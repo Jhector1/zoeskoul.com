@@ -172,8 +172,15 @@ const localAuthoredQuizQuestions = useMemo(
   [specSnap, stableQuizKey],
 );
 
+  /**
+   * Local authored/project questions are already fully resolved synchronously.
+   * They must be authoritative during soft navigation instead of inheriting
+   * stale async loading state from a previously mounted quiz request.
+   */
+  const localQuestions =
+    localProjectQuestions ?? localAuthoredQuizQuestions;
+
   useEffect(() => {
-    const localQuestions = localProjectQuestions ?? localAuthoredQuizQuestions;
     if (localQuestions) {
       setQuizLoading(false);
       setQuizError(null);
@@ -230,7 +237,16 @@ const localAuthoredQuizQuestions = useMemo(
       window.clearTimeout(timeoutId);
       ctrl.abort();
     };
-  }, [quizId, stableQuizKey, reloadNonce, specSnap, localProjectQuestions, localAuthoredQuizQuestions]);
+  }, [quizId, stableQuizKey, reloadNonce, specSnap, localQuestions]);
+
+  if (localQuestions) {
+    return {
+      quizLoading: false,
+      quizError: null,
+      questions: localQuestions,
+      serverQuizKey: stableQuizKey,
+    };
+  }
 
   return { quizLoading, quizError, questions, serverQuizKey };
 }

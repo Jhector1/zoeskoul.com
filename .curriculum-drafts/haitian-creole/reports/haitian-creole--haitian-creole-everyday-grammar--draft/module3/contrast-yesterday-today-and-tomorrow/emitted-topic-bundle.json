@@ -1,0 +1,464 @@
+{
+  "topicId": "contrast-yesterday-today-and-tomorrow",
+  "subjectSlug": "haitian-creole--haitian-creole-everyday-grammar--draft",
+  "moduleSlug": "haitian-creole-everyday-grammar-4-past-and-future",
+  "sectionSlug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time",
+  "prefix": "ht2m4",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.label",
+    "summaryKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.cards.sketch0.title",
+      "sketchId": "three-times",
+      "height": 420,
+      "tryIt": {
+        "id": "try-contrast-yesterday-today-and-tomorrow-sketch0",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch0.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch0.prompt",
+        "exerciseKey": "try-three-times-listen",
+        "exerciseKeys": [
+          "try-three-times-listen"
+        ],
+        "difficulty": "easy",
+        "preferKind": "listen_build",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.cards.sketch1.title",
+      "sketchId": "choose-time-marker",
+      "height": 420,
+      "tryIt": {
+        "id": "try-contrast-yesterday-today-and-tomorrow-sketch1",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch1.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch1.prompt",
+        "exerciseKey": "try-future-voice",
+        "exerciseKeys": [
+          "try-future-voice"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.cards.sketch2.title",
+      "sketchId": "build-three-time-sequence",
+      "height": 420,
+      "tryIt": {
+        "id": "try-contrast-yesterday-today-and-tomorrow-sketch2",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch2.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch2.prompt",
+        "exerciseKey": "try-past-build",
+        "exerciseKeys": [
+          "try-past-build",
+          "try-present-write"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "three-times",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.three-times.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.three-times.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Compare three useful time examples",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Yè mwen te ale lekòl.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Jodia mwen manje pitza.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Read them as a timeline",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Yè → Jodia → Demen",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "The past sentence uses",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "te",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "The future sentence uses",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pral",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "The middle sentence is a simple present example",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "choose-time-marker",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.choose-time-marker.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.choose-time-marker.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Compare the time words with their sentences",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Yè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "goes with the past statement",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "mwen te ale lekòl",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Jodia",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "introduces the present statement",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "mwen manje pitza",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Demen",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "goes with the future statement",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "mwen pral achte yon machin",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Choose",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "te",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "or",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pral",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "only when the time meaning requires it",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "build-three-time-sequence",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.build-three-time-sequence.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.build-three-time-sequence.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Now keep the examples in time order",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Yè mwen te ale lekòl.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Jodia mwen manje pitza.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "No new marker is added here. The goal is to contrast the past, present, and future examples you already learned",
+            "locale": "en-US"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "time-quiz-past-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-past-listen",
+      "targetText": "Yè mwen te ale lekòl.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Yè mwen te ale lekòl.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "time-quiz-present-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-present-voice",
+      "targetText": "Jodia mwen manje pitza.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Jodia mwen manje pitza.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "time-quiz-future-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-future-voice",
+      "targetText": "Demen mwen pral achte yon machin.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Demen mwen pral achte yon machin.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "time-quiz-future-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-future-build",
+      "targetText": "Demen mwen pral achte yon machin.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Demen",
+        "mwen",
+        "pral",
+        "achte",
+        "yon",
+        "machin."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Demen mwen pral achte yon machin.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "time-quiz-past-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-past-write",
+      "placeholder": "Type the Kreyòl sentence",
+      "expected": {
+        "kind": "text_input",
+        "value": "Yè mwen te ale lekòl.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "time-quiz-present-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-present-write",
+      "placeholder": "Type the Kreyòl sentence",
+      "expected": {
+        "kind": "text_input",
+        "value": "Jodia mwen manje pitza.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-three-times-listen",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.try-three-times-listen",
+      "targetText": "Jodia mwen manje pitza.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Jodia mwen manje pitza.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-future-voice",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.try-future-voice",
+      "targetText": "Demen mwen pral achte yon machin.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Demen mwen pral achte yon machin.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-past-build",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.try-past-build",
+      "targetText": "Yè mwen te ale lekòl.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Yè",
+        "mwen",
+        "te",
+        "ale",
+        "lekòl."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Yè mwen te ale lekòl.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-present-write",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.try-present-write",
+      "placeholder": "Type the Kreyòl sentence",
+      "expected": {
+        "kind": "text_input",
+        "value": "Jodia mwen manje pitza.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    }
+  ]
+}

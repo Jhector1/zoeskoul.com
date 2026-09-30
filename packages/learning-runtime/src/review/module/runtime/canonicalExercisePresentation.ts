@@ -43,6 +43,20 @@ export function hasCanonicalExerciseManifest(value: unknown): boolean {
   return isRecord(value);
 }
 
+/**
+ * Only executable code_input presentations require canonical workspace
+ * ownership before they can be shown.
+ *
+ * Materialized non-code exercises are themselves the learner presentation.
+ * Requiring an editor workspace for those exercises makes valid language
+ * exercises remain permanently transition-pending.
+ */
+function canonicalExerciseRequiresWorkspace(value: unknown): boolean {
+  if (!isRecord(value)) return false;
+
+  return value.kind === "code_input";
+}
+
 function hasNonBlankString(value: unknown): boolean {
   return (
     typeof value === "string" &&
@@ -217,13 +231,16 @@ export function resolveCanonicalExercisePresentation(args: {
       : args.resetRevision;
   const generationCurrent = runtimeGeneration === args.resetRevision;
 
+  const requiresWorkspace =
+    canonicalExerciseRequiresWorkspace(manifest);
+
   const ready =
     Boolean(exercise) &&
     hasManifest &&
     isRenderableCanonicalExerciseManifest(
       manifest,
     ) &&
-    hasWorkspace &&
+    (!requiresWorkspace || hasWorkspace) &&
     generationCurrent;
 
   if (ready) {
@@ -238,6 +255,7 @@ export function resolveCanonicalExercisePresentation(args: {
   }
 
   if (
+    requiresWorkspace &&
     exercise?.workspaceStatus === "error" &&
     !hasWorkspace &&
     generationCurrent

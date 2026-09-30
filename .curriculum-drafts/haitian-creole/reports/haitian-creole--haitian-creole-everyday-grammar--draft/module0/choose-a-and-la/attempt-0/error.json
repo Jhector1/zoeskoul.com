@@ -1,0 +1,57 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Critique failed for topic \"choose-a-and-la\"\nModule: haitian-creole-everyday-grammar-1-definite-article-choices\nSection: ht2m1-article-selection\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul-web-infra/.curriculum-drafts/haitian-creole/reports/haitian-creole--haitian-creole-everyday-grammar--draft/module0/choose-a-and-la\n- Hint reveals fill_blank answer in exercise choose-a-and-la-fill",
+  "stack": "RetryableTopicValidationError: Critique failed for topic \"choose-a-and-la\"\nModule: haitian-creole-everyday-grammar-1-definite-article-choices\nSection: ht2m1-article-selection\nReport dir: /Users/admin/Documents/NextJSProject/zoeskoul-web-infra/.curriculum-drafts/haitian-creole/reports/haitian-creole--haitian-creole-everyday-grammar--draft/module0/choose-a-and-la\n- Hint reveals fill_blank answer in exercise choose-a-and-la-fill\n    at throwRetryableReportFailure (file:///Users/admin/Documents/NextJSProject/zoeskoul-web-infra/packages/curriculum-compiler/dist/compile/compileTopic.js:56:11)\n    at compileTopic (file:///Users/admin/Documents/NextJSProject/zoeskoul-web-infra/packages/curriculum-compiler/dist/compile/compileTopic.js:345:21)\n    at async compileManualTopic (file:///Users/admin/Documents/NextJSProject/zoeskoul-web-infra/packages/curriculum-compiler/dist/manual/compileManualTopic.js:19:20)\n    at async runCompileManualTopic (file:///Users/admin/Documents/NextJSProject/zoeskoul-web-infra/packages/curriculum-cli/dist/commands/compile-manual-topic.js:22:24)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul-web-infra/packages/curriculum-cli/dist/index.js:100:13)",
+  "code": "CRITIQUE_VALIDATION_FAILED",
+  "retryable": true,
+  "details": {
+    "topicId": "choose-a-and-la",
+    "ok": false,
+    "issues": [
+      {
+        "code": "HINT_VALIDATION_WARNING",
+        "category": "hint",
+        "severity": "error",
+        "exerciseId": "choose-a-and-la-fill",
+        "message": "Hint reveals fill_blank answer in exercise choose-a-and-la-fill"
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+        "category": "clarity",
+        "severity": "warn",
+        "message": "Exercise policy targets 1 \"multi_choice\" exercise(s), but the draft has 0."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+        "category": "clarity",
+        "severity": "warn",
+        "message": "Exercise policy targets 1 \"drag_reorder\" exercise(s), but the draft has 0."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+        "category": "clarity",
+        "severity": "warn",
+        "message": "Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 1."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_OVER_TARGET",
+        "category": "clarity",
+        "severity": "warn",
+        "message": "Exercise policy targets 0 \"voice_input\" exercise(s), but the draft has 1."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_OVER_TARGET",
+        "category": "clarity",
+        "severity": "warn",
+        "message": "Exercise policy targets 0 \"word_bank_arrange\" exercise(s), but the draft has 1."
+      },
+      {
+        "code": "EXERCISE_POLICY_KIND_OVER_TARGET",
+        "category": "clarity",
+        "severity": "warn",
+        "message": "Exercise policy targets 0 \"listen_build\" exercise(s), but the draft has 1."
+      }
+    ],
+    "repairs": []
+  }
+}

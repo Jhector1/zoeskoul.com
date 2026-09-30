@@ -82,11 +82,11 @@
             "read-speak-wi-mesi": {
               "title": "Say a short phrase",
               "prompt": "Say the complete Kreyòl phrase shown: Wi, mèsi.",
-              "hint": "Read the Kreyòl target once, then say the whole phrase.",
+              "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
               "help": {
-                "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-                "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-                "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+                "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+                "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+                "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
               },
               "targetText": "Wi, mèsi."
             },
@@ -180,7 +180,7 @@
         "read-build-and-write-first-words": {
           "read-before-build": {
             "title": "Recognize the familiar pieces",
-            "bodyMarkdown": "Before arranging words, read each piece once. Look for the spellings you already know: **bonjou**, **mèsi**, **wi**, and the nasal patterns in words such as **manman**.\n\nThe word bank is not a translation puzzle. Your job is to rebuild a Kreyòl phrase while preserving the spelling and order of its parts."
+            "bodyMarkdown": "Before arranging words, read each piece once. Look for the spellings you already know: **bonjou**, **mèsi**, **wi**, and the nasal patterns in words such as **manman**.\n\nRead each piece, then put the Kreyòl phrase back together in the same order. Keep the spelling you already learned."
           },
           "write-accurately": {
             "title": "Small spelling details count",

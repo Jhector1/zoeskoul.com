@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
-    "i18n:generate": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry generate",
+    "i18n:generate": "cd ../.. && pnpm --filter @zoeskoul/curriculum-registry build && node packages/curriculum-registry/dist/generate/generateI18nManifest.js --app-root apps/web",
     "i18n:audit-ui": "node scripts/audit-hardcoded-ui-text.mjs",
     "i18n:check": "pnpm check:manifests && pnpm i18n:audit-ui",
     "gen:topic-manifests": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry generate",

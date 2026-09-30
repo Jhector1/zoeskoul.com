@@ -131,12 +131,17 @@
       "subjectSlug": "haitian-creole",
       "path": "subjects/haitian-creole",
       "courseOrder": [
-        "haitian-creole-foundations"
+        "haitian-creole-foundations",
+        "haitian-creole-everyday-grammar"
       ],
       "courses": [
         {
           "courseSlug": "haitian-creole-foundations",
           "path": "subjects/haitian-creole/courses/haitian-creole-foundations/course.spec.json"
+        },
+        {
+          "courseSlug": "haitian-creole-everyday-grammar",
+          "path": "subjects/haitian-creole/courses/haitian-creole-everyday-grammar/course.spec.json"
         }
       ]
     }

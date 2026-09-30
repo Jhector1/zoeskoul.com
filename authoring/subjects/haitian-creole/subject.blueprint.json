@@ -3,14 +3,19 @@
   "catalogSlug": "haitian-creole",
   "profileId": "language",
   "title": "Haitian Creole / Kreyòl Ayisyen",
-  "summary": "An integrated-skills Haitian Creole pathway beginning with sound, greetings, identity, everyday language, questions, numbers, time, and first conversations.",
+  "summary": "An integrated-skills Haitian Creole pathway beginning with sounds, greetings, identity, everyday language, questions, numbers, time, and first conversations, then extending into everyday grammar, richer questions, time contrasts, health, and natural descriptions.",
   "courseOrder": [
-    "haitian-creole-foundations"
+    "haitian-creole-foundations",
+    "haitian-creole-everyday-grammar"
   ],
   "milestones": [
     {
       "courseSlug": "haitian-creole-foundations",
       "outcome": "Reach an A1 foundation by understanding and producing short everyday Kreyòl through listening, speaking, reading, building, and writing."
+    },
+    {
+      "courseSlug": "haitian-creole-everyday-grammar",
+      "outcome": "Extend the Course 1 foundation by choosing singular definite article forms, using deeper pronoun and possession patterns, asking more specific questions, talking about health, placing familiar actions in past and future time, and describing people and things naturally."
     }
   ]
 }

@@ -1,3 +1,4 @@
+import type { LanguageAudioSpec } from "./language-audio.js";
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
 import type {
   HiddenShellCheck,
@@ -168,6 +169,7 @@ export type ManifestSketch =
       archetype: "paragraph";
       titleKey: string;
       bodyKey: string;
+      audio?: LanguageAudioSpec;
       runtime?: ManifestRuntimeDefaults | null;
       images?: Array<{
         id: string;

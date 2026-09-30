@@ -29,8 +29,21 @@ const TRY_IT_EXERCISE_STEP_FIELDS = [
   "purpose",
   "language",
   "lang",
-  "starterCode",
-  "starterFiles",
+
+  // Canonical manifest-driven non-code presentation contract.
+  // These values are deliberately structural; learner-facing strings
+  // continue to resolve through messageBase.
+  "optionIds",
+  "tokenIds",
+  "choiceCount",
+  "placeholder",
+  "targetText",
+  "locale",
+  "maxSeconds",
+  "wordBank",
+  "distractors",
+  "ttsText",
+
   "workspace",
   "files",
   "initialFiles",
@@ -256,6 +269,7 @@ function sketchSpecFromManifest(args: {
     specVersion: 2,
     ...(titleKey ? { title: args.resolveMessage(titleKey, titleKey) } : {}),
     ...(bodyKey ? { bodyMarkdown: args.resolveMessage(bodyKey, bodyKey) } : {}),
+    ...(sketch.audio ? { audio: sketch.audio } : {}),
     ...(runtime ? { runtime } : {}),
   };
 }

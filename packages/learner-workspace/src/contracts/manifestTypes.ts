@@ -1,5 +1,6 @@
 import type {
     ExerciseKind,
+    LanguageAudioSpec,
     ManifestBaseExercise,
     ManifestCard,
     ManifestCodeInput as SharedManifestCodeInput,
@@ -61,6 +62,7 @@ export type ManifestSketch =
     archetype: "paragraph";
     titleKey: string;
     bodyKey: string;
+    audio?: LanguageAudioSpec;
     runtime?: ManifestRuntimeDefaults | null;
     workspace?: ManifestWorkspaceSeed | null;
     images?: Array<{

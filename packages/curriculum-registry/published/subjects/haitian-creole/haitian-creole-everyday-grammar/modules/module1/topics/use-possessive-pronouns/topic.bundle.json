@@ -1,0 +1,581 @@
+{
+  "topicId": "use-possessive-pronouns",
+  "subjectSlug": "haitian-creole-everyday-grammar",
+  "moduleSlug": "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+  "sectionSlug": "haitian-creole-everyday-grammar-ht2m2-pronouns-possession",
+  "prefix": "ht2m2",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.label",
+    "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.cards.sketch0.title",
+      "sketchId": "singular-possessive-map",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-possessive-pronouns-sketch0",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch0.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch0.prompt",
+        "exerciseKey": "try-singular-nou",
+        "exerciseKeys": [
+          "try-singular-nou"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.cards.sketch1.title",
+      "sketchId": "singular-contracted-pairs",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-possessive-pronouns-sketch1",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch1.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch1.prompt",
+        "exerciseKey": "try-singular-ou-fill",
+        "exerciseKeys": [
+          "try-singular-ou-fill"
+        ],
+        "difficulty": "easy",
+        "preferKind": "fill_blank_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.cards.sketch2.title",
+      "sketchId": "plural-possessive-map",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-possessive-pronouns-sketch2",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch2.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch2.prompt",
+        "exerciseKey": "try-plural-mine-text",
+        "exerciseKeys": [
+          "try-plural-mine-text"
+        ],
+        "difficulty": "easy",
+        "preferKind": "text_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "singular-possessive-map",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.singular-possessive-map.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.singular-possessive-map.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "In Kreyòl, possession can often be expressed with a full form or a shorter everyday form. Learn the singular pairs below",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "mine",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa mwen an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa m nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa ou a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa w la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "his / hers / its",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa li a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa l la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "ours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa nou an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa n nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa nou an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa n nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "theirs",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa yo a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "no contracted form",
+            "locale": "en-US",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "The pair",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa nou an / pa n nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "can mean both",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ours",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and plural",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Pa yo a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "has no contracted partner in this set",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "singular-contracted-pairs",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.singular-contracted-pairs.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.singular-contracted-pairs.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Practice the full and short forms together",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "pa mwen an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa m nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pa ou a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa w la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pa li a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa l la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pa nou an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa n nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Learn these pairs as complete expressions. Focus on using them naturally rather than trying to build a broader contraction rule",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "plural-possessive-map",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.plural-possessive-map.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.plural-possessive-map.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Now compare the plural possessive forms",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "mine",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa mwen yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa m yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa ou yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa w yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "his / hers / its",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa li yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa l yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "ours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa nou yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa n yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa nou yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa n yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "theirs",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "no contracted form",
+            "locale": "en-US",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "The pair",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa nou yo / pa n yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "can mean both",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ours",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and plural",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Pa yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "has no contracted partner in this set",
+            "locale": "en-US"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "possessive-singular-li-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-singular-li-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "possessive-singular-yo-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-singular-yo-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "possessive-singular-m-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-singular-m-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "m"
+      }
+    },
+    {
+      "id": "possessive-plural-n-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-plural-n-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "n"
+      }
+    },
+    {
+      "id": "possessive-singular-ou-text",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-singular-ou-text",
+      "placeholder": "Type the Kreyòl form",
+      "expected": {
+        "kind": "text_input",
+        "value": "pa w la"
+      }
+    },
+    {
+      "id": "possessive-plural-li-text",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-plural-li-text",
+      "placeholder": "Type the Kreyòl form",
+      "expected": {
+        "kind": "text_input",
+        "value": "pa l yo"
+      }
+    },
+    {
+      "id": "try-singular-nou",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.try-singular-nou",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-singular-ou-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.try-singular-ou-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "w"
+      }
+    },
+    {
+      "id": "try-plural-mine-text",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.try-plural-mine-text",
+      "placeholder": "Type the Kreyòl form",
+      "expected": {
+        "kind": "text_input",
+        "value": "pa m yo"
+      }
+    }
+  ]
+}

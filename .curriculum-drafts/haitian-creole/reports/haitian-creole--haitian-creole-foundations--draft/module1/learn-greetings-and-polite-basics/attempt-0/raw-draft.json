@@ -1,202 +1,241 @@
 {
-  "title": "Learn Greetings and Polite Basics",
-  "summary": "Learn the first everyday Kreyòl greetings, including Bonjou and Bonswa, and choose the greeting that fits a simple situation.",
-  "minutes": 22,
+  "title": "Greetings and Polite Basics",
+  "summary": "Greet someone, use essential polite expressions, and close a short interaction.",
+  "minutes": 20,
   "sketchBlocks": [
     {
       "id": "greetings-start",
-      "cardTitle": "Start a Conversation",
-      "title": "Use Bonjou and Bonswa",
-      "bodyMarkdown": "**Bonjou** is a common daytime greeting. **Bonswa** is used later in the day and in the evening.\n\nFor now, focus on recognizing and using the complete greeting:\n\n- **Bonjou.** — Hello / Good morning\n- **Bonswa.** — Good evening\n\nYou do not need a long sentence to greet someone politely.",
+      "cardTitle": "Start the Conversation",
+      "title": "Bonjou and Bonswa",
+      "bodyMarkdown": "Two useful greetings are:\n\n- **Bonjou!**\n- **Bonswa!**\n\nA greeting can stand alone or come before a person's name.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Two useful greetings are:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Bonjou!",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Bonswa!",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "A greeting can stand alone or come before a person's name.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-greetings-start-evening",
-          "kind": "single_choice",
-          "title": "Choose the evening greeting",
-          "prompt": "Which greeting does the lesson use later in the day and in the evening?",
-          "hint": "Choose the option that correctly applies the pattern.",
+          "id": "try-bonjou-mari",
+          "kind": "voice_input",
+          "title": "Greet Mari",
+          "prompt": "Greet Mari using Bonjou.",
+          "hint": "Say the greeting, then her name.",
           "help": {
-            "concept": "choosing Bonjou or Bonswa",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "using a greeting with a person",
+            "hint_1": "Listen to or read the complete Kreyòl expression.",
+            "hint_2": "Use the words and word order already practiced."
           },
-          "options": [
-            "Bonswa.",
-            "Bonjou."
-          ],
-          "correctOptionIds": [
-            "a"
-          ]
+          "targetText": "Bonjou, Mari.",
+          "locale": "ht-HT"
         }
       ]
     },
     {
-      "id": "greet-a-person",
-      "cardTitle": "Add a Name",
-      "title": "A greeting can stand alone or come before a name",
-      "bodyMarkdown": "You can greet someone and then say the person's name:\n\n- **Bonjou, Mari.**\n- **Bonswa, Jan.**\n\nKeep the greeting first. The name simply tells us who is being greeted.",
+      "id": "polite-basics",
+      "cardTitle": "Be Polite",
+      "title": "Mèsi, Tanpri, and Padon",
+      "bodyMarkdown": "Three short expressions are useful immediately:\n\n- **Mèsi.** — thank you\n- **Tanpri.** — please\n- **Padon.** — excuse me / sorry\n\nListen to each as a complete spoken expression.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Three short expressions are useful immediately:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Mèsi.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "thank you",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Tanpri.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "please",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Padon.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "excuse me / sorry",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Listen to each as a complete spoken expression.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-greet-person-mari",
-          "kind": "listen_build",
-          "title": "Listen and build the greeting",
-          "prompt": "Listen, then build what you hear.",
-          "hint": "Put the greeting before the name.",
+          "id": "try-mesi-anpil",
+          "kind": "voice_input",
+          "title": "Thank someone warmly",
+          "prompt": "Say “Thank you very much.” in Kreyòl.",
+          "hint": "Begin with Mèsi.",
           "help": {
-            "concept": "greeting a named person",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "extending a familiar polite expression",
+            "hint_1": "Listen to or read the complete Kreyòl expression.",
+            "hint_2": "Use the words and word order already practiced."
           },
-          "targetText": "Bonswa, Mari.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Bonswa,",
-            "Mari."
-          ]
+          "targetText": "Mèsi anpil.",
+          "locale": "ht-HT"
         }
       ]
     },
     {
-      "id": "greeting-habit",
-      "cardTitle": "Build the Habit",
-      "title": "Recognize the whole greeting",
-      "bodyMarkdown": "When you hear or read a greeting, recognize it as one useful expression. Do not translate letter by letter. Connect **Bonjou** and **Bonswa** directly with the social situation."
+      "id": "close-politely",
+      "cardTitle": "Close the Interaction",
+      "title": "Orevwa",
+      "bodyMarkdown": "**Orevwa.** is a useful way to close a short interaction.\n\nEven a beginner conversation can already have a complete shape: greet, communicate, then close.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Orevwa.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "is a useful way to close a short interaction.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Even a beginner conversation can already have a complete shape: greet, communicate, then close.",
+            "locale": "en-US"
+          }
+        ]
+      },
+      "tryItExercises": [
+        {
+          "id": "try-orevwa-jan",
+          "kind": "text_input",
+          "title": "Close with Jan",
+          "prompt": "Type “Goodbye, Jan.” in Kreyòl.",
+          "hint": "Begin with Orevwa.",
+          "help": {
+            "concept": "closing an interaction naturally",
+            "hint_1": "Listen to or read the complete Kreyòl expression.",
+            "hint_2": "Use the words and word order already practiced."
+          },
+          "expectedText": "Orevwa, Jan.",
+          "placeholder": "Type the Kreyòl phrase",
+          "normalize": {
+            "trim": true,
+            "caseFold": true,
+            "collapseSpaces": true,
+            "stripPunct": true
+          }
+        }
+      ]
     }
   ],
   "quizDraft": [
     {
-      "id": "learn-greetings-and-polite-basics-choice",
+      "id": "greeting-choice",
       "kind": "single_choice",
-      "title": "Choose a daytime greeting",
-      "prompt": "Which Kreyòl greeting would you use to greet someone during the day?",
-      "hint": "Choose the greeting practiced for daytime.",
+      "title": "Choose a greeting",
+      "prompt": "Which expression is a greeting?",
+      "hint": "Choose the expression used to greet someone.",
       "help": {
-        "concept": "Kreyòl uses short conventional greetings for everyday social situations.",
-        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-        "hint_2": "Read or listen to the complete phrase once more before answering."
+        "concept": "recognizing a basic greeting",
+        "hint_1": "Listen to or read the complete Kreyòl expression.",
+        "hint_2": "Use the words and word order already practiced."
       },
       "options": [
-        "Bonjou.",
-        "Mèsi.",
-        "Non."
+        "Bonjou",
+        "Mèsi",
+        "Padon"
       ],
       "correctOptionIds": [
         "a"
       ]
     },
     {
-      "id": "learn-greetings-and-polite-basics-fill",
-      "kind": "fill_blank_choice",
-      "title": "Complete Bonjou",
-      "prompt": "Choose the letters that complete the Kreyòl daytime greeting.",
-      "hint": "Complete the final sound pattern in Bonjou.",
+      "id": "thanks-build",
+      "kind": "word_bank_arrange",
+      "title": "Build a stronger thank-you",
+      "prompt": "Build “Thank you very much.”",
+      "hint": "Mèsi comes first.",
       "help": {
-        "concept": "Accurate Kreyòl writing preserves the complete spelling of familiar greetings.",
-        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-        "hint_2": "Read or listen to the complete phrase once more before answering."
+        "concept": "building a polite expression",
+        "hint_1": "Listen to or read the complete Kreyòl expression.",
+        "hint_2": "Use the words and word order already practiced."
       },
-      "template": "Bonj[blank1].",
-      "choices": [
-        "ou",
-        "on",
-        "an"
-      ],
-      "correctValue": "ou"
+      "targetText": "Mèsi anpil.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mèsi",
+        "anpil."
+      ]
     },
     {
-      "id": "learn-greetings-and-polite-basics-listen",
+      "id": "bonswa-listen",
       "kind": "listen_build",
       "title": "Hear a greeting",
-      "prompt": "Listen, then build the Kreyòl greeting you hear.",
-      "hint": "Replay the audio and build the complete greeting.",
+      "prompt": "Listen and rebuild the greeting to Jan.",
+      "hint": "Listen for the greeting and Jan's name.",
       "help": {
-        "concept": "Listening practice connects the spoken greeting with its written Kreyòl form.",
-        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-        "hint_2": "Read or listen to the complete phrase once more before answering."
+        "concept": "recognizing a greeting by ear",
+        "hint_1": "Listen to or read the complete Kreyòl expression.",
+        "hint_2": "Use the words and word order already practiced."
       },
-      "targetText": "Bonjou.",
+      "targetText": "Bonswa, Jan.",
       "locale": "ht-HT",
       "wordBank": [
-        "Bonjou."
-      ],
-      "distractors": [
-        "Bonswa."
-      ],
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "Bonswa,",
+        "Jan."
+      ]
     },
     {
-      "id": "learn-greetings-and-polite-basics-voice",
+      "id": "bonjou-voice",
       "kind": "voice_input",
-      "title": "Say Bonswa",
-      "prompt": "Say the Kreyòl greeting shown: Bonswa.",
-      "hint": "Say the whole greeting at a comfortable pace.",
+      "title": "Say hello",
+      "prompt": "Greet Mari aloud.",
+      "hint": "Use Bonjou and her name.",
       "help": {
-        "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl target.",
-        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-        "hint_2": "Read or listen to the complete phrase once more before answering."
-      },
-      "targetText": "Bonswa.",
-      "locale": "ht-HT",
-      "maxSeconds": 10,
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
-    },
-    {
-      "id": "learn-greetings-and-polite-basics-build",
-      "kind": "word_bank_arrange",
-      "title": "Build a greeting with a name",
-      "prompt": "Arrange the words to say “Hello, Mari.”",
-      "hint": "Put the greeting before the name.",
-      "help": {
-        "concept": "A simple Kreyòl greeting can be followed by the person's name.",
-        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-        "hint_2": "Read or listen to the complete phrase once more before answering."
+        "concept": "producing a complete greeting",
+        "hint_1": "Listen to or read the complete Kreyòl expression.",
+        "hint_2": "Use the words and word order already practiced."
       },
       "targetText": "Bonjou, Mari.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Bonjou,",
-        "Mari."
-      ],
-      "distractors": [
-        "Mèsi,"
-      ],
-      "ttsText": "Bonjou, Mari.",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
-    },
-    {
-      "id": "learn-greetings-and-polite-basics-write",
-      "kind": "text_input",
-      "title": "Write Bonjou",
-      "prompt": "Type the Kreyòl daytime greeting.",
-      "hint": "Write the complete greeting as one word.",
-      "help": {
-        "concept": "Writing the full greeting builds accurate Kreyòl spelling habits.",
-        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-        "hint_2": "Read or listen to the complete phrase once more before answering."
-      },
-      "expectedText": "Bonjou",
-      "placeholder": "Type the Kreyòl answer",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+      "locale": "ht-HT"
     }
   ]
 }

@@ -23,14 +23,6 @@
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
-      },
-      "versioning": {
-        "family": "haitian-creole",
-        "version": 1,
-        "status": "active",
-        "defaultForNewEnrollments": true,
-        "supersedes": null,
-        "supersededBy": null
       }
     }
   },
@@ -132,7 +124,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 102,
+        "estimatedMinutes": 66,
         "prereqKeys": [
           "modules.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.title"
         ],
@@ -148,44 +140,24 @@
       },
       "sections": [
         {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht2-learn-listen-speak",
+          "slug": "haitian-creole--haitian-creole-foundations--draft-ht2-greetings-conversation",
           "order": 1,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-learn-listen-speak.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-learn-listen-speak.description",
+          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-greetings-conversation.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-greetings-conversation.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-learn-listen-speak.weeks",
+            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-greetings-conversation.weeks",
             "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-learn-listen-speak.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-learn-listen-speak.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-learn-listen-speak.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-learn-listen-speak.bullets.3"
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-greetings-conversation.bullets.0",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-greetings-conversation.bullets.1",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-greetings-conversation.bullets.2",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-greetings-conversation.bullets.3"
             ]
           },
           "serviceDefaults": null,
           "topics": [
             "learn-greetings-and-polite-basics",
-            "listen-and-say-hello"
-          ]
-        },
-        {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht2-read-build-write-use",
-          "order": 2,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-read-build-write-use.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-read-build-write-use.description",
-          "meta": {
-            "module": 1,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-read-build-write-use.weeks",
-            "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-read-build-write-use.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-read-build-write-use.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-read-build-write-use.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.haitian-creole--haitian-creole-foundations--draft-ht2-read-build-write-use.bullets.3"
-            ]
-          },
-          "serviceDefaults": null,
-          "topics": [
-            "read-build-and-write-greetings",
+            "listen-and-say-hello",
             "greeting-scenario-and-review"
           ]
         }
@@ -211,7 +183,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 102,
+        "estimatedMinutes": 67,
         "prereqKeys": [
           "modules.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-2-bonjou.title"
         ],
@@ -227,43 +199,23 @@
       },
       "sections": [
         {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht3-learn-listen-speak",
+          "slug": "haitian-creole--haitian-creole-foundations--draft-ht3-introductions",
           "order": 1,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-learn-listen-speak.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-learn-listen-speak.description",
+          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-introductions.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-introductions.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-learn-listen-speak.weeks",
+            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-introductions.weeks",
             "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-learn-listen-speak.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-learn-listen-speak.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-learn-listen-speak.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-learn-listen-speak.bullets.3"
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-introductions.bullets.0",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-introductions.bullets.1",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-introductions.bullets.2",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-introductions.bullets.3"
             ]
           },
           "serviceDefaults": null,
           "topics": [
             "learn-names-and-introductions",
-            "listen-and-introduce-yourself"
-          ]
-        },
-        {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use",
-          "order": 2,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use.description",
-          "meta": {
-            "module": 2,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use.weeks",
-            "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use.bullets.3"
-            ]
-          },
-          "serviceDefaults": null,
-          "topics": [
             "read-build-and-write-an-introduction",
             "meet-someone-scenario-and-review"
           ]
@@ -290,7 +242,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 102,
+        "estimatedMinutes": 69,
         "prereqKeys": [
           "modules.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.title"
         ],
@@ -306,43 +258,23 @@
       },
       "sections": [
         {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak",
+          "slug": "haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession",
           "order": 1,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak.description",
+          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak.weeks",
+            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession.weeks",
             "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak.bullets.3"
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession.bullets.0",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession.bullets.1",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession.bullets.2",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession.bullets.3"
             ]
           },
           "serviceDefaults": null,
           "topics": [
             "learn-everyday-things",
-            "listen-and-name-things"
-          ]
-        },
-        {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use",
-          "order": 2,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use.description",
-          "meta": {
-            "module": 3,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use.weeks",
-            "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use.bullets.3"
-            ]
-          },
-          "serviceDefaults": null,
-          "topics": [
             "read-build-and-write-about-things",
             "what-is-this-scenario-and-review"
           ]
@@ -369,7 +301,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 102,
+        "estimatedMinutes": 70,
         "prereqKeys": [
           "modules.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.title"
         ],
@@ -385,44 +317,24 @@
       },
       "sections": [
         {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak",
+          "slug": "haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines",
           "order": 1,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak.description",
+          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak.weeks",
+            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines.weeks",
             "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak.bullets.3"
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines.bullets.0",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines.bullets.1",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines.bullets.2",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines.bullets.3"
             ]
           },
           "serviceDefaults": null,
           "topics": [
             "learn-common-actions",
-            "listen-and-say-what-is-happening"
-          ]
-        },
-        {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht5-read-build-write-use",
-          "order": 2,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-read-build-write-use.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-read-build-write-use.description",
-          "meta": {
-            "module": 4,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-read-build-write-use.weeks",
-            "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-read-build-write-use.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-read-build-write-use.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-read-build-write-use.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.haitian-creole--haitian-creole-foundations--draft-ht5-read-build-write-use.bullets.3"
-            ]
-          },
-          "serviceDefaults": null,
-          "topics": [
-            "read-build-and-write-actions",
+            "listen-and-say-what-is-happening",
             "what-are-you-doing-scenario"
           ]
         }
@@ -448,7 +360,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 102,
+        "estimatedMinutes": 73,
         "prereqKeys": [
           "modules.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.title"
         ],
@@ -464,43 +376,23 @@
       },
       "sections": [
         {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht6-learn-listen-speak",
+          "slug": "haitian-creole--haitian-creole-foundations--draft-ht6-question-system",
           "order": 1,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-learn-listen-speak.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-learn-listen-speak.description",
+          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-question-system.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-question-system.description",
           "meta": {
             "module": 5,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-learn-listen-speak.weeks",
+            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-question-system.weeks",
             "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-learn-listen-speak.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-learn-listen-speak.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-learn-listen-speak.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-learn-listen-speak.bullets.3"
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-question-system.bullets.0",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-question-system.bullets.1",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-question-system.bullets.2",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-question-system.bullets.3"
             ]
           },
           "serviceDefaults": null,
           "topics": [
             "learn-core-question-patterns",
-            "listen-ask-and-answer"
-          ]
-        },
-        {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use",
-          "order": 2,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use.description",
-          "meta": {
-            "module": 5,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use.weeks",
-            "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use.bullets.3"
-            ]
-          },
-          "serviceDefaults": null,
-          "topics": [
             "read-build-and-write-questions",
             "question-chain-scenario-and-review"
           ]
@@ -527,7 +419,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 102,
+        "estimatedMinutes": 73,
         "prereqKeys": [
           "modules.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.title"
         ],
@@ -543,44 +435,24 @@
       },
       "sections": [
         {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak",
+          "slug": "haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule",
           "order": 1,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak.description",
+          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule.description",
           "meta": {
             "module": 6,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak.weeks",
+            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule.weeks",
             "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak.bullets.3"
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule.bullets.0",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule.bullets.1",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule.bullets.2",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule.bullets.3"
             ]
           },
           "serviceDefaults": null,
           "topics": [
             "learn-numbers-and-time-basics",
-            "listen-for-numbers-and-time"
-          ]
-        },
-        {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht7-read-build-write-use",
-          "order": 2,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-read-build-write-use.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-read-build-write-use.description",
-          "meta": {
-            "module": 6,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-read-build-write-use.weeks",
-            "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-read-build-write-use.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-read-build-write-use.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-read-build-write-use.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole--haitian-creole-foundations--draft-ht7-read-build-write-use.bullets.3"
-            ]
-          },
-          "serviceDefaults": null,
-          "topics": [
-            "read-build-and-write-everyday-details",
+            "listen-for-numbers-and-time",
             "everyday-plans-scenario-and-review"
           ]
         }
@@ -606,7 +478,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 102,
+        "estimatedMinutes": 78,
         "prereqKeys": [
           "modules.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.title"
         ],
@@ -622,44 +494,24 @@
       },
       "sections": [
         {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak",
+          "slug": "haitian-creole--haitian-creole-foundations--draft-ht8-capstone-conversation",
           "order": 1,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak.description",
+          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-capstone-conversation.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-capstone-conversation.description",
           "meta": {
             "module": 7,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak.weeks",
+            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-capstone-conversation.weeks",
             "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak.bullets.3"
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-capstone-conversation.bullets.0",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-capstone-conversation.bullets.1",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-capstone-conversation.bullets.2",
+              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-capstone-conversation.bullets.3"
             ]
           },
           "serviceDefaults": null,
           "topics": [
             "learn-the-conversation-map",
-            "listen-and-speak-through-a-conversation"
-          ]
-        },
-        {
-          "slug": "haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use",
-          "order": 2,
-          "titleKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use.title",
-          "descriptionKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use.description",
-          "meta": {
-            "module": 7,
-            "weeksKey": "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use.weeks",
-            "bulletKeys": [
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use.bullets.0",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use.bullets.1",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use.bullets.2",
-              "sections.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use.bullets.3"
-            ]
-          },
-          "serviceDefaults": null,
-          "topics": [
-            "read-build-and-write-a-conversation",
+            "listen-and-speak-through-a-conversation",
             "my-first-kreyol-conversation"
           ]
         }

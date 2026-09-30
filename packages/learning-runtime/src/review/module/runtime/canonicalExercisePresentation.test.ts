@@ -185,6 +185,54 @@ describe("canonical exercise presentation", () => {
     });
   });
 
+  it("presents a materialized single-choice exercise without a workspace", () => {
+    expect(
+      resolveCanonicalExercisePresentation({
+        exercise: {
+          manifest: {
+            kind: "single_choice",
+            title: "Choose the article for kiyé",
+            prompt: "",
+            options: ["a", "la"],
+          },
+          workspaceStatus: "pending",
+          workspaceGeneration: 9,
+        },
+        resetRevision: 9,
+      }),
+    ).toMatchObject({
+      status: "ready",
+      ready: true,
+      generationCurrent: true,
+      hasManifest: true,
+      hasWorkspace: false,
+    });
+  });
+
+  it("presents a materialized word-bank exercise without a workspace", () => {
+    expect(
+      resolveCanonicalExercisePresentation({
+        exercise: {
+          manifest: {
+            kind: "word_bank_arrange",
+            title: "Build the phrase",
+            prompt: "",
+            targetText: "a radyo",
+          },
+          workspaceStatus: "pending",
+          workspaceGeneration: 10,
+        },
+        resetRevision: 10,
+      }),
+    ).toMatchObject({
+      status: "ready",
+      ready: true,
+      generationCurrent: true,
+      hasManifest: true,
+      hasWorkspace: false,
+    });
+  });
+
   it("does not present non-code content with no learner-facing title or prompt", () => {
     expect(
       resolveCanonicalExercisePresentation({

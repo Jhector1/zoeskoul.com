@@ -7,13 +7,12 @@
   "summary": {
     "modules": 1,
     "topicsTotal": 1,
-    "exercises": 9,
+    "exercises": 7,
     "exerciseKinds": {
       "single_choice": 1,
-      "fill_blank_choice": 1,
-      "listen_build": 1,
+      "listen_build": 2,
+      "word_bank_arrange": 1,
       "voice_input": 2,
-      "word_bank_arrange": 3,
       "text_input": 1
     },
     "codeInputs": 0,

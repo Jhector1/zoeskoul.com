@@ -1,0 +1,478 @@
+{
+  "topicId": "use-ye",
+  "subjectSlug": "haitian-creole-everyday-grammar",
+  "moduleSlug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+  "sectionSlug": "haitian-creole-everyday-grammar-ht2m5-descriptions",
+  "prefix": "ht2m5",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.label",
+    "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.cards.sketch0.title",
+      "sketchId": "ye-at-end-of-questions",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-ye-sketch0",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch0.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch0.prompt",
+        "exerciseKey": "try-ye-question-choice",
+        "exerciseKeys": [
+          "try-ye-question-choice",
+          "try-ki-bo-listen"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.cards.sketch1.title",
+      "sketchId": "ye-with-who-what-time",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-ye-sketch1",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch1.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch1.prompt",
+        "exerciseKey": "try-koman-voice",
+        "exerciseKeys": [
+          "try-koman-voice"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.cards.sketch2.title",
+      "sketchId": "ye-closes-a-statement",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-ye-sketch2",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch2.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch2.prompt",
+        "exerciseKey": "try-se-sa-write",
+        "exerciseKeys": [
+          "try-se-sa-write"
+        ],
+        "difficulty": "easy",
+        "preferKind": "text_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "ye-at-end-of-questions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-at-end-of-questions.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-at-end-of-questions.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ye",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "at the end of several common question patterns",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Kòman manman w ye?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "How is your mother?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Ki bò liv la ye?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Where is the book?",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "The question words are already familiar. Focus on",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ye",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "at the end of each question",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ye-with-who-what-time",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-with-who-what-time.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-with-who-what-time.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Here are three more questions with",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ye",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Ki moun li ye?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Who is he?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Ki sa sa a ye?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "What is that?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Ki lè li ye?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "What time is it?",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Keep the familiar question words and notice how",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ye",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "closes each complete question",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ye-closes-a-statement",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-closes-a-statement.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-closes-a-statement.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "You can also use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ye",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "to close this statement",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Se sa li ye.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "That’s what it is / that’s the way it is",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Here",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ye",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "still comes at the end",
+            "locale": "en-US"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ye-quiz-closing-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-closing-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "ye-quiz-who-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-who-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "ye-quiz-who-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-who-listen",
+      "targetText": "Ki moun li ye?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Ki moun li ye?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "ye-quiz-time-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-time-listen",
+      "targetText": "Ki lè li ye?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Ki lè li ye?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "ye-quiz-what-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-what-voice",
+      "targetText": "Ki sa sa a ye?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Ki sa sa a ye?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "ye-quiz-book-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-book-voice",
+      "targetText": "Ki bò liv la ye?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Ki bò liv la ye?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "ye-quiz-koman-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-koman-write",
+      "placeholder": "Type the Kreyòl question",
+      "expected": {
+        "kind": "text_input",
+        "value": "Kòman manman w ye?",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "ye-quiz-closing-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-closing-write",
+      "placeholder": "Type the Kreyòl statement",
+      "expected": {
+        "kind": "text_input",
+        "value": "Se sa li ye.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-ye-question-choice",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.try-ye-question-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-ki-bo-listen",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.try-ki-bo-listen",
+      "targetText": "Ki bò liv la ye?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Ki bò liv la ye?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-koman-voice",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.try-koman-voice",
+      "targetText": "Kòman manman w ye?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Kòman manman w ye?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-se-sa-write",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.try-se-sa-write",
+      "placeholder": "Type the Kreyòl statement",
+      "expected": {
+        "kind": "text_input",
+        "value": "Se sa li ye.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    }
+  ]
+}

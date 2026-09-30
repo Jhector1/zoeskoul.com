@@ -1,0 +1,527 @@
+{
+  "title": "Use Possessive Pronouns",
+  "summary": "Use the singular and plural possessive-pronoun forms, including their contracted forms.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "singular-possessive-map",
+      "cardTitle": "Singular Possessive Pronouns",
+      "title": "Match each full singular form with its contracted form",
+      "bodyMarkdown": "In Kreyòl, possession can often be expressed with a full form or a shorter everyday form. Learn the singular pairs below:\n\n| Meaning | Full form | Contracted form |\n| --- | --- | --- |\n| mine | pa mwen an | pa m nan |\n| yours | pa ou a | pa w la |\n| his / hers / its | pa li a | pa l la |\n| ours | pa nou an | pa n nan |\n| yours | pa nou an | pa n nan |\n| theirs | pa yo a | no contracted form |\n\nThe pair **pa nou an / pa n nan** can mean both **ours** and plural **yours**. **Pa yo a** has no contracted partner in this set.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "In Kreyòl, possession can often be expressed with a full form or a shorter everyday form. Learn the singular pairs below",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "mine",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa mwen an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa m nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa ou a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa w la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "his / hers / its",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa li a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa l la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "ours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa nou an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa n nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa nou an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa n nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "theirs",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa yo a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "no contracted form",
+            "locale": "en-US",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "The pair",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa nou an / pa n nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "can mean both",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ours",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and plural",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Pa yo a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "has no contracted partner in this set",
+            "locale": "en-US"
+          }
+        ]
+      },
+      "tryItExercises": [
+        {
+          "id": "try-singular-nou",
+          "kind": "single_choice",
+          "title": "Match the singular pair",
+          "prompt": "Which contracted singular form is paired with “pa nou an” in The table?",
+          "hint": "Compare the full and short forms for the same pronoun.",
+          "help": {
+            "concept": "Each singular row pairs the full possessive form with the contracted form by the lesson.",
+            "hint_1": "Stay on the row for Nou.",
+            "hint_2": "Choose the form from that pair's short form."
+          },
+          "options": [
+            "pa n nan",
+            "pa w la",
+            "pa l la"
+          ],
+          "correctOptionIds": [
+            "a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "singular-contracted-pairs",
+      "cardTitle": "Read the Singular Pairs",
+      "title": "Practice each full and short form as a pair",
+      "bodyMarkdown": "Practice the full and short forms together:\n\n- **pa mwen an** → **pa m nan**\n- **pa ou a** → **pa w la**\n- **pa li a** → **pa l la**\n- **pa nou an** → **pa n nan**\n\nLearn these pairs as complete expressions. Focus on using them naturally rather than trying to build a broader contraction rule.",
+      "tryItExercises": [
+        {
+          "id": "try-singular-ou-fill",
+          "kind": "fill_blank_choice",
+          "title": "Complete the short form",
+          "prompt": "Complete the contracted singular form paired with “pa ou a.”",
+          "hint": "Use the same pronoun pair in The pair list.",
+          "help": {
+            "concept": "The missing position contains the short pronoun from the corresponding pair.",
+            "hint_1": "Compare the four contracted singular forms.",
+            "hint_2": "Keep the surrounding words unchanged."
+          },
+          "template": "pa ___ la",
+          "choices": [
+            "w",
+            "m",
+            "l"
+          ],
+          "correctValue": "w"
+        }
+      ],
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Practice the full and short forms together",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "pa mwen an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa m nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pa ou a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa w la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pa li a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa l la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pa nou an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa n nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Learn these pairs as complete expressions. Focus on using them naturally rather than trying to build a broader contraction rule",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "plural-possessive-map",
+      "cardTitle": "Plural Possessive Pronouns",
+      "title": "Use yo in the plural possessive forms",
+      "bodyMarkdown": "Now compare the plural possessive forms:\n\n| Meaning | Full form | Contracted form |\n| --- | --- | --- |\n| mine | pa mwen yo | pa m yo |\n| yours | pa ou yo | pa w yo |\n| his / hers / its | pa li yo | pa l yo |\n| ours | pa nou yo | pa n yo |\n| yours | pa nou yo | pa n yo |\n| theirs | pa yo | no contracted form |\n\nThe pair **pa nou yo / pa n yo** can mean both **ours** and plural **yours**. **Pa yo** has no contracted partner in this set.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Now compare the plural possessive forms",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "mine",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa mwen yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa m yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa ou yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa w yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "his / hers / its",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa li yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa l yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "ours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa nou yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa n yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa nou yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa n yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "theirs",
+            "locale": "en-US",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "pa yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 140
+          },
+          {
+            "text": "no contracted form",
+            "locale": "en-US",
+            "pauseAfterMs": 260
+          },
+          {
+            "text": "The pair",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pa nou yo / pa n yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "can mean both",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ours",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and plural",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yours",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Pa yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "has no contracted partner in this set",
+            "locale": "en-US"
+          }
+        ]
+      },
+      "tryItExercises": [
+        {
+          "id": "try-plural-mine-text",
+          "kind": "text_input",
+          "title": "Write the plural short form",
+          "prompt": "Type the contracted plural possessive pronoun meaning “mine.”",
+          "hint": "Use the short form of the plural table.",
+          "help": {
+            "concept": "Plural contracted possessive forms keep pa, use the short pronoun, and end with yo.",
+            "hint_1": "Find the row whose meaning is mine.",
+            "hint_2": "Copy the contracted form from that pair."
+          },
+          "expectedText": "pa m yo",
+          "placeholder": "Type the Kreyòl form"
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "possessive-singular-li-choice",
+      "kind": "single_choice",
+      "title": "Match li",
+      "prompt": "Which contracted singular form is paired with “pa li a”?",
+      "hint": "Compare the singular pairs.",
+      "help": {
+        "concept": "Use the contracted form from the same singular row as the full form.",
+        "hint_1": "Stay with the row for Li.",
+        "hint_2": "Choose its contracted-column entry."
+      },
+      "options": [
+        "pa l la",
+        "pa n nan",
+        "pa w la"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "possessive-singular-yo-choice",
+      "kind": "single_choice",
+      "title": "Find the singular exception",
+      "prompt": "Which singular full possessive form is listed without a contracted partner in?",
+      "hint": "Compare all six singular rows.",
+      "help": {
+        "concept": "Five meanings are represented in the table, but one pronoun row has no short partner.",
+        "hint_1": "Look only at the short form.",
+        "hint_2": "Choose the full form from the row where that column says no contracted form."
+      },
+      "options": [
+        "pa yo a",
+        "pa nou an",
+        "pa ou a"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "possessive-singular-m-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete mine",
+      "prompt": "Complete the contracted singular form paired with “pa mwen an.”",
+      "hint": "Use the short form from the same pronoun pair.",
+      "help": {
+        "concept": "The blank is the short pronoun inside the contracted form.",
+        "hint_1": "Compare the singular contracted forms.",
+        "hint_2": "Keep pa and nan unchanged."
+      },
+      "template": "pa ___ nan",
+      "choices": [
+        "m",
+        "n",
+        "l"
+      ],
+      "correctValue": "m"
+    },
+    {
+      "id": "possessive-plural-n-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete ours",
+      "prompt": "Complete the contracted plural form paired with “pa nou yo.”",
+      "hint": "Use the plural short form.",
+      "help": {
+        "concept": "The plural short form keeps pa and yo around the contracted pronoun.",
+        "hint_1": "Find the Nou pair in the plural table.",
+        "hint_2": "Choose its single-letter short pronoun."
+      },
+      "template": "pa ___ yo",
+      "choices": [
+        "n",
+        "w",
+        "l"
+      ],
+      "correctValue": "n"
+    },
+    {
+      "id": "possessive-singular-ou-text",
+      "kind": "text_input",
+      "title": "Write yours",
+      "prompt": "Type the contracted singular form paired with “pa ou a.”",
+      "hint": "Use the exact contracted form from.",
+      "help": {
+        "concept": "Write the complete contracted possessive pronoun, not only the short pronoun.",
+        "hint_1": "Use the Ou pair.",
+        "hint_2": "Include all three parts of the contracted form."
+      },
+      "expectedText": "pa w la",
+      "placeholder": "Type the Kreyòl form"
+    },
+    {
+      "id": "possessive-plural-li-text",
+      "kind": "text_input",
+      "title": "Write the plural li form",
+      "prompt": "Type the contracted plural form paired with “pa li yo.”",
+      "hint": "Use the exact plural contracted form from.",
+      "help": {
+        "concept": "Write the complete plural possessive form from the short form.",
+        "hint_1": "Use the Li pair in the plural table.",
+        "hint_2": "Keep the final plural marker."
+      },
+      "expectedText": "pa l yo",
+      "placeholder": "Type the Kreyòl form"
+    }
+  ]
+}

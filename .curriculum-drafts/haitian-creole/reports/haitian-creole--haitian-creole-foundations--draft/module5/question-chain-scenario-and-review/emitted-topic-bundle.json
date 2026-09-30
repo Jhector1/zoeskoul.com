@@ -2,9 +2,9 @@
   "topicId": "question-chain-scenario-and-review",
   "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
   "moduleSlug": "haitian-creole-foundations-6-questions-and-answers",
-  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht6-question-system",
   "prefix": "ht6",
-  "minutes": 30,
+  "minutes": 26,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -29,12 +29,12 @@
         "id": "try-question-chain-scenario-and-review-sketch0",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch0.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch0.prompt",
-        "exerciseKey": "try-mixed-dialogue-order",
+        "exerciseKey": "try-chain-next-question",
         "exerciseKeys": [
-          "try-mixed-dialogue-order"
+          "try-chain-next-question"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "single_choice",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -45,15 +45,15 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.cards.sketch1.title",
-      "sketchId": "complete-sentences",
+      "sketchId": "complete-answers",
       "height": 420,
       "tryIt": {
         "id": "try-question-chain-scenario-and-review-sketch1",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch1.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch1.prompt",
-        "exerciseKey": "try-complete-sentences-place",
+        "exerciseKey": "try-complete-place-transfer",
         "exerciseKeys": [
-          "try-complete-sentences-place"
+          "try-complete-place-transfer"
         ],
         "difficulty": "easy",
         "preferKind": "text_input",
@@ -67,18 +67,18 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.cards.sketch2.title",
-      "sketchId": "choose-question",
+      "sketchId": "second-question-chain",
       "height": 420,
       "tryIt": {
         "id": "try-question-chain-scenario-and-review-sketch2",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch2.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch2.prompt",
-        "exerciseKey": "try-choose-question-where",
+        "exerciseKey": "try-chain-hear",
         "exerciseKeys": [
-          "try-choose-question-where"
+          "try-chain-hear"
         ],
         "difficulty": "easy",
-        "preferKind": "single_choice",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 5,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -106,28 +106,301 @@
       "id": "mixed-dialogue",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.mixed-dialogue.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.mixed-dialogue.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.mixed-dialogue.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Bonjou, Mari!",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Bonjou, Jan!",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Kijan ou ye?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen byen, mèsi. E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen byen tou.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Èske ou pale kreyòl?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Wi, mwen pale kreyòl.",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Ki kote ou rete?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen rete Boston. E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen rete Chicago.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Kisa ou ap fè kounyeya?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "M ap travay kounyeya.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Different questions ask for different kinds of information.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ]
+      }
     },
     {
-      "id": "complete-sentences",
+      "id": "complete-answers",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.complete-sentences.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.complete-sentences.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.complete-answers.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.complete-answers.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "A complete answer makes a conversation easier to follow.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Compare:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Wi.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Wi, mwen pale kreyòl.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Or:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Chicago.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Mwen rete Chicago.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Short answers can be natural, but complete beginner answers help you practice reusable sentence patterns.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "choose-question",
+      "id": "second-question-chain",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.choose-question.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.choose-question.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.second-question-chain.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.second-question-chain.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "A real conversation does not follow one fixed script.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Listen as Mari starts with an",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Èske",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "question and then moves to",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Ki kote",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Choose the question that matches the information you want.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "speakerId": "mari",
+            "text": "Bonswa, Jan!",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Bonswa, Mari!",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Èske ou etidye kreyòl?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Wi, mwen etidye kreyòl.",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Ki kote ou rete?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Mwen rete Chicago. E ou menm?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Mwen rete Boston.",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Orevwa, Mari!",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Orevwa, Jan!",
+            "locale": "ht-HT"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "question-chain-scenario-and-review-choice",
+      "id": "chain-question-type-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-choice",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-question-type-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,165 +412,127 @@
       }
     },
     {
-      "id": "question-chain-scenario-and-review-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Kijan"
-      }
-    },
-    {
-      "id": "question-chain-scenario-and-review-listen",
+      "id": "chain-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-listen",
-      "targetText": "Wi, mwen pale kreyòl.",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-listen",
+      "targetText": "Mwen rete Boston.",
       "locale": "ht-HT",
       "wordBank": [
-        "Wi,",
-        "mwen",
-        "pale",
-        "kreyòl."
-      ],
-      "distractors": [
-        "rete"
+        "Mwen",
+        "rete",
+        "Boston."
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "Wi, mwen pale kreyòl.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "question-chain-scenario-and-review-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-voice",
-      "targetText": "Ki kote ou rete? Mwen rete Chicago.",
-      "locale": "ht-HT",
-      "maxSeconds": 16,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Ki kote ou rete? Mwen rete Chicago.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "question-chain-scenario-and-review-build",
-      "kind": "word_bank_arrange",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-build",
-      "targetText": "Èske ou pale kreyòl?",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Èske",
-        "ou",
-        "pale",
-        "kreyòl?"
-      ],
-      "distractors": [
-        "Kijan"
-      ],
-      "ttsText": "Èske ou pale kreyòl?",
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "Èske ou pale kreyòl?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "question-chain-scenario-and-review-write",
-      "kind": "text_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "Mwen rete Chicago.",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-mixed-dialogue-order",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-mixed-dialogue-order",
-      "targetText": "Bonjou! Kijan ou rele? M rele Ana. Ki kote ou rete? Mwen rete Chicago. Èske ou pale kreyòl? Wi, mwen pale kreyòl.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Bonjou! Kijan ou rele?",
-        "M rele Ana.",
-        "Ki kote ou rete?",
-        "Mwen rete Chicago.",
-        "Èske ou pale kreyòl?",
-        "Wi, mwen pale kreyòl."
-      ],
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "Bonjou! Kijan ou rele? M rele Ana. Ki kote ou rete? Mwen rete Chicago. Èske ou pale kreyòl? Wi, mwen pale kreyòl.",
+        "targetText": "Mwen rete Boston.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-complete-sentences-place",
-      "kind": "text_input",
-      "purpose": "project",
+      "id": "chain-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-complete-sentences-place",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-build",
+      "targetText": "Èske Mari travay?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Èske",
+        "Mari",
+        "travay?"
+      ],
       "expected": {
-        "kind": "text_input",
-        "value": "Mwen rete Boston."
+        "kind": "word_bank_arrange",
+        "targetText": "Èske Mari travay?",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "try-choose-question-where",
+      "id": "chain-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-voice",
+      "targetText": "Ki kote Mari rete?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Ki kote Mari rete?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "chain-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-write",
+      "placeholder": "Type the complete Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "M ap etidye kreyòl.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-chain-next-question",
       "kind": "single_choice",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-choose-question-where",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-chain-next-question",
       "optionIds": [
         "a",
         "b",
-        "c",
-        "d",
-        "e",
-        "f"
+        "c"
       ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
+      }
+    },
+    {
+      "id": "try-complete-place-transfer",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-complete-place-transfer",
+      "placeholder": "Type the complete Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "Mwen rete Miami.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-chain-hear",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-chain-hear",
+      "targetText": "Ki kote ou rete?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Ki",
+        "kote",
+        "ou",
+        "rete?"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Ki kote ou rete?",
+        "locale": "ht-HT"
       }
     }
   ]

@@ -3,17 +3,17 @@
     "haitian-creole--haitian-creole-foundations--draft": {
       "haitian-creole-foundations-6-questions-and-answers": {
         "learn-core-question-patterns": {
-          "label": "Learn Core Question Patterns",
-          "summary": "Ask simple yes/no questions with Èske and give short or complete answers.",
+          "label": "Yes or No? Ask with Èske",
+          "summary": "Turn familiar statements into yes/no questions with Èske and answer with a complete familiar sentence.",
           "cards": {
             "sketch0": {
               "title": "Ask a Yes/No Question"
             },
             "sketch1": {
-              "title": "Answer Simply"
+              "title": "Answer Yes or No"
             },
             "sketch2": {
-              "title": "Answer in a Complete Sentence"
+              "title": "Use It in a Short Exchange"
             },
             "quiz": {
               "title": "Practice"
@@ -22,117 +22,86 @@
           "tryIt": {
             "allowReveal": true,
             "try_learn_core_question_patterns_sketch0": {
-              "title": "Try it yourself: Build another yes/no question",
-              "prompt": "Right after the sketch \"Èske…?\", practice that exact idea with this task. Arrange the Kreyòl question for “Do you work?”. Produce the result for build another yes/no question so it reinforces Learn Core Question Patterns."
+              "title": "Try it yourself: Turn another statement into a question",
+              "prompt": "Right after the sketch \"Èske…?\", practice that exact idea with this task. Build “Do you work?”. Produce the result for turn another statement into a question so it reinforces Yes or No? Ask with Èske."
             },
             "try_learn_core_question_patterns_sketch1": {
-              "title": "Try it yourself: Give a different complete yes answer",
-              "prompt": "Right after the sketch \"Wi / Non\", practice that exact idea with this task. Say “Yes, I work.” in Kreyòl. Produce the result for give a different complete yes answer so it reinforces Learn Core Question Patterns."
+              "title": "Try it yourself: Give a complete yes answer",
+              "prompt": "Right after the sketch \"Wi / Non\", practice that exact idea with this task. Answer “Yes, I work.”. Produce the result for give a complete yes answer so it reinforces Yes or No? Ask with Èske."
+            },
+            "try_learn_core_question_patterns_sketch2": {
+              "title": "Try it yourself: Hear another yes/no question",
+              "prompt": "Right after the sketch \"Question → complete answer\", practice that exact idea with this task. Listen and rebuild Jan's question. Produce the result for hear another yes/no question so it reinforces Yes or No? Ask with Èske."
             }
           },
           "practice": {
-            "learn-core-question-patterns-choice": {
-              "title": "Choose a yes/no question",
-              "prompt": "Which sentence asks “Do you speak Kreyòl?”",
-              "hint": "Choose the question that begins with the yes/no question starter.",
+            "eske-purpose-choice": {
+              "title": "Choose the yes/no question",
+              "prompt": "Which question expects a yes or no answer?",
+              "hint": "Look for Èske.",
               "help": {
-                "concept": "A beginner yes/no question can begin with a fixed question marker.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "recognizing a yes/no question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
               "options": {
-                "a": "Èske ou pale kreyòl?",
-                "b": "Kijan ou rele?",
-                "c": "Ki kote ou rete?"
+                "a": "Èske Jan travay?",
+                "b": "Ki kote Jan rete?",
+                "c": "Kijan Jan ye?"
               }
             },
-            "learn-core-question-patterns-fill": {
-              "title": "Complete the question",
-              "prompt": "Choose the question starter that completes the yes/no question.",
-              "hint": "Use the yes/no pattern from the lesson.",
+            "eske-listen": {
+              "title": "Hear a new yes/no question",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "The question asks whether Mari speaks Kreyòl.",
               "help": {
-                "concept": "The blank comes before the subject and turns the sentence into a yes/no question.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "hearing an Èske question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "template": "[blank1] ou rete Chicago?",
-              "choices": [
-                "Èske",
-                "Kisa",
-                "Kijan"
-              ]
-            },
-            "learn-core-question-patterns-listen": {
-              "title": "Hear a yes/no question",
-              "prompt": "Listen, then build the question you hear.",
-              "hint": "Listen for the question starter, subject, and action.",
-              "help": {
-                "concept": "Build the complete question in spoken order.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Èske li travay?",
+              "targetText": "Èske Mari pale kreyòl?",
               "wordBank": [
                 "Èske",
-                "li",
-                "travay?"
-              ],
-              "distractors": [
-                "Kisa"
+                "Mari",
+                "pale",
+                "kreyòl?"
               ]
             },
-            "learn-core-question-patterns-voice": {
-              "title": "Ask a yes/no question",
-              "prompt": "Say: Èske ou pale kreyòl?",
-              "hint": "Say the complete question.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Èske ou pale kreyòl?"
-            },
-            "learn-core-question-patterns-build": {
+            "eske-build-answer": {
               "title": "Build a complete answer",
-              "prompt": "Arrange the words to answer “Yes, I speak Kreyòl.”",
-              "hint": "Begin with the positive response, then give the full sentence.",
+              "prompt": "Build “Yes, Jan works.”",
+              "hint": "Start with Wi.",
               "help": {
-                "concept": "A complete answer can combine a short response with the useful information.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "building a complete affirmative answer",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "targetText": "Wi, mwen pale kreyòl.",
+              "targetText": "Wi, Jan travay.",
               "wordBank": [
                 "Wi,",
-                "mwen",
-                "pale",
-                "kreyòl."
-              ],
-              "distractors": [
-                "rete"
-              ],
-              "ttsText": "Wi, mwen pale kreyòl."
+                "Jan",
+                "travay."
+              ]
             },
-            "learn-core-question-patterns-write": {
-              "title": "Write yes",
-              "prompt": "Type the Kreyòl word for “yes.”",
-              "hint": "Use the short positive answer from this lesson.",
+            "eske-voice": {
+              "title": "Ask another yes/no question",
+              "prompt": "Ask “Does Mari study Kreyòl?”",
+              "hint": "Begin with Èske.",
               "help": {
-                "concept": "Write the one-word positive response.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "producing an Èske question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "expectedText": "Wi",
-              "placeholder": "Type the Kreyòl answer"
+              "targetText": "Èske Mari etidye kreyòl?"
             },
-            "try-eske-kreyol": {
-              "title": "Build another yes/no question",
-              "prompt": "Arrange the Kreyòl question for “Do you work?”",
-              "hint": "Start with Èske and keep the statement order after it.",
+            "try-eske-work": {
+              "title": "Turn another statement into a question",
+              "prompt": "Build “Do you work?”",
+              "hint": "Start with Èske, then keep ou travay.",
               "help": {
-                "concept": "Èske question starter",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "forming a yes/no question with Èske",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
               "targetText": "Èske ou travay?",
               "wordBank": [
@@ -141,16 +110,34 @@
                 "travay?"
               ]
             },
-            "try-wi-non-complete": {
-              "title": "Give a different complete yes answer",
-              "prompt": "Say “Yes, I work.” in Kreyòl.",
-              "hint": "Start with Wi, then give the complete statement.",
+            "try-positive-work-answer": {
+              "title": "Give a complete yes answer",
+              "prompt": "Answer “Yes, I work.”",
+              "hint": "Begin with Wi, then repeat the useful statement.",
               "help": {
-                "concept": "complete yes/no answer",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "giving a complete affirmative answer",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
               "targetText": "Wi, mwen travay."
+            },
+            "try-eske-routine": {
+              "title": "Hear another yes/no question",
+              "prompt": "Listen and rebuild Jan's question.",
+              "hint": "The question asks whether Mari works every day.",
+              "help": {
+                "concept": "hearing a yes/no question built from known language",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "targetText": "Èske Mari travay chak jou?",
+              "wordBank": [
+                "Èske",
+                "Mari",
+                "travay",
+                "chak",
+                "jou?"
+              ]
             }
           }
         }
@@ -161,17 +148,17 @@
     "haitian-creole--haitian-creole-foundations--draft": {
       "haitian-creole-foundations-6-questions-and-answers": {
         "learn-core-question-patterns": {
-          "eske": {
+          "eske-question": {
             "title": "Èske…?",
-            "bodyMarkdown": "A clear beginner way to form a yes/no question is to begin with **Èske**:\n\n- **Èske ou pale kreyòl?** — Do you speak Kreyòl?\n- **Èske li travay?** — Does he/she work?\n- **Èske ou rete Chicago?** — Do you live in Chicago?\n\nFor now, treat **Èske** as a useful question starter."
+            "bodyMarkdown": "Use **Èske** when the answer can be yes or no.\n\nStart with a familiar statement:\n\n**Ou pale kreyòl.** — You speak Kreyòl.\n\nAdd **Èske**:\n\n**Èske ou pale kreyòl?** — Do you speak Kreyòl?\n\nThe familiar statement order stays after **Èske**."
           },
           "wi-non": {
             "title": "Wi / Non",
-            "bodyMarkdown": "You can answer a yes/no question with **Wi** or **Non**:\n\n- **Wi.** — Yes.\n- **Non.** — No.\n\nWhen you can, give a complete answer too:\n\n**Wi, mwen pale kreyòl.**"
+            "bodyMarkdown": "A short answer can begin with **Wi** or **Non**.\n\nFor stronger beginner communication, follow it with the useful information:\n\n- **Wi, mwen pale kreyòl.**\n- **Non, mwen pa pale kreyòl.**\n\nFor now, focus on recognizing both the short response and the complete response."
           },
-          "complete-answer": {
-            "title": "Repeat the useful information",
-            "bodyMarkdown": "A complete answer gives more useful practice:\n\n**Èske ou pale kreyòl?**\n\n**Wi, mwen pale kreyòl.**\n\nThis mirrors the source exercises that ask learners to answer with complete sentences."
+          "yes-no-exchange": {
+            "title": "Question → complete answer",
+            "bodyMarkdown": "**Jan:** Èske ou etidye kreyòl?\n\n**Mari:** Wi, mwen etidye kreyòl.\n\nA complete answer helps the conversation carry useful information instead of stopping at only **Wi**."
           }
         }
       }

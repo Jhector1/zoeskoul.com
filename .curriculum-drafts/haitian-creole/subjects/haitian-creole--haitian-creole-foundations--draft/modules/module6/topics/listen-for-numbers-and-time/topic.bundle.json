@@ -2,7 +2,7 @@
   "topicId": "listen-for-numbers-and-time",
   "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
   "moduleSlug": "haitian-creole-foundations-7-numbers-time-and-everyday-life",
-  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht7-learn-listen-speak",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht7-numbers-time-schedule",
   "prefix": "ht7",
   "minutes": 24,
   "runtimeDefaults": {
@@ -29,12 +29,12 @@
         "id": "try-listen-for-numbers-and-time-sketch0",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch0.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch0.prompt",
-        "exerciseKey": "try-clock-hour-three",
+        "exerciseKey": "try-clock-hour-transfer",
         "exerciseKeys": [
-          "try-clock-hour-three"
+          "try-clock-hour-transfer"
         ],
         "difficulty": "easy",
-        "preferKind": "single_choice",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -51,9 +51,9 @@
         "id": "try-listen-for-numbers-and-time-sketch1",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch1.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch1.prompt",
-        "exerciseKey": "try-half-past-three",
+        "exerciseKey": "try-half-past-transfer",
         "exerciseKeys": [
-          "try-half-past-three"
+          "try-half-past-transfer"
         ],
         "difficulty": "easy",
         "preferKind": "voice_input",
@@ -73,12 +73,12 @@
         "id": "try-listen-for-numbers-and-time-sketch2",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch2.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch2.prompt",
-        "exerciseKey": "try-ask-time-leave",
+        "exerciseKey": "try-akile-transfer",
         "exerciseKeys": [
-          "try-ask-time-leave"
+          "try-akile-transfer"
         ],
         "difficulty": "easy",
-        "preferKind": "voice_input",
+        "preferKind": "word_bank_arrange",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 5,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -106,28 +106,168 @@
       "id": "clock-hour",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.clock-hour.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.clock-hour.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.clock-hour.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Learn common clock-time expressions as whole phrases:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "inè",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "one o'clock",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "twazè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "three o'clock",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "senkè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "five o'clock",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "inè",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "can mean one hour or one o'clock depending on the context.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "half-past",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.half-past.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.half-past.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.half-past.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "edmi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "for half past:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "twazè edmi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "3:30",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "setè edmi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "7:30",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Learn each as one spoken time expression.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "ask-time",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.ask-time.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.ask-time.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.ask-time.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Akilè…?",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "asks what time an activity happens.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Akilè nou pati?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "What time do we leave?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "A short answer can simply be a time expression such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "senkè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "listen-for-numbers-and-time-choice",
+      "id": "time-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-choice",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,100 +279,63 @@
       }
     },
     {
-      "id": "listen-for-numbers-and-time-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "edmi"
-      }
-    },
-    {
-      "id": "listen-for-numbers-and-time-listen",
+      "id": "time-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-listen",
-      "targetText": "senkè",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-listen",
+      "targetText": "twazè edmi",
       "locale": "ht-HT",
       "wordBank": [
-        "senkè"
-      ],
-      "distractors": [
-        "twazè"
+        "twazè",
+        "edmi"
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "senkè",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "twazè edmi",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "listen-for-numbers-and-time-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-voice",
-      "targetText": "setè edmi",
-      "locale": "ht-HT",
-      "maxSeconds": 10,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "setè edmi",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "listen-for-numbers-and-time-build",
+      "id": "time-build",
       "kind": "word_bank_arrange",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-build",
-      "targetText": "Akilè nou pati?",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-build",
+      "targetText": "Akilè nou travay?",
       "locale": "ht-HT",
       "wordBank": [
         "Akilè",
         "nou",
-        "pati?"
+        "travay?"
       ],
-      "distractors": [
-        "Kijan"
-      ],
-      "ttsText": "Akilè nou pati?",
       "expected": {
         "kind": "word_bank_arrange",
-        "targetText": "Akilè nou pati?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Akilè nou travay?",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "listen-for-numbers-and-time-write",
+      "id": "time-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-voice",
+      "targetText": "senkè",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "senkè",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "time-write",
       "kind": "text_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-write",
-      "placeholder": "Type the Kreyòl answer",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-write",
+      "placeholder": "Type the Kreyòl time",
       "expected": {
         "kind": "text_input",
         "value": "inè",
@@ -245,27 +348,28 @@
       }
     },
     {
-      "id": "try-clock-hour-three",
-      "kind": "single_choice",
+      "id": "try-clock-hour-transfer",
+      "kind": "listen_build",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-clock-hour-three",
-      "optionIds": [
-        "a",
-        "b",
-        "c"
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-clock-hour-transfer",
+      "targetText": "setè",
+      "locale": "ht-HT",
+      "wordBank": [
+        "setè"
       ],
       "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
+        "kind": "listen_build",
+        "targetText": "setè",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "try-half-past-three",
+      "id": "try-half-past-transfer",
       "kind": "voice_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-half-past-three",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-half-past-transfer",
       "targetText": "senkè edmi",
       "locale": "ht-HT",
       "expected": {
@@ -275,16 +379,21 @@
       }
     },
     {
-      "id": "try-ask-time-leave",
-      "kind": "voice_input",
+      "id": "try-akile-transfer",
+      "kind": "word_bank_arrange",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-ask-time-leave",
-      "targetText": "Akilè nou travay?",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-akile-transfer",
+      "targetText": "Akilè ou etidye?",
       "locale": "ht-HT",
+      "wordBank": [
+        "Akilè",
+        "ou",
+        "etidye?"
+      ],
       "expected": {
-        "kind": "voice_input",
-        "targetText": "Akilè nou travay?",
+        "kind": "word_bank_arrange",
+        "targetText": "Akilè ou etidye?",
         "locale": "ht-HT"
       }
     }

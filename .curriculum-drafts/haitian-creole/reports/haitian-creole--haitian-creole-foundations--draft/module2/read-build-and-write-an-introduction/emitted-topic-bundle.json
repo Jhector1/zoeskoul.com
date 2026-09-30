@@ -2,9 +2,9 @@
   "topicId": "read-build-and-write-an-introduction",
   "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
   "moduleSlug": "haitian-creole-foundations-3-who-are-you",
-  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht3-introductions",
   "prefix": "ht3",
-  "minutes": 24,
+  "minutes": 21,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -23,15 +23,15 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.cards.sketch0.title",
-      "sketchId": "ask-place",
+      "sketchId": "ask-where",
       "height": 420,
       "tryIt": {
         "id": "try-read-build-and-write-an-introduction-sketch0",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch0.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch0.prompt",
-        "exerciseKey": "try-ask-place",
+        "exerciseKey": "try-ask-where",
         "exerciseKeys": [
-          "try-ask-place"
+          "try-ask-where"
         ],
         "difficulty": "easy",
         "preferKind": "voice_input",
@@ -45,18 +45,18 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.cards.sketch1.title",
-      "sketchId": "answer-place",
+      "sketchId": "answer-where",
       "height": 420,
       "tryIt": {
         "id": "try-read-build-and-write-an-introduction-sketch1",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch1.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch1.prompt",
-        "exerciseKey": "try-answer-place-chicago",
+        "exerciseKey": "try-different-city",
         "exerciseKeys": [
-          "try-answer-place-chicago"
+          "try-different-city"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "text_input",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -67,18 +67,18 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.cards.sketch2.title",
-      "sketchId": "third-person-place",
+      "sketchId": "residence-exchange",
       "height": 420,
       "tryIt": {
         "id": "try-read-build-and-write-an-introduction-sketch2",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch2.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch2.prompt",
-        "exerciseKey": "try-third-person-place",
+        "exerciseKey": "try-residence-transfer",
         "exerciseKeys": [
-          "try-third-person-place"
+          "try-residence-transfer"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -103,31 +103,139 @@
   ],
   "sketches": [
     {
-      "id": "ask-place",
+      "id": "ask-where",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.ask-place.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.ask-place.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.ask-where.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.ask-where.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "To ask where someone lives, use:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Ki kote ou rete?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Treat the question as one complete expression.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "answer-place",
+      "id": "answer-where",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.answer-place.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.answer-place.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.answer-where.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.answer-where.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Answer with:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Mwen rete Chicago.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "I live in Chicago.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The place can change while the sentence pattern stays stable.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "third-person-place",
+      "id": "residence-exchange",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.third-person-place.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.third-person-place.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.residence-exchange.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.residence-exchange.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Ki kote ou rete?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen rete Boston. E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen rete Chicago.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "The familiar",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "keeps the exchange moving.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "read-build-and-write-an-introduction-choice",
+      "id": "residence-question-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-choice",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.residence-question-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,133 +247,11 @@
       }
     },
     {
-      "id": "read-build-and-write-an-introduction-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "rete"
-      }
-    },
-    {
-      "id": "read-build-and-write-an-introduction-listen",
+      "id": "residence-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-listen",
-      "targetText": "Li rete Boston.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Li",
-        "rete",
-        "Boston."
-      ],
-      "distractors": [
-        "pale"
-      ],
-      "expected": {
-        "kind": "listen_build",
-        "targetText": "Li rete Boston.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "read-build-and-write-an-introduction-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-voice",
-      "targetText": "Ki kote ou rete?",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Ki kote ou rete?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "read-build-and-write-an-introduction-build",
-      "kind": "word_bank_arrange",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-build",
-      "targetText": "Mwen rete Chicago.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Mwen",
-        "rete",
-        "Chicago."
-      ],
-      "distractors": [
-        "rele"
-      ],
-      "ttsText": "Mwen rete Chicago.",
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "Mwen rete Chicago.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "read-build-and-write-an-introduction-write",
-      "kind": "text_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "kote",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-ask-place",
-      "kind": "voice_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-ask-place",
-      "targetText": "Ki kote Mari rete?",
-      "locale": "ht-HT",
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Ki kote Mari rete?",
-        "locale": "ht-HT"
-      }
-    },
-    {
-      "id": "try-answer-place-chicago",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-answer-place-chicago",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.residence-listen",
       "targetText": "Mwen rete Boston.",
       "locale": "ht-HT",
       "wordBank": [
@@ -274,27 +260,93 @@
         "Boston."
       ],
       "expected": {
-        "kind": "word_bank_arrange",
+        "kind": "listen_build",
         "targetText": "Mwen rete Boston.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-third-person-place",
+      "id": "residence-build",
       "kind": "word_bank_arrange",
-      "purpose": "project",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-third-person-place",
-      "targetText": "Li rete Chicago.",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.residence-build",
+      "targetText": "Ki kote ou rete?",
       "locale": "ht-HT",
       "wordBank": [
-        "Li",
-        "rete",
-        "Chicago."
+        "Ki",
+        "kote",
+        "ou",
+        "rete?"
       ],
       "expected": {
         "kind": "word_bank_arrange",
-        "targetText": "Li rete Chicago.",
+        "targetText": "Ki kote ou rete?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "residence-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.residence-voice",
+      "targetText": "Mwen rete Miami.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mwen rete Miami.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-ask-where",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-ask-where",
+      "targetText": "Mari, ki kote ou rete?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mari, ki kote ou rete?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-different-city",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-different-city",
+      "placeholder": "Type the Kreyòl sentence",
+      "expected": {
+        "kind": "text_input",
+        "value": "Mwen rete Miami.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-residence-transfer",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-residence-transfer",
+      "targetText": "Mwen rete Miami.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mwen",
+        "rete",
+        "Miami."
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Mwen rete Miami.",
         "locale": "ht-HT"
       }
     }

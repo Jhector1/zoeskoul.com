@@ -1,0 +1,194 @@
+{
+  "topics": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "place-adjectives-in-phrases": {
+          "label": "Place Adjectives in Phrases",
+          "summary": "Notice and reproduce adjective placement using only the exact example phrases.",
+          "cards": {
+            "sketch0": {
+              "title": "Notice the Word Order"
+            },
+            "sketch1": {
+              "title": "Keep the Whole Phrase Together"
+            },
+            "sketch2": {
+              "title": "Notice a Longer Description"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_place_adjectives_in_phrases_sketch0": {
+              "title": "Try it yourself: Find the green tree",
+              "prompt": "Right after the sketch \"yon pye bwa vèt / yon bilding wo\", practice that exact idea with this task. Which phrase means “a green tree”? Produce the result for find the green tree so it reinforces Place Adjectives in Phrases."
+            },
+            "try_place_adjectives_in_phrases_sketch1": {
+              "title": "Try it yourself: Build the old red house phrase",
+              "prompt": "Right after the sketch \"yon vye gran moun gason\", practice that exact idea with this task. Arrange the words to reproduce the exact phrase for “the old red house.”. Produce the result for build the old red house phrase so it reinforces Place Adjectives in Phrases."
+            },
+            "try_place_adjectives_in_phrases_sketch2": {
+              "title": "Try it yourself: Write the nice friend phrase",
+              "prompt": "Right after the sketch \"yon zanmi ki trè janti\", practice that exact idea with this task. Type the phrase for “a very nice friend.”. Produce the result for write the nice friend phrase so it reinforces Place Adjectives in Phrases."
+            }
+          },
+          "practice": {
+            "adj-quiz-tall-building-choice": {
+              "title": "Find the tall building",
+              "prompt": "Which phrase means “a tall building”?",
+              "hint": "Choose the phrase with bilding.",
+              "help": {
+                "concept": "Recognize the exact adjective phrase.",
+                "hint_1": "Look for yon bilding.",
+                "hint_2": "The pattern places wo at the end."
+              },
+              "options": {
+                "a": "yon bilding wo",
+                "b": "yon pye bwa vèt",
+                "c": "ansyen kay wouj la"
+              }
+            },
+            "adj-quiz-old-man-choice": {
+              "title": "Find the old man phrase",
+              "prompt": "Which phrase is translated as “a very old man”?",
+              "hint": "Choose the longer phrase beginning yon vye.",
+              "help": {
+                "concept": "Recognize the phrase as in.",
+                "hint_1": "It begins yon vye.",
+                "hint_2": "It ends gran moun gason."
+              },
+              "options": {
+                "a": "yon vye gran moun gason",
+                "b": "yon zanmi ki trè janti",
+                "c": "yon bilding wo"
+              }
+            },
+            "adj-quiz-green-tree-build": {
+              "title": "Build the green tree phrase",
+              "prompt": "Arrange the phrase for “a green tree.”",
+              "hint": "Keep the order.",
+              "help": {
+                "concept": "Reproduce the adjective phrase.",
+                "hint_1": "Begin yon pye bwa.",
+                "hint_2": "Finish vèt."
+              },
+              "targetText": "yon pye bwa vèt",
+              "wordBank": [
+                "yon",
+                "pye",
+                "bwa",
+                "vèt"
+              ]
+            },
+            "adj-quiz-tall-building-build": {
+              "title": "Build the tall building phrase",
+              "prompt": "Arrange the phrase for “a tall building.”",
+              "hint": "Keep the order.",
+              "help": {
+                "concept": "Build the phrase exactly as presents it.",
+                "hint_1": "Begin yon bilding.",
+                "hint_2": "Finish wo."
+              },
+              "targetText": "yon bilding wo",
+              "wordBank": [
+                "yon",
+                "bilding",
+                "wo"
+              ]
+            },
+            "adj-quiz-old-red-house-write": {
+              "title": "Write the old red house phrase",
+              "prompt": "Type the phrase for “the old red house.”",
+              "hint": "Begin ansyen kay.",
+              "help": {
+                "concept": "Write the complete phrase without changing its order.",
+                "hint_1": "Begin ansyen kay wouj.",
+                "hint_2": "Finish la."
+              },
+              "expectedText": "ansyen kay wouj la",
+              "placeholder": "Type the Kreyòl phrase"
+            },
+            "adj-quiz-old-man-write": {
+              "title": "Write the old man phrase",
+              "prompt": "Type the phrase translated as “a very old man.”",
+              "hint": "Begin yon vye.",
+              "help": {
+                "concept": "Write the exact wording.",
+                "hint_1": "Continue with gran moun.",
+                "hint_2": "Finish gason."
+              },
+              "expectedText": "yon vye gran moun gason",
+              "placeholder": "Type the Kreyòl phrase"
+            },
+            "try-green-tree-choice": {
+              "title": "Find the green tree",
+              "prompt": "Which phrase means “a green tree”?",
+              "hint": "Choose the phrase ending in vèt.",
+              "help": {
+                "concept": "Recognize the complete phrase and its word order.",
+                "hint_1": "Look for pye bwa.",
+                "hint_2": "The phrase ends in vèt."
+              },
+              "options": {
+                "a": "yon pye bwa vèt",
+                "b": "yon bilding wo",
+                "c": "yon zanmi ki trè janti"
+              }
+            },
+            "try-old-red-house-build": {
+              "title": "Build the old red house phrase",
+              "prompt": "Arrange the words to reproduce the exact phrase for “the old red house.”",
+              "hint": "Keep the order exactly.",
+              "help": {
+                "concept": "Rebuild the noun phrase without translating word by word.",
+                "hint_1": "The phrase begins with ansyen.",
+                "hint_2": "The phrase ends with la."
+              },
+              "targetText": "ansyen kay wouj la",
+              "wordBank": [
+                "ansyen",
+                "kay",
+                "wouj",
+                "la"
+              ]
+            },
+            "try-nice-friend-write": {
+              "title": "Write the nice friend phrase",
+              "prompt": "Type the phrase for “a very nice friend.”",
+              "hint": "Begin yon zanmi.",
+              "help": {
+                "concept": "Write the complete phrase with its word order.",
+                "hint_1": "Begin yon zanmi ki.",
+                "hint_2": "Finish trè janti."
+              },
+              "expectedText": "yon zanmi ki trè janti",
+              "placeholder": "Type the Kreyòl phrase"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "place-adjectives-in-phrases": {
+          "adjective-after-noun-examples": {
+            "title": "yon pye bwa vèt / yon bilding wo",
+            "bodyMarkdown": "Start with these adjective examples:\n\n- **yon pye bwa vèt** — a green tree\n- **yon bilding wo** — a tall building\n\nRather than translating word by word, notice where the describing word appears and keep the phrase in the same order."
+          },
+          "multiword-adjective-examples": {
+            "title": "yon vye gran moun gason",
+            "bodyMarkdown": "Here are a few more examples:\n\n- **yon vye gran moun gason** — a very old man\n- **ansyen kay wouj la** — the old red house\n\nThese examples are more complex. Keep each phrase together and notice its word order."
+          },
+          "ki-tre-adjective-example": {
+            "title": "yon zanmi ki trè janti",
+            "bodyMarkdown": "Here is one more example:\n\n- **yon zanmi ki trè janti** — a very nice friend\n\nThis phrase uses a longer pattern. Focus on recognizing it and reproducing the phrase in the same order."
+          }
+        }
+      }
+    }
+  }
+}

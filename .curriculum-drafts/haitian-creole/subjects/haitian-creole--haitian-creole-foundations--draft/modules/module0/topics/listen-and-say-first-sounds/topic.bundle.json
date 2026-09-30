@@ -107,19 +107,114 @@
       "id": "listen-first",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.listen-first.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.listen-first.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.listen-first.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "When a new language is unfamiliar, it is tempting to break every word into English-looking pieces. Instead, listen to the",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "whole Kreyòl word",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", then connect it with the spelling you already saw.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Use these anchors:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "bonjou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "mèsi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "wi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Replay whenever you need to. Focus on recognizing the whole word first; speed will come later. Then listen for one more short word and rebuild what you hear.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "say-whole-word",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.say-whole-word.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.say-whole-word.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.say-whole-word.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Read the whole word once, listen to how it sounds, then say it naturally. Keep your attention on the complete word instead of trying to pronounce it one letter at a time.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Keep the word intact. For example, when you see",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "mèsi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", preserve the word as one unit instead of spelling it aloud letter by letter.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "short-phrases",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.short-phrases.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.short-phrases.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.short-phrases.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Once a single word feels familiar, listen to two words together. A short phrase such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Wi, mèsi.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "lets you hear familiar Kreyòl without adding much new vocabulary.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Listen first, rebuild what you heard, then say the same phrase. This creates a direct path from sound → written Kreyòl → spoken Kreyòl.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [

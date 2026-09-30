@@ -1,0 +1,120 @@
+{
+  "policyId": "haitian-creole-everyday-grammar-validation",
+  "allowedConcepts": [
+    "singular definite article selection with a, la, an, lan, and nan",
+    "contracted object pronouns",
+    "possessive pronouns",
+    "possession with pou",
+    "demonstrative sa a and sa yo",
+    "expanded question words not explicitly taught in Course 1",
+    "body parts needed for simple health exchanges",
+    "fèmal health expressions",
+    "past actions with te",
+    "future actions with pral",
+    "past-present-future contrast using known present language",
+    "descriptions without an expressed English-style to be",
+    "ye",
+    "adjective placement",
+    "selected colors sizes and qualities"
+  ],
+  "disallowedConcepts": [
+    "reteaching Kreyòl sounds as a lesson focus",
+    "reteaching greetings or introductions as a lesson focus",
+    "reteaching beginner numbers or basic clock time as a lesson focus",
+    "reteaching yon as a new concept",
+    "reteaching plural yo as a new concept",
+    "reteaching basic possessor-after-noun phrases as a new concept",
+    "reteaching Èske as a new concept",
+    "reteaching Ki kote, Ki moun, or Konbyen as new concepts",
+    "reteaching present-progressive ap as a new concept",
+    "reteaching basic se identity statements as a new concept",
+    "code_input",
+    "pseudocode_input",
+    "phoneme-level pronunciation score claims",
+    "advanced literary analysis",
+    "silently correcting or reconciling contradictory source examples"
+  ],
+  "globalRules": [
+    "Assume Haitian Creole Foundations or equivalent prerequisite knowledge.",
+    "Previously learned Course 1 language may be reused as context but must not become the primary teaching target.",
+    "Introduce only the grammar or vocabulary needed for the current communicative task.",
+    "Use official Kreyòl spelling and preserve meaningful diacritics as supported by the supplied source documents.",
+    "Use integrated receptive and productive practice where it helps the concept; do not force a fixed exercise rhythm.",
+    "Do not use programming runtime or code-workspace language.",
+    "Do not describe speech transcript matching as a pronunciation score.",
+    "Do not grade the Week 2 plim definite-article form while the supplied source contains both plim nan and plim lan.",
+    "Module 1 must have accessOverride free; later modules inherit paid access."
+  ],
+  "moduleRules": {
+    "1": {
+      "focus": [
+        "a",
+        "la",
+        "an",
+        "lan",
+        "nan",
+        "singular definite article selection"
+      ],
+      "notes": [
+        "Course 1 already taught that a definite marker follows the noun; do not reteach that as the module objective.",
+        "Use the Week 2 article rules and examples, excluding disputed plim grading."
+      ]
+    },
+    "2": {
+      "focus": [
+        "contracted object pronouns",
+        "possessive pronouns"
+      ],
+      "notes": [
+        "Course 1 already used basic pronouns and possessor-after-noun phrases.",
+        "Teach only the Week 3 extensions."
+      ]
+    },
+    "3": {
+      "focus": [
+        "new Week 4 question forms",
+        "body parts",
+        "fèmal"
+      ],
+      "notes": [
+        "Do not rebuild the Course 1 basic question module.",
+        "Use the new question forms in functional health exchanges."
+      ]
+    },
+    "4": {
+      "focus": [
+        "te",
+        "pral",
+        "time contrast"
+      ],
+      "notes": [
+        "Treat simple present and present-progressive ap as known.",
+        "Add past and future through familiar action sentences."
+      ]
+    },
+    "5": {
+      "focus": [
+        "descriptions without expressed to be",
+        "ye",
+        "adjectives",
+        "colors",
+        "sizes",
+        "qualities"
+      ],
+      "notes": [
+        "Treat basic se identity as known from Course 1.",
+        "Do not require memorization of the entire Week 7 adjective table at once."
+      ]
+    }
+  },
+  "validationRequirements": {
+    "profileId": "language",
+    "moduleCount": 5,
+    "topicsPerModuleMin": 3,
+    "topicsPerModuleMax": 4,
+    "firstModuleFree": true,
+    "forbidCodeInput": true,
+    "forbidPseudocodeInput": true,
+    "requireIntegratedSkills": true
+  }
+}

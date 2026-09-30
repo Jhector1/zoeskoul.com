@@ -7,7 +7,7 @@
       "id": "exchange-map",
       "cardTitle": "A Tiny Exchange",
       "title": "Use familiar language in sequence",
-      "bodyMarkdown": "A conversation can begin with language you already recognize. For this first mini exchange, keep it deliberately small:\n\n**A:** Bonjou.\n\n**B:** Bonjou.\n\nThe purpose is not to learn a large greeting system yet. That comes in the next module. Here you are proving that familiar spelling and sound can survive inside a real turn-taking pattern.",
+      "bodyMarkdown": "A conversation can begin with language you already recognize. For this first mini exchange, keep it deliberately small:\n\n**A:** Bonjou.\n\n**B:** Bonjou.\n\nFor now, keep the exchange simple. The point is to hear familiar words inside a real back-and-forth conversation.",
       "tryItExercises": [
         {
           "id": "try-exchange-map-bonjou",
@@ -23,13 +23,63 @@
           "targetText": "Bonjou.",
           "locale": "ht-HT"
         }
-      ]
+      ],
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "a",
+            "voiceSlot": 1,
+            "label": "A",
+            "delivery": "warm"
+          },
+          {
+            "id": "b",
+            "voiceSlot": 2,
+            "label": "B",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "A conversation can begin with language you already recognize. For this first mini exchange, keep it deliberately small:",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Bonjou.",
+            "locale": "ht-HT",
+            "speakerId": "a",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Bonjou.",
+            "locale": "ht-HT",
+            "speakerId": "b",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "For now, keep the exchange simple. The point is to hear familiar words inside a real back-and-forth conversation.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ],
+        "defaultPauseMs": 300
+      }
     },
     {
       "id": "respond-with-known-words",
       "cardTitle": "Respond with Known Words",
       "title": "Reuse before adding more",
-      "bodyMarkdown": "Good beginner practice reuses known language. After hearing a familiar word, respond with a familiar word or phrase instead of reaching for new vocabulary.\n\nYou already have **bonjou**, **mèsi**, **wi**, and **non**. Use them accurately. The next module will expand these anchors into fuller social exchanges.",
+      "bodyMarkdown": "A good way to build confidence is to reuse words you already know. After hearing a familiar word, respond with a familiar word or phrase instead of reaching for new vocabulary.\n\nYou already have **bonjou**, **mèsi**, **wi**, and **non**. Use them accurately. Next, you'll use these familiar words in fuller greetings and short exchanges.",
       "tryItExercises": [
         {
           "id": "try-respond-known-greeting",
@@ -52,13 +102,148 @@
             "a"
           ]
         }
-      ]
+      ],
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "A good way to build confidence is to reuse words you already know. After hearing a familiar word, respond with a familiar word or phrase instead of reaching for new vocabulary.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "You already have",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "bonjou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "mèsi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "wi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "non",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ". Use them accurately. Next, you'll use these familiar words in fuller greetings and short exchanges.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "module-one-review",
       "cardTitle": "Module 1 Review",
       "title": "Sound, spelling, and use belong together",
-      "bodyMarkdown": "Before leaving Module 1, check three habits:\n\n1. You notice spellings such as **è**, **ou**, **an**, **en**, and **on**.\n2. You can connect a few written Kreyòl words with what you hear and say.\n3. You preserve those spellings when you build or type a response.\n\nYou do not need perfect pronunciation or a large vocabulary yet. You need a dependable first map."
+      "bodyMarkdown": "Before you move on, check three habits:\n\n1. You notice spellings such as **è**, **ou**, **an**, **en**, and **on**.\n2. You can connect a few written Kreyòl words with what you hear and say.\n3. You preserve those spellings when you build or type a response.\n\nYou do not need perfect pronunciation or a large vocabulary yet. You need a dependable first map.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Before you move on, check three habits:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "You notice spellings such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "è",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "en",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "on",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You can connect a few written Kreyòl words with what you hear and say.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You preserve those spellings when you build or type a response.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You do not need perfect pronunciation or a large vocabulary yet. You need a dependable first map.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "quizDraft": [
@@ -132,11 +317,11 @@
       "kind": "voice_input",
       "title": "Say thank you",
       "prompt": "Say the familiar Kreyòl word shown: Mèsi.",
-      "hint": "Read the Kreyòl target once, then say the whole phrase.",
+      "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
       "help": {
-        "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-        "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-        "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+        "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+        "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+        "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
       },
       "targetText": "Mèsi.",
       "locale": "ht-HT",

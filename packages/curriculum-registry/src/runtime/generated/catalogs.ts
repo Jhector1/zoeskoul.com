@@ -65,7 +65,8 @@ export const CATALOG_MANIFESTS: Record<string, any> =
       "imageAlt": "Haitian Creole catalog cover",
       "status": "active",
       "subjectSlugs": [
-        "haitian-creole-foundations"
+        "haitian-creole-foundations",
+        "haitian-creole-everyday-grammar"
       ],
       "meta": {
         "family": "languages",
@@ -150,6 +151,7 @@ export const SUBJECT_CATALOG_SLUGS: Record<string, string> =
   "c-data-structures": "c",
   "git-foundations": "git",
   "haitian-creole-foundations": "haitian-creole",
+  "haitian-creole-everyday-grammar": "haitian-creole",
   "linux-terminal-fundamentals": "linux",
   "python": "python",
   "python-v2": "python",

@@ -419,6 +419,7 @@ export function buildTopicBundleFromDraft(args: {
             seed.topicId,
             block.id,
         ),
+        ...(block.audio ? { audio: block.audio } : {}),
     }));
 
     const projectStepIdSet = new Set(projectStepIds);

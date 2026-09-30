@@ -3,14 +3,14 @@
     "haitian-creole-foundations": {
       "haitian-creole-foundations-2-bonjou": {
         "listen-and-say-hello": {
-          "label": "Listen and Say Hello",
-          "summary": "Ask how someone is doing with Kijan ou ye? and answer with a short, useful response such as Mwen byen, mèsi.",
+          "label": "Ask, Answer, and Keep It Going",
+          "summary": "Ask how someone is, answer naturally, and return the question.",
           "cards": {
             "sketch0": {
               "title": "Ask How Someone Is"
             },
             "sketch1": {
-              "title": "Answer Simply"
+              "title": "Answer Naturally"
             },
             "sketch2": {
               "title": "Keep It Going"
@@ -22,142 +22,115 @@
           "tryIt": {
             "allowReveal": true,
             "try_listen_and_say_hello_sketch0": {
-              "title": "Try it yourself: Ask Mari how she is",
-              "prompt": "Right after the sketch \"Kijan ou ye?\", practice that exact idea with this task. Press Start. Say “Mari, kijan ou ye?” clearly, then press Stop when you’re done. Produce the result for ask Mari how she is so it reinforces Listen and Say Hello."
+              "title": "Try it yourself: Ask Mari",
+              "prompt": "Right after the sketch \"Kijan ou ye?\", practice that exact idea with this task. Listen and rebuild the question to Mari. Produce the result for ask Mari so it reinforces Ask, Answer, and Keep It Going."
             },
             "try_listen_and_say_hello_sketch1": {
-              "title": "Try it yourself: Give a shorter positive answer",
-              "prompt": "Right after the sketch \"Mwen byen, mèsi.\", practice that exact idea with this task. Say “I am well.” in Kreyòl. Produce the result for give a shorter positive answer so it reinforces Listen and Say Hello."
+              "title": "Try it yourself: Give a warmer answer",
+              "prompt": "Right after the sketch \"Mwen byen, mèsi.\", practice that exact idea with this task. Say “I am well, thank you very much.”. Produce the result for give a warmer answer so it reinforces Ask, Answer, and Keep It Going."
             },
             "try_listen_and_say_hello_sketch2": {
-              "title": "Try it yourself: Answer and return the question",
-              "prompt": "Right after the sketch \"E ou menm?\", practice that exact idea with this task. Say “I am well. And you?” in Kreyòl. Produce the result for answer and return the question so it reinforces Listen and Say Hello."
+              "title": "Try it yourself: Answer and return it",
+              "prompt": "Right after the sketch \"E ou menm?\", practice that exact idea with this task. Say “I am well. And you?” in Kreyòl. Produce the result for answer and return it so it reinforces Ask, Answer, and Keep It Going."
             }
           },
           "practice": {
-            "listen-and-say-hello-choice": {
-              "title": "Choose the check-in question",
-              "prompt": "Which Kreyòl phrase asks “How are you?”",
-              "hint": "Choose the question used after a greeting.",
+            "return-question-choice": {
+              "title": "Recognize the follow-up",
+              "prompt": "Which expression means “And you?”",
+              "hint": "Choose the expression that returns the question.",
               "help": {
-                "concept": "Kijan ou ye? is a common beginner check-in question.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "recognizing the conversational follow-up",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
               "options": {
-                "a": "Kijan ou ye?",
-                "b": "Mwen byen.",
-                "c": "Mèsi anpil."
+                "a": "E ou menm?",
+                "b": "Kijan ou ye?",
+                "c": "Orevwa."
               }
             },
-            "listen-and-say-hello-fill": {
-              "title": "Complete the answer",
-              "prompt": "Choose the word that completes “I am well.”",
-              "hint": "Use the sentence pattern practiced in the lesson.",
-              "help": {
-                "concept": "A simple response places the subject before the description.",
-                "hint_1": "Look at the complete response pattern from the lesson.",
-                "hint_2": "Choose the option that makes the sentence complete and natural."
-              },
-              "template": "[blank1] byen.",
-              "choices": [
-                "Mwen",
-                "Ou",
-                "Li"
-              ]
-            },
-            "listen-and-say-hello-listen": {
+            "jan-how-listen": {
               "title": "Hear the question",
-              "prompt": "Listen, then build the Kreyòl question you hear.",
-              "hint": "Listen for the full check-in question.",
+              "prompt": "Listen and rebuild the question to Jan.",
+              "hint": "Listen for Jan's name and the question.",
               "help": {
-                "concept": "Listening to the whole expression helps you recognize it quickly in conversation.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "hearing a check-in question with a name",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Kijan ou ye?",
+              "targetText": "Jan, kijan ou ye?",
               "wordBank": [
-                "Kijan",
+                "Jan,",
+                "kijan",
                 "ou",
                 "ye?"
-              ],
-              "distractors": [
-                "mèsi"
               ]
             },
-            "listen-and-say-hello-voice": {
-              "title": "Answer the check-in",
-              "prompt": "Say: Mwen byen, mèsi.",
-              "hint": "Say the whole response in one comfortable phrase.",
+            "response-build": {
+              "title": "Build the response",
+              "prompt": "Build “I am well, thank you very much.”",
+              "hint": "Begin with Mwen byen.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl response.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "building a complete response",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Mwen byen, mèsi."
-            },
-            "listen-and-say-hello-build": {
-              "title": "Return the question",
-              "prompt": "Arrange the words to say “And you?”",
-              "hint": "Build the complete short question.",
-              "help": {
-                "concept": "E ou menm? is a useful way to return a social question.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "targetText": "E ou menm?",
+              "targetText": "Mwen byen, mèsi anpil.",
               "wordBank": [
-                "E",
+                "Mwen",
+                "byen,",
+                "mèsi",
+                "anpil."
+              ]
+            },
+            "response-return-voice": {
+              "title": "Keep it going",
+              "prompt": "Answer that you are well, then ask “And you?”",
+              "hint": "Combine the two familiar chunks.",
+              "help": {
+                "concept": "combining an answer with a follow-up",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "targetText": "Mwen byen. E ou menm?"
+            },
+            "try-mari-how": {
+              "title": "Ask Mari",
+              "prompt": "Listen and rebuild the question to Mari.",
+              "hint": "Mari's name comes before the question.",
+              "help": {
+                "concept": "hearing a check-in question in context",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "targetText": "Mari, kijan ou ye?",
+              "wordBank": [
+                "Mari,",
+                "kijan",
                 "ou",
-                "menm?"
-              ],
-              "distractors": [
-                "byen"
-              ],
-              "ttsText": "E ou menm?"
+                "ye?"
+              ]
             },
-            "listen-and-say-hello-write": {
-              "title": "Write byen",
-              "prompt": "Type the Kreyòl word for “well” used in Mwen byen.",
-              "hint": "Use the word from the short answer.",
+            "try-answer-more": {
+              "title": "Give a warmer answer",
+              "prompt": "Say “I am well, thank you very much.”",
+              "hint": "Add anpil after mèsi.",
               "help": {
-                "concept": "Accurate writing reinforces the vocabulary inside useful conversational chunks.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "extending a familiar response",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "expectedText": "byen",
-              "placeholder": "Type the Kreyòl answer"
+              "targetText": "Mwen byen, mèsi anpil."
             },
-            "try-ask-how": {
-              "title": "Ask Mari how she is",
-              "prompt": "Press Start. Say “Mari, kijan ou ye?” clearly, then press Stop when you’re done.",
-              "hint": "Say the name, then use the familiar check-in question.",
-              "help": {
-                "concept": "asking how someone is",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mari, kijan ou ye?"
-            },
-            "try-answer-how": {
-              "title": "Give a shorter positive answer",
-              "prompt": "Say “I am well.” in Kreyòl.",
-              "hint": "Use the same positive-answer pattern without adding thanks.",
-              "help": {
-                "concept": "answering how you are",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen byen."
-            },
-            "try-return-question": {
-              "title": "Answer and return the question",
+            "try-answer-return": {
+              "title": "Answer and return it",
               "prompt": "Say “I am well. And you?” in Kreyòl.",
-              "hint": "Give the short answer first, then return the question.",
+              "hint": "Answer first, then use E ou menm?",
               "help": {
-                "concept": "returning a question",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "keeping a greeting exchange moving",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
               "targetText": "Mwen byen. E ou menm?"
             }
@@ -172,15 +145,15 @@
         "listen-and-say-hello": {
           "ask-how": {
             "title": "Kijan ou ye?",
-            "bodyMarkdown": "After greeting someone, a very useful question is:\n\n**Kijan ou ye?** — How are you?\n\nLearn the question as a complete expression. At this level, you do not need to analyze every word before using it."
+            "bodyMarkdown": "To ask how someone is, use:\n\n**Kijan ou ye?**\n\nListen to the question as one complete phrase."
           },
           "answer-how": {
             "title": "Mwen byen, mèsi.",
-            "bodyMarkdown": "A simple positive answer is:\n\n**Mwen byen, mèsi.** — I am well, thank you.\n\nThe important pieces are **mwen** for “I,” **byen** for “well,” and **mèsi** for “thank you.”"
+            "bodyMarkdown": "A simple complete answer is:\n\n**Mwen byen, mèsi.**\n\nA short answer is enough when it responds clearly."
           },
           "return-question": {
             "title": "E ou menm?",
-            "bodyMarkdown": "To return the question, say:\n\n**E ou menm?** — And you?\n\nThis turns a memorized greeting into a short two-way conversation."
+            "bodyMarkdown": "After answering, return the question with:\n\n**E ou menm?** — And you?\n\nThis turns a one-way answer into a two-way conversation."
           }
         }
       }

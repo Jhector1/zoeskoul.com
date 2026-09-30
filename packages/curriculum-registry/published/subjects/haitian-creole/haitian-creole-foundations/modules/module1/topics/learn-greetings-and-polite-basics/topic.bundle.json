@@ -2,9 +2,9 @@
   "topicId": "learn-greetings-and-polite-basics",
   "subjectSlug": "haitian-creole-foundations",
   "moduleSlug": "haitian-creole-foundations-2-bonjou",
-  "sectionSlug": "haitian-creole-foundations-ht2-learn-listen-speak",
+  "sectionSlug": "haitian-creole-foundations-ht2-greetings-conversation",
   "prefix": "ht2",
-  "minutes": 24,
+  "minutes": 20,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -29,12 +29,12 @@
         "id": "try-learn-greetings-and-polite-basics-sketch0",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch0.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch0.prompt",
-        "exerciseKey": "try-greetings-start-evening",
+        "exerciseKey": "try-bonjou-mari",
         "exerciseKeys": [
-          "try-greetings-start-evening"
+          "try-bonjou-mari"
         ],
         "difficulty": "easy",
-        "preferKind": "single_choice",
+        "preferKind": "voice_input",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -45,18 +45,18 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.cards.sketch1.title",
-      "sketchId": "greet-a-person",
+      "sketchId": "polite-basics",
       "height": 420,
       "tryIt": {
         "id": "try-learn-greetings-and-polite-basics-sketch1",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch1.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch1.prompt",
-        "exerciseKey": "try-greet-person-mari",
+        "exerciseKey": "try-mesi-anpil",
         "exerciseKeys": [
-          "try-greet-person-mari"
+          "try-mesi-anpil"
         ],
         "difficulty": "easy",
-        "preferKind": "listen_build",
+        "preferKind": "voice_input",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -67,8 +67,23 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.cards.sketch2.title",
-      "sketchId": "greeting-habit",
-      "height": 420
+      "sketchId": "close-politely",
+      "height": 420,
+      "tryIt": {
+        "id": "try-learn-greetings-and-polite-basics-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch2.prompt",
+        "exerciseKey": "try-orevwa-jan",
+        "exerciseKeys": [
+          "try-orevwa-jan"
+        ],
+        "difficulty": "easy",
+        "preferKind": "text_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -78,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -91,28 +106,118 @@
       "id": "greetings-start",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greetings-start.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greetings-start.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greetings-start.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Two useful greetings are:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Bonjou!",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Bonswa!",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "A greeting can stand alone or come before a person's name.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "greet-a-person",
+      "id": "polite-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greet-a-person.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greet-a-person.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.polite-basics.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.polite-basics.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Three short expressions are useful immediately:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Mèsi.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "thank you",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Tanpri.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "please",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Padon.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "excuse me / sorry",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Listen to each as a complete spoken expression.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "greeting-habit",
+      "id": "close-politely",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greeting-habit.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greeting-habit.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.close-politely.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.close-politely.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Orevwa.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "is a useful way to close a short interaction.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Even a beginner conversation can already have a complete shape: greet, communicate, then close.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "learn-greetings-and-polite-basics-choice",
+      "id": "greeting-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-choice",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.greeting-choice",
       "optionIds": [
         "a",
         "b",
@@ -124,141 +229,99 @@
       }
     },
     {
-      "id": "learn-greetings-and-polite-basics-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "ou"
-      }
-    },
-    {
-      "id": "learn-greetings-and-polite-basics-listen",
-      "kind": "listen_build",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-listen",
-      "targetText": "Bonjou.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Bonjou."
-      ],
-      "distractors": [
-        "Bonswa."
-      ],
-      "expected": {
-        "kind": "listen_build",
-        "targetText": "Bonjou.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-greetings-and-polite-basics-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-voice",
-      "targetText": "Bonswa.",
-      "locale": "ht-HT",
-      "maxSeconds": 10,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Bonswa.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-greetings-and-polite-basics-build",
+      "id": "thanks-build",
       "kind": "word_bank_arrange",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-build",
-      "targetText": "Bonjou, Mari.",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.thanks-build",
+      "targetText": "Mèsi anpil.",
       "locale": "ht-HT",
       "wordBank": [
-        "Bonjou,",
-        "Mari."
+        "Mèsi",
+        "anpil."
       ],
-      "distractors": [
-        "Mèsi,"
-      ],
-      "ttsText": "Bonjou, Mari.",
       "expected": {
         "kind": "word_bank_arrange",
-        "targetText": "Bonjou, Mari.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Mèsi anpil.",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "learn-greetings-and-polite-basics-write",
-      "kind": "text_input",
+      "id": "bonswa-listen",
+      "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "Bonjou",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-greetings-start-evening",
-      "kind": "single_choice",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-greetings-start-evening",
-      "optionIds": [
-        "a",
-        "b"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "try-greet-person-mari",
-      "kind": "listen_build",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-greet-person-mari",
-      "targetText": "Bonswa, Mari.",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.bonswa-listen",
+      "targetText": "Bonswa, Jan.",
       "locale": "ht-HT",
       "wordBank": [
         "Bonswa,",
-        "Mari."
+        "Jan."
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "Bonswa, Mari.",
+        "targetText": "Bonswa, Jan.",
         "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "bonjou-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.bonjou-voice",
+      "targetText": "Bonjou, Mari.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Bonjou, Mari.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-bonjou-mari",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-bonjou-mari",
+      "targetText": "Bonjou, Mari.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Bonjou, Mari.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-mesi-anpil",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-mesi-anpil",
+      "targetText": "Mèsi anpil.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mèsi anpil.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-orevwa-jan",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-orevwa-jan",
+      "placeholder": "Type the Kreyòl phrase",
+      "expected": {
+        "kind": "text_input",
+        "value": "Orevwa, Jan.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
       }
     }
   ]

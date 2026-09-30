@@ -86,11 +86,11 @@
             "sound-speak-mesi": {
               "title": "Say mèsi",
               "prompt": "Say the Kreyòl word shown: Mèsi.",
-              "hint": "Read the Kreyòl target once, then say the whole phrase.",
+              "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
               "help": {
-                "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-                "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-                "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+                "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+                "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+                "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
               },
               "targetText": "Mèsi."
             },
@@ -197,7 +197,7 @@
           },
           "nasal-patterns": {
             "title": "Notice an, en, and on",
-            "bodyMarkdown": "Kreyòl also uses common nasal vowel spellings such as **an**, **en**, and **on**. For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.\n\nExamples to notice:\n\n- **manman** — mother\n- **pen** — bread\n- **non** — no\n\nLater lessons can refine how these patterns behave in different words. In this first lesson, your job is simply to spot and preserve the spelling."
+            "bodyMarkdown": "Kreyòl also uses common nasal vowel spellings such as **an**, **en**, and **on**. For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.\n\nExamples to notice:\n\n- **manman** — mother\n- **pen** — bread\n- **non** — no\n\nLater lessons can refine how these patterns behave in different words. For now, just learn to spot these spellings and keep them when you write."
           }
         }
       }

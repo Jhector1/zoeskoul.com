@@ -5,7 +5,8 @@
   "accessPolicy": "paid",
   "visibility": "public",
   "courseOrder": [
-    "haitian-creole-foundations"
+    "haitian-creole-foundations",
+    "haitian-creole-everyday-grammar"
   ],
   "publishTarget": {
     "liveSubjectSlug": "haitian-creole-foundations",
@@ -26,6 +27,12 @@
       "title": "Haitian Creole Foundations",
       "order": 1,
       "path": "courses/haitian-creole-foundations/course.spec.json"
+    },
+    {
+      "courseSlug": "haitian-creole-everyday-grammar",
+      "title": "Haitian Creole 2: Everyday Grammar & Sentence Building",
+      "order": 2,
+      "path": "courses/haitian-creole-everyday-grammar/course.spec.json"
     }
   ]
 }

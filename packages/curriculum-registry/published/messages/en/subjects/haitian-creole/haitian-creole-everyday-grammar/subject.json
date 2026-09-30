@@ -1,0 +1,143 @@
+{
+  "subjects": {
+    "haitian-creole-everyday-grammar": {
+      "title": "Haitian Creole 2: Everyday Grammar & Sentence Building",
+      "description": "An A1 continuation of Haitian Creole Foundations that adds article selection, contracted pronouns, deeper possession, expanded questions, health language, past and future time, and natural descriptions without reteaching Course 1.",
+      "moreComingSoon": "More Haitian Creole 2: Everyday Grammar & Sentence Building lessons are coming soon."
+    }
+  },
+  "modules": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "title": "Choose the Right Definite Article",
+        "description": "Move beyond knowing that the definite article follows the noun and learn to choose among a, la, an, lan, and nan.",
+        "outcomes": [
+          "Choose a or la in source-supported noun phrases.",
+          "Choose an, lan, or nan in source-supported noun phrases.",
+          "Use article selection while listening, speaking, building, and writing familiar noun phrases."
+        ],
+        "why": [
+          "Builds confidence with choose the right definite article.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "title": "Short Pronouns & Deeper Possession",
+        "description": "Extend known pronouns into short object forms and deeper possessive-pronoun patterns without reteaching Course 1 ownership or demonstratives.",
+        "outcomes": [
+          "Use m, w, l, and n in source-supported object positions.",
+          "Recognize source-supported singular and plural possessive pronouns.",
+          "Distinguish object-pronoun forms from possessive-pronoun forms without reteaching known Course 1 possession patterns."
+        ],
+        "why": [
+          "Builds confidence with short pronouns & deeper possession.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-everyday-grammar-3-more-questions-and-health": {
+        "title": "More Questions & Health",
+        "description": "Extend the Course 1 question toolkit and use it with body and health language.",
+        "outcomes": [
+          "Use new Week 4 question forms without reteaching the Course 1 core question set.",
+          "Recognize common body-part vocabulary from the source.",
+          "Say what hurts using the source's fèmal expressions."
+        ],
+        "why": [
+          "Builds confidence with more questions & health.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-everyday-grammar-4-past-and-future": {
+        "title": "Talk About Past & Future",
+        "description": "Add te and pral while treating simple present and ap as known Course 1 language.",
+        "outcomes": [
+          "Use te before a verb for source-supported past actions.",
+          "Use pral before a verb for source-supported future actions.",
+          "Contrast past, known present patterns, and future in short everyday statements."
+        ],
+        "why": [
+          "Builds confidence with talk about past & future.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "title": "Describe People & Things Naturally",
+        "description": "Use Week 7 description patterns, ye, and adjectives while treating basic identity se as known.",
+        "outcomes": [
+          "Recognize descriptions where English to be is not expressed in Kreyòl.",
+          "Use ye in source-supported questions and closing statements.",
+          "Use adjectives in source-supported noun phrases and descriptions.",
+          "Use selected colors, sizes, and qualities in everyday descriptions."
+        ],
+        "why": [
+          "Builds confidence with describe people & things naturally.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "haitian-creole-everyday-grammar-ht2m1-article-selection": {
+          "title": "Article Selection",
+          "description": "Choose the singular definite article from the ending sound of the noun.",
+          "weeks": null,
+          "bullets": [
+            "Choose a or la",
+            "Choose an, lan, or nan",
+            "Hear and Use Definite Articles"
+          ]
+        }
+      },
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "haitian-creole-everyday-grammar-ht2m2-pronouns-possession": {
+          "title": "Pronouns and Possession",
+          "description": "Extend known pronouns and possession into shorter, more flexible sentence patterns.",
+          "weeks": null,
+          "bullets": [
+            "Use Short Object Pronouns",
+            "Use Possessive Pronouns"
+          ]
+        }
+      },
+      "haitian-creole-everyday-grammar-3-more-questions-and-health": {
+        "haitian-creole-everyday-grammar-ht2m3-questions-health": {
+          "title": "Questions and Health",
+          "description": "Ask for more specific information and use the questions in a simple health context.",
+          "weeks": null,
+          "bullets": [
+            "Ask for More Specific Information",
+            "Name Body Parts",
+            "Say What Hurts"
+          ]
+        }
+      },
+      "haitian-creole-everyday-grammar-4-past-and-future": {
+        "haitian-creole-everyday-grammar-ht2m4-time": {
+          "title": "Past and Future",
+          "description": "Move familiar actions backward and forward in time.",
+          "weeks": null,
+          "bullets": [
+            "Use te for Past Actions",
+            "Use pral for Future Actions",
+            "Contrast Yesterday, Today & Tomorrow"
+          ]
+        }
+      },
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "haitian-creole-everyday-grammar-ht2m5-descriptions": {
+          "title": "Descriptions",
+          "description": "Describe states and things with the Week 7 patterns.",
+          "weeks": null,
+          "bullets": [
+            "Describe Without an Expressed to be",
+            "Use ye",
+            "Place Adjectives in Phrases",
+            "Describe Color, Size & Quality"
+          ]
+        }
+      }
+    }
+  }
+}

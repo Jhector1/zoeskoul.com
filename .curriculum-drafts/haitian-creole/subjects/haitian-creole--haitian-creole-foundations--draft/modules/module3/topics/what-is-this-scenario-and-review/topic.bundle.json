@@ -2,9 +2,9 @@
   "topicId": "what-is-this-scenario-and-review",
   "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
   "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
-  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession",
   "prefix": "ht4",
-  "minutes": 30,
+  "minutes": 24,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -23,18 +23,18 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.cards.sketch0.title",
-      "sketchId": "sa-a",
+      "sketchId": "this-that",
       "height": 420,
       "tryIt": {
         "id": "try-what-is-this-scenario-and-review-sketch0",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch0.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch0.prompt",
-        "exerciseKey": "try-sa-a-bag",
+        "exerciseKey": "try-valiz-sa-a",
         "exerciseKeys": [
-          "try-sa-a-bag"
+          "try-valiz-sa-a"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "voice_input",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -45,15 +45,15 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.cards.sketch1.title",
-      "sketchId": "sa-yo",
+      "sketchId": "these-those",
       "height": 420,
       "tryIt": {
         "id": "try-what-is-this-scenario-and-review-sketch1",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch1.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch1.prompt",
-        "exerciseKey": "try-sa-yo-books",
+        "exerciseKey": "try-liv-sa-yo",
         "exerciseKeys": [
-          "try-sa-yo-books"
+          "try-liv-sa-yo"
         ],
         "difficulty": "easy",
         "preferKind": "word_bank_arrange",
@@ -67,18 +67,18 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.cards.sketch2.title",
-      "sketchId": "demonstrative-owner",
+      "sketchId": "object-exchange",
       "height": 420,
       "tryIt": {
         "id": "try-what-is-this-scenario-and-review-sketch2",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch2.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch2.prompt",
-        "exerciseKey": "try-demonstrative-owner",
+        "exerciseKey": "try-kaye-pou-mari",
         "exerciseKeys": [
-          "try-demonstrative-owner"
+          "try-kaye-pou-mari"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -103,31 +103,162 @@
   ],
   "sketches": [
     {
-      "id": "sa-a",
+      "id": "this-that",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.sa-a.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.sa-a.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.this-that.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.this-that.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "sa a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "after a noun for “this” or “that.”",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "machin sa a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "this car / that car",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The demonstrative comes after the noun.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "sa-yo",
+      "id": "these-those",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.sa-yo.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.sa-yo.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.these-those.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.these-those.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "sa yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "after a noun for “these” or “those.”",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "machin sa yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "these cars / those cars",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Homework examples also combine this pattern with ownership.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "demonstrative-owner",
+      "id": "object-exchange",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.demonstrative-owner.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.demonstrative-owner.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.object-exchange.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.object-exchange.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Mari, liv sa a se pou ou.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mèsi, Jan. Kaye sa yo se pou ou.",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mèsi.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "This combines demonstratives, possession, and familiar polite language without adding a new question pattern.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "what-is-this-scenario-and-review-choice",
+      "id": "demonstrative-one-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-choice",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.demonstrative-one-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,72 +270,30 @@
       }
     },
     {
-      "id": "what-is-this-scenario-and-review-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "yo"
-      }
-    },
-    {
-      "id": "what-is-this-scenario-and-review-listen",
+      "id": "demonstrative-plural-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-listen",
-      "targetText": "machin sa a",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.demonstrative-plural-listen",
+      "targetText": "Liv sa yo.",
       "locale": "ht-HT",
       "wordBank": [
-        "machin",
+        "Liv",
         "sa",
-        "a"
-      ],
-      "distractors": [
-        "yo"
+        "yo."
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "machin sa a",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Liv sa yo.",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "what-is-this-scenario-and-review-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-voice",
-      "targetText": "liv sa yo",
-      "locale": "ht-HT",
-      "maxSeconds": 10,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "liv sa yo",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "what-is-this-scenario-and-review-build",
+      "id": "demonstrative-owner-build",
       "kind": "word_bank_arrange",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-build",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.demonstrative-owner-build",
       "targetText": "Valiz sa a se pou Mari.",
       "locale": "ht-HT",
       "wordBank": [
@@ -215,97 +304,78 @@
         "pou",
         "Mari."
       ],
-      "distractors": [
-        "yo"
-      ],
-      "ttsText": "Valiz sa a se pou Mari.",
       "expected": {
         "kind": "word_bank_arrange",
         "targetText": "Valiz sa a se pou Mari.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "what-is-this-scenario-and-review-write",
-      "kind": "text_input",
+      "id": "demonstrative-owner-voice",
+      "kind": "voice_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "liv sa yo",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-sa-a-bag",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-sa-a-bag",
-      "targetText": "liv sa a",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.demonstrative-owner-voice",
+      "targetText": "Kaye sa yo se pou Jan.",
       "locale": "ht-HT",
-      "wordBank": [
-        "liv",
-        "sa",
-        "a"
-      ],
       "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "liv sa a",
+        "kind": "voice_input",
+        "targetText": "Kaye sa yo se pou Jan.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-sa-yo-books",
-      "kind": "word_bank_arrange",
+      "id": "try-valiz-sa-a",
+      "kind": "voice_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-sa-yo-books",
-      "targetText": "machin sa yo",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-valiz-sa-a",
+      "targetText": "Valiz sa a.",
       "locale": "ht-HT",
-      "wordBank": [
-        "machin",
-        "sa",
-        "yo"
-      ],
       "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "machin sa yo",
+        "kind": "voice_input",
+        "targetText": "Valiz sa a.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-demonstrative-owner",
+      "id": "try-liv-sa-yo",
       "kind": "word_bank_arrange",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-demonstrative-owner",
-      "targetText": "Machin sa a se pou Jan.",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-liv-sa-yo",
+      "targetText": "Liv sa yo.",
       "locale": "ht-HT",
       "wordBank": [
-        "Machin",
+        "Liv",
         "sa",
-        "a",
+        "yo."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Liv sa yo.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-kaye-pou-mari",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-kaye-pou-mari",
+      "targetText": "Kaye sa yo se pou Mari.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Kaye",
+        "sa",
+        "yo",
         "se",
         "pou",
-        "Jan."
+        "Mari."
       ],
       "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "Machin sa a se pou Jan.",
+        "kind": "listen_build",
+        "targetText": "Kaye sa yo se pou Mari.",
         "locale": "ht-HT"
       }
     }

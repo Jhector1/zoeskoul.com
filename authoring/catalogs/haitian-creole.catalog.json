@@ -9,7 +9,8 @@
     "imageAlt": "Haitian Creole catalog cover",
     "status": "active",
     "subjectSlugs": [
-      "haitian-creole-foundations"
+      "haitian-creole-foundations",
+      "haitian-creole-everyday-grammar"
     ],
     "meta": {
       "family": "languages",

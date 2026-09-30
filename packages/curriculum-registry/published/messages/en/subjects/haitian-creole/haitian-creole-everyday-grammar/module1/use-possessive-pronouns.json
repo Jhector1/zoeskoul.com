@@ -1,0 +1,192 @@
+{
+  "topics": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "use-possessive-pronouns": {
+          "label": "Use Possessive Pronouns",
+          "summary": "Use the singular and plural possessive-pronoun forms, including their contracted forms.",
+          "cards": {
+            "sketch0": {
+              "title": "Singular Possessive Pronouns"
+            },
+            "sketch1": {
+              "title": "Read the Singular Pairs"
+            },
+            "sketch2": {
+              "title": "Plural Possessive Pronouns"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_use_possessive_pronouns_sketch0": {
+              "title": "Try it yourself: Match the singular pair",
+              "prompt": "Right after the sketch \"Match each full singular form with its contracted form\", practice that exact idea with this task. Which contracted singular form is paired with “pa nou an” in The table? Produce the result for match the singular pair so it reinforces Use Possessive Pronouns."
+            },
+            "try_use_possessive_pronouns_sketch1": {
+              "title": "Try it yourself: Complete the short form",
+              "prompt": "Right after the sketch \"Practice each full and short form as a pair\", practice that exact idea with this task. Complete the contracted singular form paired with “pa ou a.”. Produce the result for complete the short form so it reinforces Use Possessive Pronouns."
+            },
+            "try_use_possessive_pronouns_sketch2": {
+              "title": "Try it yourself: Write the plural short form",
+              "prompt": "Right after the sketch \"Use yo in the plural possessive forms\", practice that exact idea with this task. Type the contracted plural possessive pronoun meaning “mine.”. Produce the result for write the plural short form so it reinforces Use Possessive Pronouns."
+            }
+          },
+          "practice": {
+            "possessive-singular-li-choice": {
+              "title": "Match li",
+              "prompt": "Which contracted singular form is paired with “pa li a”?",
+              "hint": "Compare the singular pairs.",
+              "help": {
+                "concept": "Use the contracted form from the same singular row as the full form.",
+                "hint_1": "Stay with the row for Li.",
+                "hint_2": "Choose its contracted-column entry."
+              },
+              "options": {
+                "a": "pa l la",
+                "b": "pa n nan",
+                "c": "pa w la"
+              }
+            },
+            "possessive-singular-yo-choice": {
+              "title": "Find the singular exception",
+              "prompt": "Which singular full possessive form is listed without a contracted partner in?",
+              "hint": "Compare all six singular rows.",
+              "help": {
+                "concept": "Five meanings are represented in the table, but one pronoun row has no short partner.",
+                "hint_1": "Look only at the short form.",
+                "hint_2": "Choose the full form from the row where that column says no contracted form."
+              },
+              "options": {
+                "a": "pa yo a",
+                "b": "pa nou an",
+                "c": "pa ou a"
+              }
+            },
+            "possessive-singular-m-fill": {
+              "title": "Complete mine",
+              "prompt": "Complete the contracted singular form paired with “pa mwen an.”",
+              "hint": "Use the short form from the same pronoun pair.",
+              "help": {
+                "concept": "The blank is the short pronoun inside the contracted form.",
+                "hint_1": "Compare the singular contracted forms.",
+                "hint_2": "Keep pa and nan unchanged."
+              },
+              "template": "pa ___ nan",
+              "choices": [
+                "m",
+                "n",
+                "l"
+              ]
+            },
+            "possessive-plural-n-fill": {
+              "title": "Complete ours",
+              "prompt": "Complete the contracted plural form paired with “pa nou yo.”",
+              "hint": "Use the plural short form.",
+              "help": {
+                "concept": "The plural short form keeps pa and yo around the contracted pronoun.",
+                "hint_1": "Find the Nou pair in the plural table.",
+                "hint_2": "Choose its single-letter short pronoun."
+              },
+              "template": "pa ___ yo",
+              "choices": [
+                "n",
+                "w",
+                "l"
+              ]
+            },
+            "possessive-singular-ou-text": {
+              "title": "Write yours",
+              "prompt": "Type the contracted singular form paired with “pa ou a.”",
+              "hint": "Use the exact contracted form from.",
+              "help": {
+                "concept": "Write the complete contracted possessive pronoun, not only the short pronoun.",
+                "hint_1": "Use the Ou pair.",
+                "hint_2": "Include all three parts of the contracted form."
+              },
+              "expectedText": "pa w la",
+              "placeholder": "Type the Kreyòl form"
+            },
+            "possessive-plural-li-text": {
+              "title": "Write the plural li form",
+              "prompt": "Type the contracted plural form paired with “pa li yo.”",
+              "hint": "Use the exact plural contracted form from.",
+              "help": {
+                "concept": "Write the complete plural possessive form from the short form.",
+                "hint_1": "Use the Li pair in the plural table.",
+                "hint_2": "Keep the final plural marker."
+              },
+              "expectedText": "pa l yo",
+              "placeholder": "Type the Kreyòl form"
+            },
+            "try-singular-nou": {
+              "title": "Match the singular pair",
+              "prompt": "Which contracted singular form is paired with “pa nou an” in The table?",
+              "hint": "Compare the full and short forms for the same pronoun.",
+              "help": {
+                "concept": "Each singular row pairs the full possessive form with the contracted form by the lesson.",
+                "hint_1": "Stay on the row for Nou.",
+                "hint_2": "Choose the form from that pair's short form."
+              },
+              "options": {
+                "a": "pa n nan",
+                "b": "pa w la",
+                "c": "pa l la"
+              }
+            },
+            "try-singular-ou-fill": {
+              "title": "Complete the short form",
+              "prompt": "Complete the contracted singular form paired with “pa ou a.”",
+              "hint": "Use the same pronoun pair in The pair list.",
+              "help": {
+                "concept": "The missing position contains the short pronoun from the corresponding pair.",
+                "hint_1": "Compare the four contracted singular forms.",
+                "hint_2": "Keep the surrounding words unchanged."
+              },
+              "template": "pa ___ la",
+              "choices": [
+                "w",
+                "m",
+                "l"
+              ]
+            },
+            "try-plural-mine-text": {
+              "title": "Write the plural short form",
+              "prompt": "Type the contracted plural possessive pronoun meaning “mine.”",
+              "hint": "Use the short form of the plural table.",
+              "help": {
+                "concept": "Plural contracted possessive forms keep pa, use the short pronoun, and end with yo.",
+                "hint_1": "Find the row whose meaning is mine.",
+                "hint_2": "Copy the contracted form from that pair."
+              },
+              "expectedText": "pa m yo",
+              "placeholder": "Type the Kreyòl form"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "use-possessive-pronouns": {
+          "singular-possessive-map": {
+            "title": "Match each full singular form with its contracted form",
+            "bodyMarkdown": "In Kreyòl, possession can often be expressed with a full form or a shorter everyday form. Learn the singular pairs below:\n\n| Meaning | Full form | Contracted form |\n| --- | --- | --- |\n| mine | pa mwen an | pa m nan |\n| yours | pa ou a | pa w la |\n| his / hers / its | pa li a | pa l la |\n| ours | pa nou an | pa n nan |\n| yours | pa nou an | pa n nan |\n| theirs | pa yo a | no contracted form |\n\nThe pair **pa nou an / pa n nan** can mean both **ours** and plural **yours**. **Pa yo a** has no contracted partner in this set."
+          },
+          "singular-contracted-pairs": {
+            "title": "Practice each full and short form as a pair",
+            "bodyMarkdown": "Practice the full and short forms together:\n\n- **pa mwen an** → **pa m nan**\n- **pa ou a** → **pa w la**\n- **pa li a** → **pa l la**\n- **pa nou an** → **pa n nan**\n\nLearn these pairs as complete expressions. Focus on using them naturally rather than trying to build a broader contraction rule."
+          },
+          "plural-possessive-map": {
+            "title": "Use yo in the plural possessive forms",
+            "bodyMarkdown": "Now compare the plural possessive forms:\n\n| Meaning | Full form | Contracted form |\n| --- | --- | --- |\n| mine | pa mwen yo | pa m yo |\n| yours | pa ou yo | pa w yo |\n| his / hers / its | pa li yo | pa l yo |\n| ours | pa nou yo | pa n yo |\n| yours | pa nou yo | pa n yo |\n| theirs | pa yo | no contracted form |\n\nThe pair **pa nou yo / pa n yo** can mean both **ours** and plural **yours**. **Pa yo** has no contracted partner in this set."
+          }
+        }
+      }
+    }
+  }
+}

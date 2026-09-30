@@ -1,6 +1,7 @@
 // src/components/review/sketches/specTypes.ts
 import type { SketchTone } from "./types";
 import { WorkspaceLanguage } from "@zoeskoul/practice-contracts";
+import type { LanguageAudioSpec } from "@zoeskoul/curriculum-contracts";
 
 export type ArchetypeId =
     | "intro_stepper"
@@ -50,6 +51,7 @@ export type ParagraphImage = {
 export type ParagraphSpec = SketchSpecBase & {
     archetype: "paragraph";
     bodyMarkdown: string;
+    audio?: LanguageAudioSpec;
     images?: Record<string, ParagraphImage>;
     text?:string;
 };

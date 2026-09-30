@@ -23,7 +23,10 @@ export async function resolvePlan(args: {
     spec: CourseSpec | null;
 }> {
     const subjectPlan = await loadSubjectPlan(args.blueprint.subjectSlug);
-    const courseSlug = subjectPlan?.publishTarget?.courseSlug ?? null;
+    const courseSlug =
+        args.blueprint.courseSlug ??
+        subjectPlan?.publishTarget?.courseSlug ??
+        null;
     const spec = courseSlug
         ? await loadCourseSpec(args.blueprint.subjectSlug, courseSlug)
         : null;

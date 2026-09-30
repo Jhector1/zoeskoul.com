@@ -149,102 +149,82 @@
       "description": "Use greetings, polite expressions, and simple social responses in short everyday exchanges.",
       "purpose": "Move from isolated sounds into the first complete social interactions a learner can understand and use immediately.",
       "learningObjectives": [
-        "Recognize and use common greetings and leave-taking expressions.",
-        "Respond to short polite exchanges by listening and speaking.",
-        "Read, arrange, and write basic greeting lines in Kreyòl."
+        "Recognize and use common greetings, polite expressions, and leave-taking language.",
+        "Ask how someone is, answer naturally, and return the question.",
+        "Follow and participate in a short connected greeting conversation."
       ],
       "guidedExercises": [
-        "Learn or notice the target language in a short, beginner-safe context.",
-        "Listen and speak using transcript-based speaking practice where appropriate.",
-        "Read, arrange, write, use the language in context, then review it cumulatively."
+        "Hear useful Kreyòl before producing it.",
+        "Use listening, speaking, arranging, reading, and writing where they directly support the communication goal.",
+        "Reuse familiar language in connected turns rather than practicing isolated lines only."
       ],
       "quizFocus": [
         "greetings",
-        "leave-taking",
         "polite expressions",
-        "short social responses"
+        "asking and answering how someone is",
+        "returning a question",
+        "connected greeting conversation"
       ],
       "sections": [
         {
-          "sectionSlug": "ht2-learn-listen-speak",
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "sectionSlug": "ht2-greetings-conversation",
+          "title": "Greetings and Conversation",
+          "description": "Build from useful greetings and polite expressions into a complete two-way beginner conversation.",
           "topics": [
             {
               "topicId": "learn-greetings-and-polite-basics",
-              "title": "Learn Greetings and Polite Basics",
-              "summary": "Meet the core phrases used to greet, acknowledge, thank, and say goodbye.",
-              "minutes": 24,
+              "title": "Greetings and Polite Basics",
+              "summary": "Greet someone, use essential polite expressions, and close a short interaction.",
+              "minutes": 20,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Learn Greetings and Polite Basics.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Recognize and use Bonjou, Bonswa, Mèsi, Tanpri, Padon, and Orevwa in context.",
+                "Use listening and speaking together with simple reading and writing practice.",
+                "Choose an appropriate greeting or polite expression for a short interaction."
               ],
               "practice": {
                 "expectedPracticeKinds": [
                   "single_choice",
-                  "fill_blank_choice"
-                ]
-              }
-            },
-            {
-              "topicId": "listen-and-say-hello",
-              "title": "Listen and Say Hello",
-              "summary": "Hear greeting exchanges and respond aloud with the expected Kreyòl phrase.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Understand the Kreyòl language target introduced in Listen and Say Hello.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
-              ],
-              "practice": {
-                "expectedPracticeKinds": [
                   "listen_build",
-                  "voice_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "ht2-read-build-write-use",
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "topics": [
-            {
-              "topicId": "read-build-and-write-greetings",
-              "title": "Read, Build, and Write Greetings",
-              "summary": "Reconstruct and write short greeting lines using official spelling.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Understand the Kreyòl language target introduced in Read, Build, and Write Greetings.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
-              ],
-              "practice": {
-                "expectedPracticeKinds": [
+                  "voice_input",
                   "word_bank_arrange",
                   "text_input"
                 ]
               }
             },
             {
-              "topicId": "greeting-scenario-and-review",
-              "title": "Greeting Scenario and Review",
-              "summary": "Complete a small greeting exchange that combines listening, speaking, building, and writing.",
-              "minutes": 30,
+              "topicId": "listen-and-say-hello",
+              "title": "Ask, Answer, and Keep It Going",
+              "summary": "Ask how someone is, answer naturally, and return the question.",
+              "minutes": 22,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Greeting Scenario and Review.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Understand Kijan ou ye? when heard inside a greeting exchange.",
+                "Answer with a short complete response such as Mwen byen, mèsi.",
+                "Use E ou menm? to return the question and keep the exchange moving."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange"
+                ]
+              }
+            },
+            {
+              "topicId": "greeting-scenario-and-review",
+              "title": "Your First Greeting Conversation",
+              "summary": "Follow a complete greeting exchange, respond to each turn, and reuse the conversation pattern.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Follow Jan and Mari through a connected greeting conversation.",
+                "Respond to what the other participant says instead of reciting disconnected lines.",
+                "Transfer the same conversation pattern to slightly different wording."
               ],
               "practice": {
                 "expectedPracticeKinds": [
@@ -270,86 +250,66 @@
       "description": "Introduce yourself, ask another person's name, and exchange a few simple personal details.",
       "purpose": "Give learners a practical identity exchange they can understand and produce with increasing independence.",
       "learningObjectives": [
-        "Ask and answer simple questions about names and identity.",
-        "Understand short introductions when heard at beginner speed.",
-        "Read, arrange, and write simple self-introduction sentences."
+        "Ask and answer someone's name.",
+        "Ask and answer where someone lives.",
+        "Combine greetings, names, and residence in a connected beginner conversation."
       ],
       "guidedExercises": [
-        "Learn or notice the target language in a short, beginner-safe context.",
-        "Listen and speak using transcript-based speaking practice where appropriate.",
-        "Read, arrange, write, use the language in context, then review it cumulatively."
+        "Hear each new question and answer before producing it.",
+        "Integrate listening, speaking, arranging, reading, and writing around the communication goal.",
+        "Reuse Module 2 greeting language while adding name and residence information."
       ],
       "quizFocus": [
-        "names",
-        "identity",
-        "introductions",
-        "simple personal questions"
+        "asking and giving names",
+        "asking and answering where someone lives",
+        "returning a question with E ou menm?",
+        "connected introductions"
       ],
       "sections": [
         {
-          "sectionSlug": "ht3-learn-listen-speak",
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "sectionSlug": "ht3-introductions",
+          "title": "Names, Places & Introductions",
+          "description": "Move from exchanging names to exchanging where you live, then connect both with Module 2 greetings.",
           "topics": [
             {
               "topicId": "learn-names-and-introductions",
-              "title": "Learn Names and Introductions",
-              "summary": "Learn the sentence patterns used to ask who someone is and say who you are.",
-              "minutes": 24,
+              "title": "Names and Introductions",
+              "summary": "Ask someone's name, say your own name, and return the question naturally.",
+              "minutes": 21,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Learn Names and Introductions.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Understand and use Kijan ou rele?",
+                "Answer naturally with M rele plus a name.",
+                "Use E ou menm? to return the name question."
               ],
               "practice": {
                 "expectedPracticeKinds": [
                   "single_choice",
-                  "fill_blank_choice"
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange",
+                  "text_input"
                 ]
               }
             },
             {
-              "topicId": "listen-and-introduce-yourself",
-              "title": "Listen and Introduce Yourself",
-              "summary": "Hear short introductions and answer or repeat the key line aloud.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Understand the Kreyòl language target introduced in Listen and Introduce Yourself.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
-              ],
-              "practice": {
-                "expectedPracticeKinds": [
-                  "listen_build",
-                  "voice_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "ht3-read-build-write-use",
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "topics": [
-            {
               "topicId": "read-build-and-write-an-introduction",
-              "title": "Read, Build, and Write an Introduction",
-              "summary": "Build and write a short introduction with a name and simple identity information.",
-              "minutes": 24,
+              "title": "Where Do You Live?",
+              "summary": "Ask where someone lives, answer with a place, and return the question.",
+              "minutes": 21,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Read, Build, and Write an Introduction.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Understand and use Ki kote ou rete?",
+                "Answer with Mwen rete plus a place.",
+                "Connect a residence answer to the familiar E ou menm? follow-up."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "voice_input",
                   "word_bank_arrange",
                   "text_input"
                 ]
@@ -357,18 +317,19 @@
             },
             {
               "topicId": "meet-someone-scenario-and-review",
-              "title": "Meet Someone: Scenario and Review",
-              "summary": "Complete a first-meeting exchange using questions, answers, listening, speaking, and writing.",
-              "minutes": 30,
+              "title": "Meet Someone: A Full Introduction",
+              "summary": "Combine greetings, names, and residence into one connected first-meeting conversation.",
+              "minutes": 25,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Meet Someone: Scenario and Review.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Follow Jan and Mari through a complete beginner introduction.",
+                "Choose a natural next turn based on what the other person just said.",
+                "Reuse the introduction pattern with slightly different wording."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
                   "listen_build",
                   "voice_input",
                   "word_bank_arrange",
@@ -390,86 +351,67 @@
       "description": "Name everyday objects and use simple patterns to identify, describe, and point out things around you.",
       "purpose": "Expand from people to concrete objects so learners can understand and produce useful noun-centered sentences.",
       "learningObjectives": [
-        "Recognize and use beginner vocabulary for common everyday objects.",
-        "Identify and describe objects with short Kreyòl sentence patterns.",
-        "Read, arrange, and write simple object descriptions."
+        "Use yon, familiar definite noun phrases, and plural yo with everyday things.",
+        "Express possession with thing + possessor and with se pou.",
+        "Use sa a and sa yo to point out things and combine them with ownership."
       ],
       "guidedExercises": [
-        "Learn or notice the target language in a short, beginner-safe context.",
-        "Listen and speak using transcript-based speaking practice where appropriate.",
-        "Read, arrange, write, use the language in context, then review it cumulatively."
+        "Hear source-backed noun phrases before producing new examples.",
+        "Integrate listening, speaking, arranging, and writing around the noun-phrase meaning.",
+        "Treat a, la, an, lan, and nan as familiar chunks here; explicit article-selection rules are deferred."
       ],
       "quizFocus": [
-        "everyday objects",
-        "identifying things",
-        "simple descriptions",
-        "basic noun phrases"
+        "yon before a noun",
+        "definite marker after a noun",
+        "plural yo",
+        "thing + possessor",
+        "se pou",
+        "sa a and sa yo"
       ],
       "sections": [
         {
-          "sectionSlug": "ht4-learn-listen-speak",
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "sectionSlug": "ht4-things-and-possession",
+          "title": "Things, Ownership & Demonstratives",
+          "description": "Build useful noun phrases, say who things belong to, and point out one or several objects.",
           "topics": [
             {
               "topicId": "learn-everyday-things",
-              "title": "Learn Everyday Things",
-              "summary": "Learn high-frequency object words and the patterns used to identify them.",
-              "minutes": 24,
+              "title": "One Thing, the Thing, More Than One",
+              "summary": "Use yon, familiar definite noun phrases, and plural yo with everyday objects.",
+              "minutes": 22,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Learn Everyday Things.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Use yon before a familiar noun.",
+                "Recognize that the definite marker follows the noun in familiar source-backed phrases.",
+                "Use yo after a noun for familiar plural phrases."
               ],
               "practice": {
                 "expectedPracticeKinds": [
                   "single_choice",
-                  "fill_blank_choice"
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange"
                 ]
               }
             },
             {
-              "topicId": "listen-and-name-things",
-              "title": "Listen and Name Things",
-              "summary": "Hear object words and short identifying sentences, then respond aloud.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Understand the Kreyòl language target introduced in Listen and Name Things.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
-              ],
-              "practice": {
-                "expectedPracticeKinds": [
-                  "listen_build",
-                  "voice_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "ht4-read-build-write-use",
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "topics": [
-            {
               "topicId": "read-build-and-write-about-things",
-              "title": "Read, Build, and Write About Things",
-              "summary": "Reconstruct and write simple sentences about familiar objects.",
-              "minutes": 24,
+              "title": "Whose Thing Is It?",
+              "summary": "Put the possessor after the thing and use se pou to say who something belongs to.",
+              "minutes": 23,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Read, Build, and Write About Things.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Put the possessor after the possessed item.",
+                "Use se pou plus a person to identify ownership.",
+                "Recognize possession in singular and plural noun phrases."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "voice_input",
                   "word_bank_arrange",
                   "text_input"
                 ]
@@ -477,15 +419,15 @@
             },
             {
               "topicId": "what-is-this-scenario-and-review",
-              "title": "What Is This? Scenario and Review",
-              "summary": "Use object vocabulary in a short question-and-answer exchange.",
-              "minutes": 30,
+              "title": "This Thing, These Things",
+              "summary": "Use sa a and sa yo to point out things and combine them with ownership.",
+              "minutes": 24,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in What Is This? Scenario and Review.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Use sa a after a noun for one pointed-out thing.",
+                "Use sa yo after a noun for several pointed-out things.",
+                "Combine demonstratives with se pou inside a short object exchange."
               ],
               "practice": {
                 "expectedPracticeKinds": [
@@ -511,105 +453,86 @@
       "description": "Talk about simple actions happening now and understand short action-centered sentences.",
       "purpose": "Introduce the learner to useful action language without overloading the course with abstract grammar terminology.",
       "learningObjectives": [
-        "Recognize common beginner action words in short sentences.",
-        "Ask and answer what someone is doing in simple contexts.",
-        "Read, build, and write short action-centered statements."
+        "Use common action words in simple present statements and routines.",
+        "Use ap to describe an action in progress and recognize common short forms.",
+        "Ask Kisa ou ap fè?, answer naturally, and distinguish now from routine."
       ],
       "guidedExercises": [
-        "Learn or notice the target language in a short, beginner-safe context.",
-        "Listen and speak using transcript-based speaking practice where appropriate.",
-        "Read, arrange, write, use the language in context, then review it cumulatively."
+        "Move from familiar action words into short subject-plus-action statements.",
+        "Contrast a routine with an action happening now before introducing the action question.",
+        "Integrate listening, speaking, building, and writing inside meaningful action exchanges."
       ],
       "quizFocus": [
-        "common actions",
-        "present activity",
-        "simple action questions",
-        "short action statements"
+        "common action words",
+        "simple present and routine language",
+        "ap for action in progress",
+        "kounyeya",
+        "Kisa ou ap fè?",
+        "now versus routine"
       ],
       "sections": [
         {
-          "sectionSlug": "ht5-learn-listen-speak",
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "sectionSlug": "ht5-actions-now-and-routines",
+          "title": "Actions, Now & Routines",
+          "description": "Talk about familiar actions, distinguish routines from actions happening now, and ask what someone is doing.",
           "topics": [
             {
               "topicId": "learn-common-actions",
-              "title": "Learn Common Actions",
-              "summary": "Learn a small set of useful action words and sentence frames.",
-              "minutes": 24,
+              "title": "Everyday Actions and Routines",
+              "summary": "Use common action words in simple subject-plus-action sentences and routines.",
+              "minutes": 22,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Learn Common Actions.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Recognize and use a small set of high-frequency action words.",
+                "Build simple present statements with subject + action.",
+                "Use chak jou to make a routine explicit."
               ],
               "practice": {
                 "expectedPracticeKinds": [
                   "single_choice",
-                  "fill_blank_choice"
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange"
                 ]
               }
             },
             {
               "topicId": "listen-and-say-what-is-happening",
-              "title": "Listen and Say What Is Happening",
-              "summary": "Hear short action statements and answer with the expected spoken phrase.",
-              "minutes": 24,
+              "title": "What Is Happening Now?",
+              "summary": "Use ap with familiar actions, recognize common short forms, and use kounyeya.",
+              "minutes": 23,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Listen and Say What Is Happening.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Use person + ap + action for an action in progress.",
+                "Recognize common shortened subjects before ap.",
+                "Use kounyeya when the current time needs to be explicit."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
                   "listen_build",
-                  "voice_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "ht5-read-build-write-use",
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "topics": [
-            {
-              "topicId": "read-build-and-write-actions",
-              "title": "Read, Build, and Write Actions",
-              "summary": "Reconstruct and write simple sentences about what people are doing.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Understand the Kreyòl language target introduced in Read, Build, and Write Actions.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
-              ],
-              "practice": {
-                "expectedPracticeKinds": [
-                  "word_bank_arrange",
-                  "text_input"
+                  "voice_input",
+                  "word_bank_arrange"
                 ]
               }
             },
             {
               "topicId": "what-are-you-doing-scenario",
-              "title": "What Are You Doing? Scenario",
-              "summary": "Use action language in a short everyday exchange and cumulative review.",
-              "minutes": 30,
+              "title": "What Are You Doing?",
+              "summary": "Ask what someone is doing, answer with a current action, and distinguish now from routine.",
+              "minutes": 25,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in What Are You Doing? Scenario.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Use Kisa ou ap fè? as a complete useful question.",
+                "Answer an action question with the current-action pattern.",
+                "Distinguish kounyeya current action from chak jou routine language."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
                   "listen_build",
                   "voice_input",
                   "word_bank_arrange",
@@ -631,86 +554,67 @@
       "description": "Recognize and produce core beginner question patterns and short natural answers.",
       "purpose": "Turn memorized statements into flexible two-way communication by practicing common question-and-answer structures.",
       "learningObjectives": [
-        "Recognize common beginner question words and question patterns.",
-        "Ask and answer short questions about familiar people, objects, and actions.",
-        "Read, arrange, and write short question-and-answer pairs."
+        "Use Èske to ask familiar yes/no questions and give complete answers.",
+        "Choose familiar information-question forms based on whether you need how, what, place, person, or quantity.",
+        "Mix yes/no and information questions inside a connected beginner conversation."
       ],
       "guidedExercises": [
-        "Learn or notice the target language in a short, beginner-safe context.",
-        "Listen and speak using transcript-based speaking practice where appropriate.",
-        "Read, arrange, write, use the language in context, then review it cumulatively."
+        "Start from statements and information the learner already knows from Modules 2–5.",
+        "Choose the question form from the information need rather than memorizing isolated question lists.",
+        "Integrate listening, speaking, arranging, and writing inside short question-and-answer exchanges."
       ],
       "quizFocus": [
-        "question words",
-        "yes-no questions",
-        "short answers",
-        "familiar information exchange"
+        "Èske yes/no questions",
+        "complete affirmative answers",
+        "Kijan and Kisa",
+        "Ki kote and Ki moun",
+        "Konbyen as a quantity question",
+        "mixed question chains"
       ],
       "sections": [
         {
-          "sectionSlug": "ht6-learn-listen-speak",
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "sectionSlug": "ht6-question-system",
+          "title": "Questions & Answers",
+          "description": "Ask yes/no questions, choose information questions, and keep a short conversation moving.",
           "topics": [
             {
               "topicId": "learn-core-question-patterns",
-              "title": "Learn Core Question Patterns",
-              "summary": "Learn the forms used to ask for simple familiar information.",
-              "minutes": 24,
+              "title": "Yes or No? Ask with Èske",
+              "summary": "Turn familiar statements into yes/no questions with Èske and answer with complete sentences.",
+              "minutes": 22,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Learn Core Question Patterns.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Recognize Èske as the Course 1 yes/no question frame.",
+                "Turn familiar statements into Èske questions.",
+                "Give a complete affirmative answer using already-known language."
               ],
               "practice": {
                 "expectedPracticeKinds": [
                   "single_choice",
-                  "fill_blank_choice"
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange"
                 ]
               }
             },
             {
-              "topicId": "listen-ask-and-answer",
-              "title": "Listen, Ask, and Answer",
-              "summary": "Understand short questions and respond aloud with appropriate beginner answers.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Understand the Kreyòl language target introduced in Listen, Ask, and Answer.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
-              ],
-              "practice": {
-                "expectedPracticeKinds": [
-                  "listen_build",
-                  "voice_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "ht6-read-build-write-use",
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "topics": [
-            {
               "topicId": "read-build-and-write-questions",
-              "title": "Read, Build, and Write Questions",
-              "summary": "Reconstruct and write short question-and-answer pairs.",
-              "minutes": 24,
+              "title": "Ask for the Information You Need",
+              "summary": "Choose familiar question forms for how, what, where, who, and quantity.",
+              "minutes": 25,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Read, Build, and Write Questions.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Recognize familiar Kijan and Kisa questions from earlier modules.",
+                "Use Ki kote for place and Ki moun for person.",
+                "Recognize Konbyen as a quantity question without expanding into Module 7 number study."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "voice_input",
                   "word_bank_arrange",
                   "text_input"
                 ]
@@ -718,15 +622,15 @@
             },
             {
               "topicId": "question-chain-scenario-and-review",
-              "title": "Question Chain: Scenario and Review",
-              "summary": "Carry a short back-and-forth exchange using questions from earlier modules.",
-              "minutes": 30,
+              "title": "Keep a Question Chain Going",
+              "summary": "Mix yes/no and information questions with complete answers in a natural conversation.",
+              "minutes": 26,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Question Chain: Scenario and Review.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Choose a question that requests new information instead of repeating known information.",
+                "Answer familiar questions with complete beginner sentences.",
+                "Follow Jan and Mari through mixed question types while preserving conversational continuity."
               ],
               "practice": {
                 "expectedPracticeKinds": [
@@ -752,86 +656,71 @@
       "description": "Use beginner numbers and time expressions in useful everyday contexts.",
       "purpose": "Give learners practical language for quantities, basic time, and routine information they are likely to encounter early.",
       "learningObjectives": [
-        "Recognize and use beginner number expressions in context.",
-        "Understand and answer simple questions involving time and everyday quantities.",
-        "Read, arrange, and write short number- and time-based statements."
+        "Recognize and use numbers one through twenty inside simple everyday quantities.",
+        "Recognize full-hour and half-hour clock expressions and ask time with Akilè.",
+        "Combine everyday time expressions, routines, and familiar questions in a simple schedule conversation."
       ],
       "guidedExercises": [
-        "Learn or notice the target language in a short, beginner-safe context.",
-        "Listen and speak using transcript-based speaking practice where appropriate.",
-        "Read, arrange, write, use the language in context, then review it cumulatively."
+        "Hear number and clock expressions before producing new combinations.",
+        "Use numbers with familiar nouns instead of practicing isolated arithmetic.",
+        "Reuse Module 5 routines and Module 6 questions inside practical schedule exchanges."
       ],
       "quizFocus": [
-        "numbers",
-        "basic time",
-        "quantities",
-        "everyday routine information"
+        "numbers one through twenty",
+        "number plus noun",
+        "full-hour clock expressions",
+        "edmi half-hour expressions",
+        "Akilè questions",
+        "maten and aswè",
+        "jòdi a and kounyeya",
+        "denmen maten and chak jou",
+        "simple everyday schedules"
       ],
       "sections": [
         {
-          "sectionSlug": "ht7-learn-listen-speak",
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "sectionSlug": "ht7-numbers-time-schedule",
+          "title": "Numbers, Time & Everyday Life",
+          "description": "Count familiar things, understand basic clock time, and use time expressions inside an everyday schedule.",
           "topics": [
             {
               "topicId": "learn-numbers-and-time-basics",
-              "title": "Learn Numbers and Time Basics",
-              "summary": "Learn beginner number and time expressions through familiar contexts.",
-              "minutes": 24,
+              "title": "Numbers and Quantities",
+              "summary": "Recognize numbers one through twenty and use them with familiar everyday objects.",
+              "minutes": 23,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Learn Numbers and Time Basics.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Recognize Kreyòl numbers one through ten.",
+                "Recognize numbers eleven through twenty.",
+                "Use a known number before a familiar noun to express a quantity."
               ],
               "practice": {
                 "expectedPracticeKinds": [
                   "single_choice",
-                  "fill_blank_choice"
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange",
+                  "text_input"
                 ]
               }
             },
             {
               "topicId": "listen-for-numbers-and-time",
-              "title": "Listen for Numbers and Time",
-              "summary": "Hear simple quantities and times, then respond with the matching spoken information.",
+              "title": "Clock Time and Akilè",
+              "summary": "Recognize simple full-hour and half-hour expressions and ask what time an activity happens.",
               "minutes": 24,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Listen for Numbers and Time.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Recognize familiar full-hour expressions.",
+                "Recognize and produce edmi half-hour expressions.",
+                "Use Akilè to ask what time an activity happens."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
                   "listen_build",
-                  "voice_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "ht7-read-build-write-use",
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "topics": [
-            {
-              "topicId": "read-build-and-write-everyday-details",
-              "title": "Read, Build, and Write Everyday Details",
-              "summary": "Reconstruct and write short lines that include numbers, time, or routine details.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Understand the Kreyòl language target introduced in Read, Build, and Write Everyday Details.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
-              ],
-              "practice": {
-                "expectedPracticeKinds": [
+                  "voice_input",
                   "word_bank_arrange",
                   "text_input"
                 ]
@@ -839,18 +728,19 @@
             },
             {
               "topicId": "everyday-plans-scenario-and-review",
-              "title": "Everyday Plans: Scenario and Review",
-              "summary": "Use numbers and time in a short practical exchange with cumulative review.",
-              "minutes": 30,
+              "title": "Everyday Time and Schedule",
+              "summary": "Combine day parts, familiar time expressions, routines, and Akilè in a short conversation.",
+              "minutes": 26,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Everyday Plans: Scenario and Review.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Use maten, aswè, jòdi a, and kounyeya as everyday time expressions.",
+                "Recognize denmen maten and reuse chak jou.",
+                "Combine a clock time or day-part expression with familiar actions and questions."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
                   "listen_build",
                   "voice_input",
                   "word_bank_arrange",
@@ -872,88 +762,70 @@
       "description": "Combine greetings, identity, objects, actions, questions, numbers, and time in a first sustained beginner conversation.",
       "purpose": "Consolidate A0-to-A1 foundations into a small but meaningful conversation the learner can understand and produce.",
       "learningObjectives": [
-        "Follow a short beginner Kreyòl conversation built from previously taught language.",
-        "Respond aloud to familiar prompts without relying on English word order.",
-        "Read, arrange, and write a short conversation using course vocabulary and patterns."
+        "Recognize how familiar Course 1 conversation moves connect instead of memorizing one fixed script.",
+        "Rehearse short scenes about identity, things, actions, questions, quantities, and time.",
+        "Understand and produce a sustained beginner conversation using language accumulated across the course."
       ],
       "guidedExercises": [
-        "Learn or notice the target language in a short, beginner-safe context.",
-        "Listen and speak using transcript-based speaking practice where appropriate.",
-        "Read, arrange, write, use the language in context, then review it cumulatively."
+        "Map familiar conversation functions before attempting the sustained capstone.",
+        "Rehearse short scenes with listening, speaking, arranging, and writing embedded in the communication goal.",
+        "Finish with a Jan-and-Mari conversation and a second variation so success does not depend on one memorized script."
       ],
       "quizFocus": [
-        "cumulative conversation",
-        "greetings",
-        "identity",
-        "questions",
-        "actions",
-        "numbers and time"
+        "conversation flow",
+        "greetings and identity",
+        "residence and language",
+        "things and ownership",
+        "current actions",
+        "yes/no and information questions",
+        "quantities",
+        "clock time and routines",
+        "sustained conversation"
       ],
       "sections": [
         {
-          "sectionSlug": "ht8-learn-listen-speak",
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "sectionSlug": "ht8-capstone-conversation",
+          "title": "My First Kreyòl Conversation",
+          "description": "Map the conversation, rehearse useful scenes, then complete a sustained beginner exchange.",
           "topics": [
             {
               "topicId": "learn-the-conversation-map",
-              "title": "Learn the Conversation Map",
-              "summary": "Review the building blocks of a complete beginner exchange and how they connect.",
-              "minutes": 24,
+              "title": "Build Your Conversation Map",
+              "summary": "Connect greetings, identity, everyday information, actions, questions, quantities, and time.",
+              "minutes": 23,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Learn the Conversation Map.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Recognize useful openings and transitions inside a conversation.",
+                "Choose a question based on information that is still missing.",
+                "Reuse familiar identity, action, quantity, and time language without adding new grammar."
               ],
               "practice": {
                 "expectedPracticeKinds": [
                   "single_choice",
-                  "fill_blank_choice"
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange"
                 ]
               }
             },
             {
               "topicId": "listen-and-speak-through-a-conversation",
-              "title": "Listen and Speak Through a Conversation",
-              "summary": "Follow short conversational turns and produce the expected spoken responses.",
-              "minutes": 24,
+              "title": "Rehearse Real Conversation Turns",
+              "summary": "Practice short scenes about things, actions, quantities, questions, and time.",
+              "minutes": 25,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in Listen and Speak Through a Conversation.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Respond to short Jan-and-Mari exchanges without relying on English word order.",
+                "Reuse ownership and current-action language inside conversation.",
+                "Use quantity and schedule language inside practical exchanges."
               ],
               "practice": {
                 "expectedPracticeKinds": [
+                  "single_choice",
                   "listen_build",
-                  "voice_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "ht8-read-build-write-use",
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "topics": [
-            {
-              "topicId": "read-build-and-write-a-conversation",
-              "title": "Read, Build, and Write a Conversation",
-              "summary": "Reconstruct and write a short multi-turn exchange from the language learned across the course.",
-              "minutes": 24,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Understand the Kreyòl language target introduced in Read, Build, and Write a Conversation.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
-              ],
-              "practice": {
-                "expectedPracticeKinds": [
+                  "voice_input",
                   "word_bank_arrange",
                   "text_input"
                 ]
@@ -962,14 +834,14 @@
             {
               "topicId": "my-first-kreyol-conversation",
               "title": "My First Kreyòl Conversation",
-              "summary": "Complete a cumulative use-it-and-review conversation that combines all four language skills.",
+              "summary": "Complete and understand a sustained beginner conversation using Course 1 language.",
               "minutes": 30,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Understand the Kreyòl language target introduced in My First Kreyòl Conversation.",
-                "Use the target through at least one receptive skill and one productive skill.",
-                "Preserve official Kreyòl spelling and meaningful diacritics when reading or writing."
+                "Follow a sustained Jan-and-Mari conversation from greeting through closing.",
+                "Choose and produce familiar responses based on conversational meaning.",
+                "Understand a second version without requiring the exact same order or wording."
               ],
               "practice": {
                 "expectedPracticeKinds": [

@@ -1,0 +1,501 @@
+{
+  "subjectSlug": "haitian-creole",
+  "courseSlug": "haitian-creole-everyday-grammar",
+  "catalogSlug": "haitian-creole",
+  "trackSlug": "haitian-creole",
+  "profileId": "language",
+  "title": "Haitian Creole 2: Everyday Grammar & Sentence Building",
+  "description": "A flexible A1 continuation that introduces only material not already explicitly taught in Haitian Creole Foundations.",
+  "moduleOrder": [
+    "haitian-creole-everyday-grammar-1-definite-article-choices",
+    "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+    "haitian-creole-everyday-grammar-3-more-questions-and-health",
+    "haitian-creole-everyday-grammar-4-past-and-future",
+    "haitian-creole-everyday-grammar-5-descriptions-and-ye"
+  ],
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "haitian-creole-everyday-grammar-1-definite-article-choices",
+      "prefix": "ht2m1",
+      "order": 1,
+      "role": "standard",
+      "title": "Choose the Right Definite Article",
+      "description": "Move beyond knowing that the definite article follows the noun and learn to choose among a, la, an, lan, and nan.",
+      "purpose": "Extend the noun-phrase foundation from Course 1 by using the noun's ending sound to choose the singular definite article.",
+      "learningObjectives": [
+        "Choose a or la in source-supported noun phrases.",
+        "Choose an, lan, or nan in source-supported noun phrases.",
+        "Use article selection while listening, speaking, building, and writing familiar noun phrases."
+      ],
+      "guidedExercises": [
+        "Compare a small number of source-supported examples before practicing a new example.",
+        "Use listening when the noun ending is the important cue.",
+        "Use building or writing only after the article-selection pattern has been introduced."
+      ],
+      "quizFocus": [
+        "a versus la",
+        "an versus lan versus nan",
+        "mixed singular definite article selection"
+      ],
+      "sections": [
+        {
+          "sectionSlug": "ht2m1-article-selection",
+          "title": "Article Selection",
+          "description": "Choose the singular definite article from the ending sound of the noun.",
+          "topics": [
+            {
+              "topicId": "choose-a-and-la",
+              "title": "Choose a or la",
+              "summary": "Use the Week 2 sound patterns to distinguish a from la.",
+              "minutes": 22,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize source-supported noun endings that take a.",
+                "Recognize source-supported noun endings that take la.",
+                "Apply the distinction to new examples from the Week 2 practice list."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "fill_blank_choice",
+                  "word_bank_arrange",
+                  "text_input"
+                ]
+              }
+            },
+            {
+              "topicId": "choose-an-lan-and-nan",
+              "title": "Choose an, lan, or nan",
+              "summary": "Use Week 2 ending patterns to distinguish the three nasal article forms.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Use an with the source-supported nasal-ending patterns.",
+                "Use lan with the source-supported nasal-plus-consonant and uncommon iy/uit patterns.",
+                "Use nan with the source-supported m, nn, èn, and òn endings."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "word_bank_arrange",
+                  "text_input"
+                ]
+              }
+            },
+            {
+              "topicId": "hear-and-use-definite-articles",
+              "title": "Hear and Use Definite Articles",
+              "summary": "Choose among all five singular article forms in mixed listening and production practice.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Listen for the noun ending before selecting the article.",
+                "Build and say complete noun phrases with the appropriate article.",
+                "Write source-supported noun phrases without relying on an English article pattern."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange",
+                  "text_input"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "accessOverride": "free"
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+      "prefix": "ht2m2",
+      "order": 2,
+      "role": "standard",
+      "title": "Short Pronouns & Deeper Possession",
+      "description": "Extend known pronouns into short object forms and deeper possessive-pronoun patterns without reteaching Course 1 ownership or demonstratives.",
+      "purpose": "Build on Course 1 pronoun and possession knowledge with contracted object pronouns and standalone possessive pronouns from the Week 3 source.",
+      "learningObjectives": [
+        "Use m, w, l, and n in source-supported object positions.",
+        "Recognize source-supported singular and plural possessive pronouns.",
+        "Distinguish object-pronoun forms from possessive-pronoun forms without reteaching known Course 1 possession patterns."
+      ],
+      "guidedExercises": [
+        "Reuse Course 1 pronouns and noun phrases as known material.",
+        "Introduce only the new contracted or possessive pattern needed for the task.",
+        "Practice the new form in short complete sentences."
+      ],
+      "quizFocus": [
+        "contracted object pronouns m, w, l, n",
+        "yo without a contracted object form",
+        "standalone possessive pronouns"
+      ],
+      "sections": [
+        {
+          "sectionSlug": "ht2m2-pronouns-possession",
+          "title": "Pronouns and Possession",
+          "description": "Extend known pronouns and possession into shorter, more flexible sentence patterns.",
+          "topics": [
+            {
+              "topicId": "use-short-object-pronouns",
+              "title": "Use Short Object Pronouns",
+              "summary": "Use m, w, l, and n in source-supported object positions.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Connect full pronouns with their contracted object forms.",
+                "Recognize the object pronoun in a short sentence.",
+                "Produce short source-supported sentences with contracted objects."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "voice_input",
+                  "word_bank_arrange"
+                ]
+              }
+            },
+            {
+              "topicId": "use-possessive-pronouns",
+              "title": "Use Possessive Pronouns",
+              "summary": "Distinguish mine, yours, his or hers, ours, and theirs using the Week 3 patterns.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize singular possessive-pronoun forms.",
+                "Recognize plural possessive-pronoun forms.",
+                "Use a possessive pronoun in a short contrast."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "fill_blank_choice",
+                  "text_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+      "prefix": "ht2m3",
+      "order": 3,
+      "role": "standard",
+      "title": "More Questions & Health",
+      "description": "Extend the Course 1 question toolkit and use it with body and health language.",
+      "purpose": "Add genuinely new question words and give them an immediate everyday use in simple health exchanges.",
+      "learningObjectives": [
+        "Use new Week 4 question forms without reteaching the Course 1 core question set.",
+        "Recognize common body-part vocabulary from the source.",
+        "Say what hurts using the source's fèmal expressions."
+      ],
+      "guidedExercises": [
+        "Treat Course 1 question structures as known.",
+        "Introduce only the new question word needed for each exchange.",
+        "Use body vocabulary in short functional questions and answers."
+      ],
+      "quizFocus": [
+        "expanded question words",
+        "body parts",
+        "fèmal health expressions"
+      ],
+      "sections": [
+        {
+          "sectionSlug": "ht2m3-questions-health",
+          "title": "Questions and Health",
+          "description": "Ask for more specific information and use the questions in a simple health context.",
+          "topics": [
+            {
+              "topicId": "ask-for-more-specific-information",
+              "title": "Ask for More Specific Information",
+              "summary": "Add Week 4 question forms that were not explicitly taught in Course 1.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize the new question forms from the Week 4 source.",
+                "Choose the question word that fits the information being requested.",
+                "Produce short questions without reteaching known Course 1 forms."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "fill_blank_choice",
+                  "voice_input"
+                ]
+              }
+            },
+            {
+              "topicId": "name-body-parts",
+              "title": "Name Body Parts",
+              "summary": "Learn only the body vocabulary needed for the health expressions in the source.",
+              "minutes": 22,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize common body-part words from Week 4.",
+                "Match heard body-part words to written Kreyòl.",
+                "Use selected body-part words in short phrases."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "voice_input"
+                ]
+              }
+            },
+            {
+              "topicId": "say-what-hurts",
+              "title": "Say What Hurts",
+              "summary": "Use fèmal expressions for common aches from the Week 4 source.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize common fèmal expressions.",
+                "Say which body part hurts.",
+                "Use a short health question-and-answer exchange."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange",
+                  "text_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "haitian-creole-everyday-grammar-4-past-and-future",
+      "prefix": "ht2m4",
+      "order": 4,
+      "role": "standard",
+      "title": "Talk About Past & Future",
+      "description": "Add te and pral while treating simple present and ap as known Course 1 language.",
+      "purpose": "Let learners place familiar actions in yesterday, now, and tomorrow without reteaching present progressive.",
+      "learningObjectives": [
+        "Use te before a verb for source-supported past actions.",
+        "Use pral before a verb for source-supported future actions.",
+        "Contrast past, known present patterns, and future in short everyday statements."
+      ],
+      "guidedExercises": [
+        "Start from action sentences the learner already knows.",
+        "Change only the time marker or time expression needed for the new meaning.",
+        "Use timeline contrasts rather than abstract tense terminology where possible."
+      ],
+      "quizFocus": [
+        "past with te",
+        "future with pral",
+        "past-present-future contrast"
+      ],
+      "sections": [
+        {
+          "sectionSlug": "ht2m4-time",
+          "title": "Past and Future",
+          "description": "Move familiar actions backward and forward in time.",
+          "topics": [
+            {
+              "topicId": "use-te-for-past-actions",
+              "title": "Use te for Past Actions",
+              "summary": "Place te before a familiar verb to talk about a completed past action.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize te before a verb.",
+                "Build a short past statement.",
+                "Connect a past-time word such as yè with a te statement."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "word_bank_arrange",
+                  "text_input"
+                ]
+              }
+            },
+            {
+              "topicId": "use-pral-for-future-actions",
+              "title": "Use pral for Future Actions",
+              "summary": "Place pral before a familiar verb to talk about a future action.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize pral before a verb.",
+                "Build a short future statement.",
+                "Connect demen with a pral statement."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange"
+                ]
+              }
+            },
+            {
+              "topicId": "contrast-yesterday-today-and-tomorrow",
+              "title": "Contrast Yesterday, Today & Tomorrow",
+              "summary": "Choose between te, known present patterns, and pral in short contexts.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Identify whether an action is past, present, or future from context.",
+                "Choose te or pral only when the time meaning requires it.",
+                "Produce a short three-time contrast using familiar verbs."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange",
+                  "text_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+      "prefix": "ht2m5",
+      "order": 5,
+      "role": "standard",
+      "title": "Describe People & Things Naturally",
+      "description": "Use Week 7 description patterns, ye, and adjectives while treating basic identity se as known.",
+      "purpose": "Move from simple identity statements to natural descriptions of states, people, places, and things.",
+      "learningObjectives": [
+        "Recognize descriptions where English to be is not expressed in Kreyòl.",
+        "Use ye in source-supported questions and closing statements.",
+        "Use adjectives in source-supported noun phrases and descriptions.",
+        "Use selected colors, sizes, and qualities in everyday descriptions."
+      ],
+      "guidedExercises": [
+        "Do not reteach basic se identity from Course 1.",
+        "Contrast known identity language with the new Week 7 description patterns.",
+        "Introduce adjective vocabulary only as needed for a meaningful description."
+      ],
+      "quizFocus": [
+        "descriptions without an expressed to be",
+        "ye",
+        "adjective placement",
+        "colors sizes and qualities"
+      ],
+      "sections": [
+        {
+          "sectionSlug": "ht2m5-descriptions",
+          "title": "Descriptions",
+          "description": "Describe states and things with the Week 7 patterns.",
+          "topics": [
+            {
+              "topicId": "describe-without-to-be",
+              "title": "Describe Without an Expressed to be",
+              "summary": "Use source-supported state and description sentences where English uses is or are but Kreyòl does not.",
+              "minutes": 26,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize state descriptions without se.",
+                "Build short descriptions of people and things.",
+                "Avoid inserting se into source patterns where it is not used."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange"
+                ]
+              }
+            },
+            {
+              "topicId": "use-ye",
+              "title": "Use ye",
+              "summary": "Use ye in the Week 7 question and statement patterns.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Recognize ye at the end of source-supported questions.",
+                "Use ye in short questions about people, things, or location.",
+                "Recognize a short closing statement with ye."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "listen_build",
+                  "voice_input",
+                  "text_input"
+                ]
+              }
+            },
+            {
+              "topicId": "place-adjectives-in-phrases",
+              "title": "Place Adjectives in Phrases",
+              "summary": "Notice and use adjective placement in the Week 7 examples.",
+              "minutes": 24,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Locate the describing word in a source-supported noun phrase.",
+                "Build a short noun phrase with an adjective.",
+                "Read a description without translating word by word from English."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "word_bank_arrange",
+                  "text_input"
+                ]
+              }
+            },
+            {
+              "topicId": "describe-color-size-and-quality",
+              "title": "Describe Color, Size & Quality",
+              "summary": "Use a practical subset of the Week 7 adjective lists in complete descriptions.",
+              "minutes": 28,
+              "difficulty": "beginner",
+              "technical": false,
+              "learningGoals": [
+                "Use selected color words in descriptions.",
+                "Use selected size words in descriptions.",
+                "Use selected quality words in descriptions without memorizing the full source table at once."
+              ],
+              "practice": {
+                "expectedPracticeKinds": [
+                  "listen_build",
+                  "voice_input",
+                  "word_bank_arrange",
+                  "text_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

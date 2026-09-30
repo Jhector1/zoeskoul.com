@@ -1,199 +1,441 @@
 {
-  "title": "Everyday Plans: Scenario and Review",
-  "summary": "Combine numbers, clock time, day parts, and familiar actions in a simple everyday schedule.",
-  "minutes": 27,
+  "title": "Everyday Time and Schedule",
+  "summary": "Combine day parts, familiar time expressions, routines, and Akilè in a short everyday schedule conversation.",
+  "minutes": 26,
   "sketchBlocks": [
     {
-      "id": "schedule",
-      "cardTitle": "A Simple Day",
-      "title": "Time + action",
-      "bodyMarkdown": "You can now understand a simple schedule:\n\n- **Lendi maten, mwen etidye kreyòl.**\n- **Setè edmi, mwen travay.**\n- **Aswè, mwen li.**\n\nThe goal is not advanced tense. It is to connect familiar actions with useful time expressions.",
+      "id": "everyday-time-words",
+      "cardTitle": "Place an Activity in Everyday Time",
+      "title": "maten, aswè, jòdi a, kounyeya",
+      "bodyMarkdown": "Useful everyday time expressions include:\n\n- **maten** — morning\n- **aswè** — evening\n- **jòdi a** — today\n- **kounyeya** — now\n\nYou already know **kounyeya** from current actions. Now connect these words with a wider everyday schedule.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Useful everyday time expressions include:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "maten",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "morning",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "aswè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "evening",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "jòdi a",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "today",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "kounyeya",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "now",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You already know",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "kounyeya",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "from current actions. Now connect these words with a wider everyday schedule.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-schedule-work",
-          "kind": "word_bank_arrange",
-          "title": "Build a different schedule line",
-          "prompt": "Arrange the Kreyòl sentence for “Monday morning, I work.”",
-          "hint": "Put the time expression before the action sentence.",
+          "id": "try-evening-transfer",
+          "kind": "voice_input",
+          "title": "Use evening in a sentence",
+          "prompt": "Say “Mari studies Kreyòl in the evening.”",
+          "hint": "Finish with aswè.",
           "help": {
-            "concept": "time + action",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "using a day-part expression with a familiar action",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
           },
-          "targetText": "Lendi maten, mwen travay.",
+          "targetText": "Mari etidye kreyòl aswè.",
+          "locale": "ht-HT"
+        }
+      ]
+    },
+    {
+      "id": "tomorrow-and-routine",
+      "cardTitle": "Useful Schedule Chunks",
+      "title": "denmen maten and chak jou",
+      "bodyMarkdown": "Two more useful everyday expressions are:\n\n- **denmen maten** — tomorrow morning\n- **chak jou** — every day\n\nAt this level, treat them as useful time chunks. You do not need advanced future or scheduling grammar.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Two more useful everyday expressions are:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "denmen maten",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "tomorrow morning",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "chak jou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "every day",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "At this level, treat them as useful time chunks. You do not need advanced future or scheduling grammar.",
+            "locale": "en-US"
+          }
+        ]
+      },
+      "tryItExercises": [
+        {
+          "id": "try-routine-schedule-transfer",
+          "kind": "word_bank_arrange",
+          "title": "Build another routine",
+          "prompt": "Build “Jan studies Kreyòl every day.”",
+          "hint": "Finish with chak jou.",
+          "help": {
+            "concept": "combining a familiar action with a routine expression",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
+          },
+          "targetText": "Jan etidye kreyòl chak jou.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Jan",
+            "etidye",
+            "kreyòl",
+            "chak",
+            "jou."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "schedule-conversation",
+      "cardTitle": "Use Time in Conversation",
+      "title": "Jan and Mari compare schedules",
+      "bodyMarkdown": "**Jan:** Mari, akilè ou etidye kreyòl?\n\n**Mari:** Senkè. Mwen etidye kreyòl aswè. E ou menm?\n\n**Jan:** Mwen etidye kreyòl lendi maten.\n\n**Mari:** Èske ou travay chak jou?\n\n**Jan:** Wi, mwen travay chak jou.\n\nThis combines familiar questions, routines, and time without adding advanced tense grammar.",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Mari, akilè ou etidye kreyòl?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Senkè. Mwen etidye kreyòl aswè. E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen etidye kreyòl lendi maten.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Èske ou travay chak jou?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Wi, mwen travay chak jou.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "This combines familiar questions, routines, and time without adding advanced tense grammar.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ]
+      },
+      "tryItExercises": [
+        {
+          "id": "try-schedule-new-line",
+          "kind": "listen_build",
+          "title": "Hear another schedule line",
+          "prompt": "Listen and rebuild the sentence.",
+          "hint": "Mari works Monday morning.",
+          "help": {
+            "concept": "hearing a new time-plus-action combination",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
+          },
+          "targetText": "Lendi maten, Mari travay.",
           "locale": "ht-HT",
           "wordBank": [
             "Lendi",
             "maten,",
-            "mwen",
+            "Mari",
             "travay."
           ]
         }
       ]
     },
     {
-      "id": "ask-schedule",
-      "cardTitle": "Ask About the Schedule",
-      "title": "Akilè…?",
-      "bodyMarkdown": "Ask about the time of an activity:\n\n**Akilè ou travay?** — What time do you work?\n\nA simple answer can be:\n\n**Setè edmi.**",
+      "id": "schedule-now-review",
+      "cardTitle": "Contrast Schedule and Right Now",
+      "title": "schedule vs. kounyeya",
+      "bodyMarkdown": "Listen to one more exchange.\n\nJan gives a clock time for his routine, then answers what he is doing **kounyeya**.\n\nNotice how familiar action and time phrases work together in the same exchange.",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Listen to one more exchange.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Jan gives a clock time for his routine, then answers what he is doing",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "kounyeya",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Notice how familiar action and time phrases work together in the same exchange.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "speakerId": "mari",
+            "text": "Jan, akilè ou travay?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Setè edmi.",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Kisa ou ap fè kounyeya?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "M ap travay kounyeya.",
+            "locale": "ht-HT"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-ask-schedule",
+          "id": "try-akile-new-person",
           "kind": "voice_input",
-          "title": "Ask about study time",
-          "prompt": "Say “What time do you study?” in Kreyòl.",
-          "hint": "Keep Akilè ou and change the activity.",
+          "title": "Ask about Mari's work time",
+          "prompt": "Ask “What time does Mari work?”",
+          "hint": "Use Akilè with Mari and travay.",
           "help": {
-            "concept": "asking what time",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "transferring Akilè to another person",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
           },
-          "targetText": "Akilè ou etidye?",
+          "targetText": "Akilè Mari travay?",
           "locale": "ht-HT"
         }
       ]
-    },
-    {
-      "id": "everyday-life",
-      "cardTitle": "Bring It Together",
-      "title": "Numbers + time + routines",
-      "bodyMarkdown": "This module gives you the tools to understand small pieces of everyday life:\n\n- quantities: **de liv**\n- clock time: **senkè**\n- day parts: **maten**, **aswè**\n- frequency: **chak jou**\n- current time: **kounyeya**\n\nThese pieces will support longer conversations in later courses."
     }
   ],
   "quizDraft": [
     {
-      "id": "everyday-plans-scenario-and-review-choice",
+      "id": "schedule-choice",
       "kind": "single_choice",
-      "title": "Choose the schedule answer",
-      "prompt": "Which expression answers a question asking what time you work?",
-      "hint": "Choose the clock-time expression.",
+      "title": "Choose the routine",
+      "prompt": "Which sentence describes an everyday routine?",
+      "hint": "Look for chak jou.",
       "help": {
-        "concept": "A time question is answered with a clock-time phrase.",
+        "concept": "recognizing an everyday routine",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
       "options": [
-        "setè edmi",
-        "chak jou",
-        "de liv"
+        "Mari etidye kreyòl chak jou.",
+        "Mari ap etidye kreyòl kounyeya.",
+        "Akilè Mari etidye kreyòl?"
       ],
       "correctOptionIds": [
         "a"
       ]
     },
     {
-      "id": "everyday-plans-scenario-and-review-fill",
-      "kind": "fill_blank_choice",
-      "title": "Complete the schedule",
-      "prompt": "Choose the action that completes “Monday morning, I study Kreyòl.”",
-      "hint": "Use the study action learned earlier in the course.",
-      "help": {
-        "concept": "The blank needs the activity performed in the schedule.",
-        "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
-      },
-      "template": "Lendi maten, mwen [blank1] kreyòl.",
-      "choices": [
-        "etidye",
-        "rete",
-        "rele"
-      ],
-      "correctValue": "etidye"
-    },
-    {
-      "id": "everyday-plans-scenario-and-review-listen",
+      "id": "schedule-listen",
       "kind": "listen_build",
-      "title": "Hear a schedule",
-      "prompt": "Listen, then build the schedule phrase you hear.",
-      "hint": "Listen for the time first and the action second.",
+      "title": "Hear another schedule",
+      "prompt": "Listen and rebuild the sentence.",
+      "hint": "The activity happens Monday morning.",
       "help": {
-        "concept": "Build the short schedule sentence in spoken order.",
+        "concept": "hearing a time-plus-action sentence",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
-      "targetText": "Setè edmi, mwen travay.",
+      "targetText": "Lendi maten, Jan travay.",
       "locale": "ht-HT",
       "wordBank": [
-        "Setè",
-        "edmi,",
-        "mwen",
+        "Lendi",
+        "maten,",
+        "Jan",
         "travay."
-      ],
-      "distractors": [
-        "aswè"
-      ],
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+      ]
     },
     {
-      "id": "everyday-plans-scenario-and-review-voice",
-      "kind": "voice_input",
-      "title": "Ask about time",
-      "prompt": "Say: Akilè ou travay?",
-      "hint": "Say the complete schedule question.",
-      "help": {
-        "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl time question.",
-        "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
-      },
-      "targetText": "Akilè ou travay?",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
-    },
-    {
-      "id": "everyday-plans-scenario-and-review-build",
+      "id": "schedule-build",
       "kind": "word_bank_arrange",
-      "title": "Build an everyday sentence",
-      "prompt": "Arrange the words to say “I study Kreyòl every day.”",
-      "hint": "Put the subject and action first, then the routine time phrase.",
+      "title": "Build a time question",
+      "prompt": "Build “What time does Jan study?”",
+      "hint": "Begin with Akilè.",
       "help": {
-        "concept": "The sentence combines a familiar action with a frequency expression.",
+        "concept": "building an everyday schedule question",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
-      "targetText": "Mwen etidye kreyòl chak jou.",
+      "targetText": "Akilè Jan etidye?",
       "locale": "ht-HT",
       "wordBank": [
-        "Mwen",
-        "etidye",
-        "kreyòl",
-        "chak",
-        "jou."
-      ],
-      "distractors": [
-        "kounyeya"
-      ],
-      "ttsText": "Mwen etidye kreyòl chak jou.",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "Akilè",
+        "Jan",
+        "etidye?"
+      ]
     },
     {
-      "id": "everyday-plans-scenario-and-review-write",
-      "kind": "text_input",
-      "title": "Write 3:30",
-      "prompt": "Type the Kreyòl time expression for 3:30.",
-      "hint": "Use the hour-plus-half pattern from this module.",
+      "id": "schedule-voice",
+      "kind": "voice_input",
+      "title": "Say an evening routine",
+      "prompt": "Say “I study Kreyòl in the evening.”",
+      "hint": "Finish with aswè.",
       "help": {
-        "concept": "Write the complete half-hour clock expression.",
+        "concept": "producing an everyday schedule sentence",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
-      "expectedText": "twazè edmi",
-      "placeholder": "Type the Kreyòl answer",
+      "targetText": "Mwen etidye kreyòl aswè.",
+      "locale": "ht-HT"
+    },
+    {
+      "id": "schedule-write",
+      "kind": "text_input",
+      "title": "Write tomorrow morning",
+      "prompt": "Write “tomorrow morning” in Kreyòl.",
+      "hint": "Use the two-word everyday time expression.",
+      "help": {
+        "concept": "writing a familiar everyday time chunk",
+        "hint_1": "Use the number or time pattern introduced in this lesson.",
+        "hint_2": "Listen for the whole expression before producing it."
+      },
+      "expectedText": "denmen maten",
+      "placeholder": "Type the Kreyòl phrase",
       "normalize": {
         "trim": true,
         "caseFold": true,

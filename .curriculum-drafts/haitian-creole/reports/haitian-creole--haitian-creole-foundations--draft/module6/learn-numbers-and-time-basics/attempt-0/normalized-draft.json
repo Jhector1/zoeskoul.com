@@ -1,86 +1,353 @@
 {
-  "title": "Learn Numbers and Time Basics",
-  "summary": "Learn and recognize the Kreyòl numbers from one through twenty in useful spoken and written forms.",
-  "minutes": 26,
+  "title": "Numbers and Quantities",
+  "summary": "Recognize numbers one through twenty and use them with familiar everyday objects.",
+  "minutes": 23,
   "sketchBlocks": [
     {
       "id": "one-ten",
-      "cardTitle": "Numbers 1–10",
+      "cardTitle": "Start With 1–10",
       "title": "youn, de, twa…",
-      "bodyMarkdown": "Start with the first ten numbers:\n\n1 **youn** · 2 **de** · 3 **twa** · 4 **kat** · 5 **senk**\n\n6 **sis** · 7 **sèt** · 8 **wit** · 9 **nèf** · 10 **dis**\n\nSay them aloud in small groups rather than trying to memorize the whole list at once.",
+      "bodyMarkdown": "Start with the first ten numbers:\n\n1 **youn** · 2 **de** · 3 **twa** · 4 **kat** · 5 **senk**\n\n6 **sis** · 7 **sèt** · 8 **wit** · 9 **nèf** · 10 **dis**\n\nHear them in small groups and reuse them with words you already know.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Start with the first ten numbers:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "1",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "youn",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "2",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "de",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "3",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "twa",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "4",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "kat",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "5",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "senk",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "6",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "sis",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "7",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "sèt",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "8",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "wit",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "9",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "nèf",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "10",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "dis",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Hear them in small groups and reuse them with words you already know.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-one-ten-eight",
-          "kind": "single_choice",
-          "title": "Recognize eight",
-          "prompt": "Which number word in the lesson is **8**?",
-          "hint": "Choose the option that correctly applies the pattern.",
+          "id": "try-small-quantity-transfer",
+          "kind": "listen_build",
+          "title": "Hear a number with an object",
+          "prompt": "Listen and rebuild “six books.”",
+          "hint": "The number comes before liv.",
           "help": {
-            "concept": "numbers 1–10",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "hearing a number-plus-noun phrase",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
           },
-          "options": [
-            "wit",
-            "sèt",
-            "nèf"
-          ],
-          "correctOptionIds": [
-            "a"
+          "targetText": "sis liv",
+          "locale": "ht-HT",
+          "wordBank": [
+            "sis",
+            "liv"
           ]
         }
       ]
     },
     {
       "id": "eleven-twenty",
-      "cardTitle": "Numbers 11–20",
+      "cardTitle": "Continue to 20",
       "title": "onz through ven",
-      "bodyMarkdown": "Continue from eleven to twenty:\n\n11 **onz** · 12 **douz** · 13 **trèz** · 14 **katòz** · 15 **kenz**\n\n16 **sèz** · 17 **disèt** · 18 **dizwit** · 19 **diznèf** · 20 **ven**.",
+      "bodyMarkdown": "Continue from eleven to twenty:\n\n11 **onz** · 12 **douz** · 13 **trèz** · 14 **katòz** · 15 **kenz**\n\n16 **sèz** · 17 **disèt** · 18 **dizwit** · 19 **diznèf** · 20 **ven**\n\nFocus on recognizing and saying the numbers naturally; you are not doing arithmetic.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Continue from eleven to twenty:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "11",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "onz",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "12",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "douz",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "13",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "trèz",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "14",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "katòz",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "15",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "kenz",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "16",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "sèz",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "17",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "disèt",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "18",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "dizwit",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "19",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "diznèf",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "20",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ven",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Focus on recognizing and saying the numbers naturally; you are not doing arithmetic.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-eleven-twenty-eighteen",
-          "kind": "single_choice",
-          "title": "Recognize eighteen",
-          "prompt": "Which number word in the lesson is **18**?",
-          "hint": "Choose the option that correctly applies the pattern.",
+          "id": "try-large-quantity-transfer",
+          "kind": "voice_input",
+          "title": "Use a teen number",
+          "prompt": "Say “twelve notebooks.”",
+          "hint": "Put douz before kaye.",
           "help": {
-            "concept": "numbers 11–20",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "using a number from eleven through twenty",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
           },
-          "options": [
-            "dizwit",
-            "disèt",
-            "diznèf"
-          ],
-          "correctOptionIds": [
-            "a"
-          ]
+          "targetText": "douz kaye",
+          "locale": "ht-HT"
         }
       ]
     },
     {
-      "id": "use-numbers",
+      "id": "number-plus-noun",
       "cardTitle": "Use Numbers With Things",
-      "title": "de liv, twa valiz",
-      "bodyMarkdown": "Numbers can go directly before a noun:\n\n- **de liv** — two books\n- **twa valiz** — three bags\n- **senk kaye** — five notebooks\n\nThis prepares you for quantities, time, prices, and everyday counting.",
+      "title": "number + noun",
+      "bodyMarkdown": "Numbers can go directly before a noun:\n\n- **de liv** — two books\n- **twa valiz** — three bags\n- **senk kaye** — five notebooks\n\nThis connects the numbers to useful everyday quantities.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Numbers can go directly before a noun:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "de liv",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "two books",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "twa valiz",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "three bags",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "senk kaye",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "five notebooks",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "This connects the numbers to useful everyday quantities.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-use-numbers-notebooks",
+          "id": "try-quantity-new-combination",
           "kind": "word_bank_arrange",
-          "title": "Build another quantity phrase",
-          "prompt": "Arrange the Kreyòl phrase for “two notebooks.”",
-          "hint": "Put the number before the noun.",
+          "title": "Build another quantity",
+          "prompt": "Build “four books.”",
+          "hint": "Put kat before liv.",
           "help": {
-            "concept": "number + noun",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "building a new number-plus-noun phrase",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
           },
-          "targetText": "de kaye",
+          "targetText": "kat liv",
           "locale": "ht-HT",
           "wordBank": [
-            "de",
-            "kaye"
+            "kat",
+            "liv"
           ]
         }
       ]
@@ -88,133 +355,88 @@
   ],
   "quizDraft": [
     {
-      "id": "learn-numbers-and-time-basics-choice",
+      "id": "numbers-choice",
       "kind": "single_choice",
-      "title": "Choose five",
-      "prompt": "Which Kreyòl number means “five”?",
-      "hint": "Choose the number word from the first group.",
+      "title": "Choose twelve",
+      "prompt": "Which Kreyòl number means twelve?",
+      "hint": "Listen for the number after onz.",
       "help": {
-        "concept": "The lesson introduces the basic number sequence from one to ten.",
+        "concept": "recognizing numbers one through twenty",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
       "options": [
-        "senk",
-        "sèt",
-        "nèf"
+        "douz",
+        "dis",
+        "ven"
       ],
       "correctOptionIds": [
         "a"
       ]
     },
     {
-      "id": "learn-numbers-and-time-basics-fill",
-      "kind": "fill_blank_choice",
-      "title": "Complete the number phrase",
-      "prompt": "Choose the number that completes “three books.”",
-      "hint": "Use the number represented by 3.",
-      "help": {
-        "concept": "The blank needs the number word that comes before the noun.",
-        "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
-      },
-      "template": "[blank1] liv",
-      "choices": [
-        "twa",
-        "de",
-        "kat"
-      ],
-      "correctValue": "twa"
-    },
-    {
-      "id": "learn-numbers-and-time-basics-listen",
+      "id": "numbers-listen",
       "kind": "listen_build",
-      "title": "Hear a number",
-      "prompt": "Listen, then build the number phrase you hear.",
-      "hint": "Listen for the number and the noun.",
+      "title": "Hear another quantity",
+      "prompt": "Listen and rebuild the phrase.",
+      "hint": "The speaker says eight bags.",
       "help": {
-        "concept": "Build the short quantity phrase in spoken order.",
+        "concept": "hearing a number with a familiar noun",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
-      "targetText": "de valiz",
+      "targetText": "wit valiz",
       "locale": "ht-HT",
       "wordBank": [
-        "de",
+        "wit",
         "valiz"
-      ],
-      "distractors": [
-        "twa"
-      ],
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+      ]
     },
     {
-      "id": "learn-numbers-and-time-basics-voice",
-      "kind": "voice_input",
-      "title": "Say a number",
-      "prompt": "Say: ven.",
-      "hint": "Say the Kreyòl number shown.",
-      "help": {
-        "concept": "Speaking practice compares the recognized transcript with the authored number word.",
-        "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
-      },
-      "targetText": "ven",
-      "locale": "ht-HT",
-      "maxSeconds": 8,
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
-    },
-    {
-      "id": "learn-numbers-and-time-basics-build",
+      "id": "numbers-build",
       "kind": "word_bank_arrange",
-      "title": "Build “five notebooks”",
-      "prompt": "Arrange the words to say “five notebooks.”",
-      "hint": "Put the number before the noun.",
+      "title": "Build another quantity",
+      "prompt": "Build “seven notebooks.”",
+      "hint": "Number first.",
       "help": {
-        "concept": "A quantity phrase places the number before the thing being counted.",
+        "concept": "building a quantity phrase",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
-      "targetText": "senk kaye",
+      "targetText": "sèt kaye",
       "locale": "ht-HT",
       "wordBank": [
-        "senk",
+        "sèt",
         "kaye"
-      ],
-      "distractors": [
-        "sèt"
-      ],
-      "ttsText": "senk kaye",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+      ]
     },
     {
-      "id": "learn-numbers-and-time-basics-write",
-      "kind": "text_input",
-      "title": "Write eight",
-      "prompt": "Type the Kreyòl number word for 8.",
-      "hint": "Use the number sequence from the lesson.",
+      "id": "numbers-voice",
+      "kind": "voice_input",
+      "title": "Say another number",
+      "prompt": "Say “eighteen.”",
+      "hint": "Use the number from the 11–20 group.",
       "help": {
-        "concept": "Write the number word with its Kreyòl spelling.",
+        "concept": "producing a number from eleven through twenty",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
-      "expectedText": "wit",
-      "placeholder": "Type the Kreyòl answer",
+      "targetText": "dizwit",
+      "locale": "ht-HT"
+    },
+    {
+      "id": "numbers-write",
+      "kind": "text_input",
+      "title": "Write another number",
+      "prompt": "Write “fourteen” in Kreyòl.",
+      "hint": "It is between trèz and kenz.",
+      "help": {
+        "concept": "writing a number from eleven through twenty",
+        "hint_1": "Use the number or time pattern introduced in this lesson.",
+        "hint_2": "Listen for the whole expression before producing it."
+      },
+      "expectedText": "katòz",
+      "placeholder": "Type the Kreyòl number",
       "normalize": {
         "trim": true,
         "caseFold": true,

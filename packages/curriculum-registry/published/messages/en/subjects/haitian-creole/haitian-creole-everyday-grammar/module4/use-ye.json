@@ -1,0 +1,210 @@
+{
+  "topics": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "use-ye": {
+          "label": "Use ye",
+          "summary": "Use ye at the end of questions and in the closing statement.",
+          "cards": {
+            "sketch0": {
+              "title": "Notice ye at the End"
+            },
+            "sketch1": {
+              "title": "Use ye in Familiar Question Frames"
+            },
+            "sketch2": {
+              "title": "ye Can Close the Statement"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_use_ye_sketch0": {
+              "title": "Try it yourself: Choose the location question",
+              "prompt": "Right after the sketch \"Kòman manman w ye?\", practice that exact idea with this task. Which question asks where the book is? Produce the result for choose the location question so it reinforces Use ye."
+            },
+            "try_use_ye_sketch1": {
+              "title": "Try it yourself: Ask how your mother is",
+              "prompt": "Right after the sketch \"Ki moun li ye?\", practice that exact idea with this task. Say the question. Produce the result for ask how your mother is so it reinforces Use ye."
+            },
+            "try_use_ye_sketch2": {
+              "title": "Try it yourself: Write the closing statement",
+              "prompt": "Right after the sketch \"Se sa li ye.\", practice that exact idea with this task. Type the statement. Produce the result for write the closing statement so it reinforces Use ye."
+            }
+          },
+          "practice": {
+            "ye-quiz-closing-choice": {
+              "title": "Find the closing statement",
+              "prompt": "Which example is a statement rather than a question?",
+              "hint": "Choose the example ending with a period.",
+              "help": {
+                "concept": "Distinguish the closing statement from the questions.",
+                "hint_1": "Look for Se sa li.",
+                "hint_2": "It still ends with ye."
+              },
+              "options": {
+                "a": "Se sa li ye.",
+                "b": "Ki sa sa a ye?",
+                "c": "Ki lè li ye?"
+              }
+            },
+            "ye-quiz-who-choice": {
+              "title": "Find the who question",
+              "prompt": "Which question asks who he is?",
+              "hint": "Choose the question beginning Ki moun.",
+              "help": {
+                "concept": "Recognize the question with ye at the end.",
+                "hint_1": "Look for Ki moun.",
+                "hint_2": "The complete question ends li ye?"
+              },
+              "options": {
+                "a": "Ki moun li ye?",
+                "b": "Ki bò liv la ye?",
+                "c": "Kòman manman w ye?"
+              }
+            },
+            "ye-quiz-who-listen": {
+              "title": "Hear the who question",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "It begins with Ki moun.",
+              "help": {
+                "concept": "Build the exact question.",
+                "hint_1": "Begin Ki moun li.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki moun li ye?"
+            },
+            "ye-quiz-time-listen": {
+              "title": "Hear the time question",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "It begins with Ki lè.",
+              "help": {
+                "concept": "Recognize the time question ending in ye.",
+                "hint_1": "Begin Ki lè li.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki lè li ye?"
+            },
+            "ye-quiz-what-voice": {
+              "title": "Ask what that is",
+              "prompt": "Say the question.",
+              "hint": "Begin Ki sa sa a.",
+              "help": {
+                "concept": "Produce the question ending in ye.",
+                "hint_1": "Say Ki sa sa a.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki sa sa a ye?"
+            },
+            "ye-quiz-book-voice": {
+              "title": "Ask where the book is",
+              "prompt": "Say the question.",
+              "hint": "Begin Ki bò liv la.",
+              "help": {
+                "concept": "Produce the location question.",
+                "hint_1": "Say Ki bò liv la.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki bò liv la ye?"
+            },
+            "ye-quiz-koman-write": {
+              "title": "Write the mother question",
+              "prompt": "Type the question asking how your mother is.",
+              "hint": "Begin Kòman manman w.",
+              "help": {
+                "concept": "Write the question with ye at the end.",
+                "hint_1": "Use Kòman manman w.",
+                "hint_2": "Finish ye?"
+              },
+              "expectedText": "Kòman manman w ye?",
+              "placeholder": "Type the Kreyòl question"
+            },
+            "ye-quiz-closing-write": {
+              "title": "Write Se sa li ye",
+              "prompt": "Type the closing statement.",
+              "hint": "Begin Se sa li.",
+              "help": {
+                "concept": "Write the statement ending in ye.",
+                "hint_1": "Begin Se sa li.",
+                "hint_2": "Finish ye."
+              },
+              "expectedText": "Se sa li ye.",
+              "placeholder": "Type the Kreyòl statement"
+            },
+            "try-ye-question-choice": {
+              "title": "Choose the location question",
+              "prompt": "Which question asks where the book is?",
+              "hint": "Choose the question beginning with Ki bò.",
+              "help": {
+                "concept": "Recognize ye at the end of a location question.",
+                "hint_1": "Look for liv la.",
+                "hint_2": "The question ends in ye?"
+              },
+              "options": {
+                "a": "Ki bò liv la ye?",
+                "b": "Kòman manman w ye?",
+                "c": "Ki moun li ye?"
+              }
+            },
+            "try-ki-bo-listen": {
+              "title": "Hear the book question",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "It begins with Ki bò.",
+              "help": {
+                "concept": "Build the question with ye at the end.",
+                "hint_1": "Begin Ki bò liv la.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki bò liv la ye?"
+            },
+            "try-koman-voice": {
+              "title": "Ask how your mother is",
+              "prompt": "Say the question.",
+              "hint": "Begin Kòman manman w.",
+              "help": {
+                "concept": "Produce the question ending in ye.",
+                "hint_1": "Say Kòman manman w.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Kòman manman w ye?"
+            },
+            "try-se-sa-write": {
+              "title": "Write the closing statement",
+              "prompt": "Type the statement.",
+              "hint": "Begin Se sa li.",
+              "help": {
+                "concept": "Write the closing statement with ye at the end.",
+                "hint_1": "Begin Se sa li.",
+                "hint_2": "Finish with ye."
+              },
+              "expectedText": "Se sa li ye.",
+              "placeholder": "Type the Kreyòl statement"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "use-ye": {
+          "ye-at-end-of-questions": {
+            "title": "Kòman manman w ye?",
+            "bodyMarkdown": "Use **ye** at the end of several common question patterns.\n\nFor example:\n\n- **Kòman manman w ye?** — How is your mother?\n- **Ki bò liv la ye?** — Where is the book?\n\nThe question words are already familiar. Focus on **ye** at the end of each question."
+          },
+          "ye-with-who-what-time": {
+            "title": "Ki moun li ye?",
+            "bodyMarkdown": "Here are three more questions with **ye**:\n\n- **Ki moun li ye?** — Who is he?\n- **Ki sa sa a ye?** — What is that?\n- **Ki lè li ye?** — What time is it?\n\nKeep the familiar question words and notice how **ye** closes each complete question."
+          },
+          "ye-closes-a-statement": {
+            "title": "Se sa li ye.",
+            "bodyMarkdown": "You can also use **ye** to close this statement:\n\n- **Se sa li ye.** — That’s what it is / that’s the way it is.\n\nHere, **ye** still comes at the end."
+          }
+        }
+      }
+    }
+  }
+}

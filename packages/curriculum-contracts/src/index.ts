@@ -1,6 +1,7 @@
 export * from "./blueprint.js";
 export * from "./locales.js";
 export * from "./manifest.js";
+export * from "./language-audio.js";
 export * from "./subject-manifest.js";
 export * from "./catalog-manifest.js";
 export * from "./plan.js";

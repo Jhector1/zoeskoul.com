@@ -2,7 +2,7 @@ subject: haitian-creole--haitian-creole-foundations--draft
 profile: language
 course: haitian-creole-foundations
 modules: 8
-topics: 32
-exercise counts: {"single_choice":55,"fill_blank_choice":32,"listen_build":39,"voice_input":67,"word_bank_arrange":60,"text_input":38}
+topics: 25
+exercise counts: {"single_choice":32,"fill_blank_choice":4,"listen_build":46,"voice_input":51,"word_bank_arrange":40,"text_input":20}
 code_input count: 0
 severity counts: {"blocker":0,"error":0,"warning":0,"info":0}

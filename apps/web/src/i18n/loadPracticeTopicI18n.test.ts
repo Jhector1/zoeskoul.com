@@ -153,4 +153,110 @@ describe("loadPracticeTopicI18n", () => {
 
         expect(result.quiz?.duplicate?.starterCode).toBe("-- sql-v2 starter\n");
     });
+    it("HAITIAN_CREOLE_DRAFT_SUBJECT_ALIAS_FALLBACK preserves fill-blank presentation from a course-scoped draft message file", async () => {
+        const tmpRoot = await fs.mkdtemp(
+            path.join(
+                os.tmpdir(),
+                "practice-i18n-haitian-course2-",
+            ),
+        );
+
+        const messagesRoot = path.join(
+            tmpRoot,
+            "src",
+            "i18n",
+            "messages",
+            "en",
+        );
+
+        const topicFile = path.join(
+            messagesRoot,
+            "subjects",
+            "haitian-creole",
+            "haitian-creole-everyday-grammar",
+            "module1",
+            "use-possessive-pronouns.json",
+        );
+
+        await fs.mkdir(
+            path.dirname(topicFile),
+            {
+                recursive: true,
+            },
+        );
+
+        await fs.writeFile(
+            topicFile,
+            JSON.stringify(
+                {
+                    topics: {
+                        "haitian-creole--haitian-creole-everyday-grammar--draft": {
+                            "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+                                "use-possessive-pronouns": {
+                                    practice: {
+                                        "possessive-singular-m-fill": {
+                                            title: "Complete mine",
+                                            prompt: "Complete the contracted singular form.",
+                                            template: "pa ___ nan",
+                                            choices: [
+                                                "m",
+                                                "n",
+                                                "l",
+                                            ],
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                null,
+                2,
+            ),
+            "utf8",
+        );
+
+        vi.spyOn(
+            process,
+            "cwd",
+        ).mockReturnValue(
+            tmpRoot,
+        );
+
+        const {
+            loadPracticeTopicI18n,
+        } = await import(
+            "./loadPracticeTopicI18n"
+        );
+
+        const result =
+            await loadPracticeTopicI18n({
+                locale: "en",
+                subjectSlug:
+                    "haitian-creole-everyday-grammar",
+                moduleSlug:
+                    "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+                topicSlug:
+                    "use-possessive-pronouns",
+            });
+
+        expect(
+            result.quiz?.[
+                "possessive-singular-m-fill"
+            ]?.template,
+        ).toBe(
+            "pa ___ nan",
+        );
+
+        expect(
+            result.quiz?.[
+                "possessive-singular-m-fill"
+            ]?.choices,
+        ).toEqual([
+            "m",
+            "n",
+            "l",
+        ]);
+    });
+
 });

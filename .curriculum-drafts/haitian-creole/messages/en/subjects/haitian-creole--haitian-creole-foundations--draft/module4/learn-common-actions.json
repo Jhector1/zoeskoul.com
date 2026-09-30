@@ -3,17 +3,17 @@
     "haitian-creole--haitian-creole-foundations--draft": {
       "haitian-creole-foundations-5-what-are-you-doing": {
         "learn-common-actions": {
-          "label": "Learn Common Actions",
-          "summary": "Learn a small set of useful Kreyòl action verbs and use them in short subject-plus-action sentences.",
+          "label": "Everyday Actions and Routines",
+          "summary": "Use common action words in simple subject-plus-action sentences and talk about routines.",
           "cards": {
             "sketch0": {
-              "title": "Everyday Actions"
+              "title": "Build an Action Vocabulary"
             },
             "sketch1": {
-              "title": "Make a Short Sentence"
+              "title": "Make a Short Present Sentence"
             },
             "sketch2": {
-              "title": "Reuse What You Know"
+              "title": "Talk About a Routine"
             },
             "quiz": {
               "title": "Practice"
@@ -22,159 +22,118 @@
           "tryIt": {
             "allowReveal": true,
             "try_learn_common_actions_sketch0": {
-              "title": "Try it yourself: Recognize an action word",
-              "prompt": "Right after the sketch \"manje, bwè, travay, etidye, ale\", practice that exact idea with this task. Which action word in the lesson means “study”? Produce the result for recognize an action word so it reinforces Learn Common Actions."
+              "title": "Try it yourself: Hear an action in a sentence",
+              "prompt": "Right after the sketch \"manje, bwè, travay, etidye, ale\", practice that exact idea with this task. Listen and rebuild the short sentence. Produce the result for hear an action in a sentence so it reinforces Everyday Actions and Routines."
             },
             "try_learn_common_actions_sketch1": {
-              "title": "Try it yourself: Build another subject-action sentence",
-              "prompt": "Right after the sketch \"Mwen manje\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I work.”. Produce the result for build another subject-action sentence so it reinforces Learn Common Actions."
+              "title": "Try it yourself: Build another present sentence",
+              "prompt": "Right after the sketch \"Subject + action\", practice that exact idea with this task. Build “They drink.”. Produce the result for build another present sentence so it reinforces Everyday Actions and Routines."
             },
             "try_learn_common_actions_sketch2": {
-              "title": "Try it yourself: Find “They drink”",
-              "prompt": "Right after the sketch \"Pronouns + action\", practice that exact idea with this task. Which sentence in the lesson means “They drink”? Produce the result for find “They drink” so it reinforces Learn Common Actions."
+              "title": "Try it yourself: Say a different routine",
+              "prompt": "Right after the sketch \"chak jou\", practice that exact idea with this task. Say “I speak Kreyòl every day.”. Produce the result for say a different routine so it reinforces Everyday Actions and Routines."
             }
           },
           "practice": {
-            "learn-common-actions-choice": {
-              "title": "Choose the action sentence",
-              "prompt": "Which sentence means “I eat”?",
-              "hint": "Choose the sentence with the first-person pronoun and the eating action.",
+            "actions-routine-choice": {
+              "title": "Choose the routine",
+              "prompt": "Which sentence describes an everyday routine?",
+              "hint": "Look for chak jou.",
               "help": {
-                "concept": "A short Kreyòl action sentence can use a pronoun directly before a verb.",
+                "concept": "distinguishing a routine statement",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
               "options": {
-                "a": "Mwen manje.",
-                "b": "Ou travay.",
-                "c": "Li ale."
+                "a": "Mari travay chak jou.",
+                "b": "Mari ap travay kounyeya.",
+                "c": "Kisa Mari ap fè?"
               }
             },
-            "learn-common-actions-fill": {
-              "title": "Complete the work sentence",
-              "prompt": "Choose the action that completes “He/she works.”",
-              "hint": "Use the work action from the lesson.",
+            "actions-listen": {
+              "title": "Hear another routine",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "The final words mean every day.",
               "help": {
-                "concept": "The blank needs the verb associated with doing a job or work.",
+                "concept": "hearing a routine statement",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "template": "Li [blank1].",
-              "choices": [
-                "travay",
-                "manje",
-                "ale"
-              ]
-            },
-            "learn-common-actions-listen": {
-              "title": "Hear an action",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the subject and action.",
-              "help": {
-                "concept": "Build the short action sentence in the same order as the audio.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "Ou manje anpil.",
+              "targetText": "Jan pale kreyòl chak jou.",
               "wordBank": [
-                "Ou",
-                "manje",
-                "anpil."
-              ],
-              "distractors": [
-                "travay"
+                "Jan",
+                "pale",
+                "kreyòl",
+                "chak",
+                "jou."
               ]
             },
-            "learn-common-actions-voice": {
-              "title": "Say an action sentence",
-              "prompt": "Say: Mwen etidye.",
-              "hint": "Say the subject and action together.",
+            "actions-build": {
+              "title": "Build a simple action",
+              "prompt": "Build “We study.”",
+              "hint": "Subject first, action second.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
+                "concept": "building a simple action statement",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "Mwen etidye."
+              "targetText": "Nou etidye.",
+              "wordBank": [
+                "Nou",
+                "etidye."
+              ]
             },
-            "learn-common-actions-build": {
-              "title": "Build “They drink”",
-              "prompt": "Arrange the words to say “They drink.”",
-              "hint": "Put the plural subject before the action.",
+            "actions-voice": {
+              "title": "Say a new routine",
+              "prompt": "Say “I work every day.”",
+              "hint": "Use travay with chak jou.",
               "help": {
-                "concept": "A simple action sentence keeps the subject before the verb.",
+                "concept": "producing an everyday routine",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "Mwen travay chak jou."
+            },
+            "try-action-transfer": {
+              "title": "Hear an action in a sentence",
+              "prompt": "Listen and rebuild the short sentence.",
+              "hint": "Listen for the person first, then the action.",
+              "help": {
+                "concept": "recognizing a familiar action inside a sentence",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "Mari travay.",
+              "wordBank": [
+                "Mari",
+                "travay."
+              ]
+            },
+            "try-subject-action-transfer": {
+              "title": "Build another present sentence",
+              "prompt": "Build “They drink.”",
+              "hint": "Put the subject before the action.",
+              "help": {
+                "concept": "building a simple subject-plus-action sentence",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
               "targetText": "Yo bwè.",
               "wordBank": [
                 "Yo",
                 "bwè."
-              ],
-              "distractors": [
-                "manje."
-              ],
-              "ttsText": "Yo bwè."
-            },
-            "learn-common-actions-write": {
-              "title": "Write the study verb",
-              "prompt": "Type the Kreyòl verb for “study.”",
-              "hint": "Use the action word from this lesson.",
-              "help": {
-                "concept": "Write the verb by itself with its Kreyòl spelling.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "expectedText": "etidye",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-actions-study": {
-              "title": "Recognize an action word",
-              "prompt": "Which action word in the lesson means “study”?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "common action verbs",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "etidye",
-                "b": "manje",
-                "c": "bwè",
-                "d": "travay",
-                "e": "ale"
-              }
-            },
-            "try-subject-action-eat": {
-              "title": "Build another subject-action sentence",
-              "prompt": "Arrange the Kreyòl sentence for “I work.”",
-              "hint": "Put the subject before the action.",
-              "help": {
-                "concept": "subject + action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen travay.",
-              "wordBank": [
-                "Mwen",
-                "travay."
               ]
             },
-            "try-reuse-pronouns-they-drink": {
-              "title": "Find “They drink”",
-              "prompt": "Which sentence in the lesson means “They drink”?",
-              "hint": "Choose the option that correctly applies the pattern.",
+            "try-routine-transfer": {
+              "title": "Say a different routine",
+              "prompt": "Say “I speak Kreyòl every day.”",
+              "hint": "Keep chak jou at the end.",
               "help": {
-                "concept": "pronouns plus action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "using the simple present for a routine",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "options": {
-                "a": "Yo bwè.",
-                "b": "Mwen etidye.",
-                "c": "Ou travay.",
-                "d": "Li manje.",
-                "e": "Nou ale."
-              }
+              "targetText": "Mwen pale kreyòl chak jou."
             }
           }
         }
@@ -187,15 +146,15 @@
         "learn-common-actions": {
           "actions": {
             "title": "manje, bwè, travay, etidye, ale",
-            "bodyMarkdown": "Start with a few useful action words:\n\n- **manje** — eat\n- **bwè** — drink\n- **travay** — work\n- **etidye** — study\n- **ale** — go\n\nThese verbs will appear again in later modules, so learn them as reusable building blocks."
+            "bodyMarkdown": "Start with a few useful action words:\n\n- **manje** — eat\n- **bwè** — drink\n- **travay** — work\n- **etidye** — study\n- **ale** — go\n\nThese are reusable building blocks for everyday sentences."
           },
           "subject-action": {
-            "title": "Mwen manje",
-            "bodyMarkdown": "A simple beginner sentence can be just a subject plus an action:\n\n- **Mwen manje.** — I eat.\n- **Ou manje anpil.** — You eat a lot.\n- **Li travay.** — He/she works.\n\nThe verb does not change its spelling for different people."
+            "title": "Subject + action",
+            "bodyMarkdown": "For a simple present statement, put the subject before the action:\n\n- **Mwen manje.** — I eat.\n- **Ou travay.** — You work.\n- **Li etidye.** — He/she studies.\n\nThe action word itself does not change for each person."
           },
-          "reuse-pronouns": {
-            "title": "Pronouns + action",
-            "bodyMarkdown": "The pronouns from Module 3 work directly with action words:\n\n- **Mwen etidye.**\n- **Ou travay.**\n- **Li manje.**\n- **Nou ale.**\n- **Yo bwè.**\n\nThis makes it easy to build many new sentences from a small vocabulary."
+          "routine-language": {
+            "title": "chak jou",
+            "bodyMarkdown": "**chak jou** means “every day.”\n\nWith routine language, the basic subject + action pattern still works:\n\n- **Jan travay chak jou.** — Jan works every day.\n- **Mari etidye chak jou.** — Mari studies every day.\n\nThe time expression tells you that this is a routine."
           }
         }
       }

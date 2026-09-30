@@ -14,6 +14,7 @@ export type ExerciseKindMix = Partial<Record<ExerciseKindKey, number>>;
 
 export type ResolvedExercisePolicy = {
     source:
+        | "topic_spec"
         | "module_spec"
         | "course_spec"
         | "blueprint_teaching_style"

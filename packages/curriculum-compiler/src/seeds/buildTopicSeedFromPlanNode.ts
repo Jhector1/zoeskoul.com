@@ -192,6 +192,7 @@ export function buildTopicSeedFromPlanNode(args: {
         blueprint: args.blueprint,
         spec: args.spec ?? null,
         moduleSlug: args.module.moduleSlug,
+    topicId: args.topic.topicId,
     });
 
     const sourceRuntimePolicy = resolveModuleRuntimePolicy({

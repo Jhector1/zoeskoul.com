@@ -1,0 +1,57 @@
+{
+  "subjectSlug": "haitian-creole",
+  "courseSlug": "haitian-creole-everyday-grammar",
+  "catalogSlug": "haitian-creole",
+  "trackSlug": "haitian-creole",
+  "profileId": "language",
+  "courseNumber": 2,
+  "title": "Haitian Creole 2: Everyday Grammar & Sentence Building",
+  "subtitle": "Extend your foundations into more precise everyday Kreyòl.",
+  "level": "beginner",
+  "moduleCount": 5,
+  "description": "An A1 continuation of Haitian Creole Foundations that adds article selection, contracted pronouns, deeper possession, expanded questions, health language, past and future time, and natural descriptions without reteaching Course 1.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who completed Haitian Creole Foundations or already control equivalent A0-to-A1 material.",
+    "Learners who want to make everyday Kreyòl sentences more precise without restarting beginner greetings, numbers, or first-conversation material."
+  ],
+  "prerequisites": [
+    "Haitian Creole Foundations or equivalent ability with greetings, introductions, basic objects and actions, core questions, beginner numbers and time, and a first everyday conversation.",
+    "Familiarity with yon, plural yo, basic possessor-after-noun phrases, Èske, Ki kote, Ki moun, Konbyen, present-progressive ap, and basic se identity statements."
+  ],
+  "goals": [
+    "Choose source-supported singular definite article forms a, la, an, lan, and nan.",
+    "Use contracted object pronouns and deeper possession patterns.",
+    "Ask for more specific information and handle simple body and health exchanges.",
+    "Talk about past and future actions with te and pral.",
+    "Describe people and things naturally with Week 7 description patterns, ye, and useful adjectives."
+  ],
+  "teachingStyle": {
+    "tone": "clear, practical, encouraging, culturally respectful",
+    "integratedSkillRhythm": [
+      "learn",
+      "listen",
+      "speak",
+      "read",
+      "build",
+      "write",
+      "use_it",
+      "review"
+    ]
+  },
+  "constraints": {
+    "moduleCount": 5,
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 8
+  },
+  "seedModules": [
+    "haitian-creole-everyday-grammar-1-definite-article-choices",
+    "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+    "haitian-creole-everyday-grammar-3-more-questions-and-health",
+    "haitian-creole-everyday-grammar-4-past-and-future",
+    "haitian-creole-everyday-grammar-5-descriptions-and-ye"
+  ]
+}

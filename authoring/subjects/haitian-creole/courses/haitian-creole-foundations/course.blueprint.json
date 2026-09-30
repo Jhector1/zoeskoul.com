@@ -42,8 +42,8 @@
   },
   "constraints": {
     "moduleCount": 8,
-    "topicsPerModuleMin": 4,
-    "topicsPerModuleMax": 4
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 8
   },
   "seedModules": [
     "haitian-creole-foundations-1-sounds-of-kreyol",

@@ -3,7 +3,7 @@ export const APP_LOCALES = ["en", "fr", "ht"] as const;
 export const APP_FONT_SIZE_OPTIONS = [14, 16, 20, 24] as const;
 
 export const APP_PREFERENCES_COOKIE_NAME = "zoeskoul.preferences";
-export const APP_PREFERENCES_COOKIE_VERSION = 1;
+export const APP_PREFERENCES_COOKIE_VERSION = 2;
 export const APP_PREFERENCES_EVENT = "zoeskoul:preferences-update";
 
 export const LEGACY_PREFERENCE_KEYS = {
@@ -22,6 +22,7 @@ export type AppPreferences = {
   theme: AppTheme;
   fontSizePx: AppFontSizePx;
   soundEnabled: boolean;
+  languageAudioAutoPlay: boolean;
 };
 
 export type AppPreferencesPatch = Partial<AppPreferences>;
@@ -37,6 +38,7 @@ export const DEFAULT_APP_PREFERENCES: Readonly<AppPreferences> = {
   theme: "system",
   fontSizePx: 16,
   soundEnabled: true,
+  languageAudioAutoPlay: false,
 };
 
 export function isAppTheme(value: unknown): value is AppTheme {
@@ -176,20 +178,32 @@ export function normalizeAppPreferences(
       typeof candidate.soundEnabled === "boolean"
         ? candidate.soundEnabled
         : fallback.soundEnabled,
+    languageAudioAutoPlay:
+      typeof candidate.languageAudioAutoPlay === "boolean"
+        ? candidate.languageAudioAutoPlay
+        : fallback.languageAudioAutoPlay,
   };
 }
 
 export function isAppPreferences(value: unknown): value is AppPreferences {
   if (typeof value !== "object" || value === null) return false;
   const candidate = value as Record<string, unknown>;
+
   return (
-    Object.keys(candidate).length === 4 &&
+    Object.keys(candidate).length === 5 &&
     Object.keys(candidate).every((key) =>
-      ["locale", "theme", "fontSizePx", "soundEnabled"].includes(key)) &&
+      [
+        "locale",
+        "theme",
+        "fontSizePx",
+        "soundEnabled",
+        "languageAudioAutoPlay",
+      ].includes(key)) &&
     isAppLocale(candidate.locale) &&
     isAppTheme(candidate.theme) &&
     isAppFontSizePx(candidate.fontSizePx) &&
-    typeof candidate.soundEnabled === "boolean"
+    typeof candidate.soundEnabled === "boolean" &&
+    typeof candidate.languageAudioAutoPlay === "boolean"
   );
 }
 
@@ -203,17 +217,25 @@ export function parseAppPreferencesPatch(
     value === null ||
     Array.isArray(value)
   ) {
-    return { success: false, error: "Preferences must be an object." };
+    return {
+      success: false,
+      error: "Preferences must be an object.",
+    };
   }
 
   const candidate = value as Record<string, unknown>;
+
   const allowed = new Set([
     "locale",
     "theme",
     "fontSizePx",
     "soundEnabled",
+    "languageAudioAutoPlay",
   ]);
-  const unknownKey = Object.keys(candidate).find((key) => !allowed.has(key));
+
+  const unknownKey = Object.keys(candidate).find(
+    (key) => !allowed.has(key),
+  );
 
   if (unknownKey) {
     return {
@@ -223,26 +245,60 @@ export function parseAppPreferencesPatch(
   }
 
   if (Object.keys(candidate).length === 0) {
-    return { success: false, error: "At least one preference is required." };
+    return {
+      success: false,
+      error: "At least one preference is required.",
+    };
   }
 
-  if ("locale" in candidate && !isAppLocale(candidate.locale)) {
-    return { success: false, error: "Invalid locale." };
+  if (
+    "locale" in candidate &&
+    !isAppLocale(candidate.locale)
+  ) {
+    return {
+      success: false,
+      error: "Invalid locale.",
+    };
   }
-  if ("theme" in candidate && !isAppTheme(candidate.theme)) {
-    return { success: false, error: "Invalid theme." };
+
+  if (
+    "theme" in candidate &&
+    !isAppTheme(candidate.theme)
+  ) {
+    return {
+      success: false,
+      error: "Invalid theme.",
+    };
   }
+
   if (
     "fontSizePx" in candidate &&
     !isAppFontSizePx(candidate.fontSizePx)
   ) {
-    return { success: false, error: "Invalid font size." };
+    return {
+      success: false,
+      error: "Invalid font size.",
+    };
   }
+
   if (
     "soundEnabled" in candidate &&
     typeof candidate.soundEnabled !== "boolean"
   ) {
-    return { success: false, error: "Invalid sound preference." };
+    return {
+      success: false,
+      error: "Invalid sound preference.",
+    };
+  }
+
+  if (
+    "languageAudioAutoPlay" in candidate &&
+    typeof candidate.languageAudioAutoPlay !== "boolean"
+  ) {
+    return {
+      success: false,
+      error: "Invalid language audio auto-listen preference.",
+    };
   }
 
   return {
@@ -259,7 +315,9 @@ export function preferencesEqual(
     left.locale === right.locale &&
     left.theme === right.theme &&
     left.fontSizePx === right.fontSizePx &&
-    left.soundEnabled === right.soundEnabled
+    left.soundEnabled === right.soundEnabled &&
+    left.languageAudioAutoPlay ===
+      right.languageAudioAutoPlay
   );
 }
 
@@ -284,6 +342,7 @@ export function serializePreferencesCookieValue(
     THEME_CODES[preferences.theme],
     preferences.fontSizePx,
     preferences.soundEnabled ? "1" : "0",
+    preferences.languageAudioAutoPlay ? "1" : "0",
   ].join(".");
 }
 
@@ -291,32 +350,65 @@ export function parsePreferencesCookieValue(
   value: string | null | undefined,
 ): AppPreferences | null {
   if (!value) return null;
+
   let decoded: string;
+
   try {
     decoded = decodeURIComponent(value);
   } catch {
     return null;
   }
-  const [version, locale, themeCode, fontSize, sound, ...rest] =
-    decoded.split(".");
 
-  if (
-    rest.length > 0 ||
-    version !== `v${APP_PREFERENCES_COOKIE_VERSION}`
+  const parts = decoded.split(".");
+  const version = parts[0];
+
+  let locale: string | undefined;
+  let themeCode: string | undefined;
+  let fontSize: string | undefined;
+  let sound: string | undefined;
+  let languageAudioAutoPlay = "0";
+
+  if (version === "v1" && parts.length === 5) {
+    [, locale, themeCode, fontSize, sound] = parts;
+  } else if (
+    version === `v${APP_PREFERENCES_COOKIE_VERSION}` &&
+    parts.length === 6
   ) {
+    [
+      ,
+      locale,
+      themeCode,
+      fontSize,
+      sound,
+      languageAudioAutoPlay,
+    ] = parts;
+  } else {
     return null;
   }
 
   const theme = THEMES_BY_CODE[themeCode ?? ""];
   const parsedFontSize = Number(fontSize);
+
   const parsedSound =
-    sound === "1" ? true : sound === "0" ? false : null;
+    sound === "1"
+      ? true
+      : sound === "0"
+        ? false
+        : null;
+
+  const parsedLanguageAudioAutoPlay =
+    languageAudioAutoPlay === "1"
+      ? true
+      : languageAudioAutoPlay === "0"
+        ? false
+        : null;
 
   if (
     !isAppLocale(locale) ||
     !theme ||
     !isAppFontSizePx(parsedFontSize) ||
-    parsedSound === null
+    parsedSound === null ||
+    parsedLanguageAudioAutoPlay === null
   ) {
     return null;
   }
@@ -326,6 +418,8 @@ export function parsePreferencesCookieValue(
     theme,
     fontSizePx: parsedFontSize,
     soundEnabled: parsedSound,
+    languageAudioAutoPlay:
+      parsedLanguageAudioAutoPlay,
   };
 }
 

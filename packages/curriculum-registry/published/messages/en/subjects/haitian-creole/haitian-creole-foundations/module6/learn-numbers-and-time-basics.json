@@ -3,14 +3,14 @@
     "haitian-creole-foundations": {
       "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
         "learn-numbers-and-time-basics": {
-          "label": "Learn Numbers and Time Basics",
-          "summary": "Learn and recognize the Kreyòl numbers from one through twenty in useful spoken and written forms.",
+          "label": "Numbers and Quantities",
+          "summary": "Recognize numbers one through twenty and use them with familiar everyday objects.",
           "cards": {
             "sketch0": {
-              "title": "Numbers 1–10"
+              "title": "Start With 1–10"
             },
             "sketch1": {
-              "title": "Numbers 11–20"
+              "title": "Continue to 20"
             },
             "sketch2": {
               "title": "Use Numbers With Things"
@@ -22,153 +22,126 @@
           "tryIt": {
             "allowReveal": true,
             "try_learn_numbers_and_time_basics_sketch0": {
-              "title": "Try it yourself: Recognize eight",
-              "prompt": "Right after the sketch \"youn, de, twa…\", practice that exact idea with this task. Which number word in the lesson is **8**? Produce the result for recognize eight so it reinforces Learn Numbers and Time Basics."
+              "title": "Try it yourself: Hear a number with an object",
+              "prompt": "Right after the sketch \"youn, de, twa…\", practice that exact idea with this task. Listen and rebuild “six books.”. Produce the result for hear a number with an object so it reinforces Numbers and Quantities."
             },
             "try_learn_numbers_and_time_basics_sketch1": {
-              "title": "Try it yourself: Recognize eighteen",
-              "prompt": "Right after the sketch \"onz through ven\", practice that exact idea with this task. Which number word in the lesson is **18**? Produce the result for recognize eighteen so it reinforces Learn Numbers and Time Basics."
+              "title": "Try it yourself: Use a teen number",
+              "prompt": "Right after the sketch \"onz through ven\", practice that exact idea with this task. Say “twelve notebooks.”. Produce the result for use a teen number so it reinforces Numbers and Quantities."
             },
             "try_learn_numbers_and_time_basics_sketch2": {
-              "title": "Try it yourself: Build another quantity phrase",
-              "prompt": "Right after the sketch \"de liv, twa valiz\", practice that exact idea with this task. Arrange the Kreyòl phrase for “two notebooks.”. Produce the result for build another quantity phrase so it reinforces Learn Numbers and Time Basics."
+              "title": "Try it yourself: Build another quantity",
+              "prompt": "Right after the sketch \"number + noun\", practice that exact idea with this task. Build “four books.”. Produce the result for build another quantity so it reinforces Numbers and Quantities."
             }
           },
           "practice": {
-            "learn-numbers-and-time-basics-choice": {
-              "title": "Choose five",
-              "prompt": "Which Kreyòl number means “five”?",
-              "hint": "Choose the number word from the first group.",
+            "numbers-choice": {
+              "title": "Choose twelve",
+              "prompt": "Which Kreyòl number means twelve?",
+              "hint": "Listen for the number after onz.",
               "help": {
-                "concept": "The lesson introduces the basic number sequence from one to ten.",
+                "concept": "recognizing numbers one through twenty",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
               "options": {
-                "a": "senk",
-                "b": "sèt",
-                "c": "nèf"
+                "a": "douz",
+                "b": "dis",
+                "c": "ven"
               }
             },
-            "learn-numbers-and-time-basics-fill": {
-              "title": "Complete the number phrase",
-              "prompt": "Choose the number that completes “three books.”",
-              "hint": "Use the number represented by 3.",
+            "numbers-listen": {
+              "title": "Hear another quantity",
+              "prompt": "Listen and rebuild the phrase.",
+              "hint": "The speaker says eight bags.",
               "help": {
-                "concept": "The blank needs the number word that comes before the noun.",
+                "concept": "hearing a number with a familiar noun",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "template": "[blank1] liv",
-              "choices": [
-                "twa",
-                "de",
-                "kat"
-              ]
-            },
-            "learn-numbers-and-time-basics-listen": {
-              "title": "Hear a number",
-              "prompt": "Listen, then build the number phrase you hear.",
-              "hint": "Listen for the number and the noun.",
-              "help": {
-                "concept": "Build the short quantity phrase in spoken order.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "de valiz",
+              "targetText": "wit valiz",
               "wordBank": [
-                "de",
+                "wit",
                 "valiz"
-              ],
-              "distractors": [
-                "twa"
               ]
             },
-            "learn-numbers-and-time-basics-voice": {
-              "title": "Say a number",
-              "prompt": "Say: ven.",
-              "hint": "Say the Kreyòl number shown.",
+            "numbers-build": {
+              "title": "Build another quantity",
+              "prompt": "Build “seven notebooks.”",
+              "hint": "Number first.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored number word.",
+                "concept": "building a quantity phrase",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "targetText": "ven"
-            },
-            "learn-numbers-and-time-basics-build": {
-              "title": "Build “five notebooks”",
-              "prompt": "Arrange the words to say “five notebooks.”",
-              "hint": "Put the number before the noun.",
-              "help": {
-                "concept": "A quantity phrase places the number before the thing being counted.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "senk kaye",
+              "targetText": "sèt kaye",
               "wordBank": [
-                "senk",
+                "sèt",
                 "kaye"
-              ],
-              "distractors": [
-                "sèt"
-              ],
-              "ttsText": "senk kaye"
+              ]
             },
-            "learn-numbers-and-time-basics-write": {
-              "title": "Write eight",
-              "prompt": "Type the Kreyòl number word for 8.",
-              "hint": "Use the number sequence from the lesson.",
+            "numbers-voice": {
+              "title": "Say another number",
+              "prompt": "Say “eighteen.”",
+              "hint": "Use the number from the 11–20 group.",
               "help": {
-                "concept": "Write the number word with its Kreyòl spelling.",
+                "concept": "producing a number from eleven through twenty",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "expectedText": "wit",
-              "placeholder": "Type the Kreyòl answer"
+              "targetText": "dizwit"
             },
-            "try-one-ten-eight": {
-              "title": "Recognize eight",
-              "prompt": "Which number word in the lesson is **8**?",
-              "hint": "Choose the option that correctly applies the pattern.",
+            "numbers-write": {
+              "title": "Write another number",
+              "prompt": "Write “fourteen” in Kreyòl.",
+              "hint": "It is between trèz and kenz.",
               "help": {
-                "concept": "numbers 1–10",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "writing a number from eleven through twenty",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "options": {
-                "a": "wit",
-                "b": "sèt",
-                "c": "nèf"
-              }
+              "expectedText": "katòz",
+              "placeholder": "Type the Kreyòl number"
             },
-            "try-eleven-twenty-eighteen": {
-              "title": "Recognize eighteen",
-              "prompt": "Which number word in the lesson is **18**?",
-              "hint": "Choose the option that correctly applies the pattern.",
+            "try-small-quantity-transfer": {
+              "title": "Hear a number with an object",
+              "prompt": "Listen and rebuild “six books.”",
+              "hint": "The number comes before liv.",
               "help": {
-                "concept": "numbers 11–20",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "hearing a number-plus-noun phrase",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "options": {
-                "a": "dizwit",
-                "b": "disèt",
-                "c": "diznèf"
-              }
-            },
-            "try-use-numbers-notebooks": {
-              "title": "Build another quantity phrase",
-              "prompt": "Arrange the Kreyòl phrase for “two notebooks.”",
-              "hint": "Put the number before the noun.",
-              "help": {
-                "concept": "number + noun",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "de kaye",
+              "targetText": "sis liv",
               "wordBank": [
-                "de",
-                "kaye"
+                "sis",
+                "liv"
+              ]
+            },
+            "try-large-quantity-transfer": {
+              "title": "Use a teen number",
+              "prompt": "Say “twelve notebooks.”",
+              "hint": "Put douz before kaye.",
+              "help": {
+                "concept": "using a number from eleven through twenty",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "targetText": "douz kaye"
+            },
+            "try-quantity-new-combination": {
+              "title": "Build another quantity",
+              "prompt": "Build “four books.”",
+              "hint": "Put kat before liv.",
+              "help": {
+                "concept": "building a new number-plus-noun phrase",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "targetText": "kat liv",
+              "wordBank": [
+                "kat",
+                "liv"
               ]
             }
           }
@@ -182,15 +155,15 @@
         "learn-numbers-and-time-basics": {
           "one-ten": {
             "title": "youn, de, twa…",
-            "bodyMarkdown": "Start with the first ten numbers:\n\n1 **youn** · 2 **de** · 3 **twa** · 4 **kat** · 5 **senk**\n\n6 **sis** · 7 **sèt** · 8 **wit** · 9 **nèf** · 10 **dis**\n\nSay them aloud in small groups rather than trying to memorize the whole list at once."
+            "bodyMarkdown": "Start with the first ten numbers:\n\n1 **youn** · 2 **de** · 3 **twa** · 4 **kat** · 5 **senk**\n\n6 **sis** · 7 **sèt** · 8 **wit** · 9 **nèf** · 10 **dis**\n\nHear them in small groups and reuse them with words you already know."
           },
           "eleven-twenty": {
             "title": "onz through ven",
-            "bodyMarkdown": "Continue from eleven to twenty:\n\n11 **onz** · 12 **douz** · 13 **trèz** · 14 **katòz** · 15 **kenz**\n\n16 **sèz** · 17 **disèt** · 18 **dizwit** · 19 **diznèf** · 20 **ven**."
+            "bodyMarkdown": "Continue from eleven to twenty:\n\n11 **onz** · 12 **douz** · 13 **trèz** · 14 **katòz** · 15 **kenz**\n\n16 **sèz** · 17 **disèt** · 18 **dizwit** · 19 **diznèf** · 20 **ven**\n\nFocus on recognizing and saying the numbers naturally; you are not doing arithmetic."
           },
-          "use-numbers": {
-            "title": "de liv, twa valiz",
-            "bodyMarkdown": "Numbers can go directly before a noun:\n\n- **de liv** — two books\n- **twa valiz** — three bags\n- **senk kaye** — five notebooks\n\nThis prepares you for quantities, time, prices, and everyday counting."
+          "number-plus-noun": {
+            "title": "number + noun",
+            "bodyMarkdown": "Numbers can go directly before a noun:\n\n- **de liv** — two books\n- **twa valiz** — three bags\n- **senk kaye** — five notebooks\n\nThis connects the numbers to useful everyday quantities."
           }
         }
       }

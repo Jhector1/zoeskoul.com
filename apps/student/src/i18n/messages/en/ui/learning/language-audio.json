@@ -1,0 +1,11 @@
+{
+  "languageAudio": {
+    "listen": "Listen",
+    "playConversation": "Play conversation",
+    "stop": "Stop",
+    "replayLine": "Replay line",
+    "speaking": "Speaking…",
+    "unavailable": "Audio unavailable.",
+    "autoListen": "Auto-listen"
+  }
+}

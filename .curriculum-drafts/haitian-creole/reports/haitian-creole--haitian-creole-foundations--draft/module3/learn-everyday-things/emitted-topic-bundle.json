@@ -2,9 +2,9 @@
   "topicId": "learn-everyday-things",
   "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
   "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
-  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht4-learn-listen-speak",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession",
   "prefix": "ht4",
-  "minutes": 24,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -23,18 +23,18 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.cards.sketch0.title",
-      "sketchId": "yon",
+      "sketchId": "one-thing",
       "height": 420,
       "tryIt": {
         "id": "try-learn-everyday-things-sketch0",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch0.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch0.prompt",
-        "exerciseKey": "try-yon-liv",
+        "exerciseKey": "try-yon-valiz",
         "exerciseKeys": [
-          "try-yon-liv"
+          "try-yon-valiz"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "voice_input",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -45,18 +45,18 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.cards.sketch1.title",
-      "sketchId": "definite-after",
+      "sketchId": "the-thing",
       "height": 420,
       "tryIt": {
         "id": "try-learn-everyday-things-sketch1",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch1.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch1.prompt",
-        "exerciseKey": "try-definite-after-chat",
+        "exerciseKey": "try-biwo-a",
         "exerciseKeys": [
-          "try-definite-after-chat"
+          "try-biwo-a"
         ],
         "difficulty": "easy",
-        "preferKind": "single_choice",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -67,18 +67,18 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.cards.sketch2.title",
-      "sketchId": "contrast",
+      "sketchId": "more-than-one",
       "height": 420,
       "tryIt": {
         "id": "try-learn-everyday-things-sketch2",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch2.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch2.prompt",
-        "exerciseKey": "try-contrast-the-book",
+        "exerciseKey": "try-telefon-yo",
         "exerciseKeys": [
-          "try-contrast-the-book"
+          "try-telefon-yo"
         ],
         "difficulty": "easy",
-        "preferKind": "single_choice",
+        "preferKind": "word_bank_arrange",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -103,31 +103,196 @@
   ],
   "sketches": [
     {
-      "id": "yon",
+      "id": "one-thing",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.yon.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.yon.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.one-thing.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.one-thing.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "yon",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "means “a” or “an” and comes before the noun.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "yon liv",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "a book",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "yon kaye",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "a notebook",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "yon telefòn",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "a phone",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "For now, focus on using the whole noun phrase naturally.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "definite-after",
+      "id": "the-thing",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.definite-after.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.definite-after.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.the-thing.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.the-thing.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "In Kreyòl, the definite marker comes",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "after",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the noun.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Here are a few examples:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "liv la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the book",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "kaye a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the notebook",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "telefòn nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the phone",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You do not need to learn the full article-selection rule yet. Read and say these noun phrases as complete chunks.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "contrast",
+      "id": "more-than-one",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.contrast.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.contrast.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.more-than-one.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.more-than-one.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "For plural definite noun phrases, use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "after the noun.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "liv yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the books",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "kaye yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the notebooks",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The same",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "works across these plural noun phrases.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "learn-everyday-things-choice",
+      "id": "things-yon-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-choice",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.things-yon-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,158 +304,103 @@
       }
     },
     {
-      "id": "learn-everyday-things-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "yon"
-      }
-    },
-    {
-      "id": "learn-everyday-things-listen",
+      "id": "things-definite-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-listen",
-      "targetText": "liv la",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.things-definite-listen",
+      "targetText": "Valiz la.",
       "locale": "ht-HT",
       "wordBank": [
-        "liv",
-        "la"
-      ],
-      "distractors": [
-        "yon"
+        "Valiz",
+        "la."
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "liv la",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-everyday-things-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-voice",
-      "targetText": "yon machin",
-      "locale": "ht-HT",
-      "maxSeconds": 10,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "yon machin",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-everyday-things-build",
-      "kind": "word_bank_arrange",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-build",
-      "targetText": "chat la",
-      "locale": "ht-HT",
-      "wordBank": [
-        "chat",
-        "la"
-      ],
-      "distractors": [
-        "yon"
-      ],
-      "ttsText": "chat la",
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "chat la",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-everyday-things-write",
-      "kind": "text_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "yon liv",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-yon-liv",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-yon-liv",
-      "targetText": "yon chen",
-      "locale": "ht-HT",
-      "wordBank": [
-        "yon",
-        "chen"
-      ],
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "yon chen",
+        "targetText": "Valiz la.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-definite-after-chat",
-      "kind": "single_choice",
-      "purpose": "project",
+      "id": "things-plural-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-definite-after-chat",
-      "optionIds": [
-        "a",
-        "b",
-        "c"
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.things-plural-build",
+      "targetText": "Liv yo.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Liv",
+        "yo."
       ],
       "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
+        "kind": "word_bank_arrange",
+        "targetText": "Liv yo.",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "try-contrast-the-book",
-      "kind": "single_choice",
+      "id": "things-yon-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.things-yon-voice",
+      "targetText": "Yon kaye.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Yon kaye.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-yon-valiz",
+      "kind": "voice_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-contrast-the-book",
-      "optionIds": [
-        "a",
-        "b"
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-yon-valiz",
+      "targetText": "Yon valiz.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Yon valiz.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-biwo-a",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-biwo-a",
+      "targetText": "Biwo a.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Biwo",
+        "a."
       ],
       "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
+        "kind": "listen_build",
+        "targetText": "Biwo a.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-telefon-yo",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-telefon-yo",
+      "targetText": "Telefòn yo.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Telefòn",
+        "yo."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Telefòn yo.",
+        "locale": "ht-HT"
       }
     }
   ]

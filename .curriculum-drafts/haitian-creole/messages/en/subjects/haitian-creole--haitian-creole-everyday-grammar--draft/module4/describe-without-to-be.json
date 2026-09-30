@@ -1,0 +1,219 @@
+{
+  "topics": {
+    "haitian-creole--haitian-creole-everyday-grammar--draft": {
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "describe-without-to-be": {
+          "label": "Describe Without an Expressed to be",
+          "summary": "Use state descriptions where English uses is or are but Kreyòl does not express a separate to-be word.",
+          "cards": {
+            "sketch0": {
+              "title": "Describe a State Directly"
+            },
+            "sketch1": {
+              "title": "Describe Yourself or a Group"
+            },
+            "sketch2": {
+              "title": "Describe How They Feel"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_describe_without_to_be_sketch0": {
+              "title": "Try it yourself: Recognize The pattern",
+              "prompt": "Right after the sketch \"Li malad / Li okipe\", practice that exact idea with this task. Which sentence means “He is sick”? Produce the result for recognize The pattern so it reinforces Describe Without an Expressed to be."
+            },
+            "try_describe_without_to_be_sketch1": {
+              "title": "Try it yourself: Hear the thirsty sentence",
+              "prompt": "Right after the sketch \"M fatige / Nou swaf\", practice that exact idea with this task. Listen and rebuild the sentence. Produce the result for hear the thirsty sentence so it reinforces Describe Without an Expressed to be."
+            },
+            "try_describe_without_to_be_sketch2": {
+              "title": "Try it yourself: Build the hungry sentence",
+              "prompt": "Right after the sketch \"Yo fache / Yo grangou\", practice that exact idea with this task. Arrange the sentence for “They are hungry.”. Produce the result for build the hungry sentence so it reinforces Describe Without an Expressed to be."
+            }
+          },
+          "practice": {
+            "state-quiz-malad-choice": {
+              "title": "Recognize Li malad",
+              "prompt": "Which sentence means “He is sick”?",
+              "hint": "Choose the sentence with malad.",
+              "help": {
+                "concept": "The state follows Li directly.",
+                "hint_1": "Use the wording.",
+                "hint_2": "Do not insert an extra word."
+              },
+              "options": {
+                "a": "Li malad.",
+                "b": "Li okipe.",
+                "c": "Li mouri."
+              }
+            },
+            "state-quiz-pare-choice": {
+              "title": "Recognize Nou pare",
+              "prompt": "Which question means “Are you ready?”",
+              "hint": "Choose the question with pare.",
+              "help": {
+                "concept": "The question asks the state question without inserting se.",
+                "hint_1": "It begins with Nou.",
+                "hint_2": "It ends with pare?"
+              },
+              "options": {
+                "a": "Nou pare?",
+                "b": "Nou swaf.",
+                "c": "M fatige."
+              }
+            },
+            "state-quiz-fatige-listen": {
+              "title": "Hear M fatige",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Listen for M followed by fatige.",
+              "help": {
+                "concept": "Recognize the complete state sentence.",
+                "hint_1": "The subject is M.",
+                "hint_2": "The state is fatige."
+              },
+              "targetText": "M fatige."
+            },
+            "state-quiz-grangou-listen": {
+              "title": "Hear Yo grangou",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Listen for Yo first.",
+              "help": {
+                "concept": "Recognize another state description.",
+                "hint_1": "Begin with Yo.",
+                "hint_2": "Finish with grangou."
+              },
+              "targetText": "Yo grangou."
+            },
+            "state-quiz-okipe-voice": {
+              "title": "Say Li okipe",
+              "prompt": "Say the sentence for “He is busy.”",
+              "hint": "Use Li followed directly by okipe.",
+              "help": {
+                "concept": "Produce the state description.",
+                "hint_1": "Begin with Li.",
+                "hint_2": "Finish with okipe."
+              },
+              "targetText": "Li okipe."
+            },
+            "state-quiz-fache-voice": {
+              "title": "Say Yo fache",
+              "prompt": "Say the sentence for “They are angry.”",
+              "hint": "Use Yo followed by fache.",
+              "help": {
+                "concept": "Produce the description directly.",
+                "hint_1": "Begin with Yo.",
+                "hint_2": "Finish with fache."
+              },
+              "targetText": "Yo fache."
+            },
+            "state-quiz-swaf-build": {
+              "title": "Build Nou swaf",
+              "prompt": "Arrange the sentence for “We are thirsty.”",
+              "hint": "Put Nou before swaf.",
+              "help": {
+                "concept": "Build the state description without inserting se.",
+                "hint_1": "Start with Nou.",
+                "hint_2": "Then use swaf."
+              },
+              "targetText": "Nou swaf.",
+              "wordBank": [
+                "Nou",
+                "swaf."
+              ]
+            },
+            "state-quiz-prese-build": {
+              "title": "Build Li prese",
+              "prompt": "Arrange the sentence for “She is in a hurry.”",
+              "hint": "Put Li before prese.",
+              "help": {
+                "concept": "Build another direct state description.",
+                "hint_1": "Start with Li.",
+                "hint_2": "Finish with prese."
+              },
+              "targetText": "Li prese.",
+              "wordBank": [
+                "Li",
+                "prese."
+              ]
+            },
+            "try-li-state-choice": {
+              "title": "Recognize The pattern",
+              "prompt": "Which sentence means “He is sick”?",
+              "hint": "Choose the sentence with malad.",
+              "help": {
+                "concept": "In this description pattern, the state follows the subject directly.",
+                "hint_1": "The subject is Li.",
+                "hint_2": "The describing word is malad."
+              },
+              "options": {
+                "a": "Li malad.",
+                "b": "Li okipe.",
+                "c": "Li prese."
+              }
+            },
+            "try-nou-swaf-listen": {
+              "title": "Hear the thirsty sentence",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Listen for Nou followed directly by swaf.",
+              "help": {
+                "concept": "The state description does not insert se between the subject and swaf.",
+                "hint_1": "Begin with Nou.",
+                "hint_2": "Finish with swaf."
+              },
+              "targetText": "Nou swaf."
+            },
+            "try-m-fatige-voice": {
+              "title": "Say that you are tired",
+              "prompt": "Say the sentence for “I’m tired.”",
+              "hint": "Use M followed directly by fatige.",
+              "help": {
+                "concept": "Produce the state description.",
+                "hint_1": "Start with M.",
+                "hint_2": "Finish with fatige."
+              },
+              "targetText": "M fatige."
+            },
+            "try-yo-grangou-build": {
+              "title": "Build the hungry sentence",
+              "prompt": "Arrange the sentence for “They are hungry.”",
+              "hint": "Put the subject before grangou.",
+              "help": {
+                "concept": "Build the state description directly.",
+                "hint_1": "Start with Yo.",
+                "hint_2": "Then use grangou."
+              },
+              "targetText": "Yo grangou.",
+              "wordBank": [
+                "Yo",
+                "grangou."
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole--haitian-creole-everyday-grammar--draft": {
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "describe-without-to-be": {
+          "states-with-li": {
+            "title": "Li malad / Li okipe",
+            "bodyMarkdown": "With many states and descriptions, Kreyòl does not use a separate equivalent of English **to be**.\n\nFor example:\n\n- **Li malad.** — He is sick.\n- **Li mouri.** — She is dead.\n- **Li okipe.** — He is busy.\n- **Li prese.** — She is in a hurry.\n\nNotice the pattern: the subject is followed directly by the state description."
+          },
+          "states-with-m-and-nou": {
+            "title": "M fatige / Nou swaf",
+            "bodyMarkdown": "Here are a few more examples:\n\n- **M fatige.** — I’m tired.\n- **M sezi.** — I’m surprised.\n- **Nou pare?** — Are you ready?\n- **Nou swaf.** — We are thirsty.\n\nThese examples keep the same idea: the state follows the subject without adding a separate English-style **is / am / are** word."
+          },
+          "states-with-yo": {
+            "title": "Yo fache / Yo grangou",
+            "bodyMarkdown": "Here are two more state descriptions:\n\n- **Yo fache.** — They are angry.\n- **Yo grangou.** — They are hungry.\n\nAgain, the description comes directly after **Yo**."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "topics": {
+    "haitian-creole--haitian-creole-everyday-grammar--draft": {
+      "haitian-creole-everyday-grammar-3-more-questions-and-health": {
+        "ask-for-more-specific-information": {
+          "label": "Ask for More Specific Information",
+          "summary": "Use the question forms Kilès, Kilè, and Poukisa to ask which, when, and why.",
+          "cards": {
+            "sketch0": {
+              "title": "Ask Which One"
+            },
+            "sketch1": {
+              "title": "Ask When"
+            },
+            "sketch2": {
+              "title": "Ask Why"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_ask_for_more_specific_information_sketch0": {
+              "title": "Try it yourself: Choose the question form",
+              "prompt": "Right after the sketch \"Kilès?\", practice that exact idea with this task. Which form asks “which one?”. Produce the result for choose the question form so it reinforces Ask for More Specific Information."
+            },
+            "try_ask_for_more_specific_information_sketch1": {
+              "title": "Try it yourself: Complete the when question",
+              "prompt": "Right after the sketch \"Kilè?\", practice that exact idea with this task. Choose The question form that completes the example. Produce the result for complete the when question so it reinforces Ask for More Specific Information."
+            },
+            "try_ask_for_more_specific_information_sketch2": {
+              "title": "Try it yourself: Ask why",
+              "prompt": "Right after the sketch \"Poukisa?\", practice that exact idea with this task. Say the question “Why are you crying?” in Kreyòl. Produce the result for ask why so it reinforces Ask for More Specific Information."
+            }
+          },
+          "practice": {
+            "specific-info-kiles-choice": {
+              "title": "Ask which one",
+              "prompt": "Which form asks a person to choose one from a group?",
+              "hint": "Think about the kind of information being requested.",
+              "help": {
+                "concept": "The target form asks for a selection among alternatives.",
+                "hint_1": "Eliminate the forms that ask about time or reason.",
+                "hint_2": "Choose the remaining selection question."
+              },
+              "options": {
+                "a": "Kilès",
+                "b": "Kilè",
+                "c": "Poukisa"
+              }
+            },
+            "specific-info-poukisa-choice": {
+              "title": "Ask for a reason",
+              "prompt": "Which form asks for a reason?",
+              "hint": "Think about what kind of answer would follow.",
+              "help": {
+                "concept": "A reason question expects an explanation of why something happens.",
+                "hint_1": "Do not choose the form for selecting one item.",
+                "hint_2": "Do not choose the form for asking when."
+              },
+              "options": {
+                "a": "Poukisa",
+                "b": "Kilès",
+                "c": "Kilè"
+              }
+            },
+            "specific-info-kiles-fill": {
+              "title": "Complete the which question",
+              "prompt": "Complete The question.",
+              "hint": "The sentence asks which one of a group.",
+              "help": {
+                "concept": "The blank requests a selection.",
+                "hint_1": "Compare the three new information goals.",
+                "hint_2": "Choose the form for which."
+              },
+              "template": "___ ladan yo?",
+              "choices": [
+                "Kilès",
+                "Kilè",
+                "Poukisa"
+              ]
+            },
+            "specific-info-kile-fill": {
+              "title": "Complete the when question",
+              "prompt": "Complete The question.",
+              "hint": "The question asks about when someone will go.",
+              "help": {
+                "concept": "The blank requests time information.",
+                "hint_1": "Compare the new question forms by meaning.",
+                "hint_2": "Choose the form associated with when."
+              },
+              "template": "___ ou prale?",
+              "choices": [
+                "Kilè",
+                "Kilès",
+                "Poukisa"
+              ]
+            },
+            "specific-info-kile-voice": {
+              "title": "Ask when",
+              "prompt": "Say the question “When will you go?” in Kreyòl.",
+              "hint": "Use the complete question from the lesson.",
+              "help": {
+                "concept": "This speaking task practices the new when-question as a complete expression.",
+                "hint_1": "Begin with the new form for when.",
+                "hint_2": "Then use the phrase ou prale."
+              },
+              "targetText": "Kilè ou prale?"
+            },
+            "specific-info-poukisa-voice": {
+              "title": "Ask why",
+              "prompt": "Say the question “Why are you crying?” in Kreyòl.",
+              "hint": "Use the complete question from the lesson.",
+              "help": {
+                "concept": "This speaking task practices a reason question as a complete expression.",
+                "hint_1": "Begin with the new form for why.",
+                "hint_2": "Then use the phrase ou ap kriye."
+              },
+              "targetText": "Poukisa ou ap kriye?"
+            },
+            "try-kiles-choice": {
+              "title": "Choose the question form",
+              "prompt": "Which form asks “which one?”",
+              "hint": "Compare the information requested by each form.",
+              "help": {
+                "concept": "One form asks a learner to select one from a group.",
+                "hint_1": "Look for the form associated with choosing among alternatives.",
+                "hint_2": "Do not choose the form for time or reason."
+              },
+              "options": {
+                "a": "Kilès",
+                "b": "Kilè",
+                "c": "Poukisa"
+              }
+            },
+            "try-kile-fill": {
+              "title": "Complete the when question",
+              "prompt": "Choose The question form that completes the example.",
+              "hint": "The missing word asks for when something will happen.",
+              "help": {
+                "concept": "Choose the form that requests time information rather than a reason or a choice.",
+                "hint_1": "Read the rest of the sentence before selecting the question word.",
+                "hint_2": "The answer would tell when the person will go."
+              },
+              "template": "___ ou prale?",
+              "choices": [
+                "Kilè",
+                "Kilès",
+                "Poukisa"
+              ]
+            },
+            "try-poukisa-voice": {
+              "title": "Ask why",
+              "prompt": "Say the question “Why are you crying?” in Kreyòl.",
+              "hint": "Use the complete question from this card.",
+              "help": {
+                "concept": "This question requests a reason.",
+                "hint_1": "Begin with The form for why.",
+                "hint_2": "Then keep the current-action phrase intact."
+              },
+              "targetText": "Poukisa ou ap kriye?"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole--haitian-creole-everyday-grammar--draft": {
+      "haitian-creole-everyday-grammar-3-more-questions-and-health": {
+        "ask-for-more-specific-information": {
+          "kiles-which": {
+            "title": "Kilès?",
+            "bodyMarkdown": "Use **Kilès?** to ask **which?**\n\nFor example:\n\n**Kilès ladan yo?** — Which one of them?\n\nFocus on **Kilès** as the new question for choosing one from a group."
+          },
+          "kile-when": {
+            "title": "Kilè?",
+            "bodyMarkdown": "Use **Kilè?** to ask **when?**\n\nFor example:\n\n**Kilè ou prale?** — When will you go?\n\nUse this question when you want to ask when something will happen."
+          },
+          "poukisa-why": {
+            "title": "Poukisa?",
+            "bodyMarkdown": "Use **Poukisa?** to ask **why?**\n\nFor example:\n\n**Poukisa ou ap kriye?** — Why are you crying?\n\nThe reading section later uses the same form:\n\n**Poukisa Kintola pa ale lekòl jodia?**\n\nThis topic focuses on the new information questions that extend what you learned in Course 1."
+          }
+        }
+      }
+    }
+  }
+}

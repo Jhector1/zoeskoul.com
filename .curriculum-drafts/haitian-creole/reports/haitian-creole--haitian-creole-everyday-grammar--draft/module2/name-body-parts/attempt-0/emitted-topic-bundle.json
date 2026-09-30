@@ -1,0 +1,459 @@
+{
+  "topicId": "name-body-parts",
+  "subjectSlug": "haitian-creole--haitian-creole-everyday-grammar--draft",
+  "moduleSlug": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+  "sectionSlug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health",
+  "prefix": "ht2m3",
+  "minutes": 22,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.label",
+    "summaryKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.cards.sketch0.title",
+      "sketchId": "head-and-face",
+      "height": 420,
+      "tryIt": {
+        "id": "try-name-body-parts-sketch0",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch0.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch0.prompt",
+        "exerciseKey": "try-zorey-choice",
+        "exerciseKeys": [
+          "try-zorey-choice"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.cards.sketch1.title",
+      "sketchId": "upper-body",
+      "height": 420,
+      "tryIt": {
+        "id": "try-name-body-parts-sketch1",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch1.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch1.prompt",
+        "exerciseKey": "try-upper-body-listen",
+        "exerciseKeys": [
+          "try-upper-body-listen"
+        ],
+        "difficulty": "easy",
+        "preferKind": "listen_build",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.cards.sketch2.title",
+      "sketchId": "abdomen-and-foot",
+      "height": 420,
+      "tryIt": {
+        "id": "try-name-body-parts-sketch2",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch2.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch2.prompt",
+        "exerciseKey": "try-body-voice",
+        "exerciseKeys": [
+          "try-body-voice"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "head-and-face",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.head-and-face.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.head-and-face.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Start with these body-part words",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Tèt",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Head",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Je",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Eye",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Zòrèy",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Ear",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Nen",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Nose",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Bouch",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Mouth",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Learn each Kreyòl word with its English meaning",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "upper-body",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.upper-body.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.upper-body.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Add these body-part words",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Kou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Neck",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "zepòl",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Shoulder",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Lestomak",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Chest",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Bra",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Arm",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Men",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Hand",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "In this course, learn",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Lestomak",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Chest",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "abdomen-and-foot",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.abdomen-and-foot.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.abdomen-and-foot.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Finish with these two body-part words",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "vant",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Abdomen",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Pye",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Foot",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Together with the earlier cards, these complete the 12 body-part words in this lesson",
+            "locale": "en-US"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "body-parts-eye-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-eye-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "body-parts-shoulder-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-shoulder-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "body-parts-face-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-face-listen",
+      "targetText": "Je Zòrèy Nen Bouch",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Je Zòrèy Nen Bouch",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "body-parts-lower-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-lower-listen",
+      "targetText": "vant Pye",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "vant Pye",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "body-parts-upper-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-upper-voice",
+      "targetText": "Kou zepòl Bra",
+      "locale": "ht-HT",
+      "maxSeconds": 12,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Kou zepòl Bra",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "body-parts-head-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-head-voice",
+      "targetText": "Tèt Bouch",
+      "locale": "ht-HT",
+      "maxSeconds": 10,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Tèt Bouch",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-zorey-choice",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.try-zorey-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-upper-body-listen",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.try-upper-body-listen",
+      "targetText": "Kou zepòl Lestomak Bra Men",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Kou zepòl Lestomak Bra Men",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-body-voice",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.try-body-voice",
+      "targetText": "vant Pye",
+      "locale": "ht-HT",
+      "maxSeconds": 10,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "vant Pye",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    }
+  ]
+}

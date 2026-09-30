@@ -1,9 +1,14 @@
 import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 const source = readFileSync(
-  resolve(process.cwd(), "src/components/review/quiz/components/QuizPracticeCard.tsx"),
+  fileURLToPath(
+    new URL(
+      "./QuizPracticeCard.tsx",
+      import.meta.url,
+    ),
+  ),
   "utf8",
 );
 

@@ -3,17 +3,17 @@
     "haitian-creole-foundations": {
       "haitian-creole-foundations-3-who-are-you": {
         "meet-someone-scenario-and-review": {
-          "label": "Meet Someone: Scenario and Review",
-          "summary": "Combine your name, identity, language, and residence into a short beginner introduction.",
+          "label": "Meet Someone: A Full Introduction",
+          "summary": "Combine greetings, names, and residence into one connected first-meeting conversation.",
           "cards": {
             "sketch0": {
-              "title": "A Simple Introduction"
+              "title": "Listen to the Whole Conversation"
             },
             "sketch1": {
-              "title": "Ask the Other Person"
+              "title": "See the Conversation Grow"
             },
             "sketch2": {
-              "title": "Use It"
+              "title": "Hear a Second Version"
             },
             "quiz": {
               "title": "Practice"
@@ -22,175 +22,129 @@
           "tryIt": {
             "allowReveal": true,
             "try_meet_someone_scenario_and_review_sketch0": {
-              "title": "Try it yourself: Order the introduction pieces",
-              "prompt": "Right after the sketch \"Four useful pieces\", practice that exact idea with this task. Arrange the four reusable introduction pieces in the order shown. Produce the result for order the introduction pieces so it reinforces Meet Someone: Scenario and Review."
+              "title": "Try it yourself: Take Mari's name turn",
+              "prompt": "Right after the sketch \"Jan and Mari meet\", practice that exact idea with this task. Give Mari's name, then return the question. Produce the result for take Mari's name turn so it reinforces Meet Someone: A Full Introduction."
             },
             "try_meet_someone_scenario_and_review_sketch1": {
-              "title": "Try it yourself: Ask another person’s name",
-              "prompt": "Right after the sketch \"Kijan ou rele? / Ki kote ou rete?\", practice that exact idea with this task. Say “What is his or her name?” in Kreyòl. Produce the result for ask another person’s name so it reinforces Meet Someone: Scenario and Review."
+              "title": "Try it yourself: Build the next question",
+              "prompt": "Right after the sketch \"Greeting → name → place\", practice that exact idea with this task. After exchanging names, build the question that asks where the person lives. Produce the result for build the next question so it reinforces Meet Someone: A Full Introduction."
             },
             "try_meet_someone_scenario_and_review_sketch2": {
-              "title": "Try it yourself: Hear the introduction",
-              "prompt": "Right after the sketch \"A short introduction exchange\", practice that exact idea with this task. Listen and rebuild Ana’s name response using the pattern from the lesson. Produce the result for hear the introduction so it reinforces Meet Someone: Scenario and Review."
+              "title": "Try it yourself: Hear Mari's residence turn",
+              "prompt": "Right after the sketch \"Same people, slightly different wording\", practice that exact idea with this task. Listen and rebuild Mari's complete turn. Produce the result for hear Mari's residence turn so it reinforces Meet Someone: A Full Introduction."
             }
           },
           "practice": {
-            "meet-someone-scenario-and-review-choice": {
-              "title": "Ask for a name",
-              "prompt": "Which Kreyòl question asks a person’s name?",
-              "hint": "Choose the question used during an introduction.",
+            "intro-natural-next-choice": {
+              "title": "Choose the natural next question",
+              "prompt": "Mari says “M rele Mari.” Which question can naturally continue the introduction?",
+              "hint": "Move from name to where the person lives.",
               "help": {
-                "concept": "A beginner introduction often includes one question about a person's name.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "continuing an introduction naturally",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
               "options": {
-                "a": "Kijan ou rele?",
-                "b": "Ki kote ou rete?",
-                "c": "Kijan ou ye?"
+                "a": "Ki kote ou rete?",
+                "b": "Orevwa.",
+                "c": "Mèsi."
               }
             },
-            "meet-someone-scenario-and-review-fill": {
-              "title": "Complete the introduction",
-              "prompt": "Choose the verb that completes the name introduction.",
-              "hint": "Use the name pattern from this module.",
+            "intro-listen": {
+              "title": "Hear the residence turn",
+              "prompt": "Listen and rebuild the complete turn.",
+              "hint": "The speaker answers and returns the question.",
               "help": {
-                "concept": "The blank needs the action used in the short name-introduction pattern.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "hearing a connected introduction turn",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "template": "M [blank1] Ana.",
-              "choices": [
-                "rele",
-                "rete",
-                "pale"
-              ]
-            },
-            "meet-someone-scenario-and-review-listen": {
-              "title": "Hear a full introduction",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the speaker, language action, and language name.",
-              "help": {
-                "concept": "Build the introduction exactly in the spoken order.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Mwen pale kreyòl.",
+              "targetText": "Mwen rete Chicago. E ou menm?",
               "wordBank": [
                 "Mwen",
-                "pale",
-                "kreyòl."
-              ],
-              "distractors": [
-                "rete"
-              ]
-            },
-            "meet-someone-scenario-and-review-voice": {
-              "title": "Give a short introduction",
-              "prompt": "Say: M rele Ana. Mwen rete Chicago.",
-              "hint": "Say both short sentences clearly.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored two-sentence introduction.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "M rele Ana. Mwen rete Chicago."
-            },
-            "meet-someone-scenario-and-review-build": {
-              "title": "Build the introduction question",
-              "prompt": "Arrange the words to ask “What is your name?”",
-              "hint": "Build the complete question from this module.",
-              "help": {
-                "concept": "The question follows a fixed beginner conversational pattern.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Kijan ou rele?",
-              "wordBank": [
-                "Kijan",
+                "rete",
+                "Chicago.",
+                "E",
                 "ou",
-                "rele?"
-              ],
-              "distractors": [
-                "rete"
-              ],
-              "ttsText": "Kijan ou rele?"
-            },
-            "meet-someone-scenario-and-review-write": {
-              "title": "Write a complete identity sentence",
-              "prompt": "Type the Kreyòl sentence “I am Haitian.”",
-              "hint": "Use the identity pattern and nationality from this module.",
-              "help": {
-                "concept": "Write the complete short identity sentence.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "expectedText": "Mwen se ayisyen.",
-              "placeholder": "Type the Kreyòl answer",
-              "anyOf": [
-                "Mwen se ayisyèn."
+                "menm?"
               ]
             },
-            "try-intro-flow-order": {
-              "title": "Order the introduction pieces",
-              "prompt": "Arrange the four reusable introduction pieces in the order shown.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
+            "intro-build": {
+              "title": "Build the name turn",
+              "prompt": "Give Jan's name and return the question.",
+              "hint": "Use the familiar follow-up after the name.",
               "help": {
-                "concept": "building an introduction",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "building a complete introduction turn",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "M rele Ana. Mwen se ayisyèn. Mwen pale kreyòl. Mwen rete Chicago.",
+              "targetText": "M rele Jan. E ou menm?",
               "wordBank": [
-                "M rele Ana.",
-                "Mwen se ayisyèn.",
-                "Mwen pale kreyòl.",
-                "Mwen rete Chicago."
+                "M",
+                "rele",
+                "Jan.",
+                "E",
+                "ou",
+                "menm?"
               ]
             },
-            "try-ask-back-name": {
-              "title": "Ask another person’s name",
-              "prompt": "Say “What is his or her name?” in Kreyòl.",
-              "hint": "Use the familiar name question with li.",
+            "intro-voice": {
+              "title": "Take the full response",
+              "prompt": "Say that you live in Miami, then return the question.",
+              "hint": "Answer with Mwen rete before E ou menm?",
               "help": {
-                "concept": "asking a person's name",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "producing a connected residence response",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "Kijan li rele?"
+              "targetText": "Mwen rete Miami. E ou menm?"
             },
-            "try-ask-back-place": {
-              "title": "Ask where another person lives",
-              "prompt": "Say “Where does he or she live?” in Kreyòl.",
-              "hint": "Use Ki kote with li rete.",
+            "try-introduction-response": {
+              "title": "Take Mari's name turn",
+              "prompt": "Give Mari's name, then return the question.",
+              "hint": "Answer first, then use E ou menm?",
               "help": {
-                "concept": "asking where someone lives",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "responding inside an introduction",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "Ki kote li rete?"
+              "targetText": "M rele Mari. E ou menm?"
             },
-            "try-mini-exchange-name": {
-              "title": "Hear the introduction",
-              "prompt": "Listen and rebuild Ana’s name response using the pattern from the lesson.",
-              "hint": "Listen again and rebuild the new Kreyòl phrase.",
+            "try-map-transfer": {
+              "title": "Build the next question",
+              "prompt": "After exchanging names, build the question that asks where the person lives.",
+              "hint": "The next topic is place, not name.",
               "help": {
-                "concept": "hearing an introduction exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "choosing the next conversational move",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "M rele Ana. E ou menm?"
+              "targetText": "Ki kote ou rete?",
+              "wordBank": [
+                "Ki",
+                "kote",
+                "ou",
+                "rete?"
+              ]
             },
-            "try-mini-exchange-place": {
-              "title": "Answer the residence question",
-              "prompt": "Say the residence answer using the pattern from the lesson.",
-              "hint": "Say: Mwen rete Chicago.",
+            "try-second-version": {
+              "title": "Hear Mari's residence turn",
+              "prompt": "Listen and rebuild Mari's complete turn.",
+              "hint": "She answers, then returns the question.",
               "help": {
-                "concept": "responding with a residence",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "hearing a complete residence turn",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "Mwen rete Chicago."
+              "targetText": "Mwen rete Boston. E ou menm?",
+              "wordBank": [
+                "Mwen",
+                "rete",
+                "Boston.",
+                "E",
+                "ou",
+                "menm?"
+              ]
             }
           }
         }
@@ -201,17 +155,17 @@
     "haitian-creole-foundations": {
       "haitian-creole-foundations-3-who-are-you": {
         "meet-someone-scenario-and-review": {
-          "intro-flow": {
-            "title": "Four useful pieces",
-            "bodyMarkdown": "A short introduction can combine four things:\n\n1. **M rele Ana.** — My name is Ana.\n2. **Mwen se ayisyèn.** — I am Haitian.\n3. **Mwen pale kreyòl.** — I speak Kreyòl.\n4. **Mwen rete Chicago.** — I live in Chicago.\n\nYou do not have to say everything every time. These are reusable pieces."
+          "full-introduction": {
+            "title": "Jan and Mari meet",
+            "bodyMarkdown": "**Jan:** Bonjou!\n\n**Mari:** Bonjou!\n\n**Jan:** Kijan ou ye?\n\n**Mari:** Mwen byen, mèsi. E ou menm?\n\n**Jan:** Mwen byen tou.\n\n**Jan:** Kijan ou rele?\n\n**Mari:** M rele Mari. E ou menm?\n\n**Jan:** M rele Jan.\n\n**Jan:** Ki kote ou rete?\n\n**Mari:** Mwen rete Boston. E ou menm?\n\n**Jan:** Mwen rete Chicago.\n\n**Mari:** Orevwa, Jan!\n\n**Jan:** Orevwa, Mari!\n\nNotice how the conversation grows naturally from greetings into names and where someone lives."
           },
-          "ask-back": {
-            "title": "Kijan ou rele? / Ki kote ou rete?",
-            "bodyMarkdown": "Two useful questions keep the introduction going:\n\n- **Kijan ou rele?** — What is your name?\n- **Ki kote ou rete?** — Where do you live?\n\nUse one question at a time and listen for the other person's short answer."
+          "conversation-map": {
+            "title": "Greeting → name → place",
+            "bodyMarkdown": "You can now connect three small conversation moves:\n\n1. greet and ask how someone is\n2. exchange names\n3. exchange where you live\n\nEach new question grows from language already understood."
           },
-          "mini-exchange": {
-            "title": "A short introduction exchange",
-            "bodyMarkdown": "**A:** Bonjou! Kijan ou rele?\n\n**B:** M rele Ana. E ou menm?\n\n**A:** M rele Jan. Ki kote ou rete?\n\n**B:** Mwen rete Chicago.\n\nThis combines Module 2 greetings with Module 3 identity language."
+          "second-version": {
+            "title": "Same people, slightly different wording",
+            "bodyMarkdown": "Listen again with a different greeting and a warmer answer.\n\nJan and Mari keep the same names, residences, and voices. Only the wording changes."
           }
         }
       }

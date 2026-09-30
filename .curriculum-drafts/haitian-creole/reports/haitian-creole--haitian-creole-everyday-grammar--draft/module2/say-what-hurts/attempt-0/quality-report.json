@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "profileId": "language",
+  "subjectSlug": "haitian-creole--haitian-creole-everyday-grammar--draft",
+  "courseSlug": "haitian-creole-everyday-grammar",
+  "topicId": "say-what-hurts",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 12,
+    "exerciseKinds": {
+      "listen_build": 3,
+      "voice_input": 3,
+      "word_bank_arrange": 3,
+      "text_input": 3
+    },
+    "codeInputs": 0,
+    "projects": 0,
+    "capstones": 0,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 1,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 1,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "LEARNING_GOAL_ALIGNMENT_WEAK",
+      "severity": "warning",
+      "path": "haitian-creole-everyday-grammar-3-more-questions-and-health/ht2m3-questions-health/say-what-hurts",
+      "profileId": "language",
+      "moduleId": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+      "topicId": "say-what-hurts",
+      "message": "Topic \"say-what-hurts\" exercises do not clearly reflect the topic learning goals."
+    }
+  ]
+}

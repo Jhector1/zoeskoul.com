@@ -1,0 +1,11 @@
+{
+  "languageAudio": {
+    "listen": "Écouter",
+    "playConversation": "Lire la conversation",
+    "stop": "Arrêter",
+    "replayLine": "Réécouter la réplique",
+    "speaking": "Lecture…",
+    "unavailable": "Audio indisponible.",
+    "autoListen": "Écoute automatique"
+  }
+}

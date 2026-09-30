@@ -107,19 +107,254 @@
       "id": "sound-map",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.sound-map.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.sound-map.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.sound-map.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Kreyòl is written with a standardized spelling system. For a beginner, the most useful habit is to",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "look at the Kreyòl spelling itself instead of guessing from English spelling",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Start with a few anchor words:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "bonjou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "hello",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "mèsi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "thank you",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "wi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yes",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "non",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "no",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You do not need to memorize every sound today. First, notice that the same written pattern is meant to guide you consistently when the pattern appears again.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "vowel-patterns",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.vowel-patterns.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.vowel-patterns.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.vowel-patterns.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Two details are especially useful in your first Kreyòl words:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "è",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "is a real part of the spelling. In",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "flè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", keep the accent when you write the word.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "works together as one common sound pattern. The word",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "itself shows the two letters staying together.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Do not silently replace",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "è",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "with plain",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "e",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", and do not drop one of the letters in",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ". Apply these same spelling habits to other familiar words in the practice.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "nasal-patterns",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.nasal-patterns.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.nasal-patterns.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.nasal-patterns.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Kreyòl also uses common nasal vowel spellings such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "en",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "on",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ". For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Examples to notice:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "manman",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "mother",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pen",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "bread",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "non",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "no",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Later lessons can refine how these patterns behave in different words. For now, just learn to spot these spellings and keep them when you write.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [

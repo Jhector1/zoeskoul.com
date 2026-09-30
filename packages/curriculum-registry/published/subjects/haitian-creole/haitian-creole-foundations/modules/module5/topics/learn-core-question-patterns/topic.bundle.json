@@ -2,9 +2,9 @@
   "topicId": "learn-core-question-patterns",
   "subjectSlug": "haitian-creole-foundations",
   "moduleSlug": "haitian-creole-foundations-6-questions-and-answers",
-  "sectionSlug": "haitian-creole-foundations-ht6-learn-listen-speak",
+  "sectionSlug": "haitian-creole-foundations-ht6-question-system",
   "prefix": "ht6",
-  "minutes": 24,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -23,15 +23,15 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.cards.sketch0.title",
-      "sketchId": "eske",
+      "sketchId": "eske-question",
       "height": 420,
       "tryIt": {
         "id": "try-learn-core-question-patterns-sketch0",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch0.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch0.prompt",
-        "exerciseKey": "try-eske-kreyol",
+        "exerciseKey": "try-eske-work",
         "exerciseKeys": [
-          "try-eske-kreyol"
+          "try-eske-work"
         ],
         "difficulty": "easy",
         "preferKind": "word_bank_arrange",
@@ -51,9 +51,9 @@
         "id": "try-learn-core-question-patterns-sketch1",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch1.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch1.prompt",
-        "exerciseKey": "try-wi-non-complete",
+        "exerciseKey": "try-positive-work-answer",
         "exerciseKeys": [
-          "try-wi-non-complete"
+          "try-positive-work-answer"
         ],
         "difficulty": "easy",
         "preferKind": "voice_input",
@@ -67,8 +67,23 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.cards.sketch2.title",
-      "sketchId": "complete-answer",
-      "height": 420
+      "sketchId": "yes-no-exchange",
+      "height": 420,
+      "tryIt": {
+        "id": "try-learn-core-question-patterns-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch2.prompt",
+        "exerciseKey": "try-eske-routine",
+        "exerciseKeys": [
+          "try-eske-routine"
+        ],
+        "difficulty": "easy",
+        "preferKind": "listen_build",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -78,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -88,31 +103,213 @@
   ],
   "sketches": [
     {
-      "id": "eske",
+      "id": "eske-question",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.eske.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.eske.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.eske-question.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.eske-question.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Èske",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "when the answer can be yes or no.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Start with a familiar statement:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Ou pale kreyòl.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "You speak Kreyòl.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Add",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Èske",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ":",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Èske ou pale kreyòl?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Do you speak Kreyòl?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The familiar statement order stays after",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Èske",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "wi-non",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.wi-non.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.wi-non.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.wi-non.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "A short answer can begin with",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Wi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "or",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Non",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For stronger beginner communication, follow it with the useful information:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Wi, mwen pale kreyòl.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Non, mwen pa pale kreyòl.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "For now, focus on recognizing both the short response and the complete response.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "complete-answer",
+      "id": "yes-no-exchange",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.complete-answer.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.complete-answer.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.yes-no-exchange.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.yes-no-exchange.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Èske ou etidye kreyòl?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Wi, mwen etidye kreyòl.",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "A complete answer helps the conversation carry useful information instead of stopping at only",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Wi",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "learn-core-question-patterns-choice",
+      "id": "eske-purpose-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-choice",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.eske-purpose-choice",
       "optionIds": [
         "a",
         "b",
@@ -124,120 +321,64 @@
       }
     },
     {
-      "id": "learn-core-question-patterns-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Èske"
-      }
-    },
-    {
-      "id": "learn-core-question-patterns-listen",
+      "id": "eske-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-listen",
-      "targetText": "Èske li travay?",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.eske-listen",
+      "targetText": "Èske Mari pale kreyòl?",
       "locale": "ht-HT",
       "wordBank": [
         "Èske",
-        "li",
-        "travay?"
-      ],
-      "distractors": [
-        "Kisa"
+        "Mari",
+        "pale",
+        "kreyòl?"
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "Èske li travay?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Èske Mari pale kreyòl?",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "learn-core-question-patterns-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-voice",
-      "targetText": "Èske ou pale kreyòl?",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Èske ou pale kreyòl?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-core-question-patterns-build",
+      "id": "eske-build-answer",
       "kind": "word_bank_arrange",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-build",
-      "targetText": "Wi, mwen pale kreyòl.",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.eske-build-answer",
+      "targetText": "Wi, Jan travay.",
       "locale": "ht-HT",
       "wordBank": [
         "Wi,",
-        "mwen",
-        "pale",
-        "kreyòl."
+        "Jan",
+        "travay."
       ],
-      "distractors": [
-        "rete"
-      ],
-      "ttsText": "Wi, mwen pale kreyòl.",
       "expected": {
         "kind": "word_bank_arrange",
-        "targetText": "Wi, mwen pale kreyòl.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Wi, Jan travay.",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "learn-core-question-patterns-write",
-      "kind": "text_input",
+      "id": "eske-voice",
+      "kind": "voice_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-write",
-      "placeholder": "Type the Kreyòl answer",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.eske-voice",
+      "targetText": "Èske Mari etidye kreyòl?",
+      "locale": "ht-HT",
       "expected": {
-        "kind": "text_input",
-        "value": "Wi",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "kind": "voice_input",
+        "targetText": "Èske Mari etidye kreyòl?",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "try-eske-kreyol",
+      "id": "try-eske-work",
       "kind": "word_bank_arrange",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-eske-kreyol",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-eske-work",
       "targetText": "Èske ou travay?",
       "locale": "ht-HT",
       "wordBank": [
@@ -252,16 +393,37 @@
       }
     },
     {
-      "id": "try-wi-non-complete",
+      "id": "try-positive-work-answer",
       "kind": "voice_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-wi-non-complete",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-positive-work-answer",
       "targetText": "Wi, mwen travay.",
       "locale": "ht-HT",
       "expected": {
         "kind": "voice_input",
         "targetText": "Wi, mwen travay.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-eske-routine",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-eske-routine",
+      "targetText": "Èske Mari travay chak jou?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Èske",
+        "Mari",
+        "travay",
+        "chak",
+        "jou?"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Èske Mari travay chak jou?",
         "locale": "ht-HT"
       }
     }

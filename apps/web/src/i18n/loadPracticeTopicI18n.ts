@@ -46,8 +46,20 @@ function findTopicMessagesNode(args: {
     const topicsRoot = isObject(args.messages.topics) ? args.messages.topics : null;
     if (!topicsRoot) return null;
 
-    const subjectCandidates = args.subjectSlug
-        ? [topicsRoot[args.subjectSlug]]
+    const exactSubjectNode = args.subjectSlug
+        ? topicsRoot[args.subjectSlug]
+        : null;
+
+    /*
+     * resolveTopicFile() has already selected one course-scoped topic file.
+     *
+     * Draft previews may carry the live/course subject alias while generated
+     * messages remain keyed by the checked draft subject slug. In that case,
+     * do not discard the already-selected topic file merely because its nested
+     * subject key differs from the request alias.
+     */
+    const subjectCandidates = isObject(exactSubjectNode)
+        ? [exactSubjectNode]
         : Object.values(topicsRoot);
 
     for (const subjectNode of subjectCandidates) {
@@ -196,6 +208,155 @@ async function findFirstFileRecursive(rootDir: string, fileName: string): Promis
     }
 }
 
+async function resolveDraftTopicFile(args: {
+    locale: string;
+    subjectSlug?: string | null;
+    moduleSlug?: string | null;
+    topicSlug: string;
+}): Promise<string | null> {
+    const subjectSlug =
+        String(
+            args.subjectSlug ?? "",
+        ).trim();
+
+    if (!subjectSlug) {
+        return null;
+    }
+
+    /*
+     * Draft QA has one canonical message owner:
+     *
+     *   <repo>/.curriculum-drafts/<catalog>/messages/<locale>/subjects/<draft-subject>/...
+     *
+     * Never require a generated draft message to be copied into
+     * apps/web/src/i18n/messages. A clean .next rebuild must therefore
+     * behave exactly like a warm dev session.
+     */
+    const repoRoot =
+        path.resolve(
+            process.cwd(),
+            "../..",
+        );
+
+    const draftsRoot =
+        path.join(
+            repoRoot,
+            ".curriculum-drafts",
+        );
+
+    const fileName =
+        `${parseTopicBase(
+            args.topicSlug,
+        )}.json`;
+
+    const moduleDirs =
+        normalizeModuleDirCandidates(
+            args.moduleSlug,
+            args.topicSlug,
+        );
+
+    for (
+        const catalog
+        of await childDirectoryNames(
+            draftsRoot,
+        )
+    ) {
+        const subjectsRoot =
+            path.join(
+                draftsRoot,
+                catalog,
+                "messages",
+                args.locale,
+                "subjects",
+            );
+
+        if (
+            !(await directoryExists(
+                subjectsRoot,
+            ))
+        ) {
+            continue;
+        }
+
+        const subjectNames =
+            await childDirectoryNames(
+                subjectsRoot,
+            );
+
+        /*
+         * Requests can carry either:
+         *
+         *   haitian-creole--haitian-creole-everyday-grammar--draft
+         *
+         * or the course/live alias:
+         *
+         *   haitian-creole-everyday-grammar
+         *
+         * Match only the exact draft owner for that alias.
+         */
+        const matchingSubjectNames =
+            subjectNames.filter(
+                (candidate) =>
+                    candidate ===
+                        subjectSlug ||
+                    candidate.endsWith(
+                        `--${subjectSlug}--draft`,
+                    ),
+            );
+
+        for (
+            const candidate
+            of matchingSubjectNames
+        ) {
+            const subjectRoot =
+                path.join(
+                    subjectsRoot,
+                    candidate,
+                );
+
+            for (
+                const mod
+                of moduleDirs
+            ) {
+                const direct =
+                    path.join(
+                        subjectRoot,
+                        mod,
+                        fileName,
+                    );
+
+                try {
+                    await fs.access(
+                        direct,
+                    );
+
+                    return direct;
+                } catch {
+                    // Continue to canonical recursive search.
+                }
+            }
+
+            /*
+             * Course module slugs are semantic rather than numeric,
+             * while draft emission uses module0/module1/... directories.
+             * Recursive search stays inside this one exact draft subject,
+             * so it cannot bleed across courses.
+             */
+            const found =
+                await findFirstFileRecursive(
+                    subjectRoot,
+                    fileName,
+                );
+
+            if (found) {
+                return found;
+            }
+        }
+    }
+
+    return null;
+}
+
 async function resolveTopicFile(args: {
     locale: string;
     subjectSlug?: string | null;
@@ -239,7 +400,24 @@ async function resolveTopicFile(args: {
         if (found) return found;
     }
 
-    // 3) Last resort for old flat subjects or incomplete metadata.
+    // 3) Draft QA canonical store.
+    //
+    // Draft message artifacts intentionally live outside the Web
+    // source tree. Read them directly so clearing .next or restarting
+    // the dev server cannot remove quiz presentation data.
+    const draftTopicFile =
+        await resolveDraftTopicFile({
+            locale,
+            subjectSlug,
+            moduleSlug,
+            topicSlug,
+        });
+
+    if (draftTopicFile) {
+        return draftTopicFile;
+    }
+
+    // 4) Last resort for old flat subjects or incomplete metadata.
     return findFirstFileRecursive(localeRoot, fileName);
 }
 

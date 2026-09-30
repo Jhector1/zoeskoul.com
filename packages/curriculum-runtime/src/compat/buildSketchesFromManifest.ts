@@ -114,6 +114,7 @@ export function buildSketchesFromManifest(
                 specVersion: 2,
                 title: `@:${sketch.titleKey}`,
                 bodyMarkdown: `@:${sketch.bodyKey}`,
+                ...(sketch.audio ? { audio: sketch.audio } : {}),
                 ...(runtime ? { runtime } : {}),
                 ...(sketch.images?.length
                     ? {

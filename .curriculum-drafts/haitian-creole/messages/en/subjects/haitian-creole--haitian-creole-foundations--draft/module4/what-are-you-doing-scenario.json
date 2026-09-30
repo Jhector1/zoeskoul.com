@@ -3,14 +3,14 @@
     "haitian-creole--haitian-creole-foundations--draft": {
       "haitian-creole-foundations-5-what-are-you-doing": {
         "what-are-you-doing-scenario": {
-          "label": "What Are You Doing? Scenario",
-          "summary": "Combine action questions, current activities, and simple routine language in a short everyday exchange.",
+          "label": "What Are You Doing?",
+          "summary": "Ask what someone is doing, answer with a current action, and distinguish what is happening now from a routine.",
           "cards": {
             "sketch0": {
-              "title": "Use It in Conversation"
+              "title": "Ask About an Action"
             },
             "sketch1": {
-              "title": "Talk About Everyday Life"
+              "title": "Use It in Conversation"
             },
             "sketch2": {
               "title": "Now or Every Day?"
@@ -22,167 +22,123 @@
           "tryIt": {
             "allowReveal": true,
             "try_what_are_you_doing_scenario_sketch0": {
-              "title": "Try it yourself: Hear the question",
-              "prompt": "Right after the sketch \"What are you doing?\", practice that exact idea with this task. Listen and rebuild the opening question. Produce the result for hear the question so it reinforces What Are You Doing? Scenario."
+              "title": "Try it yourself: Ask Jan instead",
+              "prompt": "Right after the sketch \"Kisa ou ap fè?\", practice that exact idea with this task. Ask “What is Jan doing?”. Produce the result for ask Jan instead so it reinforces What Are You Doing?."
             },
             "try_what_are_you_doing_scenario_sketch1": {
-              "title": "Try it yourself: Build a different daily routine",
-              "prompt": "Right after the sketch \"chak jou\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I speak Kreyòl every day.”. Produce the result for build a different daily routine so it reinforces What Are You Doing? Scenario."
+              "title": "Try it yourself: Hear a different answer",
+              "prompt": "Right after the sketch \"Jan and Mari talk about what they are doing\", practice that exact idea with this task. Listen and rebuild Mari's new answer. Produce the result for hear a different answer so it reinforces What Are You Doing?."
             },
             "try_what_are_you_doing_scenario_sketch2": {
-              "title": "Try it yourself: Choose the sentence about now",
-              "prompt": "Right after the sketch \"kounyeya vs. chak jou\", practice that exact idea with this task. Which sentence using the pattern from the lesson describes what Jan is doing **now**? Produce the result for choose the sentence about now so it reinforces What Are You Doing? Scenario."
+              "title": "Try it yourself: Build a different routine",
+              "prompt": "Right after the sketch \"kounyeya vs. chak jou\", practice that exact idea with this task. Build “Mari studies every day.”. Produce the result for build a different routine so it reinforces What Are You Doing?."
             }
           },
           "practice": {
-            "what-are-you-doing-scenario-choice": {
-              "title": "Choose the sentence about now",
-              "prompt": "Which sentence says that Jan is working now?",
-              "hint": "Choose the sentence that marks an action in progress and includes the time word for now.",
+            "doing-natural-answer-choice": {
+              "title": "Choose the natural answer",
+              "prompt": "Jan asks “Kisa ou ap fè?” Which answer fits?",
+              "hint": "Answer with something happening now.",
               "help": {
-                "concept": "A current action can be made explicit with both an aspect pattern and a time expression.",
+                "concept": "matching an action question with a current-action answer",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
               "options": {
-                "a": "Jan ap travay kounyeya.",
-                "b": "Jan travay chak jou.",
-                "c": "Jan rete Chicago."
+                "a": "M ap etidye kreyòl.",
+                "b": "Mwen rete Chicago.",
+                "c": "M rele Mari."
               }
             },
-            "what-are-you-doing-scenario-fill": {
-              "title": "Complete the routine sentence",
-              "prompt": "Choose the action that completes “I study Kreyòl every day.”",
-              "hint": "Use the study action from this module.",
+            "doing-listen": {
+              "title": "Hear a question about Mari",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "Listen for Mari before ap fè.",
               "help": {
-                "concept": "The blank needs the activity performed as part of the routine.",
+                "concept": "hearing an action question about another person",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "template": "Mwen [blank1] kreyòl chak jou.",
-              "choices": [
-                "etidye",
-                "rete",
-                "rele"
+              "targetText": "Kisa Mari ap fè?",
+              "wordBank": [
+                "Kisa",
+                "Mari",
+                "ap",
+                "fè?"
               ]
             },
-            "what-are-you-doing-scenario-listen": {
-              "title": "Hear a routine sentence",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the action and the everyday time phrase.",
+            "doing-build": {
+              "title": "Build a current-action answer",
+              "prompt": "Build “I am working now.”",
+              "hint": "Use M ap and finish with kounyeya.",
               "help": {
-                "concept": "Build the routine sentence in the same order as the audio.",
+                "concept": "building a current-action answer",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "Mwen travay chak jou.",
+              "targetText": "M ap travay kounyeya.",
               "wordBank": [
-                "Mwen",
-                "travay",
-                "chak",
-                "jou."
-              ],
-              "distractors": [
-                "kounyeya."
-              ]
-            },
-            "what-are-you-doing-scenario-voice": {
-              "title": "Say what you are studying now",
-              "prompt": "Say: M ap etidye kreyòl.",
-              "hint": "Say the complete current-action sentence.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "M ap etidye kreyòl."
-            },
-            "what-are-you-doing-scenario-build": {
-              "title": "Build the current-action sentence",
-              "prompt": "Arrange the words to say “Jan is working now.”",
-              "hint": "Put the person first, then the current-action pattern, then the time word.",
-              "help": {
-                "concept": "The sentence combines a person, an action in progress, and an explicit time expression.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "Jan ap travay kounyeya.",
-              "wordBank": [
-                "Jan",
+                "M",
                 "ap",
                 "travay",
                 "kounyeya."
-              ],
-              "distractors": [
-                "chak"
-              ],
-              "ttsText": "Jan ap travay kounyeya."
+              ]
             },
-            "what-are-you-doing-scenario-write": {
-              "title": "Write “every day”",
-              "prompt": "Type the Kreyòl phrase used in this lesson for “every day.”",
-              "hint": "Use the two-word routine expression.",
+            "doing-routine-voice": {
+              "title": "Answer with a routine",
+              "prompt": "Say “I study Kreyòl every day.”",
+              "hint": "Use chak jou without ap.",
               "help": {
-                "concept": "Write the complete time expression.",
+                "concept": "producing a habitual-action sentence",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "expectedText": "chak jou",
-              "placeholder": "Type the Kreyòl answer"
+              "targetText": "Mwen etidye kreyòl chak jou."
             },
-            "try-short-exchange-question": {
-              "title": "Hear the question",
-              "prompt": "Listen and rebuild the opening question.",
-              "hint": "Listen again and rebuild the new Kreyòl phrase.",
+            "try-ask-doing-transfer": {
+              "title": "Ask Jan instead",
+              "prompt": "Ask “What is Jan doing?”",
+              "hint": "Replace ou with Jan.",
               "help": {
-                "concept": "hearing a current-action exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "transferring the action question to another person",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "Kisa ou ap fè?"
+              "targetText": "Kisa Jan ap fè?"
             },
-            "try-short-exchange-answer": {
-              "title": "Give the answer",
-              "prompt": "Say the learner’s current-action answer using the pattern from the lesson.",
-              "hint": "Say: M ap etidye kreyòl.",
+            "try-answer-doing-transfer": {
+              "title": "Hear a different answer",
+              "prompt": "Listen and rebuild Mari's new answer.",
+              "hint": "She says what she is doing now.",
               "help": {
-                "concept": "responding in a current-action exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "hearing a current-action answer",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "M ap etidye kreyòl."
-            },
-            "try-routine-language": {
-              "title": "Build a different daily routine",
-              "prompt": "Arrange the Kreyòl sentence for “I speak Kreyòl every day.”",
-              "hint": "Keep chak jou at the end.",
-              "help": {
-                "concept": "routine language with chak jou",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen pale kreyòl chak jou.",
+              "targetText": "M ap pale kreyòl.",
               "wordBank": [
-                "Mwen",
+                "M",
+                "ap",
                 "pale",
-                "kreyòl",
+                "kreyòl."
+              ]
+            },
+            "try-now-routine-transfer": {
+              "title": "Build a different routine",
+              "prompt": "Build “Mari studies every day.”",
+              "hint": "For the routine, do not add ap.",
+              "help": {
+                "concept": "contrasting a routine with an action in progress",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "Mari etidye chak jou.",
+              "wordBank": [
+                "Mari",
+                "etidye",
                 "chak",
                 "jou."
               ]
-            },
-            "try-now-vs-routine-now": {
-              "title": "Choose the sentence about now",
-              "prompt": "Which sentence using the pattern from the lesson describes what Jan is doing **now**?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "now versus routine",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "Jan ap travay kounyeya.",
-                "b": "Jan travay chak jou."
-              }
             }
           }
         }
@@ -193,17 +149,17 @@
     "haitian-creole--haitian-creole-foundations--draft": {
       "haitian-creole-foundations-5-what-are-you-doing": {
         "what-are-you-doing-scenario": {
-          "short-exchange": {
-            "title": "What are you doing?",
-            "bodyMarkdown": "**A:** Kisa ou ap fè?\n\n**B:** M ap etidye kreyòl.\n\n**A:** E Jan?\n\n**B:** Jan ap travay kounyeya.\n\nThis exchange reuses the same current-action pattern with different people and actions."
+          "ask-doing": {
+            "title": "Kisa ou ap fè?",
+            "bodyMarkdown": "To ask what someone is doing, use:\n\n**Kisa ou ap fè?** — What are you doing?\n\nTreat this as one useful everyday question."
           },
-          "routine-language": {
-            "title": "chak jou",
-            "bodyMarkdown": "**chak jou** means “every day.” It is useful when talking about routines:\n\n- **Mwen travay chak jou.**\n- **Mwen etidye kreyòl chak jou.**\n\nFor this beginner module, notice the difference between a routine expression and a sentence about what is happening now."
+          "action-conversation": {
+            "title": "Jan and Mari talk about what they are doing",
+            "bodyMarkdown": "**Jan:** Mari, kisa ou ap fè?\n\n**Mari:** M ap etidye kreyòl. E ou menm?\n\n**Jan:** M ap travay kounyeya.\n\nThe question and answer use the same **ap + action** pattern."
           },
           "now-vs-routine": {
             "title": "kounyeya vs. chak jou",
-            "bodyMarkdown": "Compare these time expressions:\n\n- **Jan ap travay kounyeya.** — Jan is working now.\n- **Jan travay chak jou.** — Jan works every day.\n\nThe time expression helps make the meaning clear."
+            "bodyMarkdown": "Compare:\n\n- **Jan ap travay kounyeya.** — Jan is working now.\n- **Jan travay chak jou.** — Jan works every day.\n\n**ap** helps mark the action in progress. **chak jou** makes the routine explicit."
           }
         }
       }

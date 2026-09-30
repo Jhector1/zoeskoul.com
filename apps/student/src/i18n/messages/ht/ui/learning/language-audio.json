@@ -1,0 +1,11 @@
+{
+  "languageAudio": {
+    "listen": "Koute",
+    "playConversation": "Jwe konvèsasyon an",
+    "stop": "Sispann",
+    "replayLine": "Koute liy sa a ankò",
+    "speaking": "Ap li…",
+    "unavailable": "Odyo pa disponib.",
+    "autoListen": "Koute otomatik"
+  }
+}

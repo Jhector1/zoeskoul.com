@@ -1,88 +1,214 @@
 {
-  "title": "What Is This? Scenario and Review",
-  "summary": "Use sa a and sa yo to point out singular and plural things, then combine demonstratives with ownership.",
-  "minutes": 26,
+  "title": "This Thing, These Things",
+  "summary": "Use sa a and sa yo to point out things and combine them with ownership in a short exchange.",
+  "minutes": 24,
   "sketchBlocks": [
     {
-      "id": "sa-a",
+      "id": "this-that",
       "cardTitle": "Point to One Thing",
-      "title": "sa a — this / that",
-      "bodyMarkdown": "Use **sa a** after a noun to point out one thing:\n\n- **valiz sa a** — this/that bag\n- **machin sa a** — this/that car\n\nThe demonstrative follows the noun.",
+      "title": "sa a",
+      "bodyMarkdown": "Use **sa a** after a noun for “this” or “that.”\n\nFor example:\n\n**machin sa a** — this car / that car\n\nThe demonstrative comes after the noun.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "sa a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "after a noun for “this” or “that.”",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "machin sa a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "this car / that car",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The demonstrative comes after the noun.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-sa-a-bag",
-          "kind": "word_bank_arrange",
-          "title": "Build “this book”",
-          "prompt": "Arrange the Kreyòl phrase for “this book.”",
-          "hint": "Put sa a after the noun.",
+          "id": "try-valiz-sa-a",
+          "kind": "voice_input",
+          "title": "Point to another thing",
+          "prompt": "Say “this bag.”",
+          "hint": "Put sa a after valiz.",
           "help": {
-            "concept": "singular demonstrative sa a",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "using sa a after a noun",
+            "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+            "hint_2": "Pay attention to what comes before or after the noun."
           },
-          "targetText": "liv sa a",
-          "locale": "ht-HT",
-          "wordBank": [
-            "liv",
-            "sa",
-            "a"
-          ]
+          "targetText": "Valiz sa a.",
+          "locale": "ht-HT"
         }
       ]
     },
     {
-      "id": "sa-yo",
+      "id": "these-those",
       "cardTitle": "Point to More Than One",
-      "title": "sa yo — these / those",
-      "bodyMarkdown": "For more than one thing, use **sa yo**:\n\n- **kaye sa yo** — these/those notebooks\n- **liv sa yo** — these/those books\n\nThe final **yo** marks the plural.",
+      "title": "sa yo",
+      "bodyMarkdown": "Use **sa yo** after a noun for “these” or “those.”\n\nFor example:\n\n**machin sa yo** — these cars / those cars\n\nHomework examples also combine this pattern with ownership.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "sa yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "after a noun for “these” or “those.”",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "machin sa yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "these cars / those cars",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Homework examples also combine this pattern with ownership.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-sa-yo-books",
+          "id": "try-liv-sa-yo",
           "kind": "word_bank_arrange",
-          "title": "Build “these cars”",
-          "prompt": "Arrange the Kreyòl phrase for “these cars.”",
-          "hint": "Put sa yo after the noun.",
+          "title": "Point to several books",
+          "prompt": "Build “these books.”",
+          "hint": "Put sa yo after liv.",
           "help": {
-            "concept": "plural demonstrative sa yo",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "using sa yo after a noun",
+            "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+            "hint_2": "Pay attention to what comes before or after the noun."
           },
-          "targetText": "machin sa yo",
+          "targetText": "Liv sa yo.",
           "locale": "ht-HT",
           "wordBank": [
-            "machin",
+            "Liv",
             "sa",
-            "yo"
+            "yo."
           ]
         }
       ]
     },
     {
-      "id": "demonstrative-owner",
-      "cardTitle": "Point and Say Who Owns It",
-      "title": "Valiz sa a se pou Mari",
-      "bodyMarkdown": "Combine the demonstrative with **se pou**:\n\n- **Valiz sa a se pou Mari.** — This/that bag is Mari's.\n- **Kaye sa yo se pou nou.** — These/those notebooks are ours.\n\nThis is a practical way to talk about objects around you.",
+      "id": "object-exchange",
+      "cardTitle": "Use It in an Exchange",
+      "title": "Jan and Mari sort their things",
+      "bodyMarkdown": "**Jan:** Mari, liv sa a se pou ou.\n\n**Mari:** Mèsi, Jan. Kaye sa yo se pou ou.\n\n**Jan:** Mèsi.\n\nThis combines demonstratives, possession, and familiar polite language without adding a new question pattern.",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Mari, liv sa a se pou ou.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mèsi, Jan. Kaye sa yo se pou ou.",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mèsi.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "This combines demonstratives, possession, and familiar polite language without adding a new question pattern.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-demonstrative-owner",
-          "kind": "word_bank_arrange",
-          "title": "Build a new ownership sentence",
-          "prompt": "Arrange the Kreyòl sentence for “This car is Jan’s.”",
-          "hint": "Use noun + sa a + se pou + person.",
+          "id": "try-kaye-pou-mari",
+          "kind": "listen_build",
+          "title": "Hear another ownership statement",
+          "prompt": "Listen and rebuild the new statement.",
+          "hint": "The notebooks belong to Mari.",
           "help": {
-            "concept": "demonstrative plus ownership",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "combining demonstratives with ownership",
+            "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+            "hint_2": "Pay attention to what comes before or after the noun."
           },
-          "targetText": "Machin sa a se pou Jan.",
+          "targetText": "Kaye sa yo se pou Mari.",
           "locale": "ht-HT",
           "wordBank": [
-            "Machin",
+            "Kaye",
             "sa",
-            "a",
+            "yo",
             "se",
             "pou",
-            "Jan."
+            "Mari."
           ]
         }
       ]
@@ -90,15 +216,15 @@
   ],
   "quizDraft": [
     {
-      "id": "what-is-this-scenario-and-review-choice",
+      "id": "demonstrative-one-choice",
       "kind": "single_choice",
-      "title": "Choose “this bag”",
-      "prompt": "Which phrase means “this/that bag”?",
-      "hint": "Choose the singular demonstrative pattern.",
+      "title": "Choose the phrase for one pointed-out object",
+      "prompt": "Which phrase means “this bag” or “that bag”?",
+      "hint": "For one thing, use sa a.",
       "help": {
-        "concept": "A singular demonstrative follows the noun it points out.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
+        "concept": "recognizing the singular demonstrative pattern",
+        "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+        "hint_2": "Pay attention to what comes before or after the noun."
       },
       "options": [
         "valiz sa a",
@@ -110,83 +236,34 @@
       ]
     },
     {
-      "id": "what-is-this-scenario-and-review-fill",
-      "kind": "fill_blank_choice",
-      "title": "Complete the plural demonstrative",
-      "prompt": "Choose the final marker that makes the phrase plural.",
-      "hint": "Use the plural demonstrative pattern.",
-      "help": {
-        "concept": "The blank completes the plural pointing expression after the noun.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
-      },
-      "template": "kaye sa [blank1]",
-      "choices": [
-        "yo",
-        "a",
-        "la"
-      ],
-      "correctValue": "yo"
-    },
-    {
-      "id": "what-is-this-scenario-and-review-listen",
+      "id": "demonstrative-plural-listen",
       "kind": "listen_build",
-      "title": "Hear a demonstrative phrase",
-      "prompt": "Listen, then build the phrase you hear.",
-      "hint": "Listen for the noun followed by the pointing expression.",
+      "title": "Hear several pointed-out objects",
+      "prompt": "Listen and rebuild the phrase.",
+      "hint": "Listen for sa yo.",
       "help": {
-        "concept": "Build the singular demonstrative phrase in spoken order.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
+        "concept": "hearing a plural demonstrative phrase",
+        "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+        "hint_2": "Pay attention to what comes before or after the noun."
       },
-      "targetText": "machin sa a",
+      "targetText": "Liv sa yo.",
       "locale": "ht-HT",
       "wordBank": [
-        "machin",
+        "Liv",
         "sa",
-        "a"
-      ],
-      "distractors": [
-        "yo"
-      ],
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "yo."
+      ]
     },
     {
-      "id": "what-is-this-scenario-and-review-voice",
-      "kind": "voice_input",
-      "title": "Point out several books",
-      "prompt": "Say: liv sa yo.",
-      "hint": "Say the noun and plural demonstrative together.",
-      "help": {
-        "concept": "Speaking practice compares the recognized transcript with the authored demonstrative phrase.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
-      },
-      "targetText": "liv sa yo",
-      "locale": "ht-HT",
-      "maxSeconds": 10,
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
-    },
-    {
-      "id": "what-is-this-scenario-and-review-build",
+      "id": "demonstrative-owner-build",
       "kind": "word_bank_arrange",
-      "title": "Say whose bag it is",
-      "prompt": "Arrange the words to say “This bag is for Mari.”",
-      "hint": "Point out the bag first, then identify the owner.",
+      "title": "Build an ownership statement",
+      "prompt": "Build “This bag belongs to Mari.”",
+      "hint": "Use sa a, then se pou Mari.",
       "help": {
-        "concept": "A demonstrative noun phrase can be followed by the ownership pattern.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
+        "concept": "combining demonstration and ownership",
+        "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+        "hint_2": "Pay attention to what comes before or after the noun."
       },
       "targetText": "Valiz sa a se pou Mari.",
       "locale": "ht-HT",
@@ -197,37 +274,21 @@
         "se",
         "pou",
         "Mari."
-      ],
-      "distractors": [
-        "yo"
-      ],
-      "ttsText": "Valiz sa a se pou Mari.",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+      ]
     },
     {
-      "id": "what-is-this-scenario-and-review-write",
-      "kind": "text_input",
-      "title": "Write “these books”",
-      "prompt": "Type the Kreyòl phrase for “these/those books.”",
-      "hint": "Use the plural demonstrative pattern after the noun.",
+      "id": "demonstrative-owner-voice",
+      "kind": "voice_input",
+      "title": "Say who owns these notebooks",
+      "prompt": "Say “These notebooks belong to Jan.”",
+      "hint": "Use kaye sa yo with se pou Jan.",
       "help": {
-        "concept": "Write the complete three-word demonstrative noun phrase.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
+        "concept": "producing a demonstrative ownership statement",
+        "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+        "hint_2": "Pay attention to what comes before or after the noun."
       },
-      "expectedText": "liv sa yo",
-      "placeholder": "Type the Kreyòl answer",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+      "targetText": "Kaye sa yo se pou Jan.",
+      "locale": "ht-HT"
     }
   ]
 }

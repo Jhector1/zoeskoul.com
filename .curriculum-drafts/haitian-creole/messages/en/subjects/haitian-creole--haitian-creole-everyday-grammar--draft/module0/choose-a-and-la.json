@@ -1,0 +1,207 @@
+{
+  "topics": {
+    "haitian-creole--haitian-creole-everyday-grammar--draft": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "choose-a-and-la": {
+          "label": "Choose a or la",
+          "summary": "Use the ending-sound patterns to choose between the singular definite articles a and la.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose a"
+            },
+            "sketch1": {
+              "title": "Choose la"
+            },
+            "sketch2": {
+              "title": "Choose Between Them"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_choose_a_and_la_sketch0": {
+              "title": "Try it yourself: Build a phrase with a",
+              "prompt": "Right after the sketch \"Use a with The vowel-ending pattern\", practice that exact idea with this task. Build the Kreyòl phrase for “the radio.”. Produce the result for build a phrase with a so it reinforces Choose a or la."
+            },
+            "try_choose_a_and_la_sketch1": {
+              "title": "Try it yourself: Build a phrase with la",
+              "prompt": "Right after the sketch \"Use la with The consonant-ending examples\", practice that exact idea with this task. Build the Kreyòl phrase for “the fork.”. Produce the result for build a phrase with la so it reinforces Choose a or la."
+            },
+            "try_choose_a_and_la_sketch2": {
+              "title": "Try it yourself: Choose the article for kiyè",
+              "prompt": "Right after the sketch \"Let the noun ending guide the choice\", practice that exact idea with this task. Which phrase means “the spoon”? Produce the result for choose the article for kiyè so it reinforces Choose a or la."
+            }
+          },
+          "practice": {
+            "choose-a-and-la-choice": {
+              "title": "Choose “the desk”",
+              "prompt": "Which phrase means “the desk”?",
+              "hint": "Use the article form listed with biwo in The practice set.",
+              "help": {
+                "concept": "a versus la",
+                "hint_1": "Use the article form listed with biwo in The practice set.",
+                "hint_2": "Listen to or read the whole noun phrase before choosing."
+              },
+              "options": {
+                "a": "biwo a",
+                "b": "biwo la",
+                "c": "a biwo"
+              }
+            },
+            "choose-a-and-la-fill": {
+              "title": "Complete “the table”",
+              "prompt": "Choose the article that completes The phrase.",
+              "hint": "Listen to the noun's final sound before choosing.",
+              "help": {
+                "concept": "ending-sound selection",
+                "hint_1": "Listen closely to the noun's final sound.",
+                "hint_2": "Use the sound pattern you just practiced."
+              },
+              "template": "tab [blank1]",
+              "choices": [
+                "a",
+                "la",
+                "an"
+              ]
+            },
+            "choose-a-and-la-listen": {
+              "title": "Hear “the notebook”",
+              "prompt": "Listen, then build the noun phrase you hear.",
+              "hint": "Listen for both the noun and its following article.",
+              "help": {
+                "concept": "hearing a versus la",
+                "hint_1": "Listen for both the noun and its following article.",
+                "hint_2": "Build only the phrase you hear."
+              },
+              "targetText": "kaye a",
+              "wordBank": [
+                "kaye",
+                "a"
+              ],
+              "distractors": [
+                "la"
+              ]
+            },
+            "choose-a-and-la-voice": {
+              "title": "Say “the bag”",
+              "prompt": "Press Start. Say “valiz la,” then press Stop when you’re done.",
+              "hint": "Say the complete two-word phrase.",
+              "help": {
+                "concept": "speaking a la phrase",
+                "hint_1": "Say the complete two-word phrase.",
+                "hint_2": "Say the complete noun phrase naturally."
+              },
+              "targetText": "valiz la"
+            },
+            "choose-a-and-la-build": {
+              "title": "Build “the spoon”",
+              "prompt": "Arrange the Kreyòl phrase for “the spoon.”",
+              "hint": "Choose the article used with kiyè in.",
+              "help": {
+                "concept": "building an a phrase",
+                "hint_1": "Choose the article used with kiyè in.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "kiyè a",
+              "wordBank": [
+                "kiyè",
+                "a"
+              ],
+              "distractors": [
+                "la"
+              ],
+              "ttsText": "kiyè a"
+            },
+            "choose-a-and-la-write": {
+              "title": "Write “the fork”",
+              "prompt": "Type the Kreyòl phrase for “the fork.”",
+              "hint": "Use the practice form.",
+              "help": {
+                "concept": "writing a la phrase",
+                "hint_1": "Use the practice form.",
+                "hint_2": "Type the complete Kreyòl noun phrase."
+              },
+              "expectedText": "fouchèt la",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-a-radyo": {
+              "title": "Build a phrase with a",
+              "prompt": "Build the Kreyòl phrase for “the radio.”",
+              "hint": "The practice list uses a with radyo.",
+              "help": {
+                "concept": "choosing a from the noun ending",
+                "hint_1": "The practice list uses a with radyo.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "radyo a",
+              "wordBank": [
+                "radyo",
+                "a"
+              ],
+              "distractors": [
+                "la"
+              ],
+              "ttsText": "radyo a"
+            },
+            "try-la-fouchet": {
+              "title": "Build a phrase with la",
+              "prompt": "Build the Kreyòl phrase for “the fork.”",
+              "hint": "Use the practice form for fouchèt.",
+              "help": {
+                "concept": "choosing la from the noun ending",
+                "hint_1": "Use the practice form for fouchèt.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "fouchèt la",
+              "wordBank": [
+                "fouchèt",
+                "la"
+              ],
+              "distractors": [
+                "a"
+              ],
+              "ttsText": "fouchèt la"
+            },
+            "try-a-kiye": {
+              "title": "Choose the article for kiyè",
+              "prompt": "Which phrase means “the spoon”?",
+              "hint": "Listen to the ending of kiyè and use the practice list.",
+              "help": {
+                "concept": "a versus la",
+                "hint_1": "Listen to the ending of kiyè and use the practice list.",
+                "hint_2": "Listen to or read the whole noun phrase before choosing."
+              },
+              "options": {
+                "a": "kiyè a",
+                "b": "kiyè la",
+                "c": "a kiyè"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole--haitian-creole-everyday-grammar--draft": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "choose-a-and-la": {
+          "article-a": {
+            "title": "Use a with The vowel-ending pattern",
+            "bodyMarkdown": "Course 1 already taught you that the definite article follows the noun. Now choose the form. Use **a** when the noun ends in a non-nasal vowel sound:\n\n- **tifi a** — the girl\n- **flè a** — the flower\n\nListen to the end of the noun before choosing the article."
+          },
+          "article-la": {
+            "title": "Use la with The consonant-ending examples",
+            "bodyMarkdown": "Use **la** with these examples ending in a consonant:\n\n- **bèf la** — the cow\n- **chat la** — the cat\n- **kòb la** — the money\n\nDo not translate “the” first. Notice the end of the Kreyòl noun."
+          },
+          "a-vs-la": {
+            "title": "Let the noun ending guide the choice",
+            "bodyMarkdown": "Compare the two article patterns:\n\n- a follows examples ending in a non-nasal vowel.\n- la follows examples such as bèf, chat, and kòb.\n\nYou already know where the article goes. The new skill is choosing its form."
+          }
+        }
+      }
+    }
+  }
+}

@@ -36,6 +36,7 @@ const defaults = {
   theme: "system",
   fontSizePx: 16,
   soundEnabled: true,
+  languageAudioAutoPlay: false,
 } as const;
 
 const stored = {
@@ -43,6 +44,7 @@ const stored = {
   theme: "dark",
   fontSizePx: 20,
   soundEnabled: false,
+  languageAudioAutoPlay: false,
 } as const;
 
 function request(args: {
@@ -220,7 +222,7 @@ describe("/api/app-preferences", () => {
       }),
     );
     expect(response.headers.get("set-cookie")).toContain(
-      "zoeskoul.preferences=v1.fr.d.20.0",
+      "zoeskoul.preferences=v2.fr.d.20.0.0",
     );
   });
 

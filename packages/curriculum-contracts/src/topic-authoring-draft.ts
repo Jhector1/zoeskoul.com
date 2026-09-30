@@ -27,6 +27,10 @@ import {
 } from "./workspace-path.js";
 import {countFillBlanks} from "./fillBlank/fillBlankText.js";
 import type { ToolPresentationPolicy } from "./tool-presentation.js";
+import {
+    assertLanguageAudioSpec,
+    type LanguageAudioSpec,
+} from "./language-audio.js";
 export type ExerciseHelpDraft = {
     concept: string;
     hint_1: string;
@@ -96,6 +100,8 @@ export type TopicAuthoringDraft = {
         /** Inner heading that introduces the body prose. */
         title: string;
         bodyMarkdown: string;
+        /** Exact target-language speech for this card. */
+        audio?: LanguageAudioSpec;
         /**
          * Dedicated exercises for this teaching sketch.
          *
@@ -829,6 +835,90 @@ const authoringExerciseItemSchema = {
                 ],
             } satisfies JsonSchema;
 
+const languageAudioSchema = {
+    type: "object",
+    additionalProperties: false,
+    required: ["kind", "locale", "segments"],
+    properties: {
+        kind: {
+            type: "string",
+            enum: ["read_aloud", "conversation"],
+        },
+        locale: {
+            type: "string",
+            minLength: 1,
+        },
+        speed: {
+            type: "number",
+            minimum: 0.8,
+            maximum: 1.2,
+        },
+        defaultPauseMs: {
+            type: "integer",
+            minimum: 0,
+            maximum: 2000,
+        },
+        speakers: {
+            type: "array",
+            maxItems: 8,
+            items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["id", "voiceSlot"],
+                properties: {
+                    id: {
+                        type: "string",
+                        minLength: 1,
+                    },
+                    voiceSlot: {
+                        type: "integer",
+                        minimum: 1,
+                        maximum: 8,
+                    },
+                    label: {
+                        type: "string",
+                        minLength: 1,
+                    },
+                    delivery: {
+                        type: "string",
+                        enum: [
+                            "neutral",
+                            "warm",
+                            "relaxed",
+                            "formal",
+                        ],
+                    },
+                },
+            },
+        },
+        segments: {
+            type: "array",
+            minItems: 1,
+            items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["text"],
+                properties: {
+                    text: {
+                        type: "string",
+                        minLength: 1,
+                        maxLength: 4096,
+                    },
+                    speakerId: {
+                        type: "string",
+                        minLength: 1,
+                    },
+                    pauseAfterMs: {
+                        type: "integer",
+                        minimum: 0,
+                        maximum: 3000,
+                    },
+                },
+            },
+        },
+    },
+} satisfies JsonSchema;
+
 export const TOPIC_AUTHORING_DRAFT_SCHEMA_VERSION =
     "2026-07-27-topic-authoring-draft-v3";
 
@@ -851,6 +941,7 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                     cardTitle: { type: "string" },
                     title: { type: "string" },
                     bodyMarkdown: { type: "string" },
+                    audio: languageAudioSchema,
                     tryItExercises: {
                         type: "array",
                         minItems: 1,
@@ -1909,6 +2000,7 @@ export function assertTopicAuthoringDraft(
                 "cardTitle",
                 "title",
                 "bodyMarkdown",
+                "audio",
                 "tryItExercises",
                 "tools",
             ],
@@ -1926,6 +2018,20 @@ export function assertTopicAuthoringDraft(
         }
         if (!isNonEmptyString(block.bodyMarkdown)) {
             fail(`sketchBlocks[${i}] needs bodyMarkdown`);
+        }
+
+        if (block.audio !== undefined) {
+            try {
+                assertLanguageAudioSpec(block.audio);
+            } catch (error) {
+                fail(
+                    `sketchBlocks[${i}].audio: ${
+                        error instanceof Error
+                            ? error.message
+                            : String(error)
+                    }`,
+                );
+            }
         }
 
         if (block.tryItExercises !== undefined) {

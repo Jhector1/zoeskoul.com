@@ -26,7 +26,8 @@
     "Use integrated receptive and productive practice rather than quiz-only instruction.",
     "Do not use programming runtime or code-workspace language.",
     "Do not describe speech transcript matching as a pronunciation score.",
-    "Module 1 must have accessOverride free; later modules inherit paid access."
+    "Module 1 must have accessOverride free; later modules inherit paid access.",
+    "Module, section, topic, sketch, and practice counts are pedagogical rather than fixed quotas; use only as many as the learning objective requires."
   ],
   "moduleRules": {
     "1": {
@@ -39,7 +40,7 @@
       ],
       "notes": [
         "Give true beginners enough sound and spelling confidence to approach their first spoken and written Kreyòl without treating English spelling as a guide.",
-        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+        "Use a natural integrated-skill progression for this module; do not create extra topics, sections, sketches, or activities only to satisfy a fixed count."
       ]
     },
     "2": {
@@ -51,7 +52,7 @@
       ],
       "notes": [
         "Move from isolated sounds into the first complete social interactions a learner can understand and use immediately.",
-        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+        "Use a natural integrated-skill progression for this module; do not create extra topics, sections, sketches, or activities only to satisfy a fixed count."
       ]
     },
     "3": {
@@ -63,7 +64,7 @@
       ],
       "notes": [
         "Give learners a practical identity exchange they can understand and produce with increasing independence.",
-        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+        "Use a natural integrated-skill progression for this module; do not create extra topics, sections, sketches, or activities only to satisfy a fixed count."
       ]
     },
     "4": {
@@ -75,7 +76,7 @@
       ],
       "notes": [
         "Expand from people to concrete objects so learners can understand and produce useful noun-centered sentences.",
-        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+        "Use a natural integrated-skill progression for this module; do not create extra topics, sections, sketches, or activities only to satisfy a fixed count."
       ]
     },
     "5": {
@@ -87,7 +88,7 @@
       ],
       "notes": [
         "Introduce the learner to useful action language without overloading the course with abstract grammar terminology.",
-        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+        "Use a natural integrated-skill progression for this module; do not create extra topics, sections, sketches, or activities only to satisfy a fixed count."
       ]
     },
     "6": {
@@ -99,7 +100,7 @@
       ],
       "notes": [
         "Turn memorized statements into flexible two-way communication by practicing common question-and-answer structures.",
-        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+        "Use a natural integrated-skill progression for this module; do not create extra topics, sections, sketches, or activities only to satisfy a fixed count."
       ]
     },
     "7": {
@@ -111,7 +112,7 @@
       ],
       "notes": [
         "Give learners practical language for quantities, basic time, and routine information they are likely to encounter early.",
-        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+        "Use a natural integrated-skill progression for this module; do not create extra topics, sections, sketches, or activities only to satisfy a fixed count."
       ]
     },
     "8": {
@@ -125,14 +126,13 @@
       ],
       "notes": [
         "Consolidate A0-to-A1 foundations into a small but meaningful conversation the learner can understand and produce.",
-        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+        "Use a natural integrated-skill progression for this module; do not create extra topics, sections, sketches, or activities only to satisfy a fixed count."
       ]
     }
   },
   "validationRequirements": {
     "profileId": "language",
     "moduleCount": 8,
-    "topicsPerModule": 4,
     "firstModuleFree": true,
     "forbidCodeInput": true,
     "forbidPseudocodeInput": true,

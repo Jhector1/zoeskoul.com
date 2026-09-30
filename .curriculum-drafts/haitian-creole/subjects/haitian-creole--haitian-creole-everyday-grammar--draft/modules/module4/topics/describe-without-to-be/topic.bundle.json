@@ -1,0 +1,483 @@
+{
+  "topicId": "describe-without-to-be",
+  "subjectSlug": "haitian-creole--haitian-creole-everyday-grammar--draft",
+  "moduleSlug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+  "sectionSlug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions",
+  "prefix": "ht2m5",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.label",
+    "summaryKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.cards.sketch0.title",
+      "sketchId": "states-with-li",
+      "height": 420,
+      "tryIt": {
+        "id": "try-describe-without-to-be-sketch0",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch0.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch0.prompt",
+        "exerciseKey": "try-li-state-choice",
+        "exerciseKeys": [
+          "try-li-state-choice"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.cards.sketch1.title",
+      "sketchId": "states-with-m-and-nou",
+      "height": 420,
+      "tryIt": {
+        "id": "try-describe-without-to-be-sketch1",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch1.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch1.prompt",
+        "exerciseKey": "try-nou-swaf-listen",
+        "exerciseKeys": [
+          "try-nou-swaf-listen",
+          "try-m-fatige-voice"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.cards.sketch2.title",
+      "sketchId": "states-with-yo",
+      "height": 420,
+      "tryIt": {
+        "id": "try-describe-without-to-be-sketch2",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch2.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch2.prompt",
+        "exerciseKey": "try-yo-grangou-build",
+        "exerciseKeys": [
+          "try-yo-grangou-build"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "states-with-li",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-li.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-li.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "With many states and descriptions, Kreyòl does not use a separate equivalent of English",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "to be",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Li malad.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "He is sick",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Li mouri.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "She is dead",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Li okipe.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "He is busy",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Li prese.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "She is in a hurry",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Notice the pattern: the subject is followed directly by the state description",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "states-with-m-and-nou",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-m-and-nou.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-m-and-nou.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Here are a few more examples",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "M fatige.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "I’m tired",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "M sezi.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "I’m surprised",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Nou pare?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Are you ready?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Nou swaf.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "We are thirsty",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "These examples keep the same idea: the state follows the subject without adding a separate English-style",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "is / am / are",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "word",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "states-with-yo",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-yo.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-yo.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Here are two more state descriptions",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Yo fache.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "They are angry",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Yo grangou.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "They are hungry",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Again, the description comes directly after",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Yo",
+            "locale": "ht-HT"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "state-quiz-malad-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-malad-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "state-quiz-pare-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-pare-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "state-quiz-fatige-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-fatige-listen",
+      "targetText": "M fatige.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "M fatige.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "state-quiz-grangou-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-grangou-listen",
+      "targetText": "Yo grangou.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Yo grangou.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "state-quiz-okipe-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-okipe-voice",
+      "targetText": "Li okipe.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Li okipe.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "state-quiz-fache-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-fache-voice",
+      "targetText": "Yo fache.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Yo fache.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "state-quiz-swaf-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-swaf-build",
+      "targetText": "Nou swaf.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Nou",
+        "swaf."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Nou swaf.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "state-quiz-prese-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-prese-build",
+      "targetText": "Li prese.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Li",
+        "prese."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Li prese.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-li-state-choice",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.try-li-state-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-nou-swaf-listen",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.try-nou-swaf-listen",
+      "targetText": "Nou swaf.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Nou swaf.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-m-fatige-voice",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.try-m-fatige-voice",
+      "targetText": "M fatige.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "M fatige.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-yo-grangou-build",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.try-yo-grangou-build",
+      "targetText": "Yo grangou.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Yo",
+        "grangou."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Yo grangou.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

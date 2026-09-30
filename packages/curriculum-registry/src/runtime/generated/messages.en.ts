@@ -5145,6 +5145,2651 @@ const messages: Record<string, any> = {
         }
       }
     },
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "choose-a-and-la": {
+          "label": "Choose a or la",
+          "summary": "Use the ending-sound patterns to choose between the singular definite articles a and la.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose a"
+            },
+            "sketch1": {
+              "title": "Choose la"
+            },
+            "sketch2": {
+              "title": "Choose Between Them"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_choose_a_and_la_sketch0": {
+              "title": "Try it yourself: Build a phrase with a",
+              "prompt": "Right after the sketch \"Use a with The vowel-ending pattern\", practice that exact idea with this task. Build the Kreyòl phrase for “the radio.”. Produce the result for build a phrase with a so it reinforces Choose a or la."
+            },
+            "try_choose_a_and_la_sketch1": {
+              "title": "Try it yourself: Build a phrase with la",
+              "prompt": "Right after the sketch \"Use la with The consonant-ending examples\", practice that exact idea with this task. Build the Kreyòl phrase for “the fork.”. Produce the result for build a phrase with la so it reinforces Choose a or la."
+            },
+            "try_choose_a_and_la_sketch2": {
+              "title": "Try it yourself: Choose the article for kiyè",
+              "prompt": "Right after the sketch \"Let the noun ending guide the choice\", practice that exact idea with this task. Which phrase means “the spoon”? Produce the result for choose the article for kiyè so it reinforces Choose a or la."
+            }
+          },
+          "practice": {
+            "choose-a-and-la-choice": {
+              "title": "Choose “the desk”",
+              "prompt": "Which phrase means “the desk”?",
+              "hint": "Use the article form listed with biwo in The practice set.",
+              "help": {
+                "concept": "a versus la",
+                "hint_1": "Use the article form listed with biwo in The practice set.",
+                "hint_2": "Listen to or read the whole noun phrase before choosing."
+              },
+              "options": {
+                "a": "biwo a",
+                "b": "biwo la",
+                "c": "a biwo"
+              }
+            },
+            "choose-a-and-la-fill": {
+              "title": "Complete “the table”",
+              "prompt": "Choose the article that completes The phrase.",
+              "hint": "Listen to the noun's final sound before choosing.",
+              "help": {
+                "concept": "ending-sound selection",
+                "hint_1": "Listen closely to the noun's final sound.",
+                "hint_2": "Use the sound pattern you just practiced."
+              },
+              "template": "tab [blank1]",
+              "choices": [
+                "a",
+                "la",
+                "an"
+              ]
+            },
+            "choose-a-and-la-listen": {
+              "title": "Hear “the notebook”",
+              "prompt": "Listen, then build the noun phrase you hear.",
+              "hint": "Listen for both the noun and its following article.",
+              "help": {
+                "concept": "hearing a versus la",
+                "hint_1": "Listen for both the noun and its following article.",
+                "hint_2": "Build only the phrase you hear."
+              },
+              "targetText": "kaye a",
+              "wordBank": [
+                "kaye",
+                "a"
+              ],
+              "distractors": [
+                "la"
+              ]
+            },
+            "choose-a-and-la-voice": {
+              "title": "Say “the bag”",
+              "prompt": "Press Start. Say “valiz la,” then press Stop when you’re done.",
+              "hint": "Say the complete two-word phrase.",
+              "help": {
+                "concept": "speaking a la phrase",
+                "hint_1": "Say the complete two-word phrase.",
+                "hint_2": "Say the complete noun phrase naturally."
+              },
+              "targetText": "valiz la"
+            },
+            "choose-a-and-la-build": {
+              "title": "Build “the spoon”",
+              "prompt": "Arrange the Kreyòl phrase for “the spoon.”",
+              "hint": "Choose the article used with kiyè in.",
+              "help": {
+                "concept": "building an a phrase",
+                "hint_1": "Choose the article used with kiyè in.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "kiyè a",
+              "wordBank": [
+                "kiyè",
+                "a"
+              ],
+              "distractors": [
+                "la"
+              ],
+              "ttsText": "kiyè a"
+            },
+            "choose-a-and-la-write": {
+              "title": "Write “the fork”",
+              "prompt": "Type the Kreyòl phrase for “the fork.”",
+              "hint": "Use the practice form.",
+              "help": {
+                "concept": "writing a la phrase",
+                "hint_1": "Use the practice form.",
+                "hint_2": "Type the complete Kreyòl noun phrase."
+              },
+              "expectedText": "fouchèt la",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-a-radyo": {
+              "title": "Build a phrase with a",
+              "prompt": "Build the Kreyòl phrase for “the radio.”",
+              "hint": "The practice list uses a with radyo.",
+              "help": {
+                "concept": "choosing a from the noun ending",
+                "hint_1": "The practice list uses a with radyo.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "radyo a",
+              "wordBank": [
+                "radyo",
+                "a"
+              ],
+              "distractors": [
+                "la"
+              ],
+              "ttsText": "radyo a"
+            },
+            "try-la-fouchet": {
+              "title": "Build a phrase with la",
+              "prompt": "Build the Kreyòl phrase for “the fork.”",
+              "hint": "Use the practice form for fouchèt.",
+              "help": {
+                "concept": "choosing la from the noun ending",
+                "hint_1": "Use the practice form for fouchèt.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "fouchèt la",
+              "wordBank": [
+                "fouchèt",
+                "la"
+              ],
+              "distractors": [
+                "a"
+              ],
+              "ttsText": "fouchèt la"
+            },
+            "try-a-kiye": {
+              "title": "Choose the article for kiyè",
+              "prompt": "Which phrase means “the spoon”?",
+              "hint": "Listen to the ending of kiyè and use the practice list.",
+              "help": {
+                "concept": "a versus la",
+                "hint_1": "Listen to the ending of kiyè and use the practice list.",
+                "hint_2": "Listen to or read the whole noun phrase before choosing."
+              },
+              "options": {
+                "a": "kiyè a",
+                "b": "kiyè la",
+                "c": "a kiyè"
+              }
+            }
+          }
+        },
+        "choose-an-lan-and-nan": {
+          "label": "Choose an, lan, or nan",
+          "summary": "Use the nasal-ending patterns to choose among an, lan, and nan.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose an"
+            },
+            "sketch1": {
+              "title": "Choose lan"
+            },
+            "sketch2": {
+              "title": "Choose nan"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_choose_an_lan_and_nan_sketch0": {
+              "title": "Try it yourself: Build a phrase with an",
+              "prompt": "Right after the sketch \"Use an with The nasal patterns\", practice that exact idea with this task. Build the phrase for “the television.”. Produce the result for build a phrase with an so it reinforces Choose an, lan, or nan."
+            },
+            "try_choose_an_lan_and_nan_sketch1": {
+              "title": "Try it yourself: Build a phrase with lan",
+              "prompt": "Right after the sketch \"Use lan with The nasal-plus-consonant pattern\", practice that exact idea with this task. Build the phrase for “the night.”. Produce the result for build a phrase with lan so it reinforces Choose an, lan, or nan."
+            },
+            "try_choose_an_lan_and_nan_sketch2": {
+              "title": "Try it yourself: Build a phrase with nan",
+              "prompt": "Right after the sketch \"Use nan with The m, nn, èn, and òn patterns\", practice that exact idea with this task. Build the phrase for “the phone.”. Produce the result for build a phrase with nan so it reinforces Choose an, lan, or nan."
+            }
+          },
+          "practice": {
+            "choose-an-lan-nan-choice": {
+              "title": "Choose “the bread”",
+              "prompt": "Which phrase means “the bread”?",
+              "hint": "Use the form for pen.",
+              "help": {
+                "concept": "choosing an",
+                "hint_1": "Use the form for pen.",
+                "hint_2": "Listen to or read the whole noun phrase before choosing."
+              },
+              "options": {
+                "a": "pen an",
+                "b": "pen lan",
+                "c": "pen nan"
+              }
+            },
+            "choose-an-lan-nan-fill": {
+              "title": "Complete “the knee”",
+              "prompt": "Choose the article that completes the phrase.",
+              "hint": "Listen to the noun's final sound before choosing.",
+              "help": {
+                "concept": "ending-sound selection",
+                "hint_1": "Listen closely to the noun's final sound.",
+                "hint_2": "Use the sound pattern you just practiced."
+              },
+              "template": "jenou [blank1]",
+              "choices": [
+                "an",
+                "lan",
+                "nan"
+              ]
+            },
+            "choose-an-lan-nan-listen": {
+              "title": "Hear “the night”",
+              "prompt": "Listen, then build the phrase you hear.",
+              "hint": "Listen for the complete phrase.",
+              "help": {
+                "concept": "hearing lan",
+                "hint_1": "Listen for the complete phrase.",
+                "hint_2": "Build only the phrase you hear."
+              },
+              "targetText": "nwit lan",
+              "wordBank": [
+                "nwit",
+                "lan"
+              ],
+              "distractors": [
+                "an",
+                "nan"
+              ]
+            },
+            "choose-an-lan-nan-voice": {
+              "title": "Say “the phone”",
+              "prompt": "Press Start. Say “telefòn nan,” then press Stop when you’re done.",
+              "hint": "Say the complete phrase.",
+              "help": {
+                "concept": "speaking a nan phrase",
+                "hint_1": "Say the complete phrase.",
+                "hint_2": "Say the complete noun phrase naturally."
+              },
+              "targetText": "telefòn nan"
+            },
+            "choose-an-lan-nan-build": {
+              "title": "Build “the area”",
+              "prompt": "Arrange the Kreyòl phrase for “the area.”",
+              "hint": "Use the form for zòn.",
+              "help": {
+                "concept": "building a nan phrase",
+                "hint_1": "Use the form for zòn.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "zòn nan",
+              "wordBank": [
+                "zòn",
+                "nan"
+              ],
+              "distractors": [
+                "an",
+                "lan"
+              ],
+              "ttsText": "zòn nan"
+            },
+            "choose-an-lan-nan-write": {
+              "title": "Write “the love”",
+              "prompt": "Type the Kreyòl phrase for “the love.”",
+              "hint": "places an after lanmou.",
+              "help": {
+                "concept": "writing an after the mou pattern",
+                "hint_1": "places an after lanmou.",
+                "hint_2": "Type the complete Kreyòl noun phrase."
+              },
+              "expectedText": "lanmou an",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-an-televizyon": {
+              "title": "Build a phrase with an",
+              "prompt": "Build the phrase for “the television.”",
+              "hint": "Use the form given for televizyon in The practice list.",
+              "help": {
+                "concept": "choosing an",
+                "hint_1": "Use the form given for televizyon in The practice list.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "televizyon an",
+              "wordBank": [
+                "televizyon",
+                "an"
+              ],
+              "distractors": [
+                "lan",
+                "nan"
+              ],
+              "ttsText": "televizyon an"
+            },
+            "try-lan-nwit": {
+              "title": "Build a phrase with lan",
+              "prompt": "Build the phrase for “the night.”",
+              "hint": "lists nwit with lan.",
+              "help": {
+                "concept": "choosing lan",
+                "hint_1": "lists nwit with lan.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "nwit lan",
+              "wordBank": [
+                "nwit",
+                "lan"
+              ],
+              "distractors": [
+                "an",
+                "nan"
+              ],
+              "ttsText": "nwit lan"
+            },
+            "try-nan-telefon": {
+              "title": "Build a phrase with nan",
+              "prompt": "Build the phrase for “the phone.”",
+              "hint": "Use the form given for telefòn in The practice list.",
+              "help": {
+                "concept": "choosing nan",
+                "hint_1": "Use the form given for telefòn in The practice list.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "telefòn nan",
+              "wordBank": [
+                "telefòn",
+                "nan"
+              ],
+              "distractors": [
+                "an",
+                "lan"
+              ],
+              "ttsText": "telefòn nan"
+            }
+          }
+        },
+        "hear-and-use-definite-articles": {
+          "label": "Hear and Use Definite Articles",
+          "summary": "Mix all five singular definite article forms in listening, speaking, building, and writing.",
+          "cards": {
+            "sketch0": {
+              "title": "Listen Before You Choose"
+            },
+            "sketch1": {
+              "title": "Keep the Known Word Order"
+            },
+            "sketch2": {
+              "title": "Switch Between Forms"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_hear_and_use_definite_articles_sketch0": {
+              "title": "Try it yourself: Hear a mixed article phrase",
+              "prompt": "Right after the sketch \"Hear the end of the noun\", practice that exact idea with this task. Listen, then build the noun phrase you hear. Produce the result for hear a mixed article phrase so it reinforces Hear and Use Definite Articles."
+            },
+            "try_hear_and_use_definite_articles_sketch1": {
+              "title": "Try it yourself: Build a mixed phrase",
+              "prompt": "Right after the sketch \"Keep the noun first\", practice that exact idea with this task. Build the phrase for “the fork.”. Produce the result for build a mixed phrase so it reinforces Hear and Use Definite Articles."
+            },
+            "try_hear_and_use_definite_articles_sketch2": {
+              "title": "Try it yourself: Choose a mixed article form",
+              "prompt": "Right after the sketch \"Choose the form, not an English translation\", practice that exact idea with this task. Which phrase means “the spoon”? Produce the result for choose a mixed article form so it reinforces Hear and Use Definite Articles."
+            }
+          },
+          "practice": {
+            "hear-use-articles-listen-a": {
+              "title": "Hear an a phrase",
+              "prompt": "Listen, then build the noun phrase.",
+              "hint": "Listen for the noun and article together.",
+              "help": {
+                "concept": "mixed article listening",
+                "hint_1": "Listen for the noun and article together.",
+                "hint_2": "Build only the phrase you hear."
+              },
+              "targetText": "radyo a",
+              "wordBank": [
+                "radyo",
+                "a"
+              ],
+              "distractors": [
+                "la",
+                "an"
+              ]
+            },
+            "hear-use-articles-listen-an": {
+              "title": "Hear an an phrase",
+              "prompt": "Listen, then build the noun phrase.",
+              "hint": "Listen for the complete phrase.",
+              "help": {
+                "concept": "mixed article listening",
+                "hint_1": "Listen for the complete phrase.",
+                "hint_2": "Build only the phrase you hear."
+              },
+              "targetText": "televizyon an",
+              "wordBank": [
+                "televizyon",
+                "an"
+              ],
+              "distractors": [
+                "lan",
+                "nan"
+              ]
+            },
+            "hear-use-articles-voice-la": {
+              "title": "Say a la phrase",
+              "prompt": "Press Start. Say “tab la,” then press Stop when you’re done.",
+              "hint": "Say the complete phrase.",
+              "help": {
+                "concept": "mixed article speaking",
+                "hint_1": "Say the complete phrase.",
+                "hint_2": "Say the complete noun phrase naturally."
+              },
+              "targetText": "tab la"
+            },
+            "hear-use-articles-build-nan": {
+              "title": "Build a nan phrase",
+              "prompt": "Build the Kreyòl phrase for “the phone.”",
+              "hint": "Choose the form supported by.",
+              "help": {
+                "concept": "mixed article building",
+                "hint_1": "Choose the form supported by.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "telefòn nan",
+              "wordBank": [
+                "telefòn",
+                "nan"
+              ],
+              "distractors": [
+                "an",
+                "lan"
+              ],
+              "ttsText": "telefòn nan"
+            },
+            "hear-use-articles-write-a": {
+              "title": "Write an a phrase",
+              "prompt": "Type the Kreyòl phrase for “the desk.”",
+              "hint": "Use the practice form.",
+              "help": {
+                "concept": "mixed article writing",
+                "hint_1": "Use the practice form.",
+                "hint_2": "Type the complete Kreyòl noun phrase."
+              },
+              "expectedText": "biwo a",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "hear-use-articles-choice": {
+              "title": "Choose the phrase",
+              "prompt": "Which phrase means “the bag” in The practice list?",
+              "hint": "Choose the article form used with valiz in.",
+              "help": {
+                "concept": "mixed article selection",
+                "hint_1": "Choose the article form used with valiz in.",
+                "hint_2": "Listen to or read the whole noun phrase before choosing."
+              },
+              "options": {
+                "a": "valiz la",
+                "b": "valiz a",
+                "c": "valiz an"
+              }
+            },
+            "try-mixed-biwo": {
+              "title": "Hear a mixed article phrase",
+              "prompt": "Listen, then build the noun phrase you hear.",
+              "hint": "Build only the phrase you hear.",
+              "help": {
+                "concept": "mixed definite article listening",
+                "hint_1": "Build only the phrase you hear.",
+                "hint_2": "Build only the phrase you hear."
+              },
+              "targetText": "biwo a",
+              "wordBank": [
+                "biwo",
+                "a"
+              ],
+              "distractors": [
+                "la",
+                "an"
+              ]
+            },
+            "try-mixed-fouchet": {
+              "title": "Build a mixed phrase",
+              "prompt": "Build the phrase for “the fork.”",
+              "hint": "Keep the known noun-plus-article order.",
+              "help": {
+                "concept": "applying article choice in known word order",
+                "hint_1": "Keep the known noun-plus-article order.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "fouchèt la",
+              "wordBank": [
+                "fouchèt",
+                "la"
+              ],
+              "distractors": [
+                "a",
+                "an"
+              ],
+              "ttsText": "fouchèt la"
+            },
+            "try-mixed-kiye": {
+              "title": "Choose a mixed article form",
+              "prompt": "Which phrase means “the spoon”?",
+              "hint": "Use the phrase from The practice list.",
+              "help": {
+                "concept": "mixed article selection",
+                "hint_1": "Use the phrase from The practice list.",
+                "hint_2": "Listen to or read the whole noun phrase before choosing."
+              },
+              "options": {
+                "a": "kiyè a",
+                "b": "kiyè an",
+                "c": "kiyè nan"
+              }
+            }
+          }
+        }
+      },
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "use-possessive-pronouns": {
+          "label": "Use Possessive Pronouns",
+          "summary": "Use the singular and plural possessive-pronoun forms, including their contracted forms.",
+          "cards": {
+            "sketch0": {
+              "title": "Singular Possessive Pronouns"
+            },
+            "sketch1": {
+              "title": "Read the Singular Pairs"
+            },
+            "sketch2": {
+              "title": "Plural Possessive Pronouns"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_use_possessive_pronouns_sketch0": {
+              "title": "Try it yourself: Match the singular pair",
+              "prompt": "Right after the sketch \"Match each full singular form with its contracted form\", practice that exact idea with this task. Which contracted singular form is paired with “pa nou an” in The table? Produce the result for match the singular pair so it reinforces Use Possessive Pronouns."
+            },
+            "try_use_possessive_pronouns_sketch1": {
+              "title": "Try it yourself: Complete the short form",
+              "prompt": "Right after the sketch \"Practice each full and short form as a pair\", practice that exact idea with this task. Complete the contracted singular form paired with “pa ou a.”. Produce the result for complete the short form so it reinforces Use Possessive Pronouns."
+            },
+            "try_use_possessive_pronouns_sketch2": {
+              "title": "Try it yourself: Write the plural short form",
+              "prompt": "Right after the sketch \"Use yo in the plural possessive forms\", practice that exact idea with this task. Type the contracted plural possessive pronoun meaning “mine.”. Produce the result for write the plural short form so it reinforces Use Possessive Pronouns."
+            }
+          },
+          "practice": {
+            "possessive-singular-li-choice": {
+              "title": "Match li",
+              "prompt": "Which contracted singular form is paired with “pa li a”?",
+              "hint": "Compare the singular pairs.",
+              "help": {
+                "concept": "Use the contracted form from the same singular row as the full form.",
+                "hint_1": "Stay with the row for Li.",
+                "hint_2": "Choose its contracted-column entry."
+              },
+              "options": {
+                "a": "pa l la",
+                "b": "pa n nan",
+                "c": "pa w la"
+              }
+            },
+            "possessive-singular-yo-choice": {
+              "title": "Find the singular exception",
+              "prompt": "Which singular full possessive form is listed without a contracted partner in?",
+              "hint": "Compare all six singular rows.",
+              "help": {
+                "concept": "Five meanings are represented in the table, but one pronoun row has no short partner.",
+                "hint_1": "Look only at the short form.",
+                "hint_2": "Choose the full form from the row where that column says no contracted form."
+              },
+              "options": {
+                "a": "pa yo a",
+                "b": "pa nou an",
+                "c": "pa ou a"
+              }
+            },
+            "possessive-singular-m-fill": {
+              "title": "Complete mine",
+              "prompt": "Complete the contracted singular form paired with “pa mwen an.”",
+              "hint": "Use the short form from the same pronoun pair.",
+              "help": {
+                "concept": "The blank is the short pronoun inside the contracted form.",
+                "hint_1": "Compare the singular contracted forms.",
+                "hint_2": "Keep pa and nan unchanged."
+              },
+              "template": "pa ___ nan",
+              "choices": [
+                "m",
+                "n",
+                "l"
+              ]
+            },
+            "possessive-plural-n-fill": {
+              "title": "Complete ours",
+              "prompt": "Complete the contracted plural form paired with “pa nou yo.”",
+              "hint": "Use the plural short form.",
+              "help": {
+                "concept": "The plural short form keeps pa and yo around the contracted pronoun.",
+                "hint_1": "Find the Nou pair in the plural table.",
+                "hint_2": "Choose its single-letter short pronoun."
+              },
+              "template": "pa ___ yo",
+              "choices": [
+                "n",
+                "w",
+                "l"
+              ]
+            },
+            "possessive-singular-ou-text": {
+              "title": "Write yours",
+              "prompt": "Type the contracted singular form paired with “pa ou a.”",
+              "hint": "Use the exact contracted form from.",
+              "help": {
+                "concept": "Write the complete contracted possessive pronoun, not only the short pronoun.",
+                "hint_1": "Use the Ou pair.",
+                "hint_2": "Include all three parts of the contracted form."
+              },
+              "expectedText": "pa w la",
+              "placeholder": "Type the Kreyòl form"
+            },
+            "possessive-plural-li-text": {
+              "title": "Write the plural li form",
+              "prompt": "Type the contracted plural form paired with “pa li yo.”",
+              "hint": "Use the exact plural contracted form from.",
+              "help": {
+                "concept": "Write the complete plural possessive form from the short form.",
+                "hint_1": "Use the Li pair in the plural table.",
+                "hint_2": "Keep the final plural marker."
+              },
+              "expectedText": "pa l yo",
+              "placeholder": "Type the Kreyòl form"
+            },
+            "try-singular-nou": {
+              "title": "Match the singular pair",
+              "prompt": "Which contracted singular form is paired with “pa nou an” in The table?",
+              "hint": "Compare the full and short forms for the same pronoun.",
+              "help": {
+                "concept": "Each singular row pairs the full possessive form with the contracted form by the lesson.",
+                "hint_1": "Stay on the row for Nou.",
+                "hint_2": "Choose the form from that pair's short form."
+              },
+              "options": {
+                "a": "pa n nan",
+                "b": "pa w la",
+                "c": "pa l la"
+              }
+            },
+            "try-singular-ou-fill": {
+              "title": "Complete the short form",
+              "prompt": "Complete the contracted singular form paired with “pa ou a.”",
+              "hint": "Use the same pronoun pair in The pair list.",
+              "help": {
+                "concept": "The missing position contains the short pronoun from the corresponding pair.",
+                "hint_1": "Compare the four contracted singular forms.",
+                "hint_2": "Keep the surrounding words unchanged."
+              },
+              "template": "pa ___ la",
+              "choices": [
+                "w",
+                "m",
+                "l"
+              ]
+            },
+            "try-plural-mine-text": {
+              "title": "Write the plural short form",
+              "prompt": "Type the contracted plural possessive pronoun meaning “mine.”",
+              "hint": "Use the short form of the plural table.",
+              "help": {
+                "concept": "Plural contracted possessive forms keep pa, use the short pronoun, and end with yo.",
+                "hint_1": "Find the row whose meaning is mine.",
+                "hint_2": "Copy the contracted form from that pair."
+              },
+              "expectedText": "pa m yo",
+              "placeholder": "Type the Kreyòl form"
+            }
+          }
+        },
+        "use-short-object-pronouns": {
+          "label": "Use Short Object Pronouns",
+          "summary": "Use the short object forms m, w, l, and n in sentences.",
+          "cards": {
+            "sketch0": {
+              "title": "Shorten li to l"
+            },
+            "sketch1": {
+              "title": "Shorten mwen and ou"
+            },
+            "sketch2": {
+              "title": "Map the short forms"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_use_short_object_pronouns_sketch0": {
+              "title": "Try it yourself: Build Carla’s short form",
+              "prompt": "Right after the sketch \"Use l for li in object position\", practice that exact idea with this task. Build the short-object version of “Carla achte li.”. Produce the result for build Carla’s short form so it reinforces Use Short Object Pronouns."
+            },
+            "try_use_short_object_pronouns_sketch1": {
+              "title": "Try it yourself: Say the short ou form",
+              "prompt": "Right after the sketch \"Use m and w as short objects\", practice that exact idea with this task. Say the short-object version of “Nou rayi ou.”. Produce the result for say the short ou form so it reinforces Use Short Object Pronouns."
+            },
+            "try_use_short_object_pronouns_sketch2": {
+              "title": "Try it yourself: Choose the short form of Nou",
+              "prompt": "Right after the sketch \"Connect each full pronoun with its short object form\", practice that exact idea with this task. Which short object form does The table give for Nou? Produce the result for choose the short form of Nou so it reinforces Use Short Object Pronouns."
+            }
+          },
+          "practice": {
+            "short-object-li-choice": {
+              "title": "Recognize the short li object",
+              "prompt": "Which sentence uses the short object form of li after “Mwen renmen”?",
+              "hint": "Choose the version with the contracted object.",
+              "help": {
+                "concept": "li can appear as l in object position.",
+                "hint_1": "Compare the full and short forms.",
+                "hint_2": "The short form has one letter after renmen."
+              },
+              "options": {
+                "a": "Mwen renmen l",
+                "b": "Mwen renmen li",
+                "c": "Li renmen m"
+              }
+            },
+            "short-object-yo-choice": {
+              "title": "Find the form without a contraction",
+              "prompt": "Which full pronoun has no contracted object form shown in The table?",
+              "hint": "Compare all five rows in the object-form table and look for the row that differs from the four shortened forms.",
+              "help": {
+                "concept": "Most rows pair a full pronoun with a one-letter object form; one row is the exception.",
+                "hint_1": "Look at the short forms and compare the pattern across all five rows.",
+                "hint_2": "Choose the pronoun whose row does not show a one-letter contracted object form."
+              },
+              "options": {
+                "a": "Yo",
+                "b": "Li",
+                "c": "Ou"
+              }
+            },
+            "short-object-m-voice": {
+              "title": "Say the short mwen object",
+              "prompt": "Say the short-object sentence for “Li renmen mwen.”",
+              "hint": "Shorten the final object pronoun.",
+              "help": {
+                "concept": "mwen contracts to m in this object position.",
+                "hint_1": "Keep Li renmen unchanged.",
+                "hint_2": "Use the short form from the mwen row."
+              },
+              "targetText": "Li renmen m"
+            },
+            "short-object-w-voice": {
+              "title": "Say the short ou object",
+              "prompt": "Say the short-object sentence for “Nou rayi ou.”",
+              "hint": "Shorten only the final object.",
+              "help": {
+                "concept": "ou contracts to w in this object position.",
+                "hint_1": "Keep Nou rayi unchanged.",
+                "hint_2": "Use the short form from the ou row."
+              },
+              "targetText": "Nou rayi w"
+            },
+            "short-object-carla-build": {
+              "title": "Build Carla’s sentence",
+              "prompt": "Build the short-object version of “Carla achte li.”",
+              "hint": "Keep the subject and verb, then use the short li object.",
+              "help": {
+                "concept": "li contracts to l after achte in this example.",
+                "hint_1": "Start with Carla.",
+                "hint_2": "The final token is the short form of li."
+              },
+              "targetText": "Carla achte l",
+              "wordBank": [
+                "Carla",
+                "achte",
+                "l"
+              ]
+            },
+            "short-object-m-build": {
+              "title": "Build the short mwen sentence",
+              "prompt": "Build the short-object version of “Li renmen mwen.”",
+              "hint": "Use the short object form after renmen.",
+              "help": {
+                "concept": "mwen contracts to m in this example.",
+                "hint_1": "Keep Li first and renmen second.",
+                "hint_2": "Finish with the short form of mwen."
+              },
+              "targetText": "Li renmen m",
+              "wordBank": [
+                "Li",
+                "renmen",
+                "m"
+              ]
+            },
+            "try-carla-l": {
+              "title": "Build Carla’s short form",
+              "prompt": "Build the short-object version of “Carla achte li.”",
+              "hint": "Use the short object that corresponds to li.",
+              "help": {
+                "concept": "li can contract to l in object position.",
+                "hint_1": "Keep Carla and achte in the same order.",
+                "hint_2": "Replace the final full object pronoun with its short form."
+              },
+              "targetText": "Carla achte l",
+              "wordBank": [
+                "Carla",
+                "achte",
+                "l"
+              ]
+            },
+            "try-nou-rayi-w": {
+              "title": "Say the short ou form",
+              "prompt": "Say the short-object version of “Nou rayi ou.”",
+              "hint": "Use the short object form that corresponds to ou.",
+              "help": {
+                "concept": "ou contracts to w in this object position.",
+                "hint_1": "Keep Nou rayi and shorten only the object pronoun.",
+                "hint_2": "Use the ou → w mapping."
+              },
+              "targetText": "Nou rayi w"
+            },
+            "try-nou-to-n": {
+              "title": "Choose the short form of Nou",
+              "prompt": "Which short object form does The table give for Nou?",
+              "hint": "Use the mapping table, not the full pronoun.",
+              "help": {
+                "concept": "Nou maps to n in The short-object table.",
+                "hint_1": "Look at the Nou pair.",
+                "hint_2": "Choose the single-letter short form from that pair."
+              },
+              "options": {
+                "a": "n",
+                "b": "m",
+                "c": "l"
+              }
+            }
+          }
+        }
+      },
+      "haitian-creole-everyday-grammar-3-more-questions-and-health": {
+        "ask-for-more-specific-information": {
+          "label": "Ask for More Specific Information",
+          "summary": "Use the question forms Kilès, Kilè, and Poukisa to ask which, when, and why.",
+          "cards": {
+            "sketch0": {
+              "title": "Ask Which One"
+            },
+            "sketch1": {
+              "title": "Ask When"
+            },
+            "sketch2": {
+              "title": "Ask Why"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_ask_for_more_specific_information_sketch0": {
+              "title": "Try it yourself: Choose the question form",
+              "prompt": "Right after the sketch \"Kilès?\", practice that exact idea with this task. Which form asks “which one?”. Produce the result for choose the question form so it reinforces Ask for More Specific Information."
+            },
+            "try_ask_for_more_specific_information_sketch1": {
+              "title": "Try it yourself: Complete the when question",
+              "prompt": "Right after the sketch \"Kilè?\", practice that exact idea with this task. Choose The question form that completes the example. Produce the result for complete the when question so it reinforces Ask for More Specific Information."
+            },
+            "try_ask_for_more_specific_information_sketch2": {
+              "title": "Try it yourself: Ask why",
+              "prompt": "Right after the sketch \"Poukisa?\", practice that exact idea with this task. Say the question “Why are you crying?” in Kreyòl. Produce the result for ask why so it reinforces Ask for More Specific Information."
+            }
+          },
+          "practice": {
+            "specific-info-kiles-choice": {
+              "title": "Ask which one",
+              "prompt": "Which form asks a person to choose one from a group?",
+              "hint": "Think about the kind of information being requested.",
+              "help": {
+                "concept": "The target form asks for a selection among alternatives.",
+                "hint_1": "Eliminate the forms that ask about time or reason.",
+                "hint_2": "Choose the remaining selection question."
+              },
+              "options": {
+                "a": "Kilès",
+                "b": "Kilè",
+                "c": "Poukisa"
+              }
+            },
+            "specific-info-poukisa-choice": {
+              "title": "Ask for a reason",
+              "prompt": "Which form asks for a reason?",
+              "hint": "Think about what kind of answer would follow.",
+              "help": {
+                "concept": "A reason question expects an explanation of why something happens.",
+                "hint_1": "Do not choose the form for selecting one item.",
+                "hint_2": "Do not choose the form for asking when."
+              },
+              "options": {
+                "a": "Poukisa",
+                "b": "Kilès",
+                "c": "Kilè"
+              }
+            },
+            "specific-info-kiles-fill": {
+              "title": "Complete the which question",
+              "prompt": "Complete The question.",
+              "hint": "The sentence asks which one of a group.",
+              "help": {
+                "concept": "The blank requests a selection.",
+                "hint_1": "Compare the three new information goals.",
+                "hint_2": "Choose the form for which."
+              },
+              "template": "___ ladan yo?",
+              "choices": [
+                "Kilès",
+                "Kilè",
+                "Poukisa"
+              ]
+            },
+            "specific-info-kile-fill": {
+              "title": "Complete the when question",
+              "prompt": "Complete The question.",
+              "hint": "The question asks about when someone will go.",
+              "help": {
+                "concept": "The blank requests time information.",
+                "hint_1": "Compare the new question forms by meaning.",
+                "hint_2": "Choose the form associated with when."
+              },
+              "template": "___ ou prale?",
+              "choices": [
+                "Kilè",
+                "Kilès",
+                "Poukisa"
+              ]
+            },
+            "specific-info-kile-voice": {
+              "title": "Ask when",
+              "prompt": "Say the question “When will you go?” in Kreyòl.",
+              "hint": "Use the complete question from the lesson.",
+              "help": {
+                "concept": "This speaking task practices the new when-question as a complete expression.",
+                "hint_1": "Begin with the new form for when.",
+                "hint_2": "Then use the phrase ou prale."
+              },
+              "targetText": "Kilè ou prale?"
+            },
+            "specific-info-poukisa-voice": {
+              "title": "Ask why",
+              "prompt": "Say the question “Why are you crying?” in Kreyòl.",
+              "hint": "Use the complete question from the lesson.",
+              "help": {
+                "concept": "This speaking task practices a reason question as a complete expression.",
+                "hint_1": "Begin with the new form for why.",
+                "hint_2": "Then use the phrase ou ap kriye."
+              },
+              "targetText": "Poukisa ou ap kriye?"
+            },
+            "try-kiles-choice": {
+              "title": "Choose the question form",
+              "prompt": "Which form asks “which one?”",
+              "hint": "Compare the information requested by each form.",
+              "help": {
+                "concept": "One form asks a learner to select one from a group.",
+                "hint_1": "Look for the form associated with choosing among alternatives.",
+                "hint_2": "Do not choose the form for time or reason."
+              },
+              "options": {
+                "a": "Kilès",
+                "b": "Kilè",
+                "c": "Poukisa"
+              }
+            },
+            "try-kile-fill": {
+              "title": "Complete the when question",
+              "prompt": "Choose The question form that completes the example.",
+              "hint": "The missing word asks for when something will happen.",
+              "help": {
+                "concept": "Choose the form that requests time information rather than a reason or a choice.",
+                "hint_1": "Read the rest of the sentence before selecting the question word.",
+                "hint_2": "The answer would tell when the person will go."
+              },
+              "template": "___ ou prale?",
+              "choices": [
+                "Kilè",
+                "Kilès",
+                "Poukisa"
+              ]
+            },
+            "try-poukisa-voice": {
+              "title": "Ask why",
+              "prompt": "Say the question “Why are you crying?” in Kreyòl.",
+              "hint": "Use the complete question from this card.",
+              "help": {
+                "concept": "This question requests a reason.",
+                "hint_1": "Begin with The form for why.",
+                "hint_2": "Then keep the current-action phrase intact."
+              },
+              "targetText": "Poukisa ou ap kriye?"
+            }
+          }
+        },
+        "name-body-parts": {
+          "label": "Name Body Parts",
+          "summary": "Recognize, hear, and say the body-part vocabulary listed in The.",
+          "cards": {
+            "sketch0": {
+              "title": "Head and Face"
+            },
+            "sketch1": {
+              "title": "Upper Body"
+            },
+            "sketch2": {
+              "title": "More Body Words"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_name_body_parts_sketch0": {
+              "title": "Try it yourself: Identify the ear",
+              "prompt": "Right after the sketch \"Tèt, Je, Zòrèy, Nen, Bouch\", practice that exact idea with this task. Which Kreyòl word means “ear”? Produce the result for identify the ear so it reinforces Name Body Parts."
+            },
+            "try_name_body_parts_sketch1": {
+              "title": "Try it yourself: Hear the upper-body words",
+              "prompt": "Right after the sketch \"Kou, zepòl, Lestomak, Bra, Men\", practice that exact idea with this task. Listen, then rebuild The body-word sequence. Produce the result for hear the upper-body words so it reinforces Name Body Parts."
+            },
+            "try_name_body_parts_sketch2": {
+              "title": "Try it yourself: Say two body words",
+              "prompt": "Right after the sketch \"vant and Pye\", practice that exact idea with this task. Say the two words shown on this card in order. Produce the result for say two body words so it reinforces Name Body Parts."
+            }
+          },
+          "practice": {
+            "body-parts-eye-choice": {
+              "title": "Find the eye",
+              "prompt": "Which Kreyòl word means “eye”?",
+              "hint": "Choose the word paired with eye.",
+              "help": {
+                "concept": "Match vocabulary to meaning.",
+                "hint_1": "Review the head-and-face group.",
+                "hint_2": "Choose the word for eye, not ear or nose."
+              },
+              "options": {
+                "a": "Je",
+                "b": "Zòrèy",
+                "c": "Nen"
+              }
+            },
+            "body-parts-shoulder-choice": {
+              "title": "Find the shoulder",
+              "prompt": "Which Kreyòl word means “shoulder”?",
+              "hint": "Use the upper-body vocabulary.",
+              "help": {
+                "concept": "Match the English body part to the word.",
+                "hint_1": "Compare the neck, shoulder, and arm words.",
+                "hint_2": "Choose the form paired with shoulder."
+              },
+              "options": {
+                "a": "zepòl",
+                "b": "Kou",
+                "c": "Bra"
+              }
+            },
+            "body-parts-face-listen": {
+              "title": "Rebuild face vocabulary",
+              "prompt": "Listen and rebuild the body-word sequence.",
+              "hint": "Use only the words you hear.",
+              "help": {
+                "concept": "Recognize body vocabulary from audio.",
+                "hint_1": "Listen once for the full sequence.",
+                "hint_2": "Then place each word in spoken order."
+              },
+              "targetText": "Je Zòrèy Nen Bouch"
+            },
+            "body-parts-lower-listen": {
+              "title": "Rebuild two body words",
+              "prompt": "Listen and rebuild the two-word sequence.",
+              "hint": "The audio uses two terms from The list.",
+              "help": {
+                "concept": "Recognize vocabulary from audio.",
+                "hint_1": "Listen for the abdomen term first.",
+                "hint_2": "The foot term comes second."
+              },
+              "targetText": "vant Pye"
+            },
+            "body-parts-upper-voice": {
+              "title": "Say upper-body words",
+              "prompt": "Say these three words in order: neck, shoulder, arm.",
+              "hint": "Use the Kreyòl vocabulary from the upper-body card.",
+              "help": {
+                "concept": "Produce body vocabulary from a meaning cue.",
+                "hint_1": "Begin with the neck word.",
+                "hint_2": "Then say shoulder and arm."
+              },
+              "targetText": "Kou zepòl Bra"
+            },
+            "body-parts-head-voice": {
+              "title": "Say head and mouth",
+              "prompt": "Say the Kreyòl words for head and mouth, in that order.",
+              "hint": "Use the two words from the first card.",
+              "help": {
+                "concept": "Produce two exact body-part words from.",
+                "hint_1": "Say the head word first.",
+                "hint_2": "Say the mouth word second."
+              },
+              "targetText": "Tèt Bouch"
+            },
+            "try-zorey-choice": {
+              "title": "Identify the ear",
+              "prompt": "Which Kreyòl word means “ear”?",
+              "hint": "Choose from the body vocabulary on this card.",
+              "help": {
+                "concept": "Match the English body part to its Kreyòl word.",
+                "hint_1": "Compare the five words on the card.",
+                "hint_2": "Look for the word paired with ear in the."
+              },
+              "options": {
+                "a": "Zòrèy",
+                "b": "Nen",
+                "c": "Bouch"
+              }
+            },
+            "try-upper-body-listen": {
+              "title": "Hear the upper-body words",
+              "prompt": "Listen, then rebuild The body-word sequence.",
+              "hint": "Listen for each complete body word in order.",
+              "help": {
+                "concept": "Match the spoken vocabulary to the written forms.",
+                "hint_1": "Rebuild only the words you hear.",
+                "hint_2": "Keep the sequence."
+              },
+              "targetText": "Kou zepòl Lestomak Bra Men"
+            },
+            "try-body-voice": {
+              "title": "Say two body words",
+              "prompt": "Say the two words shown on this card in order.",
+              "hint": "Say the abdomen word first and the foot word second.",
+              "help": {
+                "concept": "Speaking practice uses the exact vocabulary from this card.",
+                "hint_1": "Use both words, not their English meanings.",
+                "hint_2": "Keep the order used on the card."
+              },
+              "targetText": "vant Pye"
+            }
+          }
+        },
+        "say-what-hurts": {
+          "label": "Say What Hurts",
+          "summary": "Recognize and produce The fèmal expressions for common aches, then use the reading to understand why Kintola does not go to school.",
+          "cards": {
+            "sketch0": {
+              "title": "Three Common Aches"
+            },
+            "sketch1": {
+              "title": "Two More Aches"
+            },
+            "sketch2": {
+              "title": "Use It in The Reading"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_say_what_hurts_sketch0": {
+              "title": "Try it yourself: Hear the stomach-ache expression",
+              "prompt": "Right after the sketch \"Vant fèmal, Tèt fèmal, Kou fèmal\", practice that exact idea with this task. Listen, then build the expression you hear. Produce the result for hear the stomach-ache expression so it reinforces Say What Hurts."
+            },
+            "try_say_what_hurts_sketch1": {
+              "title": "Try it yourself: Say the sore-throat expression",
+              "prompt": "Right after the sketch \"Dan fèmal and Gòj fèmal\", practice that exact idea with this task. Say the Kreyòl expression listed for sorethroat. Produce the result for say the sore-throat expression so it reinforces Say What Hurts."
+            },
+            "try_say_what_hurts_sketch2": {
+              "title": "Try it yourself: Build the reason from the reading",
+              "prompt": "Right after the sketch \"Why Kintola Does Not Go to School\", practice that exact idea with this task. Arrange the exact reason clause from The reading. Produce the result for build the reason from the reading so it reinforces Say What Hurts."
+            }
+          },
+          "practice": {
+            "health-vant-listen": {
+              "title": "Hear the stomach-ache expression",
+              "prompt": "Listen, then build the expression you hear.",
+              "hint": "Listen for the body word followed by fèmal.",
+              "help": {
+                "concept": "Recognize one complete illness expression from the lesson.",
+                "hint_1": "The first word identifies the body area.",
+                "hint_2": "The second word is fèmal."
+              },
+              "targetText": "Vant fèmal"
+            },
+            "health-goj-listen": {
+              "title": "Hear the sore-throat expression",
+              "prompt": "Listen, then build the expression you hear.",
+              "hint": "Use the exact two-word form.",
+              "help": {
+                "concept": "Recognize the Gòj expression.",
+                "hint_1": "Listen for Gòj first.",
+                "hint_2": "Finish with fèmal."
+              },
+              "targetText": "Gòj fèmal"
+            },
+            "health-kou-voice": {
+              "title": "Say neck ache",
+              "prompt": "Say the Kreyòl expression listed for neck ache.",
+              "hint": "Use the exact two-word expression.",
+              "help": {
+                "concept": "Produce one fèmal expression.",
+                "hint_1": "Begin with the neck word.",
+                "hint_2": "Finish with fèmal."
+              },
+              "targetText": "Kou fèmal"
+            },
+            "health-dan-voice": {
+              "title": "Say tooth ache",
+              "prompt": "Say the Kreyòl expression listed for tooth ache.",
+              "hint": "Use the expression exactly.",
+              "help": {
+                "concept": "Produce the Dan expression.",
+                "hint_1": "Begin with Dan.",
+                "hint_2": "Finish with fèmal."
+              },
+              "targetText": "Dan fèmal"
+            },
+            "health-tet-build": {
+              "title": "Build head ache",
+              "prompt": "Arrange the Kreyòl expression listed for head ache.",
+              "hint": "Use two words.",
+              "help": {
+                "concept": "The illness list places the body word before fèmal.",
+                "hint_1": "Start with Tèt.",
+                "hint_2": "Then place fèmal."
+              },
+              "targetText": "Tèt fèmal",
+              "wordBank": [
+                "Tèt",
+                "fèmal"
+              ]
+            },
+            "health-reason-build": {
+              "title": "Build Kintola’s reason",
+              "prompt": "Arrange the reason clause from The reading.",
+              "hint": "Build the clause that follows the comma in the reading.",
+              "help": {
+                "concept": "The reading explains why Kintola does not go to school.",
+                "hint_1": "Begin with paske.",
+                "hint_2": "End with tèt fèmal."
+              },
+              "targetText": "paske li gen tèt fèmal",
+              "wordBank": [
+                "paske",
+                "li",
+                "gen",
+                "tèt",
+                "fèmal"
+              ]
+            },
+            "health-vant-write": {
+              "title": "Write stomach ache",
+              "prompt": "Type the Kreyòl expression listed for stomach ache.",
+              "hint": "Use the exact expression.",
+              "help": {
+                "concept": "Write the body word followed by fèmal.",
+                "hint_1": "Begin with Vant.",
+                "hint_2": "Keep fèmal as one word."
+              },
+              "expectedText": "Vant fèmal",
+              "placeholder": "Type the Kreyòl expression"
+            },
+            "health-reading-write": {
+              "title": "Write what Kintola has",
+              "prompt": "According to The reading, type the two-word expression that describes Kintola’s problem.",
+              "hint": "Use the expression at the end of the reading sentence.",
+              "help": {
+                "concept": "The reading says Kintola has this ache.",
+                "hint_1": "The first word is tèt.",
+                "hint_2": "The second word is fèmal."
+              },
+              "expectedText": "tèt fèmal",
+              "placeholder": "Type the Kreyòl expression"
+            },
+            "try-vant-femal-listen": {
+              "title": "Hear the stomach-ache expression",
+              "prompt": "Listen, then build the expression you hear.",
+              "hint": "The expression uses one body word followed by fèmal.",
+              "help": {
+                "concept": "Recognize a complete fèmal expression from audio.",
+                "hint_1": "Listen for the body word first.",
+                "hint_2": "Keep fèmal attached as one word."
+              },
+              "targetText": "Vant fèmal"
+            },
+            "try-goj-femal-voice": {
+              "title": "Say the sore-throat expression",
+              "prompt": "Say the Kreyòl expression listed for sorethroat.",
+              "hint": "Use the exact two-word expression from this card.",
+              "help": {
+                "concept": "Produce the Gòj illness expression.",
+                "hint_1": "Begin with the body word.",
+                "hint_2": "Finish with fèmal."
+              },
+              "targetText": "Gòj fèmal"
+            },
+            "try-dan-femal-write": {
+              "title": "Write the tooth-ache expression",
+              "prompt": "Type the Kreyòl expression listed for tooth ache.",
+              "hint": "Use the exact expression from this card.",
+              "help": {
+                "concept": "Write the body word followed by fèmal.",
+                "hint_1": "The body word is The word paired with tooth ache.",
+                "hint_2": "Keep fèmal as one word."
+              },
+              "expectedText": "Dan fèmal",
+              "placeholder": "Type the Kreyòl expression"
+            },
+            "try-kintola-reason-build": {
+              "title": "Build the reason from the reading",
+              "prompt": "Arrange the exact reason clause from The reading.",
+              "hint": "Use only the words from the clause after the comma.",
+              "help": {
+                "concept": "The reading itself gives the reason Kintola does not go to school.",
+                "hint_1": "Begin with paske.",
+                "hint_2": "Finish with tèt fèmal."
+              },
+              "targetText": "paske li gen tèt fèmal",
+              "wordBank": [
+                "paske",
+                "li",
+                "gen",
+                "tèt",
+                "fèmal"
+              ]
+            }
+          }
+        }
+      },
+      "haitian-creole-everyday-grammar-4-past-and-future": {
+        "contrast-yesterday-today-and-tomorrow": {
+          "label": "Contrast Yesterday, Today & Tomorrow",
+          "summary": "Use the Yè, Jodia, and Demen examples to distinguish past, present, and future.",
+          "cards": {
+            "sketch0": {
+              "title": "Three Points in Time"
+            },
+            "sketch1": {
+              "title": "Match Meaning to Time"
+            },
+            "sketch2": {
+              "title": "Put the Timeline Together"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_contrast_yesterday_today_and_tomorrow_sketch0": {
+              "title": "Try it yourself: Hear the today sentence",
+              "prompt": "Right after the sketch \"Yè, Jodia, Demen\", practice that exact idea with this task. Listen and rebuild the sentence for today. Produce the result for hear the today sentence so it reinforces Contrast Yesterday, Today & Tomorrow."
+            },
+            "try_contrast_yesterday_today_and_tomorrow_sketch1": {
+              "title": "Try it yourself: Say the tomorrow sentence",
+              "prompt": "Right after the sketch \"te for Past, pral for Future\", practice that exact idea with this task. Say the sentence for tomorrow. Produce the result for say the tomorrow sentence so it reinforces Contrast Yesterday, Today & Tomorrow."
+            },
+            "try_contrast_yesterday_today_and_tomorrow_sketch2": {
+              "title": "Try it yourself: Build the yesterday sentence",
+              "prompt": "Right after the sketch \"Yesterday → Today → Tomorrow\", practice that exact idea with this task. Arrange the sentence for yesterday. Produce the result for build the yesterday sentence so it reinforces Contrast Yesterday, Today & Tomorrow."
+            }
+          },
+          "practice": {
+            "time-quiz-past-listen": {
+              "title": "Hear yesterday",
+              "prompt": "Listen and rebuild the yesterday sentence.",
+              "hint": "It begins with Yè.",
+              "help": {
+                "concept": "Recognize the past point in the timeline.",
+                "hint_1": "Begin Yè mwen.",
+                "hint_2": "Finish te ale lekòl."
+              },
+              "targetText": "Yè mwen te ale lekòl."
+            },
+            "time-quiz-present-voice": {
+              "title": "Say today",
+              "prompt": "Say the sentence for today.",
+              "hint": "Use the pizza sentence.",
+              "help": {
+                "concept": "Produce the present point in the contrast.",
+                "hint_1": "Begin Jodia mwen.",
+                "hint_2": "Finish manje pitza."
+              },
+              "targetText": "Jodia mwen manje pitza."
+            },
+            "time-quiz-future-voice": {
+              "title": "Say tomorrow",
+              "prompt": "Say the sentence for tomorrow.",
+              "hint": "Use Demen and pral.",
+              "help": {
+                "concept": "Produce the future point in the contrast.",
+                "hint_1": "Begin Demen mwen.",
+                "hint_2": "Keep pral before achte."
+              },
+              "targetText": "Demen mwen pral achte yon machin."
+            },
+            "time-quiz-future-build": {
+              "title": "Build tomorrow",
+              "prompt": "Arrange the future sentence.",
+              "hint": "Start with Demen.",
+              "help": {
+                "concept": "Build the future point in the timeline.",
+                "hint_1": "Begin Demen mwen.",
+                "hint_2": "Finish pral achte yon machin."
+              },
+              "targetText": "Demen mwen pral achte yon machin.",
+              "wordBank": [
+                "Demen",
+                "mwen",
+                "pral",
+                "achte",
+                "yon",
+                "machin."
+              ]
+            },
+            "time-quiz-past-write": {
+              "title": "Write yesterday",
+              "prompt": "Type the sentence for yesterday.",
+              "hint": "Use Yè and te.",
+              "help": {
+                "concept": "Write the past point.",
+                "hint_1": "Begin Yè mwen.",
+                "hint_2": "Finish te ale lekòl."
+              },
+              "expectedText": "Yè mwen te ale lekòl.",
+              "placeholder": "Type the Kreyòl sentence"
+            },
+            "time-quiz-present-write": {
+              "title": "Write today",
+              "prompt": "Type the sentence for today.",
+              "hint": "Use Jodia and the pizza sentence.",
+              "help": {
+                "concept": "Write the present point.",
+                "hint_1": "Begin Jodia mwen.",
+                "hint_2": "Finish manje pitza."
+              },
+              "expectedText": "Jodia mwen manje pitza.",
+              "placeholder": "Type the Kreyòl sentence"
+            },
+            "try-three-times-listen": {
+              "title": "Hear the today sentence",
+              "prompt": "Listen and rebuild the sentence for today.",
+              "hint": "The sentence begins with Jodia.",
+              "help": {
+                "concept": "Recognize the middle point of The time contrast.",
+                "hint_1": "Begin with Jodia mwen.",
+                "hint_2": "Finish with manje pitza."
+              },
+              "targetText": "Jodia mwen manje pitza."
+            },
+            "try-future-voice": {
+              "title": "Say the tomorrow sentence",
+              "prompt": "Say the sentence for tomorrow.",
+              "hint": "Use Demen and pral.",
+              "help": {
+                "concept": "Produce the future point in the three-time contrast.",
+                "hint_1": "Begin Demen mwen.",
+                "hint_2": "Finish pral achte yon machin."
+              },
+              "targetText": "Demen mwen pral achte yon machin."
+            },
+            "try-past-build": {
+              "title": "Build the yesterday sentence",
+              "prompt": "Arrange the sentence for yesterday.",
+              "hint": "Start with Yè.",
+              "help": {
+                "concept": "Build the past point in The timeline.",
+                "hint_1": "Begin Yè mwen.",
+                "hint_2": "Place te before ale."
+              },
+              "targetText": "Yè mwen te ale lekòl.",
+              "wordBank": [
+                "Yè",
+                "mwen",
+                "te",
+                "ale",
+                "lekòl."
+              ]
+            },
+            "try-present-write": {
+              "title": "Write the today sentence",
+              "prompt": "Type the sentence that begins with Jodia.",
+              "hint": "Use the pizza sentence.",
+              "help": {
+                "concept": "Write the middle point in the timeline.",
+                "hint_1": "Begin Jodia mwen.",
+                "hint_2": "Finish manje pitza."
+              },
+              "expectedText": "Jodia mwen manje pitza.",
+              "placeholder": "Type the Kreyòl sentence"
+            }
+          }
+        },
+        "use-pral-for-future-actions": {
+          "label": "Use pral for Future Actions",
+          "summary": "Use the pral pattern to place familiar actions in the future.",
+          "cards": {
+            "sketch0": {
+              "title": "Put pral Before the Action"
+            },
+            "sketch1": {
+              "title": "Add Tomorrow"
+            },
+            "sketch2": {
+              "title": "Build a Future Action"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_use_pral_for_future_actions_sketch0": {
+              "title": "Try it yourself: Recognize the future pattern",
+              "prompt": "Right after the sketch \"Subject + pral + verb\", practice that exact idea with this task. Which sentence uses pral before the action? Produce the result for recognize the future pattern so it reinforces Use pral for Future Actions."
+            },
+            "try_use_pral_for_future_actions_sketch1": {
+              "title": "Try it yourself: Hear the tomorrow sentence",
+              "prompt": "Right after the sketch \"Demen mwen pral achte yon machin\", practice that exact idea with this task. Listen and rebuild the future sentence. Produce the result for hear the tomorrow sentence so it reinforces Use pral for Future Actions."
+            },
+            "try_use_pral_for_future_actions_sketch2": {
+              "title": "Try it yourself: Build the food sentence",
+              "prompt": "Right after the sketch \"Mwen pral achte manje\", practice that exact idea with this task. Arrange the future sentence about buying food. Produce the result for build the food sentence so it reinforces Use pral for Future Actions."
+            }
+          },
+          "practice": {
+            "pral-quiz-recognize": {
+              "title": "Recognize pral",
+              "prompt": "Which sentence uses the future marker pral?",
+              "hint": "Find pral before the action.",
+              "help": {
+                "concept": "The future pattern places pral before the verb.",
+                "hint_1": "Look for pral.",
+                "hint_2": "Choose the food-buying sentence."
+              },
+              "options": {
+                "a": "Mwen pral achte manje.",
+                "b": "Mwen manje.",
+                "c": "Mwen achte manje."
+              }
+            },
+            "pral-quiz-demen-choice": {
+              "title": "Recognize the tomorrow example",
+              "prompt": "Which future sentence begins with Demen?",
+              "hint": "Choose the car-buying sentence.",
+              "help": {
+                "concept": "Demen supplies tomorrow context in The example.",
+                "hint_1": "The sentence starts Demen mwen.",
+                "hint_2": "It contains pral achte yon machin."
+              },
+              "options": {
+                "a": "Demen mwen pral achte yon machin.",
+                "b": "Mwen pral achte manje.",
+                "c": "Mwen manje."
+              }
+            },
+            "pral-quiz-food-listen": {
+              "title": "Hear the food sentence",
+              "prompt": "Listen and rebuild the future sentence.",
+              "hint": "Listen for pral before achte.",
+              "help": {
+                "concept": "Recognize the complete future pattern.",
+                "hint_1": "Begin with Mwen.",
+                "hint_2": "Finish with achte manje."
+              },
+              "targetText": "Mwen pral achte manje."
+            },
+            "pral-quiz-car-listen": {
+              "title": "Hear the tomorrow sentence",
+              "prompt": "Listen and rebuild the complete car sentence.",
+              "hint": "The sentence begins with Demen.",
+              "help": {
+                "concept": "Recognize the example containing Demen and pral.",
+                "hint_1": "Begin Demen mwen.",
+                "hint_2": "Finish pral achte yon machin."
+              },
+              "targetText": "Demen mwen pral achte yon machin."
+            },
+            "pral-quiz-food-voice": {
+              "title": "Say the food sentence",
+              "prompt": "Say the future sentence about buying food.",
+              "hint": "Use Mwen pral before the action.",
+              "help": {
+                "concept": "Produce one exact future example.",
+                "hint_1": "Begin Mwen pral.",
+                "hint_2": "Finish achte manje."
+              },
+              "targetText": "Mwen pral achte manje."
+            },
+            "pral-quiz-car-voice": {
+              "title": "Say the tomorrow sentence",
+              "prompt": "Say the sentence about buying a car tomorrow.",
+              "hint": "Start with Demen.",
+              "help": {
+                "concept": "Produce the full future sentence from the lesson.",
+                "hint_1": "Begin Demen mwen.",
+                "hint_2": "Keep pral immediately before achte."
+              },
+              "targetText": "Demen mwen pral achte yon machin."
+            },
+            "pral-quiz-food-build": {
+              "title": "Build the future food sentence",
+              "prompt": "Arrange the sentence.",
+              "hint": "Place pral before achte.",
+              "help": {
+                "concept": "Build Subject + pral + verb.",
+                "hint_1": "Start with Mwen.",
+                "hint_2": "End with manje."
+              },
+              "targetText": "Mwen pral achte manje.",
+              "wordBank": [
+                "Mwen",
+                "pral",
+                "achte",
+                "manje."
+              ]
+            },
+            "pral-quiz-car-build": {
+              "title": "Build the tomorrow sentence",
+              "prompt": "Arrange the sentence about tomorrow.",
+              "hint": "Demen comes first.",
+              "help": {
+                "concept": "Combine the time word with the pral pattern.",
+                "hint_1": "Start Demen mwen.",
+                "hint_2": "Finish pral achte yon machin."
+              },
+              "targetText": "Demen mwen pral achte yon machin.",
+              "wordBank": [
+                "Demen",
+                "mwen",
+                "pral",
+                "achte",
+                "yon",
+                "machin."
+              ]
+            },
+            "try-pral-choice": {
+              "title": "Recognize the future pattern",
+              "prompt": "Which sentence uses pral before the action?",
+              "hint": "Look for pral before achte.",
+              "help": {
+                "concept": "gives the pattern Subject + pral + verb.",
+                "hint_1": "Find the sentence containing pral.",
+                "hint_2": "The action in this example is achte."
+              },
+              "options": {
+                "a": "Mwen pral achte manje.",
+                "b": "Mwen manje.",
+                "c": "Mwen achte manje."
+              }
+            },
+            "try-demen-pral-listen": {
+              "title": "Hear the tomorrow sentence",
+              "prompt": "Listen and rebuild the future sentence.",
+              "hint": "Listen for Demen first and pral before achte.",
+              "help": {
+                "concept": "Recognize the future pattern in a complete sentence.",
+                "hint_1": "The sentence begins with Demen.",
+                "hint_2": "The final words are yon machin."
+              },
+              "targetText": "Demen mwen pral achte yon machin."
+            },
+            "try-demen-pral-voice": {
+              "title": "Say the tomorrow sentence",
+              "prompt": "Say the sentence about buying a car tomorrow.",
+              "hint": "Begin with Demen and keep pral before achte.",
+              "help": {
+                "concept": "Produce the exact future statement.",
+                "hint_1": "Start Demen mwen.",
+                "hint_2": "Finish pral achte yon machin."
+              },
+              "targetText": "Demen mwen pral achte yon machin."
+            },
+            "try-pral-food-build": {
+              "title": "Build the food sentence",
+              "prompt": "Arrange the future sentence about buying food.",
+              "hint": "Place pral before achte.",
+              "help": {
+                "concept": "Build the pattern Subject + pral + verb.",
+                "hint_1": "Begin with Mwen.",
+                "hint_2": "Finish with achte manje."
+              },
+              "targetText": "Mwen pral achte manje.",
+              "wordBank": [
+                "Mwen",
+                "pral",
+                "achte",
+                "manje."
+              ]
+            }
+          }
+        },
+        "use-te-for-past-actions": {
+          "label": "Use te for Past Actions",
+          "summary": "Use the te pattern to place familiar actions in the past.",
+          "cards": {
+            "sketch0": {
+              "title": "Put te Before the Action"
+            },
+            "sketch1": {
+              "title": "Reuse Familiar Actions"
+            },
+            "sketch2": {
+              "title": "Add a Past-Time Word"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_use_te_for_past_actions_sketch0": {
+              "title": "Try it yourself: Recognize the past statement",
+              "prompt": "Right after the sketch \"Subject + te + verb\", practice that exact idea with this task. Which sentence uses te to place the action in the past? Produce the result for recognize the past statement so it reinforces Use te for Past Actions."
+            },
+            "try_use_te_for_past_actions_sketch1": {
+              "title": "Try it yourself: Hear a past action",
+              "prompt": "Right after the sketch \"Mwen te manje / Mwen te etidye\", practice that exact idea with this task. Listen and rebuild the past statement. Produce the result for hear a past action so it reinforces Use te for Past Actions."
+            },
+            "try_use_te_for_past_actions_sketch2": {
+              "title": "Try it yourself: Build the yesterday sentence",
+              "prompt": "Right after the sketch \"Yè mwen te ale lekòl\", practice that exact idea with this task. Arrange the sentence about going to school yesterday. Produce the result for build the yesterday sentence so it reinforces Use te for Past Actions."
+            }
+          },
+          "practice": {
+            "te-quiz-recognize": {
+              "title": "Recognize te",
+              "prompt": "Which sentence is a past statement with te?",
+              "hint": "Look for te before the action.",
+              "help": {
+                "concept": "marks these past actions with te.",
+                "hint_1": "The correct sentence contains te.",
+                "hint_2": "It uses the eating example."
+              },
+              "options": {
+                "a": "Mwen te manje.",
+                "b": "Mwen manje.",
+                "c": "Jodia mwen manje pitza."
+              }
+            },
+            "te-quiz-ye-choice": {
+              "title": "Recognize the yesterday example",
+              "prompt": "Which sentence begins with Yè?",
+              "hint": "Choose the school sentence.",
+              "help": {
+                "concept": "Yè marks the example as yesterday.",
+                "hint_1": "The sentence starts Yè mwen.",
+                "hint_2": "It contains te ale lekòl."
+              },
+              "options": {
+                "a": "Yè mwen te ale lekòl.",
+                "b": "Mwen te etidye.",
+                "c": "Mwen te manje."
+              }
+            },
+            "te-quiz-manje-listen": {
+              "title": "Hear Mwen te manje",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Listen for te between Mwen and manje.",
+              "help": {
+                "concept": "Recognize te inside a short past statement.",
+                "hint_1": "Begin with Mwen.",
+                "hint_2": "The action is manje."
+              },
+              "targetText": "Mwen te manje."
+            },
+            "te-quiz-etidye-listen": {
+              "title": "Hear Mwen te etidye",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "The action word is etidye.",
+              "help": {
+                "concept": "Recognize another exact past statement.",
+                "hint_1": "Begin with Mwen.",
+                "hint_2": "Put te before etidye."
+              },
+              "targetText": "Mwen te etidye."
+            },
+            "te-quiz-ye-build": {
+              "title": "Build the school sentence",
+              "prompt": "Arrange the exact sentence about going to school yesterday.",
+              "hint": "Use Yè first.",
+              "help": {
+                "concept": "Build the complete example.",
+                "hint_1": "Start Yè mwen.",
+                "hint_2": "Finish te ale lekòl."
+              },
+              "targetText": "Yè mwen te ale lekòl.",
+              "wordBank": [
+                "Yè",
+                "mwen",
+                "te",
+                "ale",
+                "lekòl."
+              ]
+            },
+            "te-quiz-etidye-write": {
+              "title": "Write the studied sentence",
+              "prompt": "Type the sentence for “I studied.”",
+              "hint": "Use Mwen + te + etidye.",
+              "help": {
+                "concept": "Produce one exact past statement.",
+                "hint_1": "Begin with Mwen te.",
+                "hint_2": "Finish with etidye."
+              },
+              "expectedText": "Mwen te etidye.",
+              "placeholder": "Type the Kreyòl sentence"
+            },
+            "try-te-past-choice": {
+              "title": "Recognize the past statement",
+              "prompt": "Which sentence uses te to place the action in the past?",
+              "hint": "Look for te immediately before the action.",
+              "help": {
+                "concept": "gives the pattern Subject + te + verb.",
+                "hint_1": "Find the sentence containing te.",
+                "hint_2": "The past example uses manje after te."
+              },
+              "options": {
+                "a": "Mwen te manje.",
+                "b": "Mwen manje.",
+                "c": "Jodia mwen manje pitza."
+              }
+            },
+            "try-te-etidye-listen": {
+              "title": "Hear a past action",
+              "prompt": "Listen and rebuild the past statement.",
+              "hint": "Listen for te before etidye.",
+              "help": {
+                "concept": "Recognize the complete Subject + te + verb pattern.",
+                "hint_1": "The subject is Mwen.",
+                "hint_2": "te comes before etidye."
+              },
+              "targetText": "Mwen te etidye."
+            },
+            "try-te-manje-write": {
+              "title": "Write the past sentence",
+              "prompt": "Type the Kreyòl sentence for “I ate.”",
+              "hint": "Use Mwen + te + the eating verb.",
+              "help": {
+                "concept": "Write the exact short past example from.",
+                "hint_1": "Begin with Mwen te.",
+                "hint_2": "Finish with manje."
+              },
+              "expectedText": "Mwen te manje.",
+              "placeholder": "Type the Kreyòl sentence"
+            },
+            "try-ye-te-build": {
+              "title": "Build the yesterday sentence",
+              "prompt": "Arrange the sentence about going to school yesterday.",
+              "hint": "Start with The word for yesterday.",
+              "help": {
+                "concept": "Combine Yè with the Subject + te + verb pattern.",
+                "hint_1": "Yè comes first.",
+                "hint_2": "Place te before ale."
+              },
+              "targetText": "Yè mwen te ale lekòl.",
+              "wordBank": [
+                "Yè",
+                "mwen",
+                "te",
+                "ale",
+                "lekòl."
+              ]
+            }
+          }
+        }
+      },
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "describe-color-size-and-quality": {
+          "label": "Describe Color, Size & Quality",
+          "summary": "Use a practical subset of colors, sizes, and qualities without memorizing the entire table.",
+          "cards": {
+            "sketch0": {
+              "title": "Use a Few Useful Colors"
+            },
+            "sketch1": {
+              "title": "Use piti in Descriptions"
+            },
+            "sketch2": {
+              "title": "Practice a Few Qualities"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_describe_color_size_and_quality_sketch0": {
+              "title": "Try it yourself: Hear the blue-sky description",
+              "prompt": "Right after the sketch \"ble, nwa, wouj\", practice that exact idea with this task. Listen and rebuild the sentence. Produce the result for hear the blue-sky description so it reinforces Describe Color, Size & Quality."
+            },
+            "try_describe_color_size_and_quality_sketch1": {
+              "title": "Try it yourself: Build the hotel description",
+              "prompt": "Right after the sketch \"piti\", practice that exact idea with this task. Arrange the sentence for “The hotel is very small.”. Produce the result for build the hotel description so it reinforces Describe Color, Size & Quality."
+            },
+            "try_describe_color_size_and_quality_sketch2": {
+              "title": "Try it yourself: Say clean",
+              "prompt": "Right after the sketch \"bon, pwòp, trankil\", practice that exact idea with this task. Say the selected quality word for “clean.”. Produce the result for say clean so it reinforces Describe Color, Size & Quality."
+            }
+          },
+          "practice": {
+            "adj-vocab-quiz-table-listen": {
+              "title": "Hear the small-table description",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "It ends with piti.",
+              "help": {
+                "concept": "Recognize the exact size description.",
+                "hint_1": "Begin Tab la.",
+                "hint_2": "Finish piti."
+              },
+              "targetText": "Tab la piti."
+            },
+            "adj-vocab-quiz-good-child-listen": {
+              "title": "Hear the good-child phrase",
+              "prompt": "Listen and rebuild the phrase.",
+              "hint": "Listen for bon.",
+              "help": {
+                "concept": "Recognize the exact phrase containing the selected quality bon.",
+                "hint_1": "Begin Se yon.",
+                "hint_2": "Finish bon timoun."
+              },
+              "targetText": "Se yon bon timoun."
+            },
+            "adj-vocab-quiz-blue-voice": {
+              "title": "Say blue",
+              "prompt": "Say the color word for “blue.”",
+              "hint": "Say the exact form.",
+              "help": {
+                "concept": "Practice one selected color.",
+                "hint_1": "It begins with b.",
+                "hint_2": "Use the same word heard in Syèl la ble."
+              },
+              "targetText": "ble"
+            },
+            "adj-vocab-quiz-quiet-voice": {
+              "title": "Say quiet",
+              "prompt": "Say the selected quality word for “quiet.”",
+              "hint": "Use the exact word.",
+              "help": {
+                "concept": "Practice one selected quality.",
+                "hint_1": "It begins tr.",
+                "hint_2": "The form ends in kil."
+              },
+              "targetText": "trankil"
+            },
+            "adj-vocab-quiz-table-build": {
+              "title": "Build Tab la piti",
+              "prompt": "Arrange the sentence for “The table is small.”",
+              "hint": "Keep the order.",
+              "help": {
+                "concept": "Reproduce the size description.",
+                "hint_1": "Begin Tab la.",
+                "hint_2": "Finish piti."
+              },
+              "targetText": "Tab la piti.",
+              "wordBank": [
+                "Tab",
+                "la",
+                "piti."
+              ]
+            },
+            "adj-vocab-quiz-good-child-build": {
+              "title": "Build the good-child phrase",
+              "prompt": "Arrange the phrase.",
+              "hint": "Keep the order.",
+              "help": {
+                "concept": "Reproduce the phrase containing bon.",
+                "hint_1": "Begin Se yon.",
+                "hint_2": "Finish bon timoun."
+              },
+              "targetText": "Se yon bon timoun.",
+              "wordBank": [
+                "Se",
+                "yon",
+                "bon",
+                "timoun."
+              ]
+            },
+            "adj-vocab-quiz-small-write": {
+              "title": "Write small",
+              "prompt": "Type the size word for “small.”",
+              "hint": "Use the word from Tab la piti.",
+              "help": {
+                "concept": "Recall the selected size adjective.",
+                "hint_1": "It begins p.",
+                "hint_2": "The word has four letters."
+              },
+              "expectedText": "piti",
+              "placeholder": "Type the Kreyòl word"
+            },
+            "adj-vocab-quiz-good-write": {
+              "title": "Write good",
+              "prompt": "Type the quality word for “good.”",
+              "hint": "Use the word from Se yon bon timoun.",
+              "help": {
+                "concept": "Recall one selected quality adjective.",
+                "hint_1": "It begins b.",
+                "hint_2": "The word has three letters."
+              },
+              "expectedText": "bon",
+              "placeholder": "Type the Kreyòl word"
+            },
+            "try-sky-blue-listen": {
+              "title": "Hear the blue-sky description",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "The sentence ends in ble.",
+              "help": {
+                "concept": "Use the exact description containing the color ble.",
+                "hint_1": "Begin Syèl la.",
+                "hint_2": "Finish ble."
+              },
+              "targetText": "Syèl la ble."
+            },
+            "try-black-write": {
+              "title": "Write black",
+              "prompt": "Type the color word for “black.”",
+              "hint": "Use the exact table entry.",
+              "help": {
+                "concept": "Recall one selected color.",
+                "hint_1": "It begins with n.",
+                "hint_2": "The form is four letters."
+              },
+              "expectedText": "nwa",
+              "placeholder": "Type the Kreyòl word"
+            },
+            "try-hotel-small-build": {
+              "title": "Build the hotel description",
+              "prompt": "Arrange the sentence for “The hotel is very small.”",
+              "hint": "Keep the order.",
+              "help": {
+                "concept": "Rebuild the exact size description.",
+                "hint_1": "Begin Otèl la.",
+                "hint_2": "Finish piti anpil."
+              },
+              "targetText": "Otèl la piti anpil.",
+              "wordBank": [
+                "Otèl",
+                "la",
+                "piti",
+                "anpil."
+              ]
+            },
+            "try-clean-voice": {
+              "title": "Say clean",
+              "prompt": "Say the selected quality word for “clean.”",
+              "hint": "Say the exact word.",
+              "help": {
+                "concept": "Practice one selected quality word from The table.",
+                "hint_1": "It begins pw.",
+                "hint_2": "Use the spelling with ò."
+              },
+              "targetText": "pwòp"
+            }
+          }
+        },
+        "describe-without-to-be": {
+          "label": "Describe Without an Expressed to be",
+          "summary": "Use state descriptions where English uses is or are but Kreyòl does not express a separate to-be word.",
+          "cards": {
+            "sketch0": {
+              "title": "Describe a State Directly"
+            },
+            "sketch1": {
+              "title": "Describe Yourself or a Group"
+            },
+            "sketch2": {
+              "title": "Describe How They Feel"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_describe_without_to_be_sketch0": {
+              "title": "Try it yourself: Recognize The pattern",
+              "prompt": "Right after the sketch \"Li malad / Li okipe\", practice that exact idea with this task. Which sentence means “He is sick”? Produce the result for recognize The pattern so it reinforces Describe Without an Expressed to be."
+            },
+            "try_describe_without_to_be_sketch1": {
+              "title": "Try it yourself: Hear the thirsty sentence",
+              "prompt": "Right after the sketch \"M fatige / Nou swaf\", practice that exact idea with this task. Listen and rebuild the sentence. Produce the result for hear the thirsty sentence so it reinforces Describe Without an Expressed to be."
+            },
+            "try_describe_without_to_be_sketch2": {
+              "title": "Try it yourself: Build the hungry sentence",
+              "prompt": "Right after the sketch \"Yo fache / Yo grangou\", practice that exact idea with this task. Arrange the sentence for “They are hungry.”. Produce the result for build the hungry sentence so it reinforces Describe Without an Expressed to be."
+            }
+          },
+          "practice": {
+            "state-quiz-malad-choice": {
+              "title": "Recognize Li malad",
+              "prompt": "Which sentence means “He is sick”?",
+              "hint": "Choose the sentence with malad.",
+              "help": {
+                "concept": "The state follows Li directly.",
+                "hint_1": "Use the wording.",
+                "hint_2": "Do not insert an extra word."
+              },
+              "options": {
+                "a": "Li malad.",
+                "b": "Li okipe.",
+                "c": "Li mouri."
+              }
+            },
+            "state-quiz-pare-choice": {
+              "title": "Recognize Nou pare",
+              "prompt": "Which question means “Are you ready?”",
+              "hint": "Choose the question with pare.",
+              "help": {
+                "concept": "The question asks the state question without inserting se.",
+                "hint_1": "It begins with Nou.",
+                "hint_2": "It ends with pare?"
+              },
+              "options": {
+                "a": "Nou pare?",
+                "b": "Nou swaf.",
+                "c": "M fatige."
+              }
+            },
+            "state-quiz-fatige-listen": {
+              "title": "Hear M fatige",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Listen for M followed by fatige.",
+              "help": {
+                "concept": "Recognize the complete state sentence.",
+                "hint_1": "The subject is M.",
+                "hint_2": "The state is fatige."
+              },
+              "targetText": "M fatige."
+            },
+            "state-quiz-grangou-listen": {
+              "title": "Hear Yo grangou",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Listen for Yo first.",
+              "help": {
+                "concept": "Recognize another state description.",
+                "hint_1": "Begin with Yo.",
+                "hint_2": "Finish with grangou."
+              },
+              "targetText": "Yo grangou."
+            },
+            "state-quiz-okipe-voice": {
+              "title": "Say Li okipe",
+              "prompt": "Say the sentence for “He is busy.”",
+              "hint": "Use Li followed directly by okipe.",
+              "help": {
+                "concept": "Produce the state description.",
+                "hint_1": "Begin with Li.",
+                "hint_2": "Finish with okipe."
+              },
+              "targetText": "Li okipe."
+            },
+            "state-quiz-fache-voice": {
+              "title": "Say Yo fache",
+              "prompt": "Say the sentence for “They are angry.”",
+              "hint": "Use Yo followed by fache.",
+              "help": {
+                "concept": "Produce the description directly.",
+                "hint_1": "Begin with Yo.",
+                "hint_2": "Finish with fache."
+              },
+              "targetText": "Yo fache."
+            },
+            "state-quiz-swaf-build": {
+              "title": "Build Nou swaf",
+              "prompt": "Arrange the sentence for “We are thirsty.”",
+              "hint": "Put Nou before swaf.",
+              "help": {
+                "concept": "Build the state description without inserting se.",
+                "hint_1": "Start with Nou.",
+                "hint_2": "Then use swaf."
+              },
+              "targetText": "Nou swaf.",
+              "wordBank": [
+                "Nou",
+                "swaf."
+              ]
+            },
+            "state-quiz-prese-build": {
+              "title": "Build Li prese",
+              "prompt": "Arrange the sentence for “She is in a hurry.”",
+              "hint": "Put Li before prese.",
+              "help": {
+                "concept": "Build another direct state description.",
+                "hint_1": "Start with Li.",
+                "hint_2": "Finish with prese."
+              },
+              "targetText": "Li prese.",
+              "wordBank": [
+                "Li",
+                "prese."
+              ]
+            },
+            "try-li-state-choice": {
+              "title": "Recognize The pattern",
+              "prompt": "Which sentence means “He is sick”?",
+              "hint": "Choose the sentence with malad.",
+              "help": {
+                "concept": "In this description pattern, the state follows the subject directly.",
+                "hint_1": "The subject is Li.",
+                "hint_2": "The describing word is malad."
+              },
+              "options": {
+                "a": "Li malad.",
+                "b": "Li okipe.",
+                "c": "Li prese."
+              }
+            },
+            "try-nou-swaf-listen": {
+              "title": "Hear the thirsty sentence",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Listen for Nou followed directly by swaf.",
+              "help": {
+                "concept": "The state description does not insert se between the subject and swaf.",
+                "hint_1": "Begin with Nou.",
+                "hint_2": "Finish with swaf."
+              },
+              "targetText": "Nou swaf."
+            },
+            "try-m-fatige-voice": {
+              "title": "Say that you are tired",
+              "prompt": "Say the sentence for “I’m tired.”",
+              "hint": "Use M followed directly by fatige.",
+              "help": {
+                "concept": "Produce the state description.",
+                "hint_1": "Start with M.",
+                "hint_2": "Finish with fatige."
+              },
+              "targetText": "M fatige."
+            },
+            "try-yo-grangou-build": {
+              "title": "Build the hungry sentence",
+              "prompt": "Arrange the sentence for “They are hungry.”",
+              "hint": "Put the subject before grangou.",
+              "help": {
+                "concept": "Build the state description directly.",
+                "hint_1": "Start with Yo.",
+                "hint_2": "Then use grangou."
+              },
+              "targetText": "Yo grangou.",
+              "wordBank": [
+                "Yo",
+                "grangou."
+              ]
+            }
+          }
+        },
+        "place-adjectives-in-phrases": {
+          "label": "Place Adjectives in Phrases",
+          "summary": "Notice and reproduce adjective placement using only the exact example phrases.",
+          "cards": {
+            "sketch0": {
+              "title": "Notice the Word Order"
+            },
+            "sketch1": {
+              "title": "Keep the Whole Phrase Together"
+            },
+            "sketch2": {
+              "title": "Notice a Longer Description"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_place_adjectives_in_phrases_sketch0": {
+              "title": "Try it yourself: Find the green tree",
+              "prompt": "Right after the sketch \"yon pye bwa vèt / yon bilding wo\", practice that exact idea with this task. Which phrase means “a green tree”? Produce the result for find the green tree so it reinforces Place Adjectives in Phrases."
+            },
+            "try_place_adjectives_in_phrases_sketch1": {
+              "title": "Try it yourself: Build the old red house phrase",
+              "prompt": "Right after the sketch \"yon vye gran moun gason\", practice that exact idea with this task. Arrange the words to reproduce the exact phrase for “the old red house.”. Produce the result for build the old red house phrase so it reinforces Place Adjectives in Phrases."
+            },
+            "try_place_adjectives_in_phrases_sketch2": {
+              "title": "Try it yourself: Write the nice friend phrase",
+              "prompt": "Right after the sketch \"yon zanmi ki trè janti\", practice that exact idea with this task. Type the phrase for “a very nice friend.”. Produce the result for write the nice friend phrase so it reinforces Place Adjectives in Phrases."
+            }
+          },
+          "practice": {
+            "adj-quiz-tall-building-choice": {
+              "title": "Find the tall building",
+              "prompt": "Which phrase means “a tall building”?",
+              "hint": "Choose the phrase with bilding.",
+              "help": {
+                "concept": "Recognize the exact adjective phrase.",
+                "hint_1": "Look for yon bilding.",
+                "hint_2": "The pattern places wo at the end."
+              },
+              "options": {
+                "a": "yon bilding wo",
+                "b": "yon pye bwa vèt",
+                "c": "ansyen kay wouj la"
+              }
+            },
+            "adj-quiz-old-man-choice": {
+              "title": "Find the old man phrase",
+              "prompt": "Which phrase is translated as “a very old man”?",
+              "hint": "Choose the longer phrase beginning yon vye.",
+              "help": {
+                "concept": "Recognize the phrase as in.",
+                "hint_1": "It begins yon vye.",
+                "hint_2": "It ends gran moun gason."
+              },
+              "options": {
+                "a": "yon vye gran moun gason",
+                "b": "yon zanmi ki trè janti",
+                "c": "yon bilding wo"
+              }
+            },
+            "adj-quiz-green-tree-build": {
+              "title": "Build the green tree phrase",
+              "prompt": "Arrange the phrase for “a green tree.”",
+              "hint": "Keep the order.",
+              "help": {
+                "concept": "Reproduce the adjective phrase.",
+                "hint_1": "Begin yon pye bwa.",
+                "hint_2": "Finish vèt."
+              },
+              "targetText": "yon pye bwa vèt",
+              "wordBank": [
+                "yon",
+                "pye",
+                "bwa",
+                "vèt"
+              ]
+            },
+            "adj-quiz-tall-building-build": {
+              "title": "Build the tall building phrase",
+              "prompt": "Arrange the phrase for “a tall building.”",
+              "hint": "Keep the order.",
+              "help": {
+                "concept": "Build the phrase exactly as presents it.",
+                "hint_1": "Begin yon bilding.",
+                "hint_2": "Finish wo."
+              },
+              "targetText": "yon bilding wo",
+              "wordBank": [
+                "yon",
+                "bilding",
+                "wo"
+              ]
+            },
+            "adj-quiz-old-red-house-write": {
+              "title": "Write the old red house phrase",
+              "prompt": "Type the phrase for “the old red house.”",
+              "hint": "Begin ansyen kay.",
+              "help": {
+                "concept": "Write the complete phrase without changing its order.",
+                "hint_1": "Begin ansyen kay wouj.",
+                "hint_2": "Finish la."
+              },
+              "expectedText": "ansyen kay wouj la",
+              "placeholder": "Type the Kreyòl phrase"
+            },
+            "adj-quiz-old-man-write": {
+              "title": "Write the old man phrase",
+              "prompt": "Type the phrase translated as “a very old man.”",
+              "hint": "Begin yon vye.",
+              "help": {
+                "concept": "Write the exact wording.",
+                "hint_1": "Continue with gran moun.",
+                "hint_2": "Finish gason."
+              },
+              "expectedText": "yon vye gran moun gason",
+              "placeholder": "Type the Kreyòl phrase"
+            },
+            "try-green-tree-choice": {
+              "title": "Find the green tree",
+              "prompt": "Which phrase means “a green tree”?",
+              "hint": "Choose the phrase ending in vèt.",
+              "help": {
+                "concept": "Recognize the complete phrase and its word order.",
+                "hint_1": "Look for pye bwa.",
+                "hint_2": "The phrase ends in vèt."
+              },
+              "options": {
+                "a": "yon pye bwa vèt",
+                "b": "yon bilding wo",
+                "c": "yon zanmi ki trè janti"
+              }
+            },
+            "try-old-red-house-build": {
+              "title": "Build the old red house phrase",
+              "prompt": "Arrange the words to reproduce the exact phrase for “the old red house.”",
+              "hint": "Keep the order exactly.",
+              "help": {
+                "concept": "Rebuild the noun phrase without translating word by word.",
+                "hint_1": "The phrase begins with ansyen.",
+                "hint_2": "The phrase ends with la."
+              },
+              "targetText": "ansyen kay wouj la",
+              "wordBank": [
+                "ansyen",
+                "kay",
+                "wouj",
+                "la"
+              ]
+            },
+            "try-nice-friend-write": {
+              "title": "Write the nice friend phrase",
+              "prompt": "Type the phrase for “a very nice friend.”",
+              "hint": "Begin yon zanmi.",
+              "help": {
+                "concept": "Write the complete phrase with its word order.",
+                "hint_1": "Begin yon zanmi ki.",
+                "hint_2": "Finish trè janti."
+              },
+              "expectedText": "yon zanmi ki trè janti",
+              "placeholder": "Type the Kreyòl phrase"
+            }
+          }
+        },
+        "use-ye": {
+          "label": "Use ye",
+          "summary": "Use ye at the end of questions and in the closing statement.",
+          "cards": {
+            "sketch0": {
+              "title": "Notice ye at the End"
+            },
+            "sketch1": {
+              "title": "Use ye in Familiar Question Frames"
+            },
+            "sketch2": {
+              "title": "ye Can Close the Statement"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_use_ye_sketch0": {
+              "title": "Try it yourself: Choose the location question",
+              "prompt": "Right after the sketch \"Kòman manman w ye?\", practice that exact idea with this task. Which question asks where the book is? Produce the result for choose the location question so it reinforces Use ye."
+            },
+            "try_use_ye_sketch1": {
+              "title": "Try it yourself: Ask how your mother is",
+              "prompt": "Right after the sketch \"Ki moun li ye?\", practice that exact idea with this task. Say the question. Produce the result for ask how your mother is so it reinforces Use ye."
+            },
+            "try_use_ye_sketch2": {
+              "title": "Try it yourself: Write the closing statement",
+              "prompt": "Right after the sketch \"Se sa li ye.\", practice that exact idea with this task. Type the statement. Produce the result for write the closing statement so it reinforces Use ye."
+            }
+          },
+          "practice": {
+            "ye-quiz-closing-choice": {
+              "title": "Find the closing statement",
+              "prompt": "Which example is a statement rather than a question?",
+              "hint": "Choose the example ending with a period.",
+              "help": {
+                "concept": "Distinguish the closing statement from the questions.",
+                "hint_1": "Look for Se sa li.",
+                "hint_2": "It still ends with ye."
+              },
+              "options": {
+                "a": "Se sa li ye.",
+                "b": "Ki sa sa a ye?",
+                "c": "Ki lè li ye?"
+              }
+            },
+            "ye-quiz-who-choice": {
+              "title": "Find the who question",
+              "prompt": "Which question asks who he is?",
+              "hint": "Choose the question beginning Ki moun.",
+              "help": {
+                "concept": "Recognize the question with ye at the end.",
+                "hint_1": "Look for Ki moun.",
+                "hint_2": "The complete question ends li ye?"
+              },
+              "options": {
+                "a": "Ki moun li ye?",
+                "b": "Ki bò liv la ye?",
+                "c": "Kòman manman w ye?"
+              }
+            },
+            "ye-quiz-who-listen": {
+              "title": "Hear the who question",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "It begins with Ki moun.",
+              "help": {
+                "concept": "Build the exact question.",
+                "hint_1": "Begin Ki moun li.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki moun li ye?"
+            },
+            "ye-quiz-time-listen": {
+              "title": "Hear the time question",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "It begins with Ki lè.",
+              "help": {
+                "concept": "Recognize the time question ending in ye.",
+                "hint_1": "Begin Ki lè li.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki lè li ye?"
+            },
+            "ye-quiz-what-voice": {
+              "title": "Ask what that is",
+              "prompt": "Say the question.",
+              "hint": "Begin Ki sa sa a.",
+              "help": {
+                "concept": "Produce the question ending in ye.",
+                "hint_1": "Say Ki sa sa a.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki sa sa a ye?"
+            },
+            "ye-quiz-book-voice": {
+              "title": "Ask where the book is",
+              "prompt": "Say the question.",
+              "hint": "Begin Ki bò liv la.",
+              "help": {
+                "concept": "Produce the location question.",
+                "hint_1": "Say Ki bò liv la.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki bò liv la ye?"
+            },
+            "ye-quiz-koman-write": {
+              "title": "Write the mother question",
+              "prompt": "Type the question asking how your mother is.",
+              "hint": "Begin Kòman manman w.",
+              "help": {
+                "concept": "Write the question with ye at the end.",
+                "hint_1": "Use Kòman manman w.",
+                "hint_2": "Finish ye?"
+              },
+              "expectedText": "Kòman manman w ye?",
+              "placeholder": "Type the Kreyòl question"
+            },
+            "ye-quiz-closing-write": {
+              "title": "Write Se sa li ye",
+              "prompt": "Type the closing statement.",
+              "hint": "Begin Se sa li.",
+              "help": {
+                "concept": "Write the statement ending in ye.",
+                "hint_1": "Begin Se sa li.",
+                "hint_2": "Finish ye."
+              },
+              "expectedText": "Se sa li ye.",
+              "placeholder": "Type the Kreyòl statement"
+            },
+            "try-ye-question-choice": {
+              "title": "Choose the location question",
+              "prompt": "Which question asks where the book is?",
+              "hint": "Choose the question beginning with Ki bò.",
+              "help": {
+                "concept": "Recognize ye at the end of a location question.",
+                "hint_1": "Look for liv la.",
+                "hint_2": "The question ends in ye?"
+              },
+              "options": {
+                "a": "Ki bò liv la ye?",
+                "b": "Kòman manman w ye?",
+                "c": "Ki moun li ye?"
+              }
+            },
+            "try-ki-bo-listen": {
+              "title": "Hear the book question",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "It begins with Ki bò.",
+              "help": {
+                "concept": "Build the question with ye at the end.",
+                "hint_1": "Begin Ki bò liv la.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Ki bò liv la ye?"
+            },
+            "try-koman-voice": {
+              "title": "Ask how your mother is",
+              "prompt": "Say the question.",
+              "hint": "Begin Kòman manman w.",
+              "help": {
+                "concept": "Produce the question ending in ye.",
+                "hint_1": "Say Kòman manman w.",
+                "hint_2": "Finish with ye?"
+              },
+              "targetText": "Kòman manman w ye?"
+            },
+            "try-se-sa-write": {
+              "title": "Write the closing statement",
+              "prompt": "Type the statement.",
+              "hint": "Begin Se sa li.",
+              "help": {
+                "concept": "Write the closing statement with ye at the end.",
+                "hint_1": "Begin Se sa li.",
+                "hint_2": "Finish with ye."
+              },
+              "expectedText": "Se sa li ye.",
+              "placeholder": "Type the Kreyòl statement"
+            }
+          }
+        }
+      }
+    },
     "haitian-creole-foundations": {
       "haitian-creole-foundations-1-sounds-of-kreyol": {
         "listen-and-say-first-sounds": {
@@ -5232,11 +7877,11 @@ const messages: Record<string, any> = {
             "speak-bonjou": {
               "title": "Say bonjou",
               "prompt": "Say the Kreyòl greeting shown: Bonjou.",
-              "hint": "Read the Kreyòl target once, then say the whole phrase.",
+              "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
               "help": {
-                "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-                "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-                "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+                "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+                "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+                "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
               },
               "targetText": "Bonjou."
             },
@@ -5401,11 +8046,11 @@ const messages: Record<string, any> = {
             "sound-speak-mesi": {
               "title": "Say mèsi",
               "prompt": "Say the Kreyòl word shown: Mèsi.",
-              "hint": "Read the Kreyòl target once, then say the whole phrase.",
+              "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
               "help": {
-                "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-                "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-                "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+                "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+                "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+                "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
               },
               "targetText": "Mèsi."
             },
@@ -5575,11 +8220,11 @@ const messages: Record<string, any> = {
             "read-speak-wi-mesi": {
               "title": "Say a short phrase",
               "prompt": "Say the complete Kreyòl phrase shown: Wi, mèsi.",
-              "hint": "Read the Kreyòl target once, then say the whole phrase.",
+              "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
               "help": {
-                "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-                "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-                "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+                "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+                "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+                "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
               },
               "targetText": "Wi, mèsi."
             },
@@ -5744,11 +8389,11 @@ const messages: Record<string, any> = {
             "exchange-say-mesi": {
               "title": "Say thank you",
               "prompt": "Say the familiar Kreyòl word shown: Mèsi.",
-              "hint": "Read the Kreyòl target once, then say the whole phrase.",
+              "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
               "help": {
-                "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-                "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-                "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+                "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+                "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+                "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
               },
               "targetText": "Mèsi."
             },
@@ -5815,17 +8460,17 @@ const messages: Record<string, any> = {
       },
       "haitian-creole-foundations-2-bonjou": {
         "greeting-scenario-and-review": {
-          "label": "Greeting Scenario and Review",
-          "summary": "Combine greetings, a simple check-in, thanks, and a closing into a short beginner Kreyòl exchange.",
+          "label": "Your First Greeting Conversation",
+          "summary": "Follow a complete greeting exchange, respond to each turn, and reuse the same conversation pattern with new wording.",
           "cards": {
             "sketch0": {
-              "title": "Put It Together"
+              "title": "Listen to the Whole Exchange"
             },
             "sketch1": {
-              "title": "Close Politely"
+              "title": "Follow the Flow"
             },
             "sketch2": {
-              "title": "Conversation Flow"
+              "title": "Take Your Turn"
             },
             "quiz": {
               "title": "Practice"
@@ -5834,178 +8479,135 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_greeting_scenario_and_review_sketch0": {
-              "title": "Try it yourself: Hear the check-in",
-              "prompt": "Right after the sketch \"A short greeting exchange\", practice that exact idea with this task. Listen and rebuild the check-in question from the dialogue. Produce the result for hear the check-in so it reinforces Greeting Scenario and Review."
+              "title": "Try it yourself: Start a different version",
+              "prompt": "Right after the sketch \"Jan and Mari say hello\", practice that exact idea with this task. Listen and rebuild a new opening using Bonswa. Produce the result for start a different version so it reinforces Your First Greeting Conversation."
             },
             "try_greeting_scenario_and_review_sketch1": {
-              "title": "Try it yourself: Close a short conversation",
-              "prompt": "Right after the sketch \"Orevwa\", practice that exact idea with this task. Say “Thank you. Goodbye.” in Kreyòl. Produce the result for close a short conversation so it reinforces Greeting Scenario and Review."
+              "title": "Try it yourself: Build a complete turn",
+              "prompt": "Right after the sketch \"One turn leads to the next\", practice that exact idea with this task. Build an answer that also returns the question. Produce the result for build a complete turn so it reinforces Your First Greeting Conversation."
             },
             "try_greeting_scenario_and_review_sketch2": {
-              "title": "Try it yourself: Order the conversation chunks",
-              "prompt": "Right after the sketch \"Think in small reusable chunks\", practice that exact idea with this task. Arrange the reusable chunks to form the complete exchange. Produce the result for order the conversation chunks so it reinforces Greeting Scenario and Review."
+              "title": "Try it yourself: Take Mari's turn",
+              "prompt": "Right after the sketch \"Change the words, keep the conversation\", practice that exact idea with this task. Say that you are well, thank the person very much, then return the question. Produce the result for take Mari's turn so it reinforces Your First Greeting Conversation."
             }
           },
           "practice": {
-            "greeting-scenario-and-review-choice": {
-              "title": "Open the conversation",
-              "prompt": "Which phrase is the best opening for this short exchange?",
-              "hint": "Start with the greeting.",
+            "natural-response-choice": {
+              "title": "Choose the natural response",
+              "prompt": "Jan asks “Kijan ou ye?” Which response naturally keeps the conversation going?",
+              "hint": "Choose the response that answers and returns the question.",
               "help": {
-                "concept": "A simple conversation usually begins with a greeting before the check-in question.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "choosing a contextually appropriate response",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
               "options": {
-                "a": "Bonjou!",
+                "a": "Mwen byen, mèsi. E ou menm?",
                 "b": "Orevwa.",
-                "c": "Mwen byen."
+                "c": "Bonjou."
               }
             },
-            "greeting-scenario-and-review-fill": {
-              "title": "Complete the response",
-              "prompt": "Choose the word that completes the polite answer.",
-              "hint": "Use the complete response pattern practiced in the lesson.",
+            "variant-opening-listen": {
+              "title": "Hear another opening",
+              "prompt": "Listen and rebuild the opening.",
+              "hint": "It begins with Bonswa.",
               "help": {
-                "concept": "A polite check-in response combines a status phrase with a thank-you expression.",
-                "hint_1": "Look at the full response pattern from the lesson.",
-                "hint_2": "Choose the option that completes the response naturally."
+                "concept": "hearing a greeting and check-in together",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "template": "Mwen byen, [blank1].",
-              "choices": [
-                "mèsi",
-                "bonjou",
-                "padon"
-              ]
-            },
-            "greeting-scenario-and-review-listen": {
-              "title": "Hear the check-in",
-              "prompt": "Listen, then build the Kreyòl question you hear.",
-              "hint": "Build the familiar question from this module.",
-              "help": {
-                "concept": "Recognizing Kijan ou ye? by ear helps the learner follow a real greeting exchange.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "targetText": "Kijan ou ye?",
+              "targetText": "Bonswa! Kijan ou ye?",
               "wordBank": [
+                "Bonswa!",
                 "Kijan",
                 "ou",
                 "ye?"
-              ],
-              "distractors": [
-                "byen"
               ]
             },
-            "greeting-scenario-and-review-voice": {
-              "title": "Give the full response",
-              "prompt": "Say: Mwen byen, mèsi. E ou menm?",
-              "hint": "Say the response and return question together.",
+            "mari-turn-voice": {
+              "title": "Take Mari's turn",
+              "prompt": "Answer that you are well, thank the person very much, then return the question.",
+              "hint": "Use mèsi anpil before E ou menm?",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl exchange.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "producing a complete conversational response",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Mwen byen, mèsi. E ou menm?"
+              "targetText": "Mwen byen, mèsi anpil. E ou menm?"
             },
-            "greeting-scenario-and-review-build": {
-              "title": "Build the mini exchange",
-              "prompt": "Arrange the chunks into a natural greeting and check-in.",
-              "hint": "Greeting first, then the check-in question.",
+            "close-mari-write": {
+              "title": "Close with Mari",
+              "prompt": "Type “Goodbye, Mari.” in Kreyòl.",
+              "hint": "Begin with Orevwa.",
               "help": {
-                "concept": "Short conversational chunks become useful when they are placed in a natural sequence.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "closing a conversation with a person",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Bonjou! Kijan ou ye?",
+              "expectedText": "Orevwa, Mari.",
+              "placeholder": "Type the Kreyòl phrase"
+            },
+            "try-new-opening": {
+              "title": "Start a different version",
+              "prompt": "Listen and rebuild a new opening using Bonswa.",
+              "hint": "Use the greeting, then the check-in.",
+              "help": {
+                "concept": "transferring the conversation to a new opening",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "targetText": "Bonswa! Kijan ou ye?",
               "wordBank": [
-                "Bonjou!",
+                "Bonswa!",
                 "Kijan",
                 "ou",
                 "ye?"
-              ],
-              "distractors": [
-                "Orevwa."
-              ],
-              "ttsText": "Bonjou! Kijan ou ye?"
-            },
-            "greeting-scenario-and-review-write": {
-              "title": "Write the goodbye",
-              "prompt": "Type the Kreyòl goodbye practiced in this lesson.",
-              "hint": "Write the complete closing word.",
-              "help": {
-                "concept": "A closing expression completes a short beginner conversation.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "expectedText": "Orevwa",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-mini-dialogue-question": {
-              "title": "Hear the check-in",
-              "prompt": "Listen and rebuild the check-in question from the dialogue.",
-              "hint": "Listen again and rebuild the new Kreyòl phrase.",
-              "help": {
-                "concept": "hearing a greeting exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Kijan ou ye?"
-            },
-            "try-mini-dialogue-response": {
-              "title": "Give the response",
-              "prompt": "Say the response line from the dialogue.",
-              "hint": "Say: Mwen byen, mèsi. E ou menm?",
-              "help": {
-                "concept": "responding in a greeting exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen byen, mèsi. E ou menm?"
-            },
-            "try-close-conversation-orevwa": {
-              "title": "Close a short conversation",
-              "prompt": "Say “Thank you. Goodbye.” in Kreyòl.",
-              "hint": "Thank the person first, then close the conversation.",
-              "help": {
-                "concept": "closing a conversation",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mèsi. Orevwa."
-            },
-            "try-conversation-flow-order": {
-              "title": "Order the conversation chunks",
-              "prompt": "Arrange the reusable chunks to form the complete exchange.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "ordering a greeting exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Orevwa.",
-              "wordBank": [
-                "Bonjou!",
-                "Kijan ou ye?",
-                "Mwen byen, mèsi.",
-                "E ou menm?",
-                "Orevwa."
               ]
+            },
+            "try-build-complete-turn": {
+              "title": "Build a complete turn",
+              "prompt": "Build an answer that also returns the question.",
+              "hint": "E ou menm? comes after the answer.",
+              "help": {
+                "concept": "building a responsive conversational turn",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "targetText": "Mwen byen, mèsi. E ou menm?",
+              "wordBank": [
+                "Mwen",
+                "byen,",
+                "mèsi.",
+                "E",
+                "ou",
+                "menm?"
+              ]
+            },
+            "try-own-response": {
+              "title": "Take Mari's turn",
+              "prompt": "Say that you are well, thank the person very much, then return the question.",
+              "hint": "Use mèsi anpil before E ou menm?",
+              "help": {
+                "concept": "responding independently in conversation",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "targetText": "Mwen byen, mèsi anpil. E ou menm?"
             }
           }
         },
         "learn-greetings-and-polite-basics": {
-          "label": "Learn Greetings and Polite Basics",
-          "summary": "Learn the first everyday Kreyòl greetings, including Bonjou and Bonswa, and choose the greeting that fits a simple situation.",
+          "label": "Greetings and Polite Basics",
+          "summary": "Greet someone, use essential polite expressions, and close a short interaction.",
           "cards": {
             "sketch0": {
-              "title": "Start a Conversation"
+              "title": "Start the Conversation"
             },
             "sketch1": {
-              "title": "Add a Name"
+              "title": "Be Polite"
             },
             "sketch2": {
-              "title": "Build the Habit"
+              "title": "Close the Interaction"
             },
             "quiz": {
               "title": "Practice"
@@ -6014,145 +8616,120 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_learn_greetings_and_polite_basics_sketch0": {
-              "title": "Try it yourself: Choose the evening greeting",
-              "prompt": "Right after the sketch \"Use Bonjou and Bonswa\", practice that exact idea with this task. Which greeting does the lesson use later in the day and in the evening? Produce the result for choose the evening greeting so it reinforces Learn Greetings and Polite Basics."
+              "title": "Try it yourself: Greet Mari",
+              "prompt": "Right after the sketch \"Bonjou and Bonswa\", practice that exact idea with this task. Greet Mari using Bonjou. Produce the result for greet Mari so it reinforces Greetings and Polite Basics."
             },
             "try_learn_greetings_and_polite_basics_sketch1": {
-              "title": "Try it yourself: Listen and build the greeting",
-              "prompt": "Right after the sketch \"A greeting can stand alone or come before a name\", practice that exact idea with this task. Listen, then build what you hear. Produce the result for listen and build the greeting so it reinforces Learn Greetings and Polite Basics."
+              "title": "Try it yourself: Thank someone warmly",
+              "prompt": "Right after the sketch \"Mèsi, Tanpri, and Padon\", practice that exact idea with this task. Say “Thank you very much.” in Kreyòl. Produce the result for thank someone warmly so it reinforces Greetings and Polite Basics."
+            },
+            "try_learn_greetings_and_polite_basics_sketch2": {
+              "title": "Try it yourself: Close with Jan",
+              "prompt": "Right after the sketch \"Orevwa\", practice that exact idea with this task. Type “Goodbye, Jan.” in Kreyòl. Produce the result for close with Jan so it reinforces Greetings and Polite Basics."
             }
           },
           "practice": {
-            "learn-greetings-and-polite-basics-choice": {
-              "title": "Choose a daytime greeting",
-              "prompt": "Which Kreyòl greeting would you use to greet someone during the day?",
-              "hint": "Choose the greeting practiced for daytime.",
+            "greeting-choice": {
+              "title": "Choose a greeting",
+              "prompt": "Which expression is a greeting?",
+              "hint": "Choose the expression used to greet someone.",
               "help": {
-                "concept": "Kreyòl uses short conventional greetings for everyday social situations.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "recognizing a basic greeting",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
               "options": {
-                "a": "Bonjou.",
-                "b": "Mèsi.",
-                "c": "Non."
+                "a": "Bonjou",
+                "b": "Mèsi",
+                "c": "Padon"
               }
             },
-            "learn-greetings-and-polite-basics-fill": {
-              "title": "Complete Bonjou",
-              "prompt": "Choose the letters that complete the Kreyòl daytime greeting.",
-              "hint": "Complete the final sound pattern in Bonjou.",
+            "thanks-build": {
+              "title": "Build a stronger thank-you",
+              "prompt": "Build “Thank you very much.”",
+              "hint": "Mèsi comes first.",
               "help": {
-                "concept": "Accurate Kreyòl writing preserves the complete spelling of familiar greetings.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "building a polite expression",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "template": "Bonj[blank1].",
-              "choices": [
-                "ou",
-                "on",
-                "an"
+              "targetText": "Mèsi anpil.",
+              "wordBank": [
+                "Mèsi",
+                "anpil."
               ]
             },
-            "learn-greetings-and-polite-basics-listen": {
+            "bonswa-listen": {
               "title": "Hear a greeting",
-              "prompt": "Listen, then build the Kreyòl greeting you hear.",
-              "hint": "Replay the audio and build the complete greeting.",
+              "prompt": "Listen and rebuild the greeting to Jan.",
+              "hint": "Listen for the greeting and Jan's name.",
               "help": {
-                "concept": "Listening practice connects the spoken greeting with its written Kreyòl form.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "recognizing a greeting by ear",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Bonjou.",
-              "wordBank": [
-                "Bonjou."
-              ],
-              "distractors": [
-                "Bonswa."
-              ]
-            },
-            "learn-greetings-and-polite-basics-voice": {
-              "title": "Say Bonswa",
-              "prompt": "Say the Kreyòl greeting shown: Bonswa.",
-              "hint": "Say the whole greeting at a comfortable pace.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl target.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "targetText": "Bonswa."
-            },
-            "learn-greetings-and-polite-basics-build": {
-              "title": "Build a greeting with a name",
-              "prompt": "Arrange the words to say “Hello, Mari.”",
-              "hint": "Put the greeting before the name.",
-              "help": {
-                "concept": "A simple Kreyòl greeting can be followed by the person's name.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "targetText": "Bonjou, Mari.",
-              "wordBank": [
-                "Bonjou,",
-                "Mari."
-              ],
-              "distractors": [
-                "Mèsi,"
-              ],
-              "ttsText": "Bonjou, Mari."
-            },
-            "learn-greetings-and-polite-basics-write": {
-              "title": "Write Bonjou",
-              "prompt": "Type the Kreyòl daytime greeting.",
-              "hint": "Write the complete greeting as one word.",
-              "help": {
-                "concept": "Writing the full greeting builds accurate Kreyòl spelling habits.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "expectedText": "Bonjou",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-greetings-start-evening": {
-              "title": "Choose the evening greeting",
-              "prompt": "Which greeting does the lesson use later in the day and in the evening?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "choosing Bonjou or Bonswa",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "Bonswa.",
-                "b": "Bonjou."
-              }
-            },
-            "try-greet-person-mari": {
-              "title": "Listen and build the greeting",
-              "prompt": "Listen, then build what you hear.",
-              "hint": "Put the greeting before the name.",
-              "help": {
-                "concept": "greeting a named person",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Bonswa, Mari.",
+              "targetText": "Bonswa, Jan.",
               "wordBank": [
                 "Bonswa,",
-                "Mari."
+                "Jan."
               ]
+            },
+            "bonjou-voice": {
+              "title": "Say hello",
+              "prompt": "Greet Mari aloud.",
+              "hint": "Use Bonjou and her name.",
+              "help": {
+                "concept": "producing a complete greeting",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "targetText": "Bonjou, Mari."
+            },
+            "try-bonjou-mari": {
+              "title": "Greet Mari",
+              "prompt": "Greet Mari using Bonjou.",
+              "hint": "Say the greeting, then her name.",
+              "help": {
+                "concept": "using a greeting with a person",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "targetText": "Bonjou, Mari."
+            },
+            "try-mesi-anpil": {
+              "title": "Thank someone warmly",
+              "prompt": "Say “Thank you very much.” in Kreyòl.",
+              "hint": "Begin with Mèsi.",
+              "help": {
+                "concept": "extending a familiar polite expression",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "targetText": "Mèsi anpil."
+            },
+            "try-orevwa-jan": {
+              "title": "Close with Jan",
+              "prompt": "Type “Goodbye, Jan.” in Kreyòl.",
+              "hint": "Begin with Orevwa.",
+              "help": {
+                "concept": "closing an interaction naturally",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
+              },
+              "expectedText": "Orevwa, Jan.",
+              "placeholder": "Type the Kreyòl phrase"
             }
           }
         },
         "listen-and-say-hello": {
-          "label": "Listen and Say Hello",
-          "summary": "Ask how someone is doing with Kijan ou ye? and answer with a short, useful response such as Mwen byen, mèsi.",
+          "label": "Ask, Answer, and Keep It Going",
+          "summary": "Ask how someone is, answer naturally, and return the question.",
           "cards": {
             "sketch0": {
               "title": "Ask How Someone Is"
             },
             "sketch1": {
-              "title": "Answer Simply"
+              "title": "Answer Naturally"
             },
             "sketch2": {
               "title": "Keep It Going"
@@ -6164,319 +8741,134 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_listen_and_say_hello_sketch0": {
-              "title": "Try it yourself: Ask Mari how she is",
-              "prompt": "Right after the sketch \"Kijan ou ye?\", practice that exact idea with this task. Press Start. Say “Mari, kijan ou ye?” clearly, then press Stop when you’re done. Produce the result for ask Mari how she is so it reinforces Listen and Say Hello."
+              "title": "Try it yourself: Ask Mari",
+              "prompt": "Right after the sketch \"Kijan ou ye?\", practice that exact idea with this task. Listen and rebuild the question to Mari. Produce the result for ask Mari so it reinforces Ask, Answer, and Keep It Going."
             },
             "try_listen_and_say_hello_sketch1": {
-              "title": "Try it yourself: Give a shorter positive answer",
-              "prompt": "Right after the sketch \"Mwen byen, mèsi.\", practice that exact idea with this task. Say “I am well.” in Kreyòl. Produce the result for give a shorter positive answer so it reinforces Listen and Say Hello."
+              "title": "Try it yourself: Give a warmer answer",
+              "prompt": "Right after the sketch \"Mwen byen, mèsi.\", practice that exact idea with this task. Say “I am well, thank you very much.”. Produce the result for give a warmer answer so it reinforces Ask, Answer, and Keep It Going."
             },
             "try_listen_and_say_hello_sketch2": {
-              "title": "Try it yourself: Answer and return the question",
-              "prompt": "Right after the sketch \"E ou menm?\", practice that exact idea with this task. Say “I am well. And you?” in Kreyòl. Produce the result for answer and return the question so it reinforces Listen and Say Hello."
+              "title": "Try it yourself: Answer and return it",
+              "prompt": "Right after the sketch \"E ou menm?\", practice that exact idea with this task. Say “I am well. And you?” in Kreyòl. Produce the result for answer and return it so it reinforces Ask, Answer, and Keep It Going."
             }
           },
           "practice": {
-            "listen-and-say-hello-choice": {
-              "title": "Choose the check-in question",
-              "prompt": "Which Kreyòl phrase asks “How are you?”",
-              "hint": "Choose the question used after a greeting.",
+            "return-question-choice": {
+              "title": "Recognize the follow-up",
+              "prompt": "Which expression means “And you?”",
+              "hint": "Choose the expression that returns the question.",
               "help": {
-                "concept": "Kijan ou ye? is a common beginner check-in question.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "recognizing the conversational follow-up",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
               "options": {
-                "a": "Kijan ou ye?",
-                "b": "Mwen byen.",
-                "c": "Mèsi anpil."
+                "a": "E ou menm?",
+                "b": "Kijan ou ye?",
+                "c": "Orevwa."
               }
             },
-            "listen-and-say-hello-fill": {
-              "title": "Complete the answer",
-              "prompt": "Choose the word that completes “I am well.”",
-              "hint": "Use the sentence pattern practiced in the lesson.",
-              "help": {
-                "concept": "A simple response places the subject before the description.",
-                "hint_1": "Look at the complete response pattern from the lesson.",
-                "hint_2": "Choose the option that makes the sentence complete and natural."
-              },
-              "template": "[blank1] byen.",
-              "choices": [
-                "Mwen",
-                "Ou",
-                "Li"
-              ]
-            },
-            "listen-and-say-hello-listen": {
+            "jan-how-listen": {
               "title": "Hear the question",
-              "prompt": "Listen, then build the Kreyòl question you hear.",
-              "hint": "Listen for the full check-in question.",
+              "prompt": "Listen and rebuild the question to Jan.",
+              "hint": "Listen for Jan's name and the question.",
               "help": {
-                "concept": "Listening to the whole expression helps you recognize it quickly in conversation.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "hearing a check-in question with a name",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Kijan ou ye?",
+              "targetText": "Jan, kijan ou ye?",
               "wordBank": [
-                "Kijan",
+                "Jan,",
+                "kijan",
                 "ou",
                 "ye?"
-              ],
-              "distractors": [
-                "mèsi"
               ]
             },
-            "listen-and-say-hello-voice": {
-              "title": "Answer the check-in",
-              "prompt": "Say: Mwen byen, mèsi.",
-              "hint": "Say the whole response in one comfortable phrase.",
+            "response-build": {
+              "title": "Build the response",
+              "prompt": "Build “I am well, thank you very much.”",
+              "hint": "Begin with Mwen byen.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl response.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "building a complete response",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Mwen byen, mèsi."
-            },
-            "listen-and-say-hello-build": {
-              "title": "Return the question",
-              "prompt": "Arrange the words to say “And you?”",
-              "hint": "Build the complete short question.",
-              "help": {
-                "concept": "E ou menm? is a useful way to return a social question.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "targetText": "E ou menm?",
+              "targetText": "Mwen byen, mèsi anpil.",
               "wordBank": [
-                "E",
-                "ou",
-                "menm?"
-              ],
-              "distractors": [
-                "byen"
-              ],
-              "ttsText": "E ou menm?"
+                "Mwen",
+                "byen,",
+                "mèsi",
+                "anpil."
+              ]
             },
-            "listen-and-say-hello-write": {
-              "title": "Write byen",
-              "prompt": "Type the Kreyòl word for “well” used in Mwen byen.",
-              "hint": "Use the word from the short answer.",
+            "response-return-voice": {
+              "title": "Keep it going",
+              "prompt": "Answer that you are well, then ask “And you?”",
+              "hint": "Combine the two familiar chunks.",
               "help": {
-                "concept": "Accurate writing reinforces the vocabulary inside useful conversational chunks.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "expectedText": "byen",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-ask-how": {
-              "title": "Ask Mari how she is",
-              "prompt": "Press Start. Say “Mari, kijan ou ye?” clearly, then press Stop when you’re done.",
-              "hint": "Say the name, then use the familiar check-in question.",
-              "help": {
-                "concept": "asking how someone is",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mari, kijan ou ye?"
-            },
-            "try-answer-how": {
-              "title": "Give a shorter positive answer",
-              "prompt": "Say “I am well.” in Kreyòl.",
-              "hint": "Use the same positive-answer pattern without adding thanks.",
-              "help": {
-                "concept": "answering how you are",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen byen."
-            },
-            "try-return-question": {
-              "title": "Answer and return the question",
-              "prompt": "Say “I am well. And you?” in Kreyòl.",
-              "hint": "Give the short answer first, then return the question.",
-              "help": {
-                "concept": "returning a question",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "combining an answer with a follow-up",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
               "targetText": "Mwen byen. E ou menm?"
-            }
-          }
-        },
-        "read-build-and-write-greetings": {
-          "label": "Read, Build, and Write Greetings",
-          "summary": "Use everyday polite expressions such as Mèsi, Mèsi anpil, Tanpri, and Padon in short beginner interactions.",
-          "cards": {
-            "sketch0": {
-              "title": "Say Thank You"
             },
-            "sketch1": {
-              "title": "Ask Politely"
-            },
-            "sketch2": {
-              "title": "Get Someone's Attention"
-            },
-            "quiz": {
-              "title": "Practice"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_read_build_and_write_greetings_sketch0": {
-              "title": "Try it yourself: Thank someone by name",
-              "prompt": "Right after the sketch \"Mèsi and Mèsi anpil\", practice that exact idea with this task. Thank Mari in Kreyòl. Produce the result for thank someone by name so it reinforces Read, Build, and Write Greetings."
-            },
-            "try_read_build_and_write_greetings_sketch1": {
-              "title": "Try it yourself: Use please with a name",
-              "prompt": "Right after the sketch \"Tanpri\", practice that exact idea with this task. Say “Please, Mari.” in Kreyòl. Produce the result for use please with a name so it reinforces Read, Build, and Write Greetings."
-            },
-            "try_read_build_and_write_greetings_sketch2": {
-              "title": "Try it yourself: Get someone’s attention politely",
-              "prompt": "Right after the sketch \"Padon\", practice that exact idea with this task. Say “Excuse me, Mari.” in Kreyòl. Produce the result for get someone’s attention politely so it reinforces Read, Build, and Write Greetings."
-            }
-          },
-          "practice": {
-            "read-build-and-write-greetings-choice": {
-              "title": "Choose thank you",
-              "prompt": "Which Kreyòl word means “thank you”?",
-              "hint": "Choose the familiar polite expression.",
+            "try-mari-how": {
+              "title": "Ask Mari",
+              "prompt": "Listen and rebuild the question to Mari.",
+              "hint": "Mari's name comes before the question.",
               "help": {
-                "concept": "Mèsi is the basic Kreyòl expression for thanking someone.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "hearing a check-in question in context",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "options": {
-                "a": "Mèsi.",
-                "b": "Tanpri.",
-                "c": "Padon."
-              }
-            },
-            "read-build-and-write-greetings-fill": {
-              "title": "Complete Tanpri",
-              "prompt": "Choose the letters that complete the Kreyòl word for “please.”",
-              "hint": "Choose the ending that completes the polite word.",
-              "help": {
-                "concept": "This polite expression has a fixed spelling in Kreyòl.",
-                "hint_1": "Compare the available endings carefully.",
-                "hint_2": "Choose the spelling pattern practiced in the lesson."
-              },
-              "template": "Tan[blank1]",
-              "choices": [
-                "pri",
-                "pre",
-                "pro"
+              "targetText": "Mari, kijan ou ye?",
+              "wordBank": [
+                "Mari,",
+                "kijan",
+                "ou",
+                "ye?"
               ]
             },
-            "read-build-and-write-greetings-listen": {
-              "title": "Hear please",
-              "prompt": "Listen, then build the polite Kreyòl word you hear.",
-              "hint": "Listen for the complete word.",
+            "try-answer-more": {
+              "title": "Give a warmer answer",
+              "prompt": "Say “I am well, thank you very much.”",
+              "hint": "Add anpil after mèsi.",
               "help": {
-                "concept": "Listening practice connects the spoken polite expression with its spelling.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "extending a familiar response",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Tanpri.",
-              "wordBank": [
-                "Tanpri."
-              ],
-              "distractors": [
-                "Padon."
-              ]
+              "targetText": "Mwen byen, mèsi anpil."
             },
-            "read-build-and-write-greetings-voice": {
-              "title": "Say thank you very much",
-              "prompt": "Say: Mèsi anpil.",
-              "hint": "Say both words as one polite expression.",
+            "try-answer-return": {
+              "title": "Answer and return it",
+              "prompt": "Say “I am well. And you?” in Kreyòl.",
+              "hint": "Answer first, then use E ou menm?",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl phrase.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
+                "concept": "keeping a greeting exchange moving",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use the words and word order already practiced."
               },
-              "targetText": "Mèsi anpil."
-            },
-            "read-build-and-write-greetings-build": {
-              "title": "Build strong thanks",
-              "prompt": "Arrange the words to say “Thank you very much.”",
-              "hint": "Put the basic thank-you word first.",
-              "help": {
-                "concept": "Mèsi anpil is a common two-word expression of stronger thanks.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "targetText": "Mèsi anpil.",
-              "wordBank": [
-                "Mèsi",
-                "anpil."
-              ],
-              "distractors": [
-                "Tanpri"
-              ],
-              "ttsText": "Mèsi anpil."
-            },
-            "read-build-and-write-greetings-write": {
-              "title": "Write Padon",
-              "prompt": "Type the Kreyòl word practiced for “pardon” or “excuse me.”",
-              "hint": "Write the complete polite word.",
-              "help": {
-                "concept": "Writing Padon gives you another small phrase for real interactions.",
-                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
-                "hint_2": "Read or listen to the complete phrase once more before answering."
-              },
-              "expectedText": "Padon",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-thanks-anpil": {
-              "title": "Thank someone by name",
-              "prompt": "Thank Mari in Kreyòl.",
-              "hint": "Say mèsi, then the person’s name.",
-              "help": {
-                "concept": "polite thanks",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mèsi, Mari."
-            },
-            "try-please-tanpri": {
-              "title": "Use please with a name",
-              "prompt": "Say “Please, Mari.” in Kreyòl.",
-              "hint": "Start with the polite word, then address Mari.",
-              "help": {
-                "concept": "using Tanpri",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Tanpri, Mari."
-            },
-            "try-excuse-padon": {
-              "title": "Get someone’s attention politely",
-              "prompt": "Say “Excuse me, Mari.” in Kreyòl.",
-              "hint": "Start with the polite expression, then the name.",
-              "help": {
-                "concept": "using Padon",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Padon, Mari."
+              "targetText": "Mwen byen. E ou menm?"
             }
           }
         }
       },
       "haitian-creole-foundations-3-who-are-you": {
         "learn-names-and-introductions": {
-          "label": "Learn Names and Introductions",
-          "summary": "Use the core Kreyòl personal pronouns and the patterns for saying who you are and giving your name.",
+          "label": "Names and Introductions",
+          "summary": "Ask someone's name, say your own name, and return the question naturally.",
           "cards": {
             "sketch0": {
-              "title": "People in Kreyòl"
+              "title": "Ask a Name"
             },
             "sketch1": {
-              "title": "Say Who You Are"
+              "title": "Say Your Name"
             },
             "sketch2": {
-              "title": "Give Your Name"
+              "title": "Make It Two-Way"
             },
             "quiz": {
               "title": "Practice"
@@ -6485,336 +8877,141 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_learn_names_and_introductions_sketch0": {
-              "title": "Try it yourself: Recognize Mwen",
-              "prompt": "Right after the sketch \"Mwen, Ou, Li, Nou, Yo\", practice that exact idea with this task. Which pronoun in the lesson means “I / me”? Produce the result for recognize Mwen so it reinforces Learn Names and Introductions."
+              "title": "Try it yourself: Hear the name question",
+              "prompt": "Right after the sketch \"Kijan ou rele?\", practice that exact idea with this task. Listen and rebuild Jan's question to Mari. Produce the result for hear the name question so it reinforces Names and Introductions."
             },
             "try_learn_names_and_introductions_sketch1": {
-              "title": "Try it yourself: Build a new identity sentence",
-              "prompt": "Right after the sketch \"Mwen se…\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I am Mari.”. Produce the result for build a new identity sentence so it reinforces Learn Names and Introductions."
+              "title": "Try it yourself: Use another name",
+              "prompt": "Right after the sketch \"M rele…\", practice that exact idea with this task. Use the M rele… pattern to say “My name is Mari.” in Kreyòl. Produce the result for use another name so it reinforces Names and Introductions."
             },
             "try_learn_names_and_introductions_sketch2": {
-              "title": "Try it yourself: Give a different name",
-              "prompt": "Right after the sketch \"M rele…\", practice that exact idea with this task. Say “My name is Ana.” in Kreyòl. Produce the result for give a different name so it reinforces Learn Names and Introductions."
+              "title": "Try it yourself: Build Mari's turn",
+              "prompt": "Right after the sketch \"E ou menm?\", practice that exact idea with this task. Build a turn that gives Mari's name and returns the question. Produce the result for build Mari's turn so it reinforces Names and Introductions."
             }
           },
           "practice": {
-            "learn-names-and-introductions-choice": {
-              "title": "Choose the first-person pronoun",
-              "prompt": "Which Kreyòl pronoun means “I”?",
-              "hint": "Choose the form used when a speaker refers to themself.",
+            "names-question-choice": {
+              "title": "Choose the name question",
+              "prompt": "Which question asks someone's name?",
+              "hint": "Look for the question with rele.",
               "help": {
-                "concept": "Personal pronouns tell us who is speaking or being discussed.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "recognizing the name question",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
               "options": {
-                "a": "Mwen",
-                "b": "Ou",
-                "c": "Yo"
+                "a": "Kijan ou rele?",
+                "b": "Kijan ou ye?",
+                "c": "Ki kote ou rete?"
               }
             },
-            "learn-names-and-introductions-fill": {
-              "title": "Complete the identity sentence",
-              "prompt": "Choose the word that completes “I am Jan.”",
-              "hint": "Use the identity pattern introduced in the lesson.",
+            "names-listen": {
+              "title": "Hear a different name",
+              "prompt": "Listen and rebuild the introduction.",
+              "hint": "The speaker gives a name.",
               "help": {
-                "concept": "The sentence needs the speaker form before the identity phrase.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "template": "[blank1] se Jan.",
-              "choices": [
-                "Mwen",
-                "Ou",
-                "Yo"
-              ]
-            },
-            "learn-names-and-introductions-listen": {
-              "title": "Hear a name introduction",
-              "prompt": "Listen, then build the introduction you hear.",
-              "hint": "Build the complete short introduction.",
-              "help": {
-                "concept": "Listen for the name pattern and keep the words in spoken order.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "recognizing an introduction by ear",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
               "targetText": "M rele Mari.",
               "wordBank": [
                 "M",
                 "rele",
                 "Mari."
-              ],
-              "distractors": [
-                "Ou"
               ]
             },
-            "learn-names-and-introductions-voice": {
+            "names-build": {
+              "title": "Build a two-way turn",
+              "prompt": "Give Jan's name and return the question.",
+              "hint": "Use E ou menm? after the answer.",
+              "help": {
+                "concept": "building a connected introduction turn",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
+              },
+              "targetText": "M rele Jan. E ou menm?",
+              "wordBank": [
+                "M",
+                "rele",
+                "Jan.",
+                "E",
+                "ou",
+                "menm?"
+              ]
+            },
+            "names-voice": {
               "title": "Introduce yourself",
-              "prompt": "Say: Mwen se Jan.",
-              "hint": "Say the complete identity sentence.",
+              "prompt": "Say “My name is Mari.”",
+              "hint": "Use M rele.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl target.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "producing a short introduction",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "Mwen se Jan."
+              "targetText": "M rele Mari."
             },
-            "learn-names-and-introductions-build": {
-              "title": "Build a name introduction",
-              "prompt": "Arrange the words to say “My name is Mari.”",
-              "hint": "Build the short name pattern from the lesson.",
+            "try-ask-name": {
+              "title": "Hear the name question",
+              "prompt": "Listen and rebuild Jan's question to Mari.",
+              "hint": "Listen for Mari's name before the familiar question.",
               "help": {
-                "concept": "Kreyòl name introductions follow a compact conversational pattern.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "asking someone's name",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "M rele Mari.",
+              "targetText": "Mari, kijan ou rele?",
+              "wordBank": [
+                "Mari,",
+                "kijan",
+                "ou",
+                "rele?"
+              ]
+            },
+            "try-new-name": {
+              "title": "Use another name",
+              "prompt": "Use the M rele… pattern to say “My name is Mari.” in Kreyòl.",
+              "hint": "Keep M rele and use Mari as the name.",
+              "help": {
+                "concept": "giving a name with M rele",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
+              },
+              "targetText": "M rele Mari."
+            },
+            "try-name-turn": {
+              "title": "Build Mari's turn",
+              "prompt": "Build a turn that gives Mari's name and returns the question.",
+              "hint": "Give the name first.",
+              "help": {
+                "concept": "answering and returning a name question",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
+              },
+              "targetText": "M rele Mari. E ou menm?",
               "wordBank": [
                 "M",
                 "rele",
-                "Mari."
-              ],
-              "distractors": [
-                "se"
-              ],
-              "ttsText": "M rele Mari."
-            },
-            "learn-names-and-introductions-write": {
-              "title": "Write the pronoun",
-              "prompt": "Type the Kreyòl pronoun for “you.”",
-              "hint": "Use the form addressed directly to another person.",
-              "help": {
-                "concept": "This pronoun is used when speaking directly to one person.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "expectedText": "Ou",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-pronouns-mwen": {
-              "title": "Recognize Mwen",
-              "prompt": "Which pronoun in the lesson means “I / me”?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "personal pronouns",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "Mwen",
-                "b": "Ou",
-                "c": "Li",
-                "d": "Nou",
-                "e": "Yo"
-              }
-            },
-            "try-say-who-student": {
-              "title": "Build a new identity sentence",
-              "prompt": "Arrange the Kreyòl sentence for “I am Mari.”",
-              "hint": "Use Mwen se before the name.",
-              "help": {
-                "concept": "Mwen se identity pattern",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen se Mari.",
-              "wordBank": [
-                "Mwen",
-                "se",
-                "Mari."
+                "Mari.",
+                "E",
+                "ou",
+                "menm?"
               ]
-            },
-            "try-say-name-mari": {
-              "title": "Give a different name",
-              "prompt": "Say “My name is Ana.” in Kreyòl.",
-              "hint": "Use M rele before the new name.",
-              "help": {
-                "concept": "M rele name pattern",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "M rele Ana."
-            }
-          }
-        },
-        "listen-and-introduce-yourself": {
-          "label": "Listen and Introduce Yourself",
-          "summary": "Say a nationality and the language you speak using simple identity patterns.",
-          "cards": {
-            "sketch0": {
-              "title": "Say Your Nationality"
-            },
-            "sketch1": {
-              "title": "Say What Language You Speak"
-            },
-            "sketch2": {
-              "title": "Combine Two Facts"
-            },
-            "quiz": {
-              "title": "Practice"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_listen_and_introduce_yourself_sketch0": {
-              "title": "Try it yourself: State another nationality",
-              "prompt": "Right after the sketch \"Mwen se ayisyen / ayisyèn\", practice that exact idea with this task. Say “I am American.” in Kreyòl. Produce the result for state another nationality so it reinforces Listen and Introduce Yourself."
-            },
-            "try_listen_and_introduce_yourself_sketch1": {
-              "title": "Try it yourself: Build another language sentence",
-              "prompt": "Right after the sketch \"Mwen pale…\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I speak French.”. Produce the result for build another language sentence so it reinforces Listen and Introduce Yourself."
-            },
-            "try_listen_and_introduce_yourself_sketch2": {
-              "title": "Try it yourself: Say two different facts",
-              "prompt": "Right after the sketch \"Identity + language\", practice that exact idea with this task. Say “I am American. I speak English.” in Kreyòl. Produce the result for say two different facts so it reinforces Listen and Introduce Yourself."
-            }
-          },
-          "practice": {
-            "listen-and-introduce-yourself-choice": {
-              "title": "Choose a language sentence",
-              "prompt": "Which sentence means “I speak Kreyòl”?",
-              "hint": "Choose the sentence about language ability.",
-              "help": {
-                "concept": "The lesson uses one short verb pattern to state the language a person speaks.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "options": {
-                "a": "Mwen pale kreyòl.",
-                "b": "Mwen se kreyòl.",
-                "c": "Mwen rete kreyòl."
-              }
-            },
-            "listen-and-introduce-yourself-fill": {
-              "title": "Complete the language sentence",
-              "prompt": "Choose the verb that completes the sentence about language.",
-              "hint": "Use the sentence pattern practiced in this lesson.",
-              "help": {
-                "concept": "The blank needs the action that connects the speaker with a language.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "template": "Mwen [blank1] kreyòl.",
-              "choices": [
-                "pale",
-                "rete",
-                "rele"
-              ]
-            },
-            "listen-and-introduce-yourself-listen": {
-              "title": "Hear a nationality",
-              "prompt": "Listen, then build the identity sentence you hear.",
-              "hint": "Listen for the identity pattern and nationality.",
-              "help": {
-                "concept": "Build the sentence in the same order you hear it.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Li se ayisyen.",
-              "wordBank": [
-                "Li",
-                "se",
-                "ayisyen."
-              ],
-              "distractors": [
-                "pale"
-              ]
-            },
-            "listen-and-introduce-yourself-voice": {
-              "title": "Say what language you speak",
-              "prompt": "Say: Mwen pale kreyòl.",
-              "hint": "Say the complete sentence naturally.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Mwen pale kreyòl."
-            },
-            "listen-and-introduce-yourself-build": {
-              "title": "Build two facts",
-              "prompt": "Arrange the words to say “I am Haitian.”",
-              "hint": "Use the identity pattern before the nationality.",
-              "help": {
-                "concept": "A nationality can complete the same basic identity pattern used for names and roles.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Mwen se ayisyen.",
-              "wordBank": [
-                "Mwen",
-                "se",
-                "ayisyen."
-              ],
-              "distractors": [
-                "pale"
-              ],
-              "ttsText": "Mwen se ayisyen."
-            },
-            "listen-and-introduce-yourself-write": {
-              "title": "Write a language name",
-              "prompt": "Type the Kreyòl word for the Haitian Creole language used in this course.",
-              "hint": "Use the language name that appears throughout the lesson.",
-              "help": {
-                "concept": "Write the language name with its correct Kreyòl spelling.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "expectedText": "kreyòl",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-nationality-ayisyen": {
-              "title": "State another nationality",
-              "prompt": "Say “I am American.” in Kreyòl.",
-              "hint": "Keep Mwen se and change the nationality.",
-              "help": {
-                "concept": "nationality identity",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen se ameriken."
-            },
-            "try-language-kreyol": {
-              "title": "Build another language sentence",
-              "prompt": "Arrange the Kreyòl sentence for “I speak French.”",
-              "hint": "Keep Mwen pale and change the language.",
-              "help": {
-                "concept": "Mwen pale language pattern",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen pale fransè.",
-              "wordBank": [
-                "Mwen",
-                "pale",
-                "fransè."
-              ]
-            },
-            "try-combine-identity-language": {
-              "title": "Say two different facts",
-              "prompt": "Say “I am American. I speak English.” in Kreyòl.",
-              "hint": "Use one identity sentence, then one language sentence.",
-              "help": {
-                "concept": "combining identity and language",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen se ameriken. Mwen pale anglè."
             }
           }
         },
         "meet-someone-scenario-and-review": {
-          "label": "Meet Someone: Scenario and Review",
-          "summary": "Combine your name, identity, language, and residence into a short beginner introduction.",
+          "label": "Meet Someone: A Full Introduction",
+          "summary": "Combine greetings, names, and residence into one connected first-meeting conversation.",
           "cards": {
             "sketch0": {
-              "title": "A Simple Introduction"
+              "title": "Listen to the Whole Conversation"
             },
             "sketch1": {
-              "title": "Ask the Other Person"
+              "title": "See the Conversation Grow"
             },
             "sketch2": {
-              "title": "Use It"
+              "title": "Hear a Second Version"
             },
             "quiz": {
               "title": "Practice"
@@ -6823,190 +9020,144 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_meet_someone_scenario_and_review_sketch0": {
-              "title": "Try it yourself: Order the introduction pieces",
-              "prompt": "Right after the sketch \"Four useful pieces\", practice that exact idea with this task. Arrange the four reusable introduction pieces in the order shown. Produce the result for order the introduction pieces so it reinforces Meet Someone: Scenario and Review."
+              "title": "Try it yourself: Take Mari's name turn",
+              "prompt": "Right after the sketch \"Jan and Mari meet\", practice that exact idea with this task. Give Mari's name, then return the question. Produce the result for take Mari's name turn so it reinforces Meet Someone: A Full Introduction."
             },
             "try_meet_someone_scenario_and_review_sketch1": {
-              "title": "Try it yourself: Ask another person’s name",
-              "prompt": "Right after the sketch \"Kijan ou rele? / Ki kote ou rete?\", practice that exact idea with this task. Say “What is his or her name?” in Kreyòl. Produce the result for ask another person’s name so it reinforces Meet Someone: Scenario and Review."
+              "title": "Try it yourself: Build the next question",
+              "prompt": "Right after the sketch \"Greeting → name → place\", practice that exact idea with this task. After exchanging names, build the question that asks where the person lives. Produce the result for build the next question so it reinforces Meet Someone: A Full Introduction."
             },
             "try_meet_someone_scenario_and_review_sketch2": {
-              "title": "Try it yourself: Hear the introduction",
-              "prompt": "Right after the sketch \"A short introduction exchange\", practice that exact idea with this task. Listen and rebuild Ana’s name response using the pattern from the lesson. Produce the result for hear the introduction so it reinforces Meet Someone: Scenario and Review."
+              "title": "Try it yourself: Hear Mari's residence turn",
+              "prompt": "Right after the sketch \"Same people, slightly different wording\", practice that exact idea with this task. Listen and rebuild Mari's complete turn. Produce the result for hear Mari's residence turn so it reinforces Meet Someone: A Full Introduction."
             }
           },
           "practice": {
-            "meet-someone-scenario-and-review-choice": {
-              "title": "Ask for a name",
-              "prompt": "Which Kreyòl question asks a person’s name?",
-              "hint": "Choose the question used during an introduction.",
+            "intro-natural-next-choice": {
+              "title": "Choose the natural next question",
+              "prompt": "Mari says “M rele Mari.” Which question can naturally continue the introduction?",
+              "hint": "Move from name to where the person lives.",
               "help": {
-                "concept": "A beginner introduction often includes one question about a person's name.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "continuing an introduction naturally",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
               "options": {
-                "a": "Kijan ou rele?",
-                "b": "Ki kote ou rete?",
-                "c": "Kijan ou ye?"
+                "a": "Ki kote ou rete?",
+                "b": "Orevwa.",
+                "c": "Mèsi."
               }
             },
-            "meet-someone-scenario-and-review-fill": {
-              "title": "Complete the introduction",
-              "prompt": "Choose the verb that completes the name introduction.",
-              "hint": "Use the name pattern from this module.",
+            "intro-listen": {
+              "title": "Hear the residence turn",
+              "prompt": "Listen and rebuild the complete turn.",
+              "hint": "The speaker answers and returns the question.",
               "help": {
-                "concept": "The blank needs the action used in the short name-introduction pattern.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "hearing a connected introduction turn",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "template": "M [blank1] Ana.",
-              "choices": [
-                "rele",
-                "rete",
-                "pale"
-              ]
-            },
-            "meet-someone-scenario-and-review-listen": {
-              "title": "Hear a full introduction",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the speaker, language action, and language name.",
-              "help": {
-                "concept": "Build the introduction exactly in the spoken order.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Mwen pale kreyòl.",
+              "targetText": "Mwen rete Chicago. E ou menm?",
               "wordBank": [
                 "Mwen",
-                "pale",
-                "kreyòl."
-              ],
-              "distractors": [
-                "rete"
-              ]
-            },
-            "meet-someone-scenario-and-review-voice": {
-              "title": "Give a short introduction",
-              "prompt": "Say: M rele Ana. Mwen rete Chicago.",
-              "hint": "Say both short sentences clearly.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored two-sentence introduction.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "M rele Ana. Mwen rete Chicago."
-            },
-            "meet-someone-scenario-and-review-build": {
-              "title": "Build the introduction question",
-              "prompt": "Arrange the words to ask “What is your name?”",
-              "hint": "Build the complete question from this module.",
-              "help": {
-                "concept": "The question follows a fixed beginner conversational pattern.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Kijan ou rele?",
-              "wordBank": [
-                "Kijan",
+                "rete",
+                "Chicago.",
+                "E",
                 "ou",
-                "rele?"
-              ],
-              "distractors": [
-                "rete"
-              ],
-              "ttsText": "Kijan ou rele?"
-            },
-            "meet-someone-scenario-and-review-write": {
-              "title": "Write a complete identity sentence",
-              "prompt": "Type the Kreyòl sentence “I am Haitian.”",
-              "hint": "Use the identity pattern and nationality from this module.",
-              "help": {
-                "concept": "Write the complete short identity sentence.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "expectedText": "Mwen se ayisyen.",
-              "placeholder": "Type the Kreyòl answer",
-              "anyOf": [
-                "Mwen se ayisyèn."
+                "menm?"
               ]
             },
-            "try-intro-flow-order": {
-              "title": "Order the introduction pieces",
-              "prompt": "Arrange the four reusable introduction pieces in the order shown.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
+            "intro-build": {
+              "title": "Build the name turn",
+              "prompt": "Give Jan's name and return the question.",
+              "hint": "Use the familiar follow-up after the name.",
               "help": {
-                "concept": "building an introduction",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "building a complete introduction turn",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "M rele Ana. Mwen se ayisyèn. Mwen pale kreyòl. Mwen rete Chicago.",
+              "targetText": "M rele Jan. E ou menm?",
               "wordBank": [
-                "M rele Ana.",
-                "Mwen se ayisyèn.",
-                "Mwen pale kreyòl.",
-                "Mwen rete Chicago."
+                "M",
+                "rele",
+                "Jan.",
+                "E",
+                "ou",
+                "menm?"
               ]
             },
-            "try-ask-back-name": {
-              "title": "Ask another person’s name",
-              "prompt": "Say “What is his or her name?” in Kreyòl.",
-              "hint": "Use the familiar name question with li.",
+            "intro-voice": {
+              "title": "Take the full response",
+              "prompt": "Say that you live in Miami, then return the question.",
+              "hint": "Answer with Mwen rete before E ou menm?",
               "help": {
-                "concept": "asking a person's name",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "producing a connected residence response",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "Kijan li rele?"
+              "targetText": "Mwen rete Miami. E ou menm?"
             },
-            "try-ask-back-place": {
-              "title": "Ask where another person lives",
-              "prompt": "Say “Where does he or she live?” in Kreyòl.",
-              "hint": "Use Ki kote with li rete.",
+            "try-introduction-response": {
+              "title": "Take Mari's name turn",
+              "prompt": "Give Mari's name, then return the question.",
+              "hint": "Answer first, then use E ou menm?",
               "help": {
-                "concept": "asking where someone lives",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "responding inside an introduction",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "Ki kote li rete?"
+              "targetText": "M rele Mari. E ou menm?"
             },
-            "try-mini-exchange-name": {
-              "title": "Hear the introduction",
-              "prompt": "Listen and rebuild Ana’s name response using the pattern from the lesson.",
-              "hint": "Listen again and rebuild the new Kreyòl phrase.",
+            "try-map-transfer": {
+              "title": "Build the next question",
+              "prompt": "After exchanging names, build the question that asks where the person lives.",
+              "hint": "The next topic is place, not name.",
               "help": {
-                "concept": "hearing an introduction exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "choosing the next conversational move",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "M rele Ana. E ou menm?"
+              "targetText": "Ki kote ou rete?",
+              "wordBank": [
+                "Ki",
+                "kote",
+                "ou",
+                "rete?"
+              ]
             },
-            "try-mini-exchange-place": {
-              "title": "Answer the residence question",
-              "prompt": "Say the residence answer using the pattern from the lesson.",
-              "hint": "Say: Mwen rete Chicago.",
+            "try-second-version": {
+              "title": "Hear Mari's residence turn",
+              "prompt": "Listen and rebuild Mari's complete turn.",
+              "hint": "She answers, then returns the question.",
               "help": {
-                "concept": "responding with a residence",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "hearing a complete residence turn",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "Mwen rete Chicago."
+              "targetText": "Mwen rete Boston. E ou menm?",
+              "wordBank": [
+                "Mwen",
+                "rete",
+                "Boston.",
+                "E",
+                "ou",
+                "menm?"
+              ]
             }
           }
         },
         "read-build-and-write-an-introduction": {
-          "label": "Read, Build, and Write an Introduction",
-          "summary": "Ask and answer where someone lives using Ki kote ou rete? and Mwen rete…",
+          "label": "Where Do You Live?",
+          "summary": "Ask where someone lives, answer with a place, and return the question.",
           "cards": {
             "sketch0": {
               "title": "Ask Where Someone Lives"
             },
             "sketch1": {
-              "title": "Say Where You Live"
+              "title": "Answer With a Place"
             },
             "sketch2": {
-              "title": "Talk About Someone Else"
+              "title": "Ask and Return"
             },
             "quiz": {
               "title": "Practice"
@@ -7015,27 +9166,27 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_read_build_and_write_an_introduction_sketch0": {
-              "title": "Try it yourself: Ask where Mari lives",
-              "prompt": "Right after the sketch \"Ki kote ou rete?\", practice that exact idea with this task. Say “Where does Mari live?” in Kreyòl. Produce the result for ask where Mari lives so it reinforces Read, Build, and Write an Introduction."
+              "title": "Try it yourself: Ask the question",
+              "prompt": "Right after the sketch \"Ki kote ou rete?\", practice that exact idea with this task. Ask Mari where she lives. Produce the result for ask the question so it reinforces Where Do You Live?."
             },
             "try_read_build_and_write_an_introduction_sketch1": {
-              "title": "Try it yourself: Build a different residence answer",
-              "prompt": "Right after the sketch \"Mwen rete…\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I live in Boston.”. Produce the result for build a different residence answer so it reinforces Read, Build, and Write an Introduction."
+              "title": "Try it yourself: Write another residence",
+              "prompt": "Right after the sketch \"Mwen rete…\", practice that exact idea with this task. Write “I live in Miami.” in Kreyòl. Produce the result for write another residence so it reinforces Where Do You Live?."
             },
             "try_read_build_and_write_an_introduction_sketch2": {
-              "title": "Try it yourself: Build another third-person residence",
-              "prompt": "Right after the sketch \"Li rete…\", practice that exact idea with this task. Arrange the Kreyòl sentence for “He or she lives in Chicago.”. Produce the result for build another third-person residence so it reinforces Read, Build, and Write an Introduction."
+              "title": "Try it yourself: Hear another residence",
+              "prompt": "Right after the sketch \"Jan and Mari talk about where they live\", practice that exact idea with this task. Listen and rebuild the answer. Produce the result for hear another residence so it reinforces Where Do You Live?."
             }
           },
           "practice": {
-            "read-build-and-write-an-introduction-choice": {
+            "residence-question-choice": {
               "title": "Choose the residence question",
-              "prompt": "Which Kreyòl question asks where someone lives?",
-              "hint": "Choose the question about place of residence.",
+              "prompt": "Which question asks where someone lives?",
+              "hint": "Look for Ki kote.",
               "help": {
-                "concept": "A location question uses a fixed beginner conversational pattern.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
+                "concept": "recognizing a residence question",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
               "options": {
                 "a": "Ki kote ou rete?",
@@ -7043,103 +9194,14 @@ const messages: Record<string, any> = {
                 "c": "Kijan ou ye?"
               }
             },
-            "read-build-and-write-an-introduction-fill": {
-              "title": "Complete the residence sentence",
-              "prompt": "Choose the verb that completes the sentence about where a person lives.",
-              "hint": "Use the residence pattern practiced in the lesson.",
+            "residence-listen": {
+              "title": "Hear the answer",
+              "prompt": "Listen and rebuild the residence answer.",
+              "hint": "The final word is a city.",
               "help": {
-                "concept": "The blank needs the action associated with a person's place of residence.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "template": "Mwen [blank1] Chicago.",
-              "choices": [
-                "rete",
-                "pale",
-                "rele"
-              ]
-            },
-            "read-build-and-write-an-introduction-listen": {
-              "title": "Hear where someone lives",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the subject, residence verb, and place.",
-              "help": {
-                "concept": "Build the sentence in the same order as the spoken Kreyòl.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Li rete Boston.",
-              "wordBank": [
-                "Li",
-                "rete",
-                "Boston."
-              ],
-              "distractors": [
-                "pale"
-              ]
-            },
-            "read-build-and-write-an-introduction-voice": {
-              "title": "Ask where someone lives",
-              "prompt": "Say: Ki kote ou rete?",
-              "hint": "Say the complete question.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Ki kote ou rete?"
-            },
-            "read-build-and-write-an-introduction-build": {
-              "title": "Build a residence answer",
-              "prompt": "Arrange the words to say “I live in Chicago.”",
-              "hint": "Put the speaker first, then the residence pattern, then the place.",
-              "help": {
-                "concept": "A short location answer follows a stable word order.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "targetText": "Mwen rete Chicago.",
-              "wordBank": [
-                "Mwen",
-                "rete",
-                "Chicago."
-              ],
-              "distractors": [
-                "rele"
-              ],
-              "ttsText": "Mwen rete Chicago."
-            },
-            "read-build-and-write-an-introduction-write": {
-              "title": "Write the location question word",
-              "prompt": "Type the Kreyòl word used in the question to ask “where.”",
-              "hint": "Use the first word from the residence question.",
-              "help": {
-                "concept": "This question word is used to ask about a place.",
-                "hint_1": "Use the complete pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the sentence or audio before answering."
-              },
-              "expectedText": "kote",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-ask-place": {
-              "title": "Ask where Mari lives",
-              "prompt": "Say “Where does Mari live?” in Kreyòl.",
-              "hint": "Keep Ki kote and replace ou with the person’s name.",
-              "help": {
-                "concept": "residence question",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Ki kote Mari rete?"
-            },
-            "try-answer-place-chicago": {
-              "title": "Build a different residence answer",
-              "prompt": "Arrange the Kreyòl sentence for “I live in Boston.”",
-              "hint": "Keep Mwen rete and change the place.",
-              "help": {
-                "concept": "residence answer pattern",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "hearing a residence answer",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
               "targetText": "Mwen rete Boston.",
               "wordBank": [
@@ -7148,20 +9210,71 @@ const messages: Record<string, any> = {
                 "Boston."
               ]
             },
-            "try-third-person-place": {
-              "title": "Build another third-person residence",
-              "prompt": "Arrange the Kreyòl sentence for “He or she lives in Chicago.”",
-              "hint": "Keep Li rete and change the place.",
+            "residence-build": {
+              "title": "Build the question",
+              "prompt": "Build the question about where someone lives.",
+              "hint": "Begin with Ki kote.",
               "help": {
-                "concept": "third-person residence",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "building a residence question",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
               },
-              "targetText": "Li rete Chicago.",
+              "targetText": "Ki kote ou rete?",
               "wordBank": [
-                "Li",
+                "Ki",
+                "kote",
+                "ou",
+                "rete?"
+              ]
+            },
+            "residence-voice": {
+              "title": "Answer with a new place",
+              "prompt": "Say “I live in Miami.”",
+              "hint": "Use Mwen rete.",
+              "help": {
+                "concept": "producing a residence answer",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
+              },
+              "targetText": "Mwen rete Miami."
+            },
+            "try-ask-where": {
+              "title": "Ask the question",
+              "prompt": "Ask Mari where she lives.",
+              "hint": "Address Mari, then use the familiar residence question.",
+              "help": {
+                "concept": "asking where someone lives",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
+              },
+              "targetText": "Mari, ki kote ou rete?"
+            },
+            "try-different-city": {
+              "title": "Write another residence",
+              "prompt": "Write “I live in Miami.” in Kreyòl.",
+              "hint": "Keep Mwen rete and change the city.",
+              "help": {
+                "concept": "answering with a residence",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
+              },
+              "expectedText": "Mwen rete Miami.",
+              "placeholder": "Type the Kreyòl sentence"
+            },
+            "try-residence-transfer": {
+              "title": "Hear another residence",
+              "prompt": "Listen and rebuild the answer.",
+              "hint": "Listen for the city at the end.",
+              "help": {
+                "concept": "recognizing a residence answer",
+                "hint_1": "Listen to or read the complete Kreyòl expression.",
+                "hint_2": "Use language already introduced in this course."
+              },
+              "targetText": "Mwen rete Miami.",
+              "wordBank": [
+                "Mwen",
                 "rete",
-                "Chicago."
+                "Miami."
               ]
             }
           }
@@ -7169,17 +9282,17 @@ const messages: Record<string, any> = {
       },
       "haitian-creole-foundations-4-talking-about-things": {
         "learn-everyday-things": {
-          "label": "Learn Everyday Things",
-          "summary": "Introduce Kreyòl noun phrases with yon and the idea that definite markers come after the noun.",
+          "label": "One Thing, the Thing, More Than One",
+          "summary": "Use yon, familiar definite noun phrases, and plural yo with everyday objects.",
           "cards": {
             "sketch0": {
               "title": "Talk About One Thing"
             },
             "sketch1": {
-              "title": "Talk About a Specific Thing"
+              "title": "Notice the Definite Phrase"
             },
             "sketch2": {
-              "title": "Compare the Patterns"
+              "title": "Talk About More Than One"
             },
             "quiz": {
               "title": "Practice"
@@ -7188,27 +9301,27 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_learn_everyday_things_sketch0": {
-              "title": "Try it yourself: Build “a dog”",
-              "prompt": "Right after the sketch \"Use yon before a noun\", practice that exact idea with this task. Build the Kreyòl phrase for “a dog.”. Produce the result for build “a dog” so it reinforces Learn Everyday Things."
+              "title": "Try it yourself: Use yon with another object",
+              "prompt": "Right after the sketch \"Yon comes before the noun\", practice that exact idea with this task. Say “a bag” in Kreyòl. Produce the result for use yon with another object so it reinforces One Thing, the Thing, More Than One."
             },
             "try_learn_everyday_things_sketch1": {
-              "title": "Try it yourself: Recognize a new definite phrase",
-              "prompt": "Right after the sketch \"The definite marker comes after the noun\", practice that exact idea with this task. Which Kreyòl phrase means “the cow”? Produce the result for recognize a new definite phrase so it reinforces Learn Everyday Things."
+              "title": "Try it yourself: Hear another definite noun phrase",
+              "prompt": "Right after the sketch \"The marker comes after the noun\", practice that exact idea with this task. Listen and rebuild “the desk.”. Produce the result for hear another definite noun phrase so it reinforces One Thing, the Thing, More Than One."
             },
             "try_learn_everyday_things_sketch2": {
-              "title": "Try it yourself: Choose “the dog”",
-              "prompt": "Right after the sketch \"yon liv vs. liv la\", practice that exact idea with this task. Which Kreyòl phrase means “the dog”? Produce the result for choose “the dog” so it reinforces Learn Everyday Things."
+              "title": "Try it yourself: Build a new plural noun phrase",
+              "prompt": "Right after the sketch \"Plural yo comes after the noun\", practice that exact idea with this task. Build “the phones.”. Produce the result for build a new plural noun phrase so it reinforces One Thing, the Thing, More Than One."
             }
           },
           "practice": {
-            "learn-everyday-things-choice": {
-              "title": "Choose “a book”",
-              "prompt": "Which Kreyòl phrase means “a book”?",
-              "hint": "Use the indefinite pattern from the lesson.",
+            "things-yon-choice": {
+              "title": "Choose the phrase for one book",
+              "prompt": "Which phrase means “a book”?",
+              "hint": "yon comes before the noun.",
               "help": {
-                "concept": "An unspecified singular thing uses a short marker before the noun.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "recognizing the indefinite noun phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
               "options": {
                 "a": "yon liv",
@@ -7216,312 +9329,102 @@ const messages: Record<string, any> = {
                 "c": "liv yo"
               }
             },
-            "learn-everyday-things-fill": {
-              "title": "Complete the indefinite phrase",
-              "prompt": "Choose the word that completes “a bag.”",
-              "hint": "Use the singular indefinite pattern.",
+            "things-definite-listen": {
+              "title": "Hear a familiar noun phrase",
+              "prompt": "Listen and rebuild “the bag.”",
+              "hint": "The marker follows the noun.",
               "help": {
-                "concept": "The blank needs the marker that comes before an unspecified singular noun.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "hearing a source-backed definite noun phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "template": "[blank1] valiz",
-              "choices": [
-                "yon",
-                "yo",
-                "la"
+              "targetText": "Valiz la.",
+              "wordBank": [
+                "Valiz",
+                "la."
               ]
             },
-            "learn-everyday-things-listen": {
-              "title": "Hear a specific thing",
-              "prompt": "Listen, then build the noun phrase you hear.",
-              "hint": "Build the noun first, then its following marker.",
+            "things-plural-build": {
+              "title": "Build a plural phrase",
+              "prompt": "Build “the books.”",
+              "hint": "Use yo after liv.",
               "help": {
-                "concept": "Listen for the order of the noun and its definite marker.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "building a plural noun phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "targetText": "liv la",
+              "targetText": "Liv yo.",
               "wordBank": [
-                "liv",
-                "la"
-              ],
-              "distractors": [
-                "yon"
+                "Liv",
+                "yo."
               ]
             },
-            "learn-everyday-things-voice": {
-              "title": "Say an indefinite noun phrase",
-              "prompt": "Say: yon machin.",
-              "hint": "Say both words in the authored order.",
+            "things-yon-voice": {
+              "title": "Say one notebook",
+              "prompt": "Say “a notebook.”",
+              "hint": "Use yon before kaye.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl phrase.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "producing an indefinite noun phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "targetText": "yon machin"
+              "targetText": "Yon kaye."
             },
-            "learn-everyday-things-build": {
-              "title": "Build “the cat”",
-              "prompt": "Arrange the words to build the Kreyòl phrase for “the cat.”",
-              "hint": "Put the noun before its marker.",
+            "try-yon-valiz": {
+              "title": "Use yon with another object",
+              "prompt": "Say “a bag” in Kreyòl.",
+              "hint": "Put yon before valiz.",
               "help": {
-                "concept": "The definite marker follows the noun in this phrase.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "using the indefinite article before a noun",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "targetText": "chat la",
+              "targetText": "Yon valiz."
+            },
+            "try-biwo-a": {
+              "title": "Hear another definite noun phrase",
+              "prompt": "Listen and rebuild “the desk.”",
+              "hint": "The marker follows biwo.",
+              "help": {
+                "concept": "recognizing a source-backed definite noun phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
+              },
+              "targetText": "Biwo a.",
               "wordBank": [
-                "chat",
-                "la"
-              ],
-              "distractors": [
-                "yon"
-              ],
-              "ttsText": "chat la"
-            },
-            "learn-everyday-things-write": {
-              "title": "Write “a book”",
-              "prompt": "Type the Kreyòl phrase for “a book.”",
-              "hint": "Use the indefinite pattern from the lesson.",
-              "help": {
-                "concept": "Write the complete two-word noun phrase.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "expectedText": "yon liv",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-yon-liv": {
-              "title": "Build “a dog”",
-              "prompt": "Build the Kreyòl phrase for “a dog.”",
-              "hint": "Put yon before the noun.",
-              "help": {
-                "concept": "yon before a noun",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "yon chen",
-              "wordBank": [
-                "yon",
-                "chen"
+                "Biwo",
+                "a."
               ]
             },
-            "try-definite-after-chat": {
-              "title": "Recognize a new definite phrase",
-              "prompt": "Which Kreyòl phrase means “the cow”?",
-              "hint": "Look for the noun followed by its correct definite marker.",
-              "help": {
-                "concept": "definite marker after noun",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "bèf la",
-                "b": "flè a",
-                "c": "chen an"
-              }
-            },
-            "try-contrast-the-book": {
-              "title": "Choose “the dog”",
-              "prompt": "Which Kreyòl phrase means “the dog”?",
-              "hint": "Choose the phrase with the definite marker after the noun.",
-              "help": {
-                "concept": "indefinite versus definite noun phrase",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "chen an",
-                "b": "yon chen"
-              }
-            }
-          }
-        },
-        "listen-and-name-things": {
-          "label": "Listen and Name Things",
-          "summary": "Recognize the main singular definite markers and use yo for plural definite noun phrases.",
-          "cards": {
-            "sketch0": {
-              "title": "Several Singular Forms"
-            },
-            "sketch1": {
-              "title": "Plural Is Simpler"
-            },
-            "sketch2": {
-              "title": "Singular and Plural"
-            },
-            "quiz": {
-              "title": "Practice"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_listen_and_name_things_sketch0": {
-              "title": "Try it yourself: Recognize the bread phrase",
-              "prompt": "Right after the sketch \"a, la, an, lan, nan\", practice that exact idea with this task. Which phrase using the pattern from the lesson means “the bread”? Produce the result for recognize the bread phrase so it reinforces Listen and Name Things."
-            },
-            "try_listen_and_name_things_sketch1": {
-              "title": "Try it yourself: Build a different plural phrase",
-              "prompt": "Right after the sketch \"Use yo after the noun\", practice that exact idea with this task. Arrange the Kreyòl phrase for “the cars.”. Produce the result for build a different plural phrase so it reinforces Listen and Name Things."
-            },
-            "try_listen_and_name_things_sketch2": {
-              "title": "Try it yourself: Choose the plural phrase",
-              "prompt": "Right after the sketch \"Notice what changes\", practice that exact idea with this task. Which phrase using the pattern from the lesson means “the books”? Produce the result for choose the plural phrase so it reinforces Listen and Name Things."
-            }
-          },
-          "practice": {
-            "listen-and-name-things-choice": {
-              "title": "Choose the plural phrase",
-              "prompt": "Which phrase means “the books”?",
-              "hint": "Choose the definite plural pattern.",
-              "help": {
-                "concept": "Definite plural noun phrases use one regular marker after the noun.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "options": {
-                "a": "liv yo",
-                "b": "liv la",
-                "c": "yon liv"
-              }
-            },
-            "listen-and-name-things-fill": {
-              "title": "Complete a plural phrase",
-              "prompt": "Choose the marker that completes “the dogs.”",
-              "hint": "Use the plural definite pattern.",
-              "help": {
-                "concept": "The blank needs the regular plural marker that follows the noun.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "template": "chen [blank1]",
-              "choices": [
-                "yo",
-                "an",
-                "la"
-              ]
-            },
-            "listen-and-name-things-listen": {
-              "title": "Hear a singular phrase",
-              "prompt": "Listen, then build the noun phrase you hear.",
-              "hint": "Listen for both the noun and its following marker.",
-              "help": {
-                "concept": "Build the complete singular noun phrase in spoken order.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "targetText": "pen an",
-              "wordBank": [
-                "pen",
-                "an"
-              ],
-              "distractors": [
-                "yo"
-              ]
-            },
-            "listen-and-name-things-voice": {
-              "title": "Say a plural noun phrase",
-              "prompt": "Say: liv yo.",
-              "hint": "Say the noun and plural marker together.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored plural phrase.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "targetText": "liv yo"
-            },
-            "listen-and-name-things-build": {
-              "title": "Build “the pen”",
-              "prompt": "Arrange the words to build the Kreyòl phrase for “the pen.”",
-              "hint": "Put the noun first and its definite marker second.",
-              "help": {
-                "concept": "This familiar noun uses one of the post-nominal singular markers.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "targetText": "plim nan",
-              "wordBank": [
-                "plim",
-                "nan"
-              ],
-              "distractors": [
-                "yo"
-              ],
-              "ttsText": "plim nan"
-            },
-            "listen-and-name-things-write": {
-              "title": "Write “the dogs”",
-              "prompt": "Type the Kreyòl phrase for “the dogs.”",
-              "hint": "Use the regular plural marker after the noun.",
-              "help": {
-                "concept": "Write the complete definite plural noun phrase.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "expectedText": "chen yo",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-article-forms-bread": {
-              "title": "Recognize the bread phrase",
-              "prompt": "Which phrase using the pattern from the lesson means “the bread”?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "singular definite markers",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "pen an",
-                "b": "tifi a",
-                "c": "chat la",
-                "d": "chanm lan",
-                "e": "plim nan"
-              }
-            },
-            "try-plural-yo-books": {
-              "title": "Build a different plural phrase",
-              "prompt": "Arrange the Kreyòl phrase for “the cars.”",
+            "try-telefon-yo": {
+              "title": "Build a new plural noun phrase",
+              "prompt": "Build “the phones.”",
               "hint": "Put yo after the noun.",
               "help": {
-                "concept": "plural definite yo",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "building a plural definite noun phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "targetText": "machin yo",
+              "targetText": "Telefòn yo.",
               "wordBank": [
-                "machin",
-                "yo"
+                "Telefòn",
+                "yo."
               ]
-            },
-            "try-switch-number-plural": {
-              "title": "Choose the plural phrase",
-              "prompt": "Which phrase using the pattern from the lesson means “the books”?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "singular versus plural marker",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "liv yo",
-                "b": "liv la"
-              }
             }
           }
         },
         "read-build-and-write-about-things": {
-          "label": "Read, Build, and Write About Things",
-          "summary": "Express ownership by placing the possessor after the thing and by using se pou.",
+          "label": "Whose Thing Is It?",
+          "summary": "Put the possessor after the thing and use se pou to say who something belongs to.",
           "cards": {
             "sketch0": {
-              "title": "Say Whose Thing It Is"
+              "title": "Put the Owner After the Thing"
             },
             "sketch1": {
-              "title": "Add the Definite Marker"
+              "title": "Say Who It Belongs To"
             },
             "sketch2": {
-              "title": "Another Ownership Pattern"
+              "title": "Keep the Owner After the Thing"
             },
             "quiz": {
               "title": "Practice"
@@ -7530,160 +9433,125 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_read_build_and_write_about_things_sketch0": {
-              "title": "Try it yourself: Build a new possessive phrase",
-              "prompt": "Right after the sketch \"Put the owner after the thing\", practice that exact idea with this task. Arrange the Kreyòl phrase for “my book.”. Produce the result for build a new possessive phrase so it reinforces Read, Build, and Write About Things."
+              "title": "Try it yourself: Build Mari's book",
+              "prompt": "Right after the sketch \"Machin mwen, kaye ou\", practice that exact idea with this task. Build “Mari's book.”. Produce the result for build Mari's book so it reinforces Whose Thing Is It?."
             },
             "try_read_build_and_write_about_things_sketch1": {
-              "title": "Try it yourself: Build another definite possessive phrase",
-              "prompt": "Right after the sketch \"machin mwen an\", practice that exact idea with this task. Arrange the definite Kreyòl phrase for “my book.”. Produce the result for build another definite possessive phrase so it reinforces Read, Build, and Write About Things."
+              "title": "Try it yourself: Give the book an owner",
+              "prompt": "Right after the sketch \"Se pou…\", practice that exact idea with this task. Say “The book belongs to Mari.”. Produce the result for give the book an owner so it reinforces Whose Thing Is It?."
             },
             "try_read_build_and_write_about_things_sketch2": {
-              "title": "Try it yourself: Say who it belongs to",
-              "prompt": "Right after the sketch \"Sa se pou mwen\", practice that exact idea with this task. Say “This is yours / for you.” in Kreyòl. Produce the result for say who it belongs to so it reinforces Read, Build, and Write About Things."
+              "title": "Try it yourself: Hear another possessed noun phrase",
+              "prompt": "Right after the sketch \"Possession with singular and plural things\", practice that exact idea with this task. Listen and rebuild “your phone.”. Produce the result for hear another possessed noun phrase so it reinforces Whose Thing Is It?."
             }
           },
           "practice": {
-            "read-build-and-write-about-things-choice": {
-              "title": "Choose “my car”",
-              "prompt": "Which phrase means “my car”?",
-              "hint": "Place the owner after the thing.",
+            "ownership-order-choice": {
+              "title": "Choose the Kreyòl ownership order",
+              "prompt": "Which phrase follows the Kreyòl thing + owner pattern?",
+              "hint": "The possessed item comes first.",
               "help": {
-                "concept": "Simple possession places the possessor after the possessed noun.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "recognizing Kreyòl possession order",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
               "options": {
-                "a": "machin mwen",
-                "b": "mwen machin",
-                "c": "machin yo"
+                "a": "kaye Mari",
+                "b": "Mari kaye",
+                "c": "yon Mari kaye"
               }
             },
-            "read-build-and-write-about-things-fill": {
-              "title": "Complete the possession phrase",
-              "prompt": "Choose the possessor that completes “your notebook.”",
-              "hint": "Use the owner form that refers to the person being addressed.",
+            "ownership-se-pou-listen": {
+              "title": "Hear who owns it",
+              "prompt": "Listen and rebuild the ownership sentence.",
+              "hint": "Listen for se pou.",
               "help": {
-                "concept": "The blank comes after the possessed noun and identifies its owner.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "hearing an ownership statement",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "template": "kaye [blank1]",
-              "choices": [
-                "ou",
-                "yo",
-                "li"
-              ]
-            },
-            "read-build-and-write-about-things-listen": {
-              "title": "Hear an ownership phrase",
-              "prompt": "Listen, then build the phrase you hear.",
-              "hint": "Listen for the thing first and the owner second.",
-              "help": {
-                "concept": "Build the possessive noun phrase in the same order as the audio.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "targetText": "machin mwen",
+              "targetText": "Kaye a se pou Jan.",
               "wordBank": [
-                "machin",
-                "mwen"
-              ],
-              "distractors": [
-                "yo"
-              ]
-            },
-            "read-build-and-write-about-things-voice": {
-              "title": "Say who owns it",
-              "prompt": "Say: Sa se pou mwen.",
-              "hint": "Say the complete ownership sentence.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored ownership sentence.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "targetText": "Sa se pou mwen."
-            },
-            "read-build-and-write-about-things-build": {
-              "title": "Build “the book is hers/his”",
-              "prompt": "Arrange the words to say “The book is his/her.”",
-              "hint": "Start with the definite noun phrase, then use the ownership pattern.",
-              "help": {
-                "concept": "The sentence identifies an object first and its owner second.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "targetText": "Liv la se pou li.",
-              "wordBank": [
-                "Liv",
-                "la",
+                "Kaye",
+                "a",
                 "se",
                 "pou",
-                "li."
-              ],
-              "distractors": [
-                "yo"
-              ],
-              "ttsText": "Liv la se pou li."
-            },
-            "read-build-and-write-about-things-write": {
-              "title": "Write “my notebook”",
-              "prompt": "Type the Kreyòl phrase for “my notebook.”",
-              "hint": "Put the thing first and the owner second.",
-              "help": {
-                "concept": "Write the complete two-word possessive noun phrase.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "expectedText": "kaye mwen",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-possessor-after-car": {
-              "title": "Build a new possessive phrase",
-              "prompt": "Arrange the Kreyòl phrase for “my book.”",
-              "hint": "Put the owner after the thing.",
-              "help": {
-                "concept": "possessor after the thing",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "liv mwen",
-              "wordBank": [
-                "liv",
-                "mwen"
+                "Jan."
               ]
             },
-            "try-with-definite-car": {
-              "title": "Build another definite possessive phrase",
-              "prompt": "Arrange the definite Kreyòl phrase for “my book.”",
-              "hint": "Use thing + possessor + final definite marker.",
+            "ownership-build": {
+              "title": "Build Mari's bag",
+              "prompt": "Build “Mari's bag.”",
+              "hint": "Thing first, owner second.",
               "help": {
-                "concept": "thing + possessor + definite marker",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "building a possession phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "targetText": "liv mwen an",
+              "targetText": "Valiz Mari.",
               "wordBank": [
-                "liv",
-                "mwen",
-                "an"
+                "Valiz",
+                "Mari."
               ]
             },
-            "try-se-pou-mwen": {
-              "title": "Say who it belongs to",
-              "prompt": "Say “This is yours / for you.” in Kreyòl.",
-              "hint": "Keep Sa se pou and change the person.",
+            "ownership-voice": {
+              "title": "Say who owns the phone",
+              "prompt": "Say “The phone belongs to Jan.”",
+              "hint": "Use se pou Jan.",
               "help": {
-                "concept": "se pou ownership",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "producing an ownership statement",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "targetText": "Sa se pou ou."
+              "targetText": "Telefòn nan se pou Jan."
+            },
+            "try-liv-mari": {
+              "title": "Build Mari's book",
+              "prompt": "Build “Mari's book.”",
+              "hint": "Put the thing before the owner.",
+              "help": {
+                "concept": "placing the possessor after the noun",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
+              },
+              "targetText": "Liv Mari.",
+              "wordBank": [
+                "Liv",
+                "Mari."
+              ]
+            },
+            "try-liv-pou-mari": {
+              "title": "Give the book an owner",
+              "prompt": "Say “The book belongs to Mari.”",
+              "hint": "Use liv la with se pou Mari.",
+              "help": {
+                "concept": "identifying an owner with se pou",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
+              },
+              "targetText": "Liv la se pou Mari."
+            },
+            "try-telefon-ou-an": {
+              "title": "Hear another possessed noun phrase",
+              "prompt": "Listen and rebuild “your phone.”",
+              "hint": "The possessor follows telefòn.",
+              "help": {
+                "concept": "recognizing possession inside a noun phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
+              },
+              "targetText": "Telefòn ou an.",
+              "wordBank": [
+                "Telefòn",
+                "ou",
+                "an."
+              ]
             }
           }
         },
         "what-is-this-scenario-and-review": {
-          "label": "What Is This? Scenario and Review",
-          "summary": "Use sa a and sa yo to point out singular and plural things, then combine demonstratives with ownership.",
+          "label": "This Thing, These Things",
+          "summary": "Use sa a and sa yo to point out things and combine them with ownership in a short exchange.",
           "cards": {
             "sketch0": {
               "title": "Point to One Thing"
@@ -7692,7 +9560,7 @@ const messages: Record<string, any> = {
               "title": "Point to More Than One"
             },
             "sketch2": {
-              "title": "Point and Say Who Owns It"
+              "title": "Use It in an Exchange"
             },
             "quiz": {
               "title": "Practice"
@@ -7701,27 +9569,27 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_what_is_this_scenario_and_review_sketch0": {
-              "title": "Try it yourself: Build “this book”",
-              "prompt": "Right after the sketch \"sa a — this / that\", practice that exact idea with this task. Arrange the Kreyòl phrase for “this book.”. Produce the result for build “this book” so it reinforces What Is This? Scenario and Review."
+              "title": "Try it yourself: Point to another thing",
+              "prompt": "Right after the sketch \"sa a\", practice that exact idea with this task. Say “this bag.”. Produce the result for point to another thing so it reinforces This Thing, These Things."
             },
             "try_what_is_this_scenario_and_review_sketch1": {
-              "title": "Try it yourself: Build “these cars”",
-              "prompt": "Right after the sketch \"sa yo — these / those\", practice that exact idea with this task. Arrange the Kreyòl phrase for “these cars.”. Produce the result for build “these cars” so it reinforces What Is This? Scenario and Review."
+              "title": "Try it yourself: Point to several books",
+              "prompt": "Right after the sketch \"sa yo\", practice that exact idea with this task. Build “these books.”. Produce the result for point to several books so it reinforces This Thing, These Things."
             },
             "try_what_is_this_scenario_and_review_sketch2": {
-              "title": "Try it yourself: Build a new ownership sentence",
-              "prompt": "Right after the sketch \"Valiz sa a se pou Mari\", practice that exact idea with this task. Arrange the Kreyòl sentence for “This car is Jan’s.”. Produce the result for build a new ownership sentence so it reinforces What Is This? Scenario and Review."
+              "title": "Try it yourself: Hear another ownership statement",
+              "prompt": "Right after the sketch \"Jan and Mari sort their things\", practice that exact idea with this task. Listen and rebuild the new statement. Produce the result for hear another ownership statement so it reinforces This Thing, These Things."
             }
           },
           "practice": {
-            "what-is-this-scenario-and-review-choice": {
-              "title": "Choose “this bag”",
-              "prompt": "Which phrase means “this/that bag”?",
-              "hint": "Choose the singular demonstrative pattern.",
+            "demonstrative-one-choice": {
+              "title": "Choose the phrase for one pointed-out object",
+              "prompt": "Which phrase means “this bag” or “that bag”?",
+              "hint": "For one thing, use sa a.",
               "help": {
-                "concept": "A singular demonstrative follows the noun it points out.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "recognizing the singular demonstrative pattern",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
               "options": {
                 "a": "valiz sa a",
@@ -7729,60 +9597,30 @@ const messages: Record<string, any> = {
                 "c": "yon valiz"
               }
             },
-            "what-is-this-scenario-and-review-fill": {
-              "title": "Complete the plural demonstrative",
-              "prompt": "Choose the final marker that makes the phrase plural.",
-              "hint": "Use the plural demonstrative pattern.",
+            "demonstrative-plural-listen": {
+              "title": "Hear several pointed-out objects",
+              "prompt": "Listen and rebuild the phrase.",
+              "hint": "Listen for sa yo.",
               "help": {
-                "concept": "The blank completes the plural pointing expression after the noun.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "hearing a plural demonstrative phrase",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "template": "kaye sa [blank1]",
-              "choices": [
-                "yo",
-                "a",
-                "la"
-              ]
-            },
-            "what-is-this-scenario-and-review-listen": {
-              "title": "Hear a demonstrative phrase",
-              "prompt": "Listen, then build the phrase you hear.",
-              "hint": "Listen for the noun followed by the pointing expression.",
-              "help": {
-                "concept": "Build the singular demonstrative phrase in spoken order.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "targetText": "machin sa a",
+              "targetText": "Liv sa yo.",
               "wordBank": [
-                "machin",
+                "Liv",
                 "sa",
-                "a"
-              ],
-              "distractors": [
-                "yo"
+                "yo."
               ]
             },
-            "what-is-this-scenario-and-review-voice": {
-              "title": "Point out several books",
-              "prompt": "Say: liv sa yo.",
-              "hint": "Say the noun and plural demonstrative together.",
+            "demonstrative-owner-build": {
+              "title": "Build an ownership statement",
+              "prompt": "Build “This bag belongs to Mari.”",
+              "hint": "Use sa a, then se pou Mari.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored demonstrative phrase.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "targetText": "liv sa yo"
-            },
-            "what-is-this-scenario-and-review-build": {
-              "title": "Say whose bag it is",
-              "prompt": "Arrange the words to say “This bag is for Mari.”",
-              "hint": "Point out the bag first, then identify the owner.",
-              "help": {
-                "concept": "A demonstrative noun phrase can be followed by the ownership pattern.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
+                "concept": "combining demonstration and ownership",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
               "targetText": "Valiz sa a se pou Mari.",
               "wordBank": [
@@ -7792,73 +9630,63 @@ const messages: Record<string, any> = {
                 "se",
                 "pou",
                 "Mari."
-              ],
-              "distractors": [
-                "yo"
-              ],
-              "ttsText": "Valiz sa a se pou Mari."
-            },
-            "what-is-this-scenario-and-review-write": {
-              "title": "Write “these books”",
-              "prompt": "Type the Kreyòl phrase for “these/those books.”",
-              "hint": "Use the plural demonstrative pattern after the noun.",
-              "help": {
-                "concept": "Write the complete three-word demonstrative noun phrase.",
-                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-                "hint_2": "Compare the choices with the whole sentence before answering."
-              },
-              "expectedText": "liv sa yo",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-sa-a-bag": {
-              "title": "Build “this book”",
-              "prompt": "Arrange the Kreyòl phrase for “this book.”",
-              "hint": "Put sa a after the noun.",
-              "help": {
-                "concept": "singular demonstrative sa a",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "liv sa a",
-              "wordBank": [
-                "liv",
-                "sa",
-                "a"
               ]
             },
-            "try-sa-yo-books": {
-              "title": "Build “these cars”",
-              "prompt": "Arrange the Kreyòl phrase for “these cars.”",
-              "hint": "Put sa yo after the noun.",
+            "demonstrative-owner-voice": {
+              "title": "Say who owns these notebooks",
+              "prompt": "Say “These notebooks belong to Jan.”",
+              "hint": "Use kaye sa yo with se pou Jan.",
               "help": {
-                "concept": "plural demonstrative sa yo",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "producing a demonstrative ownership statement",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "targetText": "machin sa yo",
+              "targetText": "Kaye sa yo se pou Jan."
+            },
+            "try-valiz-sa-a": {
+              "title": "Point to another thing",
+              "prompt": "Say “this bag.”",
+              "hint": "Put sa a after valiz.",
+              "help": {
+                "concept": "using sa a after a noun",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
+              },
+              "targetText": "Valiz sa a."
+            },
+            "try-liv-sa-yo": {
+              "title": "Point to several books",
+              "prompt": "Build “these books.”",
+              "hint": "Put sa yo after liv.",
+              "help": {
+                "concept": "using sa yo after a noun",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
+              },
+              "targetText": "Liv sa yo.",
               "wordBank": [
-                "machin",
+                "Liv",
                 "sa",
-                "yo"
+                "yo."
               ]
             },
-            "try-demonstrative-owner": {
-              "title": "Build a new ownership sentence",
-              "prompt": "Arrange the Kreyòl sentence for “This car is Jan’s.”",
-              "hint": "Use noun + sa a + se pou + person.",
+            "try-kaye-pou-mari": {
+              "title": "Hear another ownership statement",
+              "prompt": "Listen and rebuild the new statement.",
+              "hint": "The notebooks belong to Mari.",
               "help": {
-                "concept": "demonstrative plus ownership",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "combining demonstratives with ownership",
+                "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+                "hint_2": "Pay attention to what comes before or after the noun."
               },
-              "targetText": "Machin sa a se pou Jan.",
+              "targetText": "Kaye sa yo se pou Mari.",
               "wordBank": [
-                "Machin",
+                "Kaye",
                 "sa",
-                "a",
+                "yo",
                 "se",
                 "pou",
-                "Jan."
+                "Mari."
               ]
             }
           }
@@ -7866,17 +9694,17 @@ const messages: Record<string, any> = {
       },
       "haitian-creole-foundations-5-what-are-you-doing": {
         "learn-common-actions": {
-          "label": "Learn Common Actions",
-          "summary": "Learn a small set of useful Kreyòl action verbs and use them in short subject-plus-action sentences.",
+          "label": "Everyday Actions and Routines",
+          "summary": "Use common action words in simple subject-plus-action sentences and talk about routines.",
           "cards": {
             "sketch0": {
-              "title": "Everyday Actions"
+              "title": "Build an Action Vocabulary"
             },
             "sketch1": {
-              "title": "Make a Short Sentence"
+              "title": "Make a Short Present Sentence"
             },
             "sketch2": {
-              "title": "Reuse What You Know"
+              "title": "Talk About a Routine"
             },
             "quiz": {
               "title": "Practice"
@@ -7885,171 +9713,130 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_learn_common_actions_sketch0": {
-              "title": "Try it yourself: Recognize an action word",
-              "prompt": "Right after the sketch \"manje, bwè, travay, etidye, ale\", practice that exact idea with this task. Which action word in the lesson means “study”? Produce the result for recognize an action word so it reinforces Learn Common Actions."
+              "title": "Try it yourself: Hear an action in a sentence",
+              "prompt": "Right after the sketch \"manje, bwè, travay, etidye, ale\", practice that exact idea with this task. Listen and rebuild the short sentence. Produce the result for hear an action in a sentence so it reinforces Everyday Actions and Routines."
             },
             "try_learn_common_actions_sketch1": {
-              "title": "Try it yourself: Build another subject-action sentence",
-              "prompt": "Right after the sketch \"Mwen manje\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I work.”. Produce the result for build another subject-action sentence so it reinforces Learn Common Actions."
+              "title": "Try it yourself: Build another present sentence",
+              "prompt": "Right after the sketch \"Subject + action\", practice that exact idea with this task. Build “They drink.”. Produce the result for build another present sentence so it reinforces Everyday Actions and Routines."
             },
             "try_learn_common_actions_sketch2": {
-              "title": "Try it yourself: Find “They drink”",
-              "prompt": "Right after the sketch \"Pronouns + action\", practice that exact idea with this task. Which sentence in the lesson means “They drink”? Produce the result for find “They drink” so it reinforces Learn Common Actions."
+              "title": "Try it yourself: Say a different routine",
+              "prompt": "Right after the sketch \"chak jou\", practice that exact idea with this task. Say “I speak Kreyòl every day.”. Produce the result for say a different routine so it reinforces Everyday Actions and Routines."
             }
           },
           "practice": {
-            "learn-common-actions-choice": {
-              "title": "Choose the action sentence",
-              "prompt": "Which sentence means “I eat”?",
-              "hint": "Choose the sentence with the first-person pronoun and the eating action.",
+            "actions-routine-choice": {
+              "title": "Choose the routine",
+              "prompt": "Which sentence describes an everyday routine?",
+              "hint": "Look for chak jou.",
               "help": {
-                "concept": "A short Kreyòl action sentence can use a pronoun directly before a verb.",
+                "concept": "distinguishing a routine statement",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
               "options": {
-                "a": "Mwen manje.",
-                "b": "Ou travay.",
-                "c": "Li ale."
+                "a": "Mari travay chak jou.",
+                "b": "Mari ap travay kounyeya.",
+                "c": "Kisa Mari ap fè?"
               }
             },
-            "learn-common-actions-fill": {
-              "title": "Complete the work sentence",
-              "prompt": "Choose the action that completes “He/she works.”",
-              "hint": "Use the work action from the lesson.",
+            "actions-listen": {
+              "title": "Hear another routine",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "The final words mean every day.",
               "help": {
-                "concept": "The blank needs the verb associated with doing a job or work.",
+                "concept": "hearing a routine statement",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "template": "Li [blank1].",
-              "choices": [
-                "travay",
-                "manje",
-                "ale"
-              ]
-            },
-            "learn-common-actions-listen": {
-              "title": "Hear an action",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the subject and action.",
-              "help": {
-                "concept": "Build the short action sentence in the same order as the audio.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "Ou manje anpil.",
+              "targetText": "Jan pale kreyòl chak jou.",
               "wordBank": [
-                "Ou",
-                "manje",
-                "anpil."
-              ],
-              "distractors": [
-                "travay"
+                "Jan",
+                "pale",
+                "kreyòl",
+                "chak",
+                "jou."
               ]
             },
-            "learn-common-actions-voice": {
-              "title": "Say an action sentence",
-              "prompt": "Say: Mwen etidye.",
-              "hint": "Say the subject and action together.",
+            "actions-build": {
+              "title": "Build a simple action",
+              "prompt": "Build “We study.”",
+              "hint": "Subject first, action second.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
+                "concept": "building a simple action statement",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "Mwen etidye."
+              "targetText": "Nou etidye.",
+              "wordBank": [
+                "Nou",
+                "etidye."
+              ]
             },
-            "learn-common-actions-build": {
-              "title": "Build “They drink”",
-              "prompt": "Arrange the words to say “They drink.”",
-              "hint": "Put the plural subject before the action.",
+            "actions-voice": {
+              "title": "Say a new routine",
+              "prompt": "Say “I work every day.”",
+              "hint": "Use travay with chak jou.",
               "help": {
-                "concept": "A simple action sentence keeps the subject before the verb.",
+                "concept": "producing an everyday routine",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "Mwen travay chak jou."
+            },
+            "try-action-transfer": {
+              "title": "Hear an action in a sentence",
+              "prompt": "Listen and rebuild the short sentence.",
+              "hint": "Listen for the person first, then the action.",
+              "help": {
+                "concept": "recognizing a familiar action inside a sentence",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "Mari travay.",
+              "wordBank": [
+                "Mari",
+                "travay."
+              ]
+            },
+            "try-subject-action-transfer": {
+              "title": "Build another present sentence",
+              "prompt": "Build “They drink.”",
+              "hint": "Put the subject before the action.",
+              "help": {
+                "concept": "building a simple subject-plus-action sentence",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
               "targetText": "Yo bwè.",
               "wordBank": [
                 "Yo",
                 "bwè."
-              ],
-              "distractors": [
-                "manje."
-              ],
-              "ttsText": "Yo bwè."
-            },
-            "learn-common-actions-write": {
-              "title": "Write the study verb",
-              "prompt": "Type the Kreyòl verb for “study.”",
-              "hint": "Use the action word from this lesson.",
-              "help": {
-                "concept": "Write the verb by itself with its Kreyòl spelling.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "expectedText": "etidye",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-actions-study": {
-              "title": "Recognize an action word",
-              "prompt": "Which action word in the lesson means “study”?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "common action verbs",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "etidye",
-                "b": "manje",
-                "c": "bwè",
-                "d": "travay",
-                "e": "ale"
-              }
-            },
-            "try-subject-action-eat": {
-              "title": "Build another subject-action sentence",
-              "prompt": "Arrange the Kreyòl sentence for “I work.”",
-              "hint": "Put the subject before the action.",
-              "help": {
-                "concept": "subject + action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen travay.",
-              "wordBank": [
-                "Mwen",
-                "travay."
               ]
             },
-            "try-reuse-pronouns-they-drink": {
-              "title": "Find “They drink”",
-              "prompt": "Which sentence in the lesson means “They drink”?",
-              "hint": "Choose the option that correctly applies the pattern.",
+            "try-routine-transfer": {
+              "title": "Say a different routine",
+              "prompt": "Say “I speak Kreyòl every day.”",
+              "hint": "Keep chak jou at the end.",
               "help": {
-                "concept": "pronouns plus action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "using the simple present for a routine",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "options": {
-                "a": "Yo bwè.",
-                "b": "Mwen etidye.",
-                "c": "Ou travay.",
-                "d": "Li manje.",
-                "e": "Nou ale."
-              }
+              "targetText": "Mwen pale kreyòl chak jou."
             }
           }
         },
         "listen-and-say-what-is-happening": {
-          "label": "Listen and Say What Is Happening",
-          "summary": "Use ap with an action verb to talk about something happening now.",
+          "label": "What Is Happening Now?",
+          "summary": "Use ap with familiar actions, recognize common short forms, and make the time explicit with kounyeya.",
           "cards": {
             "sketch0": {
-              "title": "An Action Happening Now"
+              "title": "An Action in Progress"
             },
             "sketch1": {
-              "title": "Common Short Forms"
+              "title": "Recognize Common Short Forms"
             },
             "sketch2": {
               "title": "Make “Now” Explicit"
@@ -8061,339 +9848,132 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_listen_and_say_what_is_happening_sketch0": {
-              "title": "Try it yourself: Build another action in progress",
-              "prompt": "Right after the sketch \"M ap etidye\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I am working.”. Produce the result for build another action in progress so it reinforces Listen and Say What Is Happening."
+              "title": "Try it yourself: Build another current action",
+              "prompt": "Right after the sketch \"person + ap + action\", practice that exact idea with this task. Build “Mari is drinking.”. Produce the result for build another current action so it reinforces What Is Happening Now?."
             },
             "try_listen_and_say_what_is_happening_sketch1": {
-              "title": "Try it yourself: Recognize the short form",
-              "prompt": "Right after the sketch \"M ap, W ap, L ap, N ap, Y ap\", practice that exact idea with this task. Which short form in the lesson means “they are…”? Produce the result for recognize the short form so it reinforces Listen and Say What Is Happening."
+              "title": "Try it yourself: Hear a short form",
+              "prompt": "Right after the sketch \"M ap, W ap, L ap, N ap, Y ap\", practice that exact idea with this task. Listen and rebuild the current-action sentence. Produce the result for hear a short form so it reinforces What Is Happening Now?."
             },
             "try_listen_and_say_what_is_happening_sketch2": {
-              "title": "Try it yourself: Build a different sentence with now",
-              "prompt": "Right after the sketch \"kounyeya\", practice that exact idea with this task. Arrange the Kreyòl sentence for “Mari is studying now.”. Produce the result for build a different sentence with now so it reinforces Listen and Say What Is Happening."
+              "title": "Try it yourself: Say a different action happening now",
+              "prompt": "Right after the sketch \"kounyeya\", practice that exact idea with this task. Say “Mari is studying now.”. Produce the result for say a different action happening now so it reinforces What Is Happening Now?."
             }
           },
           "practice": {
-            "listen-and-say-what-is-happening-choice": {
+            "now-choice": {
               "title": "Choose the action happening now",
-              "prompt": "Which sentence means “I am studying”?",
-              "hint": "Choose the sentence that marks an action in progress.",
+              "prompt": "Which sentence describes something happening now?",
+              "hint": "Look for ap.",
               "help": {
-                "concept": "An action happening now uses an aspect marker before the verb.",
+                "concept": "recognizing an action in progress",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
               "options": {
-                "a": "M ap etidye.",
-                "b": "Mwen se etidyan.",
-                "c": "Mwen rete isit."
+                "a": "Jan ap travay.",
+                "b": "Jan travay chak jou.",
+                "c": "Kisa Jan ap fè?"
               }
             },
-            "listen-and-say-what-is-happening-fill": {
-              "title": "Complete the progressive action",
-              "prompt": "Choose the action that completes “Jan is working now.”",
-              "hint": "Use the work action from the lesson.",
+            "now-listen": {
+              "title": "Hear a current action",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Listen for ap before the action.",
               "help": {
-                "concept": "The blank needs the verb describing Jan's current activity.",
+                "concept": "hearing an action in progress",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "template": "Jan ap [blank1] kounyeya.",
-              "choices": [
-                "travay",
+              "targetText": "Yo ap etidye.",
+              "wordBank": [
+                "Yo",
+                "ap",
+                "etidye."
+              ]
+            },
+            "now-build": {
+              "title": "Build another current action",
+              "prompt": "Build “Jan is eating now.”",
+              "hint": "Use ap and finish with kounyeya.",
+              "help": {
+                "concept": "building a current action with an explicit time",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "Jan ap manje kounyeya.",
+              "wordBank": [
+                "Jan",
+                "ap",
                 "manje",
-                "rete"
+                "kounyeya."
               ]
             },
-            "listen-and-say-what-is-happening-listen": {
-              "title": "Hear an action in progress",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the subject, progress marker, and action.",
+            "now-voice": {
+              "title": "Say what Mari is doing",
+              "prompt": "Say “Mari is working.”",
+              "hint": "Put ap before travay.",
               "help": {
-                "concept": "Build the current-action sentence in spoken order.",
+                "concept": "producing an action in progress",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "Li ap etidye.",
-              "wordBank": [
-                "Li",
-                "ap",
-                "etidye."
-              ],
-              "distractors": [
-                "rete"
-              ]
+              "targetText": "Mari ap travay."
             },
-            "listen-and-say-what-is-happening-voice": {
-              "title": "Say what they are doing",
-              "prompt": "Say: Yo ap manje.",
-              "hint": "Say the complete current-action sentence.",
+            "try-ap-transfer": {
+              "title": "Build another current action",
+              "prompt": "Build “Mari is drinking.”",
+              "hint": "Put ap between Mari and the action.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
+                "concept": "building an action in progress",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "Yo ap manje."
-            },
-            "listen-and-say-what-is-happening-build": {
-              "title": "Build “I am studying”",
-              "prompt": "Arrange the words to say “I am studying.”",
-              "hint": "Put the speaker first, then the progress marker, then the action.",
-              "help": {
-                "concept": "The sentence follows the current-action pattern practiced in the lesson.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "M ap etidye.",
-              "wordBank": [
-                "M",
-                "ap",
-                "etidye."
-              ],
-              "distractors": [
-                "rete"
-              ],
-              "ttsText": "M ap etidye."
-            },
-            "listen-and-say-what-is-happening-write": {
-              "title": "Write “now”",
-              "prompt": "Type the Kreyòl word used in this lesson for “now.”",
-              "hint": "Use the time word from the example with Jan.",
-              "help": {
-                "concept": "Write the time word with its Kreyòl spelling.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "expectedText": "kounyeya",
-              "placeholder": "Type the Kreyòl answer",
-              "anyOf": [
-                "kounya"
-              ]
-            },
-            "try-ap-now-study": {
-              "title": "Build another action in progress",
-              "prompt": "Arrange the Kreyòl sentence for “I am working.”",
-              "hint": "Put ap before the action.",
-              "help": {
-                "concept": "person + ap + action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "M ap travay.",
-              "wordBank": [
-                "M",
-                "ap",
-                "travay."
-              ]
-            },
-            "try-short-forms-they": {
-              "title": "Recognize the short form",
-              "prompt": "Which short form in the lesson means “they are…”?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "shortened subject forms before ap",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "Y ap",
-                "b": "M ap",
-                "c": "W ap",
-                "d": "L ap",
-                "e": "N ap"
-              }
-            },
-            "try-kounyeya-now": {
-              "title": "Build a different sentence with now",
-              "prompt": "Arrange the Kreyòl sentence for “Mari is studying now.”",
-              "hint": "Keep kounyeya at the end.",
-              "help": {
-                "concept": "using kounyeya with an action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mari ap etidye kounyeya.",
+              "targetText": "Mari ap bwè.",
               "wordBank": [
                 "Mari",
                 "ap",
-                "etidye",
-                "kounyeya."
+                "bwè."
               ]
+            },
+            "try-short-form-transfer": {
+              "title": "Hear a short form",
+              "prompt": "Listen and rebuild the current-action sentence.",
+              "hint": "Listen for the short subject form before ap.",
+              "help": {
+                "concept": "recognizing a shortened subject before ap",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "L ap etidye.",
+              "wordBank": [
+                "L",
+                "ap",
+                "etidye."
+              ]
+            },
+            "try-kounyeya-transfer": {
+              "title": "Say a different action happening now",
+              "prompt": "Say “Mari is studying now.”",
+              "hint": "Keep kounyeya at the end.",
+              "help": {
+                "concept": "making current time explicit",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "Mari ap etidye kounyeya."
             }
           }
         },
-        "read-build-and-write-actions": {
-          "label": "Read, Build, and Write Actions",
-          "summary": "Ask what someone is doing and answer with a short current-action sentence.",
+        "what-are-you-doing-scenario": {
+          "label": "What Are You Doing?",
+          "summary": "Ask what someone is doing, answer with a current action, and distinguish what is happening now from a routine.",
           "cards": {
             "sketch0": {
               "title": "Ask About an Action"
             },
             "sketch1": {
-              "title": "Answer the Question"
-            },
-            "sketch2": {
-              "title": "Ask About Someone Else"
-            },
-            "quiz": {
-              "title": "Practice"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_read_build_and_write_actions_sketch0": {
-              "title": "Try it yourself: Ask what Jan is doing",
-              "prompt": "Right after the sketch \"Kisa ou ap fè?\", practice that exact idea with this task. Say “What is Jan doing?” in Kreyòl. Produce the result for ask what Jan is doing so it reinforces Read, Build, and Write Actions."
-            },
-            "try_read_build_and_write_actions_sketch1": {
-              "title": "Try it yourself: Give a different current-action answer",
-              "prompt": "Right after the sketch \"M ap travay\", practice that exact idea with this task. Say “I am speaking Kreyòl.” in Kreyòl. Produce the result for give a different current-action answer so it reinforces Read, Build, and Write Actions."
-            },
-            "try_read_build_and_write_actions_sketch2": {
-              "title": "Try it yourself: Ask what Mari is doing",
-              "prompt": "Right after the sketch \"Kisa li ap fè?\", practice that exact idea with this task. Say “What is Mari doing?” in Kreyòl. Produce the result for ask what Mari is doing so it reinforces Read, Build, and Write Actions."
-            }
-          },
-          "practice": {
-            "read-build-and-write-actions-choice": {
-              "title": "Choose the action question",
-              "prompt": "Which question means “What are you doing?”",
-              "hint": "Choose the question about a current action.",
-              "help": {
-                "concept": "An everyday action question asks what activity is happening now.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "options": {
-                "a": "Kisa ou ap fè?",
-                "b": "Kijan ou rele?",
-                "c": "Ki kote ou rete?"
-              }
-            },
-            "read-build-and-write-actions-fill": {
-              "title": "Complete the answer",
-              "prompt": "Choose the action that completes “I am eating.”",
-              "hint": "Use the eating action from the lesson.",
-              "help": {
-                "concept": "The blank needs the activity that answers the current-action question.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "template": "M ap [blank1].",
-              "choices": [
-                "manje",
-                "rete",
-                "rele"
-              ]
-            },
-            "read-build-and-write-actions-listen": {
-              "title": "Hear the action question",
-              "prompt": "Listen, then build the question you hear.",
-              "hint": "Listen for the complete question about an activity.",
-              "help": {
-                "concept": "Build the question in the same order as the audio.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "Kisa ou ap fè?",
-              "wordBank": [
-                "Kisa",
-                "ou",
-                "ap",
-                "fè?"
-              ],
-              "distractors": [
-                "rete?"
-              ]
-            },
-            "read-build-and-write-actions-voice": {
-              "title": "Answer what you are doing",
-              "prompt": "Say: M ap travay.",
-              "hint": "Say the complete answer.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl response.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "M ap travay."
-            },
-            "read-build-and-write-actions-build": {
-              "title": "Ask about another person",
-              "prompt": "Arrange the words to ask “What is he/she doing?”",
-              "hint": "Use the same question pattern with the third-person subject.",
-              "help": {
-                "concept": "Change the person while keeping the current-action question structure.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "Kisa li ap fè?",
-              "wordBank": [
-                "Kisa",
-                "li",
-                "ap",
-                "fè?"
-              ],
-              "distractors": [
-                "rete?"
-              ],
-              "ttsText": "Kisa li ap fè?"
-            },
-            "read-build-and-write-actions-write": {
-              "title": "Write the action question",
-              "prompt": "Type the Kreyòl question “What are you doing?”",
-              "hint": "Use the full question from this lesson.",
-              "help": {
-                "concept": "Write the complete everyday question.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "expectedText": "Kisa ou ap fè?",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-ask-doing": {
-              "title": "Ask what Jan is doing",
-              "prompt": "Say “What is Jan doing?” in Kreyòl.",
-              "hint": "Use Kisa + person + ap fè.",
-              "help": {
-                "concept": "asking what someone is doing",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Kisa Jan ap fè?"
-            },
-            "try-answer-doing": {
-              "title": "Give a different current-action answer",
-              "prompt": "Say “I am speaking Kreyòl.” in Kreyòl.",
-              "hint": "Use M ap before the action phrase.",
-              "help": {
-                "concept": "current-action answer",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "M ap pale kreyòl."
-            },
-            "try-ask-third-person": {
-              "title": "Ask what Mari is doing",
-              "prompt": "Say “What is Mari doing?” in Kreyòl.",
-              "hint": "Replace li with the person’s name.",
-              "help": {
-                "concept": "third-person action question",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Kisa Mari ap fè?"
-            }
-          }
-        },
-        "what-are-you-doing-scenario": {
-          "label": "What Are You Doing? Scenario",
-          "summary": "Combine action questions, current activities, and simple routine language in a short everyday exchange.",
-          "cards": {
-            "sketch0": {
               "title": "Use It in Conversation"
-            },
-            "sketch1": {
-              "title": "Talk About Everyday Life"
             },
             "sketch2": {
               "title": "Now or Every Day?"
@@ -8405,184 +9985,140 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_what_are_you_doing_scenario_sketch0": {
-              "title": "Try it yourself: Hear the question",
-              "prompt": "Right after the sketch \"What are you doing?\", practice that exact idea with this task. Listen and rebuild the opening question. Produce the result for hear the question so it reinforces What Are You Doing? Scenario."
+              "title": "Try it yourself: Ask Jan instead",
+              "prompt": "Right after the sketch \"Kisa ou ap fè?\", practice that exact idea with this task. Ask “What is Jan doing?”. Produce the result for ask Jan instead so it reinforces What Are You Doing?."
             },
             "try_what_are_you_doing_scenario_sketch1": {
-              "title": "Try it yourself: Build a different daily routine",
-              "prompt": "Right after the sketch \"chak jou\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I speak Kreyòl every day.”. Produce the result for build a different daily routine so it reinforces What Are You Doing? Scenario."
+              "title": "Try it yourself: Hear a different answer",
+              "prompt": "Right after the sketch \"Jan and Mari talk about what they are doing\", practice that exact idea with this task. Listen and rebuild Mari's new answer. Produce the result for hear a different answer so it reinforces What Are You Doing?."
             },
             "try_what_are_you_doing_scenario_sketch2": {
-              "title": "Try it yourself: Choose the sentence about now",
-              "prompt": "Right after the sketch \"kounyeya vs. chak jou\", practice that exact idea with this task. Which sentence using the pattern from the lesson describes what Jan is doing **now**? Produce the result for choose the sentence about now so it reinforces What Are You Doing? Scenario."
+              "title": "Try it yourself: Build a different routine",
+              "prompt": "Right after the sketch \"kounyeya vs. chak jou\", practice that exact idea with this task. Build “Mari studies every day.”. Produce the result for build a different routine so it reinforces What Are You Doing?."
             }
           },
           "practice": {
-            "what-are-you-doing-scenario-choice": {
-              "title": "Choose the sentence about now",
-              "prompt": "Which sentence says that Jan is working now?",
-              "hint": "Choose the sentence that marks an action in progress and includes the time word for now.",
+            "doing-natural-answer-choice": {
+              "title": "Choose the natural answer",
+              "prompt": "Jan asks “Kisa ou ap fè?” Which answer fits?",
+              "hint": "Answer with something happening now.",
               "help": {
-                "concept": "A current action can be made explicit with both an aspect pattern and a time expression.",
+                "concept": "matching an action question with a current-action answer",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
               "options": {
-                "a": "Jan ap travay kounyeya.",
-                "b": "Jan travay chak jou.",
-                "c": "Jan rete Chicago."
+                "a": "M ap etidye kreyòl.",
+                "b": "Mwen rete Chicago.",
+                "c": "M rele Mari."
               }
             },
-            "what-are-you-doing-scenario-fill": {
-              "title": "Complete the routine sentence",
-              "prompt": "Choose the action that completes “I study Kreyòl every day.”",
-              "hint": "Use the study action from this module.",
+            "doing-listen": {
+              "title": "Hear a question about Mari",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "Listen for Mari before ap fè.",
               "help": {
-                "concept": "The blank needs the activity performed as part of the routine.",
+                "concept": "hearing an action question about another person",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "template": "Mwen [blank1] kreyòl chak jou.",
-              "choices": [
-                "etidye",
-                "rete",
-                "rele"
+              "targetText": "Kisa Mari ap fè?",
+              "wordBank": [
+                "Kisa",
+                "Mari",
+                "ap",
+                "fè?"
               ]
             },
-            "what-are-you-doing-scenario-listen": {
-              "title": "Hear a routine sentence",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the action and the everyday time phrase.",
+            "doing-build": {
+              "title": "Build a current-action answer",
+              "prompt": "Build “I am working now.”",
+              "hint": "Use M ap and finish with kounyeya.",
               "help": {
-                "concept": "Build the routine sentence in the same order as the audio.",
+                "concept": "building a current-action answer",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "Mwen travay chak jou.",
+              "targetText": "M ap travay kounyeya.",
               "wordBank": [
-                "Mwen",
-                "travay",
-                "chak",
-                "jou."
-              ],
-              "distractors": [
-                "kounyeya."
-              ]
-            },
-            "what-are-you-doing-scenario-voice": {
-              "title": "Say what you are studying now",
-              "prompt": "Say: M ap etidye kreyòl.",
-              "hint": "Say the complete current-action sentence.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "M ap etidye kreyòl."
-            },
-            "what-are-you-doing-scenario-build": {
-              "title": "Build the current-action sentence",
-              "prompt": "Arrange the words to say “Jan is working now.”",
-              "hint": "Put the person first, then the current-action pattern, then the time word.",
-              "help": {
-                "concept": "The sentence combines a person, an action in progress, and an explicit time expression.",
-                "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
-              },
-              "targetText": "Jan ap travay kounyeya.",
-              "wordBank": [
-                "Jan",
+                "M",
                 "ap",
                 "travay",
                 "kounyeya."
-              ],
-              "distractors": [
-                "chak"
-              ],
-              "ttsText": "Jan ap travay kounyeya."
+              ]
             },
-            "what-are-you-doing-scenario-write": {
-              "title": "Write “every day”",
-              "prompt": "Type the Kreyòl phrase used in this lesson for “every day.”",
-              "hint": "Use the two-word routine expression.",
+            "doing-routine-voice": {
+              "title": "Answer with a routine",
+              "prompt": "Say “I study Kreyòl every day.”",
+              "hint": "Use chak jou without ap.",
               "help": {
-                "concept": "Write the complete time expression.",
+                "concept": "producing a habitual-action sentence",
                 "hint_1": "Use the action pattern introduced in this lesson.",
-                "hint_2": "Compare the complete sentence with the choices before answering."
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "expectedText": "chak jou",
-              "placeholder": "Type the Kreyòl answer"
+              "targetText": "Mwen etidye kreyòl chak jou."
             },
-            "try-short-exchange-question": {
-              "title": "Hear the question",
-              "prompt": "Listen and rebuild the opening question.",
-              "hint": "Listen again and rebuild the new Kreyòl phrase.",
+            "try-ask-doing-transfer": {
+              "title": "Ask Jan instead",
+              "prompt": "Ask “What is Jan doing?”",
+              "hint": "Replace ou with Jan.",
               "help": {
-                "concept": "hearing a current-action exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "transferring the action question to another person",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "Kisa ou ap fè?"
+              "targetText": "Kisa Jan ap fè?"
             },
-            "try-short-exchange-answer": {
-              "title": "Give the answer",
-              "prompt": "Say the learner’s current-action answer using the pattern from the lesson.",
-              "hint": "Say: M ap etidye kreyòl.",
+            "try-answer-doing-transfer": {
+              "title": "Hear a different answer",
+              "prompt": "Listen and rebuild Mari's new answer.",
+              "hint": "She says what she is doing now.",
               "help": {
-                "concept": "responding in a current-action exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "hearing a current-action answer",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
               },
-              "targetText": "M ap etidye kreyòl."
-            },
-            "try-routine-language": {
-              "title": "Build a different daily routine",
-              "prompt": "Arrange the Kreyòl sentence for “I speak Kreyòl every day.”",
-              "hint": "Keep chak jou at the end.",
-              "help": {
-                "concept": "routine language with chak jou",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen pale kreyòl chak jou.",
+              "targetText": "M ap pale kreyòl.",
               "wordBank": [
-                "Mwen",
+                "M",
+                "ap",
                 "pale",
-                "kreyòl",
+                "kreyòl."
+              ]
+            },
+            "try-now-routine-transfer": {
+              "title": "Build a different routine",
+              "prompt": "Build “Mari studies every day.”",
+              "hint": "For the routine, do not add ap.",
+              "help": {
+                "concept": "contrasting a routine with an action in progress",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Pay attention to whether the meaning is routine or happening now."
+              },
+              "targetText": "Mari etidye chak jou.",
+              "wordBank": [
+                "Mari",
+                "etidye",
                 "chak",
                 "jou."
               ]
-            },
-            "try-now-vs-routine-now": {
-              "title": "Choose the sentence about now",
-              "prompt": "Which sentence using the pattern from the lesson describes what Jan is doing **now**?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "now versus routine",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "Jan ap travay kounyeya.",
-                "b": "Jan travay chak jou."
-              }
             }
           }
         }
       },
       "haitian-creole-foundations-6-questions-and-answers": {
         "learn-core-question-patterns": {
-          "label": "Learn Core Question Patterns",
-          "summary": "Ask simple yes/no questions with Èske and give short or complete answers.",
+          "label": "Yes or No? Ask with Èske",
+          "summary": "Turn familiar statements into yes/no questions with Èske and answer with a complete familiar sentence.",
           "cards": {
             "sketch0": {
               "title": "Ask a Yes/No Question"
             },
             "sketch1": {
-              "title": "Answer Simply"
+              "title": "Answer Yes or No"
             },
             "sketch2": {
-              "title": "Answer in a Complete Sentence"
+              "title": "Use It in a Short Exchange"
             },
             "quiz": {
               "title": "Practice"
@@ -8591,117 +10127,86 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_learn_core_question_patterns_sketch0": {
-              "title": "Try it yourself: Build another yes/no question",
-              "prompt": "Right after the sketch \"Èske…?\", practice that exact idea with this task. Arrange the Kreyòl question for “Do you work?”. Produce the result for build another yes/no question so it reinforces Learn Core Question Patterns."
+              "title": "Try it yourself: Turn another statement into a question",
+              "prompt": "Right after the sketch \"Èske…?\", practice that exact idea with this task. Build “Do you work?”. Produce the result for turn another statement into a question so it reinforces Yes or No? Ask with Èske."
             },
             "try_learn_core_question_patterns_sketch1": {
-              "title": "Try it yourself: Give a different complete yes answer",
-              "prompt": "Right after the sketch \"Wi / Non\", practice that exact idea with this task. Say “Yes, I work.” in Kreyòl. Produce the result for give a different complete yes answer so it reinforces Learn Core Question Patterns."
+              "title": "Try it yourself: Give a complete yes answer",
+              "prompt": "Right after the sketch \"Wi / Non\", practice that exact idea with this task. Answer “Yes, I work.”. Produce the result for give a complete yes answer so it reinforces Yes or No? Ask with Èske."
+            },
+            "try_learn_core_question_patterns_sketch2": {
+              "title": "Try it yourself: Hear another yes/no question",
+              "prompt": "Right after the sketch \"Question → complete answer\", practice that exact idea with this task. Listen and rebuild Jan's question. Produce the result for hear another yes/no question so it reinforces Yes or No? Ask with Èske."
             }
           },
           "practice": {
-            "learn-core-question-patterns-choice": {
-              "title": "Choose a yes/no question",
-              "prompt": "Which sentence asks “Do you speak Kreyòl?”",
-              "hint": "Choose the question that begins with the yes/no question starter.",
+            "eske-purpose-choice": {
+              "title": "Choose the yes/no question",
+              "prompt": "Which question expects a yes or no answer?",
+              "hint": "Look for Èske.",
               "help": {
-                "concept": "A beginner yes/no question can begin with a fixed question marker.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "recognizing a yes/no question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
               "options": {
-                "a": "Èske ou pale kreyòl?",
-                "b": "Kijan ou rele?",
-                "c": "Ki kote ou rete?"
+                "a": "Èske Jan travay?",
+                "b": "Ki kote Jan rete?",
+                "c": "Kijan Jan ye?"
               }
             },
-            "learn-core-question-patterns-fill": {
-              "title": "Complete the question",
-              "prompt": "Choose the question starter that completes the yes/no question.",
-              "hint": "Use the yes/no pattern from the lesson.",
+            "eske-listen": {
+              "title": "Hear a new yes/no question",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "The question asks whether Mari speaks Kreyòl.",
               "help": {
-                "concept": "The blank comes before the subject and turns the sentence into a yes/no question.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "hearing an Èske question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "template": "[blank1] ou rete Chicago?",
-              "choices": [
-                "Èske",
-                "Kisa",
-                "Kijan"
-              ]
-            },
-            "learn-core-question-patterns-listen": {
-              "title": "Hear a yes/no question",
-              "prompt": "Listen, then build the question you hear.",
-              "hint": "Listen for the question starter, subject, and action.",
-              "help": {
-                "concept": "Build the complete question in spoken order.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Èske li travay?",
+              "targetText": "Èske Mari pale kreyòl?",
               "wordBank": [
                 "Èske",
-                "li",
-                "travay?"
-              ],
-              "distractors": [
-                "Kisa"
+                "Mari",
+                "pale",
+                "kreyòl?"
               ]
             },
-            "learn-core-question-patterns-voice": {
-              "title": "Ask a yes/no question",
-              "prompt": "Say: Èske ou pale kreyòl?",
-              "hint": "Say the complete question.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Èske ou pale kreyòl?"
-            },
-            "learn-core-question-patterns-build": {
+            "eske-build-answer": {
               "title": "Build a complete answer",
-              "prompt": "Arrange the words to answer “Yes, I speak Kreyòl.”",
-              "hint": "Begin with the positive response, then give the full sentence.",
+              "prompt": "Build “Yes, Jan works.”",
+              "hint": "Start with Wi.",
               "help": {
-                "concept": "A complete answer can combine a short response with the useful information.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "building a complete affirmative answer",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "targetText": "Wi, mwen pale kreyòl.",
+              "targetText": "Wi, Jan travay.",
               "wordBank": [
                 "Wi,",
-                "mwen",
-                "pale",
-                "kreyòl."
-              ],
-              "distractors": [
-                "rete"
-              ],
-              "ttsText": "Wi, mwen pale kreyòl."
+                "Jan",
+                "travay."
+              ]
             },
-            "learn-core-question-patterns-write": {
-              "title": "Write yes",
-              "prompt": "Type the Kreyòl word for “yes.”",
-              "hint": "Use the short positive answer from this lesson.",
+            "eske-voice": {
+              "title": "Ask another yes/no question",
+              "prompt": "Ask “Does Mari study Kreyòl?”",
+              "hint": "Begin with Èske.",
               "help": {
-                "concept": "Write the one-word positive response.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "producing an Èske question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "expectedText": "Wi",
-              "placeholder": "Type the Kreyòl answer"
+              "targetText": "Èske Mari etidye kreyòl?"
             },
-            "try-eske-kreyol": {
-              "title": "Build another yes/no question",
-              "prompt": "Arrange the Kreyòl question for “Do you work?”",
-              "hint": "Start with Èske and keep the statement order after it.",
+            "try-eske-work": {
+              "title": "Turn another statement into a question",
+              "prompt": "Build “Do you work?”",
+              "hint": "Start with Èske, then keep ou travay.",
               "help": {
-                "concept": "Èske question starter",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "forming a yes/no question with Èske",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
               "targetText": "Èske ou travay?",
               "wordBank": [
@@ -8710,201 +10215,49 @@ const messages: Record<string, any> = {
                 "travay?"
               ]
             },
-            "try-wi-non-complete": {
-              "title": "Give a different complete yes answer",
-              "prompt": "Say “Yes, I work.” in Kreyòl.",
-              "hint": "Start with Wi, then give the complete statement.",
+            "try-positive-work-answer": {
+              "title": "Give a complete yes answer",
+              "prompt": "Answer “Yes, I work.”",
+              "hint": "Begin with Wi, then repeat the useful statement.",
               "help": {
-                "concept": "complete yes/no answer",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "giving a complete affirmative answer",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
               "targetText": "Wi, mwen travay."
-            }
-          }
-        },
-        "listen-ask-and-answer": {
-          "label": "Listen, Ask, and Answer",
-          "summary": "Use Kijan and Kisa to ask about a name, condition, meaning, or action.",
-          "cards": {
-            "sketch0": {
-              "title": "Ask How"
             },
-            "sketch1": {
-              "title": "Ask What"
-            },
-            "sketch2": {
-              "title": "Answer with What You Know"
-            },
-            "quiz": {
-              "title": "Practice"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_listen_ask_and_answer_sketch0": {
-              "title": "Try it yourself: Choose the name question",
-              "prompt": "Right after the sketch \"Kijan…?\", practice that exact idea with this task. Which Kijan question in the lesson asks for someone’s name? Produce the result for choose the name question so it reinforces Listen, Ask, and Answer."
-            },
-            "try_listen_ask_and_answer_sketch1": {
-              "title": "Try it yourself: Choose the action question",
-              "prompt": "Right after the sketch \"Kisa…?\", practice that exact idea with this task. Which Kisa question asks what someone is doing? Produce the result for choose the action question so it reinforces Listen, Ask, and Answer."
-            },
-            "try_listen_ask_and_answer_sketch2": {
-              "title": "Try it yourself: Answer with another known action",
-              "prompt": "Right after the sketch \"Reuse earlier modules\", practice that exact idea with this task. Answer “What are you doing?” with “I am working.” in Kreyòl. Produce the result for answer with another known action so it reinforces Listen, Ask, and Answer."
-            }
-          },
-          "practice": {
-            "listen-ask-and-answer-choice": {
-              "title": "Choose the name question",
-              "prompt": "Which question asks a person’s name?",
-              "hint": "Choose the familiar introduction question.",
+            "try-eske-routine": {
+              "title": "Hear another yes/no question",
+              "prompt": "Listen and rebuild Jan's question.",
+              "hint": "The question asks whether Mari works every day.",
               "help": {
-                "concept": "One common beginner question asks how a person is called.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "hearing a yes/no question built from known language",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "options": {
-                "a": "Kijan ou rele?",
-                "b": "Kisa ou ap fè?",
-                "c": "Èske ou travay?"
-              }
-            },
-            "listen-ask-and-answer-fill": {
-              "title": "Complete the action question",
-              "prompt": "Choose the question word that completes “What are you doing?”",
-              "hint": "Use the question word for asking what.",
-              "help": {
-                "concept": "The blank begins a question asking for an action or thing.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "template": "[blank1] ou ap fè?",
-              "choices": [
-                "Kisa",
-                "Kijan",
-                "Èske"
-              ]
-            },
-            "listen-ask-and-answer-listen": {
-              "title": "Hear a familiar question",
-              "prompt": "Listen, then build the question you hear.",
-              "hint": "Listen for the question word and name pattern.",
-              "help": {
-                "concept": "Build the introduction question in spoken order.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Kijan ou rele?",
+              "targetText": "Èske Mari travay chak jou?",
               "wordBank": [
-                "Kijan",
-                "ou",
-                "rele?"
-              ],
-              "distractors": [
-                "Kisa"
+                "Èske",
+                "Mari",
+                "travay",
+                "chak",
+                "jou?"
               ]
-            },
-            "listen-ask-and-answer-voice": {
-              "title": "Ask what someone is doing",
-              "prompt": "Say: Kisa ou ap fè?",
-              "hint": "Say the complete action question.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Kisa ou ap fè?"
-            },
-            "listen-ask-and-answer-build": {
-              "title": "Build an answer",
-              "prompt": "Arrange the words to answer “My name is Ana.”",
-              "hint": "Use the short name-introduction pattern from Module 3.",
-              "help": {
-                "concept": "Answer the name question with the familiar introduction pattern.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "M rele Ana.",
-              "wordBank": [
-                "M",
-                "rele",
-                "Ana."
-              ],
-              "distractors": [
-                "rete"
-              ],
-              "ttsText": "M rele Ana."
-            },
-            "listen-ask-and-answer-write": {
-              "title": "Write the action answer",
-              "prompt": "Type the Kreyòl sentence “I am studying.”",
-              "hint": "Use the current-action pattern from Module 5.",
-              "help": {
-                "concept": "Write a complete answer to a current-action question.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "expectedText": "M ap etidye.",
-              "placeholder": "Type the Kreyòl answer",
-              "anyOf": [
-                "Mwen ap etidye."
-              ]
-            },
-            "try-kijan-name": {
-              "title": "Choose the name question",
-              "prompt": "Which Kijan question in the lesson asks for someone’s name?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "common Kijan questions",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "Kijan ou rele?",
-                "b": "Kijan ou ye?"
-              }
-            },
-            "try-kisa-doing": {
-              "title": "Choose the action question",
-              "prompt": "Which Kisa question asks what someone is doing?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "common Kisa questions",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "Kisa ou ap fè?",
-                "b": "Kisa sa vle di?"
-              }
-            },
-            "try-answer-known-study": {
-              "title": "Answer with another known action",
-              "prompt": "Answer “What are you doing?” with “I am working.” in Kreyòl.",
-              "hint": "Use M ap before the action.",
-              "help": {
-                "concept": "reusing an earlier answer",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "M ap travay."
             }
           }
         },
         "question-chain-scenario-and-review": {
-          "label": "Question Chain: Scenario and Review",
-          "summary": "Combine yes/no and information questions in a short conversation and answer with complete sentences.",
+          "label": "Keep a Question Chain Going",
+          "summary": "Mix yes/no and information questions with complete answers in a natural Jan-and-Mari conversation.",
           "cards": {
             "sketch0": {
-              "title": "Ask and Answer"
+              "title": "Hear the Whole Question Chain"
             },
             "sketch1": {
-              "title": "Give Useful Answers"
+              "title": "Answer With a Complete Thought"
             },
             "sketch2": {
-              "title": "Choose the Right Question"
+              "title": "Hear Another Version"
             },
             "quiz": {
               "title": "Practice"
@@ -8913,176 +10266,147 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_question_chain_scenario_and_review_sketch0": {
-              "title": "Try it yourself: Order the question chain",
-              "prompt": "Right after the sketch \"A short question exchange\", practice that exact idea with this task. Arrange the complete chunks to form a natural question-and-answer sequence. Produce the result for order the question chain so it reinforces Question Chain: Scenario and Review."
+              "title": "Try it yourself: Choose a useful next question",
+              "prompt": "Right after the sketch \"Jan and Mari keep talking\", practice that exact idea with this task. Mari has already said she speaks Kreyòl. Which question naturally asks for new information? Produce the result for choose a useful next question so it reinforces Keep a Question Chain Going."
             },
             "try_question_chain_scenario_and_review_sketch1": {
-              "title": "Try it yourself: Write a different complete answer",
-              "prompt": "Right after the sketch \"Answer with a complete thought\", practice that exact idea with this task. Write the complete Kreyòl answer “I live in Boston.”. Produce the result for write a different complete answer so it reinforces Question Chain: Scenario and Review."
+              "title": "Try it yourself: Write a complete place answer",
+              "prompt": "Right after the sketch \"Give the useful information\", practice that exact idea with this task. Write “I live in Miami.”. Produce the result for write a complete place answer so it reinforces Keep a Question Chain Going."
             },
             "try_question_chain_scenario_and_review_sketch2": {
-              "title": "Try it yourself: Choose the question form",
-              "prompt": "Right after the sketch \"Match the information you need\", practice that exact idea with this task. Which question form in the lesson asks about **where**? Produce the result for choose the question form so it reinforces Question Chain: Scenario and Review."
+              "title": "Try it yourself: Hear the place question",
+              "prompt": "Right after the sketch \"Same question system, different order\", practice that exact idea with this task. Listen and rebuild Mari's place question. Produce the result for hear the place question so it reinforces Keep a Question Chain Going."
             }
           },
           "practice": {
-            "question-chain-scenario-and-review-choice": {
-              "title": "Choose the right follow-up",
-              "prompt": "You want to know where Ana lives. Which question should you ask?",
-              "hint": "Choose the question that requests a place.",
+            "chain-question-type-choice": {
+              "title": "Choose the right question type",
+              "prompt": "You want to know whether Jan speaks Kreyòl. What do you ask?",
+              "hint": "This is a yes/no information need.",
               "help": {
-                "concept": "Match the question form to the kind of information you need.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "choosing between yes/no and information questions",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "options": {
+                "a": "Èske Jan pale kreyòl?",
+                "b": "Ki kote Jan rete?",
+                "c": "Kijan Jan ye?"
+              }
+            },
+            "chain-listen": {
+              "title": "Hear a complete answer",
+              "prompt": "Listen and rebuild Mari's answer.",
+              "hint": "She gives a complete place answer.",
+              "help": {
+                "concept": "hearing a complete conversational answer",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "targetText": "Mwen rete Boston.",
+              "wordBank": [
+                "Mwen",
+                "rete",
+                "Boston."
+              ]
+            },
+            "chain-build": {
+              "title": "Build a yes/no question",
+              "prompt": "Build “Does Mari work?”",
+              "hint": "Begin with Èske.",
+              "help": {
+                "concept": "building a familiar yes/no question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "targetText": "Èske Mari travay?",
+              "wordBank": [
+                "Èske",
+                "Mari",
+                "travay?"
+              ]
+            },
+            "chain-voice": {
+              "title": "Ask for a location",
+              "prompt": "Ask “Where does Mari live?”",
+              "hint": "Use Ki kote.",
+              "help": {
+                "concept": "producing a familiar information question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "targetText": "Ki kote Mari rete?"
+            },
+            "chain-write": {
+              "title": "Write a complete action answer",
+              "prompt": "Write “I am studying Kreyòl.”",
+              "hint": "Reuse Module 5's current-action pattern.",
+              "help": {
+                "concept": "answering a familiar action question completely",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "expectedText": "M ap etidye kreyòl.",
+              "placeholder": "Type the complete Kreyòl answer"
+            },
+            "try-chain-next-question": {
+              "title": "Choose a useful next question",
+              "prompt": "Mari has already said she speaks Kreyòl. Which question naturally asks for new information?",
+              "hint": "Ask for information you do not have yet.",
+              "help": {
+                "concept": "choosing a productive next question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
               "options": {
                 "a": "Ki kote ou rete?",
-                "b": "Kijan ou rele?",
-                "c": "Èske ou pale kreyòl?"
+                "b": "Èske ou pale kreyòl?",
+                "c": "Wi, mwen pale kreyòl."
               }
             },
-            "question-chain-scenario-and-review-fill": {
-              "title": "Complete the name question",
-              "prompt": "Choose the question word that completes the name question.",
-              "hint": "Use the introduction question pattern from Module 3.",
+            "try-complete-place-transfer": {
+              "title": "Write a complete place answer",
+              "prompt": "Write “I live in Miami.”",
+              "hint": "Use Mwen rete before the city.",
               "help": {
-                "concept": "The blank begins the familiar question used to ask a person's name.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "giving a complete answer to a place question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "template": "[blank1] ou rele?",
-              "choices": [
-                "Kijan",
-                "Kisa",
-                "Konbyen"
-              ]
+              "expectedText": "Mwen rete Miami.",
+              "placeholder": "Type the complete Kreyòl answer"
             },
-            "question-chain-scenario-and-review-listen": {
-              "title": "Hear and build the answer",
-              "prompt": "Listen, then build the answer you hear.",
-              "hint": "Listen for the positive response and complete language sentence.",
+            "try-chain-hear": {
+              "title": "Hear the place question",
+              "prompt": "Listen and rebuild Mari's place question.",
+              "hint": "She asks where Jan lives.",
               "help": {
-                "concept": "Build the complete answer in spoken order.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "hearing an information question inside a conversation",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "targetText": "Wi, mwen pale kreyòl.",
+              "targetText": "Ki kote ou rete?",
               "wordBank": [
-                "Wi,",
-                "mwen",
-                "pale",
-                "kreyòl."
-              ],
-              "distractors": [
-                "rete"
-              ]
-            },
-            "question-chain-scenario-and-review-voice": {
-              "title": "Ask and answer",
-              "prompt": "Say: Ki kote ou rete? Mwen rete Chicago.",
-              "hint": "Say the question first, then the answer.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored question-and-answer pair.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Ki kote ou rete? Mwen rete Chicago."
-            },
-            "question-chain-scenario-and-review-build": {
-              "title": "Build a mixed question",
-              "prompt": "Arrange the words to ask “Do you speak Kreyòl?”",
-              "hint": "Begin with the yes/no question starter.",
-              "help": {
-                "concept": "Build the complete yes/no question in its normal order.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Èske ou pale kreyòl?",
-              "wordBank": [
-                "Èske",
+                "Ki",
+                "kote",
                 "ou",
-                "pale",
-                "kreyòl?"
-              ],
-              "distractors": [
-                "Kijan"
-              ],
-              "ttsText": "Èske ou pale kreyòl?"
-            },
-            "question-chain-scenario-and-review-write": {
-              "title": "Write a complete answer",
-              "prompt": "Answer in Kreyòl: “Where do you live?” Use Chicago as the place.",
-              "hint": "Use the residence answer pattern from Module 3.",
-              "help": {
-                "concept": "Write a complete sentence rather than only the place name.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "expectedText": "Mwen rete Chicago.",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-mixed-dialogue-order": {
-              "title": "Order the question chain",
-              "prompt": "Arrange the complete chunks to form a natural question-and-answer sequence.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "question-chain conversation flow",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Bonjou! Kijan ou rele? M rele Ana. Ki kote ou rete? Mwen rete Chicago. Èske ou pale kreyòl? Wi, mwen pale kreyòl.",
-              "wordBank": [
-                "Bonjou! Kijan ou rele?",
-                "M rele Ana.",
-                "Ki kote ou rete?",
-                "Mwen rete Chicago.",
-                "Èske ou pale kreyòl?",
-                "Wi, mwen pale kreyòl."
+                "rete?"
               ]
-            },
-            "try-complete-sentences-place": {
-              "title": "Write a different complete answer",
-              "prompt": "Write the complete Kreyòl answer “I live in Boston.”",
-              "hint": "Use Mwen rete before the place.",
-              "help": {
-                "concept": "complete-sentence answers",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "expectedText": "Mwen rete Boston."
-            },
-            "try-choose-question-where": {
-              "title": "Choose the question form",
-              "prompt": "Which question form in the lesson asks about **where**?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "matching question form to information goal",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "Ki kote…?",
-                "b": "Èske…?",
-                "c": "Kijan…?",
-                "d": "Kisa…?",
-                "e": "Ki moun…?",
-                "f": "Konbyen…?"
-              }
             }
           }
         },
         "read-build-and-write-questions": {
-          "label": "Read, Build, and Write Questions",
-          "summary": "Ask about place, person, and quantity with Ki kote, Ki moun, and Konbyen.",
+          "label": "Ask for the Information You Need",
+          "summary": "Choose familiar question forms for how, what, where, who, and quantity.",
           "cards": {
             "sketch0": {
-              "title": "Ask Where"
+              "title": "Ask How or What"
             },
             "sketch1": {
-              "title": "Ask Who"
+              "title": "Ask About Place or Person"
             },
             "sketch2": {
-              "title": "Ask How Many"
+              "title": "Ask About Quantity"
             },
             "quiz": {
               "title": "Practice"
@@ -9091,163 +10415,153 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_read_build_and_write_questions_sketch0": {
-              "title": "Try it yourself: Ask where Mari is",
-              "prompt": "Right after the sketch \"Ki kote…?\", practice that exact idea with this task. Say “Where is Mari?” in Kreyòl. Produce the result for ask where Mari is so it reinforces Read, Build, and Write Questions."
+              "title": "Try it yourself: Choose the object question",
+              "prompt": "Right after the sketch \"Kijan…? / Kisa…?\", practice that exact idea with this task. Which question would you use when you want to know what an unfamiliar thing is? Produce the result for choose the object question so it reinforces Ask for the Information You Need."
             },
             "try_read_build_and_write_questions_sketch1": {
-              "title": "Try it yourself: Ask who someone is",
-              "prompt": "Right after the sketch \"Ki moun…?\", practice that exact idea with this task. Say “Who is he or she?” in Kreyòl. Produce the result for ask who someone is so it reinforces Read, Build, and Write Questions."
+              "title": "Try it yourself: Ask where Mari lives",
+              "prompt": "Right after the sketch \"Ki kote…? / Ki moun…?\", practice that exact idea with this task. Ask “Where does Mari live?”. Produce the result for ask where Mari lives so it reinforces Ask for the Information You Need."
             },
             "try_read_build_and_write_questions_sketch2": {
-              "title": "Try it yourself: Ask about a different quantity",
-              "prompt": "Right after the sketch \"Konbyen…?\", practice that exact idea with this task. Say “How many notebooks do you have?” in Kreyòl. Produce the result for ask about a different quantity so it reinforces Read, Build, and Write Questions."
+              "title": "Try it yourself: Ask about another object",
+              "prompt": "Right after the sketch \"Konbyen…?\", practice that exact idea with this task. Build “How many books does Jan have?”. Produce the result for ask about another object so it reinforces Ask for the Information You Need."
             }
           },
           "practice": {
-            "read-build-and-write-questions-choice": {
+            "info-place-choice": {
               "title": "Choose the place question",
-              "prompt": "Which question means “Where do you live?”",
-              "hint": "Choose the question asking for a place.",
+              "prompt": "Which question asks for a location?",
+              "hint": "Look for Ki kote.",
               "help": {
-                "concept": "A location question begins with the beginner place-question phrase.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "matching a question form to place information",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
               "options": {
-                "a": "Ki kote ou rete?",
+                "a": "Ki kote Jan rete?",
                 "b": "Ki moun sa a?",
-                "c": "Konbyen liv ou genyen?"
+                "c": "Konbyen liv Jan genyen?"
               }
             },
-            "read-build-and-write-questions-fill": {
-              "title": "Complete the quantity question",
-              "prompt": "Choose the question word that asks how many books.",
-              "hint": "Use the quantity question word.",
-              "help": {
-                "concept": "The blank asks for a number or amount.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "template": "[blank1] liv ou genyen?",
-              "choices": [
-                "Konbyen",
-                "Kijan",
-                "Kisa"
-              ]
-            },
-            "read-build-and-write-questions-listen": {
+            "info-person-listen": {
               "title": "Hear a person question",
-              "prompt": "Listen, then build the question you hear.",
-              "hint": "Listen for the words asking which person.",
+              "prompt": "Listen and rebuild the question.",
+              "hint": "The speaker wants to know who the person is.",
               "help": {
-                "concept": "Build the short person-identification question.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "hearing a person-identification question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "targetText": "Ki moun sa a?",
+              "targetText": "Ki moun li ye?",
               "wordBank": [
                 "Ki",
                 "moun",
-                "sa",
-                "a?"
-              ],
-              "distractors": [
-                "kote"
+                "li",
+                "ye?"
               ]
             },
-            "read-build-and-write-questions-voice": {
-              "title": "Ask where someone lives",
-              "prompt": "Say: Ki kote ou rete?",
-              "hint": "Say the complete location question.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "targetText": "Ki kote ou rete?"
-            },
-            "read-build-and-write-questions-build": {
+            "info-quantity-build": {
               "title": "Build a quantity question",
-              "prompt": "Arrange the words to ask “How many books do you have?”",
-              "hint": "Begin with the quantity question word.",
+              "prompt": "Build “How many notebooks do you have?”",
+              "hint": "Begin with Konbyen.",
               "help": {
-                "concept": "The question asks for the number of objects a person has.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+                "concept": "building a quantity question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
               },
-              "targetText": "Konbyen liv ou genyen?",
+              "targetText": "Konbyen kaye ou genyen?",
+              "wordBank": [
+                "Konbyen",
+                "kaye",
+                "ou",
+                "genyen?"
+              ]
+            },
+            "info-place-voice": {
+              "title": "Ask another place question",
+              "prompt": "Ask “Where does Jan live?”",
+              "hint": "Use Ki kote.",
+              "help": {
+                "concept": "producing a place question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "targetText": "Ki kote Jan rete?"
+            },
+            "info-question-write": {
+              "title": "Write a person question",
+              "prompt": "Write “Who is this person?”",
+              "hint": "Begin with Ki moun.",
+              "help": {
+                "concept": "writing a familiar person question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "expectedText": "Ki moun sa a?",
+              "placeholder": "Type the Kreyòl question"
+            },
+            "try-kisa-object-transfer": {
+              "title": "Choose the object question",
+              "prompt": "Which question would you use when you want to know what an unfamiliar thing is?",
+              "hint": "Choose the Kisa question about a thing.",
+              "help": {
+                "concept": "choosing between familiar Kijan and Kisa questions",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "options": {
+                "a": "Kisa sa ye?",
+                "b": "Kijan ou ye?",
+                "c": "Kijan ou rele?"
+              }
+            },
+            "try-ki-kote-mari": {
+              "title": "Ask where Mari lives",
+              "prompt": "Ask “Where does Mari live?”",
+              "hint": "Use Ki kote with Mari and rete.",
+              "help": {
+                "concept": "transferring the familiar place question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "targetText": "Ki kote Mari rete?"
+            },
+            "try-konbyen-transfer": {
+              "title": "Ask about another object",
+              "prompt": "Build “How many books does Jan have?”",
+              "hint": "Begin with Konbyen.",
+              "help": {
+                "concept": "building a quantity question",
+                "hint_1": "First decide what kind of information the question needs.",
+                "hint_2": "Answer with a complete familiar thought when possible."
+              },
+              "targetText": "Konbyen liv Jan genyen?",
               "wordBank": [
                 "Konbyen",
                 "liv",
-                "ou",
+                "Jan",
                 "genyen?"
-              ],
-              "distractors": [
-                "kote"
-              ],
-              "ttsText": "Konbyen liv ou genyen?"
-            },
-            "read-build-and-write-questions-write": {
-              "title": "Write “who”",
-              "prompt": "Type the Kreyòl two-word question phrase for “who.”",
-              "hint": "Use the person-question phrase from this lesson.",
-              "help": {
-                "concept": "Write the complete two-word question phrase.",
-                "hint_1": "Use the question pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete sentence before choosing your answer."
-              },
-              "expectedText": "Ki moun",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-ki-kote": {
-              "title": "Ask where Mari is",
-              "prompt": "Say “Where is Mari?” in Kreyòl.",
-              "hint": "Use Ki kote before the person and ye.",
-              "help": {
-                "concept": "Ki kote place question",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Ki kote Mari ye?"
-            },
-            "try-ki-moun": {
-              "title": "Ask who someone is",
-              "prompt": "Say “Who is he or she?” in Kreyòl.",
-              "hint": "Use Ki moun with li ye.",
-              "help": {
-                "concept": "Ki moun person question",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Ki moun li ye?"
-            },
-            "try-konbyen-books": {
-              "title": "Ask about a different quantity",
-              "prompt": "Say “How many notebooks do you have?” in Kreyòl.",
-              "hint": "Keep Konbyen and change the noun.",
-              "help": {
-                "concept": "Konbyen quantity question",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Konbyen kaye ou genyen?"
+              ]
             }
           }
         }
       },
       "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
         "everyday-plans-scenario-and-review": {
-          "label": "Everyday Plans: Scenario and Review",
-          "summary": "Combine numbers, clock time, day parts, and familiar actions in a simple everyday schedule.",
+          "label": "Everyday Time and Schedule",
+          "summary": "Combine day parts, familiar time expressions, routines, and Akilè in a short everyday schedule conversation.",
           "cards": {
             "sketch0": {
-              "title": "A Simple Day"
+              "title": "Place an Activity in Everyday Time"
             },
             "sketch1": {
-              "title": "Ask About the Schedule"
+              "title": "Useful Schedule Chunks"
             },
             "sketch2": {
-              "title": "Bring It Together"
+              "title": "Use Time in Conversation"
+            },
+            "sketch3": {
+              "title": "Contrast Schedule and Right Now"
             },
             "quiz": {
               "title": "Practice"
@@ -9256,150 +10570,162 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_everyday_plans_scenario_and_review_sketch0": {
-              "title": "Try it yourself: Build a different schedule line",
-              "prompt": "Right after the sketch \"Time + action\", practice that exact idea with this task. Arrange the Kreyòl sentence for “Monday morning, I work.”. Produce the result for build a different schedule line so it reinforces Everyday Plans: Scenario and Review."
+              "title": "Try it yourself: Use evening in a sentence",
+              "prompt": "Right after the sketch \"maten, aswè, jòdi a, kounyeya\", practice that exact idea with this task. Say “Mari studies Kreyòl in the evening.”. Produce the result for use evening in a sentence so it reinforces Everyday Time and Schedule."
             },
             "try_everyday_plans_scenario_and_review_sketch1": {
-              "title": "Try it yourself: Ask about study time",
-              "prompt": "Right after the sketch \"Akilè…?\", practice that exact idea with this task. Say “What time do you study?” in Kreyòl. Produce the result for ask about study time so it reinforces Everyday Plans: Scenario and Review."
+              "title": "Try it yourself: Build another routine",
+              "prompt": "Right after the sketch \"denmen maten and chak jou\", practice that exact idea with this task. Build “Jan studies Kreyòl every day.”. Produce the result for build another routine so it reinforces Everyday Time and Schedule."
+            },
+            "try_everyday_plans_scenario_and_review_sketch2": {
+              "title": "Try it yourself: Hear another schedule line",
+              "prompt": "Right after the sketch \"Jan and Mari compare schedules\", practice that exact idea with this task. Listen and rebuild the sentence. Produce the result for hear another schedule line so it reinforces Everyday Time and Schedule."
+            },
+            "try_everyday_plans_scenario_and_review_sketch3": {
+              "title": "Try it yourself: Ask about Mari's work time",
+              "prompt": "Right after the sketch \"schedule vs. kounyeya\", practice that exact idea with this task. Ask “What time does Mari work?”. Produce the result for ask about Mari's work time so it reinforces Everyday Time and Schedule."
             }
           },
           "practice": {
-            "everyday-plans-scenario-and-review-choice": {
-              "title": "Choose the schedule answer",
-              "prompt": "Which expression answers a question asking what time you work?",
-              "hint": "Choose the clock-time expression.",
+            "schedule-choice": {
+              "title": "Choose the routine",
+              "prompt": "Which sentence describes an everyday routine?",
+              "hint": "Look for chak jou.",
               "help": {
-                "concept": "A time question is answered with a clock-time phrase.",
+                "concept": "recognizing an everyday routine",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
               "options": {
-                "a": "setè edmi",
-                "b": "chak jou",
-                "c": "de liv"
+                "a": "Mari etidye kreyòl chak jou.",
+                "b": "Mari ap etidye kreyòl kounyeya.",
+                "c": "Akilè Mari etidye kreyòl?"
               }
             },
-            "everyday-plans-scenario-and-review-fill": {
-              "title": "Complete the schedule",
-              "prompt": "Choose the action that completes “Monday morning, I study Kreyòl.”",
-              "hint": "Use the study action learned earlier in the course.",
+            "schedule-listen": {
+              "title": "Hear another schedule",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "The activity happens Monday morning.",
               "help": {
-                "concept": "The blank needs the activity performed in the schedule.",
+                "concept": "hearing a time-plus-action sentence",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "template": "Lendi maten, mwen [blank1] kreyòl.",
-              "choices": [
-                "etidye",
-                "rete",
-                "rele"
-              ]
-            },
-            "everyday-plans-scenario-and-review-listen": {
-              "title": "Hear a schedule",
-              "prompt": "Listen, then build the schedule phrase you hear.",
-              "hint": "Listen for the time first and the action second.",
-              "help": {
-                "concept": "Build the short schedule sentence in spoken order.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "Setè edmi, mwen travay.",
+              "targetText": "Lendi maten, Jan travay.",
               "wordBank": [
-                "Setè",
-                "edmi,",
-                "mwen",
+                "Lendi",
+                "maten,",
+                "Jan",
                 "travay."
-              ],
-              "distractors": [
-                "aswè"
               ]
             },
-            "everyday-plans-scenario-and-review-voice": {
-              "title": "Ask about time",
-              "prompt": "Say: Akilè ou travay?",
-              "hint": "Say the complete schedule question.",
+            "schedule-build": {
+              "title": "Build a time question",
+              "prompt": "Build “What time does Jan study?”",
+              "hint": "Begin with Akilè.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl time question.",
+                "concept": "building an everyday schedule question",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "targetText": "Akilè ou travay?"
-            },
-            "everyday-plans-scenario-and-review-build": {
-              "title": "Build an everyday sentence",
-              "prompt": "Arrange the words to say “I study Kreyòl every day.”",
-              "hint": "Put the subject and action first, then the routine time phrase.",
-              "help": {
-                "concept": "The sentence combines a familiar action with a frequency expression.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "Mwen etidye kreyòl chak jou.",
+              "targetText": "Akilè Jan etidye?",
               "wordBank": [
-                "Mwen",
+                "Akilè",
+                "Jan",
+                "etidye?"
+              ]
+            },
+            "schedule-voice": {
+              "title": "Say an evening routine",
+              "prompt": "Say “I study Kreyòl in the evening.”",
+              "hint": "Finish with aswè.",
+              "help": {
+                "concept": "producing an everyday schedule sentence",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "targetText": "Mwen etidye kreyòl aswè."
+            },
+            "schedule-write": {
+              "title": "Write tomorrow morning",
+              "prompt": "Write “tomorrow morning” in Kreyòl.",
+              "hint": "Use the two-word everyday time expression.",
+              "help": {
+                "concept": "writing a familiar everyday time chunk",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "expectedText": "denmen maten",
+              "placeholder": "Type the Kreyòl phrase"
+            },
+            "try-evening-transfer": {
+              "title": "Use evening in a sentence",
+              "prompt": "Say “Mari studies Kreyòl in the evening.”",
+              "hint": "Finish with aswè.",
+              "help": {
+                "concept": "using a day-part expression with a familiar action",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "targetText": "Mari etidye kreyòl aswè."
+            },
+            "try-routine-schedule-transfer": {
+              "title": "Build another routine",
+              "prompt": "Build “Jan studies Kreyòl every day.”",
+              "hint": "Finish with chak jou.",
+              "help": {
+                "concept": "combining a familiar action with a routine expression",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "targetText": "Jan etidye kreyòl chak jou.",
+              "wordBank": [
+                "Jan",
                 "etidye",
                 "kreyòl",
                 "chak",
                 "jou."
-              ],
-              "distractors": [
-                "kounyeya"
-              ],
-              "ttsText": "Mwen etidye kreyòl chak jou."
+              ]
             },
-            "everyday-plans-scenario-and-review-write": {
-              "title": "Write 3:30",
-              "prompt": "Type the Kreyòl time expression for 3:30.",
-              "hint": "Use the hour-plus-half pattern from this module.",
+            "try-schedule-new-line": {
+              "title": "Hear another schedule line",
+              "prompt": "Listen and rebuild the sentence.",
+              "hint": "Mari works Monday morning.",
               "help": {
-                "concept": "Write the complete half-hour clock expression.",
+                "concept": "hearing a new time-plus-action combination",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "expectedText": "twazè edmi",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-schedule-work": {
-              "title": "Build a different schedule line",
-              "prompt": "Arrange the Kreyòl sentence for “Monday morning, I work.”",
-              "hint": "Put the time expression before the action sentence.",
-              "help": {
-                "concept": "time + action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Lendi maten, mwen travay.",
+              "targetText": "Lendi maten, Mari travay.",
               "wordBank": [
                 "Lendi",
                 "maten,",
-                "mwen",
+                "Mari",
                 "travay."
               ]
             },
-            "try-ask-schedule": {
-              "title": "Ask about study time",
-              "prompt": "Say “What time do you study?” in Kreyòl.",
-              "hint": "Keep Akilè ou and change the activity.",
+            "try-akile-new-person": {
+              "title": "Ask about Mari's work time",
+              "prompt": "Ask “What time does Mari work?”",
+              "hint": "Use Akilè with Mari and travay.",
               "help": {
-                "concept": "asking what time",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "transferring Akilè to another person",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "targetText": "Akilè ou etidye?"
+              "targetText": "Akilè Mari travay?"
             }
           }
         },
         "learn-numbers-and-time-basics": {
-          "label": "Learn Numbers and Time Basics",
-          "summary": "Learn and recognize the Kreyòl numbers from one through twenty in useful spoken and written forms.",
+          "label": "Numbers and Quantities",
+          "summary": "Recognize numbers one through twenty and use them with familiar everyday objects.",
           "cards": {
             "sketch0": {
-              "title": "Numbers 1–10"
+              "title": "Start With 1–10"
             },
             "sketch1": {
-              "title": "Numbers 11–20"
+              "title": "Continue to 20"
             },
             "sketch2": {
               "title": "Use Numbers With Things"
@@ -9411,166 +10737,139 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_learn_numbers_and_time_basics_sketch0": {
-              "title": "Try it yourself: Recognize eight",
-              "prompt": "Right after the sketch \"youn, de, twa…\", practice that exact idea with this task. Which number word in the lesson is **8**? Produce the result for recognize eight so it reinforces Learn Numbers and Time Basics."
+              "title": "Try it yourself: Hear a number with an object",
+              "prompt": "Right after the sketch \"youn, de, twa…\", practice that exact idea with this task. Listen and rebuild “six books.”. Produce the result for hear a number with an object so it reinforces Numbers and Quantities."
             },
             "try_learn_numbers_and_time_basics_sketch1": {
-              "title": "Try it yourself: Recognize eighteen",
-              "prompt": "Right after the sketch \"onz through ven\", practice that exact idea with this task. Which number word in the lesson is **18**? Produce the result for recognize eighteen so it reinforces Learn Numbers and Time Basics."
+              "title": "Try it yourself: Use a teen number",
+              "prompt": "Right after the sketch \"onz through ven\", practice that exact idea with this task. Say “twelve notebooks.”. Produce the result for use a teen number so it reinforces Numbers and Quantities."
             },
             "try_learn_numbers_and_time_basics_sketch2": {
-              "title": "Try it yourself: Build another quantity phrase",
-              "prompt": "Right after the sketch \"de liv, twa valiz\", practice that exact idea with this task. Arrange the Kreyòl phrase for “two notebooks.”. Produce the result for build another quantity phrase so it reinforces Learn Numbers and Time Basics."
+              "title": "Try it yourself: Build another quantity",
+              "prompt": "Right after the sketch \"number + noun\", practice that exact idea with this task. Build “four books.”. Produce the result for build another quantity so it reinforces Numbers and Quantities."
             }
           },
           "practice": {
-            "learn-numbers-and-time-basics-choice": {
-              "title": "Choose five",
-              "prompt": "Which Kreyòl number means “five”?",
-              "hint": "Choose the number word from the first group.",
+            "numbers-choice": {
+              "title": "Choose twelve",
+              "prompt": "Which Kreyòl number means twelve?",
+              "hint": "Listen for the number after onz.",
               "help": {
-                "concept": "The lesson introduces the basic number sequence from one to ten.",
+                "concept": "recognizing numbers one through twenty",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
               "options": {
-                "a": "senk",
-                "b": "sèt",
-                "c": "nèf"
+                "a": "douz",
+                "b": "dis",
+                "c": "ven"
               }
             },
-            "learn-numbers-and-time-basics-fill": {
-              "title": "Complete the number phrase",
-              "prompt": "Choose the number that completes “three books.”",
-              "hint": "Use the number represented by 3.",
+            "numbers-listen": {
+              "title": "Hear another quantity",
+              "prompt": "Listen and rebuild the phrase.",
+              "hint": "The speaker says eight bags.",
               "help": {
-                "concept": "The blank needs the number word that comes before the noun.",
+                "concept": "hearing a number with a familiar noun",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "template": "[blank1] liv",
-              "choices": [
-                "twa",
-                "de",
-                "kat"
-              ]
-            },
-            "learn-numbers-and-time-basics-listen": {
-              "title": "Hear a number",
-              "prompt": "Listen, then build the number phrase you hear.",
-              "hint": "Listen for the number and the noun.",
-              "help": {
-                "concept": "Build the short quantity phrase in spoken order.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "de valiz",
+              "targetText": "wit valiz",
               "wordBank": [
-                "de",
+                "wit",
                 "valiz"
-              ],
-              "distractors": [
-                "twa"
               ]
             },
-            "learn-numbers-and-time-basics-voice": {
-              "title": "Say a number",
-              "prompt": "Say: ven.",
-              "hint": "Say the Kreyòl number shown.",
+            "numbers-build": {
+              "title": "Build another quantity",
+              "prompt": "Build “seven notebooks.”",
+              "hint": "Number first.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored number word.",
+                "concept": "building a quantity phrase",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "targetText": "ven"
-            },
-            "learn-numbers-and-time-basics-build": {
-              "title": "Build “five notebooks”",
-              "prompt": "Arrange the words to say “five notebooks.”",
-              "hint": "Put the number before the noun.",
-              "help": {
-                "concept": "A quantity phrase places the number before the thing being counted.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "senk kaye",
+              "targetText": "sèt kaye",
               "wordBank": [
-                "senk",
+                "sèt",
                 "kaye"
-              ],
-              "distractors": [
-                "sèt"
-              ],
-              "ttsText": "senk kaye"
+              ]
             },
-            "learn-numbers-and-time-basics-write": {
-              "title": "Write eight",
-              "prompt": "Type the Kreyòl number word for 8.",
-              "hint": "Use the number sequence from the lesson.",
+            "numbers-voice": {
+              "title": "Say another number",
+              "prompt": "Say “eighteen.”",
+              "hint": "Use the number from the 11–20 group.",
               "help": {
-                "concept": "Write the number word with its Kreyòl spelling.",
+                "concept": "producing a number from eleven through twenty",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "expectedText": "wit",
-              "placeholder": "Type the Kreyòl answer"
+              "targetText": "dizwit"
             },
-            "try-one-ten-eight": {
-              "title": "Recognize eight",
-              "prompt": "Which number word in the lesson is **8**?",
-              "hint": "Choose the option that correctly applies the pattern.",
+            "numbers-write": {
+              "title": "Write another number",
+              "prompt": "Write “fourteen” in Kreyòl.",
+              "hint": "It is between trèz and kenz.",
               "help": {
-                "concept": "numbers 1–10",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "writing a number from eleven through twenty",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "options": {
-                "a": "wit",
-                "b": "sèt",
-                "c": "nèf"
-              }
+              "expectedText": "katòz",
+              "placeholder": "Type the Kreyòl number"
             },
-            "try-eleven-twenty-eighteen": {
-              "title": "Recognize eighteen",
-              "prompt": "Which number word in the lesson is **18**?",
-              "hint": "Choose the option that correctly applies the pattern.",
+            "try-small-quantity-transfer": {
+              "title": "Hear a number with an object",
+              "prompt": "Listen and rebuild “six books.”",
+              "hint": "The number comes before liv.",
               "help": {
-                "concept": "numbers 11–20",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "hearing a number-plus-noun phrase",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "options": {
-                "a": "dizwit",
-                "b": "disèt",
-                "c": "diznèf"
-              }
-            },
-            "try-use-numbers-notebooks": {
-              "title": "Build another quantity phrase",
-              "prompt": "Arrange the Kreyòl phrase for “two notebooks.”",
-              "hint": "Put the number before the noun.",
-              "help": {
-                "concept": "number + noun",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "de kaye",
+              "targetText": "sis liv",
               "wordBank": [
-                "de",
-                "kaye"
+                "sis",
+                "liv"
+              ]
+            },
+            "try-large-quantity-transfer": {
+              "title": "Use a teen number",
+              "prompt": "Say “twelve notebooks.”",
+              "hint": "Put douz before kaye.",
+              "help": {
+                "concept": "using a number from eleven through twenty",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "targetText": "douz kaye"
+            },
+            "try-quantity-new-combination": {
+              "title": "Build another quantity",
+              "prompt": "Build “four books.”",
+              "hint": "Put kat before liv.",
+              "help": {
+                "concept": "building a new number-plus-noun phrase",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "targetText": "kat liv",
+              "wordBank": [
+                "kat",
+                "liv"
               ]
             }
           }
         },
         "listen-for-numbers-and-time": {
-          "label": "Listen for Numbers and Time",
-          "summary": "Recognize and use simple Kreyòl clock-time expressions, including full hours and half past.",
+          "label": "Clock Time and Akilè",
+          "summary": "Recognize simple full-hour and half-hour expressions and ask what time an activity happens.",
           "cards": {
             "sketch0": {
-              "title": "Say the Hour"
+              "title": "Hear Full Hours"
             },
             "sketch1": {
-              "title": "Half Past"
+              "title": "Add Half Past"
             },
             "sketch2": {
               "title": "Ask What Time"
@@ -9582,331 +10881,145 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_listen_for_numbers_and_time_sketch0": {
-              "title": "Try it yourself: Recognize three o’clock",
-              "prompt": "Right after the sketch \"inè, twazè, senkè\", practice that exact idea with this task. Which expression in the lesson means **three o’clock**? Produce the result for recognize three o’clock so it reinforces Listen for Numbers and Time."
+              "title": "Try it yourself: Hear another full hour",
+              "prompt": "Right after the sketch \"inè, twazè, senkè\", practice that exact idea with this task. Listen and rebuild the time expression. Produce the result for hear another full hour so it reinforces Clock Time and Akilè."
             },
             "try_listen_for_numbers_and_time_sketch1": {
-              "title": "Try it yourself: Say 5:30",
-              "prompt": "Right after the sketch \"edmi\", practice that exact idea with this task. Say the Kreyòl time expression for 5:30. Produce the result for say 5:30 so it reinforces Listen for Numbers and Time."
+              "title": "Try it yourself: Say a different half hour",
+              "prompt": "Right after the sketch \"edmi\", practice that exact idea with this task. Say the Kreyòl time for 5:30. Produce the result for say a different half hour so it reinforces Clock Time and Akilè."
             },
             "try_listen_for_numbers_and_time_sketch2": {
-              "title": "Try it yourself: Ask when you work",
-              "prompt": "Right after the sketch \"Akilè…?\", practice that exact idea with this task. Say “What time do we work?” in Kreyòl. Produce the result for ask when you work so it reinforces Listen for Numbers and Time."
+              "title": "Try it yourself: Ask about study time",
+              "prompt": "Right after the sketch \"Akilè…?\", practice that exact idea with this task. Build “What time do you study?”. Produce the result for ask about study time so it reinforces Clock Time and Akilè."
             }
           },
           "practice": {
-            "listen-for-numbers-and-time-choice": {
-              "title": "Choose 3:30",
-              "prompt": "Which Kreyòl time expression means 3:30?",
-              "hint": "Choose the expression with the half-hour word.",
+            "time-choice": {
+              "title": "Choose 7:30",
+              "prompt": "Which phrase means 7:30?",
+              "hint": "Look for setè plus edmi.",
               "help": {
-                "concept": "A half-hour time combines an hour form with a word meaning half.",
+                "concept": "recognizing a half-hour expression",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
               "options": {
-                "a": "twazè edmi",
+                "a": "setè edmi",
                 "b": "senkè",
-                "c": "inè"
+                "c": "twazè"
               }
             },
-            "listen-for-numbers-and-time-fill": {
-              "title": "Complete the half-hour time",
-              "prompt": "Choose the word that completes 7:30.",
-              "hint": "Use the word that marks half past the hour.",
-              "help": {
-                "concept": "The blank completes a half-hour clock expression.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "template": "setè [blank1]",
-              "choices": [
-                "edmi",
-                "maten",
-                "jou"
-              ]
-            },
-            "listen-for-numbers-and-time-listen": {
+            "time-listen": {
               "title": "Hear a clock time",
-              "prompt": "Listen, then build the time you hear.",
-              "hint": "Listen for the hour expression.",
+              "prompt": "Listen and rebuild the time.",
+              "hint": "The time is 3:30.",
               "help": {
-                "concept": "Build the clock-time expression exactly as spoken.",
+                "concept": "hearing a half-hour expression",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "targetText": "senkè",
+              "targetText": "twazè edmi",
               "wordBank": [
-                "senkè"
-              ],
-              "distractors": [
-                "twazè"
+                "twazè",
+                "edmi"
               ]
             },
-            "listen-for-numbers-and-time-voice": {
-              "title": "Say 7:30",
-              "prompt": "Say: setè edmi.",
-              "hint": "Say the complete time expression.",
+            "time-build": {
+              "title": "Build a time question",
+              "prompt": "Build “What time do we work?”",
+              "hint": "Begin with Akilè.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl time.",
+                "concept": "building an activity-time question",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "targetText": "setè edmi"
-            },
-            "listen-for-numbers-and-time-build": {
-              "title": "Ask what time",
-              "prompt": "Arrange the words to ask “What time do we leave?”",
-              "hint": "Begin with the time-question word.",
-              "help": {
-                "concept": "The question asks for the clock time of an action.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "Akilè nou pati?",
+              "targetText": "Akilè nou travay?",
               "wordBank": [
                 "Akilè",
                 "nou",
-                "pati?"
-              ],
-              "distractors": [
-                "Kijan"
-              ],
-              "ttsText": "Akilè nou pati?"
+                "travay?"
+              ]
             },
-            "listen-for-numbers-and-time-write": {
-              "title": "Write one o'clock",
-              "prompt": "Type the Kreyòl clock expression for “one o'clock.”",
-              "hint": "Use the one-hour form introduced in the lesson.",
+            "time-voice": {
+              "title": "Say another clock time",
+              "prompt": "Say “five o'clock.”",
+              "hint": "Use the full-hour expression.",
               "help": {
-                "concept": "Write the complete clock expression.",
+                "concept": "producing a clock-time expression",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
+              },
+              "targetText": "senkè"
+            },
+            "time-write": {
+              "title": "Write one o'clock",
+              "prompt": "Write “one o'clock” in Kreyòl.",
+              "hint": "Use the source-backed clock expression.",
+              "help": {
+                "concept": "writing a clock-time expression",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
               },
               "expectedText": "inè",
-              "placeholder": "Type the Kreyòl answer"
+              "placeholder": "Type the Kreyòl time"
             },
-            "try-clock-hour-three": {
-              "title": "Recognize three o’clock",
-              "prompt": "Which expression in the lesson means **three o’clock**?",
-              "hint": "Choose the option that correctly applies the pattern.",
+            "try-clock-hour-transfer": {
+              "title": "Hear another full hour",
+              "prompt": "Listen and rebuild the time expression.",
+              "hint": "The time is seven o'clock.",
               "help": {
-                "concept": "whole-hour clock expressions",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "recognizing a full-hour clock expression",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "options": {
-                "a": "twazè",
-                "b": "inè",
-                "c": "senkè"
-              }
+              "targetText": "setè",
+              "wordBank": [
+                "setè"
+              ]
             },
-            "try-half-past-three": {
-              "title": "Say 5:30",
-              "prompt": "Say the Kreyòl time expression for 5:30.",
+            "try-half-past-transfer": {
+              "title": "Say a different half hour",
+              "prompt": "Say the Kreyòl time for 5:30.",
               "hint": "Combine senkè with edmi.",
               "help": {
-                "concept": "half-past time expression",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "transferring the half-past pattern",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Listen for the whole expression before producing it."
               },
               "targetText": "senkè edmi"
             },
-            "try-ask-time-leave": {
-              "title": "Ask when you work",
-              "prompt": "Say “What time do we work?” in Kreyòl.",
-              "hint": "Keep Akilè nou and change the activity.",
+            "try-akile-transfer": {
+              "title": "Ask about study time",
+              "prompt": "Build “What time do you study?”",
+              "hint": "Keep Akilè ou and change the activity.",
               "help": {
-                "concept": "Akilè time question",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Akilè nou travay?"
-            }
-          }
-        },
-        "read-build-and-write-everyday-details": {
-          "label": "Read, Build, and Write Everyday Details",
-          "summary": "Use common Kreyòl time-of-day and everyday time expressions such as maten, aswè, jòdi a, kounyeya, and denmen maten.",
-          "cards": {
-            "sketch0": {
-              "title": "Parts of the Day"
-            },
-            "sketch1": {
-              "title": "Today and Now"
-            },
-            "sketch2": {
-              "title": "Tomorrow and Every Day"
-            },
-            "quiz": {
-              "title": "Practice"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_read_build_and_write_everyday_details_sketch0": {
-              "title": "Try it yourself: Recognize evening",
-              "prompt": "Right after the sketch \"maten and aswè\", practice that exact idea with this task. Which word in the lesson means **evening**? Produce the result for recognize evening so it reinforces Read, Build, and Write Everyday Details."
-            },
-            "try_read_build_and_write_everyday_details_sketch1": {
-              "title": "Try it yourself: Recognize now",
-              "prompt": "Right after the sketch \"jòdi a and kounyeya\", practice that exact idea with this task. Which expression in the lesson means **now**? Produce the result for recognize now so it reinforces Read, Build, and Write Everyday Details."
-            },
-            "try_read_build_and_write_everyday_details_sketch2": {
-              "title": "Try it yourself: Recognize every day",
-              "prompt": "Right after the sketch \"denmen maten and chak jou\", practice that exact idea with this task. Which expression in the lesson means **every day**? Produce the result for recognize every day so it reinforces Read, Build, and Write Everyday Details."
-            }
-          },
-          "practice": {
-            "read-build-and-write-everyday-details-choice": {
-              "title": "Choose “today”",
-              "prompt": "Which Kreyòl expression means “today”?",
-              "hint": "Choose the expression for the current day.",
-              "help": {
-                "concept": "The lesson contrasts current-day and current-moment expressions.",
+                "concept": "building an Akilè question",
                 "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
+                "hint_2": "Listen for the whole expression before producing it."
               },
-              "options": {
-                "a": "jòdi a",
-                "b": "denmen maten",
-                "c": "chak jou"
-              }
-            },
-            "read-build-and-write-everyday-details-fill": {
-              "title": "Complete tomorrow morning",
-              "prompt": "Choose the word that completes “tomorrow morning.”",
-              "hint": "Use the day-part word from this lesson.",
-              "help": {
-                "concept": "The blank completes a two-word expression referring to the next morning.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "template": "denmen [blank1]",
-              "choices": [
-                "maten",
-                "aswè",
-                "jou"
-              ]
-            },
-            "read-build-and-write-everyday-details-listen": {
-              "title": "Hear an everyday time phrase",
-              "prompt": "Listen, then build the expression you hear.",
-              "hint": "Listen for the two-word routine phrase.",
-              "help": {
-                "concept": "Build the time expression in spoken order.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "chak jou",
+              "targetText": "Akilè ou etidye?",
               "wordBank": [
-                "chak",
-                "jou"
-              ],
-              "distractors": [
-                "maten"
+                "Akilè",
+                "ou",
+                "etidye?"
               ]
-            },
-            "read-build-and-write-everyday-details-voice": {
-              "title": "Say “now”",
-              "prompt": "Say: kounyeya.",
-              "hint": "Say the current-moment word.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl time word.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "kounyeya"
-            },
-            "read-build-and-write-everyday-details-build": {
-              "title": "Build Monday morning",
-              "prompt": "Arrange the words to say “Monday morning.”",
-              "hint": "Put the day before the day-part word.",
-              "help": {
-                "concept": "A simple schedule expression can combine a weekday and part of the day.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "targetText": "Lendi maten",
-              "wordBank": [
-                "Lendi",
-                "maten"
-              ],
-              "distractors": [
-                "aswè"
-              ],
-              "ttsText": "Lendi maten"
-            },
-            "read-build-and-write-everyday-details-write": {
-              "title": "Write “evening”",
-              "prompt": "Type the Kreyòl word for “evening.”",
-              "hint": "Use the day-part word from this lesson.",
-              "help": {
-                "concept": "Write the single Kreyòl time-of-day word.",
-                "hint_1": "Use the number or time pattern introduced in this lesson.",
-                "hint_2": "Read or listen to the complete expression before choosing your answer."
-              },
-              "expectedText": "aswè",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-day-parts-evening": {
-              "title": "Recognize evening",
-              "prompt": "Which word in the lesson means **evening**?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "day-part vocabulary",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "aswè",
-                "b": "maten"
-              }
-            },
-            "try-today-now-now": {
-              "title": "Recognize now",
-              "prompt": "Which expression in the lesson means **now**?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "today versus now",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "kounyeya",
-                "b": "jòdi a"
-              }
-            },
-            "try-tomorrow-routine-everyday": {
-              "title": "Recognize every day",
-              "prompt": "Which expression in the lesson means **every day**?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "tomorrow morning versus every day",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "chak jou",
-                "b": "denmen maten"
-              }
             }
           }
         }
       },
       "haitian-creole-foundations-8-my-first-kreyol-conversation": {
         "learn-the-conversation-map": {
-          "label": "Learn the Conversation Map",
-          "summary": "Bring together greetings, names, identity, language, and residence in a short first meeting.",
+          "label": "Build Your Conversation Map",
+          "summary": "Connect greetings, identity, everyday information, actions, questions, quantities, and time into useful moves.",
           "cards": {
             "sketch0": {
-              "title": "Meet Someone"
+              "title": "Open the Conversation"
             },
             "sketch1": {
-              "title": "Add Two Facts"
+              "title": "Learn About the Person"
             },
             "sketch2": {
-              "title": "Keep It Clear"
+              "title": "Keep the Conversation Moving"
             },
             "quiz": {
               "title": "Practice"
@@ -9915,158 +11028,136 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_learn_the_conversation_map_sketch0": {
-              "title": "Try it yourself: Order the first meeting",
-              "prompt": "Right after the sketch \"Start with what you already know\", practice that exact idea with this task. Arrange the conversation chunks in the order shown. Produce the result for order the first meeting so it reinforces Learn the Conversation Map."
+              "title": "Try it yourself: Move from greeting to a name",
+              "prompt": "Right after the sketch \"Greeting → condition → name\", practice that exact idea with this task. Ask Mari what her name is. Produce the result for move from greeting to a name so it reinforces Build Your Conversation Map."
             },
             "try_learn_the_conversation_map_sketch1": {
-              "title": "Try it yourself: Order the language and residence exchange",
-              "prompt": "Right after the sketch \"Language and residence\", practice that exact idea with this task. Arrange the chunks in the order shown. Produce the result for order the language and residence exchange so it reinforces Learn the Conversation Map."
+              "title": "Try it yourself: Hear a different residence turn",
+              "prompt": "Right after the sketch \"Name → place → language\", practice that exact idea with this task. Listen and rebuild Jan's new answer. Produce the result for hear a different residence turn so it reinforces Build Your Conversation Map."
+            },
+            "try_learn_the_conversation_map_sketch2": {
+              "title": "Try it yourself: Choose the useful next question",
+              "prompt": "Right after the sketch \"Action → quantity → time\", practice that exact idea with this task. Mari has already told you where she lives. You now want to know what time she studies. Produce the result for choose the useful next question so it reinforces Build Your Conversation Map."
             }
           },
           "practice": {
-            "learn-the-conversation-map-choice": {
-              "title": "Choose the first question",
-              "prompt": "After Bonjou, which question naturally checks how the other person is?",
-              "hint": "Choose the greeting follow-up from Module 2.",
+            "map-next-move-choice": {
+              "title": "Choose a natural next move",
+              "prompt": "Jan and Mari have exchanged names. Which question can ask for new personal information?",
+              "hint": "Ask for something they have not exchanged yet.",
               "help": {
-                "concept": "A first meeting can begin with a greeting followed by a simple check-in.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "choosing a productive conversational move",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
               "options": {
-                "a": "Kijan ou ye?",
-                "b": "Konbyen liv ou genyen?",
-                "c": "Akilè ou travay?"
+                "a": "Ki kote ou rete?",
+                "b": "Kijan ou rele?",
+                "c": "M rele Mari."
               }
             },
-            "learn-the-conversation-map-fill": {
-              "title": "Complete the name answer",
-              "prompt": "Choose the verb that completes the short name introduction.",
-              "hint": "Use the name pattern from Module 3.",
+            "map-listen": {
+              "title": "Hear a new identity turn",
+              "prompt": "Listen and rebuild the response.",
+              "hint": "The speaker gives Jan's name and returns the question.",
               "help": {
-                "concept": "The blank completes the familiar pattern for giving a name.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "hearing a connected identity turn",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "template": "M [blank1] Ana.",
-              "choices": [
+              "targetText": "M rele Jan. E ou menm?",
+              "wordBank": [
+                "M",
                 "rele",
-                "rete",
-                "travay"
-              ]
-            },
-            "learn-the-conversation-map-listen": {
-              "title": "Hear a first meeting",
-              "prompt": "Listen, then build the answer you hear.",
-              "hint": "Listen for a positive response followed by the language sentence.",
-              "help": {
-                "concept": "Build the complete answer in spoken order.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Wi, mwen pale kreyòl.",
-              "wordBank": [
-                "Wi,",
-                "mwen",
-                "pale",
-                "kreyòl."
-              ],
-              "distractors": [
-                "rete"
-              ]
-            },
-            "learn-the-conversation-map-voice": {
-              "title": "Introduce yourself",
-              "prompt": "Say: Bonjou! M rele Ana. Mwen rete Chicago.",
-              "hint": "Say the greeting, name, and residence as three short pieces.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored introduction.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Bonjou! M rele Ana. Mwen rete Chicago."
-            },
-            "learn-the-conversation-map-build": {
-              "title": "Ask where someone lives",
-              "prompt": "Arrange the words to ask the residence question.",
-              "hint": "Use the location question from Module 3.",
-              "help": {
-                "concept": "The question asks for the place where a person lives.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Ki kote ou rete?",
-              "wordBank": [
-                "Ki",
-                "kote",
+                "Jan.",
+                "E",
                 "ou",
-                "rete?"
-              ],
-              "distractors": [
-                "rele?"
-              ],
-              "ttsText": "Ki kote ou rete?"
-            },
-            "learn-the-conversation-map-write": {
-              "title": "Write a complete introduction",
-              "prompt": "Type: “My name is Jan.” in Kreyòl.",
-              "hint": "Use the short name pattern from the course.",
-              "help": {
-                "concept": "Write the complete name-introduction sentence.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "expectedText": "M rele Jan.",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-meet-someone-order": {
-              "title": "Order the first meeting",
-              "prompt": "Arrange the conversation chunks in the order shown.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "first-meeting conversation flow",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Mwen byen tou. Kijan ou rele? M rele Ana.",
-              "wordBank": [
-                "Bonjou! Kijan ou ye?",
-                "Mwen byen, mèsi. E ou menm?",
-                "Mwen byen tou. Kijan ou rele?",
-                "M rele Ana."
+                "menm?"
               ]
             },
-            "try-identity-place-order": {
-              "title": "Order the language and residence exchange",
-              "prompt": "Arrange the chunks in the order shown.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
+            "map-build": {
+              "title": "Build a new time question",
+              "prompt": "Build “What time does Jan work?”",
+              "hint": "Begin with Akilè.",
               "help": {
-                "concept": "language and residence exchange",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
+                "concept": "reusing the time-question pattern",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "targetText": "Èske ou pale kreyòl? Wi, mwen pale kreyòl. Ki kote ou rete? Mwen rete Chicago.",
+              "targetText": "Akilè Jan travay?",
               "wordBank": [
-                "Èske ou pale kreyòl?",
-                "Wi, mwen pale kreyòl.",
-                "Ki kote ou rete?",
-                "Mwen rete Chicago."
+                "Akilè",
+                "Jan",
+                "travay?"
               ]
+            },
+            "map-voice": {
+              "title": "Ask about Mari's action",
+              "prompt": "Ask “What is Mari doing?”",
+              "hint": "Use Kisa with Mari and ap fè.",
+              "help": {
+                "concept": "reusing the current-action question",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Kisa Mari ap fè?"
+            },
+            "try-map-name-transfer": {
+              "title": "Move from greeting to a name",
+              "prompt": "Ask Mari what her name is.",
+              "hint": "Use the familiar Kijan question with Mari.",
+              "help": {
+                "concept": "moving naturally from greeting to identity",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Mari, kijan ou rele?"
+            },
+            "try-map-place-transfer": {
+              "title": "Hear a different residence turn",
+              "prompt": "Listen and rebuild Jan's new answer.",
+              "hint": "The city is Miami.",
+              "help": {
+                "concept": "transferring a familiar residence pattern",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Mwen rete Miami.",
+              "wordBank": [
+                "Mwen",
+                "rete",
+                "Miami."
+              ]
+            },
+            "try-map-next-question": {
+              "title": "Choose the useful next question",
+              "prompt": "Mari has already told you where she lives. You now want to know what time she studies.",
+              "hint": "Choose the question that asks for time.",
+              "help": {
+                "concept": "choosing a question based on missing information",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "options": {
+                "a": "Akilè ou etidye kreyòl?",
+                "b": "Ki kote ou rete?",
+                "c": "Kijan ou rele?"
+              }
             }
           }
         },
         "listen-and-speak-through-a-conversation": {
-          "label": "Listen and Speak Through a Conversation",
-          "summary": "Talk about familiar things, ownership, and what people are doing in a short everyday exchange.",
+          "label": "Rehearse Real Conversation Turns",
+          "summary": "Practice short scenes about things, actions, questions, quantities, and time before the final conversation.",
           "cards": {
             "sketch0": {
-              "title": "Talk About Things"
+              "title": "Scene 1 — Things and Ownership"
             },
             "sketch1": {
-              "title": "Ask About an Action"
+              "title": "Scene 2 — Ask About an Action"
             },
             "sketch2": {
-              "title": "Point, Ask, Answer"
+              "title": "Scene 3 — Quantity and Time"
             },
             "quiz": {
               "title": "Practice"
@@ -10075,165 +11166,150 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_listen_and_speak_through_a_conversation_sketch0": {
-              "title": "Try it yourself: Identify the thing",
-              "prompt": "Right after the sketch \"What is this? Whose is it?\", practice that exact idea with this task. Arrange the answer identifying the object. Produce the result for identify the thing so it reinforces Listen and Speak Through a Conversation."
+              "title": "Try it yourself: Give another object an owner",
+              "prompt": "Right after the sketch \"Point out things and owners\", practice that exact idea with this task. Build “This bag belongs to Jan.”. Produce the result for give another object an owner so it reinforces Rehearse Real Conversation Turns."
             },
             "try_listen_and_speak_through_a_conversation_sketch1": {
-              "title": "Try it yourself: Say what Mari is doing",
-              "prompt": "Right after the sketch \"Kisa li ap fè?\", practice that exact idea with this task. Say the action answer using the pattern from the lesson. Produce the result for say what Mari is doing so it reinforces Listen and Speak Through a Conversation."
+              "title": "Try it yourself: Give Jan a different answer",
+              "prompt": "Right after the sketch \"Ask, answer, return\", practice that exact idea with this task. Say “I am speaking Kreyòl.”. Produce the result for give Jan a different answer so it reinforces Rehearse Real Conversation Turns."
+            },
+            "try_listen_and_speak_through_a_conversation_sketch2": {
+              "title": "Try it yourself: Hear a different study time",
+              "prompt": "Right after the sketch \"Ask for practical details\", practice that exact idea with this task. Listen and rebuild Jan's new answer. Produce the result for hear a different study time so it reinforces Rehearse Real Conversation Turns."
             }
           },
           "practice": {
-            "listen-and-speak-through-a-conversation-choice": {
-              "title": "Choose the ownership answer",
-              "prompt": "Which sentence says “The book is Mari’s / for Mari”?",
-              "hint": "Use the ownership pattern from Module 4.",
+            "rehearsal-owner-choice": {
+              "title": "Choose the ownership response",
+              "prompt": "Which sentence says that the notebooks belong to Mari?",
+              "hint": "Look for se pou Mari.",
               "help": {
-                "concept": "Ownership can be expressed after identifying the object.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "recognizing an ownership statement",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
               "options": {
-                "a": "Liv la se pou Mari.",
-                "b": "Mari ap li liv la.",
-                "c": "Se yon liv."
+                "a": "Kaye sa yo se pou Mari.",
+                "b": "Mari ap etidye kreyòl.",
+                "c": "Akilè Mari travay?"
               }
             },
-            "listen-and-speak-through-a-conversation-fill": {
-              "title": "Complete the current action",
-              "prompt": "Choose the action that completes “She is studying Kreyòl.”",
-              "hint": "Use the study action from Module 5.",
+            "rehearsal-listen": {
+              "title": "Hear a different action",
+              "prompt": "Listen and rebuild the answer.",
+              "hint": "Mari says she is studying now.",
               "help": {
-                "concept": "The blank needs the activity happening now.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "hearing a familiar current-action response",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "template": "Li ap [blank1] kreyòl.",
-              "choices": [
+              "targetText": "M ap etidye kounyeya.",
+              "wordBank": [
+                "M",
+                "ap",
                 "etidye",
-                "rete",
-                "rele"
+                "kounyeya."
               ]
             },
-            "listen-and-speak-through-a-conversation-listen": {
-              "title": "Hear an ownership sentence",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the object first and the owner second.",
+            "rehearsal-build": {
+              "title": "Build another quantity question",
+              "prompt": "Build “How many notebooks does Jan have?”",
+              "hint": "Begin with Konbyen.",
               "help": {
-                "concept": "Build the complete ownership sentence in spoken order.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "reusing a quantity question",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "targetText": "Liv la se pou Mari.",
+              "targetText": "Konbyen kaye Jan genyen?",
               "wordBank": [
-                "Liv",
-                "la",
+                "Konbyen",
+                "kaye",
+                "Jan",
+                "genyen?"
+              ]
+            },
+            "rehearsal-voice": {
+              "title": "Ask about Mari's study time",
+              "prompt": "Ask “What time does Mari study Kreyòl?”",
+              "hint": "Use Akilè with Mari.",
+              "help": {
+                "concept": "producing a schedule question",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Akilè Mari etidye kreyòl?"
+            },
+            "rehearsal-write": {
+              "title": "Write a different residence answer",
+              "prompt": "Write “I live in Miami.”",
+              "hint": "Use Mwen rete.",
+              "help": {
+                "concept": "writing a complete familiar answer",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "expectedText": "Mwen rete Miami.",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-rehearse-owner-transfer": {
+              "title": "Give another object an owner",
+              "prompt": "Build “This bag belongs to Jan.”",
+              "hint": "Use valiz sa a with se pou Jan.",
+              "help": {
+                "concept": "reusing demonstrative and ownership language",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Valiz sa a se pou Jan.",
+              "wordBank": [
+                "Valiz",
+                "sa",
+                "a",
                 "se",
                 "pou",
-                "Mari."
-              ],
-              "distractors": [
-                "yo"
+                "Jan."
               ]
             },
-            "listen-and-speak-through-a-conversation-voice": {
-              "title": "Ask what someone is doing",
-              "prompt": "Say: Kisa Mari ap fè?",
-              "hint": "Say the complete current-action question.",
+            "try-rehearse-action-transfer": {
+              "title": "Give Jan a different answer",
+              "prompt": "Say “I am speaking Kreyòl.”",
+              "hint": "Use M ap with pale kreyòl.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "producing a different current-action answer",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "targetText": "Kisa Mari ap fè?"
+              "targetText": "M ap pale kreyòl."
             },
-            "listen-and-speak-through-a-conversation-build": {
-              "title": "Build “this book”",
-              "prompt": "Arrange the words to say “this/that book.”",
-              "hint": "Use the singular demonstrative pattern from Module 4.",
+            "try-rehearse-time-transfer": {
+              "title": "Hear a different study time",
+              "prompt": "Listen and rebuild Jan's new answer.",
+              "hint": "The time is seven thirty.",
               "help": {
-                "concept": "The demonstrative follows the noun.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "hearing a new clock-time answer in context",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "targetText": "liv sa a",
+              "targetText": "Setè edmi.",
               "wordBank": [
-                "liv",
-                "sa",
-                "a"
-              ],
-              "distractors": [
-                "yo"
-              ],
-              "ttsText": "liv sa a"
-            },
-            "listen-and-speak-through-a-conversation-write": {
-              "title": "Write the action answer",
-              "prompt": "Type the Kreyòl sentence “She is studying Kreyòl.”",
-              "hint": "Use the current-action pattern from Module 5.",
-              "help": {
-                "concept": "Write the complete current-action sentence.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "expectedText": "Li ap etidye kreyòl.",
-              "placeholder": "Type the Kreyòl answer",
-              "anyOf": [
-                "L ap etidye kreyòl."
+                "Setè",
+                "edmi."
               ]
-            },
-            "try-things-owner-identify": {
-              "title": "Identify the thing",
-              "prompt": "Arrange the answer identifying the object.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "identifying an object",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Se yon liv.",
-              "wordBank": [
-                "Se",
-                "yon",
-                "liv."
-              ]
-            },
-            "try-things-owner-owner": {
-              "title": "Say who owns it",
-              "prompt": "Say the ownership answer using the pattern from the lesson.",
-              "hint": "Say: Liv la se pou Mari.",
-              "help": {
-                "concept": "stating ownership",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Liv la se pou Mari."
-            },
-            "try-people-actions-answer": {
-              "title": "Say what Mari is doing",
-              "prompt": "Say the action answer using the pattern from the lesson.",
-              "hint": "Say: Li ap etidye kreyòl.",
-              "help": {
-                "concept": "describing a person's action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Li ap etidye kreyòl."
             }
           }
         },
         "my-first-kreyol-conversation": {
           "label": "My First Kreyòl Conversation",
-          "summary": "Complete a first independent Kreyòl conversation by greeting, introducing yourself, asking questions, and closing politely.",
+          "summary": "Complete and understand a sustained beginner conversation using language accumulated across Course 1.",
           "cards": {
             "sketch0": {
-              "title": "Your First Full Conversation"
+              "title": "Listen From Beginning to End"
             },
             "sketch1": {
-              "title": "What You Can Now Do"
+              "title": "Follow Meaning, Not a Script"
             },
             "sketch2": {
-              "title": "Use What You Know"
+              "title": "Understand a Different Version"
             },
             "quiz": {
               "title": "Practice"
@@ -10242,334 +11318,138 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_my_first_kreyol_conversation_sketch0": {
-              "title": "Try it yourself: Hear a complete response",
-              "prompt": "Right after the sketch \"From Bonjou to Orevwa\", practice that exact idea with this task. Listen and rebuild the check-in response from the capstone dialogue. Produce the result for hear a complete response so it reinforces My First Kreyòl Conversation."
+              "title": "Try it yourself: Take Mari's place turn",
+              "prompt": "Right after the sketch \"Jan and Mari meet and keep talking\", practice that exact idea with this task. Say that you live in Miami and return the question. Produce the result for take Mari's place turn so it reinforces My First Kreyòl Conversation."
+            },
+            "try_my_first_kreyol_conversation_sketch1": {
+              "title": "Try it yourself: Choose what fits next",
+              "prompt": "Right after the sketch \"Respond to the information you hear\", practice that exact idea with this task. Jan says “Mwen rete Chicago.” Mari wants to know whether he speaks Kreyòl. Produce the result for choose what fits next so it reinforces My First Kreyòl Conversation."
+            },
+            "try_my_first_kreyol_conversation_sketch2": {
+              "title": "Try it yourself: Hear a different schedule answer",
+              "prompt": "Right after the sketch \"Same skills, different path\", practice that exact idea with this task. Listen and rebuild Mari's new time answer. Produce the result for hear a different schedule answer so it reinforces My First Kreyòl Conversation."
             }
           },
           "practice": {
-            "my-first-kreyol-conversation-choice": {
-              "title": "Choose the natural next line",
-              "prompt": "Someone says “Bonjou! Kijan ou ye?” Which answer fits naturally?",
-              "hint": "Choose the polite check-in response from Module 2.",
+            "capstone-natural-answer-choice": {
+              "title": "Choose the natural response",
+              "prompt": "Mari asks “Kijan ou ye?” Which answer fits?",
+              "hint": "Answer the condition question.",
               "help": {
-                "concept": "A conversation works when the response matches the question that was asked.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "responding naturally to a familiar greeting question",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
               "options": {
                 "a": "Mwen byen, mèsi.",
-                "b": "Twa liv.",
-                "c": "Setè edmi."
+                "b": "Mwen rete Chicago.",
+                "c": "Senkè edmi."
               }
             },
-            "my-first-kreyol-conversation-fill": {
-              "title": "Complete the final question",
-              "prompt": "Choose the word that completes the question about language.",
-              "hint": "Use the action associated with speaking a language.",
+            "capstone-listen": {
+              "title": "Hear a connected name turn",
+              "prompt": "Listen and rebuild the response.",
+              "hint": "Jan gives his name and returns the question.",
               "help": {
-                "concept": "The blank needs the verb used in the familiar language question.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "hearing a connected identity response",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "template": "Èske ou [blank1] kreyòl?",
-              "choices": [
-                "pale",
-                "rete",
-                "rele"
-              ]
-            },
-            "my-first-kreyol-conversation-listen": {
-              "title": "Hear the conversation close",
-              "prompt": "Listen, then build the closing exchange you hear.",
-              "hint": "Listen for the repeated goodbye.",
-              "help": {
-                "concept": "Build the two-line closing using the familiar farewell.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Orevwa! Orevwa!",
+              "targetText": "M rele Jan. E ou menm?",
               "wordBank": [
-                "Orevwa!",
-                "Orevwa!"
-              ],
-              "distractors": [
-                "Bonjou!"
-              ]
-            },
-            "my-first-kreyol-conversation-voice": {
-              "title": "Give your first conversation",
-              "prompt": "Say: Bonjou! M rele Jan. Mwen rete Chicago. Mwen pale kreyòl. Orevwa!",
-              "hint": "Say the short sentences one at a time at a comfortable pace.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored capstone response.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Bonjou! M rele Jan. Mwen rete Chicago. Mwen pale kreyòl. Orevwa!"
-            },
-            "my-first-kreyol-conversation-build": {
-              "title": "Build a complete mini exchange",
-              "prompt": "Arrange the chunks into a natural question and answer.",
-              "hint": "Put the residence question before its answer.",
-              "help": {
-                "concept": "A useful exchange pairs one clear question with one complete answer.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Ki kote ou rete? Mwen rete Chicago.",
-              "wordBank": [
-                "Ki",
-                "kote",
+                "M",
+                "rele",
+                "Jan.",
+                "E",
                 "ou",
-                "rete?",
-                "Mwen",
-                "rete",
-                "Chicago."
-              ],
-              "distractors": [
-                "Konbyen"
-              ],
-              "ttsText": "Ki kote ou rete? Mwen rete Chicago."
-            },
-            "my-first-kreyol-conversation-write": {
-              "title": "Write a short self-introduction",
-              "prompt": "Type: “My name is Ana. I speak Kreyòl.”",
-              "hint": "Use two short sentences from Modules 3 and 8.",
-              "help": {
-                "concept": "Write two complete beginner sentences.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "expectedText": "M rele Ana. Mwen pale kreyòl.",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-full-conversation-hear": {
-              "title": "Hear a complete response",
-              "prompt": "Listen and rebuild the check-in response from the capstone dialogue.",
-              "hint": "Listen again and rebuild the new Kreyòl phrase.",
-              "help": {
-                "concept": "capstone listening",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen byen, mèsi. E ou menm?"
-            },
-            "try-full-conversation-intro": {
-              "title": "Say a name introduction",
-              "prompt": "Say Ana’s name-introduction line from the dialogue.",
-              "hint": "Say: M rele Ana. E ou menm?",
-              "help": {
-                "concept": "capstone speaking",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "M rele Ana. E ou menm?"
-            },
-            "try-full-conversation-order": {
-              "title": "Order the conversation milestones",
-              "prompt": "Arrange these major chunks in the order they appear in the conversation.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "capstone conversation sequence",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Bonjou! Kijan ou ye? M rele Ana. E ou menm? Ki kote ou rete? Èske ou pale kreyòl? Orevwa!",
-              "wordBank": [
-                "Bonjou! Kijan ou ye?",
-                "M rele Ana. E ou menm?",
-                "Ki kote ou rete?",
-                "Èske ou pale kreyòl?",
-                "Orevwa!"
+                "menm?"
               ]
-            }
-          }
-        },
-        "read-build-and-write-a-conversation": {
-          "label": "Read, Build, and Write a Conversation",
-          "summary": "Use numbers, time, schedules, and complete questions to arrange a simple everyday plan.",
-          "cards": {
-            "sketch0": {
-              "title": "Make a Simple Plan"
             },
-            "sketch1": {
-              "title": "Add a Quantity"
-            },
-            "sketch2": {
-              "title": "Use Time Chunks"
-            },
-            "quiz": {
-              "title": "Practice"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_read_build_and_write_a_conversation_sketch0": {
-              "title": "Try it yourself: Build the time question",
-              "prompt": "Right after the sketch \"Ask what time\", practice that exact idea with this task. Arrange the time question using the pattern from the lesson. Produce the result for build the time question so it reinforces Read, Build, and Write a Conversation."
-            },
-            "try_read_build_and_write_a_conversation_sketch1": {
-              "title": "Try it yourself: Build the quantity answer",
-              "prompt": "Right after the sketch \"Konbyen…?\", practice that exact idea with this task. Arrange the answer using the pattern from the lesson. Produce the result for build the quantity answer so it reinforces Read, Build, and Write a Conversation."
-            },
-            "try_read_build_and_write_a_conversation_sketch2": {
-              "title": "Try it yourself: Choose “every day”",
-              "prompt": "Right after the sketch \"jòdi a, kounyeya, chak jou\", practice that exact idea with this task. Which time expression in the lesson means **every day**? Produce the result for choose “every day” so it reinforces Read, Build, and Write a Conversation."
-            }
-          },
-          "practice": {
-            "read-build-and-write-a-conversation-choice": {
-              "title": "Choose the time question",
-              "prompt": "Which question asks what time someone works?",
-              "hint": "Choose the clock-time question from Module 7.",
+            "capstone-build": {
+              "title": "Build a complete current-action answer",
+              "prompt": "Build “I am studying Kreyòl now.”",
+              "hint": "Use M ap and finish with kounyeya.",
               "help": {
-                "concept": "A schedule conversation needs a question that asks for clock time.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "reusing the current-action pattern in the capstone",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "M ap etidye kreyòl kounyeya.",
+              "wordBank": [
+                "M",
+                "ap",
+                "etidye",
+                "kreyòl",
+                "kounyeya."
+              ]
+            },
+            "capstone-voice": {
+              "title": "Ask a quantity question",
+              "prompt": "Ask “How many notebooks does Mari have?”",
+              "hint": "Begin with Konbyen.",
+              "help": {
+                "concept": "producing a quantity question in context",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Konbyen kaye Mari genyen?"
+            },
+            "capstone-write": {
+              "title": "Write a schedule answer",
+              "prompt": "Write “I study Kreyòl every day.”",
+              "hint": "Finish with chak jou.",
+              "help": {
+                "concept": "writing a familiar routine inside the capstone",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "expectedText": "Mwen etidye kreyòl chak jou.",
+              "placeholder": "Type the Kreyòl sentence"
+            },
+            "try-capstone-role-transfer": {
+              "title": "Take Mari's place turn",
+              "prompt": "Say that you live in Miami and return the question.",
+              "hint": "Answer first, then use E ou menm?",
+              "help": {
+                "concept": "taking a role inside the sustained conversation",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Mwen rete Miami. E ou menm?"
+            },
+            "try-capstone-next-move": {
+              "title": "Choose what fits next",
+              "prompt": "Jan says “Mwen rete Chicago.” Mari wants to know whether he speaks Kreyòl.",
+              "hint": "Choose the yes/no language question.",
+              "help": {
+                "concept": "selecting the next conversational move",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
               "options": {
-                "a": "Akilè ou travay?",
-                "b": "Kijan ou rele?",
-                "c": "Ki moun sa a?"
+                "a": "Èske ou pale kreyòl?",
+                "b": "Ki kote ou rete?",
+                "c": "Mwen rete Boston."
               }
             },
-            "read-build-and-write-a-conversation-fill": {
-              "title": "Complete the quantity answer",
-              "prompt": "Choose the number that completes “I have three books.”",
-              "hint": "Use the number represented by 3.",
+            "try-capstone-hear-transfer": {
+              "title": "Hear a different schedule answer",
+              "prompt": "Listen and rebuild Mari's new time answer.",
+              "hint": "She studies at seven thirty in the evening.",
               "help": {
-                "concept": "The blank needs the number word before the noun.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "hearing a familiar schedule pattern in a new version",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "template": "Mwen gen [blank1] liv.",
-              "choices": [
-                "twa",
-                "de",
-                "kat"
-              ]
-            },
-            "read-build-and-write-a-conversation-listen": {
-              "title": "Hear a schedule answer",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the activity and frequency expression.",
-              "help": {
-                "concept": "Build the complete routine sentence in spoken order.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Mwen etidye kreyòl chak jou.",
+              "targetText": "Setè edmi. Mwen etidye kreyòl aswè.",
               "wordBank": [
+                "Setè",
+                "edmi.",
                 "Mwen",
                 "etidye",
                 "kreyòl",
-                "chak",
-                "jou."
-              ],
-              "distractors": [
-                "kounyeya"
+                "aswè."
               ]
-            },
-            "read-build-and-write-a-conversation-voice": {
-              "title": "Ask a quantity question",
-              "prompt": "Say: Konbyen liv ou genyen?",
-              "hint": "Say the complete quantity question.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Konbyen liv ou genyen?"
-            },
-            "read-build-and-write-a-conversation-build": {
-              "title": "Build the time answer",
-              "prompt": "Arrange the words to say 7:30.",
-              "hint": "Use the hour-plus-half pattern from Module 7.",
-              "help": {
-                "concept": "Build the complete half-hour clock expression.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "setè edmi",
-              "wordBank": [
-                "setè",
-                "edmi"
-              ],
-              "distractors": [
-                "senkè"
-              ],
-              "ttsText": "setè edmi"
-            },
-            "read-build-and-write-a-conversation-write": {
-              "title": "Write the everyday frequency",
-              "prompt": "Type the Kreyòl phrase for “every day.”",
-              "hint": "Use the routine expression from Module 7.",
-              "help": {
-                "concept": "Write the complete two-word frequency expression.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "expectedText": "chak jou",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-make-plan-question": {
-              "title": "Build the time question",
-              "prompt": "Arrange the time question using the pattern from the lesson.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "asking about a work time",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Akilè ou travay?",
-              "wordBank": [
-                "Akilè",
-                "ou",
-                "travay?"
-              ]
-            },
-            "try-make-plan-routine": {
-              "title": "Give the routine answer",
-              "prompt": "Say the complete routine answer using the pattern from the lesson.",
-              "hint": "Say: Wi, mwen etidye kreyòl chak jou.",
-              "help": {
-                "concept": "complete routine answer",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Wi, mwen etidye kreyòl chak jou."
-            },
-            "try-count-things-answer": {
-              "title": "Build the quantity answer",
-              "prompt": "Arrange the answer using the pattern from the lesson.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "quantity answer in conversation",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen gen twa liv.",
-              "wordBank": [
-                "Mwen",
-                "gen",
-                "twa",
-                "liv."
-              ]
-            },
-            "try-schedule-chunks-everyday": {
-              "title": "Choose “every day”",
-              "prompt": "Which time expression in the lesson means **every day**?",
-              "hint": "Choose the option that correctly applies the pattern.",
-              "help": {
-                "concept": "everyday time expressions",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "options": {
-                "a": "chak jou",
-                "b": "jòdi a",
-                "c": "kounyeya"
-              }
             }
           }
         }
@@ -47667,16 +48547,238 @@ const messages: Record<string, any> = {
         }
       }
     },
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "choose-a-and-la": {
+          "article-a": {
+            "title": "Use a with The vowel-ending pattern",
+            "bodyMarkdown": "Course 1 already taught you that the definite article follows the noun. Now choose the form. Use **a** when the noun ends in a non-nasal vowel sound:\n\n- **tifi a** — the girl\n- **flè a** — the flower\n\nListen to the end of the noun before choosing the article."
+          },
+          "article-la": {
+            "title": "Use la with The consonant-ending examples",
+            "bodyMarkdown": "Use **la** with these examples ending in a consonant:\n\n- **bèf la** — the cow\n- **chat la** — the cat\n- **kòb la** — the money\n\nDo not translate “the” first. Notice the end of the Kreyòl noun."
+          },
+          "a-vs-la": {
+            "title": "Let the noun ending guide the choice",
+            "bodyMarkdown": "Compare the two article patterns:\n\n- a follows examples ending in a non-nasal vowel.\n- la follows examples such as bèf, chat, and kòb.\n\nYou already know where the article goes. The new skill is choosing its form."
+          }
+        },
+        "choose-an-lan-and-nan": {
+          "article-an": {
+            "title": "Use an with The nasal patterns",
+            "bodyMarkdown": "Use **an** when the noun ends in a nasal vowel sound:\n\n- **pen an** — the bread\n- **chen an** — the dog\n- **bonbon an** — the cracker\n\nIt also lists **an** with final syllables ending in **mi, mou, ni,** or **nou**, such as **chimi an**, **lanmou an**, and **jenou an**."
+          },
+          "article-lan": {
+            "title": "Use lan with The nasal-plus-consonant pattern",
+            "bodyMarkdown": "Use **lan** when the noun ends in a nasal vowel followed by a consonant:\n\n- **lanp lan** — the lamp\n- **chanm lan** — the room\n\nYou can also encounter uncommon endings such as **iy** or **uit** with this form."
+          },
+          "article-nan": {
+            "title": "Use nan with The m, nn, èn, and òn patterns",
+            "bodyMarkdown": "Use **nan** with nouns ending in **m** or **nn**, and also with endings such as **èn** or **òn**. Examples include:\n\n- **marenn nan** — the godmother\n- **fim nan** — the film\n- **balèn nan** — the candle\n- **zòn nan** — the area\n- **lalin nan** — the moon\n\nYou may see **plim** paired with more than one article form, so this lesson does not use it for graded article choice."
+          }
+        },
+        "hear-and-use-definite-articles": {
+          "listen-ending": {
+            "title": "Hear the end of the noun",
+            "bodyMarkdown": "You already know the article follows the noun. In this course, pause on the noun ending before choosing among **a, la, an, lan,** and **nan**. The practice list gives mixed forms such as **radyo a**, **valiz la**, **televizyon an**, and **telefòn nan**."
+          },
+          "keep-known-order": {
+            "title": "Keep the noun first",
+            "bodyMarkdown": "Course 1 already established the word order: noun first, definite article after it. Do not relearn that rule here. Use the known order while concentrating on which article form fits the noun."
+          },
+          "mixed-confidence": {
+            "title": "Choose the form, not an English translation",
+            "bodyMarkdown": "The English word “the” stays the same, but Kreyòl changes the singular article form. Let the Kreyòl noun guide the choice. Practice switching forms without turning the activity into a vocabulary restart."
+          }
+        }
+      },
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "use-possessive-pronouns": {
+          "singular-possessive-map": {
+            "title": "Match each full singular form with its contracted form",
+            "bodyMarkdown": "In Kreyòl, possession can often be expressed with a full form or a shorter everyday form. Learn the singular pairs below:\n\n| Meaning | Full form | Contracted form |\n| --- | --- | --- |\n| mine | pa mwen an | pa m nan |\n| yours | pa ou a | pa w la |\n| his / hers / its | pa li a | pa l la |\n| ours | pa nou an | pa n nan |\n| yours | pa nou an | pa n nan |\n| theirs | pa yo a | no contracted form |\n\nThe pair **pa nou an / pa n nan** can mean both **ours** and plural **yours**. **Pa yo a** has no contracted partner in this set."
+          },
+          "singular-contracted-pairs": {
+            "title": "Practice each full and short form as a pair",
+            "bodyMarkdown": "Practice the full and short forms together:\n\n- **pa mwen an** → **pa m nan**\n- **pa ou a** → **pa w la**\n- **pa li a** → **pa l la**\n- **pa nou an** → **pa n nan**\n\nLearn these pairs as complete expressions. Focus on using them naturally rather than trying to build a broader contraction rule."
+          },
+          "plural-possessive-map": {
+            "title": "Use yo in the plural possessive forms",
+            "bodyMarkdown": "Now compare the plural possessive forms:\n\n| Meaning | Full form | Contracted form |\n| --- | --- | --- |\n| mine | pa mwen yo | pa m yo |\n| yours | pa ou yo | pa w yo |\n| his / hers / its | pa li yo | pa l yo |\n| ours | pa nou yo | pa n yo |\n| yours | pa nou yo | pa n yo |\n| theirs | pa yo | no contracted form |\n\nThe pair **pa nou yo / pa n yo** can mean both **ours** and plural **yours**. **Pa yo** has no contracted partner in this set."
+          }
+        },
+        "use-short-object-pronouns": {
+          "short-li": {
+            "title": "Use l for li in object position",
+            "bodyMarkdown": "A full object pronoun can also appear in a shorter everyday form. Compare:\n\n**Mwen renmen li** → **Mwen renmen l**\n\nThe person receiving the action is still **li**; in the short object form it becomes **l**."
+          },
+          "short-mwen-ou": {
+            "title": "Use m and w as short objects",
+            "bodyMarkdown": "Compare another pair:\n\n**Li renmen mwen** → **Li renmen m**\n\nFor **ou**, the corresponding short object form is **w**.\n\nThese are object forms: they follow the action in these examples."
+          },
+          "object-form-map": {
+            "title": "Connect each full pronoun with its short object form",
+            "bodyMarkdown": "Use these object-pronoun mappings:\n\n| Full form | Short object form |\n| --- | --- |\n| Mwen | m |\n| Ou | w |\n| Li | l |\n| Nou | n |\n| Yo | no contracted form shown |\n\n**Nou** uses the short form **n**. **Yo** does not have a contracted form in this set."
+          }
+        }
+      },
+      "haitian-creole-everyday-grammar-3-more-questions-and-health": {
+        "ask-for-more-specific-information": {
+          "kiles-which": {
+            "title": "Kilès?",
+            "bodyMarkdown": "Use **Kilès?** to ask **which?**\n\nFor example:\n\n**Kilès ladan yo?** — Which one of them?\n\nFocus on **Kilès** as the new question for choosing one from a group."
+          },
+          "kile-when": {
+            "title": "Kilè?",
+            "bodyMarkdown": "Use **Kilè?** to ask **when?**\n\nFor example:\n\n**Kilè ou prale?** — When will you go?\n\nUse this question when you want to ask when something will happen."
+          },
+          "poukisa-why": {
+            "title": "Poukisa?",
+            "bodyMarkdown": "Use **Poukisa?** to ask **why?**\n\nFor example:\n\n**Poukisa ou ap kriye?** — Why are you crying?\n\nThe reading section later uses the same form:\n\n**Poukisa Kintola pa ale lekòl jodia?**\n\nThis topic focuses on the new information questions that extend what you learned in Course 1."
+          }
+        },
+        "name-body-parts": {
+          "head-and-face": {
+            "title": "Tèt, Je, Zòrèy, Nen, Bouch",
+            "bodyMarkdown": "Start with these body-part words:\n\n- **Tèt** — Head\n- **Je** — Eye\n- **Zòrèy** — Ear\n- **Nen** — Nose\n- **Bouch** — Mouth\n\nLearn each Kreyòl word with its English meaning."
+          },
+          "upper-body": {
+            "title": "Kou, zepòl, Lestomak, Bra, Men",
+            "bodyMarkdown": "Add these body-part words:\n\n- **Kou** — Neck\n- **zepòl** — Shoulder\n- **Lestomak** — Chest\n- **Bra** — Arm\n- **Men** — Hand\n\nIn this course, learn **Lestomak** as **Chest**."
+          },
+          "abdomen-and-foot": {
+            "title": "vant and Pye",
+            "bodyMarkdown": "Finish with these two body-part words:\n\n- **vant** — Abdomen\n- **Pye** — Foot\n\nTogether with the earlier cards, these complete the 12 body-part words in this lesson."
+          }
+        },
+        "say-what-hurts": {
+          "vant-tet-kou": {
+            "title": "Vant fèmal, Tèt fèmal, Kou fèmal",
+            "bodyMarkdown": "Use **fèmal** with body words to talk about common aches:\n\n- **Vant fèmal** — Stomach ache\n- **Tèt fèmal** — Head ache\n- **Kou fèmal** — Neck ache\n\nKeep **fèmal** together as one word."
+          },
+          "dan-goj": {
+            "title": "Dan fèmal and Gòj fèmal",
+            "bodyMarkdown": "Add two more expressions:\n\n- **Dan fèmal** — tooth ache\n- **Gòj fèmal** — sorethroat\n\nHere, **Dan** and **Gòj** are learned inside complete illness expressions."
+          },
+          "kintola-reading": {
+            "title": "Why Kintola Does Not Go to School",
+            "bodyMarkdown": "Read this short passage:\n\n**Jodia Kintola pa ale lekòl, paske li gen tèt fèmal.**\n\nThen ask:\n\n**Poukisa Kintola pa ale lekòl jodia?**\n\nThe reason is already inside the reading:\n\n**paske li gen tèt fèmal**\n\nThis reuses **Poukisa** from the first topic of this module and adds no new question form."
+          }
+        }
+      },
+      "haitian-creole-everyday-grammar-4-past-and-future": {
+        "contrast-yesterday-today-and-tomorrow": {
+          "three-times": {
+            "title": "Yè, Jodia, Demen",
+            "bodyMarkdown": "Compare three useful time examples:\n\n- **Yè mwen te ale lekòl.**\n- **Jodia mwen manje pitza.**\n- **Demen mwen pral achte yon machin.**\n\nRead them as a timeline:\n\n**Yè → Jodia → Demen**\n\nThe past sentence uses **te**. The future sentence uses **pral**. The middle sentence is a simple present example."
+          },
+          "choose-time-marker": {
+            "title": "te for Past, pral for Future",
+            "bodyMarkdown": "Compare the time words with their sentences:\n\n- **Yè** goes with the past statement **mwen te ale lekòl**.\n- **Jodia** introduces the present statement **mwen manje pitza**.\n- **Demen** goes with the future statement **mwen pral achte yon machin**.\n\nChoose **te** or **pral** only when the time meaning requires it."
+          },
+          "build-three-time-sequence": {
+            "title": "Yesterday → Today → Tomorrow",
+            "bodyMarkdown": "Now keep the examples in time order:\n\n1. **Yè mwen te ale lekòl.**\n2. **Jodia mwen manje pitza.**\n3. **Demen mwen pral achte yon machin.**\n\nNo new marker is added here. The goal is to contrast the past, present, and future examples you already learned."
+          }
+        },
+        "use-pral-for-future-actions": {
+          "pral-before-verb": {
+            "title": "Subject + pral + verb",
+            "bodyMarkdown": "Use this future pattern:\n\n**Subject + pral + verb**\n\nFor example:\n\n**Mwen pral achte manje.**\n\nThe important new marker in this topic is **pral** before the action."
+          },
+          "demen-pral": {
+            "title": "Demen mwen pral achte yon machin",
+            "bodyMarkdown": "Here is a complete future example:\n\n**Demen mwen pral achte yon machin.**\n\n**Demen** supplies the tomorrow context, while **pral** appears before **achte**."
+          },
+          "pral-familiar-action": {
+            "title": "Mwen pral achte manje",
+            "bodyMarkdown": "Here is another future example:\n\n**Mwen pral achte manje.**\n\nAgain, **pral** comes before the action **achte**."
+          }
+        },
+        "use-te-for-past-actions": {
+          "te-before-verb": {
+            "title": "Subject + te + verb",
+            "bodyMarkdown": "To talk about a completed past action, place **te** before the verb.\n\nIts pattern is:\n\n**Subject + te + verb**\n\nFor example:\n\n**Mwen te manje.** — I ate.\n\nThe new part to notice in this topic is **te** before the familiar action."
+          },
+          "te-with-familiar-actions": {
+            "title": "Mwen te manje / Mwen te etidye",
+            "bodyMarkdown": "Compare these short past examples:\n\n- **Mwen te manje.** — I ate.\n- **Mwen te etidye.** — I studied.\n\nThe action words stay familiar; **te** is what places them in the past."
+          },
+          "ye-with-te": {
+            "title": "Yè mwen te ale lekòl",
+            "bodyMarkdown": "Here is a complete past example:\n\n**Yè mwen te ale lekòl.** — Yesterday I went to school.\n\n**Yè** supplies the past-time context, and **te** still appears before the action.\n\nYou may also see **Mwen te ale lekol.** without the accent in *lekòl*. This lesson preserves that spelling variation but does not grade the unaccented spelling."
+          }
+        }
+      },
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "describe-color-size-and-quality": {
+          "selected-colors": {
+            "title": "ble, nwa, wouj",
+            "bodyMarkdown": "Start with three useful colors:\n\n- **ble** — blue\n- **nwa** — black\n- **wouj** — red\n\nNow use one of them in a complete description: **Syèl la ble.** — The sky is blue.\n\nYou also saw **ansyen kay wouj la** — the old red house."
+          },
+          "selected-size": {
+            "title": "piti",
+            "bodyMarkdown": "Use **piti** for “small.” Compare it in two complete descriptions:\n\n- **Otèl la piti anpil.** — The hotel is very small.\n- **Tab la piti.** — The table is small.\n\nPractice these complete sentences before making new combinations."
+          },
+          "selected-qualities": {
+            "title": "bon, pwòp, trankil",
+            "bodyMarkdown": "Practice three useful qualities:\n\n- **bon** — good\n- **pwòp** — clean\n- **trankil** — quiet\n\nUse **bon** in the complete phrase **Se yon bon timoun.** — It's a good child.\n\n**Se** is already known; the new vocabulary focus here is **bon**."
+          }
+        },
+        "describe-without-to-be": {
+          "states-with-li": {
+            "title": "Li malad / Li okipe",
+            "bodyMarkdown": "With many states and descriptions, Kreyòl does not use a separate equivalent of English **to be**.\n\nFor example:\n\n- **Li malad.** — He is sick.\n- **Li mouri.** — She is dead.\n- **Li okipe.** — He is busy.\n- **Li prese.** — She is in a hurry.\n\nNotice the pattern: the subject is followed directly by the state description."
+          },
+          "states-with-m-and-nou": {
+            "title": "M fatige / Nou swaf",
+            "bodyMarkdown": "Here are a few more examples:\n\n- **M fatige.** — I’m tired.\n- **M sezi.** — I’m surprised.\n- **Nou pare?** — Are you ready?\n- **Nou swaf.** — We are thirsty.\n\nThese examples keep the same idea: the state follows the subject without adding a separate English-style **is / am / are** word."
+          },
+          "states-with-yo": {
+            "title": "Yo fache / Yo grangou",
+            "bodyMarkdown": "Here are two more state descriptions:\n\n- **Yo fache.** — They are angry.\n- **Yo grangou.** — They are hungry.\n\nAgain, the description comes directly after **Yo**."
+          }
+        },
+        "place-adjectives-in-phrases": {
+          "adjective-after-noun-examples": {
+            "title": "yon pye bwa vèt / yon bilding wo",
+            "bodyMarkdown": "Start with these adjective examples:\n\n- **yon pye bwa vèt** — a green tree\n- **yon bilding wo** — a tall building\n\nRather than translating word by word, notice where the describing word appears and keep the phrase in the same order."
+          },
+          "multiword-adjective-examples": {
+            "title": "yon vye gran moun gason",
+            "bodyMarkdown": "Here are a few more examples:\n\n- **yon vye gran moun gason** — a very old man\n- **ansyen kay wouj la** — the old red house\n\nThese examples are more complex. Keep each phrase together and notice its word order."
+          },
+          "ki-tre-adjective-example": {
+            "title": "yon zanmi ki trè janti",
+            "bodyMarkdown": "Here is one more example:\n\n- **yon zanmi ki trè janti** — a very nice friend\n\nThis phrase uses a longer pattern. Focus on recognizing it and reproducing the phrase in the same order."
+          }
+        },
+        "use-ye": {
+          "ye-at-end-of-questions": {
+            "title": "Kòman manman w ye?",
+            "bodyMarkdown": "Use **ye** at the end of several common question patterns.\n\nFor example:\n\n- **Kòman manman w ye?** — How is your mother?\n- **Ki bò liv la ye?** — Where is the book?\n\nThe question words are already familiar. Focus on **ye** at the end of each question."
+          },
+          "ye-with-who-what-time": {
+            "title": "Ki moun li ye?",
+            "bodyMarkdown": "Here are three more questions with **ye**:\n\n- **Ki moun li ye?** — Who is he?\n- **Ki sa sa a ye?** — What is that?\n- **Ki lè li ye?** — What time is it?\n\nKeep the familiar question words and notice how **ye** closes each complete question."
+          },
+          "ye-closes-a-statement": {
+            "title": "Se sa li ye.",
+            "bodyMarkdown": "You can also use **ye** to close this statement:\n\n- **Se sa li ye.** — That’s what it is / that’s the way it is.\n\nHere, **ye** still comes at the end."
+          }
+        }
+      }
+    },
     "haitian-creole-foundations": {
       "haitian-creole-foundations-1-sounds-of-kreyol": {
         "listen-and-say-first-sounds": {
           "listen-first": {
             "title": "Let the full word come before analysis",
-            "bodyMarkdown": "When a new language is unfamiliar, it is tempting to break every word into English-looking pieces. Instead, listen to the **whole Kreyòl word**, then connect it with the spelling you already saw.\n\nUse these anchors:\n\n- **bonjou**\n- **mèsi**\n- **wi**\n\nReplay when needed. The goal is recognition, not speed. In the practice, listen for one more short whole word and rebuild what you hear."
+            "bodyMarkdown": "When a new language is unfamiliar, it is tempting to break every word into English-looking pieces. Instead, listen to the **whole Kreyòl word**, then connect it with the spelling you already saw.\n\nUse these anchors:\n\n- **bonjou**\n- **mèsi**\n- **wi**\n\nReplay whenever you need to. Focus on recognizing the whole word first; speed will come later. Then listen for one more short word and rebuild what you hear."
           },
           "say-whole-word": {
             "title": "Use the written target as your speaking guide",
-            "bodyMarkdown": "For speaking practice, read the complete target once, then say it naturally. The activity compares the **speech transcript** with the authored Kreyòl target. It is not a phoneme-by-phoneme pronunciation score.\n\nKeep the word intact. For example, when you see **mèsi**, preserve the word as one unit instead of spelling it aloud letter by letter."
+            "bodyMarkdown": "Read the whole word once, listen to how it sounds, then say it naturally. Keep your attention on the complete word instead of trying to pronounce it one letter at a time.\n\nKeep the word intact. For example, when you see **mèsi**, preserve the word as one unit instead of spelling it aloud letter by letter."
           },
           "short-phrases": {
             "title": "Hear words together",
@@ -47694,13 +48796,13 @@ const messages: Record<string, any> = {
           },
           "nasal-patterns": {
             "title": "Notice an, en, and on",
-            "bodyMarkdown": "Kreyòl also uses common nasal vowel spellings such as **an**, **en**, and **on**. For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.\n\nExamples to notice:\n\n- **manman** — mother\n- **pen** — bread\n- **non** — no\n\nLater lessons can refine how these patterns behave in different words. In this first lesson, your job is simply to spot and preserve the spelling."
+            "bodyMarkdown": "Kreyòl also uses common nasal vowel spellings such as **an**, **en**, and **on**. For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.\n\nExamples to notice:\n\n- **manman** — mother\n- **pen** — bread\n- **non** — no\n\nLater lessons can refine how these patterns behave in different words. For now, just learn to spot these spellings and keep them when you write."
           }
         },
         "read-build-and-write-first-words": {
           "read-before-build": {
             "title": "Recognize the familiar pieces",
-            "bodyMarkdown": "Before arranging words, read each piece once. Look for the spellings you already know: **bonjou**, **mèsi**, **wi**, and the nasal patterns in words such as **manman**.\n\nThe word bank is not a translation puzzle. Your job is to rebuild a Kreyòl phrase while preserving the spelling and order of its parts."
+            "bodyMarkdown": "Before arranging words, read each piece once. Look for the spellings you already know: **bonjou**, **mèsi**, **wi**, and the nasal patterns in words such as **manman**.\n\nRead each piece, then put the Kreyòl phrase back together in the same order. Keep the spelling you already learned."
           },
           "write-accurately": {
             "title": "Small spelling details count",
@@ -47714,189 +48816,147 @@ const messages: Record<string, any> = {
         "use-sounds-in-a-mini-exchange": {
           "exchange-map": {
             "title": "Use familiar language in sequence",
-            "bodyMarkdown": "A conversation can begin with language you already recognize. For this first mini exchange, keep it deliberately small:\n\n**A:** Bonjou.\n\n**B:** Bonjou.\n\nThe purpose is not to learn a large greeting system yet. That comes in the next module. Here you are proving that familiar spelling and sound can survive inside a real turn-taking pattern."
+            "bodyMarkdown": "A conversation can begin with language you already recognize. For this first mini exchange, keep it deliberately small:\n\n**A:** Bonjou.\n\n**B:** Bonjou.\n\nFor now, keep the exchange simple. The point is to hear familiar words inside a real back-and-forth conversation."
           },
           "respond-with-known-words": {
             "title": "Reuse before adding more",
-            "bodyMarkdown": "Good beginner practice reuses known language. After hearing a familiar word, respond with a familiar word or phrase instead of reaching for new vocabulary.\n\nYou already have **bonjou**, **mèsi**, **wi**, and **non**. Use them accurately. The next module will expand these anchors into fuller social exchanges."
+            "bodyMarkdown": "A good way to build confidence is to reuse words you already know. After hearing a familiar word, respond with a familiar word or phrase instead of reaching for new vocabulary.\n\nYou already have **bonjou**, **mèsi**, **wi**, and **non**. Use them accurately. Next, you'll use these familiar words in fuller greetings and short exchanges."
           },
           "module-one-review": {
             "title": "Sound, spelling, and use belong together",
-            "bodyMarkdown": "Before leaving Module 1, check three habits:\n\n1. You notice spellings such as **è**, **ou**, **an**, **en**, and **on**.\n2. You can connect a few written Kreyòl words with what you hear and say.\n3. You preserve those spellings when you build or type a response.\n\nYou do not need perfect pronunciation or a large vocabulary yet. You need a dependable first map."
+            "bodyMarkdown": "Before you move on, check three habits:\n\n1. You notice spellings such as **è**, **ou**, **an**, **en**, and **on**.\n2. You can connect a few written Kreyòl words with what you hear and say.\n3. You preserve those spellings when you build or type a response.\n\nYou do not need perfect pronunciation or a large vocabulary yet. You need a dependable first map."
           }
         }
       },
       "haitian-creole-foundations-2-bonjou": {
         "greeting-scenario-and-review": {
-          "mini-dialogue": {
-            "title": "A short greeting exchange",
-            "bodyMarkdown": "Here is a complete beginner exchange:\n\n**A:** Bonjou!\n\n**B:** Bonjou!\n\n**A:** Kijan ou ye?\n\n**B:** Mwen byen, mèsi. E ou menm?\n\n**A:** Mwen byen tou.\n\nEvery line uses language from this module."
-          },
-          "close-conversation": {
-            "title": "Orevwa",
-            "bodyMarkdown": "**Orevwa** is a useful way to say goodbye.\n\nA complete beginner interaction can be very short: greet, ask how the person is, answer, and close politely."
+          "first-conversation": {
+            "title": "Jan and Mari say hello",
+            "bodyMarkdown": "**Jan:** Bonjou!\n\n**Mari:** Bonjou!\n\n**Jan:** Kijan ou ye?\n\n**Mari:** Mwen byen, mèsi. E ou menm?\n\n**Jan:** Mwen byen tou, mèsi.\n\n**Mari:** Orevwa!\n\n**Jan:** Orevwa!\n\nEach turn responds naturally to the one before it."
           },
           "conversation-flow": {
-            "title": "Think in small reusable chunks",
-            "bodyMarkdown": "You now have several reusable chunks:\n\n- **Bonjou!**\n- **Kijan ou ye?**\n- **Mwen byen, mèsi.**\n- **E ou menm?**\n- **Orevwa.**\n\nPractice the chunks in order until the exchange feels familiar."
+            "title": "One turn leads to the next",
+            "bodyMarkdown": "A useful first conversation can follow this flow:\n\n1. greet\n2. ask how the person is\n3. answer\n4. return the question\n5. close politely\n\nDo not memorize the lines as separate pieces. Listen for what the other person says, understand the turn, then respond naturally."
+          },
+          "take-your-turn": {
+            "title": "Change the words, keep the conversation",
+            "bodyMarkdown": "Listen to a second version.\n\nThe conversation structure is familiar, but some wording changes.\n\nListen for the flow of the conversation instead of memorizing one exact script."
           }
         },
         "learn-greetings-and-polite-basics": {
           "greetings-start": {
-            "title": "Use Bonjou and Bonswa",
-            "bodyMarkdown": "**Bonjou** is a common daytime greeting. **Bonswa** is used later in the day and in the evening.\n\nFor now, focus on recognizing and using the complete greeting:\n\n- **Bonjou.** — Hello / Good morning\n- **Bonswa.** — Good evening\n\nYou do not need a long sentence to greet someone politely."
+            "title": "Bonjou and Bonswa",
+            "bodyMarkdown": "Two useful greetings are:\n\n- **Bonjou!**\n- **Bonswa!**\n\nA greeting can stand alone or come before a person's name."
           },
-          "greet-a-person": {
-            "title": "A greeting can stand alone or come before a name",
-            "bodyMarkdown": "You can greet someone and then say the person's name:\n\n- **Bonjou, Mari.**\n- **Bonswa, Jan.**\n\nKeep the greeting first. The name simply tells us who is being greeted."
+          "polite-basics": {
+            "title": "Mèsi, Tanpri, and Padon",
+            "bodyMarkdown": "Three short expressions are useful immediately:\n\n- **Mèsi.** — thank you\n- **Tanpri.** — please\n- **Padon.** — excuse me / sorry\n\nListen to each as a complete spoken expression."
           },
-          "greeting-habit": {
-            "title": "Recognize the whole greeting",
-            "bodyMarkdown": "When you hear or read a greeting, recognize it as one useful expression. Do not translate letter by letter. Connect **Bonjou** and **Bonswa** directly with the social situation."
+          "close-politely": {
+            "title": "Orevwa",
+            "bodyMarkdown": "**Orevwa.** is a useful way to close a short interaction.\n\nEven a beginner conversation can already have a complete shape: greet, communicate, then close."
           }
         },
         "listen-and-say-hello": {
           "ask-how": {
             "title": "Kijan ou ye?",
-            "bodyMarkdown": "After greeting someone, a very useful question is:\n\n**Kijan ou ye?** — How are you?\n\nLearn the question as a complete expression. At this level, you do not need to analyze every word before using it."
+            "bodyMarkdown": "To ask how someone is, use:\n\n**Kijan ou ye?**\n\nListen to the question as one complete phrase."
           },
           "answer-how": {
             "title": "Mwen byen, mèsi.",
-            "bodyMarkdown": "A simple positive answer is:\n\n**Mwen byen, mèsi.** — I am well, thank you.\n\nThe important pieces are **mwen** for “I,” **byen** for “well,” and **mèsi** for “thank you.”"
+            "bodyMarkdown": "A simple complete answer is:\n\n**Mwen byen, mèsi.**\n\nA short answer is enough when it responds clearly."
           },
           "return-question": {
             "title": "E ou menm?",
-            "bodyMarkdown": "To return the question, say:\n\n**E ou menm?** — And you?\n\nThis turns a memorized greeting into a short two-way conversation."
-          }
-        },
-        "read-build-and-write-greetings": {
-          "thanks": {
-            "title": "Mèsi and Mèsi anpil",
-            "bodyMarkdown": "**Mèsi** means “thank you.” To make the thanks stronger, say **Mèsi anpil** — “thank you very much.”\n\nBoth are complete, useful expressions you can use immediately."
-          },
-          "please": {
-            "title": "Tanpri",
-            "bodyMarkdown": "**Tanpri** means “please.” It is useful when making a polite request.\n\nAt this stage, practice recognizing the word and placing it naturally with other short expressions."
-          },
-          "excuse": {
-            "title": "Padon",
-            "bodyMarkdown": "**Padon** can be used for “pardon” or “excuse me” in simple situations.\n\nThese small polite words matter because they make even very short conversations feel complete and respectful."
+            "bodyMarkdown": "After answering, return the question with:\n\n**E ou menm?** — And you?\n\nThis turns a one-way answer into a two-way conversation."
           }
         }
       },
       "haitian-creole-foundations-3-who-are-you": {
         "learn-names-and-introductions": {
-          "pronouns": {
-            "title": "Mwen, Ou, Li, Nou, Yo",
-            "bodyMarkdown": "Kreyòl uses a small set of personal pronouns:\n\n- **Mwen** — I / me\n- **Ou** — you\n- **Li** — he / she / it\n- **Nou** — we / you (plural)\n- **Yo** — they\n\nFor this module, focus first on **Mwen** and **Ou** because they are the forms you need for a simple introduction."
+          "ask-a-name": {
+            "title": "Kijan ou rele?",
+            "bodyMarkdown": "To ask someone's name, use:\n\n**Kijan ou rele?**\n\nLearn the question as one useful spoken chunk."
           },
-          "say-who": {
-            "title": "Mwen se…",
-            "bodyMarkdown": "Use **Mwen se…** to identify yourself:\n\n- **Mwen se Jan.** — I am Jan.\n- **Mwen se yon elèv.** — I am a student.\n\nThe pattern is short and useful. Learn it as a complete conversational chunk."
-          },
-          "say-name": {
+          "say-your-name": {
             "title": "M rele…",
-            "bodyMarkdown": "Another common way to introduce yourself is **M rele…** — “My name is…” / literally, “I am called…”.\n\n- **M rele Mari.**\n- **M rele Jan.**\n\nYou will practice both **Mwen se…** and **M rele…**."
-          }
-        },
-        "listen-and-introduce-yourself": {
-          "nationality": {
-            "title": "Mwen se ayisyen / ayisyèn",
-            "bodyMarkdown": "You can use **Mwen se…** with a nationality:\n\n- **Mwen se ayisyen.**\n- **Mwen se ayisyèn.**\n- **Li se ameriken.**\n\nAt this level, the goal is to recognize and use the identity pattern, not to memorize a long list of nationalities."
+            "bodyMarkdown": "A short natural answer is:\n\n**M rele Jan.** — My name is Jan.\n\nThe person's name changes; the pattern stays the same:\n\n**M rele + name**"
           },
-          "language": {
-            "title": "Mwen pale…",
-            "bodyMarkdown": "Use **Mwen pale…** to say what language you speak:\n\n- **Mwen pale kreyòl.**\n- **Mwen pale anglè.**\n\nThe same structure works with many language names. In the practice, keep the sentence pattern and change the language."
-          },
-          "combine": {
-            "title": "Identity + language",
-            "bodyMarkdown": "You can now give two simple facts about yourself:\n\n**Mwen se ayisyen. Mwen pale kreyòl.**\n\nKeeping the sentences short makes them easier to hear, say, and reuse."
+          "return-the-name-question": {
+            "title": "E ou menm?",
+            "bodyMarkdown": "You already know this useful phrase:\n\n**E ou menm?** — And you?\n\nNow it can return the name question too."
           }
         },
         "meet-someone-scenario-and-review": {
-          "intro-flow": {
-            "title": "Four useful pieces",
-            "bodyMarkdown": "A short introduction can combine four things:\n\n1. **M rele Ana.** — My name is Ana.\n2. **Mwen se ayisyèn.** — I am Haitian.\n3. **Mwen pale kreyòl.** — I speak Kreyòl.\n4. **Mwen rete Chicago.** — I live in Chicago.\n\nYou do not have to say everything every time. These are reusable pieces."
+          "full-introduction": {
+            "title": "Jan and Mari meet",
+            "bodyMarkdown": "**Jan:** Bonjou!\n\n**Mari:** Bonjou!\n\n**Jan:** Kijan ou ye?\n\n**Mari:** Mwen byen, mèsi. E ou menm?\n\n**Jan:** Mwen byen tou.\n\n**Jan:** Kijan ou rele?\n\n**Mari:** M rele Mari. E ou menm?\n\n**Jan:** M rele Jan.\n\n**Jan:** Ki kote ou rete?\n\n**Mari:** Mwen rete Boston. E ou menm?\n\n**Jan:** Mwen rete Chicago.\n\n**Mari:** Orevwa, Jan!\n\n**Jan:** Orevwa, Mari!\n\nNotice how the conversation grows naturally from greetings into names and where someone lives."
           },
-          "ask-back": {
-            "title": "Kijan ou rele? / Ki kote ou rete?",
-            "bodyMarkdown": "Two useful questions keep the introduction going:\n\n- **Kijan ou rele?** — What is your name?\n- **Ki kote ou rete?** — Where do you live?\n\nUse one question at a time and listen for the other person's short answer."
+          "conversation-map": {
+            "title": "Greeting → name → place",
+            "bodyMarkdown": "You can now connect three small conversation moves:\n\n1. greet and ask how someone is\n2. exchange names\n3. exchange where you live\n\nEach new question grows from language already understood."
           },
-          "mini-exchange": {
-            "title": "A short introduction exchange",
-            "bodyMarkdown": "**A:** Bonjou! Kijan ou rele?\n\n**B:** M rele Ana. E ou menm?\n\n**A:** M rele Jan. Ki kote ou rete?\n\n**B:** Mwen rete Chicago.\n\nThis combines Module 2 greetings with Module 3 identity language."
+          "second-version": {
+            "title": "Same people, slightly different wording",
+            "bodyMarkdown": "Listen again with a different greeting and a warmer answer.\n\nJan and Mari keep the same names, residences, and voices. Only the wording changes."
           }
         },
         "read-build-and-write-an-introduction": {
-          "ask-place": {
+          "ask-where": {
             "title": "Ki kote ou rete?",
-            "bodyMarkdown": "A useful introduction question is:\n\n**Ki kote ou rete?** — Where do you live?\n\nLearn the question as one complete chunk. You will hear the same structure again in later travel and everyday-life lessons."
+            "bodyMarkdown": "To ask where someone lives, use:\n\n**Ki kote ou rete?**\n\nTreat the question as one complete expression."
           },
-          "answer-place": {
+          "answer-where": {
             "title": "Mwen rete…",
-            "bodyMarkdown": "Answer with **Mwen rete…** followed by a place:\n\n- **Mwen rete Chicago.**\n\nThe place changes, but the sentence pattern stays stable. In the practice, keep the pattern and use a different city."
+            "bodyMarkdown": "Answer with:\n\n**Mwen rete Chicago.** — I live in Chicago.\n\nThe place can change while the sentence pattern stays stable."
           },
-          "third-person-place": {
-            "title": "Li rete…",
-            "bodyMarkdown": "Use **Li rete…** to say where another person lives:\n\n**Li rete Boston.**\n\nThis reuses the pronoun **Li** from the beginning of the module."
+          "residence-exchange": {
+            "title": "Jan and Mari talk about where they live",
+            "bodyMarkdown": "**Jan:** Ki kote ou rete?\n\n**Mari:** Mwen rete Boston. E ou menm?\n\n**Jan:** Mwen rete Chicago.\n\nThe familiar **E ou menm?** keeps the exchange moving."
           }
         }
       },
       "haitian-creole-foundations-4-talking-about-things": {
         "learn-everyday-things": {
-          "yon": {
-            "title": "Use yon before a noun",
-            "bodyMarkdown": "**yon** means “a” or “an” and comes before the noun:\n\n- **yon liv** — a book\n- **yon valiz** — a bag\n- **yon machin** — a car\n\nThis is the simplest way to introduce one unspecified thing."
+          "one-thing": {
+            "title": "Yon comes before the noun",
+            "bodyMarkdown": "**yon** means “a” or “an” and comes before the noun.\n\n- **yon liv** — a book\n- **yon kaye** — a notebook\n- **yon telefòn** — a phone\n\nFor now, focus on using the whole noun phrase naturally."
           },
-          "definite-after": {
-            "title": "The definite marker comes after the noun",
-            "bodyMarkdown": "Kreyòl places its singular definite marker **after** the noun:\n\n- **tifi a** — the girl\n- **chat la** — the cat\n- **pen an** — the bread\n\nThe exact form changes with the final sound of the noun. For now, notice the most important structural fact: the marker follows the noun."
+          "the-thing": {
+            "title": "The marker comes after the noun",
+            "bodyMarkdown": "In Kreyòl, the definite marker comes **after** the noun.\n\nHere are a few examples:\n\n- **liv la** — the book\n- **kaye a** — the notebook\n- **telefòn nan** — the phone\n\nYou do not need to learn the full article-selection rule yet. Read and say these noun phrases as complete chunks."
           },
-          "contrast": {
-            "title": "yon liv vs. liv la",
-            "bodyMarkdown": "Compare:\n\n- **yon liv** — a book\n- **liv la** — the book\n\nThe indefinite word comes before the noun; the definite marker comes after it."
-          }
-        },
-        "listen-and-name-things": {
-          "article-forms": {
-            "title": "a, la, an, lan, nan",
-            "bodyMarkdown": "Kreyòl uses several singular definite markers. The form depends on the final sound of the noun:\n\n- **tifi a**\n- **chat la**\n- **pen an**\n- **chanm lan**\n- **plim nan**\n\nDo not try to memorize every sound rule at once. Start by recognizing the correct form in familiar examples."
-          },
-          "plural-yo": {
-            "title": "Use yo after the noun",
-            "bodyMarkdown": "For definite plurals, use **yo** after the noun:\n\n- **tifi yo** — the girls\n- **chen yo** — the dogs\n- **liv yo** — the books\n\nThe plural pattern is much more regular than the singular forms."
-          },
-          "switch-number": {
-            "title": "Notice what changes",
-            "bodyMarkdown": "Compare:\n\n- **liv la** — the book\n- **liv yo** — the books\n\nThe noun stays in place. The marker after the noun tells you whether the phrase is singular or plural."
+          "more-than-one": {
+            "title": "Plural yo comes after the noun",
+            "bodyMarkdown": "For plural definite noun phrases, use **yo** after the noun.\n\n- **liv yo** — the books\n- **kaye yo** — the notebooks\n\nThe same **yo** works across these plural noun phrases."
           }
         },
         "read-build-and-write-about-things": {
           "possessor-after": {
-            "title": "Put the owner after the thing",
-            "bodyMarkdown": "In a simple possessive noun phrase, the possessor comes after the thing:\n\n- **machin mwen** — my car\n- **kaye ou** — your notebook\n- **fanmi li** — his/her family\n\nThe same personal forms from Module 3 now show ownership."
-          },
-          "with-definite": {
-            "title": "machin mwen an",
-            "bodyMarkdown": "When the phrase is definite, the definite marker still comes at the end:\n\n**machin mwen an** — my car / the car that is mine\n\nThe pattern is: **thing + possessor + definite marker**."
+            "title": "Machin mwen, kaye ou",
+            "bodyMarkdown": "To show possession, the possessor follows the thing.\n\n- **machin mwen** — my car\n- **kaye ou** — your notebook\n- **valiz mesye Jan** — Mr. Jean's bag\n\nNotice the order: **thing + possessor**."
           },
           "se-pou": {
-            "title": "Sa se pou mwen",
-            "bodyMarkdown": "You can also express ownership with **se pou**:\n\n- **Sa se pou mwen.** — This/that is mine / for me.\n- **Liv la se pou li.** — The book is his/hers.\n\nThis pattern is useful when identifying who an object belongs to."
+            "title": "Se pou…",
+            "bodyMarkdown": "Here is another useful way to show who something belongs to with **se pou**.\n\n- **Machin nan se pou mwen.** — The car is mine.\n- **Manje a se pou Jan.** — The food is Jan's.\n- **Sa se pou yo.** — This/these belong to them.\n\nUse **se pou + person** to identify the owner."
+          },
+          "owner-with-number": {
+            "title": "Possession with singular and plural things",
+            "bodyMarkdown": "The owner still follows the thing when the noun phrase is singular or plural.\n\n- **valiz mwen an** — my bag\n- **liv li yo** — his/her books\n- **kaye ou yo** — your notebooks\n\nKeep the object first and the possessor after it."
           }
         },
         "what-is-this-scenario-and-review": {
-          "sa-a": {
-            "title": "sa a — this / that",
-            "bodyMarkdown": "Use **sa a** after a noun to point out one thing:\n\n- **valiz sa a** — this/that bag\n- **machin sa a** — this/that car\n\nThe demonstrative follows the noun."
+          "this-that": {
+            "title": "sa a",
+            "bodyMarkdown": "Use **sa a** after a noun for “this” or “that.”\n\nFor example:\n\n**machin sa a** — this car / that car\n\nThe demonstrative comes after the noun."
           },
-          "sa-yo": {
-            "title": "sa yo — these / those",
-            "bodyMarkdown": "For more than one thing, use **sa yo**:\n\n- **kaye sa yo** — these/those notebooks\n- **liv sa yo** — these/those books\n\nThe final **yo** marks the plural."
+          "these-those": {
+            "title": "sa yo",
+            "bodyMarkdown": "Use **sa yo** after a noun for “these” or “those.”\n\nFor example:\n\n**machin sa yo** — these cars / those cars\n\nHomework examples also combine this pattern with ownership."
           },
-          "demonstrative-owner": {
-            "title": "Valiz sa a se pou Mari",
-            "bodyMarkdown": "Combine the demonstrative with **se pou**:\n\n- **Valiz sa a se pou Mari.** — This/that bag is Mari's.\n- **Kaye sa yo se pou nou.** — These/those notebooks are ours.\n\nThis is a practical way to talk about objects around you."
+          "object-exchange": {
+            "title": "Jan and Mari sort their things",
+            "bodyMarkdown": "**Jan:** Mari, liv sa a se pou ou.\n\n**Mari:** Mèsi, Jan. Kaye sa yo se pou ou.\n\n**Jan:** Mèsi.\n\nThis combines demonstratives, possession, and familiar polite language without adding a new question pattern."
           }
         }
       },
@@ -47904,231 +48964,179 @@ const messages: Record<string, any> = {
         "learn-common-actions": {
           "actions": {
             "title": "manje, bwè, travay, etidye, ale",
-            "bodyMarkdown": "Start with a few useful action words:\n\n- **manje** — eat\n- **bwè** — drink\n- **travay** — work\n- **etidye** — study\n- **ale** — go\n\nThese verbs will appear again in later modules, so learn them as reusable building blocks."
+            "bodyMarkdown": "Start with a few useful action words:\n\n- **manje** — eat\n- **bwè** — drink\n- **travay** — work\n- **etidye** — study\n- **ale** — go\n\nThese are reusable building blocks for everyday sentences."
           },
           "subject-action": {
-            "title": "Mwen manje",
-            "bodyMarkdown": "A simple beginner sentence can be just a subject plus an action:\n\n- **Mwen manje.** — I eat.\n- **Ou manje anpil.** — You eat a lot.\n- **Li travay.** — He/she works.\n\nThe verb does not change its spelling for different people."
+            "title": "Subject + action",
+            "bodyMarkdown": "For a simple present statement, put the subject before the action:\n\n- **Mwen manje.** — I eat.\n- **Ou travay.** — You work.\n- **Li etidye.** — He/she studies.\n\nThe action word itself does not change for each person."
           },
-          "reuse-pronouns": {
-            "title": "Pronouns + action",
-            "bodyMarkdown": "The pronouns from Module 3 work directly with action words:\n\n- **Mwen etidye.**\n- **Ou travay.**\n- **Li manje.**\n- **Nou ale.**\n- **Yo bwè.**\n\nThis makes it easy to build many new sentences from a small vocabulary."
+          "routine-language": {
+            "title": "chak jou",
+            "bodyMarkdown": "**chak jou** means “every day.”\n\nWith routine language, the basic subject + action pattern still works:\n\n- **Jan travay chak jou.** — Jan works every day.\n- **Mari etidye chak jou.** — Mari studies every day.\n\nThe time expression tells you that this is a routine."
           }
         },
         "listen-and-say-what-is-happening": {
           "ap-now": {
-            "title": "M ap etidye",
-            "bodyMarkdown": "Use **ap** before an action to describe something in progress:\n\n- **M ap etidye.** — I am studying.\n- **Li ap travay.** — He/she is working.\n- **Yo ap manje.** — They are eating.\n\nThe important beginner pattern is: **person + ap + action**."
+            "title": "person + ap + action",
+            "bodyMarkdown": "Use **ap** before an action to describe something in progress:\n\n- **M ap etidye.** — I am studying.\n- **Li ap travay.** — He/she is working.\n- **Yo ap manje.** — They are eating.\n\nFocus on the pattern: **person + ap + action**."
           },
           "common-short-forms": {
             "title": "M ap, W ap, L ap, N ap, Y ap",
-            "bodyMarkdown": "In normal Kreyòl, subject pronouns often appear in shortened forms before **ap**:\n\n- **M ap** — I am...\n- **W ap** — you are...\n- **L ap** — he/she is...\n- **N ap** — we are...\n- **Y ap** — they are...\n\nYou will see both full and shortened subject forms as you continue."
+            "bodyMarkdown": "In ordinary Kreyòl, subject pronouns can appear in shortened forms before **ap**:\n\n- **M ap**\n- **W ap**\n- **L ap**\n- **N ap**\n- **Y ap**\n\nYou will also continue to see full forms such as **li ap** and **yo ap**. The meaning comes from the same current-action pattern."
           },
           "kounyeya": {
             "title": "kounyeya",
-            "bodyMarkdown": "**kounyeya** means “now.” You can add it when the time matters:\n\n**Jan ap travay kounyeya.** — Jan is working now.\n\nThe sentence still uses the same **ap + action** pattern."
-          }
-        },
-        "read-build-and-write-actions": {
-          "ask-doing": {
-            "title": "Kisa ou ap fè?",
-            "bodyMarkdown": "To ask what someone is doing, use:\n\n**Kisa ou ap fè?** — What are you doing?\n\nLearn it as a complete question. It will become one of your most useful everyday patterns."
-          },
-          "answer-doing": {
-            "title": "M ap travay",
-            "bodyMarkdown": "Answer with the current-action pattern:\n\n- **M ap travay.** — I am working.\n- **M ap etidye.** — I am studying.\n- **M ap manje.** — I am eating.\n\nChange only the action word to say what you are doing."
-          },
-          "ask-third-person": {
-            "title": "Kisa li ap fè?",
-            "bodyMarkdown": "Change the person to ask about someone else:\n\n**Kisa li ap fè?** — What is he/she doing?\n\nA possible answer is **Li ap travay.**"
+            "bodyMarkdown": "**kounyeya** means “now.” Add it when the time matters:\n\n**Jan ap travay kounyeya.** — Jan is working now.\n\nThe sentence still uses the same **ap + action** pattern."
           }
         },
         "what-are-you-doing-scenario": {
-          "short-exchange": {
-            "title": "What are you doing?",
-            "bodyMarkdown": "**A:** Kisa ou ap fè?\n\n**B:** M ap etidye kreyòl.\n\n**A:** E Jan?\n\n**B:** Jan ap travay kounyeya.\n\nThis exchange reuses the same current-action pattern with different people and actions."
+          "ask-doing": {
+            "title": "Kisa ou ap fè?",
+            "bodyMarkdown": "To ask what someone is doing, use:\n\n**Kisa ou ap fè?** — What are you doing?\n\nTreat this as one useful everyday question."
           },
-          "routine-language": {
-            "title": "chak jou",
-            "bodyMarkdown": "**chak jou** means “every day.” It is useful when talking about routines:\n\n- **Mwen travay chak jou.**\n- **Mwen etidye kreyòl chak jou.**\n\nFor this beginner module, notice the difference between a routine expression and a sentence about what is happening now."
+          "action-conversation": {
+            "title": "Jan and Mari talk about what they are doing",
+            "bodyMarkdown": "**Jan:** Mari, kisa ou ap fè?\n\n**Mari:** M ap etidye kreyòl. E ou menm?\n\n**Jan:** M ap travay kounyeya.\n\nThe question and answer use the same **ap + action** pattern."
           },
           "now-vs-routine": {
             "title": "kounyeya vs. chak jou",
-            "bodyMarkdown": "Compare these time expressions:\n\n- **Jan ap travay kounyeya.** — Jan is working now.\n- **Jan travay chak jou.** — Jan works every day.\n\nThe time expression helps make the meaning clear."
+            "bodyMarkdown": "Compare:\n\n- **Jan ap travay kounyeya.** — Jan is working now.\n- **Jan travay chak jou.** — Jan works every day.\n\n**ap** helps mark the action in progress. **chak jou** makes the routine explicit."
           }
         }
       },
       "haitian-creole-foundations-6-questions-and-answers": {
         "learn-core-question-patterns": {
-          "eske": {
+          "eske-question": {
             "title": "Èske…?",
-            "bodyMarkdown": "A clear beginner way to form a yes/no question is to begin with **Èske**:\n\n- **Èske ou pale kreyòl?** — Do you speak Kreyòl?\n- **Èske li travay?** — Does he/she work?\n- **Èske ou rete Chicago?** — Do you live in Chicago?\n\nFor now, treat **Èske** as a useful question starter."
+            "bodyMarkdown": "Use **Èske** when the answer can be yes or no.\n\nStart with a familiar statement:\n\n**Ou pale kreyòl.** — You speak Kreyòl.\n\nAdd **Èske**:\n\n**Èske ou pale kreyòl?** — Do you speak Kreyòl?\n\nThe familiar statement order stays after **Èske**."
           },
           "wi-non": {
             "title": "Wi / Non",
-            "bodyMarkdown": "You can answer a yes/no question with **Wi** or **Non**:\n\n- **Wi.** — Yes.\n- **Non.** — No.\n\nWhen you can, give a complete answer too:\n\n**Wi, mwen pale kreyòl.**"
+            "bodyMarkdown": "A short answer can begin with **Wi** or **Non**.\n\nFor stronger beginner communication, follow it with the useful information:\n\n- **Wi, mwen pale kreyòl.**\n- **Non, mwen pa pale kreyòl.**\n\nFor now, focus on recognizing both the short response and the complete response."
           },
-          "complete-answer": {
-            "title": "Repeat the useful information",
-            "bodyMarkdown": "A complete answer gives more useful practice:\n\n**Èske ou pale kreyòl?**\n\n**Wi, mwen pale kreyòl.**\n\nThis mirrors the source exercises that ask learners to answer with complete sentences."
-          }
-        },
-        "listen-ask-and-answer": {
-          "kijan": {
-            "title": "Kijan…?",
-            "bodyMarkdown": "**Kijan** is used in several common beginner questions:\n\n- **Kijan ou ye?** — How are you?\n- **Kijan ou rele?** — What is your name? / How are you called?\n\nThese are best learned as complete expressions."
-          },
-          "kisa": {
-            "title": "Kisa…?",
-            "bodyMarkdown": "**Kisa** asks “what”:\n\n- **Kisa ou ap fè?** — What are you doing?\n- **Kisa sa vle di?** — What does that mean?\n\nThe rest of the sentence tells you what kind of information is being requested."
-          },
-          "answer-known": {
-            "title": "Reuse earlier modules",
-            "bodyMarkdown": "You already know how to answer many of these questions:\n\n- **Kijan ou ye?** — **Mwen byen, mèsi.**\n- **Kijan ou rele?** — **M rele Ana.**\n- **Kisa ou ap fè?** — **M ap etidye.**"
+          "yes-no-exchange": {
+            "title": "Question → complete answer",
+            "bodyMarkdown": "**Jan:** Èske ou etidye kreyòl?\n\n**Mari:** Wi, mwen etidye kreyòl.\n\nA complete answer helps the conversation carry useful information instead of stopping at only **Wi**."
           }
         },
         "question-chain-scenario-and-review": {
           "mixed-dialogue": {
-            "title": "A short question exchange",
-            "bodyMarkdown": "**A:** Bonjou! Kijan ou rele?\n\n**B:** M rele Ana.\n\n**A:** Ki kote ou rete?\n\n**B:** Mwen rete Chicago.\n\n**A:** Èske ou pale kreyòl?\n\n**B:** Wi, mwen pale kreyòl.\n\nThis exchange reuses language from Modules 2–6."
+            "title": "Jan and Mari keep talking",
+            "bodyMarkdown": "**Jan:** Bonjou, Mari!\n\n**Mari:** Bonjou, Jan!\n\n**Jan:** Kijan ou ye?\n\n**Mari:** Mwen byen, mèsi. E ou menm?\n\n**Jan:** Mwen byen tou.\n\n**Jan:** Èske ou pale kreyòl?\n\n**Mari:** Wi, mwen pale kreyòl.\n\n**Jan:** Ki kote ou rete?\n\n**Mari:** Mwen rete Boston. E ou menm?\n\n**Jan:** Mwen rete Chicago.\n\n**Mari:** Kisa ou ap fè kounyeya?\n\n**Jan:** M ap travay kounyeya.\n\nDifferent questions ask for different kinds of information."
           },
-          "complete-sentences": {
-            "title": "Answer with a complete thought",
-            "bodyMarkdown": "The source materials often ask learners to answer with a complete sentence. That is useful practice because it forces you to reuse the grammar inside the question.\n\nFor example:\n\n**Ki kote ou rete?** → **Mwen rete Chicago.**"
+          "complete-answers": {
+            "title": "Give the useful information",
+            "bodyMarkdown": "A complete answer makes a conversation easier to follow.\n\nCompare:\n\n- **Wi.**\n- **Wi, mwen pale kreyòl.**\n\nOr:\n\n- **Chicago.**\n- **Mwen rete Chicago.**\n\nShort answers can be natural, but complete beginner answers help you practice reusable sentence patterns."
           },
-          "choose-question": {
-            "title": "Match the information you need",
-            "bodyMarkdown": "Use the question form that matches your goal:\n\n- yes/no → **Èske…?**\n- how/name → **Kijan…?**\n- what → **Kisa…?**\n- where → **Ki kote…?**\n- who → **Ki moun…?**\n- how many → **Konbyen…?**"
+          "second-question-chain": {
+            "title": "Same question system, different order",
+            "bodyMarkdown": "A real conversation does not follow one fixed script.\n\nListen as Mari starts with an **Èske** question and then moves to **Ki kote**.\n\nChoose the question that matches the information you want."
           }
         },
         "read-build-and-write-questions": {
-          "ki-kote": {
-            "title": "Ki kote…?",
-            "bodyMarkdown": "Use **Ki kote** to ask about a place:\n\n- **Ki kote ou rete?** — Where do you live?\n- **Ki kote li ye?** — Where is it/he/she?\n\nYou may also encounter **Kote** or **Kibò** in real Kreyòl, but this course uses **Ki kote** as the main beginner form."
+          "kijan-kisa": {
+            "title": "Kijan…? / Kisa…?",
+            "bodyMarkdown": "You already know useful questions with **Kijan** and **Kisa**:\n\n- **Kijan ou ye?** — How are you?\n- **Kijan ou rele?** — What is your name?\n- **Kisa sa ye?** — What is this/that?\n- **Kisa ou ap fè?** — What are you doing?\n\nListen to the whole question, not only the first word."
           },
-          "ki-moun": {
-            "title": "Ki moun…?",
-            "bodyMarkdown": "Use **Ki moun** when you want to know which person:\n\n**Ki moun sa a?** — Who is this/that person?\n\nThe answer can be a name or a short identity sentence."
+          "ki-kote-ki-moun": {
+            "title": "Ki kote…? / Ki moun…?",
+            "bodyMarkdown": "Use a place question when you need a location:\n\n**Ki kote ou rete?** — Where do you live?\n\nUse **Ki moun** when you need to identify a person:\n\n**Ki moun sa a?** — Who is this/that person?\n\nThe information you need determines the question."
           },
           "konbyen": {
             "title": "Konbyen…?",
-            "bodyMarkdown": "Use **Konbyen** to ask about quantity:\n\n- **Konbyen liv ou genyen?** — How many books do you have?\n- **Konbyen malèt nou genyen?** — How many suitcases do we have?\n\nYou will study numbers more deeply in the next module."
+            "bodyMarkdown": "Use **Konbyen** when the missing information is a number or amount.\n\n- **Konbyen liv ou genyen?** — How many books do you have?\n- **Konbyen kaye Mari genyen?** — How many notebooks does Mari have?\n\nFor now, focus on recognizing that **Konbyen** asks about a number or amount."
           }
         }
       },
       "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
         "everyday-plans-scenario-and-review": {
-          "schedule": {
-            "title": "Time + action",
-            "bodyMarkdown": "You can now understand a simple schedule:\n\n- **Lendi maten, mwen etidye kreyòl.**\n- **Setè edmi, mwen travay.**\n- **Aswè, mwen li.**\n\nThe goal is not advanced tense. It is to connect familiar actions with useful time expressions."
+          "everyday-time-words": {
+            "title": "maten, aswè, jòdi a, kounyeya",
+            "bodyMarkdown": "Useful everyday time expressions include:\n\n- **maten** — morning\n- **aswè** — evening\n- **jòdi a** — today\n- **kounyeya** — now\n\nYou already know **kounyeya** from current actions. Now connect these words with a wider everyday schedule."
           },
-          "ask-schedule": {
-            "title": "Akilè…?",
-            "bodyMarkdown": "Ask about the time of an activity:\n\n**Akilè ou travay?** — What time do you work?\n\nA simple answer can be:\n\n**Setè edmi.**"
+          "tomorrow-and-routine": {
+            "title": "denmen maten and chak jou",
+            "bodyMarkdown": "Two more useful everyday expressions are:\n\n- **denmen maten** — tomorrow morning\n- **chak jou** — every day\n\nAt this level, treat them as useful time chunks. You do not need advanced future or scheduling grammar."
           },
-          "everyday-life": {
-            "title": "Numbers + time + routines",
-            "bodyMarkdown": "This module gives you the tools to understand small pieces of everyday life:\n\n- quantities: **de liv**\n- clock time: **senkè**\n- day parts: **maten**, **aswè**\n- frequency: **chak jou**\n- current time: **kounyeya**\n\nThese pieces will support longer conversations in later courses."
+          "schedule-conversation": {
+            "title": "Jan and Mari compare schedules",
+            "bodyMarkdown": "**Jan:** Mari, akilè ou etidye kreyòl?\n\n**Mari:** Senkè. Mwen etidye kreyòl aswè. E ou menm?\n\n**Jan:** Mwen etidye kreyòl lendi maten.\n\n**Mari:** Èske ou travay chak jou?\n\n**Jan:** Wi, mwen travay chak jou.\n\nThis combines familiar questions, routines, and time without adding advanced tense grammar."
+          },
+          "schedule-now-review": {
+            "title": "schedule vs. kounyeya",
+            "bodyMarkdown": "Listen to one more exchange.\n\nJan gives a clock time for his routine, then answers what he is doing **kounyeya**.\n\nNotice how familiar action and time phrases work together in the same exchange."
           }
         },
         "learn-numbers-and-time-basics": {
           "one-ten": {
             "title": "youn, de, twa…",
-            "bodyMarkdown": "Start with the first ten numbers:\n\n1 **youn** · 2 **de** · 3 **twa** · 4 **kat** · 5 **senk**\n\n6 **sis** · 7 **sèt** · 8 **wit** · 9 **nèf** · 10 **dis**\n\nSay them aloud in small groups rather than trying to memorize the whole list at once."
+            "bodyMarkdown": "Start with the first ten numbers:\n\n1 **youn** · 2 **de** · 3 **twa** · 4 **kat** · 5 **senk**\n\n6 **sis** · 7 **sèt** · 8 **wit** · 9 **nèf** · 10 **dis**\n\nHear them in small groups and reuse them with words you already know."
           },
           "eleven-twenty": {
             "title": "onz through ven",
-            "bodyMarkdown": "Continue from eleven to twenty:\n\n11 **onz** · 12 **douz** · 13 **trèz** · 14 **katòz** · 15 **kenz**\n\n16 **sèz** · 17 **disèt** · 18 **dizwit** · 19 **diznèf** · 20 **ven**."
+            "bodyMarkdown": "Continue from eleven to twenty:\n\n11 **onz** · 12 **douz** · 13 **trèz** · 14 **katòz** · 15 **kenz**\n\n16 **sèz** · 17 **disèt** · 18 **dizwit** · 19 **diznèf** · 20 **ven**\n\nFocus on recognizing and saying the numbers naturally; you are not doing arithmetic."
           },
-          "use-numbers": {
-            "title": "de liv, twa valiz",
-            "bodyMarkdown": "Numbers can go directly before a noun:\n\n- **de liv** — two books\n- **twa valiz** — three bags\n- **senk kaye** — five notebooks\n\nThis prepares you for quantities, time, prices, and everyday counting."
+          "number-plus-noun": {
+            "title": "number + noun",
+            "bodyMarkdown": "Numbers can go directly before a noun:\n\n- **de liv** — two books\n- **twa valiz** — three bags\n- **senk kaye** — five notebooks\n\nThis connects the numbers to useful everyday quantities."
           }
         },
         "listen-for-numbers-and-time": {
           "clock-hour": {
             "title": "inè, twazè, senkè",
-            "bodyMarkdown": "Kreyòl clock-time expressions commonly attach **è** to the number:\n\n- **inè** — one o'clock\n- **twazè** — three o'clock\n- **senkè** — five o'clock\n\nThe source material also notes that **inè** can mean “one hour” or “one o'clock” depending on context."
+            "bodyMarkdown": "Learn common clock-time expressions as whole phrases:\n\n- **inè** — one o'clock\n- **twazè** — three o'clock\n- **senkè** — five o'clock\n\n**inè** can mean one hour or one o'clock depending on the context."
           },
           "half-past": {
             "title": "edmi",
-            "bodyMarkdown": "Use **edmi** for “half” in a clock-time expression:\n\n- **twazè edmi** — 3:30\n- **setè edmi** — 7:30\n\nLearn the whole expression as one time phrase."
+            "bodyMarkdown": "Use **edmi** for half past:\n\n- **twazè edmi** — 3:30\n- **setè edmi** — 7:30\n\nLearn each as one spoken time expression."
           },
           "ask-time": {
             "title": "Akilè…?",
-            "bodyMarkdown": "**Akilè…?** asks what time something happens:\n\n- **Akilè nou pati?** — What time do we leave?\n\nA short answer can simply be a time expression such as **senkè**."
-          }
-        },
-        "read-build-and-write-everyday-details": {
-          "day-parts": {
-            "title": "maten and aswè",
-            "bodyMarkdown": "Two useful everyday time words are:\n\n- **maten** — morning\n- **aswè** — evening\n\nThe source materials use expressions such as **Lendi maten** and questions about what people eat **aswè**."
-          },
-          "today-now": {
-            "title": "jòdi a and kounyeya",
-            "bodyMarkdown": "Use:\n\n- **jòdi a** — today\n- **kounyeya** — now\n\nYou have already seen **kounyeya** with actions happening now. **Jòdi a** places something in the current day."
-          },
-          "tomorrow-routine": {
-            "title": "denmen maten and chak jou",
-            "bodyMarkdown": "Useful everyday expressions include:\n\n- **denmen maten** — tomorrow morning\n- **chak jou** — every day\n\nThese phrases help you talk about a simple schedule without needing advanced tense grammar."
+            "bodyMarkdown": "**Akilè…?** asks what time an activity happens.\n\nFor example:\n\n**Akilè nou pati?** — What time do we leave?\n\nA short answer can simply be a time expression such as **senkè**."
           }
         }
       },
       "haitian-creole-foundations-8-my-first-kreyol-conversation": {
         "learn-the-conversation-map": {
           "meet-someone": {
-            "title": "Start with what you already know",
-            "bodyMarkdown": "A first conversation can stay simple:\n\n**A:** Bonjou! Kijan ou ye?\n\n**B:** Mwen byen, mèsi. E ou menm?\n\n**A:** Mwen byen tou. Kijan ou rele?\n\n**B:** M rele Ana.\n\nEvery line comes from earlier modules."
+            "title": "Greeting → condition → name",
+            "bodyMarkdown": "A first conversation can begin with language you already know:\n\n**Jan:** Bonjou!\n\n**Mari:** Bonjou!\n\n**Jan:** Kijan ou ye?\n\n**Mari:** Mwen byen, mèsi. E ou menm?\n\n**Jan:** Mwen byen tou.\n\nAfter the greeting, the conversation can move to names and other information."
           },
-          "identity-place": {
-            "title": "Language and residence",
-            "bodyMarkdown": "Continue with information you can already express:\n\n**A:** Èske ou pale kreyòl?\n\n**B:** Wi, mwen pale kreyòl.\n\n**A:** Ki kote ou rete?\n\n**B:** Mwen rete Chicago.\n\nShort complete answers are enough."
+          "identity-place-language": {
+            "title": "Name → place → language",
+            "bodyMarkdown": "A conversation can continue by exchanging simple personal information:\n\n**Jan:** Ki kote ou rete?\n\n**Mari:** Mwen rete Boston. E ou menm?\n\n**Jan:** Mwen rete Chicago.\n\n**Mari:** Èske ou pale kreyòl?\n\n**Jan:** Wi, mwen pale kreyòl.\n\nThese are familiar patterns from earlier modules."
           },
-          "keep-simple": {
-            "title": "Simple Kreyòl is useful Kreyòl",
-            "bodyMarkdown": "A successful beginner conversation does not need advanced grammar. Use short patterns you control well: greet, ask one question, listen, answer, and ask a natural follow-up."
+          "everyday-information": {
+            "title": "Action → quantity → time",
+            "bodyMarkdown": "Later in the conversation, you can ask for other familiar information:\n\n- what someone is doing\n- how many things someone has\n- what time an activity happens\n\nYou do not need to use every question in every conversation. Choose what fits the moment."
           }
         },
         "listen-and-speak-through-a-conversation": {
           "things-owner": {
-            "title": "What is this? Whose is it?",
-            "bodyMarkdown": "Use the object language from Module 4:\n\n**A:** Ki sa sa a ye?\n\n**B:** Se yon liv.\n\n**A:** Liv la se pou ki moun?\n\n**B:** Liv la se pou Mari.\n\nYou can identify a thing and then say who owns it."
+            "title": "Point out things and owners",
+            "bodyMarkdown": "**Jan:** Mari, liv sa a se pou ou.\n\n**Mari:** Mèsi, Jan. Kaye sa yo se pou ou.\n\n**Jan:** Mèsi.\n\nNow listen to those same words inside a real exchange."
           },
-          "people-actions": {
-            "title": "Kisa li ap fè?",
-            "bodyMarkdown": "Bring in Module 5:\n\n**A:** Kisa Mari ap fè?\n\n**B:** Li ap etidye kreyòl.\n\nThe same conversation can move naturally from an object to a person and an action."
+          "actions-and-questions": {
+            "title": "Ask, answer, return",
+            "bodyMarkdown": "**Mari:** Jan, kisa ou ap fè?\n\n**Jan:** M ap etidye kreyòl. E ou menm?\n\n**Mari:** M ap travay kounyeya.\n\nThe response connects directly to the previous turn."
           },
-          "point-and-answer": {
-            "title": "Reuse small chunks",
-            "bodyMarkdown": "You do not need long sentences. Combine small chunks you already control:\n\n- **liv sa a**\n- **se pou Mari**\n- **li ap etidye**\n\nThis is enough to sustain a simple everyday exchange."
+          "quantity-and-time": {
+            "title": "Ask for practical details",
+            "bodyMarkdown": "**Jan:** Konbyen liv ou genyen?\n\n**Mari:** Mwen genyen twa liv.\n\n**Mari:** Akilè ou etidye kreyòl?\n\n**Jan:** Senkè edmi. Mwen etidye kreyòl aswè.\n\nNumbers and time now work inside a conversation instead of as isolated vocabulary."
           }
         },
         "my-first-kreyol-conversation": {
           "full-conversation": {
-            "title": "From Bonjou to Orevwa",
-            "bodyMarkdown": "**A:** Bonjou! Kijan ou ye?\n\n**B:** Mwen byen, mèsi. E ou menm?\n\n**A:** Mwen byen tou. Kijan ou rele?\n\n**B:** M rele Ana. E ou menm?\n\n**A:** M rele Jan. Ki kote ou rete?\n\n**B:** Mwen rete Chicago.\n\n**A:** Èske ou pale kreyòl?\n\n**B:** Wi, mwen pale kreyòl. M ap etidye kreyòl kounyeya.\n\n**A:** Trè byen. Orevwa!\n\n**B:** Orevwa!"
+            "title": "Jan and Mari meet and keep talking",
+            "bodyMarkdown": "**Jan:** Bonjou!\n\n**Mari:** Bonjou!\n\n**Jan:** Kijan ou ye?\n\n**Mari:** Mwen byen, mèsi. E ou menm?\n\n**Jan:** Mwen byen tou.\n\n**Jan:** Kijan ou rele?\n\n**Mari:** M rele Mari. E ou menm?\n\n**Jan:** M rele Jan.\n\n**Jan:** Ki kote ou rete?\n\n**Mari:** Mwen rete Boston. E ou menm?\n\n**Jan:** Mwen rete Chicago.\n\n**Mari:** Èske ou pale kreyòl?\n\n**Jan:** Wi, mwen pale kreyòl.\n\n**Mari:** Kisa ou ap fè kounyeya?\n\n**Jan:** M ap etidye kreyòl kounyeya.\n\n**Jan:** Konbyen liv ou genyen?\n\n**Mari:** Mwen genyen twa liv.\n\n**Mari:** Akilè ou etidye kreyòl?\n\n**Jan:** Senkè edmi. Mwen etidye kreyòl aswè.\n\n**Mari:** Orevwa, Jan!\n\n**Jan:** Orevwa, Mari!\n\nYou already know the language in this conversation. Notice how greetings, questions, actions, numbers, and time now come together in one exchange."
           },
           "conversation-skills": {
-            "title": "A0 → A1 foundations",
-            "bodyMarkdown": "You can now:\n\n- greet and close politely\n- give your name and basic identity\n- say where you live and what language you speak\n- identify and describe simple things\n- say what someone is doing\n- ask common beginner questions\n- understand basic numbers and time expressions\n\nThat is the foundation for the next course."
+            "title": "Respond to the information you hear",
+            "bodyMarkdown": "A real conversation can change order.\n\nThe important skill is knowing what kind of move fits:\n\n- greet or close\n- answer and return a question\n- ask for new information\n- talk about an action\n- give a quantity or time\n\nYou do not need to memorize this conversation word for word."
           },
-          "independent-use": {
-            "title": "Do not memorize one script",
-            "bodyMarkdown": "The goal is not to memorize this exact conversation. Swap in a different name, place, action, object, number, or time. Keep the grammar simple and make the conversation your own."
-          }
-        },
-        "read-build-and-write-a-conversation": {
-          "make-plan": {
-            "title": "Ask what time",
-            "bodyMarkdown": "**A:** Akilè ou travay?\n\n**B:** Setè edmi.\n\n**A:** Èske ou etidye kreyòl chak jou?\n\n**B:** Wi, mwen etidye kreyòl chak jou.\n\nThis combines the question patterns from Module 6 with the time language from Module 7."
-          },
-          "count-things": {
-            "title": "Konbyen…?",
-            "bodyMarkdown": "Numbers can enter the conversation naturally:\n\n**A:** Konbyen liv ou genyen?\n\n**B:** Mwen gen twa liv.\n\nYou only need the 1–20 number system from Module 7 for this beginner exchange."
-          },
-          "schedule-chunks": {
-            "title": "jòdi a, kounyeya, chak jou",
-            "bodyMarkdown": "Small time expressions make your meaning clearer:\n\n- **jòdi a** — today\n- **kounyeya** — now\n- **chak jou** — every day\n\nUse them with sentences you already know instead of adding new tense grammar."
+          "alternate-conversation": {
+            "title": "Same skills, different path",
+            "bodyMarkdown": "Listen to a shorter second conversation.\n\nThe order changes, but Jan and Mari still use language you already know."
           }
         }
       }
@@ -50681,6 +51689,11 @@ const messages: Record<string, any> = {
       "description": "Learn essential local Git through three small, cumulative, plain-text projects. No programming or web-development knowledge is required.",
       "moreComingSoon": "Branches, merges, remotes, and GitHub collaboration belong to later Git courses."
     },
+    "haitian-creole-everyday-grammar": {
+      "title": "Haitian Creole 2: Everyday Grammar & Sentence Building",
+      "description": "An A1 continuation of Haitian Creole Foundations that adds article selection, contracted pronouns, deeper possession, expanded questions, health language, past and future time, and natural descriptions without reteaching Course 1.",
+      "moreComingSoon": "More Haitian Creole 2: Everyday Grammar & Sentence Building lessons are coming soon."
+    },
     "haitian-creole-foundations": {
       "title": "Haitian Creole Foundations",
       "description": "An A0-to-A1 Haitian Creole course that develops listening, speaking, reading, sentence building, and writing together from the first module.",
@@ -50867,6 +51880,74 @@ const messages: Record<string, any> = {
         ]
       }
     },
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "title": "Choose the Right Definite Article",
+        "description": "Move beyond knowing that the definite article follows the noun and learn to choose among a, la, an, lan, and nan.",
+        "outcomes": [
+          "Choose a or la in source-supported noun phrases.",
+          "Choose an, lan, or nan in source-supported noun phrases.",
+          "Use article selection while listening, speaking, building, and writing familiar noun phrases."
+        ],
+        "why": [
+          "Builds confidence with choose the right definite article.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "title": "Short Pronouns & Deeper Possession",
+        "description": "Extend known pronouns into short object forms and deeper possessive-pronoun patterns without reteaching Course 1 ownership or demonstratives.",
+        "outcomes": [
+          "Use m, w, l, and n in source-supported object positions.",
+          "Recognize source-supported singular and plural possessive pronouns.",
+          "Distinguish object-pronoun forms from possessive-pronoun forms without reteaching known Course 1 possession patterns."
+        ],
+        "why": [
+          "Builds confidence with short pronouns & deeper possession.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-everyday-grammar-3-more-questions-and-health": {
+        "title": "More Questions & Health",
+        "description": "Extend the Course 1 question toolkit and use it with body and health language.",
+        "outcomes": [
+          "Use new Week 4 question forms without reteaching the Course 1 core question set.",
+          "Recognize common body-part vocabulary from the source.",
+          "Say what hurts using the source's fèmal expressions."
+        ],
+        "why": [
+          "Builds confidence with more questions & health.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-everyday-grammar-4-past-and-future": {
+        "title": "Talk About Past & Future",
+        "description": "Add te and pral while treating simple present and ap as known Course 1 language.",
+        "outcomes": [
+          "Use te before a verb for source-supported past actions.",
+          "Use pral before a verb for source-supported future actions.",
+          "Contrast past, known present patterns, and future in short everyday statements."
+        ],
+        "why": [
+          "Builds confidence with talk about past & future.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "title": "Describe People & Things Naturally",
+        "description": "Use Week 7 description patterns, ye, and adjectives while treating basic identity se as known.",
+        "outcomes": [
+          "Recognize descriptions where English to be is not expressed in Kreyòl.",
+          "Use ye in source-supported questions and closing statements.",
+          "Use adjectives in source-supported noun phrases and descriptions.",
+          "Use selected colors, sizes, and qualities in everyday descriptions."
+        ],
+        "why": [
+          "Builds confidence with describe people & things naturally.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    },
     "haitian-creole-foundations": {
       "haitian-creole-foundations-1-sounds-of-kreyol": {
         "title": "Sounds of Kreyòl",
@@ -50885,9 +51966,9 @@ const messages: Record<string, any> = {
         "title": "Bonjou!",
         "description": "Use greetings, polite expressions, and simple social responses in short everyday exchanges.",
         "outcomes": [
-          "Recognize and use common greetings and leave-taking expressions.",
-          "Respond to short polite exchanges by listening and speaking.",
-          "Read, arrange, and write basic greeting lines in Kreyòl."
+          "Recognize and use common greetings, polite expressions, and leave-taking language.",
+          "Ask how someone is, answer naturally, and return the question.",
+          "Follow and participate in a short connected greeting conversation."
         ],
         "why": [
           "Builds confidence with bonjou!.",
@@ -50898,9 +51979,9 @@ const messages: Record<string, any> = {
         "title": "Who Are You?",
         "description": "Introduce yourself, ask another person's name, and exchange a few simple personal details.",
         "outcomes": [
-          "Ask and answer simple questions about names and identity.",
-          "Understand short introductions when heard at beginner speed.",
-          "Read, arrange, and write simple self-introduction sentences."
+          "Ask and answer someone's name.",
+          "Ask and answer where someone lives.",
+          "Combine greetings, names, and residence in a connected beginner conversation."
         ],
         "why": [
           "Builds confidence with who are you?.",
@@ -50911,9 +51992,9 @@ const messages: Record<string, any> = {
         "title": "Talking About Things",
         "description": "Name everyday objects and use simple patterns to identify, describe, and point out things around you.",
         "outcomes": [
-          "Recognize and use beginner vocabulary for common everyday objects.",
-          "Identify and describe objects with short Kreyòl sentence patterns.",
-          "Read, arrange, and write simple object descriptions."
+          "Use yon, familiar definite noun phrases, and plural yo with everyday things.",
+          "Express possession with thing + possessor and with se pou.",
+          "Use sa a and sa yo to point out things and combine them with ownership."
         ],
         "why": [
           "Builds confidence with talking about things.",
@@ -50924,9 +52005,9 @@ const messages: Record<string, any> = {
         "title": "What Are You Doing?",
         "description": "Talk about simple actions happening now and understand short action-centered sentences.",
         "outcomes": [
-          "Recognize common beginner action words in short sentences.",
-          "Ask and answer what someone is doing in simple contexts.",
-          "Read, build, and write short action-centered statements."
+          "Use common action words in simple present statements and routines.",
+          "Use ap to describe an action in progress and recognize common short forms.",
+          "Ask Kisa ou ap fè?, answer naturally, and distinguish now from routine."
         ],
         "why": [
           "Builds confidence with what are you doing?.",
@@ -50937,9 +52018,9 @@ const messages: Record<string, any> = {
         "title": "Questions & Answers",
         "description": "Recognize and produce core beginner question patterns and short natural answers.",
         "outcomes": [
-          "Recognize common beginner question words and question patterns.",
-          "Ask and answer short questions about familiar people, objects, and actions.",
-          "Read, arrange, and write short question-and-answer pairs."
+          "Use Èske to ask familiar yes/no questions and give complete answers.",
+          "Choose familiar information-question forms based on whether you need how, what, place, person, or quantity.",
+          "Mix yes/no and information questions inside a connected beginner conversation."
         ],
         "why": [
           "Builds confidence with questions & answers.",
@@ -50950,9 +52031,9 @@ const messages: Record<string, any> = {
         "title": "Numbers, Time & Everyday Life",
         "description": "Use beginner numbers and time expressions in useful everyday contexts.",
         "outcomes": [
-          "Recognize and use beginner number expressions in context.",
-          "Understand and answer simple questions involving time and everyday quantities.",
-          "Read, arrange, and write short number- and time-based statements."
+          "Recognize and use numbers one through twenty inside simple everyday quantities.",
+          "Recognize full-hour and half-hour clock expressions and ask time with Akilè.",
+          "Combine everyday time expressions, routines, and familiar questions in a simple schedule conversation."
         ],
         "why": [
           "Builds confidence with numbers, time & everyday life.",
@@ -50963,9 +52044,9 @@ const messages: Record<string, any> = {
         "title": "My First Kreyòl Conversation",
         "description": "Combine greetings, identity, objects, actions, questions, numbers, and time in a first sustained beginner conversation.",
         "outcomes": [
-          "Follow a short beginner Kreyòl conversation built from previously taught language.",
-          "Respond aloud to familiar prompts without relying on English word order.",
-          "Read, arrange, and write a short conversation using course vocabulary and patterns."
+          "Recognize how familiar Course 1 conversation moves connect instead of memorizing one fixed script.",
+          "Rehearse short scenes about identity, things, actions, questions, quantities, and time.",
+          "Understand and produce a sustained beginner conversation using language accumulated across the course."
         ],
         "why": [
           "Builds confidence with my first kreyòl conversation.",
@@ -51756,6 +52837,68 @@ const messages: Record<string, any> = {
         }
       }
     },
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "haitian-creole-everyday-grammar-ht2m1-article-selection": {
+          "title": "Article Selection",
+          "description": "Choose the singular definite article from the ending sound of the noun.",
+          "weeks": null,
+          "bullets": [
+            "Choose a or la",
+            "Choose an, lan, or nan",
+            "Hear and Use Definite Articles"
+          ]
+        }
+      },
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "haitian-creole-everyday-grammar-ht2m2-pronouns-possession": {
+          "title": "Pronouns and Possession",
+          "description": "Extend known pronouns and possession into shorter, more flexible sentence patterns.",
+          "weeks": null,
+          "bullets": [
+            "Use Short Object Pronouns",
+            "Use Possessive Pronouns"
+          ]
+        }
+      },
+      "haitian-creole-everyday-grammar-3-more-questions-and-health": {
+        "haitian-creole-everyday-grammar-ht2m3-questions-health": {
+          "title": "Questions and Health",
+          "description": "Ask for more specific information and use the questions in a simple health context.",
+          "weeks": null,
+          "bullets": [
+            "Ask for More Specific Information",
+            "Name Body Parts",
+            "Say What Hurts"
+          ]
+        }
+      },
+      "haitian-creole-everyday-grammar-4-past-and-future": {
+        "haitian-creole-everyday-grammar-ht2m4-time": {
+          "title": "Past and Future",
+          "description": "Move familiar actions backward and forward in time.",
+          "weeks": null,
+          "bullets": [
+            "Use te for Past Actions",
+            "Use pral for Future Actions",
+            "Contrast Yesterday, Today & Tomorrow"
+          ]
+        }
+      },
+      "haitian-creole-everyday-grammar-5-descriptions-and-ye": {
+        "haitian-creole-everyday-grammar-ht2m5-descriptions": {
+          "title": "Descriptions",
+          "description": "Describe states and things with the Week 7 patterns.",
+          "weeks": null,
+          "bullets": [
+            "Describe Without an Expressed to be",
+            "Use ye",
+            "Place Adjectives in Phrases",
+            "Describe Color, Size & Quality"
+          ]
+        }
+      }
+    },
     "haitian-creole-foundations": {
       "haitian-creole-foundations-1-sounds-of-kreyol": {
         "haitian-creole-foundations-ht1-learn-listen-speak": {
@@ -51778,141 +52921,85 @@ const messages: Record<string, any> = {
         }
       },
       "haitian-creole-foundations-2-bonjou": {
-        "haitian-creole-foundations-ht2-learn-listen-speak": {
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+        "haitian-creole-foundations-ht2-greetings-conversation": {
+          "title": "Greetings and Conversation",
+          "description": "Build from useful greetings and polite expressions into a complete two-way beginner conversation.",
           "weeks": null,
           "bullets": [
-            "Learn Greetings and Polite Basics",
-            "Listen and Say Hello"
-          ]
-        },
-        "haitian-creole-foundations-ht2-read-build-write-use": {
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "weeks": null,
-          "bullets": [
-            "Read, Build, and Write Greetings",
-            "Greeting Scenario and Review"
+            "Greetings and Polite Basics",
+            "Ask, Answer, and Keep It Going",
+            "Your First Greeting Conversation"
           ]
         }
       },
       "haitian-creole-foundations-3-who-are-you": {
-        "haitian-creole-foundations-ht3-learn-listen-speak": {
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+        "haitian-creole-foundations-ht3-introductions": {
+          "title": "Names, Places & Introductions",
+          "description": "Move from exchanging names to exchanging where you live, then connect both with Module 2 greetings.",
           "weeks": null,
           "bullets": [
-            "Learn Names and Introductions",
-            "Listen and Introduce Yourself"
-          ]
-        },
-        "haitian-creole-foundations-ht3-read-build-write-use": {
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "weeks": null,
-          "bullets": [
-            "Read, Build, and Write an Introduction",
-            "Meet Someone: Scenario and Review"
+            "Names and Introductions",
+            "Where Do You Live?",
+            "Meet Someone: A Full Introduction"
           ]
         }
       },
       "haitian-creole-foundations-4-talking-about-things": {
-        "haitian-creole-foundations-ht4-learn-listen-speak": {
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+        "haitian-creole-foundations-ht4-things-and-possession": {
+          "title": "Things, Ownership & Demonstratives",
+          "description": "Build useful noun phrases, say who things belong to, and point out one or several objects.",
           "weeks": null,
           "bullets": [
-            "Learn Everyday Things",
-            "Listen and Name Things"
-          ]
-        },
-        "haitian-creole-foundations-ht4-read-build-write-use": {
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "weeks": null,
-          "bullets": [
-            "Read, Build, and Write About Things",
-            "What Is This? Scenario and Review"
+            "One Thing, the Thing, More Than One",
+            "Whose Thing Is It?",
+            "This Thing, These Things"
           ]
         }
       },
       "haitian-creole-foundations-5-what-are-you-doing": {
-        "haitian-creole-foundations-ht5-learn-listen-speak": {
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+        "haitian-creole-foundations-ht5-actions-now-and-routines": {
+          "title": "Actions, Now & Routines",
+          "description": "Talk about familiar actions, distinguish routines from actions happening now, and ask what someone is doing.",
           "weeks": null,
           "bullets": [
-            "Learn Common Actions",
-            "Listen and Say What Is Happening"
-          ]
-        },
-        "haitian-creole-foundations-ht5-read-build-write-use": {
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "weeks": null,
-          "bullets": [
-            "Read, Build, and Write Actions",
-            "What Are You Doing? Scenario"
+            "Everyday Actions and Routines",
+            "What Is Happening Now?",
+            "What Are You Doing?"
           ]
         }
       },
       "haitian-creole-foundations-6-questions-and-answers": {
-        "haitian-creole-foundations-ht6-learn-listen-speak": {
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+        "haitian-creole-foundations-ht6-question-system": {
+          "title": "Questions & Answers",
+          "description": "Ask yes/no questions, choose information questions, and keep a short conversation moving.",
           "weeks": null,
           "bullets": [
-            "Learn Core Question Patterns",
-            "Listen, Ask, and Answer"
-          ]
-        },
-        "haitian-creole-foundations-ht6-read-build-write-use": {
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "weeks": null,
-          "bullets": [
-            "Read, Build, and Write Questions",
-            "Question Chain: Scenario and Review"
+            "Yes or No? Ask with Èske",
+            "Ask for the Information You Need",
+            "Keep a Question Chain Going"
           ]
         }
       },
       "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
-        "haitian-creole-foundations-ht7-learn-listen-speak": {
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+        "haitian-creole-foundations-ht7-numbers-time-schedule": {
+          "title": "Numbers, Time & Everyday Life",
+          "description": "Count familiar things, understand basic clock time, and use time expressions inside an everyday schedule.",
           "weeks": null,
           "bullets": [
-            "Learn Numbers and Time Basics",
-            "Listen for Numbers and Time"
-          ]
-        },
-        "haitian-creole-foundations-ht7-read-build-write-use": {
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "weeks": null,
-          "bullets": [
-            "Read, Build, and Write Everyday Details",
-            "Everyday Plans: Scenario and Review"
+            "Numbers and Quantities",
+            "Clock Time and Akilè",
+            "Everyday Time and Schedule"
           ]
         }
       },
       "haitian-creole-foundations-8-my-first-kreyol-conversation": {
-        "haitian-creole-foundations-ht8-learn-listen-speak": {
-          "title": "Learn, Listen & Speak",
-          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+        "haitian-creole-foundations-ht8-capstone-conversation": {
+          "title": "My First Kreyòl Conversation",
+          "description": "Map the conversation, rehearse useful scenes, then complete a sustained beginner exchange.",
           "weeks": null,
           "bullets": [
-            "Learn the Conversation Map",
-            "Listen and Speak Through a Conversation"
-          ]
-        },
-        "haitian-creole-foundations-ht8-read-build-write-use": {
-          "title": "Read, Build, Write & Use It",
-          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
-          "weeks": null,
-          "bullets": [
-            "Read, Build, and Write a Conversation",
+            "Build Your Conversation Map",
+            "Rehearse Real Conversation Turns",
             "My First Kreyòl Conversation"
           ]
         }

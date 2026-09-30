@@ -1,9 +1,11 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import RichMarkdownContent from "@/components/sketches/shared/RichMarkdownContent";
 import {ParagraphSpec} from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
+import { LanguageAudioPlayer } from "@zoeskoul/learner-workspace/language/LanguageAudioPlayer";
 
 export function ParagraphSketch({
     spec,
@@ -14,6 +16,7 @@ export function ParagraphSketch({
 }) {
     const md = (spec.bodyMarkdown ?? spec.text ?? "").trim();
     const hasVisibleTitle = Boolean(showTitle && spec.title);
+    const audioT = useTranslations("languageAudio");
 
     return (
         <div>
@@ -32,6 +35,29 @@ export function ParagraphSketch({
                 )}
                 emptyFallback={<span className="opacity-60">No text.</span>}
             />
+
+            {spec.audio ? (
+                <LanguageAudioPlayer
+                    audio={spec.audio}
+                    labels={{
+                        listen: audioT("listen"),
+                        playConversation: audioT(
+                            "playConversation",
+                        ),
+                        stop: audioT("stop"),
+                        replayLine: audioT(
+                            "replayLine",
+                        ),
+                        speaking: audioT(
+                            "speaking",
+                        ),
+                        unavailable: audioT(
+                            "unavailable",
+                        ),
+                        autoListen: audioT("autoListen"),
+                    }}
+                />
+            ) : null}
         </div>
     );
 }

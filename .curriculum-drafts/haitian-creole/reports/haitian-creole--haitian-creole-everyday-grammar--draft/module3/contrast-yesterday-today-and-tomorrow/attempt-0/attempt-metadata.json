@@ -1,0 +1,18 @@
+{
+  "profileId": "language",
+  "subjectSlug": "haitian-creole--haitian-creole-everyday-grammar--draft",
+  "courseSlug": "haitian-creole-everyday-grammar",
+  "moduleSlug": "haitian-creole-everyday-grammar-4-past-and-future",
+  "sectionSlug": "ht2m4-time",
+  "topicId": "contrast-yesterday-today-and-tomorrow",
+  "provider": "manual",
+  "model": "checked-in-json",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-07-27-topic-authoring-draft-v3",
+  "strictSchema": true,
+  "retryAttempt": 0,
+  "maxRetries": 0
+}

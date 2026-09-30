@@ -1,0 +1,216 @@
+{
+  "topics": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "choose-an-lan-and-nan": {
+          "label": "Choose an, lan, or nan",
+          "summary": "Use the nasal-ending patterns to choose among an, lan, and nan.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose an"
+            },
+            "sketch1": {
+              "title": "Choose lan"
+            },
+            "sketch2": {
+              "title": "Choose nan"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_choose_an_lan_and_nan_sketch0": {
+              "title": "Try it yourself: Build a phrase with an",
+              "prompt": "Right after the sketch \"Use an with The nasal patterns\", practice that exact idea with this task. Build the phrase for “the television.”. Produce the result for build a phrase with an so it reinforces Choose an, lan, or nan."
+            },
+            "try_choose_an_lan_and_nan_sketch1": {
+              "title": "Try it yourself: Build a phrase with lan",
+              "prompt": "Right after the sketch \"Use lan with The nasal-plus-consonant pattern\", practice that exact idea with this task. Build the phrase for “the night.”. Produce the result for build a phrase with lan so it reinforces Choose an, lan, or nan."
+            },
+            "try_choose_an_lan_and_nan_sketch2": {
+              "title": "Try it yourself: Build a phrase with nan",
+              "prompt": "Right after the sketch \"Use nan with The m, nn, èn, and òn patterns\", practice that exact idea with this task. Build the phrase for “the phone.”. Produce the result for build a phrase with nan so it reinforces Choose an, lan, or nan."
+            }
+          },
+          "practice": {
+            "choose-an-lan-nan-choice": {
+              "title": "Choose “the bread”",
+              "prompt": "Which phrase means “the bread”?",
+              "hint": "Use the form for pen.",
+              "help": {
+                "concept": "choosing an",
+                "hint_1": "Use the form for pen.",
+                "hint_2": "Listen to or read the whole noun phrase before choosing."
+              },
+              "options": {
+                "a": "pen an",
+                "b": "pen lan",
+                "c": "pen nan"
+              }
+            },
+            "choose-an-lan-nan-fill": {
+              "title": "Complete “the knee”",
+              "prompt": "Choose the article that completes the phrase.",
+              "hint": "Listen to the noun's final sound before choosing.",
+              "help": {
+                "concept": "ending-sound selection",
+                "hint_1": "Listen closely to the noun's final sound.",
+                "hint_2": "Use the sound pattern you just practiced."
+              },
+              "template": "jenou [blank1]",
+              "choices": [
+                "an",
+                "lan",
+                "nan"
+              ]
+            },
+            "choose-an-lan-nan-listen": {
+              "title": "Hear “the night”",
+              "prompt": "Listen, then build the phrase you hear.",
+              "hint": "Listen for the complete phrase.",
+              "help": {
+                "concept": "hearing lan",
+                "hint_1": "Listen for the complete phrase.",
+                "hint_2": "Build only the phrase you hear."
+              },
+              "targetText": "nwit lan",
+              "wordBank": [
+                "nwit",
+                "lan"
+              ],
+              "distractors": [
+                "an",
+                "nan"
+              ]
+            },
+            "choose-an-lan-nan-voice": {
+              "title": "Say “the phone”",
+              "prompt": "Press Start. Say “telefòn nan,” then press Stop when you’re done.",
+              "hint": "Say the complete phrase.",
+              "help": {
+                "concept": "speaking a nan phrase",
+                "hint_1": "Say the complete phrase.",
+                "hint_2": "Say the complete noun phrase naturally."
+              },
+              "targetText": "telefòn nan"
+            },
+            "choose-an-lan-nan-build": {
+              "title": "Build “the area”",
+              "prompt": "Arrange the Kreyòl phrase for “the area.”",
+              "hint": "Use the form for zòn.",
+              "help": {
+                "concept": "building a nan phrase",
+                "hint_1": "Use the form for zòn.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "zòn nan",
+              "wordBank": [
+                "zòn",
+                "nan"
+              ],
+              "distractors": [
+                "an",
+                "lan"
+              ],
+              "ttsText": "zòn nan"
+            },
+            "choose-an-lan-nan-write": {
+              "title": "Write “the love”",
+              "prompt": "Type the Kreyòl phrase for “the love.”",
+              "hint": "places an after lanmou.",
+              "help": {
+                "concept": "writing an after the mou pattern",
+                "hint_1": "places an after lanmou.",
+                "hint_2": "Type the complete Kreyòl noun phrase."
+              },
+              "expectedText": "lanmou an",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-an-televizyon": {
+              "title": "Build a phrase with an",
+              "prompt": "Build the phrase for “the television.”",
+              "hint": "Use the form given for televizyon in The practice list.",
+              "help": {
+                "concept": "choosing an",
+                "hint_1": "Use the form given for televizyon in The practice list.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "televizyon an",
+              "wordBank": [
+                "televizyon",
+                "an"
+              ],
+              "distractors": [
+                "lan",
+                "nan"
+              ],
+              "ttsText": "televizyon an"
+            },
+            "try-lan-nwit": {
+              "title": "Build a phrase with lan",
+              "prompt": "Build the phrase for “the night.”",
+              "hint": "lists nwit with lan.",
+              "help": {
+                "concept": "choosing lan",
+                "hint_1": "lists nwit with lan.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "nwit lan",
+              "wordBank": [
+                "nwit",
+                "lan"
+              ],
+              "distractors": [
+                "an",
+                "nan"
+              ],
+              "ttsText": "nwit lan"
+            },
+            "try-nan-telefon": {
+              "title": "Build a phrase with nan",
+              "prompt": "Build the phrase for “the phone.”",
+              "hint": "Use the form given for telefòn in The practice list.",
+              "help": {
+                "concept": "choosing nan",
+                "hint_1": "Use the form given for telefòn in The practice list.",
+                "hint_2": "Use the noun first, then the article form."
+              },
+              "targetText": "telefòn nan",
+              "wordBank": [
+                "telefòn",
+                "nan"
+              ],
+              "distractors": [
+                "an",
+                "lan"
+              ],
+              "ttsText": "telefòn nan"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-1-definite-article-choices": {
+        "choose-an-lan-and-nan": {
+          "article-an": {
+            "title": "Use an with The nasal patterns",
+            "bodyMarkdown": "Use **an** when the noun ends in a nasal vowel sound:\n\n- **pen an** — the bread\n- **chen an** — the dog\n- **bonbon an** — the cracker\n\nIt also lists **an** with final syllables ending in **mi, mou, ni,** or **nou**, such as **chimi an**, **lanmou an**, and **jenou an**."
+          },
+          "article-lan": {
+            "title": "Use lan with The nasal-plus-consonant pattern",
+            "bodyMarkdown": "Use **lan** when the noun ends in a nasal vowel followed by a consonant:\n\n- **lanp lan** — the lamp\n- **chanm lan** — the room\n\nYou can also encounter uncommon endings such as **iy** or **uit** with this form."
+          },
+          "article-nan": {
+            "title": "Use nan with The m, nn, èn, and òn patterns",
+            "bodyMarkdown": "Use **nan** with nouns ending in **m** or **nn**, and also with endings such as **èn** or **òn**. Examples include:\n\n- **marenn nan** — the godmother\n- **fim nan** — the film\n- **balèn nan** — the candle\n- **zòn nan** — the area\n- **lalin nan** — the moon\n\nYou may see **plim** paired with more than one article form, so this lesson does not use it for graded article choice."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,519 @@
+{
+  "topicId": "describe-color-size-and-quality",
+  "subjectSlug": "haitian-creole-everyday-grammar",
+  "moduleSlug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+  "sectionSlug": "haitian-creole-everyday-grammar-ht2m5-descriptions",
+  "prefix": "ht2m5",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.label",
+    "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.cards.sketch0.title",
+      "sketchId": "selected-colors",
+      "height": 420,
+      "tryIt": {
+        "id": "try-describe-color-size-and-quality-sketch0",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch0.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch0.prompt",
+        "exerciseKey": "try-sky-blue-listen",
+        "exerciseKeys": [
+          "try-sky-blue-listen",
+          "try-black-write"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.cards.sketch1.title",
+      "sketchId": "selected-size",
+      "height": 420,
+      "tryIt": {
+        "id": "try-describe-color-size-and-quality-sketch1",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch1.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch1.prompt",
+        "exerciseKey": "try-hotel-small-build",
+        "exerciseKeys": [
+          "try-hotel-small-build"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.cards.sketch2.title",
+      "sketchId": "selected-qualities",
+      "height": 420,
+      "tryIt": {
+        "id": "try-describe-color-size-and-quality-sketch2",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch2.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch2.prompt",
+        "exerciseKey": "try-clean-voice",
+        "exerciseKeys": [
+          "try-clean-voice"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "selected-colors",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-colors.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-colors.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Start with three useful colors",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "ble",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "blue",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "nwa",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "black",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "wouj",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "red",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Now use one of them in a complete description",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Syèl la ble.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "The sky is blue",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "You also saw",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ansyen kay wouj la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the old red house",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "selected-size",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-size.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-size.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "piti",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "for “small.” Compare it in two complete descriptions",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Otèl la piti anpil.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "The hotel is very small",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Tab la piti.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "The table is small",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Practice these complete sentences before making new combinations",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "selected-qualities",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-qualities.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-qualities.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Practice three useful qualities",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "bon",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "good",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pwòp",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "clean",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "trankil",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "quiet",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "bon",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "in the complete phrase",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Se yon bon timoun.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "It's a good child",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Se",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "is already known; the new vocabulary focus here is",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "bon",
+            "locale": "ht-HT"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "adj-vocab-quiz-table-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-table-listen",
+      "targetText": "Tab la piti.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Tab la piti.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "adj-vocab-quiz-good-child-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-good-child-listen",
+      "targetText": "Se yon bon timoun.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Se yon bon timoun.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "adj-vocab-quiz-blue-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-blue-voice",
+      "targetText": "ble",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "ble",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "adj-vocab-quiz-quiet-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-quiet-voice",
+      "targetText": "trankil",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "trankil",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "adj-vocab-quiz-table-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-table-build",
+      "targetText": "Tab la piti.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Tab",
+        "la",
+        "piti."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Tab la piti.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "adj-vocab-quiz-good-child-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-good-child-build",
+      "targetText": "Se yon bon timoun.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Se",
+        "yon",
+        "bon",
+        "timoun."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Se yon bon timoun.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "adj-vocab-quiz-small-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-small-write",
+      "placeholder": "Type the Kreyòl word",
+      "expected": {
+        "kind": "text_input",
+        "value": "piti",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "adj-vocab-quiz-good-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-good-write",
+      "placeholder": "Type the Kreyòl word",
+      "expected": {
+        "kind": "text_input",
+        "value": "bon",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-sky-blue-listen",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.try-sky-blue-listen",
+      "targetText": "Syèl la ble.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Syèl la ble.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-black-write",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.try-black-write",
+      "placeholder": "Type the Kreyòl word",
+      "expected": {
+        "kind": "text_input",
+        "value": "nwa",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-hotel-small-build",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.try-hotel-small-build",
+      "targetText": "Otèl la piti anpil.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Otèl",
+        "la",
+        "piti",
+        "anpil."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Otèl la piti anpil.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-clean-voice",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.try-clean-voice",
+      "targetText": "pwòp",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "pwòp",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

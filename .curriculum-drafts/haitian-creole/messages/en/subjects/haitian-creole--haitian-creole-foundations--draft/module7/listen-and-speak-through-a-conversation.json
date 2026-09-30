@@ -3,17 +3,17 @@
     "haitian-creole--haitian-creole-foundations--draft": {
       "haitian-creole-foundations-8-my-first-kreyol-conversation": {
         "listen-and-speak-through-a-conversation": {
-          "label": "Listen and Speak Through a Conversation",
-          "summary": "Talk about familiar things, ownership, and what people are doing in a short everyday exchange.",
+          "label": "Rehearse Real Conversation Turns",
+          "summary": "Practice short scenes about things, actions, questions, quantities, and time before the final conversation.",
           "cards": {
             "sketch0": {
-              "title": "Talk About Things"
+              "title": "Scene 1 — Things and Ownership"
             },
             "sketch1": {
-              "title": "Ask About an Action"
+              "title": "Scene 2 — Ask About an Action"
             },
             "sketch2": {
-              "title": "Point, Ask, Answer"
+              "title": "Scene 3 — Quantity and Time"
             },
             "quiz": {
               "title": "Practice"
@@ -22,150 +22,135 @@
           "tryIt": {
             "allowReveal": true,
             "try_listen_and_speak_through_a_conversation_sketch0": {
-              "title": "Try it yourself: Identify the thing",
-              "prompt": "Right after the sketch \"What is this? Whose is it?\", practice that exact idea with this task. Arrange the answer identifying the object. Produce the result for identify the thing so it reinforces Listen and Speak Through a Conversation."
+              "title": "Try it yourself: Give another object an owner",
+              "prompt": "Right after the sketch \"Point out things and owners\", practice that exact idea with this task. Build “This bag belongs to Jan.”. Produce the result for give another object an owner so it reinforces Rehearse Real Conversation Turns."
             },
             "try_listen_and_speak_through_a_conversation_sketch1": {
-              "title": "Try it yourself: Say what Mari is doing",
-              "prompt": "Right after the sketch \"Kisa li ap fè?\", practice that exact idea with this task. Say the action answer using the pattern from the lesson. Produce the result for say what Mari is doing so it reinforces Listen and Speak Through a Conversation."
+              "title": "Try it yourself: Give Jan a different answer",
+              "prompt": "Right after the sketch \"Ask, answer, return\", practice that exact idea with this task. Say “I am speaking Kreyòl.”. Produce the result for give Jan a different answer so it reinforces Rehearse Real Conversation Turns."
+            },
+            "try_listen_and_speak_through_a_conversation_sketch2": {
+              "title": "Try it yourself: Hear a different study time",
+              "prompt": "Right after the sketch \"Ask for practical details\", practice that exact idea with this task. Listen and rebuild Jan's new answer. Produce the result for hear a different study time so it reinforces Rehearse Real Conversation Turns."
             }
           },
           "practice": {
-            "listen-and-speak-through-a-conversation-choice": {
-              "title": "Choose the ownership answer",
-              "prompt": "Which sentence says “The book is Mari’s / for Mari”?",
-              "hint": "Use the ownership pattern from Module 4.",
+            "rehearsal-owner-choice": {
+              "title": "Choose the ownership response",
+              "prompt": "Which sentence says that the notebooks belong to Mari?",
+              "hint": "Look for se pou Mari.",
               "help": {
-                "concept": "Ownership can be expressed after identifying the object.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "recognizing an ownership statement",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
               "options": {
-                "a": "Liv la se pou Mari.",
-                "b": "Mari ap li liv la.",
-                "c": "Se yon liv."
+                "a": "Kaye sa yo se pou Mari.",
+                "b": "Mari ap etidye kreyòl.",
+                "c": "Akilè Mari travay?"
               }
             },
-            "listen-and-speak-through-a-conversation-fill": {
-              "title": "Complete the current action",
-              "prompt": "Choose the action that completes “She is studying Kreyòl.”",
-              "hint": "Use the study action from Module 5.",
+            "rehearsal-listen": {
+              "title": "Hear a different action",
+              "prompt": "Listen and rebuild the answer.",
+              "hint": "Mari says she is studying now.",
               "help": {
-                "concept": "The blank needs the activity happening now.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "hearing a familiar current-action response",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "template": "Li ap [blank1] kreyòl.",
-              "choices": [
+              "targetText": "M ap etidye kounyeya.",
+              "wordBank": [
+                "M",
+                "ap",
                 "etidye",
-                "rete",
-                "rele"
+                "kounyeya."
               ]
             },
-            "listen-and-speak-through-a-conversation-listen": {
-              "title": "Hear an ownership sentence",
-              "prompt": "Listen, then build the sentence you hear.",
-              "hint": "Listen for the object first and the owner second.",
+            "rehearsal-build": {
+              "title": "Build another quantity question",
+              "prompt": "Build “How many notebooks does Jan have?”",
+              "hint": "Begin with Konbyen.",
               "help": {
-                "concept": "Build the complete ownership sentence in spoken order.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "reusing a quantity question",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "targetText": "Liv la se pou Mari.",
+              "targetText": "Konbyen kaye Jan genyen?",
               "wordBank": [
-                "Liv",
-                "la",
+                "Konbyen",
+                "kaye",
+                "Jan",
+                "genyen?"
+              ]
+            },
+            "rehearsal-voice": {
+              "title": "Ask about Mari's study time",
+              "prompt": "Ask “What time does Mari study Kreyòl?”",
+              "hint": "Use Akilè with Mari.",
+              "help": {
+                "concept": "producing a schedule question",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Akilè Mari etidye kreyòl?"
+            },
+            "rehearsal-write": {
+              "title": "Write a different residence answer",
+              "prompt": "Write “I live in Miami.”",
+              "hint": "Use Mwen rete.",
+              "help": {
+                "concept": "writing a complete familiar answer",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "expectedText": "Mwen rete Miami.",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-rehearse-owner-transfer": {
+              "title": "Give another object an owner",
+              "prompt": "Build “This bag belongs to Jan.”",
+              "hint": "Use valiz sa a with se pou Jan.",
+              "help": {
+                "concept": "reusing demonstrative and ownership language",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Valiz sa a se pou Jan.",
+              "wordBank": [
+                "Valiz",
+                "sa",
+                "a",
                 "se",
                 "pou",
-                "Mari."
-              ],
-              "distractors": [
-                "yo"
+                "Jan."
               ]
             },
-            "listen-and-speak-through-a-conversation-voice": {
-              "title": "Ask what someone is doing",
-              "prompt": "Say: Kisa Mari ap fè?",
-              "hint": "Say the complete current-action question.",
+            "try-rehearse-action-transfer": {
+              "title": "Give Jan a different answer",
+              "prompt": "Say “I am speaking Kreyòl.”",
+              "hint": "Use M ap with pale kreyòl.",
               "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "producing a different current-action answer",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "targetText": "Kisa Mari ap fè?"
+              "targetText": "M ap pale kreyòl."
             },
-            "listen-and-speak-through-a-conversation-build": {
-              "title": "Build “this book”",
-              "prompt": "Arrange the words to say “this/that book.”",
-              "hint": "Use the singular demonstrative pattern from Module 4.",
+            "try-rehearse-time-transfer": {
+              "title": "Hear a different study time",
+              "prompt": "Listen and rebuild Jan's new answer.",
+              "hint": "The time is seven thirty.",
               "help": {
-                "concept": "The demonstrative follows the noun.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "hearing a new clock-time answer in context",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "targetText": "liv sa a",
+              "targetText": "Setè edmi.",
               "wordBank": [
-                "liv",
-                "sa",
-                "a"
-              ],
-              "distractors": [
-                "yo"
-              ],
-              "ttsText": "liv sa a"
-            },
-            "listen-and-speak-through-a-conversation-write": {
-              "title": "Write the action answer",
-              "prompt": "Type the Kreyòl sentence “She is studying Kreyòl.”",
-              "hint": "Use the current-action pattern from Module 5.",
-              "help": {
-                "concept": "Write the complete current-action sentence.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "expectedText": "Li ap etidye kreyòl.",
-              "placeholder": "Type the Kreyòl answer",
-              "anyOf": [
-                "L ap etidye kreyòl."
+                "Setè",
+                "edmi."
               ]
-            },
-            "try-things-owner-identify": {
-              "title": "Identify the thing",
-              "prompt": "Arrange the answer identifying the object.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "identifying an object",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Se yon liv.",
-              "wordBank": [
-                "Se",
-                "yon",
-                "liv."
-              ]
-            },
-            "try-things-owner-owner": {
-              "title": "Say who owns it",
-              "prompt": "Say the ownership answer using the pattern from the lesson.",
-              "hint": "Say: Liv la se pou Mari.",
-              "help": {
-                "concept": "stating ownership",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Liv la se pou Mari."
-            },
-            "try-people-actions-answer": {
-              "title": "Say what Mari is doing",
-              "prompt": "Say the action answer using the pattern from the lesson.",
-              "hint": "Say: Li ap etidye kreyòl.",
-              "help": {
-                "concept": "describing a person's action",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Li ap etidye kreyòl."
             }
           }
         }
@@ -177,16 +162,16 @@
       "haitian-creole-foundations-8-my-first-kreyol-conversation": {
         "listen-and-speak-through-a-conversation": {
           "things-owner": {
-            "title": "What is this? Whose is it?",
-            "bodyMarkdown": "Use the object language from Module 4:\n\n**A:** Ki sa sa a ye?\n\n**B:** Se yon liv.\n\n**A:** Liv la se pou ki moun?\n\n**B:** Liv la se pou Mari.\n\nYou can identify a thing and then say who owns it."
+            "title": "Point out things and owners",
+            "bodyMarkdown": "**Jan:** Mari, liv sa a se pou ou.\n\n**Mari:** Mèsi, Jan. Kaye sa yo se pou ou.\n\n**Jan:** Mèsi.\n\nNow listen to those same words inside a real exchange."
           },
-          "people-actions": {
-            "title": "Kisa li ap fè?",
-            "bodyMarkdown": "Bring in Module 5:\n\n**A:** Kisa Mari ap fè?\n\n**B:** Li ap etidye kreyòl.\n\nThe same conversation can move naturally from an object to a person and an action."
+          "actions-and-questions": {
+            "title": "Ask, answer, return",
+            "bodyMarkdown": "**Mari:** Jan, kisa ou ap fè?\n\n**Jan:** M ap etidye kreyòl. E ou menm?\n\n**Mari:** M ap travay kounyeya.\n\nThe response connects directly to the previous turn."
           },
-          "point-and-answer": {
-            "title": "Reuse small chunks",
-            "bodyMarkdown": "You do not need long sentences. Combine small chunks you already control:\n\n- **liv sa a**\n- **se pou Mari**\n- **li ap etidye**\n\nThis is enough to sustain a simple everyday exchange."
+          "quantity-and-time": {
+            "title": "Ask for practical details",
+            "bodyMarkdown": "**Jan:** Konbyen liv ou genyen?\n\n**Mari:** Mwen genyen twa liv.\n\n**Mari:** Akilè ou etidye kreyòl?\n\n**Jan:** Senkè edmi. Mwen etidye kreyòl aswè.\n\nNumbers and time now work inside a conversation instead of as isolated vocabulary."
           }
         }
       }

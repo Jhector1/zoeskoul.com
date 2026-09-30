@@ -24,23 +24,39 @@ function waitForAbort(signal: AbortSignal): Promise<never> {
   });
 }
 
+function waitForReviewQuizRequest<T>(
+  promise: Promise<T>,
+  signal?: AbortSignal,
+): Promise<T> {
+  if (!signal) return promise;
+  return Promise.race([promise, waitForAbort(signal)]);
+}
+
 export async function fetchReviewQuiz(spec: ReviewQuizSpec, signal?: AbortSignal) {
   const body = JSON.stringify(spec);
   const requestKey = `${tutoringContentRequestDedupeKey()}:${body}`;
   const existing = reviewQuizInFlight.get(requestKey);
 
   if (existing) {
-    return signal ? Promise.race([existing, waitForAbort(signal)]) : existing;
+    return waitForReviewQuizRequest(existing, signal);
   }
 
   const promise = (async () => {
+    /*
+     * The in-flight request is shared across mounted consumers. Do not bind
+     * the shared network request to one consumer's AbortSignal: soft
+     * navigation can dispose that consumer while a destination card is
+     * already waiting on the same request.
+     *
+     * Each caller still gets independent cancellation below via
+     * waitForReviewQuizRequest().
+     */
     const res = await fetch("/api/review/quiz", {
       method: "POST",
       headers: withTutoringContentRequestHeaders({
         "Content-Type": "application/json",
       }),
       body,
-      signal,
       cache: "no-store",
     });
 
@@ -74,7 +90,7 @@ export async function fetchReviewQuiz(spec: ReviewQuizSpec, signal?: AbortSignal
     }
   }).catch(() => undefined);
 
-  return promise;
+  return waitForReviewQuizRequest(promise, signal);
 }
 
 

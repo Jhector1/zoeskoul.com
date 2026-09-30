@@ -69,6 +69,7 @@ export function buildSketchesFromManifest(manifest: any): Record<string, any> {
           specVersion: 2,
           title: `@:${sketch.titleKey}`,
           bodyMarkdown: `@:${sketch.bodyKey}`,
+                ...(sketch.audio ? { audio: sketch.audio } : {}),
           ...(runtime ? { runtime } : {}),
         },
       },

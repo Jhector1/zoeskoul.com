@@ -2,9 +2,9 @@
   "topicId": "read-build-and-write-about-things",
   "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
   "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
-  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht4-read-build-write-use",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht4-things-and-possession",
   "prefix": "ht4",
-  "minutes": 24,
+  "minutes": 23,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -29,9 +29,9 @@
         "id": "try-read-build-and-write-about-things-sketch0",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch0.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch0.prompt",
-        "exerciseKey": "try-possessor-after-car",
+        "exerciseKey": "try-liv-mari",
         "exerciseKeys": [
-          "try-possessor-after-car"
+          "try-liv-mari"
         ],
         "difficulty": "easy",
         "preferKind": "word_bank_arrange",
@@ -45,18 +45,18 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.cards.sketch1.title",
-      "sketchId": "with-definite",
+      "sketchId": "se-pou",
       "height": 420,
       "tryIt": {
         "id": "try-read-build-and-write-about-things-sketch1",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch1.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch1.prompt",
-        "exerciseKey": "try-with-definite-car",
+        "exerciseKey": "try-liv-pou-mari",
         "exerciseKeys": [
-          "try-with-definite-car"
+          "try-liv-pou-mari"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "voice_input",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -67,18 +67,18 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.cards.sketch2.title",
-      "sketchId": "se-pou",
+      "sketchId": "owner-with-number",
       "height": 420,
       "tryIt": {
         "id": "try-read-build-and-write-about-things-sketch2",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch2.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch2.prompt",
-        "exerciseKey": "try-se-pou-mwen",
+        "exerciseKey": "try-telefon-ou-an",
         "exerciseKeys": [
-          "try-se-pou-mwen"
+          "try-telefon-ou-an"
         ],
         "difficulty": "easy",
-        "preferKind": "voice_input",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -106,28 +106,193 @@
       "id": "possessor-after",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.possessor-after.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.possessor-after.bodyMarkdown"
-    },
-    {
-      "id": "with-definite",
-      "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.with-definite.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.with-definite.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.possessor-after.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "To show possession, the possessor follows the thing.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "machin mwen",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "my car",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "kaye ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "your notebook",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "valiz mesye Jan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Mr. Jean's bag",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Notice the order:",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "thing + possessor",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "se-pou",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.se-pou.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.se-pou.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.se-pou.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Here is another useful way to show who something belongs to with",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "se pou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Machin nan se pou mwen.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "The car is mine.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Manje a se pou Jan.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "The food is Jan's.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Sa se pou yo.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "This/these belong to them.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "se pou + person",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "to identify the owner.",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "owner-with-number",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.owner-with-number.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.owner-with-number.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "The owner still follows the thing when the noun phrase is singular or plural.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "valiz mwen an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "my bag",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "liv li yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "his/her books",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "kaye ou yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "your notebooks",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Keep the object first and the possessor after it.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "read-build-and-write-about-things-choice",
+      "id": "ownership-order-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-choice",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.ownership-order-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,162 +304,106 @@
       }
     },
     {
-      "id": "read-build-and-write-about-things-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "ou"
-      }
-    },
-    {
-      "id": "read-build-and-write-about-things-listen",
+      "id": "ownership-se-pou-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-listen",
-      "targetText": "machin mwen",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.ownership-se-pou-listen",
+      "targetText": "Kaye a se pou Jan.",
       "locale": "ht-HT",
       "wordBank": [
-        "machin",
-        "mwen"
-      ],
-      "distractors": [
-        "yo"
+        "Kaye",
+        "a",
+        "se",
+        "pou",
+        "Jan."
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "machin mwen",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Kaye a se pou Jan.",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "read-build-and-write-about-things-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-voice",
-      "targetText": "Sa se pou mwen.",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Sa se pou mwen.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "read-build-and-write-about-things-build",
+      "id": "ownership-build",
       "kind": "word_bank_arrange",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-build",
-      "targetText": "Liv la se pou li.",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.ownership-build",
+      "targetText": "Valiz Mari.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Valiz",
+        "Mari."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Valiz Mari.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "ownership-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.ownership-voice",
+      "targetText": "Telefòn nan se pou Jan.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Telefòn nan se pou Jan.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-liv-mari",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-liv-mari",
+      "targetText": "Liv Mari.",
       "locale": "ht-HT",
       "wordBank": [
         "Liv",
-        "la",
-        "se",
-        "pou",
-        "li."
-      ],
-      "distractors": [
-        "yo"
-      ],
-      "ttsText": "Liv la se pou li.",
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "Liv la se pou li.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "read-build-and-write-about-things-write",
-      "kind": "text_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "kaye mwen",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-possessor-after-car",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-possessor-after-car",
-      "targetText": "liv mwen",
-      "locale": "ht-HT",
-      "wordBank": [
-        "liv",
-        "mwen"
+        "Mari."
       ],
       "expected": {
         "kind": "word_bank_arrange",
-        "targetText": "liv mwen",
+        "targetText": "Liv Mari.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-with-definite-car",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-with-definite-car",
-      "targetText": "liv mwen an",
-      "locale": "ht-HT",
-      "wordBank": [
-        "liv",
-        "mwen",
-        "an"
-      ],
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "liv mwen an",
-        "locale": "ht-HT"
-      }
-    },
-    {
-      "id": "try-se-pou-mwen",
+      "id": "try-liv-pou-mari",
       "kind": "voice_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-se-pou-mwen",
-      "targetText": "Sa se pou ou.",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-liv-pou-mari",
+      "targetText": "Liv la se pou Mari.",
       "locale": "ht-HT",
       "expected": {
         "kind": "voice_input",
-        "targetText": "Sa se pou ou.",
+        "targetText": "Liv la se pou Mari.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-telefon-ou-an",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-telefon-ou-an",
+      "targetText": "Telefòn ou an.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Telefòn",
+        "ou",
+        "an."
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Telefòn ou an.",
         "locale": "ht-HT"
       }
     }

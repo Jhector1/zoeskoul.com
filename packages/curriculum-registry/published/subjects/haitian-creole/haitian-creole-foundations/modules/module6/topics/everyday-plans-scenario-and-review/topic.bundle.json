@@ -2,9 +2,9 @@
   "topicId": "everyday-plans-scenario-and-review",
   "subjectSlug": "haitian-creole-foundations",
   "moduleSlug": "haitian-creole-foundations-7-numbers-time-and-everyday-life",
-  "sectionSlug": "haitian-creole-foundations-ht7-read-build-write-use",
+  "sectionSlug": "haitian-creole-foundations-ht7-numbers-time-schedule",
   "prefix": "ht7",
-  "minutes": 30,
+  "minutes": 26,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -23,37 +23,15 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch0.title",
-      "sketchId": "schedule",
+      "sketchId": "everyday-time-words",
       "height": 420,
       "tryIt": {
         "id": "try-everyday-plans-scenario-and-review-sketch0",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch0.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch0.prompt",
-        "exerciseKey": "try-schedule-work",
+        "exerciseKey": "try-evening-transfer",
         "exerciseKeys": [
-          "try-schedule-work"
-        ],
-        "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
-    },
-    {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch1.title",
-      "sketchId": "ask-schedule",
-      "height": 420,
-      "tryIt": {
-        "id": "try-everyday-plans-scenario-and-review-sketch1",
-        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch1.title",
-        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch1.prompt",
-        "exerciseKey": "try-ask-schedule",
-        "exerciseKeys": [
-          "try-ask-schedule"
+          "try-evening-transfer"
         ],
         "difficulty": "easy",
         "preferKind": "voice_input",
@@ -64,11 +42,70 @@
       }
     },
     {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch1.title",
+      "sketchId": "tomorrow-and-routine",
+      "height": 420,
+      "tryIt": {
+        "id": "try-everyday-plans-scenario-and-review-sketch1",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch1.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch1.prompt",
+        "exerciseKey": "try-routine-schedule-transfer",
+        "exerciseKeys": [
+          "try-routine-schedule-transfer"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch2.title",
-      "sketchId": "everyday-life",
-      "height": 420
+      "sketchId": "schedule-conversation",
+      "height": 420,
+      "tryIt": {
+        "id": "try-everyday-plans-scenario-and-review-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch2.prompt",
+        "exerciseKey": "try-schedule-new-line",
+        "exerciseKeys": [
+          "try-schedule-new-line"
+        ],
+        "difficulty": "easy",
+        "preferKind": "listen_build",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch3.title",
+      "sketchId": "schedule-now-review",
+      "height": 420,
+      "tryIt": {
+        "id": "try-everyday-plans-scenario-and-review-sketch3",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch3.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch3.prompt",
+        "exerciseKey": "try-akile-new-person",
+        "exerciseKeys": [
+          "try-akile-new-person"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -78,7 +115,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 5,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -88,31 +125,281 @@
   ],
   "sketches": [
     {
-      "id": "schedule",
+      "id": "everyday-time-words",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.everyday-time-words.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.everyday-time-words.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Useful everyday time expressions include:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "maten",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "morning",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "aswè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "evening",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "jòdi a",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "today",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "kounyeya",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "now",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You already know",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "kounyeya",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "from current actions. Now connect these words with a wider everyday schedule.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "ask-schedule",
+      "id": "tomorrow-and-routine",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.ask-schedule.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.ask-schedule.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tomorrow-and-routine.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tomorrow-and-routine.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Two more useful everyday expressions are:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "denmen maten",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "tomorrow morning",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "chak jou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "every day",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "At this level, treat them as useful time chunks. You do not need advanced future or scheduling grammar.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "everyday-life",
+      "id": "schedule-conversation",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.everyday-life.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.everyday-life.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule-conversation.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule-conversation.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Mari, akilè ou etidye kreyòl?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Senkè. Mwen etidye kreyòl aswè. E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen etidye kreyòl lendi maten.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Èske ou travay chak jou?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Wi, mwen travay chak jou.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "This combines familiar questions, routines, and time without adding advanced tense grammar.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ]
+      }
+    },
+    {
+      "id": "schedule-now-review",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule-now-review.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule-now-review.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Listen to one more exchange.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Jan gives a clock time for his routine, then answers what he is doing",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "kounyeya",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Notice how familiar action and time phrases work together in the same exchange.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "speakerId": "mari",
+            "text": "Jan, akilè ou travay?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Setè edmi.",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Kisa ou ap fè kounyeya?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "M ap travay kounyeya.",
+            "locale": "ht-HT"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "everyday-plans-scenario-and-review-choice",
+      "id": "schedule-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-choice",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-choice",
       "optionIds": [
         "a",
         "b",
@@ -124,147 +411,142 @@
       }
     },
     {
-      "id": "everyday-plans-scenario-and-review-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "etidye"
-      }
-    },
-    {
-      "id": "everyday-plans-scenario-and-review-listen",
+      "id": "schedule-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-listen",
-      "targetText": "Setè edmi, mwen travay.",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-listen",
+      "targetText": "Lendi maten, Jan travay.",
       "locale": "ht-HT",
       "wordBank": [
-        "Setè",
-        "edmi,",
-        "mwen",
+        "Lendi",
+        "maten,",
+        "Jan",
         "travay."
-      ],
-      "distractors": [
-        "aswè"
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "Setè edmi, mwen travay.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Lendi maten, Jan travay.",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "everyday-plans-scenario-and-review-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-voice",
-      "targetText": "Akilè ou travay?",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Akilè ou travay?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "everyday-plans-scenario-and-review-build",
+      "id": "schedule-build",
       "kind": "word_bank_arrange",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-build",
-      "targetText": "Mwen etidye kreyòl chak jou.",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-build",
+      "targetText": "Akilè Jan etidye?",
       "locale": "ht-HT",
       "wordBank": [
-        "Mwen",
+        "Akilè",
+        "Jan",
+        "etidye?"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Akilè Jan etidye?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "schedule-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-voice",
+      "targetText": "Mwen etidye kreyòl aswè.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mwen etidye kreyòl aswè.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "schedule-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-write",
+      "placeholder": "Type the Kreyòl phrase",
+      "expected": {
+        "kind": "text_input",
+        "value": "denmen maten",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-evening-transfer",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-evening-transfer",
+      "targetText": "Mari etidye kreyòl aswè.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mari etidye kreyòl aswè.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-routine-schedule-transfer",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-routine-schedule-transfer",
+      "targetText": "Jan etidye kreyòl chak jou.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Jan",
         "etidye",
         "kreyòl",
         "chak",
         "jou."
       ],
-      "distractors": [
-        "kounyeya"
-      ],
-      "ttsText": "Mwen etidye kreyòl chak jou.",
       "expected": {
         "kind": "word_bank_arrange",
-        "targetText": "Mwen etidye kreyòl chak jou.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "everyday-plans-scenario-and-review-write",
-      "kind": "text_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "twazè edmi",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-schedule-work",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-schedule-work",
-      "targetText": "Lendi maten, mwen travay.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Lendi",
-        "maten,",
-        "mwen",
-        "travay."
-      ],
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "Lendi maten, mwen travay.",
+        "targetText": "Jan etidye kreyòl chak jou.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-ask-schedule",
+      "id": "try-schedule-new-line",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-schedule-new-line",
+      "targetText": "Lendi maten, Mari travay.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Lendi",
+        "maten,",
+        "Mari",
+        "travay."
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Lendi maten, Mari travay.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-akile-new-person",
       "kind": "voice_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-ask-schedule",
-      "targetText": "Akilè ou etidye?",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-akile-new-person",
+      "targetText": "Akilè Mari travay?",
       "locale": "ht-HT",
       "expected": {
         "kind": "voice_input",
-        "targetText": "Akilè ou etidye?",
+        "targetText": "Akilè Mari travay?",
         "locale": "ht-HT"
       }
     }

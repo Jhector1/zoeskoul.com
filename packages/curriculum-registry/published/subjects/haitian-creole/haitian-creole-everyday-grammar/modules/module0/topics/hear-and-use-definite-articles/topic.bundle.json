@@ -1,0 +1,414 @@
+{
+  "topicId": "hear-and-use-definite-articles",
+  "subjectSlug": "haitian-creole-everyday-grammar",
+  "moduleSlug": "haitian-creole-everyday-grammar-1-definite-article-choices",
+  "sectionSlug": "haitian-creole-everyday-grammar-ht2m1-article-selection",
+  "prefix": "ht2m1",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.label",
+    "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.cards.sketch0.title",
+      "sketchId": "listen-ending",
+      "height": 420,
+      "tryIt": {
+        "id": "try-hear-and-use-definite-articles-sketch0",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch0.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch0.prompt",
+        "exerciseKey": "try-mixed-biwo",
+        "exerciseKeys": [
+          "try-mixed-biwo"
+        ],
+        "difficulty": "easy",
+        "preferKind": "listen_build",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.cards.sketch1.title",
+      "sketchId": "keep-known-order",
+      "height": 420,
+      "tryIt": {
+        "id": "try-hear-and-use-definite-articles-sketch1",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch1.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch1.prompt",
+        "exerciseKey": "try-mixed-fouchet",
+        "exerciseKeys": [
+          "try-mixed-fouchet"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.cards.sketch2.title",
+      "sketchId": "mixed-confidence",
+      "height": 420,
+      "tryIt": {
+        "id": "try-hear-and-use-definite-articles-sketch2",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch2.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch2.prompt",
+        "exerciseKey": "try-mixed-kiye",
+        "exerciseKeys": [
+          "try-mixed-kiye"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "listen-ending",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.listen-ending.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.listen-ending.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "You already know the article follows the noun. In this course, pause on the noun ending before choosing among",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "a, la, an, lan,",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "The practice list gives mixed forms such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "radyo a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "valiz la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "televizyon an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "telefòn nan",
+            "locale": "ht-HT"
+          }
+        ]
+      }
+    },
+    {
+      "id": "keep-known-order",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.keep-known-order.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.keep-known-order.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Course 1 already established the word order: noun first, definite article after it. Do not relearn that rule here. Use the known order while concentrating on which article form fits the noun",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mixed-confidence",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.mixed-confidence.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.mixed-confidence.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "The English word “the” stays the same, but Kreyòl changes the singular article form. Let the Kreyòl noun guide the choice. Practice switching forms without turning the activity into a vocabulary restart",
+            "locale": "en-US"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "hear-use-articles-listen-a",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-listen-a",
+      "targetText": "radyo a",
+      "locale": "ht-HT",
+      "wordBank": [
+        "radyo",
+        "a"
+      ],
+      "distractors": [
+        "la",
+        "an"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "radyo a",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "hear-use-articles-listen-an",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-listen-an",
+      "targetText": "televizyon an",
+      "locale": "ht-HT",
+      "wordBank": [
+        "televizyon",
+        "an"
+      ],
+      "distractors": [
+        "lan",
+        "nan"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "televizyon an",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "hear-use-articles-voice-la",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-voice-la",
+      "targetText": "tab la",
+      "locale": "ht-HT",
+      "maxSeconds": 10,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "tab la",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "hear-use-articles-build-nan",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-build-nan",
+      "targetText": "telefòn nan",
+      "locale": "ht-HT",
+      "wordBank": [
+        "telefòn",
+        "nan"
+      ],
+      "distractors": [
+        "an",
+        "lan"
+      ],
+      "ttsText": "telefòn nan",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "telefòn nan",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "hear-use-articles-write-a",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-write-a",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "biwo a",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "hear-use-articles-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-mixed-biwo",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.try-mixed-biwo",
+      "targetText": "biwo a",
+      "locale": "ht-HT",
+      "wordBank": [
+        "biwo",
+        "a"
+      ],
+      "distractors": [
+        "la",
+        "an"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "biwo a",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-mixed-fouchet",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.try-mixed-fouchet",
+      "targetText": "fouchèt la",
+      "locale": "ht-HT",
+      "wordBank": [
+        "fouchèt",
+        "la"
+      ],
+      "distractors": [
+        "a",
+        "an"
+      ],
+      "ttsText": "fouchèt la",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "fouchèt la",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-mixed-kiye",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.try-mixed-kiye",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    }
+  ]
+}

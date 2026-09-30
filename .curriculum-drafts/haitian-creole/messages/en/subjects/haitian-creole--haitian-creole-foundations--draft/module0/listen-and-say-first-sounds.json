@@ -87,11 +87,11 @@
             "speak-bonjou": {
               "title": "Say bonjou",
               "prompt": "Say the Kreyòl greeting shown: Bonjou.",
-              "hint": "Read the Kreyòl target once, then say the whole phrase.",
+              "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
               "help": {
-                "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-                "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-                "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+                "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+                "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+                "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
               },
               "targetText": "Bonjou."
             },
@@ -181,11 +181,11 @@
         "listen-and-say-first-sounds": {
           "listen-first": {
             "title": "Let the full word come before analysis",
-            "bodyMarkdown": "When a new language is unfamiliar, it is tempting to break every word into English-looking pieces. Instead, listen to the **whole Kreyòl word**, then connect it with the spelling you already saw.\n\nUse these anchors:\n\n- **bonjou**\n- **mèsi**\n- **wi**\n\nReplay when needed. The goal is recognition, not speed. In the practice, listen for one more short whole word and rebuild what you hear."
+            "bodyMarkdown": "When a new language is unfamiliar, it is tempting to break every word into English-looking pieces. Instead, listen to the **whole Kreyòl word**, then connect it with the spelling you already saw.\n\nUse these anchors:\n\n- **bonjou**\n- **mèsi**\n- **wi**\n\nReplay whenever you need to. Focus on recognizing the whole word first; speed will come later. Then listen for one more short word and rebuild what you hear."
           },
           "say-whole-word": {
             "title": "Use the written target as your speaking guide",
-            "bodyMarkdown": "For speaking practice, read the complete target once, then say it naturally. The activity compares the **speech transcript** with the authored Kreyòl target. It is not a phoneme-by-phoneme pronunciation score.\n\nKeep the word intact. For example, when you see **mèsi**, preserve the word as one unit instead of spelling it aloud letter by letter."
+            "bodyMarkdown": "Read the whole word once, listen to how it sounds, then say it naturally. Keep your attention on the complete word instead of trying to pronounce it one letter at a time.\n\nKeep the word intact. For example, when you see **mèsi**, preserve the word as one unit instead of spelling it aloud letter by letter."
           },
           "short-phrases": {
             "title": "Hear words together",

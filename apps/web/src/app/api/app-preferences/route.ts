@@ -92,6 +92,7 @@ export async function GET(request: Request) {
       theme: true,
       fontSizePx: true,
       soundEnabled: true,
+      languageAudioAutoPlay: true,
     },
   });
 
@@ -145,6 +146,7 @@ export async function PATCH(request: Request) {
       theme: true,
       fontSizePx: true,
       soundEnabled: true,
+      languageAudioAutoPlay: true,
     },
   });
 

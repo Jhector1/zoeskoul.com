@@ -4,16 +4,16 @@
       "haitian-creole-foundations-8-my-first-kreyol-conversation": {
         "my-first-kreyol-conversation": {
           "label": "My First Kreyòl Conversation",
-          "summary": "Complete a first independent Kreyòl conversation by greeting, introducing yourself, asking questions, and closing politely.",
+          "summary": "Complete and understand a sustained beginner conversation using language accumulated across Course 1.",
           "cards": {
             "sketch0": {
-              "title": "Your First Full Conversation"
+              "title": "Listen From Beginning to End"
             },
             "sketch1": {
-              "title": "What You Can Now Do"
+              "title": "Follow Meaning, Not a Script"
             },
             "sketch2": {
-              "title": "Use What You Know"
+              "title": "Understand a Different Version"
             },
             "quiz": {
               "title": "Practice"
@@ -22,145 +22,137 @@
           "tryIt": {
             "allowReveal": true,
             "try_my_first_kreyol_conversation_sketch0": {
-              "title": "Try it yourself: Hear a complete response",
-              "prompt": "Right after the sketch \"From Bonjou to Orevwa\", practice that exact idea with this task. Listen and rebuild the check-in response from the capstone dialogue. Produce the result for hear a complete response so it reinforces My First Kreyòl Conversation."
+              "title": "Try it yourself: Take Mari's place turn",
+              "prompt": "Right after the sketch \"Jan and Mari meet and keep talking\", practice that exact idea with this task. Say that you live in Miami and return the question. Produce the result for take Mari's place turn so it reinforces My First Kreyòl Conversation."
+            },
+            "try_my_first_kreyol_conversation_sketch1": {
+              "title": "Try it yourself: Choose what fits next",
+              "prompt": "Right after the sketch \"Respond to the information you hear\", practice that exact idea with this task. Jan says “Mwen rete Chicago.” Mari wants to know whether he speaks Kreyòl. Produce the result for choose what fits next so it reinforces My First Kreyòl Conversation."
+            },
+            "try_my_first_kreyol_conversation_sketch2": {
+              "title": "Try it yourself: Hear a different schedule answer",
+              "prompt": "Right after the sketch \"Same skills, different path\", practice that exact idea with this task. Listen and rebuild Mari's new time answer. Produce the result for hear a different schedule answer so it reinforces My First Kreyòl Conversation."
             }
           },
           "practice": {
-            "my-first-kreyol-conversation-choice": {
-              "title": "Choose the natural next line",
-              "prompt": "Someone says “Bonjou! Kijan ou ye?” Which answer fits naturally?",
-              "hint": "Choose the polite check-in response from Module 2.",
+            "capstone-natural-answer-choice": {
+              "title": "Choose the natural response",
+              "prompt": "Mari asks “Kijan ou ye?” Which answer fits?",
+              "hint": "Answer the condition question.",
               "help": {
-                "concept": "A conversation works when the response matches the question that was asked.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "responding naturally to a familiar greeting question",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
               "options": {
                 "a": "Mwen byen, mèsi.",
-                "b": "Twa liv.",
-                "c": "Setè edmi."
+                "b": "Mwen rete Chicago.",
+                "c": "Senkè edmi."
               }
             },
-            "my-first-kreyol-conversation-fill": {
-              "title": "Complete the final question",
-              "prompt": "Choose the word that completes the question about language.",
-              "hint": "Use the action associated with speaking a language.",
+            "capstone-listen": {
+              "title": "Hear a connected name turn",
+              "prompt": "Listen and rebuild the response.",
+              "hint": "Jan gives his name and returns the question.",
               "help": {
-                "concept": "The blank needs the verb used in the familiar language question.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "hearing a connected identity response",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "template": "Èske ou [blank1] kreyòl?",
-              "choices": [
-                "pale",
-                "rete",
-                "rele"
-              ]
-            },
-            "my-first-kreyol-conversation-listen": {
-              "title": "Hear the conversation close",
-              "prompt": "Listen, then build the closing exchange you hear.",
-              "hint": "Listen for the repeated goodbye.",
-              "help": {
-                "concept": "Build the two-line closing using the familiar farewell.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Orevwa! Orevwa!",
+              "targetText": "M rele Jan. E ou menm?",
               "wordBank": [
-                "Orevwa!",
-                "Orevwa!"
-              ],
-              "distractors": [
-                "Bonjou!"
-              ]
-            },
-            "my-first-kreyol-conversation-voice": {
-              "title": "Give your first conversation",
-              "prompt": "Say: Bonjou! M rele Jan. Mwen rete Chicago. Mwen pale kreyòl. Orevwa!",
-              "hint": "Say the short sentences one at a time at a comfortable pace.",
-              "help": {
-                "concept": "Speaking practice compares the recognized transcript with the authored capstone response.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Bonjou! M rele Jan. Mwen rete Chicago. Mwen pale kreyòl. Orevwa!"
-            },
-            "my-first-kreyol-conversation-build": {
-              "title": "Build a complete mini exchange",
-              "prompt": "Arrange the chunks into a natural question and answer.",
-              "hint": "Put the residence question before its answer.",
-              "help": {
-                "concept": "A useful exchange pairs one clear question with one complete answer.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
-              },
-              "targetText": "Ki kote ou rete? Mwen rete Chicago.",
-              "wordBank": [
-                "Ki",
-                "kote",
+                "M",
+                "rele",
+                "Jan.",
+                "E",
                 "ou",
-                "rete?",
-                "Mwen",
-                "rete",
-                "Chicago."
-              ],
-              "distractors": [
-                "Konbyen"
-              ],
-              "ttsText": "Ki kote ou rete? Mwen rete Chicago."
+                "menm?"
+              ]
             },
-            "my-first-kreyol-conversation-write": {
-              "title": "Write a short self-introduction",
-              "prompt": "Type: “My name is Ana. I speak Kreyòl.”",
-              "hint": "Use two short sentences from Modules 3 and 8.",
+            "capstone-build": {
+              "title": "Build a complete current-action answer",
+              "prompt": "Build “I am studying Kreyòl now.”",
+              "hint": "Use M ap and finish with kounyeya.",
               "help": {
-                "concept": "Write two complete beginner sentences.",
-                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
-                "hint_2": "Read or listen to the whole exchange before answering."
+                "concept": "reusing the current-action pattern in the capstone",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
               },
-              "expectedText": "M rele Ana. Mwen pale kreyòl.",
-              "placeholder": "Type the Kreyòl answer"
-            },
-            "try-full-conversation-hear": {
-              "title": "Hear a complete response",
-              "prompt": "Listen and rebuild the check-in response from the capstone dialogue.",
-              "hint": "Listen again and rebuild the new Kreyòl phrase.",
-              "help": {
-                "concept": "capstone listening",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Mwen byen, mèsi. E ou menm?"
-            },
-            "try-full-conversation-intro": {
-              "title": "Say a name introduction",
-              "prompt": "Say Ana’s name-introduction line from the dialogue.",
-              "hint": "Say: M rele Ana. E ou menm?",
-              "help": {
-                "concept": "capstone speaking",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "M rele Ana. E ou menm?"
-            },
-            "try-full-conversation-order": {
-              "title": "Order the conversation milestones",
-              "prompt": "Arrange these major chunks in the order they appear in the conversation.",
-              "hint": "Use the pattern from the lesson to build the new phrase.",
-              "help": {
-                "concept": "capstone conversation sequence",
-                "hint_1": "Use the Kreyòl pattern from this lesson.",
-                "hint_2": "Use the pattern you just learned."
-              },
-              "targetText": "Bonjou! Kijan ou ye? M rele Ana. E ou menm? Ki kote ou rete? Èske ou pale kreyòl? Orevwa!",
+              "targetText": "M ap etidye kreyòl kounyeya.",
               "wordBank": [
-                "Bonjou! Kijan ou ye?",
-                "M rele Ana. E ou menm?",
-                "Ki kote ou rete?",
-                "Èske ou pale kreyòl?",
-                "Orevwa!"
+                "M",
+                "ap",
+                "etidye",
+                "kreyòl",
+                "kounyeya."
+              ]
+            },
+            "capstone-voice": {
+              "title": "Ask a quantity question",
+              "prompt": "Ask “How many notebooks does Mari have?”",
+              "hint": "Begin with Konbyen.",
+              "help": {
+                "concept": "producing a quantity question in context",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Konbyen kaye Mari genyen?"
+            },
+            "capstone-write": {
+              "title": "Write a schedule answer",
+              "prompt": "Write “I study Kreyòl every day.”",
+              "hint": "Finish with chak jou.",
+              "help": {
+                "concept": "writing a familiar routine inside the capstone",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "expectedText": "Mwen etidye kreyòl chak jou.",
+              "placeholder": "Type the Kreyòl sentence"
+            },
+            "try-capstone-role-transfer": {
+              "title": "Take Mari's place turn",
+              "prompt": "Say that you live in Miami and return the question.",
+              "hint": "Answer first, then use E ou menm?",
+              "help": {
+                "concept": "taking a role inside the sustained conversation",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Mwen rete Miami. E ou menm?"
+            },
+            "try-capstone-next-move": {
+              "title": "Choose what fits next",
+              "prompt": "Jan says “Mwen rete Chicago.” Mari wants to know whether he speaks Kreyòl.",
+              "hint": "Choose the yes/no language question.",
+              "help": {
+                "concept": "selecting the next conversational move",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "options": {
+                "a": "Èske ou pale kreyòl?",
+                "b": "Ki kote ou rete?",
+                "c": "Mwen rete Boston."
+              }
+            },
+            "try-capstone-hear-transfer": {
+              "title": "Hear a different schedule answer",
+              "prompt": "Listen and rebuild Mari's new time answer.",
+              "hint": "She studies at seven thirty in the evening.",
+              "help": {
+                "concept": "hearing a familiar schedule pattern in a new version",
+                "hint_1": "Use language already practiced earlier in this course.",
+                "hint_2": "Respond to what the other person actually said instead of memorizing one fixed script."
+              },
+              "targetText": "Setè edmi. Mwen etidye kreyòl aswè.",
+              "wordBank": [
+                "Setè",
+                "edmi.",
+                "Mwen",
+                "etidye",
+                "kreyòl",
+                "aswè."
               ]
             }
           }
@@ -173,16 +165,16 @@
       "haitian-creole-foundations-8-my-first-kreyol-conversation": {
         "my-first-kreyol-conversation": {
           "full-conversation": {
-            "title": "From Bonjou to Orevwa",
-            "bodyMarkdown": "**A:** Bonjou! Kijan ou ye?\n\n**B:** Mwen byen, mèsi. E ou menm?\n\n**A:** Mwen byen tou. Kijan ou rele?\n\n**B:** M rele Ana. E ou menm?\n\n**A:** M rele Jan. Ki kote ou rete?\n\n**B:** Mwen rete Chicago.\n\n**A:** Èske ou pale kreyòl?\n\n**B:** Wi, mwen pale kreyòl. M ap etidye kreyòl kounyeya.\n\n**A:** Trè byen. Orevwa!\n\n**B:** Orevwa!"
+            "title": "Jan and Mari meet and keep talking",
+            "bodyMarkdown": "**Jan:** Bonjou!\n\n**Mari:** Bonjou!\n\n**Jan:** Kijan ou ye?\n\n**Mari:** Mwen byen, mèsi. E ou menm?\n\n**Jan:** Mwen byen tou.\n\n**Jan:** Kijan ou rele?\n\n**Mari:** M rele Mari. E ou menm?\n\n**Jan:** M rele Jan.\n\n**Jan:** Ki kote ou rete?\n\n**Mari:** Mwen rete Boston. E ou menm?\n\n**Jan:** Mwen rete Chicago.\n\n**Mari:** Èske ou pale kreyòl?\n\n**Jan:** Wi, mwen pale kreyòl.\n\n**Mari:** Kisa ou ap fè kounyeya?\n\n**Jan:** M ap etidye kreyòl kounyeya.\n\n**Jan:** Konbyen liv ou genyen?\n\n**Mari:** Mwen genyen twa liv.\n\n**Mari:** Akilè ou etidye kreyòl?\n\n**Jan:** Senkè edmi. Mwen etidye kreyòl aswè.\n\n**Mari:** Orevwa, Jan!\n\n**Jan:** Orevwa, Mari!\n\nYou already know the language in this conversation. Notice how greetings, questions, actions, numbers, and time now come together in one exchange."
           },
           "conversation-skills": {
-            "title": "A0 → A1 foundations",
-            "bodyMarkdown": "You can now:\n\n- greet and close politely\n- give your name and basic identity\n- say where you live and what language you speak\n- identify and describe simple things\n- say what someone is doing\n- ask common beginner questions\n- understand basic numbers and time expressions\n\nThat is the foundation for the next course."
+            "title": "Respond to the information you hear",
+            "bodyMarkdown": "A real conversation can change order.\n\nThe important skill is knowing what kind of move fits:\n\n- greet or close\n- answer and return a question\n- ask for new information\n- talk about an action\n- give a quantity or time\n\nYou do not need to memorize this conversation word for word."
           },
-          "independent-use": {
-            "title": "Do not memorize one script",
-            "bodyMarkdown": "The goal is not to memorize this exact conversation. Swap in a different name, place, action, object, number, or time. Keep the grammar simple and make the conversation your own."
+          "alternate-conversation": {
+            "title": "Same skills, different path",
+            "bodyMarkdown": "Listen to a shorter second conversation.\n\nThe order changes, but Jan and Mari still use language you already know."
           }
         }
       }

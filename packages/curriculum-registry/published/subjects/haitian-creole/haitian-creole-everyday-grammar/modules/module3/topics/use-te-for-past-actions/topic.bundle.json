@@ -1,0 +1,465 @@
+{
+  "topicId": "use-te-for-past-actions",
+  "subjectSlug": "haitian-creole-everyday-grammar",
+  "moduleSlug": "haitian-creole-everyday-grammar-4-past-and-future",
+  "sectionSlug": "haitian-creole-everyday-grammar-ht2m4-time",
+  "prefix": "ht2m4",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.label",
+    "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.cards.sketch0.title",
+      "sketchId": "te-before-verb",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-te-for-past-actions-sketch0",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch0.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch0.prompt",
+        "exerciseKey": "try-te-past-choice",
+        "exerciseKeys": [
+          "try-te-past-choice"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.cards.sketch1.title",
+      "sketchId": "te-with-familiar-actions",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-te-for-past-actions-sketch1",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch1.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch1.prompt",
+        "exerciseKey": "try-te-etidye-listen",
+        "exerciseKeys": [
+          "try-te-etidye-listen",
+          "try-te-manje-write"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.cards.sketch2.title",
+      "sketchId": "ye-with-te",
+      "height": 420,
+      "tryIt": {
+        "id": "try-use-te-for-past-actions-sketch2",
+        "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch2.title",
+        "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch2.prompt",
+        "exerciseKey": "try-ye-te-build",
+        "exerciseKeys": [
+          "try-ye-te-build"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "te-before-verb",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.te-before-verb.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.te-before-verb.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "To talk about a completed past action, place",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "te",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "before the verb",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Its pattern is",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Subject + te + verb",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Mwen te manje.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "I ate",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "The new part to notice in this topic is",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "te",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "before the familiar action",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "te-with-familiar-actions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.te-with-familiar-actions.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.te-with-familiar-actions.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Compare these short past examples",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Mwen te manje.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "I ate",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Mwen te etidye.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "I studied",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "The action words stay familiar",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "te",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "is what places them in the past",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ye-with-te",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.ye-with-te.title",
+      "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.ye-with-te.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Here is a complete past example",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Yè mwen te ale lekòl.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Yesterday I went to school",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Yè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "supplies the past-time context, and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "te",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "still appears before the action",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "You may also see",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Mwen te ale lekol.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "without the accent in",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "lekòl",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "This lesson preserves that spelling variation but does not grade the unaccented spelling",
+            "locale": "en-US"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "te-quiz-recognize",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-recognize",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "te-quiz-ye-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-ye-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "te-quiz-manje-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-manje-listen",
+      "targetText": "Mwen te manje.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Mwen te manje.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "te-quiz-etidye-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-etidye-listen",
+      "targetText": "Mwen te etidye.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Mwen te etidye.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "te-quiz-ye-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-ye-build",
+      "targetText": "Yè mwen te ale lekòl.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Yè",
+        "mwen",
+        "te",
+        "ale",
+        "lekòl."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Yè mwen te ale lekòl.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "te-quiz-etidye-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-etidye-write",
+      "placeholder": "Type the Kreyòl sentence",
+      "expected": {
+        "kind": "text_input",
+        "value": "Mwen te etidye.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-te-past-choice",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.try-te-past-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-te-etidye-listen",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.try-te-etidye-listen",
+      "targetText": "Mwen te etidye.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Mwen te etidye.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-te-manje-write",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.try-te-manje-write",
+      "placeholder": "Type the Kreyòl sentence",
+      "expected": {
+        "kind": "text_input",
+        "value": "Mwen te manje.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-ye-te-build",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.try-ye-te-build",
+      "targetText": "Yè mwen te ale lekòl.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Yè",
+        "mwen",
+        "te",
+        "ale",
+        "lekòl."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Yè mwen te ale lekòl.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

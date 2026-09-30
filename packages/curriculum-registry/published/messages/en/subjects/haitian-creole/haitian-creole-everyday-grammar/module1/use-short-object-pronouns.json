@@ -1,0 +1,189 @@
+{
+  "topics": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "use-short-object-pronouns": {
+          "label": "Use Short Object Pronouns",
+          "summary": "Use the short object forms m, w, l, and n in sentences.",
+          "cards": {
+            "sketch0": {
+              "title": "Shorten li to l"
+            },
+            "sketch1": {
+              "title": "Shorten mwen and ou"
+            },
+            "sketch2": {
+              "title": "Map the short forms"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_use_short_object_pronouns_sketch0": {
+              "title": "Try it yourself: Build Carla’s short form",
+              "prompt": "Right after the sketch \"Use l for li in object position\", practice that exact idea with this task. Build the short-object version of “Carla achte li.”. Produce the result for build Carla’s short form so it reinforces Use Short Object Pronouns."
+            },
+            "try_use_short_object_pronouns_sketch1": {
+              "title": "Try it yourself: Say the short ou form",
+              "prompt": "Right after the sketch \"Use m and w as short objects\", practice that exact idea with this task. Say the short-object version of “Nou rayi ou.”. Produce the result for say the short ou form so it reinforces Use Short Object Pronouns."
+            },
+            "try_use_short_object_pronouns_sketch2": {
+              "title": "Try it yourself: Choose the short form of Nou",
+              "prompt": "Right after the sketch \"Connect each full pronoun with its short object form\", practice that exact idea with this task. Which short object form does The table give for Nou? Produce the result for choose the short form of Nou so it reinforces Use Short Object Pronouns."
+            }
+          },
+          "practice": {
+            "short-object-li-choice": {
+              "title": "Recognize the short li object",
+              "prompt": "Which sentence uses the short object form of li after “Mwen renmen”?",
+              "hint": "Choose the version with the contracted object.",
+              "help": {
+                "concept": "li can appear as l in object position.",
+                "hint_1": "Compare the full and short forms.",
+                "hint_2": "The short form has one letter after renmen."
+              },
+              "options": {
+                "a": "Mwen renmen l",
+                "b": "Mwen renmen li",
+                "c": "Li renmen m"
+              }
+            },
+            "short-object-yo-choice": {
+              "title": "Find the form without a contraction",
+              "prompt": "Which full pronoun has no contracted object form shown in The table?",
+              "hint": "Compare all five rows in the object-form table and look for the row that differs from the four shortened forms.",
+              "help": {
+                "concept": "Most rows pair a full pronoun with a one-letter object form; one row is the exception.",
+                "hint_1": "Look at the short forms and compare the pattern across all five rows.",
+                "hint_2": "Choose the pronoun whose row does not show a one-letter contracted object form."
+              },
+              "options": {
+                "a": "Yo",
+                "b": "Li",
+                "c": "Ou"
+              }
+            },
+            "short-object-m-voice": {
+              "title": "Say the short mwen object",
+              "prompt": "Say the short-object sentence for “Li renmen mwen.”",
+              "hint": "Shorten the final object pronoun.",
+              "help": {
+                "concept": "mwen contracts to m in this object position.",
+                "hint_1": "Keep Li renmen unchanged.",
+                "hint_2": "Use the short form from the mwen row."
+              },
+              "targetText": "Li renmen m"
+            },
+            "short-object-w-voice": {
+              "title": "Say the short ou object",
+              "prompt": "Say the short-object sentence for “Nou rayi ou.”",
+              "hint": "Shorten only the final object.",
+              "help": {
+                "concept": "ou contracts to w in this object position.",
+                "hint_1": "Keep Nou rayi unchanged.",
+                "hint_2": "Use the short form from the ou row."
+              },
+              "targetText": "Nou rayi w"
+            },
+            "short-object-carla-build": {
+              "title": "Build Carla’s sentence",
+              "prompt": "Build the short-object version of “Carla achte li.”",
+              "hint": "Keep the subject and verb, then use the short li object.",
+              "help": {
+                "concept": "li contracts to l after achte in this example.",
+                "hint_1": "Start with Carla.",
+                "hint_2": "The final token is the short form of li."
+              },
+              "targetText": "Carla achte l",
+              "wordBank": [
+                "Carla",
+                "achte",
+                "l"
+              ]
+            },
+            "short-object-m-build": {
+              "title": "Build the short mwen sentence",
+              "prompt": "Build the short-object version of “Li renmen mwen.”",
+              "hint": "Use the short object form after renmen.",
+              "help": {
+                "concept": "mwen contracts to m in this example.",
+                "hint_1": "Keep Li first and renmen second.",
+                "hint_2": "Finish with the short form of mwen."
+              },
+              "targetText": "Li renmen m",
+              "wordBank": [
+                "Li",
+                "renmen",
+                "m"
+              ]
+            },
+            "try-carla-l": {
+              "title": "Build Carla’s short form",
+              "prompt": "Build the short-object version of “Carla achte li.”",
+              "hint": "Use the short object that corresponds to li.",
+              "help": {
+                "concept": "li can contract to l in object position.",
+                "hint_1": "Keep Carla and achte in the same order.",
+                "hint_2": "Replace the final full object pronoun with its short form."
+              },
+              "targetText": "Carla achte l",
+              "wordBank": [
+                "Carla",
+                "achte",
+                "l"
+              ]
+            },
+            "try-nou-rayi-w": {
+              "title": "Say the short ou form",
+              "prompt": "Say the short-object version of “Nou rayi ou.”",
+              "hint": "Use the short object form that corresponds to ou.",
+              "help": {
+                "concept": "ou contracts to w in this object position.",
+                "hint_1": "Keep Nou rayi and shorten only the object pronoun.",
+                "hint_2": "Use the ou → w mapping."
+              },
+              "targetText": "Nou rayi w"
+            },
+            "try-nou-to-n": {
+              "title": "Choose the short form of Nou",
+              "prompt": "Which short object form does The table give for Nou?",
+              "hint": "Use the mapping table, not the full pronoun.",
+              "help": {
+                "concept": "Nou maps to n in The short-object table.",
+                "hint_1": "Look at the Nou pair.",
+                "hint_2": "Choose the single-letter short form from that pair."
+              },
+              "options": {
+                "a": "n",
+                "b": "m",
+                "c": "l"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-everyday-grammar": {
+      "haitian-creole-everyday-grammar-2-pronouns-and-possession": {
+        "use-short-object-pronouns": {
+          "short-li": {
+            "title": "Use l for li in object position",
+            "bodyMarkdown": "A full object pronoun can also appear in a shorter everyday form. Compare:\n\n**Mwen renmen li** → **Mwen renmen l**\n\nThe person receiving the action is still **li**; in the short object form it becomes **l**."
+          },
+          "short-mwen-ou": {
+            "title": "Use m and w as short objects",
+            "bodyMarkdown": "Compare another pair:\n\n**Li renmen mwen** → **Li renmen m**\n\nFor **ou**, the corresponding short object form is **w**.\n\nThese are object forms: they follow the action in these examples."
+          },
+          "object-form-map": {
+            "title": "Connect each full pronoun with its short object form",
+            "bodyMarkdown": "Use these object-pronoun mappings:\n\n| Full form | Short object form |\n| --- | --- |\n| Mwen | m |\n| Ou | w |\n| Li | l |\n| Nou | n |\n| Yo | no contracted form shown |\n\n**Nou** uses the short form **n**. **Yo** does not have a contracted form in this set."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1019,6 +1019,331 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       }
     ]
   },
+  "haitian-creole-everyday-grammar": {
+    "subject": {
+      "slug": "haitian-creole-everyday-grammar",
+      "profileId": "language",
+      "catalogSlug": "haitian-creole",
+      "genKey": "language_course",
+      "order": 2,
+      "accessPolicy": "paid",
+      "visibility": "public",
+      "status": "active",
+      "imagePublicId": null,
+      "imageAlt": null,
+      "titleKey": "subjects.haitian-creole-everyday-grammar.title",
+      "descriptionKey": "subjects.haitian-creole-everyday-grammar.description",
+      "serviceDefaults": null,
+      "meta": {
+        "curriculum": {
+          "plannedModuleCount": 5,
+          "isTerminalRelease": false,
+          "moreComingMessageKey": "subjects.haitian-creole-everyday-grammar.moreComingSoon"
+        },
+        "completionPolicy": {
+          "requireAllPublishedModules": true,
+          "rewardEnabledByDefault": true,
+          "certificateEnabledByDefault": true
+        }
+      }
+    },
+    "modules": [
+      {
+        "slug": "haitian-creole-everyday-grammar-1-definite-article-choices",
+        "prefix": "ht2m1",
+        "order": 0,
+        "role": "standard",
+        "titleKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.title",
+        "descriptionKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": "free",
+        "runtimeDefaults": {
+          "kind": "code",
+          "supportsTerminal": false,
+          "supportsMultiFile": false,
+          "supportsFileSystem": false,
+          "supportsStdInStdOut": true,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": null,
+        "meta": {
+          "estimatedMinutes": 76,
+          "prereqKeys": [],
+          "outcomeKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.outcomes.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.outcomes.1",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.why.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "haitian-creole-everyday-grammar-ht2m1-article-selection",
+            "order": 1,
+            "titleKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole-everyday-grammar-ht2m1-article-selection.title",
+            "descriptionKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole-everyday-grammar-ht2m1-article-selection.description",
+            "meta": {
+              "module": 0,
+              "weeksKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole-everyday-grammar-ht2m1-article-selection.weeks",
+              "bulletKeys": [
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole-everyday-grammar-ht2m1-article-selection.bullets.0",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole-everyday-grammar-ht2m1-article-selection.bullets.1",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole-everyday-grammar-ht2m1-article-selection.bullets.2",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole-everyday-grammar-ht2m1-article-selection.bullets.3"
+              ]
+            },
+            "serviceDefaults": null,
+            "topics": [
+              "choose-a-and-la",
+              "choose-an-lan-and-nan",
+              "hear-and-use-definite-articles"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+        "prefix": "ht2m2",
+        "order": 1,
+        "role": "standard",
+        "titleKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.title",
+        "descriptionKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "supportsTerminal": false,
+          "supportsMultiFile": false,
+          "supportsFileSystem": false,
+          "supportsStdInStdOut": true,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": null,
+        "meta": {
+          "estimatedMinutes": 50,
+          "prereqKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.title"
+          ],
+          "outcomeKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.outcomes.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.outcomes.1",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.why.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "haitian-creole-everyday-grammar-ht2m2-pronouns-possession",
+            "order": 1,
+            "titleKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole-everyday-grammar-ht2m2-pronouns-possession.title",
+            "descriptionKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole-everyday-grammar-ht2m2-pronouns-possession.description",
+            "meta": {
+              "module": 1,
+              "weeksKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole-everyday-grammar-ht2m2-pronouns-possession.weeks",
+              "bulletKeys": [
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole-everyday-grammar-ht2m2-pronouns-possession.bullets.0",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole-everyday-grammar-ht2m2-pronouns-possession.bullets.1",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole-everyday-grammar-ht2m2-pronouns-possession.bullets.2",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole-everyday-grammar-ht2m2-pronouns-possession.bullets.3"
+              ]
+            },
+            "serviceDefaults": null,
+            "topics": [
+              "use-short-object-pronouns",
+              "use-possessive-pronouns"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+        "prefix": "ht2m3",
+        "order": 2,
+        "role": "standard",
+        "titleKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.title",
+        "descriptionKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "supportsTerminal": false,
+          "supportsMultiFile": false,
+          "supportsFileSystem": false,
+          "supportsStdInStdOut": true,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": null,
+        "meta": {
+          "estimatedMinutes": 74,
+          "prereqKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.title"
+          ],
+          "outcomeKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.outcomes.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.outcomes.1",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.why.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "haitian-creole-everyday-grammar-ht2m3-questions-health",
+            "order": 1,
+            "titleKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole-everyday-grammar-ht2m3-questions-health.title",
+            "descriptionKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole-everyday-grammar-ht2m3-questions-health.description",
+            "meta": {
+              "module": 2,
+              "weeksKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole-everyday-grammar-ht2m3-questions-health.weeks",
+              "bulletKeys": [
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole-everyday-grammar-ht2m3-questions-health.bullets.0",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole-everyday-grammar-ht2m3-questions-health.bullets.1",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole-everyday-grammar-ht2m3-questions-health.bullets.2",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole-everyday-grammar-ht2m3-questions-health.bullets.3"
+              ]
+            },
+            "serviceDefaults": null,
+            "topics": [
+              "ask-for-more-specific-information",
+              "name-body-parts",
+              "say-what-hurts"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "haitian-creole-everyday-grammar-4-past-and-future",
+        "prefix": "ht2m4",
+        "order": 3,
+        "role": "standard",
+        "titleKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.title",
+        "descriptionKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "supportsTerminal": false,
+          "supportsMultiFile": false,
+          "supportsFileSystem": false,
+          "supportsStdInStdOut": true,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": null,
+        "meta": {
+          "estimatedMinutes": 76,
+          "prereqKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.title"
+          ],
+          "outcomeKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.outcomes.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.outcomes.1",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.why.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "haitian-creole-everyday-grammar-ht2m4-time",
+            "order": 1,
+            "titleKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole-everyday-grammar-ht2m4-time.title",
+            "descriptionKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole-everyday-grammar-ht2m4-time.description",
+            "meta": {
+              "module": 3,
+              "weeksKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole-everyday-grammar-ht2m4-time.weeks",
+              "bulletKeys": [
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole-everyday-grammar-ht2m4-time.bullets.0",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole-everyday-grammar-ht2m4-time.bullets.1",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole-everyday-grammar-ht2m4-time.bullets.2",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole-everyday-grammar-ht2m4-time.bullets.3"
+              ]
+            },
+            "serviceDefaults": null,
+            "topics": [
+              "use-te-for-past-actions",
+              "use-pral-for-future-actions",
+              "contrast-yesterday-today-and-tomorrow"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+        "prefix": "ht2m5",
+        "order": 4,
+        "role": "standard",
+        "titleKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.title",
+        "descriptionKey": "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "supportsTerminal": false,
+          "supportsMultiFile": false,
+          "supportsFileSystem": false,
+          "supportsStdInStdOut": true,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": null,
+        "meta": {
+          "estimatedMinutes": 102,
+          "prereqKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.title"
+          ],
+          "outcomeKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.outcomes.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.outcomes.1",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.outcomes.2",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.outcomes.3"
+          ],
+          "whyKeys": [
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.why.0",
+            "modules.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "haitian-creole-everyday-grammar-ht2m5-descriptions",
+            "order": 1,
+            "titleKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole-everyday-grammar-ht2m5-descriptions.title",
+            "descriptionKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole-everyday-grammar-ht2m5-descriptions.description",
+            "meta": {
+              "module": 4,
+              "weeksKey": "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole-everyday-grammar-ht2m5-descriptions.weeks",
+              "bulletKeys": [
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole-everyday-grammar-ht2m5-descriptions.bullets.0",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole-everyday-grammar-ht2m5-descriptions.bullets.1",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole-everyday-grammar-ht2m5-descriptions.bullets.2",
+                "sections.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole-everyday-grammar-ht2m5-descriptions.bullets.3"
+              ]
+            },
+            "serviceDefaults": null,
+            "topics": [
+              "describe-without-to-be",
+              "use-ye",
+              "place-adjectives-in-phrases",
+              "describe-color-size-and-quality"
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "haitian-creole-foundations": {
     "subject": {
       "slug": "haitian-creole-foundations",
@@ -1044,14 +1369,6 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           "requireAllPublishedModules": true,
           "rewardEnabledByDefault": true,
           "certificateEnabledByDefault": true
-        },
-        "versioning": {
-          "family": "haitian-creole",
-          "version": 1,
-          "status": "active",
-          "defaultForNewEnrollments": true,
-          "supersedes": null,
-          "supersededBy": null
         }
       }
     },
@@ -1153,7 +1470,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 102,
+          "estimatedMinutes": 66,
           "prereqKeys": [
             "modules.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.title"
           ],
@@ -1169,44 +1486,24 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "haitian-creole-foundations-ht2-learn-listen-speak",
+            "slug": "haitian-creole-foundations-ht2-greetings-conversation",
             "order": 1,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-learn-listen-speak.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-learn-listen-speak.description",
+            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-greetings-conversation.title",
+            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-greetings-conversation.description",
             "meta": {
               "module": 1,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-learn-listen-speak.weeks",
+              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-greetings-conversation.weeks",
               "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-learn-listen-speak.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-learn-listen-speak.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-learn-listen-speak.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-learn-listen-speak.bullets.3"
+                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-greetings-conversation.bullets.0",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-greetings-conversation.bullets.1",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-greetings-conversation.bullets.2",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-greetings-conversation.bullets.3"
               ]
             },
             "serviceDefaults": null,
             "topics": [
               "learn-greetings-and-polite-basics",
-              "listen-and-say-hello"
-            ]
-          },
-          {
-            "slug": "haitian-creole-foundations-ht2-read-build-write-use",
-            "order": 2,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-read-build-write-use.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-read-build-write-use.description",
-            "meta": {
-              "module": 1,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-read-build-write-use.weeks",
-              "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-read-build-write-use.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-read-build-write-use.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-read-build-write-use.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.haitian-creole-foundations-ht2-read-build-write-use.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "read-build-and-write-greetings",
+              "listen-and-say-hello",
               "greeting-scenario-and-review"
             ]
           }
@@ -1232,7 +1529,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 102,
+          "estimatedMinutes": 67,
           "prereqKeys": [
             "modules.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.title"
           ],
@@ -1248,43 +1545,23 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "haitian-creole-foundations-ht3-learn-listen-speak",
+            "slug": "haitian-creole-foundations-ht3-introductions",
             "order": 1,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-learn-listen-speak.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-learn-listen-speak.description",
+            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-introductions.title",
+            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-introductions.description",
             "meta": {
               "module": 2,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-learn-listen-speak.weeks",
+              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-introductions.weeks",
               "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-learn-listen-speak.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-learn-listen-speak.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-learn-listen-speak.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-learn-listen-speak.bullets.3"
+                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-introductions.bullets.0",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-introductions.bullets.1",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-introductions.bullets.2",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-introductions.bullets.3"
               ]
             },
             "serviceDefaults": null,
             "topics": [
               "learn-names-and-introductions",
-              "listen-and-introduce-yourself"
-            ]
-          },
-          {
-            "slug": "haitian-creole-foundations-ht3-read-build-write-use",
-            "order": 2,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-read-build-write-use.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-read-build-write-use.description",
-            "meta": {
-              "module": 2,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-read-build-write-use.weeks",
-              "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-read-build-write-use.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-read-build-write-use.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-read-build-write-use.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.haitian-creole-foundations-ht3-read-build-write-use.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
               "read-build-and-write-an-introduction",
               "meet-someone-scenario-and-review"
             ]
@@ -1311,7 +1588,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 102,
+          "estimatedMinutes": 69,
           "prereqKeys": [
             "modules.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.title"
           ],
@@ -1327,43 +1604,23 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "haitian-creole-foundations-ht4-learn-listen-speak",
+            "slug": "haitian-creole-foundations-ht4-things-and-possession",
             "order": 1,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-learn-listen-speak.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-learn-listen-speak.description",
+            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-things-and-possession.title",
+            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-things-and-possession.description",
             "meta": {
               "module": 3,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-learn-listen-speak.weeks",
+              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-things-and-possession.weeks",
               "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-learn-listen-speak.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-learn-listen-speak.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-learn-listen-speak.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-learn-listen-speak.bullets.3"
+                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-things-and-possession.bullets.0",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-things-and-possession.bullets.1",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-things-and-possession.bullets.2",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-things-and-possession.bullets.3"
               ]
             },
             "serviceDefaults": null,
             "topics": [
               "learn-everyday-things",
-              "listen-and-name-things"
-            ]
-          },
-          {
-            "slug": "haitian-creole-foundations-ht4-read-build-write-use",
-            "order": 2,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-read-build-write-use.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-read-build-write-use.description",
-            "meta": {
-              "module": 3,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-read-build-write-use.weeks",
-              "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-read-build-write-use.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-read-build-write-use.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-read-build-write-use.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.haitian-creole-foundations-ht4-read-build-write-use.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
               "read-build-and-write-about-things",
               "what-is-this-scenario-and-review"
             ]
@@ -1390,7 +1647,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 102,
+          "estimatedMinutes": 70,
           "prereqKeys": [
             "modules.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.title"
           ],
@@ -1406,44 +1663,24 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "haitian-creole-foundations-ht5-learn-listen-speak",
+            "slug": "haitian-creole-foundations-ht5-actions-now-and-routines",
             "order": 1,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-learn-listen-speak.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-learn-listen-speak.description",
+            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-actions-now-and-routines.title",
+            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-actions-now-and-routines.description",
             "meta": {
               "module": 4,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-learn-listen-speak.weeks",
+              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-actions-now-and-routines.weeks",
               "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-learn-listen-speak.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-learn-listen-speak.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-learn-listen-speak.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-learn-listen-speak.bullets.3"
+                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-actions-now-and-routines.bullets.0",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-actions-now-and-routines.bullets.1",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-actions-now-and-routines.bullets.2",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-actions-now-and-routines.bullets.3"
               ]
             },
             "serviceDefaults": null,
             "topics": [
               "learn-common-actions",
-              "listen-and-say-what-is-happening"
-            ]
-          },
-          {
-            "slug": "haitian-creole-foundations-ht5-read-build-write-use",
-            "order": 2,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-read-build-write-use.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-read-build-write-use.description",
-            "meta": {
-              "module": 4,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-read-build-write-use.weeks",
-              "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-read-build-write-use.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-read-build-write-use.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-read-build-write-use.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-foundations-ht5-read-build-write-use.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "read-build-and-write-actions",
+              "listen-and-say-what-is-happening",
               "what-are-you-doing-scenario"
             ]
           }
@@ -1469,7 +1706,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 102,
+          "estimatedMinutes": 73,
           "prereqKeys": [
             "modules.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.title"
           ],
@@ -1485,43 +1722,23 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "haitian-creole-foundations-ht6-learn-listen-speak",
+            "slug": "haitian-creole-foundations-ht6-question-system",
             "order": 1,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-learn-listen-speak.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-learn-listen-speak.description",
+            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-question-system.title",
+            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-question-system.description",
             "meta": {
               "module": 5,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-learn-listen-speak.weeks",
+              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-question-system.weeks",
               "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-learn-listen-speak.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-learn-listen-speak.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-learn-listen-speak.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-learn-listen-speak.bullets.3"
+                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-question-system.bullets.0",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-question-system.bullets.1",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-question-system.bullets.2",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-question-system.bullets.3"
               ]
             },
             "serviceDefaults": null,
             "topics": [
               "learn-core-question-patterns",
-              "listen-ask-and-answer"
-            ]
-          },
-          {
-            "slug": "haitian-creole-foundations-ht6-read-build-write-use",
-            "order": 2,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-read-build-write-use.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-read-build-write-use.description",
-            "meta": {
-              "module": 5,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-read-build-write-use.weeks",
-              "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-read-build-write-use.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-read-build-write-use.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-read-build-write-use.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.haitian-creole-foundations-ht6-read-build-write-use.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
               "read-build-and-write-questions",
               "question-chain-scenario-and-review"
             ]
@@ -1548,7 +1765,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 102,
+          "estimatedMinutes": 73,
           "prereqKeys": [
             "modules.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.title"
           ],
@@ -1564,44 +1781,24 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "haitian-creole-foundations-ht7-learn-listen-speak",
+            "slug": "haitian-creole-foundations-ht7-numbers-time-schedule",
             "order": 1,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-learn-listen-speak.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-learn-listen-speak.description",
+            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-numbers-time-schedule.title",
+            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-numbers-time-schedule.description",
             "meta": {
               "module": 6,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-learn-listen-speak.weeks",
+              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-numbers-time-schedule.weeks",
               "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-learn-listen-speak.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-learn-listen-speak.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-learn-listen-speak.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-learn-listen-speak.bullets.3"
+                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-numbers-time-schedule.bullets.0",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-numbers-time-schedule.bullets.1",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-numbers-time-schedule.bullets.2",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-numbers-time-schedule.bullets.3"
               ]
             },
             "serviceDefaults": null,
             "topics": [
               "learn-numbers-and-time-basics",
-              "listen-for-numbers-and-time"
-            ]
-          },
-          {
-            "slug": "haitian-creole-foundations-ht7-read-build-write-use",
-            "order": 2,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-read-build-write-use.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-read-build-write-use.description",
-            "meta": {
-              "module": 6,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-read-build-write-use.weeks",
-              "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-read-build-write-use.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-read-build-write-use.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-read-build-write-use.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-foundations-ht7-read-build-write-use.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "read-build-and-write-everyday-details",
+              "listen-for-numbers-and-time",
               "everyday-plans-scenario-and-review"
             ]
           }
@@ -1627,7 +1824,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 102,
+          "estimatedMinutes": 78,
           "prereqKeys": [
             "modules.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.title"
           ],
@@ -1643,44 +1840,24 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "haitian-creole-foundations-ht8-learn-listen-speak",
+            "slug": "haitian-creole-foundations-ht8-capstone-conversation",
             "order": 1,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-learn-listen-speak.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-learn-listen-speak.description",
+            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-capstone-conversation.title",
+            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-capstone-conversation.description",
             "meta": {
               "module": 7,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-learn-listen-speak.weeks",
+              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-capstone-conversation.weeks",
               "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-learn-listen-speak.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-learn-listen-speak.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-learn-listen-speak.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-learn-listen-speak.bullets.3"
+                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-capstone-conversation.bullets.0",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-capstone-conversation.bullets.1",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-capstone-conversation.bullets.2",
+                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-capstone-conversation.bullets.3"
               ]
             },
             "serviceDefaults": null,
             "topics": [
               "learn-the-conversation-map",
-              "listen-and-speak-through-a-conversation"
-            ]
-          },
-          {
-            "slug": "haitian-creole-foundations-ht8-read-build-write-use",
-            "order": 2,
-            "titleKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-read-build-write-use.title",
-            "descriptionKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-read-build-write-use.description",
-            "meta": {
-              "module": 7,
-              "weeksKey": "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-read-build-write-use.weeks",
-              "bulletKeys": [
-                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-read-build-write-use.bullets.0",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-read-build-write-use.bullets.1",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-read-build-write-use.bullets.2",
-                "sections.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-foundations-ht8-read-build-write-use.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "read-build-and-write-a-conversation",
+              "listen-and-speak-through-a-conversation",
               "my-first-kreyol-conversation"
             ]
           }
@@ -30666,6 +30843,7132 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       }
     }
   },
+  "haitian-creole-everyday-grammar": {
+    "choose-a-and-la": {
+      "topicId": "choose-a-and-la",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-1-definite-article-choices",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m1-article-selection",
+      "prefix": "ht2m1",
+      "minutes": 22,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.cards.sketch0.title",
+          "sketchId": "article-a",
+          "height": 420,
+          "tryIt": {
+            "id": "try-choose-a-and-la-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.tryIt.try_choose_a_and_la_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.tryIt.try_choose_a_and_la_sketch0.prompt",
+            "exerciseKey": "try-a-radyo",
+            "exerciseKeys": [
+              "try-a-radyo"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.cards.sketch1.title",
+          "sketchId": "article-la",
+          "height": 420,
+          "tryIt": {
+            "id": "try-choose-a-and-la-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.tryIt.try_choose_a_and_la_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.tryIt.try_choose_a_and_la_sketch1.prompt",
+            "exerciseKey": "try-la-fouchet",
+            "exerciseKeys": [
+              "try-la-fouchet"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.cards.sketch2.title",
+          "sketchId": "a-vs-la",
+          "height": 420,
+          "tryIt": {
+            "id": "try-choose-a-and-la-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.tryIt.try_choose_a_and_la_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.tryIt.try_choose_a_and_la_sketch2.prompt",
+            "exerciseKey": "try-a-kiye",
+            "exerciseKeys": [
+              "try-a-kiye"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "article-a",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.article-a.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.article-a.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Course 1 already taught you that the definite article follows the noun. Now choose the form. Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "when the noun ends in a non-nasal vowel sound",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "tifi a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the girl",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "flè a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the flower",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Listen to the end of the noun before choosing the article",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "article-la",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.article-la.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.article-la.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "with these examples ending in a consonant",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "bèf la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the cow",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "chat la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the cat",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "kòb la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the money",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Do not translate “the” first. Notice the end of the Kreyòl noun",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "a-vs-la",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.a-vs-la.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.a-vs-la.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Compare the two article patterns",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "a follows examples ending in a non-nasal vowel",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "la follows examples such as bèf, chat, and kòb",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "You already know where the article goes. The new skill is choosing its form",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "choose-a-and-la-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.choose-a-and-la-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "choose-a-and-la-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.choose-a-and-la-fill",
+          "choiceCount": 3,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "la"
+          }
+        },
+        {
+          "id": "choose-a-and-la-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.choose-a-and-la-listen",
+          "targetText": "kaye a",
+          "locale": "ht-HT",
+          "wordBank": [
+            "kaye",
+            "a"
+          ],
+          "distractors": [
+            "la"
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "kaye a",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "choose-a-and-la-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.choose-a-and-la-voice",
+          "targetText": "valiz la",
+          "locale": "ht-HT",
+          "maxSeconds": 10,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "valiz la",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "choose-a-and-la-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.choose-a-and-la-build",
+          "targetText": "kiyè a",
+          "locale": "ht-HT",
+          "wordBank": [
+            "kiyè",
+            "a"
+          ],
+          "distractors": [
+            "la"
+          ],
+          "ttsText": "kiyè a",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "kiyè a",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "choose-a-and-la-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.choose-a-and-la-write",
+          "placeholder": "Type the Kreyòl answer",
+          "expected": {
+            "kind": "text_input",
+            "value": "fouchèt la",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-a-radyo",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.try-a-radyo",
+          "targetText": "radyo a",
+          "locale": "ht-HT",
+          "wordBank": [
+            "radyo",
+            "a"
+          ],
+          "distractors": [
+            "la"
+          ],
+          "ttsText": "radyo a",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "radyo a",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-la-fouchet",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.try-la-fouchet",
+          "targetText": "fouchèt la",
+          "locale": "ht-HT",
+          "wordBank": [
+            "fouchèt",
+            "la"
+          ],
+          "distractors": [
+            "a"
+          ],
+          "ttsText": "fouchèt la",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "fouchèt la",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-a-kiye",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-a-and-la.practice.try-a-kiye",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        }
+      ]
+    },
+    "choose-an-lan-and-nan": {
+      "topicId": "choose-an-lan-and-nan",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-1-definite-article-choices",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m1-article-selection",
+      "prefix": "ht2m1",
+      "minutes": 26,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.cards.sketch0.title",
+          "sketchId": "article-an",
+          "height": 420,
+          "tryIt": {
+            "id": "try-choose-an-lan-and-nan-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.tryIt.try_choose_an_lan_and_nan_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.tryIt.try_choose_an_lan_and_nan_sketch0.prompt",
+            "exerciseKey": "try-an-televizyon",
+            "exerciseKeys": [
+              "try-an-televizyon"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.cards.sketch1.title",
+          "sketchId": "article-lan",
+          "height": 420,
+          "tryIt": {
+            "id": "try-choose-an-lan-and-nan-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.tryIt.try_choose_an_lan_and_nan_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.tryIt.try_choose_an_lan_and_nan_sketch1.prompt",
+            "exerciseKey": "try-lan-nwit",
+            "exerciseKeys": [
+              "try-lan-nwit"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.cards.sketch2.title",
+          "sketchId": "article-nan",
+          "height": 420,
+          "tryIt": {
+            "id": "try-choose-an-lan-and-nan-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.tryIt.try_choose_an_lan_and_nan_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.tryIt.try_choose_an_lan_and_nan_sketch2.prompt",
+            "exerciseKey": "try-nan-telefon",
+            "exerciseKeys": [
+              "try-nan-telefon"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "article-an",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.article-an.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.article-an.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "when the noun ends in a nasal vowel sound",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "pen an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the bread",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "chen an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the dog",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "bonbon an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the cracker",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "It also lists",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "with final syllables ending in",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "mi, mou, ni,",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "or",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "nou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "chimi an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "lanmou an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "jenou an",
+                "locale": "ht-HT"
+              }
+            ]
+          }
+        },
+        {
+          "id": "article-lan",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.article-lan.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.article-lan.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "lan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "when the noun ends in a nasal vowel followed by a consonant",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "lanp lan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the lamp",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "chanm lan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the room",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "You can also encounter uncommon endings such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "iy",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "or",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "uit",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "with this form",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "article-nan",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.article-nan.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.article-nan.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "with nouns ending in",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "m",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "or",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "nn",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and also with endings such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "èn",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "or",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "òn",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Examples include",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "marenn nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the godmother",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "fim nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the film",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "balèn nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the candle",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "zòn nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the area",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "lalin nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the moon",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "You may see",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "plim",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "paired with more than one article form, so this lesson does not use it for graded article choice",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "choose-an-lan-nan-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.choose-an-lan-nan-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "choose-an-lan-nan-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.choose-an-lan-nan-fill",
+          "choiceCount": 3,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "an"
+          }
+        },
+        {
+          "id": "choose-an-lan-nan-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.choose-an-lan-nan-listen",
+          "targetText": "nwit lan",
+          "locale": "ht-HT",
+          "wordBank": [
+            "nwit",
+            "lan"
+          ],
+          "distractors": [
+            "an",
+            "nan"
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "nwit lan",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "choose-an-lan-nan-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.choose-an-lan-nan-voice",
+          "targetText": "telefòn nan",
+          "locale": "ht-HT",
+          "maxSeconds": 10,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "telefòn nan",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "choose-an-lan-nan-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.choose-an-lan-nan-build",
+          "targetText": "zòn nan",
+          "locale": "ht-HT",
+          "wordBank": [
+            "zòn",
+            "nan"
+          ],
+          "distractors": [
+            "an",
+            "lan"
+          ],
+          "ttsText": "zòn nan",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "zòn nan",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "choose-an-lan-nan-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.choose-an-lan-nan-write",
+          "placeholder": "Type the Kreyòl answer",
+          "expected": {
+            "kind": "text_input",
+            "value": "lanmou an",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-an-televizyon",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.try-an-televizyon",
+          "targetText": "televizyon an",
+          "locale": "ht-HT",
+          "wordBank": [
+            "televizyon",
+            "an"
+          ],
+          "distractors": [
+            "lan",
+            "nan"
+          ],
+          "ttsText": "televizyon an",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "televizyon an",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-lan-nwit",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.try-lan-nwit",
+          "targetText": "nwit lan",
+          "locale": "ht-HT",
+          "wordBank": [
+            "nwit",
+            "lan"
+          ],
+          "distractors": [
+            "an",
+            "nan"
+          ],
+          "ttsText": "nwit lan",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "nwit lan",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-nan-telefon",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.choose-an-lan-and-nan.practice.try-nan-telefon",
+          "targetText": "telefòn nan",
+          "locale": "ht-HT",
+          "wordBank": [
+            "telefòn",
+            "nan"
+          ],
+          "distractors": [
+            "an",
+            "lan"
+          ],
+          "ttsText": "telefòn nan",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "telefòn nan",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        }
+      ]
+    },
+    "hear-and-use-definite-articles": {
+      "topicId": "hear-and-use-definite-articles",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-1-definite-article-choices",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m1-article-selection",
+      "prefix": "ht2m1",
+      "minutes": 28,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.cards.sketch0.title",
+          "sketchId": "listen-ending",
+          "height": 420,
+          "tryIt": {
+            "id": "try-hear-and-use-definite-articles-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch0.prompt",
+            "exerciseKey": "try-mixed-biwo",
+            "exerciseKeys": [
+              "try-mixed-biwo"
+            ],
+            "difficulty": "easy",
+            "preferKind": "listen_build",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.cards.sketch1.title",
+          "sketchId": "keep-known-order",
+          "height": 420,
+          "tryIt": {
+            "id": "try-hear-and-use-definite-articles-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch1.prompt",
+            "exerciseKey": "try-mixed-fouchet",
+            "exerciseKeys": [
+              "try-mixed-fouchet"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.cards.sketch2.title",
+          "sketchId": "mixed-confidence",
+          "height": 420,
+          "tryIt": {
+            "id": "try-hear-and-use-definite-articles-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.tryIt.try_hear_and_use_definite_articles_sketch2.prompt",
+            "exerciseKey": "try-mixed-kiye",
+            "exerciseKeys": [
+              "try-mixed-kiye"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "listen-ending",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.listen-ending.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.listen-ending.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "You already know the article follows the noun. In this course, pause on the noun ending before choosing among",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a, la, an, lan,",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "The practice list gives mixed forms such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "radyo a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "valiz la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "televizyon an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "telefòn nan",
+                "locale": "ht-HT"
+              }
+            ]
+          }
+        },
+        {
+          "id": "keep-known-order",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.keep-known-order.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.keep-known-order.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Course 1 already established the word order: noun first, definite article after it. Do not relearn that rule here. Use the known order while concentrating on which article form fits the noun",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "mixed-confidence",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.mixed-confidence.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.mixed-confidence.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "The English word “the” stays the same, but Kreyòl changes the singular article form. Let the Kreyòl noun guide the choice. Practice switching forms without turning the activity into a vocabulary restart",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "hear-use-articles-listen-a",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-listen-a",
+          "targetText": "radyo a",
+          "locale": "ht-HT",
+          "wordBank": [
+            "radyo",
+            "a"
+          ],
+          "distractors": [
+            "la",
+            "an"
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "radyo a",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "hear-use-articles-listen-an",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-listen-an",
+          "targetText": "televizyon an",
+          "locale": "ht-HT",
+          "wordBank": [
+            "televizyon",
+            "an"
+          ],
+          "distractors": [
+            "lan",
+            "nan"
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "televizyon an",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "hear-use-articles-voice-la",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-voice-la",
+          "targetText": "tab la",
+          "locale": "ht-HT",
+          "maxSeconds": 10,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "tab la",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "hear-use-articles-build-nan",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-build-nan",
+          "targetText": "telefòn nan",
+          "locale": "ht-HT",
+          "wordBank": [
+            "telefòn",
+            "nan"
+          ],
+          "distractors": [
+            "an",
+            "lan"
+          ],
+          "ttsText": "telefòn nan",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "telefòn nan",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "hear-use-articles-write-a",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-write-a",
+          "placeholder": "Type the Kreyòl answer",
+          "expected": {
+            "kind": "text_input",
+            "value": "biwo a",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "hear-use-articles-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.hear-use-articles-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-mixed-biwo",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.try-mixed-biwo",
+          "targetText": "biwo a",
+          "locale": "ht-HT",
+          "wordBank": [
+            "biwo",
+            "a"
+          ],
+          "distractors": [
+            "la",
+            "an"
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "biwo a",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-mixed-fouchet",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.try-mixed-fouchet",
+          "targetText": "fouchèt la",
+          "locale": "ht-HT",
+          "wordBank": [
+            "fouchèt",
+            "la"
+          ],
+          "distractors": [
+            "a",
+            "an"
+          ],
+          "ttsText": "fouchèt la",
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "fouchèt la",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-mixed-kiye",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-1-definite-article-choices.hear-and-use-definite-articles.practice.try-mixed-kiye",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        }
+      ]
+    },
+    "use-short-object-pronouns": {
+      "topicId": "use-short-object-pronouns",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m2-pronouns-possession",
+      "prefix": "ht2m2",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.cards.sketch0.title",
+          "sketchId": "short-li",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-short-object-pronouns-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.tryIt.try_use_short_object_pronouns_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.tryIt.try_use_short_object_pronouns_sketch0.prompt",
+            "exerciseKey": "try-carla-l",
+            "exerciseKeys": [
+              "try-carla-l"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.cards.sketch1.title",
+          "sketchId": "short-mwen-ou",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-short-object-pronouns-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.tryIt.try_use_short_object_pronouns_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.tryIt.try_use_short_object_pronouns_sketch1.prompt",
+            "exerciseKey": "try-nou-rayi-w",
+            "exerciseKeys": [
+              "try-nou-rayi-w"
+            ],
+            "difficulty": "easy",
+            "preferKind": "voice_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.cards.sketch2.title",
+          "sketchId": "object-form-map",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-short-object-pronouns-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.tryIt.try_use_short_object_pronouns_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.tryIt.try_use_short_object_pronouns_sketch2.prompt",
+            "exerciseKey": "try-nou-to-n",
+            "exerciseKeys": [
+              "try-nou-to-n"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "short-li",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.short-li.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.short-li.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "A full object pronoun can also appear in a shorter everyday form. Compare",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen renmen li",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Mwen renmen l",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The person receiving the action is still",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "li",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "in the short object form it becomes",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "l",
+                "locale": "ht-HT"
+              }
+            ]
+          }
+        },
+        {
+          "id": "short-mwen-ou",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.short-mwen-ou.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.short-mwen-ou.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Compare another pair",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Li renmen mwen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Li renmen m",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the corresponding short object form is",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "w",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "These are object forms: they follow the action in these examples",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "object-form-map",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.object-form-map.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.object-form-map.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use these object-pronoun mappings",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "m",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "Ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "w",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "Li",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "l",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "Nou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "n",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "Yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "no contracted form shown",
+                "locale": "en-US",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "Nou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "uses the short form",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "n",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "does not have a contracted form in this set",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "short-object-li-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.short-object-li-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "short-object-yo-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.short-object-yo-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "short-object-m-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.short-object-m-voice",
+          "targetText": "Li renmen m",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Li renmen m",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "short-object-w-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.short-object-w-voice",
+          "targetText": "Nou rayi w",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Nou rayi w",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "short-object-carla-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.short-object-carla-build",
+          "targetText": "Carla achte l",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Carla",
+            "achte",
+            "l"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Carla achte l",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "short-object-m-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.short-object-m-build",
+          "targetText": "Li renmen m",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Li",
+            "renmen",
+            "m"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Li renmen m",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-carla-l",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.try-carla-l",
+          "targetText": "Carla achte l",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Carla",
+            "achte",
+            "l"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Carla achte l",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-nou-rayi-w",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.try-nou-rayi-w",
+          "targetText": "Nou rayi w",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Nou rayi w",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-nou-to-n",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-short-object-pronouns.practice.try-nou-to-n",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        }
+      ]
+    },
+    "use-possessive-pronouns": {
+      "topicId": "use-possessive-pronouns",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m2-pronouns-possession",
+      "prefix": "ht2m2",
+      "minutes": 26,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.cards.sketch0.title",
+          "sketchId": "singular-possessive-map",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-possessive-pronouns-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch0.prompt",
+            "exerciseKey": "try-singular-nou",
+            "exerciseKeys": [
+              "try-singular-nou"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.cards.sketch1.title",
+          "sketchId": "singular-contracted-pairs",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-possessive-pronouns-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch1.prompt",
+            "exerciseKey": "try-singular-ou-fill",
+            "exerciseKeys": [
+              "try-singular-ou-fill"
+            ],
+            "difficulty": "easy",
+            "preferKind": "fill_blank_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.cards.sketch2.title",
+          "sketchId": "plural-possessive-map",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-possessive-pronouns-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.tryIt.try_use_possessive_pronouns_sketch2.prompt",
+            "exerciseKey": "try-plural-mine-text",
+            "exerciseKeys": [
+              "try-plural-mine-text"
+            ],
+            "difficulty": "easy",
+            "preferKind": "text_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "singular-possessive-map",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.singular-possessive-map.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.singular-possessive-map.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "In Kreyòl, possession can often be expressed with a full form or a shorter everyday form. Learn the singular pairs below",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "mine",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa mwen an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa m nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "yours",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa ou a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa w la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "his / hers / its",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa li a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa l la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "ours",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa nou an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa n nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "yours",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa nou an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa n nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "theirs",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa yo a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "no contracted form",
+                "locale": "en-US",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "The pair",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pa nou an / pa n nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "can mean both",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ours",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and plural",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "yours",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Pa yo a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "has no contracted partner in this set",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "singular-contracted-pairs",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.singular-contracted-pairs.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.singular-contracted-pairs.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Practice the full and short forms together",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "pa mwen an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pa m nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "pa ou a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pa w la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "pa li a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pa l la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "pa nou an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pa n nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Learn these pairs as complete expressions. Focus on using them naturally rather than trying to build a broader contraction rule",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "plural-possessive-map",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.plural-possessive-map.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.plural-possessive-map.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Now compare the plural possessive forms",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "mine",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa mwen yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa m yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "yours",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa ou yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa w yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "his / hers / its",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa li yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa l yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "ours",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa nou yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa n yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "yours",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa nou yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa n yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "theirs",
+                "locale": "en-US",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "pa yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 140
+              },
+              {
+                "text": "no contracted form",
+                "locale": "en-US",
+                "pauseAfterMs": 260
+              },
+              {
+                "text": "The pair",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pa nou yo / pa n yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "can mean both",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ours",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and plural",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "yours",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Pa yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "has no contracted partner in this set",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "possessive-singular-li-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-singular-li-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "possessive-singular-yo-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-singular-yo-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "possessive-singular-m-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-singular-m-fill",
+          "choiceCount": 3,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "m"
+          }
+        },
+        {
+          "id": "possessive-plural-n-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-plural-n-fill",
+          "choiceCount": 3,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "n"
+          }
+        },
+        {
+          "id": "possessive-singular-ou-text",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-singular-ou-text",
+          "placeholder": "Type the Kreyòl form",
+          "expected": {
+            "kind": "text_input",
+            "value": "pa w la"
+          }
+        },
+        {
+          "id": "possessive-plural-li-text",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.possessive-plural-li-text",
+          "placeholder": "Type the Kreyòl form",
+          "expected": {
+            "kind": "text_input",
+            "value": "pa l yo"
+          }
+        },
+        {
+          "id": "try-singular-nou",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.try-singular-nou",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-singular-ou-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.try-singular-ou-fill",
+          "choiceCount": 3,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "w"
+          }
+        },
+        {
+          "id": "try-plural-mine-text",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-2-pronouns-and-possession.use-possessive-pronouns.practice.try-plural-mine-text",
+          "placeholder": "Type the Kreyòl form",
+          "expected": {
+            "kind": "text_input",
+            "value": "pa m yo"
+          }
+        }
+      ]
+    },
+    "ask-for-more-specific-information": {
+      "topicId": "ask-for-more-specific-information",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m3-questions-health",
+      "prefix": "ht2m3",
+      "minutes": 26,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.cards.sketch0.title",
+          "sketchId": "kiles-which",
+          "height": 420,
+          "tryIt": {
+            "id": "try-ask-for-more-specific-information-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.tryIt.try_ask_for_more_specific_information_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.tryIt.try_ask_for_more_specific_information_sketch0.prompt",
+            "exerciseKey": "try-kiles-choice",
+            "exerciseKeys": [
+              "try-kiles-choice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.cards.sketch1.title",
+          "sketchId": "kile-when",
+          "height": 420,
+          "tryIt": {
+            "id": "try-ask-for-more-specific-information-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.tryIt.try_ask_for_more_specific_information_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.tryIt.try_ask_for_more_specific_information_sketch1.prompt",
+            "exerciseKey": "try-kile-fill",
+            "exerciseKeys": [
+              "try-kile-fill"
+            ],
+            "difficulty": "easy",
+            "preferKind": "fill_blank_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.cards.sketch2.title",
+          "sketchId": "poukisa-why",
+          "height": 420,
+          "tryIt": {
+            "id": "try-ask-for-more-specific-information-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.tryIt.try_ask_for_more_specific_information_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.tryIt.try_ask_for_more_specific_information_sketch2.prompt",
+            "exerciseKey": "try-poukisa-voice",
+            "exerciseKeys": [
+              "try-poukisa-voice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "voice_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "kiles-which",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.kiles-which.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.kiles-which.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Kilès?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "to ask",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "which?",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Kilès ladan yo?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Which one of them?",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Focus on",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Kilès",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "as the new question for choosing one from a group",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "kile-when",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.kile-when.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.kile-when.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Kilè?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "to ask",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "when?",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Kilè ou prale?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "When will you go?",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Use this question when you want to ask when something will happen",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "poukisa-why",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.poukisa-why.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.poukisa-why.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Poukisa?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "to ask",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "why?",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Poukisa ou ap kriye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Why are you crying?",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The reading section later uses the same form",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Poukisa Kintola pa ale lekòl jodia?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "This topic focuses on the new information questions that extend what you learned in Course 1",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "specific-info-kiles-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.specific-info-kiles-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "specific-info-poukisa-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.specific-info-poukisa-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "specific-info-kiles-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.specific-info-kiles-fill",
+          "choiceCount": 3,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "Kilès"
+          }
+        },
+        {
+          "id": "specific-info-kile-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.specific-info-kile-fill",
+          "choiceCount": 3,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "Kilè"
+          }
+        },
+        {
+          "id": "specific-info-kile-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.specific-info-kile-voice",
+          "targetText": "Kilè ou prale?",
+          "locale": "ht-HT",
+          "maxSeconds": 12,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Kilè ou prale?",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "specific-info-poukisa-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.specific-info-poukisa-voice",
+          "targetText": "Poukisa ou ap kriye?",
+          "locale": "ht-HT",
+          "maxSeconds": 12,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Poukisa ou ap kriye?",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-kiles-choice",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.try-kiles-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-kile-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.try-kile-fill",
+          "choiceCount": 3,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "Kilè"
+          }
+        },
+        {
+          "id": "try-poukisa-voice",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.ask-for-more-specific-information.practice.try-poukisa-voice",
+          "targetText": "Poukisa ou ap kriye?",
+          "locale": "ht-HT",
+          "maxSeconds": 12,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Poukisa ou ap kriye?",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        }
+      ]
+    },
+    "name-body-parts": {
+      "topicId": "name-body-parts",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m3-questions-health",
+      "prefix": "ht2m3",
+      "minutes": 22,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.cards.sketch0.title",
+          "sketchId": "head-and-face",
+          "height": 420,
+          "tryIt": {
+            "id": "try-name-body-parts-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch0.prompt",
+            "exerciseKey": "try-zorey-choice",
+            "exerciseKeys": [
+              "try-zorey-choice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.cards.sketch1.title",
+          "sketchId": "upper-body",
+          "height": 420,
+          "tryIt": {
+            "id": "try-name-body-parts-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch1.prompt",
+            "exerciseKey": "try-upper-body-listen",
+            "exerciseKeys": [
+              "try-upper-body-listen"
+            ],
+            "difficulty": "easy",
+            "preferKind": "listen_build",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.cards.sketch2.title",
+          "sketchId": "abdomen-and-foot",
+          "height": 420,
+          "tryIt": {
+            "id": "try-name-body-parts-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.tryIt.try_name_body_parts_sketch2.prompt",
+            "exerciseKey": "try-body-voice",
+            "exerciseKeys": [
+              "try-body-voice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "voice_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "head-and-face",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.head-and-face.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.head-and-face.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Start with these body-part words",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Tèt",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Head",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Je",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Eye",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Zòrèy",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Ear",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Nen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Nose",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Bouch",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Mouth",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Learn each Kreyòl word with its English meaning",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "upper-body",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.upper-body.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.upper-body.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Add these body-part words",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Kou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Neck",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "zepòl",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Shoulder",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Lestomak",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Chest",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Bra",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Arm",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Men",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Hand",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "In this course, learn",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Lestomak",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Chest",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "abdomen-and-foot",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.abdomen-and-foot.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.abdomen-and-foot.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Finish with these two body-part words",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "vant",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Abdomen",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Pye",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Foot",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Together with the earlier cards, these complete the 12 body-part words in this lesson",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "body-parts-eye-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-eye-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "body-parts-shoulder-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-shoulder-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "body-parts-face-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-face-listen",
+          "targetText": "Je Zòrèy Nen Bouch",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Je Zòrèy Nen Bouch",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "body-parts-lower-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-lower-listen",
+          "targetText": "vant Pye",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "vant Pye",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "body-parts-upper-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-upper-voice",
+          "targetText": "Kou zepòl Bra",
+          "locale": "ht-HT",
+          "maxSeconds": 12,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Kou zepòl Bra",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "body-parts-head-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.body-parts-head-voice",
+          "targetText": "Tèt Bouch",
+          "locale": "ht-HT",
+          "maxSeconds": 10,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Tèt Bouch",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-zorey-choice",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.try-zorey-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-upper-body-listen",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.try-upper-body-listen",
+          "targetText": "Kou zepòl Lestomak Bra Men",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Kou zepòl Lestomak Bra Men",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-body-voice",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.name-body-parts.practice.try-body-voice",
+          "targetText": "vant Pye",
+          "locale": "ht-HT",
+          "maxSeconds": 10,
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "vant Pye",
+            "locale": "ht-HT",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        }
+      ]
+    },
+    "say-what-hurts": {
+      "topicId": "say-what-hurts",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m3-questions-health",
+      "prefix": "ht2m3",
+      "minutes": 26,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.cards.sketch0.title",
+          "sketchId": "vant-tet-kou",
+          "height": 420,
+          "tryIt": {
+            "id": "try-say-what-hurts-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch0.prompt",
+            "exerciseKey": "try-vant-femal-listen",
+            "exerciseKeys": [
+              "try-vant-femal-listen"
+            ],
+            "difficulty": "easy",
+            "preferKind": "listen_build",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.cards.sketch1.title",
+          "sketchId": "dan-goj",
+          "height": 420,
+          "tryIt": {
+            "id": "try-say-what-hurts-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch1.prompt",
+            "exerciseKey": "try-goj-femal-voice",
+            "exerciseKeys": [
+              "try-goj-femal-voice",
+              "try-dan-femal-write"
+            ],
+            "difficulty": "easy",
+            "preferKind": null,
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.cards.sketch2.title",
+          "sketchId": "kintola-reading",
+          "height": 420,
+          "tryIt": {
+            "id": "try-say-what-hurts-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch2.prompt",
+            "exerciseKey": "try-kintola-reason-build",
+            "exerciseKeys": [
+              "try-kintola-reason-build"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "vant-tet-kou",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.vant-tet-kou.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.vant-tet-kou.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "fèmal",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "with body words to talk about common aches",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Vant fèmal",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Stomach ache",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Tèt fèmal",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Head ache",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Kou fèmal",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Neck ache",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Keep",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "fèmal",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "together as one word",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "dan-goj",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.dan-goj.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.dan-goj.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Add two more expressions",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Dan fèmal",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "tooth ache",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Gòj fèmal",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "sorethroat",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Here",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Dan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Gòj",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "are learned inside complete illness expressions",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "kintola-reading",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.kintola-reading.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.kintola-reading.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Read this short passage",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Jodia Kintola pa ale lekòl, paske li gen tèt fèmal.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Then ask",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Poukisa Kintola pa ale lekòl jodia?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The reason is already inside the reading",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "paske li gen tèt fèmal",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "This reuses",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Poukisa",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "from the first topic of this module and adds no new question form",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "health-vant-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-vant-listen",
+          "targetText": "Vant fèmal",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Vant fèmal",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "health-goj-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-goj-listen",
+          "targetText": "Gòj fèmal",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Gòj fèmal",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "health-kou-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-kou-voice",
+          "targetText": "Kou fèmal",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Kou fèmal",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "health-dan-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-dan-voice",
+          "targetText": "Dan fèmal",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Dan fèmal",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "health-tet-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-tet-build",
+          "targetText": "Tèt fèmal",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Tèt",
+            "fèmal"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Tèt fèmal",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "health-reason-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-reason-build",
+          "targetText": "paske li gen tèt fèmal",
+          "locale": "ht-HT",
+          "wordBank": [
+            "paske",
+            "li",
+            "gen",
+            "tèt",
+            "fèmal"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "paske li gen tèt fèmal",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "health-vant-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-vant-write",
+          "placeholder": "Type the Kreyòl expression",
+          "expected": {
+            "kind": "text_input",
+            "value": "Vant fèmal",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "health-reading-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-reading-write",
+          "placeholder": "Type the Kreyòl expression",
+          "expected": {
+            "kind": "text_input",
+            "value": "tèt fèmal",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-vant-femal-listen",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.try-vant-femal-listen",
+          "targetText": "Vant fèmal",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Vant fèmal",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-goj-femal-voice",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.try-goj-femal-voice",
+          "targetText": "Gòj fèmal",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Gòj fèmal",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-dan-femal-write",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.try-dan-femal-write",
+          "placeholder": "Type the Kreyòl expression",
+          "expected": {
+            "kind": "text_input",
+            "value": "Dan fèmal",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-kintola-reason-build",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.try-kintola-reason-build",
+          "targetText": "paske li gen tèt fèmal",
+          "locale": "ht-HT",
+          "wordBank": [
+            "paske",
+            "li",
+            "gen",
+            "tèt",
+            "fèmal"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "paske li gen tèt fèmal",
+            "locale": "ht-HT"
+          }
+        }
+      ]
+    },
+    "use-te-for-past-actions": {
+      "topicId": "use-te-for-past-actions",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-4-past-and-future",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m4-time",
+      "prefix": "ht2m4",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.cards.sketch0.title",
+          "sketchId": "te-before-verb",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-te-for-past-actions-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch0.prompt",
+            "exerciseKey": "try-te-past-choice",
+            "exerciseKeys": [
+              "try-te-past-choice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.cards.sketch1.title",
+          "sketchId": "te-with-familiar-actions",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-te-for-past-actions-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch1.prompt",
+            "exerciseKey": "try-te-etidye-listen",
+            "exerciseKeys": [
+              "try-te-etidye-listen",
+              "try-te-manje-write"
+            ],
+            "difficulty": "easy",
+            "preferKind": null,
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.cards.sketch2.title",
+          "sketchId": "ye-with-te",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-te-for-past-actions-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.tryIt.try_use_te_for_past_actions_sketch2.prompt",
+            "exerciseKey": "try-ye-te-build",
+            "exerciseKeys": [
+              "try-ye-te-build"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "te-before-verb",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.te-before-verb.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.te-before-verb.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "To talk about a completed past action, place",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "te",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "before the verb",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Its pattern is",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Subject + te + verb",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen te manje.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "I ate",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The new part to notice in this topic is",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "te",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "before the familiar action",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "te-with-familiar-actions",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.te-with-familiar-actions.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.te-with-familiar-actions.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Compare these short past examples",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen te manje.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "I ate",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Mwen te etidye.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "I studied",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The action words stay familiar",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "te",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "is what places them in the past",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "ye-with-te",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.ye-with-te.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.ye-with-te.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here is a complete past example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Yè mwen te ale lekòl.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Yesterday I went to school",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Yè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "supplies the past-time context, and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "te",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "still appears before the action",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "You may also see",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Mwen te ale lekol.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "without the accent in",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "lekòl",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "This lesson preserves that spelling variation but does not grade the unaccented spelling",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "te-quiz-recognize",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-recognize",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "te-quiz-ye-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-ye-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "te-quiz-manje-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-manje-listen",
+          "targetText": "Mwen te manje.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Mwen te manje.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "te-quiz-etidye-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-etidye-listen",
+          "targetText": "Mwen te etidye.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Mwen te etidye.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "te-quiz-ye-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-ye-build",
+          "targetText": "Yè mwen te ale lekòl.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Yè",
+            "mwen",
+            "te",
+            "ale",
+            "lekòl."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Yè mwen te ale lekòl.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "te-quiz-etidye-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.te-quiz-etidye-write",
+          "placeholder": "Type the Kreyòl sentence",
+          "expected": {
+            "kind": "text_input",
+            "value": "Mwen te etidye.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-te-past-choice",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.try-te-past-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-te-etidye-listen",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.try-te-etidye-listen",
+          "targetText": "Mwen te etidye.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Mwen te etidye.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-te-manje-write",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.try-te-manje-write",
+          "placeholder": "Type the Kreyòl sentence",
+          "expected": {
+            "kind": "text_input",
+            "value": "Mwen te manje.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-ye-te-build",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-te-for-past-actions.practice.try-ye-te-build",
+          "targetText": "Yè mwen te ale lekòl.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Yè",
+            "mwen",
+            "te",
+            "ale",
+            "lekòl."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Yè mwen te ale lekòl.",
+            "locale": "ht-HT"
+          }
+        }
+      ]
+    },
+    "use-pral-for-future-actions": {
+      "topicId": "use-pral-for-future-actions",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-4-past-and-future",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m4-time",
+      "prefix": "ht2m4",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.cards.sketch0.title",
+          "sketchId": "pral-before-verb",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-pral-for-future-actions-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.tryIt.try_use_pral_for_future_actions_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.tryIt.try_use_pral_for_future_actions_sketch0.prompt",
+            "exerciseKey": "try-pral-choice",
+            "exerciseKeys": [
+              "try-pral-choice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.cards.sketch1.title",
+          "sketchId": "demen-pral",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-pral-for-future-actions-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.tryIt.try_use_pral_for_future_actions_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.tryIt.try_use_pral_for_future_actions_sketch1.prompt",
+            "exerciseKey": "try-demen-pral-listen",
+            "exerciseKeys": [
+              "try-demen-pral-listen",
+              "try-demen-pral-voice"
+            ],
+            "difficulty": "easy",
+            "preferKind": null,
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.cards.sketch2.title",
+          "sketchId": "pral-familiar-action",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-pral-for-future-actions-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.tryIt.try_use_pral_for_future_actions_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.tryIt.try_use_pral_for_future_actions_sketch2.prompt",
+            "exerciseKey": "try-pral-food-build",
+            "exerciseKeys": [
+              "try-pral-food-build"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "pral-before-verb",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.pral-before-verb.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.pral-before-verb.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use this future pattern",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Subject + pral + verb",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen pral achte manje.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The important new marker in this topic is",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pral",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "before the action",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "demen-pral",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.demen-pral.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.demen-pral.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here is a complete future example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Demen mwen pral achte yon machin.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Demen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "supplies the tomorrow context, while",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pral",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "appears before",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "achte",
+                "locale": "ht-HT"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pral-familiar-action",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.pral-familiar-action.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.pral-familiar-action.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here is another future example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen pral achte manje.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Again",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pral",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "comes before the action",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "achte",
+                "locale": "ht-HT"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "pral-quiz-recognize",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.pral-quiz-recognize",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "pral-quiz-demen-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.pral-quiz-demen-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "pral-quiz-food-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.pral-quiz-food-listen",
+          "targetText": "Mwen pral achte manje.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Mwen pral achte manje.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "pral-quiz-car-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.pral-quiz-car-listen",
+          "targetText": "Demen mwen pral achte yon machin.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "pral-quiz-food-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.pral-quiz-food-voice",
+          "targetText": "Mwen pral achte manje.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Mwen pral achte manje.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "pral-quiz-car-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.pral-quiz-car-voice",
+          "targetText": "Demen mwen pral achte yon machin.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "pral-quiz-food-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.pral-quiz-food-build",
+          "targetText": "Mwen pral achte manje.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Mwen",
+            "pral",
+            "achte",
+            "manje."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Mwen pral achte manje.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "pral-quiz-car-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.pral-quiz-car-build",
+          "targetText": "Demen mwen pral achte yon machin.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Demen",
+            "mwen",
+            "pral",
+            "achte",
+            "yon",
+            "machin."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-pral-choice",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.try-pral-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-demen-pral-listen",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.try-demen-pral-listen",
+          "targetText": "Demen mwen pral achte yon machin.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-demen-pral-voice",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.try-demen-pral-voice",
+          "targetText": "Demen mwen pral achte yon machin.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-pral-food-build",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.use-pral-for-future-actions.practice.try-pral-food-build",
+          "targetText": "Mwen pral achte manje.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Mwen",
+            "pral",
+            "achte",
+            "manje."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Mwen pral achte manje.",
+            "locale": "ht-HT"
+          }
+        }
+      ]
+    },
+    "contrast-yesterday-today-and-tomorrow": {
+      "topicId": "contrast-yesterday-today-and-tomorrow",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-4-past-and-future",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m4-time",
+      "prefix": "ht2m4",
+      "minutes": 28,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.cards.sketch0.title",
+          "sketchId": "three-times",
+          "height": 420,
+          "tryIt": {
+            "id": "try-contrast-yesterday-today-and-tomorrow-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch0.prompt",
+            "exerciseKey": "try-three-times-listen",
+            "exerciseKeys": [
+              "try-three-times-listen"
+            ],
+            "difficulty": "easy",
+            "preferKind": "listen_build",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.cards.sketch1.title",
+          "sketchId": "choose-time-marker",
+          "height": 420,
+          "tryIt": {
+            "id": "try-contrast-yesterday-today-and-tomorrow-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch1.prompt",
+            "exerciseKey": "try-future-voice",
+            "exerciseKeys": [
+              "try-future-voice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "voice_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.cards.sketch2.title",
+          "sketchId": "build-three-time-sequence",
+          "height": 420,
+          "tryIt": {
+            "id": "try-contrast-yesterday-today-and-tomorrow-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.tryIt.try_contrast_yesterday_today_and_tomorrow_sketch2.prompt",
+            "exerciseKey": "try-past-build",
+            "exerciseKeys": [
+              "try-past-build",
+              "try-present-write"
+            ],
+            "difficulty": "easy",
+            "preferKind": null,
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "three-times",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.three-times.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.three-times.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Compare three useful time examples",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Yè mwen te ale lekòl.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Jodia mwen manje pitza.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Demen mwen pral achte yon machin.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Read them as a timeline",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Yè → Jodia → Demen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The past sentence uses",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "te",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "The future sentence uses",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pral",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "The middle sentence is a simple present example",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "choose-time-marker",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.choose-time-marker.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.choose-time-marker.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Compare the time words with their sentences",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Yè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "goes with the past statement",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "mwen te ale lekòl",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Jodia",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "introduces the present statement",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "mwen manje pitza",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Demen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "goes with the future statement",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "mwen pral achte yon machin",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Choose",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "te",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "or",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pral",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "only when the time meaning requires it",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "build-three-time-sequence",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.build-three-time-sequence.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.build-three-time-sequence.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Now keep the examples in time order",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Yè mwen te ale lekòl.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Jodia mwen manje pitza.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Demen mwen pral achte yon machin.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "No new marker is added here. The goal is to contrast the past, present, and future examples you already learned",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "time-quiz-past-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-past-listen",
+          "targetText": "Yè mwen te ale lekòl.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Yè mwen te ale lekòl.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "time-quiz-present-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-present-voice",
+          "targetText": "Jodia mwen manje pitza.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Jodia mwen manje pitza.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "time-quiz-future-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-future-voice",
+          "targetText": "Demen mwen pral achte yon machin.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "time-quiz-future-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-future-build",
+          "targetText": "Demen mwen pral achte yon machin.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Demen",
+            "mwen",
+            "pral",
+            "achte",
+            "yon",
+            "machin."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "time-quiz-past-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-past-write",
+          "placeholder": "Type the Kreyòl sentence",
+          "expected": {
+            "kind": "text_input",
+            "value": "Yè mwen te ale lekòl.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "time-quiz-present-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.time-quiz-present-write",
+          "placeholder": "Type the Kreyòl sentence",
+          "expected": {
+            "kind": "text_input",
+            "value": "Jodia mwen manje pitza.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-three-times-listen",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.try-three-times-listen",
+          "targetText": "Jodia mwen manje pitza.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Jodia mwen manje pitza.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-future-voice",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.try-future-voice",
+          "targetText": "Demen mwen pral achte yon machin.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Demen mwen pral achte yon machin.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-past-build",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.try-past-build",
+          "targetText": "Yè mwen te ale lekòl.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Yè",
+            "mwen",
+            "te",
+            "ale",
+            "lekòl."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Yè mwen te ale lekòl.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-present-write",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-4-past-and-future.contrast-yesterday-today-and-tomorrow.practice.try-present-write",
+          "placeholder": "Type the Kreyòl sentence",
+          "expected": {
+            "kind": "text_input",
+            "value": "Jodia mwen manje pitza.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        }
+      ]
+    },
+    "describe-without-to-be": {
+      "topicId": "describe-without-to-be",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m5-descriptions",
+      "prefix": "ht2m5",
+      "minutes": 26,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.cards.sketch0.title",
+          "sketchId": "states-with-li",
+          "height": 420,
+          "tryIt": {
+            "id": "try-describe-without-to-be-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch0.prompt",
+            "exerciseKey": "try-li-state-choice",
+            "exerciseKeys": [
+              "try-li-state-choice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.cards.sketch1.title",
+          "sketchId": "states-with-m-and-nou",
+          "height": 420,
+          "tryIt": {
+            "id": "try-describe-without-to-be-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch1.prompt",
+            "exerciseKey": "try-nou-swaf-listen",
+            "exerciseKeys": [
+              "try-nou-swaf-listen",
+              "try-m-fatige-voice"
+            ],
+            "difficulty": "easy",
+            "preferKind": null,
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.cards.sketch2.title",
+          "sketchId": "states-with-yo",
+          "height": 420,
+          "tryIt": {
+            "id": "try-describe-without-to-be-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.tryIt.try_describe_without_to_be_sketch2.prompt",
+            "exerciseKey": "try-yo-grangou-build",
+            "exerciseKeys": [
+              "try-yo-grangou-build"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "states-with-li",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-li.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-li.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "With many states and descriptions, Kreyòl does not use a separate equivalent of English",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "to be",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Li malad.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "He is sick",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Li mouri.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "She is dead",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Li okipe.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "He is busy",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Li prese.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "She is in a hurry",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Notice the pattern: the subject is followed directly by the state description",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "states-with-m-and-nou",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-m-and-nou.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-m-and-nou.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here are a few more examples",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "M fatige.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "I’m tired",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "M sezi.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "I’m surprised",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Nou pare?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Are you ready?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Nou swaf.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "We are thirsty",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "These examples keep the same idea: the state follows the subject without adding a separate English-style",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "is / am / are",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "word",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "states-with-yo",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-yo.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.states-with-yo.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here are two more state descriptions",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Yo fache.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "They are angry",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Yo grangou.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "They are hungry",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Again, the description comes directly after",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Yo",
+                "locale": "ht-HT"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "state-quiz-malad-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-malad-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "state-quiz-pare-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-pare-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "state-quiz-fatige-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-fatige-listen",
+          "targetText": "M fatige.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "M fatige.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "state-quiz-grangou-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-grangou-listen",
+          "targetText": "Yo grangou.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Yo grangou.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "state-quiz-okipe-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-okipe-voice",
+          "targetText": "Li okipe.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Li okipe.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "state-quiz-fache-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-fache-voice",
+          "targetText": "Yo fache.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Yo fache.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "state-quiz-swaf-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-swaf-build",
+          "targetText": "Nou swaf.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Nou",
+            "swaf."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Nou swaf.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "state-quiz-prese-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.state-quiz-prese-build",
+          "targetText": "Li prese.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Li",
+            "prese."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Li prese.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-li-state-choice",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.try-li-state-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-nou-swaf-listen",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.try-nou-swaf-listen",
+          "targetText": "Nou swaf.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Nou swaf.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-m-fatige-voice",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.try-m-fatige-voice",
+          "targetText": "M fatige.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "M fatige.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-yo-grangou-build",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-without-to-be.practice.try-yo-grangou-build",
+          "targetText": "Yo grangou.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Yo",
+            "grangou."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Yo grangou.",
+            "locale": "ht-HT"
+          }
+        }
+      ]
+    },
+    "use-ye": {
+      "topicId": "use-ye",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m5-descriptions",
+      "prefix": "ht2m5",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.cards.sketch0.title",
+          "sketchId": "ye-at-end-of-questions",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-ye-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch0.prompt",
+            "exerciseKey": "try-ye-question-choice",
+            "exerciseKeys": [
+              "try-ye-question-choice",
+              "try-ki-bo-listen"
+            ],
+            "difficulty": "easy",
+            "preferKind": null,
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.cards.sketch1.title",
+          "sketchId": "ye-with-who-what-time",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-ye-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch1.prompt",
+            "exerciseKey": "try-koman-voice",
+            "exerciseKeys": [
+              "try-koman-voice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "voice_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.cards.sketch2.title",
+          "sketchId": "ye-closes-a-statement",
+          "height": 420,
+          "tryIt": {
+            "id": "try-use-ye-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.tryIt.try_use_ye_sketch2.prompt",
+            "exerciseKey": "try-se-sa-write",
+            "exerciseKeys": [
+              "try-se-sa-write"
+            ],
+            "difficulty": "easy",
+            "preferKind": "text_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "ye-at-end-of-questions",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-at-end-of-questions.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-at-end-of-questions.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ye",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "at the end of several common question patterns",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Kòman manman w ye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "How is your mother?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Ki bò liv la ye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Where is the book?",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The question words are already familiar. Focus on",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ye",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "at the end of each question",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "ye-with-who-what-time",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-with-who-what-time.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-with-who-what-time.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here are three more questions with",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ye",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Ki moun li ye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Who is he?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Ki sa sa a ye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "What is that?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Ki lè li ye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "What time is it?",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Keep the familiar question words and notice how",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ye",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "closes each complete question",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "ye-closes-a-statement",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-closes-a-statement.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.ye-closes-a-statement.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "You can also use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ye",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "to close this statement",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Se sa li ye.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "That’s what it is / that’s the way it is",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Here",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ye",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "still comes at the end",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "ye-quiz-closing-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-closing-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "ye-quiz-who-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-who-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "ye-quiz-who-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-who-listen",
+          "targetText": "Ki moun li ye?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Ki moun li ye?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "ye-quiz-time-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-time-listen",
+          "targetText": "Ki lè li ye?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Ki lè li ye?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "ye-quiz-what-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-what-voice",
+          "targetText": "Ki sa sa a ye?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Ki sa sa a ye?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "ye-quiz-book-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-book-voice",
+          "targetText": "Ki bò liv la ye?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Ki bò liv la ye?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "ye-quiz-koman-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-koman-write",
+          "placeholder": "Type the Kreyòl question",
+          "expected": {
+            "kind": "text_input",
+            "value": "Kòman manman w ye?",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "ye-quiz-closing-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.ye-quiz-closing-write",
+          "placeholder": "Type the Kreyòl statement",
+          "expected": {
+            "kind": "text_input",
+            "value": "Se sa li ye.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-ye-question-choice",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.try-ye-question-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-ki-bo-listen",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.try-ki-bo-listen",
+          "targetText": "Ki bò liv la ye?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Ki bò liv la ye?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-koman-voice",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.try-koman-voice",
+          "targetText": "Kòman manman w ye?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Kòman manman w ye?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-se-sa-write",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.use-ye.practice.try-se-sa-write",
+          "placeholder": "Type the Kreyòl statement",
+          "expected": {
+            "kind": "text_input",
+            "value": "Se sa li ye.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        }
+      ]
+    },
+    "place-adjectives-in-phrases": {
+      "topicId": "place-adjectives-in-phrases",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m5-descriptions",
+      "prefix": "ht2m5",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.cards.sketch0.title",
+          "sketchId": "adjective-after-noun-examples",
+          "height": 420,
+          "tryIt": {
+            "id": "try-place-adjectives-in-phrases-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.tryIt.try_place_adjectives_in_phrases_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.tryIt.try_place_adjectives_in_phrases_sketch0.prompt",
+            "exerciseKey": "try-green-tree-choice",
+            "exerciseKeys": [
+              "try-green-tree-choice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.cards.sketch1.title",
+          "sketchId": "multiword-adjective-examples",
+          "height": 420,
+          "tryIt": {
+            "id": "try-place-adjectives-in-phrases-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.tryIt.try_place_adjectives_in_phrases_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.tryIt.try_place_adjectives_in_phrases_sketch1.prompt",
+            "exerciseKey": "try-old-red-house-build",
+            "exerciseKeys": [
+              "try-old-red-house-build"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.cards.sketch2.title",
+          "sketchId": "ki-tre-adjective-example",
+          "height": 420,
+          "tryIt": {
+            "id": "try-place-adjectives-in-phrases-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.tryIt.try_place_adjectives_in_phrases_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.tryIt.try_place_adjectives_in_phrases_sketch2.prompt",
+            "exerciseKey": "try-nice-friend-write",
+            "exerciseKeys": [
+              "try-nice-friend-write"
+            ],
+            "difficulty": "easy",
+            "preferKind": "text_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "adjective-after-noun-examples",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.adjective-after-noun-examples.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.adjective-after-noun-examples.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Start with these adjective examples",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "yon pye bwa vèt",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a green tree",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "yon bilding wo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a tall building",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Rather than translating word by word, notice where the describing word appears and keep the phrase in the same order",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "multiword-adjective-examples",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.multiword-adjective-examples.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.multiword-adjective-examples.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here are a few more examples",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "yon vye gran moun gason",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a very old man",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "ansyen kay wouj la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the old red house",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "These examples are more complex. Keep each phrase together and notice its word order",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "ki-tre-adjective-example",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.ki-tre-adjective-example.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.ki-tre-adjective-example.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here is one more example",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "yon zanmi ki trè janti",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a very nice friend",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "This phrase uses a longer pattern. Focus on recognizing it and reproducing the phrase in the same order",
+                "locale": "en-US"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "adj-quiz-tall-building-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.adj-quiz-tall-building-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "adj-quiz-old-man-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.adj-quiz-old-man-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "adj-quiz-green-tree-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.adj-quiz-green-tree-build",
+          "targetText": "yon pye bwa vèt",
+          "locale": "ht-HT",
+          "wordBank": [
+            "yon",
+            "pye",
+            "bwa",
+            "vèt"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "yon pye bwa vèt",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "adj-quiz-tall-building-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.adj-quiz-tall-building-build",
+          "targetText": "yon bilding wo",
+          "locale": "ht-HT",
+          "wordBank": [
+            "yon",
+            "bilding",
+            "wo"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "yon bilding wo",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "adj-quiz-old-red-house-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.adj-quiz-old-red-house-write",
+          "placeholder": "Type the Kreyòl phrase",
+          "expected": {
+            "kind": "text_input",
+            "value": "ansyen kay wouj la",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "adj-quiz-old-man-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.adj-quiz-old-man-write",
+          "placeholder": "Type the Kreyòl phrase",
+          "expected": {
+            "kind": "text_input",
+            "value": "yon vye gran moun gason",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-green-tree-choice",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.try-green-tree-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-old-red-house-build",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.try-old-red-house-build",
+          "targetText": "ansyen kay wouj la",
+          "locale": "ht-HT",
+          "wordBank": [
+            "ansyen",
+            "kay",
+            "wouj",
+            "la"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "ansyen kay wouj la",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-nice-friend-write",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.place-adjectives-in-phrases.practice.try-nice-friend-write",
+          "placeholder": "Type the Kreyòl phrase",
+          "expected": {
+            "kind": "text_input",
+            "value": "yon zanmi ki trè janti",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        }
+      ]
+    },
+    "describe-color-size-and-quality": {
+      "topicId": "describe-color-size-and-quality",
+      "subjectSlug": "haitian-creole-everyday-grammar",
+      "moduleSlug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+      "sectionSlug": "haitian-creole-everyday-grammar-ht2m5-descriptions",
+      "prefix": "ht2m5",
+      "minutes": 28,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "topic": {
+        "labelKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.label",
+        "summaryKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.cards.sketch0.title",
+          "sketchId": "selected-colors",
+          "height": 420,
+          "tryIt": {
+            "id": "try-describe-color-size-and-quality-sketch0",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch0.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch0.prompt",
+            "exerciseKey": "try-sky-blue-listen",
+            "exerciseKeys": [
+              "try-sky-blue-listen",
+              "try-black-write"
+            ],
+            "difficulty": "easy",
+            "preferKind": null,
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.cards.sketch1.title",
+          "sketchId": "selected-size",
+          "height": 420,
+          "tryIt": {
+            "id": "try-describe-color-size-and-quality-sketch1",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch1.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch1.prompt",
+            "exerciseKey": "try-hotel-small-build",
+            "exerciseKeys": [
+              "try-hotel-small-build"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.cards.sketch2.title",
+          "sketchId": "selected-qualities",
+          "height": 420,
+          "tryIt": {
+            "id": "try-describe-color-size-and-quality-sketch2",
+            "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch2.title",
+            "promptKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.tryIt.try_describe_color_size_and_quality_sketch2.prompt",
+            "exerciseKey": "try-clean-voice",
+            "exerciseKeys": [
+              "try-clean-voice"
+            ],
+            "difficulty": "easy",
+            "preferKind": "voice_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "selected-colors",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-colors.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-colors.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Start with three useful colors",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "ble",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "blue",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "nwa",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "black",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "wouj",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "red",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Now use one of them in a complete description",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Syèl la ble.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "The sky is blue",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "You also saw",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ansyen kay wouj la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the old red house",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "selected-size",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-size.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-size.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "piti",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "for “small.” Compare it in two complete descriptions",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Otèl la piti anpil.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "The hotel is very small",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Tab la piti.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "The table is small",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Practice these complete sentences before making new combinations",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "selected-qualities",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-qualities.title",
+          "bodyKey": "sketches.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.selected-qualities.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Practice three useful qualities",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "bon",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "good",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "pwòp",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "clean",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "trankil",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "quiet",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "bon",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "in the complete phrase",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Se yon bon timoun.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "It's a good child",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Se",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "is already known; the new vocabulary focus here is",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "bon",
+                "locale": "ht-HT"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "id": "adj-vocab-quiz-table-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-table-listen",
+          "targetText": "Tab la piti.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Tab la piti.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "adj-vocab-quiz-good-child-listen",
+          "kind": "listen_build",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-good-child-listen",
+          "targetText": "Se yon bon timoun.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Se yon bon timoun.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "adj-vocab-quiz-blue-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-blue-voice",
+          "targetText": "ble",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "ble",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "adj-vocab-quiz-quiet-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-quiet-voice",
+          "targetText": "trankil",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "trankil",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "adj-vocab-quiz-table-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-table-build",
+          "targetText": "Tab la piti.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Tab",
+            "la",
+            "piti."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Tab la piti.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "adj-vocab-quiz-good-child-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-good-child-build",
+          "targetText": "Se yon bon timoun.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Se",
+            "yon",
+            "bon",
+            "timoun."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Se yon bon timoun.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "adj-vocab-quiz-small-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-small-write",
+          "placeholder": "Type the Kreyòl word",
+          "expected": {
+            "kind": "text_input",
+            "value": "piti",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "adj-vocab-quiz-good-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.adj-vocab-quiz-good-write",
+          "placeholder": "Type the Kreyòl word",
+          "expected": {
+            "kind": "text_input",
+            "value": "bon",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-sky-blue-listen",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.try-sky-blue-listen",
+          "targetText": "Syèl la ble.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Syèl la ble.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-black-write",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.try-black-write",
+          "placeholder": "Type the Kreyòl word",
+          "expected": {
+            "kind": "text_input",
+            "value": "nwa",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-hotel-small-build",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.try-hotel-small-build",
+          "targetText": "Otèl la piti anpil.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Otèl",
+            "la",
+            "piti",
+            "anpil."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Otèl la piti anpil.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-clean-voice",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-everyday-grammar.haitian-creole-everyday-grammar-5-descriptions-and-ye.describe-color-size-and-quality.practice.try-clean-voice",
+          "targetText": "pwòp",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "pwòp",
+            "locale": "ht-HT"
+          }
+        }
+      ]
+    }
+  },
   "haitian-creole-foundations": {
     "notice-kreyol-sounds": {
       "topicId": "notice-kreyol-sounds",
@@ -30776,19 +38079,254 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sound-map",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.sound-map.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.sound-map.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.sound-map.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Kreyòl is written with a standardized spelling system. For a beginner, the most useful habit is to",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "look at the Kreyòl spelling itself instead of guessing from English spelling",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Start with a few anchor words:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "bonjou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "hello",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "mèsi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "thank you",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "wi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "yes",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "non",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "no",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You do not need to memorize every sound today. First, notice that the same written pattern is meant to guide you consistently when the pattern appears again.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "vowel-patterns",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.vowel-patterns.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.vowel-patterns.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.vowel-patterns.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Two details are especially useful in your first Kreyòl words:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "è",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "is a real part of the spelling. In",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "flè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", keep the accent when you write the word.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "works together as one common sound pattern. The word",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "itself shows the two letters staying together.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Do not silently replace",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "è",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "with plain",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "e",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", and do not drop one of the letters in",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ". Apply these same spelling habits to other familiar words in the practice.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "nasal-patterns",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.nasal-patterns.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.nasal-patterns.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.notice-kreyol-sounds.nasal-patterns.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Kreyòl also uses common nasal vowel spellings such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ",",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "en",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "on",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ". For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Examples to notice:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "manman",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "mother",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "pen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "bread",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "non",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "no",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Later lessons can refine how these patterns behave in different words. For now, just learn to spot these spellings and keep them when you write.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
@@ -31079,19 +38617,114 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "listen-first",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.listen-first.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.listen-first.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.listen-first.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "When a new language is unfamiliar, it is tempting to break every word into English-looking pieces. Instead, listen to the",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "whole Kreyòl word",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", then connect it with the spelling you already saw.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Use these anchors:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "bonjou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "mèsi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "wi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Replay whenever you need to. Focus on recognizing the whole word first; speed will come later. Then listen for one more short word and rebuild what you hear.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "say-whole-word",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.say-whole-word.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.say-whole-word.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.say-whole-word.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Read the whole word once, listen to how it sounds, then say it naturally. Keep your attention on the complete word instead of trying to pronounce it one letter at a time.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Keep the word intact. For example, when you see",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "mèsi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", preserve the word as one unit instead of spelling it aloud letter by letter.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "short-phrases",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.short-phrases.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.short-phrases.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.short-phrases.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Once a single word feels familiar, listen to two words together. A short phrase such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Wi, mèsi.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "lets you hear familiar Kreyòl without adding much new vocabulary.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Listen first, rebuild what you heard, then say the same phrase. This creates a direct path from sound → written Kreyòl → spoken Kreyòl.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
@@ -31370,19 +39003,154 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "read-before-build",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.read-before-build.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.read-before-build.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.read-before-build.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Before arranging words, read each piece once. Look for the spellings you already know:",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "bonjou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ",",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "mèsi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ",",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "wi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", and the nasal patterns in words such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "manman",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Read each piece, then put the Kreyòl phrase back together in the same order. Keep the spelling you already learned.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "write-accurately",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.write-accurately.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.write-accurately.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.write-accurately.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Writing is where your new visual habits become active. When you type",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "flè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", keep",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "è",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ". When you type",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", keep",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "together.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Now apply those same spelling habits to familiar words from earlier in the module. Do not add English spelling conventions that are not present in the Kreyòl word. Short, accurate answers are better practice than long guesses.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "first-phrase",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.first-phrase.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.first-phrase.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.read-build-and-write-first-words.first-phrase.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "You can already combine a few familiar words into tiny meaningful phrases.",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Bonjou, manman.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "means “Hello, Mom.” and reuses sound patterns from this module.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Read the phrase, build it from the word bank, then write one of its familiar words from memory. That is the same sequence you will use in later modules with longer sentences.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
@@ -31653,19 +39421,204 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "exchange-map",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.exchange-map.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.exchange-map.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.exchange-map.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "a",
+                "voiceSlot": 1,
+                "label": "A",
+                "delivery": "warm"
+              },
+              {
+                "id": "b",
+                "voiceSlot": 2,
+                "label": "B",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "A conversation can begin with language you already recognize. For this first mini exchange, keep it deliberately small:",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Bonjou.",
+                "locale": "ht-HT",
+                "speakerId": "a",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Bonjou.",
+                "locale": "ht-HT",
+                "speakerId": "b",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "For now, keep the exchange simple. The point is to hear familiar words inside a real back-and-forth conversation.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ],
+            "defaultPauseMs": 300
+          }
         },
         {
           "id": "respond-with-known-words",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.respond-with-known-words.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.respond-with-known-words.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.respond-with-known-words.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "A good way to build confidence is to reuse words you already know. After hearing a familiar word, respond with a familiar word or phrase instead of reaching for new vocabulary.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "You already have",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "bonjou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ",",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "mèsi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ",",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "wi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "non",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ". Use them accurately. Next, you'll use these familiar words in fuller greetings and short exchanges.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "module-one-review",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.module-one-review.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.module-one-review.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.module-one-review.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Before you move on, check three habits:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "You notice spellings such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "è",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ",",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ",",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ",",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "en",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ", and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "on",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You can connect a few written Kreyòl words with what you hear and say.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You preserve those spellings when you build or type a response.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You do not need perfect pronunciation or a large vocabulary yet. You need a dependable first map.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
@@ -31827,9 +39780,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "learn-greetings-and-polite-basics",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-2-bonjou",
-      "sectionSlug": "haitian-creole-foundations-ht2-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht2-greetings-conversation",
       "prefix": "ht2",
-      "minutes": 24,
+      "minutes": 20,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -31854,12 +39807,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-learn-greetings-and-polite-basics-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch0.prompt",
-            "exerciseKey": "try-greetings-start-evening",
+            "exerciseKey": "try-bonjou-mari",
             "exerciseKeys": [
-              "try-greetings-start-evening"
+              "try-bonjou-mari"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -31870,18 +39823,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.cards.sketch1.title",
-          "sketchId": "greet-a-person",
+          "sketchId": "polite-basics",
           "height": 420,
           "tryIt": {
             "id": "try-learn-greetings-and-polite-basics-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch1.prompt",
-            "exerciseKey": "try-greet-person-mari",
+            "exerciseKey": "try-mesi-anpil",
             "exerciseKeys": [
-              "try-greet-person-mari"
+              "try-mesi-anpil"
             ],
             "difficulty": "easy",
-            "preferKind": "listen_build",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -31892,8 +39845,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.cards.sketch2.title",
-          "sketchId": "greeting-habit",
-          "height": 420
+          "sketchId": "close-politely",
+          "height": 420,
+          "tryIt": {
+            "id": "try-learn-greetings-and-polite-basics-sketch2",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch2.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.tryIt.try_learn_greetings_and_polite_basics_sketch2.prompt",
+            "exerciseKey": "try-orevwa-jan",
+            "exerciseKeys": [
+              "try-orevwa-jan"
+            ],
+            "difficulty": "easy",
+            "preferKind": "text_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
         },
         {
           "id": "quiz",
@@ -31903,7 +39871,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -31916,28 +39884,118 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "greetings-start",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greetings-start.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greetings-start.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greetings-start.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Two useful greetings are:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Bonswa!",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "A greeting can stand alone or come before a person's name.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "greet-a-person",
+          "id": "polite-basics",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greet-a-person.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greet-a-person.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.polite-basics.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.polite-basics.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Three short expressions are useful immediately:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mèsi.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "thank you",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Tanpri.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "please",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Padon.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "excuse me / sorry",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Listen to each as a complete spoken expression.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "greeting-habit",
+          "id": "close-politely",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greeting-habit.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.greeting-habit.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.close-politely.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.close-politely.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Orevwa.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "is a useful way to close a short interaction.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Even a beginner conversation can already have a complete shape: greet, communicate, then close.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "learn-greetings-and-polite-basics-choice",
+          "id": "greeting-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.greeting-choice",
           "optionIds": [
             "a",
             "b",
@@ -31949,141 +40007,99 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "learn-greetings-and-polite-basics-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "ou"
-          }
-        },
-        {
-          "id": "learn-greetings-and-polite-basics-listen",
-          "kind": "listen_build",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-listen",
-          "targetText": "Bonjou.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Bonjou."
-          ],
-          "distractors": [
-            "Bonswa."
-          ],
-          "expected": {
-            "kind": "listen_build",
-            "targetText": "Bonjou.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-greetings-and-polite-basics-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-voice",
-          "targetText": "Bonswa.",
-          "locale": "ht-HT",
-          "maxSeconds": 10,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Bonswa.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-greetings-and-polite-basics-build",
+          "id": "thanks-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-build",
-          "targetText": "Bonjou, Mari.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.thanks-build",
+          "targetText": "Mèsi anpil.",
           "locale": "ht-HT",
           "wordBank": [
-            "Bonjou,",
-            "Mari."
+            "Mèsi",
+            "anpil."
           ],
-          "distractors": [
-            "Mèsi,"
-          ],
-          "ttsText": "Bonjou, Mari.",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Bonjou, Mari.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Mèsi anpil.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "learn-greetings-and-polite-basics-write",
-          "kind": "text_input",
+          "id": "bonswa-listen",
+          "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.learn-greetings-and-polite-basics-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "Bonjou",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-greetings-start-evening",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-greetings-start-evening",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-greet-person-mari",
-          "kind": "listen_build",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-greet-person-mari",
-          "targetText": "Bonswa, Mari.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.bonswa-listen",
+          "targetText": "Bonswa, Jan.",
           "locale": "ht-HT",
           "wordBank": [
             "Bonswa,",
-            "Mari."
+            "Jan."
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Bonswa, Mari.",
+            "targetText": "Bonswa, Jan.",
             "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "bonjou-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.bonjou-voice",
+          "targetText": "Bonjou, Mari.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Bonjou, Mari.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-bonjou-mari",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-bonjou-mari",
+          "targetText": "Bonjou, Mari.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Bonjou, Mari.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-mesi-anpil",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-mesi-anpil",
+          "targetText": "Mèsi anpil.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Mèsi anpil.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-orevwa-jan",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.learn-greetings-and-polite-basics.practice.try-orevwa-jan",
+          "placeholder": "Type the Kreyòl phrase",
+          "expected": {
+            "kind": "text_input",
+            "value": "Orevwa, Jan.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
           }
         }
       ]
@@ -32092,9 +40108,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "listen-and-say-hello",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-2-bonjou",
-      "sectionSlug": "haitian-creole-foundations-ht2-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht2-greetings-conversation",
       "prefix": "ht2",
-      "minutes": 24,
+      "minutes": 22,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -32119,12 +40135,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-and-say-hello-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch0.prompt",
-            "exerciseKey": "try-ask-how",
+            "exerciseKey": "try-mari-how",
             "exerciseKeys": [
-              "try-ask-how"
+              "try-mari-how"
             ],
             "difficulty": "easy",
-            "preferKind": "voice_input",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -32141,9 +40157,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-and-say-hello-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch1.prompt",
-            "exerciseKey": "try-answer-how",
+            "exerciseKey": "try-answer-more",
             "exerciseKeys": [
-              "try-answer-how"
+              "try-answer-more"
             ],
             "difficulty": "easy",
             "preferKind": "voice_input",
@@ -32163,9 +40179,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-and-say-hello-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch2.prompt",
-            "exerciseKey": "try-return-question",
+            "exerciseKey": "try-answer-return",
             "exerciseKeys": [
-              "try-return-question"
+              "try-answer-return"
             ],
             "difficulty": "easy",
             "preferKind": "voice_input",
@@ -32183,7 +40199,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -32196,28 +40212,93 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "ask-how",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.ask-how.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.ask-how.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.ask-how.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "To ask how someone is, use:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Kijan ou ye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Listen to the question as one complete phrase.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "answer-how",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.answer-how.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.answer-how.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.answer-how.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "A simple complete answer is:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen byen, mèsi.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "A short answer is enough when it responds clearly.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "return-question",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.return-question.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.return-question.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.return-question.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "After answering, return the question with:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "E ou menm?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "And you?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "This turns a one-way answer into a two-way conversation.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "listen-and-say-hello-choice",
+          "id": "return-question-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.return-question-choice",
           "optionIds": [
             "a",
             "b",
@@ -32229,147 +40310,99 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "listen-and-say-hello-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Mwen"
-          }
-        },
-        {
-          "id": "listen-and-say-hello-listen",
+          "id": "jan-how-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-listen",
-          "targetText": "Kijan ou ye?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.jan-how-listen",
+          "targetText": "Jan, kijan ou ye?",
           "locale": "ht-HT",
           "wordBank": [
-            "Kijan",
+            "Jan,",
+            "kijan",
             "ou",
             "ye?"
           ],
-          "distractors": [
-            "mèsi"
-          ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Kijan ou ye?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Jan, kijan ou ye?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "listen-and-say-hello-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-voice",
-          "targetText": "Mwen byen, mèsi.",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Mwen byen, mèsi.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-say-hello-build",
+          "id": "response-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-build",
-          "targetText": "E ou menm?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.response-build",
+          "targetText": "Mwen byen, mèsi anpil.",
           "locale": "ht-HT",
           "wordBank": [
-            "E",
-            "ou",
-            "menm?"
+            "Mwen",
+            "byen,",
+            "mèsi",
+            "anpil."
           ],
-          "distractors": [
-            "byen"
-          ],
-          "ttsText": "E ou menm?",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "E ou menm?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Mwen byen, mèsi anpil.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "listen-and-say-hello-write",
-          "kind": "text_input",
+          "id": "response-return-voice",
+          "kind": "voice_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "byen",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-ask-how",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-ask-how",
-          "targetText": "Mari, kijan ou ye?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.response-return-voice",
+          "targetText": "Mwen byen. E ou menm?",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
+            "targetText": "Mwen byen. E ou menm?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-mari-how",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-mari-how",
+          "targetText": "Mari, kijan ou ye?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Mari,",
+            "kijan",
+            "ou",
+            "ye?"
+          ],
+          "expected": {
+            "kind": "listen_build",
             "targetText": "Mari, kijan ou ye?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-answer-how",
+          "id": "try-answer-more",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-answer-how",
-          "targetText": "Mwen byen.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-answer-more",
+          "targetText": "Mwen byen, mèsi anpil.",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "Mwen byen.",
+            "targetText": "Mwen byen, mèsi anpil.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-return-question",
+          "id": "try-answer-return",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-return-question",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-answer-return",
           "targetText": "Mwen byen. E ou menm?",
           "locale": "ht-HT",
           "expected": {
@@ -32380,302 +40413,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         }
       ]
     },
-    "read-build-and-write-greetings": {
-      "topicId": "read-build-and-write-greetings",
-      "subjectSlug": "haitian-creole-foundations",
-      "moduleSlug": "haitian-creole-foundations-2-bonjou",
-      "sectionSlug": "haitian-creole-foundations-ht2-read-build-write-use",
-      "prefix": "ht2",
-      "minutes": 24,
-      "runtimeDefaults": {
-        "kind": "code",
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "supportsStdInStdOut": true,
-        "supportsPackageInstall": false
-      },
-      "serviceDefaults": null,
-      "topic": {
-        "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.label",
-        "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.cards.sketch0.title",
-          "sketchId": "thanks",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-greetings-sketch0",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.tryIt.try_read_build_and_write_greetings_sketch0.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.tryIt.try_read_build_and_write_greetings_sketch0.prompt",
-            "exerciseKey": "try-thanks-anpil",
-            "exerciseKeys": [
-              "try-thanks-anpil"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.cards.sketch1.title",
-          "sketchId": "please",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-greetings-sketch1",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.tryIt.try_read_build_and_write_greetings_sketch1.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.tryIt.try_read_build_and_write_greetings_sketch1.prompt",
-            "exerciseKey": "try-please-tanpri",
-            "exerciseKeys": [
-              "try-please-tanpri"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.cards.sketch2.title",
-          "sketchId": "excuse",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-greetings-sketch2",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.tryIt.try_read_build_and_write_greetings_sketch2.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.tryIt.try_read_build_and_write_greetings_sketch2.prompt",
-            "exerciseKey": "try-excuse-padon",
-            "exerciseKeys": [
-              "try-excuse-padon"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "thanks",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.thanks.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.thanks.bodyMarkdown"
-        },
-        {
-          "id": "please",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.please.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.please.bodyMarkdown"
-        },
-        {
-          "id": "excuse",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.excuse.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.excuse.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "read-build-and-write-greetings-choice",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.read-build-and-write-greetings-choice",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "read-build-and-write-greetings-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.read-build-and-write-greetings-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "pri"
-          }
-        },
-        {
-          "id": "read-build-and-write-greetings-listen",
-          "kind": "listen_build",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.read-build-and-write-greetings-listen",
-          "targetText": "Tanpri.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Tanpri."
-          ],
-          "distractors": [
-            "Padon."
-          ],
-          "expected": {
-            "kind": "listen_build",
-            "targetText": "Tanpri.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-greetings-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.read-build-and-write-greetings-voice",
-          "targetText": "Mèsi anpil.",
-          "locale": "ht-HT",
-          "maxSeconds": 10,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Mèsi anpil.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-greetings-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.read-build-and-write-greetings-build",
-          "targetText": "Mèsi anpil.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Mèsi",
-            "anpil."
-          ],
-          "distractors": [
-            "Tanpri"
-          ],
-          "ttsText": "Mèsi anpil.",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Mèsi anpil.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-greetings-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.read-build-and-write-greetings-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "Padon",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-thanks-anpil",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.try-thanks-anpil",
-          "targetText": "Mèsi, Mari.",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Mèsi, Mari.",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-please-tanpri",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.try-please-tanpri",
-          "targetText": "Tanpri, Mari.",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Tanpri, Mari.",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-excuse-padon",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.read-build-and-write-greetings.practice.try-excuse-padon",
-          "targetText": "Padon, Mari.",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Padon, Mari.",
-            "locale": "ht-HT"
-          }
-        }
-      ]
-    },
     "greeting-scenario-and-review": {
       "topicId": "greeting-scenario-and-review",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-2-bonjou",
-      "sectionSlug": "haitian-creole-foundations-ht2-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht2-greetings-conversation",
       "prefix": "ht2",
-      "minutes": 30,
+      "minutes": 24,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -32694,19 +40438,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.cards.sketch0.title",
-          "sketchId": "mini-dialogue",
+          "sketchId": "first-conversation",
           "height": 420,
           "tryIt": {
             "id": "try-greeting-scenario-and-review-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch0.prompt",
-            "exerciseKey": "try-mini-dialogue-question",
+            "exerciseKey": "try-new-opening",
             "exerciseKeys": [
-              "try-mini-dialogue-question",
-              "try-mini-dialogue-response"
+              "try-new-opening"
             ],
             "difficulty": "easy",
-            "preferKind": null,
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -32717,18 +40460,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.cards.sketch1.title",
-          "sketchId": "close-conversation",
+          "sketchId": "conversation-flow",
           "height": 420,
           "tryIt": {
             "id": "try-greeting-scenario-and-review-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch1.prompt",
-            "exerciseKey": "try-close-conversation-orevwa",
+            "exerciseKey": "try-build-complete-turn",
             "exerciseKeys": [
-              "try-close-conversation-orevwa"
+              "try-build-complete-turn"
             ],
             "difficulty": "easy",
-            "preferKind": "voice_input",
+            "preferKind": "word_bank_arrange",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -32739,18 +40482,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.cards.sketch2.title",
-          "sketchId": "conversation-flow",
+          "sketchId": "take-your-turn",
           "height": 420,
           "tryIt": {
             "id": "try-greeting-scenario-and-review-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch2.prompt",
-            "exerciseKey": "try-conversation-flow-order",
+            "exerciseKey": "try-own-response",
             "exerciseKeys": [
-              "try-conversation-flow-order"
+              "try-own-response"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -32765,7 +40508,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -32775,31 +40518,233 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "mini-dialogue",
+          "id": "first-conversation",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.mini-dialogue.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.mini-dialogue.bodyMarkdown"
-        },
-        {
-          "id": "close-conversation",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.close-conversation.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.close-conversation.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.first-conversation.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.first-conversation.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kijan ou ye?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen, mèsi. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen tou, mèsi.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Orevwa!",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Orevwa!",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Each turn responds naturally to the one before it.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
           "id": "conversation-flow",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.conversation-flow.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.conversation-flow.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.conversation-flow.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "A useful first conversation can follow this flow:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "greet",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "ask how the person is",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "answer",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "return the question",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "close politely",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Do not memorize the lines as separate pieces. Listen for what the other person says, understand the turn, then respond naturally.",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "take-your-turn",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.take-your-turn.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.take-your-turn.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Listen to a second version.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The conversation structure is familiar, but some wording changes.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Listen for the flow of the conversation instead of memorizing one exact script.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "speakerId": "jan",
+                "text": "Bonswa!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Bonswa!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Kijan ou ye?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Mwen byen, mèsi anpil. E ou menm?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Mwen byen tou.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Orevwa!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Orevwa!",
+                "locale": "ht-HT"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "greeting-scenario-and-review-choice",
+          "id": "natural-response-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.natural-response-choice",
           "optionIds": [
             "a",
             "b",
@@ -32811,106 +40756,49 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "greeting-scenario-and-review-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "mèsi"
-          }
-        },
-        {
-          "id": "greeting-scenario-and-review-listen",
+          "id": "variant-opening-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-listen",
-          "targetText": "Kijan ou ye?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.variant-opening-listen",
+          "targetText": "Bonswa! Kijan ou ye?",
           "locale": "ht-HT",
           "wordBank": [
+            "Bonswa!",
             "Kijan",
             "ou",
             "ye?"
-          ],
-          "distractors": [
-            "byen"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Kijan ou ye?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Bonswa! Kijan ou ye?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "greeting-scenario-and-review-voice",
+          "id": "mari-turn-voice",
           "kind": "voice_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-voice",
-          "targetText": "Mwen byen, mèsi. E ou menm?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.mari-turn-voice",
+          "targetText": "Mwen byen, mèsi anpil. E ou menm?",
           "locale": "ht-HT",
-          "maxSeconds": 15,
           "expected": {
             "kind": "voice_input",
-            "targetText": "Mwen byen, mèsi. E ou menm?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Mwen byen, mèsi anpil. E ou menm?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "greeting-scenario-and-review-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-build",
-          "targetText": "Bonjou! Kijan ou ye?",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Bonjou!",
-            "Kijan",
-            "ou",
-            "ye?"
-          ],
-          "distractors": [
-            "Orevwa."
-          ],
-          "ttsText": "Bonjou! Kijan ou ye?",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Bonjou! Kijan ou ye?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "greeting-scenario-and-review-write",
+          "id": "close-mari-write",
           "kind": "text_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-write",
-          "placeholder": "Type the Kreyòl answer",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.close-mari-write",
+          "placeholder": "Type the Kreyòl phrase",
           "expected": {
             "kind": "text_input",
-            "value": "Orevwa",
+            "value": "Orevwa, Mari.",
             "normalize": {
               "trim": true,
               "caseFold": true,
@@ -32920,65 +40808,58 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "try-mini-dialogue-question",
+          "id": "try-new-opening",
           "kind": "listen_build",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-mini-dialogue-question",
-          "targetText": "Kijan ou ye?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-new-opening",
+          "targetText": "Bonswa! Kijan ou ye?",
           "locale": "ht-HT",
+          "wordBank": [
+            "Bonswa!",
+            "Kijan",
+            "ou",
+            "ye?"
+          ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Kijan ou ye?",
+            "targetText": "Bonswa! Kijan ou ye?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-mini-dialogue-response",
-          "kind": "voice_input",
+          "id": "try-build-complete-turn",
+          "kind": "word_bank_arrange",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-mini-dialogue-response",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-build-complete-turn",
           "targetText": "Mwen byen, mèsi. E ou menm?",
           "locale": "ht-HT",
+          "wordBank": [
+            "Mwen",
+            "byen,",
+            "mèsi.",
+            "E",
+            "ou",
+            "menm?"
+          ],
           "expected": {
-            "kind": "voice_input",
+            "kind": "word_bank_arrange",
             "targetText": "Mwen byen, mèsi. E ou menm?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-close-conversation-orevwa",
+          "id": "try-own-response",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-close-conversation-orevwa",
-          "targetText": "Mèsi. Orevwa.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-own-response",
+          "targetText": "Mwen byen, mèsi anpil. E ou menm?",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "Mèsi. Orevwa.",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-conversation-flow-order",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-conversation-flow-order",
-          "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Orevwa.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Bonjou!",
-            "Kijan ou ye?",
-            "Mwen byen, mèsi.",
-            "E ou menm?",
-            "Orevwa."
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Orevwa.",
+            "targetText": "Mwen byen, mèsi anpil. E ou menm?",
             "locale": "ht-HT"
           }
         }
@@ -32988,9 +40869,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "learn-names-and-introductions",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-3-who-are-you",
-      "sectionSlug": "haitian-creole-foundations-ht3-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht3-introductions",
       "prefix": "ht3",
-      "minutes": 24,
+      "minutes": 21,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -33009,18 +40890,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.cards.sketch0.title",
-          "sketchId": "pronouns",
+          "sketchId": "ask-a-name",
           "height": 420,
           "tryIt": {
             "id": "try-learn-names-and-introductions-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch0.prompt",
-            "exerciseKey": "try-pronouns-mwen",
+            "exerciseKey": "try-ask-name",
             "exerciseKeys": [
-              "try-pronouns-mwen"
+              "try-ask-name"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -33031,18 +40912,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.cards.sketch1.title",
-          "sketchId": "say-who",
+          "sketchId": "say-your-name",
           "height": 420,
           "tryIt": {
             "id": "try-learn-names-and-introductions-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch1.prompt",
-            "exerciseKey": "try-say-who-student",
+            "exerciseKey": "try-new-name",
             "exerciseKeys": [
-              "try-say-who-student"
+              "try-new-name"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -33053,18 +40934,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.cards.sketch2.title",
-          "sketchId": "say-name",
+          "sketchId": "return-the-name-question",
           "height": 420,
           "tryIt": {
             "id": "try-learn-names-and-introductions-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch2.prompt",
-            "exerciseKey": "try-say-name-mari",
+            "exerciseKey": "try-name-turn",
             "exerciseKeys": [
-              "try-say-name-mari"
+              "try-name-turn"
             ],
             "difficulty": "easy",
-            "preferKind": "voice_input",
+            "preferKind": "word_bank_arrange",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -33079,7 +40960,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -33089,31 +40970,150 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "pronouns",
+          "id": "ask-a-name",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.pronouns.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.pronouns.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.ask-a-name.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.ask-a-name.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "To ask someone's name, use:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Kijan ou rele?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Learn the question as one useful spoken chunk.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "say-who",
+          "id": "say-your-name",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-who.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-who.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-your-name.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-your-name.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "A short natural answer is:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "M rele Jan.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "My name is Jan.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The person's name changes; the pattern stays the same:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "M rele + name",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "say-name",
+          "id": "return-the-name-question",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-name.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-name.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.return-the-name-question.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.return-the-name-question.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "You already know this useful phrase:",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "And you?",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Now it can return the name question too.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "speakerId": "jan",
+                "text": "Kijan ou rele?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "M rele Mari. E ou menm?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "M rele Jan.",
+                "locale": "ht-HT"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "learn-names-and-introductions-choice",
+          "id": "names-question-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.names-question-choice",
           "optionIds": [
             "a",
             "b",
@@ -33125,23 +41125,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "learn-names-and-introductions-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Mwen"
-          }
-        },
-        {
-          "id": "learn-names-and-introductions-listen",
+          "id": "names-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-listen",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.names-listen",
           "targetText": "M rele Mari.",
           "locale": "ht-HT",
           "wordBank": [
@@ -33149,434 +41137,101 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "rele",
             "Mari."
           ],
-          "distractors": [
-            "Ou"
-          ],
           "expected": {
             "kind": "listen_build",
             "targetText": "M rele Mari.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "learn-names-and-introductions-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-voice",
-          "targetText": "Mwen se Jan.",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Mwen se Jan.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-names-and-introductions-build",
+          "id": "names-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-build",
-          "targetText": "M rele Mari.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.names-build",
+          "targetText": "M rele Jan. E ou menm?",
           "locale": "ht-HT",
           "wordBank": [
             "M",
             "rele",
-            "Mari."
-          ],
-          "distractors": [
-            "se"
-          ],
-          "ttsText": "M rele Mari.",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "M rele Mari.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-names-and-introductions-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "Ou",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-pronouns-mwen",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-pronouns-mwen",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-say-who-student",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-say-who-student",
-          "targetText": "Mwen se Mari.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Mwen",
-            "se",
-            "Mari."
+            "Jan.",
+            "E",
+            "ou",
+            "menm?"
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Mwen se Mari.",
+            "targetText": "M rele Jan. E ou menm?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-say-name-mari",
+          "id": "names-voice",
           "kind": "voice_input",
-          "purpose": "project",
+          "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-say-name-mari",
-          "targetText": "M rele Ana.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.names-voice",
+          "targetText": "M rele Mari.",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "M rele Ana.",
+            "targetText": "M rele Mari.",
             "locale": "ht-HT"
           }
-        }
-      ]
-    },
-    "listen-and-introduce-yourself": {
-      "topicId": "listen-and-introduce-yourself",
-      "subjectSlug": "haitian-creole-foundations",
-      "moduleSlug": "haitian-creole-foundations-3-who-are-you",
-      "sectionSlug": "haitian-creole-foundations-ht3-learn-listen-speak",
-      "prefix": "ht3",
-      "minutes": 24,
-      "runtimeDefaults": {
-        "kind": "code",
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "supportsStdInStdOut": true,
-        "supportsPackageInstall": false
-      },
-      "serviceDefaults": null,
-      "topic": {
-        "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.label",
-        "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.cards.sketch0.title",
-          "sketchId": "nationality",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-and-introduce-yourself-sketch0",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch0.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch0.prompt",
-            "exerciseKey": "try-nationality-ayisyen",
-            "exerciseKeys": [
-              "try-nationality-ayisyen"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.cards.sketch1.title",
-          "sketchId": "language",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-and-introduce-yourself-sketch1",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch1.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch1.prompt",
-            "exerciseKey": "try-language-kreyol",
-            "exerciseKeys": [
-              "try-language-kreyol"
-            ],
-            "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.cards.sketch2.title",
-          "sketchId": "combine",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-and-introduce-yourself-sketch2",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch2.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch2.prompt",
-            "exerciseKey": "try-combine-identity-language",
-            "exerciseKeys": [
-              "try-combine-identity-language"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "nationality",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.nationality.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.nationality.bodyMarkdown"
-        },
-        {
-          "id": "language",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.language.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.language.bodyMarkdown"
-        },
-        {
-          "id": "combine",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.combine.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.combine.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "listen-and-introduce-yourself-choice",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-choice",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "listen-and-introduce-yourself-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "pale"
-          }
-        },
-        {
-          "id": "listen-and-introduce-yourself-listen",
+          "id": "try-ask-name",
           "kind": "listen_build",
-          "purpose": "quiz",
+          "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-listen",
-          "targetText": "Li se ayisyen.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-ask-name",
+          "targetText": "Mari, kijan ou rele?",
           "locale": "ht-HT",
           "wordBank": [
-            "Li",
-            "se",
-            "ayisyen."
-          ],
-          "distractors": [
-            "pale"
+            "Mari,",
+            "kijan",
+            "ou",
+            "rele?"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Li se ayisyen.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-introduce-yourself-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-voice",
-          "targetText": "Mwen pale kreyòl.",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Mwen pale kreyòl.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-introduce-yourself-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-build",
-          "targetText": "Mwen se ayisyen.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Mwen",
-            "se",
-            "ayisyen."
-          ],
-          "distractors": [
-            "pale"
-          ],
-          "ttsText": "Mwen se ayisyen.",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Mwen se ayisyen.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-introduce-yourself-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "kreyòl",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-nationality-ayisyen",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.try-nationality-ayisyen",
-          "targetText": "Mwen se ameriken.",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Mwen se ameriken.",
+            "targetText": "Mari, kijan ou rele?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-language-kreyol",
-          "kind": "word_bank_arrange",
+          "id": "try-new-name",
+          "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.try-language-kreyol",
-          "targetText": "Mwen pale fransè.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-new-name",
+          "targetText": "M rele Mari.",
           "locale": "ht-HT",
-          "wordBank": [
-            "Mwen",
-            "pale",
-            "fransè."
-          ],
           "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Mwen pale fransè.",
+            "kind": "voice_input",
+            "targetText": "M rele Mari.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-combine-identity-language",
-          "kind": "voice_input",
+          "id": "try-name-turn",
+          "kind": "word_bank_arrange",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.try-combine-identity-language",
-          "targetText": "Mwen se ameriken. Mwen pale anglè.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-name-turn",
+          "targetText": "M rele Mari. E ou menm?",
           "locale": "ht-HT",
+          "wordBank": [
+            "M",
+            "rele",
+            "Mari.",
+            "E",
+            "ou",
+            "menm?"
+          ],
           "expected": {
-            "kind": "voice_input",
-            "targetText": "Mwen se ameriken. Mwen pale anglè.",
+            "kind": "word_bank_arrange",
+            "targetText": "M rele Mari. E ou menm?",
             "locale": "ht-HT"
           }
         }
@@ -33586,9 +41241,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "read-build-and-write-an-introduction",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-3-who-are-you",
-      "sectionSlug": "haitian-creole-foundations-ht3-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht3-introductions",
       "prefix": "ht3",
-      "minutes": 24,
+      "minutes": 21,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -33607,15 +41262,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.cards.sketch0.title",
-          "sketchId": "ask-place",
+          "sketchId": "ask-where",
           "height": 420,
           "tryIt": {
             "id": "try-read-build-and-write-an-introduction-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch0.prompt",
-            "exerciseKey": "try-ask-place",
+            "exerciseKey": "try-ask-where",
             "exerciseKeys": [
-              "try-ask-place"
+              "try-ask-where"
             ],
             "difficulty": "easy",
             "preferKind": "voice_input",
@@ -33629,18 +41284,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.cards.sketch1.title",
-          "sketchId": "answer-place",
+          "sketchId": "answer-where",
           "height": 420,
           "tryIt": {
             "id": "try-read-build-and-write-an-introduction-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch1.prompt",
-            "exerciseKey": "try-answer-place-chicago",
+            "exerciseKey": "try-different-city",
             "exerciseKeys": [
-              "try-answer-place-chicago"
+              "try-different-city"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "text_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -33651,18 +41306,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.cards.sketch2.title",
-          "sketchId": "third-person-place",
+          "sketchId": "residence-exchange",
           "height": 420,
           "tryIt": {
             "id": "try-read-build-and-write-an-introduction-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.tryIt.try_read_build_and_write_an_introduction_sketch2.prompt",
-            "exerciseKey": "try-third-person-place",
+            "exerciseKey": "try-residence-transfer",
             "exerciseKeys": [
-              "try-third-person-place"
+              "try-residence-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -33677,7 +41332,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -33687,31 +41342,139 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "ask-place",
+          "id": "ask-where",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.ask-place.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.ask-place.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.ask-where.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.ask-where.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "To ask where someone lives, use:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Ki kote ou rete?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Treat the question as one complete expression.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "answer-place",
+          "id": "answer-where",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.answer-place.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.answer-place.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.answer-where.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.answer-where.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Answer with:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen rete Chicago.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "I live in Chicago.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The place can change while the sentence pattern stays stable.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "third-person-place",
+          "id": "residence-exchange",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.third-person-place.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.third-person-place.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.residence-exchange.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.residence-exchange.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Ki kote ou rete?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Boston. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Chicago.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "The familiar",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "keeps the exchange moving.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "read-build-and-write-an-introduction-choice",
+          "id": "residence-question-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.residence-question-choice",
           "optionIds": [
             "a",
             "b",
@@ -33723,133 +41486,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "read-build-and-write-an-introduction-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "rete"
-          }
-        },
-        {
-          "id": "read-build-and-write-an-introduction-listen",
+          "id": "residence-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-listen",
-          "targetText": "Li rete Boston.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Li",
-            "rete",
-            "Boston."
-          ],
-          "distractors": [
-            "pale"
-          ],
-          "expected": {
-            "kind": "listen_build",
-            "targetText": "Li rete Boston.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-an-introduction-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-voice",
-          "targetText": "Ki kote ou rete?",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Ki kote ou rete?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-an-introduction-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-build",
-          "targetText": "Mwen rete Chicago.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Mwen",
-            "rete",
-            "Chicago."
-          ],
-          "distractors": [
-            "rele"
-          ],
-          "ttsText": "Mwen rete Chicago.",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Mwen rete Chicago.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-an-introduction-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.read-build-and-write-an-introduction-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "kote",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-ask-place",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-ask-place",
-          "targetText": "Ki kote Mari rete?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Ki kote Mari rete?",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-answer-place-chicago",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-answer-place-chicago",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.residence-listen",
           "targetText": "Mwen rete Boston.",
           "locale": "ht-HT",
           "wordBank": [
@@ -33858,27 +41499,93 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "Boston."
           ],
           "expected": {
-            "kind": "word_bank_arrange",
+            "kind": "listen_build",
             "targetText": "Mwen rete Boston.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-third-person-place",
+          "id": "residence-build",
           "kind": "word_bank_arrange",
-          "purpose": "project",
+          "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-third-person-place",
-          "targetText": "Li rete Chicago.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.residence-build",
+          "targetText": "Ki kote ou rete?",
           "locale": "ht-HT",
           "wordBank": [
-            "Li",
-            "rete",
-            "Chicago."
+            "Ki",
+            "kote",
+            "ou",
+            "rete?"
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Li rete Chicago.",
+            "targetText": "Ki kote ou rete?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "residence-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.residence-voice",
+          "targetText": "Mwen rete Miami.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Mwen rete Miami.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-ask-where",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-ask-where",
+          "targetText": "Mari, ki kote ou rete?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Mari, ki kote ou rete?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-different-city",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-different-city",
+          "placeholder": "Type the Kreyòl sentence",
+          "expected": {
+            "kind": "text_input",
+            "value": "Mwen rete Miami.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-residence-transfer",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.read-build-and-write-an-introduction.practice.try-residence-transfer",
+          "targetText": "Mwen rete Miami.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Mwen",
+            "rete",
+            "Miami."
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Mwen rete Miami.",
             "locale": "ht-HT"
           }
         }
@@ -33888,9 +41595,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "meet-someone-scenario-and-review",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-3-who-are-you",
-      "sectionSlug": "haitian-creole-foundations-ht3-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht3-introductions",
       "prefix": "ht3",
-      "minutes": 30,
+      "minutes": 25,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -33909,18 +41616,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.cards.sketch0.title",
-          "sketchId": "intro-flow",
+          "sketchId": "full-introduction",
           "height": 420,
           "tryIt": {
             "id": "try-meet-someone-scenario-and-review-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch0.prompt",
-            "exerciseKey": "try-intro-flow-order",
+            "exerciseKey": "try-introduction-response",
             "exerciseKeys": [
-              "try-intro-flow-order"
+              "try-introduction-response"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -33931,19 +41638,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.cards.sketch1.title",
-          "sketchId": "ask-back",
+          "sketchId": "conversation-map",
           "height": 420,
           "tryIt": {
             "id": "try-meet-someone-scenario-and-review-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch1.prompt",
-            "exerciseKey": "try-ask-back-name",
+            "exerciseKey": "try-map-transfer",
             "exerciseKeys": [
-              "try-ask-back-name",
-              "try-ask-back-place"
+              "try-map-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": null,
+            "preferKind": "word_bank_arrange",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -33954,19 +41660,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.cards.sketch2.title",
-          "sketchId": "mini-exchange",
+          "sketchId": "second-version",
           "height": 420,
           "tryIt": {
             "id": "try-meet-someone-scenario-and-review-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch2.prompt",
-            "exerciseKey": "try-mini-exchange-name",
+            "exerciseKey": "try-second-version",
             "exerciseKeys": [
-              "try-mini-exchange-name",
-              "try-mini-exchange-place"
+              "try-second-version"
             ],
             "difficulty": "easy",
-            "preferKind": null,
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -33981,7 +41686,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -33991,31 +41696,289 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "intro-flow",
+          "id": "full-introduction",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.intro-flow.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.intro-flow.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.full-introduction.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.full-introduction.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kijan ou ye?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen, mèsi. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen tou.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kijan ou rele?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M rele Mari. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M rele Jan.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Ki kote ou rete?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Boston. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Chicago.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Orevwa, Jan!",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Orevwa, Mari!",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Notice how the conversation grows naturally from greetings into names and where someone lives.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
-          "id": "ask-back",
+          "id": "conversation-map",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.ask-back.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.ask-back.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.conversation-map.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.conversation-map.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "You can now connect three small conversation moves:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "greet and ask how someone is",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "exchange names",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "exchange where you live",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Each new question grows from language already understood.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "mini-exchange",
+          "id": "second-version",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.mini-exchange.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.mini-exchange.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.second-version.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.second-version.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Listen again with a different greeting and a warmer answer.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Jan and Mari keep the same names, residences, and voices. Only the wording changes.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "speakerId": "jan",
+                "text": "Bonswa!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Bonswa!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Kijan ou ye?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Mwen byen, mèsi anpil. E ou menm?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Mwen byen tou, mèsi.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Kijan ou rele?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "M rele Mari. E ou menm?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "M rele Jan.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Ki kote ou rete?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Mwen rete Boston. E ou menm?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Mwen rete Chicago.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Orevwa, Jan!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Orevwa, Mari!",
+                "locale": "ht-HT"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "meet-someone-scenario-and-review-choice",
+          "id": "intro-natural-next-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.intro-natural-next-choice",
           "optionIds": [
             "a",
             "b",
@@ -34027,189 +41990,116 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "meet-someone-scenario-and-review-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "rele"
-          }
-        },
-        {
-          "id": "meet-someone-scenario-and-review-listen",
+          "id": "intro-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-listen",
-          "targetText": "Mwen pale kreyòl.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.intro-listen",
+          "targetText": "Mwen rete Chicago. E ou menm?",
           "locale": "ht-HT",
           "wordBank": [
             "Mwen",
-            "pale",
-            "kreyòl."
-          ],
-          "distractors": [
-            "rete"
+            "rete",
+            "Chicago.",
+            "E",
+            "ou",
+            "menm?"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Mwen pale kreyòl.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Mwen rete Chicago. E ou menm?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "meet-someone-scenario-and-review-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-voice",
-          "targetText": "M rele Ana. Mwen rete Chicago.",
-          "locale": "ht-HT",
-          "maxSeconds": 16,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "M rele Ana. Mwen rete Chicago.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "meet-someone-scenario-and-review-build",
+          "id": "intro-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-build",
-          "targetText": "Kijan ou rele?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.intro-build",
+          "targetText": "M rele Jan. E ou menm?",
           "locale": "ht-HT",
           "wordBank": [
-            "Kijan",
+            "M",
+            "rele",
+            "Jan.",
+            "E",
             "ou",
-            "rele?"
+            "menm?"
           ],
-          "distractors": [
-            "rete"
-          ],
-          "ttsText": "Kijan ou rele?",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Kijan ou rele?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "M rele Jan. E ou menm?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "meet-someone-scenario-and-review-write",
-          "kind": "text_input",
+          "id": "intro-voice",
+          "kind": "voice_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-write",
-          "placeholder": "Type the Kreyòl answer",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.intro-voice",
+          "targetText": "Mwen rete Miami. E ou menm?",
+          "locale": "ht-HT",
           "expected": {
-            "kind": "text_input",
-            "value": "Mwen se ayisyen.",
-            "anyOf": [
-              "Mwen se ayisyèn."
-            ],
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "kind": "voice_input",
+            "targetText": "Mwen rete Miami. E ou menm?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "try-intro-flow-order",
+          "id": "try-introduction-response",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-introduction-response",
+          "targetText": "M rele Mari. E ou menm?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "M rele Mari. E ou menm?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-map-transfer",
           "kind": "word_bank_arrange",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-intro-flow-order",
-          "targetText": "M rele Ana. Mwen se ayisyèn. Mwen pale kreyòl. Mwen rete Chicago.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-map-transfer",
+          "targetText": "Ki kote ou rete?",
           "locale": "ht-HT",
           "wordBank": [
-            "M rele Ana.",
-            "Mwen se ayisyèn.",
-            "Mwen pale kreyòl.",
-            "Mwen rete Chicago."
+            "Ki",
+            "kote",
+            "ou",
+            "rete?"
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "M rele Ana. Mwen se ayisyèn. Mwen pale kreyòl. Mwen rete Chicago.",
+            "targetText": "Ki kote ou rete?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-ask-back-name",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-ask-back-name",
-          "targetText": "Kijan li rele?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Kijan li rele?",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-ask-back-place",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-ask-back-place",
-          "targetText": "Ki kote li rete?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Ki kote li rete?",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-mini-exchange-name",
+          "id": "try-second-version",
           "kind": "listen_build",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-mini-exchange-name",
-          "targetText": "M rele Ana. E ou menm?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-second-version",
+          "targetText": "Mwen rete Boston. E ou menm?",
           "locale": "ht-HT",
+          "wordBank": [
+            "Mwen",
+            "rete",
+            "Boston.",
+            "E",
+            "ou",
+            "menm?"
+          ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "M rele Ana. E ou menm?",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-mini-exchange-place",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-mini-exchange-place",
-          "targetText": "Mwen rete Chicago.",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Mwen rete Chicago.",
+            "targetText": "Mwen rete Boston. E ou menm?",
             "locale": "ht-HT"
           }
         }
@@ -34219,9 +42109,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "learn-everyday-things",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
-      "sectionSlug": "haitian-creole-foundations-ht4-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht4-things-and-possession",
       "prefix": "ht4",
-      "minutes": 24,
+      "minutes": 22,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -34240,18 +42130,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.cards.sketch0.title",
-          "sketchId": "yon",
+          "sketchId": "one-thing",
           "height": 420,
           "tryIt": {
             "id": "try-learn-everyday-things-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch0.prompt",
-            "exerciseKey": "try-yon-liv",
+            "exerciseKey": "try-yon-valiz",
             "exerciseKeys": [
-              "try-yon-liv"
+              "try-yon-valiz"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -34262,18 +42152,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.cards.sketch1.title",
-          "sketchId": "definite-after",
+          "sketchId": "the-thing",
           "height": 420,
           "tryIt": {
             "id": "try-learn-everyday-things-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch1.prompt",
-            "exerciseKey": "try-definite-after-chat",
+            "exerciseKey": "try-biwo-a",
             "exerciseKeys": [
-              "try-definite-after-chat"
+              "try-biwo-a"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -34284,18 +42174,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.cards.sketch2.title",
-          "sketchId": "contrast",
+          "sketchId": "more-than-one",
           "height": 420,
           "tryIt": {
             "id": "try-learn-everyday-things-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.tryIt.try_learn_everyday_things_sketch2.prompt",
-            "exerciseKey": "try-contrast-the-book",
+            "exerciseKey": "try-telefon-yo",
             "exerciseKeys": [
-              "try-contrast-the-book"
+              "try-telefon-yo"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "word_bank_arrange",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -34310,7 +42200,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -34320,31 +42210,196 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "yon",
+          "id": "one-thing",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.yon.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.yon.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.one-thing.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.one-thing.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "yon",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "means “a” or “an” and comes before the noun.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "yon liv",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a book",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "yon kaye",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a notebook",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "yon telefòn",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "a phone",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "For now, focus on using the whole noun phrase naturally.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "definite-after",
+          "id": "the-thing",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.definite-after.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.definite-after.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.the-thing.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.the-thing.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "In Kreyòl, the definite marker comes",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "after",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the noun.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Here are a few examples:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "liv la",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the book",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "kaye a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the notebook",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "telefòn nan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the phone",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You do not need to learn the full article-selection rule yet. Read and say these noun phrases as complete chunks.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "contrast",
+          "id": "more-than-one",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.contrast.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.contrast.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.more-than-one.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.more-than-one.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "For plural definite noun phrases, use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "after the noun.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "liv yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the books",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "kaye yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "the notebooks",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The same",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "works across these plural noun phrases.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "learn-everyday-things-choice",
+          "id": "things-yon-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.things-yon-choice",
           "optionIds": [
             "a",
             "b",
@@ -34356,457 +42411,103 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "learn-everyday-things-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "yon"
-          }
-        },
-        {
-          "id": "learn-everyday-things-listen",
+          "id": "things-definite-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-listen",
-          "targetText": "liv la",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.things-definite-listen",
+          "targetText": "Valiz la.",
           "locale": "ht-HT",
           "wordBank": [
-            "liv",
-            "la"
-          ],
-          "distractors": [
-            "yon"
+            "Valiz",
+            "la."
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "liv la",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-everyday-things-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-voice",
-          "targetText": "yon machin",
-          "locale": "ht-HT",
-          "maxSeconds": 10,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "yon machin",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-everyday-things-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-build",
-          "targetText": "chat la",
-          "locale": "ht-HT",
-          "wordBank": [
-            "chat",
-            "la"
-          ],
-          "distractors": [
-            "yon"
-          ],
-          "ttsText": "chat la",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "chat la",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-everyday-things-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.learn-everyday-things-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "yon liv",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-yon-liv",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-yon-liv",
-          "targetText": "yon chen",
-          "locale": "ht-HT",
-          "wordBank": [
-            "yon",
-            "chen"
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "yon chen",
+            "targetText": "Valiz la.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-definite-after-chat",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-definite-after-chat",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-contrast-the-book",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-contrast-the-book",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        }
-      ]
-    },
-    "listen-and-name-things": {
-      "topicId": "listen-and-name-things",
-      "subjectSlug": "haitian-creole-foundations",
-      "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
-      "sectionSlug": "haitian-creole-foundations-ht4-learn-listen-speak",
-      "prefix": "ht4",
-      "minutes": 24,
-      "runtimeDefaults": {
-        "kind": "code",
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "supportsStdInStdOut": true,
-        "supportsPackageInstall": false
-      },
-      "serviceDefaults": null,
-      "topic": {
-        "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.label",
-        "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.cards.sketch0.title",
-          "sketchId": "article-forms",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-and-name-things-sketch0",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch0.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch0.prompt",
-            "exerciseKey": "try-article-forms-bread",
-            "exerciseKeys": [
-              "try-article-forms-bread"
-            ],
-            "difficulty": "easy",
-            "preferKind": "single_choice",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.cards.sketch1.title",
-          "sketchId": "plural-yo",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-and-name-things-sketch1",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch1.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch1.prompt",
-            "exerciseKey": "try-plural-yo-books",
-            "exerciseKeys": [
-              "try-plural-yo-books"
-            ],
-            "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.cards.sketch2.title",
-          "sketchId": "switch-number",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-and-name-things-sketch2",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch2.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch2.prompt",
-            "exerciseKey": "try-switch-number-plural",
-            "exerciseKeys": [
-              "try-switch-number-plural"
-            ],
-            "difficulty": "easy",
-            "preferKind": "single_choice",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "article-forms",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.article-forms.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.article-forms.bodyMarkdown"
-        },
-        {
-          "id": "plural-yo",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.plural-yo.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.plural-yo.bodyMarkdown"
-        },
-        {
-          "id": "switch-number",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.switch-number.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.switch-number.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "listen-and-name-things-choice",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-choice",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "listen-and-name-things-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "yo"
-          }
-        },
-        {
-          "id": "listen-and-name-things-listen",
-          "kind": "listen_build",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-listen",
-          "targetText": "pen an",
-          "locale": "ht-HT",
-          "wordBank": [
-            "pen",
-            "an"
-          ],
-          "distractors": [
-            "yo"
-          ],
-          "expected": {
-            "kind": "listen_build",
-            "targetText": "pen an",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-name-things-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-voice",
-          "targetText": "liv yo",
-          "locale": "ht-HT",
-          "maxSeconds": 10,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "liv yo",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-name-things-build",
+          "id": "things-plural-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-build",
-          "targetText": "plim nan",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.things-plural-build",
+          "targetText": "Liv yo.",
           "locale": "ht-HT",
           "wordBank": [
-            "plim",
-            "nan"
-          ],
-          "distractors": [
-            "yo"
-          ],
-          "ttsText": "plim nan",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "plim nan",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-name-things-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "chen yo",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-article-forms-bread",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.try-article-forms-bread",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-plural-yo-books",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.try-plural-yo-books",
-          "targetText": "machin yo",
-          "locale": "ht-HT",
-          "wordBank": [
-            "machin",
-            "yo"
+            "Liv",
+            "yo."
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "machin yo",
+            "targetText": "Liv yo.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-switch-number-plural",
-          "kind": "single_choice",
+          "id": "things-yon-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.things-yon-voice",
+          "targetText": "Yon kaye.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Yon kaye.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-yon-valiz",
+          "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.try-switch-number-plural",
-          "optionIds": [
-            "a",
-            "b"
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-yon-valiz",
+          "targetText": "Yon valiz.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Yon valiz.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-biwo-a",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-biwo-a",
+          "targetText": "Biwo a.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Biwo",
+            "a."
           ],
           "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
+            "kind": "listen_build",
+            "targetText": "Biwo a.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-telefon-yo",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.learn-everyday-things.practice.try-telefon-yo",
+          "targetText": "Telefòn yo.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Telefòn",
+            "yo."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Telefòn yo.",
+            "locale": "ht-HT"
           }
         }
       ]
@@ -34815,9 +42516,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "read-build-and-write-about-things",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
-      "sectionSlug": "haitian-creole-foundations-ht4-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht4-things-and-possession",
       "prefix": "ht4",
-      "minutes": 24,
+      "minutes": 23,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -34842,9 +42543,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-read-build-and-write-about-things-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch0.prompt",
-            "exerciseKey": "try-possessor-after-car",
+            "exerciseKey": "try-liv-mari",
             "exerciseKeys": [
-              "try-possessor-after-car"
+              "try-liv-mari"
             ],
             "difficulty": "easy",
             "preferKind": "word_bank_arrange",
@@ -34858,18 +42559,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.cards.sketch1.title",
-          "sketchId": "with-definite",
+          "sketchId": "se-pou",
           "height": 420,
           "tryIt": {
             "id": "try-read-build-and-write-about-things-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch1.prompt",
-            "exerciseKey": "try-with-definite-car",
+            "exerciseKey": "try-liv-pou-mari",
             "exerciseKeys": [
-              "try-with-definite-car"
+              "try-liv-pou-mari"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -34880,18 +42581,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.cards.sketch2.title",
-          "sketchId": "se-pou",
+          "sketchId": "owner-with-number",
           "height": 420,
           "tryIt": {
             "id": "try-read-build-and-write-about-things-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch2.prompt",
-            "exerciseKey": "try-se-pou-mwen",
+            "exerciseKey": "try-telefon-ou-an",
             "exerciseKeys": [
-              "try-se-pou-mwen"
+              "try-telefon-ou-an"
             ],
             "difficulty": "easy",
-            "preferKind": "voice_input",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -34906,7 +42607,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -34919,28 +42620,193 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "possessor-after",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.possessor-after.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.possessor-after.bodyMarkdown"
-        },
-        {
-          "id": "with-definite",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.with-definite.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.with-definite.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.possessor-after.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "To show possession, the possessor follows the thing.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "machin mwen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "my car",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "kaye ou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "your notebook",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "valiz mesye Jan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Mr. Jean's bag",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Notice the order:",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "thing + possessor",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "se-pou",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.se-pou.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.se-pou.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.se-pou.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Here is another useful way to show who something belongs to with",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "se pou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Machin nan se pou mwen.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "The car is mine.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Manje a se pou Jan.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "The food is Jan's.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Sa se pou yo.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "This/these belong to them.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "se pou + person",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "to identify the owner.",
+                "locale": "en-US"
+              }
+            ]
+          }
+        },
+        {
+          "id": "owner-with-number",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.owner-with-number.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.owner-with-number.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "The owner still follows the thing when the noun phrase is singular or plural.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "valiz mwen an",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "my bag",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "liv li yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "his/her books",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "kaye ou yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "your notebooks",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Keep the object first and the possessor after it.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "read-build-and-write-about-things-choice",
+          "id": "ownership-order-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.ownership-order-choice",
           "optionIds": [
             "a",
             "b",
@@ -34952,162 +42818,106 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "read-build-and-write-about-things-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "ou"
-          }
-        },
-        {
-          "id": "read-build-and-write-about-things-listen",
+          "id": "ownership-se-pou-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-listen",
-          "targetText": "machin mwen",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.ownership-se-pou-listen",
+          "targetText": "Kaye a se pou Jan.",
           "locale": "ht-HT",
           "wordBank": [
-            "machin",
-            "mwen"
-          ],
-          "distractors": [
-            "yo"
+            "Kaye",
+            "a",
+            "se",
+            "pou",
+            "Jan."
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "machin mwen",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Kaye a se pou Jan.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "read-build-and-write-about-things-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-voice",
-          "targetText": "Sa se pou mwen.",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Sa se pou mwen.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-about-things-build",
+          "id": "ownership-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-build",
-          "targetText": "Liv la se pou li.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.ownership-build",
+          "targetText": "Valiz Mari.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Valiz",
+            "Mari."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Valiz Mari.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "ownership-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.ownership-voice",
+          "targetText": "Telefòn nan se pou Jan.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Telefòn nan se pou Jan.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-liv-mari",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-liv-mari",
+          "targetText": "Liv Mari.",
           "locale": "ht-HT",
           "wordBank": [
             "Liv",
-            "la",
-            "se",
-            "pou",
-            "li."
-          ],
-          "distractors": [
-            "yo"
-          ],
-          "ttsText": "Liv la se pou li.",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Liv la se pou li.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-about-things-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "kaye mwen",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-possessor-after-car",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-possessor-after-car",
-          "targetText": "liv mwen",
-          "locale": "ht-HT",
-          "wordBank": [
-            "liv",
-            "mwen"
+            "Mari."
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "liv mwen",
+            "targetText": "Liv Mari.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-with-definite-car",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-with-definite-car",
-          "targetText": "liv mwen an",
-          "locale": "ht-HT",
-          "wordBank": [
-            "liv",
-            "mwen",
-            "an"
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "liv mwen an",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-se-pou-mwen",
+          "id": "try-liv-pou-mari",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-se-pou-mwen",
-          "targetText": "Sa se pou ou.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-liv-pou-mari",
+          "targetText": "Liv la se pou Mari.",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "Sa se pou ou.",
+            "targetText": "Liv la se pou Mari.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-telefon-ou-an",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-telefon-ou-an",
+          "targetText": "Telefòn ou an.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Telefòn",
+            "ou",
+            "an."
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Telefòn ou an.",
             "locale": "ht-HT"
           }
         }
@@ -35117,9 +42927,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "what-is-this-scenario-and-review",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
-      "sectionSlug": "haitian-creole-foundations-ht4-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht4-things-and-possession",
       "prefix": "ht4",
-      "minutes": 30,
+      "minutes": 24,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -35138,18 +42948,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.cards.sketch0.title",
-          "sketchId": "sa-a",
+          "sketchId": "this-that",
           "height": 420,
           "tryIt": {
             "id": "try-what-is-this-scenario-and-review-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch0.prompt",
-            "exerciseKey": "try-sa-a-bag",
+            "exerciseKey": "try-valiz-sa-a",
             "exerciseKeys": [
-              "try-sa-a-bag"
+              "try-valiz-sa-a"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -35160,15 +42970,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.cards.sketch1.title",
-          "sketchId": "sa-yo",
+          "sketchId": "these-those",
           "height": 420,
           "tryIt": {
             "id": "try-what-is-this-scenario-and-review-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch1.prompt",
-            "exerciseKey": "try-sa-yo-books",
+            "exerciseKey": "try-liv-sa-yo",
             "exerciseKeys": [
-              "try-sa-yo-books"
+              "try-liv-sa-yo"
             ],
             "difficulty": "easy",
             "preferKind": "word_bank_arrange",
@@ -35182,18 +42992,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.cards.sketch2.title",
-          "sketchId": "demonstrative-owner",
+          "sketchId": "object-exchange",
           "height": 420,
           "tryIt": {
             "id": "try-what-is-this-scenario-and-review-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.tryIt.try_what_is_this_scenario_and_review_sketch2.prompt",
-            "exerciseKey": "try-demonstrative-owner",
+            "exerciseKey": "try-kaye-pou-mari",
             "exerciseKeys": [
-              "try-demonstrative-owner"
+              "try-kaye-pou-mari"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -35208,7 +43018,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -35218,31 +43028,162 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "sa-a",
+          "id": "this-that",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.sa-a.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.sa-a.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.this-that.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.this-that.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "sa a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "after a noun for “this” or “that.”",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "machin sa a",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "this car / that car",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The demonstrative comes after the noun.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "sa-yo",
+          "id": "these-those",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.sa-yo.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.sa-yo.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.these-those.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.these-those.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "sa yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "after a noun for “these” or “those.”",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "machin sa yo",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "these cars / those cars",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Homework examples also combine this pattern with ownership.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "demonstrative-owner",
+          "id": "object-exchange",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.demonstrative-owner.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.demonstrative-owner.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.object-exchange.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.object-exchange.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Mari, liv sa a se pou ou.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mèsi, Jan. Kaye sa yo se pou ou.",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mèsi.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "This combines demonstratives, possession, and familiar polite language without adding a new question pattern.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "what-is-this-scenario-and-review-choice",
+          "id": "demonstrative-one-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.demonstrative-one-choice",
           "optionIds": [
             "a",
             "b",
@@ -35254,72 +43195,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "what-is-this-scenario-and-review-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "yo"
-          }
-        },
-        {
-          "id": "what-is-this-scenario-and-review-listen",
+          "id": "demonstrative-plural-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-listen",
-          "targetText": "machin sa a",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.demonstrative-plural-listen",
+          "targetText": "Liv sa yo.",
           "locale": "ht-HT",
           "wordBank": [
-            "machin",
+            "Liv",
             "sa",
-            "a"
-          ],
-          "distractors": [
-            "yo"
+            "yo."
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "machin sa a",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Liv sa yo.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "what-is-this-scenario-and-review-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-voice",
-          "targetText": "liv sa yo",
-          "locale": "ht-HT",
-          "maxSeconds": 10,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "liv sa yo",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "what-is-this-scenario-and-review-build",
+          "id": "demonstrative-owner-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-build",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.demonstrative-owner-build",
           "targetText": "Valiz sa a se pou Mari.",
           "locale": "ht-HT",
           "wordBank": [
@@ -35330,97 +43229,78 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "pou",
             "Mari."
           ],
-          "distractors": [
-            "yo"
-          ],
-          "ttsText": "Valiz sa a se pou Mari.",
           "expected": {
             "kind": "word_bank_arrange",
             "targetText": "Valiz sa a se pou Mari.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "what-is-this-scenario-and-review-write",
-          "kind": "text_input",
+          "id": "demonstrative-owner-voice",
+          "kind": "voice_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.what-is-this-scenario-and-review-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "liv sa yo",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-sa-a-bag",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-sa-a-bag",
-          "targetText": "liv sa a",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.demonstrative-owner-voice",
+          "targetText": "Kaye sa yo se pou Jan.",
           "locale": "ht-HT",
-          "wordBank": [
-            "liv",
-            "sa",
-            "a"
-          ],
           "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "liv sa a",
+            "kind": "voice_input",
+            "targetText": "Kaye sa yo se pou Jan.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-sa-yo-books",
-          "kind": "word_bank_arrange",
+          "id": "try-valiz-sa-a",
+          "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-sa-yo-books",
-          "targetText": "machin sa yo",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-valiz-sa-a",
+          "targetText": "Valiz sa a.",
           "locale": "ht-HT",
-          "wordBank": [
-            "machin",
-            "sa",
-            "yo"
-          ],
           "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "machin sa yo",
+            "kind": "voice_input",
+            "targetText": "Valiz sa a.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-demonstrative-owner",
+          "id": "try-liv-sa-yo",
           "kind": "word_bank_arrange",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-demonstrative-owner",
-          "targetText": "Machin sa a se pou Jan.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-liv-sa-yo",
+          "targetText": "Liv sa yo.",
           "locale": "ht-HT",
           "wordBank": [
-            "Machin",
+            "Liv",
             "sa",
-            "a",
+            "yo."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Liv sa yo.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-kaye-pou-mari",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.what-is-this-scenario-and-review.practice.try-kaye-pou-mari",
+          "targetText": "Kaye sa yo se pou Mari.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Kaye",
+            "sa",
+            "yo",
             "se",
             "pou",
-            "Jan."
+            "Mari."
           ],
           "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Machin sa a se pou Jan.",
+            "kind": "listen_build",
+            "targetText": "Kaye sa yo se pou Mari.",
             "locale": "ht-HT"
           }
         }
@@ -35430,9 +43310,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "learn-common-actions",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-5-what-are-you-doing",
-      "sectionSlug": "haitian-creole-foundations-ht5-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht5-actions-now-and-routines",
       "prefix": "ht5",
-      "minutes": 24,
+      "minutes": 22,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -35457,12 +43337,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-learn-common-actions-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.tryIt.try_learn_common_actions_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.tryIt.try_learn_common_actions_sketch0.prompt",
-            "exerciseKey": "try-actions-study",
+            "exerciseKey": "try-action-transfer",
             "exerciseKeys": [
-              "try-actions-study"
+              "try-action-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -35479,9 +43359,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-learn-common-actions-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.tryIt.try_learn_common_actions_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.tryIt.try_learn_common_actions_sketch1.prompt",
-            "exerciseKey": "try-subject-action-eat",
+            "exerciseKey": "try-subject-action-transfer",
             "exerciseKeys": [
-              "try-subject-action-eat"
+              "try-subject-action-transfer"
             ],
             "difficulty": "easy",
             "preferKind": "word_bank_arrange",
@@ -35495,18 +43375,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.cards.sketch2.title",
-          "sketchId": "reuse-pronouns",
+          "sketchId": "routine-language",
           "height": 420,
           "tryIt": {
             "id": "try-learn-common-actions-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.tryIt.try_learn_common_actions_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.tryIt.try_learn_common_actions_sketch2.prompt",
-            "exerciseKey": "try-reuse-pronouns-they-drink",
+            "exerciseKey": "try-routine-transfer",
             "exerciseKeys": [
-              "try-reuse-pronouns-they-drink"
+              "try-routine-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -35521,7 +43401,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -35534,28 +43414,183 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "actions",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.actions.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.actions.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.actions.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Start with a few useful action words:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "manje",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "eat",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "bwè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "drink",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "travay",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "work",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "etidye",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "study",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "ale",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "go",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "These are reusable building blocks for everyday sentences.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "subject-action",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.subject-action.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.subject-action.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.subject-action.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "For a simple present statement, put the subject before the action:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Mwen manje.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "I eat.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Ou travay.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "You work.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Li etidye.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "He/she studies.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The action word itself does not change for each person.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "reuse-pronouns",
+          "id": "routine-language",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.reuse-pronouns.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.reuse-pronouns.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.routine-language.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.routine-language.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "chak jou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "means “every day.”",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "With routine language, the basic subject + action pattern still works:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Jan travay chak jou.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Jan works every day.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Mari etidye chak jou.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Mari studies every day.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The time expression tells you that this is a routine.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "learn-common-actions-choice",
+          "id": "actions-routine-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.learn-common-actions-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.actions-routine-choice",
           "optionIds": [
             "a",
             "b",
@@ -35567,164 +43602,106 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "learn-common-actions-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.learn-common-actions-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "travay"
-          }
-        },
-        {
-          "id": "learn-common-actions-listen",
+          "id": "actions-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.learn-common-actions-listen",
-          "targetText": "Ou manje anpil.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.actions-listen",
+          "targetText": "Jan pale kreyòl chak jou.",
           "locale": "ht-HT",
           "wordBank": [
-            "Ou",
-            "manje",
-            "anpil."
-          ],
-          "distractors": [
-            "travay"
+            "Jan",
+            "pale",
+            "kreyòl",
+            "chak",
+            "jou."
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Ou manje anpil.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Jan pale kreyòl chak jou.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "learn-common-actions-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.learn-common-actions-voice",
-          "targetText": "Mwen etidye.",
-          "locale": "ht-HT",
-          "maxSeconds": 10,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Mwen etidye.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-common-actions-build",
+          "id": "actions-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.learn-common-actions-build",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.actions-build",
+          "targetText": "Nou etidye.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Nou",
+            "etidye."
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Nou etidye.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "actions-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.actions-voice",
+          "targetText": "Mwen travay chak jou.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Mwen travay chak jou.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-action-transfer",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.try-action-transfer",
+          "targetText": "Mari travay.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Mari",
+            "travay."
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Mari travay.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-subject-action-transfer",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.try-subject-action-transfer",
           "targetText": "Yo bwè.",
           "locale": "ht-HT",
           "wordBank": [
             "Yo",
             "bwè."
           ],
-          "distractors": [
-            "manje."
-          ],
-          "ttsText": "Yo bwè.",
           "expected": {
             "kind": "word_bank_arrange",
             "targetText": "Yo bwè.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-common-actions-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.learn-common-actions-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "etidye",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-actions-study",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.try-actions-study",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-subject-action-eat",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.try-subject-action-eat",
-          "targetText": "Mwen travay.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Mwen",
-            "travay."
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Mwen travay.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-reuse-pronouns-they-drink",
-          "kind": "single_choice",
+          "id": "try-routine-transfer",
+          "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.try-reuse-pronouns-they-drink",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.learn-common-actions.practice.try-routine-transfer",
+          "targetText": "Mwen pale kreyòl chak jou.",
+          "locale": "ht-HT",
           "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
+            "kind": "voice_input",
+            "targetText": "Mwen pale kreyòl chak jou.",
+            "locale": "ht-HT"
           }
         }
       ]
@@ -35733,9 +43710,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "listen-and-say-what-is-happening",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-5-what-are-you-doing",
-      "sectionSlug": "haitian-creole-foundations-ht5-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht5-actions-now-and-routines",
       "prefix": "ht5",
-      "minutes": 24,
+      "minutes": 23,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -35760,9 +43737,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-and-say-what-is-happening-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch0.prompt",
-            "exerciseKey": "try-ap-now-study",
+            "exerciseKey": "try-ap-transfer",
             "exerciseKeys": [
-              "try-ap-now-study"
+              "try-ap-transfer"
             ],
             "difficulty": "easy",
             "preferKind": "word_bank_arrange",
@@ -35782,12 +43759,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-and-say-what-is-happening-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch1.prompt",
-            "exerciseKey": "try-short-forms-they",
+            "exerciseKey": "try-short-form-transfer",
             "exerciseKeys": [
-              "try-short-forms-they"
+              "try-short-form-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -35804,12 +43781,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-and-say-what-is-happening-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch2.prompt",
-            "exerciseKey": "try-kounyeya-now",
+            "exerciseKey": "try-kounyeya-transfer",
             "exerciseKeys": [
-              "try-kounyeya-now"
+              "try-kounyeya-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -35824,7 +43801,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -35837,28 +43814,203 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "ap-now",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.ap-now.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.ap-now.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.ap-now.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "before an action to describe something in progress:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "M ap etidye.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "I am studying.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Li ap travay.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "He/she is working.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Yo ap manje.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "They are eating.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Focus on the pattern:",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "person + ap + action",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "common-short-forms",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.common-short-forms.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.common-short-forms.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.common-short-forms.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "In ordinary Kreyòl, subject pronouns can appear in shortened forms before",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ":",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "M ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "W ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "L ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "N ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Y ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You will also continue to see full forms such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "li ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "yo ap",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ". The meaning comes from the same current-action pattern.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "kounyeya",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.kounyeya.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.kounyeya.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.kounyeya.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "kounyeya",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "means “now.” Add it when the time matters:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Jan ap travay kounyeya.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Jan is working now.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The sentence still uses the same",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ap + action",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pattern.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "listen-and-say-what-is-happening-choice",
+          "id": "now-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.now-choice",
           "optionIds": [
             "a",
             "b",
@@ -35870,464 +44022,107 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "listen-and-say-what-is-happening-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "travay"
-          }
-        },
-        {
-          "id": "listen-and-say-what-is-happening-listen",
+          "id": "now-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-listen",
-          "targetText": "Li ap etidye.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.now-listen",
+          "targetText": "Yo ap etidye.",
           "locale": "ht-HT",
           "wordBank": [
-            "Li",
+            "Yo",
             "ap",
             "etidye."
-          ],
-          "distractors": [
-            "rete"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Li ap etidye.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-say-what-is-happening-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-voice",
-          "targetText": "Yo ap manje.",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Yo ap manje.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-say-what-is-happening-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-build",
-          "targetText": "M ap etidye.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "M",
-            "ap",
-            "etidye."
-          ],
-          "distractors": [
-            "rete"
-          ],
-          "ttsText": "M ap etidye.",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "M ap etidye.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-say-what-is-happening-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "kounyeya",
-            "anyOf": [
-              "kounya"
-            ],
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-ap-now-study",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-ap-now-study",
-          "targetText": "M ap travay.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "M",
-            "ap",
-            "travay."
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "M ap travay.",
+            "targetText": "Yo ap etidye.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-short-forms-they",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-short-forms-they",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-kounyeya-now",
+          "id": "now-build",
           "kind": "word_bank_arrange",
-          "purpose": "project",
+          "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-kounyeya-now",
-          "targetText": "Mari ap etidye kounyeya.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.now-build",
+          "targetText": "Jan ap manje kounyeya.",
           "locale": "ht-HT",
           "wordBank": [
-            "Mari",
+            "Jan",
             "ap",
-            "etidye",
+            "manje",
             "kounyeya."
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Mari ap etidye kounyeya.",
+            "targetText": "Jan ap manje kounyeya.",
             "locale": "ht-HT"
           }
-        }
-      ]
-    },
-    "read-build-and-write-actions": {
-      "topicId": "read-build-and-write-actions",
-      "subjectSlug": "haitian-creole-foundations",
-      "moduleSlug": "haitian-creole-foundations-5-what-are-you-doing",
-      "sectionSlug": "haitian-creole-foundations-ht5-read-build-write-use",
-      "prefix": "ht5",
-      "minutes": 24,
-      "runtimeDefaults": {
-        "kind": "code",
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "supportsStdInStdOut": true,
-        "supportsPackageInstall": false
-      },
-      "serviceDefaults": null,
-      "topic": {
-        "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.label",
-        "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.cards.sketch0.title",
-          "sketchId": "ask-doing",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-actions-sketch0",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.tryIt.try_read_build_and_write_actions_sketch0.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.tryIt.try_read_build_and_write_actions_sketch0.prompt",
-            "exerciseKey": "try-ask-doing",
-            "exerciseKeys": [
-              "try-ask-doing"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.cards.sketch1.title",
-          "sketchId": "answer-doing",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-actions-sketch1",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.tryIt.try_read_build_and_write_actions_sketch1.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.tryIt.try_read_build_and_write_actions_sketch1.prompt",
-            "exerciseKey": "try-answer-doing",
-            "exerciseKeys": [
-              "try-answer-doing"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.cards.sketch2.title",
-          "sketchId": "ask-third-person",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-actions-sketch2",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.tryIt.try_read_build_and_write_actions_sketch2.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.tryIt.try_read_build_and_write_actions_sketch2.prompt",
-            "exerciseKey": "try-ask-third-person",
-            "exerciseKeys": [
-              "try-ask-third-person"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "ask-doing",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.ask-doing.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.ask-doing.bodyMarkdown"
-        },
-        {
-          "id": "answer-doing",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.answer-doing.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.answer-doing.bodyMarkdown"
-        },
-        {
-          "id": "ask-third-person",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.ask-third-person.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.ask-third-person.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "read-build-and-write-actions-choice",
-          "kind": "single_choice",
+          "id": "now-voice",
+          "kind": "voice_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.read-build-and-write-actions-choice",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.now-voice",
+          "targetText": "Mari ap travay.",
+          "locale": "ht-HT",
           "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
+            "kind": "voice_input",
+            "targetText": "Mari ap travay.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "read-build-and-write-actions-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
+          "id": "try-ap-transfer",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.read-build-and-write-actions-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "manje"
-          }
-        },
-        {
-          "id": "read-build-and-write-actions-listen",
-          "kind": "listen_build",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.read-build-and-write-actions-listen",
-          "targetText": "Kisa ou ap fè?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-ap-transfer",
+          "targetText": "Mari ap bwè.",
           "locale": "ht-HT",
           "wordBank": [
-            "Kisa",
-            "ou",
+            "Mari",
             "ap",
-            "fè?"
+            "bwè."
           ],
-          "distractors": [
-            "rete?"
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Mari ap bwè.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-short-form-transfer",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-short-form-transfer",
+          "targetText": "L ap etidye.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "L",
+            "ap",
+            "etidye."
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Kisa ou ap fè?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-actions-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.read-build-and-write-actions-voice",
-          "targetText": "M ap travay.",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "M ap travay.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-actions-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.read-build-and-write-actions-build",
-          "targetText": "Kisa li ap fè?",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Kisa",
-            "li",
-            "ap",
-            "fè?"
-          ],
-          "distractors": [
-            "rete?"
-          ],
-          "ttsText": "Kisa li ap fè?",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Kisa li ap fè?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-actions-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.read-build-and-write-actions-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "Kisa ou ap fè?",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-ask-doing",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.try-ask-doing",
-          "targetText": "Kisa Jan ap fè?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Kisa Jan ap fè?",
+            "targetText": "L ap etidye.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-answer-doing",
+          "id": "try-kounyeya-transfer",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.try-answer-doing",
-          "targetText": "M ap pale kreyòl.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-kounyeya-transfer",
+          "targetText": "Mari ap etidye kounyeya.",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "M ap pale kreyòl.",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-ask-third-person",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.read-build-and-write-actions.practice.try-ask-third-person",
-          "targetText": "Kisa Mari ap fè?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Kisa Mari ap fè?",
+            "targetText": "Mari ap etidye kounyeya.",
             "locale": "ht-HT"
           }
         }
@@ -36337,9 +44132,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "what-are-you-doing-scenario",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-5-what-are-you-doing",
-      "sectionSlug": "haitian-creole-foundations-ht5-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht5-actions-now-and-routines",
       "prefix": "ht5",
-      "minutes": 30,
+      "minutes": 25,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -36358,19 +44153,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.cards.sketch0.title",
-          "sketchId": "short-exchange",
+          "sketchId": "ask-doing",
           "height": 420,
           "tryIt": {
             "id": "try-what-are-you-doing-scenario-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.tryIt.try_what_are_you_doing_scenario_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.tryIt.try_what_are_you_doing_scenario_sketch0.prompt",
-            "exerciseKey": "try-short-exchange-question",
+            "exerciseKey": "try-ask-doing-transfer",
             "exerciseKeys": [
-              "try-short-exchange-question",
-              "try-short-exchange-answer"
+              "try-ask-doing-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": null,
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -36381,18 +44175,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.cards.sketch1.title",
-          "sketchId": "routine-language",
+          "sketchId": "action-conversation",
           "height": 420,
           "tryIt": {
             "id": "try-what-are-you-doing-scenario-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.tryIt.try_what_are_you_doing_scenario_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.tryIt.try_what_are_you_doing_scenario_sketch1.prompt",
-            "exerciseKey": "try-routine-language",
+            "exerciseKey": "try-answer-doing-transfer",
             "exerciseKeys": [
-              "try-routine-language"
+              "try-answer-doing-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -36409,12 +44203,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-what-are-you-doing-scenario-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.tryIt.try_what_are_you_doing_scenario_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.tryIt.try_what_are_you_doing_scenario_sketch2.prompt",
-            "exerciseKey": "try-now-vs-routine-now",
+            "exerciseKey": "try-now-routine-transfer",
             "exerciseKeys": [
-              "try-now-vs-routine-now"
+              "try-now-routine-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "word_bank_arrange",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -36429,7 +44223,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -36439,31 +44233,224 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "short-exchange",
+          "id": "ask-doing",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.short-exchange.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.short-exchange.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.ask-doing.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.ask-doing.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "To ask what someone is doing, use:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Kisa ou ap fè?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "What are you doing?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Treat this as one useful everyday question.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "routine-language",
+          "id": "action-conversation",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.routine-language.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.routine-language.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.action-conversation.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.action-conversation.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Mari, kisa ou ap fè?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M ap etidye kreyòl. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M ap travay kounyeya.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "The question and answer use the same",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ap + action",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "pattern.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
           "id": "now-vs-routine",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.now-vs-routine.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.now-vs-routine.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.now-vs-routine.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Compare:",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Jan ap travay kounyeya.",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Jan is working now.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Jan travay chak jou.",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Jan works every day.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "ap",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "helps mark the action in progress.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "chak jou",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "makes the routine explicit.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "speakerId": "mari",
+                "text": "Jan, kisa ou ap fè?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "M ap travay kounyeya.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Ou travay chak jou?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Wi. Mwen travay chak jou.",
+                "locale": "ht-HT"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "what-are-you-doing-scenario-choice",
+          "id": "doing-natural-answer-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.what-are-you-doing-scenario-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.doing-natural-answer-choice",
           "optionIds": [
             "a",
             "b",
@@ -36475,177 +44462,111 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "what-are-you-doing-scenario-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.what-are-you-doing-scenario-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "etidye"
-          }
-        },
-        {
-          "id": "what-are-you-doing-scenario-listen",
+          "id": "doing-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.what-are-you-doing-scenario-listen",
-          "targetText": "Mwen travay chak jou.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.doing-listen",
+          "targetText": "Kisa Mari ap fè?",
           "locale": "ht-HT",
           "wordBank": [
-            "Mwen",
-            "travay",
-            "chak",
-            "jou."
-          ],
-          "distractors": [
-            "kounyeya."
+            "Kisa",
+            "Mari",
+            "ap",
+            "fè?"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Mwen travay chak jou.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Kisa Mari ap fè?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "what-are-you-doing-scenario-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.what-are-you-doing-scenario-voice",
-          "targetText": "M ap etidye kreyòl.",
-          "locale": "ht-HT",
-          "maxSeconds": 14,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "M ap etidye kreyòl.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "what-are-you-doing-scenario-build",
+          "id": "doing-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.what-are-you-doing-scenario-build",
-          "targetText": "Jan ap travay kounyeya.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.doing-build",
+          "targetText": "M ap travay kounyeya.",
           "locale": "ht-HT",
           "wordBank": [
-            "Jan",
+            "M",
             "ap",
             "travay",
             "kounyeya."
           ],
-          "distractors": [
-            "chak"
-          ],
-          "ttsText": "Jan ap travay kounyeya.",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Jan ap travay kounyeya.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "what-are-you-doing-scenario-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.what-are-you-doing-scenario-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "chak jou",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-short-exchange-question",
-          "kind": "listen_build",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.try-short-exchange-question",
-          "targetText": "Kisa ou ap fè?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "listen_build",
-            "targetText": "Kisa ou ap fè?",
+            "targetText": "M ap travay kounyeya.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-short-exchange-answer",
+          "id": "doing-routine-voice",
           "kind": "voice_input",
-          "purpose": "project",
+          "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.try-short-exchange-answer",
-          "targetText": "M ap etidye kreyòl.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.doing-routine-voice",
+          "targetText": "Mwen etidye kreyòl chak jou.",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "M ap etidye kreyòl.",
+            "targetText": "Mwen etidye kreyòl chak jou.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-routine-language",
+          "id": "try-ask-doing-transfer",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.try-ask-doing-transfer",
+          "targetText": "Kisa Jan ap fè?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Kisa Jan ap fè?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-answer-doing-transfer",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.try-answer-doing-transfer",
+          "targetText": "M ap pale kreyòl.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "M",
+            "ap",
+            "pale",
+            "kreyòl."
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "M ap pale kreyòl.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-now-routine-transfer",
           "kind": "word_bank_arrange",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.try-routine-language",
-          "targetText": "Mwen pale kreyòl chak jou.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.try-now-routine-transfer",
+          "targetText": "Mari etidye chak jou.",
           "locale": "ht-HT",
           "wordBank": [
-            "Mwen",
-            "pale",
-            "kreyòl",
+            "Mari",
+            "etidye",
             "chak",
             "jou."
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Mwen pale kreyòl chak jou.",
+            "targetText": "Mari etidye chak jou.",
             "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-now-vs-routine-now",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-5-what-are-you-doing.what-are-you-doing-scenario.practice.try-now-vs-routine-now",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
           }
         }
       ]
@@ -36654,9 +44575,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "learn-core-question-patterns",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-6-questions-and-answers",
-      "sectionSlug": "haitian-creole-foundations-ht6-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht6-question-system",
       "prefix": "ht6",
-      "minutes": 24,
+      "minutes": 22,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -36675,15 +44596,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.cards.sketch0.title",
-          "sketchId": "eske",
+          "sketchId": "eske-question",
           "height": 420,
           "tryIt": {
             "id": "try-learn-core-question-patterns-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch0.prompt",
-            "exerciseKey": "try-eske-kreyol",
+            "exerciseKey": "try-eske-work",
             "exerciseKeys": [
-              "try-eske-kreyol"
+              "try-eske-work"
             ],
             "difficulty": "easy",
             "preferKind": "word_bank_arrange",
@@ -36703,9 +44624,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-learn-core-question-patterns-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch1.prompt",
-            "exerciseKey": "try-wi-non-complete",
+            "exerciseKey": "try-positive-work-answer",
             "exerciseKeys": [
-              "try-wi-non-complete"
+              "try-positive-work-answer"
             ],
             "difficulty": "easy",
             "preferKind": "voice_input",
@@ -36719,8 +44640,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.cards.sketch2.title",
-          "sketchId": "complete-answer",
-          "height": 420
+          "sketchId": "yes-no-exchange",
+          "height": 420,
+          "tryIt": {
+            "id": "try-learn-core-question-patterns-sketch2",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch2.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.tryIt.try_learn_core_question_patterns_sketch2.prompt",
+            "exerciseKey": "try-eske-routine",
+            "exerciseKeys": [
+              "try-eske-routine"
+            ],
+            "difficulty": "easy",
+            "preferKind": "listen_build",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
         },
         {
           "id": "quiz",
@@ -36730,7 +44666,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -36740,31 +44676,213 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "eske",
+          "id": "eske-question",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.eske.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.eske.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.eske-question.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.eske-question.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Èske",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "when the answer can be yes or no.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Start with a familiar statement:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Ou pale kreyòl.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "You speak Kreyòl.",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Add",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Èske",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ":",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Èske ou pale kreyòl?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Do you speak Kreyòl?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The familiar statement order stays after",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Èske",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "wi-non",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.wi-non.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.wi-non.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.wi-non.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "A short answer can begin with",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Wi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "or",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Non",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For stronger beginner communication, follow it with the useful information:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Wi, mwen pale kreyòl.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Non, mwen pa pale kreyòl.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "For now, focus on recognizing both the short response and the complete response.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "complete-answer",
+          "id": "yes-no-exchange",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.complete-answer.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.complete-answer.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.yes-no-exchange.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.yes-no-exchange.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Èske ou etidye kreyòl?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Wi, mwen etidye kreyòl.",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "A complete answer helps the conversation carry useful information instead of stopping at only",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Wi",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "learn-core-question-patterns-choice",
+          "id": "eske-purpose-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.eske-purpose-choice",
           "optionIds": [
             "a",
             "b",
@@ -36776,120 +44894,64 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "learn-core-question-patterns-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Èske"
-          }
-        },
-        {
-          "id": "learn-core-question-patterns-listen",
+          "id": "eske-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-listen",
-          "targetText": "Èske li travay?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.eske-listen",
+          "targetText": "Èske Mari pale kreyòl?",
           "locale": "ht-HT",
           "wordBank": [
             "Èske",
-            "li",
-            "travay?"
-          ],
-          "distractors": [
-            "Kisa"
+            "Mari",
+            "pale",
+            "kreyòl?"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Èske li travay?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Èske Mari pale kreyòl?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "learn-core-question-patterns-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-voice",
-          "targetText": "Èske ou pale kreyòl?",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Èske ou pale kreyòl?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-core-question-patterns-build",
+          "id": "eske-build-answer",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-build",
-          "targetText": "Wi, mwen pale kreyòl.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.eske-build-answer",
+          "targetText": "Wi, Jan travay.",
           "locale": "ht-HT",
           "wordBank": [
             "Wi,",
-            "mwen",
-            "pale",
-            "kreyòl."
+            "Jan",
+            "travay."
           ],
-          "distractors": [
-            "rete"
-          ],
-          "ttsText": "Wi, mwen pale kreyòl.",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Wi, mwen pale kreyòl.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Wi, Jan travay.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "learn-core-question-patterns-write",
-          "kind": "text_input",
+          "id": "eske-voice",
+          "kind": "voice_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.learn-core-question-patterns-write",
-          "placeholder": "Type the Kreyòl answer",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.eske-voice",
+          "targetText": "Èske Mari etidye kreyòl?",
+          "locale": "ht-HT",
           "expected": {
-            "kind": "text_input",
-            "value": "Wi",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "kind": "voice_input",
+            "targetText": "Èske Mari etidye kreyòl?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "try-eske-kreyol",
+          "id": "try-eske-work",
           "kind": "word_bank_arrange",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-eske-kreyol",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-eske-work",
           "targetText": "Èske ou travay?",
           "locale": "ht-HT",
           "wordBank": [
@@ -36904,11 +44966,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "try-wi-non-complete",
+          "id": "try-positive-work-answer",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-wi-non-complete",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-positive-work-answer",
           "targetText": "Wi, mwen travay.",
           "locale": "ht-HT",
           "expected": {
@@ -36916,301 +44978,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "targetText": "Wi, mwen travay.",
             "locale": "ht-HT"
           }
-        }
-      ]
-    },
-    "listen-ask-and-answer": {
-      "topicId": "listen-ask-and-answer",
-      "subjectSlug": "haitian-creole-foundations",
-      "moduleSlug": "haitian-creole-foundations-6-questions-and-answers",
-      "sectionSlug": "haitian-creole-foundations-ht6-learn-listen-speak",
-      "prefix": "ht6",
-      "minutes": 24,
-      "runtimeDefaults": {
-        "kind": "code",
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "supportsStdInStdOut": true,
-        "supportsPackageInstall": false
-      },
-      "serviceDefaults": null,
-      "topic": {
-        "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.label",
-        "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.cards.sketch0.title",
-          "sketchId": "kijan",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-ask-and-answer-sketch0",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.tryIt.try_listen_ask_and_answer_sketch0.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.tryIt.try_listen_ask_and_answer_sketch0.prompt",
-            "exerciseKey": "try-kijan-name",
-            "exerciseKeys": [
-              "try-kijan-name"
-            ],
-            "difficulty": "easy",
-            "preferKind": "single_choice",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.cards.sketch1.title",
-          "sketchId": "kisa",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-ask-and-answer-sketch1",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.tryIt.try_listen_ask_and_answer_sketch1.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.tryIt.try_listen_ask_and_answer_sketch1.prompt",
-            "exerciseKey": "try-kisa-doing",
-            "exerciseKeys": [
-              "try-kisa-doing"
-            ],
-            "difficulty": "easy",
-            "preferKind": "single_choice",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.cards.sketch2.title",
-          "sketchId": "answer-known",
-          "height": 420,
-          "tryIt": {
-            "id": "try-listen-ask-and-answer-sketch2",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.tryIt.try_listen_ask_and_answer_sketch2.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.tryIt.try_listen_ask_and_answer_sketch2.prompt",
-            "exerciseKey": "try-answer-known-study",
-            "exerciseKeys": [
-              "try-answer-known-study"
-            ],
-            "difficulty": "easy",
-            "preferKind": "voice_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "kijan",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.kijan.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.kijan.bodyMarkdown"
-        },
-        {
-          "id": "kisa",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.kisa.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.kisa.bodyMarkdown"
-        },
-        {
-          "id": "answer-known",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.answer-known.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.answer-known.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "listen-ask-and-answer-choice",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.listen-ask-and-answer-choice",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "listen-ask-and-answer-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.listen-ask-and-answer-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Kisa"
-          }
-        },
-        {
-          "id": "listen-ask-and-answer-listen",
+          "id": "try-eske-routine",
           "kind": "listen_build",
-          "purpose": "quiz",
+          "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.listen-ask-and-answer-listen",
-          "targetText": "Kijan ou rele?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.learn-core-question-patterns.practice.try-eske-routine",
+          "targetText": "Èske Mari travay chak jou?",
           "locale": "ht-HT",
           "wordBank": [
-            "Kijan",
-            "ou",
-            "rele?"
-          ],
-          "distractors": [
-            "Kisa"
+            "Èske",
+            "Mari",
+            "travay",
+            "chak",
+            "jou?"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Kijan ou rele?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-ask-and-answer-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.listen-ask-and-answer-voice",
-          "targetText": "Kisa ou ap fè?",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Kisa ou ap fè?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-ask-and-answer-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.listen-ask-and-answer-build",
-          "targetText": "M rele Ana.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "M",
-            "rele",
-            "Ana."
-          ],
-          "distractors": [
-            "rete"
-          ],
-          "ttsText": "M rele Ana.",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "M rele Ana.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-ask-and-answer-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.listen-ask-and-answer-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "M ap etidye.",
-            "anyOf": [
-              "Mwen ap etidye."
-            ],
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-kijan-name",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.try-kijan-name",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-kisa-doing",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.try-kisa-doing",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-answer-known-study",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.listen-ask-and-answer.practice.try-answer-known-study",
-          "targetText": "M ap travay.",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "M ap travay.",
+            "targetText": "Èske Mari travay chak jou?",
             "locale": "ht-HT"
           }
         }
@@ -37220,9 +45006,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "read-build-and-write-questions",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-6-questions-and-answers",
-      "sectionSlug": "haitian-creole-foundations-ht6-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht6-question-system",
       "prefix": "ht6",
-      "minutes": 24,
+      "minutes": 25,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -37241,18 +45027,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.cards.sketch0.title",
-          "sketchId": "ki-kote",
+          "sketchId": "kijan-kisa",
           "height": 420,
           "tryIt": {
             "id": "try-read-build-and-write-questions-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch0.prompt",
-            "exerciseKey": "try-ki-kote",
+            "exerciseKey": "try-kisa-object-transfer",
             "exerciseKeys": [
-              "try-ki-kote"
+              "try-kisa-object-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "voice_input",
+            "preferKind": "single_choice",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -37263,15 +45049,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.cards.sketch1.title",
-          "sketchId": "ki-moun",
+          "sketchId": "ki-kote-ki-moun",
           "height": 420,
           "tryIt": {
             "id": "try-read-build-and-write-questions-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch1.prompt",
-            "exerciseKey": "try-ki-moun",
+            "exerciseKey": "try-ki-kote-mari",
             "exerciseKeys": [
-              "try-ki-moun"
+              "try-ki-kote-mari"
             ],
             "difficulty": "easy",
             "preferKind": "voice_input",
@@ -37291,12 +45077,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-read-build-and-write-questions-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch2.prompt",
-            "exerciseKey": "try-konbyen-books",
+            "exerciseKey": "try-konbyen-transfer",
             "exerciseKeys": [
-              "try-konbyen-books"
+              "try-konbyen-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "voice_input",
+            "preferKind": "word_bank_arrange",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -37311,7 +45097,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 5,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -37321,31 +45107,211 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "ki-kote",
+          "id": "kijan-kisa",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-kote.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-kote.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.kijan-kisa.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.kijan-kisa.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "You already know useful questions with",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Kijan",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "and",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Kisa",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ":",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Kijan ou ye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "How are you?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Kijan ou rele?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "What is your name?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Kisa sa ye?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "What is this/that?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Kisa ou ap fè?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "What are you doing?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Listen to the whole question, not only the first word.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "ki-moun",
+          "id": "ki-kote-ki-moun",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-moun.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-moun.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-kote-ki-moun.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-kote-ki-moun.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use a place question when you need a location:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Ki kote ou rete?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Where do you live?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Ki moun",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "when you need to identify a person:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Ki moun sa a?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Who is this/that person?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "The information you need determines the question.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "konbyen",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.konbyen.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.konbyen.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.konbyen.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Konbyen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "when the missing information is a number or amount.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Konbyen liv ou genyen?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "How many books do you have?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Konbyen kaye Mari genyen?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "How many notebooks does Mari have?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "For now, focus on recognizing that",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Konbyen",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "asks about a number or amount.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "read-build-and-write-questions-choice",
+          "id": "info-place-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-place-choice",
           "optionIds": [
             "a",
             "b",
@@ -37357,154 +45323,124 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "read-build-and-write-questions-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Konbyen"
-          }
-        },
-        {
-          "id": "read-build-and-write-questions-listen",
+          "id": "info-person-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-listen",
-          "targetText": "Ki moun sa a?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-person-listen",
+          "targetText": "Ki moun li ye?",
           "locale": "ht-HT",
           "wordBank": [
             "Ki",
             "moun",
-            "sa",
-            "a?"
-          ],
-          "distractors": [
-            "kote"
+            "li",
+            "ye?"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Ki moun sa a?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-questions-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-voice",
-          "targetText": "Ki kote ou rete?",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Ki kote ou rete?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-questions-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-build",
-          "targetText": "Konbyen liv ou genyen?",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Konbyen",
-            "liv",
-            "ou",
-            "genyen?"
-          ],
-          "distractors": [
-            "kote"
-          ],
-          "ttsText": "Konbyen liv ou genyen?",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Konbyen liv ou genyen?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-questions-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "Ki moun",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-ki-kote",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-ki-kote",
-          "targetText": "Ki kote Mari ye?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Ki kote Mari ye?",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-ki-moun",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-ki-moun",
-          "targetText": "Ki moun li ye?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
             "targetText": "Ki moun li ye?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-konbyen-books",
-          "kind": "voice_input",
-          "purpose": "project",
+          "id": "info-quantity-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-konbyen-books",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-quantity-build",
           "targetText": "Konbyen kaye ou genyen?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Konbyen",
+            "kaye",
+            "ou",
+            "genyen?"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Konbyen kaye ou genyen?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "info-place-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-place-voice",
+          "targetText": "Ki kote Jan rete?",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "Konbyen kaye ou genyen?",
+            "targetText": "Ki kote Jan rete?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "info-question-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-question-write",
+          "placeholder": "Type the Kreyòl question",
+          "expected": {
+            "kind": "text_input",
+            "value": "Ki moun sa a?",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-kisa-object-transfer",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-kisa-object-transfer",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-ki-kote-mari",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-ki-kote-mari",
+          "targetText": "Ki kote Mari rete?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Ki kote Mari rete?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-konbyen-transfer",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-konbyen-transfer",
+          "targetText": "Konbyen liv Jan genyen?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Konbyen",
+            "liv",
+            "Jan",
+            "genyen?"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Konbyen liv Jan genyen?",
             "locale": "ht-HT"
           }
         }
@@ -37514,9 +45450,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "question-chain-scenario-and-review",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-6-questions-and-answers",
-      "sectionSlug": "haitian-creole-foundations-ht6-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht6-question-system",
       "prefix": "ht6",
-      "minutes": 30,
+      "minutes": 26,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -37541,12 +45477,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-question-chain-scenario-and-review-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch0.prompt",
-            "exerciseKey": "try-mixed-dialogue-order",
+            "exerciseKey": "try-chain-next-question",
             "exerciseKeys": [
-              "try-mixed-dialogue-order"
+              "try-chain-next-question"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "single_choice",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -37557,15 +45493,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.cards.sketch1.title",
-          "sketchId": "complete-sentences",
+          "sketchId": "complete-answers",
           "height": 420,
           "tryIt": {
             "id": "try-question-chain-scenario-and-review-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch1.prompt",
-            "exerciseKey": "try-complete-sentences-place",
+            "exerciseKey": "try-complete-place-transfer",
             "exerciseKeys": [
-              "try-complete-sentences-place"
+              "try-complete-place-transfer"
             ],
             "difficulty": "easy",
             "preferKind": "text_input",
@@ -37579,18 +45515,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.cards.sketch2.title",
-          "sketchId": "choose-question",
+          "sketchId": "second-question-chain",
           "height": 420,
           "tryIt": {
             "id": "try-question-chain-scenario-and-review-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.tryIt.try_question_chain_scenario_and_review_sketch2.prompt",
-            "exerciseKey": "try-choose-question-where",
+            "exerciseKey": "try-chain-hear",
             "exerciseKeys": [
-              "try-choose-question-where"
+              "try-chain-hear"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -37605,7 +45541,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 5,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -37618,28 +45554,301 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "mixed-dialogue",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.mixed-dialogue.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.mixed-dialogue.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.mixed-dialogue.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Bonjou, Mari!",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Bonjou, Jan!",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kijan ou ye?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen, mèsi. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen tou.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Èske ou pale kreyòl?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Wi, mwen pale kreyòl.",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Ki kote ou rete?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Boston. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Chicago.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kisa ou ap fè kounyeya?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M ap travay kounyeya.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Different questions ask for different kinds of information.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
-          "id": "complete-sentences",
+          "id": "complete-answers",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.complete-sentences.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.complete-sentences.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.complete-answers.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.complete-answers.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "A complete answer makes a conversation easier to follow.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Compare:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Wi.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Wi, mwen pale kreyòl.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Or:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Chicago.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Mwen rete Chicago.",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Short answers can be natural, but complete beginner answers help you practice reusable sentence patterns.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "choose-question",
+          "id": "second-question-chain",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.choose-question.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.choose-question.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.second-question-chain.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.second-question-chain.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "A real conversation does not follow one fixed script.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Listen as Mari starts with an",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Èske",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "question and then moves to",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "Ki kote",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Choose the question that matches the information you want.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "speakerId": "mari",
+                "text": "Bonswa, Jan!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Bonswa, Mari!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Èske ou etidye kreyòl?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Wi, mwen etidye kreyòl.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Ki kote ou rete?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Mwen rete Chicago. E ou menm?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Mwen rete Boston.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Orevwa, Mari!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Orevwa, Jan!",
+                "locale": "ht-HT"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "question-chain-scenario-and-review-choice",
+          "id": "chain-question-type-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-question-type-choice",
           "optionIds": [
             "a",
             "b",
@@ -37651,165 +45860,127 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "question-chain-scenario-and-review-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Kijan"
-          }
-        },
-        {
-          "id": "question-chain-scenario-and-review-listen",
+          "id": "chain-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-listen",
-          "targetText": "Wi, mwen pale kreyòl.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-listen",
+          "targetText": "Mwen rete Boston.",
           "locale": "ht-HT",
           "wordBank": [
-            "Wi,",
-            "mwen",
-            "pale",
-            "kreyòl."
-          ],
-          "distractors": [
-            "rete"
+            "Mwen",
+            "rete",
+            "Boston."
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Wi, mwen pale kreyòl.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "question-chain-scenario-and-review-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-voice",
-          "targetText": "Ki kote ou rete? Mwen rete Chicago.",
-          "locale": "ht-HT",
-          "maxSeconds": 16,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Ki kote ou rete? Mwen rete Chicago.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "question-chain-scenario-and-review-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-build",
-          "targetText": "Èske ou pale kreyòl?",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Èske",
-            "ou",
-            "pale",
-            "kreyòl?"
-          ],
-          "distractors": [
-            "Kijan"
-          ],
-          "ttsText": "Èske ou pale kreyòl?",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Èske ou pale kreyòl?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "question-chain-scenario-and-review-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.question-chain-scenario-and-review-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "Mwen rete Chicago.",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-mixed-dialogue-order",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-mixed-dialogue-order",
-          "targetText": "Bonjou! Kijan ou rele? M rele Ana. Ki kote ou rete? Mwen rete Chicago. Èske ou pale kreyòl? Wi, mwen pale kreyòl.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Bonjou! Kijan ou rele?",
-            "M rele Ana.",
-            "Ki kote ou rete?",
-            "Mwen rete Chicago.",
-            "Èske ou pale kreyòl?",
-            "Wi, mwen pale kreyòl."
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Bonjou! Kijan ou rele? M rele Ana. Ki kote ou rete? Mwen rete Chicago. Èske ou pale kreyòl? Wi, mwen pale kreyòl.",
+            "targetText": "Mwen rete Boston.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-complete-sentences-place",
-          "kind": "text_input",
-          "purpose": "project",
+          "id": "chain-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-complete-sentences-place",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-build",
+          "targetText": "Èske Mari travay?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Èske",
+            "Mari",
+            "travay?"
+          ],
           "expected": {
-            "kind": "text_input",
-            "value": "Mwen rete Boston."
+            "kind": "word_bank_arrange",
+            "targetText": "Èske Mari travay?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "try-choose-question-where",
+          "id": "chain-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-voice",
+          "targetText": "Ki kote Mari rete?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Ki kote Mari rete?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "chain-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.chain-write",
+          "placeholder": "Type the complete Kreyòl answer",
+          "expected": {
+            "kind": "text_input",
+            "value": "M ap etidye kreyòl.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-chain-next-question",
           "kind": "single_choice",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-choose-question-where",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-chain-next-question",
           "optionIds": [
             "a",
             "b",
-            "c",
-            "d",
-            "e",
-            "f"
+            "c"
           ],
           "expected": {
             "kind": "single_choice",
             "optionId": "a"
+          }
+        },
+        {
+          "id": "try-complete-place-transfer",
+          "kind": "text_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-complete-place-transfer",
+          "placeholder": "Type the complete Kreyòl answer",
+          "expected": {
+            "kind": "text_input",
+            "value": "Mwen rete Miami.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-chain-hear",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-6-questions-and-answers.question-chain-scenario-and-review.practice.try-chain-hear",
+          "targetText": "Ki kote ou rete?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Ki",
+            "kote",
+            "ou",
+            "rete?"
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Ki kote ou rete?",
+            "locale": "ht-HT"
           }
         }
       ]
@@ -37818,9 +45989,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "learn-numbers-and-time-basics",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-7-numbers-time-and-everyday-life",
-      "sectionSlug": "haitian-creole-foundations-ht7-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht7-numbers-time-schedule",
       "prefix": "ht7",
-      "minutes": 24,
+      "minutes": 23,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -37845,12 +46016,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-learn-numbers-and-time-basics-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch0.prompt",
-            "exerciseKey": "try-one-ten-eight",
+            "exerciseKey": "try-small-quantity-transfer",
             "exerciseKeys": [
-              "try-one-ten-eight"
+              "try-small-quantity-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -37867,12 +46038,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-learn-numbers-and-time-basics-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch1.prompt",
-            "exerciseKey": "try-eleven-twenty-eighteen",
+            "exerciseKey": "try-large-quantity-transfer",
             "exerciseKeys": [
-              "try-eleven-twenty-eighteen"
+              "try-large-quantity-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -37883,15 +46054,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.cards.sketch2.title",
-          "sketchId": "use-numbers",
+          "sketchId": "number-plus-noun",
           "height": 420,
           "tryIt": {
             "id": "try-learn-numbers-and-time-basics-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch2.prompt",
-            "exerciseKey": "try-use-numbers-notebooks",
+            "exerciseKey": "try-quantity-new-combination",
             "exerciseKeys": [
-              "try-use-numbers-notebooks"
+              "try-quantity-new-combination"
             ],
             "difficulty": "easy",
             "preferKind": "word_bank_arrange",
@@ -37909,7 +46080,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 5,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -37922,28 +46093,303 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "one-ten",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.one-ten.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.one-ten.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.one-ten.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Start with the first ten numbers:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "1",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "youn",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "2",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "de",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "3",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "twa",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "4",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "kat",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "5",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "senk",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "6",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "sis",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "7",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "sèt",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "8",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "wit",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "9",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "nèf",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "10",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "dis",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Hear them in small groups and reuse them with words you already know.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "eleven-twenty",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.eleven-twenty.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.eleven-twenty.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.eleven-twenty.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Continue from eleven to twenty:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "11",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "onz",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "12",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "douz",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "13",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "trèz",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "14",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "katòz",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "15",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "kenz",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "16",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "sèz",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "17",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "disèt",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "18",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "dizwit",
+                "locale": "ht-HT",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "19",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "diznèf",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "20",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "ven",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Focus on recognizing and saying the numbers naturally; you are not doing arithmetic.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "use-numbers",
+          "id": "number-plus-noun",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.use-numbers.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.use-numbers.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.number-plus-noun.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.number-plus-noun.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Numbers can go directly before a noun:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "de liv",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "two books",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "twa valiz",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "three bags",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "senk kaye",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "five notebooks",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "This connects the numbers to useful everyday quantities.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "learn-numbers-and-time-basics-choice",
+          "id": "numbers-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.numbers-choice",
           "optionIds": [
             "a",
             "b",
@@ -37955,103 +46401,65 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "learn-numbers-and-time-basics-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "twa"
-          }
-        },
-        {
-          "id": "learn-numbers-and-time-basics-listen",
+          "id": "numbers-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-listen",
-          "targetText": "de valiz",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.numbers-listen",
+          "targetText": "wit valiz",
           "locale": "ht-HT",
           "wordBank": [
-            "de",
+            "wit",
             "valiz"
-          ],
-          "distractors": [
-            "twa"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "de valiz",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "wit valiz",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "learn-numbers-and-time-basics-voice",
+          "id": "numbers-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.numbers-build",
+          "targetText": "sèt kaye",
+          "locale": "ht-HT",
+          "wordBank": [
+            "sèt",
+            "kaye"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "sèt kaye",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "numbers-voice",
           "kind": "voice_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-voice",
-          "targetText": "ven",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.numbers-voice",
+          "targetText": "dizwit",
           "locale": "ht-HT",
-          "maxSeconds": 8,
           "expected": {
             "kind": "voice_input",
-            "targetText": "ven",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "dizwit",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "learn-numbers-and-time-basics-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-build",
-          "targetText": "senk kaye",
-          "locale": "ht-HT",
-          "wordBank": [
-            "senk",
-            "kaye"
-          ],
-          "distractors": [
-            "sèt"
-          ],
-          "ttsText": "senk kaye",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "senk kaye",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-numbers-and-time-basics-write",
+          "id": "numbers-write",
           "kind": "text_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-write",
-          "placeholder": "Type the Kreyòl answer",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.numbers-write",
+          "placeholder": "Type the Kreyòl number",
           "expected": {
             "kind": "text_input",
-            "value": "wit",
+            "value": "katòz",
             "normalize": {
               "trim": true,
               "caseFold": true,
@@ -38061,52 +46469,52 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "try-one-ten-eight",
-          "kind": "single_choice",
+          "id": "try-small-quantity-transfer",
+          "kind": "listen_build",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-one-ten-eight",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-small-quantity-transfer",
+          "targetText": "sis liv",
+          "locale": "ht-HT",
+          "wordBank": [
+            "sis",
+            "liv"
           ],
           "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
+            "kind": "listen_build",
+            "targetText": "sis liv",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "try-eleven-twenty-eighteen",
-          "kind": "single_choice",
+          "id": "try-large-quantity-transfer",
+          "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-eleven-twenty-eighteen",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-large-quantity-transfer",
+          "targetText": "douz kaye",
+          "locale": "ht-HT",
           "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
+            "kind": "voice_input",
+            "targetText": "douz kaye",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "try-use-numbers-notebooks",
+          "id": "try-quantity-new-combination",
           "kind": "word_bank_arrange",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-use-numbers-notebooks",
-          "targetText": "de kaye",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-quantity-new-combination",
+          "targetText": "kat liv",
           "locale": "ht-HT",
           "wordBank": [
-            "de",
-            "kaye"
+            "kat",
+            "liv"
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "de kaye",
+            "targetText": "kat liv",
             "locale": "ht-HT"
           }
         }
@@ -38116,7 +46524,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "listen-for-numbers-and-time",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-7-numbers-time-and-everyday-life",
-      "sectionSlug": "haitian-creole-foundations-ht7-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht7-numbers-time-schedule",
       "prefix": "ht7",
       "minutes": 24,
       "runtimeDefaults": {
@@ -38143,12 +46551,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-for-numbers-and-time-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch0.prompt",
-            "exerciseKey": "try-clock-hour-three",
+            "exerciseKey": "try-clock-hour-transfer",
             "exerciseKeys": [
-              "try-clock-hour-three"
+              "try-clock-hour-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "single_choice",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -38165,9 +46573,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-for-numbers-and-time-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch1.prompt",
-            "exerciseKey": "try-half-past-three",
+            "exerciseKey": "try-half-past-transfer",
             "exerciseKeys": [
-              "try-half-past-three"
+              "try-half-past-transfer"
             ],
             "difficulty": "easy",
             "preferKind": "voice_input",
@@ -38187,12 +46595,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-for-numbers-and-time-sketch2",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch2.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.tryIt.try_listen_for_numbers_and_time_sketch2.prompt",
-            "exerciseKey": "try-ask-time-leave",
+            "exerciseKey": "try-akile-transfer",
             "exerciseKeys": [
-              "try-ask-time-leave"
+              "try-akile-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "voice_input",
+            "preferKind": "word_bank_arrange",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -38207,7 +46615,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 5,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -38220,28 +46628,168 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "clock-hour",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.clock-hour.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.clock-hour.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.clock-hour.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Learn common clock-time expressions as whole phrases:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "inè",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "one o'clock",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "twazè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "three o'clock",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "senkè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "five o'clock",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "inè",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "can mean one hour or one o'clock depending on the context.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "half-past",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.half-past.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.half-past.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.half-past.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Use",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "edmi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "for half past:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "twazè edmi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "3:30",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "setè edmi",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "7:30",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "Learn each as one spoken time expression.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
           "id": "ask-time",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.ask-time.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.ask-time.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.ask-time.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Akilè…?",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "asks what time an activity happens.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "For example:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Akilè nou pati?",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "What time do we leave?",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "A short answer can simply be a time expression such as",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "senkè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "listen-for-numbers-and-time-choice",
+          "id": "time-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-choice",
           "optionIds": [
             "a",
             "b",
@@ -38253,100 +46801,63 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "listen-for-numbers-and-time-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "edmi"
-          }
-        },
-        {
-          "id": "listen-for-numbers-and-time-listen",
+          "id": "time-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-listen",
-          "targetText": "senkè",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-listen",
+          "targetText": "twazè edmi",
           "locale": "ht-HT",
           "wordBank": [
-            "senkè"
-          ],
-          "distractors": [
-            "twazè"
+            "twazè",
+            "edmi"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "senkè",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "twazè edmi",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "listen-for-numbers-and-time-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-voice",
-          "targetText": "setè edmi",
-          "locale": "ht-HT",
-          "maxSeconds": 10,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "setè edmi",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-for-numbers-and-time-build",
+          "id": "time-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-build",
-          "targetText": "Akilè nou pati?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-build",
+          "targetText": "Akilè nou travay?",
           "locale": "ht-HT",
           "wordBank": [
             "Akilè",
             "nou",
-            "pati?"
+            "travay?"
           ],
-          "distractors": [
-            "Kijan"
-          ],
-          "ttsText": "Akilè nou pati?",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Akilè nou pati?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Akilè nou travay?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "listen-for-numbers-and-time-write",
+          "id": "time-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-voice",
+          "targetText": "senkè",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "senkè",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "time-write",
           "kind": "text_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.listen-for-numbers-and-time-write",
-          "placeholder": "Type the Kreyòl answer",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.time-write",
+          "placeholder": "Type the Kreyòl time",
           "expected": {
             "kind": "text_input",
             "value": "inè",
@@ -38359,27 +46870,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "try-clock-hour-three",
-          "kind": "single_choice",
+          "id": "try-clock-hour-transfer",
+          "kind": "listen_build",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-clock-hour-three",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-clock-hour-transfer",
+          "targetText": "setè",
+          "locale": "ht-HT",
+          "wordBank": [
+            "setè"
           ],
           "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
+            "kind": "listen_build",
+            "targetText": "setè",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "try-half-past-three",
+          "id": "try-half-past-transfer",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-half-past-three",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-half-past-transfer",
           "targetText": "senkè edmi",
           "locale": "ht-HT",
           "expected": {
@@ -38389,310 +46901,22 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "try-ask-time-leave",
-          "kind": "voice_input",
+          "id": "try-akile-transfer",
+          "kind": "word_bank_arrange",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-ask-time-leave",
-          "targetText": "Akilè nou travay?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Akilè nou travay?",
-            "locale": "ht-HT"
-          }
-        }
-      ]
-    },
-    "read-build-and-write-everyday-details": {
-      "topicId": "read-build-and-write-everyday-details",
-      "subjectSlug": "haitian-creole-foundations",
-      "moduleSlug": "haitian-creole-foundations-7-numbers-time-and-everyday-life",
-      "sectionSlug": "haitian-creole-foundations-ht7-read-build-write-use",
-      "prefix": "ht7",
-      "minutes": 24,
-      "runtimeDefaults": {
-        "kind": "code",
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "supportsStdInStdOut": true,
-        "supportsPackageInstall": false
-      },
-      "serviceDefaults": null,
-      "topic": {
-        "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.label",
-        "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.cards.sketch0.title",
-          "sketchId": "day-parts",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-everyday-details-sketch0",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.tryIt.try_read_build_and_write_everyday_details_sketch0.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.tryIt.try_read_build_and_write_everyday_details_sketch0.prompt",
-            "exerciseKey": "try-day-parts-evening",
-            "exerciseKeys": [
-              "try-day-parts-evening"
-            ],
-            "difficulty": "easy",
-            "preferKind": "single_choice",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.cards.sketch1.title",
-          "sketchId": "today-now",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-everyday-details-sketch1",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.tryIt.try_read_build_and_write_everyday_details_sketch1.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.tryIt.try_read_build_and_write_everyday_details_sketch1.prompt",
-            "exerciseKey": "try-today-now-now",
-            "exerciseKeys": [
-              "try-today-now-now"
-            ],
-            "difficulty": "easy",
-            "preferKind": "single_choice",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.cards.sketch2.title",
-          "sketchId": "tomorrow-routine",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-everyday-details-sketch2",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.tryIt.try_read_build_and_write_everyday_details_sketch2.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.tryIt.try_read_build_and_write_everyday_details_sketch2.prompt",
-            "exerciseKey": "try-tomorrow-routine-everyday",
-            "exerciseKeys": [
-              "try-tomorrow-routine-everyday"
-            ],
-            "difficulty": "easy",
-            "preferKind": "single_choice",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "day-parts",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.day-parts.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.day-parts.bodyMarkdown"
-        },
-        {
-          "id": "today-now",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.today-now.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.today-now.bodyMarkdown"
-        },
-        {
-          "id": "tomorrow-routine",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.tomorrow-routine.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.tomorrow-routine.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "read-build-and-write-everyday-details-choice",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.read-build-and-write-everyday-details-choice",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "read-build-and-write-everyday-details-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.read-build-and-write-everyday-details-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "maten"
-          }
-        },
-        {
-          "id": "read-build-and-write-everyday-details-listen",
-          "kind": "listen_build",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.read-build-and-write-everyday-details-listen",
-          "targetText": "chak jou",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.listen-for-numbers-and-time.practice.try-akile-transfer",
+          "targetText": "Akilè ou etidye?",
           "locale": "ht-HT",
           "wordBank": [
-            "chak",
-            "jou"
+            "Akilè",
+            "ou",
+            "etidye?"
           ],
-          "distractors": [
-            "maten"
-          ],
-          "expected": {
-            "kind": "listen_build",
-            "targetText": "chak jou",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-everyday-details-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.read-build-and-write-everyday-details-voice",
-          "targetText": "kounyeya",
-          "locale": "ht-HT",
-          "maxSeconds": 8,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "kounyeya",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-everyday-details-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.read-build-and-write-everyday-details-build",
-          "targetText": "Lendi maten",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Lendi",
-            "maten"
-          ],
-          "distractors": [
-            "aswè"
-          ],
-          "ttsText": "Lendi maten",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Lendi maten",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-everyday-details-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.read-build-and-write-everyday-details-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "aswè",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-day-parts-evening",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.try-day-parts-evening",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-today-now-now",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.try-today-now-now",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "try-tomorrow-routine-everyday",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.read-build-and-write-everyday-details.practice.try-tomorrow-routine-everyday",
-          "optionIds": [
-            "a",
-            "b"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
+            "targetText": "Akilè ou etidye?",
+            "locale": "ht-HT"
           }
         }
       ]
@@ -38701,9 +46925,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "everyday-plans-scenario-and-review",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-7-numbers-time-and-everyday-life",
-      "sectionSlug": "haitian-creole-foundations-ht7-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht7-numbers-time-schedule",
       "prefix": "ht7",
-      "minutes": 30,
+      "minutes": 26,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -38722,37 +46946,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch0",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch0.title",
-          "sketchId": "schedule",
+          "sketchId": "everyday-time-words",
           "height": 420,
           "tryIt": {
             "id": "try-everyday-plans-scenario-and-review-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch0.prompt",
-            "exerciseKey": "try-schedule-work",
+            "exerciseKey": "try-evening-transfer",
             "exerciseKeys": [
-              "try-schedule-work"
-            ],
-            "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch1.title",
-          "sketchId": "ask-schedule",
-          "height": 420,
-          "tryIt": {
-            "id": "try-everyday-plans-scenario-and-review-sketch1",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch1.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch1.prompt",
-            "exerciseKey": "try-ask-schedule",
-            "exerciseKeys": [
-              "try-ask-schedule"
+              "try-evening-transfer"
             ],
             "difficulty": "easy",
             "preferKind": "voice_input",
@@ -38763,11 +46965,70 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch1.title",
+          "sketchId": "tomorrow-and-routine",
+          "height": 420,
+          "tryIt": {
+            "id": "try-everyday-plans-scenario-and-review-sketch1",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch1.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch1.prompt",
+            "exerciseKey": "try-routine-schedule-transfer",
+            "exerciseKeys": [
+              "try-routine-schedule-transfer"
+            ],
+            "difficulty": "easy",
+            "preferKind": "word_bank_arrange",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch2.title",
-          "sketchId": "everyday-life",
-          "height": 420
+          "sketchId": "schedule-conversation",
+          "height": 420,
+          "tryIt": {
+            "id": "try-everyday-plans-scenario-and-review-sketch2",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch2.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch2.prompt",
+            "exerciseKey": "try-schedule-new-line",
+            "exerciseKeys": [
+              "try-schedule-new-line"
+            ],
+            "difficulty": "easy",
+            "preferKind": "listen_build",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch3",
+          "kind": "sketch",
+          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.cards.sketch3.title",
+          "sketchId": "schedule-now-review",
+          "height": 420,
+          "tryIt": {
+            "id": "try-everyday-plans-scenario-and-review-sketch3",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch3.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tryIt.try_everyday_plans_scenario_and_review_sketch3.prompt",
+            "exerciseKey": "try-akile-new-person",
+            "exerciseKeys": [
+              "try-akile-new-person"
+            ],
+            "difficulty": "easy",
+            "preferKind": "voice_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
         },
         {
           "id": "quiz",
@@ -38777,7 +47038,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 5,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -38787,31 +47048,281 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "sketches": [
         {
-          "id": "schedule",
+          "id": "everyday-time-words",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.everyday-time-words.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.everyday-time-words.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Useful everyday time expressions include:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "maten",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "morning",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "aswè",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "evening",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "jòdi a",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "today",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "kounyeya",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "now",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You already know",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "kounyeya",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "from current actions. Now connect these words with a wider everyday schedule.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "ask-schedule",
+          "id": "tomorrow-and-routine",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.ask-schedule.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.ask-schedule.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tomorrow-and-routine.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.tomorrow-and-routine.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Two more useful everyday expressions are:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "denmen maten",
+                "locale": "en-US",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "tomorrow morning",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "chak jou",
+                "locale": "ht-HT",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "every day",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "At this level, treat them as useful time chunks. You do not need advanced future or scheduling grammar.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "everyday-life",
+          "id": "schedule-conversation",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.everyday-life.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.everyday-life.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule-conversation.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule-conversation.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Mari, akilè ou etidye kreyòl?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Senkè. Mwen etidye kreyòl aswè. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen etidye kreyòl lendi maten.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Èske ou travay chak jou?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Wi, mwen travay chak jou.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "This combines familiar questions, routines, and time without adding advanced tense grammar.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
+        },
+        {
+          "id": "schedule-now-review",
+          "archetype": "paragraph",
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule-now-review.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.schedule-now-review.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Listen to one more exchange.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Jan gives a clock time for his routine, then answers what he is doing",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": "kounyeya",
+                "locale": "ht-HT",
+                "speakerId": "narrator",
+                "pauseAfterMs": 50
+              },
+              {
+                "text": ".",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Notice how familiar action and time phrases work together in the same exchange.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "speakerId": "mari",
+                "text": "Jan, akilè ou travay?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Setè edmi.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Kisa ou ap fè kounyeya?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "M ap travay kounyeya.",
+                "locale": "ht-HT"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "everyday-plans-scenario-and-review-choice",
+          "id": "schedule-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-choice",
           "optionIds": [
             "a",
             "b",
@@ -38823,147 +47334,142 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "everyday-plans-scenario-and-review-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "etidye"
-          }
-        },
-        {
-          "id": "everyday-plans-scenario-and-review-listen",
+          "id": "schedule-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-listen",
-          "targetText": "Setè edmi, mwen travay.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-listen",
+          "targetText": "Lendi maten, Jan travay.",
           "locale": "ht-HT",
           "wordBank": [
-            "Setè",
-            "edmi,",
-            "mwen",
+            "Lendi",
+            "maten,",
+            "Jan",
             "travay."
-          ],
-          "distractors": [
-            "aswè"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Setè edmi, mwen travay.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "Lendi maten, Jan travay.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "everyday-plans-scenario-and-review-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-voice",
-          "targetText": "Akilè ou travay?",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Akilè ou travay?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "everyday-plans-scenario-and-review-build",
+          "id": "schedule-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-build",
-          "targetText": "Mwen etidye kreyòl chak jou.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-build",
+          "targetText": "Akilè Jan etidye?",
           "locale": "ht-HT",
           "wordBank": [
-            "Mwen",
+            "Akilè",
+            "Jan",
+            "etidye?"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Akilè Jan etidye?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "schedule-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-voice",
+          "targetText": "Mwen etidye kreyòl aswè.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Mwen etidye kreyòl aswè.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "schedule-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.schedule-write",
+          "placeholder": "Type the Kreyòl phrase",
+          "expected": {
+            "kind": "text_input",
+            "value": "denmen maten",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-evening-transfer",
+          "kind": "voice_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-evening-transfer",
+          "targetText": "Mari etidye kreyòl aswè.",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Mari etidye kreyòl aswè.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-routine-schedule-transfer",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-routine-schedule-transfer",
+          "targetText": "Jan etidye kreyòl chak jou.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Jan",
             "etidye",
             "kreyòl",
             "chak",
             "jou."
           ],
-          "distractors": [
-            "kounyeya"
-          ],
-          "ttsText": "Mwen etidye kreyòl chak jou.",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Mwen etidye kreyòl chak jou.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "everyday-plans-scenario-and-review-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.everyday-plans-scenario-and-review-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "twazè edmi",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-schedule-work",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-schedule-work",
-          "targetText": "Lendi maten, mwen travay.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Lendi",
-            "maten,",
-            "mwen",
-            "travay."
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Lendi maten, mwen travay.",
+            "targetText": "Jan etidye kreyòl chak jou.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-ask-schedule",
+          "id": "try-schedule-new-line",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-schedule-new-line",
+          "targetText": "Lendi maten, Mari travay.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Lendi",
+            "maten,",
+            "Mari",
+            "travay."
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Lendi maten, Mari travay.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-akile-new-person",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-ask-schedule",
-          "targetText": "Akilè ou etidye?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.everyday-plans-scenario-and-review.practice.try-akile-new-person",
+          "targetText": "Akilè Mari travay?",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "Akilè ou etidye?",
+            "targetText": "Akilè Mari travay?",
             "locale": "ht-HT"
           }
         }
@@ -38973,9 +47479,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "learn-the-conversation-map",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-8-my-first-kreyol-conversation",
-      "sectionSlug": "haitian-creole-foundations-ht8-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht8-capstone-conversation",
       "prefix": "ht8",
-      "minutes": 24,
+      "minutes": 23,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -39000,12 +47506,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-learn-the-conversation-map-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch0.prompt",
-            "exerciseKey": "try-meet-someone-order",
+            "exerciseKey": "try-map-name-transfer",
             "exerciseKeys": [
-              "try-meet-someone-order"
+              "try-map-name-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -39016,18 +47522,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.cards.sketch1.title",
-          "sketchId": "identity-place",
+          "sketchId": "identity-place-language",
           "height": 420,
           "tryIt": {
             "id": "try-learn-the-conversation-map-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch1.prompt",
-            "exerciseKey": "try-identity-place-order",
+            "exerciseKey": "try-map-place-transfer",
             "exerciseKeys": [
-              "try-identity-place-order"
+              "try-map-place-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
+            "preferKind": "listen_build",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -39038,8 +47544,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.cards.sketch2.title",
-          "sketchId": "keep-simple",
-          "height": 420
+          "sketchId": "everyday-information",
+          "height": 420,
+          "tryIt": {
+            "id": "try-learn-the-conversation-map-sketch2",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch2.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch2.prompt",
+            "exerciseKey": "try-map-next-question",
+            "exerciseKeys": [
+              "try-map-next-question"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
         },
         {
           "id": "quiz",
@@ -39049,7 +47570,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 4,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -39062,28 +47583,196 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "meet-someone",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.meet-someone.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.meet-someone.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.meet-someone.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "A first conversation can begin with language you already know:",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kijan ou ye?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen, mèsi. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen tou.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "After the greeting, the conversation can move to names and other information.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
-          "id": "identity-place",
+          "id": "identity-place-language",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.identity-place.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.identity-place.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.identity-place-language.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.identity-place-language.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "A conversation can continue by exchanging simple personal information:",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "Ki kote ou rete?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Boston. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Chicago.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Èske ou pale kreyòl?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Wi, mwen pale kreyòl.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "These are familiar patterns from earlier modules.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
-          "id": "keep-simple",
+          "id": "everyday-information",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.keep-simple.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.keep-simple.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.everyday-information.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.everyday-information.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "Later in the conversation, you can ask for other familiar information:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "what someone is doing",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "how many things someone has",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "what time an activity happens",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You do not need to use every question in every conversation. Choose what fits the moment.",
+                "locale": "en-US"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "learn-the-conversation-map-choice",
+          "id": "map-next-move-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.map-next-move-choice",
           "optionIds": [
             "a",
             "b",
@@ -39095,153 +47784,107 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "learn-the-conversation-map-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "rele"
-          }
-        },
-        {
-          "id": "learn-the-conversation-map-listen",
+          "id": "map-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-listen",
-          "targetText": "Wi, mwen pale kreyòl.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.map-listen",
+          "targetText": "M rele Jan. E ou menm?",
           "locale": "ht-HT",
           "wordBank": [
-            "Wi,",
-            "mwen",
-            "pale",
-            "kreyòl."
-          ],
-          "distractors": [
-            "rete"
+            "M",
+            "rele",
+            "Jan.",
+            "E",
+            "ou",
+            "menm?"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Wi, mwen pale kreyòl.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "M rele Jan. E ou menm?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "learn-the-conversation-map-voice",
+          "id": "map-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.map-build",
+          "targetText": "Akilè Jan travay?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Akilè",
+            "Jan",
+            "travay?"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Akilè Jan travay?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "map-voice",
           "kind": "voice_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-voice",
-          "targetText": "Bonjou! M rele Ana. Mwen rete Chicago.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.map-voice",
+          "targetText": "Kisa Mari ap fè?",
           "locale": "ht-HT",
-          "maxSeconds": 18,
           "expected": {
             "kind": "voice_input",
-            "targetText": "Bonjou! M rele Ana. Mwen rete Chicago.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-the-conversation-map-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-build",
-          "targetText": "Ki kote ou rete?",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Ki",
-            "kote",
-            "ou",
-            "rete?"
-          ],
-          "distractors": [
-            "rele?"
-          ],
-          "ttsText": "Ki kote ou rete?",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Ki kote ou rete?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "learn-the-conversation-map-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "M rele Jan.",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-meet-someone-order",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.try-meet-someone-order",
-          "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Mwen byen tou. Kijan ou rele? M rele Ana.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Bonjou! Kijan ou ye?",
-            "Mwen byen, mèsi. E ou menm?",
-            "Mwen byen tou. Kijan ou rele?",
-            "M rele Ana."
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Mwen byen tou. Kijan ou rele? M rele Ana.",
+            "targetText": "Kisa Mari ap fè?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-identity-place-order",
-          "kind": "word_bank_arrange",
+          "id": "try-map-name-transfer",
+          "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.try-identity-place-order",
-          "targetText": "Èske ou pale kreyòl? Wi, mwen pale kreyòl. Ki kote ou rete? Mwen rete Chicago.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.try-map-name-transfer",
+          "targetText": "Mari, kijan ou rele?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Mari, kijan ou rele?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-map-place-transfer",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.try-map-place-transfer",
+          "targetText": "Mwen rete Miami.",
           "locale": "ht-HT",
           "wordBank": [
-            "Èske ou pale kreyòl?",
-            "Wi, mwen pale kreyòl.",
-            "Ki kote ou rete?",
-            "Mwen rete Chicago."
+            "Mwen",
+            "rete",
+            "Miami."
           ],
           "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Èske ou pale kreyòl? Wi, mwen pale kreyòl. Ki kote ou rete? Mwen rete Chicago.",
+            "kind": "listen_build",
+            "targetText": "Mwen rete Miami.",
             "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "try-map-next-question",
+          "kind": "single_choice",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.try-map-next-question",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
           }
         }
       ]
@@ -39250,9 +47893,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "listen-and-speak-through-a-conversation",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-8-my-first-kreyol-conversation",
-      "sectionSlug": "haitian-creole-foundations-ht8-learn-listen-speak",
+      "sectionSlug": "haitian-creole-foundations-ht8-capstone-conversation",
       "prefix": "ht8",
-      "minutes": 24,
+      "minutes": 25,
       "runtimeDefaults": {
         "kind": "code",
         "supportsTerminal": false,
@@ -39277,13 +47920,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-listen-and-speak-through-a-conversation-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch0.prompt",
-            "exerciseKey": "try-things-owner-identify",
+            "exerciseKey": "try-rehearse-owner-transfer",
             "exerciseKeys": [
-              "try-things-owner-identify",
-              "try-things-owner-owner"
+              "try-rehearse-owner-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": null,
+            "preferKind": "word_bank_arrange",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -39294,15 +47936,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.cards.sketch1.title",
-          "sketchId": "people-actions",
+          "sketchId": "actions-and-questions",
           "height": 420,
           "tryIt": {
             "id": "try-listen-and-speak-through-a-conversation-sketch1",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch1.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch1.prompt",
-            "exerciseKey": "try-people-actions-answer",
+            "exerciseKey": "try-rehearse-action-transfer",
             "exerciseKeys": [
-              "try-people-actions-answer"
+              "try-rehearse-action-transfer"
             ],
             "difficulty": "easy",
             "preferKind": "voice_input",
@@ -39316,8 +47958,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.cards.sketch2.title",
-          "sketchId": "point-and-answer",
-          "height": 420
+          "sketchId": "quantity-and-time",
+          "height": 420,
+          "tryIt": {
+            "id": "try-listen-and-speak-through-a-conversation-sketch2",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch2.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch2.prompt",
+            "exerciseKey": "try-rehearse-time-transfer",
+            "exerciseKeys": [
+              "try-rehearse-time-transfer"
+            ],
+            "difficulty": "easy",
+            "preferKind": "listen_build",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
         },
         {
           "id": "quiz",
@@ -39327,7 +47984,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 5,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -39340,28 +47997,187 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "things-owner",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.things-owner.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.things-owner.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.things-owner.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Mari, liv sa a se pou ou.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mèsi, Jan. Kaye sa yo se pou ou.",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mèsi.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Now listen to those same words inside a real exchange.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
-          "id": "people-actions",
+          "id": "actions-and-questions",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.people-actions.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.people-actions.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.actions-and-questions.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.actions-and-questions.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Jan, kisa ou ap fè?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M ap etidye kreyòl. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M ap travay kounyeya.",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "The response connects directly to the previous turn.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
-          "id": "point-and-answer",
+          "id": "quantity-and-time",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.point-and-answer.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.point-and-answer.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.quantity-and-time.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.quantity-and-time.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Konbyen liv ou genyen?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen genyen twa liv.",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Akilè ou etidye kreyòl?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Senkè edmi. Mwen etidye kreyòl aswè.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Numbers and time now work inside a conversation instead of as isolated vocabulary.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "listen-and-speak-through-a-conversation-choice",
+          "id": "rehearsal-owner-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.rehearsal-owner-choice",
           "optionIds": [
             "a",
             "b",
@@ -39373,484 +48189,129 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "listen-and-speak-through-a-conversation-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "etidye"
-          }
-        },
-        {
-          "id": "listen-and-speak-through-a-conversation-listen",
+          "id": "rehearsal-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-listen",
-          "targetText": "Liv la se pou Mari.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.rehearsal-listen",
+          "targetText": "M ap etidye kounyeya.",
           "locale": "ht-HT",
           "wordBank": [
-            "Liv",
-            "la",
+            "M",
+            "ap",
+            "etidye",
+            "kounyeya."
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "M ap etidye kounyeya.",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "rehearsal-build",
+          "kind": "word_bank_arrange",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.rehearsal-build",
+          "targetText": "Konbyen kaye Jan genyen?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Konbyen",
+            "kaye",
+            "Jan",
+            "genyen?"
+          ],
+          "expected": {
+            "kind": "word_bank_arrange",
+            "targetText": "Konbyen kaye Jan genyen?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "rehearsal-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.rehearsal-voice",
+          "targetText": "Akilè Mari etidye kreyòl?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Akilè Mari etidye kreyòl?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "rehearsal-write",
+          "kind": "text_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.rehearsal-write",
+          "placeholder": "Type the Kreyòl answer",
+          "expected": {
+            "kind": "text_input",
+            "value": "Mwen rete Miami.",
+            "normalize": {
+              "trim": true,
+              "caseFold": true,
+              "collapseSpaces": true,
+              "stripPunct": true
+            }
+          }
+        },
+        {
+          "id": "try-rehearse-owner-transfer",
+          "kind": "word_bank_arrange",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-rehearse-owner-transfer",
+          "targetText": "Valiz sa a se pou Jan.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Valiz",
+            "sa",
+            "a",
             "se",
             "pou",
-            "Mari."
-          ],
-          "distractors": [
-            "yo"
-          ],
-          "expected": {
-            "kind": "listen_build",
-            "targetText": "Liv la se pou Mari.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-speak-through-a-conversation-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-voice",
-          "targetText": "Kisa Mari ap fè?",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Kisa Mari ap fè?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-speak-through-a-conversation-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-build",
-          "targetText": "liv sa a",
-          "locale": "ht-HT",
-          "wordBank": [
-            "liv",
-            "sa",
-            "a"
-          ],
-          "distractors": [
-            "yo"
-          ],
-          "ttsText": "liv sa a",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "liv sa a",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "listen-and-speak-through-a-conversation-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "Li ap etidye kreyòl.",
-            "anyOf": [
-              "L ap etidye kreyòl."
-            ],
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-things-owner-identify",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-things-owner-identify",
-          "targetText": "Se yon liv.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Se",
-            "yon",
-            "liv."
+            "Jan."
           ],
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Se yon liv.",
+            "targetText": "Valiz sa a se pou Jan.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-things-owner-owner",
+          "id": "try-rehearse-action-transfer",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-things-owner-owner",
-          "targetText": "Liv la se pou Mari.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-rehearse-action-transfer",
+          "targetText": "M ap pale kreyòl.",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "Liv la se pou Mari.",
+            "targetText": "M ap pale kreyòl.",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-people-actions-answer",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-people-actions-answer",
-          "targetText": "Li ap etidye kreyòl.",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Li ap etidye kreyòl.",
-            "locale": "ht-HT"
-          }
-        }
-      ]
-    },
-    "read-build-and-write-a-conversation": {
-      "topicId": "read-build-and-write-a-conversation",
-      "subjectSlug": "haitian-creole-foundations",
-      "moduleSlug": "haitian-creole-foundations-8-my-first-kreyol-conversation",
-      "sectionSlug": "haitian-creole-foundations-ht8-read-build-write-use",
-      "prefix": "ht8",
-      "minutes": 24,
-      "runtimeDefaults": {
-        "kind": "code",
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "supportsStdInStdOut": true,
-        "supportsPackageInstall": false
-      },
-      "serviceDefaults": null,
-      "topic": {
-        "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.label",
-        "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.cards.sketch0.title",
-          "sketchId": "make-plan",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-a-conversation-sketch0",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch0.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch0.prompt",
-            "exerciseKey": "try-make-plan-question",
-            "exerciseKeys": [
-              "try-make-plan-question",
-              "try-make-plan-routine"
-            ],
-            "difficulty": "easy",
-            "preferKind": null,
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.cards.sketch1.title",
-          "sketchId": "count-things",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-a-conversation-sketch1",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch1.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch1.prompt",
-            "exerciseKey": "try-count-things-answer",
-            "exerciseKeys": [
-              "try-count-things-answer"
-            ],
-            "difficulty": "easy",
-            "preferKind": "word_bank_arrange",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.cards.sketch2.title",
-          "sketchId": "schedule-chunks",
-          "height": 420,
-          "tryIt": {
-            "id": "try-read-build-and-write-a-conversation-sketch2",
-            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch2.title",
-            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch2.prompt",
-            "exerciseKey": "try-schedule-chunks-everyday",
-            "exerciseKeys": [
-              "try-schedule-chunks-everyday"
-            ],
-            "difficulty": "easy",
-            "preferKind": "single_choice",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 6,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "make-plan",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.make-plan.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.make-plan.bodyMarkdown"
-        },
-        {
-          "id": "count-things",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.count-things.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.count-things.bodyMarkdown"
-        },
-        {
-          "id": "schedule-chunks",
-          "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.schedule-chunks.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.schedule-chunks.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "read-build-and-write-a-conversation-choice",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-choice",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "read-build-and-write-a-conversation-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "twa"
-          }
-        },
-        {
-          "id": "read-build-and-write-a-conversation-listen",
+          "id": "try-rehearse-time-transfer",
           "kind": "listen_build",
-          "purpose": "quiz",
+          "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-listen",
-          "targetText": "Mwen etidye kreyòl chak jou.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-rehearse-time-transfer",
+          "targetText": "Setè edmi.",
           "locale": "ht-HT",
           "wordBank": [
-            "Mwen",
-            "etidye",
-            "kreyòl",
-            "chak",
-            "jou."
-          ],
-          "distractors": [
-            "kounyeya"
+            "Setè",
+            "edmi."
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Mwen etidye kreyòl chak jou.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-a-conversation-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-voice",
-          "targetText": "Konbyen liv ou genyen?",
-          "locale": "ht-HT",
-          "maxSeconds": 12,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Konbyen liv ou genyen?",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-a-conversation-build",
-          "kind": "word_bank_arrange",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-build",
-          "targetText": "setè edmi",
-          "locale": "ht-HT",
-          "wordBank": [
-            "setè",
-            "edmi"
-          ],
-          "distractors": [
-            "senkè"
-          ],
-          "ttsText": "setè edmi",
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "setè edmi",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "read-build-and-write-a-conversation-write",
-          "kind": "text_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-write",
-          "placeholder": "Type the Kreyòl answer",
-          "expected": {
-            "kind": "text_input",
-            "value": "chak jou",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "try-make-plan-question",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.try-make-plan-question",
-          "targetText": "Akilè ou travay?",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Akilè",
-            "ou",
-            "travay?"
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Akilè ou travay?",
+            "targetText": "Setè edmi.",
             "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-make-plan-routine",
-          "kind": "voice_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.try-make-plan-routine",
-          "targetText": "Wi, mwen etidye kreyòl chak jou.",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Wi, mwen etidye kreyòl chak jou.",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-count-things-answer",
-          "kind": "word_bank_arrange",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.try-count-things-answer",
-          "targetText": "Mwen gen twa liv.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Mwen",
-            "gen",
-            "twa",
-            "liv."
-          ],
-          "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Mwen gen twa liv.",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-schedule-chunks-everyday",
-          "kind": "single_choice",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.try-schedule-chunks-everyday",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
           }
         }
       ]
@@ -39859,7 +48320,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "my-first-kreyol-conversation",
       "subjectSlug": "haitian-creole-foundations",
       "moduleSlug": "haitian-creole-foundations-8-my-first-kreyol-conversation",
-      "sectionSlug": "haitian-creole-foundations-ht8-read-build-write-use",
+      "sectionSlug": "haitian-creole-foundations-ht8-capstone-conversation",
       "prefix": "ht8",
       "minutes": 30,
       "runtimeDefaults": {
@@ -39886,14 +48347,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "id": "try-my-first-kreyol-conversation-sketch0",
             "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.tryIt.try_my_first_kreyol_conversation_sketch0.title",
             "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.tryIt.try_my_first_kreyol_conversation_sketch0.prompt",
-            "exerciseKey": "try-full-conversation-hear",
+            "exerciseKey": "try-capstone-role-transfer",
             "exerciseKeys": [
-              "try-full-conversation-hear",
-              "try-full-conversation-intro",
-              "try-full-conversation-order"
+              "try-capstone-role-transfer"
             ],
             "difficulty": "easy",
-            "preferKind": null,
+            "preferKind": "voice_input",
             "seedPolicy": "global",
             "required": true,
             "allowReveal": true,
@@ -39905,14 +48364,44 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.cards.sketch1.title",
           "sketchId": "conversation-skills",
-          "height": 420
+          "height": 420,
+          "tryIt": {
+            "id": "try-my-first-kreyol-conversation-sketch1",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.tryIt.try_my_first_kreyol_conversation_sketch1.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.tryIt.try_my_first_kreyol_conversation_sketch1.prompt",
+            "exerciseKey": "try-capstone-next-move",
+            "exerciseKeys": [
+              "try-capstone-next-move"
+            ],
+            "difficulty": "easy",
+            "preferKind": "single_choice",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
         },
         {
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.cards.sketch2.title",
-          "sketchId": "independent-use",
-          "height": 420
+          "sketchId": "alternate-conversation",
+          "height": 420,
+          "tryIt": {
+            "id": "try-my-first-kreyol-conversation-sketch2",
+            "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.tryIt.try_my_first_kreyol_conversation_sketch2.title",
+            "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.tryIt.try_my_first_kreyol_conversation_sketch2.prompt",
+            "exerciseKey": "try-capstone-hear-transfer",
+            "exerciseKeys": [
+              "try-capstone-hear-transfer"
+            ],
+            "difficulty": "easy",
+            "preferKind": "listen_build",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
         },
         {
           "id": "quiz",
@@ -39922,7 +48411,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "difficulty": "easy",
             "n": 4,
             "min": 4,
-            "max": 6,
+            "max": 5,
             "selectionMode": "random",
             "allowReveal": true,
             "preferKind": null,
@@ -39935,28 +48424,337 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "id": "full-conversation",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.full-conversation.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.full-conversation.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.full-conversation.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Bonjou!",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kijan ou ye?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen, mèsi. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen byen tou.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kijan ou rele?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M rele Mari. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M rele Jan.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Ki kote ou rete?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Boston. E ou menm?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen rete Chicago.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Èske ou pale kreyòl?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Wi, mwen pale kreyòl.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Kisa ou ap fè kounyeya?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "M ap etidye kreyòl kounyeya.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Konbyen liv ou genyen?",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Mwen genyen twa liv.",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Akilè ou etidye kreyòl?",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Senkè edmi. Mwen etidye kreyòl aswè.",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Orevwa, Jan!",
+                "locale": "ht-HT",
+                "speakerId": "mari",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "Orevwa, Mari!",
+                "locale": "ht-HT",
+                "speakerId": "jan",
+                "pauseAfterMs": 300
+              },
+              {
+                "text": "You already know the language in this conversation. Notice how greetings, questions, actions, numbers, and time now come together in one exchange.",
+                "locale": "en-US",
+                "speakerId": "narrator"
+              }
+            ]
+          }
         },
         {
           "id": "conversation-skills",
           "archetype": "paragraph",
           "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.conversation-skills.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.conversation-skills.bodyMarkdown"
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.conversation-skills.bodyMarkdown",
+          "audio": {
+            "kind": "read_aloud",
+            "locale": "ht-HT",
+            "segments": [
+              {
+                "text": "A real conversation can change order.",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The important skill is knowing what kind of move fits:",
+                "locale": "en-US",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "greet or close",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "answer and return a question",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "ask for new information",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "talk about an action",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "give a quantity or time",
+                "locale": "en-US",
+                "pauseAfterMs": 220
+              },
+              {
+                "text": "You do not need to memorize this conversation word for word.",
+                "locale": "en-US"
+              }
+            ]
+          }
         },
         {
-          "id": "independent-use",
+          "id": "alternate-conversation",
           "archetype": "paragraph",
-          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.independent-use.title",
-          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.independent-use.bodyMarkdown"
+          "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.alternate-conversation.title",
+          "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.alternate-conversation.bodyMarkdown",
+          "audio": {
+            "kind": "conversation",
+            "locale": "ht-HT",
+            "speakers": [
+              {
+                "id": "jan",
+                "label": "Jan",
+                "voiceSlot": 1,
+                "voicePresentation": "male",
+                "delivery": "warm"
+              },
+              {
+                "id": "mari",
+                "label": "Mari",
+                "voiceSlot": 2,
+                "voicePresentation": "female",
+                "delivery": "warm"
+              },
+              {
+                "id": "narrator",
+                "voiceSlot": 3,
+                "label": "Narrator",
+                "delivery": "warm"
+              }
+            ],
+            "segments": [
+              {
+                "text": "Listen to a shorter second conversation.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "text": "The order changes, but Jan and Mari still use language you already know.",
+                "locale": "en-US",
+                "speakerId": "narrator",
+                "pauseAfterMs": 240
+              },
+              {
+                "speakerId": "mari",
+                "text": "Bonswa!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Bonswa!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Kijan ou ye?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Mwen byen, mèsi. E ou menm?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Mwen byen tou.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Èske ou etidye kreyòl chak jou?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Wi, mwen etidye kreyòl chak jou.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Akilè ou etidye kreyòl?",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Setè edmi. Mwen etidye kreyòl aswè.",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "jan",
+                "text": "Orevwa, Mari!",
+                "pauseAfterMs": 300,
+                "locale": "ht-HT"
+              },
+              {
+                "speakerId": "mari",
+                "text": "Orevwa, Jan!",
+                "locale": "ht-HT"
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "id": "my-first-kreyol-conversation-choice",
+          "id": "capstone-natural-answer-choice",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.my-first-kreyol-conversation-choice",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.capstone-natural-answer-choice",
           "optionIds": [
             "a",
             "b",
@@ -39968,108 +48766,72 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "my-first-kreyol-conversation-fill",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.my-first-kreyol-conversation-fill",
-          "choiceCount": 3,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "pale"
-          }
-        },
-        {
-          "id": "my-first-kreyol-conversation-listen",
+          "id": "capstone-listen",
           "kind": "listen_build",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.my-first-kreyol-conversation-listen",
-          "targetText": "Orevwa! Orevwa!",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.capstone-listen",
+          "targetText": "M rele Jan. E ou menm?",
           "locale": "ht-HT",
           "wordBank": [
-            "Orevwa!",
-            "Orevwa!"
-          ],
-          "distractors": [
-            "Bonjou!"
+            "M",
+            "rele",
+            "Jan.",
+            "E",
+            "ou",
+            "menm?"
           ],
           "expected": {
             "kind": "listen_build",
-            "targetText": "Orevwa! Orevwa!",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "M rele Jan. E ou menm?",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "my-first-kreyol-conversation-voice",
-          "kind": "voice_input",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.my-first-kreyol-conversation-voice",
-          "targetText": "Bonjou! M rele Jan. Mwen rete Chicago. Mwen pale kreyòl. Orevwa!",
-          "locale": "ht-HT",
-          "maxSeconds": 25,
-          "expected": {
-            "kind": "voice_input",
-            "targetText": "Bonjou! M rele Jan. Mwen rete Chicago. Mwen pale kreyòl. Orevwa!",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
-          }
-        },
-        {
-          "id": "my-first-kreyol-conversation-build",
+          "id": "capstone-build",
           "kind": "word_bank_arrange",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.my-first-kreyol-conversation-build",
-          "targetText": "Ki kote ou rete? Mwen rete Chicago.",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.capstone-build",
+          "targetText": "M ap etidye kreyòl kounyeya.",
           "locale": "ht-HT",
           "wordBank": [
-            "Ki",
-            "kote",
-            "ou",
-            "rete?",
-            "Mwen",
-            "rete",
-            "Chicago."
+            "M",
+            "ap",
+            "etidye",
+            "kreyòl",
+            "kounyeya."
           ],
-          "distractors": [
-            "Konbyen"
-          ],
-          "ttsText": "Ki kote ou rete? Mwen rete Chicago.",
           "expected": {
             "kind": "word_bank_arrange",
-            "targetText": "Ki kote ou rete? Mwen rete Chicago.",
-            "locale": "ht-HT",
-            "normalize": {
-              "trim": true,
-              "caseFold": true,
-              "collapseSpaces": true,
-              "stripPunct": true
-            }
+            "targetText": "M ap etidye kreyòl kounyeya.",
+            "locale": "ht-HT"
           }
         },
         {
-          "id": "my-first-kreyol-conversation-write",
+          "id": "capstone-voice",
+          "kind": "voice_input",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.capstone-voice",
+          "targetText": "Konbyen kaye Mari genyen?",
+          "locale": "ht-HT",
+          "expected": {
+            "kind": "voice_input",
+            "targetText": "Konbyen kaye Mari genyen?",
+            "locale": "ht-HT"
+          }
+        },
+        {
+          "id": "capstone-write",
           "kind": "text_input",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.my-first-kreyol-conversation-write",
-          "placeholder": "Type the Kreyòl answer",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.capstone-write",
+          "placeholder": "Type the Kreyòl sentence",
           "expected": {
             "kind": "text_input",
-            "value": "M rele Ana. Mwen pale kreyòl.",
+            "value": "Mwen etidye kreyòl chak jou.",
             "normalize": {
               "trim": true,
               "caseFold": true,
@@ -40079,51 +48841,54 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "try-full-conversation-hear",
-          "kind": "listen_build",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.try-full-conversation-hear",
-          "targetText": "Mwen byen, mèsi. E ou menm?",
-          "locale": "ht-HT",
-          "expected": {
-            "kind": "listen_build",
-            "targetText": "Mwen byen, mèsi. E ou menm?",
-            "locale": "ht-HT"
-          }
-        },
-        {
-          "id": "try-full-conversation-intro",
+          "id": "try-capstone-role-transfer",
           "kind": "voice_input",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.try-full-conversation-intro",
-          "targetText": "M rele Ana. E ou menm?",
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.try-capstone-role-transfer",
+          "targetText": "Mwen rete Miami. E ou menm?",
           "locale": "ht-HT",
           "expected": {
             "kind": "voice_input",
-            "targetText": "M rele Ana. E ou menm?",
+            "targetText": "Mwen rete Miami. E ou menm?",
             "locale": "ht-HT"
           }
         },
         {
-          "id": "try-full-conversation-order",
-          "kind": "word_bank_arrange",
+          "id": "try-capstone-next-move",
+          "kind": "single_choice",
           "purpose": "project",
           "weight": 1,
-          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.try-full-conversation-order",
-          "targetText": "Bonjou! Kijan ou ye? M rele Ana. E ou menm? Ki kote ou rete? Èske ou pale kreyòl? Orevwa!",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Bonjou! Kijan ou ye?",
-            "M rele Ana. E ou menm?",
-            "Ki kote ou rete?",
-            "Èske ou pale kreyòl?",
-            "Orevwa!"
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.try-capstone-next-move",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
           ],
           "expected": {
-            "kind": "word_bank_arrange",
-            "targetText": "Bonjou! Kijan ou ye? M rele Ana. E ou menm? Ki kote ou rete? Èske ou pale kreyòl? Orevwa!",
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "try-capstone-hear-transfer",
+          "kind": "listen_build",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.my-first-kreyol-conversation.practice.try-capstone-hear-transfer",
+          "targetText": "Setè edmi. Mwen etidye kreyòl aswè.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Setè",
+            "edmi.",
+            "Mwen",
+            "etidye",
+            "kreyòl",
+            "aswè."
+          ],
+          "expected": {
+            "kind": "listen_build",
+            "targetText": "Setè edmi. Mwen etidye kreyòl aswè.",
             "locale": "ht-HT"
           }
         }
@@ -169369,6 +178134,7 @@ const GEN_KEY_BY_SUBJECT: Record<string, GeneratedSubjectGenKey> =
   "c-data-structures": "c_course",
   "c-runtime-analysis-asymptotics": "c_course",
   "git-foundations": "git_course",
+  "haitian-creole-everyday-grammar": "language_course",
   "haitian-creole-foundations": "language_course",
   "linux-terminal-fundamentals": "bash_course",
   "applied-python-projects": "python_part1",

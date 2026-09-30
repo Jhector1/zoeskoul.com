@@ -2,9 +2,9 @@
   "topicId": "learn-names-and-introductions",
   "subjectSlug": "haitian-creole-foundations",
   "moduleSlug": "haitian-creole-foundations-3-who-are-you",
-  "sectionSlug": "haitian-creole-foundations-ht3-learn-listen-speak",
+  "sectionSlug": "haitian-creole-foundations-ht3-introductions",
   "prefix": "ht3",
-  "minutes": 24,
+  "minutes": 21,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -23,18 +23,18 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.cards.sketch0.title",
-      "sketchId": "pronouns",
+      "sketchId": "ask-a-name",
       "height": 420,
       "tryIt": {
         "id": "try-learn-names-and-introductions-sketch0",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch0.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch0.prompt",
-        "exerciseKey": "try-pronouns-mwen",
+        "exerciseKey": "try-ask-name",
         "exerciseKeys": [
-          "try-pronouns-mwen"
+          "try-ask-name"
         ],
         "difficulty": "easy",
-        "preferKind": "single_choice",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -45,18 +45,18 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.cards.sketch1.title",
-      "sketchId": "say-who",
+      "sketchId": "say-your-name",
       "height": 420,
       "tryIt": {
         "id": "try-learn-names-and-introductions-sketch1",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch1.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch1.prompt",
-        "exerciseKey": "try-say-who-student",
+        "exerciseKey": "try-new-name",
         "exerciseKeys": [
-          "try-say-who-student"
+          "try-new-name"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "voice_input",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -67,18 +67,18 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.cards.sketch2.title",
-      "sketchId": "say-name",
+      "sketchId": "return-the-name-question",
       "height": 420,
       "tryIt": {
         "id": "try-learn-names-and-introductions-sketch2",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch2.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.tryIt.try_learn_names_and_introductions_sketch2.prompt",
-        "exerciseKey": "try-say-name-mari",
+        "exerciseKey": "try-name-turn",
         "exerciseKeys": [
-          "try-say-name-mari"
+          "try-name-turn"
         ],
         "difficulty": "easy",
-        "preferKind": "voice_input",
+        "preferKind": "word_bank_arrange",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -103,31 +103,150 @@
   ],
   "sketches": [
     {
-      "id": "pronouns",
+      "id": "ask-a-name",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.pronouns.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.pronouns.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.ask-a-name.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.ask-a-name.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "To ask someone's name, use:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Kijan ou rele?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Learn the question as one useful spoken chunk.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "say-who",
+      "id": "say-your-name",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-who.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-who.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-your-name.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-your-name.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "A short natural answer is:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "M rele Jan.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "My name is Jan.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The person's name changes; the pattern stays the same:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "M rele + name",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "say-name",
+      "id": "return-the-name-question",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-name.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.say-name.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.return-the-name-question.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.return-the-name-question.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "You already know this useful phrase:",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "And you?",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Now it can return the name question too.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "speakerId": "jan",
+            "text": "Kijan ou rele?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "M rele Mari. E ou menm?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "M rele Jan.",
+            "locale": "ht-HT"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "learn-names-and-introductions-choice",
+      "id": "names-question-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-choice",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.names-question-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,161 +258,113 @@
       }
     },
     {
-      "id": "learn-names-and-introductions-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Mwen"
-      }
-    },
-    {
-      "id": "learn-names-and-introductions-listen",
+      "id": "names-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-listen",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.names-listen",
       "targetText": "M rele Mari.",
       "locale": "ht-HT",
       "wordBank": [
         "M",
         "rele",
         "Mari."
-      ],
-      "distractors": [
-        "Ou"
       ],
       "expected": {
         "kind": "listen_build",
         "targetText": "M rele Mari.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-names-and-introductions-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-voice",
-      "targetText": "Mwen se Jan.",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Mwen se Jan.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-names-and-introductions-build",
-      "kind": "word_bank_arrange",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-build",
-      "targetText": "M rele Mari.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "M",
-        "rele",
-        "Mari."
-      ],
-      "distractors": [
-        "se"
-      ],
-      "ttsText": "M rele Mari.",
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "M rele Mari.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "learn-names-and-introductions-write",
-      "kind": "text_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.learn-names-and-introductions-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "Ou",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-pronouns-mwen",
-      "kind": "single_choice",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-pronouns-mwen",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "try-say-who-student",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-say-who-student",
-      "targetText": "Mwen se Mari.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Mwen",
-        "se",
-        "Mari."
-      ],
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "Mwen se Mari.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-say-name-mari",
-      "kind": "voice_input",
-      "purpose": "project",
+      "id": "names-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-say-name-mari",
-      "targetText": "M rele Ana.",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.names-build",
+      "targetText": "M rele Jan. E ou menm?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "M",
+        "rele",
+        "Jan.",
+        "E",
+        "ou",
+        "menm?"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "M rele Jan. E ou menm?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "names-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.names-voice",
+      "targetText": "M rele Mari.",
       "locale": "ht-HT",
       "expected": {
         "kind": "voice_input",
-        "targetText": "M rele Ana.",
+        "targetText": "M rele Mari.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-ask-name",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-ask-name",
+      "targetText": "Mari, kijan ou rele?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mari,",
+        "kijan",
+        "ou",
+        "rele?"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Mari, kijan ou rele?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-new-name",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-new-name",
+      "targetText": "M rele Mari.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "M rele Mari.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-name-turn",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.learn-names-and-introductions.practice.try-name-turn",
+      "targetText": "M rele Mari. E ou menm?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "M",
+        "rele",
+        "Mari.",
+        "E",
+        "ou",
+        "menm?"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "M rele Mari. E ou menm?",
         "locale": "ht-HT"
       }
     }

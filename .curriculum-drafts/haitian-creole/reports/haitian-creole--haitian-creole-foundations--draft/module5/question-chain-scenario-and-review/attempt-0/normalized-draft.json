@@ -1,86 +1,361 @@
 {
-  "title": "Question Chain: Scenario and Review",
-  "summary": "Combine yes/no and information questions in a short conversation and answer with complete sentences.",
-  "minutes": 27,
+  "title": "Keep a Question Chain Going",
+  "summary": "Mix yes/no and information questions with complete answers in a natural Jan-and-Mari conversation.",
+  "minutes": 26,
   "sketchBlocks": [
     {
       "id": "mixed-dialogue",
-      "cardTitle": "Ask and Answer",
-      "title": "A short question exchange",
-      "bodyMarkdown": "**A:** Bonjou! Kijan ou rele?\n\n**B:** M rele Ana.\n\n**A:** Ki kote ou rete?\n\n**B:** Mwen rete Chicago.\n\n**A:** Èske ou pale kreyòl?\n\n**B:** Wi, mwen pale kreyòl.\n\nThis exchange reuses language from Modules 2–6.",
+      "cardTitle": "Hear the Whole Question Chain",
+      "title": "Jan and Mari keep talking",
+      "bodyMarkdown": "**Jan:** Bonjou, Mari!\n\n**Mari:** Bonjou, Jan!\n\n**Jan:** Kijan ou ye?\n\n**Mari:** Mwen byen, mèsi. E ou menm?\n\n**Jan:** Mwen byen tou.\n\n**Jan:** Èske ou pale kreyòl?\n\n**Mari:** Wi, mwen pale kreyòl.\n\n**Jan:** Ki kote ou rete?\n\n**Mari:** Mwen rete Boston. E ou menm?\n\n**Jan:** Mwen rete Chicago.\n\n**Mari:** Kisa ou ap fè kounyeya?\n\n**Jan:** M ap travay kounyeya.\n\nDifferent questions ask for different kinds of information.",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "Bonjou, Mari!",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Bonjou, Jan!",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Kijan ou ye?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen byen, mèsi. E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen byen tou.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Èske ou pale kreyòl?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Wi, mwen pale kreyòl.",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Ki kote ou rete?",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen rete Boston. E ou menm?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Mwen rete Chicago.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Kisa ou ap fè kounyeya?",
+            "locale": "ht-HT",
+            "speakerId": "mari",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "M ap travay kounyeya.",
+            "locale": "ht-HT",
+            "speakerId": "jan",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Different questions ask for different kinds of information.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-mixed-dialogue-order",
-          "kind": "word_bank_arrange",
-          "title": "Order the question chain",
-          "prompt": "Arrange the complete chunks to form a natural question-and-answer sequence.",
-          "hint": "Use the pattern from the lesson to build the new phrase.",
+          "id": "try-chain-next-question",
+          "kind": "single_choice",
+          "title": "Choose a useful next question",
+          "prompt": "Mari has already said she speaks Kreyòl. Which question naturally asks for new information?",
+          "hint": "Ask for information you do not have yet.",
           "help": {
-            "concept": "question-chain conversation flow",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "choosing a productive next question",
+            "hint_1": "First decide what kind of information the question needs.",
+            "hint_2": "Answer with a complete familiar thought when possible."
           },
-          "targetText": "Bonjou! Kijan ou rele? M rele Ana. Ki kote ou rete? Mwen rete Chicago. Èske ou pale kreyòl? Wi, mwen pale kreyòl.",
-          "locale": "ht-HT",
-          "wordBank": [
-            "Bonjou! Kijan ou rele?",
-            "M rele Ana.",
+          "options": [
             "Ki kote ou rete?",
-            "Mwen rete Chicago.",
             "Èske ou pale kreyòl?",
             "Wi, mwen pale kreyòl."
+          ],
+          "correctOptionIds": [
+            "a"
           ]
         }
       ]
     },
     {
-      "id": "complete-sentences",
-      "cardTitle": "Give Useful Answers",
-      "title": "Answer with a complete thought",
-      "bodyMarkdown": "The source materials often ask learners to answer with a complete sentence. That is useful practice because it forces you to reuse the grammar inside the question.\n\nFor example:\n\n**Ki kote ou rete?** → **Mwen rete Chicago.**",
+      "id": "complete-answers",
+      "cardTitle": "Answer With a Complete Thought",
+      "title": "Give the useful information",
+      "bodyMarkdown": "A complete answer makes a conversation easier to follow.\n\nCompare:\n\n- **Wi.**\n- **Wi, mwen pale kreyòl.**\n\nOr:\n\n- **Chicago.**\n- **Mwen rete Chicago.**\n\nShort answers can be natural, but complete beginner answers help you practice reusable sentence patterns.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "A complete answer makes a conversation easier to follow.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Compare:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Wi.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Wi, mwen pale kreyòl.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Or:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Chicago.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Mwen rete Chicago.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Short answers can be natural, but complete beginner answers help you practice reusable sentence patterns.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-complete-sentences-place",
+          "id": "try-complete-place-transfer",
           "kind": "text_input",
-          "title": "Write a different complete answer",
-          "prompt": "Write the complete Kreyòl answer “I live in Boston.”",
-          "hint": "Use Mwen rete before the place.",
+          "title": "Write a complete place answer",
+          "prompt": "Write “I live in Miami.”",
+          "hint": "Use Mwen rete before the city.",
           "help": {
-            "concept": "complete-sentence answers",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "giving a complete answer to a place question",
+            "hint_1": "First decide what kind of information the question needs.",
+            "hint_2": "Answer with a complete familiar thought when possible."
           },
-          "expectedText": "Mwen rete Boston."
+          "expectedText": "Mwen rete Miami.",
+          "placeholder": "Type the complete Kreyòl answer",
+          "normalize": {
+            "trim": true,
+            "caseFold": true,
+            "collapseSpaces": true,
+            "stripPunct": true
+          }
         }
       ]
     },
     {
-      "id": "choose-question",
-      "cardTitle": "Choose the Right Question",
-      "title": "Match the information you need",
-      "bodyMarkdown": "Use the question form that matches your goal:\n\n- yes/no → **Èske…?**\n- how/name → **Kijan…?**\n- what → **Kisa…?**\n- where → **Ki kote…?**\n- who → **Ki moun…?**\n- how many → **Konbyen…?**",
+      "id": "second-question-chain",
+      "cardTitle": "Hear Another Version",
+      "title": "Same question system, different order",
+      "bodyMarkdown": "A real conversation does not follow one fixed script.\n\nListen as Mari starts with an **Èske** question and then moves to **Ki kote**.\n\nChoose the question that matches the information you want.",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "jan",
+            "label": "Jan",
+            "voiceSlot": 1,
+            "voicePresentation": "male",
+            "delivery": "warm"
+          },
+          {
+            "id": "mari",
+            "label": "Mari",
+            "voiceSlot": 2,
+            "voicePresentation": "female",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "A real conversation does not follow one fixed script.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Listen as Mari starts with an",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Èske",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "question and then moves to",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Ki kote",
+            "locale": "ht-HT",
+            "speakerId": "narrator",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Choose the question that matches the information you want.",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "speakerId": "mari",
+            "text": "Bonswa, Jan!",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Bonswa, Mari!",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Èske ou etidye kreyòl?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Wi, mwen etidye kreyòl.",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Ki kote ou rete?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Mwen rete Chicago. E ou menm?",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Mwen rete Boston.",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "jan",
+            "text": "Orevwa, Mari!",
+            "pauseAfterMs": 300,
+            "locale": "ht-HT"
+          },
+          {
+            "speakerId": "mari",
+            "text": "Orevwa, Jan!",
+            "locale": "ht-HT"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-choose-question-where",
-          "kind": "single_choice",
-          "title": "Choose the question form",
-          "prompt": "Which question form in the lesson asks about **where**?",
-          "hint": "Choose the option that correctly applies the pattern.",
+          "id": "try-chain-hear",
+          "kind": "listen_build",
+          "title": "Hear the place question",
+          "prompt": "Listen and rebuild Mari's place question.",
+          "hint": "She asks where Jan lives.",
           "help": {
-            "concept": "matching question form to information goal",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "hearing an information question inside a conversation",
+            "hint_1": "First decide what kind of information the question needs.",
+            "hint_2": "Answer with a complete familiar thought when possible."
           },
-          "options": [
-            "Ki kote…?",
-            "Èske…?",
-            "Kijan…?",
-            "Kisa…?",
-            "Ki moun…?",
-            "Konbyen…?"
-          ],
-          "correctOptionIds": [
-            "a"
+          "targetText": "Ki kote ou rete?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Ki",
+            "kote",
+            "ou",
+            "rete?"
           ]
         }
       ]
@@ -88,137 +363,90 @@
   ],
   "quizDraft": [
     {
-      "id": "question-chain-scenario-and-review-choice",
+      "id": "chain-question-type-choice",
       "kind": "single_choice",
-      "title": "Choose the right follow-up",
-      "prompt": "You want to know where Ana lives. Which question should you ask?",
-      "hint": "Choose the question that requests a place.",
+      "title": "Choose the right question type",
+      "prompt": "You want to know whether Jan speaks Kreyòl. What do you ask?",
+      "hint": "This is a yes/no information need.",
       "help": {
-        "concept": "Match the question form to the kind of information you need.",
-        "hint_1": "Use the question pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete sentence before choosing your answer."
+        "concept": "choosing between yes/no and information questions",
+        "hint_1": "First decide what kind of information the question needs.",
+        "hint_2": "Answer with a complete familiar thought when possible."
       },
       "options": [
-        "Ki kote ou rete?",
-        "Kijan ou rele?",
-        "Èske ou pale kreyòl?"
+        "Èske Jan pale kreyòl?",
+        "Ki kote Jan rete?",
+        "Kijan Jan ye?"
       ],
       "correctOptionIds": [
         "a"
       ]
     },
     {
-      "id": "question-chain-scenario-and-review-fill",
-      "kind": "fill_blank_choice",
-      "title": "Complete the name question",
-      "prompt": "Choose the question word that completes the name question.",
-      "hint": "Use the introduction question pattern from Module 3.",
-      "help": {
-        "concept": "The blank begins the familiar question used to ask a person's name.",
-        "hint_1": "Use the question pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete sentence before choosing your answer."
-      },
-      "template": "[blank1] ou rele?",
-      "choices": [
-        "Kijan",
-        "Kisa",
-        "Konbyen"
-      ],
-      "correctValue": "Kijan"
-    },
-    {
-      "id": "question-chain-scenario-and-review-listen",
+      "id": "chain-listen",
       "kind": "listen_build",
-      "title": "Hear and build the answer",
-      "prompt": "Listen, then build the answer you hear.",
-      "hint": "Listen for the positive response and complete language sentence.",
+      "title": "Hear a complete answer",
+      "prompt": "Listen and rebuild Mari's answer.",
+      "hint": "She gives a complete place answer.",
       "help": {
-        "concept": "Build the complete answer in spoken order.",
-        "hint_1": "Use the question pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete sentence before choosing your answer."
+        "concept": "hearing a complete conversational answer",
+        "hint_1": "First decide what kind of information the question needs.",
+        "hint_2": "Answer with a complete familiar thought when possible."
       },
-      "targetText": "Wi, mwen pale kreyòl.",
+      "targetText": "Mwen rete Boston.",
       "locale": "ht-HT",
       "wordBank": [
-        "Wi,",
-        "mwen",
-        "pale",
-        "kreyòl."
-      ],
-      "distractors": [
-        "rete"
-      ],
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "Mwen",
+        "rete",
+        "Boston."
+      ]
     },
     {
-      "id": "question-chain-scenario-and-review-voice",
-      "kind": "voice_input",
-      "title": "Ask and answer",
-      "prompt": "Say: Ki kote ou rete? Mwen rete Chicago.",
-      "hint": "Say the question first, then the answer.",
-      "help": {
-        "concept": "Speaking practice compares the recognized transcript with the authored question-and-answer pair.",
-        "hint_1": "Use the question pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete sentence before choosing your answer."
-      },
-      "targetText": "Ki kote ou rete? Mwen rete Chicago.",
-      "locale": "ht-HT",
-      "maxSeconds": 16,
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
-    },
-    {
-      "id": "question-chain-scenario-and-review-build",
+      "id": "chain-build",
       "kind": "word_bank_arrange",
-      "title": "Build a mixed question",
-      "prompt": "Arrange the words to ask “Do you speak Kreyòl?”",
-      "hint": "Begin with the yes/no question starter.",
+      "title": "Build a yes/no question",
+      "prompt": "Build “Does Mari work?”",
+      "hint": "Begin with Èske.",
       "help": {
-        "concept": "Build the complete yes/no question in its normal order.",
-        "hint_1": "Use the question pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete sentence before choosing your answer."
+        "concept": "building a familiar yes/no question",
+        "hint_1": "First decide what kind of information the question needs.",
+        "hint_2": "Answer with a complete familiar thought when possible."
       },
-      "targetText": "Èske ou pale kreyòl?",
+      "targetText": "Èske Mari travay?",
       "locale": "ht-HT",
       "wordBank": [
         "Èske",
-        "ou",
-        "pale",
-        "kreyòl?"
-      ],
-      "distractors": [
-        "Kijan"
-      ],
-      "ttsText": "Èske ou pale kreyòl?",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "Mari",
+        "travay?"
+      ]
     },
     {
-      "id": "question-chain-scenario-and-review-write",
-      "kind": "text_input",
-      "title": "Write a complete answer",
-      "prompt": "Answer in Kreyòl: “Where do you live?” Use Chicago as the place.",
-      "hint": "Use the residence answer pattern from Module 3.",
+      "id": "chain-voice",
+      "kind": "voice_input",
+      "title": "Ask for a location",
+      "prompt": "Ask “Where does Mari live?”",
+      "hint": "Use Ki kote.",
       "help": {
-        "concept": "Write a complete sentence rather than only the place name.",
-        "hint_1": "Use the question pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete sentence before choosing your answer."
+        "concept": "producing a familiar information question",
+        "hint_1": "First decide what kind of information the question needs.",
+        "hint_2": "Answer with a complete familiar thought when possible."
       },
-      "expectedText": "Mwen rete Chicago.",
-      "placeholder": "Type the Kreyòl answer",
+      "targetText": "Ki kote Mari rete?",
+      "locale": "ht-HT"
+    },
+    {
+      "id": "chain-write",
+      "kind": "text_input",
+      "title": "Write a complete action answer",
+      "prompt": "Write “I am studying Kreyòl.”",
+      "hint": "Reuse Module 5's current-action pattern.",
+      "help": {
+        "concept": "answering a familiar action question completely",
+        "hint_1": "First decide what kind of information the question needs.",
+        "hint_2": "Answer with a complete familiar thought when possible."
+      },
+      "expectedText": "M ap etidye kreyòl.",
+      "placeholder": "Type the complete Kreyòl answer",
       "normalize": {
         "trim": true,
         "caseFold": true,

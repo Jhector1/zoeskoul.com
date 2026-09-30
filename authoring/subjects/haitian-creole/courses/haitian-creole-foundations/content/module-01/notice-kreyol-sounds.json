@@ -30,7 +30,77 @@
             "a"
           ]
         }
-      ]
+      ],
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Kreyòl is written with a standardized spelling system. For a beginner, the most useful habit is to",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "look at the Kreyòl spelling itself instead of guessing from English spelling",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Start with a few anchor words:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "bonjou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "hello",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "mèsi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "thank you",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "wi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yes",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "non",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "no",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You do not need to memorize every sound today. First, notice that the same written pattern is meant to guide you consistently when the pattern appears again.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "vowel-patterns",
@@ -64,13 +134,98 @@
           },
           "expectedText": "bonjou"
         }
-      ]
+      ],
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Two details are especially useful in your first Kreyòl words:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "è",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "is a real part of the spelling. In",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "flè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", keep the accent when you write the word.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "works together as one common sound pattern. The word",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "itself shows the two letters staying together.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Do not silently replace",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "è",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "with plain",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "e",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", and do not drop one of the letters in",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ". Apply these same spelling habits to other familiar words in the practice.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "nasal-patterns",
       "cardTitle": "Nasal Patterns",
       "title": "Notice an, en, and on",
-      "bodyMarkdown": "Kreyòl also uses common nasal vowel spellings such as **an**, **en**, and **on**. For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.\n\nExamples to notice:\n\n- **manman** — mother\n- **pen** — bread\n- **non** — no\n\nLater lessons can refine how these patterns behave in different words. In this first lesson, your job is simply to spot and preserve the spelling.",
+      "bodyMarkdown": "Kreyòl also uses common nasal vowel spellings such as **an**, **en**, and **on**. For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.\n\nExamples to notice:\n\n- **manman** — mother\n- **pen** — bread\n- **non** — no\n\nLater lessons can refine how these patterns behave in different words. For now, just learn to spot these spellings and keep them when you write.",
       "tryItExercises": [
         {
           "id": "try-nasal-patterns-en",
@@ -92,7 +247,87 @@
             "a"
           ]
         }
-      ]
+      ],
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Kreyòl also uses common nasal vowel spellings such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "en",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "on",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ". For now, learn to recognize the written patterns in familiar words rather than trying to master every pronunciation rule at once.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Examples to notice:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "manman",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "mother",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "pen",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "bread",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "non",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "no",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Later lessons can refine how these patterns behave in different words. For now, just learn to spot these spellings and keep them when you write.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "quizDraft": [
@@ -166,11 +401,11 @@
       "kind": "voice_input",
       "title": "Say mèsi",
       "prompt": "Say the Kreyòl word shown: Mèsi.",
-      "hint": "Read the Kreyòl target once, then say the whole phrase.",
+      "hint": "Read the Kreyòl phrase once, then say the whole phrase.",
       "help": {
-        "concept": "Speaking practice checks the transcript of the phrase you say against the authored Kreyòl target.",
-        "hint_1": "Say the complete target phrase clearly at a comfortable pace.",
-        "hint_2": "Use the written Kreyòl as your guide; this activity checks the transcript, not a phoneme-level pronunciation score."
+        "concept": "When you speak, focus on saying the complete Kreyòl phrase naturally.",
+        "hint_1": "Say the whole Kreyòl phrase clearly at a comfortable pace.",
+        "hint_2": "Use the written Kreyòl as your guide. Say the whole phrase naturally instead of sounding out each letter."
       },
       "targetText": "Mèsi.",
       "locale": "ht-HT",

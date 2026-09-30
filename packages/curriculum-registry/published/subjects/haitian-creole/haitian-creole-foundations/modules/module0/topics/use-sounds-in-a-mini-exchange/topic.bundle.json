@@ -91,19 +91,204 @@
       "id": "exchange-map",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.exchange-map.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.exchange-map.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.exchange-map.bodyMarkdown",
+      "audio": {
+        "kind": "conversation",
+        "locale": "ht-HT",
+        "speakers": [
+          {
+            "id": "a",
+            "voiceSlot": 1,
+            "label": "A",
+            "delivery": "warm"
+          },
+          {
+            "id": "b",
+            "voiceSlot": 2,
+            "label": "B",
+            "delivery": "warm"
+          },
+          {
+            "id": "narrator",
+            "voiceSlot": 3,
+            "label": "Narrator",
+            "delivery": "warm"
+          }
+        ],
+        "segments": [
+          {
+            "text": "A conversation can begin with language you already recognize. For this first mini exchange, keep it deliberately small:",
+            "locale": "en-US",
+            "speakerId": "narrator",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Bonjou.",
+            "locale": "ht-HT",
+            "speakerId": "a",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "Bonjou.",
+            "locale": "ht-HT",
+            "speakerId": "b",
+            "pauseAfterMs": 300
+          },
+          {
+            "text": "For now, keep the exchange simple. The point is to hear familiar words inside a real back-and-forth conversation.",
+            "locale": "en-US",
+            "speakerId": "narrator"
+          }
+        ],
+        "defaultPauseMs": 300
+      }
     },
     {
       "id": "respond-with-known-words",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.respond-with-known-words.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.respond-with-known-words.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.respond-with-known-words.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "A good way to build confidence is to reuse words you already know. After hearing a familiar word, respond with a familiar word or phrase instead of reaching for new vocabulary.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "You already have",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "bonjou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "mèsi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "wi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "non",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ". Use them accurately. Next, you'll use these familiar words in fuller greetings and short exchanges.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "module-one-review",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.module-one-review.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.module-one-review.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.use-sounds-in-a-mini-exchange.module-one-review.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Before you move on, check three habits:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "You notice spellings such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "è",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ou",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "an",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ",",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "en",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ", and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "on",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You can connect a few written Kreyòl words with what you hear and say.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You preserve those spellings when you build or type a response.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You do not need perfect pronunciation or a large vocabulary yet. You need a dependable first map.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [

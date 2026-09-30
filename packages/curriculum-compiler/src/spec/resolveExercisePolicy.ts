@@ -88,7 +88,37 @@ export function resolveExercisePolicy(args: {
     blueprint: CourseBlueprint;
     spec?: CourseSpec | null;
     moduleSlug: string;
+    topicId?: string;
 }): ResolvedExercisePolicy {
+    const topicPolicy =
+        args.topicId && args.spec?.topicPolicies
+            ? args.spec.topicPolicies[args.topicId]
+            : undefined;
+
+    const expectedPracticeKinds =
+        Array.isArray(topicPolicy?.expectedPracticeKinds)
+            ? topicPolicy.expectedPracticeKinds
+            : [];
+
+    const topicMix: ExerciseKindMix = {};
+
+    for (const rawKind of expectedPracticeKinds) {
+        const kind = String(rawKind) as ExerciseKindKey;
+
+        if (!KIND_KEYS.includes(kind)) {
+            continue;
+        }
+
+        topicMix[kind] = 1;
+    }
+
+    if (Object.keys(topicMix).length > 0) {
+        return {
+            source: "topic_spec",
+            mix: normalizeMix(topicMix),
+        };
+    }
+
     const moduleSpec = args.spec?.modules.find(
         (module) => module.moduleSlug === args.moduleSlug,
     );

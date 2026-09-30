@@ -1,85 +1,243 @@
 {
-  "title": "Learn Everyday Things",
-  "summary": "Introduce Kreyòl noun phrases with yon and the idea that definite markers come after the noun.",
-  "minutes": 24,
+  "title": "One Thing, the Thing, More Than One",
+  "summary": "Use yon, familiar definite noun phrases, and plural yo with everyday objects.",
+  "minutes": 22,
   "sketchBlocks": [
     {
-      "id": "yon",
+      "id": "one-thing",
       "cardTitle": "Talk About One Thing",
-      "title": "Use yon before a noun",
-      "bodyMarkdown": "**yon** means “a” or “an” and comes before the noun:\n\n- **yon liv** — a book\n- **yon valiz** — a bag\n- **yon machin** — a car\n\nThis is the simplest way to introduce one unspecified thing.",
+      "title": "Yon comes before the noun",
+      "bodyMarkdown": "**yon** means “a” or “an” and comes before the noun.\n\n- **yon liv** — a book\n- **yon kaye** — a notebook\n- **yon telefòn** — a phone\n\nFor now, focus on using the whole noun phrase naturally.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "yon",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "means “a” or “an” and comes before the noun.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "yon liv",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "a book",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "yon kaye",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "a notebook",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "yon telefòn",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "a phone",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "For now, focus on using the whole noun phrase naturally.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-yon-liv",
-          "kind": "word_bank_arrange",
-          "title": "Build “a dog”",
-          "prompt": "Build the Kreyòl phrase for “a dog.”",
-          "hint": "Put yon before the noun.",
+          "id": "try-yon-valiz",
+          "kind": "voice_input",
+          "title": "Use yon with another object",
+          "prompt": "Say “a bag” in Kreyòl.",
+          "hint": "Put yon before valiz.",
           "help": {
-            "concept": "yon before a noun",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "using the indefinite article before a noun",
+            "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+            "hint_2": "Pay attention to what comes before or after the noun."
           },
-          "targetText": "yon chen",
+          "targetText": "Yon valiz.",
+          "locale": "ht-HT"
+        }
+      ]
+    },
+    {
+      "id": "the-thing",
+      "cardTitle": "Notice the Definite Phrase",
+      "title": "The marker comes after the noun",
+      "bodyMarkdown": "In Kreyòl, the definite marker comes **after** the noun.\n\nHere are a few examples:\n\n- **liv la** — the book\n- **kaye a** — the notebook\n- **telefòn nan** — the phone\n\nYou do not need to learn the full article-selection rule yet. Read and say these noun phrases as complete chunks.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "In Kreyòl, the definite marker comes",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "after",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the noun.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Here are a few examples:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "liv la",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the book",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "kaye a",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the notebook",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "telefòn nan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the phone",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You do not need to learn the full article-selection rule yet. Read and say these noun phrases as complete chunks.",
+            "locale": "en-US"
+          }
+        ]
+      },
+      "tryItExercises": [
+        {
+          "id": "try-biwo-a",
+          "kind": "listen_build",
+          "title": "Hear another definite noun phrase",
+          "prompt": "Listen and rebuild “the desk.”",
+          "hint": "The marker follows biwo.",
+          "help": {
+            "concept": "recognizing a source-backed definite noun phrase",
+            "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+            "hint_2": "Pay attention to what comes before or after the noun."
+          },
+          "targetText": "Biwo a.",
           "locale": "ht-HT",
           "wordBank": [
-            "yon",
-            "chen"
+            "Biwo",
+            "a."
           ]
         }
       ]
     },
     {
-      "id": "definite-after",
-      "cardTitle": "Talk About a Specific Thing",
-      "title": "The definite marker comes after the noun",
-      "bodyMarkdown": "Kreyòl places its singular definite marker **after** the noun:\n\n- **tifi a** — the girl\n- **chat la** — the cat\n- **pen an** — the bread\n\nThe exact form changes with the final sound of the noun. For now, notice the most important structural fact: the marker follows the noun.",
+      "id": "more-than-one",
+      "cardTitle": "Talk About More Than One",
+      "title": "Plural yo comes after the noun",
+      "bodyMarkdown": "For plural definite noun phrases, use **yo** after the noun.\n\n- **liv yo** — the books\n- **kaye yo** — the notebooks\n\nThe same **yo** works across these plural noun phrases.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "For plural definite noun phrases, use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "after the noun.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "liv yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the books",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "kaye yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "the notebooks",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The same",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yo",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "works across these plural noun phrases.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-definite-after-chat",
-          "kind": "single_choice",
-          "title": "Recognize a new definite phrase",
-          "prompt": "Which Kreyòl phrase means “the cow”?",
-          "hint": "Look for the noun followed by its correct definite marker.",
+          "id": "try-telefon-yo",
+          "kind": "word_bank_arrange",
+          "title": "Build a new plural noun phrase",
+          "prompt": "Build “the phones.”",
+          "hint": "Put yo after the noun.",
           "help": {
-            "concept": "definite marker after noun",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "building a plural definite noun phrase",
+            "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+            "hint_2": "Pay attention to what comes before or after the noun."
           },
-          "options": [
-            "bèf la",
-            "flè a",
-            "chen an"
-          ],
-          "correctOptionIds": [
-            "a"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "contrast",
-      "cardTitle": "Compare the Patterns",
-      "title": "yon liv vs. liv la",
-      "bodyMarkdown": "Compare:\n\n- **yon liv** — a book\n- **liv la** — the book\n\nThe indefinite word comes before the noun; the definite marker comes after it.",
-      "tryItExercises": [
-        {
-          "id": "try-contrast-the-book",
-          "kind": "single_choice",
-          "title": "Choose “the dog”",
-          "prompt": "Which Kreyòl phrase means “the dog”?",
-          "hint": "Choose the phrase with the definite marker after the noun.",
-          "help": {
-            "concept": "indefinite versus definite noun phrase",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
-          },
-          "options": [
-            "chen an",
-            "yon chen"
-          ],
-          "correctOptionIds": [
-            "a"
+          "targetText": "Telefòn yo.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Telefòn",
+            "yo."
           ]
         }
       ]
@@ -87,15 +245,15 @@
   ],
   "quizDraft": [
     {
-      "id": "learn-everyday-things-choice",
+      "id": "things-yon-choice",
       "kind": "single_choice",
-      "title": "Choose “a book”",
-      "prompt": "Which Kreyòl phrase means “a book”?",
-      "hint": "Use the indefinite pattern from the lesson.",
+      "title": "Choose the phrase for one book",
+      "prompt": "Which phrase means “a book”?",
+      "hint": "yon comes before the noun.",
       "help": {
-        "concept": "An unspecified singular thing uses a short marker before the noun.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
+        "concept": "recognizing the indefinite noun phrase",
+        "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+        "hint_2": "Pay attention to what comes before or after the noun."
       },
       "options": [
         "yon liv",
@@ -107,119 +265,54 @@
       ]
     },
     {
-      "id": "learn-everyday-things-fill",
-      "kind": "fill_blank_choice",
-      "title": "Complete the indefinite phrase",
-      "prompt": "Choose the word that completes “a bag.”",
-      "hint": "Use the singular indefinite pattern.",
-      "help": {
-        "concept": "The blank needs the marker that comes before an unspecified singular noun.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
-      },
-      "template": "[blank1] valiz",
-      "choices": [
-        "yon",
-        "yo",
-        "la"
-      ],
-      "correctValue": "yon"
-    },
-    {
-      "id": "learn-everyday-things-listen",
+      "id": "things-definite-listen",
       "kind": "listen_build",
-      "title": "Hear a specific thing",
-      "prompt": "Listen, then build the noun phrase you hear.",
-      "hint": "Build the noun first, then its following marker.",
+      "title": "Hear a familiar noun phrase",
+      "prompt": "Listen and rebuild “the bag.”",
+      "hint": "The marker follows the noun.",
       "help": {
-        "concept": "Listen for the order of the noun and its definite marker.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
+        "concept": "hearing a source-backed definite noun phrase",
+        "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+        "hint_2": "Pay attention to what comes before or after the noun."
       },
-      "targetText": "liv la",
+      "targetText": "Valiz la.",
       "locale": "ht-HT",
       "wordBank": [
-        "liv",
-        "la"
-      ],
-      "distractors": [
-        "yon"
-      ],
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "Valiz",
+        "la."
+      ]
     },
     {
-      "id": "learn-everyday-things-voice",
-      "kind": "voice_input",
-      "title": "Say an indefinite noun phrase",
-      "prompt": "Say: yon machin.",
-      "hint": "Say both words in the authored order.",
-      "help": {
-        "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl phrase.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
-      },
-      "targetText": "yon machin",
-      "locale": "ht-HT",
-      "maxSeconds": 10,
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
-    },
-    {
-      "id": "learn-everyday-things-build",
+      "id": "things-plural-build",
       "kind": "word_bank_arrange",
-      "title": "Build “the cat”",
-      "prompt": "Arrange the words to build the Kreyòl phrase for “the cat.”",
-      "hint": "Put the noun before its marker.",
+      "title": "Build a plural phrase",
+      "prompt": "Build “the books.”",
+      "hint": "Use yo after liv.",
       "help": {
-        "concept": "The definite marker follows the noun in this phrase.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
+        "concept": "building a plural noun phrase",
+        "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+        "hint_2": "Pay attention to what comes before or after the noun."
       },
-      "targetText": "chat la",
+      "targetText": "Liv yo.",
       "locale": "ht-HT",
       "wordBank": [
-        "chat",
-        "la"
-      ],
-      "distractors": [
-        "yon"
-      ],
-      "ttsText": "chat la",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "Liv",
+        "yo."
+      ]
     },
     {
-      "id": "learn-everyday-things-write",
-      "kind": "text_input",
-      "title": "Write “a book”",
-      "prompt": "Type the Kreyòl phrase for “a book.”",
-      "hint": "Use the indefinite pattern from the lesson.",
+      "id": "things-yon-voice",
+      "kind": "voice_input",
+      "title": "Say one notebook",
+      "prompt": "Say “a notebook.”",
+      "hint": "Use yon before kaye.",
       "help": {
-        "concept": "Write the complete two-word noun phrase.",
-        "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
-        "hint_2": "Compare the choices with the whole sentence before answering."
+        "concept": "producing an indefinite noun phrase",
+        "hint_1": "Use the noun phrase pattern introduced in the lesson.",
+        "hint_2": "Pay attention to what comes before or after the noun."
       },
-      "expectedText": "yon liv",
-      "placeholder": "Type the Kreyòl answer",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+      "targetText": "Yon kaye.",
+      "locale": "ht-HT"
     }
   ]
 }

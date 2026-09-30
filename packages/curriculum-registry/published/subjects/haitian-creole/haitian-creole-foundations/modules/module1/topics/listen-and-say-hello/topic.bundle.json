@@ -2,9 +2,9 @@
   "topicId": "listen-and-say-hello",
   "subjectSlug": "haitian-creole-foundations",
   "moduleSlug": "haitian-creole-foundations-2-bonjou",
-  "sectionSlug": "haitian-creole-foundations-ht2-learn-listen-speak",
+  "sectionSlug": "haitian-creole-foundations-ht2-greetings-conversation",
   "prefix": "ht2",
-  "minutes": 24,
+  "minutes": 22,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -29,12 +29,12 @@
         "id": "try-listen-and-say-hello-sketch0",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch0.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch0.prompt",
-        "exerciseKey": "try-ask-how",
+        "exerciseKey": "try-mari-how",
         "exerciseKeys": [
-          "try-ask-how"
+          "try-mari-how"
         ],
         "difficulty": "easy",
-        "preferKind": "voice_input",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -51,9 +51,9 @@
         "id": "try-listen-and-say-hello-sketch1",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch1.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch1.prompt",
-        "exerciseKey": "try-answer-how",
+        "exerciseKey": "try-answer-more",
         "exerciseKeys": [
-          "try-answer-how"
+          "try-answer-more"
         ],
         "difficulty": "easy",
         "preferKind": "voice_input",
@@ -73,9 +73,9 @@
         "id": "try-listen-and-say-hello-sketch2",
         "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch2.title",
         "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.tryIt.try_listen_and_say_hello_sketch2.prompt",
-        "exerciseKey": "try-return-question",
+        "exerciseKey": "try-answer-return",
         "exerciseKeys": [
-          "try-return-question"
+          "try-answer-return"
         ],
         "difficulty": "easy",
         "preferKind": "voice_input",
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -106,28 +106,93 @@
       "id": "ask-how",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.ask-how.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.ask-how.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.ask-how.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "To ask how someone is, use:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Kijan ou ye?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Listen to the question as one complete phrase.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "answer-how",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.answer-how.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.answer-how.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.answer-how.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "A simple complete answer is:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Mwen byen, mèsi.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "A short answer is enough when it responds clearly.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "return-question",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.return-question.title",
-      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.return-question.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.return-question.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "After answering, return the question with:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "E ou menm?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "And you?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "This turns a one-way answer into a two-way conversation.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "listen-and-say-hello-choice",
+      "id": "return-question-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-choice",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.return-question-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,147 +204,99 @@
       }
     },
     {
-      "id": "listen-and-say-hello-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Mwen"
-      }
-    },
-    {
-      "id": "listen-and-say-hello-listen",
+      "id": "jan-how-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-listen",
-      "targetText": "Kijan ou ye?",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.jan-how-listen",
+      "targetText": "Jan, kijan ou ye?",
       "locale": "ht-HT",
       "wordBank": [
-        "Kijan",
+        "Jan,",
+        "kijan",
         "ou",
         "ye?"
       ],
-      "distractors": [
-        "mèsi"
-      ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "Kijan ou ye?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Jan, kijan ou ye?",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "listen-and-say-hello-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-voice",
-      "targetText": "Mwen byen, mèsi.",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Mwen byen, mèsi.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "listen-and-say-hello-build",
+      "id": "response-build",
       "kind": "word_bank_arrange",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-build",
-      "targetText": "E ou menm?",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.response-build",
+      "targetText": "Mwen byen, mèsi anpil.",
       "locale": "ht-HT",
       "wordBank": [
-        "E",
-        "ou",
-        "menm?"
+        "Mwen",
+        "byen,",
+        "mèsi",
+        "anpil."
       ],
-      "distractors": [
-        "byen"
-      ],
-      "ttsText": "E ou menm?",
       "expected": {
         "kind": "word_bank_arrange",
-        "targetText": "E ou menm?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
+        "targetText": "Mwen byen, mèsi anpil.",
+        "locale": "ht-HT"
       }
     },
     {
-      "id": "listen-and-say-hello-write",
-      "kind": "text_input",
+      "id": "response-return-voice",
+      "kind": "voice_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.listen-and-say-hello-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "byen",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-ask-how",
-      "kind": "voice_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-ask-how",
-      "targetText": "Mari, kijan ou ye?",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.response-return-voice",
+      "targetText": "Mwen byen. E ou menm?",
       "locale": "ht-HT",
       "expected": {
         "kind": "voice_input",
+        "targetText": "Mwen byen. E ou menm?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-mari-how",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-mari-how",
+      "targetText": "Mari, kijan ou ye?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mari,",
+        "kijan",
+        "ou",
+        "ye?"
+      ],
+      "expected": {
+        "kind": "listen_build",
         "targetText": "Mari, kijan ou ye?",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-answer-how",
+      "id": "try-answer-more",
       "kind": "voice_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-answer-how",
-      "targetText": "Mwen byen.",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-answer-more",
+      "targetText": "Mwen byen, mèsi anpil.",
       "locale": "ht-HT",
       "expected": {
         "kind": "voice_input",
-        "targetText": "Mwen byen.",
+        "targetText": "Mwen byen, mèsi anpil.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-return-question",
+      "id": "try-answer-return",
       "kind": "voice_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-return-question",
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.listen-and-say-hello.practice.try-answer-return",
       "targetText": "Mwen byen. E ou menm?",
       "locale": "ht-HT",
       "expected": {

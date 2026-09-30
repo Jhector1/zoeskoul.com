@@ -2,9 +2,9 @@
   "topicId": "listen-and-say-what-is-happening",
   "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
   "moduleSlug": "haitian-creole-foundations-5-what-are-you-doing",
-  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht5-learn-listen-speak",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht5-actions-now-and-routines",
   "prefix": "ht5",
-  "minutes": 24,
+  "minutes": 23,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -29,9 +29,9 @@
         "id": "try-listen-and-say-what-is-happening-sketch0",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch0.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch0.prompt",
-        "exerciseKey": "try-ap-now-study",
+        "exerciseKey": "try-ap-transfer",
         "exerciseKeys": [
-          "try-ap-now-study"
+          "try-ap-transfer"
         ],
         "difficulty": "easy",
         "preferKind": "word_bank_arrange",
@@ -51,12 +51,12 @@
         "id": "try-listen-and-say-what-is-happening-sketch1",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch1.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch1.prompt",
-        "exerciseKey": "try-short-forms-they",
+        "exerciseKey": "try-short-form-transfer",
         "exerciseKeys": [
-          "try-short-forms-they"
+          "try-short-form-transfer"
         ],
         "difficulty": "easy",
-        "preferKind": "single_choice",
+        "preferKind": "listen_build",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -73,12 +73,12 @@
         "id": "try-listen-and-say-what-is-happening-sketch2",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch2.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.tryIt.try_listen_and_say_what_is_happening_sketch2.prompt",
-        "exerciseKey": "try-kounyeya-now",
+        "exerciseKey": "try-kounyeya-transfer",
         "exerciseKeys": [
-          "try-kounyeya-now"
+          "try-kounyeya-transfer"
         ],
         "difficulty": "easy",
-        "preferKind": "word_bank_arrange",
+        "preferKind": "voice_input",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 4,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -106,28 +106,203 @@
       "id": "ap-now",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.ap-now.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.ap-now.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.ap-now.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "before an action to describe something in progress:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "M ap etidye.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "I am studying.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Li ap travay.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "He/she is working.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Yo ap manje.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "They are eating.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Focus on the pattern:",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "person + ap + action",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "common-short-forms",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.common-short-forms.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.common-short-forms.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.common-short-forms.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "In ordinary Kreyòl, subject pronouns can appear in shortened forms before",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ":",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "M ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "W ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "L ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "N ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Y ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "You will also continue to see full forms such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "li ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "yo ap",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ". The meaning comes from the same current-action pattern.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "kounyeya",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.kounyeya.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.kounyeya.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.kounyeya.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "kounyeya",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "means “now.” Add it when the time matters:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Jan ap travay kounyeya.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Jan is working now.",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The sentence still uses the same",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "ap + action",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "pattern.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "listen-and-say-what-is-happening-choice",
+      "id": "now-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-choice",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.now-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,169 +314,106 @@
       }
     },
     {
-      "id": "listen-and-say-what-is-happening-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "travay"
-      }
-    },
-    {
-      "id": "listen-and-say-what-is-happening-listen",
+      "id": "now-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-listen",
-      "targetText": "Li ap etidye.",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.now-listen",
+      "targetText": "Yo ap etidye.",
       "locale": "ht-HT",
       "wordBank": [
-        "Li",
+        "Yo",
         "ap",
         "etidye."
-      ],
-      "distractors": [
-        "rete"
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "Li ap etidye.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "listen-and-say-what-is-happening-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-voice",
-      "targetText": "Yo ap manje.",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Yo ap manje.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "listen-and-say-what-is-happening-build",
-      "kind": "word_bank_arrange",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-build",
-      "targetText": "M ap etidye.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "M",
-        "ap",
-        "etidye."
-      ],
-      "distractors": [
-        "rete"
-      ],
-      "ttsText": "M ap etidye.",
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "M ap etidye.",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "listen-and-say-what-is-happening-write",
-      "kind": "text_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.listen-and-say-what-is-happening-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "kounyeya",
-        "anyOf": [
-          "kounya"
-        ],
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-ap-now-study",
-      "kind": "word_bank_arrange",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-ap-now-study",
-      "targetText": "M ap travay.",
-      "locale": "ht-HT",
-      "wordBank": [
-        "M",
-        "ap",
-        "travay."
-      ],
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "M ap travay.",
+        "targetText": "Yo ap etidye.",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-short-forms-they",
-      "kind": "single_choice",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-short-forms-they",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "try-kounyeya-now",
+      "id": "now-build",
       "kind": "word_bank_arrange",
-      "purpose": "project",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-kounyeya-now",
-      "targetText": "Mari ap etidye kounyeya.",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.now-build",
+      "targetText": "Jan ap manje kounyeya.",
       "locale": "ht-HT",
       "wordBank": [
-        "Mari",
+        "Jan",
         "ap",
-        "etidye",
+        "manje",
         "kounyeya."
       ],
       "expected": {
         "kind": "word_bank_arrange",
+        "targetText": "Jan ap manje kounyeya.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "now-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.now-voice",
+      "targetText": "Mari ap travay.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mari ap travay.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-ap-transfer",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-ap-transfer",
+      "targetText": "Mari ap bwè.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mari",
+        "ap",
+        "bwè."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Mari ap bwè.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-short-form-transfer",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-short-form-transfer",
+      "targetText": "L ap etidye.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "L",
+        "ap",
+        "etidye."
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "L ap etidye.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-kounyeya-transfer",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-5-what-are-you-doing.listen-and-say-what-is-happening.practice.try-kounyeya-transfer",
+      "targetText": "Mari ap etidye kounyeya.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
         "targetText": "Mari ap etidye kounyeya.",
         "locale": "ht-HT"
       }

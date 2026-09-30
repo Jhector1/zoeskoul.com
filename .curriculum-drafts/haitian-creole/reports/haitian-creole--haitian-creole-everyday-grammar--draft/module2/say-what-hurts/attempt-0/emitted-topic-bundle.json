@@ -1,0 +1,495 @@
+{
+  "topicId": "say-what-hurts",
+  "subjectSlug": "haitian-creole--haitian-creole-everyday-grammar--draft",
+  "moduleSlug": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+  "sectionSlug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health",
+  "prefix": "ht2m3",
+  "minutes": 26,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.label",
+    "summaryKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.cards.sketch0.title",
+      "sketchId": "vant-tet-kou",
+      "height": 420,
+      "tryIt": {
+        "id": "try-say-what-hurts-sketch0",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch0.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch0.prompt",
+        "exerciseKey": "try-vant-femal-listen",
+        "exerciseKeys": [
+          "try-vant-femal-listen"
+        ],
+        "difficulty": "easy",
+        "preferKind": "listen_build",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.cards.sketch1.title",
+      "sketchId": "dan-goj",
+      "height": 420,
+      "tryIt": {
+        "id": "try-say-what-hurts-sketch1",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch1.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch1.prompt",
+        "exerciseKey": "try-goj-femal-voice",
+        "exerciseKeys": [
+          "try-goj-femal-voice",
+          "try-dan-femal-write"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.cards.sketch2.title",
+      "sketchId": "kintola-reading",
+      "height": 420,
+      "tryIt": {
+        "id": "try-say-what-hurts-sketch2",
+        "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch2.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.tryIt.try_say_what_hurts_sketch2.prompt",
+        "exerciseKey": "try-kintola-reason-build",
+        "exerciseKeys": [
+          "try-kintola-reason-build"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "vant-tet-kou",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.vant-tet-kou.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.vant-tet-kou.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "fèmal",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "with body words to talk about common aches",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Vant fèmal",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Stomach ache",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Tèt fèmal",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Head ache",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Kou fèmal",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Neck ache",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Keep",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "fèmal",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "together as one word",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dan-goj",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.dan-goj.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.dan-goj.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Add two more expressions",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Dan fèmal",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "tooth ache",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Gòj fèmal",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "sorethroat",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Here",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Dan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Gòj",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "are learned inside complete illness expressions",
+            "locale": "en-US"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kintola-reading",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.kintola-reading.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.kintola-reading.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Read this short passage",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Jodia Kintola pa ale lekòl, paske li gen tèt fèmal.",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Then ask",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Poukisa Kintola pa ale lekòl jodia?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "The reason is already inside the reading",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "paske li gen tèt fèmal",
+            "locale": "ht-HT",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "This reuses",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Poukisa",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "from the first topic of this module and adds no new question form",
+            "locale": "en-US"
+          }
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "health-vant-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-vant-listen",
+      "targetText": "Vant fèmal",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Vant fèmal",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "health-goj-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-goj-listen",
+      "targetText": "Gòj fèmal",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Gòj fèmal",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "health-kou-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-kou-voice",
+      "targetText": "Kou fèmal",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Kou fèmal",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "health-dan-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-dan-voice",
+      "targetText": "Dan fèmal",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Dan fèmal",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "health-tet-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-tet-build",
+      "targetText": "Tèt fèmal",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Tèt",
+        "fèmal"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Tèt fèmal",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "health-reason-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-reason-build",
+      "targetText": "paske li gen tèt fèmal",
+      "locale": "ht-HT",
+      "wordBank": [
+        "paske",
+        "li",
+        "gen",
+        "tèt",
+        "fèmal"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "paske li gen tèt fèmal",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "health-vant-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-vant-write",
+      "placeholder": "Type the Kreyòl expression",
+      "expected": {
+        "kind": "text_input",
+        "value": "Vant fèmal",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "health-reading-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.health-reading-write",
+      "placeholder": "Type the Kreyòl expression",
+      "expected": {
+        "kind": "text_input",
+        "value": "tèt fèmal",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-vant-femal-listen",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.try-vant-femal-listen",
+      "targetText": "Vant fèmal",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Vant fèmal",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-goj-femal-voice",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.try-goj-femal-voice",
+      "targetText": "Gòj fèmal",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Gòj fèmal",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-dan-femal-write",
+      "kind": "text_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.try-dan-femal-write",
+      "placeholder": "Type the Kreyòl expression",
+      "expected": {
+        "kind": "text_input",
+        "value": "Dan fèmal",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-kintola-reason-build",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.say-what-hurts.practice.try-kintola-reason-build",
+      "targetText": "paske li gen tèt fèmal",
+      "locale": "ht-HT",
+      "wordBank": [
+        "paske",
+        "li",
+        "gen",
+        "tèt",
+        "fèmal"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "paske li gen tèt fèmal",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

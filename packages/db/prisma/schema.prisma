@@ -463,7 +463,8 @@ model UserPreferences {
   locale       String   @default("en")
   theme        String   @default("system")
   fontSizePx   Int      @default(16)
-  soundEnabled Boolean  @default(true)
+  soundEnabled          Boolean  @default(true)
+  languageAudioAutoPlay Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)

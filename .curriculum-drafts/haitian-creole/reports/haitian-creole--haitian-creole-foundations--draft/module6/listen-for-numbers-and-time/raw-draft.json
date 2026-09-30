@@ -1,52 +1,144 @@
 {
-  "title": "Listen for Numbers and Time",
-  "summary": "Recognize and use simple Kreyòl clock-time expressions, including full hours and half past.",
-  "minutes": 26,
+  "title": "Clock Time and Akilè",
+  "summary": "Recognize simple full-hour and half-hour expressions and ask what time an activity happens.",
+  "minutes": 24,
   "sketchBlocks": [
     {
       "id": "clock-hour",
-      "cardTitle": "Say the Hour",
+      "cardTitle": "Hear Full Hours",
       "title": "inè, twazè, senkè",
-      "bodyMarkdown": "Kreyòl clock-time expressions commonly attach **è** to the number:\n\n- **inè** — one o'clock\n- **twazè** — three o'clock\n- **senkè** — five o'clock\n\nThe source material also notes that **inè** can mean “one hour” or “one o'clock” depending on context.",
+      "bodyMarkdown": "Learn common clock-time expressions as whole phrases:\n\n- **inè** — one o'clock\n- **twazè** — three o'clock\n- **senkè** — five o'clock\n\n**inè** can mean one hour or one o'clock depending on the context.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Learn common clock-time expressions as whole phrases:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "inè",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "one o'clock",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "twazè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "three o'clock",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "senkè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "five o'clock",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "inè",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "can mean one hour or one o'clock depending on the context.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-clock-hour-three",
-          "kind": "single_choice",
-          "title": "Recognize three o’clock",
-          "prompt": "Which expression in the lesson means **three o’clock**?",
-          "hint": "Choose the option that correctly applies the pattern.",
+          "id": "try-clock-hour-transfer",
+          "kind": "listen_build",
+          "title": "Hear another full hour",
+          "prompt": "Listen and rebuild the time expression.",
+          "hint": "The time is seven o'clock.",
           "help": {
-            "concept": "whole-hour clock expressions",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "recognizing a full-hour clock expression",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
           },
-          "options": [
-            "twazè",
-            "inè",
-            "senkè"
-          ],
-          "correctOptionIds": [
-            "a"
+          "targetText": "setè",
+          "locale": "ht-HT",
+          "wordBank": [
+            "setè"
           ]
         }
       ]
     },
     {
       "id": "half-past",
-      "cardTitle": "Half Past",
+      "cardTitle": "Add Half Past",
       "title": "edmi",
-      "bodyMarkdown": "Use **edmi** for “half” in a clock-time expression:\n\n- **twazè edmi** — 3:30\n- **setè edmi** — 7:30\n\nLearn the whole expression as one time phrase.",
+      "bodyMarkdown": "Use **edmi** for half past:\n\n- **twazè edmi** — 3:30\n- **setè edmi** — 7:30\n\nLearn each as one spoken time expression.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "edmi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "for half past:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "twazè edmi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "3:30",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "setè edmi",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "7:30",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Learn each as one spoken time expression.",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-half-past-three",
+          "id": "try-half-past-transfer",
           "kind": "voice_input",
-          "title": "Say 5:30",
-          "prompt": "Say the Kreyòl time expression for 5:30.",
+          "title": "Say a different half hour",
+          "prompt": "Say the Kreyòl time for 5:30.",
           "hint": "Combine senkè with edmi.",
           "help": {
-            "concept": "half-past time expression",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "transferring the half-past pattern",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
           },
           "targetText": "senkè edmi",
           "locale": "ht-HT"
@@ -57,154 +149,160 @@
       "id": "ask-time",
       "cardTitle": "Ask What Time",
       "title": "Akilè…?",
-      "bodyMarkdown": "**Akilè…?** asks what time something happens:\n\n- **Akilè nou pati?** — What time do we leave?\n\nA short answer can simply be a time expression such as **senkè**.",
+      "bodyMarkdown": "**Akilè…?** asks what time an activity happens.\n\nFor example:\n\n**Akilè nou pati?** — What time do we leave?\n\nA short answer can simply be a time expression such as **senkè**.",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Akilè…?",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "asks what time an activity happens.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "For example:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Akilè nou pati?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "What time do we leave?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "A short answer can simply be a time expression such as",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "senkè",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ".",
+            "locale": "en-US"
+          }
+        ]
+      },
       "tryItExercises": [
         {
-          "id": "try-ask-time-leave",
-          "kind": "voice_input",
-          "title": "Ask when you work",
-          "prompt": "Say “What time do we work?” in Kreyòl.",
-          "hint": "Keep Akilè nou and change the activity.",
+          "id": "try-akile-transfer",
+          "kind": "word_bank_arrange",
+          "title": "Ask about study time",
+          "prompt": "Build “What time do you study?”",
+          "hint": "Keep Akilè ou and change the activity.",
           "help": {
-            "concept": "Akilè time question",
-            "hint_1": "Use the Kreyòl pattern from this lesson.",
-            "hint_2": "Use the pattern you just learned."
+            "concept": "building an Akilè question",
+            "hint_1": "Use the number or time pattern introduced in this lesson.",
+            "hint_2": "Listen for the whole expression before producing it."
           },
-          "targetText": "Akilè nou travay?",
-          "locale": "ht-HT"
+          "targetText": "Akilè ou etidye?",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Akilè",
+            "ou",
+            "etidye?"
+          ]
         }
       ]
     }
   ],
   "quizDraft": [
     {
-      "id": "listen-for-numbers-and-time-choice",
+      "id": "time-choice",
       "kind": "single_choice",
-      "title": "Choose 3:30",
-      "prompt": "Which Kreyòl time expression means 3:30?",
-      "hint": "Choose the expression with the half-hour word.",
+      "title": "Choose 7:30",
+      "prompt": "Which phrase means 7:30?",
+      "hint": "Look for setè plus edmi.",
       "help": {
-        "concept": "A half-hour time combines an hour form with a word meaning half.",
+        "concept": "recognizing a half-hour expression",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
       "options": [
-        "twazè edmi",
+        "setè edmi",
         "senkè",
-        "inè"
+        "twazè"
       ],
       "correctOptionIds": [
         "a"
       ]
     },
     {
-      "id": "listen-for-numbers-and-time-fill",
-      "kind": "fill_blank_choice",
-      "title": "Complete the half-hour time",
-      "prompt": "Choose the word that completes 7:30.",
-      "hint": "Use the word that marks half past the hour.",
-      "help": {
-        "concept": "The blank completes a half-hour clock expression.",
-        "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
-      },
-      "template": "setè [blank1]",
-      "choices": [
-        "edmi",
-        "maten",
-        "jou"
-      ],
-      "correctValue": "edmi"
-    },
-    {
-      "id": "listen-for-numbers-and-time-listen",
+      "id": "time-listen",
       "kind": "listen_build",
       "title": "Hear a clock time",
-      "prompt": "Listen, then build the time you hear.",
-      "hint": "Listen for the hour expression.",
+      "prompt": "Listen and rebuild the time.",
+      "hint": "The time is 3:30.",
       "help": {
-        "concept": "Build the clock-time expression exactly as spoken.",
+        "concept": "hearing a half-hour expression",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
-      "targetText": "senkè",
+      "targetText": "twazè edmi",
       "locale": "ht-HT",
       "wordBank": [
-        "senkè"
-      ],
-      "distractors": [
-        "twazè"
-      ],
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "twazè",
+        "edmi"
+      ]
     },
     {
-      "id": "listen-for-numbers-and-time-voice",
-      "kind": "voice_input",
-      "title": "Say 7:30",
-      "prompt": "Say: setè edmi.",
-      "hint": "Say the complete time expression.",
-      "help": {
-        "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl time.",
-        "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
-      },
-      "targetText": "setè edmi",
-      "locale": "ht-HT",
-      "maxSeconds": 10,
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
-    },
-    {
-      "id": "listen-for-numbers-and-time-build",
+      "id": "time-build",
       "kind": "word_bank_arrange",
-      "title": "Ask what time",
-      "prompt": "Arrange the words to ask “What time do we leave?”",
-      "hint": "Begin with the time-question word.",
+      "title": "Build a time question",
+      "prompt": "Build “What time do we work?”",
+      "hint": "Begin with Akilè.",
       "help": {
-        "concept": "The question asks for the clock time of an action.",
+        "concept": "building an activity-time question",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
-      "targetText": "Akilè nou pati?",
+      "targetText": "Akilè nou travay?",
       "locale": "ht-HT",
       "wordBank": [
         "Akilè",
         "nou",
-        "pati?"
-      ],
-      "distractors": [
-        "Kijan"
-      ],
-      "ttsText": "Akilè nou pati?",
-      "normalize": {
-        "trim": true,
-        "caseFold": true,
-        "collapseSpaces": true,
-        "stripPunct": true
-      }
+        "travay?"
+      ]
     },
     {
-      "id": "listen-for-numbers-and-time-write",
+      "id": "time-voice",
+      "kind": "voice_input",
+      "title": "Say another clock time",
+      "prompt": "Say “five o'clock.”",
+      "hint": "Use the full-hour expression.",
+      "help": {
+        "concept": "producing a clock-time expression",
+        "hint_1": "Use the number or time pattern introduced in this lesson.",
+        "hint_2": "Listen for the whole expression before producing it."
+      },
+      "targetText": "senkè",
+      "locale": "ht-HT"
+    },
+    {
+      "id": "time-write",
       "kind": "text_input",
       "title": "Write one o'clock",
-      "prompt": "Type the Kreyòl clock expression for “one o'clock.”",
-      "hint": "Use the one-hour form introduced in the lesson.",
+      "prompt": "Write “one o'clock” in Kreyòl.",
+      "hint": "Use the source-backed clock expression.",
       "help": {
-        "concept": "Write the complete clock expression.",
+        "concept": "writing a clock-time expression",
         "hint_1": "Use the number or time pattern introduced in this lesson.",
-        "hint_2": "Read or listen to the complete expression before choosing your answer."
+        "hint_2": "Listen for the whole expression before producing it."
       },
       "expectedText": "inè",
-      "placeholder": "Type the Kreyòl answer",
+      "placeholder": "Type the Kreyòl time",
       "normalize": {
         "trim": true,
         "caseFold": true,

@@ -2,9 +2,9 @@
   "topicId": "read-build-and-write-questions",
   "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
   "moduleSlug": "haitian-creole-foundations-6-questions-and-answers",
-  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht6-read-build-write-use",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht6-question-system",
   "prefix": "ht6",
-  "minutes": 24,
+  "minutes": 25,
   "runtimeDefaults": {
     "kind": "code",
     "supportsTerminal": false,
@@ -23,18 +23,18 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.cards.sketch0.title",
-      "sketchId": "ki-kote",
+      "sketchId": "kijan-kisa",
       "height": 420,
       "tryIt": {
         "id": "try-read-build-and-write-questions-sketch0",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch0.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch0.prompt",
-        "exerciseKey": "try-ki-kote",
+        "exerciseKey": "try-kisa-object-transfer",
         "exerciseKeys": [
-          "try-ki-kote"
+          "try-kisa-object-transfer"
         ],
         "difficulty": "easy",
-        "preferKind": "voice_input",
+        "preferKind": "single_choice",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -45,15 +45,15 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.cards.sketch1.title",
-      "sketchId": "ki-moun",
+      "sketchId": "ki-kote-ki-moun",
       "height": 420,
       "tryIt": {
         "id": "try-read-build-and-write-questions-sketch1",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch1.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch1.prompt",
-        "exerciseKey": "try-ki-moun",
+        "exerciseKey": "try-ki-kote-mari",
         "exerciseKeys": [
-          "try-ki-moun"
+          "try-ki-kote-mari"
         ],
         "difficulty": "easy",
         "preferKind": "voice_input",
@@ -73,12 +73,12 @@
         "id": "try-read-build-and-write-questions-sketch2",
         "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch2.title",
         "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.tryIt.try_read_build_and_write_questions_sketch2.prompt",
-        "exerciseKey": "try-konbyen-books",
+        "exerciseKey": "try-konbyen-transfer",
         "exerciseKeys": [
-          "try-konbyen-books"
+          "try-konbyen-transfer"
         ],
         "difficulty": "easy",
-        "preferKind": "voice_input",
+        "preferKind": "word_bank_arrange",
         "seedPolicy": "global",
         "required": true,
         "allowReveal": true,
@@ -93,7 +93,7 @@
         "difficulty": "easy",
         "n": 4,
         "min": 4,
-        "max": 6,
+        "max": 5,
         "selectionMode": "random",
         "allowReveal": true,
         "preferKind": null,
@@ -103,31 +103,211 @@
   ],
   "sketches": [
     {
-      "id": "ki-kote",
+      "id": "kijan-kisa",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-kote.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-kote.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.kijan-kisa.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.kijan-kisa.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "You already know useful questions with",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Kijan",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "and",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Kisa",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": ":",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Kijan ou ye?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "How are you?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Kijan ou rele?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "What is your name?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Kisa sa ye?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "What is this/that?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Kisa ou ap fè?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "What are you doing?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Listen to the whole question, not only the first word.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
-      "id": "ki-moun",
+      "id": "ki-kote-ki-moun",
       "archetype": "paragraph",
-      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-moun.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-moun.bodyMarkdown"
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-kote-ki-moun.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.ki-kote-ki-moun.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use a place question when you need a location:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Ki kote ou rete?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Where do you live?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Ki moun",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "when you need to identify a person:",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Ki moun sa a?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Who is this/that person?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "The information you need determines the question.",
+            "locale": "en-US"
+          }
+        ]
+      }
     },
     {
       "id": "konbyen",
       "archetype": "paragraph",
       "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.konbyen.title",
-      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.konbyen.bodyMarkdown"
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.konbyen.bodyMarkdown",
+      "audio": {
+        "kind": "read_aloud",
+        "locale": "ht-HT",
+        "segments": [
+          {
+            "text": "Use",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Konbyen",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "when the missing information is a number or amount.",
+            "locale": "en-US",
+            "pauseAfterMs": 240
+          },
+          {
+            "text": "Konbyen liv ou genyen?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "How many books do you have?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "Konbyen kaye Mari genyen?",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "How many notebooks does Mari have?",
+            "locale": "en-US",
+            "pauseAfterMs": 220
+          },
+          {
+            "text": "For now, focus on recognizing that",
+            "locale": "en-US",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "Konbyen",
+            "locale": "ht-HT",
+            "pauseAfterMs": 50
+          },
+          {
+            "text": "asks about a number or amount.",
+            "locale": "en-US"
+          }
+        ]
+      }
     }
   ],
   "exercises": [
     {
-      "id": "read-build-and-write-questions-choice",
+      "id": "info-place-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-choice",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-place-choice",
       "optionIds": [
         "a",
         "b",
@@ -139,154 +319,124 @@
       }
     },
     {
-      "id": "read-build-and-write-questions-fill",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-fill",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Konbyen"
-      }
-    },
-    {
-      "id": "read-build-and-write-questions-listen",
+      "id": "info-person-listen",
       "kind": "listen_build",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-listen",
-      "targetText": "Ki moun sa a?",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-person-listen",
+      "targetText": "Ki moun li ye?",
       "locale": "ht-HT",
       "wordBank": [
         "Ki",
         "moun",
-        "sa",
-        "a?"
-      ],
-      "distractors": [
-        "kote"
+        "li",
+        "ye?"
       ],
       "expected": {
         "kind": "listen_build",
-        "targetText": "Ki moun sa a?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "read-build-and-write-questions-voice",
-      "kind": "voice_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-voice",
-      "targetText": "Ki kote ou rete?",
-      "locale": "ht-HT",
-      "maxSeconds": 12,
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Ki kote ou rete?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "read-build-and-write-questions-build",
-      "kind": "word_bank_arrange",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-build",
-      "targetText": "Konbyen liv ou genyen?",
-      "locale": "ht-HT",
-      "wordBank": [
-        "Konbyen",
-        "liv",
-        "ou",
-        "genyen?"
-      ],
-      "distractors": [
-        "kote"
-      ],
-      "ttsText": "Konbyen liv ou genyen?",
-      "expected": {
-        "kind": "word_bank_arrange",
-        "targetText": "Konbyen liv ou genyen?",
-        "locale": "ht-HT",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "read-build-and-write-questions-write",
-      "kind": "text_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.read-build-and-write-questions-write",
-      "placeholder": "Type the Kreyòl answer",
-      "expected": {
-        "kind": "text_input",
-        "value": "Ki moun",
-        "normalize": {
-          "trim": true,
-          "caseFold": true,
-          "collapseSpaces": true,
-          "stripPunct": true
-        }
-      }
-    },
-    {
-      "id": "try-ki-kote",
-      "kind": "voice_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-ki-kote",
-      "targetText": "Ki kote Mari ye?",
-      "locale": "ht-HT",
-      "expected": {
-        "kind": "voice_input",
-        "targetText": "Ki kote Mari ye?",
-        "locale": "ht-HT"
-      }
-    },
-    {
-      "id": "try-ki-moun",
-      "kind": "voice_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-ki-moun",
-      "targetText": "Ki moun li ye?",
-      "locale": "ht-HT",
-      "expected": {
-        "kind": "voice_input",
         "targetText": "Ki moun li ye?",
         "locale": "ht-HT"
       }
     },
     {
-      "id": "try-konbyen-books",
-      "kind": "voice_input",
-      "purpose": "project",
+      "id": "info-quantity-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-konbyen-books",
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-quantity-build",
       "targetText": "Konbyen kaye ou genyen?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Konbyen",
+        "kaye",
+        "ou",
+        "genyen?"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Konbyen kaye ou genyen?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "info-place-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-place-voice",
+      "targetText": "Ki kote Jan rete?",
       "locale": "ht-HT",
       "expected": {
         "kind": "voice_input",
-        "targetText": "Konbyen kaye ou genyen?",
+        "targetText": "Ki kote Jan rete?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "info-question-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.info-question-write",
+      "placeholder": "Type the Kreyòl question",
+      "expected": {
+        "kind": "text_input",
+        "value": "Ki moun sa a?",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-kisa-object-transfer",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-kisa-object-transfer",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-ki-kote-mari",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-ki-kote-mari",
+      "targetText": "Ki kote Mari rete?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Ki kote Mari rete?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-konbyen-transfer",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-6-questions-and-answers.read-build-and-write-questions.practice.try-konbyen-transfer",
+      "targetText": "Konbyen liv Jan genyen?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Konbyen",
+        "liv",
+        "Jan",
+        "genyen?"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Konbyen liv Jan genyen?",
         "locale": "ht-HT"
       }
     }

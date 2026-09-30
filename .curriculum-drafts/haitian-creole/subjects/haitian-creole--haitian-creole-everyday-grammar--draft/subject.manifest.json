@@ -1,0 +1,325 @@
+{
+  "subject": {
+    "slug": "haitian-creole--haitian-creole-everyday-grammar--draft",
+    "profileId": "language",
+    "catalogSlug": "haitian-creole",
+    "genKey": "language_course",
+    "order": 2,
+    "accessPolicy": "paid",
+    "visibility": "public",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.haitian-creole--haitian-creole-everyday-grammar--draft.title",
+    "descriptionKey": "subjects.haitian-creole--haitian-creole-everyday-grammar--draft.description",
+    "serviceDefaults": null,
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 5,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.haitian-creole--haitian-creole-everyday-grammar--draft.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "haitian-creole-everyday-grammar-1-definite-article-choices",
+      "prefix": "ht2m1",
+      "order": 0,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.title",
+      "descriptionKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 76,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.outcomes.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.outcomes.1",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.why.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m1-article-selection",
+          "order": 1,
+          "titleKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m1-article-selection.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m1-article-selection.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m1-article-selection.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m1-article-selection.bullets.0",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m1-article-selection.bullets.1",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m1-article-selection.bullets.2",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m1-article-selection.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "choose-a-and-la",
+            "choose-an-lan-and-nan",
+            "hear-and-use-definite-articles"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-everyday-grammar-2-pronouns-and-possession",
+      "prefix": "ht2m2",
+      "order": 1,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.title",
+      "descriptionKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 50,
+        "prereqKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-1-definite-article-choices.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.outcomes.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.outcomes.1",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.why.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m2-pronouns-possession",
+          "order": 1,
+          "titleKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m2-pronouns-possession.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m2-pronouns-possession.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m2-pronouns-possession.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m2-pronouns-possession.bullets.0",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m2-pronouns-possession.bullets.1",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m2-pronouns-possession.bullets.2",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m2-pronouns-possession.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "use-short-object-pronouns",
+            "use-possessive-pronouns"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-everyday-grammar-3-more-questions-and-health",
+      "prefix": "ht2m3",
+      "order": 2,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.title",
+      "descriptionKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 74,
+        "prereqKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-2-pronouns-and-possession.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.outcomes.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.outcomes.1",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.why.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health",
+          "order": 1,
+          "titleKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health.bullets.0",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health.bullets.1",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health.bullets.2",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m3-questions-health.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "ask-for-more-specific-information",
+            "name-body-parts",
+            "say-what-hurts"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-everyday-grammar-4-past-and-future",
+      "prefix": "ht2m4",
+      "order": 3,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.title",
+      "descriptionKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 76,
+        "prereqKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-3-more-questions-and-health.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.outcomes.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.outcomes.1",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.why.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time",
+          "order": 1,
+          "titleKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time.bullets.0",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time.bullets.1",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time.bullets.2",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m4-time.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "use-te-for-past-actions",
+            "use-pral-for-future-actions",
+            "contrast-yesterday-today-and-tomorrow"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-everyday-grammar-5-descriptions-and-ye",
+      "prefix": "ht2m5",
+      "order": 4,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.title",
+      "descriptionKey": "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-4-past-and-future.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.outcomes.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.outcomes.1",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.outcomes.2",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.why.0",
+          "modules.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions",
+          "order": 1,
+          "titleKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions.title",
+          "descriptionKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions.bullets.0",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions.bullets.1",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions.bullets.2",
+              "sections.haitian-creole--haitian-creole-everyday-grammar--draft.haitian-creole-everyday-grammar-5-descriptions-and-ye.haitian-creole--haitian-creole-everyday-grammar--draft-ht2m5-descriptions.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "describe-without-to-be",
+            "use-ye",
+            "place-adjectives-in-phrases",
+            "describe-color-size-and-quality"
+          ]
+        }
+      ]
+    }
+  ]
+}

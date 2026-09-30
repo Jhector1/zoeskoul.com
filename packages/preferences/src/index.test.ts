@@ -30,6 +30,7 @@ const saved = {
     theme: "dark",
     fontSizePx: 20,
     soundEnabled: false,
+    languageAudioAutoPlay: false,
   },
 } as const;
 
@@ -98,6 +99,10 @@ describe("preference contracts", () => {
   it("strictly rejects invalid and unknown patch fields", () => {
     expect(parseAppPreferencesPatch({ theme: "sepia" }).success).toBe(false);
     expect(parseAppPreferencesPatch({ soundEnabled: "yes" }).success).toBe(false);
+    expect(parseAppPreferencesPatch({}).success).toBe(false);
+    expect(parseAppPreferencesPatch({
+      languageAudioAutoPlay: "yes",
+    }).success).toBe(false);
     expect(parseAppPreferencesPatch({ userId: "spoof", theme: "dark" }))
       .toMatchObject({ success: false });
     expect(parseAppPreferencesPatch({ fontSizePx: 18 }).success).toBe(false);
@@ -107,8 +112,10 @@ describe("preference contracts", () => {
 
   it("round-trips a stable versioned cookie and rejects invalid versions", () => {
     const serialized = serializePreferencesCookieValue(saved.preferences);
-    expect(serialized).toBe("v1.fr.d.20.0");
+    expect(serialized).toBe("v2.fr.d.20.0.0");
     expect(parsePreferencesCookieValue(serialized)).toEqual(saved.preferences);
+    expect(parsePreferencesCookieValue("v1.fr.d.20.0"))
+      .toEqual(saved.preferences);
     expect(parsePreferencesCookieValue("v2.fr.d.20.0")).toBeNull();
     expect(parsePreferencesCookieValue("v1.fr.d.18.0")).toBeNull();
   });
