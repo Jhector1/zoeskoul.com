@@ -844,6 +844,38 @@ export default function QuizBlock({
   });
 
   /**
+   * Soft navigation can leave the previous runtime exercise bound for one or
+   * more renders. Transition readiness must resolve against the destination
+   * authored identity, not against bound/active runtime keys alone.
+   */
+  const transitionExerciseQuestion = useMemo(
+    () =>
+      routeExerciseIndex >= 0
+        ? questions[routeExerciseIndex] ?? null
+        : questions[activeIndex] ?? null,
+    [questions, routeExerciseIndex, activeIndex],
+  );
+
+  const transitionAuthoredExerciseId = useMemo(() => {
+    const routedExerciseId = String(routeExerciseId ?? "").trim();
+    if (routedExerciseId) return routedExerciseId;
+
+    if (
+      !transitionExerciseQuestion ||
+      transitionExerciseQuestion.kind !== "practice"
+    ) {
+      return null;
+    }
+
+    return (
+      getPracticeRouteExerciseId(transitionExerciseQuestion) ||
+      transitionExerciseQuestion.id
+    );
+  }, [routeExerciseId, transitionExerciseQuestion]);
+
+  const transitionOwnerCardId = quizCardId ?? quizId;
+
+  /**
    * Transition presentation follows the canonical runtime/editor owner, not
    * the signed practice request. Subscribe to one primitive signature so the
    * mounted QuizBlock re-evaluates readiness when route sync creates/binds the
@@ -852,9 +884,15 @@ export default function QuizBlock({
   const transitionRuntimePresentationRevision = useReviewRuntimeStore(
       (state) => {
         const exerciseKey =
-            state.tool.boundExerciseKey ??
-            state.activeExerciseKey ??
-            "";
+          resolveCanonicalExerciseOwnerKey({
+            registry: state.targetRegistry,
+            exercises: state.exercises,
+            boundExerciseKey: state.tool.boundExerciseKey,
+            activeExerciseKey: state.activeExerciseKey,
+            authoredExerciseId: transitionAuthoredExerciseId,
+            ownerCardId: transitionOwnerCardId,
+            fallbackExerciseKey: null,
+          }) ?? "";
         if (!exerciseKey) return "";
 
         const exercise = state.exercises[exerciseKey];
@@ -878,6 +916,8 @@ const transitionCanonicalExerciseOwnerKey = useReviewRuntimeStore((state) =>
     exercises: state.exercises,
     boundExerciseKey: state.tool.boundExerciseKey,
     activeExerciseKey: state.activeExerciseKey,
+    authoredExerciseId: transitionAuthoredExerciseId,
+    ownerCardId: transitionOwnerCardId,
     fallbackExerciseKey: null,
   }),
 );
@@ -2056,7 +2096,32 @@ const transitionCanonicalExercisePresentation = useMemo(
         routeExercisePendingResolution,
     ]);
 
-  if (quizLoading || routeExercisePendingResolution) return <QuizBlockSkeleton />;
+  if (quizLoading || routeExercisePendingResolution) {
+    return (
+      <div
+        data-testid="review-quiz-loading-debug"
+        data-quiz-loading={quizLoading ? "1" : "0"}
+        data-route-pending={routeExercisePendingResolution ? "1" : "0"}
+        data-quiz-id={quizId}
+        data-quiz-card-id={quizCardId ?? ""}
+        data-stable-key={stableKey}
+        data-spec-mode={String((spec as any)?.mode ?? "")}
+        data-spec-step-count={
+          Array.isArray((spec as any)?.steps)
+            ? String((spec as any).steps.length)
+            : "0"
+        }
+        data-spec-exercise-count={
+          Array.isArray((spec as any)?.exerciseKeys)
+            ? String((spec as any).exerciseKeys.length)
+            : "0"
+        }
+        data-question-count={String(questions.length)}
+      >
+        <QuizBlockSkeleton />
+      </div>
+    );
+  }
 
   if (quizError) {
     return <div className="ui-quiz-note-danger">{quizError}</div>;

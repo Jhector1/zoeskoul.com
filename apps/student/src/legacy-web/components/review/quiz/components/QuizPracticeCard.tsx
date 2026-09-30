@@ -30,7 +30,10 @@ import {
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { getExerciseStateKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
-import { resolveCanonicalExercisePresentation } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
+import {
+  isRenderableCanonicalExerciseManifest,
+  resolveCanonicalExercisePresentation,
+} from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
 import { resolveCanonicalExerciseOwnerKey } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExerciseOwnerKey";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import {
@@ -1361,6 +1364,44 @@ export default function QuizPracticeCard(props: {
         (typeof runtimeExercise?.code === "string" ? runtimeExercise.code : "")
     );
   }, [runtimeExercise]);
+
+  useEffect(() => {
+    if (!practiceResolvedForToolBinding) return;
+    if (!livePracticeManifest) return;
+    if (livePracticeManifest.kind === "code_input") return;
+    if (!livePracticeItem) return;
+    if (!isRenderableCanonicalExerciseManifest(livePracticeManifest)) return;
+
+    /**
+     * Route sync initially owns the structural authored manifest so navigation
+     * has deterministic exercise identity before the practice request finishes.
+     *
+     * Once /api/practice returns a fully materialized non-code exercise, publish
+     * that learner-facing contract into the same canonical ExerciseRuntime.
+     * Otherwise kinds such as single_choice remain stuck with optionIds but no
+     * resolved options and the transition boundary can never become ready.
+     */
+    ensureRuntimeExercise({
+      exerciseKey: exerciseKeyForTools,
+      subjectSlug: fetchSubjectSlug,
+      moduleSlug: fetchModuleSlug,
+      sectionSlug: fetchSectionSlug,
+      topicId: fetchTopicId,
+      cardId: fetchOwnerCardId,
+      manifest: livePracticeManifest,
+    });
+  }, [
+    ensureRuntimeExercise,
+    exerciseKeyForTools,
+    fetchSubjectSlug,
+    fetchModuleSlug,
+    fetchSectionSlug,
+    fetchTopicId,
+    fetchOwnerCardId,
+    livePracticeManifest,
+    livePracticeItem,
+    practiceResolvedForToolBinding,
+  ]);
 
   useEffect(() => {
     if (!practiceResolvedForToolBinding) return;

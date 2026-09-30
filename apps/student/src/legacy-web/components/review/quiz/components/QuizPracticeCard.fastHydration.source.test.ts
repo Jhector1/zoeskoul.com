@@ -62,4 +62,16 @@ describe("QuizPracticeCard canonical presentation ownership", () => {
     );
     expect(source).toContain("<PracticeHelpPanel");
   });
+  it("publishes a materialized non-code practice manifest into canonical runtime", () => {
+    expect(source).toContain(
+      'if (livePracticeManifest.kind === "code_input") return;',
+    );
+    expect(source).toContain(
+      "isRenderableCanonicalExerciseManifest(livePracticeManifest)",
+    );
+    expect(source).toContain(
+      "Once /api/practice returns a fully materialized non-code exercise",
+    );
+  });
+
 });

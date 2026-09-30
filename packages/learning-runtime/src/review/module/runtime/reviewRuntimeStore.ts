@@ -1080,6 +1080,31 @@ function buildCanonicalExerciseReset(
     return { exerciseKey, exercise, editor, workspace };
 }
 
+function runtimeContractContentKey(value: unknown): string {
+    if (value === undefined) return "undefined";
+    if (value === null) return "null";
+
+    if (typeof value !== "object") {
+        return JSON.stringify(value) ?? String(value);
+    }
+
+    if (Array.isArray(value)) {
+        return `[${value
+            .map((entry) => runtimeContractContentKey(entry))
+            .join(",")}]`;
+    }
+
+    const record = value as Record<string, unknown>;
+
+    return `{${Object.keys(record)
+        .sort()
+        .map(
+            (key) =>
+                `${JSON.stringify(key)}:${runtimeContractContentKey(record[key])}`,
+        )
+        .join(",")}}`;
+}
+
 function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
         return "null";
@@ -2904,6 +2929,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 terminalEvidenceContentKey((nextExercise as any).terminalEvidence) &&
                 ideConfigContentKey(existing?.ideConfig ?? null) ===
                 ideConfigContentKey(nextExercise.ideConfig ?? null) &&
+                runtimeContractContentKey(existing.manifest ?? null) ===
+                runtimeContractContentKey(nextExercise.manifest ?? null) &&
                 workspaceContentKey(existing.workspace ?? null) ===
                 workspaceContentKey(workspaceForState)
             );

@@ -339,4 +339,62 @@ describe("review runtime progress hydration ownership", () => {
     expect(codeOf(resetExercise?.workspace)).not.toContain("ooppppp");
   });
 
+  it("updates canonical presentation when only a non-code manifest materializes", () => {
+    const exerciseKey =
+      "haitian-creole:grammar:section:choose-a-and-la:sketch2:try-a-kiye";
+
+    const structuralManifest = {
+      id: "try-a-kiye",
+      kind: "single_choice",
+      title: "Try it yourself: Choose the article for kiyé",
+      prompt: "",
+      optionIds: ["a", "b", "c"],
+    };
+
+    const materializedManifest = {
+      ...structuralManifest,
+      options: [
+        { id: "a", text: "kiyè a" },
+        { id: "b", text: "kiyè la" },
+        { id: "c", text: "a kiyè" },
+      ],
+    };
+
+    const runtime = useReviewRuntimeStore.getState();
+
+    runtime.ensureExercise({
+      exerciseKey,
+      subjectSlug: "haitian-creole",
+      moduleSlug: "haitian-creole-everyday-grammar",
+      sectionSlug: "section",
+      topicId: "choose-a-and-la",
+      cardId: "sketch2",
+      manifest: structuralManifest,
+    });
+
+    expect(
+      (useReviewRuntimeStore.getState().exercises[exerciseKey]?.manifest as any)
+        ?.options,
+    ).toBeUndefined();
+
+    runtime.ensureExercise({
+      exerciseKey,
+      subjectSlug: "haitian-creole",
+      moduleSlug: "haitian-creole-everyday-grammar",
+      sectionSlug: "section",
+      topicId: "choose-a-and-la",
+      cardId: "sketch2",
+      manifest: materializedManifest,
+    });
+
+    expect(
+      (useReviewRuntimeStore.getState().exercises[exerciseKey]?.manifest as any)
+        ?.options,
+    ).toEqual([
+      { id: "a", text: "kiyè a" },
+      { id: "b", text: "kiyè la" },
+      { id: "c", text: "a kiyè" },
+    ]);
+  });
+
 });

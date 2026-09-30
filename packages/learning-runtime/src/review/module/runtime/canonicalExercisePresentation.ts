@@ -43,6 +43,157 @@ export function hasCanonicalExerciseManifest(value: unknown): boolean {
   return isRecord(value);
 }
 
+function hasNonBlankString(value: unknown): boolean {
+  return (
+    typeof value === "string" &&
+    value.trim().length > 0
+  );
+}
+
+function hasNonEmptyArray(value: unknown): boolean {
+  return (
+    Array.isArray(value) &&
+    value.length > 0
+  );
+}
+
+/**
+ * Decide whether a canonical route manifest is already a learner-renderable
+ * Exercise.
+ *
+ * Code input intentionally supports zero-network fast hydration: its authored
+ * manifest plus canonical workspace is the learner surface.
+ *
+ * Non-code manifests are different. The compiled curriculum manifest is often
+ * structural and message-driven. For example, fill_blank_choice stores
+ * messageBase + choiceCount + expected, while template + choices are created
+ * later by buildExerciseFromManifest().
+ *
+ * A structural manifest must therefore never become learner presentation just
+ * because ReviewRuntime attached an empty workspace to it.
+ */
+export function isRenderableCanonicalExerciseManifest(
+  value: unknown,
+): boolean {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  const kind =
+    typeof value.kind === "string"
+      ? value.kind.trim()
+      : "";
+
+  if (!kind) {
+    return false;
+  }
+
+  /*
+   * Preserve the existing fast-hydration architecture for executable code
+   * exercises. Their canonical manifest + workspace is intentionally enough.
+   */
+  if (kind === "code_input") {
+    return true;
+  }
+
+  /*
+   * Every materialized non-code Exercise owns learner-facing copy.
+   * Structural manifests generally own messageBase instead.
+   *
+   * Title and prompt are alternative presentation surfaces. Some canonical
+   * language exercises materialize their learner instruction entirely into
+   * title and intentionally leave prompt blank, so requiring both would keep
+   * an otherwise complete exercise permanently pending.
+   */
+  if (
+    !hasNonBlankString(value.title) &&
+    !hasNonBlankString(value.prompt)
+  ) {
+    return false;
+  }
+
+  switch (kind) {
+    case "single_choice":
+    case "multi_choice":
+      return hasNonEmptyArray(
+        value.options,
+      );
+
+    case "drag_reorder":
+      return hasNonEmptyArray(
+        value.tokens,
+      );
+
+    case "fill_blank_choice":
+      return (
+        hasNonBlankString(
+          value.template,
+        ) &&
+        hasNonEmptyArray(
+          value.choices,
+        ) &&
+        (
+          value.choices as unknown[]
+        ).every(
+          hasNonBlankString,
+        )
+      );
+
+    case "voice_input":
+    case "word_bank_arrange":
+    case "listen_build":
+      return hasNonBlankString(
+        value.targetText,
+      );
+
+    case "matrix_input":
+      return (
+        typeof value.rows ===
+          "number" &&
+        value.rows > 0 &&
+        typeof value.cols ===
+          "number" &&
+        value.cols > 0
+      );
+
+    case "vector_drag_target":
+      return (
+        isRecord(
+          value.initialA,
+        ) &&
+        isRecord(
+          value.targetA,
+        )
+      );
+
+    case "vector_drag_dot":
+      return (
+        isRecord(
+          value.initialA,
+        ) &&
+        isRecord(
+          value.b,
+        )
+      );
+
+    case "pseudocode_input":
+      return hasNonBlankString(
+        value.mode,
+      );
+
+    /*
+     * Numeric and text input have no additional mandatory presentation
+     * collections beyond their materialized title/prompt contract.
+     */
+    case "numeric":
+    case "text_input":
+      return true;
+
+    default:
+      return false;
+  }
+}
+
 export function resolveCanonicalExercisePresentation(args: {
   exercise: CanonicalExerciseRuntimeLike;
   authoredManifest?: unknown;
@@ -69,6 +220,9 @@ export function resolveCanonicalExercisePresentation(args: {
   const ready =
     Boolean(exercise) &&
     hasManifest &&
+    isRenderableCanonicalExerciseManifest(
+      manifest,
+    ) &&
     hasWorkspace &&
     generationCurrent;
 
