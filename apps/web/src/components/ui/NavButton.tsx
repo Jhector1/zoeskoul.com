@@ -10,7 +10,7 @@ import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavi
 import {
     isAbsoluteHttpHref,
     resolveNavButtonNavigationKind,
-} from "./navButtonNavigation";
+} from "@zoeskoul/learner-workspace/lib/navigation/navButtonNavigation";
 
 type RouterHref =
     Parameters<ReturnType<typeof useRouter>["push"]>[0];

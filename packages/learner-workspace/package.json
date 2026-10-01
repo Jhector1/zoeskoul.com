@@ -191,7 +191,8 @@
     "./tools/utils/cx": "./src/tools/utils/cx.ts",
     "./tools/utils/storage": "./src/tools/utils/storage.ts",
     "./ui/Tooltip": "./src/ui/Tooltip.tsx",
-    "./ui/markdown/MathMarkdown": "./src/ui/markdown/MathMarkdown.tsx"
+    "./ui/markdown/MathMarkdown": "./src/ui/markdown/MathMarkdown.tsx",
+    "./lib/navigation/navButtonNavigation": "./src/lib/navigation/navButtonNavigation.ts"
   },
   "dependencies": {
     "@zoeskoul/code-contracts": "workspace:*",

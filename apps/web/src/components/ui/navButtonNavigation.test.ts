@@ -7,7 +7,7 @@ import {
 import {
     isAbsoluteHttpHref,
     resolveNavButtonNavigationKind,
-} from "./navButtonNavigation";
+} from "@zoeskoul/learner-workspace/lib/navigation/navButtonNavigation";
 
 describe("NavButton navigation ownership", () => {
     it.each([
