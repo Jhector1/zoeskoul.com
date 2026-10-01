@@ -4,15 +4,15 @@ import React, { useCallback, useMemo, useState } from "react";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/types";
-import type { SketchEntry } from "./registryTypes";
+import type { SketchEntry } from "@zoeskoul/learner-workspace/sketches/subjects/registryTypes";
 import type { SketchSpec } from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
 
 import { getSketchEntry } from "./registry";
 import { defaultStateForSpec } from "@zoeskoul/learner-ui/sketches/subjects/defaults";
 import { migrateSketchState } from "@zoeskoul/learner-ui/sketches/subjects/migrate";
-import { useDebouncedEmit } from "@/components/sketches/_shared/useDebouncedEmit";
-import { cn, SKETCH_BTN, SKETCH_BTN_PRIMARY } from "@/components/sketches/_shared/sketchUi";
-import { SketchShell } from "@/components/sketches/_shared/shells";
+import { useDebouncedEmit } from "@zoeskoul/learner-workspace/sketches/_shared/useDebouncedEmit";
+import { cn, SKETCH_BTN, SKETCH_BTN_PRIMARY } from "@zoeskoul/learner-workspace/sketches/_shared/sketchUi";
+import { SketchShell } from "@zoeskoul/learner-workspace/sketches/_shared/shells";
 import SketchRenderer from "./SketchRenderer";
 import { useTaggedT } from "@/i18n/tagged";
 import {

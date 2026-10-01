@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
+import MathMarkdown from "../../ui/markdown/MathMarkdown";
 import { cn, SKETCH_PANEL } from "./sketchUi";
 import { toneCls } from "./tones";
 import type { SketchTone } from "@zoeskoul/learner-ui/sketches/subjects/types";

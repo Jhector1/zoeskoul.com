@@ -8,7 +8,7 @@ import type { SketchSpec } from "@zoeskoul/learner-ui/sketches/subjects/specType
 
 import { ParagraphSketch } from "@/components/sketches/_archetypes/ParagraphSketch";
 import ImageSketch from "@/components/sketches/_archetypes/ImageSketch";
-import AlgorithmAnimationSketch from "@/components/sketches/_archetypes/AlgorithmAnimationSketch";
+import AlgorithmAnimationSketch from "@zoeskoul/learner-workspace/sketches/_archetypes/AlgorithmAnimationSketch";
 
 function getByPath(obj: unknown, path: string): unknown {
     const parts = path.split(".");

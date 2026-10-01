@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/components/sketches/_shared/sketchUi";
+import { cn } from "../_shared/sketchUi";
 
 export default function ComingSoonSketch(props: {
     title?: string;

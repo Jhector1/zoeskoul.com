@@ -409,16 +409,9 @@ apps/student/src/legacy-web/components/sandbox/LinearAlgebraSandox.tsx
 apps/student/src/legacy-web/components/sandbox/ProgrammingSandbox.tsx
 apps/student/src/legacy-web/components/sandbox/ProgrammingSandboxSkeleton.tsx
 apps/student/src/legacy-web/components/shared/RedirectOverlay.tsx
-apps/student/src/legacy-web/components/sketches/_archetypes/AlgorithmAnimationSketch.tsx
 apps/student/src/legacy-web/components/sketches/_archetypes/ImageSketch.tsx
 apps/student/src/legacy-web/components/sketches/_archetypes/ParagraphSketch.tsx
-apps/student/src/legacy-web/components/sketches/_shared/shells.tsx
-apps/student/src/legacy-web/components/sketches/_shared/sketchUi.tsx
-apps/student/src/legacy-web/components/sketches/_shared/tones.ts
-apps/student/src/legacy-web/components/sketches/_shared/useDebouncedEmit.ts
 apps/student/src/legacy-web/components/sketches/components/ImageSketchComponent.tsx
-apps/student/src/legacy-web/components/sketches/gallery/ComingSoonSketch.tsx
-apps/student/src/legacy-web/components/sketches/gallery/registry.ts
 apps/student/src/legacy-web/components/sketches/shared/RichMarkdownContent.tsx
 apps/student/src/legacy-web/components/sketches/subjects/SketchBlock.tsx
 apps/student/src/legacy-web/components/sketches/subjects/SketchRenderer.tsx
@@ -427,7 +420,6 @@ apps/student/src/legacy-web/components/sketches/subjects/getDistinctSketchShellT
 apps/student/src/legacy-web/components/sketches/subjects/getDistinctSketchShellTitle.ts
 apps/student/src/legacy-web/components/sketches/subjects/migrate.ts
 apps/student/src/legacy-web/components/sketches/subjects/registry.ts
-apps/student/src/legacy-web/components/sketches/subjects/registryTypes.ts
 apps/student/src/legacy-web/components/sketches/subjects/specTypes.ts
 apps/student/src/legacy-web/components/sketches/subjects/types.ts
 apps/student/src/legacy-web/components/tools/ToolTabs.tsx
