@@ -4,10 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getLearningAssignmentsForUser } from "@/lib/learningAssignments/assignmentAccessServer";
 import { resolveSubjectDeliveryPresentations } from "@/lib/subjects/resolveSubjectDeliveryPresentation";
 import { tutoringParticipantWhere } from "@/lib/tutoring/sessionAccess";
-import {
-  linkTutoringSessionInvitesToUser,
-  tutoringSessionInviteState,
-} from "@/lib/tutoring/sessionInvites";
+import { tutoringSessionInviteState } from "@/lib/tutoring/sessionInvites";
 
 export async function loadAssignedLearningForUser(args: {
   userId: string;
@@ -47,16 +44,17 @@ export async function loadAssignedLearningForUser(args: {
 export async function loadTutoringLearningForUser(args: {
   userId: string;
   locale: string;
+  userEmail?: string | null;
 }) {
-  const user = await prisma.user.findUnique({
-    where: { id: args.userId },
-    select: { email: true },
-  });
-  const email = user?.email?.trim().toLowerCase() ?? null;
-  await linkTutoringSessionInvitesToUser(prisma, {
-    userId: args.userId,
-    userEmail: email,
-  });
+  const email =
+    args.userEmail === undefined
+      ? (
+          await prisma.user.findUnique({
+            where: { id: args.userId },
+            select: { email: true },
+          })
+        )?.email?.trim().toLowerCase() ?? null
+      : args.userEmail?.trim().toLowerCase() ?? null;
 
   const sessionSelect = {
     id: true,

@@ -244,6 +244,7 @@ export async function GET(request: Request) {
       }),
       loadTutoringLearningForUser({
         userId: access.user.id,
+        userEmail: access.user.email,
         locale,
       }),
     ]);
