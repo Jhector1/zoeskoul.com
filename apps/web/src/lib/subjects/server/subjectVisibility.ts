@@ -17,6 +17,9 @@ export {
     type SubjectVisibilityInput,
 } from "./subjectVisibilityCore";
 
+export type SubjectStateActor =
+    Awaited<ReturnType<typeof getActor>>;
+
 export type SubjectEnrollmentFields = {
     subjectId: string | null;
     enrolled: boolean;
@@ -41,13 +44,14 @@ type PersistedSubjectState = PersistedSubjectCardPresentation & {
 
 async function loadPersistedSubjectState(
     slugs: readonly string[],
+    actor?: SubjectStateActor,
 ): Promise<Map<string, PersistedSubjectState>> {
     if (slugs.length === 0) {
         return new Map();
     }
 
-    const [actor, dbSubjects] = await Promise.all([
-        getActor(),
+    const [resolvedActor, dbSubjects] = await Promise.all([
+        actor ? Promise.resolve(actor) : getActor(),
         prisma.practiceSubject.findMany({
             where: {
                 slug: {
@@ -73,10 +77,10 @@ async function loadPersistedSubjectState(
     ]);
 
     const actorKey =
-        actor.userId || actor.guestId
+        resolvedActor.userId || resolvedActor.guestId
             ? actorKeyOf({
-                  userId: actor.userId ?? null,
-                  guestId: actor.guestId ?? null,
+                  userId: resolvedActor.userId ?? null,
+                  guestId: resolvedActor.guestId ?? null,
               })
             : null;
 
@@ -178,9 +182,11 @@ export async function withSubjectEnrollmentActivity<T extends { slug: string }>(
  */
 export async function withSubjectCardState<T extends SubjectCardPresentation>(
     subjects: readonly T[],
+    actor?: SubjectStateActor,
 ): Promise<Array<T & SubjectDatabaseStateFields>> {
     const stateBySlug = await loadPersistedSubjectState(
         subjects.map((subject) => subject.slug),
+        actor,
     );
 
     return subjects.map((subject) => {

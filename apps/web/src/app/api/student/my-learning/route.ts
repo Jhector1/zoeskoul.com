@@ -237,7 +237,10 @@ export async function GET(request: Request) {
   const locale = requestLocale(request);
   const [rawCourses, rawAssignments, rawTutoring] =
     await Promise.all([
-      getEnrolledVisibleSubjectCardsForActor(),
+      getEnrolledVisibleSubjectCardsForActor({
+        userId: access.user.id,
+        guestId: null,
+      }),
       loadAssignedLearningForUser({
         userId: access.user.id,
         locale,

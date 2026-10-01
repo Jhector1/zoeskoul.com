@@ -12,6 +12,7 @@ import {
 import {
     withSubjectCardState,
     type SubjectDatabaseStateFields,
+    type SubjectStateActor,
 } from "@/lib/subjects/server/subjectVisibility";
 import type { SubjectCardPresentation } from "@/lib/subjects/subjectCardPresentation";
 import {
@@ -142,12 +143,13 @@ export async function getAvailableVisibleSubjectCardsForActor(): Promise<
     );
 }
 
-export async function getEnrolledVisibleSubjectCardsForActor(): Promise<
-    VisibleSubjectCard[]
-> {
+export async function getEnrolledVisibleSubjectCardsForActor(
+    actor?: SubjectStateActor,
+): Promise<VisibleSubjectCard[]> {
     const subjectMap = await getResolvedSubjectCardMap();
     const subjectsWithState = await withSubjectCardState(
         Object.values(subjectMap),
+        actor,
     );
 
     return subjectsWithState
