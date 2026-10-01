@@ -7,6 +7,8 @@ import type {
   AppSessionResponse,
 } from "@zoeskoul/auth-client";
 import {
+  lazy,
+  Suspense,
   useEffect,
   useState,
 } from "react";
@@ -20,17 +22,87 @@ import { ExactLeaderboardView } from "../exact-old-ui/ExactLeaderboardView";
 import { ExactProgressView } from "../exact-old-ui/ExactProgressView";
 import { ExactCertificateView } from "../exact-old-ui/ExactCertificateView";
 import { ExactSubjectAssignmentsView } from "../exact-old-ui/ExactSubjectAssignmentsView";
-import { ExactTutoringSessionView } from "../exact-old-ui/ExactTutoringSessionView";
-import { ExactSubjectModulesView } from "../exact-old-ui/ExactSubjectModulesView";
-import { ExactModuleIntroView } from "../exact-old-ui/ExactModuleIntroView";
-import { ExactReviewModuleView } from "../exact-old-ui/ExactReviewModuleView";
-import {
-  ExactDailyPracticeView,
-  ExactModulePracticeView,
-} from "../exact-old-ui/ExactPracticeViews";
+
+
+
+
+
 import {
   resolveStudentShellLocation,
 } from "./studentRoutes";
+
+const ExactTutoringSessionView = lazy(
+  () =>
+    import(
+      "../exact-old-ui/ExactTutoringSessionView"
+    ).then((module) => ({
+      default: module.ExactTutoringSessionView,
+    })),
+);
+
+const ExactSubjectModulesView = lazy(
+  () =>
+    import(
+      "../exact-old-ui/ExactSubjectModulesView"
+    ).then((module) => ({
+      default: module.ExactSubjectModulesView,
+    })),
+);
+
+const ExactModuleIntroView = lazy(
+  () =>
+    import(
+      "../exact-old-ui/ExactModuleIntroView"
+    ).then((module) => ({
+      default: module.ExactModuleIntroView,
+    })),
+);
+
+const ExactReviewModuleView = lazy(
+  () =>
+    import(
+      "../exact-old-ui/ExactReviewModuleView"
+    ).then((module) => ({
+      default: module.ExactReviewModuleView,
+    })),
+);
+
+const ExactDailyPracticeView = lazy(
+  () =>
+    import(
+      "../exact-old-ui/ExactPracticeViews"
+    ).then((module) => ({
+      default: module.ExactDailyPracticeView,
+    })),
+);
+
+const ExactModulePracticeView = lazy(
+  () =>
+    import(
+      "../exact-old-ui/ExactPracticeViews"
+    ).then((module) => ({
+      default: module.ExactModulePracticeView,
+    })),
+);
+
+function StudentRouteLoading() {
+  return (
+    <main className="ui-container py-8">
+      <section
+        className="ui-page-surface p-6"
+        aria-busy="true"
+      >
+        <div className="ui-section-kicker">
+          ZoeSkoul
+        </div>
+        <div className="mt-3 ui-meta">
+          Loading…
+        </div>
+      </section>
+    </main>
+  );
+}
+
 
 import {
   shouldRenderGlobalStudentHeader,
@@ -276,7 +348,9 @@ export function StudentAppShell(props: {
           }
         />
       ) : null}
-      {content}
+      <Suspense fallback={<StudentRouteLoading />}>
+        {content}
+      </Suspense>
     </div>
   );
 }
