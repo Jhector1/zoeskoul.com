@@ -33,7 +33,6 @@ export function ParagraphSketch({
                 renderMarkdown={(content, key) => (
                     <MathMarkdown key={key} content={content} />
                 )}
-                emptyFallback={<span className="opacity-60">No text.</span>}
             />
 
             {spec.audio ? (

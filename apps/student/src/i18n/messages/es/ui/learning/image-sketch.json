@@ -1,0 +1,18 @@
+{
+  "imageSketchUi": {
+    "imageViewer": "Visor de imágenes",
+    "dragToPan": "Arrastra para desplazar",
+    "wheelToZoom": "Usa la rueda para hacer zoom",
+    "doubleClickToReset": "Haz doble clic para restablecer",
+    "zoomOut": "Alejar",
+    "zoomIn": "Acercar",
+    "resetView": "Restablecer vista",
+    "reset": "Restablecer",
+    "marker": "Marcador",
+    "drag": "Arrastrar",
+    "panOff": "Desplazamiento desactivado",
+    "wheel": "Rueda",
+    "zoomOff": "Zoom desactivado",
+    "noText": "Sin texto."
+  }
+}

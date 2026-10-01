@@ -1,0 +1,18 @@
+{
+  "imageSketchUi": {
+    "imageViewer": "Image viewer",
+    "dragToPan": "Drag to pan",
+    "wheelToZoom": "Wheel to zoom",
+    "doubleClickToReset": "Double-click to reset",
+    "zoomOut": "Zoom out",
+    "zoomIn": "Zoom in",
+    "resetView": "Reset view",
+    "reset": "Reset",
+    "marker": "Marker",
+    "drag": "Drag",
+    "panOff": "Pan off",
+    "wheel": "Wheel",
+    "zoomOff": "Zoom off",
+    "noText": "No text."
+  }
+}

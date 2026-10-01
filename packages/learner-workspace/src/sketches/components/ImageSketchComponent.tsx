@@ -2,7 +2,10 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
+import {
+    SketchImage as Image,
+    useSketchImageTranslation,
+} from "../runtime/SketchImageRuntime";
 
 type Marker = {
     id: string;
@@ -80,6 +83,7 @@ export default function ImageSketchComponent({
                                         className,
                                         onTransformChange,
                                     }: ImageSketchProps) {
+    const t = useSketchImageTranslation();
     const wrapRef = React.useRef<HTMLDivElement | null>(null);
 
     const [zoom, setZoom] = React.useState(() => clamp(initialZoom, minZoom, maxZoom));
@@ -258,9 +262,9 @@ export default function ImageSketchComponent({
             {showControls && (
                 <div className="flex items-center justify-between gap-2 border-b border-black/10 dark:border-white/10 px-3 py-2 bg-black/[0.02] dark:bg-white/[0.04]">
                     <div className="text-xs font-semibold text-neutral-700 dark:text-white/80">
-                        Image viewer
+                        {t("imageViewer")}
                         <span className="ml-2 font-normal text-neutral-500 dark:text-white/50">
-              Drag to pan • Wheel to zoom • Double-click to reset
+              {t("dragToPan")} • {t("wheelToZoom")} • {t("doubleClickToReset")}
             </span>
                     </div>
 
@@ -269,8 +273,8 @@ export default function ImageSketchComponent({
                             type="button"
                             className="ui-btn ui-btn-secondary text-xs px-2 py-1"
                             onClick={() => zoomBy(-1)}
-                            aria-label="Zoom out"
-                            title="Zoom out"
+                            aria-label={t("zoomOut")}
+                            title={t("zoomOut")}
                         >
                             −
                         </button>
@@ -281,8 +285,8 @@ export default function ImageSketchComponent({
                             type="button"
                             className="ui-btn ui-btn-secondary text-xs px-2 py-1"
                             onClick={() => zoomBy(1)}
-                            aria-label="Zoom in"
-                            title="Zoom in"
+                            aria-label={t("zoomIn")}
+                            title={t("zoomIn")}
                         >
                             +
                         </button>
@@ -290,8 +294,8 @@ export default function ImageSketchComponent({
                             type="button"
                             className="ui-btn ui-btn-ghost text-xs px-2 py-1"
                             onClick={reset}
-                            aria-label="Reset view"
-                            title="Reset"
+                            aria-label={t("resetView")}
+                            title={t("reset")}
                         >
                             Reset
                         </button>
@@ -351,10 +355,10 @@ export default function ImageSketchComponent({
                                 left: `${clamp(m.x, 0, 1) * 100}%`,
                                 top: `${clamp(m.y, 0, 1) * 100}%`,
                             }}
-                            title={m.label || "Marker"}
-                            aria-label={m.label || "Marker"}
+                            title={m.label || t("marker")}
+                            aria-label={m.label || t("marker")}
                         >
-                            <span className="sr-only">{m.label || "Marker"}</span>
+                            <span className="sr-only">{m.label || t("marker")}</span>
 
                             {m.label && (
                                 <span
@@ -379,7 +383,7 @@ export default function ImageSketchComponent({
 
                 {/* Corner hint (optional) */}
                 <div className="absolute bottom-2 left-2 text-[11px] font-semibold text-neutral-700/80 dark:text-white/70 bg-white/70 dark:bg-black/30 backdrop-blur px-2 py-1 rounded-lg border border-black/5 dark:border-white/10">
-                    {allowPan ? "Drag" : "Pan off"} • {allowWheelZoom ? "Wheel" : "Zoom off"}
+                    {allowPan ? t("drag") : t("panOff")} • {allowWheelZoom ? t("wheel") : t("zoomOff")}
                 </div>
             </div>
 

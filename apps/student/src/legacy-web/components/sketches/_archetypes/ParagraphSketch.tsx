@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import RichMarkdownContent from "@/components/sketches/shared/RichMarkdownContent";
+import RichMarkdownContent from "@student/components/sketches/shared/RichMarkdownContent";
 import {ParagraphSpec} from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
 import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import { LanguageAudioPlayer } from "@zoeskoul/learner-workspace/language/LanguageAudioPlayer";
@@ -33,7 +33,6 @@ export function ParagraphSketch({
                 renderMarkdown={(content, key) => (
                     <MathMarkdown key={key} content={content} />
                 )}
-                emptyFallback={<span className="opacity-60">No text.</span>}
             />
 
             {spec.audio ? (

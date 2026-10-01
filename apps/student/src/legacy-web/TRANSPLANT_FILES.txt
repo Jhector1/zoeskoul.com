@@ -411,8 +411,6 @@ apps/student/src/legacy-web/components/sandbox/ProgrammingSandboxSkeleton.tsx
 apps/student/src/legacy-web/components/shared/RedirectOverlay.tsx
 apps/student/src/legacy-web/components/sketches/_archetypes/ImageSketch.tsx
 apps/student/src/legacy-web/components/sketches/_archetypes/ParagraphSketch.tsx
-apps/student/src/legacy-web/components/sketches/components/ImageSketchComponent.tsx
-apps/student/src/legacy-web/components/sketches/shared/RichMarkdownContent.tsx
 apps/student/src/legacy-web/components/sketches/subjects/SketchBlock.tsx
 apps/student/src/legacy-web/components/sketches/subjects/SketchRenderer.tsx
 apps/student/src/legacy-web/components/sketches/subjects/registry.ts

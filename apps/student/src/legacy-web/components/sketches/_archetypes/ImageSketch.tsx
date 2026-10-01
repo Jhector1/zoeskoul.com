@@ -6,7 +6,7 @@ import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/ty
 import type { ImageSketchSpec } from "@zoeskoul/learner-ui/sketches/subjects/specTypes";
 import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 // import ImageSketch from "@/components/sketches/ImageSketchComponent";
-import ImageSketchComponent from "@/components/sketches/components/ImageSketchComponent";
+import ImageSketchComponent from "@student/components/sketches/components/ImageSketchComponent";
 
 type Transform = { zoom: number; x: number; y: number };
 

@@ -1,0 +1,18 @@
+{
+  "imageSketchUi": {
+    "imageViewer": "Vizyalizatè imaj",
+    "dragToPan": "Trennen pou deplase",
+    "wheelToZoom": "Woule sourit la pou zoom",
+    "doubleClickToReset": "Double-klike pou reyinisyalize",
+    "zoomOut": "Redui zoom",
+    "zoomIn": "Ogmante zoom",
+    "resetView": "Reyinisyalize vizyalizasyon an",
+    "reset": "Reyinisyalize",
+    "marker": "Makè",
+    "drag": "Trennen",
+    "panOff": "Deplasman dezaktive",
+    "wheel": "Woulèt",
+    "zoomOff": "Zoom dezaktive",
+    "noText": "Pa gen tèks."
+  }
+}

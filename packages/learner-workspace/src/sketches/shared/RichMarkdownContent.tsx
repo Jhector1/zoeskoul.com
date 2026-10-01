@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import { SketchImage as Image } from "../runtime/SketchImageRuntime";
 
 export type RichContentImage = {
     src: string;
@@ -127,7 +127,7 @@ export default function RichMarkdownContent(props: {
         content,
         images,
         renderMarkdown,
-        emptyFallback = <span className="opacity-60">No text.</span>,
+        emptyFallback = null,
         missingImageFallback,
         className,
     } = props;
