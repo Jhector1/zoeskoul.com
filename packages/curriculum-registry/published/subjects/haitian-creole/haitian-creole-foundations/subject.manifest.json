@@ -5,7 +5,7 @@
     "catalogSlug": "haitian-creole",
     "genKey": "language_course",
     "order": 1,
-    "accessPolicy": "paid",
+    "accessPolicy": "free",
     "visibility": "public",
     "status": "active",
     "imagePublicId": null,
