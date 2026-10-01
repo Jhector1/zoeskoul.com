@@ -35,7 +35,7 @@ describe(
 
                 const student =
                     source(
-                        "apps/student/src/legacy-web/components/practice/kinds/_shared/useSpeak.ts",
+                        "apps/student/src/legacy-web/components/practice/kinds/ListenBuildExerciseUI.tsx",
                     );
 
                 expect(shared).toContain(

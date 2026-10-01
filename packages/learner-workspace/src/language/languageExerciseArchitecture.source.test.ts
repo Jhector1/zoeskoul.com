@@ -40,12 +40,21 @@ describe("language exercise architecture", () => {
 
   it("uses locale-aware server speech defaults", () => {
     const route = source("apps/web/src/app/api/speech/speak/route.ts");
-    const webSpeak = source("apps/web/src/components/practice/kinds/_shared/useSpeak.ts");
-    const studentSpeak = source("apps/student/src/legacy-web/components/practice/kinds/_shared/useSpeak.ts");
+    const sharedSpeak = source(
+      "packages/learner-workspace/src/language/useSpeak.ts",
+    );
+    const webSpeak = source(
+      "apps/web/src/components/practice/kinds/_shared/useSpeak.ts",
+    );
 
     expect(route).toContain("resolveSpeechSynthesisDefaults");
     expect(route).not.toContain('"Speak in Haitian Creole (Kreyòl ayisyen). Do not switch to English."');
-    expect(webSpeak).toContain("opts.locale");
-    expect(studentSpeak).toContain("opts.locale");
+
+    expect(sharedSpeak).toContain("opts.locale");
+
+    expect(webSpeak).toContain(
+      "@zoeskoul/learner-workspace/language/useSpeak",
+    );
+    expect(webSpeak).not.toContain('"/api/speech/speak"');
   });
 });
