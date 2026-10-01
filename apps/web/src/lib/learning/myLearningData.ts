@@ -13,26 +13,42 @@ export async function loadAssignedLearningForUser(args: {
   const rawAssignments = await getLearningAssignmentsForUser(prisma, {
     userId: args.userId,
   });
-  const resolvedSubjects = await resolveSubjectDeliveryPresentations(
-    rawAssignments.map((assignment) => assignment.subject),
-    args.locale,
-  );
-  const assignments = rawAssignments.map((assignment, index) => ({
-    ...assignment,
-    subject: resolvedSubjects[index],
-  }));
+  const subjectIds = [
+    ...new Set(
+      rawAssignments.map(
+        (assignment) => assignment.subject.id,
+      ),
+    ),
+  ];
 
-  const subjectIds = [...new Set(assignments.map((assignment) => assignment.subject.id))];
-  const enrollments = subjectIds.length
-    ? await prisma.subjectEnrollment.findMany({
-        where: {
-          userId: args.userId,
-          subjectId: { in: subjectIds },
-          status: { in: ["enrolled", "completed"] },
-        },
-        select: { subjectId: true },
-      })
-    : [];
+  const [resolvedSubjects, enrollments] =
+    await Promise.all([
+      resolveSubjectDeliveryPresentations(
+        rawAssignments.map(
+          (assignment) => assignment.subject,
+        ),
+        args.locale,
+      ),
+      subjectIds.length
+        ? prisma.subjectEnrollment.findMany({
+            where: {
+              userId: args.userId,
+              subjectId: { in: subjectIds },
+              status: {
+                in: ["enrolled", "completed"],
+              },
+            },
+            select: { subjectId: true },
+          })
+        : Promise.resolve([]),
+    ]);
+
+  const assignments = rawAssignments.map(
+    (assignment, index) => ({
+      ...assignment,
+      subject: resolvedSubjects[index],
+    }),
+  );
   const enrolledSubjectIds = new Set(enrollments.map((row) => row.subjectId));
 
   return assignments.map((assignment) => ({
