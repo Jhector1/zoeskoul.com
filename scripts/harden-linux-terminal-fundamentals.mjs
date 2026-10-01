@@ -423,109 +423,79 @@ if (fs.existsSync(validationFile)) {
   changed.push(path.relative(root, validationFile));
 }
 
-// Shared sketch-heading deduplication. This is intentionally idempotent so it
-// coexists with the same fix already introduced by the Python curriculum patch.
-const sketchDir = path.join(
+// Canonical sketch-heading ownership.
+//
+// The reusable sketch title helper belongs to @zoeskoul/learner-ui.
+// App SketchBlock surfaces consume that package owner. This hardener
+// validates that ownership contract and must never recreate app-local
+// helper or helper-test copies.
+const canonicalSketchHelperFile = path.join(
+  root,
+  "packages/learner-ui/src/sketches/subjects/getDistinctSketchShellTitle.ts",
+);
+
+const webSketchDir = path.join(
   root,
   "apps/web/src/components/sketches/subjects",
 );
-const helperFile = path.join(sketchDir, "getDistinctSketchShellTitle.ts");
-const helperTestFile = path.join(
-  sketchDir,
-  "getDistinctSketchShellTitle.test.ts",
+
+const webSketchBlockFile = path.join(
+  webSketchDir,
+  "SketchBlock.tsx",
 );
-const sketchBlockFile = path.join(sketchDir, "SketchBlock.tsx");
 
-if (fs.existsSync(sketchDir) && !fs.existsSync(helperFile)) {
-  const helperSource = [
-    'export function normalizeSketchHeading(value: string): string {',
-    '    return value',
-    '        .normalize("NFKC")',
-    '        .replace(/[\\x60*_~]/g, "")',
-    '        .replace(/\\s+/g, " ")',
-    '        .trim()',
-    '        .toLocaleLowerCase();',
-    '}',
-    '',
-    'export function getDistinctSketchShellTitle(',
-    '    cardTitle: string | null | undefined,',
-    '    contentTitle: string | null | undefined,',
-    '): string | undefined {',
-    '    const resolvedCardTitle = cardTitle?.trim();',
-    '    if (!resolvedCardTitle) return undefined;',
-    '',
-    '    const resolvedContentTitle = contentTitle?.trim();',
-    '    if (',
-    '        resolvedContentTitle &&',
-    '        normalizeSketchHeading(resolvedCardTitle) ===',
-    '            normalizeSketchHeading(resolvedContentTitle)',
-    '    ) {',
-    '        return undefined;',
-    '    }',
-    '',
-    '    return resolvedCardTitle;',
-    '}',
-    '',
-  ].join("\n");
-  fs.writeFileSync(helperFile, helperSource);
-  changed.push(path.relative(root, helperFile));
+const obsoleteWebLocalSketchHelperFile = path.join(
+  webSketchDir,
+  "getDistinctSketchShellTitle.ts",
+);
+
+const canonicalSketchHelperImport =
+  'import { getDistinctSketchShellTitle } from "@zoeskoul/learner-ui/sketches/subjects/getDistinctSketchShellTitle";';
+
+if (!fs.existsSync(canonicalSketchHelperFile)) {
+  throw new Error(
+    `Canonical sketch title helper is missing: ${canonicalSketchHelperFile}`,
+  );
 }
 
-if (fs.existsSync(sketchDir) && !fs.existsSync(helperTestFile)) {
-  const testSource = [
-    'import { describe, expect, it } from "vitest";',
-    '',
-    'import { getDistinctSketchShellTitle } from "./getDistinctSketchShellTitle";',
-    '',
-    'describe("getDistinctSketchShellTitle", () => {',
-    '    it("hides an outer title that repeats the sketch heading", () => {',
-    '        expect(getDistinctSketchShellTitle("Use cp for a backup", "Use cp for a backup")).toBeUndefined();',
-    '    });',
-    '',
-    '    it("normalizes markdown, whitespace, and case", () => {',
-    '        expect(getDistinctSketchShellTitle(" USE  **CP** FOR A BACKUP ", "Use cp for a backup")).toBeUndefined();',
-    '    });',
-    '',
-    '    it("keeps a different course-introduction shell title", () => {',
-    '        expect(getDistinctSketchShellTitle("Course introduction", "Welcome to Linux Terminal Fundamentals")).toBe("Course introduction");',
-    '    });',
-    '});',
-    '',
-  ].join("\n");
-  fs.writeFileSync(helperTestFile, testSource);
-  changed.push(path.relative(root, helperTestFile));
+if (fs.existsSync(obsoleteWebLocalSketchHelperFile)) {
+  throw new Error(
+    `Obsolete Web-local sketch title helper must not exist: ${obsoleteWebLocalSketchHelperFile}`,
+  );
 }
 
-if (fs.existsSync(sketchBlockFile)) {
-  let source = fs.readFileSync(sketchBlockFile, "utf8");
-  if (!source.includes("getDistinctSketchShellTitle")) {
-    const importAnchor =
-      'import { learnerUiFlags } from "@/lib/config/learnerUiFlags";';
-    if (!source.includes(importAnchor)) {
-      throw new Error(
-        `Cannot safely add sketch title helper import: missing anchor in ${sketchBlockFile}`,
-      );
-    }
-    source = source.replace(
-      importAnchor,
-      `${importAnchor}\nimport { getDistinctSketchShellTitle } from "./getDistinctSketchShellTitle";`,
-    );
-
-    const titleAnchor = "const shellTitle = tt.resolve(title ?? spec.title);";
-    if (!source.includes(titleAnchor)) {
-      throw new Error(
-        `Cannot safely replace duplicate sketch title logic: missing anchor in ${sketchBlockFile}`,
-      );
-    }
-    source = source.replace(
-      titleAnchor,
-      `const resolvedCardTitle = tt.resolve(title ?? null);\n    const resolvedContentTitle = tt.resolve(spec.title ?? null);\n    const shellTitle = getDistinctSketchShellTitle(\n        resolvedCardTitle,\n        resolvedContentTitle,\n    );`,
-    );
-    fs.writeFileSync(sketchBlockFile, source);
-    changed.push(path.relative(root, sketchBlockFile));
-  }
+if (!fs.existsSync(webSketchBlockFile)) {
+  throw new Error(
+    `Web SketchBlock is missing: ${webSketchBlockFile}`,
+  );
 }
 
-console.log("Linux authoring and shared UI synchronization complete.");
+const webSketchBlockSource =
+  fs.readFileSync(
+    webSketchBlockFile,
+    "utf8",
+  );
+
+if (
+  !webSketchBlockSource.includes(
+    canonicalSketchHelperImport,
+  )
+) {
+  throw new Error(
+    `Web SketchBlock must import the canonical learner-ui sketch title helper: ${webSketchBlockFile}`,
+  );
+}
+
+if (
+  !webSketchBlockSource.includes(
+    "const shellTitle = getDistinctSketchShellTitle(",
+  )
+) {
+  throw new Error(
+    `Web SketchBlock must use getDistinctSketchShellTitle: ${webSketchBlockFile}`,
+  );
+}
+
+console.log("Linux authoring and shared UI ownership validation complete.");
 for (const file of changed) console.log(`- ${file}`);
 if (changed.length === 0) console.log("- no changes were needed");

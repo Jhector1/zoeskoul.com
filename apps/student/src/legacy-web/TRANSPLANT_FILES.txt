@@ -415,13 +415,7 @@ apps/student/src/legacy-web/components/sketches/components/ImageSketchComponent.
 apps/student/src/legacy-web/components/sketches/shared/RichMarkdownContent.tsx
 apps/student/src/legacy-web/components/sketches/subjects/SketchBlock.tsx
 apps/student/src/legacy-web/components/sketches/subjects/SketchRenderer.tsx
-apps/student/src/legacy-web/components/sketches/subjects/defaults.ts
-apps/student/src/legacy-web/components/sketches/subjects/getDistinctSketchShellTitle.test.ts
-apps/student/src/legacy-web/components/sketches/subjects/getDistinctSketchShellTitle.ts
-apps/student/src/legacy-web/components/sketches/subjects/migrate.ts
 apps/student/src/legacy-web/components/sketches/subjects/registry.ts
-apps/student/src/legacy-web/components/sketches/subjects/specTypes.ts
-apps/student/src/legacy-web/components/sketches/subjects/types.ts
 apps/student/src/legacy-web/components/tools/ToolTabs.tsx
 apps/student/src/legacy-web/components/tools/ToolsPanel.test.tsx
 apps/student/src/legacy-web/components/tools/ToolsPanel.tsx
