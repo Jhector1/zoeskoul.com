@@ -420,6 +420,31 @@ export async function publishActiveChallengeToSocial(args: {
   });
 }
 
+export async function getNextDailyPublicChallengeLink(
+  locale: string,
+) {
+  const previouslyPublished =
+    await prisma.publicChallengeSocialPost.findMany({
+      where: {
+        source: "daily",
+        status: "published",
+      },
+      select: {
+        challengeId: true,
+      },
+      distinct: ["challengeId"],
+    });
+
+  return getLatestActivePracticeChallengeLink(
+    locale,
+    {
+      excludeIds: previouslyPublished.map(
+        (post) => post.challengeId,
+      ),
+    },
+  );
+}
+
 export async function runDailyPublicChallengeSocialTick(
   now = new Date(),
 ) {
@@ -440,7 +465,7 @@ export async function runDailyPublicChallengeSocialTick(
     return { ok: true as const, action: "no_providers" as const };
   }
 
-  const challenge = await getLatestActivePracticeChallengeLink(
+  const challenge = await getNextDailyPublicChallengeLink(
     settings.locale,
   );
   if (!challenge || challenge.locale !== settings.locale) {

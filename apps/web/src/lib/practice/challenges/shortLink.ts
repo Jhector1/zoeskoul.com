@@ -43,14 +43,35 @@ export async function getActivePracticeChallengeLink(codeValue: unknown) {
   });
 }
 
-export async function getLatestActivePracticeChallengeLink(locale?: string) {
+export async function getLatestActivePracticeChallengeLink(
+  locale?: string,
+  options?: {
+    excludeIds?: readonly string[];
+  },
+) {
   const activeWhere = activePracticeChallengeWhere();
   const normalizedLocale = String(locale ?? "").trim();
+  const excludeIds = [
+    ...new Set(
+      (options?.excludeIds ?? [])
+        .map((id) => String(id).trim())
+        .filter(Boolean),
+    ),
+  ];
+  const exclusion =
+    excludeIds.length > 0
+      ? {
+          id: {
+            notIn: excludeIds,
+          },
+        }
+      : {};
 
   if (normalizedLocale) {
     const localized = await prisma.practiceChallengeLink.findFirst({
       where: {
         ...activeWhere,
+        ...exclusion,
         locale: normalizedLocale,
       },
       orderBy: { createdAt: "desc" },
@@ -60,7 +81,10 @@ export async function getLatestActivePracticeChallengeLink(locale?: string) {
   }
 
   return prisma.practiceChallengeLink.findFirst({
-    where: activeWhere,
+    where: {
+      ...activeWhere,
+      ...exclusion,
+    },
     orderBy: { createdAt: "desc" },
   });
 }
