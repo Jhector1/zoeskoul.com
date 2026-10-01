@@ -56,7 +56,6 @@ apps/student/src/legacy-web/components/code/runner/components/WebPreview.tsx
 apps/student/src/legacy-web/components/code/runner/components/XtermTerminal.layout.test.ts
 apps/student/src/legacy-web/components/code/runner/components/XtermTerminal.test.tsx
 apps/student/src/legacy-web/components/code/runner/components/XtermTerminal.tsx
-apps/student/src/legacy-web/components/code/runner/components/sql.zip
 apps/student/src/legacy-web/components/code/runner/components/sql/results-pane/SqlResultsPane.constants.ts
 apps/student/src/legacy-web/components/code/runner/components/sql/results-pane/SqlResultsPane.tsx
 apps/student/src/legacy-web/components/code/runner/components/sql/results-pane/SqlResultsPane.types.ts
@@ -179,7 +178,6 @@ apps/student/src/legacy-web/components/legal/LegalDocClient.tsx
 apps/student/src/legacy-web/components/legal/LegalSectionNav.tsx
 apps/student/src/legacy-web/components/markdown/MathMarkdown.literalOperator.test.tsx
 apps/student/src/legacy-web/components/markdown/MathMarkdown.tsx
-apps/student/src/legacy-web/components/markdown/MathMarkdown.tsx.before-literal-operator-fix
 apps/student/src/legacy-web/components/markdown/TextMarkdown.tsx
 apps/student/src/legacy-web/components/marketing/MarketingConsentPrompt.tsx
 apps/student/src/legacy-web/components/mod0/CanvasPanel.tsx
@@ -215,10 +213,8 @@ apps/student/src/legacy-web/components/practice/kinds/FillBlankChoiceExerciseUI.
 apps/student/src/legacy-web/components/practice/kinds/KindHelper.tsx
 apps/student/src/legacy-web/components/practice/kinds/ListenBuildExerciseUI.tsx
 apps/student/src/legacy-web/components/practice/kinds/MultiChoiceExerciseUI.tsx
-apps/student/src/legacy-web/components/practice/kinds/MultiChoiceExerciseUI.tsx.before-choice-metadata-removal
 apps/student/src/legacy-web/components/practice/kinds/NumericExerciseUI.tsx
 apps/student/src/legacy-web/components/practice/kinds/SingleChoiceExerciseUI.tsx
-apps/student/src/legacy-web/components/practice/kinds/SingleChoiceExerciseUI.tsx.before-choice-metadata-removal
 apps/student/src/legacy-web/components/practice/kinds/TextInputExerciseUI.tsx
 apps/student/src/legacy-web/components/practice/kinds/VectorDragDotExerciseUI.tsx
 apps/student/src/legacy-web/components/practice/kinds/VectorDragTargetExerciseUI.tsx
@@ -258,7 +254,6 @@ apps/student/src/legacy-web/components/practice/tools/useStandalonePracticeTools
 apps/student/src/legacy-web/components/practice/workspaceExercise.test.ts
 apps/student/src/legacy-web/components/practice/workspaceExercise.ts
 apps/student/src/legacy-web/components/review/QuizBlock.tsx
-apps/student/src/legacy-web/components/review/QuizBlock.tsx.before-project-completion-persistence-fix
 apps/student/src/legacy-web/components/review/README_curriculum_and_review_alignment.md
 apps/student/src/legacy-web/components/review/ReviewModuleNavBar.test.tsx
 apps/student/src/legacy-web/components/review/ReviewModuleNavBar.tsx
@@ -329,7 +324,6 @@ apps/student/src/legacy-web/components/review/module/hooks/useReviewContentUpdat
 apps/student/src/legacy-web/components/review/module/hooks/useReviewModuleController.ideConfig.test.ts
 apps/student/src/legacy-web/components/review/module/hooks/useReviewModuleController.test.ts
 apps/student/src/legacy-web/components/review/module/hooks/useReviewModuleController.ts
-apps/student/src/legacy-web/components/review/module/hooks/useReviewModuleController.ts.before-project-completion-persistence-fix
 apps/student/src/legacy-web/components/review/module/hooks/useReviewModuleRuntime.test.ts
 apps/student/src/legacy-web/components/review/module/hooks/useReviewModuleRuntime.ts
 apps/student/src/legacy-web/components/review/module/hooks/useReviewPanels.test.ts
@@ -346,7 +340,6 @@ apps/student/src/legacy-web/components/review/module/hooks/useToolCodeRunnerStat
 apps/student/src/legacy-web/components/review/module/hooks/useToolCodeRunnerState.starterHash.test.ts
 apps/student/src/legacy-web/components/review/module/hooks/useToolCodeRunnerState.test.ts
 apps/student/src/legacy-web/components/review/module/hooks/useToolCodeRunnerState.ts
-apps/student/src/legacy-web/components/review/module/hooks/useToolCodeRunnerState.ts.before-terminal-snapshot-starterhash-fix
 apps/student/src/legacy-web/components/review/module/i18n/getOptionalClientMessage.ts
 apps/student/src/legacy-web/components/review/module/learningProgress.test.ts
 apps/student/src/legacy-web/components/review/module/learningProgress.ts
