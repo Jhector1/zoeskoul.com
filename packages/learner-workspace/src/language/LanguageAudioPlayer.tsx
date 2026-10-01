@@ -38,6 +38,7 @@ export type LanguageAudioPlayerLabels = {
     playConversation: string;
     stop: string;
     replayLine: string;
+    loading: string;
     speaking: string;
     unavailable: string;
     autoListen: string;
@@ -337,6 +338,7 @@ export function LanguageAudioPlayer({
 
     const busy =
         playingAll ||
+        speech.isPreparing ||
         speech.isSpeaking;
 
     const mainLabel =
@@ -522,12 +524,11 @@ export function LanguageAudioPlayer({
             >
                 {speech.error
                     ? labels.unavailable
-                    : (
-                        playingAll ||
-                        speech.isSpeaking
-                    )
-                      ? labels.speaking
-                      : ""}
+                    : speech.isPreparing
+                      ? labels.loading
+                      : speech.isSpeaking
+                        ? labels.speaking
+                        : ""}
             </span>
         </div>
     );

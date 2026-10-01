@@ -48,6 +48,9 @@ export function ParagraphSketch({
                         replayLine: audioT(
                             "replayLine",
                         ),
+                        loading: audioT(
+                            "loading",
+                        ),
                         speaking: audioT(
                             "speaking",
                         ),

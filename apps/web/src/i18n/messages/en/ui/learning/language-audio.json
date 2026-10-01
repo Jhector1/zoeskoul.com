@@ -4,6 +4,7 @@
     "playConversation": "Play conversation",
     "stop": "Stop",
     "replayLine": "Replay line",
+    "loading": "Loading…",
     "speaking": "Speaking…",
     "unavailable": "Audio unavailable.",
     "autoListen": "Auto-listen"

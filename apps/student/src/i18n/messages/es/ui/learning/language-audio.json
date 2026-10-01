@@ -4,6 +4,7 @@
     "playConversation": "Reproducir conversación",
     "stop": "Detener",
     "replayLine": "Volver a escuchar la línea",
+    "loading": "Cargando…",
     "speaking": "Reproduciendo…",
     "unavailable": "Audio no disponible.",
     "autoListen": "Escucha automática"

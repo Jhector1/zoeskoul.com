@@ -85,13 +85,25 @@ describe(
         );
 
         it(
-            "keeps Speaking stable across bilingual clip boundaries",
+            "keeps Speaking tied to continuous whole-card playback",
             () => {
                 const player = source(
                     "packages/learner-workspace/src/language/LanguageAudioPlayer.tsx",
                 );
 
                 expect(player).toContain(
+                    "speech.isPreparing ||\n        speech.isSpeaking",
+                );
+
+                expect(player).toContain(
+                    ": speech.isSpeaking",
+                );
+
+                expect(player).toContain(
+                    "? labels.speaking",
+                );
+
+                expect(player).not.toContain(
                     "playingAll ||\n                        speech.isSpeaking",
                 );
             },

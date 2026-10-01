@@ -50,6 +50,9 @@ export function useSpeak() {
     const [ttsStatus, setTtsStatus] =
         useState<string | null>(null);
 
+    const [isPreparing, setIsPreparing] =
+        useState(false);
+
     const [isSpeaking, setIsSpeaking] =
         useState(false);
 
@@ -107,6 +110,7 @@ export function useSpeak() {
         settlePending(false);
         revokeCurrentUrl();
 
+        setIsPreparing(false);
         setIsSpeaking(false);
         setTtsStatus(null);
         setError(null);
@@ -143,8 +147,9 @@ export function useSpeak() {
                 controller;
 
             setError(null);
-            setIsSpeaking(true);
-            setTtsStatus("Speaking…");
+            setIsPreparing(true);
+            setIsSpeaking(false);
+            setTtsStatus(null);
 
             try {
                 const response = await fetch(
@@ -270,6 +275,7 @@ export function useSpeak() {
                         return;
                     }
 
+                    setIsPreparing(false);
                     setIsSpeaking(false);
                     setTtsStatus(null);
                     releaseLanguageAudioSession(
@@ -322,6 +328,17 @@ export function useSpeak() {
 
                 await audio.play();
 
+                if (
+                    sessionId !==
+                    sessionRef.current
+                ) {
+                    return false;
+                }
+
+                setIsPreparing(false);
+                setIsSpeaking(true);
+                setTtsStatus("Speaking…");
+
                 if (!waitUntilEnded) {
                     // Preserve the existing
                     // useSpeak status behavior:
@@ -351,6 +368,7 @@ export function useSpeak() {
                 setTtsStatus(
                     `TTS: ${message}`,
                 );
+                setIsPreparing(false);
                 setIsSpeaking(false);
                 releaseLanguageAudioSession(
                     ownerRef.current,
@@ -461,9 +479,9 @@ export function useSpeak() {
                     controller;
 
                 setError(null);
-                setTtsStatus(
-                    "Speaking…",
-                );
+                setIsPreparing(true);
+                setIsSpeaking(false);
+                setTtsStatus(null);
 
                 try {
                     /*
@@ -530,8 +548,6 @@ export function useSpeak() {
 
                     audio.src = url;
 
-                    setIsSpeaking(true);
-
                     const completion =
                         new Promise<boolean>(
                             (resolve) => {
@@ -570,6 +586,19 @@ export function useSpeak() {
 
                     try {
                         await audio.play();
+
+                        if (
+                            sessionId !==
+                            sessionRef.current
+                        ) {
+                            return false;
+                        }
+
+                        setIsPreparing(false);
+                        setIsSpeaking(true);
+                        setTtsStatus(
+                            "Speaking…",
+                        );
                     } catch (cause) {
                         const message =
                             cause instanceof Error
@@ -621,6 +650,10 @@ export function useSpeak() {
                         sessionId ===
                         sessionRef.current
                     ) {
+                        setIsPreparing(
+                            false,
+                        );
+
                         setIsSpeaking(
                             false,
                         );
@@ -693,6 +726,7 @@ export function useSpeak() {
         speakSequenceAndWait,
         stop,
         ttsStatus,
+        isPreparing,
         isSpeaking,
         error,
     };
