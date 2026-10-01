@@ -7,6 +7,9 @@ services:
     env_file:
       - .env
 
+    volumes:
+      - /opt/zoeskoul/secrets/google-tts-service-account.json:/run/secrets/google-tts-service-account.json:ro
+
     expose:
       - "3000"
 
