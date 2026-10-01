@@ -24,6 +24,9 @@ import {
   publicChallengeSocialSchedulerConfigured,
   publishPublicChallengeToProvider,
 } from "@/lib/marketing/publicChallengeSocial";
+import {
+  resolvePublicChallengeSocialDescription,
+} from "@/lib/marketing/publicChallengeSocialCopy";
 
 import { ensurePublicChallengeSocialImage } from "@/lib/practice/challenges/socialCard";
 
@@ -268,6 +271,8 @@ export async function publishChallengeToSocial(args: {
     code: string;
     locale: string;
     subjectSlug: string;
+    moduleSlug?: string | null;
+    sectionSlug?: string | null;
     topicSlug: string;
     exerciseKey: string;
     shareTitle: string | null;
@@ -290,17 +295,35 @@ export async function publishChallengeToSocial(args: {
   const challengeWithImage = await ensurePublicChallengeSocialImage(
     args.challenge,
   );
-  const presentation = buildPublicChallengePresentation({
-    source: challengeWithImage,
-    fallbackTitle: args.challenge.shareTitle || args.challenge.exerciseKey,
-  });
+  const socialDescription =
+    await resolvePublicChallengeSocialDescription(
+      args.challenge,
+    );
+
+  const presentation =
+    buildPublicChallengePresentation({
+      source: {
+        ...challengeWithImage,
+        shareDescription:
+          socialDescription,
+      },
+      fallbackTitle:
+        args.challenge.shareTitle ||
+        args.challenge.exerciseKey,
+    });
 
   const content = {
     title: presentation.title,
-    description: presentation.description,
-    challengeUrl: challengeUrl(challengeWithImage),
-    imageUrl: presentation.imageUrl,
-    imageAlt: presentation.imageAlt,
+    description:
+      presentation.description,
+    subjectSlug:
+      args.challenge.subjectSlug,
+    challengeUrl:
+      challengeUrl(challengeWithImage),
+    imageUrl:
+      presentation.imageUrl,
+    imageAlt:
+      presentation.imageAlt,
   };
 
   const results: PublicChallengeSocialPublishResult[] = [];

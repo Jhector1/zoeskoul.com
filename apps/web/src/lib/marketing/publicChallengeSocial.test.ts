@@ -12,6 +12,7 @@ import {
 const content = {
   title: "Daily Python challenge",
   description: "Can you solve it?",
+  subjectSlug: "python-v2",
   challengeUrl: "https://zoeskoul.com/en/c/AbCdEf123",
   imageUrl:
     "https://res.cloudinary.com/demo/image/upload/challenge.jpg",
@@ -71,8 +72,91 @@ describe("public challenge social providers", () => {
     const [url, init] =
       vi.mocked(fetcher).mock.calls[0]!;
     expect(String(url)).toBe("https://api.x.com/2/tweets");
-    expect(String(init?.body)).toContain(
+    const payload = JSON.parse(
+      String(init?.body),
+    ) as { text?: string };
+
+    expect(payload.text).toContain(
+      content.description,
+    );
+    expect(payload.text).toContain(
       content.challengeUrl,
+    );
+    expect(payload.text).toContain(
+      "#Python",
+    );
+    expect(payload.text).toContain(
+      "#CodingChallenge",
+    );
+    expect(payload.text).toContain(
+      "#ZoeSkoul",
+    );
+    expect(
+      payload.text?.length ?? 0,
+    ).toBeLessThanOrEqual(280);
+  });
+
+  it("includes the authored description and hashtags in Facebook copy", async () => {
+    const fetcher = vi.fn(async () =>
+      new Response(
+        JSON.stringify({
+          id: "page-1_post-1",
+        }),
+        {
+          status: 200,
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+        },
+      ),
+    ) as unknown as typeof fetch;
+
+    await publishPublicChallengeToProvider(
+      "facebook",
+      content,
+      {
+        env: {
+          NODE_ENV: "test",
+          META_GRAPH_API_VERSION:
+            "v26.0",
+          FACEBOOK_PAGE_ID:
+            "page-1",
+          FACEBOOK_PAGE_ACCESS_TOKEN:
+            "token",
+        } as NodeJS.ProcessEnv,
+        fetcher,
+      },
+    );
+
+    const [, init] =
+      vi.mocked(fetcher).mock.calls[0]!;
+
+    const params =
+      new URLSearchParams(
+        String(init?.body),
+      );
+
+    const message =
+      params.get("message") ?? "";
+
+    expect(message).toContain(
+      content.description,
+    );
+    expect(message).toContain(
+      content.challengeUrl,
+    );
+    expect(message).toContain(
+      "#Python",
+    );
+    expect(message).toContain(
+      "#CodingChallenge",
+    );
+    expect(message).toContain(
+      "#Programming",
+    );
+    expect(message).toContain(
+      "#ZoeSkoul",
     );
   });
 

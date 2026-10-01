@@ -8,6 +8,7 @@ import type {
 export type PublicChallengeSocialContent = {
   title: string;
   description: string;
+  subjectSlug: string;
   challengeUrl: string;
   imageUrl: string | null;
   imageAlt: string;
@@ -132,21 +133,109 @@ async function requireOk(
   );
 }
 
-function caption(content: PublicChallengeSocialContent) {
-  return [content.title, content.description, content.challengeUrl]
+export function publicChallengeSocialHashtags(
+  subjectSlug: string,
+) {
+  const slug = String(subjectSlug ?? "")
+    .trim()
+    .toLowerCase();
+
+  let subjectTag: string | null = null;
+
+  if (
+    slug.includes("python") ||
+    slug === "data-functions" ||
+    slug === "applied-projects"
+  ) {
+    subjectTag = "#Python";
+  } else if (
+    slug.includes("sql") ||
+    slug === "analysis-reporting" ||
+    slug === "multi-table" ||
+    slug === "data-management"
+  ) {
+    subjectTag = "#SQL";
+  } else if (slug.includes("linux")) {
+    subjectTag = "#Linux";
+  } else if (slug.includes("git")) {
+    subjectTag = "#Git";
+  }
+
+  return [
+    subjectTag,
+    "#CodingChallenge",
+    "#Programming",
+    "#ZoeSkoul",
+  ].filter(
+    (tag): tag is string =>
+      Boolean(tag),
+  );
+}
+
+function hashtagText(
+  content: PublicChallengeSocialContent,
+) {
+  return publicChallengeSocialHashtags(
+    content.subjectSlug,
+  ).join(" ");
+}
+
+function caption(
+  content: PublicChallengeSocialContent,
+) {
+  return [
+    content.title.trim(),
+    content.description.trim(),
+    content.challengeUrl.trim(),
+    hashtagText(content),
+  ]
     .filter(Boolean)
     .join("\n\n");
 }
 
-function xText(content: PublicChallengeSocialContent) {
-  const suffix = `\n${content.challengeUrl}`;
-  const room = Math.max(0, 280 - suffix.length);
-  const title = content.title.trim();
+function xText(
+  content: PublicChallengeSocialContent,
+) {
+  const suffix = [
+    content.challengeUrl.trim(),
+    hashtagText(content),
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const body = [
+    content.title.trim(),
+    content.description.trim(),
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+
+  const separator =
+    body && suffix ? "\n\n" : "";
+
+  const room = Math.max(
+    0,
+    280 -
+      separator.length -
+      suffix.length,
+  );
+
   const prefix =
-    title.length <= room
-      ? title
-      : `${title.slice(0, Math.max(0, room - 1)).trimEnd()}…`;
-  return `${prefix}${suffix}`;
+    body.length <= room
+      ? body
+      : room > 1
+        ? `${body
+            .slice(0, room - 1)
+            .trimEnd()}…`
+        : "";
+
+  return [
+    prefix,
+    suffix,
+  ]
+    .filter(Boolean)
+    .join("\n\n")
+    .slice(0, 280);
 }
 
 async function publishFacebook(
