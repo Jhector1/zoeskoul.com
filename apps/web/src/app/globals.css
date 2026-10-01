@@ -4,7 +4,7 @@
 /* put custom variant AFTER tailwind import */
 @custom-variant dark (&:where(.dark, .dark *));
 
-@import "../styles/ui.css";
+@import "../../../../packages/ui-styles/ui.css";
 @source "../../../../packages/learner-ui/src";
 
 @keyframes review-nav-progress {
