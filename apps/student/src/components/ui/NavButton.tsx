@@ -3,8 +3,8 @@
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { usePathname, useRouter } from "@student/i18n/navigation";
+import { routing } from "@student/i18n/routing";
 import { createNavButton } from "@zoeskoul/learner-workspace/navigation/NavButton";
 
 type RouterHref =

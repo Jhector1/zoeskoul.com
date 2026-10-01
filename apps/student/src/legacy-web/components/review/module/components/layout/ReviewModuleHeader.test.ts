@@ -49,7 +49,7 @@ vi.mock("@student/components/chrome/StudentHeaderSlick", () => ({
         React.createElement("div", { "data-testid": "header-slick" }, slot),
 }));
 
-vi.mock("@/components/ui/NavButton", () => ({
+vi.mock("@student/components/ui/NavButton", () => ({
     default: ({
         children,
         href = "",

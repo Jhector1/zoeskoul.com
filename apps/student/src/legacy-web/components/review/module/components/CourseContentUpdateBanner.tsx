@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from "@student/i18n/navigation";
-import NavButton from "@/components/ui/NavButton";
+import NavButton from "@student/components/ui/NavButton";
 
 export default function CourseContentUpdateBanner({
                                                       show,

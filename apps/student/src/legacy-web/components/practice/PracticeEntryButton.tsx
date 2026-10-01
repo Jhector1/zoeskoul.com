@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import EntryActionButton from "@/components/navigation/EntryActionButton";
+import EntryActionButton from "@student/components/navigation/EntryActionButton";
 import { buildPracticeEntryHref } from "@/lib/practice/entry";
 
 type PracticeEntryButtonProps = {

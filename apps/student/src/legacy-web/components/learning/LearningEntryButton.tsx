@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 
-import EntryActionButton from "@/components/navigation/EntryActionButton";
+import EntryActionButton from "@student/components/navigation/EntryActionButton";
 import {
   createStartLearningEntry,
   parseLearningEntry,

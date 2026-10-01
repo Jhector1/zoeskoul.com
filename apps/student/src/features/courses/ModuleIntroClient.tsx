@@ -9,7 +9,7 @@ import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
 import { ROUTES } from "@zoeskoul/app-config";
 import type { ModuleMeta } from "@zoeskoul/curriculum-runtime/compat/defineModule";
-import NavButton from "@/components/ui/NavButton";
+import NavButton from "@student/components/ui/NavButton";
 
 type Props = {
     locale: string;

@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { BookOpenCheck, Play } from "lucide-react";
 
-import NavButton from "@/components/ui/NavButton";
+import NavButton from "@student/components/ui/NavButton";
 import { useTaggedT } from "@student/i18n/tagged";
 import { resolvePracticeDisplayTitle } from "@zoeskoul/learner-workspace/lib/practice/displayTitle";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";

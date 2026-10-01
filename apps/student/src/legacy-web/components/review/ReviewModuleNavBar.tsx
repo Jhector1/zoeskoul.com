@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { ROUTES } from "@zoeskoul/app-config";
-import NavButton from "@/components/ui/NavButton";
+import NavButton from "@student/components/ui/NavButton";
 
 type Props = {
     show?: boolean;

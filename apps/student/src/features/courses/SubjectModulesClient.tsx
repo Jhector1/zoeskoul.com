@@ -9,7 +9,7 @@ import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
 import { ROUTES } from "@zoeskoul/app-config";
 import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
-import NavButton from "@/components/ui/NavButton";
+import NavButton from "@student/components/ui/NavButton";
 import { getCourseModuleEntryPolicy } from "@zoeskoul/learning-runtime/review/module/runtime/courseProgressionPolicy";
 
 type ModuleRow = {

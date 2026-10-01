@@ -30,7 +30,7 @@ import { useAuthHref } from "@student/hooks/useAuthHref";
 import { startGlobalNavigationPending } from "@student/components/navigation/GlobalNavigationProgress";
 import LearningEntryButton from "@/components/learning/LearningEntryButton";
 import PracticeEntryButton from "@/components/practice/PracticeEntryButton";
-import NavButton from "@/components/ui/NavButton";
+import NavButton from "@student/components/ui/NavButton";
 
 const websiteOrigin =
   import.meta.env.VITE_WEBSITE_ORIGIN ??

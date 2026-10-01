@@ -38,7 +38,7 @@ vi.mock("next-intl", () => ({
     },
 }));
 
-vi.mock("@/components/ui/NavButton", () => ({
+vi.mock("@student/components/ui/NavButton", () => ({
     default: ({
         children,
         href = "",

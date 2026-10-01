@@ -1,28 +1,23 @@
 "use client";
 
 import React, { useEffect, useMemo, useState, useTransition } from "react";
-import { useSearchParams } from "next/navigation";
-import { usePathname, useRouter } from "@student/i18n/navigation";
-import { routing } from "@student/i18n/routing";
 import { Loader2 } from "lucide-react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import { startGlobalNavigationPending } from "@student/components/navigation/GlobalNavigationProgress";
+import { startGlobalNavigationPending } from "./GlobalNavigationProgress";
 import {
     isAbsoluteHttpHref,
     resolveNavButtonNavigationKind,
 } from "@zoeskoul/learner-workspace/lib/navigation/navButtonNavigation";
 
-type RouterHref =
-    Parameters<ReturnType<typeof useRouter>["push"]>[0];
-type NavHref = RouterHref | string;
+type NavHref<RouterHref> = RouterHref | string;
 
-type NavButtonProps = {
+export type NavButtonProps<RouterHref> = {
     /**
      * Optional now:
      * - provide href for route navigation
      * - omit href for local/in-page navigation such as Previous/Next slideshow
      */
-    href?: NavHref;
+    href?: NavHref<RouterHref>;
     children: React.ReactNode;
     className?: string;
     disabled?: boolean;
@@ -44,18 +39,21 @@ type NavButtonProps = {
     loadingText?: React.ReactNode;
 };
 
-function normalizeHref(href: NavHref): NavHref {
+function normalizeHref<RouterHref>(
+    href: NavHref<RouterHref>,
+    locales: readonly string[],
+): NavHref<RouterHref> {
     if (typeof href !== "string") return href;
     if (isAbsoluteHttpHref(href)) return href;
 
     let path = href.startsWith("/") ? href : `/${href}`;
-    const localeSet = new Set(routing.locales);
+    const localeSet = new Set(locales);
 
     while (true) {
         const parts = path.split("/");
         const first = parts[1];
 
-        if (!first || !localeSet.has(first as (typeof routing.locales)[number])) {
+        if (!first || !localeSet.has(first)) {
             break;
         }
 
@@ -66,7 +64,23 @@ function normalizeHref(href: NavHref): NavHref {
     return path || "/";
 }
 
-export default function NavButton({
+export type NavButtonRuntime<RouterHref> = {
+    useRouter: () => {
+        push: (href: RouterHref) => unknown;
+        prefetch: (href: RouterHref) => unknown;
+    };
+    usePathname: () => string | null;
+    useSearchParams: () => {
+        toString: () => string;
+    } | null;
+    locales: readonly string[];
+    useDefaultLoadingText: () => string;
+};
+
+export function createNavButton<RouterHref>(
+    runtime: NavButtonRuntime<RouterHref>,
+) {
+    return function NavButton({
                                       href,
                                       children,
                                       className,
@@ -81,16 +95,17 @@ export default function NavButton({
                                       hardReloadCurrent = false,
                                       loadingText,
                                       style = {},
-                                  }: NavButtonProps) {
-    const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
+                                  }: NavButtonProps<RouterHref>) {
+    const router = runtime.useRouter();
+    const pathname = runtime.usePathname();
+    const searchParams = runtime.useSearchParams();
+    const defaultLoadingText = runtime.useDefaultLoadingText();
 
     const [isPending, startTransition] = useTransition();
     const [clicked, setClicked] = useState(false);
 
     const normalizedHref = useMemo(
-        () => (href === undefined ? null : normalizeHref(href)),
+        () => (href === undefined ? null : normalizeHref(href, runtime.locales)),
         [href],
     );
     const navigationKind =
@@ -141,7 +156,7 @@ export default function NavButton({
 
                     if (hardReload || hardReloadCurrent) {
                         startGlobalNavigationPending({
-                            label: typeof loadingText === "string" ? loadingText : "Loading…",
+                            label: typeof loadingText === "string" ? loadingText : defaultLoadingText,
                             source: "nav-button-reload",
                             minVisibleMs: 500,
                         });
@@ -185,7 +200,7 @@ export default function NavButton({
                             label:
                                 typeof loadingText === "string"
                                     ? loadingText
-                                    : "Loading…",
+                                    : defaultLoadingText,
                             source: "nav-button-external",
                             minVisibleMs: 350,
                         });
@@ -209,7 +224,7 @@ export default function NavButton({
                      * The clicked state resets when pathname/search changes.
                      */
                     startGlobalNavigationPending({
-                        label: typeof loadingText === "string" ? loadingText : "Loading…",
+                        label: typeof loadingText === "string" ? loadingText : defaultLoadingText,
                         source: "nav-button",
                         minVisibleMs: 350,
                     });
@@ -237,4 +252,5 @@ export default function NavButton({
             <span>{loading && loadingText ? loadingText : children}</span>
         </button>
     );
+}
 }

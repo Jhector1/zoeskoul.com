@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import StudentHeaderSlick from "@student/components/chrome/StudentHeaderSlick";
 import type { HeaderGamificationVm } from "../../types";
-import NavButton from "@/components/ui/NavButton";
+import NavButton from "@student/components/ui/NavButton";
 import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 
 type Props = {

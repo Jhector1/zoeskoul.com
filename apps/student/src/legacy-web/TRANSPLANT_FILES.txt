@@ -183,7 +183,6 @@ apps/student/src/legacy-web/components/mod0/hooks/usePracticeEngine.ts
 apps/student/src/legacy-web/components/mod0/hooks/useRafBus.ts
 apps/student/src/legacy-web/components/mod0/ui.tsx
 apps/student/src/legacy-web/components/modules/SpanBasisModule.tsx
-apps/student/src/legacy-web/components/navigation/EntryActionButton.tsx
 apps/student/src/legacy-web/components/practice/ConfirmResetModal.tsx
 apps/student/src/legacy-web/components/practice/ExerciseRenderer.test.ts
 apps/student/src/legacy-web/components/practice/ExerciseRenderer.tsx
@@ -472,7 +471,6 @@ apps/student/src/legacy-web/components/tutoring/TutoringSessionPlayer.tsx
 apps/student/src/legacy-web/components/tutoring/TutoringWorkspaceBar.test.tsx
 apps/student/src/legacy-web/components/tutoring/TutoringWorkspaceBar.tsx
 apps/student/src/legacy-web/components/ui/ConfirmDialog.tsx
-apps/student/src/legacy-web/components/ui/NavButton.tsx
 apps/student/src/legacy-web/components/ui/Tooltip.tsx
 apps/student/src/legacy-web/components/vectorpad/VectorPad.tsx
 apps/student/src/legacy-web/components/vectorpad/defaultState.ts
