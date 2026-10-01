@@ -1,5 +1,5 @@
 import { createHash } from "crypto";
-import { PracticeKind } from "@zoeskoul/db";
+import type { PracticeKind } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
 export type ReviewExercisePurpose = "quiz" | "project";
 

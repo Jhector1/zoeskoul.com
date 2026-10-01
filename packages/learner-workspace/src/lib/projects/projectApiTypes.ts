@@ -1,11 +1,26 @@
 // src/lib/projects/projectApiTypes.ts
 import type { WorkspaceLanguage } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { JsonObject } from "@zoeskoul/learner-workspace/lib/types/json";
-import type {
-    CodeProjectScopeKind,
-    CodeProjectVisibility,
-    CodeProjectRole,
-} from "@zoeskoul/db";
+/**
+ * Browser-safe project API wire values.
+ * Server persistence may map these values to Prisma enums, but browser code
+ * must not depend on @zoeskoul/db.
+ */
+export type CodeProjectScopeKind =
+    | "personal"
+    | "module"
+    | "assignment"
+    | "template";
+
+export type CodeProjectVisibility =
+    | "private"
+    | "unlisted"
+    | "shared";
+
+export type CodeProjectRole =
+    | "owner"
+    | "editor"
+    | "viewer";
 import { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 
 export type ProjectScopeInput = {

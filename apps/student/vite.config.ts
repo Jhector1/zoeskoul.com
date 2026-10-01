@@ -55,12 +55,6 @@ export default defineConfig(({ mode }) => ({
         ),
       },
       {
-        find: "@zoeskoul/db",
-        replacement: source(
-          "./src/compat/zoeskoul-db-browser.ts",
-        ),
-      },
-      {
         find: "next/dynamic",
         replacement: source(
           "./src/compat/next-dynamic.tsx",

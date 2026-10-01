@@ -1,8 +1,16 @@
-import { FeatureKey } from "@zoeskoul/db";
+export type IdeFeatureKey =
+  | "ide_multi_file"
+  | "ide_save_cloud"
+  | "ide_project_create"
+  | "ide_project_revisions"
+  | "ide_project_scope_module"
+  | "ide_project_scope_assignment"
+  | "ide_project_share"
+  | "ide_project_unlimited";
 export type IdeAccessSnapshot = {
   hasUser: boolean;
   isSubscribed: boolean;
-  featureAccess: ReadonlySet<FeatureKey>;
+  featureAccess: ReadonlySet<IdeFeatureKey>;
 };
 
 
@@ -30,7 +38,7 @@ export type IdeCapabilities = {
     maxProjects: number | null;
 };
 
-function hasFeature(snapshot: IdeAccessSnapshot, key: FeatureKey) {
+function hasFeature(snapshot: IdeAccessSnapshot, key: IdeFeatureKey) {
     return snapshot.featureAccess.has(key);
 }
 
@@ -40,34 +48,34 @@ export function resolveIdeCapabilities(snapshot: IdeAccessSnapshot): IdeCapabili
     const canUseMultiFile =
         snapshot.hasUser ||
         isSubscribed ||
-        hasFeature(snapshot, FeatureKey.ide_multi_file);
+        hasFeature(snapshot, "ide_multi_file");
 
     const canSaveCloud =
         isSubscribed ||
-        hasFeature(snapshot, FeatureKey.ide_save_cloud);
+        hasFeature(snapshot, "ide_save_cloud");
 
     const canCreateProjects =
         canSaveCloud ||
-        hasFeature(snapshot, FeatureKey.ide_project_create);
+        hasFeature(snapshot, "ide_project_create");
 
     const canUseProjectRevisions =
         isSubscribed ||
-        hasFeature(snapshot, FeatureKey.ide_project_revisions);
+        hasFeature(snapshot, "ide_project_revisions");
 
     const canUseModuleProjects =
         isSubscribed ||
-        hasFeature(snapshot, FeatureKey.ide_project_scope_module);
+        hasFeature(snapshot, "ide_project_scope_module");
 
     const canUseAssignmentProjects =
         isSubscribed ||
-        hasFeature(snapshot, FeatureKey.ide_project_scope_assignment);
+        hasFeature(snapshot, "ide_project_scope_assignment");
 
     const canShareProjects =
         isSubscribed ||
-        hasFeature(snapshot, FeatureKey.ide_project_share);
+        hasFeature(snapshot, "ide_project_share");
 
     const maxProjects =
-        isSubscribed || hasFeature(snapshot, FeatureKey.ide_project_unlimited)
+        isSubscribed || hasFeature(snapshot, "ide_project_unlimited")
             ? null
             : 0;
 

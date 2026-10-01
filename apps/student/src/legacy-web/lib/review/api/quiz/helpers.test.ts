@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { PracticeKind } from "@zoeskoul/db";
 import {
     filterPoolByPreferKind,
     filterPoolByPurpose,
@@ -56,7 +55,7 @@ describe("review quiz pool helpers", () => {
         });
 
         expect(filterPoolForPurposeAndKind(pool, "quiz", null).map((item) => item.key)).toEqual(["quiz-single"]);
-        expect(filterPoolForPurposeAndKind(pool, "project", PracticeKind.code_input).map((item) => item.key)).toEqual([
+        expect(filterPoolForPurposeAndKind(pool, "project", "code_input").map((item) => item.key)).toEqual([
             "try-code",
             "capstone-code",
         ]);
@@ -84,7 +83,7 @@ describe("review quiz pool helpers", () => {
         });
 
         expect(
-            filterPoolForPurposeAndKind(pool, "project", PracticeKind.code_input).map(
+            filterPoolForPurposeAndKind(pool, "project", "code_input").map(
                 (item) => item.key,
             ),
         ).toEqual(["ci-project"]);
@@ -99,7 +98,7 @@ describe("review quiz pool helpers", () => {
         });
 
         expect(
-            filterPoolForPurposeAndKind(pool, "quiz", PracticeKind.code_input).map(
+            filterPoolForPurposeAndKind(pool, "quiz", "code_input").map(
                 (item) => item.key,
             ),
         ).toEqual(["ci-quiz"]);
@@ -115,7 +114,7 @@ describe("review quiz pool helpers", () => {
         });
 
         const quizPool = filterPoolByPurpose(pool, "quiz");
-        const quizCodePool = filterPoolByPreferKind(quizPool, PracticeKind.code_input);
+        const quizCodePool = filterPoolByPreferKind(quizPool, "code_input");
 
         expect(quizPool.map((item) => item.key)).toEqual(["quiz-code", "quiz-single"]);
         expect(quizCodePool.map((item) => item.key)).toEqual(["quiz-code"]);

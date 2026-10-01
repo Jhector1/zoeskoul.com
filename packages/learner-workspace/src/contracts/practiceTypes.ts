@@ -1,5 +1,6 @@
 import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
-import { PracticeKind } from "@zoeskoul/db";
+import type { PracticeKind } from "@zoeskoul/practice-contracts";
+export type { PracticeKind } from "@zoeskoul/practice-contracts";
 import type { LearningIdeConfig } from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
 import type { FileEntry } from "@zoeskoul/learner-workspace/lib/code/types";
 import type {

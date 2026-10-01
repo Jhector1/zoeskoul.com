@@ -1,6 +1,19 @@
-import type { XpSourceType } from "@zoeskoul/db";
-
-export type GamificationAwardSourceType = XpSourceType;
+/**
+ * Browser/API wire values for gamification award sources.
+ * Server persistence maps the same strings to its persistence enum.
+ */
+export type GamificationAwardSourceType =
+  | "answer_correct"
+  | "answer_retry_correct"
+  | "session_complete"
+  | "topic_complete"
+  | "module_complete"
+  | "streak_bonus"
+  | "daily_goal"
+  | "daily_five_complete"
+  | "public_challenge_complete"
+  | "assignment_complete"
+  | "project_step";
 
 export type GamificationSummary = {
   totalXp: number;

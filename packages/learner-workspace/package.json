@@ -198,7 +198,6 @@
     "@zoeskoul/api-client": "workspace:*",
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-registry": "workspace:*",
-    "@zoeskoul/db": "workspace:*",
     "@zoeskoul/practice-checks": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/workspace-contracts": "workspace:*",
