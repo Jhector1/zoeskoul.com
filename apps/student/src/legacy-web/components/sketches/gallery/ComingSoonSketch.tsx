@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import TextMarkdown from "@/components/markdown/TextMarkdown";
 import { cn } from "@/components/sketches/_shared/sketchUi";
 
 export default function ComingSoonSketch(props: {

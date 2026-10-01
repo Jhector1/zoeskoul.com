@@ -175,7 +175,6 @@ apps/student/src/legacy-web/components/legal/LegalDocClient.tsx
 apps/student/src/legacy-web/components/legal/LegalSectionNav.tsx
 apps/student/src/legacy-web/components/markdown/MathMarkdown.literalOperator.test.tsx
 apps/student/src/legacy-web/components/markdown/MathMarkdown.tsx
-apps/student/src/legacy-web/components/markdown/TextMarkdown.tsx
 apps/student/src/legacy-web/components/marketing/MarketingConsentPrompt.tsx
 apps/student/src/legacy-web/components/mod0/CanvasPanel.tsx
 apps/student/src/legacy-web/components/mod0/LeftPanel.tsx
