@@ -1,5 +1,5 @@
 import type { BillingStatus } from "@/lib/billing/types";
-import type { BadgeTone } from "./Badge";
+import type { BadgeTone } from "@zoeskoul/learner-ui/components/Badge";
 import { fmtShortDate } from "@zoeskoul/learner-ui/lib/billing/format";
 import { scheduledCancellationEndIso } from "@/lib/billing/period";
 

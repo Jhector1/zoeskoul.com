@@ -9,7 +9,7 @@ import {
   isCheckoutAttemptId,
 } from "@/lib/billing/checkoutAttempt";
 
-import Badge, { type BadgeTone } from "@/components/billing/Badge";
+import Badge, { type BadgeTone } from "@zoeskoul/learner-ui/components/Badge";
 import {
   BillingCard,
   BillingPanel,

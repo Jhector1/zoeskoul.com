@@ -22,7 +22,7 @@ import {
 import StudentUserMenuSlick from "@student/components/chrome/StudentUserMenuSlick";
 import StudentLocaleSwitcher from "@student/components/chrome/StudentLocaleSwitcher";
 import { Link, usePathname } from "@student/i18n/navigation";
-import Badge from "@/components/billing/Badge";
+import Badge from "@zoeskoul/learner-ui/components/Badge";
 import BillingPromotionCountdown from "@/components/billing/BillingPromotionCountdown";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import SoundToggle from "@/lib/sfx/SoundToggle";

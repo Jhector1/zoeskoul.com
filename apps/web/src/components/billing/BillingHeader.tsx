@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import type { BillingStatus } from "@/lib/billing/types";
-import Badge from "./Badge";
+import Badge from "@zoeskoul/learner-ui/components/Badge";
 import type { BillingHeadline } from "./deriveBillingHeadline";
 import { SECTION_HEADER } from "./styles";
 

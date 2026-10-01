@@ -14,7 +14,7 @@ import { ROUTES } from "@zoeskoul/app-config";
 import UserMenuSlick from "./UserMenuSlick";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { Link, usePathname } from "@/i18n/navigation";
-import Badge from "@/components/billing/Badge";
+import Badge from "@zoeskoul/learner-ui/components/Badge";
 import BillingPromotionCountdown from "@/components/billing/BillingPromotionCountdown";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import { useBillingActions } from "@/components/billing/hooks/useBillingActions";

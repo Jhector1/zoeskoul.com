@@ -2,7 +2,7 @@
 
 import React from "react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import Badge from "./Badge";
+import Badge from "@zoeskoul/learner-ui/components/Badge";
 
 export default function PlanCard(props: {
     title: string;

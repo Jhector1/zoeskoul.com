@@ -4,7 +4,7 @@ import React from "react";
 import { useTaggedT } from "@/i18n/tagged";
 import type { CodeFeedback, CodeFeedbackTone } from "@/lib/code/feedback/types";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import Badge from "@/components/billing/Badge";
+import Badge from "@zoeskoul/learner-ui/components/Badge";
 
 function resolveFeedbackTone(args: {
     feedback?: CodeFeedback | null;

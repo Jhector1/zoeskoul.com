@@ -18,7 +18,6 @@ apps/student/src/legacy-web/components/ai-tutor/tutorAvailability.ts
 apps/student/src/legacy-web/components/ai-tutor/tutorContext.test.ts
 apps/student/src/legacy-web/components/ai-tutor/tutorContext.ts
 apps/student/src/legacy-web/components/ai-tutor/useAiTutorRuntimeStatus.ts
-apps/student/src/legacy-web/components/billing/Badge.tsx
 apps/student/src/legacy-web/components/billing/BillingError.tsx
 apps/student/src/legacy-web/components/billing/BillingHeader.tsx
 apps/student/src/legacy-web/components/billing/BillingPageSkeleton.tsx
