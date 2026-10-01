@@ -10,7 +10,6 @@ import {
     AppPreferencesProvider,
     useAppPreferences,
 } from "@zoeskoul/preferences/react";
-import { GlobalNavigationProgress } from "@/components/navigation/GlobalNavigationProgress";
 
 function isBenignMonacoCanceledError(reason: unknown) {
     const message = String((reason as any)?.message ?? reason ?? "");
@@ -96,7 +95,6 @@ export default function Providers({
                 >
                     <ThemePreferenceSync />
                     <MonacoCanceledErrorGuard />
-                    <GlobalNavigationProgress />
                     {children}
                 </ThemeProvider>
             </AppPreferencesProvider>

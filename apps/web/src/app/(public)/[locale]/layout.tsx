@@ -13,6 +13,7 @@ import { SfxProvider } from "@/lib/sfx/SfxProvider";
 import { inter, playfair, greatVibes } from "@/app/fonts";
 import { getSiteUrl } from "@/lib/seo/site";
 import MarketingConsentPrompt from "@/components/marketing/MarketingConsentPrompt";
+import { GlobalNavigationProgress } from "@/components/navigation/GlobalNavigationProgress";
 import { normalizeConfiguredAppOrigin } from "@zoeskoul/app-config";
 import { cookies } from "next/headers";
 import {
@@ -106,6 +107,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
                 initialPreferences={initialPreferences}
             >
                 <NextIntlClientProvider messages={messages}>
+                    <GlobalNavigationProgress />
                     <SfxProvider>
                         {children}
                         <MarketingConsentPrompt />

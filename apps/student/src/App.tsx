@@ -24,7 +24,7 @@ import {
 import { StudentThemeProvider } from "./platform/StudentThemeProvider";
 import { LegacyProviders } from "./compat/LegacyProviders";
 import { LegacyApiBridge } from "./compat/LegacyApiBridge";
-import { GlobalNavigationProgress } from "./legacy-web/components/navigation/GlobalNavigationProgress";
+import { GlobalNavigationProgress } from "./components/navigation/GlobalNavigationProgress";
 import "./shell.css";
 
 import "./legacy-web/styles/globals.css";
@@ -137,7 +137,6 @@ export function App() {
   return (
     <AppPreferencesProvider apiOrigin={apiOrigin}>
       <StudentThemeProvider>
-        <GlobalNavigationProgress />
         <StudentLocalePreferenceBoundary>
           <StudentAccessGate
           apiOrigin={apiOrigin}
@@ -148,6 +147,7 @@ export function App() {
         >
           {(session) => (
             <LegacyProviders session={session}>
+              <GlobalNavigationProgress />
               <LegacyApiBridge apiOrigin={apiOrigin}>
                 <StudentAppShell
                   apiOrigin={apiOrigin}

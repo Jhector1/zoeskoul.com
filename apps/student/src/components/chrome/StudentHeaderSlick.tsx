@@ -27,7 +27,7 @@ import BillingPromotionCountdown from "@/components/billing/BillingPromotionCoun
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import SoundToggle from "@/lib/sfx/SoundToggle";
 import { useAuthHref } from "@student/hooks/useAuthHref";
-import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
+import { startGlobalNavigationPending } from "@student/components/navigation/GlobalNavigationProgress";
 import LearningEntryButton from "@/components/learning/LearningEntryButton";
 import PracticeEntryButton from "@/components/practice/PracticeEntryButton";
 import NavButton from "@/components/ui/NavButton";

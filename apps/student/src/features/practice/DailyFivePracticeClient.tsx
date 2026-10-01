@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import PracticeShell from "@/components/practice/PracticeShell";
 import PracticePathWizard from "@/components/practice/PracticePathWizard";
-import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
+import { startGlobalNavigationPending } from "@student/components/navigation/GlobalNavigationProgress";
 import { usePracticeController } from "@student/features/practice/client/usePracticeController";
 import type {
   PracticeChooserCatalog,

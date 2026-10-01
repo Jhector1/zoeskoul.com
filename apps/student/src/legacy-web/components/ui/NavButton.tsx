@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "@student/i18n/navigation";
 import { routing } from "@student/i18n/routing";
 import { Loader2 } from "lucide-react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
+import { startGlobalNavigationPending } from "@student/components/navigation/GlobalNavigationProgress";
 import {
     isAbsoluteHttpHref,
     resolveNavButtonNavigationKind,

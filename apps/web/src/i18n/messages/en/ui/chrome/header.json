@@ -37,6 +37,7 @@
     "continueLesson": "Continue lesson",
     "startLearning": "Start learning",
     "exploreLessons": "Explore lessons",
-    "learningOpening": "Opening your lesson…"
+    "learningOpening": "Opening your lesson…",
+    "navigationLoading": "Loading…"
   }
 }

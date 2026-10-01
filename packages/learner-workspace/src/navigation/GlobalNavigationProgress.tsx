@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { usePathname } from "next/navigation";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 
 export const GLOBAL_NAVIGATION_PENDING_EVENT = "zoeskoul:navigation-pending";
@@ -27,7 +26,6 @@ type PendingState = {
     minVisibleMs: number;
 };
 
-const DEFAULT_LABEL = "Loading…";
 const DEFAULT_MIN_VISIBLE_MS = 350;
 const SHOW_DELAY_MS = 140;
 const DEFAULT_SAFETY_TIMEOUT_MS = 18_000;
@@ -109,12 +107,17 @@ export function stopGlobalNavigationPending() {
     window.dispatchEvent(new CustomEvent(GLOBAL_NAVIGATION_IDLE_EVENT));
 }
 
-export function GlobalNavigationProgress() {
-    const pathname = usePathname();
+export function GlobalNavigationProgress({
+    pathname,
+    defaultLabel,
+}: {
+    pathname: string | null;
+    defaultLabel: string;
+}) {
     const [state, setState] = React.useState<PendingState>(() => ({
         pending: false,
         visible: false,
-        label: DEFAULT_LABEL,
+        label: defaultLabel,
         source: "idle",
         startHref: currentHref(),
         startedAt: 0,
@@ -182,7 +185,7 @@ export function GlobalNavigationProgress() {
             const nextState: PendingState = {
                 pending: true,
                 visible: false,
-                label: detail.label || DEFAULT_LABEL,
+                label: detail.label || defaultLabel,
                 description: detail.description,
                 source: detail.source || "navigation",
                 targetHref: detail.targetHref,
@@ -233,7 +236,7 @@ export function GlobalNavigationProgress() {
             if (!shouldStartForAnchor(anchor, event)) return;
 
             beginPending({
-                label: anchor.dataset.globalLoaderLabel || DEFAULT_LABEL,
+                label: anchor.dataset.globalLoaderLabel || defaultLabel,
                 source: "link",
                 targetHref: anchor.href,
             });
@@ -246,14 +249,14 @@ export function GlobalNavigationProgress() {
             if (event.defaultPrevented) return;
 
             beginPending({
-                label: form.dataset.globalLoaderLabel || DEFAULT_LABEL,
+                label: form.dataset.globalLoaderLabel || defaultLabel,
                 source: "form",
                 minVisibleMs: 500,
             });
         };
 
         const onPopState = () => {
-            beginPending({ label: DEFAULT_LABEL, source: "history", minVisibleMs: 250 });
+            beginPending({ label: defaultLabel, source: "history", minVisibleMs: 250 });
         };
 
         const onPageShow = () => stopAfterMinimum();

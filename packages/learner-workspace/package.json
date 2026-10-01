@@ -192,7 +192,8 @@
     "./tools/utils/storage": "./src/tools/utils/storage.ts",
     "./ui/Tooltip": "./src/ui/Tooltip.tsx",
     "./ui/markdown/MathMarkdown": "./src/ui/markdown/MathMarkdown.tsx",
-    "./lib/navigation/navButtonNavigation": "./src/lib/navigation/navButtonNavigation.ts"
+    "./lib/navigation/navButtonNavigation": "./src/lib/navigation/navButtonNavigation.ts",
+    "./navigation/GlobalNavigationProgress": "./src/navigation/GlobalNavigationProgress.tsx"
   },
   "dependencies": {
     "@zoeskoul/code-contracts": "workspace:*",

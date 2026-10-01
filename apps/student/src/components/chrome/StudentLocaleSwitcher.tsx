@@ -8,7 +8,7 @@ import { routing } from "@student/i18n/routing";
 import { LocaleSwitcherChrome } from "@zoeskoul/learner-ui";
 import ConfirmResetModal from "@/components/practice/ConfirmResetModal";
 import { persistLocale } from "@/lib/locale/persistLocale";
-import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
+import { startGlobalNavigationPending } from "@student/components/navigation/GlobalNavigationProgress";
 
 export default function StudentLocaleSwitcher({
   compact = false,
