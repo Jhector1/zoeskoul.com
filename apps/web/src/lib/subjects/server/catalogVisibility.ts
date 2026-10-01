@@ -99,6 +99,22 @@ function getCatalogDefaultSubjectSlug(
     return subjects[0]?.slug ?? null;
 }
 
+function selectHydratedCatalogSubjectsForActor<
+    T extends SubjectCardPresentation,
+>(
+    subjects: readonly (T & SubjectDatabaseStateFields)[],
+    actorAccess: CatalogActorAccess,
+): Array<CatalogSubjectWithAvailability<T>> {
+    const selected = selectPublicCatalogSubjects(
+        selectCatalogSubjectsForMode(subjects, actorAccess.mode),
+    );
+
+    return selected.map(
+        (subject): CatalogSubjectWithAvailability<T> =>
+            withAvailabilityStatus(subject),
+    );
+}
+
 export async function selectCatalogSubjectsForActor<
     T extends SubjectCardPresentation,
 >(
@@ -108,13 +124,9 @@ export async function selectCatalogSubjectsForActor<
     const access = actorAccess ?? (await getCatalogActorAccess());
     const subjectsWithState = await withSubjectCardState(subjects);
 
-    const selected = selectPublicCatalogSubjects(
-        selectCatalogSubjectsForMode(subjectsWithState, access.mode),
-    );
-
-    return selected.map(
-        (subject): CatalogSubjectWithAvailability<T> =>
-            withAvailabilityStatus(subject),
+    return selectHydratedCatalogSubjectsForActor(
+        subjectsWithState,
+        access,
     );
 }
 
@@ -167,12 +179,33 @@ export async function getAvailableVisibleCatalogsForActor(
             actorAccess.canSeeAllCatalogSubjects || catalog.status !== "disabled",
     );
 
-    const catalogs = await Promise.all(
-        rawCatalogs.map(async (catalog): Promise<VisibleCatalog> => {
-            const subjects = await selectCatalogSubjectsForActor(
-                catalog.subjects,
-                actorAccess,
-            );
+    const allCatalogSubjects = rawCatalogs.flatMap(
+        (catalog) => catalog.subjects,
+    );
+
+    const allSubjectsWithState =
+        await withSubjectCardState(allCatalogSubjects);
+
+    let subjectOffset = 0;
+
+    const catalogs = rawCatalogs.map(
+        (catalog): VisibleCatalog => {
+            const endOffset =
+                subjectOffset + catalog.subjects.length;
+
+            const catalogSubjectsWithState =
+                allSubjectsWithState.slice(
+                    subjectOffset,
+                    endOffset,
+                );
+
+            subjectOffset = endOffset;
+
+            const subjects =
+                selectHydratedCatalogSubjectsForActor(
+                    catalogSubjectsWithState,
+                    actorAccess,
+                );
 
             return {
                 ...catalog,
@@ -183,7 +216,7 @@ export async function getAvailableVisibleCatalogsForActor(
                     subjects,
                 ),
             };
-        }),
+        },
     );
 
     // Public catalog routes do not render private-only or empty catalog shells.
