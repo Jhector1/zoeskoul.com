@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { useStudentSession } from "../../../../app/studentSession";
+import { useStudentSession } from "@student/app/studentSession";
 import { SettingsMenu } from "@student/components/chrome/StudentHeaderSlick";
 
 export function useFullIDEAuthenticatedUserId(): string | null {

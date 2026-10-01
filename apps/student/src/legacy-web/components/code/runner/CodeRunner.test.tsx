@@ -14,9 +14,10 @@ import CodeRunner, {
     shouldCollapseIdleOutputPanel,
     shouldAutoOpenWorkspaceTerminal,
     shouldOpenEditorForWorkspaceFileSelection,
-} from "@/components/code/runner/CodeRunner";
+} from "@student/components/learner-workspace/CodeRunner";
 
 vi.mock("next-intl", () => ({
+    useLocale: () => "en",
     useTranslations: () => (key: string) => key,
 }));
 
@@ -25,6 +26,18 @@ vi.mock("next-themes", () => ({
         resolvedTheme: "dark",
     }),
 }));
+
+vi.mock("@zoeskoul/preferences/react", async (importOriginal) => {
+    const actual =
+        await importOriginal<typeof import("@zoeskoul/preferences/react")>();
+
+    return {
+        ...actual,
+        useResolvedAppTheme: () => "dark",
+    };
+});
+
+
 
 vi.mock("@zoeskoul/learner-workspace/ui/markdown/MathMarkdown", () => ({
     default: () => null,

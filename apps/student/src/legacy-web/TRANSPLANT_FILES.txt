@@ -40,7 +40,6 @@ apps/student/src/legacy-web/components/code/projects/SaveBeforeSwitchModal.tsx
 apps/student/src/legacy-web/components/code/projects/hooks/useProjectDirtyState.ts
 apps/student/src/legacy-web/components/code/projects/hooks/useProjectsList.ts
 apps/student/src/legacy-web/components/code/runner/CodeRunner.test.tsx
-apps/student/src/legacy-web/components/code/runner/CodeRunner.tsx
 apps/student/src/legacy-web/components/code/runner/components/BashTerminal.tsx
 apps/student/src/legacy-web/components/code/runner/components/EditorPane.tsx
 apps/student/src/legacy-web/components/code/runner/components/EditorPane.workspaceReplacement.test.ts
@@ -126,7 +125,6 @@ apps/student/src/legacy-web/components/ide/fsTree.ts
 apps/student/src/legacy-web/components/ide/fullide/DeleteModal.tsx
 apps/student/src/legacy-web/components/ide/fullide/ExplorerTree.tsx
 apps/student/src/legacy-web/components/ide/fullide/ExplorerTreeHelpers.tsx
-apps/student/src/legacy-web/components/ide/fullide/FullIDE.tsx
 apps/student/src/legacy-web/components/ide/fullide/NodeMenu.tsx
 apps/student/src/legacy-web/components/ide/fullide/TabsBar.tsx
 apps/student/src/legacy-web/components/ide/fullide/chrome/IdeConflictBanner.tsx

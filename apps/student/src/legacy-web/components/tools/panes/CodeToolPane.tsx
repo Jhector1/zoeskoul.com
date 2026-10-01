@@ -8,7 +8,7 @@ import { CodeToolPaneAppBridgeProvider } from "@zoeskoul/learner-workspace/tools
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
 import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 
-const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
+const FullIDE = dynamic(() => import("@student/components/learner-workspace/FullIDE"), {
     ssr: false,
     loading: () => null,
 });
@@ -21,7 +21,7 @@ export function preloadCodeToolPaneEditorAssets() {
     }
 
     codeToolPaneEditorPreloadPromise = Promise.all([
-        import("@/components/ide/fullide/FullIDE"),
+        import("@student/components/learner-workspace/FullIDE"),
         import("@monaco-editor/react"),
         import("monaco-editor"),
     ]).then(() => undefined);
