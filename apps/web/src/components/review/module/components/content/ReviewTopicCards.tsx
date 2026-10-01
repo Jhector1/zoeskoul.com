@@ -33,6 +33,11 @@ import {
 } from "../../actions";
 
 import { getCardStateKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
+import { getSketchEntry } from "@/components/sketches/subjects/registry";
+import {
+  resolveLanguageAudioFromSketchEntry,
+  scheduleLanguageAudioSpecPrewarm,
+} from "@zoeskoul/learner-workspace/language/languageAudioPreparation";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type { CompactQuizNavigationState } from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
@@ -140,6 +145,57 @@ export default function ReviewTopicCards({
       0,
       Math.min(viewCards.length - 1, maxUnlockedCardIndex ?? activeCardIndex),
     );
+  // NEXT-CARD AUDIO PREWARM OWNER:
+  //
+  // Review already owns canonical ordered viewCards and activeCardIndex.
+  // Resolve only the immediate next sketch through the same registry used
+  // by SketchBlock, then hand narration preparation to learner-workspace.
+  //
+  // The short delay lets the mounted/current card start its own prewarm
+  // first, so speculative next-card work does not immediately compete
+  // with the learner's current narration.
+  React.useEffect(() => {
+    const nextCard =
+      viewCards[
+        activeCardIndex + 1
+      ] ?? null;
+
+    if (
+      !nextCard ||
+      nextCard.type !==
+        "sketch"
+    ) {
+      return;
+    }
+
+    const audio =
+      resolveLanguageAudioFromSketchEntry({
+        entry:
+          getSketchEntry(
+            nextCard.sketchId,
+          ),
+        propsPatch:
+          nextCard.props as
+            | Record<
+                string,
+                unknown
+              >
+            | undefined,
+      });
+
+    if (!audio) {
+      return;
+    }
+
+    return scheduleLanguageAudioSpecPrewarm(
+      audio,
+      1000,
+    );
+  }, [
+    activeCardIndex,
+    viewCards,
+  ]);
+
   const handleNavigate = React.useCallback(
       async (index: number) => {
         const clampedIndex = Math.max(0, Math.min(viewCards.length - 1, index));

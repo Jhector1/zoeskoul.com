@@ -30,6 +30,18 @@ describe(
                 );
 
                 expect(speak).toContain(
+                    "prepareLanguageNarration",
+                );
+
+                expect(speak).not.toContain(
+                    '"/api/speech/narrate"',
+                );
+
+                expect(
+                    source(
+                        "packages/learner-workspace/src/language/languageAudioPreparation.ts",
+                    ),
+                ).toContain(
                     '"/api/speech/narrate"',
                 );
 

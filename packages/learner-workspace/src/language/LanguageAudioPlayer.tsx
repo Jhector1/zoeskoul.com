@@ -22,9 +22,12 @@ import {
 } from "@zoeskoul/preferences/react";
 
 import {
-    resolveLanguageAudioPauseMs,
     resolveLanguageAudioTurn,
 } from "./languageAudioPlayback";
+
+import {
+    buildLanguageAudioNarrationSequence,
+} from "./languageAudioPreparation";
 
 import {
     useSpeak,
@@ -89,6 +92,15 @@ export function LanguageAudioPlayer({
             speech.stop,
         ]);
 
+    const buildCurrentSequence =
+        useCallback(
+            () =>
+                buildLanguageAudioNarrationSequence(
+                    audioRef.current,
+                ),
+            [],
+        );
+
     const playAll =
         useCallback(async () => {
             stop();
@@ -96,35 +108,8 @@ export function LanguageAudioPlayer({
             const runId =
                 runRef.current;
 
-            const currentAudio =
-                audioRef.current;
-
             const sequence =
-                currentAudio.segments.map(
-                    (
-                        segment,
-                        index,
-                    ) => {
-                        const turn =
-                            resolveLanguageAudioTurn(
-                                currentAudio,
-                                segment,
-                            );
-
-                        return {
-                            text:
-                                turn.text,
-                            opts:
-                                turn.options,
-                            pauseMs:
-                                resolveLanguageAudioPauseMs(
-                                    currentAudio,
-                                    segment,
-                                    index,
-                                ),
-                        };
-                    },
-                );
+                buildCurrentSequence();
 
             setPlayingAll(true);
 
@@ -153,6 +138,7 @@ export function LanguageAudioPlayer({
                 }
             }
         }, [
+            buildCurrentSequence,
             speech.speakSequenceAndWait,
             stop,
         ]);
@@ -175,6 +161,46 @@ export function LanguageAudioPlayer({
     }, [
         audioIdentity,
         stop,
+    ]);
+
+    // CURRENT-CARD AUDIO PREWARM OWNER:
+    //
+    // Start preparing narration after the active
+    // card reaches the browser. This never plays
+    // audio and requires no autoplay permission.
+    // Strict Mode / rerenders safely share the
+    // module-level prepared Promise.
+    useEffect(() => {
+        const currentAudio =
+            audioRef.current;
+
+        if (
+            !Array.isArray(
+                currentAudio.segments,
+            ) ||
+            currentAudio.segments.length ===
+                0
+        ) {
+            return;
+        }
+
+        const scheduledIdentity =
+            audioIdentity;
+
+        if (
+            activeAudioIdentityRef.current !==
+            scheduledIdentity
+        ) {
+            return;
+        }
+
+        void speech.prewarmSequence(
+            buildCurrentSequence(),
+        );
+    }, [
+        audioIdentity,
+        buildCurrentSequence,
+        speech.prewarmSequence,
     ]);
 
     // AUTO-LISTEN STABILITY OWNER:

@@ -43,6 +43,25 @@ const MAX_SEGMENTS = 64;
 const MAX_SEGMENT_CHARS = 4096;
 const MAX_TOTAL_CHARS = 24000;
 
+const NARRATION_SYNTHESIS_CONCURRENCY =
+    (() => {
+        const parsed = Number.parseInt(
+            process.env
+                .LANGUAGE_AUDIO_TTS_CONCURRENCY
+                ?.trim() || "6",
+            10,
+        );
+
+        if (!Number.isFinite(parsed)) {
+            return 6;
+        }
+
+        return Math.max(
+            1,
+            Math.min(8, parsed),
+        );
+    })();
+
 type NarrationSegment = {
     text: string;
     locale?: string;
@@ -230,7 +249,36 @@ type GoogleServiceAccountFile = {
     project_id?: unknown;
 };
 
+type CachedGoogleAccess = {
+    token: string;
+    projectId: string;
+    expiresAt: number;
+};
+
+let cachedGoogleAccess:
+    | CachedGoogleAccess
+    | null = null;
+
 async function googleAccess(args: { signal: AbortSignal }) {
+    /*
+     * Google access tokens normally live for about an hour.
+     * Reuse the token while it has at least two minutes
+     * remaining instead of repeating JWT signing + OAuth
+     * token exchange for every narration card.
+     */
+    if (
+        cachedGoogleAccess &&
+        cachedGoogleAccess.expiresAt >
+            Date.now() + 2 * 60 * 1000
+    ) {
+        return {
+            token:
+                cachedGoogleAccess.token,
+            projectId:
+                cachedGoogleAccess.projectId,
+        };
+    }
+
     /*
      * Keep this flow intentionally aligned with the independently verified
      * standalone Node proof used during the narration rollout.
@@ -374,6 +422,34 @@ async function googleAccess(args: { signal: AbortSignal }) {
         );
     }
 
+    const rawExpiresIn =
+        Number(
+            detail?.expires_in ??
+                3600,
+        );
+
+    const expiresInSeconds =
+        Number.isFinite(
+            rawExpiresIn,
+        )
+            ? Math.max(
+                  60,
+                  Math.min(
+                      3600,
+                      rawExpiresIn,
+                  ),
+              )
+            : 3600;
+
+    cachedGoogleAccess = {
+        token,
+        projectId,
+        expiresAt:
+            Date.now() +
+            expiresInSeconds *
+                1000,
+    };
+
     return {
         token,
         projectId,
@@ -391,7 +467,10 @@ async function synthesizeGoogleCard(
         : `${region}-texttospeech.googleapis.com`;
     const url = `https://${host}/v1/text:synthesize`;
 
-    return mapWithConcurrency(segments, 3, async (segment) => {
+    return mapWithConcurrency(
+        segments,
+        NARRATION_SYNTHESIS_CONCURRENCY,
+        async (segment) => {
         const response = await fetch(url, {
             method: "POST",
             signal,
@@ -439,8 +518,14 @@ async function synthesizeOpenAiCard(
     segments: ReadonlyArray<NarrationSegment>,
     signal: AbortSignal,
 ) {
-    return mapWithConcurrency(segments, 3, (segment) =>
-        synthesizeOpenAi(segment, signal),
+    return mapWithConcurrency(
+        segments,
+        NARRATION_SYNTHESIS_CONCURRENCY,
+        (segment) =>
+            synthesizeOpenAi(
+                segment,
+                signal,
+            ),
     );
 }
 

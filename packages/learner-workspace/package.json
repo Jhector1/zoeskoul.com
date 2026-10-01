@@ -53,6 +53,7 @@
     "./ide/workspaceHook/workspace.types": "./src/ide/workspaceHook/workspace.types.ts",
     "./language/LanguageAudioPlayer": "./src/language/LanguageAudioPlayer.tsx",
     "./language/languageAudioPlayback": "./src/language/languageAudioPlayback.ts",
+    "./language/languageAudioPreparation": "./src/language/languageAudioPreparation.ts",
     "./language/speechTypes": "./src/language/speechTypes.ts",
     "./language/useSpeak": "./src/language/useSpeak.ts",
     "./language/normalizeLearnerText": "./src/language/normalizeLearnerText.ts",

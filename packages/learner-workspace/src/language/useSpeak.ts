@@ -10,6 +10,12 @@ import {
 import type { SpeakOpts } from "./speechTypes";
 
 import {
+    normalizeLanguageNarrationSequence,
+    prepareLanguageNarration,
+    type LanguageNarrationSequenceItem,
+} from "./languageAudioPreparation";
+
+import {
     claimLanguageAudioSession,
     createLanguageAudioSessionOwner,
     releaseLanguageAudioSession,
@@ -55,7 +61,9 @@ export function useSpeak() {
 
         try {
             URL.revokeObjectURL(urlRef.current);
-        } catch {}
+        } catch {
+            // Best-effort media cleanup.
+        }
 
         urlRef.current = null;
     }, []);
@@ -91,7 +99,9 @@ export function useSpeak() {
             try {
                 audio.pause();
                 audio.currentTime = 0;
-            } catch {}
+            } catch {
+                // Best-effort media cleanup.
+            }
         }
 
         settlePending(false);
@@ -244,7 +254,9 @@ export function useSpeak() {
                 try {
                     audio.pause();
                     audio.currentTime = 0;
-                } catch {}
+                } catch {
+                    // Best-effort media cleanup.
+                }
 
                 audio.src = url;
 
@@ -390,43 +402,43 @@ export function useSpeak() {
         [startSpeech],
     );
 
+    const prewarmSequence =
+        useCallback(
+            async (
+                items:
+                    ReadonlyArray<
+                        LanguageNarrationSequenceItem
+                    >,
+            ): Promise<boolean> => {
+                try {
+                    return (
+                        await prepareLanguageNarration(
+                            items,
+                        )
+                    ) != null;
+                } catch {
+                    // Prewarming is speculative.
+                    // Playback retries through the
+                    // same preparation owner and
+                    // reports any real error then.
+                    return false;
+                }
+            },
+            [],
+        );
+
     const speakSequenceAndWait =
         useCallback(
             async (
-                items: ReadonlyArray<{
-                    text: string;
-                    opts?: SpeakOpts;
-                    pauseMs?: number;
-                }>,
+                items:
+                    ReadonlyArray<
+                        LanguageNarrationSequenceItem
+                    >,
             ): Promise<boolean> => {
                 const queue =
-                    items
-                        .map((item) => ({
-                            text:
-                                String(
-                                    item.text ??
-                                        "",
-                                ).trim(),
-                            opts:
-                                item.opts ??
-                                {},
-                            pauseMs:
-                                Math.max(
-                                    0,
-                                    Math.min(
-                                        5000,
-                                        Number(
-                                            item.pauseMs ??
-                                                0,
-                                        ),
-                                    ),
-                                ),
-                        }))
-                        .filter(
-                            (item) =>
-                                item.text.length >
-                                0,
-                        );
+                    normalizeLanguageNarrationSequence(
+                        items,
+                    );
 
                 if (queue.length === 0) {
                     return false;
@@ -455,59 +467,18 @@ export function useSpeak() {
 
                 try {
                     /*
-                     * One browser request, one returned WAV, one Audio.src, one
-                     * audio.play(). The server owns bilingual synthesis and
-                     * authored pauses so navigation never exposes per-segment
-                     * network/decode gaps to the learner.
+                     * Current-card prewarming and playback share the exact same
+                     * prepared WAV Promise. A click during synthesis joins the
+                     * in-flight request; a click after preparation reuses the
+                     * finished ArrayBuffer without another network request.
                      */
-                    const response =
-                        await fetch(
-                            "/api/speech/narrate",
-                            {
-                                method:
-                                    "POST",
-                                headers: {
-                                    "Content-Type":
-                                        "application/json",
-                                },
-                                signal:
-                                    controller.signal,
-                                body:
-                                    JSON.stringify({
-                                        segments:
-                                            queue.map(
-                                                (item) => ({
-                                                    text:
-                                                        item.text,
-                                                    locale:
-                                                        item.opts.locale,
-                                                    voice:
-                                                        item.opts.voice,
-                                                    speed:
-                                                        item.opts.speed,
-                                                    instructions:
-                                                        item.opts.instructions,
-                                                    pauseMs:
-                                                        item.pauseMs,
-                                                }),
-                                            ),
-                                    }),
-                            },
+                    const prepared =
+                        await prepareLanguageNarration(
+                            queue,
                         );
 
-                    if (!response.ok) {
-                        const detail =
-                            await response
-                                .json()
-                                .catch(
-                                    () => null,
-                                );
-
-                        throw new Error(
-                            detail?.message ??
-                                detail?.error ??
-                                "Narration TTS failed",
-                        );
+                    if (!prepared) {
+                        return false;
                     }
 
                     if (
@@ -518,19 +489,10 @@ export function useSpeak() {
                     }
 
                     const contentType =
-                        response.headers.get(
-                            "Content-Type",
-                        ) || "audio/wav";
+                        prepared.contentType;
 
                     const buffer =
-                        await response.arrayBuffer();
-
-                    if (
-                        sessionId !==
-                        sessionRef.current
-                    ) {
-                        return false;
-                    }
+                        prepared.buffer;
 
                     const blob =
                         new Blob(
@@ -562,7 +524,9 @@ export function useSpeak() {
                         audio.pause();
                         audio.currentTime =
                             0;
-                    } catch {}
+                    } catch {
+                        // Best-effort media cleanup.
+                    }
 
                     audio.src = url;
 
@@ -709,7 +673,9 @@ export function useSpeak() {
 
                 try {
                     audio.pause();
-                } catch {}
+                } catch {
+                    // Best-effort media cleanup.
+                }
             }
 
             settlePending(false);
@@ -723,6 +689,7 @@ export function useSpeak() {
     return {
         speak,
         speakAndWait,
+        prewarmSequence,
         speakSequenceAndWait,
         stop,
         ttsStatus,
