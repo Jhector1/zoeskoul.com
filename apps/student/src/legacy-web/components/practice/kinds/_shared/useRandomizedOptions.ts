@@ -5,7 +5,7 @@ import {
     buildStableSeedKey,
     shuffleItems,
     type PresentableOption,
-} from "@/lib/practice/presentationOrder";
+} from "@zoeskoul/learner-workspace/lib/practice/presentationOrder";
 
 export function useRandomizedOptions(options: PresentableOption[]) {
     const optionIds = useMemo(() => options.map((o) => o.id), [options]);

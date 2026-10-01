@@ -1,4 +1,4 @@
-import type { Difficulty, TopicSlug } from "@/lib/practice/types";
+import type { Difficulty, TopicSlug } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
 /**
  * Stable product experiences. These are product-level intents, not always a

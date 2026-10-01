@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isCatalogLearningPath } from "./protectedLearningPath";
+import { isCatalogLearningPath } from "@zoeskoul/learner-workspace/lib/routing/protectedLearningPath";
 
 describe("isCatalogLearningPath", () => {
     it.each([

@@ -12,7 +12,7 @@ import {
     resolveWorkspaceTerminalActivationFailure,
     resolveWorkspaceTerminalHydration,
     subscribeTerminalCapacityInvalidations,
-} from "./workspaceTerminalHosts";
+} from "@zoeskoul/learner-workspace/runner/workspaceTerminalHosts";
 
 
 async function flushMicrotasksUntil(predicate: () => boolean, attempts = 10) {

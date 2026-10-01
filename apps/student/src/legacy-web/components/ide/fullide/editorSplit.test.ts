@@ -7,7 +7,7 @@ import {
     clampEditorSplitRatio,
     resolveEditorSplitOrder,
     resolveEditorSplitRatioFromClientX,
-} from "./editorSplit";
+} from "@zoeskoul/learner-workspace/fullide/editorSplit";
 
 describe("resolveEditorSplitOrder", () => {
     it("places the secondary file on the left", () => {

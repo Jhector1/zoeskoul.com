@@ -7,7 +7,7 @@ import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracti
 import QuizPracticeCard from "@/components/review/quiz/components/QuizPracticeCard";
 import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import type { ReviewFinalizedPracticeAction } from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
-import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
+import { DEFAULT_PRACTICE_HELP_POLICY } from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
 import { resolveReviewExerciseSourceCoordinates } from "@zoeskoul/learning-runtime/review/module/runtime/resolveReviewExerciseSourceCoordinates";
 import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";

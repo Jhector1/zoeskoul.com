@@ -2,10 +2,10 @@
 
 import React from "react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import type { Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem } from "@/lib/practice/uiTypes";
 import RevealAnswerCard from "../RevealAnswerCard";
-import MathMarkdown from "@/components/markdown/MathMarkdown";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 
 export function resolveRevealAnswerForResult(current: QItem | null | undefined) {

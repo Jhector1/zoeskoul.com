@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { shouldRenderLiteralOperatorContent } from "./MathMarkdown";
+import { shouldRenderLiteralOperatorContent } from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 
 describe("shouldRenderLiteralOperatorContent", () => {
     it.each([">", ">>", "..", "~", "&&", "||", "<=", ">=", "!=", "+", "-"])(

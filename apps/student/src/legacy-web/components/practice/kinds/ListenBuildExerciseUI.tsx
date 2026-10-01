@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
-import { useSpeak } from "./_shared/useSpeak";
+import { useSpeak } from "@zoeskoul/learner-workspace/language/useSpeak";
 
 type Exercise = {
     title: string;

@@ -4,7 +4,7 @@ import React, { useCallback, useMemo, useRef, useState, useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import type { Difficulty } from "@/lib/practice/types";
+import type { Difficulty } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem } from "@/lib/practice/uiTypes";
 import PracticeShell from "@/components/practice/PracticeShell";
 

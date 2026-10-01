@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clientPointToBoardPoint } from "./coordinates";
+import { clientPointToBoardPoint } from "@zoeskoul/learner-workspace/tools/board/coordinates";
 
 function svgMock(options: {
   matrix?: { a: number; b: number; c: number; d: number; e: number; f: number } | null;

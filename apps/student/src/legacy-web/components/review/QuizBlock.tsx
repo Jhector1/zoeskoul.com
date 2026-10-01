@@ -13,11 +13,11 @@ import React, {
 } from "react";
 import { flushSync } from "react-dom";
 import type {ReviewProjectSpec, ReviewProjectStep, ReviewQuestion, ReviewQuizSpec} from "@zoeskoul/curriculum-contracts/subjects/types";
-import type { SavedQuizState } from "@/lib/subjects/progressTypes";
+import type { SavedQuizState } from "@zoeskoul/learning-runtime";
 import type {
   ExerciseRuntimeState,
   UnknownRecord,
-} from "@/components/review/module/runtime/reviewRuntimeTypes";
+} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeTypes";
 import { buildReviewQuizKey } from "@zoeskoul/curriculum-contracts/subjects/quizClient";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
@@ -34,7 +34,7 @@ import QuizPracticeCard from "./quiz/components/QuizPracticeCard";
 import QuizLocalCard from "./quiz/components/QuizLocalCard";
 import ReviewExerciseTransitionBoundary from "./quiz/components/ReviewExerciseTransitionBoundary";
 import QuizFooter from "./quiz/components/QuizFooter";
-import { emitSfx } from "@/lib/sfx/bus";
+import { emitSfx } from "@zoeskoul/learner-workspace/lib/sfx/bus";
 import { QuizBlockSkeleton } from "@/components/review/quiz/components/QuizBlockSkeleton";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { resolveCanonicalExercisePresentation } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
@@ -46,10 +46,10 @@ import {
   resolveQuizPracticeRuntimeDefaults,
 } from "@zoeskoul/learning-runtime/review/quiz/runtimeDefaults";
 
-import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
+import { scrollIntoViewSmart } from "@zoeskoul/learner-workspace/lib/ui/flowScroll";
 import { useTaggedT } from "@student/i18n/tagged";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
-import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
+import { clearReviewWorkspaceDrafts } from "@zoeskoul/learner-workspace/tools/code/reviewWorkspaceDrafts";
 import { withTutoringContentRequestHeaders } from "@zoeskoul/learning-client/legacy-compatible/tutoring/clientContentRequestContext";
 import FlowNavigator, {
   type FlowNavMode,
@@ -69,7 +69,7 @@ import { resolveReviewQuizRestoreIndex } from "@zoeskoul/learning-runtime/review
 import {
   canRevealPracticeAnswer,
   DEFAULT_PRACTICE_HELP_POLICY,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import {
     buildReviewFinalizedActionConsumedPatch,
     findReviewPracticeCompletionForExercise,

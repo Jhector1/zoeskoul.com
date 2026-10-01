@@ -3,7 +3,7 @@
 import React from "react";
 import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import SubjectFinishBanner from "../../components/finish/SubjectFinishBanner";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import type { SubjectFinishState } from "../../types/subjectFinish.types";
 
 type ReviewTopicCompletionViewTopic = Pick<

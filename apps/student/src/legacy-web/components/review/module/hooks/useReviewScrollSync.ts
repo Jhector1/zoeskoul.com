@@ -3,7 +3,7 @@ import type { ReviewCard } from "@zoeskoul/curriculum-contracts/subjects/types";
 import { isCardDoneFromState, isQuizLikeCard } from "@zoeskoul/learning-runtime/review/module/progressKeys";
 import { prereqsMetForAnyQuizOrProject } from "@zoeskoul/learning-runtime/review/module/utils";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
-import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
+import { scrollIntoViewSmart } from "@zoeskoul/learner-workspace/lib/ui/flowScroll";
 
 type Args = {
     subjectSlug: string;

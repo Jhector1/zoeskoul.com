@@ -9,7 +9,7 @@ import React, {
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import {
   useOptionalReviewDestinationTransition,
-} from "@/components/review/module/navigation/ReviewDestinationTransitionContext";
+} from "@zoeskoul/learner-workspace/tools/code/ReviewDestinationTransitionContext";
 
 function ReviewExerciseCardSkeleton({ minHeight }: { minHeight: number }) {
   return (

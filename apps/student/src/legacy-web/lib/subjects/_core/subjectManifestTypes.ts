@@ -4,8 +4,8 @@ import type {
     ManifestSketch,
     ManifestRuntimeDefaults,
     TopicBundleManifest as BaseTopicBundleManifest,
-} from "@/lib/subjects/_core/manifestTypes";
-import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+} from "@zoeskoul/learner-workspace/contracts/manifestTypes";
+import type { LearningIdeConfig } from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
 import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 
 export type SubjectCurriculumManifestMeta = {

@@ -5,14 +5,14 @@ import type {
     SubmitAnswer,
     TopicSlug,
     Vec3,
-} from "@/lib/practice/types";
+} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem } from "@/lib/practice/uiTypes";
-import { serializeWorkspaceForCodeRun } from "@/lib/code/workspaceSubmission";
-import type { FileEntry } from "@/lib/code/types";
+import { serializeWorkspaceForCodeRun } from "@zoeskoul/learner-workspace/lib/code/workspaceSubmission";
+import type { FileEntry } from "@zoeskoul/learner-workspace/lib/code/types";
 import { isTextWorkspaceFileEntry } from "@zoeskoul/code-contracts";
-import { exportWorkspaceEntries } from "@/components/ide/fsTree";
-import { applyTerminalWorkspaceHintsToEntries } from "@/lib/practice/terminalWorkspaceHints";
-import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";
+import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
+import { applyTerminalWorkspaceHintsToEntries } from "@zoeskoul/learner-workspace/lib/practice/terminalWorkspaceHints";
+import { normalizeVisibleTerminalTranscriptText } from "@zoeskoul/learner-workspace/lib/practice/visibleTerminalTranscript";
 
 function getWorkspaceEntryContent(args: {
     entry: string;

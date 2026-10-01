@@ -7,7 +7,7 @@ import {
   getBoardCameraViewport,
   panBoardCameraByClientDelta,
   zoomBoardCameraAtClientPoint,
-} from "./viewport";
+} from "@zoeskoul/learner-workspace/tools/board/viewport";
 
 const surface = { width: 1200, height: 800 };
 

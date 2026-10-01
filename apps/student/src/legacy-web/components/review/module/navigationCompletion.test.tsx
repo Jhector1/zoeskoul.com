@@ -2,12 +2,12 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import type { ReviewCard, ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type {
     ReviewProgressState,
     ReviewTopicProgress,
-} from "@/lib/subjects/progressTypes";
+} from "@zoeskoul/learning-runtime";
 
 import {
     buildEmbeddedTryItPassProgress,

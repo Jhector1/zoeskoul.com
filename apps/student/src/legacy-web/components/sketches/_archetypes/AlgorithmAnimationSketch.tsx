@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import MathMarkdown from "@/components/markdown/MathMarkdown";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import type {
     AlgorithmAnimationNode,
     AlgorithmAnimationSpec,

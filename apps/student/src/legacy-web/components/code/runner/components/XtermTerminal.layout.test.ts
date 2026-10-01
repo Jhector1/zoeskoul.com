@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
     isHostLargeEnoughForTerminalLayout,
     isHostVisibleForTerminalInteraction,
-} from "@/components/code/runner/components/XtermTerminal";
+} from "@zoeskoul/learner-workspace/runner/components/XtermTerminal";
 
 function makeHost(args: { width: number; height: number; connected?: boolean }) {
     return {

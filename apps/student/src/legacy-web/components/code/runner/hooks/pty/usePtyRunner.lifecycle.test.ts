@@ -8,7 +8,7 @@ import {
     resolvePtySnapshotMergeMeta,
     shouldConsumePtyEventStream,
     startPtyRunExactlyOnce,
-} from "./usePtyRunner";
+} from "@zoeskoul/learner-workspace/runner/hooks/pty/usePtyRunner";
 
 describe("isFinalPtySessionState", () => {
     it("recognizes every backend terminal state that must release the Run button", () => {

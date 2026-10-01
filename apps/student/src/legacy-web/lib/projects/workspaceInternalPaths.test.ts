@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isWorkspaceInternalPath } from "./workspaceInternalPaths";
+import { isWorkspaceInternalPath } from "@zoeskoul/learner-workspace/lib/projects/workspaceInternalPaths";
 
 describe("isWorkspaceInternalPath", () => {
     it("recognizes platform and Git-managed path segments", () => {

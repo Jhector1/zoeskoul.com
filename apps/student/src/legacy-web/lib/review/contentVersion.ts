@@ -7,7 +7,7 @@ import {
     getRawReviewModuleRows,
 } from "@/lib/subjects/registry";
 
-import type { ReviewContentVersion } from "@/lib/review/contentVersionTypes";
+import type { ReviewContentVersion } from "@zoeskoul/learner-workspace/lib/review/contentVersionTypes";
 
 function stableStringify(value: unknown): string {
     if (value === null || typeof value !== "object") {

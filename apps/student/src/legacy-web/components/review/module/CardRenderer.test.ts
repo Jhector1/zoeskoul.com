@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { ReviewCard } from "@zoeskoul/curriculum-contracts/subjects/types";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 
 import { buildQuizBlockRuntimeDefaultsProps } from "@zoeskoul/learning-runtime/review/module/runtime/cardRuntimeDefaults";
 import {
@@ -39,7 +39,7 @@ vi.mock("@/components/review/QuizBlock", () => ({
     },
 }));
 
-vi.mock("@/components/markdown/MathMarkdown", () => ({
+vi.mock("@zoeskoul/learner-workspace/ui/markdown/MathMarkdown", () => ({
     default: () => null,
 }));
 

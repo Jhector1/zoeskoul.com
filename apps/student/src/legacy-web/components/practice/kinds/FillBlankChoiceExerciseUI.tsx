@@ -2,9 +2,9 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
-import { normalizePresentableOptions } from "@/lib/practice/presentationOrder";
+import { normalizePresentableOptions } from "@zoeskoul/learner-workspace/lib/practice/presentationOrder";
 import { useRandomizedOptions } from "./_shared/useRandomizedOptions";
-import type { FillBlankChoiceExercise } from "@/lib/practice/types";
+import type { FillBlankChoiceExercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
 const BLANK_PATTERN = /\[blank[^\]]*\]|_{2,}/gi;
 

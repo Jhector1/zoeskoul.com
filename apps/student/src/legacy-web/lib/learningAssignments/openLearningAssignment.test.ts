@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildAssignedCourseHref } from "./assignedCourseHref";
+import { buildAssignedCourseHref } from "@zoeskoul/learner-workspace/lib/learningAssignments/assignedCourseHref";
 
 describe("buildAssignedCourseHref", () => {
   it("returns the first assigned-course module without a billing URL", () => {

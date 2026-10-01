@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type MutableRefObject } from "react";
 
-import type { Difficulty } from "@/lib/practice/types";
+import type { Difficulty } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { PracticeRunMetaApi } from "@/lib/practice/apiTypes";
 import type { QItem, TopicValue } from "@/lib/practice/uiTypes";
 import { normalizeTopicValue } from "@/lib/practice/uiHelpers";

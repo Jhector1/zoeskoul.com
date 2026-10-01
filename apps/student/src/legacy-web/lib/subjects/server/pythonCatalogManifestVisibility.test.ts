@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 import { SUBJECT_MANIFESTS } from "@zoeskoul/curriculum-registry/runtime";
-import { selectVisibleSubjectsForActor } from "./subjectVisibilityCore";
+import { selectVisibleSubjectsForActor } from "@zoeskoul/learner-workspace/lib/subjects/server/subjectVisibilityCore";
 
 type SubjectManifestMeta = NonNullable<
     (typeof SUBJECT_MANIFESTS)[string]["subject"]["meta"]

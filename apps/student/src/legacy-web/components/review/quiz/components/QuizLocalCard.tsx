@@ -2,7 +2,7 @@
 
 import React from "react";
 import type { ReviewQuestion } from "@zoeskoul/curriculum-contracts/subjects/types";
-import MathMarkdown from "@/components/markdown/MathMarkdown";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import { normalizeMath } from "@zoeskoul/learner-ui/lib/markdown/normalizeMath";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { useTaggedT } from "@student/i18n/tagged";

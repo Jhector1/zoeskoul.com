@@ -1,16 +1,16 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import MathMarkdown from "@/components/markdown/MathMarkdown";
-import type { Exercise } from "@/lib/practice/types";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { PracticeHelpState, QItem } from "@/lib/practice/uiTypes";
 import RevealAnswerCard from "@/components/practice/RevealAnswerCard";
 import { useTaggedT } from "@student/i18n/tagged";
-import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
+import { scrollIntoViewSmart } from "@zoeskoul/learner-workspace/lib/ui/flowScroll";
 import {
     PRACTICE_HELP_STEP_DEF_MAP,
     type PracticeHelpPolicy,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 
 export default function PracticeHelpPanel({
                                               exercise,

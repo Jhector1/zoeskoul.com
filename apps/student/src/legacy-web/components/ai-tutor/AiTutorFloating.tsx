@@ -24,8 +24,8 @@ import {
   X,
 } from "lucide-react";
 
-import MathMarkdown from "@/components/markdown/MathMarkdown";
-import type { Exercise } from "@/lib/practice/types";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem } from "@/lib/practice/uiTypes";
 import {
   fetchPracticeTutor,

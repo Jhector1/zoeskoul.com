@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import {buildReviewTargetRegistry, ReviewTargetEntry} from "@zoeskoul/learning-runtime/review/module/runtime/reviewTargetRegistry";
 import {
   deriveEntryCode,

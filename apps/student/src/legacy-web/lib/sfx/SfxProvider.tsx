@@ -2,9 +2,9 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { onSfx } from "./bus";
-import { play, unlockAndPreload } from "./engine";
-import { readSfxSettings, writeSfxSettings, clamp } from "./settings";
+import { onSfx } from "@zoeskoul/learner-workspace/lib/sfx/bus";
+import { play, unlockAndPreload } from "@zoeskoul/learner-workspace/lib/sfx/engine";
+import { readSfxSettings, writeSfxSettings, clamp } from "@zoeskoul/learner-workspace/lib/sfx/settings";
 import {
     useOptionalAppPreferences,
 } from "@zoeskoul/preferences/react";

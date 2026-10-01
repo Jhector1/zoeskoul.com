@@ -15,20 +15,20 @@ import {
 import NavButton from "@/components/ui/NavButton";
 import SubscriberPracticeRail from "@/components/practice/SubscriberPracticeRail";
 import { useTaggedT } from "@student/i18n/tagged";
-import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
+import { resolvePracticeDisplayTitle } from "@zoeskoul/learner-workspace/lib/practice/displayTitle";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import {
   resolveAvailablePracticeTargetCount,
-} from "@/lib/practice/experience/availableTargetCount";
+} from "@zoeskoul/learner-workspace/lib/practice/experience/availableTargetCount";
 import type {
   PracticeChooserCatalog,
   PracticeChooserMode,
   PracticeChooserSelection,
   SubscriberPracticeContinuationSummary,
-} from "@/lib/practice/experience/practiceChooserTypes";
+} from "@zoeskoul/learner-workspace/lib/practice/experience/practiceChooserTypes";
 import {
   findSubscriberPracticeContinuation,
-} from "@/lib/practice/experience/subscriberPracticeContinuationSummary";
+} from "@zoeskoul/learner-workspace/lib/practice/experience/subscriberPracticeContinuationSummary";
 
 type WizardStep = "catalog" | "course" | "module";
 

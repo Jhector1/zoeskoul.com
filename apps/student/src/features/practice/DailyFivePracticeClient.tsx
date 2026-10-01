@@ -12,7 +12,7 @@ import type {
   PracticeChooserMode,
   PracticeChooserSelection,
   SubscriberPracticeContinuationSummary,
-} from "@/lib/practice/experience/practiceChooserTypes";
+} from "@zoeskoul/learner-workspace/lib/practice/experience/practiceChooserTypes";
 import {
   buildPracticeChooserRouteHref,
   startSelfPacedPractice,

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { mergeRuntimeIntoProgress } from "@zoeskoul/learning-runtime/review/module/runtime/runtimeProgressBridge";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { ReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeTypes";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import type { ReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeTypes";
 
 type RuntimeLike = Pick<ReviewRuntimeStore, "exercises" | "cards">;
 

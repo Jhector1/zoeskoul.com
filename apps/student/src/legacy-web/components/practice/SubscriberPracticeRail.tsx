@@ -6,9 +6,9 @@ import { BookOpenCheck, Play } from "lucide-react";
 
 import NavButton from "@/components/ui/NavButton";
 import { useTaggedT } from "@student/i18n/tagged";
-import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
+import { resolvePracticeDisplayTitle } from "@zoeskoul/learner-workspace/lib/practice/displayTitle";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import type { SubscriberPracticeContinuationSummary } from "@/lib/practice/experience/practiceChooserTypes";
+import type { SubscriberPracticeContinuationSummary } from "@zoeskoul/learner-workspace/lib/practice/experience/practiceChooserTypes";
 
 export default function SubscriberPracticeRail(props: {
   continuations: SubscriberPracticeContinuationSummary[];

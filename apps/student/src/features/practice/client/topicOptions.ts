@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { TopicSlug } from "@/lib/practice/types";
+import type { TopicSlug } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
 export type TopicValue = TopicSlug | "all";
 

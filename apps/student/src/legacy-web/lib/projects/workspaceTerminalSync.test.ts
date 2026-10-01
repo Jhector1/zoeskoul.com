@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { pathOf } from "@/components/ide/fsTree";
-import type { FSNode, WorkspaceStateV2 } from "@/components/ide/types";
+import { pathOf } from "@zoeskoul/learner-workspace/ide/fsTree";
+import type { FSNode, WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 
-import { mergeWorkspaceWithTerminalSnapshot } from "./workspaceTerminalSync";
+import { mergeWorkspaceWithTerminalSnapshot } from "@zoeskoul/learner-workspace/lib/projects/workspaceTerminalSync";
 
 function folderNode(id: string, name: string, parentId: string | null): FSNode {
     return {

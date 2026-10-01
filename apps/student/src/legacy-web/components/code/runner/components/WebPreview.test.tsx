@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { buildWebPreviewSrcDoc } from "./WebPreview";
+import { buildWebPreviewSrcDoc } from "@zoeskoul/learner-workspace/runner/components/WebPreview";
 
 describe("buildWebPreviewSrcDoc", () => {
     it("inlines binary image and font assets without decoding them as text", () => {

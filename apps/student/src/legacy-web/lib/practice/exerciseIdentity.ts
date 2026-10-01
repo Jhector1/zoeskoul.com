@@ -1,4 +1,4 @@
-import type { Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem } from "@/lib/practice/uiTypes";
 
 function firstText(...values: unknown[]) {

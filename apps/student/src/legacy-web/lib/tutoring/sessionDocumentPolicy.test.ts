@@ -4,7 +4,7 @@ import {
   isValidBoardCardKey,
   participantOwnerKey,
   validateBoardDocumentInput,
-} from "./sessionDocumentPolicy";
+} from "@zoeskoul/learner-workspace/lib/tutoring/sessionDocumentPolicy";
 
 const moduleKey = "module-1";
 const cardKey = "card:topic:general";

@@ -4,7 +4,7 @@ import type {
   TopicSlug,
   ValidateResponse,
   Vec3,
-} from "@/lib/practice/types";
+} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { MissedItem } from "@/lib/practice/uiTypes";
 import type { SessionHistoryRow } from "@/lib/practice/runtime/types";
 import type {

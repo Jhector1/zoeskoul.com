@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { WorkspaceLanguage } from "@/lib/practice/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import type { WorkspaceLanguage } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import {
     hydrateBlankWorkspaceFromStarter,
     resolvePreferredExerciseWorkspace,

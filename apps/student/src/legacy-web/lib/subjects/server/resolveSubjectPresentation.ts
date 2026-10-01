@@ -15,7 +15,7 @@ import type {
     ReviewQuizSpec,
     ReviewTopicShape,
 } from "@zoeskoul/curriculum-contracts/subjects/types";
-import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
+import type { ManifestRuntimeDefaults } from "@zoeskoul/learner-workspace/contracts/manifestTypes";
 import {getReviewContentVersion} from "@/lib/review/contentVersion";
 
 function indexBy<T extends { slug: string }>(items: readonly T[]) {

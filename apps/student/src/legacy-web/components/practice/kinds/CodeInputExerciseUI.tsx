@@ -10,13 +10,13 @@ import type {
     CodeExpectedExample,
     Exercise,
     SqlDialect, WorkspaceLanguage,
-} from "@/lib/practice/types";
-import type { FileEntry, RunResult } from "@/lib/code/types";
-import type { CodeFeedback } from "@/lib/code/feedback/types";
-import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
-import { runViaApi } from "@/lib/code/runClient";
+} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
+import type { FileEntry, RunResult } from "@zoeskoul/learner-workspace/lib/code/types";
+import type { CodeFeedback } from "@zoeskoul/learner-workspace/lib/code/feedback/types";
+import { pickRunFeedbackFromResult } from "@zoeskoul/learner-workspace/lib/code/feedback/index";
+import { runViaApi } from "@zoeskoul/learner-workspace/lib/code/runClient";
 import type { CodeRunnerFrame } from "@/components/code/CodeRunner";
-import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
+import { resolveEditableWorkspaceFileId } from "@zoeskoul/learner-workspace/runner/workspaceEditing";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useTaggedT } from "@student/i18n/tagged";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
@@ -26,12 +26,12 @@ import {
 } from "@zoeskoul/curriculum-runtime/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
 import {isRunnerLanguage, RunnerLanguage} from "@zoeskoul/code-contracts";
 import { formatSqlDisplayValue } from "@zoeskoul/practice-checks";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { resolveExerciseWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 import { reviewDebug, summarizeWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/reviewDebug";
 import { exerciseDebug, summarizeExerciseWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseDebug";

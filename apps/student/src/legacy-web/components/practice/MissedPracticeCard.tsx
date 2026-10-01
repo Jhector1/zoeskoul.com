@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef } from "react";
-import MathMarkdown from "@/components/markdown/MathMarkdown";
-import type { WorkspaceLanguage, Exercise } from "@/lib/practice/types";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
+import type { WorkspaceLanguage, Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import { defaultVectorPadState } from "@zoeskoul/learner-ui/vectorpad/defaultState";
 import ExerciseRenderer from "./ExerciseRenderer";

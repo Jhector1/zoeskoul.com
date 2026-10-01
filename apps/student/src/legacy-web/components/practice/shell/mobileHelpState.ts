@@ -1,4 +1,4 @@
-import { isRevealStepKey } from "@/lib/practice/help/steps";
+import { isRevealStepKey } from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 
 export type MobilePracticeHelpState = {
   hintKeys: string[];

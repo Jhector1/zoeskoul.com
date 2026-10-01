@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import ExerciseRenderer from "../ExerciseRenderer";
 import type { PracticeShellProps } from "../PracticeShell";
-import type { Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import { useTaggedT } from "@student/i18n/tagged";
 import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 

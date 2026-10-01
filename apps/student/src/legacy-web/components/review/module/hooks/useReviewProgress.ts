@@ -5,7 +5,7 @@ import {
 } from "@zoeskoul/learning-runtime";
 
 import { useEffect, useMemo, useRef, useState, useCallback, type Dispatch, type SetStateAction } from "react";
-import type { ReviewProgressState, ReviewTopicProgress } from "@/lib/review/progressTypes";
+import type { ReviewProgressState, ReviewTopicProgress } from "@zoeskoul/learning-runtime";
 import {
     emptyReviewProgress,
     fetchReviewProgressGET,
@@ -61,7 +61,7 @@ import {
     canPollReviewRemoteProgress,
     shouldApplyRemoteReviewWorkspace,
     shouldTrackReviewRuntimeMutation,
-} from "./reviewProgressRemoteSyncPolicy";
+} from "@zoeskoul/workspace-contracts";
 import {
     REVIEW_AUTOSAVE_RETRY_DELAYS_MS,
     reviewAutosaveRetryDelayMs,

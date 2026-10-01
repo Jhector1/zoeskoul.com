@@ -18,21 +18,21 @@ import React, {
   useState,
 } from "react";
 
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
-import type { CodeFeedback } from "@/lib/code/feedback/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import type { LearningIdeConfig } from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
+import type { CodeFeedback } from "@zoeskoul/learner-workspace/lib/code/feedback/types";
 import type {
   WorkspaceLanguage,
   SqlDialect,
   TerminalEvidence,
-} from "@/lib/practice/types";
-import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
+import type { SqlPaneOptions } from "@zoeskoul/learner-workspace/runner/components/sql/results-pane/index";
 import type { ToolPresentationPolicy } from "@zoeskoul/curriculum-contracts";
 import type {
   RuntimeWorkspaceMutation,
   UnknownRecord,
   WorkspaceOrigin,
-} from "../runtime/reviewRuntimeTypes";
+} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeTypes";
 import {
   shouldRetainBoundExerciseForResetNavigation,
   type ReviewResetNavigationBindingLease,

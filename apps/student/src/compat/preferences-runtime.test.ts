@@ -13,6 +13,7 @@ describe("Student shared preference compatibility", () => {
       theme: "dark",
       fontSizePx: 24,
       soundEnabled: false,
+      languageAudioAutoPlay: false,
     } as const;
     const snapshot = readBrowserPreferenceSnapshot({
       cookie:

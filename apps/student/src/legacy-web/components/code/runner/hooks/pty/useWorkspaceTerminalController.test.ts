@@ -12,7 +12,7 @@ import {
     resolveInitialWorkspaceTerminalCwd,
     shouldConsumeWorkspaceTerminalEventStream,
     shouldEnableWorkspaceTerminalInput,
-} from "./useWorkspaceTerminalController";
+} from "@zoeskoul/learner-workspace/runner/hooks/pty/useWorkspaceTerminalController";
 
 
 describe("cloneWorkspaceTerminalOwnerSnapshot", () => {

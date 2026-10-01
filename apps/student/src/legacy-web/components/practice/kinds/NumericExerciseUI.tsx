@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import type { Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 
 export default function NumericExerciseUI({

@@ -1,22 +1,22 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import QuizPracticeCard, {
     flushReviewToolsBeforeSubmit,
     workspaceStableKey,
 } from "./QuizPracticeCard";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { CodeInputExercise, ValidateResponse } from "@/lib/practice/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import type { CodeInputExercise, ValidateResponse } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem } from "@/lib/practice/uiTypes";
-import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
+import { DEFAULT_PRACTICE_HELP_POLICY } from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import {
     getReviewSubmitBridgeHost,
     type ReviewSubmitBridgeHost,
 } from "@zoeskoul/learning-runtime/review/submitBridge";
 
-vi.mock("@/lib/config/learnerUiFlags", () => ({
+vi.mock("@zoeskoul/learner-workspace/lib/config/learnerUiFlags", () => ({
     learnerUiFlags: {
         compactLearnerUi: false,
         showDebugLearningUi: false,

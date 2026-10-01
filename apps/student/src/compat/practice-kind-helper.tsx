@@ -1,6 +1,6 @@
 "use client";
 
-import MathMarkdown from "@/components/markdown/MathMarkdown";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import { useTaggedT } from "@student/i18n/tagged";
 import { normalizeMath } from "@zoeskoul/learner-ui/lib/markdown/normalizeMath";
 import React from "react";

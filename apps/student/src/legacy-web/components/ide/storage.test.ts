@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { repairWorkspaceStateV2 } from "./storage";
+import { repairWorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/storage";
 
 describe("repairWorkspaceStateV2 binary workspaces", () => {
     it("preserves a binary active file while repairing the entry to a text file", () => {

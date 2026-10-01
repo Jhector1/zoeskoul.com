@@ -136,7 +136,7 @@ export type PracticeSubmitRequest = {
 
 
 
-import type { SubmitAnswer } from "@/lib/practice/types";
+import type { SubmitAnswer } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
 // export type PracticeGetResponse = any;
 // export type PracticeValidateClientResponse = any;

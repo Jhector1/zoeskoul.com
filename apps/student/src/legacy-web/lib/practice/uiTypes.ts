@@ -5,7 +5,7 @@ import type {
     TopicSlug,
     ValidateResponse,
     Vec3,
-} from "@/lib/practice/types";
+} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
 export type TopicValue = TopicSlug | "all";
 

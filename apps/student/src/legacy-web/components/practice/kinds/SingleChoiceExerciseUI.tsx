@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useMemo } from "react";
-import type { Exercise } from "@/lib/practice/types";
-import MathMarkdown from "@/components/markdown/MathMarkdown";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useTaggedT } from "@student/i18n/tagged";
 import {
     normalizePresentableOptions,
-} from "@/lib/practice/presentationOrder";
+} from "@zoeskoul/learner-workspace/lib/practice/presentationOrder";
 import { useRandomizedOptions } from "./_shared/useRandomizedOptions";
 
 export default function SingleChoiceExerciseUI({

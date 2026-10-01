@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import type { FSNode, FileNode } from "../types";
+import type { FSNode, FileNode } from "@zoeskoul/learner-workspace/ide/types";
 import {
     isLearnerHiddenWorkspacePath,
     learnerVisibleTabFiles,
     learnerVisibleWorkspaceNodes,
     resolveLearnerWorkspacePresentation,
-} from "./workspacePresentation";
+} from "@zoeskoul/learner-workspace/fullide/workspacePresentation";
 
 const nodes: FSNode[] = [
     { id: "internal", kind: "folder", name: ".zoeskoul", parentId: null, createdAt: 0, updatedAt: 0 },

@@ -10,10 +10,10 @@ import type { ReviewCard, ReviewModule } from "@zoeskoul/curriculum-contracts/su
 import type {
     ReviewProgressState,
     ReviewTopicProgress,
-} from "@/lib/subjects/progressTypes";
+} from "@zoeskoul/learning-runtime";
 import type { SubjectFinishState } from "../../types/subjectFinish.types";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import type { CompactQuizNavigationState } from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
 import type { ReviewWorkspaceCapabilities } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 import { isCardDoneFromState } from "@zoeskoul/learning-runtime/review/module/progressKeys";

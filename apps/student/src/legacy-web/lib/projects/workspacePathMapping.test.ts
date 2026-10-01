@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import type { FSNode } from "@/components/ide/types";
+import type { FSNode } from "@zoeskoul/learner-workspace/ide/types";
 
 import {
     detectSyntheticSrcRoot,
@@ -8,7 +8,7 @@ import {
     normalizeSafeRelativePath,
     normalizeUiProjectPath,
     splitSafeRelativePath,
-} from "./workspacePathMapping";
+} from "@zoeskoul/learner-workspace/lib/projects/workspacePathMapping";
 
 function folderNode(id: string, name: string, parentId: string | null): FSNode {
     return {

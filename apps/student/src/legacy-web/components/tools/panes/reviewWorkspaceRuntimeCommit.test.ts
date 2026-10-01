@@ -4,7 +4,7 @@ import {
   REVIEW_WORKSPACE_RUNTIME_COMMIT_DELAY_MS,
   resolveReviewWorkspacePersistencePolicy,
   shouldCommitReviewWorkspaceToRuntimeAfterIdle,
-} from "./reviewWorkspaceRuntimeCommit";
+} from "@zoeskoul/learner-workspace/tools/code/reviewWorkspaceRuntimeCommit";
 
 describe("review workspace persistence policy", () => {
   it("keeps browser-local draft storage off for editable tutoring", () => {

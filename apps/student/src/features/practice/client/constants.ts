@@ -1,5 +1,5 @@
 // src/features/practice/client/constants.ts
-import { DEFAULT_STANDARD_PRACTICE_TARGET_COUNT } from "@/lib/practice/experience/availableTargetCount";
+import { DEFAULT_STANDARD_PRACTICE_TARGET_COUNT } from "@zoeskoul/learner-workspace/lib/practice/experience/availableTargetCount";
 
 export const STORAGE_VERSION = 6 as const;
 export const SESSION_DEFAULT = DEFAULT_STANDARD_PRACTICE_TARGET_COUNT;

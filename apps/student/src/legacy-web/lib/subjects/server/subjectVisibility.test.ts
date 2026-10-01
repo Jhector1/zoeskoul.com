@@ -4,7 +4,7 @@ vi.mock("server-only", () => ({}));
 
 import {
     selectVisibleSubjectsForActor,
-} from "./subjectVisibilityCore";
+} from "@zoeskoul/learner-workspace/lib/subjects/server/subjectVisibilityCore";
 type Subject = {
     slug: string;
     enrolled?: boolean;

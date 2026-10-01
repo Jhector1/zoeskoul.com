@@ -1,12 +1,12 @@
 import { z } from "zod";
-import type { ReviewProgressState } from "@/lib/review/progressTypes";
+import type { ReviewProgressState } from "@zoeskoul/learning-runtime";
 import {
     bytesOfText,
     resolveWorkspacePolicy,
     validateWorkspaceState,
     type IdeWorkspacePolicy,
-} from "@/lib/ide/workspacePolicy";
-import type { WorkspaceLanguage } from "@/lib/practice/types";
+} from "@zoeskoul/learner-workspace/lib/ide/workspacePolicy";
+import type { WorkspaceLanguage } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
 function pickModuleSlug(...values: Array<string | undefined>) {
     for (const value of values) {

@@ -8,13 +8,13 @@ import type {
   ReviewProgressState,
   ReviewTopicProgress,
   SavedQuizState,
-} from "@/lib/subjects/progressTypes";
+} from "@zoeskoul/learning-runtime";
 
 import CardRenderer from "@/components/review/module/CardRenderer";
 import FlowNavigator from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "@zoeskoul/learning-runtime/review/module/runtime/runtimeProgressBridge";
-import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
+import { clearReviewWorkspaceDrafts } from "@zoeskoul/learner-workspace/tools/code/reviewWorkspaceDrafts";
 import { reviewDebug } from "@zoeskoul/learning-runtime/review/module/runtime/reviewDebug";
 
 import {
@@ -39,7 +39,7 @@ import {
   scheduleLanguageAudioSpecPrewarm,
 } from "@zoeskoul/learner-workspace/language/languageAudioPreparation";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import type { CompactQuizNavigationState } from "@zoeskoul/learning-runtime/review/module/compactFlowNavigation";
 import type { ReviewWorkspaceCapabilities } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 

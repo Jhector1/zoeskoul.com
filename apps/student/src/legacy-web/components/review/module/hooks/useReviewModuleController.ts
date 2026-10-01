@@ -13,7 +13,7 @@ import {useRouter} from "@student/i18n/navigation";
 import {publishNavigation} from "@student/compat/navigation-runtime";
 import { mergeToolPresentationPolicies } from "@zoeskoul/curriculum-contracts";
 
-import type {ReviewProgressState} from "@/lib/subjects/progressTypes";
+import type {ReviewProgressState} from "@zoeskoul/learning-runtime";
 
 import { ROUTES } from "@zoeskoul/app-config";
 
@@ -85,17 +85,17 @@ import {
     computeProgressiveUnlock, firstRouteTargetForUnlockedTopic,
     getTargetKeyForRouteTarget, isTrustedProgressiveRouteLease, maxUnlockedCardIndexForTopic
 } from "@zoeskoul/learning-runtime/review/module/runtime/progressiveUnlock";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import {resolveRightRailSqlProps} from "@zoeskoul/learning-runtime/review/module/runtime/resolveRightRailSqlProps";
 import { resolveTopicStageRuntimeDefaults } from "@zoeskoul/learning-runtime/review/module/runtime/topicStageRuntimeDefaults";
 import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
 import { resolveRightRailIdeConfig } from "./rightRailIdeConfig";
 import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 import { startSelfPacedPractice } from "@zoeskoul/learning-client";
-import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
+import { clearReviewWorkspaceDrafts } from "@zoeskoul/learner-workspace/tools/code/reviewWorkspaceDrafts";
 import {
     resolveReviewWorkspacePersistencePolicy,
-} from "@/components/tools/panes/reviewWorkspaceRuntimeCommit";
+} from "@zoeskoul/learner-workspace/tools/code/reviewWorkspaceRuntimeCommit";
 import {
     cardHasAuthoredExerciseSurface,
     shouldRightRailUseBoundExercise,

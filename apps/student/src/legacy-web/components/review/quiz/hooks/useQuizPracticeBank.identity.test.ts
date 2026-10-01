@@ -11,8 +11,8 @@ import {
     shouldTreatPatchAsExplicitFeedbackDismiss,
     shouldTreatPatchAsRevealFill,
 } from "@/components/review/quiz/hooks/useQuizPracticeBank";
-import { collectTerminalWorkspaceCommands } from "@/lib/practice/terminalWorkspaceHints";
-import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";
+import { collectTerminalWorkspaceCommands } from "@zoeskoul/learner-workspace/lib/practice/terminalWorkspaceHints";
+import { normalizeVisibleTerminalTranscriptText } from "@zoeskoul/learner-workspace/lib/practice/visibleTerminalTranscript";
 import { getReviewSubmitBridgeHost } from "@zoeskoul/learning-runtime/review/submitBridge";
 
 describe("useQuizPracticeBank practice identity guards", () => {

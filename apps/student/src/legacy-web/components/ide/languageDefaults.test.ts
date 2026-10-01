@@ -4,7 +4,7 @@ import {
     defaultExt,
     defaultMainCode,
     defaultMainFile,
-} from "./languageDefaults";
+} from "@zoeskoul/learner-workspace/ide/languageDefaults";
 
 describe("languageDefaults bash", () => {
     it("uses main.sh as the default bash entry file", () => {

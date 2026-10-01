@@ -1,6 +1,6 @@
-import type { Difficulty, Exercise } from "@/lib/practice/types";
+import type { Difficulty, Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem } from "@/lib/practice/uiTypes";
-import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
+import type { PracticeHelpPolicy } from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 
 export type PracticeItemState = {
     loading: boolean;

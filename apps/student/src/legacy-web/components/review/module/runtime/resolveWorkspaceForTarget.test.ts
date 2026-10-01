@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import {
   createManifestWorkspaceDefinition,
   resolveWorkspaceForExerciseTarget,

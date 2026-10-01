@@ -7,7 +7,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState, useCallback, useMem
 import type { ReviewQuestion, ReviewQuizSpec } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import { defaultVectorPadState } from "@zoeskoul/learner-ui/vectorpad/defaultState";
-import type { SavedQuizState } from "@/lib/review/progressTypes";
+import type { SavedQuizState } from "@zoeskoul/learning-runtime";
 import type { QItem } from "@/lib/practice/uiTypes";
 import type { PracticeItemState } from "@/lib/practice/runtime";
 import {
@@ -19,14 +19,14 @@ import {
   submitPracticeItem,
 } from "@/lib/practice/runtime";
 import { cloneVec } from "@/lib/practice/uiHelpers";
-import { emitSfx } from "@/lib/sfx/bus";
+import { emitSfx } from "@zoeskoul/learner-workspace/lib/sfx/bus";
 import { useTaggedT } from "@student/i18n/tagged";
 import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import {
   DEFAULT_PRACTICE_HELP_POLICY,
   getNextPracticeHelpStepKey,
   isRevealStepKey,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import { emitGamificationUpdate } from "@zoeskoul/learning-client/legacy-compatible/gamification/browserEvents";
 import { reviewDebug, summarizePracticePatch } from "@zoeskoul/learning-runtime/review/module/runtime/reviewDebug";
 import { exerciseDebug, summarizeExercisePatch } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseDebug";

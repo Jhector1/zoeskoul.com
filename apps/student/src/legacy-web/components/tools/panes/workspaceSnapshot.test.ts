@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import {
     extractRuntimeSnapshotFromWorkspace,
     rememberWorkspaceForSubmit,
     selectWorkspaceForSubmit,
-} from "@/components/tools/panes/workspaceSnapshot";
+} from "@zoeskoul/learner-workspace/tools/code/workspaceSnapshot";
 
 function buildWorkspace(): WorkspaceStateV2 {
     return {

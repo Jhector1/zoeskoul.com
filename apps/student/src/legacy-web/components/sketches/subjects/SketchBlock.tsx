@@ -18,7 +18,7 @@ import { useTaggedT } from "@student/i18n/tagged";
 import {
     isCompactLearnerUiActive,
     shouldShowExpandedLearnerTitles,
-} from "@/lib/config/learnerUiFlags";
+} from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import { getDistinctSketchShellTitle } from "@zoeskoul/learner-ui/sketches/subjects/getDistinctSketchShellTitle";
 
 function mergeSpec(base: SketchSpec, patch?: Record<string, unknown>): SketchSpec {

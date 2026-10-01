@@ -4,16 +4,16 @@ import React from "react";
 import { NotebookPen, PenTool, TerminalSquare } from "lucide-react";
 import type { ToolSpec, ToolsCtx } from "./types";
 import CodeToolPane from "./panes/CodeToolPane";
-import{ SqlDialect } from "@/lib/practice/types";
+import{ SqlDialect } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import {RunnerLanguage} from "@zoeskoul/code-contracts";
 import NotesToolPane from "@/components/tools/panes/NotesToolPane";
 import BoardToolPane from "@/components/tools/panes/BoardToolPane";
 import type { ToolDocKey } from "@/components/tools/hooks/useToolDoc";
-import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import type { LearningIdeConfig } from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import type { SqlPaneOptions } from "@zoeskoul/learner-workspace/runner/components/sql/results-pane/index";
 import type { ToolRunnerPanePolicy, ToolSurface } from "@zoeskoul/curriculum-contracts";
-import type { ReviewWorkspaceRuntimeCommitMode } from "@/components/tools/panes/reviewWorkspaceRuntimeCommit";
+import type { ReviewWorkspaceRuntimeCommitMode } from "@zoeskoul/learner-workspace/tools/code/reviewWorkspaceRuntimeCommit";
 
 export type CodeToolProps = {
     height: number;

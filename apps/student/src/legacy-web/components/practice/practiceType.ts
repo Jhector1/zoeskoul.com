@@ -1,4 +1,4 @@
-import {WorkspaceLanguage, TopicSlug} from "@/lib/practice/types";
+import {WorkspaceLanguage, TopicSlug} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 
 export type TopicValue = TopicSlug | "all";

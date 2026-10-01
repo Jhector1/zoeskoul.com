@@ -1,7 +1,7 @@
 "use client";
 
 import React, {useCallback, useEffect, useMemo, useRef} from "react";
-import type {Exercise, SqlDialect} from "@/lib/practice/types";
+import type {Exercise, SqlDialect} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type {VectorPadState} from "@zoeskoul/learner-ui/vectorpad/types";
 
 import NumericExerciseUI from "./kinds/NumericExerciseUI";
@@ -16,19 +16,19 @@ import VoiceInputExerciseUI from "./kinds/VoiceInputExerciseUI";
 
 import type {QItem} from "./practiceType";
 import MatrixInputPanel from "./MatrixInputPanel";
-import {resizeGrid} from "@/lib/practice/matrixHelpers";
+import {resizeGrid} from "@zoeskoul/learner-workspace/lib/practice/matrixHelpers";
 import FillBlankChoiceExerciseUI from "@/components/practice/kinds/FillBlankChoiceExerciseUI";
 import ListenBuildExerciseUI from "@/components/practice/kinds/ListenBuildExerciseUI";
 import WordBankArrangeExerciseUI from "@/components/practice/kinds/WordBankArrangeExerciseUI";
 import {resolveDeepTagged} from "@zoeskoul/i18n-core";
 import {useTaggedT} from "@student/i18n/tagged";
 import type {RunnerLanguage} from "@zoeskoul/code-contracts";
-import type {LearningIdeConfig} from "@/lib/ide/learningIdeConfig";
-import type {WorkspaceStateV2} from "@/components/ide/types";
+import type {LearningIdeConfig} from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
+import type {WorkspaceStateV2} from "@zoeskoul/learner-workspace/ide/types";
 import {useReviewRuntimeStore} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import {getExerciseStateKey} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
 import {resolveSqlRunnerConfig} from "@zoeskoul/curriculum-runtime/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
-import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import type { SqlPaneOptions } from "@zoeskoul/learner-workspace/runner/components/sql/results-pane/index";
 
 import {resolveExerciseWorkspace, deriveEntryCode} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 import {

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
 export type CodeSurfaceRequest = "auto" | "embedded" | "workspace";
 export type ResolvedCodeSurface = "embedded" | "tools";

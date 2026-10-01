@@ -3,7 +3,7 @@ import "server-only";
 import {
     selectVisibleSubjectsForActor,
     type SubjectVisibilityInput,
-} from "./subjectVisibilityCore";
+} from "@zoeskoul/learner-workspace/lib/subjects/server/subjectVisibilityCore";
 
 export type CatalogVisibilityMode = "learner" | "admin";
 

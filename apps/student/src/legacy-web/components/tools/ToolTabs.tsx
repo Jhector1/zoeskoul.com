@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cx } from "./utils/cx";
+import { cx } from "@zoeskoul/learner-workspace/tools/utils/cx";
 import type { ToolId, ToolsCtx } from "./types";
 import { TOOL_SPECS } from "./registry";
 

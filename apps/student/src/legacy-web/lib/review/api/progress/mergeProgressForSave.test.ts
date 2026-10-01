@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import type { ReviewProgressState } from "@/lib/review/progressTypes";
-import { mergeReviewProgressForSave } from "./mergeProgressForSave";
+import type { ReviewProgressState } from "@zoeskoul/learning-runtime";
+import { mergeReviewProgressForSave } from "@zoeskoul/learning-runtime";
 
 function state(value: Partial<ReviewProgressState>): ReviewProgressState {
   return { topics: {}, ...value } as ReviewProgressState;

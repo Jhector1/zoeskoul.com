@@ -4,7 +4,7 @@ import { useMemo, useState, type Dispatch, type SetStateAction } from "react";
 import { useSearchParams } from "next/navigation";
 
 import type { PracticeRunMetaApi } from "@/lib/practice/apiTypes";
-import type { Difficulty } from "@/lib/practice/types";
+import type { Difficulty } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { TopicValue } from "@/lib/practice/uiTypes";
 
 import { difficultyOptions } from "@zoeskoul/learner-ui/vectorpad/types";

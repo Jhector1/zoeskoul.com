@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem } from "./practiceType";
-import type { FSNode, NodeId, WorkspaceStateV2 } from "@/components/ide/types";
+import type { FSNode, NodeId, WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 
-import MathMarkdown from "@/components/markdown/MathMarkdown";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import MatrixInputPanel from "./MatrixInputPanel";
-import { defaultMainFile } from "@/components/ide/languageDefaults";
-import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
+import { defaultMainFile } from "@zoeskoul/learner-workspace/ide/languageDefaults";
+import { scrollIntoViewSmart } from "@zoeskoul/learner-workspace/lib/ui/flowScroll";
 import { useTaggedT } from "@student/i18n/tagged";
 import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";

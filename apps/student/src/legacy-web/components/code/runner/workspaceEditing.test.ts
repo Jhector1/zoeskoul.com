@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import { resolveEditableWorkspaceFileId } from "@zoeskoul/learner-workspace/runner/workspaceEditing";
 
 function buildWorkspace(): WorkspaceStateV2 {
     return {

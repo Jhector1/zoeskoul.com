@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canViewLearningAssignmentSolutions } from "./solutionPolicy";
+import { canViewLearningAssignmentSolutions } from "@zoeskoul/learner-workspace/lib/learningAssignments/solutionPolicy";
 
 const now = new Date("2026-07-23T12:00:00.000Z");
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mergeSubjectCardPresentation } from "./subjectCardPresentation";
+import { mergeSubjectCardPresentation } from "@zoeskoul/learner-workspace/lib/subjects/subjectCardPresentation";
 
 const authored = {
     slug: "python-v2",

@@ -20,12 +20,12 @@ import {
 import { useTranslations } from "next-intl";
 
 import { useToolDoc, type ToolDocKey } from "../hooks/useToolDoc";
-import { useElementSize } from "../hooks/useElementSize";
-import { clientPointToBoardPoint } from "../board/coordinates";
+import { useElementSize } from "@zoeskoul/learner-workspace/tools/hooks/useElementSize";
+import { clientPointToBoardPoint } from "@zoeskoul/learner-workspace/tools/board/coordinates";
 import {
   getBoardTextEditorLogicalSize,
   getBoardTextEditorRect,
-} from "../board/layout";
+} from "@zoeskoul/learner-workspace/tools/board/layout";
 import {
   boardElementBounds,
   boardTextBounds,
@@ -36,13 +36,13 @@ import {
   serializeBoardDocument,
   translateBoardElement,
   type BoardResizeHandle,
-} from "../board/document";
+} from "@zoeskoul/learner-workspace/tools/board/document";
 import type {
   BoardDocument,
   BoardElement,
   BoardPoint,
   BoardTool,
-} from "../board/types";
+} from "@zoeskoul/learner-workspace/tools/board/types";
 import {
   DEFAULT_BOARD_CAMERA,
   fitBoardCameraToBounds,
@@ -51,7 +51,7 @@ import {
   zoomBoardCameraAtClientPoint,
   type BoardCamera,
   type BoardClientPoint,
-} from "../board/viewport";
+} from "@zoeskoul/learner-workspace/tools/board/viewport";
 
 const DEFAULT_COLOR = "#0f766e";
 const DEFAULT_STROKE_WIDTH = 4;

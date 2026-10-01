@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import type { Exercise, Vec3 } from "@/lib/practice/types";
+import type { Exercise, Vec3 } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import VectorPad from "@/components/vectorpad/VectorPad";
 import {ExercisePrompt} from "@/components/practice/kinds/KindHelper";

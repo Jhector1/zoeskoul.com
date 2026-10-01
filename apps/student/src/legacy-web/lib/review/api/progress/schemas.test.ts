@@ -3,7 +3,7 @@ import {
     ReviewProgressWriteSchema,
     REVIEW_PROGRESS_LIMITS,
 } from "@/lib/review/api/progress/schemas";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 
 function buildWorkspace(language: WorkspaceStateV2["language"] = "python"): WorkspaceStateV2 {
     return {

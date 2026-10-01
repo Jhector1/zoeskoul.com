@@ -7,7 +7,7 @@ import {
   resizeBoardElement,
   serializeBoardDocument,
   translateBoardElement,
-} from "./document";
+} from "@zoeskoul/learner-workspace/tools/board/document";
 
 const rectangle = {
   id: "r1",

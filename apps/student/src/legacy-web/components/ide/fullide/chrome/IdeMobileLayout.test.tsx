@@ -2,7 +2,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
-import IdeMobileLayout from "./IdeMobileLayout";
+import IdeMobileLayout from "@zoeskoul/learner-workspace/fullide/chrome/IdeMobileLayout";
 
 vi.mock("next-intl", () => ({
     useTranslations: () => (key: string) =>

@@ -10,7 +10,7 @@ import {
     resolveTerminalWorkspaceKey,
     shouldProbeTerminalOnVisibilityRestore,
     workspaceTerminalBootstrapKey,
-} from "@/components/code/runner/runtime";
+} from "@zoeskoul/learner-workspace/runner/runtime";
 
 describe("resolveTerminalWorkspaceKey", () => {
     const topicExerciseA =

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import type { Exercise, Difficulty } from "@/lib/practice/types";
+import type { Exercise, Difficulty } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 
 import type { MissedItem, QItem, TopicValue } from "./practiceType";
@@ -15,7 +15,7 @@ import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 import { isPracticeItemFinalized } from "@/lib/practice/runtime";
 import type { PracticeExperienceMode, PracticeRunViewer } from "@/lib/practice/experience/types";
 import type { PracticeSubscriberRunMeta } from "@/lib/practice/apiTypes";
-import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
+import type { PracticeHelpPolicy } from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import { resolvePracticeExerciseSurface } from "@/lib/practice/experience/surface";
 import {
   resolveEmbeddedPracticeWorkspacePresentation,

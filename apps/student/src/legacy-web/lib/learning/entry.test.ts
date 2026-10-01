@@ -5,7 +5,7 @@ import {
   createContinueLearningEntry,
   createStartLearningEntry,
   parseLearningEntry,
-} from "./entry";
+} from "@zoeskoul/learner-workspace/lib/learning/entry";
 
 describe("learning entry", () => {
   it("builds the canonical module learning route", () => {

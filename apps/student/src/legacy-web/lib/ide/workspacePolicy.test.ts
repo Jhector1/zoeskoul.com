@@ -5,8 +5,8 @@ import {
     resolveWorkspacePolicy,
     validateImportedFiles,
     validateWorkspaceState,
-} from "@/lib/ide/workspacePolicy";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+} from "@zoeskoul/learner-workspace/lib/ide/workspacePolicy";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 
 function buildWorkspace(overrides?: Partial<WorkspaceStateV2>): WorkspaceStateV2 {
     return {

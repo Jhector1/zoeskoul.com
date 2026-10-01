@@ -7,7 +7,7 @@ import {
   createStartLearningEntry,
   parseLearningEntry,
   type LearningEntry,
-} from "@/lib/learning/entry";
+} from "@zoeskoul/learner-workspace/lib/learning/entry";
 
 type LearningEntryButtonProps = {
   isAuthenticated: boolean;

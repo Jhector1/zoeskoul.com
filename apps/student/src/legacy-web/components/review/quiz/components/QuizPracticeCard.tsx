@@ -35,7 +35,7 @@ import {
   resolveCanonicalExercisePresentation,
 } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
 import { resolveCanonicalExerciseOwnerKey } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExerciseOwnerKey";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import {
   normalizeWorkspaceLanguage,
   stateLanguageMatches,
@@ -46,25 +46,25 @@ import { getReviewSubmitBridgeHost } from "@zoeskoul/learning-runtime/review/sub
 
 import { useTaggedT } from "@student/i18n/tagged";
 import { resolveDeepTagged } from "@zoeskoul/i18n-core";
-import type { Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import {
   canRevealPracticeAnswer,
   DEFAULT_PRACTICE_HELP_POLICY,
   getFallbackPracticeHintStepKey,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import { normalizeCurrentPracticeItem } from "@/lib/practice/runtime";
 import { deriveEntryCode } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 import { createManifestWorkspaceDefinition } from "@zoeskoul/learning-runtime/review/module/runtime/resolveWorkspaceForTarget";
-import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
-import { defaultMainFile } from "@/components/ide/languageDefaults";
+import { mergeLearningIdeConfigs } from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
+import { defaultMainFile } from "@zoeskoul/learner-workspace/ide/languageDefaults";
 import {
   cleanStarterCode,
   firstUsableStarterFilesValue,
   pickEntryFileFromStarterFilesValue,
   starterFileContentForPath,
 } from "@zoeskoul/learning-runtime/review/module/runtime/starterContent";
-import type { CodeFeedback } from "@/lib/code/feedback/types";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import type { CodeFeedback } from "@zoeskoul/learner-workspace/lib/code/feedback/types";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import {
   resolveReviewFinalizedPracticeAction,
   type ReviewFinalizedPracticeAction,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { ReviewContentVersion } from "@/lib/review/contentVersionTypes";
+import type { ReviewContentVersion } from "@zoeskoul/learner-workspace/lib/review/contentVersionTypes";
 
 export function useReviewContentUpdate(args: {
     loadedContentVersion?: ReviewContentVersion | null;

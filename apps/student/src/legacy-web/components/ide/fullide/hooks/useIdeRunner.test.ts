@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { buildProjectRunRequest } from "./useIdeRunner";
+import { buildProjectRunRequest } from "@zoeskoul/learner-workspace/fullide/hooks/useIdeRunner";
 
 const baseFile = {
     kind: "file" as const,

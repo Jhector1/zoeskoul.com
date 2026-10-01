@@ -10,7 +10,7 @@ import {
 } from "vitest";
 
 vi.mock(
-  "@/components/markdown/MathMarkdown",
+  "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown",
   () => ({
     default: ({
       content,

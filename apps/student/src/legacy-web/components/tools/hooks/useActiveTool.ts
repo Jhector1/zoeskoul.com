@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { ToolId, ToolsCtx } from "../types";
-import { safeGet, safeSet } from "../utils/storage";
+import { safeGet, safeSet } from "@zoeskoul/learner-workspace/tools/utils/storage";
 import { TOOL_SPECS } from "../registry";
 
 function storageKey(ctx: ToolsCtx) {

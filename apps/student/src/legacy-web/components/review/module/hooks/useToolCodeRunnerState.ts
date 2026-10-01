@@ -6,17 +6,17 @@ import {
 } from "@zoeskoul/learning-runtime";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import type { WorkspaceLanguage, SqlDialect } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import { useDebouncedCommit } from "@zoeskoul/learning-client/legacy-compatible/client/persistence/useDebouncedCommit";
 import { useFlushOnPageExit } from "@zoeskoul/learning-client/legacy-compatible/client/persistence/useFlushOnPageExit";
-import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
-import { defaultMainCode } from "@/components/ide/languageDefaults";
+import { DEFAULT_SQL_DIALECT } from "@zoeskoul/learner-workspace/runner/constants";
+import { defaultMainCode } from "@zoeskoul/learner-workspace/ide/languageDefaults";
 import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
 } from "@zoeskoul/curriculum-runtime/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
-import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { LearningIdeConfig } from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import {
     getCardIdFromToolScopeKey,

@@ -1,6 +1,6 @@
 // src/components/review/quiz/hooks/useQuizLocalAnswers.ts
 import { useCallback, useState } from "react";
-import type { SavedQuizState } from "@/lib/subjects/progressTypes";
+import type { SavedQuizState } from "@zoeskoul/learning-runtime";
 
 export function useQuizLocalAnswers() {
   const [answers, setAnswers] = useState<Record<string, any>>({});

@@ -2,7 +2,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
-import IdeEditorPane from "@/components/ide/fullide/panes/IdeEditorPane";
+import IdeEditorPane from "@zoeskoul/learner-workspace/fullide/panes/IdeEditorPane";
 
 const capturedRunnerProps: any[] = [];
 
@@ -20,7 +20,7 @@ vi.mock("@/components/code/CodeRunner", () => ({
     },
 }));
 
-vi.mock("@/components/ide/fullide/TabsBar", () => ({
+vi.mock("@zoeskoul/learner-workspace/fullide/TabsBar", () => ({
     default: () => <div data-testid="mock-tabs-bar" />,
 }));
 

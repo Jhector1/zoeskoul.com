@@ -3,13 +3,13 @@ import { toolsPolicyForSubject } from "@zoeskoul/learner-ui/lib/tools/policy";
 import { resolveToolDefaults } from "@/components/tools/resolveToolDefaults";
 import { resolveCourseSqlRunnerConfig } from "@zoeskoul/learning-runtime/review/module/runtime/courseProfiles";
 import type { ReviewModule } from "@zoeskoul/curriculum-contracts/subjects/types";
-import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
+import type { ManifestRuntimeDefaults } from "@zoeskoul/learner-workspace/contracts/manifestTypes";
 import {
     learningIdeFromRuntimeDefaults,
     type LearningIdeConfig,
     mergeLearningIdeConfigs,
-} from "@/lib/ide/learningIdeConfig";
-import type { UnknownRecord } from "../runtime/reviewRuntimeTypes";
+} from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
+import type { UnknownRecord } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeTypes";
 
 type Args = {
     subjectSlug: string;

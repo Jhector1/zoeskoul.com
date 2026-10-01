@@ -3,7 +3,7 @@ import {
     canPollReviewRemoteProgress,
     shouldApplyRemoteReviewWorkspace,
     shouldTrackReviewRuntimeMutation,
-} from "./reviewProgressRemoteSyncPolicy";
+} from "@zoeskoul/workspace-contracts";
 
 describe("review progress remote sync policy", () => {
     it("does not treat runtime mount churn as learner work in a read-only tutor workspace", () => {

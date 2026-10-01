@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 
-import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import {
     buildModelPath,
     buildWorkspaceModelReplacements,
     canApplyMountedWorkspaceReplacement,
     replaceMountedWorkspaceModels,
-} from "./EditorPane";
+} from "@zoeskoul/learner-workspace/runner/components/EditorPane";
 
 const workspace: WorkspaceStateV2 = {
     version: 2,

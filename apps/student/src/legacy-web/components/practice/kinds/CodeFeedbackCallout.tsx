@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTaggedT } from "@student/i18n/tagged";
-import type { CodeFeedback, CodeFeedbackTone } from "@/lib/code/feedback/types";
+import type { CodeFeedback, CodeFeedbackTone } from "@zoeskoul/learner-workspace/lib/code/feedback/types";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import Badge from "@/components/billing/Badge";
 

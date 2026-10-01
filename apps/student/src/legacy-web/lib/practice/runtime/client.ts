@@ -1,5 +1,5 @@
 import type { MutableRefObject } from "react";
-import type { Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem, PracticeHelpEntry } from "@/lib/practice/uiTypes";
 import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import {
@@ -21,7 +21,7 @@ import type { PracticeRuntimeTextResolvers } from "./types";
 import {
     DEFAULT_PRACTICE_HELP_POLICY,
     normalizePracticeHelpPolicy,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import {
     normalizeWorkspaceLanguage,
     stateLanguageMatches,

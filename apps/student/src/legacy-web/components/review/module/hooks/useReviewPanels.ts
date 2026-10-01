@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useResizablePanels } from "./useResizablePanels";
 import { useMediaQuery } from "./useMediaQuery";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 
 type Args = {
     footerInsetPx?: number;

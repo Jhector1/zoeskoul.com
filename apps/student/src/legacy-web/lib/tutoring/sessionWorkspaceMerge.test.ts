@@ -4,7 +4,7 @@ import {
   getTutoringBaselineVersion,
   mergeTutoringSnapshotValue,
   withTutoringBaseline,
-} from "./sessionWorkspaceMerge";
+} from "@zoeskoul/learner-workspace/lib/tutoring/sessionWorkspaceMerge";
 
 describe("tutoring workspace snapshot merge", () => {
   it("applies tutor changes to untouched values and preserves learner conflicts", () => {

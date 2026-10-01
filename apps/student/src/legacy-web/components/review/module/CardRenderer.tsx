@@ -6,9 +6,9 @@ import type { ReviewCard, ReviewEmbeddedTryIt } from "@zoeskoul/curriculum-contr
 import type {
     ReviewTopicProgress,
     SavedQuizState,
-} from "@/lib/subjects/progressTypes";
+} from "@zoeskoul/learning-runtime";
 
-import MathMarkdown from "@/components/markdown/MathMarkdown";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import QuizBlock from "@/components/review/QuizBlock";
 import { buildReviewQuizKey } from "@zoeskoul/curriculum-contracts/subjects/quizClient";
 import type { ReviewAssessmentCompletionReason } from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
@@ -18,7 +18,7 @@ import type { SavedSketchState } from "@zoeskoul/learner-ui/sketches/subjects/ty
 import { useTaggedT } from "@student/i18n/tagged";
 import { resolveDeepTagged } from "@zoeskoul/i18n-core";
 import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
-import { shouldShowExpandedLearnerTitles } from "@/lib/config/learnerUiFlags";
+import { shouldShowExpandedLearnerTitles } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { getCardToolScopeKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
 import { buildQuizBlockRuntimeDefaultsProps } from "@zoeskoul/learning-runtime/review/module/runtime/cardRuntimeDefaults";

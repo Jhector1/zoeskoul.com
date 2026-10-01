@@ -2,8 +2,8 @@
 
 import React from "react";
 import { useTaggedT } from "@student/i18n/tagged";
-import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
-import type { Exercise } from "@/lib/practice/types";
+import { resolvePracticeDisplayTitle } from "@zoeskoul/learner-workspace/lib/practice/displayTitle";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { PracticeShellProps } from "../PracticeShell";
 import ResultPanel from "./ResultPanel";
 import { shouldOfferAiTutor } from "@zoeskoul/learner-ui/ai-tutor/tutorContext";
@@ -16,7 +16,7 @@ import {
     canRevealPracticeAnswer,
     DEFAULT_PRACTICE_HELP_POLICY,
     getFallbackPracticeHintStepKey,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 
 function SelectField<T extends string>({
                                            label,

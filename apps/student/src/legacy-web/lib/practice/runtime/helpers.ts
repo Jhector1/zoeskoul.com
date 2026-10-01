@@ -2,7 +2,7 @@ import type {
     Exercise,
     SubmitAnswer,
     TopicSlug,
-} from "@/lib/practice/types";
+} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { MissedItem, QItem } from "@/lib/practice/uiTypes";
 import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import {

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   isLearningAssignmentOpen,
   learningAssignmentAvailability,
-} from "./assignmentWindow";
+} from "@zoeskoul/learner-workspace/lib/learningAssignments/assignmentWindow";
 
 const now = new Date("2026-07-23T12:00:00.000Z");
 

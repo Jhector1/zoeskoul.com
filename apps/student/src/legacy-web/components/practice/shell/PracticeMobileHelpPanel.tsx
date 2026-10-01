@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import type { Exercise } from "@/lib/practice/types";
-import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
+import type { Exercise } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
+import type { PracticeHelpPolicy } from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import {
   canRevealPracticeAnswer,
   DEFAULT_PRACTICE_HELP_POLICY,
   getFallbackPracticeHintStepKey,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import type { QItem } from "@/lib/practice/uiTypes";
 import PracticeHelpPanel from "../PracticeHelpPanel";
 import type { TFn } from "../PracticeShell";

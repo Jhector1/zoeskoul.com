@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
     buildStableSeedKey,
     shuffleItems,
-} from "@/lib/practice/presentationOrder";
+} from "@zoeskoul/learner-workspace/lib/practice/presentationOrder";
 
 export function useRandomizedIdOrder(args: {
     sourceIds: string[];

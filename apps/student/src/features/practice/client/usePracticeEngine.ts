@@ -7,7 +7,7 @@ import type {
   SubmitAnswer,
   Difficulty,
   TopicSlug,
-} from "@/lib/practice/types";
+} from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { QItem, MissedItem } from "@/lib/practice/uiTypes";
 import {
   fetchPracticeExercise,
@@ -27,7 +27,7 @@ import type { VectorPadState } from "@zoeskoul/learner-ui/vectorpad/types";
 import { getEffectiveSid } from "./storage";
 import { useTaggedT } from "@student/i18n/tagged";
 import { resolveDeepTagged } from "@zoeskoul/i18n-core";
-import { emitSfx } from "@/lib/sfx/bus";
+import { emitSfx } from "@zoeskoul/learner-workspace/lib/sfx/bus";
 import {
   buildLocalMissed,
   computePracticeCounts,
@@ -51,7 +51,7 @@ import {
 import {
   canRevealPracticeAnswer,
   isRevealStepKey,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { buildServerResumePlan } from "./assignmentResumePolicy";
 import { resolvePracticePurposeRequestParams } from "./practiceRequestPolicy";

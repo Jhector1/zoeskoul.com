@@ -13,7 +13,7 @@ import {
   canRevealPracticeAnswer,
   DEFAULT_PRACTICE_HELP_POLICY,
   getFallbackPracticeHintStepKey,
-} from "@/lib/practice/help/steps";
+} from "@zoeskoul/learner-workspace/lib/practice/help/steps";
 
 function TrophyIcon() {
   return (

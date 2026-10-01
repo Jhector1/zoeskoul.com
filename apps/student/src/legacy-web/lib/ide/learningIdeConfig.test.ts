@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
     mergeLearningIdeConfigs,
     resolveFullIDEConfigFromLearningIde,
-} from "@/lib/ide/learningIdeConfig";
+} from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
 
 describe("mergeLearningIdeConfigs", () => {
     it("preserves layoutMode, requirements, terminal cwd, bootstrap, and SQL options additively", () => {

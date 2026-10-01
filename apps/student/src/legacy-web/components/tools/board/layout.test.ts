@@ -3,7 +3,7 @@ import {
   getBoardTextEditorLogicalSize,
   getBoardTextEditorRect,
   getBoardViewport,
-} from "./layout";
+} from "@zoeskoul/learner-workspace/tools/board/layout";
 
 describe("getBoardViewport", () => {
   it("fills a wide panel by extending the logical width", () => {

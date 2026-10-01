@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
   ReviewDestinationTransitionProvider,
   type ReviewDestinationTransitionValue,
-} from "@/components/review/module/navigation/ReviewDestinationTransitionContext";
+} from "@zoeskoul/learner-workspace/tools/code/ReviewDestinationTransitionContext";
 import ReviewExerciseTransitionBoundary from "./ReviewExerciseTransitionBoundary";
 
 function render(active: boolean, transitioning: boolean) {

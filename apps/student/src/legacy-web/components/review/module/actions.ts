@@ -3,7 +3,7 @@ import type {
     ReviewProgressState,
     ReviewTopicProgress,
     SavedQuizState,
-} from "@/lib/subjects/progressTypes";
+} from "@zoeskoul/learning-runtime";
 import {
     isQuizLikeCard,
     markCardDoneInTopicState,

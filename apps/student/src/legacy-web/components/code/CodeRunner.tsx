@@ -1,2 +1,2 @@
 export { default } from "./runner/CodeRunner";
-export * from "./runner/types";
+export * from "@zoeskoul/learner-workspace/runner/types";

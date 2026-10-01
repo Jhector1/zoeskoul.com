@@ -10,7 +10,7 @@ import {
   boardDocumentKey,
   isValidBoardCardKey,
   utf8Bytes,
-} from "./sessionDocumentPolicy";
+} from "@zoeskoul/learner-workspace/lib/tutoring/sessionDocumentPolicy";
 
 export type TutoringSelection = {
   scope: "course" | "module" | "section" | "topic";

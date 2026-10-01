@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import StudentHeaderSlick from "@student/components/chrome/StudentHeaderSlick";
 import type { HeaderGamificationVm } from "../../types";
 import NavButton from "@/components/ui/NavButton";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
 
 type Props = {
     locale: string;

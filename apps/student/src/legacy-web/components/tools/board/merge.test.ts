@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { canonicalizeBoardBody, mergeBoardBodies } from "./merge";
+import { canonicalizeBoardBody, mergeBoardBodies } from "@zoeskoul/learner-workspace/tools/board/merge";
 
 const text = (id: string, value: string) => ({
   id,

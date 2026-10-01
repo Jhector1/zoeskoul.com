@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { resolveTutoringAccess } from "./sessionAccessCore";
+import { resolveTutoringAccess } from "@zoeskoul/learner-workspace/lib/tutoring/sessionAccessCore";
 
 const base = {
   userId: "student-1",

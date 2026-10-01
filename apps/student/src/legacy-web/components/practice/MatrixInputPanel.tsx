@@ -3,7 +3,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import MatrixEntryInput from "./MatrixEntryInput";
-import { clampInt } from "@/lib/practice/matrixHelpers";
+import { clampInt } from "@zoeskoul/learner-workspace/lib/practice/matrixHelpers";
 
 export default function MatrixInputPanel({
   labelLatex = String.raw`\mathbf{A}=`,

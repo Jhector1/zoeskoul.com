@@ -9,13 +9,13 @@ import ToolTabs from "./ToolTabs";
 import { TOOL_SPECS } from "./registry";
 import type { ToolsCtx, ToolId } from "./types";
 import { useActiveTool } from "./hooks/useActiveTool";
-import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
-import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
+import type { WorkspaceLanguage, SqlDialect } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
+import type { LearningIdeConfig } from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
+import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import type { SqlPaneOptions } from "@zoeskoul/learner-workspace/runner/components/sql/results-pane/index";
 import type { ToolRunnerPanePolicy, ToolSurface } from "@zoeskoul/curriculum-contracts";
-import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
-import type { ReviewWorkspaceRuntimeCommitMode } from "@/components/tools/panes/reviewWorkspaceRuntimeCommit";
+import { learnerUiFlags } from "@zoeskoul/learner-workspace/lib/config/learnerUiFlags";
+import type { ReviewWorkspaceRuntimeCommitMode } from "@zoeskoul/learner-workspace/tools/code/reviewWorkspaceRuntimeCommit";
 
 const PANE_ANIM = {
     show: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" },

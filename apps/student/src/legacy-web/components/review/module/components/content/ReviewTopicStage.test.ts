@@ -7,7 +7,7 @@ import {
 } from "@zoeskoul/learning-runtime/review/module/workspaceCapabilities";
 import ReviewTopicStage from "./ReviewTopicStage";
 
-vi.mock("@/lib/config/learnerUiFlags", () => ({
+vi.mock("@zoeskoul/learner-workspace/lib/config/learnerUiFlags", () => ({
     learnerUiFlags: {
         compactLearnerUi: false,
         showDebugLearningUi: false,

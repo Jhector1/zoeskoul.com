@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { scorePhraseMatch } from "@zoeskoul/practice-checks";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
-import Tooltip from "@/components/ui/Tooltip";
+import Tooltip from "@zoeskoul/learner-workspace/ui/Tooltip";
 
 import {
     Mic,

@@ -1,6 +1,6 @@
 import type { MutableRefObject } from "react";
 import type { QItem, TopicValue } from "@/lib/practice/uiTypes";
-import type { Difficulty } from "@/lib/practice/types";
+import type { Difficulty } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { SESSION_DEFAULT, STORAGE_VERSION } from "./constants";
 

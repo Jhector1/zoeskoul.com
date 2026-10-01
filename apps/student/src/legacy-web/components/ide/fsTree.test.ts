@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import type { FSNode, WorkspaceStateV2 } from "./types";
-import { exportProjectFiles, exportWorkspaceEntries, relativeProjectPathOf } from "./fsTree";
+import type { FSNode, WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import { exportProjectFiles, exportWorkspaceEntries, relativeProjectPathOf } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 function fileNode(
     id: string,

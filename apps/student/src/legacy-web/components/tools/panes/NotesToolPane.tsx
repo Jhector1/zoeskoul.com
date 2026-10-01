@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { cx } from "../utils/cx";
+import { cx } from "@zoeskoul/learner-workspace/tools/utils/cx";
 import { useToolDoc } from "../hooks/useToolDoc";
 
 export default function NotesToolPane(props: {

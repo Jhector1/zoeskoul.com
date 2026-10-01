@@ -26,23 +26,23 @@ vi.mock("next-themes", () => ({
     }),
 }));
 
-vi.mock("@/components/markdown/MathMarkdown", () => ({
+vi.mock("@zoeskoul/learner-workspace/ui/markdown/MathMarkdown", () => ({
     default: () => null,
 }));
 
-vi.mock("@/components/code/runner/components/EditorPane", () => ({
+vi.mock("@zoeskoul/learner-workspace/runner/components/EditorPane", () => ({
     default: () => <div data-testid="mock-editor-pane" />,
 }));
 
-vi.mock("@/components/code/runner/components/OutputSurface", () => ({
+vi.mock("@zoeskoul/learner-workspace/runner/components/OutputSurface", () => ({
     default: () => <div data-testid="mock-output-surface" />,
 }));
 
-vi.mock("@/components/code/runner/components/XtermTerminal", () => ({
+vi.mock("@zoeskoul/learner-workspace/runner/components/XtermTerminal", () => ({
     default: () => <div data-testid="mock-xterm-terminal" />,
 }));
 
-vi.mock("@/components/code/runner/hooks/useSplitSizing", () => ({
+vi.mock("@zoeskoul/learner-workspace/runner/hooks/useSplitSizing", () => ({
     useSplitSizing: () => ({
         mainH: 320,
         bottomEditorH: 160,
@@ -54,7 +54,7 @@ vi.mock("@/components/code/runner/hooks/useSplitSizing", () => ({
     }),
 }));
 
-vi.mock("@/components/code/runner/hooks/controller/useCodeRunnerController", () => ({
+vi.mock("@zoeskoul/learner-workspace/runner/hooks/controller/useCodeRunnerController", () => ({
     useCodeRunnerController: () => ({
         busy: false,
         runState: "idle",
@@ -65,11 +65,11 @@ vi.mock("@/components/code/runner/hooks/controller/useCodeRunnerController", () 
     }),
 }));
 
-vi.mock("@/components/code/runner/hooks/controller/useResolvedRuntime", () => ({
+vi.mock("@zoeskoul/learner-workspace/runner/hooks/controller/useResolvedRuntime", () => ({
     resolveRuntime: (runtime: unknown) => runtime,
 }));
 
-vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () => ({
+vi.mock("@zoeskoul/learner-workspace/runner/hooks/pty/useWorkspaceTerminalController", () => ({
     useWorkspaceTerminalController: (args: any) => {
         return {
             available: true,

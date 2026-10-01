@@ -1,4 +1,4 @@
-import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { LearningIdeConfig } from "@zoeskoul/learner-workspace/lib/ide/learningIdeConfig";
 
 export function resolveRightRailIdeConfig(args: {
     toolIdeConfig?: LearningIdeConfig | null;
