@@ -1,5 +1,7 @@
 import "server-only";
 
+import { createHmac, randomBytes } from "node:crypto";
+
 import type {
   PublicChallengeSocialProvider,
   PublicChallengeSocialProviderStatus,
@@ -43,7 +45,6 @@ function configured(...parts: string[]) {
 
 export function publicChallengeSocialProviderStatuses(
   env: Environment = process.env,
-  options: { xConfigured?: boolean } = {},
 ): PublicChallengeSocialProviderStatus[] {
   return [
     {
@@ -79,9 +80,12 @@ export function publicChallengeSocialProviderStatuses(
     {
       provider: "x",
       label: "X",
-      configured:
-        options.xConfigured ??
-        configured(value(env, "X_USER_ACCESS_TOKEN")),
+      configured: configured(
+        value(env, "X_API_KEY"),
+        value(env, "X_API_SECRET"),
+        value(env, "X_ACCESS_TOKEN"),
+        value(env, "X_ACCESS_TOKEN_SECRET"),
+      ),
       imageRequired: true,
     },
   ];
@@ -111,16 +115,14 @@ async function responseDetail(response: Response) {
       detail?: string;
       errors?: Array<{ message?: string; detail?: string }>;
     };
-    const detail =
+    return (
       parsed.error?.message ||
       parsed.detail ||
+      parsed.title ||
       parsed.errors?.[0]?.detail ||
       parsed.errors?.[0]?.message ||
-      parsed.title ||
-      body.slice(0, 600);
-    return parsed.title && detail !== parsed.title
-      ? `${parsed.title}: ${detail}`
-      : detail;
+      body.slice(0, 600)
+    );
   } catch {
     return body.slice(0, 600);
   }
@@ -136,6 +138,114 @@ async function requireOk(
     await responseDetail(response),
     response.status,
   );
+}
+
+type XOAuth1Credentials = {
+  apiKey: string;
+  apiSecret: string;
+  accessToken: string;
+  accessTokenSecret: string;
+};
+
+function xOAuth1Credentials(env: Environment): XOAuth1Credentials {
+  const credentials = {
+    apiKey: value(env, "X_API_KEY"),
+    apiSecret: value(env, "X_API_SECRET"),
+    accessToken: value(env, "X_ACCESS_TOKEN"),
+    accessTokenSecret: value(env, "X_ACCESS_TOKEN_SECRET"),
+  };
+
+  if (!configured(...Object.values(credentials))) {
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      "X OAuth 1.0a credentials are not configured.",
+    );
+  }
+
+  return credentials;
+}
+
+function oauthPercentEncode(value: string) {
+  return encodeURIComponent(value).replace(
+    /[!'()*]/g,
+    (character) =>
+      `%${character.charCodeAt(0).toString(16).toUpperCase()}`,
+  );
+}
+
+function xOAuth1Authorization(args: {
+  method: string;
+  url: string;
+  credentials: XOAuth1Credentials;
+  nonce?: string;
+  timestamp?: string;
+}) {
+  const parsedUrl = new URL(args.url);
+  const oauthParams: Record<string, string> = {
+    oauth_consumer_key: args.credentials.apiKey,
+    oauth_nonce: args.nonce ?? randomBytes(18).toString("hex"),
+    oauth_signature_method: "HMAC-SHA1",
+    oauth_timestamp:
+      args.timestamp ?? String(Math.floor(Date.now() / 1000)),
+    oauth_token: args.credentials.accessToken,
+    oauth_version: "1.0",
+  };
+
+  const signatureParams: Array<[string, string]> = [
+    ...Object.entries(oauthParams),
+    ...Array.from(parsedUrl.searchParams.entries()),
+  ];
+
+  const normalizedParams = signatureParams
+    .map(([key, itemValue]) => [
+      oauthPercentEncode(key),
+      oauthPercentEncode(itemValue),
+    ] as const)
+    .sort(([aKey, aValue], [bKey, bValue]) => {
+      if (aKey < bKey) return -1;
+      if (aKey > bKey) return 1;
+      if (aValue < bValue) return -1;
+      if (aValue > bValue) return 1;
+      return 0;
+    })
+    .map(([key, itemValue]) => `${key}=${itemValue}`)
+    .join("&");
+
+  const baseUrl = `${parsedUrl.protocol}//${parsedUrl.host}${parsedUrl.pathname}`;
+  const signatureBase = [
+    args.method.toUpperCase(),
+    oauthPercentEncode(baseUrl),
+    oauthPercentEncode(normalizedParams),
+  ].join("&");
+  const signingKey = `${oauthPercentEncode(
+    args.credentials.apiSecret,
+  )}&${oauthPercentEncode(args.credentials.accessTokenSecret)}`;
+  const signature = createHmac("sha1", signingKey)
+    .update(signatureBase)
+    .digest("base64");
+
+  return `OAuth ${Object.entries({
+    ...oauthParams,
+    oauth_signature: signature,
+  })
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(
+      ([key, itemValue]) =>
+        `${oauthPercentEncode(key)}="${oauthPercentEncode(itemValue)}"`,
+    )
+    .join(", ")}`;
+}
+
+function xOAuth1Headers(args: {
+  method: string;
+  url: string;
+  credentials: XOAuth1Credentials;
+  contentType?: string;
+}) {
+  return {
+    Authorization: xOAuth1Authorization(args),
+    ...(args.contentType ? { "Content-Type": args.contentType } : {}),
+  };
 }
 
 export function publicChallengeSocialHashtags(
@@ -425,7 +535,7 @@ function xImageFilename(mediaType: string) {
 
 async function uploadXImage(args: {
   imageUrl: string;
-  token: string;
+  credentials: XOAuth1Credentials;
   base: string;
   fetcher: Fetcher;
 }) {
@@ -468,25 +578,22 @@ async function uploadXImage(args: {
     );
   }
 
-  const authorization = {
-    Authorization: `Bearer ${args.token}`,
-  };
-
-  const mediaUploadUrl = `${args.base}/media/upload`;
-  const initializeUrl = new URL(mediaUploadUrl);
-  initializeUrl.searchParams.set("command", "INIT");
-  initializeUrl.searchParams.set(
-    "total_bytes",
-    String(mediaBytes.byteLength),
-  );
-  initializeUrl.searchParams.set("media_type", mediaType);
-  initializeUrl.searchParams.set("media_category", "tweet_image");
-
+  const initializeUrl = `${args.base}/media/upload/initialize`;
   const initializeResponse = await requireOk(
     "x",
     await args.fetcher(initializeUrl, {
       method: "POST",
-      headers: authorization,
+      headers: xOAuth1Headers({
+        method: "POST",
+        url: initializeUrl,
+        credentials: args.credentials,
+        contentType: "application/json",
+      }),
+      body: JSON.stringify({
+        total_bytes: mediaBytes.byteLength,
+        media_type: mediaType,
+        media_category: "tweet_image",
+      }),
       cache: "no-store",
     }),
   );
@@ -506,8 +613,6 @@ async function uploadXImage(args: {
   }
 
   const form = new FormData();
-  form.append("command", "APPEND");
-  form.append("media_id", mediaId);
   form.append("segment_index", "0");
   form.append(
     "media",
@@ -515,25 +620,35 @@ async function uploadXImage(args: {
     xImageFilename(mediaType),
   );
 
+  const appendUrl = `${args.base}/media/upload/${encodeURIComponent(
+    mediaId,
+  )}/append`;
   await requireOk(
     "x",
-    await args.fetcher(mediaUploadUrl, {
+    await args.fetcher(appendUrl, {
       method: "POST",
-      headers: authorization,
+      headers: xOAuth1Headers({
+        method: "POST",
+        url: appendUrl,
+        credentials: args.credentials,
+      }),
       body: form,
       cache: "no-store",
     }),
   );
 
-  const finalizeUrl = new URL(mediaUploadUrl);
-  finalizeUrl.searchParams.set("command", "FINALIZE");
-  finalizeUrl.searchParams.set("media_id", mediaId);
-
+  const finalizeUrl = `${args.base}/media/upload/${encodeURIComponent(
+    mediaId,
+  )}/finalize`;
   const finalizeResponse = await requireOk(
     "x",
     await args.fetcher(finalizeUrl, {
       method: "POST",
-      headers: authorization,
+      headers: xOAuth1Headers({
+        method: "POST",
+        url: finalizeUrl,
+        credentials: args.credentials,
+      }),
       cache: "no-store",
     }),
   );
@@ -577,15 +692,8 @@ async function publishX(
   content: PublicChallengeSocialContent,
   env: Environment,
   fetcher: Fetcher,
-  tokenOverride?: string,
 ): Promise<PublicChallengeSocialProviderResult> {
-  const token = tokenOverride?.trim() || value(env, "X_USER_ACCESS_TOKEN");
-  if (!token) {
-    throw new PublicChallengeSocialProviderError(
-      "x",
-      "X user access token is not configured.",
-    );
-  }
+  const credentials = xOAuth1Credentials(env);
   if (!content.imageUrl) {
     throw new PublicChallengeSocialProviderError(
       "x",
@@ -599,19 +707,22 @@ async function publishX(
   );
   const mediaId = await uploadXImage({
     imageUrl: content.imageUrl,
-    token,
+    credentials,
     base,
     fetcher,
   });
 
+  const postUrl = `${base}/tweets`;
   const response = await requireOk(
     "x",
-    await fetcher(`${base}/tweets`, {
+    await fetcher(postUrl, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+      headers: xOAuth1Headers({
+        method: "POST",
+        url: postUrl,
+        credentials,
+        contentType: "application/json",
+      }),
       body: JSON.stringify({
         text: xText(content),
         media: { media_ids: [mediaId] },
@@ -639,11 +750,7 @@ async function publishX(
 export async function publishPublicChallengeToProvider(
   provider: PublicChallengeSocialProvider,
   content: PublicChallengeSocialContent,
-  options: {
-    env?: Environment;
-    fetcher?: Fetcher;
-    xAccessToken?: string;
-  } = {},
+  options: { env?: Environment; fetcher?: Fetcher } = {},
 ): Promise<PublicChallengeSocialProviderResult> {
   const env = options.env ?? process.env;
   const fetcher = options.fetcher ?? fetch;
@@ -656,11 +763,6 @@ export async function publishPublicChallengeToProvider(
     case "linkedin":
       return publishLinkedIn(content, env, fetcher);
     case "x":
-      return publishX(
-        content,
-        env,
-        fetcher,
-        options.xAccessToken,
-      );
+      return publishX(content, env, fetcher);
   }
 }

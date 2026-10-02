@@ -27,10 +27,6 @@ import {
 import {
   resolvePublicChallengeSocialDescription,
 } from "@/lib/marketing/publicChallengeSocialCopy";
-import {
-  getPublicChallengeXAccessToken,
-  isPublicChallengeXCredentialConfigured,
-} from "@/lib/marketing/publicChallengeSocialXAuth";
 
 import { ensurePublicChallengeSocialImage } from "@/lib/practice/challenges/socialCard";
 
@@ -158,14 +154,8 @@ export async function updatePublicChallengeSocialAutomationSettings(
     );
   }
 
-  const xConfigured = uniqueProviders.includes("x")
-    ? await isPublicChallengeXCredentialConfigured()
-    : undefined;
   const configured = new Set(
-    publicChallengeSocialProviderStatuses(
-      process.env,
-      { xConfigured },
-    )
+    publicChallengeSocialProviderStatuses()
       .filter((provider) => provider.configured)
       .map((provider) => provider.provider),
   );
@@ -296,14 +286,8 @@ export async function publishChallengeToSocial(args: {
   now?: Date;
 }): Promise<PublicChallengeSocialPublishResponse> {
   const now = args.now ?? new Date();
-  const xConfigured = args.providers.includes("x")
-    ? await isPublicChallengeXCredentialConfigured()
-    : undefined;
   const configured = new Map(
-    publicChallengeSocialProviderStatuses(
-      process.env,
-      { xConfigured },
-    ).map((status) => [
+    publicChallengeSocialProviderStatuses().map((status) => [
       status.provider,
       status.configured,
     ]),
@@ -382,14 +366,9 @@ export async function publishChallengeToSocial(args: {
     }
 
     try {
-      const xAccessToken =
-        provider === "x"
-          ? await getPublicChallengeXAccessToken()
-          : undefined;
       const published = await publishPublicChallengeToProvider(
         provider,
         content,
-        { xAccessToken },
       );
 
       await prisma.publicChallengeSocialPost.update({
@@ -533,7 +512,7 @@ export async function runDailyPublicChallengeSocialTick(
 }
 
 export async function getPublicChallengeSocialAdminState(): Promise<PublicChallengeSocialAdminResponse> {
-  const [automation, recentPosts, xConfigured] = await Promise.all([
+  const [automation, recentPosts] = await Promise.all([
     getPublicChallengeSocialAutomationSettings(),
     prisma.publicChallengeSocialPost.findMany({
       take: 12,
@@ -548,15 +527,11 @@ export async function getPublicChallengeSocialAdminState(): Promise<PublicChalle
         },
       },
     }),
-    isPublicChallengeXCredentialConfigured(),
   ]);
 
   return {
     schedulerConfigured: publicChallengeSocialSchedulerConfigured(),
-    providers: publicChallengeSocialProviderStatuses(
-      process.env,
-      { xConfigured },
-    ),
+    providers: publicChallengeSocialProviderStatuses(),
     automation,
     recentPosts: recentPosts.map((post) => ({
       id: post.id,

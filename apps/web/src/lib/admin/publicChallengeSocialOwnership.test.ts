@@ -30,7 +30,10 @@ describe("public challenge social publishing ownership", () => {
       "LINKEDIN_ACCESS_TOKEN",
     );
     expect(admin).not.toContain(
-      "X_USER_ACCESS_TOKEN",
+      "X_API_KEY",
+      "X_API_SECRET",
+      "X_ACCESS_TOKEN",
+      "X_ACCESS_TOKEN_SECRET",
     );
 
     expect(provider).toContain(
@@ -43,7 +46,10 @@ describe("public challenge social publishing ownership", () => {
       "LINKEDIN_ACCESS_TOKEN",
     );
     expect(provider).toContain(
-      "X_USER_ACCESS_TOKEN",
+      "X_API_KEY",
+      "X_API_SECRET",
+      "X_ACCESS_TOKEN",
+      "X_ACCESS_TOKEN_SECRET",
     );
   });
 

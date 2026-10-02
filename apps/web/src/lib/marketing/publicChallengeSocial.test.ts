@@ -31,7 +31,10 @@ describe("public challenge social providers", () => {
       LINKEDIN_VERSION: "202603",
       LINKEDIN_ACCESS_TOKEN: "secret-linkedin",
       LINKEDIN_AUTHOR_URN: "urn:li:organization:123",
-      X_USER_ACCESS_TOKEN: "secret-x",
+      X_API_KEY: "secret-api-key",
+      X_API_SECRET: "secret-api-secret",
+      X_ACCESS_TOKEN: "secret-access-token",
+      X_ACCESS_TOKEN_SECRET: "secret-access-secret",
     } as NodeJS.ProcessEnv);
 
     expect(statuses.every((item) => item.configured)).toBe(true);
@@ -52,33 +55,28 @@ describe("public challenge social providers", () => {
         });
       }
 
-      if (url.startsWith("https://api.x.com/2/media/upload?")) {
-        const requestUrl = new URL(url);
-        const command = requestUrl.searchParams.get("command");
-
-        if (command === "INIT") {
-          return new Response(
-            JSON.stringify({ data: { id: "media-123" } }),
-            {
-              status: 201,
-              headers: { "Content-Type": "application/json" },
-            },
-          );
-        }
-
-        if (command === "FINALIZE") {
-          return new Response(
-            JSON.stringify({ data: { id: "media-123" } }),
-            {
-              status: 201,
-              headers: { "Content-Type": "application/json" },
-            },
-          );
-        }
+      if (url.endsWith("/media/upload/initialize")) {
+        return new Response(
+          JSON.stringify({ data: { id: "media-123" } }),
+          {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
       }
 
-      if (url === "https://api.x.com/2/media/upload") {
+      if (url.endsWith("/media-123/append")) {
         return new Response(null, { status: 204 });
+      }
+
+      if (url.endsWith("/media-123/finalize")) {
+        return new Response(
+          JSON.stringify({ data: { id: "media-123" } }),
+          {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
       }
 
       if (url === "https://api.x.com/2/tweets") {
@@ -100,7 +98,10 @@ describe("public challenge social providers", () => {
       {
         env: {
           NODE_ENV: "test",
-          X_USER_ACCESS_TOKEN: "token",
+          X_API_KEY: "api-key",
+          X_API_SECRET: "api-secret",
+          X_ACCESS_TOKEN: "access-token",
+          X_ACCESS_TOKEN_SECRET: "access-secret",
           X_USERNAME: "zoeskoul",
         } as NodeJS.ProcessEnv,
         fetcher,
@@ -121,42 +122,58 @@ describe("public challenge social providers", () => {
 
     const [initializeUrl, initializeInit] =
       vi.mocked(fetcher).mock.calls[1]!;
-    const initializeRequestUrl = new URL(String(initializeUrl));
-    expect(initializeRequestUrl.origin + initializeRequestUrl.pathname).toBe(
-      "https://api.x.com/2/media/upload",
+    expect(String(initializeUrl)).toBe(
+      "https://api.x.com/2/media/upload/initialize",
     );
-    expect(initializeRequestUrl.searchParams.get("command")).toBe("INIT");
-    expect(initializeRequestUrl.searchParams.get("total_bytes")).toBe("4");
-    expect(initializeRequestUrl.searchParams.get("media_type")).toBe(
-      "image/jpeg",
+    expect(JSON.parse(String(initializeInit?.body))).toEqual({
+      total_bytes: 4,
+      media_type: "image/jpeg",
+      media_category: "tweet_image",
+    });
+    const initializeAuthorization = new Headers(
+      initializeInit?.headers,
+    ).get("Authorization");
+    expect(initializeAuthorization).toMatch(/^OAuth /);
+    expect(initializeAuthorization).toContain(
+      'oauth_consumer_key="api-key"',
     );
-    expect(initializeRequestUrl.searchParams.get("media_category")).toBe(
-      "tweet_image",
+    expect(initializeAuthorization).toContain(
+      'oauth_token="access-token"',
     );
-    expect(initializeInit?.body).toBeUndefined();
+    expect(initializeAuthorization).toContain(
+      'oauth_signature_method="HMAC-SHA1"',
+    );
+    expect(initializeAuthorization).not.toContain(
+      "api-secret",
+    );
+    expect(initializeAuthorization).not.toContain(
+      "access-secret",
+    );
 
     const [appendUrl, appendInit] =
       vi.mocked(fetcher).mock.calls[2]!;
-    expect(String(appendUrl)).toBe("https://api.x.com/2/media/upload");
+    expect(String(appendUrl)).toBe(
+      "https://api.x.com/2/media/upload/media-123/append",
+    );
     expect(appendInit?.body).toBeInstanceOf(FormData);
     const appendBody = appendInit?.body as FormData;
-    expect(appendBody.get("command")).toBe("APPEND");
-    expect(appendBody.get("media_id")).toBe("media-123");
     expect(appendBody.get("segment_index")).toBe("0");
     expect(appendBody.get("media")).toBeInstanceOf(Blob);
 
     const [finalizeUrl] =
       vi.mocked(fetcher).mock.calls[3]!;
-    const finalizeRequestUrl = new URL(String(finalizeUrl));
-    expect(finalizeRequestUrl.origin + finalizeRequestUrl.pathname).toBe(
-      "https://api.x.com/2/media/upload",
+    expect(String(finalizeUrl)).toBe(
+      "https://api.x.com/2/media/upload/media-123/finalize",
     );
-    expect(finalizeRequestUrl.searchParams.get("command")).toBe("FINALIZE");
-    expect(finalizeRequestUrl.searchParams.get("media_id")).toBe("media-123");
 
     const [url, init] =
       vi.mocked(fetcher).mock.calls[4]!;
     expect(String(url)).toBe("https://api.x.com/2/tweets");
+    const postAuthorization = new Headers(init?.headers).get(
+      "Authorization",
+    );
+    expect(postAuthorization).toMatch(/^OAuth /);
+    expect(postAuthorization).not.toContain("Bearer");
     const payload = JSON.parse(
       String(init?.body),
     ) as {
@@ -259,7 +276,10 @@ describe("public challenge social providers", () => {
         {
           env: {
             NODE_ENV: "test",
-            X_USER_ACCESS_TOKEN: "token",
+            X_API_KEY: "api-key",
+            X_API_SECRET: "api-secret",
+            X_ACCESS_TOKEN: "access-token",
+            X_ACCESS_TOKEN_SECRET: "access-secret",
           } as NodeJS.ProcessEnv,
           fetcher,
         },
