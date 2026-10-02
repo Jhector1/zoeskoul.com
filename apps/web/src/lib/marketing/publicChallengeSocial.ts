@@ -79,7 +79,7 @@ export function publicChallengeSocialProviderStatuses(
       provider: "x",
       label: "X",
       configured: configured(value(env, "X_USER_ACCESS_TOKEN")),
-      imageRequired: false,
+      imageRequired: true,
     },
   ];
 }
@@ -396,6 +396,176 @@ async function publishLinkedIn(
   return { providerPostId: id, providerPostUrl: null };
 }
 
+const X_IMAGE_MAX_BYTES = 5 * 1024 * 1024;
+
+function normalizedContentType(response: Response) {
+  return (response.headers.get("content-type") || "")
+    .split(";", 1)[0]
+    ?.trim()
+    .toLowerCase();
+}
+
+function xImageFilename(mediaType: string) {
+  switch (mediaType) {
+    case "image/png":
+      return "challenge.png";
+    case "image/gif":
+      return "challenge.gif";
+    case "image/webp":
+      return "challenge.webp";
+    default:
+      return "challenge.jpg";
+  }
+}
+
+async function uploadXImage(args: {
+  imageUrl: string;
+  token: string;
+  base: string;
+  fetcher: Fetcher;
+}) {
+  const imageResponse = await args.fetcher(args.imageUrl, {
+    method: "GET",
+    cache: "no-store",
+  });
+
+  if (!imageResponse.ok) {
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      `Could not download the challenge image for X: ${await responseDetail(
+        imageResponse,
+      )}`,
+      imageResponse.status,
+    );
+  }
+
+  const mediaType = normalizedContentType(imageResponse);
+  if (!mediaType.startsWith("image/")) {
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      `Challenge image for X returned unsupported content type ${
+        mediaType || "unknown"
+      }.`,
+    );
+  }
+
+  const mediaBytes = await imageResponse.arrayBuffer();
+  if (!mediaBytes.byteLength) {
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      "Challenge image for X was empty.",
+    );
+  }
+  if (mediaBytes.byteLength > X_IMAGE_MAX_BYTES) {
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      "Challenge image for X exceeds the 5 MB tweet_image limit.",
+    );
+  }
+
+  const authorization = {
+    Authorization: `Bearer ${args.token}`,
+  };
+
+  const initializeResponse = await requireOk(
+    "x",
+    await args.fetcher(`${args.base}/media/upload/initialize`, {
+      method: "POST",
+      headers: {
+        ...authorization,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        total_bytes: mediaBytes.byteLength,
+        media_type: mediaType,
+        media_category: "tweet_image",
+      }),
+      cache: "no-store",
+    }),
+  );
+
+  const initialized = (await initializeResponse.json()) as {
+    data?: { id?: unknown };
+  };
+  const mediaId =
+    typeof initialized.data?.id === "string"
+      ? initialized.data.id
+      : "";
+  if (!mediaId) {
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      "X returned no media ID while initializing the challenge image upload.",
+    );
+  }
+
+  const form = new FormData();
+  form.append("segment_index", "0");
+  form.append(
+    "media",
+    new Blob([mediaBytes], { type: mediaType }),
+    xImageFilename(mediaType),
+  );
+
+  await requireOk(
+    "x",
+    await args.fetcher(
+      `${args.base}/media/upload/${encodeURIComponent(mediaId)}/append`,
+      {
+        method: "POST",
+        headers: authorization,
+        body: form,
+        cache: "no-store",
+      },
+    ),
+  );
+
+  const finalizeResponse = await requireOk(
+    "x",
+    await args.fetcher(
+      `${args.base}/media/upload/${encodeURIComponent(mediaId)}/finalize`,
+      {
+        method: "POST",
+        headers: authorization,
+        cache: "no-store",
+      },
+    ),
+  );
+
+  const finalized = (await finalizeResponse.json().catch(() => null)) as
+    | {
+        data?: {
+          id?: unknown;
+          processing_info?: {
+            state?: unknown;
+            error?: { message?: unknown };
+          };
+        };
+      }
+    | null;
+
+  const processingState =
+    typeof finalized?.data?.processing_info?.state === "string"
+      ? finalized.data.processing_info.state
+      : "";
+  if (processingState === "failed") {
+    const detail = finalized?.data?.processing_info?.error?.message;
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      typeof detail === "string" && detail.trim()
+        ? detail
+        : "X failed to process the challenge image.",
+    );
+  }
+  if (processingState && processingState !== "succeeded") {
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      `X challenge image processing is not ready (${processingState}).`,
+    );
+  }
+
+  return mediaId;
+}
+
 async function publishX(
   content: PublicChallengeSocialContent,
   env: Environment,
@@ -408,17 +578,36 @@ async function publishX(
       "X user access token is not configured.",
     );
   }
+  if (!content.imageUrl) {
+    throw new PublicChallengeSocialProviderError(
+      "x",
+      "X requires a public challenge image.",
+    );
+  }
 
-  const base = value(env, "X_API_BASE") || "https://api.x.com/2";
+  const base = (value(env, "X_API_BASE") || "https://api.x.com/2").replace(
+    /\/$/,
+    "",
+  );
+  const mediaId = await uploadXImage({
+    imageUrl: content.imageUrl,
+    token,
+    base,
+    fetcher,
+  });
+
   const response = await requireOk(
     "x",
-    await fetcher(`${base.replace(/\/$/, "")}/tweets`, {
+    await fetcher(`${base}/tweets`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text: xText(content) }),
+      body: JSON.stringify({
+        text: xText(content),
+        media: { media_ids: [mediaId] },
+      }),
       cache: "no-store",
     }),
   );

@@ -35,19 +35,59 @@ describe("public challenge social providers", () => {
     } as NodeJS.ProcessEnv);
 
     expect(statuses.every((item) => item.configured)).toBe(true);
+    expect(
+      statuses.find((item) => item.provider === "x")?.imageRequired,
+    ).toBe(true);
     expect(JSON.stringify(statuses)).not.toContain("secret-");
   });
 
-  it("creates an X post through the canonical adapter", async () => {
-    const fetcher = vi.fn(async () =>
-      new Response(
-        JSON.stringify({ data: { id: "tweet-123" } }),
-        {
-          status: 201,
-          headers: { "Content-Type": "application/json" },
-        },
-      ),
-    ) as unknown as typeof fetch;
+  it("uploads the challenge image before creating an X post", async () => {
+    const fetcher = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+
+      if (url === content.imageUrl) {
+        return new Response(new Uint8Array([1, 2, 3, 4]), {
+          status: 200,
+          headers: { "Content-Type": "image/jpeg" },
+        });
+      }
+
+      if (url.endsWith("/media/upload/initialize")) {
+        return new Response(
+          JSON.stringify({ data: { id: "media-123" } }),
+          {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      if (url.endsWith("/media-123/append")) {
+        return new Response(null, { status: 204 });
+      }
+
+      if (url.endsWith("/media-123/finalize")) {
+        return new Response(
+          JSON.stringify({ data: { id: "media-123" } }),
+          {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      if (url === "https://api.x.com/2/tweets") {
+        return new Response(
+          JSON.stringify({ data: { id: "tweet-123" } }),
+          {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      return new Response("unexpected request", { status: 500 });
+    }) as unknown as typeof fetch;
 
     const result = await publishPublicChallengeToProvider(
       "x",
@@ -67,15 +107,51 @@ describe("public challenge social providers", () => {
       providerPostUrl:
         "https://x.com/zoeskoul/status/tweet-123",
     });
-    expect(fetcher).toHaveBeenCalledOnce();
+    expect(fetcher).toHaveBeenCalledTimes(5);
+
+    const [imageUrl, imageInit] =
+      vi.mocked(fetcher).mock.calls[0]!;
+    expect(String(imageUrl)).toBe(content.imageUrl);
+    expect(imageInit?.method).toBe("GET");
+
+    const [initializeUrl, initializeInit] =
+      vi.mocked(fetcher).mock.calls[1]!;
+    expect(String(initializeUrl)).toBe(
+      "https://api.x.com/2/media/upload/initialize",
+    );
+    expect(JSON.parse(String(initializeInit?.body))).toEqual({
+      total_bytes: 4,
+      media_type: "image/jpeg",
+      media_category: "tweet_image",
+    });
+
+    const [appendUrl, appendInit] =
+      vi.mocked(fetcher).mock.calls[2]!;
+    expect(String(appendUrl)).toBe(
+      "https://api.x.com/2/media/upload/media-123/append",
+    );
+    expect(appendInit?.body).toBeInstanceOf(FormData);
+    const appendBody = appendInit?.body as FormData;
+    expect(appendBody.get("segment_index")).toBe("0");
+    expect(appendBody.get("media")).toBeInstanceOf(Blob);
+
+    const [finalizeUrl] =
+      vi.mocked(fetcher).mock.calls[3]!;
+    expect(String(finalizeUrl)).toBe(
+      "https://api.x.com/2/media/upload/media-123/finalize",
+    );
 
     const [url, init] =
-      vi.mocked(fetcher).mock.calls[0]!;
+      vi.mocked(fetcher).mock.calls[4]!;
     expect(String(url)).toBe("https://api.x.com/2/tweets");
     const payload = JSON.parse(
       String(init?.body),
-    ) as { text?: string };
+    ) as {
+      text?: string;
+      media?: { media_ids?: string[] };
+    };
 
+    expect(payload.media?.media_ids).toEqual(["media-123"]);
     expect(payload.text).toContain(
       content.description,
     );
@@ -158,6 +234,28 @@ describe("public challenge social providers", () => {
     expect(message).toContain(
       "#ZoeSkoul",
     );
+  });
+
+  it("requires an image before calling X", async () => {
+    const fetcher = vi.fn() as unknown as typeof fetch;
+
+    await expect(
+      publishPublicChallengeToProvider(
+        "x",
+        { ...content, imageUrl: null },
+        {
+          env: {
+            NODE_ENV: "test",
+            X_USER_ACCESS_TOKEN: "token",
+          } as NodeJS.ProcessEnv,
+          fetcher,
+        },
+      ),
+    ).rejects.toThrow(
+      "X requires a public challenge image.",
+    );
+
+    expect(fetcher).not.toHaveBeenCalled();
   });
 
   it("requires an image before calling Instagram", async () => {
