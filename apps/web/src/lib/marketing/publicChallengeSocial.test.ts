@@ -52,28 +52,33 @@ describe("public challenge social providers", () => {
         });
       }
 
-      if (url.endsWith("/media/upload/initialize")) {
-        return new Response(
-          JSON.stringify({ data: { id: "media-123" } }),
-          {
-            status: 201,
-            headers: { "Content-Type": "application/json" },
-          },
-        );
+      if (url.startsWith("https://api.x.com/2/media/upload?")) {
+        const requestUrl = new URL(url);
+        const command = requestUrl.searchParams.get("command");
+
+        if (command === "INIT") {
+          return new Response(
+            JSON.stringify({ data: { id: "media-123" } }),
+            {
+              status: 201,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
+        }
+
+        if (command === "FINALIZE") {
+          return new Response(
+            JSON.stringify({ data: { id: "media-123" } }),
+            {
+              status: 201,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
+        }
       }
 
-      if (url.endsWith("/media-123/append")) {
+      if (url === "https://api.x.com/2/media/upload") {
         return new Response(null, { status: 204 });
-      }
-
-      if (url.endsWith("/media-123/finalize")) {
-        return new Response(
-          JSON.stringify({ data: { id: "media-123" } }),
-          {
-            status: 201,
-            headers: { "Content-Type": "application/json" },
-          },
-        );
       }
 
       if (url === "https://api.x.com/2/tweets") {
@@ -116,30 +121,38 @@ describe("public challenge social providers", () => {
 
     const [initializeUrl, initializeInit] =
       vi.mocked(fetcher).mock.calls[1]!;
-    expect(String(initializeUrl)).toBe(
-      "https://api.x.com/2/media/upload/initialize",
+    const initializeRequestUrl = new URL(String(initializeUrl));
+    expect(initializeRequestUrl.origin + initializeRequestUrl.pathname).toBe(
+      "https://api.x.com/2/media/upload",
     );
-    expect(JSON.parse(String(initializeInit?.body))).toEqual({
-      total_bytes: 4,
-      media_type: "image/jpeg",
-      media_category: "tweet_image",
-    });
+    expect(initializeRequestUrl.searchParams.get("command")).toBe("INIT");
+    expect(initializeRequestUrl.searchParams.get("total_bytes")).toBe("4");
+    expect(initializeRequestUrl.searchParams.get("media_type")).toBe(
+      "image/jpeg",
+    );
+    expect(initializeRequestUrl.searchParams.get("media_category")).toBe(
+      "tweet_image",
+    );
+    expect(initializeInit?.body).toBeUndefined();
 
     const [appendUrl, appendInit] =
       vi.mocked(fetcher).mock.calls[2]!;
-    expect(String(appendUrl)).toBe(
-      "https://api.x.com/2/media/upload/media-123/append",
-    );
+    expect(String(appendUrl)).toBe("https://api.x.com/2/media/upload");
     expect(appendInit?.body).toBeInstanceOf(FormData);
     const appendBody = appendInit?.body as FormData;
+    expect(appendBody.get("command")).toBe("APPEND");
+    expect(appendBody.get("media_id")).toBe("media-123");
     expect(appendBody.get("segment_index")).toBe("0");
     expect(appendBody.get("media")).toBeInstanceOf(Blob);
 
     const [finalizeUrl] =
       vi.mocked(fetcher).mock.calls[3]!;
-    expect(String(finalizeUrl)).toBe(
-      "https://api.x.com/2/media/upload/media-123/finalize",
+    const finalizeRequestUrl = new URL(String(finalizeUrl));
+    expect(finalizeRequestUrl.origin + finalizeRequestUrl.pathname).toBe(
+      "https://api.x.com/2/media/upload",
     );
+    expect(finalizeRequestUrl.searchParams.get("command")).toBe("FINALIZE");
+    expect(finalizeRequestUrl.searchParams.get("media_id")).toBe("media-123");
 
     const [url, init] =
       vi.mocked(fetcher).mock.calls[4]!;

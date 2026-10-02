@@ -43,6 +43,7 @@ function configured(...parts: string[]) {
 
 export function publicChallengeSocialProviderStatuses(
   env: Environment = process.env,
+  options: { xConfigured?: boolean } = {},
 ): PublicChallengeSocialProviderStatus[] {
   return [
     {
@@ -78,7 +79,9 @@ export function publicChallengeSocialProviderStatuses(
     {
       provider: "x",
       label: "X",
-      configured: configured(value(env, "X_USER_ACCESS_TOKEN")),
+      configured:
+        options.xConfigured ??
+        configured(value(env, "X_USER_ACCESS_TOKEN")),
       imageRequired: true,
     },
   ];
@@ -108,14 +111,16 @@ async function responseDetail(response: Response) {
       detail?: string;
       errors?: Array<{ message?: string; detail?: string }>;
     };
-    return (
+    const detail =
       parsed.error?.message ||
       parsed.detail ||
-      parsed.title ||
       parsed.errors?.[0]?.detail ||
       parsed.errors?.[0]?.message ||
-      body.slice(0, 600)
-    );
+      parsed.title ||
+      body.slice(0, 600);
+    return parsed.title && detail !== parsed.title
+      ? `${parsed.title}: ${detail}`
+      : detail;
   } catch {
     return body.slice(0, 600);
   }
@@ -467,19 +472,21 @@ async function uploadXImage(args: {
     Authorization: `Bearer ${args.token}`,
   };
 
+  const mediaUploadUrl = `${args.base}/media/upload`;
+  const initializeUrl = new URL(mediaUploadUrl);
+  initializeUrl.searchParams.set("command", "INIT");
+  initializeUrl.searchParams.set(
+    "total_bytes",
+    String(mediaBytes.byteLength),
+  );
+  initializeUrl.searchParams.set("media_type", mediaType);
+  initializeUrl.searchParams.set("media_category", "tweet_image");
+
   const initializeResponse = await requireOk(
     "x",
-    await args.fetcher(`${args.base}/media/upload/initialize`, {
+    await args.fetcher(initializeUrl, {
       method: "POST",
-      headers: {
-        ...authorization,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        total_bytes: mediaBytes.byteLength,
-        media_type: mediaType,
-        media_category: "tweet_image",
-      }),
+      headers: authorization,
       cache: "no-store",
     }),
   );
@@ -499,6 +506,8 @@ async function uploadXImage(args: {
   }
 
   const form = new FormData();
+  form.append("command", "APPEND");
+  form.append("media_id", mediaId);
   form.append("segment_index", "0");
   form.append(
     "media",
@@ -508,27 +517,25 @@ async function uploadXImage(args: {
 
   await requireOk(
     "x",
-    await args.fetcher(
-      `${args.base}/media/upload/${encodeURIComponent(mediaId)}/append`,
-      {
-        method: "POST",
-        headers: authorization,
-        body: form,
-        cache: "no-store",
-      },
-    ),
+    await args.fetcher(mediaUploadUrl, {
+      method: "POST",
+      headers: authorization,
+      body: form,
+      cache: "no-store",
+    }),
   );
+
+  const finalizeUrl = new URL(mediaUploadUrl);
+  finalizeUrl.searchParams.set("command", "FINALIZE");
+  finalizeUrl.searchParams.set("media_id", mediaId);
 
   const finalizeResponse = await requireOk(
     "x",
-    await args.fetcher(
-      `${args.base}/media/upload/${encodeURIComponent(mediaId)}/finalize`,
-      {
-        method: "POST",
-        headers: authorization,
-        cache: "no-store",
-      },
-    ),
+    await args.fetcher(finalizeUrl, {
+      method: "POST",
+      headers: authorization,
+      cache: "no-store",
+    }),
   );
 
   const finalized = (await finalizeResponse.json().catch(() => null)) as
@@ -570,8 +577,9 @@ async function publishX(
   content: PublicChallengeSocialContent,
   env: Environment,
   fetcher: Fetcher,
+  tokenOverride?: string,
 ): Promise<PublicChallengeSocialProviderResult> {
-  const token = value(env, "X_USER_ACCESS_TOKEN");
+  const token = tokenOverride?.trim() || value(env, "X_USER_ACCESS_TOKEN");
   if (!token) {
     throw new PublicChallengeSocialProviderError(
       "x",
@@ -631,7 +639,11 @@ async function publishX(
 export async function publishPublicChallengeToProvider(
   provider: PublicChallengeSocialProvider,
   content: PublicChallengeSocialContent,
-  options: { env?: Environment; fetcher?: Fetcher } = {},
+  options: {
+    env?: Environment;
+    fetcher?: Fetcher;
+    xAccessToken?: string;
+  } = {},
 ): Promise<PublicChallengeSocialProviderResult> {
   const env = options.env ?? process.env;
   const fetcher = options.fetcher ?? fetch;
@@ -644,6 +656,11 @@ export async function publishPublicChallengeToProvider(
     case "linkedin":
       return publishLinkedIn(content, env, fetcher);
     case "x":
-      return publishX(content, env, fetcher);
+      return publishX(
+        content,
+        env,
+        fetcher,
+        options.xAccessToken,
+      );
   }
 }

@@ -704,6 +704,17 @@ model PublicChallengeSocialAutomation {
   updatedAt        DateTime @updatedAt
 }
 
+model PublicChallengeSocialCredential {
+  provider               String   @id @db.VarChar(24)
+  accessTokenCiphertext  String?
+  refreshTokenCiphertext String?
+  accessTokenExpiresAt   DateTime?
+  scope                  String?
+  connectedAt            DateTime?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
 model PublicChallengeSocialPost {
   id              String                @id @default(cuid())
   challengeId     String
