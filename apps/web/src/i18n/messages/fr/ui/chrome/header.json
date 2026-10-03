@@ -32,6 +32,10 @@
     "startLearning": "Commencer à apprendre",
     "exploreLessons": "Explorer les leçons",
     "learningOpening": "Ouverture de votre leçon…",
-    "navigationLoading": "Chargement…"
+    "navigationLoading": "Chargement…",
+    "learn": "Apprendre",
+    "students": "Étudiants",
+    "teachers": "Enseignants",
+    "schools": "Écoles"
   }
 }

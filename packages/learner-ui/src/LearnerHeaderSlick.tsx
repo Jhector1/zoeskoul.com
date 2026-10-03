@@ -91,6 +91,10 @@ export type LearnerHeaderRuntime = {
     pricing: string;
   };
   authenticatedNavIsExternal: boolean;
+  guestPrimaryNav?: readonly {
+    href: string;
+    labelKey: string;
+  }[];
   defaultWebsiteOrigin?: string;
 
   Link: React.ElementType;
@@ -501,7 +505,7 @@ function HeaderSlick({
     locale,
   });
 
-  const NAV: NavItem[] = useMemo(
+  const defaultNav: NavItem[] = useMemo(
       () => [
         {
           href: isAuthed
@@ -541,6 +545,14 @@ function HeaderSlick({
       ],
       [isAuthed, locale, studentHomeHref, t],
   );
+
+  const NAV: NavItem[] =
+      !isAuthed && runtime.guestPrimaryNav?.length
+          ? runtime.guestPrimaryNav.map((item) => ({
+              href: item.href,
+              label: t(item.labelKey),
+            }))
+          : defaultNav;
 
   const [open, setOpen] = useState(false);
   const [elevated, setElevated] = useState(false);

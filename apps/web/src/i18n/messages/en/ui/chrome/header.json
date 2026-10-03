@@ -38,6 +38,10 @@
     "startLearning": "Start learning",
     "exploreLessons": "Explore lessons",
     "learningOpening": "Opening your lesson…",
-    "navigationLoading": "Loading…"
+    "navigationLoading": "Loading…",
+    "learn": "Learn",
+    "students": "Students",
+    "teachers": "Teachers",
+    "schools": "Schools"
   }
 }

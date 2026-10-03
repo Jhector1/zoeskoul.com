@@ -33,7 +33,15 @@
       "privacy": "Vi prive",
       "cookies": "Bonbon yo",
       "refunds": "Ranbousman",
-      "acceptableUse": "Itilizasyon akseptab"
+      "acceptableUse": "Itilizasyon akseptab",
+      "learn": "Aprann",
+      "students": "Elèv",
+      "teachers": "Pwofesè",
+      "schools": "Lekòl",
+      "sql": "SQL",
+      "git": "Git",
+      "linux": "Linux",
+      "languages": "Lang"
     },
     "actions": {
       "browseCatalogs": "Gade katalòg yo",

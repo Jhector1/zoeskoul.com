@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         twitterTitle: seo.twitterTitle,
         twitterDescription: seo.twitterDescription,
         imageAlt: shared.defaultOgAlt,
-        noIndex: false,
+        noIndex: true,
     });
 }
 

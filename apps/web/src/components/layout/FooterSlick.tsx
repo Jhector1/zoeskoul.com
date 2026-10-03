@@ -89,29 +89,24 @@ export default function FooterSlick({
             title: t("sections.explore"),
             links: [
                 { href: ROUTES.home, label: t("links.home") },
-                { href: ROUTES.catalogs, label: t("links.catalogs") },
-                { href: ROUTES.myLearning, label: t("links.myLearning") },
+                { href: "/learn", label: t("links.learn") },
+                { href: "/students", label: t("links.students") },
+                { href: "/teachers", label: t("links.teachers") },
+                { href: "/schools", label: t("links.schools") },
                 { href: ROUTES.pricing, label: t("links.pricing") },
-                { href: "/sandbox", label: t("links.sandbox") },
+                { href: "/sandbox/programming", label: t("links.sandbox") },
             ],
         },
         {
             title: t("sections.subjects"),
             links: [
-                { href: ROUTES.subjectModules("python"), label: t("links.python") },
-                {
-                    href: ROUTES.subjectModules("linear-algebra"),
-                    label: t("links.linearAlgebra"),
-                },
-                { href: ROUTES.subjectModules("ai-literacy"), label: t("links.aiChatgpt") },
-                {
-                    href: ROUTES.subjectModules("cyber-security"),
-                    label: t("links.cybersecurity"),
-                },
-                {
-                    href: ROUTES.subjectModules("haitian-creole"),
-                    label: t("links.haitianCreole"),
-                },
+                { href: "/learn/python", label: t("links.python") },
+                { href: "/learn/sql", label: t("links.sql") },
+                { href: "/learn/git", label: t("links.git") },
+                { href: "/learn/linux", label: t("links.linux") },
+                { href: "/learn/ai", label: t("links.aiChatgpt") },
+                { href: "/learn/cybersecurity", label: t("links.cybersecurity") },
+                { href: "/learn/languages", label: t("links.languages") },
             ],
         },
         {
@@ -201,19 +196,19 @@ export default function FooterSlick({
 
                         <div className="flex flex-wrap gap-3">
                             <Link
-                                href={ROUTES.catalogs}
+                                href="/learn"
                                 className="ui-btn-primary inline-flex items-center gap-2"
                             >
                                 <BookOpen className="h-4 w-4" />
-                                {t("actions.browseCatalogs")}
+                                {t("links.learn")}
                             </Link>
 
                             <Link
-                                href="/legal"
+                                href="/teachers"
                                 className="ui-btn-secondary inline-flex items-center gap-2"
                             >
-                                <ShieldCheck className="h-4 w-4" />
-                                {t("actions.legalCenter")}
+                                <GraduationCap className="h-4 w-4" />
+                                {t("links.teachers")}
                             </Link>
                         </div>
                     </div>

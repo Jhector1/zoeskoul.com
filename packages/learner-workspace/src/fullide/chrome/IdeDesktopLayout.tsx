@@ -4,6 +4,7 @@ import type React from "react";
 import { Redo2, Undo2 } from "lucide-react";
 import { useLearnerWorkspaceTranslations as useTranslations } from "@zoeskoul/learner-workspace/runtime/appRuntime";
 import { IconChevronRight } from "@zoeskoul/learner-workspace/ide/fullide/icons";
+import ResizeSeparator from "../../ui/ResizeSeparator";
 
 export default function IdeDesktopLayout({
                                            splitRef,
@@ -106,10 +107,9 @@ export default function IdeDesktopLayout({
                 {explorer}
               </div>
 
-              <div
-                  role="separator"
+              <ResizeSeparator
+                  orientation="vertical"
                   tabIndex={0}
-                  aria-orientation="vertical"
                   aria-label={t("resizeExplorer")}
                   aria-valuemin={16}
                   aria-valuemax={40}
@@ -117,7 +117,6 @@ export default function IdeDesktopLayout({
                   onMouseDown={onMouseDownDivider}
                   onPointerDown={onPointerDownDivider}
                   onKeyDown={onKeyDownDivider}
-                  className="w-[6px] shrink-0 cursor-col-resize bg-neutral-200/45 outline-none transition-colors hover:bg-neutral-300/60 focus:bg-neutral-300/60 dark:bg-white/[0.04] dark:hover:bg-white/[0.09] dark:focus:bg-white/[0.09]"
                   title={t("resizeExplorerHelp")}
               />
             </>

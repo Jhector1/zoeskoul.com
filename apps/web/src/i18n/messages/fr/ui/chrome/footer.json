@@ -33,7 +33,15 @@
       "privacy": "Confidentialité",
       "cookies": "Cookies",
       "refunds": "Remboursements",
-      "acceptableUse": "Utilisation acceptable"
+      "acceptableUse": "Utilisation acceptable",
+      "learn": "Apprendre",
+      "students": "Étudiants",
+      "teachers": "Enseignants",
+      "schools": "Écoles",
+      "sql": "SQL",
+      "git": "Git",
+      "linux": "Linux",
+      "languages": "Langues"
     },
     "actions": {
       "browseCatalogs": "Parcourir les catalogues",

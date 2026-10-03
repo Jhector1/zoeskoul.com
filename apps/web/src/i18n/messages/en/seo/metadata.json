@@ -215,6 +215,46 @@
         "ogDescription": "Use a real interactive Bash shell to practice commands and filesystem basics.",
         "twitterTitle": "Shell Practice — {appName}",
         "twitterDescription": "Practice Bash commands in a real interactive shell with {appName}."
+      },
+      "learn": {
+        "title": "Interactive Courses & Hands-On Learning — {appName}",
+        "description": "Explore hands-on learning paths in programming, Python, SQL, Git, Linux, AI, cybersecurity, math, and languages with interactive practice.",
+        "ogTitle": "Learn by practicing — {appName}",
+        "ogDescription": "Interactive learning paths with structured lessons and hands-on practice.",
+        "twitterTitle": "Interactive Courses & Hands-On Learning — {appName}",
+        "twitterDescription": "Explore programming, data, AI, cybersecurity, math, and language learning with hands-on practice."
+      },
+      "students": {
+        "title": "Interactive Learning for Students — {appName}",
+        "description": "Learn with structured lessons, hands-on practice, immediate feedback, progress tracking, and optional tutoring support.",
+        "ogTitle": "Hands-on learning for students — {appName}",
+        "ogDescription": "Practice skills instead of only watching tutorials.",
+        "twitterTitle": "Interactive Learning for Students — {appName}",
+        "twitterDescription": "Structured learning, interactive practice, feedback, and progress."
+      },
+      "teachers": {
+        "title": "Teaching Platform for Interactive Learning — {appName}",
+        "description": "Organize learners, create learning groups, assign courses, invite students, support practice, and review learner progress.",
+        "ogTitle": "Interactive teaching tools — {appName}",
+        "ogDescription": "Learning groups, assignments, student invitations, tutoring, and progress review.",
+        "twitterTitle": "Teaching Platform for Interactive Learning — {appName}",
+        "twitterDescription": "Organize learners, assign courses, and review progress with hands-on learning workflows."
+      },
+      "schools": {
+        "title": "Interactive Learning Platform for Schools — {appName}",
+        "description": "Support classrooms and learning programs with interactive curriculum, teacher workflows, student practice, assignments, and progress reporting.",
+        "ogTitle": "Hands-on learning for schools — {appName}",
+        "ogDescription": "Interactive curriculum and school teaching workflows in one learning platform.",
+        "twitterTitle": "Interactive Learning Platform for Schools — {appName}",
+        "twitterDescription": "Interactive curriculum, teacher workflows, assignments, practice, and progress reporting."
+      },
+      "sandbox-programming": {
+        "title": "Interactive Programming Sandbox & Coding Practice — {appName}",
+        "description": "Practice programming in your browser with public hands-on coding tools from {appName}. Write and run code, explore languages, and move from explanation to practice.",
+        "ogTitle": "Interactive programming practice — {appName}",
+        "ogDescription": "Write and run code in browser-based programming tools and practice by doing.",
+        "twitterTitle": "Interactive Programming Sandbox — {appName}",
+        "twitterDescription": "Practice programming with browser-based coding tools and hands-on execution."
       }
     },
     "subjects": {
@@ -247,6 +287,42 @@
         "description": "Build practical AI literacy with guided lessons on ChatGPT, prompting, safe use, and real-world workflows.",
         "ogTitle": "Learn AI and ChatGPT — {appName}",
         "ogDescription": "Practical AI learning with guided lessons and safe workflows."
+      },
+      "programming": {
+        "title": "Learn Programming — {appName}",
+        "description": "Learn programming through hands-on coding, immediate feedback, and structured practice.",
+        "ogTitle": "Learn programming through practice — {appName}",
+        "ogDescription": "Build programming fundamentals by writing and running code."
+      },
+      "sql": {
+        "title": "Learn SQL — {appName}",
+        "description": "Learn SQL with hands-on queries, filtering, joins, aggregation, reporting, and data analysis practice.",
+        "ogTitle": "Learn SQL by writing queries — {appName}",
+        "ogDescription": "Interactive SQL learning and query practice."
+      },
+      "git": {
+        "title": "Learn Git & Version Control — {appName}",
+        "description": "Learn repositories, commits, branches, merges, and practical Git workflows.",
+        "ogTitle": "Learn Git and version control — {appName}",
+        "ogDescription": "Build practical Git skills with structured learning."
+      },
+      "linux": {
+        "title": "Learn Linux & Terminal Skills — {appName}",
+        "description": "Learn Linux commands, files, permissions, directories, and terminal workflows with structured practice.",
+        "ogTitle": "Learn Linux and terminal fundamentals — {appName}",
+        "ogDescription": "Build confidence with Linux and command-line workflows."
+      },
+      "ai": {
+        "title": "Learn AI Fundamentals — {appName}",
+        "description": "Build practical AI literacy including core concepts, prompting, responsible use, limitations, and applications.",
+        "ogTitle": "Build practical AI literacy — {appName}",
+        "ogDescription": "Understand AI concepts, prompting, limitations, and responsible use."
+      },
+      "languages": {
+        "title": "Interactive Language Learning — {appName}",
+        "description": "Build vocabulary, comprehension, and communication skills with structured lessons and repeated practice.",
+        "ogTitle": "Practice languages with structure — {appName}",
+        "ogDescription": "Interactive language practice with structured progression."
       }
     }
   }

@@ -33,7 +33,15 @@
       "privacy": "Privacy",
       "cookies": "Cookies",
       "refunds": "Refunds",
-      "acceptableUse": "Acceptable Use"
+      "acceptableUse": "Acceptable Use",
+      "learn": "Learn",
+      "students": "Students",
+      "teachers": "Teachers",
+      "schools": "Schools",
+      "sql": "SQL",
+      "git": "Git",
+      "linux": "Linux",
+      "languages": "Languages"
     },
     "actions": {
       "browseCatalogs": "Browse catalogs",

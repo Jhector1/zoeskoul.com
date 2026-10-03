@@ -220,11 +220,22 @@ export default async function middleware(req: NextRequest) {
   const { pathname: localizedPathname } = req.nextUrl;
   const { locale, path } = stripLocale(localizedPathname);
 
-  // Prevent auth pages from being indexed
-  if (path.startsWith("/authenticate")) {
+  // Search destinations belong to public marketing pages, not account/session UI.
+  const shouldNoIndexAppRoute = [
+    "/authenticate",
+    "/admin",
+    "/profile",
+    "/assignments",
+    "/invitations",
+    "/tutoring-sessions",
+    "/billing/success",
+    "/c/",
+  ].some((prefix) => path.startsWith(prefix));
+
+  if (shouldNoIndexAppRoute) {
     res.headers.set(
-        "X-Robots-Tag",
-        "noindex, nofollow, noarchive, nosnippet"
+      "X-Robots-Tag",
+      "noindex, nofollow, noarchive, nosnippet",
     );
   }
 

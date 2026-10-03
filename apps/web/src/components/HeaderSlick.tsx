@@ -64,6 +64,14 @@ function useWebHeaderBilling(): LearnerHeaderBillingSnapshot {
 const learnerHeader = createLearnerHeader({
   appName: process.env.NEXT_PUBLIC_APP_NAME ?? "ZoeSkoul",
   routes: ROUTES,
+  guestPrimaryNav: [
+    { href: "/learn", labelKey: "learn" },
+    { href: "/students", labelKey: "students" },
+    { href: "/teachers", labelKey: "teachers" },
+    { href: "/schools", labelKey: "schools" },
+    { href: ROUTES.pricing, labelKey: "billing" },
+    { href: "/sandbox/programming", labelKey: "startSession" },
+  ],
   authenticatedNavIsExternal: true,
 
   Link,

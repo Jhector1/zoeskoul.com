@@ -29,12 +29,14 @@ describe("public challenge social publishing ownership", () => {
     expect(admin).not.toContain(
       "LINKEDIN_ACCESS_TOKEN",
     );
-    expect(admin).not.toContain(
+    for (const secretName of [
       "X_API_KEY",
       "X_API_SECRET",
       "X_ACCESS_TOKEN",
       "X_ACCESS_TOKEN_SECRET",
-    );
+    ]) {
+      expect(admin).not.toContain(secretName);
+    }
 
     expect(provider).toContain(
       "FACEBOOK_PAGE_ACCESS_TOKEN",
@@ -45,12 +47,14 @@ describe("public challenge social publishing ownership", () => {
     expect(provider).toContain(
       "LINKEDIN_ACCESS_TOKEN",
     );
-    expect(provider).toContain(
+    for (const secretName of [
       "X_API_KEY",
       "X_API_SECRET",
       "X_ACCESS_TOKEN",
       "X_ACCESS_TOKEN_SECRET",
-    );
+    ]) {
+      expect(provider).toContain(secretName);
+    }
   });
 
   it("shares one manual/daily publisher with durable idempotency", () => {

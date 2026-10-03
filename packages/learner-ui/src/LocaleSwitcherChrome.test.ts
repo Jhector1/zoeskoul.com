@@ -69,7 +69,6 @@ describe("LocaleSwitcherChrome ownership boundary", () => {
         'from "next-intl"',
         'from "next/navigation"',
         'from "@/lib/locale/persistLocale"',
-        'from "@/components/navigation/GlobalNavigationProgress"',
         'import { LocaleSwitcherChrome } from "@zoeskoul/learner-ui";',
         'useTranslations("LocaleSwitcher")',
         "useLocale()",
@@ -88,8 +87,14 @@ describe("LocaleSwitcherChrome ownership boundary", () => {
     }
     expect(web).toContain('from "@/i18n/navigation"');
     expect(web).toContain('from "@/i18n/routing"');
+    expect(web).toContain(
+      'from "@/components/navigation/GlobalNavigationProgress"',
+    );
     expect(student).toContain('from "@student/i18n/navigation"');
     expect(student).toContain('from "@student/i18n/routing"');
+    expect(student).toContain(
+      'from "@student/components/navigation/GlobalNavigationProgress"',
+    );
   });
 
   it("moves the Student adapter out of legacy ownership", () => {

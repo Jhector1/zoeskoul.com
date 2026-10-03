@@ -76,6 +76,12 @@ describe("HeaderChrome ownership boundary", () => {
     expect(web).toContain("useSession()");
     expect(web).toContain("buildStudentAppHref");
     expect(web).toContain("buildWebLogoutUrl");
+    expect(shared).toContain("guestPrimaryNav?: readonly");
+    expect(shared).toContain("runtime.guestPrimaryNav.map");
+    expect(web).toContain("guestPrimaryNav:");
+    expect(web).toContain('{ href: "/learn", labelKey: "learn" }');
+    expect(web).toContain('{ href: "/teachers", labelKey: "teachers" }');
+    expect(web).toContain('{ href: "/schools", labelKey: "schools" }');
 
     expect(student).toContain("useStudentSession()");
     expect(student).toContain("buildStudentLogoutUrl");

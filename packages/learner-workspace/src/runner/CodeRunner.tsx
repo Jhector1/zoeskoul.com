@@ -27,6 +27,7 @@ import OutputSurface, {
     type OutputSurfaceModel,
 } from "@zoeskoul/learner-workspace/runner/components/OutputSurface";
 import { useSplitSizing } from "@zoeskoul/learner-workspace/runner/hooks/useSplitSizing";
+import ResizeSeparator from "../ui/ResizeSeparator";
 import type { WorkspaceLanguage, SqlDialect } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import { runViaApi } from "@zoeskoul/learner-workspace/lib/code/runClient";
 import { useCodeRunnerController } from "@zoeskoul/learner-workspace/runner/hooks/controller/useCodeRunnerController";
@@ -376,7 +377,10 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
 };
 
 const RUNNER_SURFACE =
-    "overflow-hidden border border-neutral-200 bg-neutral-50/60 dark:border-white/10 dark:bg-black/20";
+    "overflow-hidden bg-neutral-50/60 dark:bg-black/20";
+
+const RUNNER_SURFACE_FRAMED =
+    "border border-neutral-200 dark:border-white/10";
 
 const PANEL_EDITOR = "bg-white/80 dark:bg-black/10";
 
@@ -395,10 +399,6 @@ const MOBILE_TAB_ACTIVE =
 const MOBILE_TAB_OUTPUT_ACTIVE =
     "border border-sky-300/20 bg-sky-300/10 text-sky-900 dark:border-sky-300/20 dark:bg-sky-300/10 dark:text-sky-100";
 
-const SPLIT_BAR_IDLE =
-    "bg-neutral-200/50 outline-none dark:bg-white/[0.04] dark:hover:bg-white/[0.09] dark:focus:bg-white/[0.09]";
-
-const SPLIT_BAR_ACTIVE = "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
 
 // Short guard only. A 60s module-level claim makes exercise navigation show
 // a blank "Idle" terminal until the learner clicks/presses something.
@@ -3417,6 +3417,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     className={[
                         "relative z-0 mt-3 min-h-0",
                         RUNNER_SURFACE,
+                        frame === "plain" ? "" : RUNNER_SURFACE_FRAMED,
                         "flex-1",
                         isNarrowScreen ? "overscroll-y-auto touch-pan-y" : "overscroll-contain",
                         rootStyle ? "" : shouldFillParentHeight ? "" : height === "auto" ? "h-auto" : "",
@@ -3490,33 +3491,32 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             <div className="flex h-full min-h-0 flex-col">
                                 <div
                                     className={cx(
-                                        "min-h-0 border-b border-neutral-200 dark:border-white/10",
+                                        "min-h-0",
                                         PANEL_EDITOR,
                                     )}
                                 >
                                     {renderEditorPane(split.bottomEditorH)}
                                 </div>
 
-                                <div
+                                <ResizeSeparator
                                     {...split.separatorProps}
-                                    aria-disabled={term.runState !== "idle" && !isWeb}
+                                    data-testid="runner-bottom-split-resizer"
+                                    orientation="horizontal"
+                                    disabled={term.runState !== "idle" && !isWeb}
                                     onPointerDown={
-                                        term.runState !== "idle" && !isWeb ? undefined : split.onPointerDownSplit
+                                        term.runState !== "idle" && !isWeb
+                                            ? undefined
+                                            : split.onPointerDownSplit
                                     }
                                     onKeyDown={
-                                        term.runState !== "idle" && !isWeb ? undefined : split.separatorProps.onKeyDown
-                                    }
-                                    className={[
-                                        "relative z-20 h-[6px] shrink-0 touch-none",
-                                        SPLIT_BAR_IDLE,
                                         term.runState !== "idle" && !isWeb
-                                            ? "cursor-not-allowed opacity-60"
-                                            : `cursor-row-resize ${SPLIT_BAR_ACTIVE}`,
-                                    ].join(" ")}
+                                            ? undefined
+                                            : split.separatorProps.onKeyDown
+                                    }
                                     title={
                                         term.runState !== "idle" && !isWeb
                                             ? "Cannot resize while a run session is active"
-                                            : "Drag or use arrow keys to resize preview"
+                                            : "Drag or use arrow keys to resize terminal"
                                     }
                                 />
 
@@ -3526,33 +3526,32 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             <div className="flex h-full min-h-0">
                                 <div
                                     className={cx(
-                                        "min-w-0 flex-1 border-r border-neutral-200 dark:border-white/10",
+                                        "min-w-0 flex-1",
                                         PANEL_EDITOR,
                                     )}
                                 >
                                     {renderEditorPane(split.rightTotalH)}
                                 </div>
 
-                                <div
+                                <ResizeSeparator
                                     {...split.separatorProps}
-                                    aria-disabled={term.runState !== "idle" && !isWeb}
+                                    data-testid="runner-right-split-resizer"
+                                    orientation="vertical"
+                                    disabled={term.runState !== "idle" && !isWeb}
                                     onPointerDown={
-                                        term.runState !== "idle" && !isWeb ? undefined : split.onPointerDownSplit
+                                        term.runState !== "idle" && !isWeb
+                                            ? undefined
+                                            : split.onPointerDownSplit
                                     }
                                     onKeyDown={
-                                        term.runState !== "idle" && !isWeb ? undefined : split.separatorProps.onKeyDown
-                                    }
-                                    className={[
-                                        "relative z-20 w-[6px] shrink-0 touch-none",
-                                        SPLIT_BAR_IDLE,
                                         term.runState !== "idle" && !isWeb
-                                            ? "cursor-not-allowed opacity-60"
-                                            : `cursor-col-resize ${SPLIT_BAR_ACTIVE}`,
-                                    ].join(" ")}
+                                            ? undefined
+                                            : split.separatorProps.onKeyDown
+                                    }
                                     title={
                                         term.runState !== "idle" && !isWeb
                                             ? "Cannot resize while a run session is active"
-                                            : "Drag or use arrow keys to resize preview"
+                                            : "Drag or use arrow keys to resize terminal"
                                     }
                                 />
 

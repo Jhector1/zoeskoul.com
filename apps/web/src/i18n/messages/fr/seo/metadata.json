@@ -197,6 +197,46 @@
         "ogDescription": "Écrivez et exécutez des requêtes SQL en ligne avec l’éditeur SQL {appName}.",
         "twitterTitle": "Éditeur SQL en ligne — {appName}",
         "twitterDescription": "Écrivez et exécutez des requêtes SQL en ligne avec l’éditeur SQL {appName}."
+      },
+      "learn": {
+        "title": "Cours interactifs et apprentissage pratique — {appName}",
+        "description": "Explorez des parcours pratiques en programmation, Python, SQL, Git, Linux, IA, cybersécurité, mathématiques et langues.",
+        "ogTitle": "Apprendre en pratiquant — {appName}",
+        "ogDescription": "Des parcours interactifs avec des leçons structurées et de la pratique.",
+        "twitterTitle": "Cours interactifs et apprentissage pratique — {appName}",
+        "twitterDescription": "Explorez programmation, données, IA, cybersécurité, mathématiques et langues par la pratique."
+      },
+      "students": {
+        "title": "Apprentissage interactif pour étudiants — {appName}",
+        "description": "Apprenez avec des leçons structurées, de la pratique, des retours immédiats, un suivi des progrès et du tutorat en option.",
+        "ogTitle": "Apprentissage pratique pour étudiants — {appName}",
+        "ogDescription": "Pratiquez les compétences au lieu de seulement regarder des tutoriels.",
+        "twitterTitle": "Apprentissage interactif pour étudiants — {appName}",
+        "twitterDescription": "Leçons structurées, pratique interactive, retours et progression."
+      },
+      "teachers": {
+        "title": "Plateforme d'enseignement interactif — {appName}",
+        "description": "Organisez les apprenants, créez des groupes, assignez des cours, invitez les étudiants et suivez leur progression.",
+        "ogTitle": "Outils interactifs pour enseignants — {appName}",
+        "ogDescription": "Groupes, devoirs, invitations, tutorat et suivi des progrès.",
+        "twitterTitle": "Plateforme d'enseignement interactif — {appName}",
+        "twitterDescription": "Organisez les apprenants, assignez des cours et suivez les progrès."
+      },
+      "schools": {
+        "title": "Plateforme d'apprentissage interactif pour écoles — {appName}",
+        "description": "Soutenez les classes et programmes avec un curriculum interactif, des outils enseignants, des devoirs, de la pratique et des rapports.",
+        "ogTitle": "Apprentissage pratique pour les écoles — {appName}",
+        "ogDescription": "Curriculum interactif et outils pédagogiques dans une même plateforme.",
+        "twitterTitle": "Plateforme d'apprentissage interactif pour écoles — {appName}",
+        "twitterDescription": "Curriculum interactif, outils enseignants, devoirs, pratique et rapports."
+      },
+      "sandbox-programming": {
+        "title": "Bac à sable de programmation et pratique du code — {appName}",
+        "description": "Pratiquez la programmation dans votre navigateur avec les outils de code publics de {appName}. Écrivez et exécutez du code et passez rapidement de l'explication à la pratique.",
+        "ogTitle": "Pratique interactive de la programmation — {appName}",
+        "ogDescription": "Écrivez et exécutez du code dans des outils de programmation accessibles depuis le navigateur.",
+        "twitterTitle": "Bac à sable de programmation — {appName}",
+        "twitterDescription": "Pratiquez la programmation avec des outils de code dans le navigateur."
       }
     },
     "subjects": {
@@ -229,6 +269,42 @@
         "description": "Développez une culture pratique de l’IA avec des leçons guidées sur ChatGPT, le prompting, l’usage sûr et les workflows concrets.",
         "ogTitle": "Apprendre l’IA et ChatGPT — {appName}",
         "ogDescription": "Apprentissage pratique de l’IA avec leçons guidées et usages sûrs."
+      },
+      "programming": {
+        "title": "Apprendre la programmation — {appName}",
+        "description": "Apprenez la programmation avec du code pratique, des retours immédiats et une progression structurée.",
+        "ogTitle": "Apprendre la programmation par la pratique — {appName}",
+        "ogDescription": "Développez les bases de la programmation en écrivant et exécutant du code."
+      },
+      "sql": {
+        "title": "Apprendre SQL — {appName}",
+        "description": "Apprenez SQL avec des requêtes, filtres, jointures, agrégations, rapports et analyses de données.",
+        "ogTitle": "Apprendre SQL avec de vraies requêtes — {appName}",
+        "ogDescription": "Apprentissage interactif de SQL et pratique des requêtes."
+      },
+      "git": {
+        "title": "Apprendre Git et le contrôle de version — {appName}",
+        "description": "Apprenez dépôts, commits, branches, fusions et flux Git pratiques.",
+        "ogTitle": "Apprendre Git et le contrôle de version — {appName}",
+        "ogDescription": "Développez des compétences Git pratiques avec un parcours structuré."
+      },
+      "linux": {
+        "title": "Apprendre Linux et le terminal — {appName}",
+        "description": "Apprenez commandes Linux, fichiers, permissions, dossiers et flux du terminal avec de la pratique structurée.",
+        "ogTitle": "Apprendre Linux et les bases du terminal — {appName}",
+        "ogDescription": "Développez votre aisance avec Linux et la ligne de commande."
+      },
+      "ai": {
+        "title": "Apprendre les bases de l'IA — {appName}",
+        "description": "Développez une culture pratique de l'IA: concepts, prompts, usage responsable, limites et applications.",
+        "ogTitle": "Développer une culture pratique de l'IA — {appName}",
+        "ogDescription": "Comprenez concepts, prompts, limites et usage responsable de l'IA."
+      },
+      "languages": {
+        "title": "Apprentissage interactif des langues — {appName}",
+        "description": "Développez vocabulaire, compréhension et communication avec des leçons structurées et de la pratique répétée.",
+        "ogTitle": "Pratiquer les langues avec structure — {appName}",
+        "ogDescription": "Pratique interactive des langues avec une progression structurée."
       }
     }
   }

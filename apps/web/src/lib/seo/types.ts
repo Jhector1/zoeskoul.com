@@ -24,14 +24,26 @@ export type SeoRouteKey =
     | "online-cpp-compiler"
     | "online-sql-editor"
     | "sandbox-programming"
-    | "sandbox-linear-algebra" | "sandbox-shell-practice" | "online-web-editor"
+    | "sandbox-linear-algebra"
+    | "sandbox-shell-practice"
+    | "online-web-editor"
+    | "learn"
+    | "students"
+    | "teachers"
+    | "schools";
 
 export type SeoSubjectKey =
     | "python"
     | "linear-algebra"
     | "cybersecurity"
     | "haitian-creole"
-    | "ai-chatgpt-kickstart";
+    | "ai-chatgpt-kickstart"
+    | "programming"
+    | "sql"
+    | "git"
+    | "linux"
+    | "ai"
+    | "languages";
 
 export type SeoRouteEntry = {
     title: string;

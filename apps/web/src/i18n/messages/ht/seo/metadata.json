@@ -197,6 +197,46 @@
         "ogDescription": "Ekri epi kouri kestyon SQL sou entènèt ak editè SQL {appName}.",
         "twitterTitle": "Editè SQL sou entènèt — {appName}",
         "twitterDescription": "Ekri epi kouri kestyon SQL sou entènèt ak editè SQL {appName}."
+      },
+      "learn": {
+        "title": "Kou entèaktif ak aprantisaj pratik — {appName}",
+        "description": "Eksplore chemen aprantisaj pratik nan pwogramasyon, Python, SQL, Git, Linux, AI, sibèsekirite, matematik ak lang.",
+        "ogTitle": "Aprann pandan w ap pratike — {appName}",
+        "ogDescription": "Chemen aprantisaj entèaktif ak leson òganize ak pratik.",
+        "twitterTitle": "Kou entèaktif ak aprantisaj pratik — {appName}",
+        "twitterDescription": "Eksplore pwogramasyon, done, AI, sibèsekirite, matematik ak lang ak pratik."
+      },
+      "students": {
+        "title": "Aprantisaj entèaktif pou elèv — {appName}",
+        "description": "Aprann ak leson òganize, pratik, fidbak rapid, swivi pwogrè ak sipò tutorat si sa nesesè.",
+        "ogTitle": "Aprantisaj pratik pou elèv — {appName}",
+        "ogDescription": "Pratike ladrès olye w sèlman gade leson.",
+        "twitterTitle": "Aprantisaj entèaktif pou elèv — {appName}",
+        "twitterDescription": "Leson òganize, pratik entèaktif, fidbak ak pwogrè."
+      },
+      "teachers": {
+        "title": "Platfòm ansèyman entèaktif — {appName}",
+        "description": "Òganize elèv, kreye gwoup aprantisaj, bay kou ak devwa, envite elèv epi suiv pwogrè yo.",
+        "ogTitle": "Zouti entèaktif pou pwofesè — {appName}",
+        "ogDescription": "Gwoup, devwa, envitasyon, tutorat ak revizyon pwogrè.",
+        "twitterTitle": "Platfòm ansèyman entèaktif — {appName}",
+        "twitterDescription": "Òganize elèv, bay kou epi suiv pwogrè ak aprantisaj pratik."
+      },
+      "schools": {
+        "title": "Platfòm aprantisaj entèaktif pou lekòl — {appName}",
+        "description": "Sipòte klas ak pwogram ak kourikoulòm entèaktif, zouti pwofesè, devwa, pratik ak rapò sou pwogrè.",
+        "ogTitle": "Aprantisaj pratik pou lekòl — {appName}",
+        "ogDescription": "Kourikoulòm entèaktif ak zouti lekòl nan yon sèl platfòm.",
+        "twitterTitle": "Platfòm aprantisaj entèaktif pou lekòl — {appName}",
+        "twitterDescription": "Kourikoulòm entèaktif, zouti pwofesè, devwa, pratik ak rapò."
+      },
+      "sandbox-programming": {
+        "title": "Sandbox pwogramasyon ak pratik kòd — {appName}",
+        "description": "Pratike pwogramasyon dirèkteman nan navigatè ou ak zouti kòd piblik {appName}. Ekri epi kouri kòd epi pase soti nan eksplikasyon pou rive nan pratik.",
+        "ogTitle": "Pratik pwogramasyon entèaktif — {appName}",
+        "ogDescription": "Ekri epi kouri kòd nan zouti pwogramasyon ki mache nan navigatè a.",
+        "twitterTitle": "Sandbox pwogramasyon — {appName}",
+        "twitterDescription": "Pratike pwogramasyon ak zouti kòd ki mache nan navigatè a."
       }
     },
     "subjects": {
@@ -229,6 +269,42 @@
         "description": "Bati konpetans pratik nan IA ak leson gide sou ChatGPT, prompting, itilizasyon an sekirite ak workflow reyèl.",
         "ogTitle": "Aprann IA ak ChatGPT — {appName}",
         "ogDescription": "Aprantisaj pratik sou IA ak leson gide ak workflow an sekirite."
+      },
+      "programming": {
+        "title": "Aprann pwogramasyon — {appName}",
+        "description": "Aprann pwogramasyon ak kòd pratik, fidbak rapid ak yon pwogresyon òganize.",
+        "ogTitle": "Aprann pwogramasyon ak pratik — {appName}",
+        "ogDescription": "Bati baz pwogramasyon pandan w ap ekri ak kouri kòd."
+      },
+      "sql": {
+        "title": "Aprann SQL — {appName}",
+        "description": "Aprann SQL ak query pratik, filtè, join, agregasyon, rapò ak analiz done.",
+        "ogTitle": "Aprann SQL ak vrè query — {appName}",
+        "ogDescription": "Aprantisaj SQL entèaktif ak pratik query."
+      },
+      "git": {
+        "title": "Aprann Git ak kontwòl vèsyon — {appName}",
+        "description": "Aprann repo, commit, branch, merge ak fason pou travay ak Git.",
+        "ogTitle": "Aprann Git ak kontwòl vèsyon — {appName}",
+        "ogDescription": "Bati ladrès Git pratik ak yon chemen òganize."
+      },
+      "linux": {
+        "title": "Aprann Linux ak tèminal — {appName}",
+        "description": "Aprann kòmand Linux, fichye, pèmisyon, dosye ak travay nan tèminal ak pratik òganize.",
+        "ogTitle": "Aprann Linux ak baz tèminal la — {appName}",
+        "ogDescription": "Bati konfyans ak Linux ak kòmand tèminal."
+      },
+      "ai": {
+        "title": "Aprann baz AI — {appName}",
+        "description": "Bati konpreyansyon pratik sou AI: prensip, prompt, bon itilizasyon, limit ak aplikasyon.",
+        "ogTitle": "Bati konpreyansyon pratik sou AI — {appName}",
+        "ogDescription": "Konprann prensip AI, prompt, limit ak itilizasyon responsab."
+      },
+      "languages": {
+        "title": "Aprantisaj lang entèaktif — {appName}",
+        "description": "Bati vokabilè, konpreyansyon ak kominikasyon ak leson òganize ak pratik repete.",
+        "ogTitle": "Pratike lang ak estrikti — {appName}",
+        "ogDescription": "Pratik lang entèaktif ak yon pwogresyon òganize."
       }
     }
   }

@@ -848,7 +848,19 @@ export default function XtermTerminal(props: {
             <span
                 ref={probeRef}
                 aria-hidden="true"
-                className="pointer-events-none absolute -left-[9999px] -top-[9999px] whitespace-pre font-mono text-[12px] leading-[1.35]"
+                data-testid="terminal-font-measure-probe"
+                style={{
+                    position: "absolute",
+                    left: -9999,
+                    top: -9999,
+                    visibility: "hidden",
+                    pointerEvents: "none",
+                    whiteSpace: "pre",
+                    fontFamily:
+                        'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+                    fontSize: 12,
+                    lineHeight: 1.35,
+                }}
             >
                 MMMMMMMMMM
             </span>
