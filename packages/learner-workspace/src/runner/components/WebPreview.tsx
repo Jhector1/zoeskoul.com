@@ -197,6 +197,14 @@ export default function WebPreview(props: {
                     srcDoc={srcDoc}
                     sandbox="allow-scripts allow-forms allow-modals allow-popups allow-downloads"
                     className="h-full w-full border-0 bg-white"
+                    style={{
+                        // The learner preview is a neutral browser surface, not an extension
+                        // of ZoeSkoul's light/dark theme. Pinning the embedding element to
+                        // light keeps UA controls and nested prefers-color-scheme behavior
+                        // stable while learner-authored CSS can still style the page itself.
+                        colorScheme: "light",
+                        backgroundColor: "#ffffff",
+                    }}
                 />
             </div>
         </div>
