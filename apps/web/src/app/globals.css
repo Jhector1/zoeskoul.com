@@ -6,6 +6,7 @@
 
 @import "../../../../packages/ui-styles/ui.css";
 @source "../../../../packages/learner-ui/src";
+@source "../../../../packages/learner-workspace/src";
 
 @keyframes review-nav-progress {
     0% {

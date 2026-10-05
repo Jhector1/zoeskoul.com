@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
 
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
+import ProgressRing from "@zoeskoul/learner-ui/components/ProgressRing";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
 import { ROUTES } from "@zoeskoul/app-config";
 import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
@@ -150,25 +151,20 @@ function getActionButtonClass(
 function ModuleIcon({
                         idx,
                         completed,
+                        pct,
                     }: {
     idx: number;
     completed?: boolean;
+    pct: number;
 }) {
     return (
-        <div
-            className={cn(
-                "ui-icon-box h-8 w-8 rounded-full text-[11px]",
-                completed &&
-                "border-[rgb(var(--ui-accent)/0.20)] bg-[rgb(var(--ui-accent)/0.10)] text-[rgb(var(--ui-accent)/1)]",
-            )}
-            aria-hidden
-        >
+        <ProgressRing pct={completed ? 1 : pct} size="sm">
             {completed ? (
-                <CheckCircle2 className="h-3.5 w-3.5" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-[rgb(var(--ui-accent)/1)]" />
             ) : (
-                <span className="font-medium tabular-nums">{idx + 1}</span>
+                <span>{idx + 1}</span>
             )}
-        </div>
+        </ProgressRing>
     );
 }
 
@@ -381,7 +377,7 @@ export default function SubjectModulesClient(props: Props) {
                                         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                                             <div className="min-w-0 flex-1">
                                                 <div className="flex items-start gap-3">
-                                                    <ModuleIcon idx={idx} completed={completed} />
+                                                    <ModuleIcon idx={idx} completed={completed} pct={modulePct} />
 
                                                     <div className="min-w-0 flex-1">
                                                         <div className="flex flex-wrap items-center gap-2">

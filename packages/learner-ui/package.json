@@ -11,7 +11,8 @@
     "./sketches/*": "./src/sketches/*.ts",
     "./vectorpad/*": "./src/vectorpad/*.ts",
     "./review/useReviewReset": "./src/review/useReviewReset.ts",
-    "./components/Badge": "./src/components/Badge.tsx"
+    "./components/Badge": "./src/components/Badge.tsx",
+    "./components/ProgressRing": "./src/components/ProgressRing.tsx"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",

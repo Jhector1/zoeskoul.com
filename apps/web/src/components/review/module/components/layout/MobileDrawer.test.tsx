@@ -4,18 +4,6 @@ import { describe, expect, it, vi } from "vitest";
 
 import MobileDrawer from "./MobileDrawer";
 
-vi.mock("framer-motion", () => ({
-    AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
-    motion: {
-        button: ({ initial: _initial, animate: _animate, exit: _exit, transition: _transition, ...props }: any) => (
-            <button {...props} />
-        ),
-        aside: ({ initial: _initial, animate: _animate, exit: _exit, transition: _transition, ...props }: any) => (
-            <aside {...props} />
-        ),
-    },
-}));
-
 describe("MobileDrawer", () => {
     it("uses the shared UI palette instead of hard-coded light and dark colors", () => {
         const html = renderToStaticMarkup(
@@ -39,4 +27,23 @@ describe("MobileDrawer", () => {
         expect(html).not.toContain("dark:");
         expect(html).not.toContain("#0b0d12");
     });
+    it("keeps the drawer mounted while closed so first open does not pay mount cost", () => {
+        const html = renderToStaticMarkup(
+            <MobileDrawer
+                open={false}
+                side="left"
+                title="Course modules"
+                reduceMotion
+                onClose={vi.fn()}
+            >
+                <div>Drawer content</div>
+            </MobileDrawer>,
+        );
+
+        expect(html).toContain("ui-review-mobile-drawer");
+        expect(html).toContain('aria-hidden="true"');
+        expect(html).toContain("invisible");
+        expect(html).toContain("Drawer content");
+    });
+
 });

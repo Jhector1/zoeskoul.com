@@ -227,6 +227,17 @@ async function claimPost(args: {
     },
   });
 
+  if (
+    existing.challengeId !== args.challengeId ||
+    existing.provider !== args.provider ||
+    existing.dispatchDate !== args.dispatchDate ||
+    existing.source !== args.source
+  ) {
+    throw new Error(
+      `Social post idempotency conflict for ${args.idempotencyKey}.`,
+    );
+  }
+
   if (existing.status === "published") {
     return { record: existing, claimed: false };
   }
@@ -468,6 +479,38 @@ export async function getNextDailyPublicChallengeLink(
   );
 }
 
+export async function getDailyPublicChallengeForDispatch(
+  locale: string,
+  dispatchDate: string,
+) {
+  const existingDispatch =
+    await prisma.publicChallengeSocialPost.findFirst({
+      where: {
+        source: "daily",
+        dispatchDate,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+      include: {
+        challenge: true,
+      },
+    });
+
+  if (existingDispatch) {
+    return existingDispatch.challenge;
+  }
+
+  const challenge =
+    await getNextDailyPublicChallengeLink(locale);
+
+  if (!challenge || challenge.locale !== locale) {
+    return null;
+  }
+
+  return challenge;
+}
+
 export async function runDailyPublicChallengeSocialTick(
   now = new Date(),
 ) {
@@ -488,17 +531,19 @@ export async function runDailyPublicChallengeSocialTick(
     return { ok: true as const, action: "no_providers" as const };
   }
 
-  const challenge = await getNextDailyPublicChallengeLink(
-    settings.locale,
-  );
-  if (!challenge || challenge.locale !== settings.locale) {
+  const clock = localClock(now, settings.timezone);
+  const challenge =
+    await getDailyPublicChallengeForDispatch(
+      settings.locale,
+      clock.date,
+    );
+  if (!challenge) {
     return {
       ok: true as const,
       action: "no_active_challenge" as const,
     };
   }
 
-  const clock = localClock(now, settings.timezone);
   return {
     action: "processed" as const,
     ...(await publishChallengeToSocial({

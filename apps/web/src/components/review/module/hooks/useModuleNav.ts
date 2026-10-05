@@ -10,6 +10,7 @@ export type CourseModuleNavItem = {
     current: boolean;
     locked: boolean;
     billingHref: string | null;
+    progressPct: number;
 };
 
 export type ModulePracticeProgress = {

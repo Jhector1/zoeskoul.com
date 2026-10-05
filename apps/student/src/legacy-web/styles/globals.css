@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @import "../../../../../packages/ui-styles/ui.css";
 @source "../../../../../packages/learner-ui/src";
+@source "../../../../../packages/learner-workspace/src";
 
 /* Tailwind custom variants must come after all CSS imports. */
 @custom-variant dark (&:where(.dark, .dark *));

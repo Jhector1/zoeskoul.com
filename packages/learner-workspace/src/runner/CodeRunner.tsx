@@ -391,10 +391,10 @@ const MOBILE_TAB_BASE =
     "inline-flex h-8 items-center justify-center gap-1.5 rounded-md px-2.5 text-[11px] font-medium transition-colors";
 
 const MOBILE_TAB_IDLE =
-    "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90";
+    "text-[rgb(var(--ui-text-muted)/0.9)] hover:bg-[rgb(var(--ui-hover)/0.72)] hover:text-[rgb(var(--ui-text)/1)]";
 
 const MOBILE_TAB_ACTIVE =
-    "border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/90";
+    "border border-[rgb(var(--ui-border-strong)/0.72)] bg-[rgb(var(--ui-surface-3)/0.82)] text-[rgb(var(--ui-text)/1)]";
 
 const MOBILE_TAB_OUTPUT_ACTIVE =
     "border border-sky-300/20 bg-sky-300/10 text-sky-900 dark:border-sky-300/20 dark:bg-sky-300/10 dark:text-sky-100";

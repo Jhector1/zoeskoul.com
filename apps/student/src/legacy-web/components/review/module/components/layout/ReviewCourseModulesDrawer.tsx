@@ -3,6 +3,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
+import ProgressRing from "@zoeskoul/learner-ui/components/ProgressRing";
 import type { CourseModuleNavItem } from "../../hooks/useModuleNav";
 import MobileDrawer from "./MobileDrawer";
 
@@ -55,19 +56,16 @@ function ModuleRow({
                 pending && "cursor-wait opacity-60",
             )}
         >
-            <span
-                aria-hidden="true"
-                className={cn(
-                    "ui-review-module-index",
-                    item.current
-                        ? "ui-review-module-index-current"
-                        : item.locked
-                            ? "ui-review-module-index-locked"
-                            : "ui-review-module-index-default",
-                )}
-            >
-                {item.index + 1}
-            </span>
+            <ProgressRing pct={item.progressPct} size="sm">
+                <span
+                    className={cn(
+                        item.current && "text-[rgb(var(--ui-accent)/1)]",
+                        item.locked && "text-[rgb(var(--ui-warn)/1)]",
+                    )}
+                >
+                    {item.index + 1}
+                </span>
+            </ProgressRing>
 
             <span className="min-w-0 flex-1">
                 <span className="flex items-start justify-between gap-2">

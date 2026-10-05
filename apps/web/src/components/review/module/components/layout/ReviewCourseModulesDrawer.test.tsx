@@ -42,6 +42,7 @@ const modules = [
         current: true,
         locked: false,
         billingHref: null,
+        progressPct: 0.14,
     },
     {
         slug: "module-2",
@@ -51,6 +52,7 @@ const modules = [
         current: false,
         locked: false,
         billingHref: null,
+        progressPct: 0,
     },
     {
         slug: "module-3",
@@ -60,6 +62,7 @@ const modules = [
         current: false,
         locked: true,
         billingHref: "/en/billing",
+        progressPct: 0.5,
     },
 ];
 
@@ -87,6 +90,7 @@ describe("ReviewCourseModulesDrawer", () => {
         expect(html).toContain("ui-review-topic-btn-active");
         expect(html).toContain("ui-review-topic-btn");
         expect(html).toContain("ui-pill-warn");
+        expect(html).toContain("ui-progress-ring");
         expect(html).not.toMatch(/(?:bg|text|border)-(?:black|white|neutral|amber|rose)-?/);
         expect(html).not.toContain("dark:");
     });

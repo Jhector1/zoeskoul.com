@@ -38,7 +38,37 @@ export default async function SubjectModulesPage({
 }) {
   const { locale, subjectSlug } = await params;
 
-  const session = await auth();
+  const [session, subject, manifestView, resolvedSectionsBySlug] = await Promise.all([
+    auth(),
+    prisma.practiceSubject.findUnique({
+      where: { slug: subjectSlug },
+      select: {
+        id: true,
+        slug: true,
+        accessPolicy: true as any,
+        entitlementKey: true,
+        status: true,
+        visibility: true,
+        modules: {
+          orderBy: [{ order: "asc" }, { slug: "asc" }],
+          select: {
+            id: true,
+            slug: true,
+            order: true,
+            weekStart: true,
+            weekEnd: true,
+            accessOverride: true as any,
+            entitlementKey: true,
+          },
+        },
+      },
+    }),
+    getResolvedSubjectModulesFromManifest(subjectSlug),
+    getResolvedSectionPresentationMap(subjectSlug),
+  ]);
+
+  if (!subject || !manifestView) notFound();
+
   const sessionUser: any = (session as any)?.user ?? null;
   const userId: string | null = sessionUser?.id ?? null;
   const email: string | null = sessionUser?.email ?? null;
@@ -50,43 +80,6 @@ export default async function SubjectModulesPage({
 
   const actor: Actor = { userId, guestId: null };
 
-  const subject = await prisma.practiceSubject.findUnique({
-    where: { slug: subjectSlug },
-    select: {
-      id: true,
-      slug: true,
-      accessPolicy: true as any,
-      entitlementKey: true,
-      status: true,
-      visibility: true,
-      modules: {
-        orderBy: [{ order: "asc" }, { slug: "asc" }],
-        select: {
-          id: true,
-          slug: true,
-          order: true,
-          weekStart: true,
-          weekEnd: true,
-          accessOverride: true as any,
-          entitlementKey: true,
-        },
-      },
-      sections: {
-        orderBy: [{ order: "asc" }, { slug: "asc" }],
-        select: {
-          id: true,
-          slug: true,
-          title: true,
-          description: true,
-          order: true,
-          moduleId: true,
-        },
-      },
-    },
-  });
-
-  if (!subject) notFound();
-
   const manifestStatus = getManifestSubjectPublicationStatus(subjectSlug);
   if (
     !canUnlockAll &&
@@ -94,20 +87,6 @@ export default async function SubjectModulesPage({
   ) {
     notFound();
   }
-
-  if (!canUnlockAll) {
-    const audienceAccess = await checkSubjectAudienceAccess(prisma, {
-      actor,
-      subjectId: subject.id,
-      visibility: subject.visibility,
-    });
-    if (!audienceAccess.ok) notFound();
-  }
-
-  const manifestView = await getResolvedSubjectModulesFromManifest(subjectSlug);
-  if (!manifestView) notFound();
-
-  const resolvedSectionsBySlug = await getResolvedSectionPresentationMap(subjectSlug);
 
   const manifestModuleSlugs = new Set(manifestView.modules.map((m) => m.slug));
   const dbModulesBySlug = new Map(subject.modules.map((m) => [m.slug, m]));
@@ -156,10 +135,24 @@ export default async function SubjectModulesPage({
 
   const requireAll = process.env.BILLING_REQUIRE_ALL_MODULES === "1";
 
-  const snapshot = await getAccessSnapshot(prisma, actor, {
-    subjectIds: [subject.id],
-    moduleIds: modules.map((m) => m.id),
-  });
+  let snapshot: Awaited<ReturnType<typeof getAccessSnapshot>> | null = null;
+
+  if (!canUnlockAll) {
+    const [audienceAccess, accessSnapshot] = await Promise.all([
+      checkSubjectAudienceAccess(prisma, {
+        actor,
+        subjectId: subject.id,
+        visibility: subject.visibility,
+      }),
+      getAccessSnapshot(prisma, actor, {
+        subjectIds: [subject.id],
+        moduleIds: modules.map((m) => m.id),
+      }),
+    ]);
+
+    if (!audienceAccess.ok) notFound();
+    snapshot = accessSnapshot;
+  }
 
   const accessByModuleSlug: Record<string, ModuleAccessView> = {};
 
@@ -183,7 +176,7 @@ export default async function SubjectModulesPage({
         accessOverride: (m as any).accessOverride,
         entitlementKey: (m as any).entitlementKey ?? null,
       },
-      snapshot,
+      snapshot: snapshot!,
       requireAll,
     });
 

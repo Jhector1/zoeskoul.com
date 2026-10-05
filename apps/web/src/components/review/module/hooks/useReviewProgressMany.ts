@@ -1,6 +1,6 @@
 import {
   completedTopicKeysFromProgress,
-  fetchReviewProgressGET,
+  emptyReviewProgress,
 } from "@zoeskoul/learning-client/legacy-compatible/review/progressClient";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -19,34 +19,23 @@ export function useReviewProgressMany(args: {
   const { subjectSlug, locale, moduleIds, enabled = true, refreshMs = 0 } =
     args;
 
-  // ✅ stable key based on VALUES, not array identity
   const idsKey = moduleIds.filter(Boolean).join("|");
-
-  // ✅ stable array derived from key
   const stableIds = useMemo(() => (idsKey ? idsKey.split("|") : []), [idsKey]);
 
   const [nonce, setNonce] = useState(0);
   const refresh = useCallback(() => setNonce((n) => n + 1), []);
 
-  // ✅ first-load vs background syncing (prevents flicker)
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const [byModuleId, setByModuleId] = useState<
-    Record<string, ModuleProgressLite>
-  >({});
-
-  // keep last known good so a temporary failure doesn't blank UI
+  const [byModuleId, setByModuleId] = useState<Record<string, ModuleProgressLite>>({});
   const lastGoodRef = useRef<Record<string, ModuleProgressLite>>({});
 
   useEffect(() => {
-    if (!enabled) return;
-    if (!subjectSlug || !locale) return;
+    if (!enabled || !subjectSlug || !locale) return;
 
     let alive = true;
     const ctrl = new AbortController();
-
     const isFirstLoad = Object.keys(lastGoodRef.current).length === 0;
 
     setError(null);
@@ -55,54 +44,46 @@ export function useReviewProgressMany(args: {
 
     (async () => {
       try {
-        const settled = await Promise.allSettled(
-          stableIds.map(async (moduleSlug) => {
-            const p = await fetchReviewProgressGET({
-              subjectSlug,
-              moduleSlug,
-              locale,
-              signal: ctrl.signal,
-            });
+        const search = new URLSearchParams({
+          subjectSlug,
+          locale,
+          moduleSlugs: stableIds.join(","),
+        });
+        const response = await fetch(`/api/review/progress-many?${search.toString()}`, {
+          method: "GET",
+          cache: "no-store",
+          credentials: "include",
+          headers: { Accept: "application/json" },
+          signal: ctrl.signal,
+        });
 
-            return [
-              moduleSlug,
-              {
-                moduleCompleted: Boolean(p.moduleCompleted),
-                completedTopicKeys: completedTopicKeysFromProgress(p),
-              },
-            ] as const;
-          }),
-        );
+        if (!response.ok) {
+          throw new Error(`Progress sync failed: ${response.status}`);
+        }
+
+        const data = await response.json().catch(() => null);
+        const rawByModule =
+          data && typeof data === "object" && data.progressByModuleId
+            ? (data.progressByModuleId as Record<string, any>)
+            : {};
 
         if (!alive) return;
 
-        // merge into last-known-good
-        const next: Record<string, ModuleProgressLite> = {
-          ...lastGoodRef.current,
-        };
-
-        let okCount = 0;
-        for (const r of settled) {
-          if (r.status === "fulfilled") {
-            okCount++;
-            const [id, v] = r.value;
-            next[id] = v;
-          }
+        const next: Record<string, ModuleProgressLite> = {};
+        for (const moduleSlug of stableIds) {
+          const progress = rawByModule[moduleSlug] ?? emptyReviewProgress();
+          next[moduleSlug] = {
+            moduleCompleted: Boolean(progress.moduleCompleted),
+            completedTopicKeys: completedTopicKeysFromProgress(progress),
+          };
         }
 
         lastGoodRef.current = next;
         setByModuleId(next);
-
-        if (stableIds.length > 0 && okCount === 0) {
-          setError(
-            "Could not sync progress (network/server). Showing last known values.",
-          );
-        }
       } catch (e: any) {
-        if (!alive) return;
-        if (e?.name !== "AbortError") {
-          setError(e?.message ?? "Could not sync progress.");
-        }
+        if (!alive || e?.name === "AbortError") return;
+        setError(e?.message ?? "Could not sync progress.");
+        setByModuleId(lastGoodRef.current);
       } finally {
         if (!alive) return;
         setLoading(false);
@@ -124,10 +105,9 @@ export function useReviewProgressMany(args: {
   }, [enabled, refresh]);
 
   useEffect(() => {
-    if (!enabled) return;
-    if (!refreshMs || refreshMs <= 0) return;
-    const t = setInterval(() => refresh(), Math.max(2000, refreshMs));
-    return () => clearInterval(t);
+    if (!enabled || !refreshMs || refreshMs <= 0) return;
+    const timer = setInterval(() => refresh(), Math.max(2000, refreshMs));
+    return () => clearInterval(timer);
   }, [enabled, refresh, refreshMs]);
 
   return { loading, syncing, error, byModuleId, refresh };
