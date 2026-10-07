@@ -1,0 +1,81 @@
+name: Public Challenge Social Autopost
+
+on:
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: public-challenge-social-autopost
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  tick:
+    name: Run social autopost tick
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      SOCIAL_TICK_URL: ${{ vars.ZOESKOUL_SOCIAL_TICK_URL || 'https://zoeskoul.com/api/internal/public-challenges/social/tick' }}
+      SCHEDULER_SECRET: ${{ secrets.ZOESKOUL_SOCIAL_SCHEDULER_SECRET }}
+
+    steps:
+      - name: Scheduler not activated
+        if: ${{ env.SCHEDULER_SECRET == '' }}
+        shell: bash
+        run: |
+          echo "::notice::ZOESKOUL_SOCIAL_SCHEDULER_SECRET is not configured yet; social autopost tick skipped."
+
+      - name: Validate scheduler configuration
+        if: ${{ env.SCHEDULER_SECRET != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "${SOCIAL_TICK_URL}" in
+            https://*/api/internal/public-challenges/social/tick) ;;
+            *)
+              echo "::error::ZOESKOUL_SOCIAL_TICK_URL must be HTTPS and end in /api/internal/public-challenges/social/tick."
+              exit 1
+              ;;
+          esac
+
+      - name: Trigger daily social tick
+        if: ${{ env.SCHEDULER_SECRET != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          response_file="$(mktemp)"
+          trap 'rm -f "${response_file}"' EXIT
+
+          http_code="$(
+            curl \
+              --silent \
+              --show-error \
+              --request POST \
+              --connect-timeout 10 \
+              --max-time 90 \
+              --retry 3 \
+              --retry-delay 5 \
+              --retry-all-errors \
+              --output "${response_file}" \
+              --write-out "%{http_code}" \
+              --header "Authorization: Bearer ${SCHEDULER_SECRET}" \
+              "${SOCIAL_TICK_URL}"
+          )"
+
+          echo "social_tick_http=${http_code}"
+          if [ -s "${response_file}" ]; then
+            cat "${response_file}"
+            echo
+          fi
+
+          case "${http_code}" in
+            2??) echo "social_tick=PASS" ;;
+            *)
+              echo "::error::Social autopost tick returned HTTP ${http_code}."
+              exit 1
+              ;;
+          esac

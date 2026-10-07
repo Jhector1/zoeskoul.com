@@ -9,6 +9,82 @@ export function createPracticeChallengeCode() {
   return crypto.randomBytes(7).toString("base64url");
 }
 
+export class ChallengeLinkPersistenceError extends Error {
+  constructor(cause?: unknown) {
+    super("Could not save the challenge link.", { cause });
+    this.name = "ChallengeLinkPersistenceError";
+  }
+}
+
+function isUniqueConstraintError(error: unknown) {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: unknown }).code === "P2002"
+  );
+}
+
+export type CreatePracticeChallengeLinkRecordInput = {
+  locale: "en" | "fr" | "ht";
+  subjectSlug: string;
+  moduleSlug: string;
+  sectionSlug: string;
+  topicSlug: string;
+  exerciseKey: string;
+  exercisePurpose: "practice";
+  signedToken: string;
+  shareTitle: string;
+  shareDescription: string;
+  ogImagePublicId: string | null;
+  ogImageAlt: string | null;
+  createdById: string | null;
+  expiresAt: Date | null;
+};
+
+export async function createPracticeChallengeLinkRecord(
+  input: CreatePracticeChallengeLinkRecordInput,
+) {
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    try {
+      return await prisma.practiceChallengeLink.create({
+        data: {
+          code: createPracticeChallengeCode(),
+          locale: input.locale,
+          subjectSlug: input.subjectSlug,
+          moduleSlug: input.moduleSlug,
+          sectionSlug: input.sectionSlug,
+          topicSlug: input.topicSlug,
+          exerciseKey: input.exerciseKey,
+          exercisePurpose: input.exercisePurpose,
+          signedToken: input.signedToken,
+          shareTitle: input.shareTitle,
+          shareDescription: input.shareDescription,
+          ogImagePublicId: input.ogImagePublicId,
+          ogImageAlt: input.ogImageAlt,
+          createdById: input.createdById,
+          expiresAt: input.expiresAt,
+        },
+      });
+    } catch (error) {
+      if (isUniqueConstraintError(error) && attempt < 5) continue;
+      throw new ChallengeLinkPersistenceError(error);
+    }
+  }
+
+  throw new Error("Could not allocate a unique challenge code.");
+}
+
+export function practiceChallengeLinkExpiresAt(now = new Date()) {
+  const raw = Number(process.env.CHALLENGE_LINK_TTL_DAYS ?? "365");
+  const ttlDays =
+    Number.isFinite(raw) && raw > 0
+      ? Math.max(1, Math.min(Math.floor(raw), 3650))
+      : 365;
+
+  return new Date(now.getTime() + ttlDays * 24 * 60 * 60 * 1000);
+}
+
 export function normalizePracticeChallengeCode(value: unknown): string | null {
   if (typeof value !== "string") return null;
   const code = value.trim();

@@ -95,6 +95,9 @@ describe("Public Challenge authored-Practice-only architecture", () => {
     const share = read(
       "apps/web/src/app/api/practice/trial/share/route.ts",
     );
+    const shortLink = read(
+      "apps/web/src/lib/practice/challenges/shortLink.ts",
+    );
     const adminApi = read(
       "apps/web/src/app/api/admin/public-challenges/route.ts",
     );
@@ -108,8 +111,11 @@ describe("Public Challenge authored-Practice-only architecture", () => {
       "apps/admin/src/features/public-challenges/PublicChallengePublisher.tsx",
     );
 
-    expect(share).toContain(
+    expect(shortLink).toContain(
       "exercisePurpose: input.exercisePurpose",
+    );
+    expect(share).toContain(
+      "createPracticeChallengeLinkRecord({",
     );
     expect(share).toContain(
       "exercisePurpose: target.exercisePurpose",

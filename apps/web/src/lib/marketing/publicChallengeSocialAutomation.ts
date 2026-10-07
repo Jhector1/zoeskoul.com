@@ -15,9 +15,16 @@ import {
 } from "@/lib/practice/challenges/presentation";
 import {
   getActivePracticeChallengeLink,
-  getLatestActivePracticeChallengeLink,
   practiceChallengePath,
 } from "@/lib/practice/challenges/shortLink";
+import {
+  createOrReuseAutomatedPracticeChallenge,
+  publicChallengeExerciseIdentity,
+  type PublicChallengeLocale,
+} from "@/lib/practice/challenges/automatedChallenge";
+import {
+  listPublishedChallengeExerciseOptions,
+} from "@/lib/practice/challenges/publishedCatalog";
 import {
   PublicChallengeSocialProviderError,
   publicChallengeSocialProviderStatuses,
@@ -455,7 +462,7 @@ export async function publishActiveChallengeToSocial(args: {
 }
 
 export async function getNextDailyPublicChallengeLink(
-  locale: string,
+  locale: PublicChallengeLocale,
 ) {
   const previouslyPublished =
     await prisma.publicChallengeSocialPost.findMany({
@@ -464,23 +471,43 @@ export async function getNextDailyPublicChallengeLink(
         status: "published",
       },
       select: {
-        challengeId: true,
+        challenge: {
+          select: {
+            subjectSlug: true,
+            moduleSlug: true,
+            sectionSlug: true,
+            topicSlug: true,
+            exerciseKey: true,
+          },
+        },
       },
-      distinct: ["challengeId"],
     });
 
-  return getLatestActivePracticeChallengeLink(
-    locale,
-    {
-      excludeIds: previouslyPublished.map(
-        (post) => post.challengeId,
-      ),
-    },
+  const usedExerciseIds = new Set(
+    previouslyPublished.map(({ challenge }) =>
+      publicChallengeExerciseIdentity(challenge),
+    ),
   );
+
+  const options =
+    await listPublishedChallengeExerciseOptions();
+  const candidate = options.find(
+    (option) =>
+      !usedExerciseIds.has(
+        publicChallengeExerciseIdentity(option),
+      ),
+  );
+
+  if (!candidate) return null;
+
+  return createOrReuseAutomatedPracticeChallenge({
+    locale,
+    option: candidate,
+  });
 }
 
 export async function getDailyPublicChallengeForDispatch(
-  locale: string,
+  locale: PublicChallengeLocale,
   dispatchDate: string,
 ) {
   const existingDispatch =

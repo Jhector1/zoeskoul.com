@@ -22,12 +22,13 @@ import { DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION } from "@/lib/practice/challenges/
 import { assertPublishedChallengeTargetAvailable } from "@/lib/practice/challenges/publishedAvailability";
 import { requireChallengePublisherAccessApi } from "@/lib/practice/challenges/publisherAccess";
 import {
-  createPracticeChallengeCode,
+  ChallengeLinkPersistenceError,
+  createPracticeChallengeLinkRecord,
+  practiceChallengeLinkExpiresAt,
   practiceChallengePath,
 } from "@/lib/practice/challenges/shortLink";
 import {
   resolveSharedChallengeTarget,
-  type ResolvedSharedChallengeTarget,
 } from "@/lib/practice/challenges/target";
 import { signSharedChallenge } from "@/lib/practice/challenges/token";
 
@@ -63,19 +64,6 @@ type ParsedShareRequest = {
   image: File | null;
 };
 
-class ChallengeLinkPersistenceError extends Error {
-  constructor(cause?: unknown) {
-    super("Could not save the challenge link.", { cause });
-    this.name = "ChallengeLinkPersistenceError";
-  }
-}
-
-function challengeTtlDays() {
-  const raw = Number(process.env.CHALLENGE_LINK_TTL_DAYS ?? "365");
-  if (!Number.isFinite(raw) || raw <= 0) return 365;
-  return Math.max(1, Math.min(Math.floor(raw), 3650));
-}
-
 function optionalFormValue(form: FormData, key: string) {
   const value = form.get(key);
   if (typeof value !== "string") return undefined;
@@ -108,61 +96,6 @@ async function readShareRequest(req: Request): Promise<ParsedShareRequest> {
     image:
       imageValue instanceof File && imageValue.size > 0 ? imageValue : null,
   };
-}
-
-function isUniqueConstraintError(error: unknown) {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "code" in error &&
-    (error as { code?: unknown }).code === "P2002"
-  );
-}
-
-async function createChallengeLinkRecord(input: {
-  locale: "en" | "fr" | "ht";
-  subjectSlug: string;
-  moduleSlug: string;
-  sectionSlug: string;
-  topicSlug: string;
-  exerciseKey: string;
-  exercisePurpose: ResolvedSharedChallengeTarget["exercisePurpose"];
-  signedToken: string;
-  shareTitle: string;
-  shareDescription: string;
-  ogImagePublicId: string | null;
-  ogImageAlt: string | null;
-  createdById: string | null;
-  expiresAt: Date;
-}) {
-  for (let attempt = 0; attempt < 6; attempt += 1) {
-    try {
-      return await prisma.practiceChallengeLink.create({
-        data: {
-          code: createPracticeChallengeCode(),
-          locale: input.locale,
-          subjectSlug: input.subjectSlug,
-          moduleSlug: input.moduleSlug,
-          sectionSlug: input.sectionSlug,
-          topicSlug: input.topicSlug,
-          exerciseKey: input.exerciseKey,
-          exercisePurpose: input.exercisePurpose,
-          signedToken: input.signedToken,
-          shareTitle: input.shareTitle,
-          shareDescription: input.shareDescription,
-          ogImagePublicId: input.ogImagePublicId,
-          ogImageAlt: input.ogImageAlt,
-          createdById: input.createdById,
-          expiresAt: input.expiresAt,
-        },
-      });
-    } catch (error) {
-      if (isUniqueConstraintError(error) && attempt < 5) continue;
-      throw new ChallengeLinkPersistenceError(error);
-    }
-  }
-
-  throw new Error("Could not allocate a unique challenge code.");
 }
 
 export async function POST(req: Request) {
@@ -203,9 +136,7 @@ export async function POST(req: Request) {
     assertEligiblePublicChallengeTarget(target);
     await assertPublishedChallengeTargetAvailable({ prisma, target });
 
-    const expiresAt = new Date(
-      Date.now() + challengeTtlDays() * 24 * 60 * 60 * 1000,
-    );
+    const expiresAt = practiceChallengeLinkExpiresAt();
     const token = signSharedChallenge(target, { expiresAt });
     const shareTitle = parsed.data.shareTitle ?? target.exerciseTitle;
     const shareDescription =
@@ -225,7 +156,7 @@ export async function POST(req: Request) {
       uploadedPublicId = generated.publicId;
     }
 
-    const link = await createChallengeLinkRecord({
+    const link = await createPracticeChallengeLinkRecord({
       locale: parsed.data.locale,
       subjectSlug: target.subjectSlug,
       moduleSlug: target.moduleSlug,
