@@ -6,11 +6,61 @@
       "navLabel": "Teacher navigation",
       "mainSite": "Main site",
       "nav": {
-        "tutoring": "Tutoring",
+        "home": "Home",
         "classes": "Classes",
-        "assignments": "Assignments",
-        "reports": "Reports",
-        "school": "School"
+        "tutoring": "Tutoring",
+        "institution": "Institution"
+      }
+    },
+    "home": {
+      "kicker": "Teacher workspace",
+      "title": "What do you want to do?",
+      "subtitle": "Start a class, manage tutoring, or work through your institution from one clear entry point.",
+      "actions": {
+        "class": {
+          "kicker": "Classes",
+          "title": "Create a class",
+          "body": "Set the institution, class details, and learners step by step.",
+          "cta": "Create class"
+        },
+        "tutoring": {
+          "kicker": "1:1 learning",
+          "title": "Tutoring",
+          "body": "Handle learner requests, availability, and scheduled sessions.",
+          "cta": "Open tutoring"
+        },
+        "institution": {
+          "kicker": "Organization",
+          "title": "Institution",
+          "body": "Manage the institution, staff, courses, announcements, and its classes.",
+          "cta": "Open institution"
+        }
+      },
+      "overview": {
+        "title": "At a glance",
+        "subtitle": "The items most likely to need your attention.",
+        "classes": "Current classes",
+        "pendingTutoring": "Tutoring needs scheduling",
+        "scheduledTutoring": "Scheduled tutoring"
+      },
+      "recentClasses": {
+        "title": "Your classes",
+        "viewAll": "View all classes",
+        "loading": "Loading classes…",
+        "empty": "No classes yet. Create your first class to get started.",
+        "independent": "Independent class",
+        "meta": "{students} students · {assignments} assignments",
+        "error": "Your classes could not be loaded. Retry before creating replacement classes."
+      },
+      "loadError": {
+        "message": "Some teacher workspace data could not be loaded. Nothing has been replaced with a zero value.",
+        "retry": "Retry",
+        "unavailable": "Unavailable"
+      },
+      "classStatus": {
+        "draft": "Draft",
+        "open": "Open",
+        "closed": "Closed"
       }
     }
   }

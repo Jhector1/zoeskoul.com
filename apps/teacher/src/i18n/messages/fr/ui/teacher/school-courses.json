@@ -1,30 +1,30 @@
 {
   "Teacher": {
     "schoolCourses": {
-      "kicker": "Catalogue de l’école",
-      "title": "Cours",
-      "description": "Activez des cours ZoeSkoul canoniques pour cette école. Les classes et devoirs référencent le même cours, sans copie.",
+      "kicker": "Programme de l’établissement",
+      "title": "Cours disponibles",
+      "description": "Choisissez les contenus pédagogiques ZoeSkoul que les enseignants de cet établissement peuvent utiliser pour créer des devoirs dans leurs classes. Un cours est un programme réutilisable ; ce n’est pas une classe ni un groupe d’élèves.",
       "enabledCount": "{count} activés",
       "loading": "Chargement des cours…",
       "saving": "Enregistrement…",
       "empty": "Aucun cours attribuable n’est disponible.",
-      "readOnly": "Les enseignants peuvent consulter le catalogue. Les propriétaires et administrateurs gèrent la disponibilité des cours.",
+      "readOnly": "Les enseignants peuvent consulter les cours disponibles. Les propriétaires et administrateurs de l’établissement gèrent les cours utilisables.",
       "status": {
         "enabled": "Activé",
         "available": "Disponible"
       },
       "actions": {
-        "add": "Ajouter à l’école",
-        "remove": "Retirer"
+        "add": "Activer pour l’établissement",
+        "remove": "Désactiver"
       },
       "notices": {
-        "added": "Cours ajouté à l’école.",
-        "removed": "Cours retiré de l’école."
+        "added": "Cours activé pour l’établissement.",
+        "removed": "Cours désactivé pour l’établissement."
       },
       "errors": {
-        "load": "Les cours de l’école n’ont pas pu être chargés.",
-        "add": "Ce cours n’a pas pu être ajouté.",
-        "remove": "Ce cours n’a pas pu être retiré. Un devoir scolaire actuel ou historique peut encore l’utiliser."
+        "load": "Les cours disponibles n’ont pas pu être chargés.",
+        "add": "Ce cours n’a pas pu être activé.",
+        "remove": "Ce cours n’a pas pu être désactivé. Un devoir actuel ou historique peut encore l’utiliser."
       }
     }
   }

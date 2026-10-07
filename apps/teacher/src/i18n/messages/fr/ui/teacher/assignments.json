@@ -2,23 +2,23 @@
   "Teacher": {
     "assignments": {
       "kicker": "Enseignement",
-      "title": "Attributions de cours",
-      "subtitle": "Attribuez des cours ZoeSkoul existants à des classes ou à des élèves individuels sans créer une autre copie du cours.",
+      "title": "Devoirs",
+      "subtitle": "Distribuez des contenus de cours réutilisables à des classes ou à des apprenants individuels. Chaque devoir contrôle le public, les dates et l’accès.",
       "classes": "Classes",
       "newAssignment": "Nouvelle attribution",
-      "loading": "Chargement des attributions de cours…",
+      "loading": "Chargement des devoirs…",
       "loadingEditor": "Chargement de l’éditeur d’attribution…",
-      "empty": "Aucune attribution de cours privé pour le moment.",
+      "empty": "Aucun devoir pour le moment.",
       "errors": {
-        "load": "Impossible de charger les attributions de cours.",
+        "load": "Impossible de charger les devoirs.",
         "loadEditor": "Impossible de charger l’éditeur d’attribution.",
-        "save": "Impossible d’enregistrer l’attribution du cours.",
-        "delete": "Impossible de supprimer l’attribution du cours.",
+        "save": "Impossible d’enregistrer le devoir.",
+        "delete": "Impossible de supprimer le devoir.",
         "forbidden": "Votre compte n’est pas autorisé à gérer cette attribution.",
-        "notFound": "Cette attribution de cours est introuvable."
+        "notFound": "Ce devoir est introuvable."
       },
       "notices": {
-        "saved": "Attribution de cours enregistrée.",
+        "saved": "Devoir enregistré.",
         "savedOnePending": "Enregistré. Un élève attend une invitation de compte.",
         "savedManyPending": "Enregistré. {count} élèves attendent des invitations de compte."
       },
@@ -50,16 +50,16 @@
         "always": "Toujours"
       },
       "editor": {
-        "newTitle": "Attribuer un cours privé",
-        "editTitle": "Modifier l’attribution du cours",
-        "accessNote": "L’attribution donne accès à ce cours. Les élèves n’ont pas besoin d’un abonnement personnel pour le contenu attribué.",
+        "newTitle": "Créer un devoir",
+        "editTitle": "Modifier le devoir",
+        "accessNote": "Attribuez le contenu d’un cours à des classes ou à des apprenants individuels. Le devoir accorde l’accès ; les apprenants n’ont donc pas besoin d’un abonnement personnel pour le contenu attribué.",
         "delete": "Supprimer",
         "saving": "Enregistrement…",
         "save": "Enregistrer",
-        "deleteConfirm": "Supprimer cette attribution de cours ?",
+        "deleteConfirm": "Supprimer ce devoir ?",
         "content": "Contenu",
         "course": "Cours",
-        "courseAccess": "Visibilité : {visibility}. L’attribution elle-même donne le droit d’accès à l’élève.",
+        "courseAccess": "Visibilité du cours : {visibility}. Ce devoir accorde l’accès au contenu du cours sélectionné.",
         "assignmentTitle": "Titre de l’attribution",
         "slug": "Identifiant",
         "instructions": "Instructions pour les élèves",
@@ -69,12 +69,17 @@
         "due": "Échéance",
         "solutionVisibility": "Visibilité de la solution officielle",
         "audience": "Public",
-        "studentEmails": "E-mails des élèves individuels",
+        "studentEmails": "Apprenants individuels",
         "emailPlaceholder": "eleve@exemple.com\nautre@exemple.com",
-        "emailHint": "Les comptes existants sont attribués immédiatement. Les e-mails sans compte deviennent des invitations en attente que vous pouvez copier ou envoyer.",
-        "groups": "Classes",
+        "emailHint": "Saisissez les adresses e-mail des apprenants, une par ligne. Les comptes existants sont attribués immédiatement ; les autres deviennent des invitations en attente que vous pouvez copier ou envoyer.",
+        "groups": "Classes (groupes d’apprenants)",
         "groupMembers": "({count} élèves)",
-        "noGroups": "Créez d’abord une classe ou attribuez des e-mails individuels."
+        "noGroups": "Créez d’abord une classe ou ajoutez des apprenants individuels par e-mail.",
+        "audienceNote": "Choisissez les classes et/ou les apprenants individuels qui doivent recevoir ce devoir.",
+        "summaryClassOne": "{count} classe",
+        "summaryClassMany": "{count} classes",
+        "summaryLearnerOne": "{count} apprenant individuel",
+        "summaryLearnerMany": "{count} apprenants individuels"
       },
       "invites": {
         "title": "Invitations de compte en attente",

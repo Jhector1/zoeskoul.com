@@ -1,14 +1,13 @@
-import type { PracticeExperienceMode } from "./types";
+import type { PracticeExperienceMode } from "@zoeskoul/learner-workspace/practice/experience/types";
+import {
+  resolveRevealCompletionTransition as resolveSharedRevealCompletionTransition,
+  type RevealCompletionTransition,
+} from "@zoeskoul/learner-workspace/practice/experience/revealCompletion";
 
-export type RevealCompletionTransition = "explicit";
+export type { RevealCompletionTransition };
 
-/**
- * Revealing an answer finalizes the current item with zero credit, but never
- * navigates away automatically. Every practice surface keeps the revealed
- * solution on screen until the learner presses Next or Finish.
- */
 export function resolveRevealCompletionTransition(
-  _mode: PracticeExperienceMode | null | undefined,
+  mode: PracticeExperienceMode | null | undefined,
 ): RevealCompletionTransition {
-  return "explicit";
+  return resolveSharedRevealCompletionTransition(mode);
 }

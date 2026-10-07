@@ -29,6 +29,10 @@ export const LearningGroupInputSchema = z.object({
   memberEmails: emailList,
 });
 
+export const LearningGroupStatusUpdateSchema = z.object({
+  status: z.enum(["open", "closed"]),
+});
+
 export const LearningAssignmentInputSchema = z
   .object({
     slug,
@@ -64,4 +68,5 @@ export const LearningAssignmentInputSchema = z
   });
 
 export type LearningGroupInput = z.infer<typeof LearningGroupInputSchema>;
+export type LearningGroupStatusUpdate = z.infer<typeof LearningGroupStatusUpdateSchema>;
 export type LearningAssignmentInput = z.infer<typeof LearningAssignmentInputSchema>;

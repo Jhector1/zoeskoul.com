@@ -82,7 +82,7 @@ describe("School course access architecture", () => {
       "organizationId",
     );
     expect(assignment).toContain(
-      "ownedTeachingRecordWhere",
+      "learningGroupWhereForTeachingUser",
     );
   });
 

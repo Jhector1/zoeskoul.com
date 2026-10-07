@@ -622,6 +622,9 @@ importers:
       typescript:
         specifier: ^5
         version: 5.9.3
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@20.19.37)(vite@8.1.5(@types/node@20.19.37)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
 
   packages/api-client:
     devDependencies:
@@ -889,6 +892,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.5.0
@@ -899,6 +905,9 @@ importers:
       '@types/react':
         specifier: ^19.0.0
         version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.14)
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -911,6 +920,9 @@ importers:
       '@zoeskoul/api-client':
         specifier: workspace:*
         version: link:../api-client
+      '@zoeskoul/app-config':
+        specifier: workspace:*
+        version: link:../app-config
       '@zoeskoul/code-contracts':
         specifier: workspace:*
         version: link:../code-contracts
@@ -920,12 +932,21 @@ importers:
       '@zoeskoul/curriculum-registry':
         specifier: workspace:*
         version: link:../curriculum-registry
+      '@zoeskoul/curriculum-runtime':
+        specifier: workspace:*
+        version: link:../curriculum-runtime
       '@zoeskoul/editor-surface':
         specifier: workspace:*
         version: link:../editor-surface
       '@zoeskoul/learner-ui':
         specifier: workspace:*
         version: link:../learner-ui
+      '@zoeskoul/learning-client':
+        specifier: workspace:*
+        version: link:../learning-client
+      '@zoeskoul/learning-contracts':
+        specifier: workspace:*
+        version: link:../learning-contracts
       '@zoeskoul/learning-runtime':
         specifier: workspace:*
         version: link:../learning-runtime
@@ -947,12 +968,18 @@ importers:
       '@zoeskoul/workspace-contracts':
         specifier: workspace:*
         version: link:../workspace-contracts
+      framer-motion:
+        specifier: ^12.34.0
+        version: 12.38.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       lucide-react:
         specifier: ^0.563.0
         version: 0.563.0(react@19.2.3)
       monaco-editor:
         specifier: ^0.55.1
         version: 0.55.1
+      p5:
+        specifier: ^2.1.2
+        version: 2.2.3
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)

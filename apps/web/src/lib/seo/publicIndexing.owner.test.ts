@@ -29,7 +29,7 @@ describe("public indexing manifest", () => {
     expect(PUBLIC_INDEXABLE_ROUTES).toContain(ROUTES.home);
     expect(PUBLIC_INDEXABLE_ROUTES).toContain(ROUTES.pricing);
     expect(PUBLIC_INDEXABLE_ROUTES).toContain(ROUTES.contact);
-    expect(PUBLIC_INDEXABLE_ROUTES).toContain("/legal");
+    expect(PUBLIC_INDEXABLE_ROUTES).not.toContain("/legal");
     expect(PUBLIC_INDEXABLE_ROUTES).toContain(ROUTES.sandbox);
 
     expect(PUBLIC_INDEXABLE_ROUTES).not.toContain(ROUTES.privacy);
@@ -52,7 +52,7 @@ describe("public indexing manifest", () => {
     );
   });
 
-  it("submits every localized public static, legal, and Sandbox tool URL", () => {
+  it("submits localized public static and Sandbox tool URLs while excluding legal pages", () => {
     const paths = sitemap().map((entry) => new URL(entry.url).pathname);
 
     for (const locale of LOCALES) {
@@ -61,7 +61,7 @@ describe("public indexing manifest", () => {
       }
 
       for (const doc of LEGAL_INDEX) {
-        expect(paths).toContain(`/${locale}/legal/${doc.slug}`);
+        expect(paths).not.toContain(`/${locale}/legal/${doc.slug}`);
       }
 
       for (const path of PUBLIC_SANDBOX_TOOL_PATHS) {

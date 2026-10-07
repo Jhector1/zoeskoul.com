@@ -6,6 +6,21 @@ import IdeEditorPane from "@/components/ide/fullide/panes/IdeEditorPane";
 
 const capturedRunnerProps: any[] = [];
 
+vi.mock("@zoeskoul/learner-workspace/runtime/appRuntime", async (importOriginal) => {
+    const actual =
+        await importOriginal<
+            typeof import("@zoeskoul/learner-workspace/runtime/appRuntime")
+        >();
+
+    return {
+        ...actual,
+        useLearnerWorkspaceTranslations:
+            () =>
+            (key: string) =>
+                key === "openFileExplorer" ? "Open file explorer" : key,
+    };
+});
+
 vi.mock("next-intl", () => ({
     useTranslations:
         (namespace?: string) =>
@@ -13,14 +28,14 @@ vi.mock("next-intl", () => ({
             namespace ? `${namespace}.${key}` : key,
 }));
 
-vi.mock("@/components/code/CodeRunner", () => ({
+vi.mock("@zoeskoul/learner-workspace/runner/CodeRunner", () => ({
     default: (props: any) => {
         capturedRunnerProps.push(props);
         return <div data-testid="mock-code-runner" />;
     },
 }));
 
-vi.mock("@/components/ide/fullide/TabsBar", () => ({
+vi.mock("@zoeskoul/learner-workspace/fullide/TabsBar", () => ({
     default: () => <div data-testid="mock-tabs-bar" />,
 }));
 

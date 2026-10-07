@@ -13,6 +13,9 @@ export default function LearningGroupEditor({ initialGroup }: { initialGroup: an
   const isNew = !initialGroup;
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<"draft" | "open" | "closed">(
+    initialGroup?.status ?? "draft",
+  );
   const [state, setState] = useState({
     name: initialGroup?.name ?? "",
     slug: initialGroup?.slug ?? "",
@@ -45,7 +48,25 @@ export default function LearningGroupEditor({ initialGroup }: { initialGroup: an
       setError(`${json.error ?? "Could not save group."}${json.missingEmails?.length ? ` Missing: ${json.missingEmails.join(", ")}` : ""}`);
       setBusy(false); return;
     }
+    setStatus(json.group.status ?? status);
     router.replace(`/admin/learning-groups/${json.group.id}`); router.refresh(); setBusy(false);
+  }
+
+  async function changeStatus(next: "open" | "closed") {
+    if (!initialGroup) return;
+    setBusy(true); setError(null);
+    const response = await fetch(`/api/teacher/learning-groups/${initialGroup.id}/status`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ status: next }),
+    });
+    const json = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      setError(json.error ?? "Could not update class status.");
+      setBusy(false); return;
+    }
+    setStatus(json.group.status);
+    router.refresh(); setBusy(false);
   }
 
   async function destroy() {
@@ -59,8 +80,8 @@ export default function LearningGroupEditor({ initialGroup }: { initialGroup: an
   return (
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold">{isNew ? "New student group" : "Edit student group"}</h1><p className="mt-1 text-sm text-neutral-500">Groups only own audience membership; courses and progress remain shared.</p></div>
-        <div className="flex gap-2">{!isNew ? <button onClick={destroy} disabled={busy} className="rounded-lg border border-red-200 px-4 py-2 text-sm text-red-700">Delete</button> : null}<button onClick={save} disabled={busy} className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white disabled:opacity-50">{busy ? "Saving…" : "Save"}</button></div>
+        <div><div className="flex items-center gap-2"><h1 className="text-2xl font-semibold">{isNew ? "New student group" : "Edit student group"}</h1>{!isNew ? <span className="rounded-full border border-neutral-200 px-2 py-1 text-xs capitalize">{status}</span> : null}</div><p className="mt-1 text-sm text-neutral-500">Groups only own audience membership; courses and progress remain shared.</p></div>
+        <div className="flex flex-wrap gap-2">{!isNew ? status === "open" ? <button onClick={() => void changeStatus("closed")} disabled={busy} className="rounded-lg border border-neutral-300 px-4 py-2 text-sm">Close</button> : <button onClick={() => void changeStatus("open")} disabled={busy} className="rounded-lg border border-neutral-300 px-4 py-2 text-sm">{status === "draft" ? "Open class" : "Reopen"}</button> : null}{!isNew ? <button onClick={destroy} disabled={busy} className="rounded-lg border border-red-200 px-4 py-2 text-sm text-red-700">Delete</button> : null}<button onClick={save} disabled={busy} className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white disabled:opacity-50">{busy ? "Saving…" : "Save"}</button></div>
       </div>
       {error ? <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div> : null}
       <div className="rounded-xl border border-neutral-200 bg-white p-5 space-y-4">

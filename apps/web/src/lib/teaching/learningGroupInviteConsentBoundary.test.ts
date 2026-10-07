@@ -10,6 +10,7 @@ function source(relative: string) {
 const collection = source("apps/web/src/app/api/teacher/learning-groups/route.ts");
 const item = source("apps/web/src/app/api/teacher/learning-groups/[id]/route.ts");
 const manual = source("apps/web/src/app/api/teacher/learning-groups/[id]/invites/route.ts");
+const statusRoute = source("apps/web/src/app/api/teacher/learning-groups/[id]/status/route.ts");
 const delivery = source("apps/web/src/lib/learningGroups/groupInviteDelivery.ts");
 const invites = source("apps/web/src/lib/learningGroups/groupInvites.ts");
 const learner = source("apps/web/src/app/(public)/[locale]/(generalZone)/invitations/class/[token]/page.tsx");
@@ -34,11 +35,15 @@ describe("LearningGroup invitation consent boundary", () => {
     expect(learner).toContain("acceptLearningGroupInvite");
   });
 
-  it("auto-sends only newly created or reactivated invites", () => {
-    expect(collection).toContain("autoDeliverLearningGroupInvites");
-    expect(item).toContain("autoDeliverLearningGroupInvites");
+  it("defers draft delivery and releases unsent invites when the class opens", () => {
+    expect(collection).toContain("deferred: prepared.autoDeliveryEmails.length");
+    expect(collection).not.toContain("autoDeliverLearningGroupInvites");
+    expect(item).toContain('group.status === "open"');
+    expect(statusRoute).toContain("autoDeliverLearningGroupInvites");
+    expect(statusRoute).toContain("syncPendingLearningGroupInvites");
+    expect(statusRoute).toContain("invite.expiresAt <= now");
     expect(invites).toContain("autoDeliveryEmails");
-    expect(delivery).toContain('action: "email"');
+    expect(delivery).toContain('context.status !== "open"');
   });
 
   it("retains copy-link and resend actions", () => {

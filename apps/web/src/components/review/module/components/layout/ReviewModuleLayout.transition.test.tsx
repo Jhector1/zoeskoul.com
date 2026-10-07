@@ -9,13 +9,13 @@ import {
     vi,
 } from "vitest";
 
-import ReviewModuleLayout from "./ReviewModuleLayout";
+import ReviewModuleLayout from "@zoeskoul/learner-workspace/review/components/layout/ReviewModuleLayout";
 
 const captured = vi.hoisted(() => ({
     holdContent: [] as boolean[],
 }));
 
-vi.mock("../overlays/ReviewSkeletonSwap", () => ({
+vi.mock("@zoeskoul/learner-workspace/review/components/overlays/ReviewSkeletonSwap", () => ({
     default: ({
         children,
         holdContent,

@@ -3,6 +3,10 @@ const LOCALE_RE =
 
 export type TeacherLocation =
   | {
+      kind: "home";
+      locale: string;
+    }
+  | {
       kind: "classes";
       locale: string;
     }
@@ -59,6 +63,23 @@ export function resolveTeacherLocation(
       ? parts.shift()!
       : fallbackLocale;
 
+  if (!parts[0]) {
+    return {
+      kind: "home",
+      locale,
+    };
+  }
+
+  if (
+    parts[0] === "tutoring" &&
+    !parts[1]
+  ) {
+    return {
+      kind: "tutoring",
+      locale,
+    };
+  }
+
   if (
     parts[0] === "classes" &&
     !parts[1]
@@ -93,7 +114,7 @@ export function resolveTeacherLocation(
   }
 
   if (
-    parts[0] === "school" &&
+    (parts[0] === "institution" || parts[0] === "school") &&
     !parts[1]
   ) {
     return { kind: "school", locale };
@@ -143,7 +164,7 @@ export function resolveTeacherLocation(
   }
 
   return {
-    kind: "tutoring",
+    kind: "home",
     locale,
   };
 }

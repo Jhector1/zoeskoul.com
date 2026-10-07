@@ -52,7 +52,9 @@
         "resend": "Reenviar correo",
         "revoke": "Revocar",
         "pending": "Pendiente · {role}",
-        "empty": "No hay invitaciones pendientes."
+        "empty": "No hay invitaciones pendientes.",
+        "openComposer": "Invitar personal",
+        "cancelComposer": "Cancelar"
       },
       "classes": {
         "title": "Clases",
@@ -80,6 +82,15 @@
         "sent": "Invitación enviada.",
         "copied": "Enlace copiado.",
         "revoked": "Invitación revocada."
+      },
+      "staffClasses": {
+        "title": "Acceso a clases",
+        "description": "Elige a qué clases puede acceder este instructor.",
+        "empty": "Todavía no hay clases disponibles en esta institución.",
+        "assigned": "Asignado",
+        "notAssigned": "Sin asignar",
+        "toggle": "Cambiar el acceso a {className}",
+        "error": "No se pudo actualizar el acceso a la clase."
       }
     }
   }

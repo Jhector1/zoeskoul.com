@@ -5,8 +5,7 @@ import { describe, expect, it } from "vitest";
 const repoRoot = process.cwd();
 
 const paths = [
-  "apps/web/src/components/review/quiz/hooks/useReviewQuizQuestions.ts",
-  "apps/student/src/legacy-web/components/review/quiz/hooks/useReviewQuizQuestions.ts",
+  "packages/learner-workspace/src/components/review/quiz/hooks/useReviewQuizQuestions.ts",
 ];
 
 describe("useReviewQuizQuestions local question authority", () => {

@@ -2,23 +2,23 @@
   "Teacher": {
     "assignments": {
       "kicker": "Teaching",
-      "title": "Course assignments",
-      "subtitle": "Assign existing ZoeSkoul courses to classes or individual students without creating another copy of the course.",
+      "title": "Assignments",
+      "subtitle": "Deliver reusable course content to classes or individual learners. Each assignment controls audience, timing, and access.",
       "classes": "Classes",
       "newAssignment": "New assignment",
-      "loading": "Loading course assignments…",
+      "loading": "Loading assignments…",
       "loadingEditor": "Loading assignment editor…",
-      "empty": "No private course assignments yet.",
+      "empty": "No assignments yet.",
       "errors": {
-        "load": "Could not load course assignments.",
+        "load": "Could not load assignments.",
         "loadEditor": "Could not load the assignment editor.",
-        "save": "Could not save the course assignment.",
-        "delete": "Could not delete the course assignment.",
+        "save": "Could not save the assignment.",
+        "delete": "Could not delete the assignment.",
         "forbidden": "Your account does not have permission to manage this assignment.",
-        "notFound": "This course assignment could not be found."
+        "notFound": "This assignment could not be found."
       },
       "notices": {
-        "saved": "Course assignment saved.",
+        "saved": "Assignment saved.",
         "savedOnePending": "Saved. One student is waiting for an account invitation.",
         "savedManyPending": "Saved. {count} students are waiting for account invitations."
       },
@@ -50,16 +50,16 @@
         "always": "Always"
       },
       "editor": {
-        "newTitle": "Assign a private course",
-        "editTitle": "Edit course assignment",
-        "accessNote": "The assignment grants access to this course. Students do not need a personal subscription for assigned content.",
+        "newTitle": "Create assignment",
+        "editTitle": "Edit assignment",
+        "accessNote": "Assign course content to classes or individual learners. The assignment grants access, so learners do not need a personal subscription for assigned content.",
         "delete": "Delete",
         "saving": "Saving…",
         "save": "Save",
-        "deleteConfirm": "Delete this course assignment?",
+        "deleteConfirm": "Delete this assignment?",
         "content": "Content",
         "course": "Course",
-        "courseAccess": "Visibility: {visibility}. The assignment itself is the learner's access entitlement.",
+        "courseAccess": "Course visibility: {visibility}. This assignment grants learner access to the selected course content.",
         "assignmentTitle": "Assignment title",
         "slug": "Slug",
         "instructions": "Student instructions",
@@ -69,12 +69,18 @@
         "due": "Due",
         "solutionVisibility": "Official solution visibility",
         "audience": "Audience",
-        "studentEmails": "Individual student emails",
+        "studentEmails": "Individual learners",
         "emailPlaceholder": "student@example.com\none@example.com",
-        "emailHint": "Existing accounts are assigned immediately. Emails without an account become pending invitations that you can copy or send.",
-        "groups": "Classes",
+        "emailHint": "Enter learner email addresses, one per line. Existing accounts are assigned immediately; others receive pending invitations you can copy or send.",
+        "groups": "Classes (learner groups)",
         "groupMembers": "({count} students)",
-        "noGroups": "Create a class first, or assign individual emails."
+        "noGroups": "Create a class first, or add individual learners by email.",
+        "groupInactive": "({status})",
+        "audienceNote": "Choose the classes and/or individual learners who should receive this assignment.",
+        "summaryClassOne": "{count} class",
+        "summaryClassMany": "{count} classes",
+        "summaryLearnerOne": "{count} individual learner",
+        "summaryLearnerMany": "{count} individual learners"
       },
       "invites": {
         "title": "Pending account invitations",

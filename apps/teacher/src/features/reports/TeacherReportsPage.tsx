@@ -30,6 +30,8 @@ export function TeacherReportsPage(
   props: {
     apiOrigin: string;
     locale: string;
+    fixedSchoolId?: string;
+    embedded?: boolean;
   },
 ) {
   const t = useTranslations("Teacher.reports");
@@ -57,7 +59,7 @@ export function TeacherReportsPage(
       TeacherSchool[] | null
     >(null);
   const [schoolId, setSchoolId] =
-    useState("");
+    useState(props.fixedSchoolId ?? "");
   const [report, setReport] =
     useState<
       TeacherSchoolReport | null
@@ -72,6 +74,13 @@ export function TeacherReportsPage(
     >(null);
 
   useEffect(() => {
+    if (props.fixedSchoolId) {
+      setSchools(null);
+      setSchoolId(props.fixedSchoolId);
+      setLoadError(null);
+      return;
+    }
+
     let cancelled = false;
 
     void classesClient
@@ -96,7 +105,10 @@ export function TeacherReportsPage(
     return () => {
       cancelled = true;
     };
-  }, [classesClient]);
+  }, [
+    classesClient,
+    props.fixedSchoolId,
+  ]);
 
   useEffect(() => {
     if (!schoolId) {
@@ -144,8 +156,10 @@ export function TeacherReportsPage(
   );
 
   return (
-    <main className="mx-auto max-w-6xl p-6">
-      <div className="flex flex-wrap items-start justify-between gap-4">
+    <div className={props.embedded ? "" : "mx-auto max-w-6xl p-6"}>
+      <div
+        className={props.embedded ? "hidden" : "flex flex-wrap items-start justify-between gap-4"}
+      >
         <div>
           <div className="text-xs font-semibold uppercase tracking-wide opacity-60">
             {t("kicker")}
@@ -160,7 +174,7 @@ export function TeacherReportsPage(
 
         <div className="flex gap-2">
           <TeacherLink
-            href="/school"
+            href="/institution"
             locale={props.locale}
             className="ui-btn-secondary rounded-lg px-4 py-2 text-sm font-medium"
           >
@@ -176,11 +190,12 @@ export function TeacherReportsPage(
         </div>
       </div>
 
+      {!props.fixedSchoolId ? (
       <div className="ui-surface mt-6 max-w-md rounded-xl p-4">
         <label className="grid gap-2 text-sm font-medium">
           <span>{t("school")}</span>
           <select
-            className="rounded-lg border px-3 py-2"
+            className="ui-focus-ring ui-border-soft ui-bg-surface ui-text w-full rounded-md border px-3 py-2 text-sm"
             value={schoolId}
             disabled={schools === null}
             onChange={(event) =>
@@ -206,7 +221,10 @@ export function TeacherReportsPage(
         </label>
       </div>
 
-      {loadError === "schools" ? (
+      ) : null}
+
+      {!props.fixedSchoolId &&
+      loadError === "schools" ? (
         <div className="ui-surface-soft mt-6 rounded-xl p-5 text-sm">
           {t("errors.schools")}
         </div>
@@ -257,7 +275,7 @@ export function TeacherReportsPage(
             {report.courses.length ? (
               <div className="ui-surface mt-3 overflow-x-auto rounded-xl">
                 <table className="w-full min-w-[760px] text-left text-sm">
-                  <thead className="border-b text-xs opacity-60">
+                  <thead className="border-b ui-border-soft text-xs opacity-70">
                     <tr>
                       <th className="px-4 py-3 font-medium">{t("columns.course")}</th>
                       <th className="px-4 py-3 font-medium">{t("columns.classes")}</th>
@@ -271,7 +289,7 @@ export function TeacherReportsPage(
                     {report.courses.map((course) => (
                       <tr
                         key={course.subjectId}
-                        className="border-b last:border-0"
+                        className="border-b ui-border-soft last:border-0"
                       >
                         <td className="px-4 py-3">
                           <div className="font-medium">{course.subjectTitle}</div>
@@ -338,7 +356,7 @@ export function TeacherReportsPage(
             {report.students.length ? (
               <div className="ui-surface mt-3 overflow-x-auto rounded-xl">
                 <table className="w-full min-w-[760px] text-left text-sm">
-                  <thead className="border-b text-xs opacity-60">
+                  <thead className="border-b ui-border-soft text-xs opacity-70">
                     <tr>
                       <th className="px-4 py-3 font-medium">{t("columns.student")}</th>
                       <th className="px-4 py-3 font-medium">{t("columns.classes")}</th>
@@ -352,7 +370,7 @@ export function TeacherReportsPage(
                     {report.students.map((student) => (
                       <tr
                         key={student.userId}
-                        className="border-b last:border-0"
+                        className="border-b ui-border-soft last:border-0"
                       >
                         <td className="px-4 py-3">
                           <div className="font-medium">
@@ -391,6 +409,6 @@ export function TeacherReportsPage(
           </section>
         </>
       ) : null}
-    </main>
+    </div>
   );
 }

@@ -40,7 +40,7 @@ const teachingUser = await requireTeachingPageUser({
       <div className="mt-6 grid gap-3">
         {groups.length ? groups.map((group) => (
           <Link key={group.id} href={`/admin/learning-groups/${group.id}`} className="rounded-xl border border-neutral-200 bg-white p-4 transition hover:border-neutral-400">
-            <div className="flex items-center justify-between"><div><div className="font-medium">{group.name}</div><div className="mt-1 text-xs text-neutral-500">{group.slug}</div></div><div className="text-sm text-neutral-600">{group._count.members} students · {group._count.assignments} assignments</div></div>
+            <div className="flex items-center justify-between"><div><div className="flex items-center gap-2"><div className="font-medium">{group.name}</div><span className="rounded-full border border-neutral-200 px-2 py-0.5 text-[11px] capitalize text-neutral-500">{group.status}</span></div><div className="mt-1 text-xs text-neutral-500">{group.slug}</div></div><div className="text-sm text-neutral-600">{group._count.members} students · {group._count.assignments} assignments</div></div>
           </Link>
         )) : <div className="rounded-xl border border-neutral-200 bg-white p-6 text-sm text-neutral-600">No groups yet.</div>}
       </div>

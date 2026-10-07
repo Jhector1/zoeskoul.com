@@ -286,6 +286,7 @@ export async function PATCH(
       {
         teachingUser,
         input: parsed.data,
+        allowedInactiveGroupIds: assignment.groups.map((row) => row.groupId),
       },
     );
 

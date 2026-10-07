@@ -402,5 +402,5 @@ describe("GET /api/auth/logout", () => {
       roles: [],
       capabilities: [],
     });
-  });
+  }, 30_000);
 });

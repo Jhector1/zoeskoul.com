@@ -1,0 +1,483 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse, dataclasses, datetime as dt, hashlib, json, os, re, shlex, subprocess, sys, time
+from pathlib import Path
+from typing import Any, Iterable, Optional
+
+try:
+    from openai import OpenAI
+except Exception:
+    OpenAI = None
+
+from chatgpt_auth import (
+    AuthError, auth_status, choose_model, ensure_access_token,
+    list_models, load_profile, login, logout, refresh,
+)
+
+VERSION = "2.0.0"
+PATCH_BEGIN = "PATCH_BEGIN"
+PATCH_END = "PATCH_END"
+NO_SAFE_PATCH = "NO_SAFE_PATCH"
+
+FORBIDDEN = [
+    re.compile(r"\b(?:it|test|describe)\.skip\s*\("),
+    re.compile(r"\b(?:it|test|describe)\.only\s*\("),
+    re.compile(r"\btest\.todo\s*\("),
+    re.compile(r"@ts-ignore|@ts-nocheck|eslint-disable|--passWithNoTests"),
+    re.compile(r"\bgit\s+(?:push|commit|reset|checkout)\b"),
+    re.compile(r"\brm\s+-rf\b|\bsudo\b"),
+    re.compile(r"expect\s*\(\s*true\s*\)\s*\."),
+]
+PATH_RE = re.compile(
+    r"(?P<path>(?:(?:apps|packages)/|\.\./\.\./packages/|src/)"
+    r"[A-Za-z0-9_@./+\-]+\.(?:ts|tsx|js|jsx|mjs|cjs|json|py|sh))"
+    r"(?::(?P<line>\d+))?"
+)
+DIFF_RE = re.compile(r"^diff --git a/(.+) b/(.+)$")
+
+
+@dataclasses.dataclass
+class Gate:
+    name: str
+    command: str
+    timeout_seconds: int
+    repairable: bool = True
+
+
+@dataclasses.dataclass
+class Result:
+    command: str
+    returncode: int
+    stdout: str
+    stderr: str
+    elapsed: float
+    timed_out: bool = False
+    @property
+    def combined(self) -> str:
+        return "\n".join(x for x in (self.stdout, self.stderr) if x)
+
+
+class AgentError(RuntimeError):
+    pass
+
+
+def run(repo: Path, command: str, timeout: int) -> Result:
+    started = time.monotonic()
+    try:
+        p = subprocess.run(
+            ["/bin/bash", "-lc", command],
+            cwd=repo, text=True, capture_output=True, timeout=timeout,
+            env=os.environ.copy(),
+        )
+        return Result(command, p.returncode, p.stdout, p.stderr, time.monotonic()-started)
+    except subprocess.TimeoutExpired as exc:
+        out = exc.stdout or ""
+        err = exc.stderr or ""
+        if isinstance(out, bytes): out = out.decode(errors="replace")
+        if isinstance(err, bytes): err = err.decode(errors="replace")
+        return Result(command, 124, out, err + f"\nTIMEOUT after {timeout}s", time.monotonic()-started, True)
+
+
+def git(repo: Path, args: Iterable[str], timeout: int = 120) -> Result:
+    return run(repo, "git " + " ".join(shlex.quote(x) for x in args), timeout)
+
+
+def must_git(repo: Path, args: Iterable[str]) -> str:
+    r = git(repo, args)
+    if r.returncode:
+        raise AgentError(r.combined)
+    return r.stdout
+
+
+def clip(text: str, limit: int) -> str:
+    if len(text) <= limit: return text
+    n = limit // 2
+    return text[:n] + f"\n... [CLIPPED {len(text)-limit} chars] ...\n" + text[-n:]
+
+
+def normalize(path: str) -> str:
+    while path.startswith("./"): path = path[2:]
+    if path.startswith("../../packages/"): path = path[len("../../"):]
+    if path.startswith("src/"): path = "apps/web/" + path
+    return Path(path).as_posix()
+
+
+def source_context(repo: Path, output: str, limit: int) -> tuple[str, list[str]]:
+    found: dict[str, list[int]] = {}
+    for m in PATH_RE.finditer(output):
+        p = normalize(m.group("path"))
+        if not (repo / p).is_file(): continue
+        found.setdefault(p, [])
+        if m.group("line"):
+            found[p].append(int(m.group("line")))
+        if len(found) >= 12: break
+
+    chunks, paths = [], []
+    for rel, lines in found.items():
+        paths.append(rel)
+        content = (repo / rel).read_text(errors="replace").splitlines()
+        windows = lines[:3] or [1]
+        for line in windows:
+            start, end = max(1, line-55), min(len(content), line+70 if line > 1 else 180)
+            body = "\n".join(f"{i:5d} | {content[i-1]}" for i in range(start, end+1))
+            chunks.append(f"\n===== {rel} [{start}-{end}] =====\n{body}")
+        if sum(map(len, chunks)) >= limit: break
+    return clip("\n".join(chunks), limit), paths
+
+
+def patch_paths(patch: str) -> list[str]:
+    paths = []
+    for line in patch.splitlines():
+        m = DIFF_RE.match(line)
+        if not m: continue
+        for raw in (m.group(1), m.group(2)):
+            if raw == "/dev/null": continue
+            p = normalize(raw)
+            if p not in paths: paths.append(p)
+    if not paths: raise AgentError("Patch has no diff --git headers.")
+    return paths
+
+
+def validate_patch(patch: str, cfg: dict[str, Any]) -> list[str]:
+    if len(patch) > int(cfg["max_patch_chars"]):
+        raise AgentError("Patch exceeds size limit.")
+    if "GIT binary patch" in patch:
+        raise AgentError("Binary patch forbidden.")
+    paths = patch_paths(patch)
+    if len(paths) > int(cfg["max_files_per_patch"]):
+        raise AgentError("Patch touches too many files.")
+
+    allowed = [str(x) for x in cfg["allowed_path_prefixes"]]
+    denied = [str(x) for x in cfg["denied_path_prefixes"]]
+    denied_rx = [re.compile(str(x)) for x in cfg["denied_path_regexes"]]
+    bad = [
+        p for p in paths
+        if any(p.startswith(x) for x in denied)
+        or any(rx.search(p) for rx in denied_rx)
+        or not any(p.startswith(x) for x in allowed)
+    ]
+    if bad: raise AgentError("Non-allowlisted path(s): " + ", ".join(bad))
+
+    additions = [x[1:] for x in patch.splitlines() if x.startswith("+") and not x.startswith("+++")]
+    if len(additions) > int(cfg["max_added_lines_per_patch"]):
+        raise AgentError("Patch adds too many lines.")
+    for line in additions:
+        for rx in FORBIDDEN:
+            if rx.search(line):
+                raise AgentError(f"Forbidden addition: {line}")
+    return paths
+
+
+def instructions(cfg: dict[str, Any]) -> str:
+    rules = "\n".join(f"- {x}" for x in cfg["architecture_rules"])
+    return f"""You are the repair planner for ZoeSkoul.
+
+You have NO shell tool. Return only ONE minimal unified git diff, or NO_SAFE_PATCH.
+
+Rules:
+- Fix only the current failing gate.
+- Prefer canonical owners; never resurrect legacy mirrors.
+- Never regress production code to satisfy stale tests.
+- Retarget stale tests/mocks/assertions when ownership moved.
+- Never skip/weaken/delete tests or make them vacuous.
+- Never add suppressions, broad catches, fake success, sleeps, commit/push/reset/checkout.
+- Never touch secrets, env files, deployment config, lockfiles, node_modules, or published curriculum.
+- Keep patches minimal and DRY.
+- If evidence is insufficient, return NO_SAFE_PATCH.
+
+Architecture:
+{rules}
+
+Exact output:
+PATCH_BEGIN
+diff --git a/path b/path
+...
+PATCH_END
+
+or:
+NO_SAFE_PATCH
+REASON: concise reason
+
+No Markdown fences or extra prose."""
+
+
+def prompt_for(gate: Gate, result: Result, status: str, src: str, diff: str, iteration: int) -> str:
+    return f"""ITERATION: {iteration}
+FAILING GATE: {gate.name}
+FIXED LOCAL COMMAND (context only):
+{gate.command}
+EXIT={result.returncode}
+TIMED_OUT={result.timed_out}
+
+GIT STATUS:
+{status}
+
+FAILURE:
+{clip(result.combined, 24000)}
+
+RELEVANT SOURCE:
+{src or "[none extracted]"}
+
+CURRENT RELEVANT DIFF:
+{diff or "[none]"}
+
+Return the smallest safe patch."""
+
+
+def extract_patch(text: str) -> tuple[Optional[str], Optional[str]]:
+    if NO_SAFE_PATCH in text and PATCH_BEGIN not in text:
+        return None, text.strip()
+    a, b = text.find(PATCH_BEGIN), text.find(PATCH_END)
+    if a < 0 or b <= a:
+        raise AgentError("Model output format invalid.")
+    patch = text[a+len(PATCH_BEGIN):b].strip()
+    if patch.startswith("```"):
+        patch = re.sub(r"^```(?:diff|patch)?\s*", "", patch)
+        patch = re.sub(r"\s*```$", "", patch)
+    return patch + ("" if patch.endswith("\n") else "\n"), None
+
+
+def call_chatgpt(access_token: str, model: str, inst: str, prompt: str) -> str:
+    if OpenAI is None:
+        raise AgentError("OpenAI Python SDK unavailable.")
+    client = OpenAI(
+        api_key=access_token,  # OAuth bearer token from Sign in with ChatGPT.
+        base_url="https://api.openai.com/v1",
+        max_retries=0,
+    )
+    pieces, completed, failure = [], False, None
+    with client.responses.create(
+        model=model,
+        instructions=inst,
+        input=[{"role": "user", "content": prompt}],
+        store=False,
+        stream=True,
+    ) as stream:
+        for event in stream:
+            t = getattr(event, "type", "")
+            if t == "response.output_text.delta":
+                pieces.append(str(getattr(event, "delta", "")))
+            elif t == "response.completed":
+                completed = True
+            elif t == "response.failed":
+                resp = getattr(event, "response", None)
+                error = getattr(resp, "error", None) if resp else None
+                failure = getattr(error, "code", None) or "unknown_error"
+            elif t == "response.incomplete":
+                failure = "response_incomplete"
+    if failure:
+        raise AgentError(f"ChatGPT plan inference failed: {failure}")
+    if not completed:
+        raise AgentError("Stream ended without response.completed.")
+    return "".join(pieces)
+
+
+def ask(cfg: dict[str, Any], inst: str, prompt: str) -> tuple[str, str]:
+    token = ensure_access_token()
+    model = choose_model(token, [str(x) for x in cfg["preferred_models"]])
+    try:
+        return call_chatgpt(token, model, inst, prompt), model
+    except Exception as exc:
+        code = getattr(exc, "status_code", None)
+        if code == 401 or "401" in str(exc) or "invalid_token" in str(exc).lower():
+            profile = load_profile()
+            if profile:
+                token = str(refresh(profile)["access_token"])
+                model = choose_model(token, [str(x) for x in cfg["preferred_models"]])
+                return call_chatgpt(token, model, inst, prompt), model
+        raise
+
+
+def apply_patch(repo: Path, file: Path) -> None:
+    chk = git(repo, ["apply", "--check", str(file)])
+    if chk.returncode: raise AgentError("git apply --check failed:\n" + chk.combined)
+    ap = git(repo, ["apply", "--whitespace=error-all", str(file)])
+    if ap.returncode: raise AgentError("git apply failed:\n" + ap.combined)
+    dc = git(repo, ["diff", "--check"])
+    if dc.returncode:
+        git(repo, ["apply", "-R", str(file)])
+        raise AgentError("git diff --check failed; candidate reversed:\n" + dc.combined)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo", default=".")
+    parser.add_argument("--config")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--from-gate")
+    parser.add_argument("--max-iterations", type=int)
+    parser.add_argument("--login", action="store_true")
+    parser.add_argument("--logout", action="store_true")
+    parser.add_argument("--auth-status", action="store_true")
+    parser.add_argument("--models", action="store_true")
+    args = parser.parse_args()
+
+    if args.login: login(); return 0
+    if args.logout: logout(); return 0
+    if args.auth_status: return auth_status()
+    if args.models:
+        token = ensure_access_token()
+        for m in list_models(token): print(f"{m['slug']}\t{m['display_name']}")
+        return 0
+
+    here = Path(__file__).resolve().parent
+    cfg = json.loads(Path(args.config).read_text() if args.config else (here/"zoeskoul-agent.json").read_text())
+
+    rr = run(Path(args.repo).resolve(), "git rev-parse --show-toplevel", 30)
+    if rr.returncode: raise AgentError("Not in a git repository.")
+    repo = Path(rr.stdout.strip()).resolve()
+
+    for marker in cfg["required_repo_markers"]:
+        if not (repo / marker).exists():
+            raise AgentError(f"Repo identity check failed: missing {marker}")
+
+    gates = [Gate(x["name"], x["command"], int(x["timeout_seconds"]), bool(x.get("repairable", True))) for x in cfg["gates"]]
+    gate_index = 0
+    if args.from_gate:
+        names = [g.name for g in gates]
+        if args.from_gate not in names: raise AgentError("Unknown gate.")
+        gate_index = names.index(args.from_gate)
+
+    max_iterations = args.max_iterations or int(cfg["max_iterations"])
+    log_root = Path(cfg["log_directory"]).expanduser()
+    session = log_root / dt.datetime.now().strftime("%Y%m%d-%H%M%S")
+    session.mkdir(parents=True)
+
+    branch = must_git(repo, ["branch", "--show-current"]).strip()
+    head = must_git(repo, ["rev-parse", "HEAD"]).strip()
+    status0 = must_git(repo, ["status", "--short"])
+    (session/"status-before.txt").write_text(status0)
+    (session/"diff-before.patch").write_text(must_git(repo, ["diff", "--binary"]))
+
+    token = ensure_access_token()
+    model0 = choose_model(token, [str(x) for x in cfg["preferred_models"]])
+    (session/"session.json").write_text(json.dumps({
+        "version": VERSION, "auth": "ChatGPT plan", "model": model0,
+        "repo": str(repo), "branch": branch, "head": head,
+        "dirty_before": bool(status0.strip())
+    }, indent=2) + "\n")
+
+    print("=== ZOESKOUL CLOSURE AGENT V2 ===")
+    print("auth=CHATGPT_PLAN")
+    print(f"model={model0}")
+    print(f"repo={repo}")
+    print(f"preexisting_dirty={'YES' if status0.strip() else 'NO'}")
+    print("commit_or_push=DISABLED_BY_DESIGN")
+
+    inst = instructions(cfg)
+    iteration = 0
+    seen: dict[str, int] = {}
+    final_cycle = 0
+
+    while True:
+        if gate_index >= len(gates):
+            final_cycle += 1
+            print(f"\n=== FINAL VERIFICATION {final_cycle} ===")
+            fail = None
+            for i, gate in enumerate(gates):
+                r = run(repo, gate.command, gate.timeout_seconds)
+                (session/f"final-{final_cycle:02d}-{i+1:02d}-{gate.name}.log").write_text(r.combined)
+                if r.returncode:
+                    print(f"[FINAL] FAIL {gate.name}")
+                    fail = i
+                    break
+                print(f"[FINAL] PASS {gate.name}")
+            if fail is None:
+                dc = git(repo, ["diff", "--check"])
+                if dc.returncode: raise AgentError(dc.combined)
+                (session/"diff-after.patch").write_text(must_git(repo, ["diff", "--binary"]))
+                print("\nALL_GATES=PASS")
+                print("FINAL_RERUN=PASS")
+                print("git_diff_check=PASS")
+                print("commit_or_push=NO")
+                return 0
+            if final_cycle >= int(cfg["max_final_verification_cycles"]):
+                return 3
+            gate_index = fail
+            continue
+
+        gate = gates[gate_index]
+        print(f"\n=== GATE {gate_index+1}/{len(gates)} {gate.name} ===")
+        r = run(repo, gate.command, gate.timeout_seconds)
+        (session/f"gate-{gate_index+1:02d}-{gate.name}-{iteration+1:02d}.log").write_text(r.combined)
+
+        if r.returncode == 0:
+            print(f"PASS {gate.name} ({r.elapsed:.1f}s)")
+            gate_index += 1
+            continue
+
+        print(f"FAIL {gate.name} exit={r.returncode}")
+        if not gate.repairable: return 4
+        if iteration >= max_iterations: return 5
+
+        key = hashlib.sha256((gate.name + "\n" + clip(r.combined, 24000)).encode()).hexdigest()
+        seen[key] = seen.get(key, 0) + 1
+        if seen[key] > int(cfg["stagnation_limit"]):
+            print("STAGNATION_DETECTED=YES")
+            return 6
+
+        iteration += 1
+        idir = session / f"iteration-{iteration:02d}-{gate.name}"
+        idir.mkdir()
+        status = must_git(repo, ["status", "--short"])
+        src, paths = source_context(repo, r.combined, int(cfg["max_source_context_chars"]))
+        diff = must_git(repo, ["diff", "--", *paths]) if paths else ""
+        diff = clip(diff, int(cfg["max_relevant_diff_chars"]))
+        prm = prompt_for(gate, r, status, src, diff, iteration)
+        (idir/"prompt.txt").write_text(prm)
+        (idir/"source-context.txt").write_text(src)
+        (idir/"relevant-diff.patch").write_text(diff)
+
+        print(f"repair_iteration={iteration}/{max_iterations}")
+        text, used_model = ask(cfg, inst, prm)
+        (idir/"model.txt").write_text(used_model+"\n")
+        (idir/"model-response.txt").write_text(text)
+        patch, reason = extract_patch(text)
+        if patch is None:
+            print(reason or "NO_SAFE_PATCH")
+            return 7
+
+        pf = idir/"candidate.patch"
+        pf.write_text(patch)
+        try:
+            touched = validate_patch(patch, cfg)
+        except Exception as exc:
+            (idir/"rejected.txt").write_text(str(exc))
+            print(f"PATCH_REJECTED: {exc}")
+            continue
+
+        print("patch_paths=" + ",".join(touched))
+        if args.dry_run:
+            chk = git(repo, ["apply", "--check", str(pf)])
+            if chk.returncode:
+                print("DRY_RUN_PATCH_CHECK=FAIL")
+                return 8
+            print("DRY_RUN_PATCH_CHECK=PASS")
+            print("repo_modified=NO")
+            print(f"candidate={pf}")
+            return 0
+
+        try:
+            apply_patch(repo, pf)
+        except Exception as exc:
+            (idir/"apply-rejected.txt").write_text(str(exc))
+            print(f"PATCH_APPLY_REJECTED: {exc}")
+            continue
+
+        (idir/"diff-after-apply.patch").write_text(must_git(repo, ["diff", "--binary"]))
+        print("patch_apply=PASS")
+        print("git_diff_check=PASS")
+        print("rerun_same_gate=YES")
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except KeyboardInterrupt:
+        print("\nINTERRUPTED\ncommit_or_push=NO")
+        raise SystemExit(130)
+    except (AgentError, AuthError) as exc:
+        print(f"\nAGENT_ERROR: {exc}", file=sys.stderr)
+        print("commit_or_push=NO", file=sys.stderr)
+        raise SystemExit(2)

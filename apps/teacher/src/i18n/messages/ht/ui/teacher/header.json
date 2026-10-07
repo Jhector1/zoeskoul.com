@@ -6,11 +6,10 @@
       "navLabel": "Navigasyon pwofesè",
       "mainSite": "Sit prensipal",
       "nav": {
-        "tutoring": "Leson prive",
+        "home": "Akèy",
         "classes": "Klas",
-        "assignments": "Devwa",
-        "reports": "Rapò",
-        "school": "Lekòl"
+        "tutoring": "Leson prive",
+        "institution": "Enstitisyon"
       }
     }
   }

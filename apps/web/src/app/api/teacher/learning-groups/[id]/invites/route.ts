@@ -1,3 +1,4 @@
+import { learningGroupWhereForTeachingUser } from "@/lib/teaching/classAccess";
 import { z } from "zod";
 
 import {
@@ -9,7 +10,6 @@ import { deliverLearningGroupInvite } from "@/lib/learningGroups/groupInviteDeli
 import { prisma } from "@/lib/prisma";
 import {
   getTeachingUser,
-  ownedTeachingRecordWhere,
 } from "@/lib/teaching/teachingAccess";
 
 export const runtime = "nodejs";
@@ -40,9 +40,10 @@ export async function POST(request: Request, context: Context) {
   const { id } = await context.params;
   const email = parsed.data.email.trim().toLowerCase();
   const group = await prisma.learningGroup.findFirst({
-    where: { id, ...ownedTeachingRecordWhere(teachingUser) },
+    where: { id, ...learningGroupWhereForTeachingUser(teachingUser) },
     select: {
       id: true,
+      status: true,
       invites: {
         where: { email, acceptedAt: null, revokedAt: null },
         select: { id: true },
@@ -52,6 +53,16 @@ export async function POST(request: Request, context: Context) {
   });
 
   if (!group) return appCorsJson(request, { error: "Class not found" }, { status: 404 });
+  if (group.status !== "open") {
+    return appCorsJson(
+      request,
+      {
+        error: "Open the class before sending learner invitations.",
+        code: "CLASS_NOT_OPEN",
+      },
+      { status: 409 },
+    );
+  }
   if (!group.invites.length) {
     return appCorsJson(
       request,
@@ -72,8 +83,10 @@ export async function POST(request: Request, context: Context) {
     const status =
       result.reason === "not_found"
         ? 404
-        : result.reason === "invite_unavailable"
+        : result.reason === "class_inactive"
           ? 409
+          : result.reason === "invite_unavailable"
+            ? 409
           : result.reason === "not_configured"
             ? 503
             : 502;
@@ -85,9 +98,11 @@ export async function POST(request: Request, context: Context) {
         error:
           result.reason === "not_configured"
             ? "Automatic invitation email delivery is not configured."
-            : result.reason === "invite_unavailable"
-              ? "This class invitation is no longer available."
-              : "The class invitation email could not be delivered.",
+            : result.reason === "class_inactive"
+              ? "Open the class before sending learner invitations."
+              : result.reason === "invite_unavailable"
+                ? "This class invitation is no longer available."
+                : "The class invitation email could not be delivered.",
         code: "INVITE_EMAIL_NOT_DELIVERED",
         ...("inviteUrl" in result
           ? {

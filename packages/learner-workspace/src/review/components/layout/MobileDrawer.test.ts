@@ -4,18 +4,20 @@ import { describe, expect, it, vi } from "vitest";
 
 import MobileDrawer from "./MobileDrawer";
 
-describe("MobileDrawer", () => {
+describe("shared MobileDrawer", () => {
     it("uses the shared UI palette instead of hard-coded light and dark colors", () => {
         const html = renderToStaticMarkup(
-            <MobileDrawer
-                open
-                side="left"
-                title="Course modules"
-                reduceMotion
-                onClose={vi.fn()}
-            >
-                <div>Drawer content</div>
-            </MobileDrawer>,
+            React.createElement(
+                MobileDrawer,
+                {
+                    open: true,
+                    side: "left",
+                    title: "Course modules",
+                    reduceMotion: true,
+                    onClose: vi.fn(),
+                },
+                React.createElement("div", null, "Drawer content"),
+            ),
         );
 
         expect(html).toContain("ui-review-drawer-backdrop");
@@ -27,17 +29,20 @@ describe("MobileDrawer", () => {
         expect(html).not.toContain("dark:");
         expect(html).not.toContain("#0b0d12");
     });
+
     it("keeps the drawer mounted while closed so first open does not pay mount cost", () => {
         const html = renderToStaticMarkup(
-            <MobileDrawer
-                open={false}
-                side="left"
-                title="Course modules"
-                reduceMotion
-                onClose={vi.fn()}
-            >
-                <div>Drawer content</div>
-            </MobileDrawer>,
+            React.createElement(
+                MobileDrawer,
+                {
+                    open: false,
+                    side: "left",
+                    title: "Course modules",
+                    reduceMotion: true,
+                    onClose: vi.fn(),
+                },
+                React.createElement("div", null, "Drawer content"),
+            ),
         );
 
         expect(html).toContain("ui-review-mobile-drawer");
@@ -45,5 +50,4 @@ describe("MobileDrawer", () => {
         expect(html).toContain("invisible");
         expect(html).toContain("Drawer content");
     });
-
 });

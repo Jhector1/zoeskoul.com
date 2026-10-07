@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import { resolveSubjectDeliveryPresentations } from "@/lib/subjects/resolveSubjectDeliveryPresentation";
 
 import {
   projectClassProgress,
@@ -9,6 +10,7 @@ import {
 
 export async function getLearningGroupDashboard(
   groupId: string,
+  locale = "en",
 ): Promise<TeacherClassDashboard | null> {
   const group = await prisma.learningGroup.findUnique({
     where: { id: groupId },
@@ -61,6 +63,14 @@ export async function getLearningGroupDashboard(
   });
 
   if (!group) return null;
+
+  const resolvedSubjects =
+    await resolveSubjectDeliveryPresentations(
+      group.assignments.map(
+        (row) => row.assignment.subject,
+      ),
+      locale,
+    );
 
   const userIds = group.members.map((member) => member.userId);
   const subjectIds = [
@@ -182,7 +192,7 @@ export async function getLearningGroupDashboard(
       id: group.id,
       name: group.name,
     },
-    assignments: group.assignments.map((row) => ({
+    assignments: group.assignments.map((row, index) => ({
       id: row.assignment.id,
       title: row.assignment.title,
       status: row.assignment.status,
@@ -191,9 +201,9 @@ export async function getLearningGroupDashboard(
       dueAt:
         row.assignment.dueAt?.toISOString() ?? null,
       assignedAt: row.assignedAt.toISOString(),
-      subject: {
-        ...row.assignment.subject,
-      },
+      subject:
+        resolvedSubjects[index] ??
+        row.assignment.subject,
     })),
     students: group.members.map((member) => {
       const learner = learnerByUser.get(member.userId);

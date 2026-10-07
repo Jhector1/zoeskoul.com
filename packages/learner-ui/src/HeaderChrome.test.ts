@@ -33,7 +33,7 @@ describe("HeaderChrome ownership boundary", () => {
 
     for (const required of [
       'className="sticky top-0 z-50"',
-      '"border-b border-neutral-200/80 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-neutral-950/85"',
+      '"border-b border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface)/0.90)] backdrop-blur"',
       'className="mx-auto px-4 md:px-6"',
       'className="flex h-16 min-w-0 items-center gap-2 sm:gap-3 lg:gap-4"',
       'className="hidden min-w-0 flex-1 justify-center xl:flex"',

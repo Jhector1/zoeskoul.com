@@ -14,7 +14,9 @@
       },
       "actions": {
         "publish": "Publicar anuncio",
-        "publishing": "Publicando…"
+        "publishing": "Publicando…",
+        "openComposer": "Nuevo anuncio",
+        "cancelComposer": "Cancelar"
       },
       "loading": "Cargando anuncios…",
       "empty": "Todavía no hay anuncios.",

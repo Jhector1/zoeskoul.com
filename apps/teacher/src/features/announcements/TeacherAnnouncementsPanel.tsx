@@ -20,6 +20,7 @@ export function TeacherAnnouncementsPanel(
     scope: TeacherAnnouncementScope;
     targetId: string;
     canPublish: boolean;
+    collapseComposerByDefault?: boolean;
   },
 ) {
   const t =
@@ -47,6 +48,10 @@ export function TeacherAnnouncementsPanel(
     useState<string | null>(null);
   const [notice, setNotice] =
     useState<string | null>(null);
+  const [composerOpen, setComposerOpen] =
+    useState(
+      () => !props.collapseComposerByDefault,
+    );
 
   const formatter = useMemo(
     () =>
@@ -131,6 +136,9 @@ export function TeacherAnnouncementsPanel(
       );
       setTitle("");
       setBody("");
+      if (props.collapseComposerByDefault) {
+        setComposerOpen(false);
+      }
       await load();
       setNotice(
         t("notices.published"),
@@ -145,7 +153,7 @@ export function TeacherAnnouncementsPanel(
   }
 
   return (
-    <section className="ui-surface rounded-2xl p-5">
+    <section className="ui-surface rounded-xl p-5">
       <div>
         <div className="ui-section-kicker">
           {t("kicker")}
@@ -174,14 +182,30 @@ export function TeacherAnnouncementsPanel(
         </div>
       ) : null}
 
-      {props.canPublish ? (
-        <div className="ui-surface-soft mt-4 rounded-xl p-4">
+      {props.canPublish && props.collapseComposerByDefault ? (
+        <button
+          type="button"
+          className="ui-btn-secondary mt-4 h-9 px-3"
+          onClick={() =>
+            setComposerOpen((open) => !open)
+          }
+        >
+          {t(
+            composerOpen
+              ? "actions.cancelComposer"
+              : "actions.openComposer",
+          )}
+        </button>
+      ) : null}
+
+      {props.canPublish && composerOpen ? (
+        <div className="ui-surface-soft mt-4 rounded-lg p-4">
           <div className="grid gap-3">
             <label className="grid gap-2 text-sm">
               <span className="font-medium">
                 {t("fields.title")}
               </span>
-              <input
+              <input className="ui-input-ide ui-focus-ring ui-border-soft ui-bg-surface ui-text w-full rounded-md border px-3 py-2 text-sm"
                 value={title}
                 maxLength={120}
                 onChange={(event) =>
@@ -189,7 +213,6 @@ export function TeacherAnnouncementsPanel(
                     event.target.value,
                   )
                 }
-                className="rounded-lg border px-3 py-2"
               />
             </label>
 
@@ -205,7 +228,7 @@ export function TeacherAnnouncementsPanel(
                     event.target.value,
                   )
                 }
-                className="min-h-28 rounded-lg border px-3 py-2"
+                className="ui-focus-ring ui-border-soft ui-bg-surface ui-text w-full rounded-md border px-3 py-2 text-sm leading-6 min-h-28"
               />
             </label>
           </div>

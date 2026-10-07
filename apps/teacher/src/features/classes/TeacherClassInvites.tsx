@@ -17,6 +17,7 @@ export function TeacherClassInvites(props: {
   classId: string;
   locale: string;
   invites: TeacherClassInvite[];
+  classStatus: "draft" | "open" | "closed";
   onNotice: (message: string | null) => void;
   onError: (message: string | null) => void;
   onInviteChanged: (email: string, patch: { expiresAt?: string; sentAt?: string | null }) => void;
@@ -74,16 +75,18 @@ export function TeacherClassInvites(props: {
   }
 
   return (
-    <section className="space-y-4 rounded-xl border border-neutral-200 bg-white p-5">
+    <section className="ui-surface space-y-4 rounded-lg p-5">
       <div>
         <h2 className="font-semibold">{t("title")}</h2>
-        <p className="mt-1 text-sm text-neutral-500">{t("description")}</p>
+        <p className="mt-1 text-sm text-neutral-500">
+          {t(props.classStatus === "open" ? "description" : "inactiveDescription")}
+        </p>
       </div>
       <div className="grid gap-2">
         {pending.map((invite) => {
           const busy = busyEmail === invite.email;
           return (
-            <div key={invite.id} className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-neutral-200 px-3 py-3">
+            <div key={invite.id} className="flex flex-wrap items-center justify-between gap-3 rounded-lg border ui-border-soft px-3 py-3">
               <div>
                 <div className="text-sm font-medium">{invite.email}</div>
                 <div className="mt-1 text-xs text-neutral-500">
@@ -93,10 +96,10 @@ export function TeacherClassInvites(props: {
                 </div>
               </div>
               <div className="flex gap-2">
-                <button type="button" disabled={busy} onClick={() => void deliver(invite.email, "link")} className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium disabled:opacity-50">
+                <button type="button" disabled={busy || props.classStatus !== "open"} onClick={() => void deliver(invite.email, "link")} className="ui-btn ui-btn-secondary h-8 px-3 text-xs disabled:opacity-50">
                   {t("copyLink")}
                 </button>
-                <button type="button" disabled={busy} onClick={() => void deliver(invite.email, "email")} className="rounded-lg bg-black px-3 py-1.5 text-xs font-medium text-white disabled:opacity-50">
+                <button type="button" disabled={busy || props.classStatus !== "open"} onClick={() => void deliver(invite.email, "email")} className="ui-btn ui-btn-primary h-8 px-3 text-xs disabled:opacity-50">
                   {busy ? t("sending") : invite.sentAt ? t("resendEmail") : t("sendEmail")}
                 </button>
               </div>

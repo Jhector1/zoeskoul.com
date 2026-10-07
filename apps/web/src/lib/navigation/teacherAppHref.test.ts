@@ -131,7 +131,8 @@ describe("Teacher production teaching handoff", () => {
       "apps/teacher/src/features/classes/TeacherClassesPage.tsx",
     );
 
-    expect(text).toContain('href="/assignments"');
+    expect(text).not.toContain('href="/assignments"');
+    expect(text).toContain('href={`/classes/${group.id}`}');
     expect(text).toContain("<TeacherLink");
     expect(text).not.toContain("/admin/course-assignments");
     expect(text).not.toContain("courseAssignmentsHref");

@@ -45,6 +45,8 @@ describe("Teacher class dashboard architecture", () => {
     expect(query).toContain("subjectEnrollment.findMany");
     expect(query).toContain("reviewProgress.findMany");
     expect(query).toContain("practiceAttempt.findMany");
+    expect(query).toContain("resolveSubjectDeliveryPresentations");
+    expect(query).toContain('locale = "en"');
     expect(query).not.toContain(".create(");
     expect(query).not.toContain(".update(");
     expect(query).not.toContain(".upsert(");
@@ -52,10 +54,12 @@ describe("Teacher class dashboard architecture", () => {
 
   it("keeps class authorization and CORS on the existing Teacher API boundary", () => {
     expect(route).toContain("getTeachingUser");
-    expect(route).toContain("ownedTeachingRecordWhere");
+    expect(route).toContain("learningGroupWhereForTeachingUser");
     expect(route).toContain("isAppOriginAllowed");
     expect(route).toContain("appCorsJson");
     expect(route).toContain("appCorsPreflight");
+    expect(route).toContain("localeFromRequest");
+    expect(route).toContain("getLearningGroupDashboard");
   });
 
   it("keeps browser UI in Teacher and Prisma out of Teacher", () => {

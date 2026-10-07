@@ -5,7 +5,7 @@ import SharedWordBankArrangeExerciseUI, {
     type WordBankArrangeExercise,
 } from "@zoeskoul/learner-workspace/practice/kinds/WordBankArrangeExerciseUI";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
-import { useSpeak } from "./_shared/useSpeak";
+import { useSpeak } from "@zoeskoul/learner-workspace/language/useSpeak";
 
 type Props = {
     exercise: WordBankArrangeExercise;

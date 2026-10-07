@@ -56,7 +56,7 @@ describe(
             "prisma.learningGroup",
           );
           expect(text).toContain(
-            "ownedTeachingRecordWhere",
+            "learningGroupWhereForTeachingUser",
           );
           expect(text).toContain(
             "canTeachingUserUseOrganizationForClass",

@@ -52,7 +52,9 @@
         "resend": "Renvoyer l’e-mail",
         "revoke": "Révoquer",
         "pending": "En attente · {role}",
-        "empty": "Aucune invitation en attente."
+        "empty": "Aucune invitation en attente.",
+        "openComposer": "Inviter du personnel",
+        "cancelComposer": "Annuler"
       },
       "classes": {
         "title": "Classes",
@@ -80,6 +82,15 @@
         "sent": "Invitation envoyée.",
         "copied": "Lien copié.",
         "revoked": "Invitation révoquée."
+      },
+      "staffClasses": {
+        "title": "Accès aux classes",
+        "description": "Choisissez les classes auxquelles cet instructeur peut accéder.",
+        "empty": "Aucune classe n’est encore disponible dans cet établissement.",
+        "assigned": "Affecté",
+        "notAssigned": "Non affecté",
+        "toggle": "Modifier l’accès à {className}",
+        "error": "Impossible de mettre à jour l’accès à la classe."
       }
     }
   }

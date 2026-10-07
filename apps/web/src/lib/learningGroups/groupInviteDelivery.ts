@@ -33,6 +33,7 @@ export async function deliverLearningGroupInvite(
     select: {
       id: true,
       name: true,
+      status: true,
       owner: { select: { name: true, email: true } },
       invites: {
         where: { email },
@@ -51,6 +52,9 @@ export async function deliverLearningGroupInvite(
   const invite = context?.invites[0];
   if (!context || !invite) {
     return { ok: false as const, reason: "not_found" as const };
+  }
+  if (context.status !== "open") {
+    return { ok: false as const, reason: "class_inactive" as const };
   }
   if (learningGroupInviteState(invite) !== "pending") {
     return { ok: false as const, reason: "invite_unavailable" as const };

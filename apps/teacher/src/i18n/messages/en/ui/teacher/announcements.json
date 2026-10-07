@@ -14,7 +14,9 @@
       },
       "actions": {
         "publish": "Publish announcement",
-        "publishing": "Publishing…"
+        "publishing": "Publishing…",
+        "openComposer": "New announcement",
+        "cancelComposer": "Cancel"
       },
       "loading": "Loading announcements…",
       "empty": "No announcements yet.",

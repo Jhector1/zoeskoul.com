@@ -184,7 +184,7 @@ export function TeacherAssignmentInvites(props: {
   }
 
   return (
-    <section className="space-y-4 rounded-xl border border-neutral-200 bg-white p-5 lg:col-span-2">
+    <section className="ui-surface space-y-4 rounded-lg p-5 lg:col-span-2">
       <div>
         <h2 className="font-semibold">
           {t("title")}
@@ -195,7 +195,7 @@ export function TeacherAssignmentInvites(props: {
       </div>
 
       {!props.enabled ? (
-        <div className="rounded-lg bg-neutral-50 p-3 text-sm text-neutral-600">
+        <div className="ui-surface-soft rounded-lg p-3 text-sm text-[rgb(var(--ui-text-muted)/0.86)]">
           {t("disabled")}
         </div>
       ) : null}
@@ -210,7 +210,7 @@ export function TeacherAssignmentInvites(props: {
             return (
               <div
                 key={invite.id}
-                className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-neutral-200 px-3 py-3"
+                className="flex flex-wrap items-center justify-between gap-3 rounded-lg border ui-border-soft px-3 py-3"
               >
                 <div>
                   <div className="text-sm font-medium">
@@ -246,7 +246,7 @@ export function TeacherAssignmentInvites(props: {
                         "link",
                       );
                     }}
-                    className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium disabled:opacity-50"
+                    className="ui-btn ui-btn-secondary h-8 px-3 text-xs disabled:opacity-50"
                   >
                     {t("copyLink")}
                   </button>

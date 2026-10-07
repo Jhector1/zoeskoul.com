@@ -35,8 +35,8 @@ const BODY = {
   name: "Launch week",
   percentOff: 20,
   planScope: "both",
-  startsAt: "2026-08-22T15:00:00.000Z",
-  endsAt: "2026-08-29T15:00:00.000Z",
+  startsAt: "2027-08-22T15:00:00.000Z",
+  endsAt: "2027-08-29T15:00:00.000Z",
   enabled: true,
 };
 const context = { params: Promise.resolve({ id: ID }) };
@@ -74,20 +74,20 @@ describe("Admin-app billing promotion update route", () => {
       name: "Launch week",
       percentOff: 20,
       planScope: "both",
-      startsAt: new Date("2026-08-22T15:00:00.000Z"),
-      endsAt: new Date("2026-08-29T15:00:00.000Z"),
+      startsAt: new Date("2027-08-22T15:00:00.000Z"),
+      endsAt: new Date("2027-08-29T15:00:00.000Z"),
       enabled: true,
       couponDuration: "once",
       couponDurationMonths: null,
       stripeCouponId: "coupon_old",
-      createdAt: new Date("2026-08-22T15:00:00.000Z"),
-      updatedAt: new Date("2026-08-22T15:00:00.000Z"),
+      createdAt: new Date("2027-08-22T15:00:00.000Z"),
+      updatedAt: new Date("2027-08-22T15:00:00.000Z"),
     });
     mocks.campaignUpdate.mockImplementation(async ({ data }) => ({
       id: ID,
       ...data,
-      createdAt: new Date("2026-08-22T15:00:00.000Z"),
-      updatedAt: new Date("2026-08-22T16:00:00.000Z"),
+      createdAt: new Date("2027-08-22T15:00:00.000Z"),
+      updatedAt: new Date("2027-08-22T16:00:00.000Z"),
     }));
   });
 

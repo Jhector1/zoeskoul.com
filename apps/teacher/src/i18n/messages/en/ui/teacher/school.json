@@ -1,46 +1,46 @@
 {
   "Teacher": {
     "school": {
-      "kicker": "School administration",
-      "title": "School",
-      "subtitle": "Manage school details, teachers, administrators, staff invitations, and the existing classes connected to your school.",
-      "loading": "Loading school…",
+      "kicker": "Institution administration",
+      "title": "Institution",
+      "subtitle": "Manage institution details, teachers, administrators, staff invitations, courses, announcements, and connected classes.",
+      "loading": "Loading institution…",
       "na": "—",
       "nav": {
         "classes": "Classes",
         "reports": "Reports"
       },
       "selector": {
-        "label": "School",
-        "none": "No school selected"
+        "label": "Institution",
+        "none": "No institution selected"
       },
       "create": {
-        "title": "Create a school",
+        "title": "Create an institution",
         "description": "Create the organization that groups your classes and teaching staff.",
-        "name": "School name",
-        "slug": "School slug",
-        "action": "Create school"
+        "name": "Institution name",
+        "slug": "Institution slug",
+        "action": "Create institution"
       },
       "details": {
-        "title": "School details",
+        "title": "Institution details",
         "slug": "Slug: {slug}",
         "name": "Name",
         "description": "Description",
-        "save": "Save school",
+        "save": "Save institution",
         "manage": "Management access",
         "readOnly": "Read-only access"
       },
       "staff": {
         "title": "Teachers and administrators",
-        "description": "School roles are scoped to this school and never grant platform-admin access.",
-        "owner": "School owner",
+        "description": "Institution roles are scoped to this institution and never grant platform-admin access.",
+        "owner": "Institution owner",
         "ownerFallback": "Owner",
         "memberFallback": "Staff member",
         "remove": "Remove",
         "empty": "No additional staff have joined this school yet."
       },
       "roles": {
-        "admin": "School admin",
+        "admin": "Institution admin",
         "instructor": "Teacher"
       },
       "invites": {
@@ -52,20 +52,27 @@
         "resend": "Resend email",
         "revoke": "Revoke",
         "pending": "Pending · {role}",
-        "empty": "No pending staff invitations."
+        "empty": "No pending staff invitations.",
+        "openComposer": "Invite staff",
+        "cancelComposer": "Cancel"
       },
       "classes": {
         "title": "Classes",
-        "description": "Existing ZoeSkoul classes connected to this school.",
+        "description": "Existing ZoeSkoul classes connected to this institution.",
         "new": "New class",
         "meta": "{students} members · {assignments} assignments",
-        "empty": "No classes are connected to this school yet."
+        "empty": "No classes are connected to this school yet.",
+        "status": {
+          "draft": "Draft",
+          "open": "Open",
+          "closed": "Closed"
+        }
       },
       "errors": {
-        "load": "Your schools could not be loaded.",
-        "createFields": "Enter a school name and slug.",
-        "create": "The school could not be created.",
-        "save": "The school could not be saved.",
+        "load": "Your institutions could not be loaded.",
+        "createFields": "Enter an institution name and slug.",
+        "create": "The institution could not be created.",
+        "save": "The institution could not be saved.",
         "staff": "The staff member could not be updated.",
         "inviteEmail": "Enter an email address to invite.",
         "invite": "The staff invitation could not be sent.",
@@ -73,13 +80,50 @@
         "revoke": "The invitation could not be revoked."
       },
       "notices": {
-        "created": "School created.",
-        "saved": "School saved.",
+        "created": "Institution created.",
+        "saved": "Institution saved.",
         "role": "Staff role updated.",
-        "removed": "Staff member removed from this school.",
+        "removed": "Staff member removed from this institution.",
         "sent": "Invitation email sent.",
         "copied": "Invitation link copied.",
         "revoked": "Invitation revoked."
+      },
+      "workspace": {
+        "navLabel": "Institution workspace",
+        "tabs": {
+          "overview": "Overview",
+          "classes": "Classes",
+          "staff": "Staff",
+          "courses": "Courses",
+          "announcements": "Announcements",
+          "reports": "Reports",
+          "settings": "Settings"
+        }
+      },
+      "overview": {
+        "openClasses": "Open classes",
+        "allClasses": "All classes",
+        "staff": "Staff",
+        "pendingInvites": "Pending invites",
+        "recentClasses": "Classes at a glance",
+        "recentClassesBody": "Open a class workspace or move to Classes for the full list."
+      },
+      "reports": {
+        "title": "Institution reports",
+        "description": "Open the reporting workspace for course, class, and learner progress across this institution.",
+        "action": "Open reports"
+      },
+      "settings": {
+        "description": "Update institution identity and descriptive information here instead of mixing settings into daily administration."
+      },
+      "staffClasses": {
+        "title": "Class access",
+        "description": "Choose which classes this instructor can access.",
+        "empty": "No classes are available in this institution yet.",
+        "assigned": "Assigned",
+        "notAssigned": "Not assigned",
+        "toggle": "Toggle access to {className}",
+        "error": "Could not update class access."
       }
     }
   }

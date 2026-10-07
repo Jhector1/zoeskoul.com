@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const source = readFileSync(
-    new URL("./useDebouncedSketchState.ts", import.meta.url),
+    new URL("../../../../../../../packages/learner-workspace/src/review/hooks/useDebouncedSketchState.ts", import.meta.url),
     "utf8",
 );
 const compactSource = source.replace(/\s+/g, " ");

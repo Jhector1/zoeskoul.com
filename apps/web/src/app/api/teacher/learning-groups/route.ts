@@ -1,20 +1,16 @@
+import { learningGroupWhereForTeachingUser } from "@/lib/teaching/classAccess";
 import {
   appCorsJson,
   appCorsPreflight,
   isAppMutationOriginAllowed,
   isAppOriginAllowed,
 } from "@/lib/http/appCors";
-import {
-  autoDeliverLearningGroupInvites,
-  resolveLearningGroupInviteLocaleFromRequest,
-} from "@/lib/learningGroups/groupInviteDelivery";
 import { syncPendingLearningGroupInvites } from "@/lib/learningGroups/groupInvites";
 import { prisma } from "@/lib/prisma";
 import { normalizeEmails } from "@/lib/teaching/recipientResolution";
 import { canTeachingUserUseOrganizationForClass } from "@/lib/teaching/schoolAccess";
 import {
   getTeachingUser,
-  ownedTeachingRecordWhere,
 } from "@/lib/teaching/teachingAccess";
 import { LearningGroupInputSchema } from "@/lib/validators/learningDelivery";
 
@@ -31,7 +27,7 @@ export async function GET(request: Request) {
   if (!teachingUser) return routeJson(request, { error: "Forbidden" }, 403);
 
   const groups = await prisma.learningGroup.findMany({
-    where: ownedTeachingRecordWhere(teachingUser),
+    where: learningGroupWhereForTeachingUser(teachingUser),
     orderBy: { updatedAt: "desc" },
     include: {
       owner: { select: { id: true, name: true, email: true } },
@@ -87,12 +83,14 @@ export async function POST(request: Request) {
     };
   });
 
-  const inviteDelivery = await autoDeliverLearningGroupInvites(prisma, {
-    groupId: prepared.groupId,
-    emails: prepared.autoDeliveryEmails,
-    origin: new URL(request.url).origin,
-    locale: resolveLearningGroupInviteLocaleFromRequest(request),
-  });
+  // New classes start as draft. Keep invitation intent durable, but do not
+  // contact learners until the teacher explicitly opens the class.
+  const inviteDelivery = {
+    attempted: 0,
+    sent: 0,
+    failed: 0,
+    deferred: prepared.autoDeliveryEmails.length,
+  };
 
   const group = await prisma.learningGroup.findUniqueOrThrow({
     where: { id: prepared.groupId },

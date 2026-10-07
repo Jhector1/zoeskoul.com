@@ -1,0 +1,104 @@
+{
+  "preferred_models": [
+    "gpt-6.1-sol",
+    "gpt-6.1",
+    "gpt-5.6-sol"
+  ],
+  "max_iterations": 10,
+  "stagnation_limit": 3,
+  "max_final_verification_cycles": 2,
+  "max_patch_chars": 70000,
+  "max_files_per_patch": 8,
+  "max_added_lines_per_patch": 450,
+  "max_source_context_chars": 32000,
+  "max_relevant_diff_chars": 20000,
+  "log_directory": "~/.zoeskoul-agent/zoeskoul-web-infra/runs",
+  "required_repo_markers": [
+    "pnpm-workspace.yaml",
+    "apps/web",
+    "packages/learner-workspace",
+    "packages/curriculum-registry"
+  ],
+  "allowed_path_prefixes": [
+    "apps/web/src/",
+    "apps/web/tests/",
+    "packages/learner-workspace/src/",
+    "packages/preferences/src/",
+    "packages/learner-ui/src/",
+    "packages/curriculum-registry/src/"
+  ],
+  "denied_path_prefixes": [
+    ".git/",
+    "node_modules/",
+    "apps/web/src/lib/subjects/",
+    "apps/student/src/legacy-web/",
+    "packages/curriculum-registry/published/",
+    "infra/",
+    "deploy/",
+    "deployment/",
+    "prisma/migrations/"
+  ],
+  "denied_path_regexes": [
+    "(^|/)\\.env($|\\.)",
+    "(^|/).*secret.*$",
+    "(^|/).*credential.*$",
+    "(^|/)pnpm-lock\\.yaml$",
+    "(^|/)package-lock\\.json$",
+    "(^|/)yarn\\.lock$",
+    "(^|/)Dockerfile$"
+  ],
+  "architecture_rules": [
+    "Production Web and Student consume canonical @zoeskoul/curriculum-registry runtime data; do not restore apps/web/src/lib/subjects as production truth.",
+    "Canonical learner workspace ownership lives in packages/learner-workspace; Web/Student should remain thin adapters/re-exports where migration established that boundary.",
+    "Do not recreate duplicate CodeRunner, IDE, Review, or Practice implementations inside apps/web to satisfy stale tests.",
+    "When tests mock Web-local owners that production no longer imports, update tests to the canonical owner or canonical DOM contract.",
+    "Keep SQL curriculum identity tests cardinality-independent.",
+    "Review/Practice must not introduce browser-local persistence.",
+    "Preserve reset-generation/hydration protections.",
+    "Auto-advance remains correct-answer-only and existing attempts policy remains intact."
+  ],
+  "gates": [
+    {
+      "name": "runtime-roots",
+      "timeout_seconds": 240,
+      "repairable": true,
+      "command": "cd apps/web && pnpm exec vitest run src/lib/practice/experience/resolve.test.ts src/components/ide/fullide/chrome/IdeDesktopLayout.singleFile.test.tsx src/components/ide/fullide/chrome/IdeMobileLayout.test.tsx src/components/ide/fullide/panes/IdeEditorPane.test.tsx src/components/review/module/components/layout/ReviewModuleLayout.transition.test.tsx src/components/code/runner/CodeRunner.test.tsx"
+    },
+    {
+      "name": "canonical-sql-identity",
+      "timeout_seconds": 120,
+      "repairable": true,
+      "command": "cd apps/web && pnpm exec vitest run src/lib/practice/sqlAnalysisReportingExerciseIdentity.test.ts"
+    },
+    {
+      "name": "canonical-manifests",
+      "timeout_seconds": 300,
+      "repairable": true,
+      "command": "pnpm run check:manifests"
+    },
+    {
+      "name": "web-tests",
+      "timeout_seconds": 1800,
+      "repairable": true,
+      "command": "cd apps/web && pnpm exec vitest run"
+    },
+    {
+      "name": "web-typecheck",
+      "timeout_seconds": 900,
+      "repairable": true,
+      "command": "cd apps/web && pnpm run typecheck"
+    },
+    {
+      "name": "repo-typecheck",
+      "timeout_seconds": 1200,
+      "repairable": true,
+      "command": "pnpm run typecheck"
+    },
+    {
+      "name": "web-build",
+      "timeout_seconds": 1800,
+      "repairable": true,
+      "command": "cd apps/web && pnpm run build"
+    }
+  ]
+}

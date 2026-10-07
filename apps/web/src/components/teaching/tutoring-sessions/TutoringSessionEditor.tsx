@@ -17,7 +17,12 @@ type Course = {
   }>;
 };
 
-type Group = { id: string; name: string; memberCount: number };
+type Group = {
+  id: string;
+  name: string;
+  memberCount: number;
+  status: "draft" | "open" | "closed";
+};
 
 type TutoringInvite = {
   id: string;
@@ -528,17 +533,23 @@ export default function TutoringSessionEditor({
             {groups.length ? (
               groups.map((group) => {
                 const checked = state.groupIds.includes(group.id);
+                const unavailable = group.status !== "open" && !checked;
                 return (
                   <label
                     key={group.id}
                     className="flex items-center justify-between rounded-lg border px-3 py-2 text-sm"
                   >
                     <span>
-                      {group.name} <span className="text-neutral-500">({group.memberCount})</span>
+                      {group.name}{" "}
+                      <span className="text-neutral-500">
+                        ({group.memberCount})
+                        {group.status !== "open" ? ` · ${group.status}` : ""}
+                      </span>
                     </span>
                     <input
                       type="checkbox"
                       checked={checked}
+                      disabled={unavailable}
                       onChange={(event) =>
                         setState((current) => ({
                           ...current,

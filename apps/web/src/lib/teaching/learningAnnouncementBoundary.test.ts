@@ -54,7 +54,7 @@ describe("Learning Announcement ownership", () => {
       "canManageSchool",
     );
     expect(classRoute).toContain(
-      "ownedTeachingRecordWhere",
+      "learningGroupWhereForTeachingUser",
     );
   });
 

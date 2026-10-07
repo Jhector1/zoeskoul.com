@@ -25,6 +25,7 @@ export async function resolveTutoringRecipients(
     teachingUser: TeachingUser;
     userEmails: readonly string[];
     groupIds: readonly string[];
+    allowedInactiveGroupIds?: readonly string[];
   },
 ) {
   const recipientEmails = normalizeEmails(args.userEmails);
@@ -36,6 +37,12 @@ export async function resolveTutoringRecipients(
           where: {
             id: { in: uniqueGroupIds },
             ...ownedTeachingRecordWhere(args.teachingUser),
+            OR: [
+              { status: "open" },
+              ...(args.allowedInactiveGroupIds?.length
+                ? [{ id: { in: [...args.allowedInactiveGroupIds] } }]
+                : []),
+            ],
           },
           select: { id: true },
         })
@@ -279,6 +286,7 @@ export async function updateTutoringSession(
             ...existing.invites.map((invite) => invite.email),
           ],
         groupIds: args.input.groupIds ?? existing.groups.map((row) => row.groupId),
+        allowedInactiveGroupIds: existing.groups.map((row) => row.groupId),
       })
     : null;
   if (recipients && !recipients.ok) return recipients;

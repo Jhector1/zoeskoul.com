@@ -119,10 +119,10 @@ function baseTx(): TutoringCommercialTx {
         requestId: "request-1",
         teacherId: "teacher-1",
         tutoringSessionId: "session-1",
-        startsAt: new Date("2026-09-01T15:00:00.000Z"),
+        startsAt: new Date("2099-09-01T15:00:00.000Z"),
         durationMinutes: 30,
         status: args.data.status,
-        creditReservedAt: new Date("2026-08-27T23:00:00.000Z"),
+        creditReservedAt: new Date("2099-08-27T23:00:00.000Z"),
         creditConsumedAt: args.data.creditConsumedAt ?? null,
         creditReleasedAt: args.data.creditReleasedAt ?? null,
         request: {
@@ -292,11 +292,11 @@ describe("tutoring commercial credits", () => {
     const result = await createTutoringBookingForRequest(
       {
         requestId: "request-1",
-        startsAt: new Date("2026-09-01T15:00:00.000Z"),
+        startsAt: new Date("2099-09-01T15:00:00.000Z"),
       },
       {
         db: dbFrom(tx),
-        now: new Date("2026-08-27T23:00:00.000Z"),
+        now: new Date("2099-08-27T23:00:00.000Z"),
       },
     );
 
@@ -332,7 +332,7 @@ describe("tutoring commercial credits", () => {
       createTutoringBookingForRequest(
         {
           requestId: "request-1",
-          startsAt: new Date("2026-09-01T15:00:00.000Z"),
+          startsAt: new Date("2099-09-01T15:00:00.000Z"),
         },
         { db: dbFrom(tx) },
       ),
@@ -360,7 +360,7 @@ describe("tutoring commercial credits", () => {
     (tx.tutoringBooking.findMany as any)
       .mockResolvedValueOnce([
         {
-          startsAt: new Date("2026-09-01T14:45:00.000Z"),
+          startsAt: new Date("2099-09-01T14:45:00.000Z"),
           durationMinutes: 60,
         },
       ])
@@ -369,7 +369,7 @@ describe("tutoring commercial credits", () => {
     const result = await createTutoringBookingForRequest(
       {
         requestId: "request-1",
-        startsAt: new Date("2026-09-01T15:00:00.000Z"),
+        startsAt: new Date("2099-09-01T15:00:00.000Z"),
       },
       { db: dbFrom(tx) },
     );
@@ -381,7 +381,7 @@ describe("tutoring commercial credits", () => {
     const tx = baseTx();
     (tx.tutoringBooking.findMany as any).mockResolvedValue([
       {
-        startsAt: new Date("2026-09-01T14:45:00.000Z"),
+        startsAt: new Date("2099-09-01T14:45:00.000Z"),
         durationMinutes: 60,
       },
     ]);
@@ -390,7 +390,7 @@ describe("tutoring commercial credits", () => {
       createTutoringBookingForRequest(
         {
           requestId: "request-1",
-          startsAt: new Date("2026-09-01T15:00:00.000Z"),
+          startsAt: new Date("2099-09-01T15:00:00.000Z"),
         },
         { db: dbFrom(tx) },
       ),
@@ -406,10 +406,10 @@ describe("tutoring booking credit settlement", () => {
       requestId: "request-1",
       teacherId: "teacher-1",
       tutoringSessionId: "session-1",
-      startsAt: new Date("2026-09-01T15:00:00.000Z"),
+      startsAt: new Date("2099-09-01T15:00:00.000Z"),
       durationMinutes: 30,
       status: "scheduled",
-      creditReservedAt: new Date("2026-08-27T23:00:00.000Z"),
+      creditReservedAt: new Date("2099-08-27T23:00:00.000Z"),
       creditConsumedAt: null,
       creditReleasedAt: null,
       request: {
@@ -443,7 +443,7 @@ describe("tutoring booking credit settlement", () => {
     const tx = bookedTx();
     await consumeTutoringBookingCredits("booking-1", {
       db: dbFrom(tx),
-      now: new Date("2026-09-01T15:30:00.000Z"),
+      now: new Date("2099-09-01T15:30:00.000Z"),
       expectedTeacherId: "teacher-1",
     });
 
@@ -462,7 +462,7 @@ describe("tutoring booking credit settlement", () => {
     const tx = bookedTx();
     await releaseTutoringBookingCredits("booking-1", {
       db: dbFrom(tx),
-      now: new Date("2026-08-31T15:00:00.000Z"),
+      now: new Date("2099-08-31T15:00:00.000Z"),
       expectedTeacherId: "teacher-1",
     });
 
@@ -494,7 +494,7 @@ describe("tutoring booking credit settlement", () => {
       idempotencyKey:
         "tutoring:booking:booking-1:release",
       meta: null,
-      createdAt: new Date("2026-08-31T15:00:00.000Z"),
+      createdAt: new Date("2099-08-31T15:00:00.000Z"),
     });
     (
       tx.tutoringCreditLedgerEntry.aggregate as any
@@ -510,7 +510,7 @@ describe("tutoring booking credit settlement", () => {
         "booking-1",
         {
           db: dbFrom(tx),
-          now: new Date("2026-08-31T15:00:00.000Z"),
+          now: new Date("2099-08-31T15:00:00.000Z"),
           expectedTeacherId: "teacher-1",
         },
       );
@@ -527,7 +527,7 @@ describe("tutoring booking credit settlement", () => {
     await expect(
       consumeTutoringBookingCredits("booking-1", {
         db: dbFrom(tx),
-        now: new Date("2026-09-01T15:30:00.000Z"),
+        now: new Date("2099-09-01T15:30:00.000Z"),
         expectedTeacherId: "teacher-2",
       }),
     ).rejects.toThrow(
@@ -544,7 +544,7 @@ describe("tutoring booking credit settlement", () => {
     await expect(
       consumeTutoringBookingCredits("booking-1", {
         db: dbFrom(tx),
-        now: new Date("2026-09-01T15:15:00.000Z"),
+        now: new Date("2099-09-01T15:15:00.000Z"),
         expectedTeacherId: "teacher-1",
       }),
     ).rejects.toThrow(
@@ -567,7 +567,7 @@ describe("tutoring booking credit settlement", () => {
     await expect(
       consumeTutoringBookingCredits("booking-1", {
         db: dbFrom(tx),
-        now: new Date("2026-09-01T15:30:00.000Z"),
+        now: new Date("2099-09-01T15:30:00.000Z"),
         expectedTeacherId: "teacher-1",
       }),
     ).rejects.toThrow(
@@ -590,7 +590,7 @@ describe("tutoring booking credit settlement", () => {
     await expect(
       releaseTutoringBookingCredits("booking-1", {
         db: dbFrom(tx),
-        now: new Date("2026-08-31T15:00:00.000Z"),
+        now: new Date("2099-08-31T15:00:00.000Z"),
         expectedTeacherId: "teacher-1",
       }),
     ).rejects.toThrow("no longer scheduled");
@@ -628,7 +628,7 @@ describe("paid tutoring purchase settlement", () => {
         amountMinor: 6123,
         currency: "usd",
         stripePriceId: "price_tutor_60",
-        paidAt: new Date("2026-08-28T23:00:00.000Z"),
+        paidAt: new Date("2099-08-28T23:00:00.000Z"),
       },
       { db: dbFrom(tx) },
     );
@@ -669,7 +669,7 @@ describe("paid tutoring purchase settlement", () => {
       stripeCheckoutSessionId: "cs_paid_1",
       stripePaymentIntentId: "pi_paid_1",
       status: "paid",
-      paidAt: new Date("2026-08-28T23:00:00.000Z"),
+      paidAt: new Date("2099-08-28T23:00:00.000Z"),
       failedAt: null,
       canceledAt: null,
     });
@@ -696,7 +696,7 @@ describe("paid tutoring purchase settlement", () => {
         amountMinor: 6123,
         currency: "usd",
         stripePriceId: "price_tutor_60",
-        paidAt: new Date("2026-08-28T23:00:05.000Z"),
+        paidAt: new Date("2099-08-28T23:00:05.000Z"),
       },
       { db: dbFrom(tx) },
     );
@@ -720,7 +720,7 @@ describe("paid tutoring purchase settlement", () => {
           amountMinor: 9999,
           currency: "usd",
           stripePriceId: "price_tutor_60",
-          paidAt: new Date("2026-08-28T23:00:00.000Z"),
+          paidAt: new Date("2099-08-28T23:00:00.000Z"),
         },
         { db: dbFrom(tx) },
       ),
@@ -741,7 +741,7 @@ describe("paid tutoring purchase settlement", () => {
         checkoutAttemptId: ATTEMPT_ID,
         checkoutSessionId: "cs_failed_1",
         status: "failed",
-        occurredAt: new Date("2026-08-28T23:05:00.000Z"),
+        occurredAt: new Date("2099-08-28T23:05:00.000Z"),
       },
       { db: dbFrom(tx) },
     );
@@ -765,12 +765,12 @@ describe("teacher-confirmed tutoring scheduling", () => {
     const result = await createTutoringBookingForRequest(
       {
         requestId: "request-1",
-        startsAt: new Date("2026-09-01T15:00:00.000Z"),
+        startsAt: new Date("2099-09-01T15:00:00.000Z"),
         confirmedTeacherId: "teacher-1",
       },
       {
         db: dbFrom(tx),
-        now: new Date("2026-08-29T00:00:00.000Z"),
+        now: new Date("2099-08-29T00:00:00.000Z"),
       },
     );
 
@@ -781,8 +781,8 @@ describe("teacher-confirmed tutoring scheduling", () => {
       expect.objectContaining({
         where: expect.objectContaining({
           teacherId: "teacher-1",
-          startsAt: { lte: new Date("2026-09-01T15:00:00.000Z") },
-          endsAt: { gte: new Date("2026-09-01T15:30:00.000Z") },
+          startsAt: { lte: new Date("2099-09-01T15:00:00.000Z") },
+          endsAt: { gte: new Date("2099-09-01T15:30:00.000Z") },
         }),
       }),
     );
@@ -807,12 +807,12 @@ describe("teacher-confirmed tutoring scheduling", () => {
       createTutoringBookingForRequest(
         {
           requestId: "request-1",
-          startsAt: new Date("2026-09-01T15:00:00.000Z"),
+          startsAt: new Date("2099-09-01T15:00:00.000Z"),
           confirmedTeacherId: "teacher-1",
         },
         {
           db: dbFrom(tx),
-          now: new Date("2026-08-29T00:00:00.000Z"),
+          now: new Date("2099-08-29T00:00:00.000Z"),
         },
       ),
     ).rejects.toBeInstanceOf(NoTutoringTeacherAvailableError);
@@ -835,12 +835,12 @@ describe("teacher-confirmed tutoring scheduling", () => {
       createTutoringBookingForRequest(
         {
           requestId: "request-1",
-          startsAt: new Date("2026-09-01T15:00:00.000Z"),
+          startsAt: new Date("2099-09-01T15:00:00.000Z"),
           confirmedTeacherId: "teacher-1",
         },
         {
           db: dbFrom(tx),
-          now: new Date("2026-08-29T00:00:00.000Z"),
+          now: new Date("2099-08-29T00:00:00.000Z"),
         },
       ),
     ).rejects.toThrow(
@@ -857,12 +857,12 @@ describe("teacher-confirmed tutoring scheduling", () => {
       createTutoringBookingForRequest(
         {
           requestId: "request-1",
-          startsAt: new Date("2026-08-28T23:00:00.000Z"),
+          startsAt: new Date("2099-08-28T23:00:00.000Z"),
           confirmedTeacherId: "teacher-1",
         },
         {
           db: dbFrom(tx),
-          now: new Date("2026-08-29T00:00:00.000Z"),
+          now: new Date("2099-08-29T00:00:00.000Z"),
         },
       ),
     ).rejects.toThrow("must start in the future");

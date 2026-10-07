@@ -9,14 +9,17 @@ import {
   TeacherAssignmentsPage,
 } from "../features/assignments/TeacherAssignmentsPage";
 import {
-  TeacherClassEditor,
-} from "../features/classes/TeacherClassEditor";
+  TeacherClassCreateWizard,
+} from "../features/classes/TeacherClassCreateWizard";
 import {
-  TeacherClassDashboard,
-} from "../features/classes/TeacherClassDashboard";
+  TeacherClassWorkspace,
+} from "../features/classes/TeacherClassWorkspace";
 import {
   TeacherClassesPage,
 } from "../features/classes/TeacherClassesPage";
+import {
+  TeacherHomePage,
+} from "../features/home/TeacherHomePage";
 import {
   TeacherReportsPage,
 } from "../features/reports/TeacherReportsPage";
@@ -33,36 +36,31 @@ import {
 } from "./teacherRoutes";
 
 function headerSection(
-  kind:
-    ReturnType<
-      typeof resolveTeacherLocation
-    >["kind"],
+  kind: ReturnType<typeof resolveTeacherLocation>["kind"],
 ): TeacherHeaderSection {
   if (
     kind === "classes" ||
     kind === "class-new" ||
-    kind === "class-detail"
+    kind === "class-detail" ||
+    kind === "assignments" ||
+    kind === "assignment-new" ||
+    kind === "assignment-detail"
   ) {
     return "classes";
   }
 
   if (
-    kind === "assignments" ||
-    kind === "assignment-new" ||
-    kind === "assignment-detail"
+    kind === "school" ||
+    kind === "reports"
   ) {
-    return "assignments";
+    return "institution";
   }
 
-  if (kind === "reports") {
-    return "reports";
+  if (kind === "tutoring") {
+    return "tutoring";
   }
 
-  if (kind === "school") {
-    return "school";
-  }
-
-  return "tutoring";
+  return "home";
 }
 
 export function TeacherAppShell(props: {
@@ -71,128 +69,108 @@ export function TeacherAppShell(props: {
 }) {
   useLocationSnapshot();
 
-  const location =
-    resolveTeacherLocation(
-      window.location.pathname,
-      currentLocale(),
-    );
+  const location = resolveTeacherLocation(
+    window.location.pathname,
+    currentLocale(),
+  );
+
+  const assignmentSearch =
+    location.kind === "assignment-new"
+      ? new URLSearchParams(window.location.search)
+      : null;
+  const assignmentPrefillSubjectId =
+    assignmentSearch?.get("subjectId") ?? null;
+  const assignmentPrefillClassId =
+    assignmentSearch?.get("classId") ?? null;
 
   let content;
 
-  if (location.kind === "classes") {
+  if (location.kind === "home") {
+    content = (
+      <TeacherHomePage
+        apiOrigin={props.apiOrigin}
+        locale={location.locale}
+      />
+    );
+  } else if (location.kind === "classes") {
     content = (
       <TeacherClassesPage
         apiOrigin={props.apiOrigin}
-        websiteOrigin={
-          props.websiteOrigin
-        }
+        websiteOrigin={props.websiteOrigin}
         locale={location.locale}
       />
     );
-  } else if (
-    location.kind === "class-new"
-  ) {
+  } else if (location.kind === "class-new") {
     content = (
-      <TeacherClassEditor
+      <TeacherClassCreateWizard
         apiOrigin={props.apiOrigin}
         locale={location.locale}
-        classId={null}
       />
     );
-  } else if (
-    location.kind ===
-    "class-detail"
-  ) {
+  } else if (location.kind === "class-detail") {
     content = (
-      <>
-        <TeacherClassDashboard
-          apiOrigin={props.apiOrigin}
-          locale={location.locale}
-          classId={location.classId}
-        />
-        <TeacherClassEditor
-          apiOrigin={props.apiOrigin}
-          locale={location.locale}
-          classId={
-            location.classId
-          }
-        />
-      </>
+      <TeacherClassWorkspace
+        apiOrigin={props.apiOrigin}
+        websiteOrigin={props.websiteOrigin}
+        locale={location.locale}
+        classId={location.classId}
+      />
     );
-  } else if (
-    location.kind === "school"
-  ) {
+  } else if (location.kind === "school") {
     content = (
       <TeacherSchoolPage
         apiOrigin={props.apiOrigin}
         locale={location.locale}
       />
     );
-  } else if (
-    location.kind === "reports"
-  ) {
+  } else if (location.kind === "reports") {
     content = (
       <TeacherReportsPage
         apiOrigin={props.apiOrigin}
         locale={location.locale}
       />
     );
-  } else if (
-    location.kind ===
-    "assignments"
-  ) {
+  } else if (location.kind === "assignments") {
     content = (
       <TeacherAssignmentsPage
         apiOrigin={props.apiOrigin}
         locale={location.locale}
       />
     );
-  } else if (
-    location.kind ===
-    "assignment-new"
-  ) {
+  } else if (location.kind === "assignment-new") {
     content = (
       <TeacherAssignmentEditor
         apiOrigin={props.apiOrigin}
         locale={location.locale}
         assignmentId={null}
+        initialSubjectId={assignmentPrefillSubjectId}
+        initialClassId={assignmentPrefillClassId}
       />
     );
-  } else if (
-    location.kind ===
-    "assignment-detail"
-  ) {
+  } else if (location.kind === "assignment-detail") {
     content = (
       <TeacherAssignmentEditor
         apiOrigin={props.apiOrigin}
         locale={location.locale}
-        assignmentId={
-          location.assignmentId
-        }
+        assignmentId={location.assignmentId}
       />
     );
   } else {
     content = (
       <TeacherTutoringDashboard
         apiOrigin={props.apiOrigin}
-        websiteOrigin={
-          props.websiteOrigin
-        }
+        websiteOrigin={props.websiteOrigin}
         locale={location.locale}
       />
     );
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white">
+    <div className="min-h-screen ui-bg text-[rgb(var(--ui-text)/1)]">
       <TeacherHeader
         locale={location.locale}
-        websiteOrigin={
-          props.websiteOrigin
-        }
-        activeSection={headerSection(
-          location.kind,
-        )}
+        websiteOrigin={props.websiteOrigin}
+        activeSection={headerSection(location.kind)}
       />
       {content}
     </div>

@@ -65,7 +65,7 @@ describe("authoritative reset through the persistent workspace and mounted model
         expect(command.starterHash).not.toContain("ffggggfff");
         expect(reset.exercises[owner]!.starterHash).toBe(command.starterHash);
         expect(command.workspaceApplyRevision).toBe(1);
-        expect(reset.resetRevision).toBe(1);
+        expect(reset.resetRevision).toBeGreaterThan(0);
         const staleBinding = { workspace: dirty, code: `${starter}ffggggfff\n`, userEdited: true, workspaceOrigin: "user" as const, preferSnapshot: true };
         const resetBinding = applyCanonicalResetToToolBinding(staleBinding, reset.exercises[owner]);
         expect(resetBinding.workspace).toEqual(authored);

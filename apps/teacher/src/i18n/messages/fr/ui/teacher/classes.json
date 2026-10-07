@@ -18,12 +18,12 @@
     },
     "classes": {
       "kicker": "Enseignement",
-      "title": "Groupes d’élèves",
-      "subtitle": "Gérez une seule fois les membres d’un groupe et réutilisez-le pour les attributions privées de cours.",
+      "title": "Classes",
+      "subtitle": "Gérez les groupes d’apprenants, les devoirs, la progression et l’activité de classe. Les cours sont des contenus réutilisables ; les classes sont les apprenants et leur parcours.",
       "courseAssignments": "Attributions de cours",
-      "newGroup": "Nouveau groupe",
-      "loading": "Chargement des groupes d’élèves…",
-      "empty": "Aucun groupe pour le moment.",
+      "newGroup": "Créer une classe",
+      "loading": "Chargement des classes…",
+      "empty": "Créez une classe et ajoutez des apprenants lorsque vous êtes prêt.",
       "cardMeta": "{members} élèves · {assignments} attributions",
       "errors": {
         "load": "Impossible de charger les groupes d’élèves.",
@@ -70,14 +70,14 @@
       },
       "dashboard": {
         "kicker": "Tableau de classe",
-        "title": "Progression et relevé",
-        "subtitle": "Une vue en direct des devoirs de la classe à partir de la progression apprenant déjà enregistrée par ZoeSkoul.",
+        "title": "Vue d’ensemble de la classe",
+        "subtitle": "Un aperçu rapide des apprenants, des devoirs, de la progression et des communications de la classe.",
         "loading": "Chargement de la progression de la classe…",
-        "emptyAssignments": "Aucun cours attribué n’est encore associé à cette classe.",
+        "emptyAssignments": "Aucun devoir n’est encore associé à cette classe.",
         "emptyStudents": "Aucun élève accepté n’est encore dans cette classe.",
         "unknownStudent": "Élève",
         "notAvailable": "—",
-        "assignmentMeta": "{subject} · {progress}% de progression moyenne",
+        "assignmentMeta": "Cours : {subject} · {progress}% de progression moyenne",
         "due": "À rendre le {date}",
         "cellAccuracy": "{accuracy}% de réussite · {attempts} tentatives",
         "stats": {
@@ -87,8 +87,9 @@
           "averageAccuracy": "Réussite moyenne"
         },
         "sections": {
-          "assignments": "Cours attribués",
-          "gradebook": "Relevé"
+          "assignments": "Devoirs",
+          "gradebook": "Relevé",
+          "announcements": "Annonces"
         },
         "columns": {
           "student": "Élève",
@@ -101,10 +102,42 @@
         },
         "errors": {
           "load": "Impossible de charger la progression de la classe."
-        }
+        },
+        "announcementsHint": "Consultez les mises à jour de la classe ou ouvrez l’éditeur d’annonce."
       },
       "reports": "Rapports",
-      "schoolAdmin": "École"
+      "schoolAdmin": "École",
+      "workspace": {
+        "kicker": "Espace de classe",
+        "back": "Toutes les classes",
+        "loading": "Chargement de la classe…",
+        "navLabel": "Navigation de l’espace de classe",
+        "tabs": {
+          "overview": "Vue d’ensemble",
+          "students": "Élèves",
+          "courses": "Cours",
+          "assignments": "Devoirs",
+          "gradebook": "Relevé",
+          "settings": "Paramètres"
+        },
+        "actions": {
+          "assignments": "Devoirs",
+          "reports": "Rapports"
+        }
+      },
+      "courses": {
+        "title": "Cours",
+        "subtitle": "Cours réutilisables actuellement utilisés par cette classe au moyen des devoirs.",
+        "loading": "Chargement des cours de la classe…",
+        "error": "Les cours de la classe n’ont pas pu être chargés.",
+        "empty": "Cette classe n’utilise encore aucun cours.",
+        "emptyHint": "Créez un devoir pour commencer à utiliser un cours disponible avec cette classe.",
+        "createAssignment": "Créer un devoir",
+        "assignmentOne": "{count} devoir",
+        "assignmentMany": "{count} devoirs",
+        "progress": "{progress}% de progression moyenne",
+        "openWorkspace": "Ouvrir l’espace du cours"
+      }
     }
   }
 }

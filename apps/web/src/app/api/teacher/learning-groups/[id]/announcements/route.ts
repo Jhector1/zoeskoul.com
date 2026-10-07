@@ -1,3 +1,4 @@
+import { learningGroupWhereForTeachingUser } from "@/lib/teaching/classAccess";
 import { z } from "zod";
 
 import {
@@ -13,7 +14,6 @@ import {
 import { prisma } from "@/lib/prisma";
 import {
   getTeachingUser,
-  ownedTeachingRecordWhere,
 } from "@/lib/teaching/teachingAccess";
 
 export const runtime = "nodejs";
@@ -43,12 +43,13 @@ async function resolveClass(id: string) {
     await prisma.learningGroup.findFirst({
       where: {
         id,
-        ...ownedTeachingRecordWhere(
+        ...learningGroupWhereForTeachingUser(
           teachingUser,
         ),
       },
       select: {
         id: true,
+        status: true,
       },
     });
 
@@ -130,6 +131,17 @@ export async function POST(
       request,
       { error: "Class not found." },
       { status: 404 },
+    );
+  }
+
+  if (group.status !== "open") {
+    return appCorsJson(
+      request,
+      {
+        error: "Open the class before publishing a new announcement.",
+        code: "CLASS_NOT_OPEN",
+      },
+      { status: 409 },
     );
   }
 

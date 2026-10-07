@@ -1,3 +1,4 @@
+import { learningGroupWhereForTeachingUser } from "@/lib/teaching/classAccess";
 import {
   appCorsJson,
   appCorsPreflight,
@@ -14,7 +15,6 @@ import { normalizeEmails } from "@/lib/teaching/recipientResolution";
 import { canTeachingUserUseOrganizationForClass } from "@/lib/teaching/schoolAccess";
 import {
   getTeachingUser,
-  ownedTeachingRecordWhere,
 } from "@/lib/teaching/teachingAccess";
 import { LearningGroupInputSchema } from "@/lib/validators/learningDelivery";
 
@@ -28,7 +28,7 @@ async function ownedGroup(id: string) {
   const teachingUser = await getTeachingUser();
   if (!teachingUser) return { teachingUser: null, group: null };
   const group = await prisma.learningGroup.findFirst({
-    where: { id, ...ownedTeachingRecordWhere(teachingUser) },
+    where: { id, ...learningGroupWhereForTeachingUser(teachingUser) },
     include: {
       organization: {
         select: { id: true, name: true, slug: true },
@@ -136,12 +136,20 @@ export async function PATCH(request: Request, context: Context) {
     return { autoDeliveryEmails: inviteSync.autoDeliveryEmails };
   });
 
-  const inviteDelivery = await autoDeliverLearningGroupInvites(prisma, {
-    groupId: id,
-    emails: prepared.autoDeliveryEmails,
-    origin: new URL(request.url).origin,
-    locale: resolveLearningGroupInviteLocaleFromRequest(request),
-  });
+  const inviteDelivery =
+    group.status === "open"
+      ? await autoDeliverLearningGroupInvites(prisma, {
+          groupId: id,
+          emails: prepared.autoDeliveryEmails,
+          origin: new URL(request.url).origin,
+          locale: resolveLearningGroupInviteLocaleFromRequest(request),
+        })
+      : {
+          attempted: 0,
+          sent: 0,
+          failed: 0,
+          deferred: prepared.autoDeliveryEmails.length,
+        };
 
   const updated = await prisma.learningGroup.findUniqueOrThrow({
     where: { id },

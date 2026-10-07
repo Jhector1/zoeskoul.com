@@ -12,7 +12,10 @@
     "./vectorpad/*": "./src/vectorpad/*.ts",
     "./review/useReviewReset": "./src/review/useReviewReset.ts",
     "./components/Badge": "./src/components/Badge.tsx",
-    "./components/ProgressRing": "./src/components/ProgressRing.tsx"
+    "./components/ProgressRing": "./src/components/ProgressRing.tsx",
+    "./components/QuizBlockSkeleton": "./src/components/QuizBlockSkeleton.tsx",
+    "./components/ConfirmDialog": "./src/components/ConfirmDialog.tsx",
+    "./components/ConfirmResetModal": "./src/components/ConfirmResetModal.tsx"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",
@@ -27,7 +30,8 @@
     "@zoeskoul/permissions": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/preferences": "workspace:*",
-    "next-themes": "^0.4.6"
+    "next-themes": "^0.4.6",
+    "react-dom": "19.2.3"
   },
   "peerDependencies": {
     "react": ">=18.0.0"
@@ -36,6 +40,7 @@
     "@types/node": "25.6.0",
     "@types/react": "^19.0.0",
     "react": "19.2.3",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.5",
+    "@types/react-dom": "^19"
   }
 }

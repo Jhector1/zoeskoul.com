@@ -18,12 +18,12 @@
     },
     "classes": {
       "kicker": "Enseñanza",
-      "title": "Grupos de estudiantes",
-      "subtitle": "Mantén la membresía del grupo una sola vez y reutilízala en asignaciones privadas de cursos.",
+      "title": "Clases",
+      "subtitle": "Gestiona grupos de estudiantes, tareas, progreso y actividad de clase. Los cursos son currículo reutilizable; las clases son las personas y la forma en que se imparte.",
       "courseAssignments": "Asignaciones de cursos",
-      "newGroup": "Nuevo grupo",
-      "loading": "Cargando grupos de estudiantes…",
-      "empty": "Aún no hay grupos.",
+      "newGroup": "Crear clase",
+      "loading": "Cargando clases…",
+      "empty": "Crea una clase y agrega estudiantes cuando estés listo.",
       "cardMeta": "{members} estudiantes · {assignments} asignaciones",
       "errors": {
         "load": "No se pudieron cargar los grupos de estudiantes.",
@@ -70,14 +70,14 @@
       },
       "dashboard": {
         "kicker": "Panel de clase",
-        "title": "Progreso y calificaciones",
-        "subtitle": "Una vista en vivo de las asignaciones de la clase usando el mismo progreso de aprendizaje que ZoeSkoul ya registra.",
+        "title": "Resumen de la clase",
+        "subtitle": "Una vista rápida de estudiantes, asignaciones, progreso y comunicación de la clase.",
         "loading": "Cargando el progreso de la clase…",
-        "emptyAssignments": "Todavía no hay asignaciones de curso conectadas a esta clase.",
+        "emptyAssignments": "Todavía no hay asignaciones conectadas a esta clase.",
         "emptyStudents": "Todavía no hay estudiantes aceptados en esta clase.",
         "unknownStudent": "Estudiante",
         "notAvailable": "—",
-        "assignmentMeta": "{subject} · {progress}% de progreso promedio",
+        "assignmentMeta": "Curso: {subject} · {progress}% de progreso promedio",
         "due": "Entrega {date}",
         "cellAccuracy": "{accuracy}% de precisión · {attempts} intentos",
         "stats": {
@@ -87,8 +87,9 @@
           "averageAccuracy": "Precisión promedio"
         },
         "sections": {
-          "assignments": "Cursos asignados",
-          "gradebook": "Calificaciones"
+          "assignments": "Asignaciones",
+          "gradebook": "Calificaciones",
+          "announcements": "Anuncios"
         },
         "columns": {
           "student": "Estudiante",
@@ -101,10 +102,42 @@
         },
         "errors": {
           "load": "No se pudo cargar el progreso de la clase."
-        }
+        },
+        "announcementsHint": "Consulta las novedades de la clase o abre el editor de anuncios."
       },
       "reports": "Informes",
-      "schoolAdmin": "Escuela"
+      "schoolAdmin": "Escuela",
+      "workspace": {
+        "kicker": "Espacio de clase",
+        "back": "Todas las clases",
+        "loading": "Cargando la clase…",
+        "navLabel": "Navegación del espacio de clase",
+        "tabs": {
+          "overview": "Resumen",
+          "students": "Estudiantes",
+          "courses": "Cursos",
+          "assignments": "Asignaciones",
+          "gradebook": "Calificaciones",
+          "settings": "Configuración"
+        },
+        "actions": {
+          "assignments": "Asignaciones",
+          "reports": "Informes"
+        }
+      },
+      "courses": {
+        "title": "Cursos",
+        "subtitle": "Cursos reutilizables que esta clase usa actualmente mediante asignaciones.",
+        "loading": "Cargando cursos de la clase…",
+        "error": "No se pudieron cargar los cursos de la clase.",
+        "empty": "Esta clase todavía no usa ningún curso.",
+        "emptyHint": "Crea una asignación para empezar a usar un curso disponible con esta clase.",
+        "createAssignment": "Crear asignación",
+        "assignmentOne": "{count} asignación",
+        "assignmentMany": "{count} asignaciones",
+        "progress": "{progress}% de progreso promedio",
+        "openWorkspace": "Abrir espacio del curso"
+      }
     }
   }
 }

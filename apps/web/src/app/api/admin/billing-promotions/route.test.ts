@@ -34,8 +34,8 @@ const BODY = {
   name: "Launch week",
   percentOff: 20,
   planScope: "both",
-  startsAt: "2026-08-22T15:00:00.000Z",
-  endsAt: "2026-08-29T15:00:00.000Z",
+  startsAt: "2027-08-22T15:00:00.000Z",
+  endsAt: "2027-08-29T15:00:00.000Z",
   enabled: true,
 };
 
@@ -67,8 +67,8 @@ describe("Admin-app billing promotion collection route", () => {
     mocks.campaignFindMany.mockResolvedValue([]);
     mocks.campaignCreate.mockImplementation(async ({ data }) => ({
       ...data,
-      createdAt: new Date("2026-08-22T15:00:00.000Z"),
-      updatedAt: new Date("2026-08-22T15:00:00.000Z"),
+      createdAt: new Date("2027-08-22T15:00:00.000Z"),
+      updatedAt: new Date("2027-08-22T15:00:00.000Z"),
     }));
   });
 
@@ -122,7 +122,7 @@ describe("Admin-app billing promotion collection route", () => {
       expect.objectContaining({
         name: "Launch week",
         percentOff: 20,
-        endsAt: new Date("2026-08-29T15:00:00.000Z"),
+        endsAt: new Date("2027-08-29T15:00:00.000Z"),
       }),
     );
     expect(mocks.campaignCreate).toHaveBeenCalledWith({

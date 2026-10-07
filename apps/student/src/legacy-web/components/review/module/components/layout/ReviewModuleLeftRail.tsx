@@ -1,49 +1,8 @@
 "use client";
-
 import React from "react";
-import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import ModuleSidebar from "../../components/ModuleSidebar";
-
-type Props = {
-    showDesktopLeft: boolean;
-    leftCollapsed: boolean;
-    leftW: number;
-    onResizeStart: (e: React.MouseEvent<HTMLDivElement>) => void;
-    padStyle: React.CSSProperties;
-    sidebarProps: React.ComponentProps<typeof ModuleSidebar>;
-};
-
-export default function ReviewModuleLeftRail({
-                                                 showDesktopLeft,
-                                                 leftCollapsed,
-                                                 leftW,
-                                                 onResizeStart,
-                                                 padStyle,
-                                                 sidebarProps,
-                                             }: Props) {
-    if (!showDesktopLeft) return null;
-
-    return (
-        <>
-            <aside
-                className={cn(
-                    "min-h-0 shrink-0 transition-[width] duration-300 ease-out overflow-hidden",
-                    leftCollapsed && "w-0",
-                )}
-                style={{ width: leftCollapsed ? 0 : leftW }}
-            >
-                <div className="h-full min-h-0 overflow-auto" style={padStyle}>
-                    <ModuleSidebar {...sidebarProps} />
-                </div>
-            </aside>
-
-            {!leftCollapsed ? (
-                <div
-                    onMouseDown={onResizeStart}
-                    className="w-2 shrink-0 cursor-col-resize rounded-xl bg-neutral-200/60 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10"
-                    title="Drag to resize sidebar"
-                />
-            ) : null}
-        </>
-    );
+import Shared from "@zoeskoul/learner-workspace/review/components/layout/ReviewModuleLeftRail";
+type Props = Omit<React.ComponentProps<typeof Shared>, "sidebar"> & { sidebarProps: React.ComponentProps<typeof ModuleSidebar> };
+export default function ReviewModuleLeftRail({ sidebarProps, ...props }: Props) {
+  return <Shared {...props} sidebar={<ModuleSidebar {...sidebarProps} />} />;
 }

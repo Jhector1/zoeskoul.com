@@ -50,6 +50,7 @@ describe("LearningGroup class invitations", () => {
             id: "group-1",
             name: "Python 101",
             slug: "python-101",
+            status: "open",
             owner: {
               id: "teacher-1",
               name: "Teacher",
@@ -114,6 +115,7 @@ describe("LearningGroup class invitations", () => {
             id: "group-1",
             name: "Python 101",
             slug: "python-101",
+            status: "open",
             owner: {
               id: "teacher-1",
               name: "Teacher",
@@ -134,6 +136,7 @@ describe("LearningGroup class invitations", () => {
         token: "class-token",
         userId: "wrong-user",
         userEmail: "wrong@example.com",
+        now: new Date("2026-09-03T02:30:00.000Z"),
       },
     );
 
@@ -141,6 +144,42 @@ describe("LearningGroup class invitations", () => {
       ok: false,
       reason: "email_mismatch",
     });
+    expect(memberUpsert).not.toHaveBeenCalled();
+  });
+
+  it("does not accept a class invitation while the class is inactive", async () => {
+    const memberUpsert = vi.fn();
+    const prisma = {
+      learningGroupInvite: {
+        findUnique: vi.fn(async () => ({
+          id: "invite-1",
+          groupId: "group-1",
+          email: "student@example.com",
+          expiresAt: new Date("2026-10-01T00:00:00.000Z"),
+          acceptedAt: null,
+          acceptedByUserId: null,
+          revokedAt: null,
+          group: {
+            id: "group-1",
+            name: "Python 101",
+            slug: "python-101",
+            status: "closed",
+            owner: { id: "teacher-1", name: "Teacher", email: "teacher@example.com" },
+            organization: null,
+          },
+        })),
+      },
+      learningGroupMember: { upsert: memberUpsert },
+    };
+
+    const result = await acceptLearningGroupInvite(prisma as never, {
+      token: "class-token",
+      userId: "student-1",
+      userEmail: "student@example.com",
+      now: new Date("2026-09-03T02:30:00.000Z"),
+    });
+
+    expect(result).toMatchObject({ ok: false, reason: "class_inactive" });
     expect(memberUpsert).not.toHaveBeenCalled();
   });
 

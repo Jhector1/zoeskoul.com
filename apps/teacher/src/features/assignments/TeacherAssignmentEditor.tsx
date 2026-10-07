@@ -33,6 +33,7 @@ type GroupOption = {
   name: string;
   slug: string;
   memberCount: number;
+  status: "draft" | "open" | "closed";
 };
 
 type FormState = {
@@ -51,7 +52,7 @@ type FormState = {
 };
 
 const field =
-  "mt-1 w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-200";
+  "ui-focus-ring ui-border-soft ui-bg-surface ui-text w-full rounded-md border px-3 py-2 text-sm mt-1";
 
 function slugify(value: string) {
   return value
@@ -62,6 +63,16 @@ function slugify(value: string) {
       "-",
     )
     .replace(/^-|-$/g, "");
+}
+
+function automaticAssignmentSlug(
+  title: string,
+) {
+  const base =
+    slugify(title) ||
+    "assignment";
+
+  return `${base}-${Date.now().toString(36)}`;
 }
 
 function localDateTime(
@@ -224,6 +235,8 @@ export function TeacherAssignmentEditor(props: {
   apiOrigin: string;
   locale: string;
   assignmentId: string | null;
+  initialSubjectId?: string | null;
+  initialClassId?: string | null;
 }) {
   const t =
     useTranslations(
@@ -297,6 +310,14 @@ export function TeacherAssignmentEditor(props: {
           )
         : Promise.resolve(null);
 
+    const prefillClassPromise =
+      !props.assignmentId &&
+      props.initialClassId
+        ? classesClient
+            .get(props.initialClassId)
+            .catch(() => null)
+        : Promise.resolve(null);
+
     void Promise.all([
       assignmentClient
         .editorBootstrap(
@@ -304,12 +325,14 @@ export function TeacherAssignmentEditor(props: {
         ),
       classesClient.list(),
       assignmentPromise,
+      prefillClassPromise,
     ])
       .then(
         ([
           bootstrap,
           classResult,
           assignmentResult,
+          prefillClassResult,
         ]) => {
           if (cancelled) {
             return;
@@ -325,6 +348,7 @@ export function TeacherAssignmentEditor(props: {
                 id: group.id,
                 name: group.name,
                 slug: group.slug,
+                status: group.status,
                 memberCount:
                   group.members.filter(
                     (row) =>
@@ -350,11 +374,34 @@ export function TeacherAssignmentEditor(props: {
             );
           } else {
             setAssignment(null);
-            setForm(
+
+            const nextForm =
               emptyForm(
                 bootstrap.courses,
-              ),
-            );
+              );
+
+            if (
+              props.initialSubjectId &&
+              bootstrap.courses.some(
+                (course) =>
+                  course.id ===
+                  props.initialSubjectId,
+              )
+            ) {
+              nextForm.subjectId =
+                props.initialSubjectId;
+            }
+
+            if (
+              prefillClassResult?.group
+                ?.status === "open"
+            ) {
+              nextForm.groupIds = [
+                prefillClassResult.group.id,
+              ];
+            }
+
+            setForm(nextForm);
           }
 
           setLoading(false);
@@ -403,6 +450,8 @@ export function TeacherAssignmentEditor(props: {
     assignmentClient,
     classesClient,
     props.assignmentId,
+    props.initialClassId,
+    props.initialSubjectId,
     props.locale,
     t,
   ]);
@@ -414,6 +463,36 @@ export function TeacherAssignmentEditor(props: {
         form.subjectId,
     ) ?? null;
 
+  const individualLearnerCount =
+    emailsFromText(
+      form.userEmails,
+    ).length;
+  const selectedClassCount =
+    form.groupIds.length;
+  const assignmentSummary = [
+    t(
+      selectedClassCount === 1
+        ? "editor.summaryClassOne"
+        : "editor.summaryClassMany",
+      {
+        count:
+          selectedClassCount,
+      },
+    ),
+    t(
+      individualLearnerCount === 1
+        ? "editor.summaryLearnerOne"
+        : "editor.summaryLearnerMany",
+      {
+        count:
+          individualLearnerCount,
+      },
+    ),
+    t(
+      `status.${form.status}`,
+    ),
+  ].join(" · ");
+
   async function save() {
     setBusy(true);
     setError(null);
@@ -424,7 +503,7 @@ export function TeacherAssignmentEditor(props: {
         title: form.title,
         slug:
           form.slug ||
-          slugify(
+          automaticAssignmentSlug(
             form.title,
           ),
         description:
@@ -607,7 +686,7 @@ export function TeacherAssignmentEditor(props: {
   if (loading) {
     return (
       <main className="mx-auto max-w-5xl p-6">
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 text-sm text-neutral-600">
+        <div className="ui-surface rounded-lg p-6 text-sm text-[rgb(var(--ui-text-muted)/0.86)]">
           {t("loadingEditor")}
         </div>
       </main>
@@ -647,8 +726,9 @@ export function TeacherAssignmentEditor(props: {
             </p>
           </div>
 
-          <div className="flex gap-2">
-            {!isNew ? (
+          <div className="flex flex-col items-end gap-2">
+            <div className="flex gap-2">
+              {!isNew ? (
               <button
                 type="button"
                 className="rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-700"
@@ -679,7 +759,12 @@ export function TeacherAssignmentEditor(props: {
                   ? "editor.saving"
                   : "editor.save",
               )}
-            </button>
+              </button>
+            </div>
+
+            <div className="text-xs text-neutral-500">
+              {assignmentSummary}
+            </div>
           </div>
         </div>
 
@@ -696,7 +781,7 @@ export function TeacherAssignmentEditor(props: {
         ) : null}
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <section className="space-y-4 rounded-xl border border-neutral-200 bg-white p-5">
+          <section className="ui-surface space-y-4 rounded-lg p-5">
             <h2 className="font-semibold">
               {t(
                 "editor.content",
@@ -737,11 +822,7 @@ export function TeacherAssignmentEditor(props: {
                     >
                       {
                         course.title
-                      }{" "}
-                      (
-                      {
-                        course.slug
-                      })
+                      }
                     </option>
                   ),
                 )}
@@ -749,7 +830,7 @@ export function TeacherAssignmentEditor(props: {
             </label>
 
             {selectedCourse ? (
-              <div className="rounded-lg bg-neutral-50 px-3 py-2 text-xs text-neutral-600">
+              <div className="ui-surface-soft rounded-lg px-3 py-2 text-xs text-[rgb(var(--ui-text-muted)/0.86)]">
                 {t(
                   "editor.courseAccess",
                   {
@@ -767,7 +848,7 @@ export function TeacherAssignmentEditor(props: {
                 "editor.assignmentTitle",
               )}
               <input
-                className={field}
+                className={["ui-input-ide", (field)].filter(Boolean).join(" ")}
                 value={form.title}
                 onChange={(
                   event,
@@ -778,37 +859,12 @@ export function TeacherAssignmentEditor(props: {
                       title:
                         event.target
                           .value,
-                      slug:
-                        current.slug ||
-                        slugify(
-                          event.target
-                            .value,
-                        ),
                     }),
                   )
                 }
               />
             </label>
 
-            <label className="block text-xs font-medium text-neutral-600">
-              {t("editor.slug")}
-              <input
-                className={field}
-                value={form.slug}
-                onChange={(
-                  event,
-                ) =>
-                  setForm(
-                    (current) => ({
-                      ...current,
-                      slug:
-                        event.target
-                          .value,
-                    }),
-                  )
-                }
-              />
-            </label>
 
             <label className="block text-xs font-medium text-neutral-600">
               {t(
@@ -836,7 +892,7 @@ export function TeacherAssignmentEditor(props: {
             </label>
           </section>
 
-          <section className="space-y-4 rounded-xl border border-neutral-200 bg-white p-5">
+          <section className="ui-surface space-y-4 rounded-lg p-5">
             <h2 className="font-semibold">
               {t(
                 "editor.delivery",
@@ -889,7 +945,7 @@ export function TeacherAssignmentEditor(props: {
                 )}
                 <input
                   type="datetime-local"
-                  className={field}
+                  className={["ui-input-ide", (field)].filter(Boolean).join(" ")}
                   value={
                     form.availableFrom
                   }
@@ -915,7 +971,7 @@ export function TeacherAssignmentEditor(props: {
                 {t("editor.due")}
                 <input
                   type="datetime-local"
-                  className={field}
+                  className={["ui-input-ide", (field)].filter(Boolean).join(" ")}
                   value={
                     form.dueAt
                   }
@@ -985,12 +1041,17 @@ export function TeacherAssignmentEditor(props: {
             </label>
           </section>
 
-          <section className="space-y-4 rounded-xl border border-neutral-200 bg-white p-5 lg:col-span-2">
+          <section className="ui-surface space-y-4 rounded-lg p-5 lg:col-span-2">
             <h2 className="font-semibold">
               {t(
                 "editor.audience",
               )}
             </h2>
+            <p className="text-xs text-neutral-500">
+              {t(
+                "editor.audienceNote",
+              )}
+            </p>
 
             <div className="grid gap-5 lg:grid-cols-2">
               <label className="block text-xs font-medium text-neutral-600">
@@ -1044,18 +1105,24 @@ export function TeacherAssignmentEditor(props: {
                           form.groupIds.includes(
                             group.id,
                           );
+                        const unavailable = group.status !== "open" && !checked;
 
                         return (
                           <label
                             key={
                               group.id
                             }
-                            className="flex items-center justify-between rounded-lg border border-neutral-200 px-3 py-2 text-sm"
+                            className="flex items-center justify-between rounded-lg border ui-border-soft px-3 py-2 text-sm"
                           >
                             <span>
                               {
                                 group.name
-                              }{" "}
+                              }
+                              {group.status !== "open" ? (
+                                <span className="ml-2 text-xs text-neutral-500">
+                                  {t("editor.groupInactive", { status: group.status })}
+                                </span>
+                              ) : null}{" "}
                               <span className="text-xs text-neutral-500">
                                 {t(
                                   "editor.groupMembers",
@@ -1069,9 +1136,11 @@ export function TeacherAssignmentEditor(props: {
 
                             <input
                               type="checkbox"
+                              className="h-4 w-4 shrink-0 accent-neutral-900"
                               checked={
                                 checked
                               }
+                              disabled={unavailable}
                               onChange={(
                                 event,
                               ) =>
@@ -1104,7 +1173,7 @@ export function TeacherAssignmentEditor(props: {
                       },
                     )
                   ) : (
-                    <div className="rounded-lg bg-neutral-50 p-3 text-sm text-neutral-500">
+                    <div className="ui-surface-soft rounded-lg p-3 text-sm text-[rgb(var(--ui-text-muted)/0.82)]">
                       {t(
                         "editor.noGroups",
                       )}

@@ -1,0 +1,81 @@
+{
+  "preferred_models": [
+    "gpt-6-astra",
+    "gpt-5.6-sol",
+    "gpt-5.6-terra",
+    "gpt-5.6-luna"
+  ],
+  "max_iterations": 15,
+  "stagnation_limit": 4,
+  "max_final_verification_cycles": 3,
+  "max_patch_chars": 350000,
+  "max_files_per_patch": 30,
+  "max_added_lines_per_patch": 3000,
+  "max_evidence_rounds_per_failure": 6,
+  "max_requested_evidence_chars": 160000,
+  "max_baseline_evidence_chars": 200000,
+  "max_direct_source_context_chars": 70000,
+  "max_relevant_diff_chars": 60000,
+  "log_directory": "~/.zoeskoul-agent/zoeskoul-web-infra/runs",
+  "required_repo_markers": [
+    "pnpm-workspace.yaml",
+    "apps/web",
+    "packages/learner-workspace",
+    "packages/curriculum-registry"
+  ],
+  "architecture_rules": [
+    "Production Web and Student consume canonical @zoeskoul/curriculum-registry runtime data; do not restore apps/web/src/lib/subjects as production truth.",
+    "Canonical learner workspace ownership lives in packages/learner-workspace; Web/Student should remain thin adapters/re-exports where migration established that boundary.",
+    "Do not recreate duplicate CodeRunner, IDE, Review, or Practice implementations inside apps/web to satisfy stale tests.",
+    "When tests mock Web-local owners that production no longer imports, update tests to the canonical owner or canonical DOM contract.",
+    "Keep SQL curriculum identity tests cardinality-independent.",
+    "Review/Practice must not introduce browser-local persistence.",
+    "Preserve reset-generation/hydration protections.",
+    "Auto-advance remains correct-answer-only and existing attempts policy remains intact."
+  ],
+  "gates": [
+    {
+      "name": "runtime-roots",
+      "timeout_seconds": 240,
+      "repairable": true,
+      "command": "cd apps/web && pnpm exec vitest run src/lib/practice/experience/resolve.test.ts src/components/ide/fullide/chrome/IdeDesktopLayout.singleFile.test.tsx src/components/ide/fullide/chrome/IdeMobileLayout.test.tsx src/components/ide/fullide/panes/IdeEditorPane.test.tsx src/components/review/module/components/layout/ReviewModuleLayout.transition.test.tsx src/components/code/runner/CodeRunner.test.tsx"
+    },
+    {
+      "name": "canonical-sql-identity",
+      "timeout_seconds": 120,
+      "repairable": true,
+      "command": "cd apps/web && pnpm exec vitest run src/lib/practice/sqlAnalysisReportingExerciseIdentity.test.ts"
+    },
+    {
+      "name": "canonical-manifests",
+      "timeout_seconds": 300,
+      "repairable": false,
+      "command": "if pnpm -s run | grep -q 'check:manifests'; then pnpm run check:manifests; else echo 'canonical_manifest_boundary=SKIPPED_NO_SCRIPT'; fi"
+    },
+    {
+      "name": "web-tests",
+      "timeout_seconds": 1800,
+      "repairable": true,
+      "command": "pnpm run test:web"
+    },
+    {
+      "name": "web-typecheck",
+      "timeout_seconds": 900,
+      "repairable": true,
+      "command": "cd apps/web && pnpm run typecheck"
+    },
+    {
+      "name": "repo-typecheck",
+      "timeout_seconds": 1200,
+      "repairable": true,
+      "command": "pnpm run typecheck"
+    },
+    {
+      "name": "web-build",
+      "timeout_seconds": 1800,
+      "repairable": true,
+      "command": "cd apps/web && pnpm run build"
+    }
+  ],
+  "max_patch_repair_rounds": 3
+}

@@ -8,6 +8,7 @@ import {
 import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
+import { learningGroupWhereForTeachingUser } from "@/lib/teaching/classAccess";
 import {
   getLearningOrganizationAccess,
 } from "@/lib/teaching/schoolAccess";
@@ -35,9 +36,24 @@ export async function GET(request: Request, context: RouteContext) {
   const teachingUser = await getTeachingUser(); if (!teachingUser) return appCorsJson(request, { error: "Forbidden." }, { status: 403 });
   const { id } = await context.params; const resolved = await getLearningOrganizationAccess({ organizationId: id, teachingUser });
   if (!resolved) return appCorsJson(request, { error: "School not found." }, { status: 404 });
-  const school = await prisma.learningOrganization.findUnique({ where: { id }, include: { owner: { select: { id: true, name: true, email: true } }, memberships: { orderBy: [{ role: "asc" }, { joinedAt: "asc" }], include: { user: { select: { id: true, name: true, email: true, roles: true } } } }, groups: { orderBy: { name: "asc" }, select: { id: true, slug: true, name: true, description: true, _count: { select: { members: true, assignments: true } } } }, invites: { orderBy: { createdAt: "desc" }, select: { id: true, email: true, role: true, expiresAt: true, sentAt: true, acceptedAt: true, acceptedByUserId: true, revokedAt: true } }, _count: { select: { groups: true, memberships: true } } } });
+  const school = await prisma.learningOrganization.findUnique({ where: { id }, include: { owner: { select: { id: true, name: true, email: true } }, memberships: { orderBy: [{ role: "asc" }, { joinedAt: "asc" }], include: { user: { select: { id: true, name: true, email: true, roles: true } } } }, groups: { where: learningGroupWhereForTeachingUser(teachingUser), orderBy: { name: "asc" }, select: { id: true, slug: true, name: true, description: true, status: true, members: { where: { role: "instructor" }, select: { userId: true } }, _count: { select: { members: true, assignments: true } } } }, invites: { orderBy: { createdAt: "desc" }, select: { id: true, email: true, role: true, expiresAt: true, sentAt: true, acceptedAt: true, acceptedByUserId: true, revokedAt: true } }, _count: { select: { groups: true, memberships: true } } } });
   if (!school) return appCorsJson(request, { error: "School not found." }, { status: 404 });
-  return appCorsJson(request, { school, access: resolved.access, membershipRole: resolved.membershipRole });
+  const scopedSchool = {
+    ...school,
+    groups: school.groups.map(({ members, ...group }) => ({
+      ...group,
+      instructorUserIds: members.map((member) => member.userId),
+    })),
+    _count: {
+      ...school._count,
+      groups: school.groups.length,
+    },
+  };
+  return appCorsJson(request, {
+    school: scopedSchool,
+    access: resolved.access,
+    membershipRole: resolved.membershipRole,
+  });
 }
 
 export async function PATCH(

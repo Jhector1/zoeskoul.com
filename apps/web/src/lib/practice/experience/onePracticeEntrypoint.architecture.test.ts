@@ -91,7 +91,7 @@ describe("one sessionless self-paced Practice entrypoint", () => {
   });
 
   it("keeps legacy/assignment sessions compatible but defaults module Practice to practice", () => {
-    const policy = read("apps/web/src/lib/practice/experience/routePolicy.ts");
+    const policy = read("packages/learner-workspace/src/practice/experience/routePolicy.ts");
     expect(policy).toContain('defaultMode: "practice"');
     expect(policy).toContain('["practice", "standard", "assignment"]');
 

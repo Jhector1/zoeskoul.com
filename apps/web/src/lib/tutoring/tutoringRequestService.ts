@@ -396,6 +396,8 @@ export async function listTutoringRequestQueue(args: {
       tutoringSessionId: true,
       assignedAt: true,
       scheduledAt: true,
+      completedAt: true,
+      canceledAt: true,
       createdAt: true,
       updatedAt: true,
       learner: {
@@ -425,5 +427,50 @@ export async function listTutoringRequestQueue(args: {
     },
   });
 
-  return { pool, requests };
+  const terminalStatuses = ["completed", "canceled"] as const;
+  const history = await prisma.tutoringRequest.findMany({
+    where: {
+      status: { in: [...terminalStatuses] },
+      assignedTeacherId: args.teacherId,
+    },
+    orderBy: [{ updatedAt: "desc" }],
+    take: 100,
+    select: {
+      id: true,
+      status: true,
+      requestedMinutes: true,
+      preferredStartsAt: true,
+      sourceSubjectSlug: true,
+      sourceModuleSlug: true,
+      sourceExerciseKey: true,
+      note: true,
+      assignedTeacherId: true,
+      tutoringSessionId: true,
+      assignedAt: true,
+      scheduledAt: true,
+      completedAt: true,
+      canceledAt: true,
+      createdAt: true,
+      updatedAt: true,
+      learner: {
+        select: { id: true, name: true, email: true },
+      },
+      assignedTeacher: {
+        select: { id: true, name: true },
+      },
+      bookings: {
+        orderBy: { createdAt: "desc" },
+        take: 1,
+        select: {
+          id: true,
+          startsAt: true,
+          durationMinutes: true,
+          status: true,
+          tutoringSessionId: true,
+        },
+      },
+    },
+  });
+
+  return { pool, requests, history };
 }

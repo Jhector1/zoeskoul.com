@@ -34,7 +34,7 @@ const teachingUser = await requireTeachingPageUser({
       select: { id: true, slug: true, title: true, description: true, visibility: true },
     }),
     prisma.learningGroup.findMany({
-      where: ownedTeachingRecordWhere(teachingUser),
+      where: { ...ownedTeachingRecordWhere(teachingUser), status: "open" },
       orderBy: { name: "asc" },
       select: { id: true, name: true, slug: true, _count: { select: { members: true } } },
     }),

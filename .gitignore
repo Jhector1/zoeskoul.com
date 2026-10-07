@@ -93,3 +93,6 @@ apps/runner/Archive.zip
 
 # Playwright generated auth state
 apps/web/.playwright/
+
+# Local learner-workspace migration audit snapshots
+.zoeskoul-legacy-migration-v*.json

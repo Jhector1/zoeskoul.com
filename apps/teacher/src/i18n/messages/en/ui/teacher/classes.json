@@ -18,12 +18,12 @@
     },
     "classes": {
       "kicker": "Teaching",
-      "title": "Student groups",
-      "subtitle": "Maintain audience membership once and reuse it across private course assignments.",
+      "title": "Classes",
+      "subtitle": "Manage groups of learners, assignments, progress, and class activity. Courses are reusable curriculum; classes are the people and delivery.",
       "courseAssignments": "Course assignments",
-      "newGroup": "New group",
-      "loading": "Loading student groups…",
-      "empty": "No groups yet.",
+      "newGroup": "Create class",
+      "loading": "Loading classes…",
+      "empty": "Create a class and add learners when you are ready.",
       "cardMeta": "{members} students · {assignments} assignments",
       "errors": {
         "load": "Could not load student groups.",
@@ -32,7 +32,8 @@
         "delete": "Could not delete the student group.",
         "forbidden": "Your account does not have permission to manage this group.",
         "notFound": "This student group could not be found.",
-        "loadSchools": "Could not load your schools."
+        "loadSchools": "Could not load your schools.",
+        "missingAccounts": "These learner accounts could not be found: {emails}."
       },
       "editor": {
         "newTitle": "New student group",
@@ -45,14 +46,20 @@
         "slug": "Slug",
         "description": "Description",
         "studentEmails": "Student emails",
-        "emailHint": "One email per line. Every newly added learner receives a class invitation, including existing ZoeSkoul users. They join the class only after accepting.",
+        "emailHint": "One email per line. In an open class, newly added learners are invited automatically. In a draft or closed class, invitation intent is saved and held until the class is opened.",
         "deleteConfirm": "Delete this student group?",
-        "school": "School",
-        "noSchool": "No school",
-        "schoolHint": "Optional. Standalone classes remain supported.",
-        "saved": "Class saved."
+        "school": "Institution",
+        "noSchool": "Independent class",
+        "schoolHint": "Optional. Independent classes remain supported.",
+        "saved": "Class saved.",
+        "detailsTitle": "Class settings",
+        "detailsSubtitle": "Update the class name, description, and institution. The class URL stays stable.",
+        "studentsTitle": "Students and invitations",
+        "studentsSubtitle": "Manage the learners who belong to this class and its pending invitations.",
+        "dangerTitle": "Delete class",
+        "dangerBody": "Deleting permanently removes the class record and its class-owned membership/invitation links. Close the class instead when you want to preserve its history."
       },
-      "standalone": "Standalone",
+      "standalone": "Independent class",
       "schoolValue": "School: {school}",
       "invites": {
         "title": "Pending class invitations",
@@ -66,18 +73,19 @@
         "linkCopied": "Class invite link copied for {email}.",
         "emailSent": "Class invitation sent to {email}.",
         "emailFailedCopied": "Email delivery failed for {email}; the class invite link was copied instead.",
-        "deliveryFailed": "Could not deliver the class invitation to {email}."
+        "deliveryFailed": "Could not deliver the class invitation to {email}.",
+        "inactiveDescription": "These invitations are saved but delivery is paused. Open the class to release unsent invitations; closed classes must be reopened before links or emails can be sent."
       },
       "dashboard": {
         "kicker": "Class dashboard",
-        "title": "Progress and gradebook",
-        "subtitle": "A live view of class assignments using the same learner progress ZoeSkoul already records.",
+        "title": "Class overview",
+        "subtitle": "A quick view of learners, assignments, progress, and class communication.",
         "loading": "Loading class progress…",
-        "emptyAssignments": "No course assignments are connected to this class yet.",
+        "emptyAssignments": "No assignments are connected to this class yet.",
         "emptyStudents": "No accepted students are in this class yet.",
         "unknownStudent": "Student",
         "notAvailable": "—",
-        "assignmentMeta": "{subject} · {progress}% average progress",
+        "assignmentMeta": "Course: {subject} · {progress}% average progress",
         "due": "Due {date}",
         "cellAccuracy": "{accuracy}% accuracy · {attempts} attempts",
         "stats": {
@@ -87,8 +95,9 @@
           "averageAccuracy": "Average accuracy"
         },
         "sections": {
-          "assignments": "Assigned courses",
-          "gradebook": "Gradebook"
+          "assignments": "Assignments",
+          "gradebook": "Gradebook",
+          "announcements": "Announcements"
         },
         "columns": {
           "student": "Student",
@@ -101,10 +110,134 @@
         },
         "errors": {
           "load": "Class progress could not be loaded."
-        }
+        },
+        "announcementsHint": "View class updates or open the announcement composer."
       },
       "reports": "Reports",
-      "schoolAdmin": "School"
+      "schoolAdmin": "Institution",
+      "emptyTitle": "No classes yet",
+      "currentTitle": "Current classes",
+      "classCount": "{count} classes",
+      "current": "Current",
+      "wizard": {
+        "kicker": "Create class",
+        "title": "Set up a class",
+        "subtitle": "Move through the essentials one step at a time. The class is created as a draft so you can review it before learners are contacted.",
+        "loading": "Loading class setup…",
+        "cancel": "Cancel",
+        "step": "Step {number}",
+        "steps": {
+          "institution": "Institution",
+          "details": "Class details",
+          "students": "Students",
+          "review": "Review"
+        },
+        "institution": {
+          "title": "Where does this class belong?",
+          "body": "Connect the class to an institution, or keep it independent.",
+          "label": "Institution",
+          "independent": "Independent class",
+          "hint": "You can move the class to another institution later.",
+          "empty": "You do not have an institution yet.",
+          "manage": "Manage institutions"
+        },
+        "details": {
+          "title": "Name the class",
+          "body": "Use a clear name learners and staff will recognize."
+        },
+        "students": {
+          "title": "Add students",
+          "body": "Add learner emails now, or skip this step. Invitations are held until you open the class.",
+          "hint": "Use one email per line, or separate emails with commas. Leaving this blank is fine."
+        },
+        "review": {
+          "title": "Review and create",
+          "body": "Confirm the setup. The class starts as a draft; opening it releases unsent learner invitations and makes it available for new teaching work.",
+          "institution": "Institution",
+          "name": "Class name",
+          "students": "Students",
+          "studentCount": "{count} learners to invite",
+          "status": "Initial status"
+        },
+        "back": "Back",
+        "next": "Next",
+        "reviewClass": "Review class",
+        "create": "Create class",
+        "creating": "Creating…"
+      },
+      "workspace": {
+        "kicker": "Class workspace",
+        "back": "All classes",
+        "loading": "Loading class…",
+        "navLabel": "Class workspace navigation",
+        "tabs": {
+          "overview": "Overview",
+          "students": "Students",
+          "courses": "Courses",
+          "assignments": "Assignments",
+          "gradebook": "Gradebook",
+          "settings": "Settings"
+        },
+        "actions": {
+          "assignments": "Assignments",
+          "reports": "Reports"
+        }
+      },
+      "openWorkspace": "Open class",
+      "lifecycle": {
+        "filterLabel": "Filter classes by status",
+        "status": {
+          "draft": "Draft",
+          "open": "Open",
+          "closed": "Closed"
+        },
+        "sections": {
+          "draft": "Draft classes",
+          "open": "Open classes",
+          "closed": "Closed classes"
+        },
+        "actions": {
+          "open": "Open class",
+          "close": "Close class",
+          "reopen": "Reopen class"
+        },
+        "updating": "Updating…",
+        "closeConfirm": "Close this class? Students keep their history, but the class will stop accepting new invitations and new assignment/tutoring targeting until you reopen it.",
+        "notice": {
+          "draft": "This class is still a draft. Finish setup, then open it to release pending student invitations and make it available for new teaching work.",
+          "closed": "This class is closed. History and reports remain available, but it is not available for new invitations, assignments, or tutoring until reopened."
+        },
+        "empty": {
+          "draft": {
+            "title": "No draft classes",
+            "body": "New classes appear here until you open them."
+          },
+          "open": {
+            "title": "No open classes",
+            "body": "Open a draft or reopen a closed class when you are ready to teach."
+          },
+          "closed": {
+            "title": "No closed classes",
+            "body": "Classes you close will stay here for history and reporting."
+          }
+        },
+        "errors": {
+          "update": "Could not update the class status."
+        }
+      },
+      "courses": {
+        "title": "Courses",
+        "subtitle": "Reusable courses currently used by this class through assignments.",
+        "loading": "Loading class courses…",
+        "error": "Class courses could not be loaded.",
+        "empty": "This class is not using any course yet.",
+        "emptyHint": "Create an assignment to start using an available course with this class.",
+        "createAssignment": "Create assignment",
+        "assignmentOne": "{count} assignment",
+        "assignmentMany": "{count} assignments",
+        "progress": "{progress}% average progress",
+        "openWorkspace": "Open course workspace"
+      }
     }
   }
 }

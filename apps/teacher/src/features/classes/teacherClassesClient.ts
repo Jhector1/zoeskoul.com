@@ -40,11 +40,14 @@ export type TeacherClassInviteDelivery = {
   emailMessageId?: string | null;
 };
 
+export type TeacherClassStatus = "draft" | "open" | "closed";
+
 export type TeacherClass = {
   id: string;
   slug: string;
   name: string;
   description: string | null;
+  status: TeacherClassStatus;
   ownerId?: string;
   organizationId?: string | null;
   organization?: TeacherSchool | null;
@@ -200,11 +203,34 @@ async deliverInvite(
   );
 },
 
-    async getDashboard(classId: string) {
+    async setStatus(
+      classId: string,
+      status: "open" | "closed",
+    ) {
+      return api.request<{
+        group: TeacherClass;
+        inviteDelivery: {
+          attempted: number;
+          sent: number;
+          failed: number;
+        };
+      }>(
+        `/api/teacher/learning-groups/${encodeURIComponent(classId)}/status`,
+        {
+          method: "PATCH",
+          json: { status },
+        },
+      );
+    },
+
+    async getDashboard(
+      classId: string,
+      locale: string,
+    ) {
       return api.request<{
         dashboard: TeacherClassDashboard;
       }>(
-        `/api/teacher/learning-groups/${encodeURIComponent(classId)}/dashboard`,
+        `/api/teacher/learning-groups/${encodeURIComponent(classId)}/dashboard?locale=${encodeURIComponent(locale)}`,
         {
           method: "GET",
           cache: "no-store",

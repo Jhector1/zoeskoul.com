@@ -22,7 +22,7 @@ import ReviewResetDialog from "./components/overlays/ReviewResetDialog";
 import ReviewModuleNavBar from "@/components/review/ReviewModuleNavBar";
 import {
     ReviewDestinationTransitionProvider,
-} from "./navigation/ReviewDestinationTransitionContext";
+} from "@zoeskoul/learner-workspace/tools/code/ReviewDestinationTransitionContext";
 
 export default function ReviewModulePage(props: ReviewModulePageProps) {
     const vm = useReviewModuleController(props);

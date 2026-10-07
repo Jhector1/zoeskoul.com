@@ -1,3 +1,4 @@
+import { learningGroupWhereForTeachingUser } from "@/lib/teaching/classAccess";
 import {
   appCorsJson,
   appCorsPreflight,
@@ -9,11 +10,29 @@ import {
 import { prisma } from "@/lib/prisma";
 import {
   getTeachingUser,
-  ownedTeachingRecordWhere,
 } from "@/lib/teaching/teachingAccess";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+const SUPPORTED_LOCALES =
+  new Set(["en", "es", "fr", "ht"]);
+
+function localeFromRequest(
+  request: Request,
+) {
+  const locale =
+    new URL(request.url)
+      .searchParams
+      .get("locale")
+      ?.trim()
+      .toLowerCase();
+
+  return locale &&
+    SUPPORTED_LOCALES.has(locale)
+    ? locale
+    : "en";
+}
 
 type Context = {
   params: Promise<{ id: string }>;
@@ -44,7 +63,7 @@ export async function GET(
   const group = await prisma.learningGroup.findFirst({
     where: {
       id,
-      ...ownedTeachingRecordWhere(teachingUser),
+      ...learningGroupWhereForTeachingUser(teachingUser),
     },
     select: { id: true },
   });
@@ -58,7 +77,10 @@ export async function GET(
   }
 
   const dashboard =
-    await getLearningGroupDashboard(group.id);
+    await getLearningGroupDashboard(
+      group.id,
+      localeFromRequest(request),
+    );
 
   if (!dashboard) {
     return appCorsJson(

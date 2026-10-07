@@ -105,7 +105,7 @@ export function TeacherAssignmentsPage(props: {
           <TeacherLink
             href="/classes"
             locale={props.locale}
-            className="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium"
+            className="ui-btn ui-btn-secondary h-9 px-4"
           >
             {t("classes")}
           </TeacherLink>
@@ -126,13 +126,13 @@ export function TeacherAssignmentsPage(props: {
             {t("errors.load")}
           </div>
         ) : assignments === null ? (
-          <div className="rounded-xl border border-neutral-200 bg-white p-6 text-sm text-neutral-600">
+          <div className="ui-surface rounded-lg p-6 text-sm text-[rgb(var(--ui-text-muted)/0.86)]">
             {t("loading")}
           </div>
         ) : assignments.length ? (
-          <div className="overflow-x-auto rounded-xl border border-neutral-200 bg-white">
+          <div className="ui-surface overflow-x-auto rounded-lg">
             <table className="w-full min-w-[900px] text-left text-sm">
-              <thead className="bg-neutral-50 text-neutral-600">
+              <thead className="ui-bg-surface-2 text-[rgb(var(--ui-text-muted)/0.9)]">
                 <tr>
                   <th className="px-4 py-3">
                     {t(
@@ -169,7 +169,7 @@ export function TeacherAssignmentsPage(props: {
                       key={
                         assignment.id
                       }
-                      className="border-t border-neutral-200"
+                      className="border-t ui-border-soft"
                     >
                       <td className="px-4 py-3">
                         <div className="font-medium">
@@ -243,7 +243,7 @@ export function TeacherAssignmentsPage(props: {
                           locale={
                             props.locale
                           }
-                          className="rounded-lg border border-neutral-300 px-3 py-1.5 text-xs font-medium"
+                          className="ui-btn ui-btn-secondary h-8 px-3 text-xs"
                         >
                           {t(
                             "table.edit",
@@ -257,7 +257,7 @@ export function TeacherAssignmentsPage(props: {
             </table>
           </div>
         ) : (
-          <div className="rounded-xl border border-neutral-200 bg-white p-6 text-sm text-neutral-600">
+          <div className="ui-surface rounded-lg p-6 text-sm text-[rgb(var(--ui-text-muted)/0.86)]">
             {t("empty")}
           </div>
         )}

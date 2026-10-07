@@ -899,6 +899,7 @@ model LearningGroup {
   description      String?
   ownerId          String
   organizationId   String?
+  status           LearningGroupStatus       @default(draft)
   createdAt        DateTime                  @default(now())
   updatedAt        DateTime                  @updatedAt
   owner            User                      @relation("LearningGroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
@@ -1471,6 +1472,12 @@ enum TutoringParticipantRole {
 enum LearningOrganizationMemberRole {
   admin
   instructor
+}
+
+enum LearningGroupStatus {
+  draft
+  open
+  closed
 }
 
 enum LearningGroupMemberRole {

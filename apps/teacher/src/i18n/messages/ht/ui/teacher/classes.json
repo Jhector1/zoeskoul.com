@@ -18,12 +18,12 @@
     },
     "classes": {
       "kicker": "Ansèyman",
-      "title": "Gwoup elèv",
-      "subtitle": "Jere manm gwoup la yon sèl fwa epi sèvi avè l ankò pou bay kou prive.",
+      "title": "Klas",
+      "subtitle": "Jere gwoup elèv, devwa, pwogrè ak aktivite klas la. Kou yo se kourikoulòm yo ka itilize ankò; klas yo se moun yo ak fason yo resevwa ansèyman an.",
       "courseAssignments": "Kou yo bay",
-      "newGroup": "Nouvo gwoup",
-      "loading": "N ap chaje gwoup elèv yo…",
-      "empty": "Pa gen gwoup pou kounye a.",
+      "newGroup": "Kreye klas",
+      "loading": "N ap chaje klas yo…",
+      "empty": "Kreye yon klas epi ajoute elèv lè ou pare.",
       "cardMeta": "{members} elèv · {assignments} travay",
       "errors": {
         "load": "Nou pa t kapab chaje gwoup elèv yo.",
@@ -70,14 +70,14 @@
       },
       "dashboard": {
         "kicker": "Tablo klas",
-        "title": "Pwogrè ak kanè",
-        "subtitle": "Yon vizyon an dirèk sou travay klas la ki sèvi ak menm pwogrè elèv ZoeSkoul deja anrejistre.",
+        "title": "Apèsi klas la",
+        "subtitle": "Yon apèsi rapid sou elèv, travay, pwogrè ak kominikasyon klas la.",
         "loading": "Ap chaje pwogrè klas la…",
-        "emptyAssignments": "Pa gen okenn kou ki asosye ak klas sa a ankò.",
+        "emptyAssignments": "Pa gen okenn travay ki asosye ak klas sa a ankò.",
         "emptyStudents": "Pa gen okenn elèv ki aksepte envitasyon an nan klas sa a ankò.",
         "unknownStudent": "Elèv",
         "notAvailable": "—",
-        "assignmentMeta": "{subject} · {progress}% pwogrè mwayèn",
+        "assignmentMeta": "Kou: {subject} · {progress}% pwogrè mwayèn",
         "due": "Pou remèt {date}",
         "cellAccuracy": "{accuracy}% presizyon · {attempts} tantativ",
         "stats": {
@@ -87,8 +87,9 @@
           "averageAccuracy": "Presizyon mwayèn"
         },
         "sections": {
-          "assignments": "Kou yo bay",
-          "gradebook": "Kanè"
+          "assignments": "Travay",
+          "gradebook": "Kanè",
+          "announcements": "Anons"
         },
         "columns": {
           "student": "Elèv",
@@ -101,10 +102,42 @@
         },
         "errors": {
           "load": "Pwogrè klas la pa t kapab chaje."
-        }
+        },
+        "announcementsHint": "Gade mizajou klas la oswa ouvri editè anons la."
       },
       "reports": "Rapò",
-      "schoolAdmin": "Lekòl"
+      "schoolAdmin": "Lekòl",
+      "workspace": {
+        "kicker": "Espas klas",
+        "back": "Tout klas yo",
+        "loading": "N ap chaje klas la…",
+        "navLabel": "Navigasyon espas klas la",
+        "tabs": {
+          "overview": "Apèsi",
+          "students": "Elèv",
+          "courses": "Kou",
+          "assignments": "Travay",
+          "gradebook": "Kanè",
+          "settings": "Paramèt"
+        },
+        "actions": {
+          "assignments": "Travay",
+          "reports": "Rapò"
+        }
+      },
+      "courses": {
+        "title": "Kou",
+        "subtitle": "Kou ki ka itilize ankò epi klas sa a ap itilize kounye a atravè travay yo.",
+        "loading": "N ap chaje kou klas la…",
+        "error": "Nou pa t kapab chaje kou klas la.",
+        "empty": "Klas sa a poko ap itilize okenn kou.",
+        "emptyHint": "Kreye yon travay pou kòmanse itilize yon kou ki disponib ak klas sa a.",
+        "createAssignment": "Kreye travay",
+        "assignmentOne": "{count} travay",
+        "assignmentMany": "{count} travay",
+        "progress": "{progress}% pwogrè an mwayèn",
+        "openWorkspace": "Louvri espas kou a"
+      }
     }
   }
 }

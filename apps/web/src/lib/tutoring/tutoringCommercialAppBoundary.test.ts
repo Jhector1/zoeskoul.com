@@ -2,6 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
+const cwd = process.cwd();
+const webRoot = fs.existsSync(path.join(cwd, "src/app"))
+  ? cwd
+  : path.join(cwd, "apps/web");
+
 const ROUTES = [
   "src/app/api/teacher/tutoring-requests/route.ts",
   "src/app/api/teacher/tutoring-pool/route.ts",
@@ -14,7 +19,7 @@ const ROUTES = [
 
 function source(relativePath: string) {
   return fs.readFileSync(
-    path.join(process.cwd(), relativePath),
+    path.join(webRoot, relativePath),
     "utf8",
   );
 }

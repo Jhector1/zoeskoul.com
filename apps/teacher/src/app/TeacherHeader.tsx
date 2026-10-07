@@ -10,28 +10,26 @@ import {
 } from "./TeacherLink";
 
 export type TeacherHeaderSection =
-  | "tutoring"
+  | "home"
   | "classes"
-  | "assignments"
-  | "reports"
-  | "school";
+  | "tutoring"
+  | "institution";
 
 type NavItem = {
   section: TeacherHeaderSection;
   href: string;
   key:
-    | "tutoring"
+    | "home"
     | "classes"
-    | "assignments"
-    | "reports"
-    | "school";
+    | "tutoring"
+    | "institution";
 };
 
 const NAV_ITEMS: readonly NavItem[] = [
   {
-    section: "tutoring",
+    section: "home",
     href: "/",
-    key: "tutoring",
+    key: "home",
   },
   {
     section: "classes",
@@ -39,25 +37,18 @@ const NAV_ITEMS: readonly NavItem[] = [
     key: "classes",
   },
   {
-    section: "assignments",
-    href: "/assignments",
-    key: "assignments",
+    section: "tutoring",
+    href: "/tutoring",
+    key: "tutoring",
   },
   {
-    section: "reports",
-    href: "/reports",
-    key: "reports",
-  },
-  {
-    section: "school",
-    href: "/school",
-    key: "school",
+    section: "institution",
+    href: "/institution",
+    key: "institution",
   },
 ];
 
-function desktopItem(
-  active: boolean,
-) {
+function desktopItem(active: boolean) {
   return [
     active
       ? "ui-btn-ide-active"
@@ -66,80 +57,53 @@ function desktopItem(
   ].join(" ");
 }
 
-function mobileItem(
-  active: boolean,
-) {
+function mobileItem(active: boolean) {
   return [
     "inline-flex h-9 shrink-0 items-center rounded-lg px-3 text-sm font-medium transition-colors",
     active
-      ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
-      : "text-neutral-700 hover:bg-neutral-100 dark:text-white/75 dark:hover:bg-white/[0.08]",
+      ? "bg-[rgb(var(--ui-text)/1)] text-[rgb(var(--ui-text-invert)/1)]"
+      : "text-[rgb(var(--ui-text-muted)/0.9)] hover:bg-[rgb(var(--ui-hover)/0.72)] hover:text-[rgb(var(--ui-text)/1)]",
   ].join(" ");
 }
 
-export function TeacherHeader(
-  props: {
-    locale: string;
-    websiteOrigin: string;
-    activeSection:
-      TeacherHeaderSection;
-  },
-) {
-  const t =
-    useTranslations(
-      "Teacher.header",
+export function TeacherHeader(props: {
+  locale: string;
+  websiteOrigin: string;
+  activeSection: TeacherHeaderSection;
+}) {
+  const t = useTranslations("Teacher.header");
+
+  const nav = NAV_ITEMS.map((item) => {
+    const active = item.section === props.activeSection;
+
+    return (
+      <TeacherLink
+        key={item.section}
+        href={item.href}
+        locale={props.locale}
+        className={desktopItem(active)}
+        aria-current={active ? "page" : undefined}
+      >
+        {t(`nav.${item.key}`)}
+      </TeacherLink>
     );
+  });
 
-  const nav = NAV_ITEMS.map(
-    (item) => {
-      const active =
-        item.section ===
-        props.activeSection;
+  const mobileNav = NAV_ITEMS.map((item) => {
+    const active = item.section === props.activeSection;
 
-      return (
-        <TeacherLink
-          key={item.section}
-          href={item.href}
-          locale={props.locale}
-          className={desktopItem(
-            active,
-          )}
-          aria-current={
-            active
-              ? "page"
-              : undefined
-          }
-        >
-          {t(`nav.${item.key}`)}
-        </TeacherLink>
-      );
-    },
-  );
-
-  const mobileNav =
-    NAV_ITEMS.map((item) => {
-      const active =
-        item.section ===
-        props.activeSection;
-
-      return (
-        <TeacherLink
-          key={item.section}
-          href={item.href}
-          locale={props.locale}
-          className={mobileItem(
-            active,
-          )}
-          aria-current={
-            active
-              ? "page"
-              : undefined
-          }
-        >
-          {t(`nav.${item.key}`)}
-        </TeacherLink>
-      );
-    });
+    return (
+      <TeacherLink
+        key={item.section}
+        href={item.href}
+        locale={props.locale}
+        className={mobileItem(active)}
+        aria-current={active ? "page" : undefined}
+      >
+        {t(`nav.${item.key}`)}
+      </TeacherLink>
+    );
+  });
 
   const brandGroup = (
     <TeacherLink
@@ -148,14 +112,14 @@ export function TeacherHeader(
       className="group flex min-w-0 shrink-0 items-center gap-2.5"
     >
       <div className="ui-icon-box h-9 w-9 rounded-lg">
-        <span className="text-sm font-semibold text-neutral-900 dark:text-white/90">
+        <span className="text-sm font-semibold text-[rgb(var(--ui-text)/0.94)]">
           Z
         </span>
       </div>
 
       <div className="min-w-0 leading-tight">
         <div className="flex min-w-0 items-center gap-2">
-          <span className="min-w-0 truncate text-sm font-semibold tracking-tight text-neutral-900 dark:text-white/90">
+          <span className="min-w-0 truncate text-sm font-semibold tracking-tight text-[rgb(var(--ui-text)/0.94)]">
             ZoeSkoul
           </span>
           <span className="hidden ui-pill-neutral sm:inline-flex">
@@ -163,7 +127,7 @@ export function TeacherHeader(
           </span>
         </div>
 
-        <div className="hidden truncate text-[11px] text-neutral-500 dark:text-white/55 sm:block">
+        <div className="hidden truncate text-[11px] text-[rgb(var(--ui-text-muted)/0.82)] sm:block">
           {t("tagline")}
         </div>
       </div>
@@ -173,7 +137,7 @@ export function TeacherHeader(
   const centerSlot = (
     <nav
       aria-label={t("navLabel")}
-      className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white/80 p-1 dark:border-white/10 dark:bg-white/[0.04]"
+      className="ui-surface-soft flex items-center gap-1 rounded-lg p-1"
     >
       {nav}
     </nav>
@@ -189,7 +153,7 @@ export function TeacherHeader(
   );
 
   const mobileMenu = (
-    <div className="border-t border-neutral-200/80 px-4 py-2 xl:hidden dark:border-white/10">
+    <div className="border-t ui-border-soft px-4 py-2 xl:hidden">
       <nav
         aria-label={t("navLabel")}
         className="flex min-w-0 gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -201,12 +165,9 @@ export function TeacherHeader(
 
   return (
     <HeaderChrome
-      elevated
       brandGroup={brandGroup}
       centerSlot={centerSlot}
-      topRowActions={
-        topRowActions
-      }
+      topRowActions={topRowActions}
       mobileMenu={mobileMenu}
     />
   );

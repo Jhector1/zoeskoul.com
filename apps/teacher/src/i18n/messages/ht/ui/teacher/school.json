@@ -52,7 +52,9 @@
         "resend": "Revoye imèl",
         "revoke": "Anile",
         "pending": "Annatant · {role}",
-        "empty": "Pa gen envitasyon annatant."
+        "empty": "Pa gen envitasyon annatant.",
+        "openComposer": "Envite anplwaye",
+        "cancelComposer": "Anile"
       },
       "classes": {
         "title": "Klas",
@@ -80,6 +82,15 @@
         "sent": "Envitasyon voye.",
         "copied": "Lyen kopye.",
         "revoked": "Envitasyon anile."
+      },
+      "staffClasses": {
+        "title": "Aksè nan klas",
+        "description": "Chwazi ki klas enstriktè sa a ka jwenn aksè.",
+        "empty": "Pa gen klas ki disponib nan enstitisyon sa a pou kounye a.",
+        "assigned": "Asiyen",
+        "notAssigned": "Pa asiyen",
+        "toggle": "Chanje aksè pou {className}",
+        "error": "Nou pa t kapab mete aksè klas la ajou."
       }
     }
   }

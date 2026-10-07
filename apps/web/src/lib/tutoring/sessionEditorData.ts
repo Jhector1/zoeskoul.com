@@ -29,6 +29,7 @@ export async function loadTutoringSessionEditorData(args: {
       select: {
         id: true,
         name: true,
+        status: true,
         _count: { select: { members: true } },
       },
     }),
@@ -59,6 +60,7 @@ export async function loadTutoringSessionEditorData(args: {
     groups: groups.map((group) => ({
       id: group.id,
       name: group.name,
+      status: group.status,
       memberCount: group._count.members,
     })),
   };

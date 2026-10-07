@@ -154,6 +154,21 @@ it("delivers class invitations through the LearningGroup invite endpoint", async
 });
 
 
+  it("updates class lifecycle through the dedicated status endpoint", async () => {
+    const fetchImpl = vi.fn(async () => Response.json({
+      group: { id: "group-1", name: "Class", slug: "class", description: null, status: "closed", members: [] },
+      inviteDelivery: { attempted: 0, sent: 0, failed: 0 },
+    }));
+    const client = createTeacherClassesClient({ apiOrigin: "https://zoeskoul.com", fetchImpl });
+
+    await client.setStatus("group-1", "closed");
+
+    expect(fetchImpl).toHaveBeenCalledWith(
+      new URL("/api/teacher/learning-groups/group-1/status", "https://zoeskoul.com"),
+      expect.objectContaining({ method: "PATCH", credentials: "include" }),
+    );
+  });
+
   it("loads the class dashboard from the scoped LearningGroup projection endpoint", async () => {
     const fetchImpl = vi.fn(async () =>
       Response.json({
@@ -176,11 +191,11 @@ it("delivers class invitations through the LearningGroup invite endpoint", async
       fetchImpl,
     });
 
-    await client.getDashboard("group-1");
+    await client.getDashboard("group-1", "fr");
 
     expect(fetchImpl).toHaveBeenCalledWith(
       new URL(
-        "/api/teacher/learning-groups/group-1/dashboard",
+        "/api/teacher/learning-groups/group-1/dashboard?locale=fr",
         "https://zoeskoul.com",
       ),
       expect.objectContaining({

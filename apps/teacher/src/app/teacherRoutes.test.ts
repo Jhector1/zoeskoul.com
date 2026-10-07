@@ -9,11 +9,24 @@ import {
 } from "./teacherRoutes";
 
 describe("Teacher route ownership", () => {
+  it("owns Teacher home at the root", () => {
+    for (const path of ["/", "/en", "/fr/"]) {
+      expect(resolveTeacherLocation(path).kind).toBe("home");
+    }
+  });
+
+  it("owns explicit localized tutoring", () => {
+    expect(
+      resolveTeacherLocation("/en/tutoring"),
+    ).toEqual({
+      kind: "tutoring",
+      locale: "en",
+    });
+  });
+
   it("owns localized classes", () => {
     expect(
-      resolveTeacherLocation(
-        "/en/classes",
-      ),
+      resolveTeacherLocation("/en/classes"),
     ).toEqual({
       kind: "classes",
       locale: "en",
@@ -22,20 +35,16 @@ describe("Teacher route ownership", () => {
 
   it("owns localized class creation", () => {
     expect(
-      resolveTeacherLocation(
-        "/fr/classes/new",
-      ),
+      resolveTeacherLocation("/fr/classes/new"),
     ).toEqual({
       kind: "class-new",
       locale: "fr",
     });
   });
 
-  it("owns localized class editing", () => {
+  it("owns localized class workspaces", () => {
     expect(
-      resolveTeacherLocation(
-        "/ht/classes/group-1",
-      ),
+      resolveTeacherLocation("/ht/classes/group-1"),
     ).toEqual({
       kind: "class-detail",
       locale: "ht",
@@ -43,69 +52,50 @@ describe("Teacher route ownership", () => {
     });
   });
 
-  it("owns localized assignments", () => {
+  it("keeps legacy assignment routes reachable", () => {
     expect(
-      resolveTeacherLocation(
-        "/en/assignments",
-      ),
+      resolveTeacherLocation("/en/assignments"),
     ).toEqual({
       kind: "assignments",
       locale: "en",
     });
-  });
 
-  it("owns localized assignment creation", () => {
     expect(
-      resolveTeacherLocation(
-        "/es/assignments/new",
-      ),
+      resolveTeacherLocation("/es/assignments/new"),
     ).toEqual({
       kind: "assignment-new",
       locale: "es",
     });
-  });
 
-  it("owns localized assignment editing", () => {
     expect(
-      resolveTeacherLocation(
-        "/fr/assignments/assignment-1",
-      ),
+      resolveTeacherLocation("/fr/assignments/assignment-1"),
     ).toEqual({
       kind: "assignment-detail",
       locale: "fr",
-      assignmentId:
-        "assignment-1",
+      assignmentId: "assignment-1",
     });
   });
 
-  it("preserves tutoring for every other Teacher path", () => {
-    for (const path of [
-      "/",
-      "/en",
-      "/en/tutoring",
-      "/es/schedule",
-    ]) {
-      expect(
-        resolveTeacherLocation(path).kind,
-      ).toBe("tutoring");
-    }
-  });
-
-  it("resolves localized school reports inside Teacher", () => {
+  it("keeps reports reachable inside the class area", () => {
     expect(
-      resolveTeacherLocation(
-        "/fr/reports",
-        "en",
-      ),
+      resolveTeacherLocation("/fr/reports", "en"),
     ).toEqual({
       kind: "reports",
       locale: "fr",
     });
   });
 
+  it("owns Institution and preserves the legacy School alias", () => {
+    expect(
+      resolveTeacherLocation("/ht/institution", "en"),
+    ).toEqual({ kind: "school", locale: "ht" });
 
-  it("resolves localized School administration inside Teacher", () => {
-    expect(resolveTeacherLocation("/ht/school", "en")).toEqual({ kind: "school", locale: "ht" });
+    expect(
+      resolveTeacherLocation("/ht/school", "en"),
+    ).toEqual({ kind: "school", locale: "ht" });
   });
 
+  it("falls unknown Teacher paths back to home instead of tutoring", () => {
+    expect(resolveTeacherLocation("/es/unknown").kind).toBe("home");
+  });
 });

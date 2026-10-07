@@ -4,6 +4,21 @@ import { describe, expect, it, vi } from "vitest";
 
 import IdeDesktopLayout from "./IdeDesktopLayout";
 
+vi.mock("@zoeskoul/learner-workspace/runtime/appRuntime", async (importOriginal) => {
+    const actual =
+        await importOriginal<
+            typeof import("@zoeskoul/learner-workspace/runtime/appRuntime")
+        >();
+
+    return {
+        ...actual,
+        useLearnerWorkspaceTranslations:
+            () =>
+            (key: string) =>
+                key === "openFileExplorer" ? "Open file explorer" : key,
+    };
+});
+
 vi.mock("next-intl", () => ({
     useTranslations: () => (key: string) =>
         key === "openFileExplorer" ? "Open file explorer" : key,

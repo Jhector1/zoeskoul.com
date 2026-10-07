@@ -666,3 +666,19 @@ export function requestAppPreferencesUpdate(
     new CustomEvent(APP_PREFERENCES_EVENT, { detail: patch }),
   );
 }
+
+/**
+ * Persist a user-selected application locale across legacy browser storage,
+ * the Next locale cookie, and the shared preference event channel.
+ */
+export function persistLocale(nextLocale: string) {
+  const locale = normalizeLocale(nextLocale);
+  try {
+    localStorage.setItem(LEGACY_PREFERENCE_KEYS.locale, locale);
+  } catch {
+    // Browser storage can be unavailable; the cookie/event path still persists the locale.
+  }
+  document.cookie =
+    `NEXT_LOCALE=${locale}; Path=/; Max-Age=31536000; SameSite=Lax`;
+  requestAppPreferencesUpdate({ locale });
+}

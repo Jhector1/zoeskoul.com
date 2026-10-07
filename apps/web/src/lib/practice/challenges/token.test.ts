@@ -37,10 +37,20 @@ describe("shared practice challenge tokens", () => {
 
   it("rejects a modified token", () => {
     const token = signSharedChallenge(target);
-    const replacement = token.endsWith("a") ? "b" : "a";
-    const modified = `${token.slice(0, -1)}${replacement}`;
+            const separatorIndex = token.lastIndexOf(".");
+            expect(separatorIndex).toBeGreaterThanOrEqual(0);
 
-    expect(verifySharedChallenge(modified)).toBeNull();
+            const signatureStart = separatorIndex + 1;
+            const currentSignatureChar = token[signatureStart];
+            expect(currentSignatureChar).toBeTruthy();
+
+            const replacement = currentSignatureChar === "a" ? "b" : "a";
+            const modified =
+                token.slice(0, signatureStart) +
+                replacement +
+                token.slice(signatureStart + 1);
+
+            expect(verifySharedChallenge(modified)).toBeNull();
   });
 
   it("rejects an expired token", () => {

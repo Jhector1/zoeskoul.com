@@ -6,11 +6,10 @@
       "navLabel": "Navigation enseignant",
       "mainSite": "Site principal",
       "nav": {
-        "tutoring": "Tutorat",
+        "home": "Accueil",
         "classes": "Classes",
-        "assignments": "Devoirs",
-        "reports": "Rapports",
-        "school": "École"
+        "tutoring": "Tutorat",
+        "institution": "Établissement"
       }
     }
   }

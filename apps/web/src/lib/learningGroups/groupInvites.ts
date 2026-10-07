@@ -205,6 +205,14 @@ export async function acceptLearningGroupInvite(
     };
   }
 
+  if (invite.group.status !== "open") {
+    return {
+      ok: false as const,
+      reason: "class_inactive" as const,
+      group: invite.group,
+    };
+  }
+
   const [accountEmail] = normalizeEmails([args.userEmail ?? ""]);
   if (!accountEmail || accountEmail !== invite.email) {
     return {

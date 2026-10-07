@@ -16,6 +16,59 @@ import CodeRunner, {
     shouldOpenEditorForWorkspaceFileSelection,
 } from "@/components/code/runner/CodeRunner";
 
+// V265N1A: isolate canonical preferences theme hook for CodeRunner presentation tests
+vi.mock("@zoeskoul/preferences/react", async (importOriginal) => {
+    const actual =
+        await importOriginal<typeof import("@zoeskoul/preferences/react")>();
+
+    return {
+        ...actual,
+        useResolvedAppTheme: () => "dark",
+    };
+});
+
+vi.mock("@/components/ide/fullide/appAdapter", async () => {
+    const ReactModule = await import("react");
+    const runtimeModule = await import(
+        "@zoeskoul/learner-workspace/runtime/appRuntime"
+    );
+
+    runtimeModule.setLearnerWorkspaceStaticConfig({
+        appName: "test",
+        nodeEnv: "test",
+        env: {},
+    });
+
+    const runtime = {
+        useTranslations:
+            () =>
+            (key: string) =>
+                key,
+        useAuthenticatedUserId: () => "test-user",
+        useRouter: () => ({
+            push: () => undefined,
+            replace: () => undefined,
+            back: () => undefined,
+            refresh: () => undefined,
+        }),
+        Link: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) =>
+            ReactModule.createElement("a", props, props.children),
+        SettingsMenu: () => null,
+    };
+
+    return {
+        LearnerWorkspaceAppRuntimeProvider: ({
+            children,
+        }: {
+            children: React.ReactNode;
+        }) =>
+            ReactModule.createElement(
+                runtimeModule.LearnerWorkspaceRuntimeProvider,
+                { runtime, children },
+            ),
+    };
+});
+
 vi.mock("next-intl", () => ({
     useTranslations: () => (key: string) => key,
 }));
@@ -389,7 +442,7 @@ describe("CodeRunner runner-pane defaults", () => {
             />,
         );
 
-        expect(html).toContain('data-testid="mock-xterm-terminal"');
+        expect(html).toContain('data-testid="interactive-terminal"');
         expect(html).not.toContain('data-testid="mock-output-surface"');
     });
 });
@@ -511,10 +564,10 @@ describe("CodeRunner terminal-only mode", () => {
         );
 
         expect(html).toContain('data-testid="output-pane"');
-        expect(html).toContain('data-testid="mock-xterm-terminal"');
+        expect(html).toContain('data-testid="interactive-terminal"');
         expect(html).not.toContain('data-testid="mock-output-surface"');
         expect(html).not.toContain('data-testid="editor-pane"');
-        expect(html).not.toContain('data-testid="mock-editor-pane"');
+        expect(html).not.toContain('data-testid="editor-pane"');
         expect(html).toContain('aria-pressed="true"');
         expect(html).toContain(">Terminal 1<");
         expect(html).not.toContain(">Output<");
@@ -551,9 +604,9 @@ describe("CodeRunner terminal-only mode", () => {
             />,
         );
 
-        expect(first).toContain('data-testid="mock-xterm-terminal"');
+        expect(first).toContain('data-testid="interactive-terminal"');
         expect(first).not.toContain('data-testid="mock-output-surface"');
-        expect(second).toContain('data-testid="mock-xterm-terminal"');
+        expect(second).toContain('data-testid="interactive-terminal"');
         expect(second).not.toContain('data-testid="mock-output-surface"');
     });
 
@@ -678,8 +731,7 @@ describe("CodeRunner terminal-only mode", () => {
         );
 
         expect(html).toContain('data-testid="editor-pane"');
-        expect(html).toContain('data-testid="mock-editor-pane"');
-        expect(html).not.toContain('data-testid="mock-xterm-terminal"');
+        expect(html).not.toContain('data-testid="interactive-terminal"');
     });
 });
 

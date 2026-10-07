@@ -2,23 +2,23 @@
   "Teacher": {
     "assignments": {
       "kicker": "Ansèyman",
-      "title": "Kou yo bay",
-      "subtitle": "Bay klas oswa elèv endividyèl kou ZoeSkoul ki deja egziste san kreye yon lòt kopi kou a.",
+      "title": "Travay",
+      "subtitle": "Bay klas oswa elèv endividyèl kontni kou yo ka itilize ankò. Chak travay kontwole moun k ap resevwa li, dat yo ak aksè.",
       "classes": "Klas",
       "newAssignment": "Nouvo travay",
-      "loading": "N ap chaje kou yo bay yo…",
+      "loading": "N ap chaje travay yo…",
       "loadingEditor": "N ap chaje editè travay la…",
-      "empty": "Pa gen kou prive yo bay pou kounye a.",
+      "empty": "Pa gen travay pou kounye a.",
       "errors": {
-        "load": "Nou pa t kapab chaje kou yo bay yo.",
+        "load": "Nou pa t kapab chaje travay yo.",
         "loadEditor": "Nou pa t kapab chaje editè travay la.",
-        "save": "Nou pa t kapab anrejistre kou yo bay la.",
-        "delete": "Nou pa t kapab efase kou yo bay la.",
+        "save": "Nou pa t kapab anrejistre travay la.",
+        "delete": "Nou pa t kapab efase travay la.",
         "forbidden": "Kont ou a pa gen pèmisyon pou jere travay sa a.",
-        "notFound": "Nou pa t kapab jwenn kou yo bay sa a."
+        "notFound": "Nou pa t kapab jwenn travay sa a."
       },
       "notices": {
-        "saved": "Kou yo bay la anrejistre.",
+        "saved": "Travay la anrejistre.",
         "savedOnePending": "Anrejistre. Yon elèv ap tann yon envitasyon pou kont.",
         "savedManyPending": "Anrejistre. {count} elèv ap tann envitasyon pou kont."
       },
@@ -50,16 +50,16 @@
         "always": "Toujou"
       },
       "editor": {
-        "newTitle": "Bay yon kou prive",
-        "editTitle": "Modifye kou yo bay la",
-        "accessNote": "Travay la bay aksè ak kou sa a. Elèv yo pa bezwen yon abònman pèsonèl pou kontni yo ba yo.",
+        "newTitle": "Kreye travay",
+        "editTitle": "Modifye travay",
+        "accessNote": "Bay klas oswa elèv endividyèl kontni yon kou. Travay la bay aksè, kidonk elèv yo pa bezwen yon abònman pèsonèl pou kontni yo ba yo a.",
         "delete": "Efase",
         "saving": "N ap anrejistre…",
         "save": "Anrejistre",
-        "deleteConfirm": "Efase kou yo bay sa a?",
+        "deleteConfirm": "Efase travay sa a?",
         "content": "Kontni",
         "course": "Kou",
-        "courseAccess": "Vizibilite: {visibility}. Travay la menm se otorizasyon aksè elèv la.",
+        "courseAccess": "Vizibilite kou a: {visibility}. Travay sa a bay elèv aksè ak kontni kou ou chwazi a.",
         "assignmentTitle": "Tit travay la",
         "slug": "Idantifyan",
         "instructions": "Enstriksyon pou elèv",
@@ -69,12 +69,17 @@
         "due": "Dat limit",
         "solutionVisibility": "Vizibilite solisyon ofisyèl la",
         "audience": "Moun k ap resevwa",
-        "studentEmails": "Imèl elèv endividyèl",
+        "studentEmails": "Elèv endividyèl",
         "emailPlaceholder": "elev@egzanp.com\nyonlot@egzanp.com",
-        "emailHint": "Kont ki deja egziste yo jwenn travay la touswit. Imèl ki pa gen kont vin envitasyon k ap tann ke ou ka kopye oswa voye.",
-        "groups": "Klas",
+        "emailHint": "Antre imèl elèv yo, youn sou chak liy. Kont ki deja egziste jwenn travay la touswit; lòt yo resevwa envitasyon k ap tann ou ka kopye oswa voye.",
+        "groups": "Klas (gwoup elèv)",
         "groupMembers": "({count} elèv)",
-        "noGroups": "Kreye yon klas anvan, oswa bay imèl endividyèl."
+        "noGroups": "Kreye yon klas anvan, oswa ajoute elèv endividyèl pa imèl.",
+        "audienceNote": "Chwazi klas yo ak/oswa elèv endividyèl ki dwe resevwa travay sa a.",
+        "summaryClassOne": "{count} klas",
+        "summaryClassMany": "{count} klas",
+        "summaryLearnerOne": "{count} elèv endividyèl",
+        "summaryLearnerMany": "{count} elèv endividyèl"
       },
       "invites": {
         "title": "Envitasyon kont k ap tann",

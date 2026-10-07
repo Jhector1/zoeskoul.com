@@ -2,36 +2,23 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
-import ReviewCourseModulesDrawer from "./ReviewCourseModulesDrawer";
+import ReviewCourseModulesDrawer, {
+    type ReviewCourseModulesDrawerLabels,
+} from "./ReviewCourseModulesDrawer";
 
-vi.mock("next-intl", () => ({
-    useTranslations: () => (key: string) => {
-        const messages: Record<string, string> = {
-            title: "Course modules",
-            kicker: "Course outline",
-            description: "Jump to another module without leaving your lesson workspace.",
-            current: "Current",
-            locked: "Locked",
-            currentDescription: "You are working in this module.",
-            lockedDescription: "Open the access page for this module.",
-            openDescription: "Open this module.",
-            loading: "Loading course modules...",
-            error: "Course modules could not be loaded.",
-            empty: "No published modules are available yet.",
-        };
-
-        return messages[key] ?? key;
-    },
-}));
-
-vi.mock("./MobileDrawer", () => ({
-    default: ({ open, title, children }: any) =>
-        open ? (
-            <aside aria-label={title} data-testid="mobile-drawer-shell">
-                {children}
-            </aside>
-        ) : null,
-}));
+const labels: ReviewCourseModulesDrawerLabels = {
+    title: "Course modules",
+    kicker: "Course outline",
+    description: "Jump to another module without leaving your lesson workspace.",
+    current: "Current",
+    locked: "Locked",
+    currentDescription: "You are working in this module.",
+    lockedDescription: "Open the access page for this module.",
+    openDescription: "Open this module.",
+    loading: "Loading course modules...",
+    error: "Course modules could not be loaded.",
+    empty: "No published modules are available yet.",
+};
 
 const modules = [
     {
@@ -66,18 +53,19 @@ const modules = [
     },
 ];
 
-describe("ReviewCourseModulesDrawer", () => {
+describe("shared ReviewCourseModulesDrawer", () => {
     it("shows the complete course outline with current and locked states", () => {
         const html = renderToStaticMarkup(
-            <ReviewCourseModulesDrawer
-                open
-                reduceMotion
-                onClose={vi.fn()}
-                modules={modules}
-                loading={false}
-                error={false}
-                onSelectModule={vi.fn()}
-            />,
+            React.createElement(ReviewCourseModulesDrawer, {
+                open: true,
+                reduceMotion: true,
+                onClose: vi.fn(),
+                modules,
+                loading: false,
+                error: false,
+                onSelectModule: vi.fn(),
+                labels,
+            }),
         );
 
         expect(html).toContain('data-testid="review-course-modules-drawer"');
@@ -97,15 +85,16 @@ describe("ReviewCourseModulesDrawer", () => {
 
     it("renders a loading state before module access resolves", () => {
         const html = renderToStaticMarkup(
-            <ReviewCourseModulesDrawer
-                open
-                reduceMotion
-                onClose={vi.fn()}
-                modules={[]}
-                loading
-                error={false}
-                onSelectModule={vi.fn()}
-            />,
+            React.createElement(ReviewCourseModulesDrawer, {
+                open: true,
+                reduceMotion: true,
+                onClose: vi.fn(),
+                modules: [],
+                loading: true,
+                error: false,
+                onSelectModule: vi.fn(),
+                labels,
+            }),
         );
 
         expect(html).toContain("Loading course modules...");

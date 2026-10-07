@@ -41,6 +41,8 @@ export type TeacherTutoringRequest = {
   scheduledAt: string | null;
   createdAt: string;
   updatedAt: string;
+  completedAt?: string | null;
+  canceledAt?: string | null;
   learner: {
     id: string;
     name: string | null;
@@ -57,6 +59,7 @@ export type TeacherTutoringOverview = {
   pool: TeacherPoolMembership;
   availability: TeacherAvailability;
   requests: TeacherTutoringRequest[];
+  history: TeacherTutoringRequest[];
 };
 
 type ErrorPayload = {
@@ -147,6 +150,7 @@ export async function loadTeacherTutoringOverview(
   const queue = await requireJson<{
     pool: TeacherPoolMembership;
     requests: TeacherTutoringRequest[];
+    history?: TeacherTutoringRequest[];
   }>(queueResponse);
   const availabilityPayload = await requireJson<{
     availability: TeacherAvailability;
@@ -156,6 +160,7 @@ export async function loadTeacherTutoringOverview(
     pool: queue.pool,
     availability: availabilityPayload.availability,
     requests: queue.requests,
+    history: queue.history ?? [],
   };
 }
 

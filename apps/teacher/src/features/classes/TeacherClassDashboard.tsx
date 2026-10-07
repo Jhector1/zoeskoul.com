@@ -23,8 +23,19 @@ export function TeacherClassDashboard(props: {
   apiOrigin: string;
   locale: string;
   classId: string;
+  classStatus: "draft" | "open" | "closed";
+  view?: "overview" | "assignments" | "gradebook";
+  embedded?: boolean;
 }) {
   const t = useTranslations("Teacher.classes");
+  const view = props.view ?? "overview";
+  const dashboardTitle =
+    view === "assignments"
+      ? t("dashboard.sections.assignments")
+      : view === "gradebook"
+        ? t("dashboard.sections.gradebook")
+        : t("dashboard.title");
+
   const client = useMemo(
     () =>
       createTeacherClassesClient({
@@ -46,7 +57,10 @@ export function TeacherClassDashboard(props: {
     setError(false);
 
     void client
-      .getDashboard(props.classId)
+      .getDashboard(
+        props.classId,
+        props.locale,
+      )
       .then(({ dashboard }) => {
         if (!cancelled) {
           setData(dashboard);
@@ -82,7 +96,7 @@ export function TeacherClassDashboard(props: {
 
   if (loading) {
     return (
-      <section className="mx-auto max-w-6xl px-6 pt-6">
+      <section className={props.embedded ? "" : "mx-auto max-w-6xl px-6 pt-6"}>
         <div className="ui-surface rounded-xl p-5 text-sm">
           {t("dashboard.loading")}
         </div>
@@ -92,7 +106,7 @@ export function TeacherClassDashboard(props: {
 
   if (error || !data) {
     return (
-      <section className="mx-auto max-w-6xl px-6 pt-6">
+      <section className={props.embedded ? "" : "mx-auto max-w-6xl px-6 pt-6"}>
         <div className="rounded-xl border border-red-200 bg-red-50 p-5 text-sm text-red-800">
           {t("dashboard.errors.load")}
         </div>
@@ -101,28 +115,20 @@ export function TeacherClassDashboard(props: {
   }
 
   return (
-    <section className="mx-auto max-w-6xl px-6 pt-6">
+    <section className={props.embedded ? "" : "mx-auto max-w-6xl px-6 pt-6"}>
       <div className="mb-5">
         <div className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
           {t("dashboard.kicker")}
         </div>
         <h2 className="mt-1 text-2xl font-semibold">
-          {t("dashboard.title")}
+          {dashboardTitle}
         </h2>
         <p className="mt-1 text-sm text-neutral-500">
           {t("dashboard.subtitle")}
         </p>
       </div>
 
-      <div className="mb-6">
-        <TeacherAnnouncementsPanel
-          apiOrigin={props.apiOrigin}
-          locale={props.locale}
-          scope="class"
-          targetId={props.classId}
-          canPublish
-        />
-      </div>
+
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {[
@@ -160,6 +166,38 @@ export function TeacherClassDashboard(props: {
           </div>
         ))}
       </div>
+
+      {view === "overview" ? (
+        <details className="ui-surface mb-6 rounded-xl p-4">
+          <summary className="cursor-pointer list-none">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <div className="text-sm font-semibold text-neutral-900 dark:text-white">
+                  {t("dashboard.sections.announcements")}
+                </div>
+                <div className="mt-1 text-xs text-neutral-500 dark:text-white/55">
+                  {t("dashboard.announcementsHint")}
+                </div>
+              </div>
+              <span className="text-xs font-medium text-neutral-500">
+                +
+              </span>
+            </div>
+          </summary>
+          <div className="mt-4 border-t ui-border-soft pt-4">
+            <TeacherAnnouncementsPanel
+              apiOrigin={props.apiOrigin}
+              locale={props.locale}
+              scope="class"
+              targetId={props.classId}
+              canPublish={props.classStatus === "open"}
+            />
+          </div>
+        </details>
+      ) : null}
+
+      {view === "assignments" ? (
+
 
       <div className="mt-6">
         <h3 className="text-base font-semibold">
@@ -202,8 +240,10 @@ export function TeacherClassDashboard(props: {
           </div>
         )}
       </div>
+) : null}
 
-      <div className="mt-6">
+      {view === "gradebook" ? (
+<div className="mt-6">
         <h3 className="text-base font-semibold">
           {t("dashboard.sections.gradebook")}
         </h3>
@@ -219,7 +259,7 @@ export function TeacherClassDashboard(props: {
         ) : (
           <div className="ui-surface mt-3 overflow-x-auto rounded-xl">
             <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="border-b border-neutral-200 text-xs text-neutral-500">
+              <thead className="border-b ui-border-soft text-xs text-[rgb(var(--ui-text-muted)/0.82)]">
                 <tr>
                   <th className="px-4 py-3 font-medium">
                     {t("dashboard.columns.student")}
@@ -241,7 +281,7 @@ export function TeacherClassDashboard(props: {
                 {data.students.map((student) => (
                   <tr
                     key={student.userId}
-                    className="border-b border-neutral-100 last:border-0"
+                    className="border-b ui-border-soft last:border-0"
                   >
                     <td className="px-4 py-3 align-top">
                       <div className="font-medium">
@@ -319,6 +359,7 @@ export function TeacherClassDashboard(props: {
           </div>
         )}
       </div>
+) : null}
     </section>
   );
 }

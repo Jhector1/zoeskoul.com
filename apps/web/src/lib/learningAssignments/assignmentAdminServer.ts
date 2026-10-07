@@ -2,9 +2,7 @@ import "server-only";
 
 import type { PrismaClient } from "@/lib/prisma";
 import type { TeachingUser } from "@/lib/teaching/teachingAccess";
-import {
-  ownedTeachingRecordWhere,
-} from "@/lib/teaching/teachingAccess";
+import { learningGroupWhereForTeachingUser } from "@/lib/teaching/classAccess";
 import {
   normalizeEmails,
   resolveUsersByEmail,
@@ -39,6 +37,7 @@ export async function resolveLearningAssignmentWrite(
   args: {
     teachingUser: TeachingUser;
     input: LearningAssignmentInput;
+    allowedInactiveGroupIds?: readonly string[];
   },
 ): Promise<LearningAssignmentWriteResolution> {
   const recipientEmails =
@@ -64,9 +63,15 @@ export async function resolveLearningAssignmentWrite(
               id: {
                 in: args.input.groupIds,
               },
-              ...ownedTeachingRecordWhere(
+              ...learningGroupWhereForTeachingUser(
                 args.teachingUser,
               ),
+              OR: [
+                { status: "open" },
+                ...(args.allowedInactiveGroupIds?.length
+                  ? [{ id: { in: [...args.allowedInactiveGroupIds] } }]
+                  : []),
+              ],
             },
             select: {
               id: true,

@@ -1,5 +1,12 @@
 // src/lib/flow/excuse.ts
-import type { QItem } from "@zoeskoul/practice-contracts";
+export type ExcusablePracticeItem = {
+    result?: unknown;
+    submitted?: boolean;
+    revealed?: boolean;
+    excused?: boolean;
+    excusedAt?: number;
+    excusedReason?: string | null;
+};
 
 /** Quiz-style map value (supports boolean for back-compat) */
 export type ExcuseMeta = { at: number; reason?: string | null };
@@ -45,7 +52,7 @@ export function unexcuseId(prev: ExcusedById, id: string): ExcusedById {
 /* Practice-style (QItem) excusing                                     */
 /* ------------------------------------------------------------------ */
 
-export function isExcusedPracticeItem(q: QItem | null | undefined) {
+export function isExcusedPracticeItem(q: ExcusablePracticeItem | null | undefined) {
     return Boolean((q as any)?.excused);
 }
 
@@ -53,7 +60,7 @@ export function isExcusedPracticeItem(q: QItem | null | undefined) {
  * Mark a practice item as finalized so navigation can continue.
  * Pure client-side: does not require server changes.
  */
-export function excusePracticeItem<T extends QItem>(q: T, reason?: string | null): T {
+export function excusePracticeItem<T extends ExcusablePracticeItem>(q: T, reason?: string | null): T {
     const now = Date.now();
     const prevResult: any = (q as any).result;
 

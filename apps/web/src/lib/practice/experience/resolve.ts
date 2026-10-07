@@ -22,6 +22,37 @@ function readMetaKind(meta: unknown): string | null {
   return typeof kind === "string" ? kind : null;
 }
 
+function hasLegacySharedChallengeMeta(meta: unknown): boolean {
+  if (!meta || typeof meta !== "object" || Array.isArray(meta)) return false;
+
+  const record = meta as Record<string, unknown>;
+  const requiredStrings = [
+    "challengeId",
+    "subjectSlug",
+    "moduleSlug",
+    "sectionSlug",
+    "topicSlug",
+    "exerciseKey",
+    "exerciseTitle",
+    "exercisePurpose",
+    "locale",
+  ] as const;
+
+  return (
+    record.kind === "shared_challenge" &&
+    requiredStrings.every(
+      (key) => typeof record[key] === "string" && String(record[key]).trim().length > 0,
+    ) &&
+    typeof record.maxAttempts === "number" &&
+    Number.isInteger(record.maxAttempts) &&
+    record.maxAttempts > 0
+  );
+}
+
+function hasReadablePublicChallengeMeta(meta: unknown): boolean {
+  return Boolean(readSharedChallengeMeta(meta)) || hasLegacySharedChallengeMeta(meta);
+}
+
 /**
  * Resolve the product experience from an explicit database mode.
  *
@@ -37,7 +68,7 @@ export function resolvePracticeExperienceMode(
 
   if (session.assignmentId) return "assignment";
 
-  if (readSharedChallengeMeta(session.meta)) {
+  if (hasReadablePublicChallengeMeta(session.meta)) {
     return "public_challenge";
   }
 
@@ -66,7 +97,7 @@ export function assertPracticeExperienceInvariant(
     throw error;
   }
 
-  if (mode === "public_challenge" && !readSharedChallengeMeta(session.meta)) {
+  if (mode === "public_challenge" && !hasReadablePublicChallengeMeta(session.meta)) {
     const error = new Error("Public challenge session is missing challenge metadata.");
     (error as any).status = 500;
     (error as any).code = "INVALID_PUBLIC_CHALLENGE_SESSION";

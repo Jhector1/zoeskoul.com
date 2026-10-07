@@ -24,7 +24,7 @@
     "start": "next start --port 3000",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "bash ./scripts/test-with-monorepo-view.sh",
     "test:watch": "vitest",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
@@ -144,6 +144,7 @@
     "prisma": "latest",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }

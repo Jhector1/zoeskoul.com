@@ -33,8 +33,8 @@ export function HeaderChrome({
     <header className="sticky top-0 z-50">
       <div
         className={cn(
-          "border-b border-neutral-200/80 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-neutral-950/85",
-          elevated && "shadow-sm",
+          "border-b border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface)/0.90)] backdrop-blur",
+          elevated && "shadow-[var(--ui-shadow-soft)]",
         )}
       >
         <div className="mx-auto px-4 md:px-6">

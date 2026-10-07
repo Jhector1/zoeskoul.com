@@ -14,7 +14,9 @@
       },
       "actions": {
         "publish": "Pibliye anons",
-        "publishing": "Ap pibliye…"
+        "publishing": "Ap pibliye…",
+        "openComposer": "Nouvo anons",
+        "cancelComposer": "Anile"
       },
       "loading": "Ap chaje anons yo…",
       "empty": "Pa gen anons pou kounye a.",

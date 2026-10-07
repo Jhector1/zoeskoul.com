@@ -118,9 +118,7 @@ describe("ReviewSkeletonSwap lightweight navigation", () => {
             holdContent: false,
         });
 
-        expect(html).toContain(
-            'data-testid="initial-review-skeleton"',
-        );
+        expect(html).toContain("ui-skel");
         expect(html).not.toContain(
             'data-testid="review-content"',
         );
