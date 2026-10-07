@@ -34,6 +34,12 @@ import {
 import {
   resolvePublicChallengeSocialDescription,
 } from "@/lib/marketing/publicChallengeSocialCopy";
+import {
+  getPublicChallengeAudienceList,
+  listPublicChallengeAudienceLists,
+  publicChallengeBrevoConfigured,
+  sendPublicChallengeCampaignNow,
+} from "@/lib/marketing/publicChallengeCampaign";
 
 import { ensurePublicChallengeSocialImage } from "@/lib/practice/challenges/socialCard";
 
@@ -55,6 +61,8 @@ type AutomationRow = {
   instagramEnabled: boolean;
   linkedinEnabled: boolean;
   xEnabled: boolean;
+  emailEnabled: boolean;
+  emailListId: number | null;
 };
 
 function rowProviders(row: AutomationRow): PublicChallengeSocialProvider[] {
@@ -78,6 +86,8 @@ function rowSettings(
     localTime: row.localTime,
     timezone: row.timezone,
     providers: rowProviders(row),
+    emailEnabled: row.emailEnabled,
+    emailListId: row.emailListId,
   };
 }
 
@@ -155,9 +165,13 @@ export async function updatePublicChallengeSocialAutomationSettings(
   }
 
   const uniqueProviders = [...new Set(input.providers)];
-  if (!uniqueProviders.length && input.enabled) {
+  if (
+    !uniqueProviders.length &&
+    !input.emailEnabled &&
+    input.enabled
+  ) {
     throw new Error(
-      "Choose at least one social provider before enabling automation.",
+      "Choose at least one social provider or enable Brevo email before enabling automation.",
     );
   }
 
@@ -175,6 +189,20 @@ export async function updatePublicChallengeSocialAutomationSettings(
       `Configure ${unavailable.join(", ")} before enabling daily posting.`,
     );
   }
+  if (input.enabled && input.emailEnabled) {
+    if (!publicChallengeBrevoConfigured()) {
+      throw new Error(
+        "Configure Brevo before enabling automatic challenge email.",
+      );
+    }
+    if (!input.emailListId) {
+      throw new Error(
+        "Choose a Brevo audience list before enabling automatic challenge email.",
+      );
+    }
+    await getPublicChallengeAudienceList(input.emailListId);
+  }
+
   if (input.enabled && !publicChallengeSocialSchedulerConfigured()) {
     throw new Error(
       "The production social scheduler secret is not configured.",
@@ -190,6 +218,8 @@ export async function updatePublicChallengeSocialAutomationSettings(
       localTime: input.localTime,
       timezone: input.timezone,
       ...providerFlags(uniqueProviders),
+      emailEnabled: input.emailEnabled,
+      emailListId: input.emailEnabled ? input.emailListId : null,
     },
     update: {
       enabled: input.enabled,
@@ -197,6 +227,8 @@ export async function updatePublicChallengeSocialAutomationSettings(
       localTime: input.localTime,
       timezone: input.timezone,
       ...providerFlags(uniqueProviders),
+      emailEnabled: input.emailEnabled,
+      emailListId: input.emailEnabled ? input.emailListId : null,
     },
   });
 
@@ -461,16 +493,76 @@ export async function publishActiveChallengeToSocial(args: {
   });
 }
 
-export async function getNextDailyPublicChallengeLink(
-  locale: PublicChallengeLocale,
+type DailyExerciseHistoryItem = {
+  dispatchDate: string;
+  createdAt: Date;
+  challenge: {
+    subjectSlug: string;
+    moduleSlug: string;
+    sectionSlug: string;
+    topicSlug: string;
+    exerciseKey: string;
+  };
+};
+
+function chooseNextSubjectRotatedOption(
+  options: Awaited<ReturnType<typeof listPublishedChallengeExerciseOptions>>,
+  history: DailyExerciseHistoryItem[],
 ) {
-  const previouslyPublished =
-    await prisma.publicChallengeSocialPost.findMany({
-      where: {
-        source: "daily",
-        status: "published",
-      },
+  const usedExerciseIds = new Set(
+    history.map(({ challenge }) =>
+      publicChallengeExerciseIdentity(challenge),
+    ),
+  );
+  const remaining = options.filter(
+    (option) =>
+      !usedExerciseIds.has(
+        publicChallengeExerciseIdentity(option),
+      ),
+  );
+  if (!remaining.length) return null;
+
+  const subjectOrder = Array.from(
+    new Set(options.map((option) => option.subjectSlug)),
+  );
+  if (!subjectOrder.length) return remaining[0] ?? null;
+
+  const orderedHistory = [...history].sort(
+    (left, right) =>
+      left.dispatchDate.localeCompare(right.dispatchDate) ||
+      left.createdAt.getTime() - right.createdAt.getTime(),
+  );
+  const lastSubjectSlug =
+    orderedHistory.at(-1)?.challenge.subjectSlug ?? null;
+  const lastIndex = lastSubjectSlug
+    ? subjectOrder.indexOf(lastSubjectSlug)
+    : -1;
+  const startIndex =
+    lastIndex >= 0 ? (lastIndex + 1) % subjectOrder.length : 0;
+
+  for (let offset = 0; offset < subjectOrder.length; offset += 1) {
+    const subjectSlug =
+      subjectOrder[
+        (startIndex + offset) % subjectOrder.length
+      ];
+    const candidate = remaining.find(
+      (option) => option.subjectSlug === subjectSlug,
+    );
+    if (candidate) return candidate;
+  }
+
+  return remaining[0] ?? null;
+}
+
+async function getDailyExerciseHistory(): Promise<
+  DailyExerciseHistoryItem[]
+> {
+  const [dispatches, legacyPublishedPosts] = await Promise.all([
+    prisma.publicChallengeDailyDispatch.findMany({
+      orderBy: [{ dispatchDate: "asc" }, { createdAt: "asc" }],
       select: {
+        dispatchDate: true,
+        createdAt: true,
         challenge: {
           select: {
             subjectSlug: true,
@@ -481,23 +573,57 @@ export async function getNextDailyPublicChallengeLink(
           },
         },
       },
-    });
+    }),
+    prisma.publicChallengeSocialPost.findMany({
+      where: {
+        source: "daily",
+        status: "published",
+      },
+      orderBy: [{ dispatchDate: "asc" }, { createdAt: "asc" }],
+      select: {
+        dispatchDate: true,
+        createdAt: true,
+        challenge: {
+          select: {
+            subjectSlug: true,
+            moduleSlug: true,
+            sectionSlug: true,
+            topicSlug: true,
+            exerciseKey: true,
+          },
+        },
+      },
+    }),
+  ]);
 
-  const usedExerciseIds = new Set(
-    previouslyPublished.map(({ challenge }) =>
-      publicChallengeExerciseIdentity(challenge),
-    ),
+  const byDispatchAndExercise = new Map<
+    string,
+    DailyExerciseHistoryItem
+  >();
+
+  for (const item of [...legacyPublishedPosts, ...dispatches]) {
+    const key = [
+      item.dispatchDate,
+      publicChallengeExerciseIdentity(item.challenge),
+    ].join("::");
+    byDispatchAndExercise.set(key, item);
+  }
+
+  return [...byDispatchAndExercise.values()];
+}
+
+export async function getNextDailyPublicChallengeLink(
+  locale: PublicChallengeLocale,
+) {
+  const [history, options] = await Promise.all([
+    getDailyExerciseHistory(),
+    listPublishedChallengeExerciseOptions(),
+  ]);
+
+  const candidate = chooseNextSubjectRotatedOption(
+    options,
+    history,
   );
-
-  const options =
-    await listPublishedChallengeExerciseOptions();
-  const candidate = options.find(
-    (option) =>
-      !usedExerciseIds.has(
-        publicChallengeExerciseIdentity(option),
-      ),
-  );
-
   if (!candidate) return null;
 
   return createOrReuseAutomatedPracticeChallenge({
@@ -511,6 +637,15 @@ export async function getDailyPublicChallengeForDispatch(
   dispatchDate: string,
 ) {
   const existingDispatch =
+    await prisma.publicChallengeDailyDispatch.findUnique({
+      where: { dispatchDate },
+      include: { challenge: true },
+    });
+  if (existingDispatch) {
+    return existingDispatch.challenge;
+  }
+
+  const legacyDispatch =
     await prisma.publicChallengeSocialPost.findFirst({
       where: {
         source: "daily",
@@ -524,18 +659,179 @@ export async function getDailyPublicChallengeForDispatch(
       },
     });
 
-  if (existingDispatch) {
-    return existingDispatch.challenge;
+  if (legacyDispatch) {
+    const claimed =
+      await prisma.publicChallengeDailyDispatch.upsert({
+        where: { dispatchDate },
+        create: {
+          dispatchDate,
+          locale: legacyDispatch.challenge.locale,
+          subjectSlug: legacyDispatch.challenge.subjectSlug,
+          challengeId: legacyDispatch.challenge.id,
+        },
+        update: {},
+        include: { challenge: true },
+      });
+    return claimed.challenge;
   }
 
   const challenge =
     await getNextDailyPublicChallengeLink(locale);
-
   if (!challenge || challenge.locale !== locale) {
     return null;
   }
 
-  return challenge;
+  const claimed =
+    await prisma.publicChallengeDailyDispatch.upsert({
+      where: { dispatchDate },
+      create: {
+        dispatchDate,
+        locale,
+        subjectSlug: challenge.subjectSlug,
+        challengeId: challenge.id,
+      },
+      update: {},
+      include: { challenge: true },
+    });
+
+  return claimed.challenge;
+}
+
+type DailyEmailPublishResult = {
+  status: "sent" | "failed" | "skipped";
+  campaignId: number | null;
+  selectedCount: number | null;
+  error: string | null;
+};
+
+export async function publishDailyChallengeEmail(args: {
+  challenge: NonNullable<
+    Awaited<ReturnType<typeof getActivePracticeChallengeLink>>
+  >;
+  dispatchDate: string;
+  sourceListId: number;
+  now?: Date;
+}): Promise<DailyEmailPublishResult> {
+  const now = args.now ?? new Date();
+  const idempotencyKey =
+    `daily:${args.dispatchDate}:email:${args.sourceListId}`;
+
+  const existing =
+    await prisma.publicChallengeEmailDispatch.upsert({
+      where: { idempotencyKey },
+      create: {
+        challengeId: args.challenge.id,
+        dispatchDate: args.dispatchDate,
+        sourceListId: args.sourceListId,
+        status: "pending",
+        idempotencyKey,
+      },
+      update: {},
+    });
+
+  if (existing.status === "sent") {
+    return {
+      status: "skipped",
+      campaignId: existing.campaignId,
+      selectedCount: existing.selectedCount,
+      error: null,
+    };
+  }
+
+  if (existing.status === "sending") {
+    return {
+      status: "skipped",
+      campaignId: existing.campaignId,
+      selectedCount: existing.selectedCount,
+      error: "Email dispatch is already in progress.",
+    };
+  }
+
+  const claim =
+    await prisma.publicChallengeEmailDispatch.updateMany({
+      where: {
+        id: existing.id,
+        status: { in: ["pending", "failed"] },
+      },
+      data: {
+        status: "sending",
+        attemptCount: { increment: 1 },
+        lastError: null,
+      },
+    });
+
+  if (claim.count !== 1) {
+    return {
+      status: "skipped",
+      campaignId: existing.campaignId,
+      selectedCount: existing.selectedCount,
+      error: "Email dispatch was claimed by another worker.",
+    };
+  }
+
+  try {
+    const challengeWithImage =
+      await ensurePublicChallengeSocialImage(args.challenge);
+    const description =
+      await resolvePublicChallengeSocialDescription(
+        challengeWithImage,
+      );
+    const presentation = buildPublicChallengePresentation({
+      source: challengeWithImage,
+      fallbackTitle: challengeWithImage.exerciseKey,
+    });
+    const result = await sendPublicChallengeCampaignNow({
+      sourceListId: args.sourceListId,
+      excludedEmails: [],
+      challengeUrl: `${getProductionAppOrigin("website")}${practiceChallengePath(
+        challengeWithImage.code,
+      )}`,
+      imageUrl: presentation.imageUrl,
+      title: presentation.title,
+      description,
+    });
+
+    await prisma.publicChallengeEmailDispatch.update({
+      where: { id: existing.id },
+      data: {
+        status: "sent",
+        campaignId: result.campaignId,
+        selectedCount: result.selectedCount,
+        sentAt: now,
+        lastError: null,
+      },
+    });
+
+    return {
+      status: "sent",
+      campaignId: result.campaignId,
+      selectedCount: result.selectedCount,
+      error: null,
+    };
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? error.message.slice(0, 1_000)
+        : "Automatic Brevo challenge email failed.";
+
+    await prisma.publicChallengeEmailDispatch.updateMany({
+      where: {
+        id: existing.id,
+        status: "sending",
+      },
+      data: {
+        status: "failed",
+        lastError: message,
+      },
+    });
+
+    return {
+      status: "failed",
+      campaignId: null,
+      selectedCount: null,
+      error: message,
+    };
+  }
 }
 
 export async function runDailyPublicChallengeSocialTick(
@@ -554,8 +850,14 @@ export async function runDailyPublicChallengeSocialTick(
     return { ok: true as const, action: "not_due" as const };
   }
 
-  if (!settings.providers.length) {
-    return { ok: true as const, action: "no_providers" as const };
+  if (
+    !settings.providers.length &&
+    !settings.emailEnabled
+  ) {
+    return {
+      ok: true as const,
+      action: "no_channels" as const,
+    };
   }
 
   const clock = localClock(now, settings.timezone);
@@ -564,6 +866,7 @@ export async function runDailyPublicChallengeSocialTick(
       settings.locale,
       clock.date,
     );
+
   if (!challenge) {
     return {
       ok: true as const,
@@ -571,20 +874,62 @@ export async function runDailyPublicChallengeSocialTick(
     };
   }
 
+  const social = settings.providers.length
+    ? await publishChallengeToSocial({
+        challenge,
+        providers: settings.providers,
+        source: "daily",
+        dispatchDate: clock.date,
+        now,
+      })
+    : {
+        ok: true as const,
+        challengeCode: challenge.code,
+        results: [],
+      };
+
+  let email: DailyEmailPublishResult = {
+    status: "skipped",
+    campaignId: null,
+    selectedCount: null,
+    error: null,
+  };
+
+  if (settings.emailEnabled) {
+    if (!settings.emailListId) {
+      email = {
+        status: "failed",
+        campaignId: null,
+        selectedCount: null,
+        error:
+          "Automatic Brevo email is enabled without an audience list.",
+      };
+    } else {
+      const currentChallenge =
+        settings.providers.length
+          ? await prisma.practiceChallengeLink.findUniqueOrThrow({
+              where: { id: challenge.id },
+            })
+          : challenge;
+
+      email = await publishDailyChallengeEmail({
+        challenge: currentChallenge,
+        dispatchDate: clock.date,
+        sourceListId: settings.emailListId,
+        now,
+      });
+    }
+  }
+
   return {
     action: "processed" as const,
-    ...(await publishChallengeToSocial({
-      challenge,
-      providers: settings.providers,
-      source: "daily",
-      dispatchDate: clock.date,
-      now,
-    })),
+    ...social,
+    email,
   };
 }
 
 export async function getPublicChallengeSocialAdminState(): Promise<PublicChallengeSocialAdminResponse> {
-  const [automation, recentPosts] = await Promise.all([
+  const [automation, recentPosts, email] = await Promise.all([
     getPublicChallengeSocialAutomationSettings(),
     prisma.publicChallengeSocialPost.findMany({
       take: 12,
@@ -599,12 +944,19 @@ export async function getPublicChallengeSocialAdminState(): Promise<PublicChalle
         },
       },
     }),
+    listPublicChallengeAudienceLists().catch(() => ({
+      provider: "brevo" as const,
+      configured: false as const,
+      defaultListId: null,
+      lists: [],
+    })),
   ]);
 
   return {
     schedulerConfigured: publicChallengeSocialSchedulerConfigured(),
     providers: publicChallengeSocialProviderStatuses(),
     automation,
+    email,
     recentPosts: recentPosts.map((post) => ({
       id: post.id,
       provider: post.provider as PublicChallengeSocialProvider,

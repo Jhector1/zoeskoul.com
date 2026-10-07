@@ -458,16 +458,16 @@ model User {
 }
 
 model UserPreferences {
-  id           String   @id @default(cuid())
-  userId       String   @unique
-  locale       String   @default("en")
-  theme        String   @default("system")
-  fontSizePx   Int      @default(16)
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  locale                String   @default("en")
+  theme                 String   @default("system")
+  fontSizePx            Int      @default(16)
   soundEnabled          Boolean  @default(true)
   languageAudioAutoPlay Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserMarketingPreference {
@@ -661,15 +661,15 @@ model ReviewQuizInstance {
 }
 
 model PracticeChallengeLink {
-  id               String                      @id @default(cuid())
-  code             String                      @unique @db.VarChar(24)
-  locale           String                      @default("en") @db.VarChar(8)
+  id               String                         @id @default(cuid())
+  code             String                         @unique @db.VarChar(24)
+  locale           String                         @default("en") @db.VarChar(8)
   subjectSlug      String
   moduleSlug       String
   sectionSlug      String
   topicSlug        String
   exerciseKey      String
-  exercisePurpose  PracticePurpose             @default(project)
+  exercisePurpose  PracticePurpose                @default(project)
   signedToken      String
   shareTitle       String?
   shareDescription String?
@@ -678,10 +678,12 @@ model PracticeChallengeLink {
   createdById      String?
   expiresAt        DateTime?
   revokedAt        DateTime?
-  createdAt        DateTime                    @default(now())
-  updatedAt        DateTime                    @updatedAt
-  createdBy        User?                       @relation("UserPracticeChallengeLinks", fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt        DateTime                       @default(now())
+  updatedAt        DateTime                       @updatedAt
+  createdBy        User?                          @relation("UserPracticeChallengeLinks", fields: [createdById], references: [id], onDelete: SetNull)
   socialPosts      PublicChallengeSocialPost[]
+  dailyDispatches  PublicChallengeDailyDispatch[]
+  emailDispatches  PublicChallengeEmailDispatch[]
 
   @@index([exerciseKey])
   @@index([subjectSlug, moduleSlug])
@@ -700,8 +702,44 @@ model PublicChallengeSocialAutomation {
   instagramEnabled Boolean  @default(false)
   linkedinEnabled  Boolean  @default(false)
   xEnabled         Boolean  @default(false)
+  emailEnabled     Boolean  @default(false)
+  emailListId      Int?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+model PublicChallengeDailyDispatch {
+  id           String                @id @default(cuid())
+  dispatchDate String                @unique @db.VarChar(10)
+  locale       String                @db.VarChar(8)
+  subjectSlug  String
+  challengeId  String
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  challenge    PracticeChallengeLink @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@index([subjectSlug, dispatchDate])
+  @@index([challengeId])
+}
+
+model PublicChallengeEmailDispatch {
+  id             String                @id @default(cuid())
+  challengeId    String
+  dispatchDate   String                @db.VarChar(10)
+  sourceListId   Int
+  status         String                @default("pending") @db.VarChar(16)
+  idempotencyKey String                @unique @db.VarChar(220)
+  campaignId     Int?
+  selectedCount  Int?
+  attemptCount   Int                   @default(0)
+  lastError      String?
+  sentAt         DateTime?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  challenge      PracticeChallengeLink @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@index([challengeId, createdAt])
+  @@index([dispatchDate, status])
 }
 
 model PublicChallengeSocialPost {

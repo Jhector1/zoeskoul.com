@@ -40,6 +40,8 @@ const AutomationSchema = z.object({
   localTime: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/),
   timezone: z.string().trim().min(1).max(80),
   providers: z.array(ProviderSchema).max(4),
+  emailEnabled: z.boolean().default(false),
+  emailListId: z.number().int().positive().nullable().default(null),
 });
 
 async function authorize(request: Request) {

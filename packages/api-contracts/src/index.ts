@@ -277,6 +277,8 @@ export type PublicChallengeSocialAutomationSettings = {
   localTime: string;
   timezone: string;
   providers: PublicChallengeSocialProvider[];
+  emailEnabled: boolean;
+  emailListId: number | null;
 };
 
 export type PublicChallengeSocialRecentPost = {
@@ -299,6 +301,7 @@ export type PublicChallengeSocialAdminResponse = {
   schedulerConfigured: boolean;
   providers: PublicChallengeSocialProviderStatus[];
   automation: PublicChallengeSocialAutomationSettings;
+  email: PublicChallengeAudienceListsResponse;
   recentPosts: PublicChallengeSocialRecentPost[];
 };
 

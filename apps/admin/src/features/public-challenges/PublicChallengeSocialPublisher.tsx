@@ -7,6 +7,7 @@ import type {
 } from "@zoeskoul/api-contracts";
 
 import { adminFetch } from "@/lib/adminApi";
+import PublicChallengeAutoEmailControls from "./PublicChallengeAutoEmailControls";
 
 type Challenge = {
   code: string;
@@ -244,6 +245,7 @@ export default function PublicChallengeSocialPublisher(props: {
   }
 
   return (
+    <>
     <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
@@ -456,5 +458,11 @@ export default function PublicChallengeSocialPublisher(props: {
         </div>
       ) : null}
     </section>
+      <PublicChallengeAutoEmailControls
+        settings={settings}
+        email={state?.email ?? null}
+        onChange={setSettings}
+      />
+    </>
   );
 }

@@ -4,7 +4,10 @@ import {
     getPublicOnboardingSubjects,
 } from "@/lib/onboarding/getOnboardingSubjects";
 import { buildPublicChallengePresentation } from "@/lib/practice/challenges/presentation";
-import { getLatestActivePracticeChallengeLink } from "@/lib/practice/challenges/shortLink";
+import {
+    getLatestActivePracticeChallengeLink,
+    getLatestDailyPracticeChallengeLink,
+} from "@/lib/practice/challenges/shortLink";
 import type { PublicChallengeCardData } from "@/lib/practice/challenges/types";
 import { DAILY_PRACTICE_TARGET_COUNT } from "@/lib/practice/experience/config";
 import { resolvePracticeViewer } from "@/lib/practice/experience/viewer";
@@ -20,19 +23,20 @@ async function getLatestChallengeCard(
     locale: string,
 ): Promise<PublicChallengeCardData | null> {
     try {
-        const link = await getLatestActivePracticeChallengeLink(
-            supportedLocale(locale),
-        );
+        const challengeLocale = supportedLocale(locale);
+        const link =
+            (await getLatestDailyPracticeChallengeLink(challengeLocale)) ??
+            (await getLatestActivePracticeChallengeLink(challengeLocale));
         if (!link) return null;
 
         const presentation = buildPublicChallengePresentation({
             source: link,
             fallbackTitle: "A new coding challenge",
         });
-        const challengeLocale = supportedLocale(link.locale);
+        const linkLocale = supportedLocale(link.locale);
 
         return {
-            href: `/${challengeLocale}/c/${encodeURIComponent(link.code)}`,
+            href: `/${linkLocale}/c/${encodeURIComponent(link.code)}`,
             ...presentation,
         };
     } catch (error) {
@@ -47,7 +51,11 @@ export default async function HomePageAvatarOnboardingServer({
     locale: string;
 }) {
     const session = await auth();
-    const userId = (session?.user as any)?.id as string | undefined;
+    const rawUserId = (
+        session?.user as { id?: unknown } | undefined
+    )?.id;
+    const userId =
+        typeof rawUserId === "string" ? rawUserId : undefined;
 
     if (!userId) {
         const subjects = await getPublicOnboardingSubjects();

@@ -10,6 +10,9 @@ import {
 const mocks = vi.hoisted(() => ({
   socialPostFindFirst: vi.fn(),
   socialPostFindMany: vi.fn(),
+  dailyDispatchFindUnique: vi.fn(),
+  dailyDispatchFindMany: vi.fn(),
+  dailyDispatchUpsert: vi.fn(),
   listPublished: vi.fn(),
   createOrReuse: vi.fn(),
 }));
@@ -17,7 +20,9 @@ const mocks = vi.hoisted(() => ({
 vi.mock("server-only", () => ({}));
 
 vi.mock("@zoeskoul/app-config", () => ({
-  getProductionAppOrigin: vi.fn(() => "https://zoeskoul.com"),
+  getProductionAppOrigin: vi.fn(
+    () => "https://zoeskoul.com",
+  ),
 }));
 
 vi.mock("@/lib/prisma", () => ({
@@ -26,12 +31,21 @@ vi.mock("@/lib/prisma", () => ({
       findFirst: mocks.socialPostFindFirst,
       findMany: mocks.socialPostFindMany,
     },
+    publicChallengeDailyDispatch: {
+      findUnique: mocks.dailyDispatchFindUnique,
+      findMany: mocks.dailyDispatchFindMany,
+      upsert: mocks.dailyDispatchUpsert,
+    },
   },
 }));
 
-vi.mock("@/lib/practice/challenges/presentation", () => ({
-  buildPublicChallengePresentation: vi.fn(),
-}));
+vi.mock(
+  "@/lib/practice/challenges/presentation",
+  () => ({
+    buildPublicChallengePresentation:
+      vi.fn(),
+  }),
+);
 
 vi.mock("@/lib/practice/challenges/shortLink", () => ({
   getActivePracticeChallengeLink: vi.fn(),
@@ -39,11 +53,13 @@ vi.mock("@/lib/practice/challenges/shortLink", () => ({
 }));
 
 vi.mock("@/lib/practice/challenges/publishedCatalog", () => ({
-  listPublishedChallengeExerciseOptions: mocks.listPublished,
+  listPublishedChallengeExerciseOptions:
+    mocks.listPublished,
 }));
 
 vi.mock("@/lib/practice/challenges/automatedChallenge", () => ({
-  createOrReuseAutomatedPracticeChallenge: mocks.createOrReuse,
+  createOrReuseAutomatedPracticeChallenge:
+    mocks.createOrReuse,
   publicChallengeExerciseIdentity: (value: {
     subjectSlug: string;
     moduleSlug: string;
@@ -68,6 +84,17 @@ vi.mock("@/lib/marketing/publicChallengeSocial", () => ({
   publishPublicChallengeToProvider: vi.fn(),
 }));
 
+vi.mock("@/lib/marketing/publicChallengeSocialCopy", () => ({
+  resolvePublicChallengeSocialDescription: vi.fn(),
+}));
+
+vi.mock("@/lib/marketing/publicChallengeCampaign", () => ({
+  getPublicChallengeAudienceList: vi.fn(),
+  listPublicChallengeAudienceLists: vi.fn(),
+  publicChallengeBrevoConfigured: vi.fn(() => true),
+  sendPublicChallengeCampaignNow: vi.fn(),
+}));
+
 vi.mock("@/lib/practice/challenges/socialCard", () => ({
   ensurePublicChallengeSocialImage: vi.fn(),
 }));
@@ -84,7 +111,7 @@ beforeAll(async () => {
   } = await import("./publicChallengeSocialAutomation"));
 });
 
-const optionA = {
+const pythonA = {
   id: "python::m1::s1::t1::a",
   catalogSlug: "code",
   catalogTitle: "Code",
@@ -108,110 +135,162 @@ const optionA = {
   releaseStatus: "active",
 } as const;
 
-const optionB = {
-  ...optionA,
+const pythonB = {
+  ...pythonA,
   id: "python::m1::s1::t1::b",
   exerciseKey: "exercise-b",
   exerciseTitle: "Exercise B",
   exercisePrompt: "Solve B",
 } as const;
 
+const sqlA = {
+  ...pythonA,
+  id: "sql::m1::s1::t1::a",
+  subjectSlug: "sql-v2",
+  subjectTitle: "SQL",
+  exerciseKey: "exercise-sql-a",
+  exerciseTitle: "SQL Exercise A",
+  exercisePrompt: "Solve SQL A",
+} as const;
+
+function history(
+  option: {
+    subjectSlug: string;
+    moduleSlug: string;
+    sectionSlug: string;
+    topicSlug: string;
+    exerciseKey: string;
+  },
+  date: string,
+) {
+  return {
+    dispatchDate: date,
+    createdAt: new Date(`${date}T15:00:00.000Z`),
+    challenge: {
+      subjectSlug: option.subjectSlug,
+      moduleSlug: option.moduleSlug,
+      sectionSlug: option.sectionSlug,
+      topicSlug: option.topicSlug,
+      exerciseKey: option.exerciseKey,
+    },
+  };
+}
+
 beforeEach(() => {
   vi.clearAllMocks();
   mocks.socialPostFindFirst.mockResolvedValue(null);
   mocks.socialPostFindMany.mockResolvedValue([]);
-  mocks.listPublished.mockResolvedValue([optionA, optionB]);
+  mocks.dailyDispatchFindUnique.mockResolvedValue(null);
+  mocks.dailyDispatchFindMany.mockResolvedValue([]);
+  mocks.listPublished.mockResolvedValue([
+    pythonA,
+    pythonB,
+    sqlA,
+  ]);
 });
 
-describe("daily public challenge manifest rotation", () => {
-  it("chooses the first unused canonical published exercise", async () => {
-    mocks.socialPostFindMany.mockResolvedValue([
-      {
-        challenge: {
-          subjectSlug: optionA.subjectSlug,
-          moduleSlug: optionA.moduleSlug,
-          sectionSlug: optionA.sectionSlug,
-          topicSlug: optionA.topicSlug,
-          exerciseKey: optionA.exerciseKey,
-        },
-      },
+describe("daily public challenge subject rotation", () => {
+  it("moves to the next subject even when the previous subject still has unused exercises", async () => {
+    mocks.dailyDispatchFindMany.mockResolvedValue([
+      history(pythonA, "2026-10-06"),
     ]);
-
-    const challengeB = {
-      id: "challenge-b",
-      code: "ChallengeB",
+    const challenge = {
+      id: "challenge-sql",
+      code: "ChallengeSql",
       locale: "en",
     };
-    mocks.createOrReuse.mockResolvedValue(challengeB);
+    mocks.createOrReuse.mockResolvedValue(challenge);
 
     await expect(
       getNextDailyPublicChallengeLink("en"),
-    ).resolves.toBe(challengeB);
+    ).resolves.toBe(challenge);
 
-    expect(mocks.listPublished).toHaveBeenCalledTimes(1);
     expect(mocks.createOrReuse).toHaveBeenCalledWith({
       locale: "en",
-      option: optionB,
+      option: sqlA,
     });
   });
 
-  it("reuses the challenge already claimed for a dispatch date", async () => {
-    const challengeA = {
+  it("wraps to the first subject and chooses its next unused exercise", async () => {
+    mocks.dailyDispatchFindMany.mockResolvedValue([
+      history(pythonA, "2026-10-05"),
+      history(sqlA, "2026-10-06"),
+    ]);
+    const challenge = {
+      id: "challenge-python-b",
+      code: "ChallengePythonB",
+      locale: "en",
+    };
+    mocks.createOrReuse.mockResolvedValue(challenge);
+
+    await expect(
+      getNextDailyPublicChallengeLink("en"),
+    ).resolves.toBe(challenge);
+
+    expect(mocks.createOrReuse).toHaveBeenCalledWith({
+      locale: "en",
+      option: pythonB,
+    });
+  });
+
+  it("reuses the channel-neutral challenge already claimed for the dispatch date", async () => {
+    const challenge = {
       id: "challenge-a",
       code: "ChallengeA",
       locale: "en",
+    };
+    mocks.dailyDispatchFindUnique.mockResolvedValue({
+      challenge,
+    });
+
+    await expect(
+      getDailyPublicChallengeForDispatch(
+        "en",
+        "2026-10-07",
+      ),
+    ).resolves.toBe(challenge);
+
+    expect(mocks.socialPostFindFirst).not.toHaveBeenCalled();
+    expect(mocks.listPublished).not.toHaveBeenCalled();
+  });
+
+  it("backfills a legacy social-owned daily claim into the channel-neutral owner", async () => {
+    const challenge = {
+      id: "challenge-legacy",
+      code: "ChallengeLegacy",
+      locale: "en",
+      subjectSlug: "python-v2",
     };
     mocks.socialPostFindFirst.mockResolvedValue({
-      challenge: challengeA,
+      challenge,
+    });
+    mocks.dailyDispatchUpsert.mockResolvedValue({
+      challenge,
     });
 
     await expect(
-      getDailyPublicChallengeForDispatch("en", "2026-10-05"),
-    ).resolves.toBe(challengeA);
+      getDailyPublicChallengeForDispatch(
+        "en",
+        "2026-10-06",
+      ),
+    ).resolves.toBe(challenge);
 
-    expect(mocks.socialPostFindMany).not.toHaveBeenCalled();
-    expect(mocks.listPublished).not.toHaveBeenCalled();
-    expect(mocks.createOrReuse).not.toHaveBeenCalled();
+    expect(mocks.dailyDispatchUpsert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { dispatchDate: "2026-10-06" },
+        create: expect.objectContaining({
+          challengeId: "challenge-legacy",
+          subjectSlug: "python-v2",
+        }),
+      }),
+    );
   });
 
-  it("creates a manifest-driven challenge only for a new dispatch date", async () => {
-    const challengeA = {
-      id: "challenge-a",
-      code: "ChallengeA",
-      locale: "en",
-    };
-    mocks.createOrReuse.mockResolvedValue(challengeA);
-
-    await expect(
-      getDailyPublicChallengeForDispatch("en", "2026-10-06"),
-    ).resolves.toBe(challengeA);
-
-    expect(mocks.createOrReuse).toHaveBeenCalledWith({
-      locale: "en",
-      option: optionA,
-    });
-  });
-
-  it("returns no candidate after every eligible manifest exercise has published", async () => {
-    mocks.socialPostFindMany.mockResolvedValue([
-      {
-        challenge: {
-          subjectSlug: optionA.subjectSlug,
-          moduleSlug: optionA.moduleSlug,
-          sectionSlug: optionA.sectionSlug,
-          topicSlug: optionA.topicSlug,
-          exerciseKey: optionA.exerciseKey,
-        },
-      },
-      {
-        challenge: {
-          subjectSlug: optionB.subjectSlug,
-          moduleSlug: optionB.moduleSlug,
-          sectionSlug: optionB.sectionSlug,
-          topicSlug: optionB.topicSlug,
-          exerciseKey: optionB.exerciseKey,
-        },
-      },
+  it("returns no candidate after every eligible exercise has already been dispatched", async () => {
+    mocks.dailyDispatchFindMany.mockResolvedValue([
+      history(pythonA, "2026-10-04"),
+      history(pythonB, "2026-10-05"),
+      history(sqlA, "2026-10-06"),
     ]);
 
     await expect(

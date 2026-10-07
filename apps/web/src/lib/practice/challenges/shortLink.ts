@@ -119,6 +119,28 @@ export async function getActivePracticeChallengeLink(codeValue: unknown) {
   });
 }
 
+export async function getLatestDailyPracticeChallengeLink(
+  locale: string,
+  now = new Date(),
+) {
+  const dispatch =
+    await prisma.publicChallengeDailyDispatch.findFirst({
+      where: { locale },
+      orderBy: [
+        { dispatchDate: "desc" },
+        { createdAt: "desc" },
+      ],
+      include: { challenge: true },
+    });
+
+  const link = dispatch?.challenge ?? null;
+  if (!link) return null;
+  if (link.revokedAt) return null;
+  if (link.expiresAt && link.expiresAt <= now) return null;
+
+  return link;
+}
+
 export async function getLatestActivePracticeChallengeLink(
   locale?: string,
   options?: {
