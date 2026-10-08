@@ -2,10 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
-const root = path.resolve(process.cwd(), "../..");
+const root = new URL("../../../../../", import.meta.url);
 
 function source(relative: string) {
-  return fs.readFileSync(path.join(root, relative), "utf8");
+  return fs.readFileSync(new URL(relative, root), "utf8");
 }
 
 describe("daily challenge multi-channel automation ownership", () => {

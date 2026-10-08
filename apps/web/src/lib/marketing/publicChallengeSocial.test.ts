@@ -7,6 +7,7 @@ import {
 import {
   isPublicChallengeSocialAutomationDue,
   isValidPublicChallengeSocialTimezone,
+  publicChallengeDailyScheduleOccurrence,
 } from "./publicChallengeSocialAutomation";
 
 const content = {
@@ -329,6 +330,47 @@ describe("daily social automation schedule", () => {
     ).toBe(false);
   });
 
+  it("does not impose a rolling 24-hour cooldown", () => {
+    const yesterdayAtFour = publicChallengeDailyScheduleOccurrence({
+      localTime: "16:00",
+      timezone: "America/Chicago",
+      now: new Date("2026-10-07T21:00:00.000Z"),
+    });
+    const todayAtTen = publicChallengeDailyScheduleOccurrence({
+      localTime: "10:00",
+      timezone: "America/Chicago",
+      now: new Date("2026-10-08T15:00:00.000Z"),
+    });
+
+    expect(todayAtTen.dispatchDate).toBe("2026-10-08");
+    expect(todayAtTen.id).not.toBe(yesterdayAtFour.id);
+    expect(
+      new Date("2026-10-08T15:00:00.000Z").getTime() -
+        new Date("2026-10-07T21:00:00.000Z").getTime(),
+    ).toBe(18 * 60 * 60 * 1000);
+  });
+
+  it("treats different configured times on the same day as different occurrences", () => {
+    const ten = publicChallengeDailyScheduleOccurrence({
+      localTime: "10:00",
+      timezone: "America/Chicago",
+      now: new Date("2026-10-08T15:00:00.000Z"),
+    });
+    const four = publicChallengeDailyScheduleOccurrence({
+      localTime: "16:00",
+      timezone: "America/Chicago",
+      now: new Date("2026-10-08T21:00:00.000Z"),
+    });
+    const tenRetry = publicChallengeDailyScheduleOccurrence({
+      localTime: "10:00",
+      timezone: "America/Chicago",
+      now: new Date("2026-10-08T15:07:00.000Z"),
+    });
+
+    expect(four.id).not.toBe(ten.id);
+    expect(tenRetry).toEqual(ten);
+  });
+
   it("becomes due at or after the configured local time", () => {
     expect(
       isPublicChallengeSocialAutomationDue({
@@ -349,3 +391,5 @@ describe("daily social automation schedule", () => {
     ).toBe(false);
   });
 });
+
+vi.mock("server-only", () => ({}));

@@ -142,6 +142,18 @@ export function isPublicChallengeSocialAutomationDue(args: {
   return clock.time >= args.localTime;
 }
 
+export function publicChallengeDailyScheduleOccurrence(args: {
+  localTime: string;
+  timezone: string;
+  now: Date;
+}) {
+  const clock = localClock(args.now, args.timezone);
+  return {
+    dispatchDate: clock.date,
+    id: `${clock.date}@${args.localTime}@${args.timezone}`,
+  };
+}
+
 async function automationRow() {
   return prisma.publicChallengeSocialAutomation.upsert({
     where: { id: AUTOMATION_ID },
@@ -333,6 +345,7 @@ export async function publishChallengeToSocial(args: {
   providers: PublicChallengeSocialProvider[];
   source: "manual" | "daily";
   dispatchDate: string;
+  dailyOccurrenceId?: string;
   now?: Date;
 }): Promise<PublicChallengeSocialPublishResponse> {
   const now = args.now ?? new Date();
@@ -392,7 +405,7 @@ export async function publishChallengeToSocial(args: {
 
     const idempotencyKey =
       args.source === "daily"
-        ? `daily:${args.dispatchDate}:${provider}`
+        ? `daily:${args.dailyOccurrenceId ?? args.dispatchDate}:${provider}`
         : `manual:${args.dispatchDate}:${args.challenge.id}:${provider}`;
 
     const claim = await claimPost({
@@ -635,44 +648,58 @@ export async function getNextDailyPublicChallengeLink(
 export async function getDailyPublicChallengeForDispatch(
   locale: PublicChallengeLocale,
   dispatchDate: string,
+  occurrenceKey?: string,
 ) {
-  const existingDispatch =
-    await prisma.publicChallengeDailyDispatch.findUnique({
-      where: { dispatchDate },
-      include: { challenge: true },
-    });
+  const existingDispatch = occurrenceKey
+    ? await prisma.publicChallengeDailyDispatch.findUnique({
+        where: { occurrenceKey },
+        include: { challenge: true },
+      })
+    : await prisma.publicChallengeDailyDispatch.findFirst({
+        where: { dispatchDate },
+        orderBy: { createdAt: "asc" },
+        include: { challenge: true },
+      });
+
   if (existingDispatch) {
     return existingDispatch.challenge;
   }
 
-  const legacyDispatch =
-    await prisma.publicChallengeSocialPost.findFirst({
-      where: {
-        source: "daily",
-        dispatchDate,
-      },
-      orderBy: {
-        createdAt: "asc",
-      },
-      include: {
-        challenge: true,
-      },
-    });
-
-  if (legacyDispatch) {
-    const claimed =
-      await prisma.publicChallengeDailyDispatch.upsert({
-        where: { dispatchDate },
-        create: {
+  // Legacy date-owned social rows are only a compatibility source for callers
+  // that do not yet carry a scheduled occurrence. A real scheduled occurrence
+  // must never be suppressed just because another time already posted today.
+  if (!occurrenceKey) {
+    const legacyDispatch =
+      await prisma.publicChallengeSocialPost.findFirst({
+        where: {
+          source: "daily",
           dispatchDate,
-          locale: legacyDispatch.challenge.locale,
-          subjectSlug: legacyDispatch.challenge.subjectSlug,
-          challengeId: legacyDispatch.challenge.id,
         },
-        update: {},
-        include: { challenge: true },
+        orderBy: {
+          createdAt: "asc",
+        },
+        include: {
+          challenge: true,
+        },
       });
-    return claimed.challenge;
+
+    if (legacyDispatch) {
+      const legacyOccurrenceKey = `legacy:${dispatchDate}:social`;
+      const claimed =
+        await prisma.publicChallengeDailyDispatch.upsert({
+          where: { occurrenceKey: legacyOccurrenceKey },
+          create: {
+            occurrenceKey: legacyOccurrenceKey,
+            dispatchDate,
+            locale: legacyDispatch.challenge.locale,
+            subjectSlug: legacyDispatch.challenge.subjectSlug,
+            challengeId: legacyDispatch.challenge.id,
+          },
+          update: {},
+          include: { challenge: true },
+        });
+      return claimed.challenge;
+    }
   }
 
   const challenge =
@@ -681,10 +708,13 @@ export async function getDailyPublicChallengeForDispatch(
     return null;
   }
 
+  const claimOccurrenceKey =
+    occurrenceKey ?? `legacy:${dispatchDate}:generated`;
   const claimed =
     await prisma.publicChallengeDailyDispatch.upsert({
-      where: { dispatchDate },
+      where: { occurrenceKey: claimOccurrenceKey },
       create: {
+        occurrenceKey: claimOccurrenceKey,
         dispatchDate,
         locale,
         subjectSlug: challenge.subjectSlug,
@@ -696,7 +726,6 @@ export async function getDailyPublicChallengeForDispatch(
 
   return claimed.challenge;
 }
-
 type DailyEmailPublishResult = {
   status: "sent" | "failed" | "skipped";
   campaignId: number | null;
@@ -709,12 +738,13 @@ export async function publishDailyChallengeEmail(args: {
     Awaited<ReturnType<typeof getActivePracticeChallengeLink>>
   >;
   dispatchDate: string;
+  dailyOccurrenceId?: string;
   sourceListId: number;
   now?: Date;
 }): Promise<DailyEmailPublishResult> {
   const now = args.now ?? new Date();
   const idempotencyKey =
-    `daily:${args.dispatchDate}:email:${args.sourceListId}`;
+    `daily:${args.dailyOccurrenceId ?? args.dispatchDate}:email:${args.sourceListId}`;
 
   const existing =
     await prisma.publicChallengeEmailDispatch.upsert({
@@ -838,7 +868,6 @@ export async function runDailyPublicChallengeSocialTick(
   now = new Date(),
 ) {
   const settings = rowSettings(await automationRow());
-
   if (
     !isPublicChallengeSocialAutomationDue({
       enabled: settings.enabled,
@@ -860,11 +889,16 @@ export async function runDailyPublicChallengeSocialTick(
     };
   }
 
-  const clock = localClock(now, settings.timezone);
+  const occurrence = publicChallengeDailyScheduleOccurrence({
+    localTime: settings.localTime,
+    timezone: settings.timezone,
+    now,
+  });
   const challenge =
     await getDailyPublicChallengeForDispatch(
       settings.locale,
-      clock.date,
+      occurrence.dispatchDate,
+      occurrence.id,
     );
 
   if (!challenge) {
@@ -879,7 +913,8 @@ export async function runDailyPublicChallengeSocialTick(
         challenge,
         providers: settings.providers,
         source: "daily",
-        dispatchDate: clock.date,
+        dispatchDate: occurrence.dispatchDate,
+        dailyOccurrenceId: occurrence.id,
         now,
       })
     : {
@@ -894,7 +929,6 @@ export async function runDailyPublicChallengeSocialTick(
     selectedCount: null,
     error: null,
   };
-
   if (settings.emailEnabled) {
     if (!settings.emailListId) {
       email = {
@@ -911,10 +945,10 @@ export async function runDailyPublicChallengeSocialTick(
               where: { id: challenge.id },
             })
           : challenge;
-
       email = await publishDailyChallengeEmail({
         challenge: currentChallenge,
-        dispatchDate: clock.date,
+        dispatchDate: occurrence.dispatchDate,
+        dailyOccurrenceId: occurrence.id,
         sourceListId: settings.emailListId,
         now,
       });
@@ -927,7 +961,6 @@ export async function runDailyPublicChallengeSocialTick(
     email,
   };
 }
-
 export async function getPublicChallengeSocialAdminState(): Promise<PublicChallengeSocialAdminResponse> {
   const [automation, recentPosts, email] = await Promise.all([
     getPublicChallengeSocialAutomationSettings(),

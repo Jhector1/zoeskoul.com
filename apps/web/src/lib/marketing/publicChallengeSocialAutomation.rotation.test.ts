@@ -11,6 +11,7 @@ const mocks = vi.hoisted(() => ({
   socialPostFindFirst: vi.fn(),
   socialPostFindMany: vi.fn(),
   dailyDispatchFindUnique: vi.fn(),
+  dailyDispatchFindFirst: vi.fn(),
   dailyDispatchFindMany: vi.fn(),
   dailyDispatchUpsert: vi.fn(),
   listPublished: vi.fn(),
@@ -33,6 +34,7 @@ vi.mock("@/lib/prisma", () => ({
     },
     publicChallengeDailyDispatch: {
       findUnique: mocks.dailyDispatchFindUnique,
+      findFirst: mocks.dailyDispatchFindFirst,
       findMany: mocks.dailyDispatchFindMany,
       upsert: mocks.dailyDispatchUpsert,
     },
@@ -181,6 +183,7 @@ beforeEach(() => {
   mocks.socialPostFindFirst.mockResolvedValue(null);
   mocks.socialPostFindMany.mockResolvedValue([]);
   mocks.dailyDispatchFindUnique.mockResolvedValue(null);
+  mocks.dailyDispatchFindFirst.mockResolvedValue(null);
   mocks.dailyDispatchFindMany.mockResolvedValue([]);
   mocks.listPublished.mockResolvedValue([
     pythonA,
@@ -233,7 +236,7 @@ describe("daily public challenge subject rotation", () => {
     });
   });
 
-  it("reuses the channel-neutral challenge already claimed for the dispatch date", async () => {
+  it("reuses the channel-neutral challenge already claimed for the scheduled occurrence", async () => {
     const challenge = {
       id: "challenge-a",
       code: "ChallengeA",
@@ -247,11 +250,17 @@ describe("daily public challenge subject rotation", () => {
       getDailyPublicChallengeForDispatch(
         "en",
         "2026-10-07",
+        "2026-10-07@10:00@America/Chicago",
       ),
     ).resolves.toBe(challenge);
 
     expect(mocks.socialPostFindFirst).not.toHaveBeenCalled();
     expect(mocks.listPublished).not.toHaveBeenCalled();
+    expect(mocks.dailyDispatchFindUnique).toHaveBeenCalledWith({
+      where: { occurrenceKey: "2026-10-07@10:00@America/Chicago" },
+      include: { challenge: true },
+    });
+    expect(mocks.dailyDispatchFindFirst).not.toHaveBeenCalled();
   });
 
   it("backfills a legacy social-owned daily claim into the channel-neutral owner", async () => {
@@ -277,8 +286,9 @@ describe("daily public challenge subject rotation", () => {
 
     expect(mocks.dailyDispatchUpsert).toHaveBeenCalledWith(
       expect.objectContaining({
-        where: { dispatchDate: "2026-10-06" },
+        where: { occurrenceKey: "legacy:2026-10-06:social" },
         create: expect.objectContaining({
+          occurrenceKey: "legacy:2026-10-06:social",
           challengeId: "challenge-legacy",
           subjectSlug: "python-v2",
         }),

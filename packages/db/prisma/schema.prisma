@@ -709,9 +709,10 @@ model PublicChallengeSocialAutomation {
 }
 
 model PublicChallengeDailyDispatch {
-  id           String                @id @default(cuid())
-  dispatchDate String                @unique @db.VarChar(10)
-  locale       String                @db.VarChar(8)
+  id            String                @id @default(cuid())
+  occurrenceKey String                @unique @db.VarChar(220)
+  dispatchDate  String                @db.VarChar(10)
+  locale        String                @db.VarChar(8)
   subjectSlug  String
   challengeId  String
   createdAt    DateTime              @default(now())
