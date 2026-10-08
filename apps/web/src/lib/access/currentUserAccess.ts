@@ -2,6 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 
+import type { AppOnboardingState } from "@zoeskoul/api-contracts";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import {
@@ -18,6 +19,7 @@ export type CurrentUserAccess = {
     image: string | null;
   } | null;
   capabilities: RoleCapabilities;
+  onboarding: AppOnboardingState | null;
 };
 
 const EMPTY_CAPABILITIES = resolveRoleCapabilities([]);
@@ -40,6 +42,7 @@ export const getCurrentUserAccess = cache(
         authenticated: false,
         user: null,
         capabilities: EMPTY_CAPABILITIES,
+        onboarding: null,
       };
     }
 
@@ -53,6 +56,19 @@ export const getCurrentUserAccess = cache(
         name: true,
         image: true,
         roles: true,
+        onboardingProfile: {
+          select: {
+            version: true,
+            completedAt: true,
+            skippedAt: true,
+            departments: {
+              select: {
+                departmentKey: true,
+                context: true,
+              },
+            },
+          },
+        },
       },
     });
 
@@ -61,6 +77,7 @@ export const getCurrentUserAccess = cache(
         authenticated: false,
         user: null,
         capabilities: EMPTY_CAPABILITIES,
+        onboarding: null,
       };
     }
 
@@ -73,6 +90,29 @@ export const getCurrentUserAccess = cache(
         image: user.image,
       },
       capabilities: resolveRoleCapabilities(user.roles),
+      onboarding: user.onboardingProfile
+        ? {
+            status:
+              user.onboardingProfile.completedAt ||
+              user.onboardingProfile.skippedAt
+                ? "completed"
+                : "in_progress",
+            version: Math.max(1, user.onboardingProfile.version),
+            learnerDepartments: user.onboardingProfile.departments
+              .filter((item) => item.context === "learner")
+              .map((item) => item.departmentKey)
+              .sort(),
+            teacherDepartments: user.onboardingProfile.departments
+              .filter((item) => item.context === "teacher")
+              .map((item) => item.departmentKey)
+              .sort(),
+          }
+        : {
+            status: "not_started",
+            version: 1,
+            learnerDepartments: [],
+            teacherDepartments: [],
+          },
     };
   },
 );

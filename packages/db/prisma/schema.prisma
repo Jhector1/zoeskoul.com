@@ -274,25 +274,43 @@ model PracticeAttempt {
 }
 
 model UserOnboardingProfile {
-  id                String                     @id @default(cuid())
-  userId            String?                    @unique
-  guestId           String?                    @unique
-  preferredLanguage String?
-  level             String?
-  studyTime         String?
-  completedAt       DateTime?
-  skippedAt         DateTime?
-  claimedAt         DateTime?
-  expiresAt         DateTime?
-  createdAt         DateTime                   @default(now())
-  updatedAt         DateTime                   @updatedAt
-  analyticsEvents   OnboardingAnalyticsEvent[]
-  interests         UserOnboardingInterest[]
-  user              User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                 String                     @id @default(cuid())
+  userId             String?                    @unique
+  guestId            String?                    @unique
+  version            Int                        @default(1)
+  useMode            OnboardingUseMode?
+  learnerAffiliation OnboardingAffiliation?
+  teacherAffiliation OnboardingAffiliation?
+  preferredLanguage  String?
+  level              String?
+  studyTime          String?
+  completedAt        DateTime?
+  skippedAt          DateTime?
+  claimedAt          DateTime?
+  expiresAt          DateTime?
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime                   @updatedAt
+  analyticsEvents    OnboardingAnalyticsEvent[]
+  departments        UserOnboardingDepartment[]
+  interests          UserOnboardingInterest[]
+  user               User?                      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([guestId])
   @@index([userId])
   @@index([expiresAt])
+}
+
+model UserOnboardingDepartment {
+  id            String                      @id @default(cuid())
+  profileId     String
+  departmentKey String
+  context       OnboardingDepartmentContext
+  createdAt     DateTime                    @default(now())
+  profile       UserOnboardingProfile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, departmentKey, context])
+  @@index([profileId, context])
+  @@index([departmentKey])
 }
 
 model UserOnboardingInterest {
@@ -1505,6 +1523,22 @@ enum TutoringSelectionScope {
 enum TutoringParticipantRole {
   learner
   observer
+}
+
+enum OnboardingUseMode {
+  learner
+  teacher
+  both
+}
+
+enum OnboardingAffiliation {
+  independent
+  institution
+}
+
+enum OnboardingDepartmentContext {
+  learner
+  teacher
 }
 
 enum LearningOrganizationMemberRole {

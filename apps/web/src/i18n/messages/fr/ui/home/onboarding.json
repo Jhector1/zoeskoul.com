@@ -39,7 +39,7 @@
     "gate": {
       "kicker": "Bienvenue",
       "title": "Configurons votre espace {appName}.",
-      "description": "Répondez à quelques questions rapides pour personnaliser la langue, les matières, le niveau, le rythme et le thème. Vous pourrez tout modifier plus tard."
+      "description": "Configurez votre usage de ZoeSkoul, votre contexte institutionnel, vos départements, votre langue et vos préférences. Seules les questions pertinentes sont affichées."
     },
     "hero": {
       "kicker": "Votre espace d’apprentissage",
@@ -75,6 +75,26 @@
       "unlimitedCta": "Choisir une pratique"
     },
     "steps": {
+      "useMode": {
+        "title": "Comment utiliserez-vous {appName} ?",
+        "description": "Choisissez si vous êtes ici pour apprendre, enseigner ou faire les deux. Cela adapte votre espace sans accorder de permissions de sécurité."
+      },
+      "learnerAffiliation": {
+        "title": "Comment apprenez-vous ?",
+        "description": "Indiquez si vous apprenez de façon indépendante ou par l’intermédiaire d’une école ou d’une organisation."
+      },
+      "learnerDepartments": {
+        "title": "Que voulez-vous apprendre ?",
+        "description": "Choisissez vos départements. Ces choix déterminent les catalogues affichés dans votre espace d’apprentissage."
+      },
+      "teacherAffiliation": {
+        "title": "Comment enseignez-vous ?",
+        "description": "Indiquez si vous enseignez de façon indépendante ou au sein d’une école ou d’une organisation."
+      },
+      "teacherDepartments": {
+        "title": "Qu’enseignez-vous ?",
+        "description": "Choisissez les départements que vous enseignez afin que ZoeSkoul affiche les programmes et outils pertinents."
+      },
       "preferredLanguage": {
         "title": "Quelle langue {appName} doit-il utiliser pour votre expérience ?",
         "description": "Cela définit votre langue par défaut pour l’accueil, la navigation et le contenu d’entraînement lorsque la traduction est disponible."
@@ -125,7 +145,14 @@
         "friend": "Ami ou collègue",
         "social": "Réseaux sociaux",
         "school-work": "École ou travail",
-        "other": "Autre"
+        "other": "Autre",
+        "learn": "Apprendre",
+        "teach": "Enseigner",
+        "both": "Apprendre et enseigner",
+        "independent": "Indépendant",
+        "independentHint": "Utilisez ZoeSkoul de votre côté, sans institution qui gère ce contexte.",
+        "institution": "École ou organisation",
+        "institutionHint": "Vous êtes lié à, rejoignez ou enseignez par l’intermédiaire d’une institution."
       }
     },
     "panel": {
@@ -164,7 +191,7 @@
     },
     "recommended": {
       "kicker": "Choisissez la suite",
-      "title": "Commencez par quelque chose que vous avez envie de construire.",
+      "title": "Commencez par quelque chose que vous avez envie d’apprendre.",
       "titleWithCurrent": "Continuez à apprendre ou choisissez la suite.",
       "viewAll": "Voir toutes les matières",
       "current": "En cours",
@@ -189,12 +216,28 @@
       "avatarText": "Bonjour, je suis votre guide. Êtes-vous nouveau ici ou avez-vous déjà un compte ?",
       "newUser": "Je suis nouveau ici",
       "returningUser": "J’ai déjà un compte",
-      "helper": "Les nouveaux utilisateurs commencent par l’onboarding. Les utilisateurs existants vont à la connexion."
+      "helper": "Les nouveaux utilisateurs créent d’abord un compte, puis terminent la configuration. Les utilisateurs existants se connectent et continuent vers leur espace."
     },
     "latestChallenge": {
       "eyebrow": "Dernier défi quotidien",
       "noAccount": "Aucun compte requis",
       "cta": "Ouvrir le défi"
     }
+  },
+  "languageDemo": {
+    "kicker": "Langues",
+    "title": "Apprenez en écoutant et en parlant",
+    "description": "Écoutez des phrases naturelles, répondez à voix haute et développez votre vocabulaire avec un retour immédiat.",
+    "conversationLabel": "Pratique de conversation",
+    "listenLabel": "Écouter",
+    "learnerLabel": "Vous",
+    "prompt": "Bonjou! Kijan ou ye?",
+    "response": "Mwen byen, mèsi.",
+    "feedback": "Réponse claire",
+    "vocabularyLabel": "Vocabulaire",
+    "firstTerm": "bonjou",
+    "firstMeaning": "bonjour",
+    "secondTerm": "mèsi",
+    "secondMeaning": "merci"
   }
 }

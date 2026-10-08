@@ -4,11 +4,13 @@ import { prisma } from "@/lib/prisma";
 import type { Actor } from "@/lib/practice/actor";
 import { listVisiblePracticeChooserExerciseOptions } from "@/lib/practice/challenges/publishedCatalog";
 import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
+import { resolveDepartmentPresentation } from "@zoeskoul/curriculum-registry/runtime";
 import { resolveModuleAccess } from "@/lib/access/resolveModuleAccess";
 import {
   getAvailableVisibleCatalogsForActor,
   type CatalogActorIdentity,
 } from "@/lib/subjects/server/catalogVisibility";
+import { getLearnerCatalogDepartmentFilter } from "@/lib/onboarding/departmentSelection";
 import { loadPracticeAccessModelForActor } from "./dailyAccess";
 import { buildPracticeChooserCatalogs } from "./practiceChooserCore";
 import { practiceModuleAccessKey } from "./practiceAccessKey";
@@ -26,8 +28,38 @@ export async function loadPracticeChooser(args: {
   const visibleCatalogs = await getAvailableVisibleCatalogsForActor(
     args.catalogIdentity,
   );
+  const learnerDepartmentFilter = args.actor.userId
+    ? await getLearnerCatalogDepartmentFilter(args.actor.userId)
+    : null;
+
+  const personalizedCatalogs = learnerDepartmentFilter
+    ? visibleCatalogs
+        .map((catalog) => {
+          const department = resolveDepartmentPresentation({
+            catalogFamily: catalog.family,
+            catalogSlug: catalog.slug,
+          });
+
+          if (learnerDepartmentFilter.has(department.id)) {
+            return catalog;
+          }
+
+          const enrolledSubjects = catalog.subjects.filter(
+            (subject) => subject.enrolled,
+          );
+
+          return enrolledSubjects.length > 0
+            ? { ...catalog, subjects: enrolledSubjects }
+            : null;
+        })
+        .filter(
+          (catalog): catalog is NonNullable<typeof catalog> =>
+            catalog !== null,
+        )
+    : visibleCatalogs;
+
   const visibleSubjectSlugs = new Set(
-    visibleCatalogs.flatMap((catalog) =>
+    personalizedCatalogs.flatMap((catalog) =>
       catalog.subjects.map((subject) => subject.slug),
     ),
   );

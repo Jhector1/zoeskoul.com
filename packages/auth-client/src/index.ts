@@ -6,6 +6,8 @@ import type { ApiClientOptions } from "@zoeskoul/api-client";
 
 export type {
   AppCapability,
+  AppOnboardingState,
+  AppOnboardingStatus,
   AppSessionResponse,
   AppSessionUser,
 } from "@zoeskoul/api-contracts";
@@ -122,6 +124,13 @@ export function buildAuthenticateUrl(
   const locale = normalizeLocale(options.locale);
   const url = new URL(`/${locale}/authenticate`, options.websiteOrigin);
   url.searchParams.set("callbackUrl", options.callbackUrl);
+  return url.toString();
+}
+
+export function buildOnboardingUrl(options: AuthenticateUrlOptions): string {
+  const locale = normalizeLocale(options.locale);
+  const url = new URL(`/${locale}/onboarding`, options.websiteOrigin);
+  url.searchParams.set("returnTo", options.callbackUrl);
   return url.toString();
 }
 

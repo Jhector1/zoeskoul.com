@@ -38,7 +38,10 @@ import FooterSlick from "@/components/layout/FooterSlick";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { useTaggedT } from "@/i18n/tagged";
 import RedirectOverlay from "@/components/shared/RedirectOverlay";
-import {useAuthHref} from "@/hooks/useAuthHref";
+import {
+    buildAuthenticateHref,
+    buildAuthenticateHrefForTarget,
+} from "@zoeskoul/auth-client/callback-url";
 import type { PublicChallengeCardData } from "@/lib/practice/challenges/types";
 import {
     AiTutorAvatar,
@@ -57,7 +60,21 @@ import {
 } from "@/lib/practice/entry";
 import { ONBOARDING_TRIAL_TARGET_COUNT } from "@/lib/practice/experience/defaults";
 import { buildStudentAppHref } from "@/lib/navigation/studentAppHref";
+import DepartmentExperienceSection from "@/components/home/demo/DepartmentExperienceSection";
 import HomeIdeDemo from "@/components/home/demo/HomeIdeDemo";
+import LanguageExperienceDemo from "@/components/home/demo/LanguageExperienceDemo";
+import {
+    resolveDepartmentHomeExperiences,
+    selectDepartmentHomeSubjects,
+} from "@/lib/home/departmentHome";
+import type {
+    DiscoverySource,
+    Level,
+    OnboardingAffiliation,
+    OnboardingUseMode,
+    PreferredLanguage,
+    StudyTime,
+} from "@/lib/onboarding/schema";
 
 type Choice = {
     label: string;
@@ -66,30 +83,36 @@ type Choice = {
     icon?: LucideIcon;
 };
 
-type PreferredLanguage = "english" | "french" | "haitian-creole" | "";
 type ThemePreference = "light" | "dark" | "";
 type TrialIntent = "now" | "later" | "";
-type Level = "beginner" | "intermediate" | "advanced" | "";
-type StudyTime = "1-2-hours" | "3-5-hours" | "6-plus-hours" | "";
-type DiscoverySource =
-    | "other"
-    | "search"
-    | "friend"
-    | "social"
-    | "school-work"
-    | "";
 
 type OnboardingData = {
-    preferredLanguage: PreferredLanguage;
+    useMode: OnboardingUseMode | "";
+    learnerAffiliation: OnboardingAffiliation | "";
+    teacherAffiliation: OnboardingAffiliation | "";
+    learnerDepartments: string[];
+    teacherDepartments: string[];
+    preferredLanguage: PreferredLanguage | "";
     learningInterests: string[];
-    level: Level;
-    studyTime: StudyTime;
-    discoverySource: DiscoverySource;
+    level: Level | "";
+    studyTime: StudyTime | "";
+    discoverySource: DiscoverySource | "";
     themePreference: ThemePreference;
     trialIntent: TrialIntent;
 };
 
+export type OnboardingInitialState = {
+    completed: boolean;
+    skipped: boolean;
+    data: Partial<OnboardingData>;
+};
+
 type StepId =
+    | "useMode"
+    | "learnerAffiliation"
+    | "learnerDepartments"
+    | "teacherAffiliation"
+    | "teacherDepartments"
     | "preferredLanguage"
     | "learningInterests"
     | "level"
@@ -119,6 +142,8 @@ type SubjectCard = {
     catalogSlug: string;
     catalogTitle: string;
     catalogOrder: number;
+    departmentId: string;
+    departmentTitle: string;
 };
 
 type SubjectCatalogGroup = {
@@ -153,6 +178,11 @@ const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "ZoeSkoul";
 const COLLAPSED_COURSE_LIMIT = 3;
 
 const DEFAULT_DATA: OnboardingData = {
+    useMode: "",
+    learnerAffiliation: "",
+    teacherAffiliation: "",
+    learnerDepartments: [],
+    teacherDepartments: [],
     preferredLanguage: "",
     learningInterests: [],
     level: "",
@@ -188,7 +218,11 @@ function groupSubjectsByCatalog(subjects: SubjectCard[]): SubjectCatalogGroup[] 
 }
 
 function emptyValueForStep(stepId: StepId): OnboardingData[StepId] {
-    if (stepId === "learningInterests") {
+    if (
+        stepId === "learningInterests" ||
+        stepId === "learnerDepartments" ||
+        stepId === "teacherDepartments"
+    ) {
         return [] as OnboardingData[StepId];
     }
     return "" as OnboardingData[StepId];
@@ -199,14 +233,54 @@ function normalizeOnboardingDataForSubjects(
 ): OnboardingData {
     const allowedSubjectSlugs = new Set(subjects.map((subject) => subject.slug));
 
+    const allowedDepartmentIds = new Set(
+        subjects.map((subject) => subject.departmentId),
+    );
+
     return {
         ...data,
+        learnerDepartments: data.learnerDepartments.filter((id) =>
+            allowedDepartmentIds.has(id),
+        ),
+        teacherDepartments: data.teacherDepartments.filter((id) =>
+            allowedDepartmentIds.has(id),
+        ),
         learningInterests: data.learningInterests.filter((slug) =>
             allowedSubjectSlugs.has(slug),
         ),
     };
 }
 const TAGGED_STEP_META: Omit<StepConfig, "choices">[] = [
+    {
+        id: "useMode",
+        title: "@:steps.useMode.title",
+        description: "@:steps.useMode.description",
+        mode: "single",
+    },
+    {
+        id: "learnerAffiliation",
+        title: "@:steps.learnerAffiliation.title",
+        description: "@:steps.learnerAffiliation.description",
+        mode: "single",
+    },
+    {
+        id: "learnerDepartments",
+        title: "@:steps.learnerDepartments.title",
+        description: "@:steps.learnerDepartments.description",
+        mode: "multi",
+    },
+    {
+        id: "teacherAffiliation",
+        title: "@:steps.teacherAffiliation.title",
+        description: "@:steps.teacherAffiliation.description",
+        mode: "single",
+    },
+    {
+        id: "teacherDepartments",
+        title: "@:steps.teacherDepartments.title",
+        description: "@:steps.teacherDepartments.description",
+        mode: "multi",
+    },
     {
         id: "preferredLanguage",
         title: "@:steps.preferredLanguage.title",
@@ -248,6 +322,25 @@ const TAGGED_STEP_META: Omit<StepConfig, "choices">[] = [
         title: "@:steps.trialIntent.title",
         description: "@:steps.trialIntent.description",
         mode: "single",
+    },
+];
+
+const TAGGED_MODE_CHOICES: Choice[] = [
+    { label: "@:steps.choices.learn", value: "learner" },
+    { label: "@:steps.choices.teach", value: "teacher" },
+    { label: "@:steps.choices.both", value: "both" },
+];
+
+const TAGGED_AFFILIATION_CHOICES: Choice[] = [
+    {
+        label: "@:steps.choices.independent",
+        value: "independent",
+        hint: "@:steps.choices.independentHint",
+    },
+    {
+        label: "@:steps.choices.institution",
+        value: "institution",
+        hint: "@:steps.choices.institutionHint",
     },
 ];
 
@@ -1051,6 +1144,48 @@ function TrialSubjectChooser({
     );
 }
 
+function PreAuthEntryPanel({
+    onNewUser,
+    onReturningUser,
+}: {
+    onNewUser: () => void;
+    onReturningUser: () => void;
+}) {
+    const { t } = useTaggedT("homeOnboarding");
+
+    return (
+        <div className="space-y-4">
+            <AvatarWithQuestion text={t("entry.avatarText", { appName: APP_NAME })} speaking />
+            <Surface className="mx-auto max-w-[520px] p-4 sm:p-5">
+                <div className="ui-kicker">{t("entry.kicker")}</div>
+                <h2 className="ui-title-md mt-2">{t("entry.title", { appName: APP_NAME })}</h2>
+                <p className="ui-meta mt-2">{t("entry.description", { appName: APP_NAME })}</p>
+
+                <div className="mt-5 grid gap-2.5">
+                    <button
+                        type="button"
+                        className={cn(buttonClass("primary"), "h-10 w-full justify-between px-4")}
+                        onClick={onNewUser}
+                    >
+                        <span>{t("entry.newUser")}</span>
+                        <ArrowRight className="size-4" />
+                    </button>
+                    <button
+                        type="button"
+                        className={cn(buttonClass("secondary"), "h-10 w-full justify-between px-4")}
+                        onClick={onReturningUser}
+                    >
+                        <span>{t("entry.returningUser")}</span>
+                        <ArrowRight className="size-4" />
+                    </button>
+                </div>
+
+                <p className="ui-meta mt-3">{t("entry.helper")}</p>
+            </Surface>
+        </div>
+    );
+}
+
 /* -------------------- onboarding panel -------------------- */
 
 // replace your OnboardingPanel signature with this
@@ -1060,6 +1195,7 @@ function OnboardingPanel({
                              setData,
                              onSkipAll,
                              onFinish,
+                             onProgress,
                              subjectOptions,
                              locale,
                              onThemeSelect,
@@ -1072,6 +1208,7 @@ function OnboardingPanel({
     setData: React.Dispatch<React.SetStateAction<OnboardingData>>;
     onSkipAll: () => void;
     onFinish: (finalData: OnboardingData) => void;
+    onProgress: (data: OnboardingData) => Promise<void>;
     subjectOptions: SubjectCard[];
     locale: string;
     onThemeSelect: (theme: "light" | "dark") => void;
@@ -1105,6 +1242,26 @@ function OnboardingPanel({
         [t],
     );
 
+    const modeChoices = useMemo(
+        () =>
+            resolveDeepTagged(
+                TAGGED_MODE_CHOICES,
+                (key, values) => t(key, values),
+                { appName: APP_NAME },
+            ) as Choice[],
+        [t],
+    );
+
+    const affiliationChoices = useMemo(
+        () =>
+            resolveDeepTagged(
+                TAGGED_AFFILIATION_CHOICES,
+                (key, values) => t(key, values),
+                { appName: APP_NAME },
+            ) as Choice[],
+        [t],
+    );
+
     const discoveryChoices = useMemo(
         () =>
             resolveDeepTagged(
@@ -1135,12 +1292,67 @@ function OnboardingPanel({
         [t],
     );
 
+    const departmentChoices = useMemo<Choice[]>(() => {
+        const seen = new Map<string, string>();
+
+        for (const subject of subjectOptions) {
+            if (!seen.has(subject.departmentId)) {
+                seen.set(subject.departmentId, subject.departmentTitle);
+            }
+        }
+
+        return Array.from(seen, ([value, label]) => ({ value, label }));
+    }, [subjectOptions]);
+
+    const learnerEnabled = data.useMode === "learner" || data.useMode === "both";
+    const teacherEnabled = data.useMode === "teacher" || data.useMode === "both";
+
+    const learnerSubjectOptions = useMemo(() => {
+        if (!data.learnerDepartments.length) return subjectOptions;
+        const selected = new Set(data.learnerDepartments);
+        return subjectOptions.filter((subject) => selected.has(subject.departmentId));
+    }, [data.learnerDepartments, subjectOptions]);
+
     const dynamicStepConfig: StepConfig[] = useMemo(() => {
         const visibleSteps = localizedStepMeta.filter((step) => {
-            return !(isAuthenticated && step.id === "trialIntent");
+            if (step.id === "trialIntent") return !isAuthenticated;
+            if (
+                step.id === "learnerAffiliation" ||
+                step.id === "learnerDepartments" ||
+                step.id === "learningInterests" ||
+                step.id === "level" ||
+                step.id === "studyTime"
+            ) {
+                return learnerEnabled;
+            }
+            if (
+                step.id === "teacherAffiliation" ||
+                step.id === "teacherDepartments"
+            ) {
+                return teacherEnabled;
+            }
+            return true;
         });
 
         return visibleSteps.map((step) => {
+            if (step.id === "useMode") {
+                return { ...step, choices: modeChoices };
+            }
+
+            if (
+                step.id === "learnerAffiliation" ||
+                step.id === "teacherAffiliation"
+            ) {
+                return { ...step, choices: affiliationChoices };
+            }
+
+            if (
+                step.id === "learnerDepartments" ||
+                step.id === "teacherDepartments"
+            ) {
+                return { ...step, choices: departmentChoices };
+            }
+
             if (step.id === "preferredLanguage") {
                 return {
                     ...step,
@@ -1153,10 +1365,7 @@ function OnboardingPanel({
             }
 
             if (step.id === "learningInterests") {
-                return {
-                    ...step,
-                    choices: [],
-                };
+                return { ...step, choices: [] };
             }
 
             if (step.id === "level") {
@@ -1194,13 +1403,24 @@ function OnboardingPanel({
     }, [
         localizedStepMeta,
         isAuthenticated,
+        learnerEnabled,
+        teacherEnabled,
+        modeChoices,
+        affiliationChoices,
+        departmentChoices,
         t,
         themeChoices,
         trialChoices,
         discoveryChoices,
     ]);
 
-    const step = dynamicStepConfig[stepIndex];
+    useEffect(() => {
+        if (stepIndex >= dynamicStepConfig.length) {
+            setStepIndex(Math.max(0, dynamicStepConfig.length - 1));
+        }
+    }, [dynamicStepConfig.length, stepIndex]);
+
+    const step = dynamicStepConfig[Math.min(stepIndex, dynamicStepConfig.length - 1)];
     const total = dynamicStepConfig.length;
     const progress = ((stepIndex + 1) / total) * 100;
 
@@ -1215,7 +1435,7 @@ function OnboardingPanel({
     );
 
     const handleToggle = (value: string) => {
-        const next =
+        let next =
             step.mode === "multi"
                 ? (() => {
                     const current = Array.isArray(data[step.id])
@@ -1228,22 +1448,38 @@ function OnboardingPanel({
                 })()
                 : ({ ...data, [step.id]: value } as OnboardingData);
 
+        if (step.id === "useMode") {
+            if (value === "learner") {
+                next = {
+                    ...next,
+                    teacherAffiliation: "",
+                    teacherDepartments: [],
+                };
+            } else if (value === "teacher") {
+                next = {
+                    ...next,
+                    learnerAffiliation: "",
+                    learnerDepartments: [],
+                    learningInterests: [],
+                    level: "",
+                    studyTime: "",
+                };
+            }
+        }
+
+        if (step.id === "learnerDepartments") {
+            const selectedDepartments = new Set(next.learnerDepartments);
+            next = {
+                ...next,
+                learningInterests: next.learningInterests.filter((slug) => {
+                    const subject = subjectOptions.find((item) => item.slug === slug);
+                    return Boolean(subject && selectedDepartments.has(subject.departmentId));
+                }),
+            };
+        }
+
         setData(next);
         saveStoredOnboarding(false, next, stepIndex, true);
-
-        if (step.id === "preferredLanguage" && step.mode === "single") {
-            const nextLocale = mapNextLocale(value, locale);
-            persistLocale(nextLocale);
-
-            if (nextLocale !== locale) {
-                onRequestLocaleChange({
-                    nextLocale,
-                    nextData: next,
-                    stepIndex,
-                });
-            }
-            return;
-        }
 
         if (step.id === "themePreference" && step.mode === "single") {
             onThemeSelect(value === "dark" ? "dark" : "light");
@@ -1253,22 +1489,14 @@ function OnboardingPanel({
     const handleContinue = async () => {
         if (!canContinue || busy) return;
 
-        if (step.id === "preferredLanguage" && typeof currentValue === "string" && currentValue) {
-            const nextLocale = mapNextLocale(currentValue, locale);
-            persistLocale(nextLocale);
-
-            if (nextLocale !== locale) {
-                onRequestLocaleChange({
-                    nextLocale,
-                    nextData: data,
-                    stepIndex,
-                });
-                return;
-            }
-        }
-
         if (step.id === "themePreference" && typeof currentValue === "string" && currentValue) {
             onThemeSelect(currentValue === "dark" ? "dark" : "light");
+        }
+
+        try {
+            await onProgress(data);
+        } catch (error) {
+            console.error("Failed to persist onboarding progress", error);
         }
 
         if (stepIndex === total - 1) {
@@ -1277,6 +1505,26 @@ function OnboardingPanel({
         }
 
         const nextStepIndex = stepIndex + 1;
+
+        if (
+            step.id === "preferredLanguage" &&
+            typeof currentValue === "string" &&
+            currentValue
+        ) {
+            const nextLocale = mapNextLocale(currentValue, locale);
+            persistLocale(nextLocale);
+
+            if (nextLocale !== locale) {
+                saveStoredOnboarding(false, data, nextStepIndex, true);
+                onRequestLocaleChange({
+                    nextLocale,
+                    nextData: data,
+                    stepIndex: nextStepIndex,
+                });
+                return;
+            }
+        }
+
         setStepIndex(nextStepIndex);
         saveStoredOnboarding(false, data, nextStepIndex, true);
     };
@@ -1310,6 +1558,12 @@ function OnboardingPanel({
     };
 
     const side: "left" | "right" = stepIndex % 2 === 0 ? "right" : "left";
+    const requiredStep =
+        step.id === "useMode" ||
+        step.id === "learnerAffiliation" ||
+        step.id === "teacherAffiliation" ||
+        step.id === "learnerDepartments" ||
+        step.id === "teacherDepartments";
 
     return (
         <div className="space-y-4">
@@ -1317,7 +1571,7 @@ function OnboardingPanel({
 
             {step.id === "learningInterests" ? (
                 <div className="mx-auto max-w-[520px]">
-                    <SubjectImageStrip subjects={subjectOptions} />
+                    <SubjectImageStrip subjects={learnerSubjectOptions} />
                 </div>
             ) : null}
 
@@ -1331,29 +1585,33 @@ function OnboardingPanel({
                     </div>
 
                     <div className="flex w-full flex-wrap items-center justify-end gap-1.5 sm:w-auto sm:flex-nowrap">
-                        <button
-                            type="button"
-                            onClick={handleSkipCurrent}
-                            disabled={busy}
-                            className={cn(
-                                buttonClass("ghost"),
-                                "h-7 w-auto shrink-0 whitespace-nowrap px-2.5 text-[11px] font-medium sm:text-xs"
-                            )}
-                        >
-                            {t("panel.skipCurrent", undefined, "Skip question")}
-                        </button>
+                        {!requiredStep ? (
+                            <button
+                                type="button"
+                                onClick={handleSkipCurrent}
+                                disabled={busy}
+                                className={cn(
+                                    buttonClass("ghost"),
+                                    "h-7 w-auto shrink-0 whitespace-nowrap px-2.5 text-[11px] font-medium sm:text-xs"
+                                )}
+                            >
+                                {t("panel.skipCurrent", undefined, "Skip question")}
+                            </button>
+                        ) : null}
 
-                        <button
-                            type="button"
-                            onClick={onSkipAll}
-                            disabled={busy}
-                            className={cn(
-                                buttonClass("ghost"),
-                                "h-7 w-auto shrink-0 whitespace-nowrap px-2.5 text-[11px] font-medium sm:text-xs"
-                            )}
-                        >
-                            {t("panel.skipAll", undefined, "Skip all")}
-                        </button>
+                        {!isAuthenticated ? (
+                            <button
+                                type="button"
+                                onClick={onSkipAll}
+                                disabled={busy}
+                                className={cn(
+                                    buttonClass("ghost"),
+                                    "h-7 w-auto shrink-0 whitespace-nowrap px-2.5 text-[11px] font-medium sm:text-xs"
+                                )}
+                            >
+                                {t("panel.skipAll", undefined, "Skip all")}
+                            </button>
+                        ) : null}
                     </div>
                 </div>
 
@@ -1367,7 +1625,7 @@ function OnboardingPanel({
                 <div className="mt-4 grid gap-2.5">
                     {step.id === "learningInterests" ? (
                         <CatalogSubjectChoices
-                            subjects={subjectOptions}
+                            subjects={learnerSubjectOptions}
                             selected={data.learningInterests}
                             onToggle={handleToggle}
                             disabled={busy}
@@ -1576,6 +1834,9 @@ export default function HomePageAvatarOnboardingClient({
                                                            isSubscriber,
                                                            latestChallenge,
                                                            dailyPracticeTargetCount,
+                                                           forceOnboarding = false,
+                                                           completionHref = null,
+                                                           initialOnboarding = null,
                                                        }: {
     initialSubjects: SubjectCard[];
     locale: string;
@@ -1583,6 +1844,9 @@ export default function HomePageAvatarOnboardingClient({
     isSubscriber: boolean;
     latestChallenge: PublicChallengeCardData | null;
     dailyPracticeTargetCount: number;
+    forceOnboarding?: boolean;
+    completionHref?: string | null;
+    initialOnboarding?: OnboardingInitialState | null;
 }) {
     const { t, resolve } = useTaggedT("homeOnboarding");
     const reduceMotion = useReducedMotion();
@@ -1617,7 +1881,23 @@ export default function HomePageAvatarOnboardingClient({
     const practiceEntryHandledRef = useRef(false);
 // 1) add this near your other memo/state setup, after pathname/router
 
-    const authHref = useAuthHref() ;
+    const studentHomeHref = useMemo(
+        () => buildStudentAppHref({ pathname: "/subjects", locale }),
+        [locale],
+    );
+    const newUserAuthHref = useMemo(
+        () =>
+            buildAuthenticateHrefForTarget({
+                locale,
+                targetPathname: "/onboarding",
+                search: new URLSearchParams({ returnTo: studentHomeHref }).toString(),
+            }),
+        [locale, studentHomeHref],
+    );
+    const returningUserAuthHref = useMemo(
+        () => buildAuthenticateHref(studentHomeHref),
+        [studentHomeHref],
+    );
     const practiceEntryRequested = hasPracticeEntryIntent(searchParams);
     function redirectToTrial(href: string) {
         redirectingRef.current = true;
@@ -1646,8 +1926,12 @@ export default function HomePageAvatarOnboardingClient({
         }
     };
 
-    const handleGoToAuth = () => {
-        router.push(authHref as any);
+    const handleNewUserAuth = () => {
+        router.push(newUserAuthHref as any);
+    };
+
+    const handleReturningUserAuth = () => {
+        router.push(returningUserAuthHref as any);
     };
 // 2) replace your bootstrapping effect with this
 
@@ -1658,29 +1942,63 @@ export default function HomePageAvatarOnboardingClient({
             typeof window !== "undefined" &&
             window.localStorage.getItem(DISMISSED_KEY) === "1";
 
-        const effectiveCompleted = stored.open ? false : stored.completed;
-        const effectiveSkipped = stored.open ? false : dismissed;
+        const serverData = initialOnboarding
+            ? {
+                ...DEFAULT_DATA,
+                ...initialOnboarding.data,
+                learnerDepartments: initialOnboarding.data.learnerDepartments ?? [],
+                teacherDepartments: initialOnboarding.data.teacherDepartments ?? [],
+                learningInterests: initialOnboarding.data.learningInterests ?? [],
+            }
+            : null;
+        const effectiveCompleted = isAuthenticated
+            ? Boolean(initialOnboarding?.completed)
+            : false;
+        const effectiveSkipped = isAuthenticated
+            ? Boolean(initialOnboarding?.skipped)
+            : dismissed;
+        const shouldResumeStoredDraft =
+            isAuthenticated &&
+            forceOnboarding &&
+            stored.open;
 
-        const normalizedStoredData = normalizeOnboardingDataForSubjects(
-            stored.data,
+        const sourceData = isAuthenticated
+            ? shouldResumeStoredDraft
+                ? {
+                    ...(serverData ?? DEFAULT_DATA),
+                    ...stored.data,
+                    learnerDepartments: stored.data.learnerDepartments ?? [],
+                    teacherDepartments: stored.data.teacherDepartments ?? [],
+                    learningInterests: stored.data.learningInterests ?? [],
+                }
+                : serverData ?? stored.data
+            : DEFAULT_DATA;
+        const normalizedData = normalizeOnboardingDataForSubjects(
+            sourceData,
             subjects,
         );
 
-        setOnboardingData(normalizedStoredData);
+        setOnboardingData(normalizedData);
         setCompleted(effectiveCompleted);
         setSkipped(effectiveSkipped);
-        setResumeStepIndex(stored.stepIndex);
+        setResumeStepIndex(
+            shouldResumeStoredDraft ? stored.stepIndex : 0,
+        );
 
-        // only resume onboarding if it was already open before refresh
-        const shouldResumeOnboarding = Boolean(stored.open);
-
-        setShowOnboarding(shouldResumeOnboarding);
+        setShowOnboarding(
+            isAuthenticated ? Boolean(forceOnboarding) : false,
+        );
         setBubbleCollapsed(
             Boolean(effectiveCompleted || effectiveSkipped || isAuthenticated),
         );
         setHydrated(true);
         setBootstrapped(true);
-    }, [isAuthenticated, subjects]);
+    }, [
+        forceOnboarding,
+        initialOnboarding,
+        isAuthenticated,
+        subjects,
+    ]);
     useEffect(() => {
         const interests = onboardingData.learningInterests ?? [];
 
@@ -1699,27 +2017,56 @@ export default function HomePageAvatarOnboardingClient({
         if (!pendingLocaleSwitch?.locale || !pathname) return;
 
         const timer = window.setTimeout(() => {
-            router.replace(pathname as any, {
+            const query = searchParams.toString();
+            const href = query ? `${pathname}?${query}` : pathname;
+
+            router.replace(href as any, {
                 locale: pendingLocaleSwitch.locale as any,
             });
         }, 220);
 
         return () => window.clearTimeout(timer);
-    }, [pendingLocaleSwitch, router, pathname]);
+    }, [pendingLocaleSwitch, router, pathname, searchParams]);
 
     const selectedTrialSubjects = useMemo(() => {
         const selected = new Set(onboardingData.learningInterests);
         return subjects.filter((s) => selected.has(s.slug));
     }, [subjects, onboardingData.learningInterests]);
 
+    const homeDepartmentSubjects = useMemo(
+        () =>
+            selectDepartmentHomeSubjects(
+                subjects,
+                onboardingData.learnerDepartments,
+            ),
+        [subjects, onboardingData.learnerDepartments],
+    );
+
     const homeSubjectShelf = useMemo(
         () =>
             buildHomeSubjectShelf(
-                subjects,
+                homeDepartmentSubjects,
                 onboardingData.learningInterests,
             ),
-        [subjects, onboardingData.learningInterests],
+        [homeDepartmentSubjects, onboardingData.learningInterests],
     );
+
+    const departmentHomeExperiences = useMemo(
+        () =>
+            resolveDepartmentHomeExperiences(
+                onboardingData.learnerDepartments,
+                {
+                    learnerEnabled: onboardingData.useMode !== "teacher",
+                },
+            ),
+        [onboardingData.learnerDepartments, onboardingData.useMode],
+    );
+
+    const showCodingHomeContent =
+        departmentHomeExperiences.includes("computer-science");
+    const visibleLatestChallenge = showCodingHomeContent
+        ? latestChallenge
+        : null;
 
     const hasCurrentHomeSubjects = homeSubjectShelf.some(
         (item) => item.kind === "current",
@@ -1759,8 +2106,36 @@ export default function HomePageAvatarOnboardingClient({
         onboardingData.level,
     );
 
+    const buildDepartmentSelections = (data: OnboardingData) => [
+        ...data.learnerDepartments.map((departmentKey) => ({
+            departmentKey,
+            context: "learner" as const,
+        })),
+        ...data.teacherDepartments.map((departmentKey) => ({
+            departmentKey,
+            context: "teacher" as const,
+        })),
+    ];
+
+    const persistOnboardingDraft = async (data: OnboardingData) => {
+        await saveOnboarding({
+            useMode: data.useMode || undefined,
+            learnerAffiliation: data.learnerAffiliation || undefined,
+            teacherAffiliation: data.teacherAffiliation || undefined,
+            departmentSelections: buildDepartmentSelections(data),
+            preferredLanguage: data.preferredLanguage || undefined,
+            learningInterests: data.learningInterests,
+            level: data.level || undefined,
+            studyTime: data.studyTime || undefined,
+        });
+    };
+
     const persistOnboardingState = async (data: OnboardingData) => {
         await saveOnboarding({
+            useMode: data.useMode || undefined,
+            learnerAffiliation: data.learnerAffiliation || undefined,
+            teacherAffiliation: data.teacherAffiliation || undefined,
+            departmentSelections: buildDepartmentSelections(data),
             preferredLanguage: data.preferredLanguage || undefined,
             learningInterests: data.learningInterests,
             level: data.level || undefined,
@@ -1883,6 +2258,10 @@ export default function HomePageAvatarOnboardingClient({
                 setShowOnboarding(false);
                 setBubbleCollapsed(true);
                 setResumeStepIndex(0);
+
+                if (completionHref && typeof window !== "undefined") {
+                    window.location.assign(completionHref);
+                }
                 return;
             }
 
@@ -1949,6 +2328,9 @@ export default function HomePageAvatarOnboardingClient({
 
         try {
             await saveOnboarding({ skipped: true });
+            if (isAuthenticated && completionHref && typeof window !== "undefined") {
+                window.location.assign(completionHref);
+            }
         } catch (err) {
             console.error("Failed to persist skipped onboarding", err);
         }
@@ -1967,6 +2349,17 @@ export default function HomePageAvatarOnboardingClient({
 // 4) replace reopenAssistant with this simpler version
 
     const reopenAssistant = () => {
+        if (isAuthenticated && typeof window !== "undefined") {
+            const onboardingUrl = new URL(
+                `/${encodeURIComponent(locale)}/onboarding`,
+                window.location.origin,
+            );
+            onboardingUrl.searchParams.set("edit", "1");
+            onboardingUrl.searchParams.set("returnTo", window.location.href);
+            window.location.assign(onboardingUrl.toString());
+            return;
+        }
+
         openOnboardingFlow();
     };
 
@@ -2083,7 +2476,11 @@ export default function HomePageAvatarOnboardingClient({
     return (
         <>
             {showChrome ? (
-                <HeaderSlick brand={APP_NAME} badge={t("common.mvp")} />
+                <HeaderSlick
+                    brand={APP_NAME}
+                    badge={t("common.mvp")}
+                    learnerDepartmentIds={onboardingData.learnerDepartments}
+                />
             ) : null}
 
             <PageShell>
@@ -2112,19 +2509,27 @@ export default function HomePageAvatarOnboardingClient({
 
                                         <div className="mt-6">
 
-                                            <OnboardingPanel
-                                                data={onboardingData}
-                                                setData={setOnboardingData}
-                                                onSkipAll={handleSkipAll}
-                                                onFinish={handleFinish}
-                                                subjectOptions={subjects}
-                                                locale={locale}
-                                                onThemeSelect={applyThemeChoice}
-                                                isAuthenticated={isAuthenticated}
-                                                initialStepIndex={resumeStepIndex}
-                                                onRequestLocaleChange={handleLocaleChange}
-                                                busy={Boolean(pendingLocaleSwitch)}
-                                            />
+                                            {isAuthenticated ? (
+                                                <OnboardingPanel
+                                                    data={onboardingData}
+                                                    setData={setOnboardingData}
+                                                    onSkipAll={handleSkipAll}
+                                                    onFinish={handleFinish}
+                                                    onProgress={persistOnboardingDraft}
+                                                    subjectOptions={subjects}
+                                                    locale={locale}
+                                                    onThemeSelect={applyThemeChoice}
+                                                    isAuthenticated={isAuthenticated}
+                                                    initialStepIndex={resumeStepIndex}
+                                                    onRequestLocaleChange={handleLocaleChange}
+                                                    busy={Boolean(pendingLocaleSwitch)}
+                                                />
+                                            ) : (
+                                                <PreAuthEntryPanel
+                                                    onNewUser={handleNewUserAuth}
+                                                    onReturningUser={handleReturningUserAuth}
+                                                />
+                                            )}
                                         </div>
                                     </Surface>
                                 </motion.div>
@@ -2141,21 +2546,21 @@ export default function HomePageAvatarOnboardingClient({
                                         <div
                                             className={cn(
                                                 "grid items-center gap-8 xl:gap-8",
-                                                latestChallenge
+                                                visibleLatestChallenge
                                                     ? "xl:grid-cols-[minmax(220px,0.78fr)_minmax(0,1.42fr)_minmax(220px,0.8fr)]"
                                                     : "xl:grid-cols-[minmax(0,1.05fr)_minmax(220px,0.95fr)] xl:gap-10",
                                             )}
                                         >
-                                            {latestChallenge ? (
+                                            {visibleLatestChallenge ? (
                                                 <div className="order-2 self-start xl:order-1">
-                                                    <LatestChallengeCard challenge={latestChallenge} />
+                                                    <LatestChallengeCard challenge={visibleLatestChallenge} />
                                                 </div>
                                             ) : null}
 
                                             <div
                                                 className={cn(
                                                     "min-w-0",
-                                                    latestChallenge
+                                                    visibleLatestChallenge
                                                         ? "order-1 xl:order-2"
                                                         : "order-2 xl:order-1",
                                                 )}
@@ -2168,7 +2573,7 @@ export default function HomePageAvatarOnboardingClient({
                                                     transition={{ duration: 0.5 }}
                                                     className={cn(
                                                         "mt-2 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl",
-                                                        latestChallenge ? "lg:text-[2.65rem]" : "lg:text-5xl",
+                                                        visibleLatestChallenge ? "lg:text-[2.65rem]" : "lg:text-5xl",
                                                     )}
                                                     style={{ color: "rgb(var(--ui-text) / 0.96)" }}
                                                 >
@@ -2276,7 +2681,7 @@ export default function HomePageAvatarOnboardingClient({
 
                                             <div
                                                 className={cn(
-                                                    latestChallenge
+                                                    visibleLatestChallenge
                                                         ? "order-3 xl:order-3"
                                                         : "order-1 xl:order-2",
                                                 )}
@@ -2321,22 +2726,51 @@ export default function HomePageAvatarOnboardingClient({
                                         </div>
                                     </Surface>
 
-                                    <HomeIdeDemo
-                                        kicker={t(
-                                            "ideDemo.kicker",
-                                            undefined,
-                                            "Inside ZoeSkoul",
-                                        )}
-                                        title={t(
-                                            "ideDemo.title",
-                                            undefined,
-                                            "Learn by doing, right inside the workspace",
-                                        )}
-                                        description={t(
-                                            "ideDemo.description",
-                                            { appName: APP_NAME },
-                                            "Write code, query data, work in the terminal, and get immediate guidance from your AI tutor—all without leaving the lesson.",
-                                        )}
+                                    <DepartmentExperienceSection
+                                        experienceIds={departmentHomeExperiences}
+                                        renderers={{
+                                            "computer-science": (
+                                                <HomeIdeDemo
+                                                    kicker={t(
+                                                        "ideDemo.kicker",
+                                                        undefined,
+                                                        "Inside ZoeSkoul",
+                                                    )}
+                                                    title={t(
+                                                        "ideDemo.title",
+                                                        undefined,
+                                                        "Learn by doing, right inside the workspace",
+                                                    )}
+                                                    description={t(
+                                                        "ideDemo.description",
+                                                        { appName: APP_NAME },
+                                                        "Write code, query data, work in the terminal, and get immediate guidance from your AI tutor—all without leaving the lesson.",
+                                                    )}
+                                                />
+                                            ),
+                                            languages: (
+                                                <LanguageExperienceDemo
+                                                    kicker={t("languageDemo.kicker", undefined, "Languages")}
+                                                    title={t("languageDemo.title", undefined, "Learn by listening and speaking")}
+                                                    description={t(
+                                                        "languageDemo.description",
+                                                        undefined,
+                                                        "Hear natural phrases, answer out loud, and build vocabulary with immediate feedback.",
+                                                    )}
+                                                    conversationLabel={t("languageDemo.conversationLabel", undefined, "Conversation practice")}
+                                                    listenLabel={t("languageDemo.listenLabel", undefined, "Listen")}
+                                                    learnerLabel={t("languageDemo.learnerLabel", undefined, "You")}
+                                                    prompt={t("languageDemo.prompt", undefined, "Bonjou! Kijan ou ye?")}
+                                                    response={t("languageDemo.response", undefined, "Mwen byen, mèsi.")}
+                                                    feedback={t("languageDemo.feedback", undefined, "Clear response")}
+                                                    vocabularyLabel={t("languageDemo.vocabularyLabel", undefined, "Vocabulary")}
+                                                    firstTerm={t("languageDemo.firstTerm", undefined, "bonjou")}
+                                                    firstMeaning={t("languageDemo.firstMeaning", undefined, "hello")}
+                                                    secondTerm={t("languageDemo.secondTerm", undefined, "mèsi")}
+                                                    secondMeaning={t("languageDemo.secondMeaning", undefined, "thank you")}
+                                                />
+                                            ),
+                                        }}
                                     />
 
                                     <HomePracticeCard

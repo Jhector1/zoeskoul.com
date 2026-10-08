@@ -49,6 +49,7 @@ function useStudentHeaderSession() {
     data: data
       ? {
           user: data.user ?? undefined,
+          onboarding: data.onboarding,
         }
       : data,
     status,

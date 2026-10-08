@@ -39,7 +39,7 @@
     "gate": {
       "kicker": "Byenveni",
       "title": "Ann konfigire paj dakèy {appName} ou a.",
-      "description": "Reponn kèk kestyon rapid pou pèsonalize lang, sijè, nivo, ritm, ak tèm nan. Ou ka chanje tout bagay pita."
+      "description": "Mete kijan ou itilize ZoeSkoul, kontèks enstitisyon ou, depatman ou, lang ou ak preferans aprantisaj ou. Nou montre sèlman kestyon ki enpòtan pou ou."
     },
     "hero": {
       "kicker": "Espas aprantisaj ou",
@@ -75,6 +75,26 @@
       "unlimitedCta": "Chwazi pratik"
     },
     "steps": {
+      "useMode": {
+        "title": "Kijan ou pral itilize {appName}?",
+        "description": "Chwazi si ou la pou aprann, anseye, oswa fè toude. Sa adapte espas ou san li pa bay pèmisyon sekirite."
+      },
+      "learnerAffiliation": {
+        "title": "Kijan w ap aprann?",
+        "description": "Di nou si w ap aprann poukont ou oswa atravè yon lekòl oubyen òganizasyon."
+      },
+      "learnerDepartments": {
+        "title": "Kisa ou vle aprann?",
+        "description": "Chwazi depatman ou yo. Chwa sa yo detèmine ki katalòg ki parèt nan espas aprantisaj ou."
+      },
+      "teacherAffiliation": {
+        "title": "Kijan w ap anseye?",
+        "description": "Di nou si w ap anseye poukont ou oswa kòm manm yon lekòl oubyen òganizasyon."
+      },
+      "teacherDepartments": {
+        "title": "Kisa ou anseye?",
+        "description": "Chwazi depatman ou anseye yo pou ZoeSkoul ka montre kourikoulòm ak zouti pwofesè ki enpòtan pou ou."
+      },
       "preferredLanguage": {
         "title": "Ki lang {appName} dwe itilize pou eksperyans ou a?",
         "description": "Sa fikse lang pa default pou akey, navigasyon, ak tèks pratik yo kote tradiksyon disponib."
@@ -125,7 +145,14 @@
         "friend": "Zanmi oswa kolèg",
         "social": "Rezo sosyal",
         "school-work": "Lekòl oswa travay",
-        "other": "Lòt"
+        "other": "Lòt",
+        "learn": "Aprann",
+        "teach": "Anseye",
+        "both": "Aprann epi anseye",
+        "independent": "Endepandan",
+        "independentHint": "Itilize ZoeSkoul poukont ou, san yon enstitisyon k ap jere kontèks sa a.",
+        "institution": "Lekòl oswa òganizasyon",
+        "institutionHint": "Ou konekte ak, w ap antre nan, oswa w ap anseye atravè yon enstitisyon."
       }
     },
     "panel": {
@@ -164,7 +191,7 @@
     },
     "recommended": {
       "kicker": "Chwazi pwochen chemen ou",
-      "title": "Kòmanse ak yon bagay ou anvi bati.",
+      "title": "Kòmanse ak yon bagay ou anvi aprann.",
       "titleWithCurrent": "Kontinye aprann oswa chwazi sa k ap vini apre.",
       "viewAll": "Gade tout sijè yo",
       "current": "Aktyèl",
@@ -189,12 +216,28 @@
       "avatarText": "Bonjou, mwen se gid ou. Èske ou nouvo isit la, oswa èske ou deja gen yon kont?",
       "newUser": "Mwen nouvo isit la",
       "returningUser": "Mwen deja gen yon kont",
-      "helper": "Nouvo itilizatè yo kòmanse ak onboarding. Itilizatè ki deja egziste yo ale konekte."
+      "helper": "Nouvo itilizatè yo kreye kont an premye, apre sa yo fini konfigirasyon an. Itilizatè ki deja gen kont konekte epi kontinye nan espas yo."
     },
     "latestChallenge": {
       "eyebrow": "Dènye defi chak jou",
       "noAccount": "Ou pa bezwen kont",
       "cta": "Ouvri defi a"
     }
+  },
+  "languageDemo": {
+    "kicker": "Lang",
+    "title": "Aprann lè w koute epi pale",
+    "description": "Koute fraz natirèl, reponn byen fò, epi devlope vokabilè w ak fidbak tousuit.",
+    "conversationLabel": "Pratik konvèsasyon",
+    "listenLabel": "Koute",
+    "learnerLabel": "Ou",
+    "prompt": "Bonjou! Kijan ou ye?",
+    "response": "Mwen byen, mèsi.",
+    "feedback": "Repons lan klè",
+    "vocabularyLabel": "Vokabilè",
+    "firstTerm": "bonjou",
+    "firstMeaning": "salitasyon",
+    "secondTerm": "mèsi",
+    "secondMeaning": "remèsiman"
   }
 }

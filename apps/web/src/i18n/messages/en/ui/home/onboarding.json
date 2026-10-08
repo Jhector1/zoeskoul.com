@@ -39,7 +39,7 @@
     "gate": {
       "kicker": "Welcome",
       "title": "Welcome to {appName}! Let’s set up your learning space.",
-      "description": "Answer a few quick questions to personalize language, subjects, level, pace, and theme. You can change everything later."
+      "description": "Set up how you use ZoeSkoul, your institution context, departments, language, and learning preferences. Only relevant questions are shown."
     },
     "hero": {
       "kicker": "Your learning space",
@@ -75,6 +75,26 @@
       "unlimitedCta": "Choose practice"
     },
     "steps": {
+      "useMode": {
+        "title": "How will you use {appName}?",
+        "description": "Choose whether you are here to learn, teach, or do both. This shapes the workspace without granting security permissions."
+      },
+      "learnerAffiliation": {
+        "title": "How are you learning?",
+        "description": "Tell us whether you are learning independently or through a school or organization."
+      },
+      "learnerDepartments": {
+        "title": "What do you want to learn?",
+        "description": "Choose your department or departments. These choices determine which catalogs populate your learning workspace."
+      },
+      "teacherAffiliation": {
+        "title": "How are you teaching?",
+        "description": "Tell us whether you teach independently or as part of a school or organization."
+      },
+      "teacherDepartments": {
+        "title": "What do you teach?",
+        "description": "Choose the departments you teach so ZoeSkoul can show the relevant curriculum and teacher tools."
+      },
       "preferredLanguage": {
         "title": "What language should {appName} use for your experience?",
         "description": "This sets your default language for onboarding, navigation, and practice copy where translations are available."
@@ -125,7 +145,14 @@
         "friend": "Friend or colleague",
         "social": "Social media",
         "school-work": "School or work",
-        "other": "Other"
+        "other": "Other",
+        "learn": "Learn",
+        "teach": "Teach",
+        "both": "Learn and teach",
+        "independent": "Independent",
+        "independentHint": "Use ZoeSkoul on your own, without an institution managing this context.",
+        "institution": "School or organization",
+        "institutionHint": "You are connected to, joining, or teaching through an institution."
       }
     },
     "panel": {
@@ -164,7 +191,7 @@
     },
     "recommended": {
       "kicker": "Choose your next path",
-      "title": "Start with something you’re excited to build.",
+      "title": "Start with something you’re excited to learn.",
       "titleWithCurrent": "Continue learning or choose what’s next.",
       "viewAll": "View all subjects",
       "current": "Current",
@@ -189,12 +216,28 @@
       "avatarText": "Hi, I’m your guide. Are you new here, or do you already have an account?",
       "newUser": "I’m new here",
       "returningUser": "I already have an account",
-      "helper": "New users start onboarding. Returning users go to sign in."
+      "helper": "New users create an account first, then complete onboarding. Returning users sign in and continue to their workspace."
     },
     "latestChallenge": {
       "eyebrow": "Latest daily challenge",
       "noAccount": "No account needed",
       "cta": "Open challenge"
     }
+  },
+  "languageDemo": {
+    "kicker": "Languages",
+    "title": "Learn by listening and speaking",
+    "description": "Hear natural phrases, answer out loud, and build vocabulary with immediate feedback.",
+    "conversationLabel": "Conversation practice",
+    "listenLabel": "Listen",
+    "learnerLabel": "You",
+    "prompt": "Bonjou! Kijan ou ye?",
+    "response": "Mwen byen, mèsi.",
+    "feedback": "Clear response",
+    "vocabularyLabel": "Vocabulary",
+    "firstTerm": "bonjou",
+    "firstMeaning": "hello",
+    "secondTerm": "mèsi",
+    "secondMeaning": "thank you"
   }
 }

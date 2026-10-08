@@ -79,6 +79,7 @@ export function LegacyProviders(props: {
           id: props.session.user.id,
           roles: props.session.roles,
         },
+        onboarding: props.session.onboarding,
       }
     : null;
 

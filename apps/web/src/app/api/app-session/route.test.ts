@@ -58,6 +58,7 @@ describe("GET /api/app-session", () => {
       user: null,
       roles: [],
       capabilities: [],
+      onboarding: null,
     });
   });
 
@@ -90,6 +91,7 @@ describe("GET /api/app-session", () => {
       },
       roles: ["student"],
       capabilities: ["student:access"],
+      onboarding: { status: "not_started", version: 1, learnerDepartments: [], teacherDepartments: [] },
     });
   });
 
@@ -196,6 +198,7 @@ describe("GET /api/app-session", () => {
       user: null,
       roles: [],
       capabilities: [],
+      onboarding: null,
     });
   });
 

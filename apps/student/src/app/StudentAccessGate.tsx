@@ -1,5 +1,6 @@
 import {
   buildAuthenticateUrl,
+  buildOnboardingUrl,
   type AppCapability,
   type AppSessionResponse,
 } from "@zoeskoul/auth-client";
@@ -36,6 +37,28 @@ export function StudentAccessGate(props: {
     });
 
     window.location.replace(signInUrl);
+  }, [
+    props.allowUnauthenticated,
+    props.websiteOrigin,
+    state,
+  ]);
+
+  useEffect(() => {
+    if (
+      state.status !== "authenticated" ||
+      props.allowUnauthenticated ||
+      !state.session.capabilities.includes(STUDENT_ACCESS_CAPABILITY) ||
+      state.session.onboarding.status === "completed"
+    ) {
+      return;
+    }
+
+    window.location.replace(
+      buildOnboardingUrl({
+        websiteOrigin: props.websiteOrigin,
+        callbackUrl: window.location.href,
+      }),
+    );
   }, [
     props.allowUnauthenticated,
     props.websiteOrigin,
@@ -118,6 +141,22 @@ export function StudentAccessGate(props: {
           >
             Return to ZoeSkoul
           </a>
+        </section>
+      </main>
+    );
+  }
+
+  if (
+    !props.allowUnauthenticated &&
+    session.onboarding.status !== "completed"
+  ) {
+    return (
+      <main className="student-state-page" aria-busy="true">
+        <section className="student-state-card">
+          <div className="student-state-spinner" aria-hidden="true" />
+          <p className="student-state-eyebrow">Setting up your learning space</p>
+          <h1>Opening ZoeSkoul onboarding</h1>
+          <p>Your setup is saved to your ZoeSkoul account.</p>
         </section>
       </main>
     );
