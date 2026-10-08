@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import { resolveAutomatedPublicChallengeCopy } from "@/lib/marketing/publicChallengeAiCopy";
 import { assertEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
 import { DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION } from "@/lib/practice/challenges/presentation";
 import type { PublishedChallengeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
@@ -66,8 +67,36 @@ export async function createOrReuseAutomatedPracticeChallenge(args: {
     orderBy: { createdAt: "desc" },
   });
 
-  if (existing) return existing;
+  if (existing) {
+    const savedDescription = String(
+      existing.shareDescription ?? "",
+    ).trim();
 
+    if (
+      savedDescription &&
+      savedDescription !== DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION
+    ) {
+      return existing;
+    }
+
+    const copy = await resolveAutomatedPublicChallengeCopy({
+      locale: args.locale,
+      option: args.option,
+    });
+
+    return prisma.practiceChallengeLink.update({
+      where: { id: existing.id },
+      data: {
+        shareTitle: copy.title,
+        shareDescription: copy.prompt,
+      },
+    });
+  }
+
+  const copy = await resolveAutomatedPublicChallengeCopy({
+    locale: args.locale,
+    option: args.option,
+  });
   const expiresAt = practiceChallengeLinkExpiresAt(now);
   const signedToken = signSharedChallenge(target, { expiresAt });
 
@@ -80,8 +109,8 @@ export async function createOrReuseAutomatedPracticeChallenge(args: {
     exerciseKey: target.exerciseKey,
     exercisePurpose: "practice",
     signedToken,
-    shareTitle: target.exerciseTitle,
-    shareDescription: DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION,
+    shareTitle: copy.title,
+    shareDescription: copy.prompt,
     ogImagePublicId: null,
     ogImageAlt: null,
     createdById: null,

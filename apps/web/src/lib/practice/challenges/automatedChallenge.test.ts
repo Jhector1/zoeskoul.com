@@ -15,6 +15,8 @@ const mocks = vi.hoisted(() => ({
   expiresAt: vi.fn(),
   resolveTarget: vi.fn(),
   sign: vi.fn(),
+  aiCopy: vi.fn(),
+  update: vi.fn(),
 }));
 
 vi.mock("server-only", () => ({}));
@@ -23,8 +25,13 @@ vi.mock("@/lib/prisma", () => ({
   prisma: {
     practiceChallengeLink: {
       findFirst: mocks.findFirst,
+      update: mocks.update,
     },
   },
+}));
+
+vi.mock("@/lib/marketing/publicChallengeAiCopy", () => ({
+  resolveAutomatedPublicChallengeCopy: mocks.aiCopy,
 }));
 
 vi.mock("@/lib/practice/challenges/eligibility", () => ({
@@ -110,6 +117,17 @@ beforeEach(() => {
     id: "challenge-1",
     code: "Challenge1",
   });
+  mocks.aiCopy.mockResolvedValue({
+    title: "Clear Challenge Title",
+    prompt: "Clear challenge prompt with the required context.",
+    source: "ai",
+  });
+  mocks.update.mockImplementation(async ({ data }) => ({
+    id: "existing",
+    code: "Existing1",
+    shareDescription: data.shareDescription,
+    shareTitle: data.shareTitle,
+  }));
 });
 
 describe("automated public challenge creation", () => {
@@ -145,7 +163,8 @@ describe("automated public challenge creation", () => {
         exerciseKey: target.exerciseKey,
         exercisePurpose: "practice",
         signedToken: "signed-token",
-        shareTitle: target.exerciseTitle,
+        shareTitle: "Clear Challenge Title",
+        shareDescription: "Clear challenge prompt with the required context.",
         ogImagePublicId: null,
         createdById: null,
       }),
@@ -156,6 +175,45 @@ describe("automated public challenge creation", () => {
     const existing = {
       id: "existing",
       code: "Existing1",
+      shareTitle: target.exerciseTitle,
+      shareDescription: "Default challenge description",
+    };
+    mocks.findFirst.mockResolvedValue(existing);
+
+    await expect(
+      createOrReuseAutomatedPracticeChallenge({
+        locale: "en",
+        option,
+      }),
+    ).resolves.toEqual(
+      expect.objectContaining({
+        shareTitle: "Clear Challenge Title",
+        shareDescription:
+          "Clear challenge prompt with the required context.",
+      }),
+    );
+
+    expect(mocks.aiCopy).toHaveBeenCalledWith({
+      locale: "en",
+      option,
+    });
+    expect(mocks.update).toHaveBeenCalledWith({
+      where: { id: "existing" },
+      data: {
+        shareTitle: "Clear Challenge Title",
+        shareDescription:
+          "Clear challenge prompt with the required context.",
+      },
+    });
+    expect(mocks.sign).not.toHaveBeenCalled();
+    expect(mocks.createRecord).not.toHaveBeenCalled();
+  });
+  it("preserves explicitly customized copy on an existing active challenge", async () => {
+    const existing = {
+      id: "existing-custom",
+      code: "ExistingCustom1",
+      shareTitle: "Custom title",
+      shareDescription: "Custom description",
     };
     mocks.findFirst.mockResolvedValue(existing);
 
@@ -166,7 +224,9 @@ describe("automated public challenge creation", () => {
       }),
     ).resolves.toBe(existing);
 
-    expect(mocks.sign).not.toHaveBeenCalled();
-    expect(mocks.createRecord).not.toHaveBeenCalled();
+    expect(mocks.aiCopy).not.toHaveBeenCalled();
+    expect(mocks.update).not.toHaveBeenCalled();
   });
+
+
 });

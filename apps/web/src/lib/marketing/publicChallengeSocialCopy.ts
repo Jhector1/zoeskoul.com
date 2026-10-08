@@ -25,7 +25,20 @@ function compactDescription(value: unknown) {
     .replace(/```[\s\S]*?```/g, " ")
     .replace(/`([^`]+)`/g, "$1")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-    .replace(/[*_>#~]+/g, " ")
+    // Strip markdown presentation syntax without mutating technical tokens.
+    // In particular, identifiers such as inventory_items and operators such
+    // as SELECT * must survive exactly as authored/generated.
+    .replace(/^\s{0,3}(?:#{1,6}|>)\s*/gm, "")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/~~([^~]+)~~/g, "$1")
+    .replace(
+      /(^|[\s(])\*([^*\n]+)\*(?=$|[\s).,!?;:])/g,
+      "$1$2",
+    )
+    .replace(
+      /(^|[\s(])_([^_\n]+)_(?=$|[\s).,!?;:])/g,
+      "$1$2",
+    )
     .replace(/\s+/g, " ")
     .trim();
 
@@ -101,7 +114,10 @@ export async function resolvePublicChallengeSocialDescription(
     saved.startsWith("@:");
 
   if (!needsAuthoredPrompt) {
-    return saved;
+    return (
+      compactDescription(saved) ||
+      DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION
+    );
   }
 
   try {
@@ -153,7 +169,7 @@ export async function resolvePublicChallengeSocialDescription(
   }
 
   return (
-    saved ||
+    compactDescription(saved) ||
     DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION
   );
 }

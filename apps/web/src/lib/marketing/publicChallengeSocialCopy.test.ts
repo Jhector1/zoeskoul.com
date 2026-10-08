@@ -151,5 +151,46 @@ describe(
         ).not.toHaveBeenCalled();
       },
     );
+    it(
+      "keeps persisted AI copy concise for both social and Brevo",
+      async () => {
+        const longDescription =
+          "In the inventory_items table, preview row id 5 before making the approved change. " +
+          "Update its status to active, then verify id, name, and status for the same row. " +
+          "This intentionally includes extra explanatory wording that should not make a social post or automatic email unnecessarily long.";
+
+        const result =
+          await resolvePublicChallengeSocialDescription({
+            ...legacyChallenge,
+            shareDescription: longDescription,
+          });
+
+        expect(result.length).toBeLessThanOrEqual(240);
+        expect(result).toContain("inventory_items");
+        expect(result).toContain("id 5");
+        expect(mocks.published).not.toHaveBeenCalled();
+      },
+    );
+
+
+    it(
+      "preserves technical identifiers and SQL operators while compacting",
+      async () => {
+        const result =
+          await resolvePublicChallengeSocialDescription({
+            ...legacyChallenge,
+            shareDescription:
+              "In the `inventory_items` table, run `SELECT *` to preview row `id = 5`, then update `status` to `active`.",
+          });
+
+        expect(result).toContain("inventory_items");
+        expect(result).toContain("SELECT *");
+        expect(result).toContain("id = 5");
+        expect(result).toContain("status");
+        expect(result).toContain("active");
+      },
+    );
+
+
   },
 );
