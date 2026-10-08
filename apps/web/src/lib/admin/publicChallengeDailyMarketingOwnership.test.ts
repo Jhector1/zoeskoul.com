@@ -49,4 +49,24 @@ describe("daily challenge multi-channel automation ownership", () => {
     expect(emailControls).toContain("Automatic email");
     expect(emailControls).toContain("Brevo audience list");
   });
+  it("fans the one claimed occurrence challenge through social and Brevo", () => {
+    const automation = source(
+      "apps/web/src/lib/marketing/publicChallengeSocialAutomation.ts",
+    );
+
+    expect(automation).toContain(
+      "const occurrence = publicChallengeDailyScheduleOccurrence({",
+    );
+    expect(automation).toContain(
+      "await getDailyPublicChallengeForDispatch(",
+    );
+    expect(
+      automation.match(/dailyOccurrenceId: occurrence\.id/g)?.length,
+    ).toBe(2);
+    expect(automation).toContain(
+      "challenge: currentChallenge",
+    );
+  });
+
+
 });

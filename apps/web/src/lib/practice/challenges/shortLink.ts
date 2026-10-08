@@ -126,9 +126,12 @@ export async function getLatestDailyPracticeChallengeLink(
   const dispatch =
     await prisma.publicChallengeDailyDispatch.findFirst({
       where: { locale },
+      // The homepage follows the most recently claimed scheduled
+      // occurrence. Claim time is authoritative even if the configured
+      // timezone changes across a local-date boundary.
       orderBy: [
-        { dispatchDate: "desc" },
         { createdAt: "desc" },
+        { id: "desc" },
       ],
       include: { challenge: true },
     });

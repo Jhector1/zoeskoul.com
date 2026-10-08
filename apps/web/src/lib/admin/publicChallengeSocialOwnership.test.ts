@@ -98,4 +98,19 @@ describe("public challenge social publishing ownership", () => {
     );
     expect(tick).toContain("timingSafeEqual");
   });
+  it("renders the real publication timestamp for recent social posts", () => {
+    const admin = source(
+      "apps/admin/src/features/public-challenges/PublicChallengeSocialPublisher.tsx",
+    );
+
+    expect(admin).toContain(
+      "post.publishedAt ?? post.createdAt",
+    );
+    expect(admin).toContain(
+      "formatRecentPostTimestamp(post, settings?.timezone)",
+    );
+    expect(admin).not.toContain("{post.dispatchDate}");
+  });
+
+
 });

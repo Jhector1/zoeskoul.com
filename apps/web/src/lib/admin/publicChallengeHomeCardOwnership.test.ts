@@ -1,15 +1,14 @@
 import fs from "node:fs";
-import path from "node:path";
 import { describe, expect, it } from "vitest";
 
-const root = path.resolve(process.cwd(), "../..");
+const root = new URL("../../../../../", import.meta.url);
 
 function source(relative: string) {
-  return fs.readFileSync(path.join(root, relative), "utf8");
+  return fs.readFileSync(new URL(relative, root), "utf8");
 }
 
 describe("home latest daily challenge ownership", () => {
-  it("prefers the automatic daily dispatch over an unrelated newer manual link", () => {
+  it("uses the scheduler-claimed daily dispatch as the only homepage challenge source", () => {
     const home = source(
       "apps/web/src/components/home/onboarding/HomePageAvatarOnboardingServer.tsx",
     );
@@ -24,31 +23,28 @@ describe("home latest daily challenge ownership", () => {
       "prisma.publicChallengeDailyDispatch.findFirst",
     );
     expect(shortLink).toContain(
-      '{ dispatchDate: "desc" }',
+      '{ createdAt: "desc" }',
     );
 
     expect(home).toContain(
       "await getLatestDailyPracticeChallengeLink(challengeLocale)",
     );
-    expect(home).toContain(
-      "await getLatestActivePracticeChallengeLink(challengeLocale)",
+    expect(home).not.toContain(
+      "getLatestActivePracticeChallengeLink",
     );
     expect(home).toContain("source: link");
   });
 
-  it("keeps the manual/latest-link fallback when no daily dispatch exists", () => {
+  it("does not promote a manually-created active link when no daily occurrence was claimed", () => {
     const home = source(
       "apps/web/src/components/home/onboarding/HomePageAvatarOnboardingServer.tsx",
     );
 
-    const daily = home.indexOf(
-      "getLatestDailyPracticeChallengeLink(challengeLocale)",
+    expect(home).toContain(
+      "const link = await getLatestDailyPracticeChallengeLink(challengeLocale);",
     );
-    const fallback = home.indexOf(
-      "getLatestActivePracticeChallengeLink(challengeLocale)",
+    expect(home).not.toContain(
+      "getLatestActivePracticeChallengeLink",
     );
-
-    expect(daily).toBeGreaterThanOrEqual(0);
-    expect(fallback).toBeGreaterThan(daily);
   });
 });

@@ -41,6 +41,42 @@ const LABELS: Record<PublicChallengeSocialProvider, string> = {
   x: "X",
 };
 
+function formatRecentPostTimestamp(
+  post: PublicChallengeSocialAdminResponse["recentPosts"][number],
+  timeZone?: string,
+) {
+  const timestamp = post.publishedAt ?? post.createdAt;
+  const value = new Date(timestamp);
+
+  if (Number.isNaN(value.getTime())) {
+    return post.dispatchDate;
+  }
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short",
+  };
+  if (timeZone) {
+    options.timeZone = timeZone;
+  }
+
+  try {
+    return new Intl.DateTimeFormat("en-US", options).format(value);
+  } catch {
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    }).format(value);
+  }
+}
+
 export default function PublicChallengeSocialPublisher(props: {
   challenge: Challenge | null;
 }) {
@@ -428,7 +464,7 @@ export default function PublicChallengeSocialPublisher(props: {
                       {post.challengeTitle}
                     </span>
                     <span className="text-neutral-500">
-                      {post.dispatchDate}
+                      {formatRecentPostTimestamp(post, settings?.timezone)}
                     </span>
                     {post.lastError ? (
                       <span className="text-red-700 md:col-span-4">

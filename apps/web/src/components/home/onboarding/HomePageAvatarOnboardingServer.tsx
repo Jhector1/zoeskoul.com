@@ -5,7 +5,6 @@ import {
 } from "@/lib/onboarding/getOnboardingSubjects";
 import { buildPublicChallengePresentation } from "@/lib/practice/challenges/presentation";
 import {
-    getLatestActivePracticeChallengeLink,
     getLatestDailyPracticeChallengeLink,
 } from "@/lib/practice/challenges/shortLink";
 import type { PublicChallengeCardData } from "@/lib/practice/challenges/types";
@@ -24,9 +23,7 @@ async function getLatestChallengeCard(
 ): Promise<PublicChallengeCardData | null> {
     try {
         const challengeLocale = supportedLocale(locale);
-        const link =
-            (await getLatestDailyPracticeChallengeLink(challengeLocale)) ??
-            (await getLatestActivePracticeChallengeLink(challengeLocale));
+        const link = await getLatestDailyPracticeChallengeLink(challengeLocale);
         if (!link) return null;
 
         const presentation = buildPublicChallengePresentation({

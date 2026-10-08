@@ -2,6 +2,7 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 const prismaMocks = vi.hoisted(() => ({
   findFirst: vi.fn(),
+  dailyFindFirst: vi.fn(),
 }));
 
 vi.mock("server-only", () => ({}));
@@ -10,11 +11,15 @@ vi.mock("@/lib/prisma", () => ({
     practiceChallengeLink: {
       findFirst: prismaMocks.findFirst,
     },
+    publicChallengeDailyDispatch: {
+      findFirst: prismaMocks.dailyFindFirst,
+    },
   },
 }));
 
 let createPracticeChallengeCode: typeof import("./shortLink").createPracticeChallengeCode;
 let getLatestActivePracticeChallengeLink: typeof import("./shortLink").getLatestActivePracticeChallengeLink;
+let getLatestDailyPracticeChallengeLink: typeof import("./shortLink").getLatestDailyPracticeChallengeLink;
 let normalizePracticeChallengeCode: typeof import("./shortLink").normalizePracticeChallengeCode;
 let practiceChallengePath: typeof import("./shortLink").practiceChallengePath;
 
@@ -22,6 +27,7 @@ beforeAll(async () => {
   ({
     createPracticeChallengeCode,
     getLatestActivePracticeChallengeLink,
+    getLatestDailyPracticeChallengeLink,
     normalizePracticeChallengeCode,
     practiceChallengePath,
   } = await import("./shortLink"));
@@ -29,6 +35,7 @@ beforeAll(async () => {
 
 beforeEach(() => {
   prismaMocks.findFirst.mockReset();
+  prismaMocks.dailyFindFirst.mockReset();
 });
 
 describe("practice challenge short links", () => {
@@ -95,5 +102,30 @@ describe("practice challenge short links", () => {
       orderBy: { createdAt: "desc" },
     });
   });
+
+  it("returns the challenge from the most recently claimed daily occurrence", async () => {
+    const challenge = {
+      id: "daily-challenge",
+      revokedAt: null,
+      expiresAt: null,
+    };
+    prismaMocks.dailyFindFirst.mockResolvedValueOnce({
+      challenge,
+    });
+
+    await expect(
+      getLatestDailyPracticeChallengeLink("en"),
+    ).resolves.toBe(challenge);
+
+    expect(prismaMocks.dailyFindFirst).toHaveBeenCalledWith({
+      where: { locale: "en" },
+      orderBy: [
+        { createdAt: "desc" },
+        { id: "desc" },
+      ],
+      include: { challenge: true },
+    });
+  });
+
 
 });
