@@ -20,9 +20,18 @@ const content = {
   imageAlt: "Python challenge",
 };
 
+function testEnv(
+  values: Record<string, string | undefined>,
+): NodeJS.ProcessEnv {
+  return {
+    ...values,
+    NODE_ENV: "test",
+  };
+}
+
 describe("public challenge social providers", () => {
   it("reports configuration without exposing secret values", () => {
-    const statuses = publicChallengeSocialProviderStatuses({
+    const statuses = publicChallengeSocialProviderStatuses(testEnv({
       NODE_ENV: "test",
       META_GRAPH_API_VERSION: "v26.0",
       FACEBOOK_PAGE_ID: "page-1",
@@ -36,12 +45,38 @@ describe("public challenge social providers", () => {
       X_API_SECRET: "secret-api-secret",
       X_ACCESS_TOKEN: "secret-access-token",
       X_ACCESS_TOKEN_SECRET: "secret-access-secret",
-    } as NodeJS.ProcessEnv);
+      THREADS_ACCESS_TOKEN: "secret-threads",
+      REDDIT_COMMERCIAL_API_APPROVED: "true",
+      REDDIT_USER_AGENT: "zoeskoul:test:v1",
+      REDDIT_SUBREDDIT: "zoeskoul",
+      REDDIT_ACCESS_TOKEN: "secret-reddit",
+      TIKTOK_ACCESS_TOKEN: "secret-tiktok",
+      TIKTOK_PRIVACY_LEVEL: "PUBLIC_TO_EVERYONE",
+      TIKTOK_DIRECT_POST_AUDITED: "true",
+    }));
 
     expect(statuses.every((item) => item.configured)).toBe(true);
+    expect(statuses.map((item) => item.provider)).toEqual([
+      "facebook",
+      "instagram",
+      "linkedin",
+      "x",
+      "threads",
+      "reddit",
+      "tiktok",
+    ]);
     expect(
       statuses.find((item) => item.provider === "x")?.imageRequired,
     ).toBe(true);
+    expect(
+      statuses.find((item) => item.provider === "tiktok")?.imageRequired,
+    ).toBe(true);
+    expect(
+      statuses.find((item) => item.provider === "threads")?.imageRequired,
+    ).toBe(false);
+    expect(
+      statuses.find((item) => item.provider === "reddit")?.imageRequired,
+    ).toBe(false);
     expect(JSON.stringify(statuses)).not.toContain("secret-");
   });
 
@@ -97,14 +132,14 @@ describe("public challenge social providers", () => {
       "x",
       content,
       {
-        env: {
+        env: testEnv({
           NODE_ENV: "test",
           X_API_KEY: "api-key",
           X_API_SECRET: "api-secret",
           X_ACCESS_TOKEN: "access-token",
           X_ACCESS_TOKEN_SECRET: "access-secret",
           X_USERNAME: "zoeskoul",
-        } as NodeJS.ProcessEnv,
+        }),
         fetcher,
       },
     );
@@ -223,7 +258,7 @@ describe("public challenge social providers", () => {
       "facebook",
       content,
       {
-        env: {
+        env: testEnv({
           NODE_ENV: "test",
           META_GRAPH_API_VERSION:
             "v26.0",
@@ -231,7 +266,7 @@ describe("public challenge social providers", () => {
             "page-1",
           FACEBOOK_PAGE_ACCESS_TOKEN:
             "token",
-        } as NodeJS.ProcessEnv,
+        }),
         fetcher,
       },
     );
@@ -267,6 +302,237 @@ describe("public challenge social providers", () => {
     );
   });
 
+  it("publishes a shared image challenge to Threads", async () => {
+    const fetcher = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+
+      if (url.endsWith("/me/threads")) {
+        return new Response(JSON.stringify({ id: "container-1" }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      if (url.endsWith("/me/threads_publish")) {
+        return new Response(JSON.stringify({ id: "thread-1" }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      return new Response("unexpected request", { status: 500 });
+    }) as unknown as typeof fetch;
+
+    await expect(
+      publishPublicChallengeToProvider("threads", content, {
+        env: testEnv({
+          THREADS_ACCESS_TOKEN: "threads-token",
+        }),
+        fetcher,
+      }),
+    ).resolves.toEqual({
+      providerPostId: "thread-1",
+      providerPostUrl: null,
+    });
+
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    const [, createInit] = vi.mocked(fetcher).mock.calls[0]!;
+    const createBody = new URLSearchParams(String(createInit?.body));
+    expect(createBody.get("media_type")).toBe("IMAGE");
+    expect(createBody.get("image_url")).toBe(content.imageUrl);
+    expect(createBody.get("text")).toContain(content.description);
+    expect(createBody.get("text")).toContain(content.challengeUrl);
+    expect(createBody.get("access_token")).toBe("threads-token");
+  });
+
+  it("posts a TikTok-safe photo after checking creator settings", async () => {
+    const fetcher = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+
+      if (url.endsWith("/creator_info/query/")) {
+        return new Response(
+          JSON.stringify({
+            data: {
+              privacy_level_options: [
+                "PUBLIC_TO_EVERYONE",
+                "SELF_ONLY",
+              ],
+              comment_disabled: false,
+            },
+            error: { code: "ok", message: "" },
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      if (url.endsWith("/content/init/")) {
+        return new Response(
+          JSON.stringify({
+            data: { publish_id: "publish-1" },
+            error: { code: "ok", message: "" },
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      return new Response("unexpected request", { status: 500 });
+    }) as unknown as typeof fetch;
+
+    await expect(
+      publishPublicChallengeToProvider("tiktok", content, {
+        env: testEnv({
+          TIKTOK_ACCESS_TOKEN: "tiktok-token",
+          TIKTOK_PRIVACY_LEVEL: "PUBLIC_TO_EVERYONE",
+          TIKTOK_DIRECT_POST_AUDITED: "true",
+        }),
+        fetcher,
+      }),
+    ).resolves.toEqual({
+      providerPostId: "publish-1",
+      providerPostUrl: null,
+    });
+
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    const [, publishInit] = vi.mocked(fetcher).mock.calls[1]!;
+    const payload = JSON.parse(String(publishInit?.body)) as {
+      post_info: {
+        description: string;
+        brand_content_toggle: boolean;
+        brand_organic_toggle: boolean;
+      };
+      source_info: { photo_images: string[] };
+    };
+
+    expect(payload.source_info.photo_images).toEqual([content.imageUrl]);
+    expect(payload.post_info.description).toBe(content.description);
+    expect(payload.post_info.description).not.toContain(content.challengeUrl);
+    expect(payload.post_info.description).not.toContain("#ZoeSkoul");
+    expect(payload.post_info.brand_content_toggle).toBe(false);
+    expect(payload.post_info.brand_organic_toggle).toBe(true);
+  });
+
+  it("checks Reddit requirements before submitting a self post", async () => {
+    const fetcher = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+
+      if (url.endsWith("/api/v1/zoeskoul/post_requirements")) {
+        return new Response(
+          JSON.stringify({
+            body_restriction_policy: "none",
+            body_text_max_length: 4000,
+            title_text_max_length: 300,
+            title_text_min_length: 1,
+            is_flair_required: false,
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      if (url.endsWith("/api/submit")) {
+        return new Response(
+          JSON.stringify({
+            json: {
+              errors: [],
+              data: {
+                name: "t3_post1",
+                url: "https://www.reddit.com/r/zoeskoul/comments/post1/",
+              },
+            },
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      return new Response("unexpected request", { status: 500 });
+    }) as unknown as typeof fetch;
+
+    await expect(
+      publishPublicChallengeToProvider("reddit", content, {
+        env: testEnv({
+          REDDIT_COMMERCIAL_API_APPROVED: "true",
+          REDDIT_USER_AGENT: "zoeskoul:test:v1",
+          REDDIT_SUBREDDIT: "zoeskoul",
+          REDDIT_ACCESS_TOKEN: "reddit-token",
+        }),
+        fetcher,
+      }),
+    ).resolves.toEqual({
+      providerPostId: "t3_post1",
+      providerPostUrl:
+        "https://www.reddit.com/r/zoeskoul/comments/post1/",
+    });
+
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    const [, requirementsInit] = vi.mocked(fetcher).mock.calls[0]!;
+    expect(new Headers(requirementsInit?.headers).get("User-Agent")).toBe(
+      "zoeskoul:test:v1",
+    );
+
+    const [, submitInit] = vi.mocked(fetcher).mock.calls[1]!;
+    const form = new URLSearchParams(String(submitInit?.body));
+    expect(form.get("kind")).toBe("self");
+    expect(form.get("sr")).toBe("zoeskoul");
+    expect(form.get("validate_on_submit")).toBe("true");
+    expect(form.get("text")).toContain(content.description);
+    expect(form.get("text")).toContain(content.challengeUrl);
+  });
+
+  it("keeps Reddit disabled until commercial API use is approved", () => {
+    const status = publicChallengeSocialProviderStatuses(testEnv({
+      REDDIT_COMMERCIAL_API_APPROVED: "false",
+      REDDIT_USER_AGENT: "zoeskoul:test:v1",
+      REDDIT_SUBREDDIT: "zoeskoul",
+      REDDIT_ACCESS_TOKEN: "reddit-token",
+    })).find((item) => item.provider === "reddit");
+
+    expect(status?.configured).toBe(false);
+  });
+
+  it("keeps public TikTok posting disabled until the Direct Post client is audited", () => {
+    const status = publicChallengeSocialProviderStatuses(testEnv({
+      TIKTOK_ACCESS_TOKEN: "tiktok-token",
+      TIKTOK_PRIVACY_LEVEL: "PUBLIC_TO_EVERYONE",
+      TIKTOK_DIRECT_POST_AUDITED: "false",
+    })).find((item) => item.provider === "tiktok");
+
+    expect(status?.configured).toBe(false);
+  });
+
+  it("requires a TikTok-safe image before calling TikTok", async () => {
+    const fetcher = vi.fn() as unknown as typeof fetch;
+
+    await expect(
+      publishPublicChallengeToProvider(
+        "tiktok",
+        { ...content, imageUrl: null },
+        {
+          env: testEnv({
+            TIKTOK_ACCESS_TOKEN: "tiktok-token",
+            TIKTOK_PRIVACY_LEVEL: "PUBLIC_TO_EVERYONE",
+            TIKTOK_DIRECT_POST_AUDITED: "true",
+        }),
+          fetcher,
+        },
+      ),
+    ).rejects.toThrow(
+      "TikTok requires a public, TikTok-safe challenge image.",
+    );
+
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
   it("requires an image before calling X", async () => {
     const fetcher = vi.fn() as unknown as typeof fetch;
 
@@ -275,13 +541,13 @@ describe("public challenge social providers", () => {
         "x",
         { ...content, imageUrl: null },
         {
-          env: {
+          env: testEnv({
             NODE_ENV: "test",
             X_API_KEY: "api-key",
             X_API_SECRET: "api-secret",
             X_ACCESS_TOKEN: "access-token",
             X_ACCESS_TOKEN_SECRET: "access-secret",
-          } as NodeJS.ProcessEnv,
+        }),
           fetcher,
         },
       ),
@@ -300,11 +566,11 @@ describe("public challenge social providers", () => {
         "instagram",
         { ...content, imageUrl: null },
         {
-          env: {
+          env: testEnv({
             NODE_ENV: "test",
             INSTAGRAM_BUSINESS_ACCOUNT_ID: "ig-1",
             INSTAGRAM_ACCESS_TOKEN: "token",
-          } as NodeJS.ProcessEnv,
+        }),
           fetcher,
         },
       ),

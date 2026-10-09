@@ -1,12 +1,14 @@
 import "server-only";
 
 import { getProductionAppOrigin } from "@zoeskoul/app-config";
-import type {
-  PublicChallengeSocialAdminResponse,
-  PublicChallengeSocialAutomationSettings,
-  PublicChallengeSocialProvider,
-  PublicChallengeSocialPublishResponse,
-  PublicChallengeSocialPublishResult,
+import {
+  PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS,
+  type PublicChallengeSocialAdminResponse,
+  type PublicChallengeSocialAutomationProvider,
+  type PublicChallengeSocialAutomationSettings,
+  type PublicChallengeSocialProvider,
+  type PublicChallengeSocialPublishResponse,
+  type PublicChallengeSocialPublishResult,
 } from "@zoeskoul/api-contracts";
 
 import { prisma } from "@/lib/prisma";
@@ -41,14 +43,14 @@ import {
   sendPublicChallengeCampaignNow,
 } from "@/lib/marketing/publicChallengeCampaign";
 
-import { ensurePublicChallengeSocialImage } from "@/lib/practice/challenges/socialCard";
+import {
+  ensurePublicChallengeSocialImage,
+  ensurePublicChallengeTikTokImage,
+} from "@/lib/practice/challenges/socialCard";
 
 const AUTOMATION_ID = "daily";
-const PROVIDERS: PublicChallengeSocialProvider[] = [
-  "facebook",
-  "instagram",
-  "linkedin",
-  "x",
+const PROVIDERS: PublicChallengeSocialAutomationProvider[] = [
+  ...PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS,
 ];
 const STALE_PUBLISHING_MS = 15 * 60 * 1000;
 
@@ -61,17 +63,34 @@ type AutomationRow = {
   instagramEnabled: boolean;
   linkedinEnabled: boolean;
   xEnabled: boolean;
+  threadsEnabled: boolean;
+  redditEnabled: boolean;
   emailEnabled: boolean;
   emailListId: number | null;
 };
 
-function rowProviders(row: AutomationRow): PublicChallengeSocialProvider[] {
-  return PROVIDERS.filter((provider) => {
-    if (provider === "facebook") return row.facebookEnabled;
-    if (provider === "instagram") return row.instagramEnabled;
-    if (provider === "linkedin") return row.linkedinEnabled;
-    return row.xEnabled;
-  });
+type ProviderFlag =
+  | "facebookEnabled"
+  | "instagramEnabled"
+  | "linkedinEnabled"
+  | "xEnabled"
+  | "threadsEnabled"
+  | "redditEnabled";
+
+const PROVIDER_FLAG: Record<
+  PublicChallengeSocialAutomationProvider,
+  ProviderFlag
+> = {
+  facebook: "facebookEnabled",
+  instagram: "instagramEnabled",
+  linkedin: "linkedinEnabled",
+  x: "xEnabled",
+  threads: "threadsEnabled",
+  reddit: "redditEnabled",
+};
+
+function rowProviders(row: AutomationRow): PublicChallengeSocialAutomationProvider[] {
+  return PROVIDERS.filter((provider) => row[PROVIDER_FLAG[provider]]);
 }
 
 function rowSettings(
@@ -91,14 +110,14 @@ function rowSettings(
   };
 }
 
-function providerFlags(providers: PublicChallengeSocialProvider[]) {
+function providerFlags(providers: PublicChallengeSocialAutomationProvider[]) {
   const selected = new Set(providers);
-  return {
-    facebookEnabled: selected.has("facebook"),
-    instagramEnabled: selected.has("instagram"),
-    linkedinEnabled: selected.has("linkedin"),
-    xEnabled: selected.has("x"),
-  };
+  return Object.fromEntries(
+    PROVIDERS.map((provider) => [
+      PROVIDER_FLAG[provider],
+      selected.has(provider),
+    ]),
+  ) as Record<ProviderFlag, boolean>;
 }
 
 export function isValidPublicChallengeSocialTimezone(timezone: string) {
@@ -341,8 +360,15 @@ export async function publishChallengeToSocial(args: {
     shareDescription: string | null;
     ogImagePublicId: string | null;
     ogImageAlt: string | null;
+    tiktokImagePublicId?: string | null;
+    tiktokImageAlt?: string | null;
   };
   providers: PublicChallengeSocialProvider[];
+  tiktokCopy?: {
+    title: string;
+    description: string;
+    consent: true;
+  };
   source: "manual" | "daily";
   dispatchDate: string;
   dailyOccurrenceId?: string;
@@ -429,9 +455,49 @@ export async function publishChallengeToSocial(args: {
     }
 
     try {
+      let providerContent = content;
+
+      if (provider === "tiktok") {
+        if (args.source !== "manual" || !args.tiktokCopy?.consent) {
+          throw new Error(
+            "TikTok requires a manual post with editable copy and explicit consent.",
+          );
+        }
+
+        const tiktokChallenge =
+          await ensurePublicChallengeTikTokImage(args.challenge);
+        const tiktokPresentation =
+          buildPublicChallengePresentation({
+            source: {
+              ...tiktokChallenge,
+              shareDescription: socialDescription,
+              ogImagePublicId:
+                tiktokChallenge.tiktokImagePublicId || null,
+              ogImageAlt:
+                tiktokChallenge.tiktokImageAlt ||
+                tiktokChallenge.ogImageAlt,
+            },
+            fallbackTitle:
+              args.challenge.shareTitle ||
+              args.challenge.exerciseKey,
+          });
+
+        providerContent = {
+          ...content,
+          title: args.tiktokCopy.title.trim(),
+          description: args.tiktokCopy.description.trim(),
+          imageUrl:
+            `${getProductionAppOrigin("website")}` +
+            `/api/public-challenges/tiktok-media/${encodeURIComponent(
+              tiktokChallenge.code,
+            )}`,
+          imageAlt: tiktokPresentation.imageAlt,
+        };
+      }
+
       const published = await publishPublicChallengeToProvider(
         provider,
-        content,
+        providerContent,
       );
 
       await prisma.publicChallengeSocialPost.update({
@@ -487,6 +553,11 @@ export async function publishChallengeToSocial(args: {
 export async function publishActiveChallengeToSocial(args: {
   challengeCode: string;
   providers: PublicChallengeSocialProvider[];
+  tiktok?: {
+    title: string;
+    description: string;
+    consent: true;
+  };
   now?: Date;
 }) {
   const now = args.now ?? new Date();
@@ -500,6 +571,7 @@ export async function publishActiveChallengeToSocial(args: {
   return publishChallengeToSocial({
     challenge,
     providers: args.providers,
+    tiktokCopy: args.tiktok,
     source: "manual",
     dispatchDate: utcDate(now),
     now,

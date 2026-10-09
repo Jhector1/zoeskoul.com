@@ -35,6 +35,8 @@ export type PublicChallengeSocialImageSource = {
   shareTitle: string | null;
   ogImagePublicId: string | null;
   ogImageAlt: string | null;
+  tiktokImagePublicId?: string | null;
+  tiktokImageAlt?: string | null;
 };
 
 type CardTarget = {
@@ -611,8 +613,16 @@ function languageLabel(language: string) {
   return labels[key] ?? language;
 }
 
-export async function renderPublicChallengeSocialCard(target: CardTarget) {
+type PublicChallengeSocialCardRenderOptions = {
+  branding?: boolean;
+};
+
+export async function renderPublicChallengeSocialCard(
+  target: CardTarget,
+  options: PublicChallengeSocialCardRenderOptions = {},
+) {
   const model = await resolvePublicChallengeSocialCardModel(target);
+  const branding = options.branding !== false;
 
   const response = new ImageResponse(
     (
@@ -637,33 +647,46 @@ export async function renderPublicChallengeSocialCard(target: CardTarget) {
             height: "52px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              fontSize: "28px",
-              fontWeight: 800,
-            }}
-          >
+          {branding ? (
             <div
               style={{
-                width: "38px",
-                height: "38px",
-                borderRadius: "10px",
-                background: "#12b76a",
-                color: "#04110a",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                marginRight: "12px",
-                fontSize: "24px",
-                fontWeight: 900,
+                fontSize: "28px",
+                fontWeight: 800,
               }}
             >
-              Z
+              <div
+                style={{
+                  width: "38px",
+                  height: "38px",
+                  borderRadius: "10px",
+                  background: "#12b76a",
+                  color: "#04110a",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: "12px",
+                  fontSize: "24px",
+                  fontWeight: 900,
+                }}
+              >
+                Z
+              </div>
+              ZoeSkoul
             </div>
-            ZoeSkoul
-          </div>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "25px",
+                fontWeight: 800,
+              }}
+            >
+              Daily Coding Challenge
+            </div>
+          )}
 
           <div
             style={{
@@ -829,18 +852,20 @@ export async function renderPublicChallengeSocialCard(target: CardTarget) {
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginTop: "14px",
-            color: "#789086",
-            fontSize: "16px",
-            fontWeight: 600,
-          }}
-        >
-          zoeskoul.com
-        </div>
+        {branding ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: "14px",
+              color: "#789086",
+              fontSize: "16px",
+              fontWeight: 600,
+            }}
+          >
+            zoeskoul.com
+          </div>
+        ) : null}
       </div>
     ),
     { width: WIDTH, height: HEIGHT },
@@ -857,16 +882,36 @@ export async function renderPublicChallengeSocialCard(target: CardTarget) {
   return { file, model };
 }
 
-export async function uploadGeneratedPublicChallengeSocialCard(
+async function uploadGeneratedPublicChallengeCard(
   target: CardTarget,
+  options: PublicChallengeSocialCardRenderOptions,
 ) {
-  const rendered = await renderPublicChallengeSocialCard(target);
+  const rendered = await renderPublicChallengeSocialCard(
+    target,
+    options,
+  );
   const uploaded = await uploadChallengeOgImage(rendered.file);
 
   return {
     publicId: uploaded.publicId,
     imageAlt: rendered.model.imageAlt,
   };
+}
+
+export function uploadGeneratedPublicChallengeSocialCard(
+  target: CardTarget,
+) {
+  return uploadGeneratedPublicChallengeCard(target, {
+    branding: true,
+  });
+}
+
+export function uploadGeneratedPublicChallengeTikTokCard(
+  target: CardTarget,
+) {
+  return uploadGeneratedPublicChallengeCard(target, {
+    branding: false,
+  });
 }
 
 async function cleanupGeneratedImage(publicId: string) {
@@ -880,39 +925,65 @@ async function cleanupGeneratedImage(publicId: string) {
   }
 }
 
-export async function ensurePublicChallengeSocialImage<
-  T extends PublicChallengeSocialImageSource,
->(challenge: T) {
-  if (challenge.ogImagePublicId) return challenge;
+type PublicChallengeImageVariant = "social" | "tiktok";
 
-  const generated = await uploadGeneratedPublicChallengeSocialCard({
+async function ensurePublicChallengeGeneratedImage<
+  T extends PublicChallengeSocialImageSource,
+>(challenge: T, variant: PublicChallengeImageVariant) {
+  const existingPublicId =
+    variant === "social"
+      ? challenge.ogImagePublicId
+      : challenge.tiktokImagePublicId;
+  if (existingPublicId) return challenge;
+
+  const target = {
     locale: challenge.locale,
     subjectSlug: challenge.subjectSlug,
     topicSlug: challenge.topicSlug,
     exerciseKey: challenge.exerciseKey,
     shareTitle: challenge.shareTitle,
-  });
+  };
+  const generated =
+    variant === "social"
+      ? await uploadGeneratedPublicChallengeSocialCard(target)
+      : await uploadGeneratedPublicChallengeTikTokCard(target);
+  const generatedAlt =
+    variant === "social"
+      ? challenge.ogImageAlt || generated.imageAlt
+      : challenge.tiktokImageAlt || generated.imageAlt;
 
   let cleaned = false;
 
   try {
-    const claimed = await prisma.practiceChallengeLink.updateMany({
-      where: {
-        id: challenge.id,
-        ogImagePublicId: null,
-      },
-      data: {
-        ogImagePublicId: generated.publicId,
-        ogImageAlt: challenge.ogImageAlt || generated.imageAlt,
-      },
-    });
+    const claimed =
+      variant === "social"
+        ? await prisma.practiceChallengeLink.updateMany({
+            where: { id: challenge.id, ogImagePublicId: null },
+            data: {
+              ogImagePublicId: generated.publicId,
+              ogImageAlt: generatedAlt,
+            },
+          })
+        : await prisma.practiceChallengeLink.updateMany({
+            where: { id: challenge.id, tiktokImagePublicId: null },
+            data: {
+              tiktokImagePublicId: generated.publicId,
+              tiktokImageAlt: generatedAlt,
+            },
+          });
 
     if (claimed.count === 1) {
-      return {
-        ...challenge,
-        ogImagePublicId: generated.publicId,
-        ogImageAlt: challenge.ogImageAlt || generated.imageAlt,
-      };
+      return variant === "social"
+        ? {
+            ...challenge,
+            ogImagePublicId: generated.publicId,
+            ogImageAlt: generatedAlt,
+          }
+        : {
+            ...challenge,
+            tiktokImagePublicId: generated.publicId,
+            tiktokImageAlt: generatedAlt,
+          };
     }
 
     const current = await prisma.practiceChallengeLink.findUnique({
@@ -920,27 +991,56 @@ export async function ensurePublicChallengeSocialImage<
       select: {
         ogImagePublicId: true,
         ogImageAlt: true,
+        tiktokImagePublicId: true,
+        tiktokImageAlt: true,
       },
     });
 
     await cleanupGeneratedImage(generated.publicId);
     cleaned = true;
 
-    if (!current?.ogImagePublicId) {
+    const persistedPublicId =
+      variant === "social"
+        ? current?.ogImagePublicId
+        : current?.tiktokImagePublicId;
+    const persistedAlt =
+      variant === "social"
+        ? current?.ogImageAlt
+        : current?.tiktokImageAlt;
+
+    if (!persistedPublicId) {
       throw new Error(
-        "Public challenge disappeared while preparing its social image.",
+        `Public challenge disappeared while preparing its ${variant} image.`,
       );
     }
 
-    return {
-      ...challenge,
-      ogImagePublicId: current.ogImagePublicId,
-      ogImageAlt: current.ogImageAlt,
-    };
+    return variant === "social"
+      ? {
+          ...challenge,
+          ogImagePublicId: persistedPublicId,
+          ogImageAlt: persistedAlt,
+        }
+      : {
+          ...challenge,
+          tiktokImagePublicId: persistedPublicId,
+          tiktokImageAlt: persistedAlt,
+        };
   } catch (error) {
     if (!cleaned) {
       await cleanupGeneratedImage(generated.publicId);
     }
     throw error;
   }
+}
+
+export function ensurePublicChallengeSocialImage<
+  T extends PublicChallengeSocialImageSource,
+>(challenge: T) {
+  return ensurePublicChallengeGeneratedImage(challenge, "social");
+}
+
+export function ensurePublicChallengeTikTokImage<
+  T extends PublicChallengeSocialImageSource,
+>(challenge: T) {
+  return ensurePublicChallengeGeneratedImage(challenge, "tiktok");
 }

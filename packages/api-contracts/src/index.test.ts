@@ -5,8 +5,50 @@ import {
 } from "vitest";
 
 import {
+  PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS,
+  PUBLIC_CHALLENGE_SOCIAL_MANUAL_ONLY_PROVIDERS,
+  PUBLIC_CHALLENGE_SOCIAL_PROVIDER_LABELS,
+  PUBLIC_CHALLENGE_SOCIAL_PROVIDERS,
   isAppSessionResponse,
 } from "./index";
+
+describe("public challenge social provider catalog", () => {
+  it("keeps providers and labels centralized", () => {
+    expect(PUBLIC_CHALLENGE_SOCIAL_PROVIDERS).toEqual([
+      "facebook",
+      "instagram",
+      "linkedin",
+      "x",
+      "threads",
+      "reddit",
+      "tiktok",
+    ]);
+    expect(PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS).toEqual([
+      "facebook",
+      "instagram",
+      "linkedin",
+      "x",
+      "threads",
+      "reddit",
+    ]);
+    expect(PUBLIC_CHALLENGE_SOCIAL_MANUAL_ONLY_PROVIDERS).toEqual([
+      "tiktok",
+    ]);
+    expect(
+      PUBLIC_CHALLENGE_SOCIAL_PROVIDERS.map(
+        (provider) => PUBLIC_CHALLENGE_SOCIAL_PROVIDER_LABELS[provider],
+      ),
+    ).toEqual([
+      "Facebook",
+      "Instagram",
+      "LinkedIn",
+      "X",
+      "Threads",
+      "Reddit",
+      "TikTok",
+    ]);
+  });
+});
 
 describe("isAppSessionResponse", () => {
   it("accepts an authenticated browser-safe payload", () => {

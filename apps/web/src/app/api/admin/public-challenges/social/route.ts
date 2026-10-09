@@ -1,7 +1,9 @@
 import { z } from "zod";
 
-import type {
-  PublicChallengeSocialAutomationSettings,
+import {
+  PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS,
+  PUBLIC_CHALLENGE_SOCIAL_PROVIDERS,
+  type PublicChallengeSocialAutomationSettings,
 } from "@zoeskoul/api-contracts";
 
 import {
@@ -22,24 +24,47 @@ import { readJsonSafe } from "@/lib/practice/api/shared/http";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const ProviderSchema = z.enum([
-  "facebook",
-  "instagram",
-  "linkedin",
-  "x",
-]);
+const ProviderSchema = z.enum(
+  PUBLIC_CHALLENGE_SOCIAL_PROVIDERS,
+);
 
-const PublishSchema = z.object({
-  challengeCode: z.string().trim().min(8).max(24),
-  providers: z.array(ProviderSchema).min(1).max(4),
-});
+const PublishSchema = z
+  .object({
+    challengeCode: z.string().trim().min(8).max(24),
+    providers: z
+      .array(ProviderSchema)
+      .min(1)
+      .max(PUBLIC_CHALLENGE_SOCIAL_PROVIDERS.length),
+    tiktok: z
+      .object({
+        title: z.string().trim().min(1).max(90),
+        description: z.string().trim().min(1).max(4000),
+        consent: z.literal(true),
+      })
+      .optional(),
+  })
+  .superRefine((value, context) => {
+    if (value.providers.includes("tiktok") && !value.tiktok) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["tiktok"],
+        message: "TikTok requires editable copy and explicit consent.",
+      });
+    }
+  });
+
+const AutomationProviderSchema = z.enum(
+  PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS,
+);
 
 const AutomationSchema = z.object({
   enabled: z.boolean(),
   locale: z.enum(["en", "fr", "ht"]),
   localTime: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/),
   timezone: z.string().trim().min(1).max(80),
-  providers: z.array(ProviderSchema).max(4),
+  providers: z
+    .array(AutomationProviderSchema)
+    .max(PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS.length),
   emailEnabled: z.boolean().default(false),
   emailListId: z.number().int().positive().nullable().default(null),
 });

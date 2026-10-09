@@ -2,10 +2,14 @@ import "server-only";
 
 import { createHmac, randomBytes } from "node:crypto";
 
-import type {
-  PublicChallengeSocialProvider,
-  PublicChallengeSocialProviderStatus,
+import {
+  PUBLIC_CHALLENGE_SOCIAL_PROVIDER_LABELS,
+  PUBLIC_CHALLENGE_SOCIAL_PROVIDERS,
+  type PublicChallengeSocialProvider,
+  type PublicChallengeSocialProviderStatus,
 } from "@zoeskoul/api-contracts";
+
+import { getTikTokPublisherAccessToken } from "@/lib/marketing/publicChallengeTikTokConnection";
 
 export type PublicChallengeSocialContent = {
   title: string;
@@ -43,52 +47,93 @@ function configured(...parts: string[]) {
   return parts.every(Boolean);
 }
 
-export function publicChallengeSocialProviderStatuses(
-  env: Environment = process.env,
-): PublicChallengeSocialProviderStatus[] {
-  return [
-    {
-      provider: "facebook",
-      label: "Facebook",
-      configured: configured(
+function enabledFlag(env: Environment, key: string) {
+  return ["1", "true", "yes", "on"].includes(
+    value(env, key).toLowerCase(),
+  );
+}
+
+function providerConfigured(
+  provider: PublicChallengeSocialProvider,
+  env: Environment,
+) {
+  switch (provider) {
+    case "facebook":
+      return configured(
         value(env, "META_GRAPH_API_VERSION"),
         value(env, "FACEBOOK_PAGE_ID"),
         value(env, "FACEBOOK_PAGE_ACCESS_TOKEN"),
-      ),
-      imageRequired: false,
-    },
-    {
-      provider: "instagram",
-      label: "Instagram",
-      configured: configured(
+      );
+    case "instagram":
+      return configured(
         value(env, "META_GRAPH_API_VERSION"),
         value(env, "INSTAGRAM_BUSINESS_ACCOUNT_ID"),
         value(env, "INSTAGRAM_ACCESS_TOKEN"),
-      ),
-      imageRequired: true,
-    },
-    {
-      provider: "linkedin",
-      label: "LinkedIn",
-      configured: configured(
+      );
+    case "linkedin":
+      return configured(
         value(env, "LINKEDIN_VERSION"),
         value(env, "LINKEDIN_ACCESS_TOKEN"),
         value(env, "LINKEDIN_AUTHOR_URN"),
-      ),
-      imageRequired: false,
-    },
-    {
-      provider: "x",
-      label: "X",
-      configured: configured(
+      );
+    case "x":
+      return configured(
         value(env, "X_API_KEY"),
         value(env, "X_API_SECRET"),
         value(env, "X_ACCESS_TOKEN"),
         value(env, "X_ACCESS_TOKEN_SECRET"),
-      ),
-      imageRequired: true,
-    },
-  ];
+      );
+    case "threads":
+      return configured(value(env, "THREADS_ACCESS_TOKEN"));
+    case "reddit":
+      return (
+        enabledFlag(env, "REDDIT_COMMERCIAL_API_APPROVED") &&
+        configured(
+          value(env, "REDDIT_USER_AGENT"),
+          value(env, "REDDIT_SUBREDDIT"),
+        ) &&
+        Boolean(
+          value(env, "REDDIT_ACCESS_TOKEN") ||
+            configured(
+              value(env, "REDDIT_CLIENT_ID"),
+              value(env, "REDDIT_CLIENT_SECRET"),
+              value(env, "REDDIT_REFRESH_TOKEN"),
+            ),
+        )
+      );
+    case "tiktok": {
+      const privacyLevel = value(env, "TIKTOK_PRIVACY_LEVEL");
+      const credentialsReady =
+        configured(value(env, "TIKTOK_ACCESS_TOKEN")) ||
+        configured(
+          value(env, "TIKTOK_CLIENT_KEY"),
+          value(env, "TIKTOK_CLIENT_SECRET"),
+        );
+      return (
+        configured(privacyLevel) &&
+        credentialsReady &&
+        (privacyLevel === "SELF_ONLY" ||
+          enabledFlag(env, "TIKTOK_DIRECT_POST_AUDITED"))
+      );
+    }
+  }
+}
+
+const IMAGE_REQUIRED_PROVIDERS = new Set<PublicChallengeSocialProvider>([
+  "instagram",
+  "x",
+  "tiktok",
+]);
+
+export function publicChallengeSocialProviderStatuses(
+  env: Environment = process.env,
+): PublicChallengeSocialProviderStatus[] {
+  return PUBLIC_CHALLENGE_SOCIAL_PROVIDERS.map((provider) => ({
+    provider,
+    label: PUBLIC_CHALLENGE_SOCIAL_PROVIDER_LABELS[provider],
+    configured: providerConfigured(provider, env),
+    imageRequired: IMAGE_REQUIRED_PROVIDERS.has(provider),
+  }));
 }
 
 export function publicChallengeSocialSchedulerConfigured(
@@ -459,6 +504,75 @@ async function publishInstagram(
   return { providerPostId: id, providerPostUrl: null };
 }
 
+function threadsApiBase(env: Environment) {
+  return (value(env, "THREADS_API_BASE") || "https://graph.threads.net/v1.0").replace(/\/$/, "");
+}
+
+async function publishThreads(
+  content: PublicChallengeSocialContent,
+  env: Environment,
+  fetcher: Fetcher,
+): Promise<PublicChallengeSocialProviderResult> {
+  const token = value(env, "THREADS_ACCESS_TOKEN");
+  if (!token) {
+    throw new PublicChallengeSocialProviderError(
+      "threads",
+      "Threads publishing credentials are not configured.",
+    );
+  }
+
+  const createParams = new URLSearchParams({
+    media_type: content.imageUrl ? "IMAGE" : "TEXT",
+    text: caption(content).slice(0, 500),
+    access_token: token,
+  });
+  if (content.imageUrl) {
+    createParams.set("image_url", content.imageUrl);
+    createParams.set("alt_text", content.imageAlt.slice(0, 1000));
+  }
+
+  const createResponse = await requireOk(
+    "threads",
+    await fetcher(`${threadsApiBase(env)}/me/threads`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: createParams,
+      cache: "no-store",
+    }),
+  );
+  const created = (await createResponse.json()) as { id?: unknown };
+  const creationId = typeof created.id === "string" ? created.id : "";
+  if (!creationId) {
+    throw new PublicChallengeSocialProviderError(
+      "threads",
+      "Threads returned no media container ID.",
+    );
+  }
+
+  const publishResponse = await requireOk(
+    "threads",
+    await fetcher(`${threadsApiBase(env)}/me/threads_publish`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        creation_id: creationId,
+        access_token: token,
+      }),
+      cache: "no-store",
+    }),
+  );
+  const published = (await publishResponse.json()) as { id?: unknown };
+  const id = typeof published.id === "string" ? published.id : "";
+  if (!id) {
+    throw new PublicChallengeSocialProviderError(
+      "threads",
+      "Threads returned no published post ID.",
+    );
+  }
+
+  return { providerPostId: id, providerPostUrl: null };
+}
+
 async function publishLinkedIn(
   content: PublicChallengeSocialContent,
   env: Environment,
@@ -688,6 +802,149 @@ async function uploadXImage(args: {
   return mediaId;
 }
 
+const TIKTOK_PRIVACY_LEVELS = new Set([
+  "PUBLIC_TO_EVERYONE",
+  "MUTUAL_FOLLOW_FRIENDS",
+  "FOLLOWER_OF_CREATOR",
+  "SELF_ONLY",
+]);
+
+function tiktokApiBase(env: Environment) {
+  return (value(env, "TIKTOK_API_BASE") || "https://open.tiktokapis.com").replace(/\/$/, "");
+}
+
+function tiktokDescription(content: PublicChallengeSocialContent) {
+  // TikTok requires preset text, including hashtags, to remain user-editable.
+  // The manual admin composer supplies the final reviewed description.
+  return content.description.trim().slice(0, 4000);
+}
+
+function tiktokPayloadError(payload: {
+  error?: { code?: unknown; message?: unknown };
+} | null) {
+  const code = typeof payload?.error?.code === "string" ? payload.error.code : "";
+  if (!code || code === "ok") return null;
+  const message =
+    typeof payload?.error?.message === "string"
+      ? payload.error.message.trim()
+      : "";
+  return message || `TikTok returned ${code}.`;
+}
+
+async function publishTikTok(
+  content: PublicChallengeSocialContent,
+  env: Environment,
+  fetcher: Fetcher,
+): Promise<PublicChallengeSocialProviderResult> {
+  const token = (await getTikTokPublisherAccessToken({ env, fetcher })) || "";
+  const privacyLevel = value(env, "TIKTOK_PRIVACY_LEVEL");
+  if (!configured(token, privacyLevel)) {
+    throw new PublicChallengeSocialProviderError(
+      "tiktok",
+      "TikTok publishing credentials are not configured.",
+    );
+  }
+  if (!TIKTOK_PRIVACY_LEVELS.has(privacyLevel)) {
+    throw new PublicChallengeSocialProviderError(
+      "tiktok",
+      "TIKTOK_PRIVACY_LEVEL is not supported.",
+    );
+  }
+  if (
+    privacyLevel !== "SELF_ONLY" &&
+    !enabledFlag(env, "TIKTOK_DIRECT_POST_AUDITED")
+  ) {
+    throw new PublicChallengeSocialProviderError(
+      "tiktok",
+      "TikTok unaudited clients must publish with SELF_ONLY privacy.",
+    );
+  }
+  if (!content.imageUrl) {
+    throw new PublicChallengeSocialProviderError(
+      "tiktok",
+      "TikTok requires a public, TikTok-safe challenge image.",
+    );
+  }
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json; charset=UTF-8",
+  };
+  const creatorResponse = await requireOk(
+    "tiktok",
+    await fetcher(`${tiktokApiBase(env)}/v2/post/publish/creator_info/query/`, {
+      method: "POST",
+      headers,
+      cache: "no-store",
+    }),
+  );
+  const creatorPayload = (await creatorResponse.json()) as {
+    data?: { privacy_level_options?: unknown; comment_disabled?: unknown };
+    error?: { code?: unknown; message?: unknown };
+  };
+  const creatorError = tiktokPayloadError(creatorPayload);
+  if (creatorError) {
+    throw new PublicChallengeSocialProviderError("tiktok", creatorError);
+  }
+  const privacyOptions = Array.isArray(creatorPayload.data?.privacy_level_options)
+    ? creatorPayload.data.privacy_level_options.filter(
+        (item): item is string => typeof item === "string",
+      )
+    : [];
+  if (!privacyOptions.includes(privacyLevel)) {
+    throw new PublicChallengeSocialProviderError(
+      "tiktok",
+      `TikTok creator does not allow privacy level ${privacyLevel}.`,
+    );
+  }
+
+  const publishResponse = await requireOk(
+    "tiktok",
+    await fetcher(`${tiktokApiBase(env)}/v2/post/publish/content/init/`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        media_type: "PHOTO",
+        post_mode: "DIRECT_POST",
+        post_info: {
+          title: content.title.trim().slice(0, 90),
+          description: tiktokDescription(content),
+          privacy_level: privacyLevel,
+          disable_comment: creatorPayload.data?.comment_disabled === true,
+          auto_add_music: false,
+          brand_content_toggle: false,
+          brand_organic_toggle: true,
+        },
+        source_info: {
+          source: "PULL_FROM_URL",
+          photo_cover_index: 0,
+          photo_images: [content.imageUrl],
+        },
+      }),
+      cache: "no-store",
+    }),
+  );
+  const publishPayload = (await publishResponse.json()) as {
+    data?: { publish_id?: unknown };
+    error?: { code?: unknown; message?: unknown };
+  };
+  const publishError = tiktokPayloadError(publishPayload);
+  if (publishError) {
+    throw new PublicChallengeSocialProviderError("tiktok", publishError);
+  }
+  const id =
+    typeof publishPayload.data?.publish_id === "string"
+      ? publishPayload.data.publish_id
+      : "";
+  if (!id) {
+    throw new PublicChallengeSocialProviderError(
+      "tiktok",
+      "TikTok returned no publish ID.",
+    );
+  }
+  return { providerPostId: id, providerPostUrl: null };
+}
+
 async function publishX(
   content: PublicChallengeSocialContent,
   env: Environment,
@@ -747,6 +1004,234 @@ async function publishX(
   };
 }
 
+type RedditPostRequirements = {
+  body_restriction_policy?: "required" | "notAllowed" | "none";
+  body_text_max_length?: number | null;
+  body_text_min_length?: number | null;
+  domain_blacklist?: string[];
+  domain_whitelist?: string[];
+  is_flair_required?: boolean;
+  title_text_max_length?: number | null;
+  title_text_min_length?: number | null;
+};
+
+function redditApiBase(env: Environment) {
+  return (value(env, "REDDIT_API_BASE") || "https://oauth.reddit.com").replace(/\/$/, "");
+}
+
+async function redditAccessToken(env: Environment, fetcher: Fetcher) {
+  const direct = value(env, "REDDIT_ACCESS_TOKEN");
+  if (direct) return direct;
+
+  const clientId = value(env, "REDDIT_CLIENT_ID");
+  const clientSecret = value(env, "REDDIT_CLIENT_SECRET");
+  const refreshToken = value(env, "REDDIT_REFRESH_TOKEN");
+  const userAgent = value(env, "REDDIT_USER_AGENT");
+  if (!configured(clientId, clientSecret, refreshToken, userAgent)) {
+    throw new PublicChallengeSocialProviderError(
+      "reddit",
+      "Reddit OAuth credentials are not configured.",
+    );
+  }
+
+  const response = await requireOk(
+    "reddit",
+    await fetcher("https://www.reddit.com/api/v1/access_token", {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": userAgent,
+      },
+      body: new URLSearchParams({
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+      }),
+      cache: "no-store",
+    }),
+  );
+  const payload = (await response.json()) as { access_token?: unknown };
+  const accessToken =
+    typeof payload.access_token === "string" ? payload.access_token : "";
+  if (!accessToken) {
+    throw new PublicChallengeSocialProviderError(
+      "reddit",
+      "Reddit returned no OAuth access token.",
+    );
+  }
+  return accessToken;
+}
+
+function redditBody(content: PublicChallengeSocialContent) {
+  return [
+    content.description.trim(),
+    `Try the challenge: ${content.challengeUrl.trim()}`,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+}
+
+function redditDomainMatches(host: string, candidate: string) {
+  const left = host.toLowerCase().replace(/^www\./, "");
+  const right = candidate.toLowerCase().replace(/^www\./, "");
+  return left === right || left.endsWith(`.${right}`);
+}
+
+async function publishReddit(
+  content: PublicChallengeSocialContent,
+  env: Environment,
+  fetcher: Fetcher,
+): Promise<PublicChallengeSocialProviderResult> {
+  if (!enabledFlag(env, "REDDIT_COMMERCIAL_API_APPROVED")) {
+    throw new PublicChallengeSocialProviderError(
+      "reddit",
+      "Reddit commercial API approval is required before ZoeSkoul automatic posting can be enabled.",
+    );
+  }
+
+  const subreddit = value(env, "REDDIT_SUBREDDIT").replace(/^r\//i, "");
+  const userAgent = value(env, "REDDIT_USER_AGENT");
+  if (!configured(subreddit, userAgent)) {
+    throw new PublicChallengeSocialProviderError(
+      "reddit",
+      "Reddit subreddit and User-Agent are not configured.",
+    );
+  }
+
+  const token = await redditAccessToken(env, fetcher);
+  const oauthHeaders = {
+    Authorization: `Bearer ${token}`,
+    "User-Agent": userAgent,
+  };
+  const requirementsResponse = await requireOk(
+    "reddit",
+    await fetcher(
+      `${redditApiBase(env)}/api/v1/${encodeURIComponent(subreddit)}/post_requirements`,
+      { method: "GET", headers: oauthHeaders, cache: "no-store" },
+    ),
+  );
+  const requirements = (await requirementsResponse.json()) as RedditPostRequirements;
+
+  let title = content.title.trim();
+  const titleMax =
+    typeof requirements.title_text_max_length === "number"
+      ? requirements.title_text_max_length
+      : 300;
+  title = title.slice(0, titleMax).trimEnd();
+  const titleMin =
+    typeof requirements.title_text_min_length === "number"
+      ? requirements.title_text_min_length
+      : 0;
+  if (title.length < titleMin) {
+    throw new PublicChallengeSocialProviderError(
+      "reddit",
+      `r/${subreddit} requires a title of at least ${titleMin} characters.`,
+    );
+  }
+
+  const flairId = value(env, "REDDIT_FLAIR_ID");
+  if (requirements.is_flair_required && !flairId) {
+    throw new PublicChallengeSocialProviderError(
+      "reddit",
+      `r/${subreddit} requires post flair; configure REDDIT_FLAIR_ID.`,
+    );
+  }
+
+  const form = new URLSearchParams({
+    api_type: "json",
+    sr: subreddit,
+    title,
+    resubmit: "true",
+    validate_on_submit: "true",
+  });
+  if (flairId) form.set("flair_id", flairId);
+
+  if (requirements.body_restriction_policy === "notAllowed") {
+    const host = new URL(content.challengeUrl).hostname;
+    if (
+      requirements.domain_whitelist?.length &&
+      !requirements.domain_whitelist.some((domain) => redditDomainMatches(host, domain))
+    ) {
+      throw new PublicChallengeSocialProviderError(
+        "reddit",
+        `r/${subreddit} does not allow links from ${host}.`,
+      );
+    }
+    if (
+      requirements.domain_blacklist?.some((domain) => redditDomainMatches(host, domain))
+    ) {
+      throw new PublicChallengeSocialProviderError(
+        "reddit",
+        `r/${subreddit} blocks links from ${host}.`,
+      );
+    }
+    form.set("kind", "link");
+    form.set("url", content.challengeUrl);
+  } else {
+    const body = redditBody(content);
+    const bodyMax =
+      typeof requirements.body_text_max_length === "number"
+        ? requirements.body_text_max_length
+        : body.length;
+    const finalBody = body.slice(0, bodyMax).trimEnd();
+    const bodyMin =
+      typeof requirements.body_text_min_length === "number"
+        ? requirements.body_text_min_length
+        : 0;
+    if (finalBody.length < bodyMin) {
+      throw new PublicChallengeSocialProviderError(
+        "reddit",
+        `r/${subreddit} requires a body of at least ${bodyMin} characters.`,
+      );
+    }
+    form.set("kind", "self");
+    form.set("text", finalBody);
+  }
+
+  const response = await requireOk(
+    "reddit",
+    await fetcher(`${redditApiBase(env)}/api/submit`, {
+      method: "POST",
+      headers: {
+        ...oauthHeaders,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: form,
+      cache: "no-store",
+    }),
+  );
+  const payload = (await response.json()) as {
+    json?: {
+      errors?: unknown;
+      data?: { id?: unknown; name?: unknown; url?: unknown };
+    };
+  };
+  const errors = Array.isArray(payload.json?.errors) ? payload.json.errors : [];
+  if (errors.length) {
+    throw new PublicChallengeSocialProviderError(
+      "reddit",
+      `Reddit rejected the post: ${JSON.stringify(errors).slice(0, 600)}`,
+    );
+  }
+  const id =
+    typeof payload.json?.data?.name === "string"
+      ? payload.json.data.name
+      : typeof payload.json?.data?.id === "string"
+        ? payload.json.data.id
+        : "";
+  if (!id) {
+    throw new PublicChallengeSocialProviderError(
+      "reddit",
+      "Reddit returned no post ID.",
+    );
+  }
+  return {
+    providerPostId: id,
+    providerPostUrl:
+      typeof payload.json?.data?.url === "string" ? payload.json.data.url : null,
+  };
+}
+
 export async function publishPublicChallengeToProvider(
   provider: PublicChallengeSocialProvider,
   content: PublicChallengeSocialContent,
@@ -764,5 +1249,11 @@ export async function publishPublicChallengeToProvider(
       return publishLinkedIn(content, env, fetcher);
     case "x":
       return publishX(content, env, fetcher);
+    case "threads":
+      return publishThreads(content, env, fetcher);
+    case "reddit":
+      return publishReddit(content, env, fetcher);
+    case "tiktok":
+      return publishTikTok(content, env, fetcher);
   }
 }

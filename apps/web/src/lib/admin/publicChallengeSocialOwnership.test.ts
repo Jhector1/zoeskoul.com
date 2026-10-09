@@ -34,6 +34,11 @@ describe("public challenge social publishing ownership", () => {
       "X_API_SECRET",
       "X_ACCESS_TOKEN",
       "X_ACCESS_TOKEN_SECRET",
+      "THREADS_ACCESS_TOKEN",
+      "REDDIT_ACCESS_TOKEN",
+      "REDDIT_CLIENT_SECRET",
+      "REDDIT_REFRESH_TOKEN",
+      "TIKTOK_ACCESS_TOKEN",
     ]) {
       expect(admin).not.toContain(secretName);
     }
@@ -52,6 +57,11 @@ describe("public challenge social publishing ownership", () => {
       "X_API_SECRET",
       "X_ACCESS_TOKEN",
       "X_ACCESS_TOKEN_SECRET",
+      "THREADS_ACCESS_TOKEN",
+      "REDDIT_ACCESS_TOKEN",
+      "REDDIT_CLIENT_SECRET",
+      "REDDIT_REFRESH_TOKEN",
+      "TIKTOK_ACCESS_TOKEN",
     ]) {
       expect(provider).toContain(secretName);
     }
@@ -110,6 +120,49 @@ describe("public challenge social publishing ownership", () => {
       "formatRecentPostTimestamp(post, settings?.timezone)",
     );
     expect(admin).not.toContain("{post.dispatchDate}");
+  });
+
+  it("derives route and automation providers from the shared catalog", () => {
+    const contracts = source("packages/api-contracts/src/index.ts");
+    const route = source("apps/web/src/app/api/admin/public-challenges/social/route.ts");
+    const automation = source("apps/web/src/lib/marketing/publicChallengeSocialAutomation.ts");
+
+    expect(contracts).toContain("PUBLIC_CHALLENGE_SOCIAL_PROVIDERS");
+    expect(route).toContain("PUBLIC_CHALLENGE_SOCIAL_PROVIDERS");
+    expect(automation).toContain("...PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS");
+  });
+
+  it("keeps TikTok compliance media separate from the branded social card", () => {
+    const card = source("apps/web/src/lib/practice/challenges/socialCard.tsx");
+    const automation = source("apps/web/src/lib/marketing/publicChallengeSocialAutomation.ts");
+
+    expect(card).toContain("uploadGeneratedPublicChallengeTikTokCard");
+    expect(card).toContain("branding: false");
+    expect(automation).toContain("ensurePublicChallengeTikTokImage");
+    expect(automation).toContain('provider === "tiktok"');
+  });
+
+  it("keeps TikTok manual-only with editable copy and explicit consent", () => {
+    const contracts = source("packages/api-contracts/src/index.ts");
+    const route = source(
+      "apps/web/src/app/api/admin/public-challenges/social/route.ts",
+    );
+    const admin = source(
+      "apps/admin/src/features/public-challenges/PublicChallengeSocialPublisher.tsx",
+    );
+
+    expect(contracts).toContain(
+      "PUBLIC_CHALLENGE_SOCIAL_MANUAL_ONLY_PROVIDERS",
+    );
+    expect(contracts).toContain(
+      "PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS",
+    );
+    expect(route).toContain(
+      'message: "TikTok requires editable copy and explicit consent."',
+    );
+    expect(admin).toContain("TikTok manual post");
+    expect(admin).toContain("tiktokConsent");
+    expect(admin).toContain("Post to TikTok");
   });
 
 

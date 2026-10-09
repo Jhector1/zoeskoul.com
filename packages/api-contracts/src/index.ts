@@ -258,11 +258,47 @@ export type PublicChallengeEmailImageUploadResponse = {
   imageUrl: string;
 };
 
+export const PUBLIC_CHALLENGE_SOCIAL_PROVIDERS = [
+  "facebook",
+  "instagram",
+  "linkedin",
+  "x",
+  "threads",
+  "reddit",
+  "tiktok",
+] as const;
+
 export type PublicChallengeSocialProvider =
-  | "facebook"
-  | "instagram"
-  | "linkedin"
-  | "x";
+  (typeof PUBLIC_CHALLENGE_SOCIAL_PROVIDERS)[number];
+
+export const PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS = [
+  "facebook",
+  "instagram",
+  "linkedin",
+  "x",
+  "threads",
+  "reddit",
+] as const satisfies readonly PublicChallengeSocialProvider[];
+
+export type PublicChallengeSocialAutomationProvider =
+  (typeof PUBLIC_CHALLENGE_SOCIAL_AUTOMATION_PROVIDERS)[number];
+
+export const PUBLIC_CHALLENGE_SOCIAL_MANUAL_ONLY_PROVIDERS = [
+  "tiktok",
+] as const satisfies readonly PublicChallengeSocialProvider[];
+
+export const PUBLIC_CHALLENGE_SOCIAL_PROVIDER_LABELS: Record<
+  PublicChallengeSocialProvider,
+  string
+> = {
+  facebook: "Facebook",
+  instagram: "Instagram",
+  linkedin: "LinkedIn",
+  x: "X",
+  threads: "Threads",
+  reddit: "Reddit",
+  tiktok: "TikTok",
+};
 
 export type PublicChallengeSocialProviderStatus = {
   provider: PublicChallengeSocialProvider;
@@ -276,7 +312,7 @@ export type PublicChallengeSocialAutomationSettings = {
   locale: "en" | "fr" | "ht";
   localTime: string;
   timezone: string;
-  providers: PublicChallengeSocialProvider[];
+  providers: PublicChallengeSocialAutomationProvider[];
   emailEnabled: boolean;
   emailListId: number | null;
 };

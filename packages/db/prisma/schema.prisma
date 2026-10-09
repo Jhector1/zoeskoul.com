@@ -673,8 +673,10 @@ model PracticeChallengeLink {
   signedToken      String
   shareTitle       String?
   shareDescription String?
-  ogImagePublicId  String?
-  ogImageAlt       String?
+  ogImagePublicId     String?
+  ogImageAlt          String?
+  tiktokImagePublicId String?
+  tiktokImageAlt      String?
   createdById      String?
   expiresAt        DateTime?
   revokedAt        DateTime?
@@ -702,6 +704,8 @@ model PublicChallengeSocialAutomation {
   instagramEnabled Boolean  @default(false)
   linkedinEnabled  Boolean  @default(false)
   xEnabled         Boolean  @default(false)
+  threadsEnabled   Boolean  @default(false)
+  redditEnabled    Boolean  @default(false)
   emailEnabled     Boolean  @default(false)
   emailListId      Int?
   createdAt        DateTime @default(now())
