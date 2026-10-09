@@ -2,7 +2,11 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import { listVisiblePracticeChooserExerciseOptions } from "./publishedCatalog";
+import {
+  listPublishedChallengeExerciseOptions,
+  listPublishedPracticeExerciseOptions,
+  listVisiblePracticeChooserExerciseOptions,
+} from "./publishedCatalog";
 
 describe("published Practice catalog canonical topic identity", () => {
   it("emits the canonical namespaced topic slug for authored SQL Practice", async () => {
@@ -33,6 +37,32 @@ describe("published Practice catalog canonical topic identity", () => {
         (option) =>
           option.subjectSlug === "sql-analysis-reporting" &&
           option.topicSlug === "case-for-readable-labels",
+      ),
+    ).toBe(false);
+  });
+});
+
+describe("published Public Challenge runner eligibility", () => {
+  it("keeps authenticated-terminal exercises out of daily public rotation", async () => {
+    const practiceOptions = await listPublishedPracticeExerciseOptions();
+    const offender = practiceOptions.find(
+      (option) => option.exerciseKey === "what-terminal-is-try-it-2",
+    );
+
+    expect(offender).toBeDefined();
+    expect(offender?.requiresTerminal).toBe(true);
+
+    const publicOptions = await listPublishedChallengeExerciseOptions();
+
+    expect(publicOptions.every((option) => !option.requiresTerminal)).toBe(true);
+    expect(
+      publicOptions.some(
+        (option) =>
+          option.subjectSlug === offender?.subjectSlug &&
+          option.moduleSlug === offender?.moduleSlug &&
+          option.sectionSlug === offender?.sectionSlug &&
+          option.topicSlug === offender?.topicSlug &&
+          option.exerciseKey === offender?.exerciseKey,
       ),
     ).toBe(false);
   });

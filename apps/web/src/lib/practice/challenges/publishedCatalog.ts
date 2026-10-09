@@ -220,7 +220,7 @@ async function listAuthoredPracticeExerciseOptions(args: {
                   exerciseKind: target.exerciseKind,
                   exercisePurpose: target.exercisePurpose,
                   isMultiFile: capabilities.isMultiFile,
-                  requiresTerminal: capabilities.requiresTerminal,
+                  requiresTerminal: target.requiresAuthenticatedRunner,
                   isStandaloneTryIt: standaloneTryItExerciseKeys.has(
                     target.exerciseKey,
                   ),
@@ -278,6 +278,7 @@ export async function listPublishedChallengeExerciseOptions(): Promise<
   return options.filter(
     (option) =>
       isAuthoredLessonPracticeOption(option) &&
-      isEligiblePublicChallengeTarget(option),
+      isEligiblePublicChallengeTarget(option) &&
+      !option.requiresTerminal,
   );
 }
