@@ -45,6 +45,23 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       # Publish Web automatically from main, while preserving manual builds.
+      - name: Ensure ZoeSkoul Node base mirror
+        shell: bash
+        env:
+          NODE_BASE_MIRROR: ghcr.io/jhector1/zoeskoul-node-base:22-bookworm-slim
+          NODE_BASE_UPSTREAM: public.ecr.aws/docker/library/node:22-bookworm-slim
+        run: |
+          set -euo pipefail
+          if docker buildx imagetools inspect "$NODE_BASE_MIRROR" >/dev/null 2>&1; then
+            echo "Node base mirror already present in GHCR."
+          else
+            echo "Node base mirror missing; seeding from AWS Public ECR Docker Official Images."
+            docker buildx imagetools create \
+              --tag "$NODE_BASE_MIRROR" \
+              "$NODE_BASE_UPSTREAM"
+          fi
+          docker buildx imagetools inspect "$NODE_BASE_MIRROR"
+
       - name: Build and push web image
         if: >-
           github.event_name == 'push' ||

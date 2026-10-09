@@ -1,4 +1,4 @@
-FROM node:22-bookworm-slim AS app
+FROM ghcr.io/jhector1/zoeskoul-node-base:22-bookworm-slim AS app
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
