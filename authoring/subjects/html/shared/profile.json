@@ -1,0 +1,13 @@
+{
+  "profileId": "web",
+  "language": "web",
+  "runtime": {
+    "kind": "code",
+    "language": "web"
+  },
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "html-browser-workspace",
+  "checker": {
+    "defaultRecipe": "source_checks"
+  }
+}

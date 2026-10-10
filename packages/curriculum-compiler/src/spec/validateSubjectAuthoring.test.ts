@@ -205,6 +205,31 @@ describe("validateSubjectAuthoring", () => {
         expect(issuesBySubject).toEqual({});
     });
 
+    it("rejects learner content directories under authoring", async () => {
+        const authoringRoot = await makeAuthoringFixture();
+        await writeJson(
+            path.join(
+                authoringRoot,
+                "subjects",
+                "sql",
+                "courses",
+                "sql-foundations",
+                "content",
+                "module-01",
+                "topic.json",
+            ),
+            { title: "wrong layer" },
+        );
+
+        await expect(validateSubjectAuthoring("sql", { authoringRoot })).resolves.toEqual(
+            expect.arrayContaining([
+                expect.stringContaining(
+                    "learner-facing topic content is forbidden under authoring",
+                ),
+            ]),
+        );
+    });
+
     it("fails when publishTarget course is missing", async () => {
         const authoringRoot = await makeAuthoringFixture({
             subjectPlan: {

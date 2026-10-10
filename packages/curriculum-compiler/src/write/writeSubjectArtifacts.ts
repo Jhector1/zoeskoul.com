@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
-    getDraftSubjectManifestPath,
-    getDraftSubjectMessagesPath,
+    getBuildSubjectManifestPath,
+    getBuildSubjectMessagesPath,
 } from "@zoeskoul/curriculum-core";
 
 async function ensureDir(filePath: string) {
@@ -21,12 +21,12 @@ export async function writeSubjectArtifacts(args: {
     subjectManifest: unknown;
     subjectMessagesByLocale?: Record<string, Record<string, unknown>>;
 }) {
-    const manifestPath = getDraftSubjectManifestPath(args.subjectSlug);
+    const manifestPath = getBuildSubjectManifestPath(args.subjectSlug);
 
     await writeJsonAtomic(manifestPath, args.subjectManifest);
 
     for (const [locale, messages] of Object.entries(args.subjectMessagesByLocale ?? {})) {
-        const subjectMessagesPath = getDraftSubjectMessagesPath(
+        const subjectMessagesPath = getBuildSubjectMessagesPath(
             locale,
             args.subjectSlug,
         );

@@ -1,6 +1,0 @@
-{
-  "attempt": 1,
-  "status": "failed",
-  "retryable": true,
-  "errorCode": "TOPIC_GENERATION_OUTPUT_INVALID"
-}

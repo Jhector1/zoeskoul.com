@@ -151,7 +151,15 @@ export function getAuthoringCourseValidationPath(
     );
 }
 
-export function getDraftSubjectRoot(subjectSlug: string) {
+export function getDraftSourceRoot() {
+    return fromRepoRoot(".curriculum-drafts");
+}
+
+export function getDraftSourceCatalogRoot(subjectSlug: string) {
+    return fromRepoRoot(".curriculum-drafts", getCatalogSlugForSubjectSlug(subjectSlug));
+}
+
+export function getDraftSourceSubjectRoot(subjectSlug: string) {
     return fromRepoRoot(
         ".curriculum-drafts",
         getCatalogSlugForSubjectSlug(subjectSlug),
@@ -160,30 +168,100 @@ export function getDraftSubjectRoot(subjectSlug: string) {
     );
 }
 
-export function getDraftCatalogRoot(subjectSlug: string) {
-    return fromRepoRoot(".curriculum-drafts", getCatalogSlugForSubjectSlug(subjectSlug));
-}
-
-export function getDraftMessagesRoot(subjectSlug: string) {
+export function getDraftSourceCourseRoot(subjectSlug: string, courseSlug: string) {
     return fromRepoRoot(
         ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "subjects",
+        subjectSlug,
+        "courses",
+        courseSlug,
+    );
+}
+
+export function getDraftSourceTopicsRoot(subjectSlug: string, courseSlug: string) {
+    return fromRepoRoot(
+        ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "subjects",
+        subjectSlug,
+        "courses",
+        courseSlug,
+        "topics",
+    );
+}
+
+export function getDraftSourceTopicPath(
+    subjectSlug: string,
+    courseSlug: string,
+    moduleSlug: string,
+    topicId: string,
+) {
+    return fromRepoRoot(
+        ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "subjects",
+        subjectSlug,
+        "courses",
+        courseSlug,
+        "topics",
+        moduleSlug,
+        `${topicId}.json`,
+    );
+}
+
+export function getDraftSourceTopicMetadataPath(
+    subjectSlug: string,
+    courseSlug: string,
+    moduleSlug: string,
+    topicId: string,
+) {
+    return fromRepoRoot(
+        ".curriculum-drafts",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "subjects",
+        subjectSlug,
+        "courses",
+        courseSlug,
+        "topics",
+        moduleSlug,
+        `${topicId}.source.json`,
+    );
+}
+
+export function getBuildSubjectRoot(subjectSlug: string) {
+    return fromRepoRoot(
+        ".curriculum-build",
+        getCatalogSlugForSubjectSlug(subjectSlug),
+        "subjects",
+        subjectSlug,
+    );
+}
+
+export function getBuildCatalogRoot(subjectSlug: string) {
+    return fromRepoRoot(".curriculum-build", getCatalogSlugForSubjectSlug(subjectSlug));
+}
+
+export function getBuildMessagesRoot(subjectSlug: string) {
+    return fromRepoRoot(
+        ".curriculum-build",
         getCatalogSlugForSubjectSlug(subjectSlug),
         "messages",
     );
 }
 
-export function getDraftReportsRoot(subjectSlug: string) {
+export function getBuildReportsRoot(subjectSlug: string) {
     return fromRepoRoot(
-        ".curriculum-drafts",
+        ".curriculum-build",
         getCatalogSlugForSubjectSlug(subjectSlug),
         "reports",
         subjectSlug,
     );
 }
 
-export function getDraftSubjectManifestPath(subjectSlug: string) {
+export function getBuildSubjectManifestPath(subjectSlug: string) {
     return fromRepoRoot(
-        ".curriculum-drafts",
+        ".curriculum-build",
         getCatalogSlugForSubjectSlug(subjectSlug),
         "subjects",
         subjectSlug,
@@ -191,13 +269,13 @@ export function getDraftSubjectManifestPath(subjectSlug: string) {
     );
 }
 
-export function getDraftTopicBundlePath(
+export function getBuildTopicBundlePath(
     subjectSlug: string,
     moduleDir: string,
     topicId: string,
 ) {
     return fromRepoRoot(
-        ".curriculum-drafts",
+        ".curriculum-build",
         getCatalogSlugForSubjectSlug(subjectSlug),
         "subjects",
         subjectSlug,
@@ -209,14 +287,14 @@ export function getDraftTopicBundlePath(
     );
 }
 
-export function getDraftTopicMessagesPath(
+export function getBuildTopicMessagesPath(
     locale: string,
     subjectSlug: string,
     moduleDir: string,
     topicId: string,
 ) {
     return fromRepoRoot(
-        ".curriculum-drafts",
+        ".curriculum-build",
         getCatalogSlugForSubjectSlug(subjectSlug),
         "messages",
         locale,
@@ -227,9 +305,9 @@ export function getDraftTopicMessagesPath(
     );
 }
 
-export function getDraftSubjectMessagesPath(locale: string, subjectSlug: string) {
+export function getBuildSubjectMessagesPath(locale: string, subjectSlug: string) {
     return fromRepoRoot(
-        ".curriculum-drafts",
+        ".curriculum-build",
         getCatalogSlugForSubjectSlug(subjectSlug),
         "messages",
         locale,

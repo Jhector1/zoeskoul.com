@@ -309,6 +309,7 @@ function extractSolutionCode(exercise: ManifestCodeInput): string {
         case "fixed_tests":
         case "sql_query":
         case "semantic":
+        case "source_checks":
             return String(exercise.recipe.solutionCode ?? "");
         case "shell_task":
             return "";

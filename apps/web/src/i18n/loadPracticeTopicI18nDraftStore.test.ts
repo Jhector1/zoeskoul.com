@@ -24,7 +24,7 @@ describe(
         });
 
         it(
-            "loads Course 2 fill-blank presentation directly from .curriculum-drafts after a clean app rebuild",
+            "loads Course 2 fill-blank presentation directly from .curriculum-build after a clean app rebuild",
             async () => {
                 const repoRoot =
                     await fs.mkdtemp(
@@ -57,7 +57,7 @@ describe(
                 const topicFile =
                     path.join(
                         repoRoot,
-                        ".curriculum-drafts",
+                        ".curriculum-build",
                         "haitian-creole",
                         "messages",
                         "en",

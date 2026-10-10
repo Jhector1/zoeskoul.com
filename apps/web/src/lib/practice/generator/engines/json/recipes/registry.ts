@@ -5,6 +5,7 @@ import { buildSemanticRecipe } from "./semantic";
 import { buildShellTaskRecipe } from "./shellTask";
 import { buildSqlQueryRecipe } from "./sqlQuery";
 import { buildTemplateIoRecipe } from "./templateIo";
+import { buildSourceChecksRecipe } from "./sourceChecks";
 
 export const RECIPE_REGISTRY: Record<ManifestRecipe["type"], RecipeHandler<any>> = {
     fixed_tests: buildFixedTestsRecipe,
@@ -12,4 +13,5 @@ export const RECIPE_REGISTRY: Record<ManifestRecipe["type"], RecipeHandler<any>>
     shell_task: buildShellTaskRecipe,
     sql_query: buildSqlQueryRecipe,
     template_io: buildTemplateIoRecipe,
+    source_checks: buildSourceChecksRecipe,
 };

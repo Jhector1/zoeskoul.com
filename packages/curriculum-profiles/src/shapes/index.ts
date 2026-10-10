@@ -5,12 +5,13 @@ import { gitShape } from "./gitShape.js";
 import { mathShape } from "./mathShape.js";
 import { pythonShape } from "./pythonShape.js";
 import { sqlShape } from "./sqlShape.js";
+import { webShape } from "./webShape.js";
 import type { SubjectShapePack } from "./types.js";
 
 export function getSubjectShape(profileId: string): SubjectShapePack {
     return getCurriculumProfile(profileId).shape;
 }
 
-export { bashShape, cShape, gitShape, sqlShape, pythonShape, mathShape };
+export { bashShape, cShape, gitShape, sqlShape, pythonShape, mathShape, webShape };
 export type * from "./types.js";
 export * from "./languageShape.js";

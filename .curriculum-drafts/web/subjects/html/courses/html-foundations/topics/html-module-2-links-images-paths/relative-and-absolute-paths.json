@@ -1,0 +1,334 @@
+{
+  "title": "Relative and Absolute Paths",
+  "summary": "Understand how URLs and local paths point to resources.",
+  "minutes": 16,
+  "sketchBlocks": [
+    {
+      "id": "relative-paths-start-from-current-location",
+      "title": "Relative paths start from the current file",
+      "bodyMarkdown": "A relative path tells the browser where a destination is **from the current HTML file**.\n\n```html\n<a href=\"schedule.html\">Tutoring schedule</a>\n<a href=\"pages/events.html\">Campus events</a>\n```\n\nLine by line: **First**, `schedule.html` tells the browser to look in the same folder as the current page. **Second**, `pages/events.html` tells the browser to enter the `pages` child folder before opening `events.html`. Relative paths are useful when related site files move together because the path is based on their folder relationship.",
+      "cardTitle": "Source Becomes a Page"
+    },
+    {
+      "id": "absolute-urls-name-complete-destinations",
+      "title": "Absolute URLs name a complete destination",
+      "bodyMarkdown": "An absolute URL includes the scheme and host, so the browser has the full destination.\n\n```html\n<a href=\"https://example.org/campus-map\">Campus map</a>\n```\n\nThis line gives the browser a complete external destination: the scheme is `https`, the host is `example.org`, and `/campus-map` identifies the resource on that site. Unlike a relative path, the destination does not depend on the current HTML file's folder.",
+      "cardTitle": "Read the Markup"
+    },
+    {
+      "id": "dot-dot-moves-up-one-folder",
+      "title": "Use ../ to move up one folder",
+      "bodyMarkdown": "`../` means “move to the parent folder.”\n\nIf `profile.html` is inside `students/`, this link:\n\n```html\n<a href=\"../home.html\">Site home</a>\n```\n\nThis line first moves from `students/` to its parent folder, then asks the browser to open `home.html` there. Read a relative path from left to right: move through the folder relationship first, then arrive at the target file.",
+      "cardTitle": "Build Meaning First"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "paths-sc-1",
+      "kind": "single_choice",
+      "title": "Choose a same-folder path",
+      "prompt": "Which href points to `about.html` in the same folder as the current page?",
+      "hint": "A same-folder relative path can name the file directly.",
+      "help": {
+        "concept": "Relative paths are interpreted from the current document location.",
+        "hint_1": "No folder change is needed for a file in the same directory.",
+        "hint_2": "Choose the filename by itself."
+      },
+      "options": [
+        "about.html",
+        "/about.html",
+        "https://about.html",
+        "../about.html"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "paths-sc-2",
+      "kind": "single_choice",
+      "title": "Choose an absolute URL",
+      "prompt": "Which destination is an absolute web URL?",
+      "hint": "Look for a complete URL with a scheme and host.",
+      "help": {
+        "concept": "Absolute URLs include the full network destination.",
+        "hint_1": "https:// is a strong clue.",
+        "hint_2": "Relative paths do not need a scheme or hostname."
+      },
+      "options": [
+        "pages/help.html",
+        "../help.html",
+        "https://example.com/help",
+        "help.html"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "paths-mc-1",
+      "kind": "multi_choice",
+      "title": "Recognize relative paths",
+      "prompt": "Which values are relative paths? Choose all that apply.",
+      "hint": "Relative paths depend on the current file location.",
+      "help": {
+        "concept": "Relative paths can name same-folder, child-folder, or parent-folder destinations.",
+        "hint_1": "A full https URL is absolute.",
+        "hint_2": "Look for values without a scheme and host."
+      },
+      "options": [
+        "about.html",
+        "pages/contact.html",
+        "../index.html",
+        "https://example.com/profile"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "paths-dr-1",
+      "kind": "drag_reorder",
+      "title": "Build a child-folder path",
+      "prompt": "Arrange these pieces to form a relative path to `contact.html` inside the `pages` folder.",
+      "hint": "Start with the folder, then the slash, then the file.",
+      "help": {
+        "concept": "A child-folder path names the folder before the file.",
+        "hint_1": "The slash separates path segments.",
+        "hint_2": "The finished path is pages/contact.html."
+      },
+      "tokens": [
+        "contact.html",
+        "/",
+        "pages"
+      ],
+      "correctOrder": [
+        "pages",
+        "/",
+        "contact.html"
+      ]
+    },
+    {
+      "id": "paths-fb-1",
+      "kind": "fill_blank_choice",
+      "title": "Complete a parent-folder path",
+      "prompt": "Choose the prefix that moves from a child folder up to its parent before opening `index.html`.",
+      "hint": "Use the path segment that means parent folder.",
+      "help": {
+        "concept": "../ moves one folder upward.",
+        "hint_1": "The target file is outside the current folder.",
+        "hint_2": "Choose the parent-directory prefix."
+      },
+      "template": "<a href=\"[blank1]index.html\">Home</a>",
+      "choices": [
+        "../",
+        "./",
+        "https://",
+        "#"
+      ],
+      "correctValue": "../"
+    },
+    {
+      "id": "paths-fb-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete an external destination",
+      "prompt": "Choose the value that makes this link point to the complete Example site profile URL.",
+      "hint": "An external destination needs the complete absolute URL.",
+      "help": {
+        "concept": "Absolute web URLs include scheme and host.",
+        "hint_1": "The destination is on example.com, not this site's folder tree.",
+        "hint_2": "Choose the https URL."
+      },
+      "template": "<a href=\"[blank1]\">Profile</a>",
+      "choices": [
+        "profile.html",
+        "pages/profile.html",
+        "https://example.com/profile",
+        "../profile.html"
+      ],
+      "correctValue": "https://example.com/profile"
+    },
+    {
+      "id": "paths-ci-1",
+      "kind": "code_input",
+      "title": "Use a same-folder path",
+      "prompt": "The Explorer shows `index.html` and `about.html` side by side. In `index.html`, connect `About me` to the neighboring page using a relative path.",
+      "hint": "No folder change is needed for this destination.",
+      "help": {
+        "concept": "A same-folder relative path can connect sibling HTML files without a full web address.",
+        "hint_1": "The destination file is visible beside the current file in Explorer.",
+        "hint_2": "Use only the neighboring page's filename as the destination."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+          "path": "index.html",
+          "message": "Use the sibling-page relative path for About me.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html"
+        ]
+      }
+    },
+    {
+      "id": "paths-ci-2",
+      "kind": "code_input",
+      "title": "Move down into a folder",
+      "prompt": "The robotics page is nested under the `projects` folder. In `index.html`, write the relative destination that moves into that folder and opens the page.",
+      "hint": "Read the file tree from the current page down to the nested page.",
+      "help": {
+        "concept": "A child-folder relative path names the folder before the destination file.",
+        "hint_1": "The path begins with the folder shown in Explorer.",
+        "hint_2": "After the folder segment, name the robotics HTML file."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+          "path": "index.html",
+          "message": "Use the child-folder relative path to the robotics page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "projects/robotics.html"
+        ]
+      }
+    },
+    {
+      "id": "paths-ci-3",
+      "kind": "code_input",
+      "title": "Move back to the parent folder",
+      "prompt": "Open `projects/robotics.html`. Its `Back to profile` link must return to `index.html`, which is one folder above. Add the correct parent-folder relative destination, then verify both pages in Preview.",
+      "hint": "Start by moving from the projects folder back to its parent.",
+      "help": {
+        "concept": "A parent-folder relative path lets a nested page navigate to a file higher in the website tree.",
+        "hint_1": "The current page is inside one child folder.",
+        "hint_2": "Move up one level before naming the home page."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']\\.\\./index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+          "path": "projects/robotics.html",
+          "message": "Use a parent-folder relative path back to the home page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "projects/robotics.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p>Welcome to the profile home page.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p>Welcome to the profile home page.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "projects/robotics.html"
+        ]
+      }
+    }
+  ]
+}

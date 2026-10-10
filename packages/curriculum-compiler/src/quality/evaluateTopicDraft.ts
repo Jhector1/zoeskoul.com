@@ -41,7 +41,7 @@ export async function evaluateTopicDraft(args: {
     rawDraft: TopicAuthoringDraft;
     profileServices: ProfileServices;
     skipSemantic?: boolean;
-    mode?: "generated" | "manual-strict";
+    mode?: "generated" | "source-strict";
 }): Promise<{
     normalizedDraft: TopicAuthoringDraft;
     draft: TopicAuthoringDraft;
@@ -50,9 +50,9 @@ export async function evaluateTopicDraft(args: {
     semanticReport: SemanticValidationReport;
     hintWarnings: string[];
 }> {
-    const manualStrict = args.mode === "manual-strict";
+    const sourceStrict = args.mode === "source-strict";
 
-    let draft = manualStrict
+    let draft = sourceStrict
         ? args.rawDraft
         : normalizeTopicAuthoringDraft(args.rawDraft, {
               profileId: args.seed.profileId,
@@ -64,7 +64,7 @@ export async function evaluateTopicDraft(args: {
         report: RepairReport;
     };
 
-    if (manualStrict) {
+    if (sourceStrict) {
         profileRepairResult = {
             draft,
             report: makeBaseRepairReport(args.seed.topicId),

@@ -12,6 +12,20 @@ function isSqlQueryExercise(exercise: CodeExercise | undefined): boolean {
     return exercise?.recipeType === "sql_query";
 }
 
+function isWebExercise(exercise: CodeExercise | undefined): boolean {
+    if (!exercise) return false;
+
+    if (String(exercise.fixedLanguage ?? "").trim().toLowerCase() === "web") {
+        return true;
+    }
+
+    const entryFilePath = normalizeText(
+        (exercise as { entryFilePath?: string }).entryFilePath,
+    ).toLowerCase();
+
+    return entryFilePath.endsWith(".html") || entryFilePath.endsWith(".htm");
+}
+
 function ensureTrailingNewline(value: string): string {
     return value.endsWith("\n") ? value : `${value}\n`;
 }
@@ -49,12 +63,18 @@ function progressivePrompt(args: {
     return `${args.projectConfig.continuePromptPrefix ?? "Continue the same project from the previous working step."} In step ${args.stepNumber} of ${args.totalSteps}, ${suffix}`;
 }
 
-function progressiveHint(stepNumber: number) {
+function progressiveHint(stepNumber: number, exercise?: DraftExercise) {
+    const webExercise = exercise?.kind === "code_input" && isWebExercise(exercise);
+
     if (stepNumber === 1) {
-        return "This is the first project step. Build a clean starting version, then run it before moving on.";
+        return webExercise
+            ? "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on."
+            : "This is the first project step. Build a clean starting version, then run it before moving on.";
     }
 
-    return "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.";
+    return webExercise
+        ? "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure."
+        : "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.";
 }
 
 function progressiveHelp(args: {
@@ -62,7 +82,7 @@ function progressiveHelp(args: {
     projectConfig: ProjectProfileConfig;
     stepNumber: number;
 }) {
-    const baseHint = progressiveHint(args.stepNumber);
+    const baseHint = progressiveHint(args.stepNumber, args.exercise);
 
     return {
         concept: args.projectConfig.helpConcept ?? args.exercise.help.concept,
@@ -70,7 +90,9 @@ function progressiveHelp(args: {
         hint_2:
             args.stepNumber === 1
                 ? args.exercise.help.hint_2
-                : "Run the previous working code first, then make only the focused change for this step.",
+                : args.exercise.kind === "code_input" && isWebExercise(args.exercise)
+                    ? "Preview the previous working page first, then make only the focused HTML change for this step."
+                    : "Run the previous working code first, then make only the focused change for this step.",
     };
 }
 
@@ -89,13 +111,29 @@ function progressiveStarterCode(args: {
     const title = normalizeText(args.exercise.title) || `${label} ${args.stepNumber}`;
     const shortTask = shortTaskFromPrompt(args.exercise.prompt);
 
+    const commentLines = [
+        `${label} ${args.stepNumber}: ${title}`,
+        "Keep the working code above from the previous step.",
+        `Next, ${shortTask}`,
+        "Add only the focused change for this step inside the existing work.",
+    ];
+    const webExercise = isWebExercise(args.exercise);
     const commentPrefix = isSqlQueryExercise(args.exercise) ? "--" : "#";
-    const commentBlock = [
-        `${commentPrefix} ${label} ${args.stepNumber}: ${title}`,
-        `${commentPrefix} Keep the working code above from the previous step.`,
-        `${commentPrefix} Next, ${shortTask}`,
-        `${commentPrefix} Add only the focused change for this step inside the existing work.`,
-    ].join("\n");
+    const commentBlock = webExercise
+        ? commentLines.map((line) => `<!-- ${line} -->`).join("\n")
+        : commentLines.map((line) => `${commentPrefix} ${line}`).join("\n");
+
+    if (webExercise) {
+        const closingBody = /<\/body\s*>/i;
+        if (closingBody.test(previousSolution)) {
+            return ensureTrailingNewline(
+                previousSolution.replace(
+                    closingBody,
+                    `${commentBlock}\n  </body>`,
+                ),
+            );
+        }
+    }
 
     return ensureTrailingNewline(
         [previousSolution, "", commentBlock].filter(Boolean).join("\n"),
@@ -123,7 +161,9 @@ function progressiveSolutionCode(args: {
     // later SQL solution to contain the complete cumulative query.
     if (
         isSqlQueryExercise(args.exercise) ||
-        isSqlQueryExercise(args.previousExercise)
+        isSqlQueryExercise(args.previousExercise) ||
+        isWebExercise(args.exercise) ||
+        isWebExercise(args.previousExercise)
     ) {
         return ensureTrailingNewline(currentSolution);
     }
@@ -147,7 +187,9 @@ function resolveEntryFilePath(exercise: CodeExercise) {
         return entryStarter.path;
     }
 
-    return isSqlQueryExercise(exercise) ? "query.sql" : "main.py";
+    if (isSqlQueryExercise(exercise)) return "query.sql";
+    if (isWebExercise(exercise)) return "index.html";
+    return "main.py";
 }
 
 function cloneStarterFiles(files: CodeExercise["starterFiles"]) {
@@ -428,7 +470,7 @@ export function applyProgressiveProjectFlow(args: {
                 stepNumber,
                 totalSteps: args.projectStepIds.length,
             }),
-            hint: progressiveHint(stepNumber),
+            hint: progressiveHint(stepNumber, exercise),
             help: progressiveHelp({
                 exercise,
                 projectConfig,

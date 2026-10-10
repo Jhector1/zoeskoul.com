@@ -715,25 +715,107 @@ function sanitizeLegacyWorkspaceArtifacts(args: {
   };
 }
 
+export function restoreCanonicalBinaryStarterPlaceholders(args: {
+  base: WorkspaceStateV2;
+  canonicalFiles: NormalizedStarterFile[];
+}): WorkspaceStateV2 {
+  const canonicalBinaryByPath = new Map(
+    args.canonicalFiles
+      .filter((file) => Boolean(file.binary))
+      .map((file) => [
+        normalizePath(file.path, file.path),
+        file.binary!,
+      ] as const),
+  );
+
+  if (canonicalBinaryByPath.size === 0) {
+    return args.base;
+  }
+
+  let changed = false;
+  const nodes = args.base.nodes.map((node) => {
+    if (node.kind !== "file") {
+      return node;
+    }
+
+    const path = normalizePath(
+      workspacePathForNode(args.base.nodes, node.id),
+      node.name,
+    );
+    const binary = canonicalBinaryByPath.get(path);
+    if (!binary) return node;
+
+    /**
+     * A canonical binary asset owns its path. Text at the same path is never a
+     * valid learner edit; it is a legacy/cross-file hydration corruption.
+     */
+    if (
+      node.binary?.encoding === "base64" &&
+      node.binary.data === binary.data &&
+      node.binary.mimeType === binary.mimeType
+    ) {
+      return node;
+    }
+
+    changed = true;
+    return {
+      ...node,
+      content: "",
+      binary,
+    };
+  });
+
+  return changed
+    ? {
+        ...args.base,
+        nodes,
+      }
+    : args.base;
+}
+
 function manifestFilesForMissingMerge(
   manifest: ManifestWorkspaceDefinition,
 ): NormalizedStarterFile[] {
   /**
-   * Saved/user workspaces are authoritative. Only runtime fixture files
-   * should be merged back into a saved workspace. Do not merge the full
-   * manifest workspace here because that workspace includes starterFiles;
-   * doing so resurrects starter/helper files that the learner never saved.
+   * Saved learner-authored text remains authoritative.
+   *
+   * Runtime fixtures are structural. Canonical binary starter assets are
+   * structural too: learners do not edit their bytes in Monaco, and older
+   * saved snapshots can legitimately predate the path. Merge only those
+   * binary starter assets back; never resurrect missing authored text files.
    */
-  return manifest.fixtureFiles;
+  const canonicalBinaryAssets = workspaceFileEntries(
+    manifest.manifestWorkspace,
+  ).filter((file) => Boolean(file.binary));
+
+  return mergeNormalizedStarterFiles(
+    [manifest.fixtureFiles, canonicalBinaryAssets],
+    manifest.entryFile,
+  );
 }
 
 function mergeMissingManifestFilesIntoWorkspace(args: {
   base: WorkspaceStateV2;
   manifest: ManifestWorkspaceDefinition;
 }): WorkspaceStateV2 {
-  return mergeMissingFilesIntoWorkspace({
+  const merged = mergeMissingFilesIntoWorkspace({
     base: args.base,
     fixtureFiles: manifestFilesForMissingMerge(args.manifest),
+  });
+
+  /**
+   * Saved authored text files remain authoritative. Canonical binary asset paths
+   * are different: learners do not edit their bytes in Monaco, so any text node
+   * at the same canonical binary path is corruption and must be replaced.
+   */
+  return restoreCanonicalBinaryStarterPlaceholders({
+    base: merged,
+    canonicalFiles: [
+      ...workspaceFileEntries(args.manifest.manifestWorkspace),
+      ...(Array.isArray(args.manifest.fixtureFiles)
+        ? args.manifest.fixtureFiles
+        : []),
+    ],
   });
 }
 
@@ -777,8 +859,15 @@ function isCollapsedMultiFileStarterSnapshot(args: {
   savedWorkspace: WorkspaceStateV2 | null | undefined;
   manifestWorkspace: WorkspaceStateV2 | null | undefined;
 }) {
-  const savedFiles = workspaceFileEntries(args.savedWorkspace);
-  const manifestFiles = workspaceFileEntries(args.manifestWorkspace);
+  /**
+   * Legacy starter-collapse detection is about Monaco-editable authored text.
+   * Canonical binary assets must not prevent detection merely because an older
+   * saved snapshot predates the binary path.
+   */
+  const savedFiles = workspaceFileEntries(args.savedWorkspace)
+    .filter((file) => !file.binary);
+  const manifestFiles = workspaceFileEntries(args.manifestWorkspace)
+    .filter((file) => !file.binary);
 
   if (savedFiles.length < 2 || manifestFiles.length < 2) {
     return false;
@@ -1358,6 +1447,150 @@ export function createManifestWorkspaceDefinition(args: {
   };
 }
 
+/**
+ * MANIFEST_BINARY_ADAPTER_V284AD
+ *
+ * Compiler code-input file records use the public manifest shape:
+ *   { path, encoding: "base64", data, mimeType, sizeBytes, checksum? }
+ *
+ * WorkspaceStateV2 FileNode uses:
+ *   { ..., content: "", binary: { encoding, data, mimeType, sizeBytes, checksum? } }
+ *
+ * Keep this conversion at the Lesson manifest -> runtime workspace boundary so
+ * the shared FullIDE receives the same binary FileNode shape as Sandbox.
+ */
+export function hydrateManifestWorkspaceBinaryFiles(args: {
+  workspace: WorkspaceStateV2 | null | undefined;
+  rawManifest: unknown;
+}): WorkspaceStateV2 | null | undefined {
+  const workspace = args.workspace;
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return workspace;
+  }
+
+  type BinaryRecord = {
+    encoding: "base64";
+    data: string;
+    mimeType: string;
+    sizeBytes: number;
+    checksum?: string;
+  };
+
+  const binaryByPath = new Map<string, BinaryRecord>();
+  const seen = new Set<object>();
+
+  const visit = (value: unknown) => {
+    if (!value || typeof value !== "object") return;
+    if (seen.has(value as object)) return;
+    seen.add(value as object);
+
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item);
+      return;
+    }
+
+    const record = value as Record<string, unknown>;
+    const path =
+      typeof record.path === "string"
+        ? normalizePath(record.path, record.path)
+        : "";
+
+    if (
+      path &&
+      record.encoding === "base64" &&
+      typeof record.data === "string" &&
+      record.data.length > 0 &&
+      typeof record.mimeType === "string" &&
+      Number.isFinite(Number(record.sizeBytes)) &&
+      Number(record.sizeBytes) >= 0
+    ) {
+      binaryByPath.set(path, {
+        encoding: "base64",
+        data: record.data,
+        mimeType: record.mimeType,
+        sizeBytes: Number(record.sizeBytes),
+        ...(typeof record.checksum === "string" && record.checksum
+          ? { checksum: record.checksum }
+          : {}),
+      });
+    }
+
+    const nestedBinary =
+      record.binary &&
+      typeof record.binary === "object" &&
+      !Array.isArray(record.binary)
+        ? (record.binary as Record<string, unknown>)
+        : null;
+
+    if (
+      path &&
+      nestedBinary?.encoding === "base64" &&
+      typeof nestedBinary.data === "string" &&
+      nestedBinary.data.length > 0 &&
+      typeof nestedBinary.mimeType === "string" &&
+      Number.isFinite(Number(nestedBinary.sizeBytes)) &&
+      Number(nestedBinary.sizeBytes) >= 0
+    ) {
+      binaryByPath.set(path, {
+        encoding: "base64",
+        data: nestedBinary.data,
+        mimeType: nestedBinary.mimeType,
+        sizeBytes: Number(nestedBinary.sizeBytes),
+        ...(typeof nestedBinary.checksum === "string" && nestedBinary.checksum
+          ? { checksum: nestedBinary.checksum }
+          : {}),
+      });
+    }
+
+    for (const child of Object.values(record)) {
+      visit(child);
+    }
+  };
+
+  visit(args.rawManifest);
+
+  if (binaryByPath.size === 0) {
+    return workspace;
+  }
+
+  let changed = false;
+  const nodes = workspace.nodes.map((node) => {
+    if (node.kind !== "file") return node;
+
+    const path = normalizePath(
+      workspacePathForNode(workspace.nodes, node.id),
+      node.name,
+    );
+    const binary = binaryByPath.get(path);
+    if (!binary) return node;
+
+    if (
+      node.binary?.encoding === "base64" &&
+      node.binary.data === binary.data &&
+      node.binary.mimeType === binary.mimeType &&
+      node.binary.sizeBytes === binary.sizeBytes &&
+      String(node.content ?? "") === ""
+    ) {
+      return node;
+    }
+
+    changed = true;
+    return {
+      ...node,
+      content: "",
+      binary: { ...binary },
+      updatedAt: node.updatedAt ?? Date.now(),
+    };
+  });
+
+  return changed
+    ? {
+        ...workspace,
+        nodes,
+      }
+    : workspace;
+}
+
 export function resolveWorkspaceForTarget(args: {
   targetKey: string;
   targetKind: WorkspaceTargetKind;
@@ -1370,12 +1603,26 @@ export function resolveWorkspaceForTarget(args: {
   draftMaxAgeMs?: number;
 }): ResolvedWorkspaceForTarget {
   const language = (args.language || "python") as WorkspaceLanguage;
-  const manifest = createManifestWorkspaceDefinition({
+  const manifestDefinition = createManifestWorkspaceDefinition({
     language,
     manifest: args.manifest,
     entry: args.entry,
     workspaceRequested: args.workspaceRequested ?? args.targetKind === "exercise",
   });
+  const hydratedManifestWorkspace = hydrateManifestWorkspaceBinaryFiles({
+    workspace: manifestDefinition.manifestWorkspace,
+    rawManifest: args.manifest,
+  });
+  const manifest =
+    hydratedManifestWorkspace === manifestDefinition.manifestWorkspace
+      ? manifestDefinition
+      : {
+          ...manifestDefinition,
+          manifestWorkspace: hydratedManifestWorkspace ?? null,
+          starterHash: hydratedManifestWorkspace
+            ? workspaceContentKey(hydratedManifestWorkspace)
+            : manifestDefinition.starterHash,
+        };
 
   const normalizedCandidates = (args.savedCandidates ?? []).map((candidate) => ({
     candidate,

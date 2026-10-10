@@ -1,0 +1,136 @@
+{
+  "title": "Project: Build Your First Complete Page",
+  "summary": "Act as a junior web developer helping a student-success team prepare a simple learning-profile page for a new-coder orientation. Build and hand off one browser-ready index.html page in three progressive steps.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "project-roadmap",
+      "cardTitle": "Your First Client-Style Page",
+      "title": "Build a learning-profile page for a student-success team",
+      "bodyMarkdown": "You are a **junior web developer** helping a student-success team prepare a small learning-profile page for a new-coder orientation. The team needs one clean file—`index.html`—that they can open in a browser and review without any extra setup. Your deliverable is a browser-ready page that clearly shows what the learner is studying and demonstrates sound HTML structure.\n\nYou will build that deliverable in three progressive steps. First, create the document foundation in `index.html`. Next, add the visible heading and paragraph content the team asked for. Finally, improve the page structure with a second heading and nested emphasis while keeping the document valid. Each step continues the same file, so preserve the working markup from the previous milestone rather than starting over.\n\nUse the browser preview after every change as if you were checking the page before handing it to the team. The preview should remain understandable throughout the project: first the document has a reliable foundation, then the reviewer sees useful content, and finally the page gains clearer structure and emphasis. **Check Answer** verifies the required HTML source for each milestone.\n\nThe goal is not decoration. The finished `index.html` is the team's review copy and should demonstrate that you can organize a modern HTML document, separate head information from body content, use headings and paragraphs, keep tags balanced, and nest elements correctly. Later CSS and JavaScript courses can build on this same web-development workflow."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "first-page-step-1-shell",
+      "kind": "code_input",
+      "title": "Step 1: Build the document shell",
+      "prompt": "You are starting the student-success team's review page in index.html. Create the document foundation with a modern doctype, html lang set to English, UTF-8 charset, the title **My Learning Page**, and an empty body ready for the content the team will review in the next step.",
+      "hint": "Build the outer document structure first and leave the body ready for the next project step.",
+      "help": {
+        "concept": "A reliable page starts with a complete HTML document shell before visible content is added.",
+        "hint_1": "Work from the doctype into html, then head and body.",
+        "hint_2": "Preview the page even though the body is empty, then use Check Answer to verify the source foundation."
+      },
+      "starterCode": "<!-- Build the document foundation here. -->\n",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n  </body>\n</html>\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "index.html",
+      "recipeType": "source_checks",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)^\\s*<!doctype\\s+html\\s*>",
+          "message": "Start the project with the HTML doctype.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<html\\b[^>]*\\blang\\s*=\\s*[\\\"']en[\\\"'][^>]*>.*</html>",
+          "message": "Use an html root with lang set to en.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<head\\b[^>]*>.*<meta\\b[^>]*charset\\s*=\\s*[\\\"']?UTF-8[\\\"']?[^>]*>.*<title\\b[^>]*>\\s*My Learning Page\\s*</title>.*</head>",
+          "message": "Complete head with UTF-8 and the My Learning Page title.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<body\\b[^>]*>\\s*</body>",
+          "message": "Leave an empty body ready for the next project step.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "first-page-step-2-content",
+      "kind": "code_input",
+      "title": "Step 2: Add the page content",
+      "prompt": "Continue the same index.html review page for the student-success team. Add an h1 **My Learning Page** and two paragraphs: **I am learning how browsers read HTML.** and **Clear structure helps me understand my page.**",
+      "hint": "Keep the completed document shell and add the required elements inside body.",
+      "help": {
+        "concept": "Visible headings and paragraphs belong in the body while the document title remains in head.",
+        "hint_1": "Add the h1 first, followed by the two paragraph elements.",
+        "hint_2": "Preview the text after adding it and make sure none of the new content was placed inside head."
+      },
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n  </body>\n</html>\n",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  </body>\n</html>\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "index.html",
+      "recipeType": "source_checks",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<body\\b[^>]*>.*<h1\\b[^>]*>\\s*My Learning Page\\s*</h1>.*<p\\b[^>]*>\\s*I am learning how browsers read HTML\\.\\s*</p>.*<p\\b[^>]*>\\s*Clear structure helps me understand my page\\.\\s*</p>.*</body>",
+          "message": "Add the h1 and both required paragraphs inside body.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "first-page-step-3-nesting",
+      "kind": "code_input",
+      "title": "Step 3: Finish with clear nested markup",
+      "prompt": "Finish the same index.html handoff for the student-success team. Add an h2 **What I learned**, wrap **HTML** in strong inside the first paragraph, and wrap **structure** in em inside the second paragraph. The final browser preview should be ready for the team's review.",
+      "hint": "Preserve the working page and make only the final heading and nested-element changes inside body.",
+      "help": {
+        "concept": "Balanced nested elements add meaning inside existing content without breaking the surrounding document structure.",
+        "hint_1": "Add the h2 after the h1, then nest strong and em only around the requested words.",
+        "hint_2": "Inspect the final preview, then check that every nested element closes before its paragraph closes."
+      },
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  </body>\n</html>\n",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <h2>What I learned</h2>\n    <p>I am learning how browsers read <strong>HTML</strong>.</p>\n    <p>Clear <em>structure</em> helps me understand my page.</p>\n  </body>\n</html>\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "index.html",
+      "recipeType": "source_checks",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<h2(?:\\s[^>]*)?>\\s*What I learned\\s*</h2>",
+          "message": "Add the What I learned h2.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*I am learning how browsers read\\s*<strong(?:\\s[^>]*)?>\\s*HTML\\s*</strong>\\s*\\.\\s*</p>",
+          "message": "Wrap HTML in a strong element inside the first paragraph.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*Clear\\s*<em(?:\\s[^>]*)?>\\s*structure\\s*</em>\\s*helps me understand my page\\.\\s*</p>",
+          "message": "Wrap structure in an em element inside the second paragraph.",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Build Your First Complete Page",
+    "stepIds": [
+      "first-page-step-1-shell",
+      "first-page-step-2-content",
+      "first-page-step-3-nesting"
+    ]
+  }
+}

@@ -287,7 +287,7 @@ export async function loadDraftQaPractice(args: {
 
   // Never let a missing Draft QA message lookup silently become visible UI.
   // Published/live practice already resolves through the normal message layer;
-  // this guard protects the raw .curriculum-drafts adapter specifically.
+  // this guard protects the raw .curriculum-build adapter specifically.
   assertNoUnresolvedDraftMessageRefs(exercise, "exercise");
   assertNoUnresolvedDraftMessageRefs(expected, "expected");
 

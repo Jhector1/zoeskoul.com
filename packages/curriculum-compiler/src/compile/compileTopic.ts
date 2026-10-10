@@ -4,7 +4,7 @@ import path from "node:path";
 import type { CourseBlueprint, TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider, TopicRetryContext } from "@zoeskoul/curriculum-ai";
 import { generateTopicAuthoringDraftAttempt } from "@zoeskoul/curriculum-ai";
-import { getDraftReportsRoot } from "@zoeskoul/curriculum-core";
+import { getBuildReportsRoot } from "@zoeskoul/curriculum-core";
 import {
     getProfileServices,
     getSubjectShape,
@@ -30,6 +30,7 @@ import {
     extractGenerationDiagnostics,
 } from "../reports/topicGenerationAudit.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
+import { findTopicSourceDraft, writeTopicSourceDraft } from "../drafts/topicSourceDraft.js";
 import { buildCurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
@@ -57,7 +58,7 @@ function getTopicReportDir(args: {
     topicId: string;
 }) {
     return path.join(
-        getDraftReportsRoot(args.subjectSlug),
+        getBuildReportsRoot(args.subjectSlug),
         `module${args.moduleOrder}`,
         args.topicId,
     );
@@ -111,7 +112,7 @@ function throwRetryableReportFailure(args: {
 
 export async function compileTopic(args: {
     blueprint: CourseBlueprint;
-    provider: AiProvider;
+    provider?: AiProvider;
     translationProvider?: AiProvider;
     /**
      * Optional emitted subject identity.
@@ -124,9 +125,28 @@ export async function compileTopic(args: {
     outputSubjectSlug?: string;
     topicId: string;
     onProgress?: CompileProgressCallback;
-    manualDraft?: TopicAuthoringDraft;
+    sourceDraft?: TopicAuthoringDraft;
 }) {
     validateBlueprint(args.blueprint);
+
+    const noExternalAiProvider: AiProvider = {
+        async generateJson() {
+            throw new Error(
+                "No AI provider is configured and no canonical topic source draft is available.",
+            );
+        },
+    };
+    const effectiveProvider = args.provider ?? noExternalAiProvider;
+    const courseSlug = args.blueprint.courseSlug;
+    const persistedSource =
+        !args.sourceDraft && courseSlug
+            ? await findTopicSourceDraft({
+                  subjectSlug: args.blueprint.subjectSlug,
+                  courseSlug,
+                  topicId: args.topicId,
+              })
+            : null;
+    const sourceDraft = args.sourceDraft ?? persistedSource?.draft;
 
     const outputSubjectSlug =
         args.outputSubjectSlug ?? args.blueprint.subjectSlug;
@@ -138,13 +158,13 @@ export async function compileTopic(args: {
                   subjectSlug: outputSubjectSlug,
               };
 
-    const translationProvider = args.translationProvider ?? args.provider;
+    const translationProvider = args.translationProvider ?? effectiveProvider;
     const sourceLocale = args.blueprint.sourceLocale;
     const extraLocales = (args.blueprint.targetLocales ?? []).filter(
         (locale) => locale !== sourceLocale,
     );
 
-    const maxTopicRetries = args.manualDraft ? 0 : MAX_TOPIC_RETRIES;
+    const maxTopicRetries = sourceDraft ? 0 : MAX_TOPIC_RETRIES;
     const totalStages = 8 + extraLocales.length * 2 + maxTopicRetries;
     let currentStage = 0;
 
@@ -174,7 +194,7 @@ export async function compileTopic(args: {
 
     const resolved = await resolvePlan({
         blueprint: args.blueprint,
-        provider: args.provider,
+        provider: effectiveProvider,
     });
 
     advanceProgress({
@@ -295,7 +315,7 @@ export async function compileTopic(args: {
 
         try {
             advanceProgress({
-                stage: attempt > 0 ? `retrying topic draft (${attempt}/${maxTopicRetries})` : "generating topic draft",
+                stage: attempt > 0 ? `retrying topic draft (${attempt}/${maxTopicRetries})` : sourceDraft ? "loading canonical topic source draft" : "generating topic draft",
                 topicId: node.topic.topicId,
                 moduleSlug: node.module.moduleSlug,
                 sectionSlug: node.section.sectionSlug,
@@ -303,27 +323,26 @@ export async function compileTopic(args: {
 
             let generationAttempt;
             try {
-                if (args.manualDraft) {
-                    const rawText = JSON.stringify(args.manualDraft);
+                if (sourceDraft) {
                     generationAttempt = {
-                        prompt: {
-                            system: "manual-topic-authoring",
-                            user: node.topic.topicId,
-                        },
-                        generation: {
-                            provider: "manual",
-                            model: "checked-in-json",
-                            temperature: 0,
-                            seed: 0,
-                            schemaName: "TopicAuthoringDraft" as const,
-                            strictSchema: true,
-                            rawText,
-                            parsedJson: args.manualDraft,
-                            value: args.manualDraft,
-                        },
-                    };
+                            prompt: {
+                                system: "canonical-topic-source-draft",
+                                user: node.topic.topicId,
+                            },
+                            generation: {
+                                provider: "source-draft",
+                                model: "checked-in-json",
+                                temperature: 0,
+                                seed: 0,
+                                schemaName: "TopicAuthoringDraft" as const,
+                                strictSchema: true,
+                                rawText: JSON.stringify(sourceDraft),
+                                parsedJson: sourceDraft,
+                                value: sourceDraft,
+                            },
+                        };
                 } else {
-                    generationAttempt = await generateTopicAuthoringDraftAttempt(args.provider, {
+                    generationAttempt = await generateTopicAuthoringDraftAttempt(effectiveProvider, {
                         seed,
                         locale: sourceLocale,
                         shape,
@@ -373,7 +392,7 @@ export async function compileTopic(args: {
 
             const rawDraft = generationAttempt.generation.value;
 
-            if (args.manualDraft) {
+            if (sourceDraft) {
                 assertTopicAuthoringDraft(rawDraft);
             }
 
@@ -406,11 +425,11 @@ export async function compileTopic(args: {
             });
 
             const evaluation = await evaluateTopicDraft({
-                provider: args.provider,
+                provider: effectiveProvider,
                 seed,
                 rawDraft,
                 profileServices,
-                mode: args.manualDraft ? "manual-strict" : "generated",
+                mode: sourceDraft ? "source-strict" : "generated",
             });
 
             const draft = evaluation.draft;
@@ -595,6 +614,25 @@ export async function compileTopic(args: {
                 }
             }
 
+            if (!sourceDraft && courseSlug) {
+                await writeTopicSourceDraft({
+                    subjectSlug: args.blueprint.subjectSlug,
+                    courseSlug,
+                    moduleSlug: node.module.moduleSlug,
+                    topicId: node.topic.topicId,
+                    draft,
+                    metadata: {
+                        version: 1,
+                        origin: "generated",
+                        generatedAt: new Date().toISOString(),
+                        generator: {
+                            provider: generationAttempt.generation.provider,
+                            model: generationAttempt.generation.model,
+                        },
+                    },
+                });
+            }
+
             const sourceMessages = buildMessagesFromDraft({
                 shape,
                 seed,
@@ -726,7 +764,9 @@ export async function compileTopic(args: {
             if (isRetryableTopicValidationError(error)) {
                 throw new Error(
                     [
-                        `Retryable topic generation failed after ${attempt + 1} attempt(s).`,
+                        sourceDraft
+                                ? `Canonical topic compilation failed after ${attempt + 1} attempt(s).`
+                                : `Retryable topic generation failed after ${attempt + 1} attempt(s).`,
                         `Topic: ${node.module.moduleSlug}/${node.section.sectionSlug}/${node.topic.topicId}`,
                         `Last error code: ${error.code}`,
                         "",

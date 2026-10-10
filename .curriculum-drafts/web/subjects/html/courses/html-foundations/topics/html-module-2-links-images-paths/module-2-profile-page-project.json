@@ -1,0 +1,276 @@
+{
+  "title": "Project: Build a Profile Page",
+  "summary": "Build a small multi-page student profile site with real relative navigation, a nested project page, and a supplied profile image.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "project-brief",
+      "title": "Project brief: Student Profile Page",
+      "bodyMarkdown": "### Project Brief\n\n**Scenario:** A student organization needs a small profile website that can become part of its member directory.\n\n**Your role:** Junior web developer.\n\n**Workspace:** Use the Full IDE Explorer. The project grows across `index.html`, `about.html`, `projects/robotics.html`, and a supplied `images/profile.png` asset.\n\n**Deliverable:** A navigable profile site where every relative path resolves to a real workspace file and the supplied image appears with meaningful alternative text.\n\nComplete the three steps in order. Each step reconstructs the previous milestone as its canonical starter state.",
+      "cardTitle": "Your First Client-Style Page"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "module2-profile-step-1",
+      "kind": "code_input",
+      "title": "Build the two-page profile foundation",
+      "prompt": "Use the Explorer to work in both `index.html` and `about.html`. Link `About me` from the home page to the About page, then make `Back to profile` on the About page return home. Verify both directions in Preview.",
+      "hint": "Both pages are siblings in the project root.",
+      "help": {
+        "concept": "A multi-page site becomes navigable when related HTML documents link to each other with relative paths.",
+        "hint_1": "Complete the home-page link first, then open the About page in Explorer.",
+        "hint_2": "The return destination is the entry page beside the About page."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+          "path": "index.html",
+          "message": "Link the profile home page to About.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+          "path": "about.html",
+          "message": "Link the About page back to the profile home page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html"
+        ]
+      }
+    },
+    {
+      "id": "module2-profile-step-2",
+      "kind": "code_input",
+      "title": "Add the nested robotics project page",
+      "prompt": "Continue the same site. Link the home page to `projects/robotics.html`. Then open that nested page and make its `Back to profile` link move up one folder to the home page. Test both links in Preview.",
+      "hint": "One path moves down into a child folder and the other moves back to its parent.",
+      "help": {
+        "concept": "Nested website pages require different relative paths depending on the current file's folder.",
+        "hint_1": "The home-page link begins with the projects folder.",
+        "hint_2": "The project page must move up one level before naming the home page."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+          "path": "index.html",
+          "message": "Link the profile home page to the nested robotics page.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']\\.\\./index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+          "path": "projects/robotics.html",
+          "message": "Use a parent-folder path from the robotics page back home.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html",
+          "projects/robotics.html"
+        ]
+      }
+    },
+    {
+      "id": "module2-profile-step-3",
+      "kind": "code_input",
+      "title": "Add the supplied profile image",
+      "prompt": "Finish the site with the supplied `images/profile.png` asset. Add it below the h1 in `index.html` and give it descriptive alternative text. Do not remove the working About or Robotics links. Verify the image and all three pages in Preview.",
+      "hint": "The image is already provided in a child folder; reference it from the home page.",
+      "help": {
+        "concept": "A real website can combine multi-page navigation with local binary assets stored in its folder tree.",
+        "hint_1": "Use the Explorer to confirm the asset path before editing the img element.",
+        "hint_2": "Keep the two existing page links intact while adding the image."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"']Jordan Lee smiling outside the campus library[\"'])[^>]*>",
+          "path": "index.html",
+          "message": "Add the supplied profile image with the requested descriptive alt text.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+          "path": "index.html",
+          "message": "Keep the About link working.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+          "path": "index.html",
+          "message": "Keep the Robotics link working.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html",
+          "projects/robotics.html",
+          "images/profile.png"
+        ]
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Project: Build a Multi-Page Profile Site",
+    "stepIds": [
+      "module2-profile-step-1",
+      "module2-profile-step-2",
+      "module2-profile-step-3"
+    ]
+  }
+}

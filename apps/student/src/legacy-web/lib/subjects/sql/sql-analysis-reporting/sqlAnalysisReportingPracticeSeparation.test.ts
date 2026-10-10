@@ -11,7 +11,7 @@ function findRepoRoot(): string {
     ];
 
     const root = candidates.find((candidate) =>
-        fs.existsSync(path.join(candidate, ".curriculum-drafts")),
+        fs.existsSync(path.join(candidate, ".curriculum-build")),
     );
 
     if (!root) {
@@ -46,7 +46,7 @@ function extractSqlBlocks(markdown: string): string[] {
 function listMessageFiles(root: string): string[] {
     const courseRoot = path.join(
         root,
-        ".curriculum-drafts/sql/messages/en/subjects/sql--sql-analysis-reporting--draft",
+        ".curriculum-build/sql/messages/en/subjects/sql--sql-analysis-reporting--draft",
     );
     const files: string[] = [];
 

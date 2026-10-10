@@ -226,7 +226,7 @@ async function resolveDraftTopicFile(args: {
     /*
      * Draft QA has one canonical message owner:
      *
-     *   <repo>/.curriculum-drafts/<catalog>/messages/<locale>/subjects/<draft-subject>/...
+     *   <repo>/.curriculum-build/<catalog>/messages/<locale>/subjects/<draft-subject>/...
      *
      * Never require a generated draft message to be copied into
      * apps/web/src/i18n/messages. A clean .next rebuild must therefore
@@ -241,7 +241,7 @@ async function resolveDraftTopicFile(args: {
     const draftsRoot =
         path.join(
             repoRoot,
-            ".curriculum-drafts",
+            ".curriculum-build",
         );
 
     const fileName =

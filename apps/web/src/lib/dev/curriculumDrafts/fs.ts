@@ -93,7 +93,7 @@ export type DraftBackupResult = {
 
 type JsonObject = Record<string, unknown>;
 
-const DRAFT_ROOT_NAME = ".curriculum-drafts";
+const BUILD_ROOT_NAME = ".curriculum-build";
 const BACKUP_ROOT_NAME = ".curriculum-backups";
 
 export function isCurriculumDraftEditorEnabled() {
@@ -127,10 +127,10 @@ function repoRootCandidates(startDir = process.cwd()) {
   const seeds: Array<{ path: string; source: string }> = [];
 
   const envRepoRoot = process.env.DEV_CURRICULUM_REPO_ROOT || process.env.CURRICULUM_REPO_ROOT;
-  const envDraftRoot = process.env.DEV_CURRICULUM_DRAFT_ROOT || process.env.CURRICULUM_DRAFT_ROOT;
+  const envDraftRoot = process.env.DEV_CURRICULUM_BUILD_ROOT || process.env.CURRICULUM_BUILD_ROOT;
 
   if (envRepoRoot) seeds.push({ path: envRepoRoot, source: "DEV_CURRICULUM_REPO_ROOT/CURRICULUM_REPO_ROOT" });
-  if (envDraftRoot) seeds.push({ path: path.dirname(envDraftRoot), source: "dirname(DEV_CURRICULUM_DRAFT_ROOT/CURRICULUM_DRAFT_ROOT)" });
+  if (envDraftRoot) seeds.push({ path: path.dirname(envDraftRoot), source: "dirname(DEV_CURRICULUM_BUILD_ROOT/CURRICULUM_BUILD_ROOT)" });
   if (process.env.INIT_CWD) seeds.push({ path: process.env.INIT_CWD, source: "INIT_CWD" });
   if (process.env.PWD) seeds.push({ path: process.env.PWD, source: "PWD" });
   seeds.push({ path: startDir, source: "process.cwd()" });
@@ -153,7 +153,7 @@ export async function findRepoRoot(startDir = process.cwd()) {
   const candidates = repoRootCandidates(startDir);
 
   for (const candidate of candidates) {
-    if (await pathExists(path.join(candidate.path, DRAFT_ROOT_NAME))) {
+    if (await pathExists(path.join(candidate.path, BUILD_ROOT_NAME))) {
       return candidate.path;
     }
   }
@@ -168,13 +168,13 @@ export async function findRepoRoot(startDir = process.cwd()) {
 }
 
 export async function getDraftRootCandidates(startDir = process.cwd()): Promise<DraftRootCandidate[]> {
-  const explicitDraftRoot = process.env.DEV_CURRICULUM_DRAFT_ROOT || process.env.CURRICULUM_DRAFT_ROOT;
+  const explicitDraftRoot = process.env.DEV_CURRICULUM_BUILD_ROOT || process.env.CURRICULUM_BUILD_ROOT;
   const baseCandidates = repoRootCandidates(startDir);
   const draftCandidates = uniquePaths([
-    ...(explicitDraftRoot ? [{ path: explicitDraftRoot, source: "DEV_CURRICULUM_DRAFT_ROOT/CURRICULUM_DRAFT_ROOT" }] : []),
+    ...(explicitDraftRoot ? [{ path: explicitDraftRoot, source: "DEV_CURRICULUM_BUILD_ROOT/CURRICULUM_BUILD_ROOT" }] : []),
     ...baseCandidates.map((candidate) => ({
-      path: path.join(candidate.path, DRAFT_ROOT_NAME),
-      source: `${candidate.source}/${DRAFT_ROOT_NAME}`,
+      path: path.join(candidate.path, BUILD_ROOT_NAME),
+      source: `${candidate.source}/${BUILD_ROOT_NAME}`,
     })),
   ]);
 
@@ -191,7 +191,7 @@ export async function getDraftRootCandidates(startDir = process.cwd()): Promise<
 
 export async function findDraftRoot(startDir = process.cwd()) {
   const candidates = await getDraftRootCandidates(startDir);
-  return candidates.find((candidate) => candidate.exists)?.path ?? path.join(await findRepoRoot(startDir), DRAFT_ROOT_NAME);
+  return candidates.find((candidate) => candidate.exists)?.path ?? path.join(await findRepoRoot(startDir), BUILD_ROOT_NAME);
 }
 
 export async function getDraftRoot() {
@@ -349,7 +349,7 @@ export async function listDraftsWithDebug(locale = "en"): Promise<DraftListResul
 
   if (catalogs.length === 0) {
     warnings.push(
-      `No draft catalogs found in ${draftRoot}. Start the web app from the repo root or set DEV_CURRICULUM_DRAFT_ROOT=/absolute/path/to/.curriculum-drafts.`,
+      `No draft catalogs found in ${draftRoot}. Start the web app from the repo root or set DEV_CURRICULUM_BUILD_ROOT=/absolute/path/to/.curriculum-build.`,
     );
   }
 
@@ -459,11 +459,10 @@ export async function loadDraftTopic(ref: DraftRef): Promise<LoadedDraftTopic> {
 }
 
 
-export async function loadDraftModuleAuthoredTopicOrder(args: {
+export async function loadDraftSubjectManifest(args: {
   catalog: string;
   subject: string;
-  moduleSlug: string;
-}): Promise<string[]> {
+}): Promise<JsonObject> {
   const draftRoot = await findDraftRoot();
   const manifestPath = safeJoin(
     draftRoot,
@@ -473,9 +472,38 @@ export async function loadDraftModuleAuthoredTopicOrder(args: {
     "subject.manifest.json",
   );
 
-  if (!(await pathExists(manifestPath))) return [];
+  if (!(await pathExists(manifestPath))) {
+    throw new Error(
+      `Draft subject manifest not found: ${args.catalog}/${args.subject}`,
+    );
+  }
 
-  const parsed = JSON.parse(await fs.readFile(manifestPath, "utf8")) as JsonObject;
+  const parsed = await readJsonFile(manifestPath);
+  const manifest = asObject(parsed);
+
+  if (!manifest) {
+    throw new Error(
+      `Draft subject manifest is not a JSON object: ${args.catalog}/${args.subject}`,
+    );
+  }
+
+  return manifest;
+}
+
+export async function loadDraftModuleAuthoredTopicOrder(args: {
+  catalog: string;
+  subject: string;
+  moduleSlug: string;
+}): Promise<string[]> {
+  let parsed: JsonObject;
+  try {
+    parsed = await loadDraftSubjectManifest({
+      catalog: args.catalog,
+      subject: args.subject,
+    });
+  } catch {
+    return [];
+  }
   const modules = Array.isArray(parsed.modules) ? parsed.modules : [];
 
   let moduleRecord: JsonObject | null = null;
@@ -633,50 +661,81 @@ export async function backupDraftSubject(args: {
   locale?: string;
 }): Promise<DraftBackupResult> {
   const repoRoot = await findRepoRoot();
-  const draftRoot = await findDraftRoot();
-  const locale = args.locale || "en";
-  const catalogRoot = safeJoin(draftRoot, args.catalog);
-  const snapshotRoot = safeJoin(repoRoot, BACKUP_ROOT_NAME, "dev-editor", timestampForBackup());
-  const sourcePaths = [
-    safeJoin(catalogRoot, "subjects", args.subject),
-    safeJoin(catalogRoot, "messages", locale, "subjects", args.subject),
-  ];
-  const copiedPaths: string[] = [];
+  const buildRoot = await findDraftRoot();
+  const sourceRoots = Array.from(
+    new Set([
+      safeJoin(path.dirname(buildRoot), ".curriculum-drafts"),
+      safeJoin(repoRoot, ".curriculum-drafts"),
+    ]),
+  );
+  const canonicalSubject = subjectWithoutDraftWrapper(
+    args.catalog,
+    args.subject,
+  );
+  const subjectCandidates = Array.from(
+    new Set([args.subject, canonicalSubject].filter(Boolean)),
+  );
 
-  for (const sourcePath of sourcePaths) {
-    if (!(await pathExists(sourcePath))) continue;
+  let sourceSubjectRoot: string | null = null;
+  let resolvedSourceRoot: string | null = null;
+  let resolvedSubject = args.subject;
+  const checkedPaths: string[] = [];
 
-    const relativePath = path.relative(draftRoot, sourcePath);
-    const backupPath = safeJoin(snapshotRoot, DRAFT_ROOT_NAME, relativePath);
-    await fs.mkdir(path.dirname(backupPath), { recursive: true });
-    await fs.cp(sourcePath, backupPath, { recursive: true });
-    copiedPaths.push(toRepoRelative(repoRoot, backupPath));
+  for (const sourceRoot of sourceRoots) {
+    for (const subject of subjectCandidates) {
+      const candidate = safeJoin(
+        sourceRoot,
+        args.catalog,
+        "subjects",
+        subject,
+      );
+      checkedPaths.push(candidate);
+      if (await pathExists(candidate)) {
+        sourceSubjectRoot = candidate;
+        resolvedSourceRoot = sourceRoot;
+        resolvedSubject = subject;
+        break;
+      }
+    }
+    if (sourceSubjectRoot) break;
   }
 
-  if (copiedPaths.length === 0) {
-    throw new Error(`Draft subject not found: ${args.catalog}/${args.subject}`);
+  if (!sourceSubjectRoot || !resolvedSourceRoot) {
+    throw new Error(
+      `Canonical curriculum source not found: ${args.catalog}/${args.subject}. Checked: ${checkedPaths.join(", ")}`,
+    );
   }
+
+  const snapshotRoot = safeJoin(
+    repoRoot,
+    BACKUP_ROOT_NAME,
+    "dev-editor",
+    timestampForBackup(),
+  );
+  const backupPath = safeJoin(
+    snapshotRoot,
+    ".curriculum-drafts",
+    args.catalog,
+    "subjects",
+    resolvedSubject,
+  );
+
+  await fs.mkdir(path.dirname(backupPath), { recursive: true });
+  await fs.cp(sourceSubjectRoot, backupPath, { recursive: true });
 
   return {
     backupRoot: toRepoRelative(repoRoot, snapshotRoot),
-    paths: copiedPaths,
+    paths: [toRepoRelative(repoRoot, backupPath)],
   };
 }
 
-export async function writeDraftJsonFile(args: {
+export async function writeDraftJsonFile(_args: {
   filePath: string;
   value: unknown;
 }) {
-  const repoRoot = await findRepoRoot();
-  const draftRoot = await findDraftRoot();
-  const safePath = safeJoin(draftRoot, path.relative(draftRoot, args.filePath));
-
-  await fs.mkdir(path.dirname(safePath), { recursive: true });
-  await fs.writeFile(safePath, `${JSON.stringify(args.value, null, 2)}\n`, "utf8");
-
-  return {
-    path: toRepoRelative(repoRoot, safePath),
-  };
+  throw new Error(
+    "Compiled curriculum build artifacts are read-only. Edit the canonical .curriculum-drafts topic source and recompile.",
+  );
 }
 
 export function getNestedValue(root: unknown, keyPath: string) {

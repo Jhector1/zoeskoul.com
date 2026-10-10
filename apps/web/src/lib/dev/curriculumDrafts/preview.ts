@@ -16,7 +16,7 @@ import type { PracticeKind } from "@zoeskoul/db";
 import {
   loadDraftModuleAuthoredTopicOrder,
   loadDraftModuleTopics,
-  subjectWithoutDraftWrapper,
+  loadDraftSubjectManifest,
   type DraftRef,
   type LoadedDraftTopic,
 } from "./fs";
@@ -507,30 +507,12 @@ function humanizeSlug(value: string) {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-function draftPreviewProfileId(catalog: string, subjectSlug: string) {
-  const normalizedCatalog = catalog.trim().toLowerCase();
-  const normalizedSubject = subjectSlug.trim().toLowerCase();
-
-  // Raw draft preview can use draft subject slugs like
-  // python--applied-python-projects--draft. The normal tool policy needs the
-  // real programming profile id so the Code/Run tool becomes available.
-  if (normalizedCatalog === "python" || normalizedSubject.includes("python")) return "python";
-  if (normalizedCatalog === "sql" || normalizedSubject.includes("sql")) return "sql";
-  if (
-    normalizedCatalog === "linux" ||
-    normalizedCatalog === "bash" ||
-    normalizedSubject.includes("linux") ||
-    normalizedSubject.includes("terminal") ||
-    normalizedSubject.includes("bash")
-  ) {
-    return "bash";
-  }
-
-  return subjectWithoutDraftWrapper(catalog, subjectSlug);
-}
-
 export async function buildDraftPreviewReviewModule(ref: DraftRef): Promise<ReviewModule> {
   const draftModule = await loadDraftModuleTopics(ref);
+  const subjectManifest = await loadDraftSubjectManifest({
+    catalog: ref.catalog,
+    subject: ref.subject,
+  });
   if (!draftModule.topics.length) {
     throw new Error(`No draft topics found for ${ref.catalog}/${ref.subject}/${ref.module}`);
   }
@@ -572,7 +554,7 @@ export async function buildDraftPreviewReviewModule(ref: DraftRef): Promise<Revi
         humanizeSlug(sectionSlug),
       ),
       summary: null,
-      description: "Dev-only draft preview loaded directly from .curriculum-drafts.",
+      description: "Dev-only draft preview loaded directly from .curriculum-build.",
       order: sectionBySlug.size + 1,
       runtimeDefaults: manifest.runtimeDefaults ?? null,
       topics: [],
@@ -589,9 +571,19 @@ export async function buildDraftPreviewReviewModule(ref: DraftRef): Promise<Revi
   return {
     id: primaryManifest.moduleSlug,
     title: humanizeSlug(primaryManifest.moduleSlug),
-    subtitle: "Draft preview — loaded directly from .curriculum-drafts",
+    subtitle: "Draft preview — loaded directly from .curriculum-build",
     startPracticeSectionSlug: firstSectionSlug,
-    profileId: draftPreviewProfileId(ref.catalog, primaryManifest.subjectSlug),
+    profileId: (() => {
+      const profileId = asString(
+        asRecord(subjectManifest.subject)?.profileId,
+      );
+      if (!profileId) {
+        throw new Error(
+          `Draft subject manifest is missing subject.profileId for ${ref.catalog}/${ref.subject}. Recompile the draft curriculum before previewing it.`,
+        );
+      }
+      return profileId;
+    })(),
     versionFamily: ref.catalog,
     runtimeDefaults: primaryManifest.runtimeDefaults ?? null,
     serviceDefaults: (primaryManifest as any).serviceDefaults ?? null,

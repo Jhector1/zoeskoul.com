@@ -668,9 +668,13 @@ function Tree(props: TreeProps) {
                             </button>
 
                             {isEntry ? (
-                                <div className="mr-1 ui-pill-good" title={t("entryRunsOnClick")}>
+                                <div
+                                    className="mr-1 grid h-6 w-6 shrink-0 place-items-center text-emerald-600 dark:text-emerald-300"
+                                    title={t("entryRunsOnClick")}
+                                    role="img"
+                                    aria-label={t("entryBadge")}
+                                >
                                     <IconPlay className="h-3 w-3" />
-                                    {t("entryBadge")}
                                 </div>
                             ) : null}
 

@@ -1,0 +1,57 @@
+{
+  "subjectSlug": "html",
+  "courseSlug": "html-foundations",
+  "catalogSlug": "web",
+  "trackSlug": "web-development",
+  "profileId": "web",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "html-browser-workspace",
+  "title": "HTML Foundations",
+  "description": "Build semantic, accessible web pages with HTML and verify every change in ZoeSkoul's live browser preview.",
+  "moduleOrder": [
+    "html-module-1-first-web-pages",
+    "html-module-2-links-images-paths",
+    "html-module-3-lists-tables-content",
+    "html-module-4-semantic-accessible-layout",
+    "html-module-5-forms-inputs",
+    "html-module-6-final-capstone"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "html-module-1-first-web-pages",
+      "moduleNumber": 1,
+      "title": "First Web Pages",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "html-module-2-links-images-paths",
+      "moduleNumber": 2,
+      "title": "Links, Images, and Paths",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "html-module-3-lists-tables-content",
+      "moduleNumber": 3,
+      "title": "Lists, Tables, and Structured Content",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "html-module-4-semantic-accessible-layout",
+      "moduleNumber": 4,
+      "title": "Semantic and Accessible Page Structure",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "html-module-5-forms-inputs",
+      "moduleNumber": 5,
+      "title": "Forms and User Input",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "html-module-6-final-capstone",
+      "moduleNumber": 6,
+      "title": "Final Capstone: Personal Website",
+      "role": "capstone"
+    }
+  ]
+}

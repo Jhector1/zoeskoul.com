@@ -5,9 +5,9 @@ import type {
     TopicBundleManifest,
 } from "@zoeskoul/curriculum-contracts";
 import {
-    getDraftReportsRoot,
-    getDraftTopicBundlePath,
-    getDraftTopicMessagesPath,
+    getBuildReportsRoot,
+    getBuildTopicBundlePath,
+    getBuildTopicMessagesPath,
 } from "@zoeskoul/curriculum-core";
 
 export type RebuildDraftSourcePreference = "reports" | "current-output";
@@ -35,7 +35,7 @@ export function getTopicReportDir(args: {
     topicId: string;
 }) {
     return path.join(
-        getDraftReportsRoot(args.subjectSlug),
+        getBuildReportsRoot(args.subjectSlug),
         `module${args.moduleOrder}`,
         args.topicId,
     );
@@ -90,12 +90,12 @@ export async function readCurrentDraftOutputForRebuild(args: {
     sourceMessagesPaths: Record<string, string>;
 }> {
     const moduleDir = `module${args.moduleOrder}`;
-    const sourceBundlePath = getDraftTopicBundlePath(
+    const sourceBundlePath = getBuildTopicBundlePath(
         args.subjectSlug,
         moduleDir,
         args.topicId,
     );
-    const sourceMessagesPath = getDraftTopicMessagesPath(
+    const sourceMessagesPath = getBuildTopicMessagesPath(
         args.sourceLocale,
         args.subjectSlug,
         moduleDir,
@@ -124,7 +124,7 @@ export async function readCurrentDraftOutputForRebuild(args: {
     };
 
     for (const locale of args.extraLocales ?? []) {
-        const messagesPath = getDraftTopicMessagesPath(
+        const messagesPath = getBuildTopicMessagesPath(
             locale,
             args.subjectSlug,
             moduleDir,

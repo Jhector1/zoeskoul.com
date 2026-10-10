@@ -5,22 +5,28 @@ import { afterEach, describe, expect, it } from "vitest";
 import { backupDraftSubject, pathExists, safeJoin, subjectWithoutDraftWrapper, writeDraftJsonFile } from "./fs";
 
 const temporaryRoots: string[] = [];
-const originalDraftRoot = process.env.DEV_CURRICULUM_DRAFT_ROOT;
+const originalBuildRoot = process.env.DEV_CURRICULUM_BUILD_ROOT;
 
 async function createDraftRoot() {
-  const repoRoot = await fs.mkdtemp(path.join(os.tmpdir(), "zoeskoul-curriculum-drafts-"));
+  const repoRoot = await fs.mkdtemp(
+    path.join(os.tmpdir(), "zoeskoul-curriculum-drafts-"),
+  );
+  const buildRoot = path.join(repoRoot, ".curriculum-build");
   const draftRoot = path.join(repoRoot, ".curriculum-drafts");
+
+  await fs.mkdir(buildRoot, { recursive: true });
   await fs.mkdir(draftRoot, { recursive: true });
-  temporaryRoots.push(repoRoot);
-  process.env.DEV_CURRICULUM_DRAFT_ROOT = draftRoot;
-  return { repoRoot, draftRoot };
+
+  process.env.DEV_CURRICULUM_BUILD_ROOT = buildRoot;
+
+  return { repoRoot, buildRoot, draftRoot };
 }
 
 afterEach(async () => {
-  if (originalDraftRoot === undefined) {
-    delete process.env.DEV_CURRICULUM_DRAFT_ROOT;
+  if (originalBuildRoot === undefined) {
+    delete process.env.DEV_CURRICULUM_BUILD_ROOT;
   } else {
-    process.env.DEV_CURRICULUM_DRAFT_ROOT = originalDraftRoot;
+    process.env.DEV_CURRICULUM_BUILD_ROOT = originalBuildRoot;
   }
 
   await Promise.all(temporaryRoots.splice(0).map((root) => fs.rm(root, { recursive: true, force: true })));
@@ -38,39 +44,75 @@ describe("curriculum draft fs helpers", () => {
     expect(subjectWithoutDraftWrapper("sql", "sql-v2--draft")).toBe("sql-v2");
   });
 
-  it("writes the current draft directly without creating an automatic backup", async () => {
+  it("rejects direct writes to compiled curriculum build artifacts", async () => {
     const { repoRoot, draftRoot } = await createDraftRoot();
-    const filePath = path.join(draftRoot, "git", "subjects", "git--git-foundations--draft", "subject.json");
+    const filePath = path.join(
+      draftRoot,
+      "git",
+      "subjects",
+      "git--git-foundations--draft",
+      "subject.json",
+    );
 
-    const result = await writeDraftJsonFile({ filePath, value: { title: "Git Foundations" } });
+    await expect(
+      writeDraftJsonFile({
+        filePath,
+        value: { title: "Git Foundations" },
+      }),
+    ).rejects.toThrow(
+      /Compiled curriculum build artifacts are read-only/,
+    );
 
-    await expect(fs.readFile(filePath, "utf8")).resolves.toBe('{\n  "title": "Git Foundations"\n}\n');
-    expect(result).toEqual({
-      path: ".curriculum-drafts/git/subjects/git--git-foundations--draft/subject.json",
+    await expect(pathExists(filePath)).resolves.toBe(false);
+    await expect(
+      pathExists(path.join(repoRoot, ".curriculum-backups")),
+    ).resolves.toBe(false);
+  })
+
+  it("creates a manual canonical source backup", async () => {
+    const { repoRoot } = await createDraftRoot();
+    const subject = "git-foundations";
+    const topicFile = path.join(
+      repoRoot,
+      ".curriculum-drafts",
+      "git",
+      "subjects",
+      subject,
+      "courses",
+      "git-foundations",
+      "topics",
+      "module-1",
+      "intro.json",
+    );
+
+    await fs.mkdir(path.dirname(topicFile), { recursive: true });
+    await fs.writeFile(topicFile, '{"title":"Intro"}\n', "utf8");
+
+    const backup = await backupDraftSubject({
+      catalog: "git",
+      subject,
+      locale: "en",
     });
-    await expect(pathExists(path.join(repoRoot, ".curriculum-backups"))).resolves.toBe(false);
-  });
-
-  it("creates a manual subject backup with authored files and messages", async () => {
-    const { repoRoot, draftRoot } = await createDraftRoot();
-    const subject = "git--git-foundations--draft";
-    const subjectFile = path.join(draftRoot, "git", "subjects", subject, "subject.manifest.json");
-    const messageFile = path.join(draftRoot, "git", "messages", "en", "subjects", subject, "subject.json");
-    await fs.mkdir(path.dirname(subjectFile), { recursive: true });
-    await fs.mkdir(path.dirname(messageFile), { recursive: true });
-    await fs.writeFile(subjectFile, '{"slug":"git-foundations"}\n', "utf8");
-    await fs.writeFile(messageFile, '{"title":"Git Foundations"}\n', "utf8");
-
-    const backup = await backupDraftSubject({ catalog: "git", subject, locale: "en" });
     const backupRoot = path.join(repoRoot, backup.backupRoot);
 
     expect(backup.backupRoot).toMatch(/^\.curriculum-backups\/dev-editor\//);
-    expect(backup.paths).toHaveLength(2);
+    expect(backup.paths).toHaveLength(1);
     await expect(
-      fs.readFile(path.join(backupRoot, ".curriculum-drafts", "git", "subjects", subject, "subject.manifest.json"), "utf8"),
-    ).resolves.toBe('{"slug":"git-foundations"}\n');
-    await expect(
-      fs.readFile(path.join(backupRoot, ".curriculum-drafts", "git", "messages", "en", "subjects", subject, "subject.json"), "utf8"),
-    ).resolves.toBe('{"title":"Git Foundations"}\n');
-  });
+      fs.readFile(
+        path.join(
+          backupRoot,
+          ".curriculum-drafts",
+          "git",
+          "subjects",
+          subject,
+          "courses",
+          "git-foundations",
+          "topics",
+          "module-1",
+          "intro.json",
+        ),
+        "utf8",
+      ),
+    ).resolves.toBe('{"title":"Intro"}\n');
+  })
 });

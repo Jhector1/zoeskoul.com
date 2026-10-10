@@ -96,3 +96,9 @@ apps/web/.playwright/
 
 # Local learner-workspace migration audit snapshots
 .zoeskoul-legacy-migration-v*.json
+
+# Canonical curriculum source must remain tracked even when hidden-file patterns exist.
+!.curriculum-drafts/
+!.curriculum-drafts/**
+# Generated curriculum compiler output; canonical editable source lives in .curriculum-drafts/.
+.curriculum-build/

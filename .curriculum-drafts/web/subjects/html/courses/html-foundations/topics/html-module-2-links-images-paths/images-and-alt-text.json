@@ -1,0 +1,367 @@
+{
+  "title": "Images and Alt Text",
+  "summary": "Add images with src and meaningful alt text.",
+  "minutes": 16,
+  "sketchBlocks": [
+    {
+      "id": "img-src-and-alt",
+      "title": "An image needs src and meaningful alt text",
+      "bodyMarkdown": "The `<img>` element embeds an image. `src` tells the browser where the image file is, and `alt` provides a text alternative.\n\n```html\n<img src=\"images/campus.jpg\" alt=\"Students crossing the campus quad\">\n```\n\nThis line has two jobs: the source path tells the browser which file to load, while the alternative text communicates the picture's meaningful content when the image cannot be seen. `<img>` is a void element, so it does not wrap content with a separate closing tag.",
+      "cardTitle": "Source Becomes a Page"
+    },
+    {
+      "id": "alt-describes-purpose",
+      "title": "Alt text should communicate the image's purpose",
+      "bodyMarkdown": "Useful alt text explains information that matters in context.\n\n```html\n<img src=\"images/lab.jpg\" alt=\"Two students building a sensor in the engineering lab\">\n```\n\nThis line pairs the image file with a concise description of what matters in the scene. Avoid alternatives such as `image`, `photo`, or a raw filename; a learner who cannot see the picture should still understand why it is present.",
+      "cardTitle": "Read the Markup"
+    },
+    {
+      "id": "image-paths-follow-the-same-rules",
+      "title": "Image paths follow the same path rules",
+      "bodyMarkdown": "The `src` attribute follows the same path rules used by link destinations.\n\n```html\n<img src=\"avatar.png\" alt=\"Student club avatar\">\n<img src=\"media/avatar.png\" alt=\"Student club avatar\">\n```\n\nLine by line: **First**, `avatar.png` means the image is in the same folder as the current HTML document. **Second**, `media/avatar.png` means the browser must enter the `media` child folder before loading the file. The alt text can stay the same because both examples describe the same picture while demonstrating two different file locations.",
+      "cardTitle": "Build Meaning First"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "images-sc-1",
+      "kind": "single_choice",
+      "title": "Choose the image source attribute",
+      "prompt": "Which attribute tells an img element where to find the image file?",
+      "hint": "Think about which image attribute points to the file location.",
+      "help": {
+        "concept": "An image separates its file location from its text alternative.",
+        "hint_1": "Look for the attribute that stores the path to the file.",
+        "hint_2": "Eliminate choices used for links, text alternatives, or identifiers."
+      },
+      "options": [
+        "href",
+        "src",
+        "alt",
+        "id"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "images-sc-2",
+      "kind": "single_choice",
+      "title": "Choose useful alt text",
+      "prompt": "Which alt value is most useful for a profile portrait?",
+      "hint": "Describe the meaningful content instead of the file type or filename.",
+      "help": {
+        "concept": "Alt text should communicate what matters about the image.",
+        "hint_1": "Avoid generic words like image or photo.",
+        "hint_2": "Choose the description a person could understand without seeing the image."
+      },
+      "options": [
+        "image",
+        "profile.jpg",
+        "Student smiling in front of the campus library",
+        "photo"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "images-mc-1",
+      "kind": "multi_choice",
+      "title": "Recognize a complete image element",
+      "prompt": "Which statements about img are correct? Choose all that apply.",
+      "hint": "Think about image location, alternative text, and void elements.",
+      "help": {
+        "concept": "img uses src and alt and is a void element.",
+        "hint_1": "Relative paths work in src just as they do in href.",
+        "hint_2": "There is no required closing </img> tag."
+      },
+      "options": [
+        "src identifies the image file.",
+        "alt provides a text alternative.",
+        "img requires a closing </img> tag.",
+        "A relative src can point into an images folder."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "images-dr-1",
+      "kind": "drag_reorder",
+      "title": "Assemble an image element",
+      "prompt": "Arrange the pieces into one img element with src first and alt second.",
+      "hint": "Start the img tag, add its attributes, then close the tag.",
+      "help": {
+        "concept": "Attributes belong inside the opening img tag.",
+        "hint_1": "src and alt both appear before >.",
+        "hint_2": "The result does not need a separate closing element."
+      },
+      "tokens": [
+        "alt=\"Student profile portrait\"",
+        "<img",
+        "src=\"images/profile.jpg\"",
+        ">"
+      ],
+      "correctOrder": [
+        "<img",
+        "src=\"images/profile.jpg\"",
+        "alt=\"Student profile portrait\"",
+        ">"
+      ]
+    },
+    {
+      "id": "images-fb-1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the image path",
+      "prompt": "Choose the src value for `profile.jpg` inside the `images` folder.",
+      "hint": "Build the value from the child folder name and the image filename.",
+      "help": {
+        "concept": "A relative image path can enter a child folder before naming the file.",
+        "hint_1": "Join the folder and filename with one slash.",
+        "hint_2": "The finished value should describe one child-folder step followed by the target file."
+      },
+      "template": "<img src=\"[blank1]\" alt=\"Student profile portrait\">",
+      "choices": [
+        "profile.jpg",
+        "images/profile.jpg",
+        "../profile.jpg",
+        "https://profile.jpg"
+      ],
+      "correctValue": "images/profile.jpg"
+    },
+    {
+      "id": "images-fb-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete meaningful alt text",
+      "prompt": "Choose the most descriptive alt value.",
+      "hint": "Describe the meaningful content of the picture.",
+      "help": {
+        "concept": "Alt text is a text alternative, not a filename label.",
+        "hint_1": "Choose a concise description of what the image communicates.",
+        "hint_2": "Avoid generic words like image or picture."
+      },
+      "template": "<img src=\"images/club.jpg\" alt=\"[blank1]\">",
+      "choices": [
+        "image",
+        "club.jpg",
+        "Students presenting a science club poster",
+        "picture"
+      ],
+      "correctValue": "Students presenting a science club poster"
+    },
+    {
+      "id": "images-ci-1",
+      "kind": "code_input",
+      "title": "Use the supplied profile image",
+      "prompt": "Open the `images` folder in Explorer and confirm `profile.png` is supplied. In `index.html`, add that image below the h1 and give it useful alternative text for a student profile illustration. Check the real asset in Preview.",
+      "hint": "The image lives in a child folder of the home page.",
+      "help": {
+        "concept": "The image source path and alternative text work together: one locates the asset and the other communicates its purpose.",
+        "hint_1": "Use the folder tree to build the source path.",
+        "hint_2": "Describe the profile illustration instead of using a generic word such as image."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <!-- Add the supplied profile image here -->\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Student profile illustration\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"'][^\"']{5,}[\"'])[^>]*>",
+          "path": "index.html",
+          "message": "Use the supplied profile asset with meaningful alt text.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <!-- Add the supplied profile image here -->\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Student profile illustration\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "images/profile.png"
+        ]
+      }
+    },
+    {
+      "id": "images-ci-2",
+      "kind": "code_input",
+      "title": "Improve the profile image alt text",
+      "prompt": "The image already appears in Preview, but its alternative text is too generic. Improve the `alt` value so it identifies Jordan and describes the campus-library scene.",
+      "hint": "Change the text alternative, not the supplied image file.",
+      "help": {
+        "concept": "Useful alt text communicates the meaningful content of an image in its page context.",
+        "hint_1": "Include who the profile image represents.",
+        "hint_2": "Also include the relevant setting shown by the exercise."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"profile image\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"']Jordan Lee smiling outside the campus library[\"'])[^>]*>",
+          "path": "index.html",
+          "message": "Replace the generic alternative text with the requested descriptive text.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"profile image\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "images/profile.png"
+        ]
+      }
+    },
+    {
+      "id": "images-ci-3",
+      "kind": "code_input",
+      "title": "Make the profile image open About",
+      "prompt": "The website includes `about.html`. Wrap the existing profile image in an anchor so clicking the image in Preview opens the About page. Keep the image source and alternative text unchanged.",
+      "hint": "The anchor should contain the existing img element.",
+      "help": {
+        "concept": "Images can be interactive link content when an anchor wraps the image element.",
+        "hint_1": "Do not replace or edit the supplied image asset.",
+        "hint_2": "Use the neighboring About page as the anchor destination."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <a href=\"about.html\">\n    <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  </a>\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"']Jordan Lee smiling outside the campus library[\"'])[^>]*>\\s*</a>",
+          "path": "index.html",
+          "message": "Wrap the existing profile image in a link to the About page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <a href=\"about.html\">\n    <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  </a>\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html",
+          "images/profile.png"
+        ]
+      }
+    }
+  ]
+}

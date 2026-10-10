@@ -9,6 +9,7 @@ import { applyBaseCourseGenerationPolicy } from "./shared/generationPolicy.js";
 import { buildFixedTestsRecipe } from "./base/recipes/buildFixedTestsRecipe.js";
 import { buildSemanticRecipe } from "./base/recipes/buildSemanticRecipe.js";
 import { buildTemplateIoRecipe } from "./base/recipes/buildTemplateIoRecipe.js";
+import { buildSourceChecksRecipe } from "./base/recipes/buildSourceChecksRecipe.js";
 import { bashProfile, bashProfileAdapter } from "./bash/index.js";
 import { gitProfile, gitProfileAdapter } from "./git/index.js";
 import { sqlProfile, sqlProfileAdapter } from "./sql/index.js";
@@ -16,6 +17,7 @@ import { pythonProfile, pythonProfileAdapter } from "./python/index.js";
 import { cProfile, cProfileAdapter } from "./c/index.js";
 import { mathProfile, mathProfileAdapter } from "./math/index.js";
 import { languageProfile, languageProfileAdapter } from "./language/index.js";
+import { webProfile, webProfileAdapter } from "./web/index.js";
 
 const builtinProfiles = [
     bashProfile,
@@ -25,6 +27,7 @@ const builtinProfiles = [
     cProfile,
     mathProfile,
     languageProfile,
+    webProfile,
 ] satisfies CourseProfile[];
 const builtinAdapters = [
     bashProfileAdapter,
@@ -34,6 +37,7 @@ const builtinAdapters = [
     cProfileAdapter,
     mathProfileAdapter,
     languageProfileAdapter,
+    webProfileAdapter,
 ] satisfies CourseProfileAdapter[];
 
 const profileRegistry = new Map<string, CourseProfile>(
@@ -47,6 +51,7 @@ export const BASE_RECIPE_REGISTRY: Record<string, RecipeHandler> = {
     fixed_tests: buildFixedTestsRecipe,
     semantic: buildSemanticRecipe,
     template_io: buildTemplateIoRecipe,
+    source_checks: buildSourceChecksRecipe,
 };
 
 function unknownProfileError(profileId: string): Error {

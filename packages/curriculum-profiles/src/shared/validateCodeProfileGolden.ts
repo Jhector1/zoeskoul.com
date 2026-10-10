@@ -470,7 +470,7 @@ export async function validateCodeProfileGolden(args: {
 
         const expected = parsedExpected.data;
         const minimumFixedTests = Math.max(1, Math.trunc(args.minimumFixedTests ?? 1));
-        if (expected.strategy === "programming" && expected.checkMode !== "semantic" && (expected.tests?.length ?? 0) < minimumFixedTests) {
+        if (expected.strategy === "programming" && expected.checkMode === "stdout" && (expected.tests?.length ?? 0) < minimumFixedTests) {
             issues.push({
                 code: "CODE_PROFILE_MINIMUM_FIXED_TESTS",
                 category: "tests",
@@ -481,6 +481,12 @@ export async function validateCodeProfileGolden(args: {
             continue;
         }
         const solutionCode = String(expected.solutionCode ?? "").trim();
+
+        if (expected.strategy === "programming" && expected.checkMode === "source") {
+            // Source-only browser exercises are validated by authored source checks
+            // at answer time. There is intentionally no Judge0/golden execution.
+            continue;
+        }
 
         if (!solutionCode) {
             issues.push({

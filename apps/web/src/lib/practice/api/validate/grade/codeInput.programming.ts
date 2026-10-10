@@ -1326,6 +1326,16 @@ export async function gradeProgrammingCodeInput(args: {
         };
     }
 
+    if (expected.checkMode === "source") {
+        // Browser-rendered HTML/CSS exercises are validated from the submitted
+        // workspace source. They do not need Judge0 or stdout execution.
+        return {
+            ok: true,
+            explanation: "Correct.",
+            feedback: null,
+        };
+    }
+
     if (expected.checkMode === "semantic") {
         return gradeSemanticCodeInput({
             expected,

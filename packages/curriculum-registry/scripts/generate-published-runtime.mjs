@@ -12,6 +12,7 @@ const subjectsRoot = path.join(publishedRoot, "subjects");
 const messagesRoot = path.join(publishedRoot, "messages");
 const outputRoot = path.join(packageRoot, "src", "runtime", "generated");
 const authoringCatalogsRoot = path.join(repoRoot, "authoring", "catalogs");
+const authoringSubjectsRoot = path.join(repoRoot, "authoring", "subjects");
 
 function die(message) {
   throw new Error(message);
@@ -123,6 +124,34 @@ function catalogVersioning(catalog) {
     catalog?.meta?.versioning ??
     {}
   );
+}
+
+async function loadDraftOnlyAuthoringSubjectSlugs() {
+  const planFiles = await walkFiles(
+    authoringSubjectsRoot,
+    (_full, name) => name === "subject.plan.json",
+  );
+
+  const draftOnly = new Set();
+
+  for (const planFile of planFiles) {
+    const plan = await readJson(planFile);
+    const subjectSlug = String(
+      plan?.subjectSlug ?? path.basename(path.dirname(planFile)),
+    ).trim();
+    const channel = String(plan?.publishTarget?.channel ?? "")
+      .trim()
+      .toLowerCase();
+    const status = String(plan?.versioning?.status ?? "")
+      .trim()
+      .toLowerCase();
+
+    if (subjectSlug && (channel === "draft" || status === "draft")) {
+      draftOnly.add(subjectSlug);
+    }
+  }
+
+  return draftOnly;
 }
 
 async function generateSubjects() {
@@ -326,6 +355,9 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
 }
 
 async function generateCatalogs(subjectRecords) {
+  const draftOnlyAuthoringSubjectSlugs =
+    await loadDraftOnlyAuthoringSubjectSlugs();
+
   const catalogFiles = await walkFiles(
     authoringCatalogsRoot,
     (_full, name) => name.endsWith(".catalog.json"),
@@ -359,7 +391,37 @@ async function generateCatalogs(subjectRecords) {
       Array.isArray(source?.catalog?.subjectSlugs) &&
       source.catalog.subjectSlugs.length
     ) {
-      subjectSlugs = source.catalog.subjectSlugs.map((value) => String(value));
+      const requestedSubjectSlugs = source.catalog.subjectSlugs.map((value) =>
+        String(value),
+      );
+      const trulyUnknownSubjectSlugs = requestedSubjectSlugs.filter(
+        (subjectSlug) =>
+          !subjectRecords[subjectSlug] &&
+          !draftOnlyAuthoringSubjectSlugs.has(subjectSlug),
+      );
+
+      if (trulyUnknownSubjectSlugs.length) {
+        die(
+          `Catalog ${slug} references unknown canonical subject(s): ` +
+            trulyUnknownSubjectSlugs.join(", "),
+        );
+      }
+
+      subjectSlugs = requestedSubjectSlugs.filter(
+        (subjectSlug) => subjectRecords[subjectSlug],
+      );
+
+      // Authoring catalogs describe the planned catalog. A catalog containing
+      // only verified draft subjects should not leak into the published runtime.
+      if (
+        !subjectSlugs.length &&
+        requestedSubjectSlugs.length &&
+        requestedSubjectSlugs.every((subjectSlug) =>
+          draftOnlyAuthoringSubjectSlugs.has(subjectSlug),
+        )
+      ) {
+        continue;
+      }
     } else if (catalogVersioning(source)?.hideLegacyByDefault === true) {
       const groups = new Map();
 
@@ -398,6 +460,14 @@ async function generateCatalogs(subjectRecords) {
     let defaultSubjectSlug = String(
       source?.catalog?.defaultSubjectSlug ?? "",
     ).trim();
+
+    if (
+      defaultSubjectSlug &&
+      !subjectRecords[defaultSubjectSlug] &&
+      draftOnlyAuthoringSubjectSlugs.has(defaultSubjectSlug)
+    ) {
+      defaultSubjectSlug = "";
+    }
 
     if (!defaultSubjectSlug) {
       const groups = new Map();

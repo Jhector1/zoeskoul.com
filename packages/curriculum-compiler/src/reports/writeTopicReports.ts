@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { getDraftReportsRoot } from "@zoeskoul/curriculum-core";
+import { getBuildReportsRoot } from "@zoeskoul/curriculum-core";
 import type {
     CritiqueReport,
     GoldenValidationReport,
@@ -40,7 +40,7 @@ export async function writeTopicReports(args: {
     validationState?: CompileValidationState;
 }) {
     const baseDir = path.join(
-        getDraftReportsRoot(args.subjectSlug),
+        getBuildReportsRoot(args.subjectSlug),
         `module${args.moduleOrder}`,
         args.topicId,
     );

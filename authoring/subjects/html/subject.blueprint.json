@@ -1,0 +1,16 @@
+{
+  "subjectSlug": "html",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "title": "HTML",
+  "summary": "A hands-on HTML path from first web page through semantic structure, accessible forms, and complete browser-rendered pages.",
+  "courseOrder": [
+    "html-foundations"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "html-foundations",
+      "outcome": "Build a complete, semantic, accessible single-page website with HTML and verify it in the live browser preview."
+    }
+  ]
+}

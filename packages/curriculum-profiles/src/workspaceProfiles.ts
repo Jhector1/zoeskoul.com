@@ -42,6 +42,103 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
         ],
     },
 
+    "browser-web-runner": {
+        id: "browser-web-runner",
+        name: "Browser web preview runner",
+        ui: {
+            editorLabel: "HTML editor",
+            runButtonLabel: "Preview",
+            outputPanelLabel: "browser preview",
+            feedbackPanelLabel: "feedback area",
+            terminalPanelLabel: null,
+            filesPanelLabel: "files panel",
+        },
+        capabilities: {
+            singleFileCodeInput: { enabled: true },
+            multiFileProjects: { enabled: true },
+            terminal: { enabled: false },
+            filesystem: { enabled: true },
+            stdinStdout: { enabled: false },
+            packageInstall: { enabled: false },
+            externalNetwork: { enabled: false },
+            uploads: { enabled: false },
+            createFiles: { enabled: true, label: "Create file" },
+            createFolders: { enabled: true, label: "Create folder" },
+        },
+        preferredActionLanguage: [
+            "Edit index.html in the HTML editor.",
+            "Check the browser preview after each change.",
+            "Use the files panel when a later lesson provides more than one web file.",
+            "Click Check Answer when the page structure matches the task.",
+        ],
+        forbiddenActionLanguage: [
+            "Open a terminal",
+            "Use the command line",
+            "Run HTML with Judge0",
+            "Install a package",
+            "Use npm",
+        ],
+    },
+
+    "browser-web-files-runner": {
+        id: "browser-web-files-runner",
+        name: "Browser web files runner",
+        ui: {
+            editorLabel: "web editor",
+            runButtonLabel: "Preview",
+            outputPanelLabel: "browser preview",
+            feedbackPanelLabel: "feedback area",
+            terminalPanelLabel: null,
+            filesPanelLabel: "files panel",
+        },
+        capabilities: {
+            singleFileCodeInput: { enabled: true },
+            multiFileProjects: {
+                enabled: true,
+                label: "Website files",
+                notes: "Learners work across HTML pages and provided web assets in the shared file explorer.",
+            },
+            terminal: { enabled: false },
+            filesystem: {
+                enabled: true,
+                label: "Website workspace",
+                notes: "The files panel contains the pages, folders, and assets provided by the lesson.",
+            },
+            stdinStdout: { enabled: false },
+            packageInstall: { enabled: false },
+            externalNetwork: { enabled: false },
+            uploads: {
+                enabled: false,
+                notes: "HTML Foundations uses provided curriculum assets; learner uploads are not required.",
+            },
+            createFiles: {
+                enabled: true,
+                label: "Create file",
+                notes: "Learners may create a page when a lesson explicitly asks for one.",
+            },
+            createFolders: {
+                enabled: true,
+                label: "Create folder",
+                notes: "Learners may create a folder when a lesson explicitly asks for one.",
+            },
+        },
+        preferredActionLanguage: [
+            "Open the requested page in the files panel.",
+            "Use relative paths between the provided website files.",
+            "Use nested paths such as projects/robotics.html and images/profile.png.",
+            "Use Preview to check the current website page.",
+        ],
+        forbiddenActionLanguage: [
+            "Open a terminal",
+            "Use the command line",
+            "Install a package",
+            "Use npm",
+            "Use pip",
+            "Run a shell command",
+            "Use Judge0",
+        ],
+    },
+
     "browser-python-files-runner": {
         id: "browser-python-files-runner",
         name: "Browser Python files runner",

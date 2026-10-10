@@ -9,6 +9,12 @@ describe("toolsPolicyForSubject", () => {
         ).toEqual({ codeEnabled: true });
     });
 
+    it("enables the existing code workspace for the Web/HTML curriculum profile", () => {
+        expect(
+            toolsPolicyForSubject("html", undefined, "web"),
+        ).toEqual({ codeEnabled: true });
+    });
+
     it("still honors an explicit authored tools override", () => {
         expect(
             toolsPolicyForSubject(

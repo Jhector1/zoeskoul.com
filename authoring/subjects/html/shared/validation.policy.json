@@ -1,0 +1,29 @@
+{
+  "policyId": "html-shared-validation",
+  "extendsValidation": [
+    "course-structure",
+    "versioning",
+    "workspace-language"
+  ],
+  "runtime": {
+    "language": "web"
+  },
+  "validationRequirements": {
+    "htmlCodeInputNeedsSourceChecks": true,
+    "judge0NotRequired": true,
+    "browserPreviewRequired": true
+  },
+  "rules": {
+    "executionValidation": [
+      "Every HTML code_input must use recipeType source_checks",
+      "Every HTML code_input must include at least one sourceChecks rule",
+      "Use source_regex or source_contains checks against index.html",
+      "Do not create stdout tests for HTML-only exercises"
+    ],
+    "pedagogy": [
+      "Keep HTML Foundations focused on document structure and semantics",
+      "Each hands-on exercise should create a visible result in the browser preview",
+      "Do not require CSS or JavaScript to complete HTML Foundations"
+    ]
+  }
+}

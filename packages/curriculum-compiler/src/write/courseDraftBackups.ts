@@ -5,12 +5,12 @@ import {
     getBackupSubjectManifestPath,
     getBackupTopicBundlePath,
     getBackupTopicMessagesPath,
-    getDraftMessagesRoot,
-    getDraftSubjectManifestPath,
-    getDraftSubjectMessagesPath,
-    getDraftSubjectRoot,
-    getDraftTopicBundlePath,
-    getDraftTopicMessagesPath,
+    getBuildMessagesRoot,
+    getBuildSubjectManifestPath,
+    getBuildSubjectMessagesPath,
+    getBuildSubjectRoot,
+    getBuildTopicBundlePath,
+    getBuildTopicMessagesPath,
 } from "@zoeskoul/curriculum-core";
 
 async function ensureDir(filePath: string) {
@@ -176,7 +176,7 @@ async function backupDraftMessages(args: {
     backupKey: string;
     draftSubjectSlug: string;
 }) {
-    const draftMessagesRoot = getDraftMessagesRoot(args.draftSubjectSlug);
+    const draftMessagesRoot = getBuildMessagesRoot(args.draftSubjectSlug);
 
     if (!(await pathExists(draftMessagesRoot))) {
         return;
@@ -197,7 +197,7 @@ async function backupDraftMessages(args: {
 
         if (!(await pathExists(draftSubjectMessagesDir))) continue;
 
-        const draftSubjectJsonPath = getDraftSubjectMessagesPath(
+        const draftSubjectJsonPath = getBuildSubjectMessagesPath(
             locale,
             args.draftSubjectSlug,
         );
@@ -229,7 +229,7 @@ async function backupDraftMessages(args: {
 
                 const topicId = file.name.replace(/\.json$/, "");
                 const raw = await readJsonValidated(
-                    getDraftTopicMessagesPath(
+                    getBuildTopicMessagesPath(
                         locale,
                         args.draftSubjectSlug,
                         moduleDir.name,
@@ -260,7 +260,7 @@ export async function backupCurrentDraftCourse(args: {
     const backupKey = assertSafeBackupKey(
         args.backupKey ?? makeDraftBackupKey(args.courseSlug),
     );
-    const draftManifestPath = getDraftSubjectManifestPath(args.draftSubjectSlug);
+    const draftManifestPath = getBuildSubjectManifestPath(args.draftSubjectSlug);
 
     if (!(await pathExists(draftManifestPath))) {
         throw new Error(`Draft subject manifest not found: ${draftManifestPath}`);
@@ -273,7 +273,7 @@ export async function backupCurrentDraftCourse(args: {
     );
 
     const draftModulesRoot = path.join(
-        getDraftSubjectRoot(args.draftSubjectSlug),
+        getBuildSubjectRoot(args.draftSubjectSlug),
         "modules",
     );
 
@@ -293,7 +293,7 @@ export async function backupCurrentDraftCourse(args: {
 
                 const topicId = topicDir.name;
                 const bundleRaw = await readJsonValidated(
-                    getDraftTopicBundlePath(args.draftSubjectSlug, moduleDir.name, topicId),
+                    getBuildTopicBundlePath(args.draftSubjectSlug, moduleDir.name, topicId),
                 );
 
                 await writeRawAtomic(
@@ -322,11 +322,11 @@ export async function backupCurrentDraftCourse(args: {
 }
 
 async function getDraftHasAnyFiles(draftSubjectSlug: string) {
-    if (await pathExists(getDraftSubjectRoot(draftSubjectSlug))) {
+    if (await pathExists(getBuildSubjectRoot(draftSubjectSlug))) {
         return true;
     }
 
-    const draftMessagesRoot = getDraftMessagesRoot(draftSubjectSlug);
+    const draftMessagesRoot = getBuildMessagesRoot(draftSubjectSlug);
     if (!(await pathExists(draftMessagesRoot))) {
         return false;
     }
@@ -354,12 +354,12 @@ async function getDraftHasAnyFiles(draftSubjectSlug: string) {
 }
 
 async function removeDraftSubjectArtifacts(draftSubjectSlug: string) {
-    await fs.rm(getDraftSubjectRoot(draftSubjectSlug), {
+    await fs.rm(getBuildSubjectRoot(draftSubjectSlug), {
         recursive: true,
         force: true,
     });
 
-    const draftMessagesRoot = getDraftMessagesRoot(draftSubjectSlug);
+    const draftMessagesRoot = getBuildMessagesRoot(draftSubjectSlug);
     if (!(await pathExists(draftMessagesRoot))) {
         return;
     }
@@ -452,7 +452,7 @@ async function restoreBackupMessagesToDraft(args: {
             });
 
             await writeRawAtomic(
-                getDraftSubjectMessagesPath(locale, args.draftSubjectSlug),
+                getBuildSubjectMessagesPath(locale, args.draftSubjectSlug),
                 subjectMessageRaw,
             );
         }
@@ -478,7 +478,7 @@ async function restoreBackupMessagesToDraft(args: {
                 });
 
                 await writeRawAtomic(
-                    getDraftTopicMessagesPath(
+                    getBuildTopicMessagesPath(
                         locale,
                         args.draftSubjectSlug,
                         moduleDir.name,
@@ -539,7 +539,7 @@ export async function restoreCourseBackupToDraft(args: {
         toSubjectSlug: args.draftSubjectSlug,
     });
 
-    await writeRawAtomic(getDraftSubjectManifestPath(args.draftSubjectSlug), manifestRaw);
+    await writeRawAtomic(getBuildSubjectManifestPath(args.draftSubjectSlug), manifestRaw);
 
     const backupModulesRoot = path.join(
         getBackupRoot(backupKey, sourceSubjectSlug),
@@ -575,7 +575,7 @@ export async function restoreCourseBackupToDraft(args: {
                 });
 
                 await writeRawAtomic(
-                    getDraftTopicBundlePath(args.draftSubjectSlug, moduleDir.name, topicId),
+                    getBuildTopicBundlePath(args.draftSubjectSlug, moduleDir.name, topicId),
                     bundleRaw,
                 );
             }

@@ -1,0 +1,881 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "html",
+  "courseSlug": "html-foundations",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "html-browser-workspace",
+  "title": "HTML Foundations",
+  "subtitle": "Build real web pages with HTML and see every change live",
+  "intendedFor": "Absolute beginners and students preparing for CSS, JavaScript, frontend development, or full-stack development.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "courseOverview": {
+    "recommendedSequence": "Complete modules in order. Every technical topic connects HTML source to the live browser preview.",
+    "summary": "A practical beginner HTML course covering documents, text, links, images, lists, tables, semantic structure, forms, metadata, accessibility, and a complete single-page capstone.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "First Web Pages",
+        "coreSkill": "Understand HTML as document structure that a browser parses and renders.",
+        "outputFocus": "Combine document structure, headings, paragraphs, and basic attributes in one page."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Links, Images, and Paths",
+        "coreSkill": "Create links with anchor elements and useful link text.",
+        "outputFocus": "Build a profile page with text, links, and an accessible image."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Lists, Tables, and Structured Content",
+        "coreSkill": "Choose ordered or unordered lists based on content meaning.",
+        "outputFocus": "Combine lists and a data table into a clear information page."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Semantic and Accessible Page Structure",
+        "coreSkill": "Use header, nav, main, and footer to describe major page regions.",
+        "outputFocus": "Build a page with landmarks, navigation, article content, and accessible structure."
+      },
+      {
+        "moduleNumber": 5,
+        "title": "Forms and User Input",
+        "coreSkill": "Connect labels to form controls and understand form structure.",
+        "outputFocus": "Build a complete form with labels, sensible input types, choices, and a submit button."
+      },
+      {
+        "moduleNumber": 6,
+        "title": "Final Capstone: Personal Website",
+        "coreSkill": "Bring document structure, semantic HTML, forms, metadata, and accessibility checks together.",
+        "outputFocus": "Build and verify one complete semantic, accessible personal website."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "html-foundations",
+      "startModuleNumber": 1,
+      "endModuleNumber": 6
+    },
+    "releases": [
+      {
+        "name": "html-foundations",
+        "startModuleNumber": 1,
+        "endModuleNumber": 6
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.25,
+        "multi_choice": 0.15,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.2,
+        "code_input": 0.3
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 3,
+        "projectCodeInputMax": 5,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 5,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 320
+    }
+  },
+  "authoringGuidance": [
+    "This course uses profileId web, workspaceProfileId browser-web-runner, and workspacePolicyId html-browser-workspace.",
+    "Hands-on HTML tasks use kind code_input, fixedLanguage web, recipeType source_checks, and index.html.",
+    "Every code_input must include explicit sourceChecks and must not include stdout tests.",
+    "Use source_regex when harmless whitespace or attribute ordering should be accepted.",
+    "The live browser preview is the visual feedback surface; do not tell learners to open a terminal or run Judge0.",
+    "Keep Course 1 HTML-only. CSS and JavaScript may be mentioned as later layers but are never required for a correct answer.",
+    "Teach accessibility as part of normal markup: lang, headings, alt text, labels, link text, and semantic landmarks.",
+    "The capstone remains a single index.html page; multi-page navigation belongs in Practical HTML."
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "One module per week or two short topics per study session.",
+    "recommendedCourseDeliverables": [
+      "Short concept sketches",
+      "HTML source checks",
+      "Live browser-preview exercises",
+      "Five module projects",
+      "One final capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul HTML editor",
+      "Live browser preview",
+      "Check Answer source validation"
+    ],
+    "closingNote": "Learners finish able to build a semantic, accessible HTML page and are ready for CSS."
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "html-module-1-first-web-pages",
+      "prefix": "html_module_1",
+      "title": "First Web Pages",
+      "purpose": "Build confidence with first web pages through visible browser-preview practice.",
+      "learningObjectives": [
+        "Understand HTML as document structure that a browser parses and renders.",
+        "Build a page with doctype, html, head, title, and body.",
+        "Read opening tags, closing tags, nested content, and attributes."
+      ],
+      "guidedExercises": [
+        "Edit index.html in the HTML editor",
+        "Observe the browser preview after each meaningful change",
+        "Use Check Answer to validate required HTML source structure"
+      ],
+      "quizFocus": [
+        "HTML meaning and syntax",
+        "semantic element choice",
+        "accessible markup"
+      ],
+      "moduleProject": "Project: Build Your First Complete Page",
+      "sections": [
+        {
+          "sectionSlug": "html-module-1-lessons",
+          "title": "First Web Pages",
+          "summary": "Learn the core HTML ideas for first web pages.",
+          "topics": [
+            {
+              "topicId": "how-html-and-the-browser-work",
+              "title": "How HTML and the Browser Work",
+              "summary": "Understand HTML as document structure that a browser parses and renders.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Understand HTML as document structure that a browser parses and renders."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "document-structure",
+              "title": "The HTML Document Structure",
+              "summary": "Build a page with doctype, html, head, title, and body.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Build a page with doctype, html, head, title, and body."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "elements-tags-and-attributes",
+              "title": "Elements, Tags, and Attributes",
+              "summary": "Read opening tags, closing tags, nested content, and attributes.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Read opening tags, closing tags, nested content, and attributes."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "html-module-1-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Combine document structure, headings, paragraphs, and basic attributes in one page.",
+          "topics": [
+            {
+              "topicId": "module-1-first-page-project",
+              "title": "Project: Build Your First Complete Page",
+              "summary": "Combine document structure, headings, paragraphs, and basic attributes in one page.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine document structure, headings, paragraphs, and basic attributes in one page."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "html-module-2-links-images-paths",
+      "prefix": "html_module_2",
+      "title": "Links, Images, and Paths",
+      "purpose": "Build confidence with links, images, and paths through visible browser-preview practice.",
+      "learningObjectives": [
+        "Create links with anchor elements and useful link text.",
+        "Understand how URLs and local paths point to resources.",
+        "Add images with src and meaningful alt text."
+      ],
+      "guidedExercises": [
+        "Edit index.html in the HTML editor",
+        "Observe the browser preview after each meaningful change",
+        "Use Check Answer to validate required HTML source structure"
+      ],
+      "quizFocus": [
+        "HTML meaning and syntax",
+        "semantic element choice",
+        "accessible markup"
+      ],
+      "moduleProject": "Project: Build a Profile Page",
+      "sections": [
+        {
+          "sectionSlug": "html-module-2-lessons",
+          "title": "Links, Images, and Paths",
+          "summary": "Learn the core HTML ideas for links, images, and paths.",
+          "topics": [
+            {
+              "topicId": "links-and-anchors",
+              "title": "Links and Anchors",
+              "summary": "Create links with anchor elements and useful link text.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Create links with anchor elements and useful link text."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "relative-and-absolute-paths",
+              "title": "Relative and Absolute Paths",
+              "summary": "Understand how URLs and local paths point to resources.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Understand how URLs and local paths point to resources."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "images-and-alt-text",
+              "title": "Images and Alt Text",
+              "summary": "Add images with src and meaningful alt text.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Add images with src and meaningful alt text."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "html-module-2-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Build a profile page with text, links, and an accessible image.",
+          "topics": [
+            {
+              "topicId": "module-2-profile-page-project",
+              "title": "Project: Build a Profile Page",
+              "summary": "Build a profile page with text, links, and an accessible image.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Build a profile page with text, links, and an accessible image."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "html-module-3-lists-tables-content",
+      "prefix": "html_module_3",
+      "title": "Lists, Tables, and Structured Content",
+      "purpose": "Build confidence with lists, tables, and structured content through visible browser-preview practice.",
+      "learningObjectives": [
+        "Choose ordered or unordered lists based on content meaning.",
+        "Represent grouped and hierarchical information with nested lists.",
+        "Use table, caption, thead, tbody, tr, th, and td for tabular data."
+      ],
+      "guidedExercises": [
+        "Edit index.html in the HTML editor",
+        "Observe the browser preview after each meaningful change",
+        "Use Check Answer to validate required HTML source structure"
+      ],
+      "quizFocus": [
+        "HTML meaning and syntax",
+        "semantic element choice",
+        "accessible markup"
+      ],
+      "moduleProject": "Project: Build a Structured Content Page",
+      "sections": [
+        {
+          "sectionSlug": "html-module-3-lessons",
+          "title": "Lists, Tables, and Structured Content",
+          "summary": "Learn the core HTML ideas for lists, tables, and structured content.",
+          "topics": [
+            {
+              "topicId": "ordered-and-unordered-lists",
+              "title": "Ordered and Unordered Lists",
+              "summary": "Choose ordered or unordered lists based on content meaning.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Choose ordered or unordered lists based on content meaning."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "nested-lists",
+              "title": "Nested Lists",
+              "summary": "Represent grouped and hierarchical information with nested lists.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Represent grouped and hierarchical information with nested lists."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "tables-and-table-structure",
+              "title": "Tables and Table Structure",
+              "summary": "Use table, caption, thead, tbody, tr, th, and td for tabular data.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use table, caption, thead, tbody, tr, th, and td for tabular data."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "html-module-3-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Combine lists and a data table into a clear information page.",
+          "topics": [
+            {
+              "topicId": "module-3-content-page-project",
+              "title": "Project: Build a Structured Content Page",
+              "summary": "Combine lists and a data table into a clear information page.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Combine lists and a data table into a clear information page."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "html-module-4-semantic-accessible-layout",
+      "prefix": "html_module_4",
+      "title": "Semantic and Accessible Page Structure",
+      "purpose": "Build confidence with semantic and accessible page structure through visible browser-preview practice.",
+      "learningObjectives": [
+        "Use header, nav, main, and footer to describe major page regions.",
+        "Choose semantic content containers instead of generic wrappers when meaning exists.",
+        "Create a logical heading hierarchy and meaningful text alternatives."
+      ],
+      "guidedExercises": [
+        "Edit index.html in the HTML editor",
+        "Observe the browser preview after each meaningful change",
+        "Use Check Answer to validate required HTML source structure"
+      ],
+      "quizFocus": [
+        "HTML meaning and syntax",
+        "semantic element choice",
+        "accessible markup"
+      ],
+      "moduleProject": "Project: Build a Semantic Article Page",
+      "sections": [
+        {
+          "sectionSlug": "html-module-4-lessons",
+          "title": "Semantic and Accessible Page Structure",
+          "summary": "Learn the core HTML ideas for semantic and accessible page structure.",
+          "topics": [
+            {
+              "topicId": "page-landmarks",
+              "title": "Page Landmarks",
+              "summary": "Use header, nav, main, and footer to describe major page regions.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Use header, nav, main, and footer to describe major page regions."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "sections-articles-and-asides",
+              "title": "Sections, Articles, and Asides",
+              "summary": "Choose semantic content containers instead of generic wrappers when meaning exists.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Choose semantic content containers instead of generic wrappers when meaning exists."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "headings-and-accessible-structure",
+              "title": "Headings and Accessible Structure",
+              "summary": "Create a logical heading hierarchy and meaningful text alternatives.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Create a logical heading hierarchy and meaningful text alternatives."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "html-module-4-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Build a page with landmarks, navigation, article content, and accessible structure.",
+          "topics": [
+            {
+              "topicId": "module-4-article-page-project",
+              "title": "Project: Build a Semantic Article Page",
+              "summary": "Build a page with landmarks, navigation, article content, and accessible structure.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Build a page with landmarks, navigation, article content, and accessible structure."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "html-module-5-forms-inputs",
+      "prefix": "html_module_5",
+      "title": "Forms and User Input",
+      "purpose": "Build confidence with forms and user input through visible browser-preview practice.",
+      "learningObjectives": [
+        "Connect labels to form controls and understand form structure.",
+        "Choose text, email, number, date, checkbox, radio, and other input types appropriately.",
+        "Collect longer text and choices with accessible controls."
+      ],
+      "guidedExercises": [
+        "Edit index.html in the HTML editor",
+        "Observe the browser preview after each meaningful change",
+        "Use Check Answer to validate required HTML source structure"
+      ],
+      "quizFocus": [
+        "HTML meaning and syntax",
+        "semantic element choice",
+        "accessible markup"
+      ],
+      "moduleProject": "Project: Build an Accessible Signup Form",
+      "sections": [
+        {
+          "sectionSlug": "html-module-5-lessons",
+          "title": "Forms and User Input",
+          "summary": "Learn the core HTML ideas for forms and user input.",
+          "topics": [
+            {
+              "topicId": "forms-labels-and-inputs",
+              "title": "Forms, Labels, and Inputs",
+              "summary": "Connect labels to form controls and understand form structure.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Connect labels to form controls and understand form structure."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "useful-input-types",
+              "title": "Useful Input Types",
+              "summary": "Choose text, email, number, date, checkbox, radio, and other input types appropriately.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Choose text, email, number, date, checkbox, radio, and other input types appropriately."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "select-textarea-and-buttons",
+              "title": "Select, Textarea, and Buttons",
+              "summary": "Collect longer text and choices with accessible controls.",
+              "minutes": 16,
+              "technical": true,
+              "learningGoals": [
+                "Collect longer text and choices with accessible controls."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "html-module-5-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Build a complete form with labels, sensible input types, choices, and a submit button.",
+          "topics": [
+            {
+              "topicId": "module-5-signup-form-project",
+              "title": "Project: Build an Accessible Signup Form",
+              "summary": "Build a complete form with labels, sensible input types, choices, and a submit button.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Build a complete form with labels, sensible input types, choices, and a submit button."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 6,
+      "moduleSlug": "html-module-6-final-capstone",
+      "prefix": "html_module_6",
+      "title": "Final Capstone: Personal Website",
+      "purpose": "Bring the full HTML Foundations skill set together in one complete, semantic, accessible single-page website.",
+      "learningObjectives": [
+        "Plan and build a complete single-page HTML document from a blank or minimal starter.",
+        "Combine semantic structure, text, links, images, lists or tables, and a form appropriately.",
+        "Review document metadata, nesting, headings, labels, alt text, and link text before submission.",
+        "Use the live browser preview and source validation to verify a polished final page."
+      ],
+      "guidedExercises": [
+        "Build the capstone progressively in one index.html workspace",
+        "Use the browser preview after each milestone",
+        "Run Check Answer against cumulative semantic and accessibility source checks"
+      ],
+      "quizFocus": [
+        "document quality",
+        "semantic structure",
+        "accessibility review"
+      ],
+      "moduleProject": "Build and verify a complete personal website that demonstrates the HTML Foundations skill set.",
+      "sections": [
+        {
+          "sectionSlug": "html-module-6-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Build one complete personal website that combines the course skills in a clean, accessible HTML document.",
+          "topics": [
+            {
+              "topicId": "final-html-personal-site-capstone",
+              "title": "Capstone: Build a Complete Personal Website",
+              "summary": "Plan, build, preview, review, and validate a complete semantic single-page website using only HTML.",
+              "minutes": 45,
+              "technical": true,
+              "learningGoals": [
+                "Build a complete HTML page with correct document structure and useful metadata.",
+                "Use semantic landmarks and a logical heading hierarchy.",
+                "Include appropriate text, links, images, structured content, and a labeled form.",
+                "Review accessibility basics and validate the final source in ZoeSkoul."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "projectFlow": "progressive",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "Create a polished personal website that introduces you, organizes useful information, and includes an accessible way for a visitor to share basic contact information.",
+                "role": "Beginner web developer preparing a complete HTML page for review before moving on to CSS.",
+                "workspace": "One cumulative browser-web workspace using index.html only. The page is rendered continuously in ZoeSkoul's existing live browser preview.",
+                "deliverable": "One complete semantic and accessible single-page personal website with valid document structure, useful metadata, meaningful content, navigation, an image with alternative text, structured content, and a labeled form.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Use HTML only; do not require CSS or JavaScript for correctness.",
+                  "Keep all capstone work in the same index.html workspace from the first step through final verification.",
+                  "Include <!DOCTYPE html>, an html element with a language attribute, head metadata, a title, and a body.",
+                  "Use semantic landmarks and a logical heading hierarchy instead of generic structure when a semantic element fits.",
+                  "Use meaningful link text, useful image alt text, and explicitly associated form labels.",
+                  "Use the live browser preview for visual feedback and source checks for grading; do not require Judge0 or terminal execution."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Build the Document Foundation",
+                    "requirement": "Create the complete HTML document shell with doctype, language, head metadata, page title, and body, then confirm it renders in the live preview."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Add Semantic Page Structure",
+                    "requirement": "Add header, navigation, main content, and footer regions with a logical heading hierarchy and meaningful introductory content."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Add Rich Structured Content",
+                    "requirement": "Add useful links, an image with meaningful alt text, and at least one appropriate structured-content element such as a list or table."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Build an Accessible Contact Form",
+                    "requirement": "Add a form with explicitly associated labels, sensible input types, at least one choice or longer-text control, and a submit button."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Review, Preview, and Validate",
+                    "requirement": "Review nesting, metadata, headings, landmarks, link text, alt text, and labels; inspect the final browser preview and pass the cumulative HTML source checks."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "role": "capstone"
+    }
+  ]
+}

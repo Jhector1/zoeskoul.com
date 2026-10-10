@@ -1,4 +1,4 @@
-import { compileCourse } from "@zoeskoul/curriculum-compiler";
+import { compileCourse, getCourseSourceDraftCoverage, resolveAuthoringCompileTarget } from "@zoeskoul/curriculum-compiler";
 import type { CompileValidationSkipOptions } from "@zoeskoul/curriculum-compiler";
 import {
     finishProgressBar,
@@ -108,9 +108,36 @@ export async function runCompileCourse(
 ) {
     const options = parseCompileCourseArgs(args);
 
+    let sourceCoverage = { complete: false, present: [] as string[], missing: [] as string[] };
+    let needsTranslation = false;
+    if (!options.rebuildFromDrafts && !options.upgradeDrafts) {
+        const target = await resolveAuthoringCompileTarget({
+            subjectSlug,
+            courseSlug,
+            options: {
+                liveSubjectSlug: options.liveSubjectSlug,
+                forceLiveOverwrite: options.forceLiveOverwrite,
+                draftOnly: options.draftOnly,
+            },
+        });
+        const topicIds = target.spec.modules.flatMap((module) =>
+            module.sections.flatMap((section) => section.topics.map((topic) => topic.topicId)),
+        );
+        sourceCoverage = await getCourseSourceDraftCoverage({
+            subjectSlug,
+            courseSlug,
+            topicIds,
+        });
+        needsTranslation = (target.blueprint.targetLocales ?? []).some(
+            (locale) => locale !== target.blueprint.sourceLocale,
+        );
+    }
+
     const ai = await resolveAiProviderOptions({
         cliArgs: args,
-        needsGeneration: !options.rebuildFromDrafts && !options.upgradeDrafts,
+        needsGeneration:
+            (!options.rebuildFromDrafts && !options.upgradeDrafts && !sourceCoverage.complete) ||
+            needsTranslation,
     });
 
     if (!ai && args.includes("--list-ai-models")) {
@@ -120,6 +147,7 @@ export async function runCompileCourse(
     let sawProgress = false;
 
     console.log(`Compiling course ${subjectSlug}/${courseSlug}...`);
+    if (sourceCoverage.complete) console.log("Canonical source drafts: COMPLETE (generation AI not required)");
 
     try {
         const out = await compileCourse({

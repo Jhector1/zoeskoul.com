@@ -211,6 +211,27 @@ export function canApplyMountedWorkspaceReplacement(args: {
     );
 }
 
+export function shouldAcceptMountedEditorChange(args: {
+    expectedPath: string;
+    modelUri: string;
+    eventValue: string;
+    liveModelValue: string;
+}) {
+    if (
+        args.modelUri.startsWith("inmemory://zoeskoul-runner/") &&
+        args.modelUri !== args.expectedPath
+    ) {
+        return false;
+    }
+
+    /**
+     * Monaco can finish dispatching a change from the previous model after the
+     * editor has already mounted the next path. In that race the URI can point
+     * at the new model while the event payload still belongs to the old file.
+     */
+    return args.eventValue === args.liveModelValue;
+}
+
 function getLiveEditorModel(ed: any) {
     try {
         if (!ed || ed.isDisposed?.() === true) return null;
@@ -936,6 +957,20 @@ export default function EditorPane(props: {
                         }
 
                         const next = v ?? "";
+                        const liveModelValue = String(
+                            model?.getValue?.() ?? "",
+                        );
+
+                        if (
+                            !shouldAcceptMountedEditorChange({
+                                expectedPath: path,
+                                modelUri,
+                                eventValue: next,
+                                liveModelValue,
+                            })
+                        ) {
+                            return;
+                        }
 
                         lastLocalValueRef.current = next;
 

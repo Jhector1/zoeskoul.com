@@ -173,7 +173,7 @@ export const ProgrammingExpectedSchema = z
     .object({
         kind: z.literal("code_input"),
         language: ProgrammingLanguageSchema.optional(),
-        checkMode: z.enum(["stdout", "semantic"]).optional(),
+        checkMode: z.enum(["stdout", "semantic", "source"]).optional(),
         tests: z.array(ProgrammingCodeTestSchema).optional(),
         stdin: z.string().optional(),
         stdout: z.string().optional(),
@@ -188,6 +188,10 @@ export const ProgrammingExpectedSchema = z
         makeProgrammingExpected(value as ProgrammingExpectedInput),
     )
     .superRefine((value: ProgrammingExpected, ctx) => {
+        if (value.checkMode === "source") {
+            return;
+        }
+
         if (value.checkMode === "semantic") {
             if (
                 !Array.isArray(value.semanticChecks) ||

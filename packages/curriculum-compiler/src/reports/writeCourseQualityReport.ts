@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { getDraftReportsRoot } from "@zoeskoul/curriculum-core";
+import { getBuildReportsRoot } from "@zoeskoul/curriculum-core";
 import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 
 async function ensureDir(filePath: string) {
@@ -40,7 +40,7 @@ export async function writeCourseQualityReport(args: {
     subjectSlug: string;
     report: CurriculumQualityReport;
 }) {
-    const baseDir = getDraftReportsRoot(args.subjectSlug);
+    const baseDir = getBuildReportsRoot(args.subjectSlug);
 
     await writeFileAtomic(
         path.join(baseDir, "course-quality-report.json"),

@@ -1,0 +1,82 @@
+{
+  "policyId": "html-foundations-validation",
+  "allowedConcepts": [
+    "doctype",
+    "html",
+    "head",
+    "body",
+    "title",
+    "meta",
+    "headings",
+    "paragraphs",
+    "strong",
+    "em",
+    "links",
+    "href",
+    "images",
+    "src",
+    "alt",
+    "relative paths",
+    "absolute URLs",
+    "ordered lists",
+    "unordered lists",
+    "nested lists",
+    "tables",
+    "caption",
+    "thead",
+    "tbody",
+    "tr",
+    "th",
+    "td",
+    "header",
+    "nav",
+    "main",
+    "footer",
+    "section",
+    "article",
+    "aside",
+    "forms",
+    "label",
+    "input",
+    "select",
+    "option",
+    "textarea",
+    "button",
+    "lang",
+    "charset",
+    "viewport",
+    "accessibility"
+  ],
+  "disallowedConcepts": [
+    "CSS selectors",
+    "Flexbox",
+    "CSS Grid",
+    "JavaScript",
+    "DOM scripting",
+    "React",
+    "npm",
+    "package installation",
+    "backend APIs"
+  ],
+  "validationRequirements": {
+    "usesWebProfile": true,
+    "usesSourceChecksRecipe": true,
+    "usesBrowserPreview": true,
+    "judge0NotRequired": true,
+    "entryFile": "index.html"
+  },
+  "rules": {
+    "executionValidation": [
+      "Every HTML code_input uses fixedLanguage web and recipeType source_checks",
+      "Every source_checks exercise includes one or more sourceChecks entries",
+      "Use path index.html for Course 1 source checks",
+      "Do not publish fixed_tests, template_io, semantic, shell_task, or sql_query recipes in HTML Foundations"
+    ],
+    "pedagogy": [
+      "Every technical topic should include at least one visible browser-preview change",
+      "Prefer semantic elements over div/span when the lesson has introduced the semantic alternative",
+      "Require meaningful alt text and explicit form labels when those concepts have been introduced",
+      "Do not grade whitespace, indentation, or attribute ordering unless the lesson explicitly teaches formatting"
+    ]
+  }
+}

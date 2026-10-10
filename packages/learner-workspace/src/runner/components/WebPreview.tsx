@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { WorkspaceSyncEntry } from "@zoeskoul/learner-workspace/runner/runtime";
 import { isBinaryWorkspaceEntry } from "@zoeskoul/learner-workspace/lib/ide/workspaceFileContent";
 
 function normalizePath(input: string) {
     return String(input ?? "")
         .replace(/\\/g, "/")
-        .replace(/^\.\/+/, "")
+        .replace(/^\.\//, "")
         .replace(/\/+/g, "/")
         .trim();
 }
@@ -38,6 +38,7 @@ function resolveRelativePath(fromFile: string, target: string) {
     const joined = normalizePath(
         baseDir ? `${baseDir}/${cleanTarget}` : cleanTarget,
     );
+
     const parts = joined.split("/");
     const out: string[] = [];
 
@@ -73,18 +74,35 @@ function rewriteCssAssets(args: {
     );
 }
 
-export function buildWebPreviewSrcDoc(entries: WorkspaceSyncEntry[]) {
+export function listWebPreviewHtmlPaths(entries: WorkspaceSyncEntry[]) {
+    const paths: string[] = [];
+
+    for (const entry of entries) {
+        if (entry.kind === "directory" || isBinaryWorkspaceEntry(entry)) continue;
+        const path = normalizePath(entry.path);
+        if (path.toLowerCase().endsWith(".html")) paths.push(path);
+    }
+
+    return paths;
+}
+
+export function buildWebPreviewSrcDoc(
+    entries: WorkspaceSyncEntry[],
+    requestedPath = "index.html",
+) {
     const fileMap = new Map<string, string>();
     const assetMap = new Map<string, string>();
 
     for (const entry of entries) {
         if (entry.kind === "directory") continue;
         const path = normalizePath(entry.path);
+
         if (isBinaryWorkspaceEntry(entry)) {
             assetMap.set(path, buildBinaryDataUrl(entry));
         } else {
             const content = String(entry.content ?? "");
             fileMap.set(path, content);
+
             if (path.toLowerCase().endsWith(".svg")) {
                 assetMap.set(
                     path,
@@ -94,10 +112,16 @@ export function buildWebPreviewSrcDoc(entries: WorkspaceSyncEntry[]) {
         }
     }
 
+    const requested = normalizePath(requestedPath).replace(/^\/+/, "");
     const htmlPath =
-        fileMap.has("index.html")
+        (requested &&
+        requested.toLowerCase().endsWith(".html") &&
+        fileMap.has(requested)
+            ? requested
+            : "") ||
+        (fileMap.has("index.html")
             ? "index.html"
-            : [...fileMap.keys()].find((p) => p.endsWith(".html")) ?? "";
+            : [...fileMap.keys()].find((path) => path.endsWith(".html")) ?? "");
 
     const html =
         (htmlPath && fileMap.get(htmlPath)) ||
@@ -126,13 +150,16 @@ export function buildWebPreviewSrcDoc(entries: WorkspaceSyncEntry[]) {
 
             const css = fileMap.get(resolved);
             if (typeof css !== "string") return full;
+
             const rewrittenCss = rewriteCssAssets({
                 css,
                 cssPath: resolved,
                 assetMap,
             });
 
-            return `<style data-inline-href="${resolved}">\n${rewrittenCss}\n</style>`;
+            return `<style data-inline-href="${resolved}">
+${rewrittenCss}
+</style>`;
         },
     );
 
@@ -145,7 +172,9 @@ export function buildWebPreviewSrcDoc(entries: WorkspaceSyncEntry[]) {
             const js = fileMap.get(resolved);
             if (typeof js !== "string") return full;
 
-            return `<script${before ?? ""}${after ?? ""} data-inline-src="${resolved}">\n${js}\n<\/script>`;
+            return `<script${before ?? ""}${after ?? ""} data-inline-src="${resolved}">
+${js}
+<\/script>`;
         },
     );
 
@@ -158,6 +187,43 @@ export function buildWebPreviewSrcDoc(entries: WorkspaceSyncEntry[]) {
         },
     );
 
+    out = out.replace(
+        /<a\b([^>]*?)href=(['"])([^'"]+)\2([^>]*)>/gi,
+        (full, before, quote, href, after) => {
+            const resolved = resolveRelativePath(htmlPath || "index.html", href);
+
+            if (
+                !resolved ||
+                !resolved.toLowerCase().endsWith(".html") ||
+                !fileMap.has(resolved)
+            ) {
+                return full;
+            }
+
+            return `<a${before ?? ""}href=${quote}${href}${quote}${after ?? ""} data-zoeskoul-preview-path="/${resolved}">`;
+        },
+    );
+
+    const navigationBridge = `
+<script>
+document.addEventListener("click", function (event) {
+  var node = event.target;
+  var anchor = node && node.closest
+    ? node.closest("a[data-zoeskoul-preview-path]")
+    : null;
+  if (!anchor) return;
+
+  var path = anchor.getAttribute("data-zoeskoul-preview-path");
+  if (!path) return;
+
+  event.preventDefault();
+  window.parent.postMessage(
+    { type: "zoeskoul-web-preview:navigate", path: path },
+    "*"
+  );
+});
+<\/script>`;
+
     const errorBridge = `
 <script>
 window.addEventListener("error", function (event) {
@@ -166,42 +232,107 @@ window.addEventListener("error", function (event) {
   pre.style.cssText = "position:fixed;left:12px;right:12px;bottom:12px;z-index:999999;padding:10px 12px;border-radius:12px;background:rgba(127,29,29,.95);color:white;font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;";
   document.body.appendChild(pre);
 });
-</script>`;
+<\/script>`;
+
+    const bridges = `${navigationBridge}${errorBridge}`;
 
     if (out.includes("</body>")) {
-        out = out.replace("</body>", `${errorBridge}</body>`);
+        out = out.replace("</body>", `${bridges}</body>`);
     } else {
-        out += errorBridge;
+        out += bridges;
     }
 
     return out;
 }
 
+const DEFAULT_WEB_PREVIEW_URL = "/index.html";
+
 export default function WebPreview(props: {
     entries: WorkspaceSyncEntry[];
     title?: string;
 }) {
-    const srcDoc = useMemo(() => buildWebPreviewSrcDoc(props.entries), [props.entries]);
+    const iframeRef = useRef<HTMLIFrameElement | null>(null);
+    const [virtualPath, setVirtualPath] = useState(
+        DEFAULT_WEB_PREVIEW_URL.slice(1),
+    );
+    const [refreshRevision, setRefreshRevision] = useState(0);
+
+    const htmlPaths = useMemo(
+        () => listWebPreviewHtmlPaths(props.entries),
+        [props.entries],
+    );
+
+    useEffect(() => {
+        if (htmlPaths.includes(virtualPath)) return;
+
+        const nextPath =
+            (htmlPaths.includes("index.html") ? "index.html" : htmlPaths[0]) ??
+            DEFAULT_WEB_PREVIEW_URL.slice(1);
+
+        setVirtualPath(nextPath);
+    }, [htmlPaths, virtualPath]);
+
+    useEffect(() => {
+        const onMessage = (event: MessageEvent) => {
+            if (event.source !== iframeRef.current?.contentWindow) return;
+
+            const data =
+                event.data && typeof event.data === "object"
+                    ? (event.data as { type?: unknown; path?: unknown })
+                    : null;
+
+            if (data?.type !== "zoeskoul-web-preview:navigate") return;
+
+            const path = normalizePath(String(data.path ?? "")).replace(
+                /^\+/,
+                "",
+            );
+
+            if (!path || !htmlPaths.includes(path)) return;
+            setVirtualPath(path);
+        };
+
+        window.addEventListener("message", onMessage);
+        return () => window.removeEventListener("message", onMessage);
+    }, [htmlPaths]);
+
+    const srcDoc = useMemo(
+        () => buildWebPreviewSrcDoc(props.entries, virtualPath),
+        [props.entries, virtualPath],
+    );
 
     return (
-        <div className="h-full min-h-0 border-t border-neutral-200 bg-white/80  dark:border-white/10 dark:bg-black/40">
-            <div className="mb-2 p-2 flex items-center justify-between gap-2">
-                <div className="text-[10px] font-extrabold text-neutral-600 dark:text-white/60">
-                    {props.title ?? "Preview"}
-                </div>
+        <div className="flex h-full min-h-0 flex-col bg-white dark:bg-black/40">
+            <div className="flex shrink-0 items-center gap-2 border-b border-neutral-200 bg-neutral-50 px-2 py-1.5 dark:border-white/10 dark:bg-neutral-950">
+                <button
+                    type="button"
+                    aria-label="Refresh browser preview"
+                    title="Refresh"
+                    onClick={() => setRefreshRevision((value) => value + 1)}
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-neutral-200 bg-white text-sm font-bold text-neutral-600 hover:bg-neutral-100 dark:border-white/10 dark:bg-neutral-900 dark:text-white/70 dark:hover:bg-neutral-800"
+                >
+                    ↻
+                </button>
+
+                <input
+                    aria-label="Preview URL"
+                    value={`/${virtualPath}`}
+                    readOnly
+                    data-testid="web-preview-virtual-url"
+                    className="min-w-0 flex-1 truncate rounded-md border border-neutral-200 bg-white px-2 py-1 font-mono text-[11px] text-neutral-600 outline-none dark:border-white/10 dark:bg-neutral-900 dark:text-white/70"
+                />
             </div>
 
-            <div className="h-[calc(100%-28px)] min-h-0 overflow-hidden  border border-neutral-200 bg-white dark:border-white/10 dark:bg-neutral-950">
+            <div className="min-h-0 flex-1">
                 <iframe
-                    title={props.title ?? "Web Preview"}
+                    ref={iframeRef}
+                    key={refreshRevision}
+                    title={props.title ?? "Web preview"}
                     srcDoc={srcDoc}
-                    sandbox="allow-scripts allow-forms allow-modals allow-popups allow-downloads"
+                    sandbox="allow-scripts allow-modals"
+                    data-web-preview-frame
                     className="h-full w-full border-0 bg-white"
                     style={{
-                        // The learner preview is a neutral browser surface, not an extension
-                        // of ZoeSkoul's light/dark theme. Pinning the embedding element to
-                        // light keeps UA controls and nested prefers-color-scheme behavior
-                        // stable while learner-authored CSS can still style the page itself.
                         colorScheme: "light",
                         backgroundColor: "#ffffff",
                     }}

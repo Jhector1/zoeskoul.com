@@ -5,8 +5,9 @@ import { getRepoRoot } from "./repoPaths.js";
 import {
     getBackupRoot,
     getAuthoringCourseSpecPath,
-    getDraftSubjectManifestPath,
-    getDraftTopicMessagesPath,
+    getBuildSubjectManifestPath,
+    getBuildTopicMessagesPath,
+    getDraftSourceTopicPath,
     getSubjectManifestPath,
     getTopicBundlePath,
     getAuthoringSharedGenerationPolicyPath,
@@ -94,10 +95,10 @@ describe("curriculumPaths", () => {
                 "topic.bundle.json",
             ),
         );
-        expect(getDraftSubjectManifestPath("sql-v2")).toBe(
+        expect(getBuildSubjectManifestPath("sql-v2")).toBe(
             path.join(
                 getRepoRoot(),
-                ".curriculum-drafts",
+                ".curriculum-build",
                 "sql",
                 "subjects",
                 "sql-v2",
@@ -105,17 +106,38 @@ describe("curriculumPaths", () => {
             ),
         );
         expect(
-            getDraftTopicMessagesPath("en", "python-v2", "module0", "what-python-is"),
+            getBuildTopicMessagesPath("en", "python-v2", "module0", "what-python-is"),
         ).toBe(
             path.join(
                 getRepoRoot(),
-                ".curriculum-drafts",
+                ".curriculum-build",
                 "python",
                 "messages",
                 "en",
                 "subjects",
                 "python-v2",
                 "module0",
+                "what-python-is.json",
+            ),
+        );
+        expect(
+            getDraftSourceTopicPath(
+                "python",
+                "python-foundations",
+                "python-basics",
+                "what-python-is",
+            ),
+        ).toBe(
+            path.join(
+                getRepoRoot(),
+                ".curriculum-drafts",
+                "python",
+                "subjects",
+                "python",
+                "courses",
+                "python-foundations",
+                "topics",
+                "python-basics",
                 "what-python-is.json",
             ),
         );

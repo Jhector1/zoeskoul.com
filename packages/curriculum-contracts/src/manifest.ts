@@ -438,6 +438,15 @@ export type ManifestRecipe =
       type: "shell_task";
       mode?: "terminal_workspace" | "stdout" | "workspace_and_stdout";
       instructions?: string;
+    }
+  | {
+      /**
+       * Source-only grading for browser-rendered work such as HTML/CSS.
+       * Runtime execution is intentionally skipped after authored source checks pass.
+       */
+      type: "source_checks";
+      solutionCode?: string;
+      solutionFiles?: ManifestStarterFiles;
     };
 
 export type ManifestCodeInputExpectedExample =

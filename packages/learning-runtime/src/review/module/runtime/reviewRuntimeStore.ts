@@ -477,6 +477,166 @@ function repairUntouchedBlankRuntimeFiles(args: {
     return nextWorkspace ?? incoming;
 }
 
+export function repairLegacyCollapsedRuntimeStarterFiles(args: {
+    incomingWorkspace: WorkspaceStateV2 | null | undefined;
+    starterWorkspace: WorkspaceStateV2 | null | undefined;
+}) {
+    const incoming = args.incomingWorkspace;
+    const starter = args.starterWorkspace;
+
+    if (
+        !incoming ||
+        incoming.version !== 2 ||
+        !starter ||
+        starter.version !== 2
+    ) {
+        return incoming ?? null;
+    }
+
+    const incomingFiles = runtimeFileMap(incoming);
+    const starterFiles = runtimeFileMap(starter);
+    const authoredTextFiles = [...starterFiles.entries()].filter(
+        ([, file]) =>
+            !file?.binary &&
+            String(file?.content ?? "").trim().length > 0,
+    );
+
+    if (authoredTextFiles.length < 2) return incoming;
+
+    const normalize = (value: unknown) =>
+        String(value ?? "").replace(/\r\n?/g, "\n").trim();
+
+    const distinctStarterValues = new Set(
+        authoredTextFiles.map(([, file]) => normalize(file.content)),
+    );
+    if (distinctStarterValues.size < 2) return incoming;
+
+    const incomingValues: string[] = [];
+    for (const [path] of authoredTextFiles) {
+        const file = incomingFiles.get(path);
+        if (!file || file.binary) return incoming;
+
+        const value = normalize(file.content);
+        if (!value) return incoming;
+        incomingValues.push(value);
+    }
+
+    const distinctIncomingValues = new Set(incomingValues);
+    if (distinctIncomingValues.size !== 1) return incoming;
+
+    const repeatedValue = incomingValues[0] ?? "";
+    if (!distinctStarterValues.has(repeatedValue)) return incoming;
+
+    const differsFromStarter = authoredTextFiles.some(
+        ([, file]) => normalize(file.content) !== repeatedValue,
+    );
+    if (!differsFromStarter) return incoming;
+
+    const repaired = cloneRuntimeWorkspace(incoming);
+    const repairedFiles = runtimeFileMap(repaired);
+
+    for (const [path, starterFile] of authoredTextFiles) {
+        const target = repairedFiles.get(path);
+        if (!target) continue;
+
+        target.content = String(starterFile.content ?? "");
+        delete target.binary;
+        target.updatedAt = starterFile.updatedAt ?? Date.now();
+    }
+
+    return repaired;
+}
+
+export function restoreCanonicalRuntimeBinaryAssets(args: {
+    incomingWorkspace: WorkspaceStateV2 | null | undefined;
+    starterWorkspace: WorkspaceStateV2 | null | undefined;
+}) {
+    const incoming = args.incomingWorkspace;
+    const starter = args.starterWorkspace;
+
+    if (
+        !incoming ||
+        incoming.version !== 2 ||
+        !starter ||
+        starter.version !== 2
+    ) {
+        return incoming ?? null;
+    }
+
+    const starterBinaryFiles = [...runtimeFileMap(starter).entries()].filter(
+        ([, file]) =>
+            file?.binary?.encoding === "base64" &&
+            typeof file.binary.data === "string" &&
+            file.binary.data.length > 0,
+    );
+    if (starterBinaryFiles.length === 0) return incoming;
+
+    let repaired: WorkspaceStateV2 | null = null;
+    const ensureRepaired = () => {
+        if (!repaired) repaired = cloneRuntimeWorkspace(incoming);
+        return repaired;
+    };
+
+    for (const [path, starterFile] of starterBinaryFiles) {
+        const currentWorkspace = repaired ?? incoming;
+        const currentFile = runtimeFileMap(currentWorkspace).get(path);
+
+        if (
+            currentFile?.binary?.encoding === "base64" &&
+            typeof currentFile.binary.data === "string" &&
+            currentFile.binary.data.length > 0
+        ) {
+            continue;
+        }
+
+        /**
+         * Canonical binary assets own their exact path. A text payload at that
+         * path cannot be a legitimate learner edit because binary files are not
+         * Monaco-editable. Replace blank and nonblank text corruption alike.
+         */
+        const workspace = ensureRepaired();
+        const refreshedFiles = runtimeFileMap(workspace);
+        const target = refreshedFiles.get(path);
+
+        if (target) {
+            target.content = "";
+            target.binary = { ...starterFile.binary };
+            target.updatedAt = starterFile.updatedAt ?? Date.now();
+            continue;
+        }
+
+        const segments = path.split("/");
+        const name = segments.pop() || String(starterFile.name ?? "asset.bin");
+        const parentId = ensureRuntimeFolder({
+            workspace,
+            folderPath: segments.join("/"),
+        });
+        const existingIds = new Set(
+            workspace.nodes.map((node: any) => String(node?.id ?? "")),
+        );
+
+        let fileId = `file:${path.replace(/\//g, "__")}`;
+        let index = 2;
+        while (existingIds.has(fileId)) {
+            fileId = `file:${path.replace(/\//g, "__")}:${index}`;
+            index += 1;
+        }
+
+        workspace.nodes.push({
+            ...starterFile,
+            id: fileId,
+            name,
+            parentId,
+            content: "",
+            binary: { ...starterFile.binary },
+            createdAt: starterFile.createdAt ?? 0,
+            updatedAt: starterFile.updatedAt ?? Date.now(),
+        } as any);
+    }
+
+    return repaired ?? incoming;
+}
+
 function runtimeWorkspacePatchSourceType(args: {
     source?: string | null;
     workspaceOrigin?: unknown;
@@ -1149,10 +1309,26 @@ function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
 
     const files = (workspace.nodes as any[])
         .filter((node) => node?.kind === "file")
-        .map((node) => ({
-            path: filePath(node),
-            content: String(node.content ?? ""),
-        }))
+        .map((node) => {
+            const binary =
+                node?.binary?.encoding === "base64" &&
+                typeof node.binary.data === "string" &&
+                node.binary.data.length > 0
+                    ? {
+                        encoding: "base64",
+                        data: node.binary.data,
+                        mimeType: node.binary.mimeType ?? "",
+                        sizeBytes: node.binary.sizeBytes ?? null,
+                        checksum: node.binary.checksum ?? null,
+                    }
+                    : null;
+
+            return {
+                path: filePath(node),
+                content: binary ? "" : String(node.content ?? ""),
+                binary,
+            };
+        })
         .sort((a, b) => a.path.localeCompare(b.path));
 
     const activeNode = (workspace.nodes as any[]).find(
@@ -1846,7 +2022,7 @@ function ensureRuntimeFolder(args: {
     return parentId;
 }
 
-function mergeMissingFilesFromResolvedWorkspace(args: {
+export function mergeMissingFilesFromResolvedWorkspace(args: {
     baseWorkspace: WorkspaceStateV2 | null | undefined;
     resolvedWorkspace: WorkspaceStateV2 | null | undefined;
 }): WorkspaceStateV2 | null {
@@ -1864,31 +2040,94 @@ function mergeMissingFilesFromResolvedWorkspace(args: {
     const baseNodes = base.nodes as any[];
     const resolvedNodes = resolved.nodes as any[];
 
-    const existingPaths = new Set(
+    const existingFileByPath = new Map(
         baseNodes
             .filter((node) => node?.kind === "file")
-            .map((node) => runtimePathForNode(baseNodes, node))
-            .filter(Boolean),
+            .map((node) => [
+                runtimePathForNode(baseNodes, node),
+                node,
+            ] as const)
+            .filter(([path]) => Boolean(path)),
     );
+    const existingPaths = new Set(existingFileByPath.keys());
 
-    const missingFiles = resolvedNodes
+    const resolvedFiles = resolvedNodes
         .filter((node) => node?.kind === "file")
         .map((node) => ({
             node,
             path: runtimePathForNode(resolvedNodes, node),
         }))
-        .filter(({ path }) => path && !existingPaths.has(path));
+        .filter(({ path }) => Boolean(path));
 
-    if (missingFiles.length === 0) {
+    const missingFiles = resolvedFiles.filter(
+        ({ path }) => !existingPaths.has(path),
+    );
+
+    const canonicalBinaryReplacements = resolvedFiles.filter(
+        ({ node, path }) => {
+            const binary = node?.binary;
+            if (
+                binary?.encoding !== "base64" ||
+                typeof binary.data !== "string" ||
+                binary.data.length === 0
+            ) {
+                return false;
+            }
+
+            const existing = existingFileByPath.get(path);
+            if (!existing) return false;
+
+            return !(
+                existing.binary?.encoding === "base64" &&
+                existing.binary.data === binary.data &&
+                existing.binary.mimeType === binary.mimeType &&
+                String(existing.content ?? "") === ""
+            );
+        },
+    );
+
+    if (
+        missingFiles.length === 0 &&
+        canonicalBinaryReplacements.length === 0
+    ) {
         return base;
     }
 
     const merged: WorkspaceStateV2 = {
         ...base,
-        nodes: baseNodes.map((node) => ({ ...node })),
+        nodes: baseNodes.map((node) => ({
+            ...node,
+            ...(node?.binary ? { binary: { ...node.binary } } : {}),
+        })),
         openTabs: [...(base.openTabs ?? [])],
         expanded: [...(base.expanded ?? [])],
     };
+
+    /**
+     * Saved learner-authored text remains authoritative. Canonical binary assets
+     * are structural and own their exact path, so a saved blank/text placeholder
+     * must be replaced by the resolved binary bytes during initial runtime seed.
+     */
+    if (canonicalBinaryReplacements.length > 0) {
+        const mergedFileByPath = new Map(
+            (merged.nodes as any[])
+                .filter((node) => node?.kind === "file")
+                .map((node) => [
+                    runtimePathForNode(merged.nodes as any[], node),
+                    node,
+                ] as const),
+        );
+
+        for (const { node, path } of canonicalBinaryReplacements) {
+            const target = mergedFileByPath.get(path);
+            if (!target) continue;
+
+            target.content = "";
+            target.binary = { ...node.binary };
+            target.updatedAt =
+                node.updatedAt ?? target.updatedAt ?? Date.now();
+        }
+    }
 
     for (const { node, path } of missingFiles) {
         const parts = path.split("/");
@@ -2039,7 +2278,15 @@ function workspaceHasUsableFile(workspace: WorkspaceStateV2 | null | undefined) 
 
     return workspace.nodes.some((node: any) => {
         if (node?.kind !== "file") return false;
-        return String(node.content ?? "").trim().length > 0;
+
+        return (
+            (
+                node.binary?.encoding === "base64" &&
+                typeof node.binary.data === "string" &&
+                node.binary.data.length > 0
+            ) ||
+            String(node.content ?? "").trim().length > 0
+        );
     });
 }
 
@@ -2055,7 +2302,15 @@ function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined
 
     return workspace.nodes.some((node: any) => {
         if (node?.kind !== "file") return false;
-        return String(node.content ?? "").trim().length > 0;
+
+        return (
+            (
+                node.binary?.encoding === "base64" &&
+                typeof node.binary.data === "string" &&
+                node.binary.data.length > 0
+            ) ||
+            String(node.content ?? "").trim().length > 0
+        );
     });
 }
 
@@ -2252,12 +2507,28 @@ function stableWorkspaceKey(workspace: any): string {
 
     const files = workspace.nodes
         .filter((node: any) => node?.kind === "file")
-        .map((node: any) => ({
-            id: String(node.id ?? ""),
-            name: String(node.name ?? ""),
-            parentId: node.parentId == null ? null : String(node.parentId),
-            content: String(node.content ?? ""),
-        }))
+        .map((node: any) => {
+            const binary =
+                node?.binary?.encoding === "base64" &&
+                typeof node.binary.data === "string" &&
+                node.binary.data.length > 0
+                    ? {
+                        encoding: "base64",
+                        data: node.binary.data,
+                        mimeType: node.binary.mimeType ?? "",
+                        sizeBytes: node.binary.sizeBytes ?? null,
+                        checksum: node.binary.checksum ?? null,
+                    }
+                    : null;
+
+            return {
+                id: String(node.id ?? ""),
+                name: String(node.name ?? ""),
+                parentId: node.parentId == null ? null : String(node.parentId),
+                content: binary ? "" : String(node.content ?? ""),
+                binary,
+            };
+        })
         .sort((a: any, b: any) => a.id.localeCompare(b.id));
 
     return JSON.stringify({
@@ -4376,20 +4647,47 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             );
             const explicitChangedFilePaths =
                 workspaceMutation?.changedFilePaths ?? [];
+            const starterWorkspaceForReconciliation =
+                existing.starterWorkspace ??
+                existingExercise?.starterWorkspace ??
+                null;
+
+            let reconciledWorkspace = workspace;
+
+            /**
+             * Lesson-only hydration can replay saved/cache snapshots created by
+             * older broken multi-file transitions. Before that snapshot becomes
+             * protected learner state, repair only two deterministic legacy
+             * shapes against the canonical starter:
+             * 1) one authored text starter copied into every authored text file;
+             * 2) a missing/blank canonical binary asset.
+             *
+             * Direct learner mutations remain authoritative.
+             */
+            if (patchSourceType !== "learner") {
+                reconciledWorkspace =
+                    repairLegacyCollapsedRuntimeStarterFiles({
+                        incomingWorkspace: reconciledWorkspace,
+                        starterWorkspace: starterWorkspaceForReconciliation,
+                    });
+                reconciledWorkspace =
+                    restoreCanonicalRuntimeBinaryAssets({
+                        incomingWorkspace: reconciledWorkspace,
+                        starterWorkspace: starterWorkspaceForReconciliation,
+                    });
+            }
+
             const shouldRepairUntouchedBlankFiles =
                 patchSourceType !== "saved" &&
                 (
                     patchSourceType !== "learner" ||
                     explicitChangedFilePaths.length > 0
                 );
-            const reconciledWorkspace = shouldRepairUntouchedBlankFiles
+            reconciledWorkspace = shouldRepairUntouchedBlankFiles
                 ? repairUntouchedBlankRuntimeFiles({
-                    incomingWorkspace: workspace,
+                    incomingWorkspace: reconciledWorkspace,
                     existingWorkspace: existing.workspace ?? null,
-                    starterWorkspace:
-                        existing.starterWorkspace ??
-                        existingExercise?.starterWorkspace ??
-                        null,
+                    starterWorkspace: starterWorkspaceForReconciliation,
                     fileEditState:
                         existing.fileEditState ??
                         existingExercise?.fileEditState ??
@@ -4400,7 +4698,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                             ? explicitChangedFilePaths
                             : undefined,
                 })
-                : workspace;
+                : reconciledWorkspace;
             const nextCode = deriveCodeFromWorkspace(reconciledWorkspace) ?? "";
             const nextStdin =
                 typeof reconciledWorkspace?.stdin === "string"

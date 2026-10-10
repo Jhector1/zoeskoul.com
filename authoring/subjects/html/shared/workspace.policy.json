@@ -1,0 +1,28 @@
+{
+  "policyId": "html-browser-workspace",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "html-browser-workspace",
+  "uiTerms": {
+    "editor": "HTML editor",
+    "runButton": "Preview",
+    "output": "browser preview"
+  },
+  "preferredTerms": {
+    "output panel": "browser preview",
+    "run": "preview",
+    "program": "web page"
+  },
+  "learnerInstructions": [
+    "Edit index.html in the HTML editor.",
+    "Watch the browser preview update as you work.",
+    "Click Check Answer when the page structure matches the task."
+  ],
+  "forbiddenActions": [
+    "terminal",
+    "command line",
+    "Judge0",
+    "npm install",
+    "package installation",
+    "local IDE"
+  ]
+}

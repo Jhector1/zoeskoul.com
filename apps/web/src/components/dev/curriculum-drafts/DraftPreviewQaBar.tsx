@@ -45,7 +45,7 @@ export default function DraftPreviewQaBar() {
           type="button"
           className="rounded-md border border-emerald-300 bg-white px-2.5 py-1.5 font-semibold hover:bg-emerald-100"
           onClick={() => window.location.reload()}
-          title="Reload the latest saved .curriculum-drafts files and reset local QA progress"
+          title="Reload the latest saved .curriculum-build files and reset local QA progress"
         >
           Reload saved draft
         </button>

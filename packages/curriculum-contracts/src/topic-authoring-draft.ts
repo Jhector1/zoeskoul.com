@@ -240,7 +240,7 @@ export type TopicAuthoringDraft = {
         files?: ProgrammingCodeInputFileDraft[];
         semanticChecks?: SemanticCheck[];
         datasetId?: string;
-        recipeType?: "sql_query" | "template_io" | "fixed_tests" | "semantic" | "shell_task";
+        recipeType?: "sql_query" | "template_io" | "fixed_tests" | "semantic" | "shell_task" | "source_checks";
         mode?: "terminal_workspace" | "stdout" | "workspace_and_stdout";
         instructions?: string;
         checkSql?: string;
@@ -281,6 +281,7 @@ const RECIPE_TYPE_ENUM = [
     "fixed_tests",
     "semantic",
     "shell_task",
+    "source_checks",
 ] as const;
 
 const helpSchema = {
@@ -656,6 +657,7 @@ const authoringExerciseItemSchema = {
                                             type: "string",
                                             enum: ["source_contains", "source_regex"],
                                         },
+                                        path: { type: "string" },
                                         pattern: { type: "string" },
                                         message: { type: "string" },
                                         normalizeWhitespace: { type: "boolean" },
@@ -1811,7 +1813,7 @@ function assertAuthoringExerciseDraft(
                 const record = check as Record<string, unknown>;
                 assertOnlyKeys(
                     record,
-                    ["type", "pattern", "message", "normalizeWhitespace"],
+                    ["type", "path", "pattern", "message", "normalizeWhitespace"],
                     `${label}.sourceChecks[${checkIndex}]`,
                 );
 
@@ -1820,6 +1822,13 @@ function assertAuthoringExerciseDraft(
                     record.type !== "source_regex"
                 ) {
                     fail(`${label} sourceChecks[${checkIndex}].type must be "source_contains" or "source_regex"`);
+                }
+
+                if (
+                    typeof record.path !== "undefined" &&
+                    !isNonEmptyString(record.path)
+                ) {
+                    fail(`${label} sourceChecks[${checkIndex}].path must be a non-empty string when provided`);
                 }
 
                 if (!isNonEmptyString(record.pattern)) {
@@ -1940,9 +1949,17 @@ function assertAuthoringExerciseDraft(
             fail(`${label} fixed_tests code_input needs tests`);
         }
 
+        const hasSourceChecks =
+            Array.isArray(exercise.sourceChecks) && exercise.sourceChecks.length > 0;
+
+        if (exercise.recipeType === "source_checks" && !hasSourceChecks) {
+            fail(`${label} source_checks code_input needs sourceChecks`);
+        }
+
         if (
             exercise.recipeType !== "sql_query" &&
             exercise.recipeType !== "shell_task" &&
+            exercise.recipeType !== "source_checks" &&
             !hasTests &&
             !hasSemanticChecks
         ) {

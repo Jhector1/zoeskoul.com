@@ -1,4 +1,4 @@
-const PROGRAMMING_PROFILES = new Set([
+const CODE_WORKSPACE_PROFILES = new Set([
     "python",
     "java",
     "javascript",
@@ -8,6 +8,7 @@ const PROGRAMMING_PROFILES = new Set([
     "sql",
     "bash",
     "git",
+    "web",
 ]);
 
 export function toolsPolicyForSubject(
@@ -24,6 +25,6 @@ export function toolsPolicyForSubject(
     const profile = String(profileId ?? "").trim().toLowerCase();
 
     return {
-        codeEnabled: PROGRAMMING_PROFILES.has(profile),
+        codeEnabled: CODE_WORKSPACE_PROFILES.has(profile),
     };
 }

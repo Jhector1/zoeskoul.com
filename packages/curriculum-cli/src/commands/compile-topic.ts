@@ -1,6 +1,6 @@
 // packages/curriculum-cli/src/commands/compile-topic.ts
 
-import { loadBlueprint, compileTopic } from "@zoeskoul/curriculum-compiler";
+import { compileTopic, findTopicSourceDraft, loadBlueprint } from "@zoeskoul/curriculum-compiler";
 import {
     finishProgressBar,
     renderProgressBar,
@@ -29,25 +29,34 @@ export async function runCompileTopic(
     topicId: string,
     args: string[] = [],
 ) {
+    const blueprint = await loadBlueprint(blueprintPath);
+    const existingSource = blueprint.courseSlug
+        ? await findTopicSourceDraft({
+              subjectSlug: blueprint.subjectSlug,
+              courseSlug: blueprint.courseSlug,
+              topicId,
+          })
+        : null;
+    const needsTranslation = (blueprint.targetLocales ?? []).some(
+        (locale) => locale !== blueprint.sourceLocale,
+    );
     const ai = await resolveAiProviderOptions({
         cliArgs: args,
-        needsGeneration: true,
+        needsGeneration: !existingSource || needsTranslation,
     });
 
     if (!ai && args.includes("--list-ai-models")) {
         return;
     }
-
-    const blueprint = await loadBlueprint(blueprintPath);
     let sawProgress = false;
 
     console.log(`Compiling topic ${topicId} for subject ${blueprint.subjectSlug}...`);
+    if (existingSource) console.log(`Using canonical source draft: ${existingSource.sourcePath}`);
 
     try {
         const out = await compileTopic({
             blueprint,
-            provider: ai!.provider,
-            translationProvider: ai!.translationProvider,
+            ...(ai ? { provider: ai.provider, translationProvider: ai.translationProvider } : {}),
             topicId,
             onProgress: (info) => {
                 sawProgress = true;

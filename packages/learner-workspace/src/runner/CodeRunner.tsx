@@ -3094,6 +3094,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             />
                         ) : null}
                         <EditorPane
+                            key={args.modelKey}
                             frame={frame}
                             lang={args.editorLanguage}
                             mobileEditMode="auto"

@@ -261,7 +261,7 @@ For production trust, **draft critique is more important than fresh critique**.
 Every compiled topic should write reports under:
 
 ```txt
-.curriculum-drafts/reports/<subjectSlug>/module<moduleOrder>/<topicId>/
+.curriculum-build/reports/<subjectSlug>/module<moduleOrder>/<topicId>/
 ```
 
 Expected files:

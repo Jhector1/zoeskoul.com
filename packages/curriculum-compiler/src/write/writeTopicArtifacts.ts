@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
-    getDraftTopicBundlePath,
-    getDraftTopicMessagesPath,
+    getBuildTopicBundlePath,
+    getBuildTopicMessagesPath,
 } from "@zoeskoul/curriculum-core";
 
 async function ensureDir(filePath: string) {
@@ -26,13 +26,13 @@ export async function writeTopicArtifacts(args: {
     const moduleDir = `module${args.moduleOrder}`;
 
     await writeJsonAtomic(
-        getDraftTopicBundlePath(args.subjectSlug, moduleDir, args.topicId),
+        getBuildTopicBundlePath(args.subjectSlug, moduleDir, args.topicId),
         args.topicBundle,
     );
 
     for (const [locale, messages] of Object.entries(args.messagesByLocale)) {
         await writeJsonAtomic(
-            getDraftTopicMessagesPath(locale, args.subjectSlug, moduleDir, args.topicId),
+            getBuildTopicMessagesPath(locale, args.subjectSlug, moduleDir, args.topicId),
             messages,
         );
     }

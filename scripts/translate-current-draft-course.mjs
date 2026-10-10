@@ -1209,7 +1209,7 @@ async function runLocaleTranslation({
 }) {
   const targetRoot = path.join(
     REPO_ROOT,
-    ".curriculum-drafts",
+    ".curriculum-build",
     args.subjectSlug,
     "messages",
     locale,
@@ -1307,7 +1307,7 @@ async function main() {
   const draftSubjectSlug = target.liveSubjectSlug;
   const sourceRoot = path.join(
     REPO_ROOT,
-    ".curriculum-drafts",
+    ".curriculum-build",
     args.subjectSlug,
     "messages",
     SOURCE_LOCALE,

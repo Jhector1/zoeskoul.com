@@ -1,9 +1,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
-    getDraftMessagesRoot,
-    getDraftSubjectManifestPath,
-    getDraftSubjectRoot,
+    getBuildMessagesRoot,
+    getBuildSubjectManifestPath,
+    getBuildSubjectRoot,
 } from "@zoeskoul/curriculum-core";
 import { loadCourseSpec } from "../spec/loadCourseSpec.js";
 import { validateProjectTopicStructure } from "./validateProjectTopicStructure.js";
@@ -335,7 +335,7 @@ export async function validateDraftSubject(subjectSlug: string) {
     const issues: string[] = [];
     const authoredTopicRoles = await loadAuthoredTopicRoles(subjectSlug);
 
-    const subjectManifestPath = getDraftSubjectManifestPath(subjectSlug);
+    const subjectManifestPath = getBuildSubjectManifestPath(subjectSlug);
     if (!(await pathExists(subjectManifestPath))) {
         throw new Error(`Draft manifest not found for subject ${subjectSlug}`);
     }
@@ -376,7 +376,7 @@ export async function validateDraftSubject(subjectSlug: string) {
                 if (!topicId) continue;
 
                 const topicBundlePath = path.join(
-                    getDraftSubjectRoot(subjectSlug),
+                    getBuildSubjectRoot(subjectSlug),
                     "modules",
                     moduleDir,
                     "topics",
@@ -407,7 +407,7 @@ export async function validateDraftSubject(subjectSlug: string) {
         }
     }
 
-    const messagesRoot = getDraftMessagesRoot(subjectSlug);
+    const messagesRoot = getBuildMessagesRoot(subjectSlug);
     if (await pathExists(messagesRoot)) {
         const localeDirs = await fs.readdir(messagesRoot, { withFileTypes: true });
 

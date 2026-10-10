@@ -7,7 +7,7 @@ import {
     type CourseSpec,
     type TopicBundleManifest,
 } from "@zoeskoul/curriculum-contracts";
-import { getDraftTopicMessagesPath } from "@zoeskoul/curriculum-core";
+import { getBuildTopicMessagesPath } from "@zoeskoul/curriculum-core";
 import {
     getProfileServices,
     getSubjectShape,
@@ -72,7 +72,7 @@ async function readExistingLocaleMessages(args: {
 }) {
     const moduleDir = `module${args.moduleOrder}`;
     return readJsonIfExists(
-        getDraftTopicMessagesPath(
+        getBuildTopicMessagesPath(
             args.locale,
             args.subjectSlug,
             moduleDir,
@@ -297,6 +297,11 @@ function normalizeCurrentOutputVisibleStarterFileContentRefs(args: {
 
     args.value.forEach((entry, index) => {
         if (!isCurrentOutputRecord(entry)) return;
+
+        if (entry.encoding === "base64") {
+            entry.content = "";
+            return;
+        }
         if (isCurrentOutputEntryStarterFile(entry)) return;
 
         const content = entry.content;
@@ -327,6 +332,12 @@ function normalizeCurrentOutputSolutionFileContentRefs(args: {
 
     solutionFiles.forEach((entry, index) => {
         if (!isCurrentOutputRecord(entry)) return;
+
+        if (entry.encoding === "base64") {
+            entry.content = "";
+            return;
+        }
+
 
         const content = entry.content;
         if (typeof content !== "string" || content.trim().length === 0 || content.startsWith("@:")) {
@@ -440,6 +451,11 @@ function normalizeCurrentOutputEntryStarterFileRefs(
 
     for (const file of value) {
         if (!isCurrentOutputRecord(file)) continue;
+
+        if (file.encoding === "base64") {
+            file.content = "";
+            continue;
+        }
         const path = typeof file.path === "string" ? file.path : "";
         const isEntry = file.isEntry === true || file.entry === true || path === "main.sh";
         if (!isEntry) continue;

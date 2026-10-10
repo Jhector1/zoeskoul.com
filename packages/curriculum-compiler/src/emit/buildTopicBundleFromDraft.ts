@@ -94,6 +94,29 @@ function resolveLessonTools(args: {
     );
 }
 
+function canonicalizeBinaryWorkspaceFileContent(value: unknown): void {
+    if (Array.isArray(value)) {
+        for (const entry of value) {
+            canonicalizeBinaryWorkspaceFileContent(entry);
+        }
+        return;
+    }
+
+    if (!value || typeof value !== "object") return;
+
+    const record = value as Record<string, unknown>;
+    if (
+        record.encoding === "base64" &&
+        typeof record.path === "string"
+    ) {
+        record.content = "";
+    }
+
+    for (const child of Object.values(record)) {
+        canonicalizeBinaryWorkspaceFileContent(child);
+    }
+}
+
 export function buildTopicBundleFromDraft(args: {
     shape: SubjectShapePack;
     seed: TopicSeed;
@@ -773,6 +796,10 @@ export function buildTopicBundleFromDraft(args: {
             ? { ...manifestExercise, tools }
             : manifestExercise;
     });
+
+    for (const exercise of exercises) {
+        canonicalizeBinaryWorkspaceFileContent(exercise);
+    }
 
     return {
         topicId: seed.topicId,

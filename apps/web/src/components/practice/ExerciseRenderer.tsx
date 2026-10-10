@@ -265,8 +265,19 @@ function hasResolvedStarterFilesLike(value: unknown) {
             return entry.trim().length > 0 && !isTaggedMessageRefLike(entry);
         }
 
-        if (isRecordLike(entry) && typeof entry.content === "string") {
-            return entry.content.trim().length > 0 && !isTaggedMessageRefLike(entry.content);
+        if (isRecordLike(entry)) {
+            if (
+                entry.encoding === "base64" &&
+                typeof entry.data === "string" &&
+                entry.data.length > 0
+            ) {
+                return true;
+            }
+
+            if (typeof entry.content === "string") {
+                return entry.content.trim().length > 0 &&
+                    !isTaggedMessageRefLike(entry.content);
+            }
         }
 
         return false;
@@ -412,7 +423,14 @@ function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined
 
     return workspace.nodes.some((node: any) => {
         if (node?.kind !== "file") return false;
-        return String(node.content ?? "").trim().length > 0;
+        return (
+            (
+                node.binary?.encoding === "base64" &&
+                typeof node.binary.data === "string" &&
+                node.binary.data.length > 0
+            ) ||
+            String(node.content ?? "").trim().length > 0
+        );
     });
 }
 

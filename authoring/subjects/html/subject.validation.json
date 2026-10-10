@@ -1,0 +1,19 @@
+{
+  "validationSuite": "htmlSubjectValidation",
+  "appliesTo": "html_courses",
+  "runtime": {
+    "language": "web"
+  },
+  "rules": {
+    "executionValidation": [
+      "Every HTML code input uses source_checks and at least one authored source check",
+      "HTML-only exercises do not require Judge0 or stdout tests",
+      "Hands-on HTML exercises use index.html in the web workspace"
+    ],
+    "pedagogy": [
+      "Every technical topic should create a visible browser-preview result",
+      "Teach semantic HTML before CSS or JavaScript",
+      "Accessibility requirements should be introduced as normal HTML practice, not as a separate afterthought"
+    ]
+  }
+}

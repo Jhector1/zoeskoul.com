@@ -100,12 +100,13 @@ function capabilityEnabled(value: unknown): boolean {
     return Boolean(value && typeof value === "object" && (value as { enabled?: unknown }).enabled === true);
 }
 
-function topicAllowsExplicitPythonEntryFile(args: {
+function topicAllowsExplicitWorkspaceEntryFile(args: {
     topic: TopicQualityInput;
     exercise: ManifestCodeInput;
     expectedEntryFile?: string;
 }): boolean {
-    if (args.topic.seed.profileId !== "python") return false;
+    // Alternate entry files are valid only for real file-capable workspaces.
+    // The profile default still governs single-file lessons.
     const entryFilePath = normalizeText(args.exercise.workspace?.entryFilePath);
     if (!entryFilePath || entryFilePath === args.expectedEntryFile) return false;
 
@@ -476,7 +477,7 @@ export function buildCurriculumQualityReport(args: {
                 .filter(Boolean)
                 .join("\n");
 
-            const explicitPythonEntryFileAllowed = topicAllowsExplicitPythonEntryFile({
+            const explicitWorkspaceEntryFileAllowed = topicAllowsExplicitWorkspaceEntryFile({
                 topic,
                 exercise,
                 expectedEntryFile,
@@ -486,7 +487,7 @@ export function buildCurriculumQualityReport(args: {
                 expectedEntryFile &&
                 starterText &&
                 !starterText.includes(expectedEntryFile) &&
-                !explicitPythonEntryFileAllowed
+                !explicitWorkspaceEntryFileAllowed
             ) {
                 addIssue(issues, {
                     code: "EXPECTED_ENTRY_FILE_MISSING",
@@ -504,7 +505,7 @@ export function buildCurriculumQualityReport(args: {
                 expectedEntryFile &&
                 exercise.workspace?.entryFilePath &&
                 exercise.workspace.entryFilePath !== expectedEntryFile &&
-                !explicitPythonEntryFileAllowed
+                !explicitWorkspaceEntryFileAllowed
             ) {
                 addIssue(issues, {
                     code: "WORKSPACE_ENTRY_FILE_LEAK",

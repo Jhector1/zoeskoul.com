@@ -16,6 +16,7 @@
     }
   },
   "scripts": {
+    "prebuild": "pnpm --filter @zoeskoul/practice-checks build",
     "build": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
     "test": "vitest run --root ../.. packages/curriculum-profiles/src"

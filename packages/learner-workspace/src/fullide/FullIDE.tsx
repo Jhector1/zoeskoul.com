@@ -33,7 +33,9 @@ import { CodeRunnerRuntime, ExecutionBackend } from "@zoeskoul/learner-workspace
 import { mergeTerminalSnapshotIntoWorkspace } from "@zoeskoul/learner-workspace/lib/projects/mergeTerminalSnapshotIntoWorkspace";
 import {FullIDEServices, resolveFullIDEServices} from "@zoeskoul/learner-workspace/ide/fullide/services";
 import { resolveLearnerWorkspacePresentation } from "@zoeskoul/learner-workspace/fullide/workspacePresentation";
-import { resolveExternalWorkspaceApplyKey, resolveReadyWorkspaceReplacementRevision } from "@zoeskoul/learner-workspace/ide/fullide/externalWorkspaceControl";
+import { resolveExternalWorkspaceApplyKey, resolveReadyWorkspaceReplacementRevision,
+    workspaceControlledContentKey,
+} from "@zoeskoul/learner-workspace/ide/fullide/externalWorkspaceControl";
 import { buildFullIdeSessionRemountKey } from "./sessionRemountKey";
 import type { EditorSplitPlacement } from "@zoeskoul/learner-workspace/runner/types";
 import {
@@ -266,6 +268,27 @@ function FullIDEInner({
         : null;
     const [workspaceFileSelectionVersion, setWorkspaceFileSelectionVersion] =
         useState(0);
+    const lastCommittedWorkspaceActiveFileIdRef = useRef(workspaceActiveFileId);
+
+    /**
+     * Signal Monaco only after the workspace reducer has committed the active file.
+     * Explorer/tab click handlers must not bump this version before openFile /
+     * setActiveFileId commits, otherwise CodeRunner can replace the editor using
+     * the previous file while the tab/header already show the new selection.
+     */
+    useEffect(() => {
+        if (
+            lastCommittedWorkspaceActiveFileIdRef.current ===
+            workspaceActiveFileId
+        ) {
+            return;
+        }
+
+        lastCommittedWorkspaceActiveFileIdRef.current =
+            workspaceActiveFileId;
+        setWorkspaceFileSelectionVersion((version) => version + 1);
+    }, [workspaceActiveFileId]);
+
     const currentWorkspaceRef = useRef(currentWorkspace);
 
     useEffect(() => {
@@ -560,7 +583,6 @@ function FullIDEInner({
     );
     const handleOpenWorkspaceFile = useCallback(
         (id: string) => {
-            setWorkspaceFileSelectionVersion((version) => version + 1);
             actions.openFile(id);
         },
         [actions],
@@ -588,7 +610,6 @@ function FullIDEInner({
     const handleSelectWorkspaceTab = useCallback(
         (id: string | null) => {
             if (!id) return;
-            setWorkspaceFileSelectionVersion((version) => version + 1);
             actions.setActiveFileId(id);
         },
         [actions],
@@ -1134,13 +1155,22 @@ export default function FullIDE(props: FullIDEProps) {
         onUserWorkspaceMutation: markNextWorkspaceChangeAsUser,
     });
 
+    /**
+     * Controlled hydration owns semantic workspace content, not local IDE presentation.
+     *
+     * File selection, tabs, expanded folders, and splitter width are local presentation
+     * state. Using the full notify key here lets a stale parent snapshot immediately
+     * overwrite a learner's Explorer/tab selection, which makes a newly selected file
+     * appear to require a second click. Explicit replacement revisions remain fully
+     * authoritative below.
+     */
     const externalWorkspaceControlKey = useMemo(
-        () => workspaceNotifyKey(externalWorkspace),
+        () => workspaceControlledContentKey(externalWorkspace),
         [externalWorkspace],
     );
     const hasExternalWorkspaceProp = typeof externalWorkspace !== "undefined";
     const initialWorkspaceControlKey = useMemo(
-        () => workspaceNotifyKey(initialWorkspace),
+        () => workspaceControlledContentKey(initialWorkspace),
         [initialWorkspace],
     );
     const externalWorkspaceApplyKey = useMemo(
@@ -1207,10 +1237,15 @@ export default function FullIDE(props: FullIDEProps) {
         () => workspaceNotifyKey(workspace.derived.currentWorkspace),
         [workspace.derived.currentWorkspace],
     );
+    const currentWorkspaceControlKey = useMemo(
+        () => workspaceControlledContentKey(workspace.derived.currentWorkspace),
+        [workspace.derived.currentWorkspace],
+    );
     const externalWorkspaceRef = useRef(externalWorkspace);
     const initialWorkspaceRef = useRef(initialWorkspace);
     const currentWorkspaceJsonRef = useRef(currentWorkspaceJson);
     const currentWorkspaceNotifyKeyRef = useRef(currentWorkspaceNotifyKey);
+    const currentWorkspaceControlKeyRef = useRef(currentWorkspaceControlKey);
 
     useLayoutEffect(() => {
         externalWorkspaceRef.current = externalWorkspace;
@@ -1220,7 +1255,12 @@ export default function FullIDE(props: FullIDEProps) {
     useEffect(() => {
         currentWorkspaceJsonRef.current = currentWorkspaceJson;
         currentWorkspaceNotifyKeyRef.current = currentWorkspaceNotifyKey;
-    }, [currentWorkspaceJson, currentWorkspaceNotifyKey]);
+        currentWorkspaceControlKeyRef.current = currentWorkspaceControlKey;
+    }, [
+        currentWorkspaceControlKey,
+        currentWorkspaceJson,
+        currentWorkspaceNotifyKey,
+    ]);
 
     useLayoutEffect(() => {
         if (!hasExternalWorkspaceProp) return;
@@ -1232,6 +1272,7 @@ export default function FullIDE(props: FullIDEProps) {
             externalWorkspaceRef.current ?? initialWorkspaceRef.current ?? null;
 
         const nextNotifyKey = workspaceNotifyKey(nextWorkspace);
+        const nextControlKey = workspaceControlledContentKey(nextWorkspace);
 
         lastAppliedExternalWorkspaceJsonRef.current = applyKey;
         clearPendingUserWorkspaceMutation();
@@ -1239,7 +1280,7 @@ export default function FullIDE(props: FullIDEProps) {
         if (nextWorkspace) {
             if (
                 typeof externalWorkspaceRevision !== "undefined" ||
-                nextNotifyKey !== currentWorkspaceNotifyKeyRef.current
+                nextControlKey !== currentWorkspaceControlKeyRef.current
             ) {
                 /**
                  * This hydration is parent-controlled/programmatic.
@@ -1276,7 +1317,7 @@ export default function FullIDE(props: FullIDEProps) {
     const readyWorkspaceReplacementRevision = resolveReadyWorkspaceReplacementRevision({
         revision: externalWorkspaceRevision,
         requestedWorkspaceKey: externalWorkspaceControlKey,
-        committedWorkspaceKey: currentWorkspaceNotifyKey,
+        committedWorkspaceKey: currentWorkspaceControlKey,
     });
 
     useEffect(() => {

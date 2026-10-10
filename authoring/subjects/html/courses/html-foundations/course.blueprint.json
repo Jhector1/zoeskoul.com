@@ -1,0 +1,64 @@
+{
+  "subjectSlug": "html",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "html-browser-workspace",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "title": "HTML Foundations",
+  "description": "A hands-on beginner HTML course that teaches page structure, text, links, images, lists, tables, semantic layout, forms, metadata, and accessibility through a live browser preview.",
+  "level": "beginner",
+  "audience": [
+    "absolute beginners",
+    "students starting web development",
+    "programming students who want browser fundamentals",
+    "learners preparing for CSS and JavaScript"
+  ],
+  "goals": [
+    "Build valid HTML documents from scratch",
+    "Use semantic elements to structure page content",
+    "Create links, images, lists, tables, and accessible forms",
+    "Use metadata and accessibility attributes correctly",
+    "Build a complete single-page website in the ZoeSkoul browser workspace"
+  ],
+  "teachingStyle": {
+    "tone": "friendly, visual, practical, beginner-safe, and build-first",
+    "quizWeight": 0.25,
+    "projectWeight": 0.4,
+    "codeInputWeight": 0.6
+  },
+  "constraints": {
+    "moduleCount": 6,
+    "topicsPerModuleMin": 4,
+    "topicsPerModuleMax": 4,
+    "moduleSlugFormat": "<subjectSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<subjectSlug>-module-<number>-<short-section-role>",
+    "prefixFormat": "html_module_<number>"
+  },
+  "courseSlug": "html-foundations",
+  "trackSlug": "web-development",
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser-web-preview",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "HTML editor",
+      "output panel": "browser preview",
+      "run button": "Preview"
+    },
+    "notes": [
+      "Use fixedLanguage web and recipeType source_checks for HTML code_input exercises.",
+      "Use index.html as the Course 1 entry file.",
+      "Every technical topic should connect source code to a visible preview change.",
+      "Do not require CSS or JavaScript in HTML Foundations.",
+      "Use source checks that allow harmless whitespace and formatting differences.",
+      "Keep Modules 1-5 at three teaching topics plus one module project; keep Module 6 as one cumulative capstone section/topic to satisfy the canonical capstone contract."
+    ]
+  },
+  "modulePolicies": [
+    {
+      "moduleNumber": 2,
+      "workspaceProfileId": "browser-web-files-runner"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ export const PROGRAMMING_LANGUAGES = [
     "c",
     "cpp",
     "bash",
+    "web",
 ] as const;
 
 export type ProgrammingLanguage = (typeof PROGRAMMING_LANGUAGES)[number];
@@ -185,14 +186,28 @@ export type SemanticProgrammingExpected = {
     solutionCode?: string;
 };
 
+export type SourceProgrammingExpected = {
+    kind: "code_input";
+    strategy: "programming";
+    language: ProgrammingLanguage;
+    checkMode: "source";
+    tests: [];
+    semanticChecks: [];
+    workspaceExpectations?: ProgrammingWorkspaceExpectations;
+    terminalExpectations?: TerminalExpectations;
+    hiddenShellCheck?: HiddenShellCheck;
+    solutionCode?: string;
+};
+
 export type ProgrammingExpected =
     | StdoutProgrammingExpected
-    | SemanticProgrammingExpected;
+    | SemanticProgrammingExpected
+    | SourceProgrammingExpected;
 
 export type ProgrammingExpectedInput = {
     kind?: "code_input";
     language?: ProgrammingLanguage;
-    checkMode?: "stdout" | "semantic";
+    checkMode?: "stdout" | "semantic" | "source";
     stdin?: string;
     stdout?: string;
     match?: ProgrammingStdoutMatchMode;
@@ -232,6 +247,27 @@ export function makeProgrammingExpected(
 ): ProgrammingExpected {
     const kind = "code_input" as const;
     const checkMode = input.checkMode ?? "stdout";
+
+    if (checkMode === "source") {
+        return {
+            kind,
+            strategy: "programming",
+            language: input.language ?? "web",
+            checkMode: "source",
+            tests: [],
+            semanticChecks: [],
+            ...(input.workspaceExpectations
+                ? { workspaceExpectations: input.workspaceExpectations }
+                : {}),
+            ...(input.terminalExpectations
+                ? { terminalExpectations: input.terminalExpectations }
+                : {}),
+            ...(input.hiddenShellCheck
+                ? { hiddenShellCheck: input.hiddenShellCheck }
+                : {}),
+            solutionCode: input.solutionCode,
+        };
+    }
 
     if (checkMode === "semantic") {
         return {

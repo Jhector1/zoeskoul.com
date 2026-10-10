@@ -17,7 +17,7 @@ import { buildCourseQualityReportFromArtifacts } from "./buildCourseQualityRepor
 const subjectSlug = "python--course-quality-aggregation-test--draft";
 const reportRoot = path.join(
     getRepoRoot(),
-    ".curriculum-drafts",
+    ".curriculum-build",
     "python",
     "reports",
     subjectSlug,

@@ -1,0 +1,22 @@
+{
+  "catalog": {
+    "slug": "web",
+    "order": 25,
+    "title": "Web Development",
+    "defaultSubjectSlug": "html",
+    "description": "Hands-on web development beginning with HTML, followed by styling, browser programming, APIs, and full-stack projects.",
+    "imageAlt": "Web development catalog cover",
+    "status": "active",
+    "subjectSlugs": [
+      "html"
+    ],
+    "meta": {
+      "family": "web-development",
+      "featured": true
+    }
+  },
+  "subjectSlugs": [
+    "html"
+  ],
+  "defaultSubjectSlug": "html"
+}

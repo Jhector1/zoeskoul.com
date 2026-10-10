@@ -189,11 +189,11 @@ Course-specific examples:
 
 Flags:
   --resume                 Skip topics that already have completed draft artifacts
-  --draft-only             Compile course output into .curriculum-drafts only
+  --draft-only             Compile course output into .curriculum-build only
   --rebuild-from-drafts    Rebuild draft outputs without AI
   --upgrade-drafts         Reserved for schema-only draft upgrades
   --prefer-current-draft-output
-                           For rebuild mode, use current .curriculum-drafts subject/messages output as source of truth
+                           For rebuild mode, use current .curriculum-build subject/messages output as source of truth
   --prefer-reports         For rebuild mode, use saved report drafts as source of truth
   --no-sync-reports        For rebuild mode, do not write rebuild-source/report snapshots
   --force                  Allow publish/publish-auto to overwrite an existing subject release
@@ -329,7 +329,7 @@ function getCourseBlueprintPath(resolvedCourseSlug) {
 
 function draftSubjectRootExists(slug) {
   return existsSync(
-      path.join(root, ".curriculum-drafts", "subjects", slug),
+      path.join(root, ".curriculum-build", "subjects", slug),
   );
 }
 
@@ -424,7 +424,7 @@ function collectLifecycleFiles(basePath) {
 
 function snapshotCourseDraft(resolvedCourseSlug) {
   const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
-  const draftRoot = path.join(root, ".curriculum-drafts", subjectSlug);
+  const draftRoot = path.join(root, ".curriculum-build", subjectSlug);
   const roots = [];
 
   const subjectRoot = path.join(draftRoot, "subjects", draftSubjectSlug);
@@ -620,7 +620,7 @@ function publishedMessagesRoot() {
 function draftMessageLocaleRoots(draftSubjectSlug) {
   const messagesRoot = path.join(
       root,
-      ".curriculum-drafts",
+      ".curriculum-build",
       subjectSlug,
       "messages",
   );
@@ -712,7 +712,7 @@ function prunePublishedCourseExtras(resolvedCourseSlug, resolvedLiveSubjectSlug)
   const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
   const draftSubjectRoot = path.join(
       root,
-      ".curriculum-drafts",
+      ".curriculum-build",
       subjectSlug,
       "subjects",
       draftSubjectSlug,
@@ -849,7 +849,7 @@ function assertDraftPublishedParity(resolvedCourseSlug, resolvedLiveSubjectSlug)
   const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
   const draftSubjectRoot = path.join(
       root,
-      ".curriculum-drafts",
+      ".curriculum-build",
       subjectSlug,
       "subjects",
       draftSubjectSlug,
@@ -1082,9 +1082,9 @@ function backupRoot() {
 
 function courseDraftPaths(draftSubjectSlug) {
   return {
-    subject: path.join(root, ".curriculum-drafts", subjectSlug, "subjects", draftSubjectSlug),
-    messages: path.join(root, ".curriculum-drafts", subjectSlug, "messages", "en", "subjects", draftSubjectSlug),
-    reports: path.join(root, ".curriculum-drafts", subjectSlug, "reports", draftSubjectSlug),
+    subject: path.join(root, ".curriculum-build", subjectSlug, "subjects", draftSubjectSlug),
+    messages: path.join(root, ".curriculum-build", subjectSlug, "messages", "en", "subjects", draftSubjectSlug),
+    reports: path.join(root, ".curriculum-build", subjectSlug, "reports", draftSubjectSlug),
   };
 }
 

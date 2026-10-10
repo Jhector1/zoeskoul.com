@@ -1,0 +1,31 @@
+{
+  "subjectSlug": "html",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "accessPolicy": "paid",
+  "courseOrder": [
+    "html-foundations"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "html-foundations",
+    "courseSlug": "html-foundations",
+    "channel": "draft"
+  },
+  "versioning": {
+    "family": "html",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "html-foundations",
+      "title": "HTML Foundations",
+      "order": 1,
+      "path": "courses/html-foundations/course.spec.json",
+      "status": "draft"
+    }
+  ]
+}

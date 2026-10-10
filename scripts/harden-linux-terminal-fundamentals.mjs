@@ -264,7 +264,7 @@ function terminalReminderForExercise(exercise) {
 }
 
 function ensureTerminalExerciseEnterReminders() {
-  const draftRoot = path.join(root, ".curriculum-drafts/linux");
+  const draftRoot = path.join(root, ".curriculum-build/linux");
   const subjectRoot = path.join(
     draftRoot,
     "subjects/linux--linux-terminal-fundamentals--draft",
@@ -357,7 +357,7 @@ function ensureTerminalExerciseEnterReminders() {
 }
 
 function removeOptionalDraftArtifacts() {
-  const draftRoot = path.join(root, ".curriculum-drafts/linux");
+  const draftRoot = path.join(root, ".curriculum-build/linux");
   if (!fs.existsSync(draftRoot)) return;
 
   const visit = (directory) => {

@@ -38,11 +38,8 @@ type BackupResult = {
 
 const tabs: Array<{ key: TabKey; label: string }> = [
   { key: "overview", label: "Overview" },
-  { key: "bundle", label: "Bundle JSON" },
-  { key: "messages", label: "Messages JSON" },
-  { key: "sketches", label: "Sketches" },
-  { key: "exercises", label: "Exercises" },
-  { key: "files", label: "Starter/Solution" },
+  { key: "bundle", label: "Bundle JSON (read-only)" },
+  { key: "messages", label: "Messages JSON (read-only)" },
   { key: "project", label: "Project Flow" },
   { key: "validation", label: "Validation" },
 ];
@@ -560,7 +557,7 @@ export default function CurriculumDraftEditor() {
     if (dirtyBundle || dirtyMessages) {
       const proceed = window.confirm(
         source === "draft"
-          ? "You have unsaved changes. Draft preview reads the last saved .curriculum-drafts files. Save first for the most accurate preview. Continue anyway?"
+          ? "Local editor state differs from the compiled build. Recompile canonical .curriculum-drafts source before relying on this preview. Continue anyway?"
           : "You have unsaved changes. Generated preview reads topics.generated.ts. Save and run Gen manifests first for the most accurate preview. Continue anyway?",
       );
       if (!proceed) return;
@@ -601,7 +598,7 @@ export default function CurriculumDraftEditor() {
       window.open(websiteHref(previewUrl), "_blank", "noopener,noreferrer");
       setStatus(
         source === "draft"
-          ? "Opened draft QA preview from saved .curriculum-drafts files. Progress persistence is off; reload the preview after saving changes."
+          ? "Opened build QA preview from .curriculum-build. Progress persistence is off; recompile canonical source to refresh this preview."
           : "Opened generated QA preview with progress persistence off. Run Gen manifests first if you changed draft files.",
       );
     } catch (err) {
@@ -663,7 +660,7 @@ export default function CurriculumDraftEditor() {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-950">
       <div className="border-b border-amber-200 bg-amber-50 px-6 py-3 text-sm text-amber-950">
-        <span className="font-semibold">Local dev draft editor</span> — saves update <span className="font-mono">.curriculum-drafts</span> directly. Use <span className="font-semibold">Backup draft</span> when you want a manual snapshot.
+        <span className="font-semibold">Local curriculum build QA</span> — reads generated <span className="font-mono">.curriculum-build</span> artifacts. Canonical editable topic source lives in <span className="font-mono">.curriculum-drafts</span>.
       </div>
 
       <div className="grid min-h-[calc(100vh-45px)] grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)_360px]">
@@ -730,7 +727,7 @@ export default function CurriculumDraftEditor() {
               </details>
               <div className="mt-3 rounded-xl bg-white/70 p-2">
                 Add this to <span className="font-mono">apps/web/.env.local</span> if needed:<br />
-                <span className="font-mono">DEV_CURRICULUM_DRAFT_ROOT=/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts</span>
+                <span className="font-mono">DEV_CURRICULUM_BUILD_ROOT=/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-build</span>
               </div>
             </div>
           ) : null}
@@ -740,7 +737,7 @@ export default function CurriculumDraftEditor() {
           <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h1 className="text-lg font-bold">Curriculum Draft Editor</h1>
+                <h1 className="text-lg font-bold">Curriculum Build QA</h1>
                 <p className="mt-1 max-w-4xl truncate font-mono text-xs text-slate-500">
                   {loadedTopic ? `${loadedTopic.paths.bundle} · ${loadedTopic.paths.messages}` : "Choose a topic from the left sidebar."}
                 </p>
@@ -748,15 +745,6 @@ export default function CurriculumDraftEditor() {
               <div className="flex flex-wrap gap-2">
                 <button type="button" onClick={() => void reloadCurrentTopic()} disabled={loading || !selectedTopic} className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-50 disabled:opacity-40">
                   {loading ? "Loading…" : "Load"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => void backupDraft()}
-                  disabled={backupRunning || !selectedCatalog || !selectedSubject}
-                  title="Back up the currently saved subject draft and its messages"
-                  className="rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-950 hover:bg-amber-100 disabled:opacity-40"
-                >
-                  {backupRunning ? "Backing up…" : "Backup draft"}
                 </button>
                 <button type="button" onClick={() => previewLoadedTopic("draft")} disabled={!loadedTopic} className="rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white disabled:opacity-40">Preview Draft</button>
                 <button type="button" onClick={() => previewLoadedTopic("generated")} disabled={!loadedTopic} className="rounded-xl border border-indigo-200 px-3 py-2 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 disabled:opacity-40">Preview Generated</button>
@@ -788,7 +776,7 @@ export default function CurriculumDraftEditor() {
           </div>
 
           {!loadedTopic ? (
-            <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500">Load a topic to begin editing.</div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500">Load a compiled topic to inspect its generated build artifacts.</div>
           ) : null}
 
           {loadedTopic && tab === "overview" ? (
@@ -808,8 +796,8 @@ export default function CurriculumDraftEditor() {
             </section>
           ) : null}
 
-          {loadedTopic && tab === "bundle" ? <JsonEditor title="topic.bundle.json" value={bundleText} onChange={setBundleText} onSave={saveBundle} disabled={loading || Boolean(bundleParse.error)} error={bundleParse.error} /> : null}
-          {loadedTopic && tab === "messages" ? <JsonEditor title="messages JSON" value={messagesText} onChange={setMessagesText} onSave={saveMessages} disabled={loading || Boolean(messagesParse.error)} error={messagesParse.error} /> : null}
+          {loadedTopic && tab === "bundle" ? <JsonEditor title="topic.bundle.json" value={bundleText} onChange={setBundleText} onSave={saveBundle} disabled={true} error={bundleParse.error} /> : null}
+          {loadedTopic && tab === "messages" ? <JsonEditor title="messages JSON" value={messagesText} onChange={setMessagesText} onSave={saveMessages} disabled={true} error={messagesParse.error} /> : null}
 
           {loadedTopic && tab === "sketches" ? (
             <SketchesEditor

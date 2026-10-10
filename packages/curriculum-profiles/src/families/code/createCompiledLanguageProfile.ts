@@ -217,13 +217,15 @@ export function createCompiledLanguageProfile(args: {
                 buildArgs.exercise.starterCode,
             ).map((file, index) => ({
                 ...file,
-                content: file.path === entryFilePath
-                    ? starterCodeTag
-                    : starterFileContentMessageTag({
-                        messageBase,
-                        filePath: file.path,
-                        index,
-                    }),
+                content: file.encoding === "base64"
+                    ? ""
+                    : file.path === entryFilePath
+                      ? starterCodeTag
+                      : starterFileContentMessageTag({
+                          messageBase,
+                          filePath: file.path,
+                          index,
+                      }),
                 language: file.language ?? args.language,
                 isEntry: file.path === entryFilePath,
                 entry: file.path === entryFilePath,
@@ -234,13 +236,15 @@ export function createCompiledLanguageProfile(args: {
                 buildArgs.exercise.solutionCode,
             ).map((file, index, files) => ({
                 ...file,
-                content: file.path === entryFilePath && files.length === 1
-                    ? solutionCodeTag
-                    : solutionFileContentMessageTag({
-                        messageBase,
-                        filePath: file.path,
-                        index,
-                    }),
+                content: file.encoding === "base64"
+                    ? ""
+                    : file.path === entryFilePath && files.length === 1
+                      ? solutionCodeTag
+                      : solutionFileContentMessageTag({
+                          messageBase,
+                          filePath: file.path,
+                          index,
+                      }),
                 language: file.language ?? args.language,
                 isEntry: file.path === entryFilePath,
                 entry: file.path === entryFilePath,

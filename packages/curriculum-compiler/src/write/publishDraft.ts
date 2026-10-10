@@ -2,16 +2,16 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import {
   getBackupRoot,
-  getDraftCatalogRoot,
+  getBuildCatalogRoot,
   getBackupSubjectManifestPath,
   getBackupTopicBundlePath,
   getBackupTopicMessagesPath,
-  getDraftSubjectMessagesPath,
-  getDraftMessagesRoot,
-  getDraftSubjectManifestPath,
-  getDraftSubjectRoot,
-  getDraftTopicBundlePath,
-  getDraftTopicMessagesPath,
+  getBuildSubjectMessagesPath,
+  getBuildMessagesRoot,
+  getBuildSubjectManifestPath,
+  getBuildSubjectRoot,
+  getBuildTopicBundlePath,
+  getBuildTopicMessagesPath,
   getLiveSubjectMessagesRoot,
   getSubjectMessagesPath,
   getSubjectManifestPath,
@@ -174,10 +174,10 @@ export async function publishDraftToLive(args: {
     courseSlug: args.courseSlug,
     liveSubjectSlug: args.liveSubjectSlug,
   });
-  const draftSubjectRoot = getDraftSubjectRoot(args.draftSubjectSlug);
-  const draftMessagesRoot = getDraftMessagesRoot(args.draftSubjectSlug);
+  const draftSubjectRoot = getBuildSubjectRoot(args.draftSubjectSlug);
+  const draftMessagesRoot = getBuildMessagesRoot(args.draftSubjectSlug);
 
-  const draftManifestPath = getDraftSubjectManifestPath(args.draftSubjectSlug);
+  const draftManifestPath = getBuildSubjectManifestPath(args.draftSubjectSlug);
   const liveManifestPath = getSubjectManifestPath(args.liveSubjectSlug);
 
   if (!(await pathExists(draftManifestPath))) {
@@ -217,7 +217,7 @@ export async function publishDraftToLive(args: {
 
         const topicId = topicDir.name;
 
-        const draftBundlePath = getDraftTopicBundlePath(
+        const draftBundlePath = getBuildTopicBundlePath(
             args.draftSubjectSlug,
             moduleDir.name,
             topicId,
@@ -269,7 +269,7 @@ export async function publishDraftToLive(args: {
 
       if (!(await pathExists(draftSubjectMessagesDir))) continue;
 
-      const draftSubjectJsonPath = getDraftSubjectMessagesPath(
+      const draftSubjectJsonPath = getBuildSubjectMessagesPath(
           locale,
           args.draftSubjectSlug,
       );
@@ -313,7 +313,7 @@ export async function publishDraftToLive(args: {
 
           const topicId = file.name.replace(/\.json$/, "");
 
-          const draftMessagePath = getDraftTopicMessagesPath(
+          const draftMessagePath = getBuildTopicMessagesPath(
               locale,
               args.draftSubjectSlug,
               moduleDir.name,

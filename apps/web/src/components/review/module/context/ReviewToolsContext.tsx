@@ -192,88 +192,94 @@ export function reconcileProtectedCodeInputWorkspace(args: {
   if (!args.previous) return null;
   if (!args.incoming) return args.previous;
 
-  return mergeMissingWorkspaceFiles({
+  const merged = mergeMissingWorkspaceFiles({
     base: args.previous,
     source: args.incoming,
   });
+
+  const pathMap = (workspace: WorkspaceStateV2) => {
+    const nodes = workspace.nodes as any[];
+    const byId = new Map(
+      nodes.map((node) => [String(node?.id ?? ""), node]),
+    );
+
+    const pathOf = (node: any) => {
+      const parts = [String(node?.name ?? "")];
+      let parentId =
+        node?.parentId == null ? null : String(node.parentId);
+
+      while (parentId) {
+        const parent = byId.get(parentId);
+        if (!parent) break;
+        parts.unshift(String(parent.name ?? ""));
+        parentId =
+          parent.parentId == null ? null : String(parent.parentId);
+      }
+
+      return parts.filter(Boolean).join("/");
+    };
+
+    return new Map(
+      nodes
+        .filter((node) => node?.kind === "file")
+        .map((node) => [pathOf(node), node] as const),
+    );
+  };
+
+  const incomingFiles = pathMap(args.incoming);
+  const mergedFiles = pathMap(merged);
+
+  let changed = false;
+  const replacements = new Map<string, any>();
+
+  for (const [path, incomingFile] of incomingFiles) {
+    const binary = incomingFile?.binary;
+    if (
+      binary?.encoding !== "base64" ||
+      typeof binary.data !== "string" ||
+      binary.data.length === 0
+    ) {
+      continue;
+    }
+
+    const current = mergedFiles.get(path);
+    if (!current) continue;
+
+    const sameBinary =
+      current.binary?.encoding === "base64" &&
+      current.binary.data === binary.data &&
+      current.binary.mimeType === binary.mimeType;
+
+    if (sameBinary && String(current.content ?? "") === "") {
+      continue;
+    }
+
+    changed = true;
+    replacements.set(String(current.id), {
+      ...current,
+      content: "",
+      binary: { ...binary },
+      updatedAt: incomingFile.updatedAt ?? current.updatedAt,
+    });
+  }
+
+  if (!changed) return merged;
+
+  return {
+    ...merged,
+    nodes: merged.nodes.map((node: any) =>
+      replacements.get(String(node?.id ?? "")) ?? node
+    ),
+  };
 }
 
 function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
-  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-    return JSON.stringify(workspace ?? null);
-  }
-
-  const folderPathById = new Map<string, string>();
-
-  let changed = true;
-  while (changed) {
-    changed = false;
-
-    for (const node of workspace.nodes as any[]) {
-      if (!node || node.kind !== "folder") continue;
-
-      const id = String(node.id ?? "");
-      if (!id || folderPathById.has(id)) continue;
-
-      const name = String(node.name ?? "");
-      const parentId = node.parentId == null ? null : String(node.parentId);
-      if (parentId && !folderPathById.has(parentId)) continue;
-
-      const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
-      folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
-      changed = true;
-    }
-  }
-
-  const nodePath = (node: any) => {
-    const name = String(node?.name ?? "");
-    const parentId = node?.parentId == null ? null : String(node.parentId);
-    const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
-    return parentPath ? `${parentPath}/${name}` : name;
-  };
-
-  const files = (workspace.nodes as any[])
-    .filter((node) => node?.kind === "file")
-    .map((node) => ({
-      path: nodePath(node),
-      content: String(node.content ?? ""),
-    }))
-    .sort((a, b) => a.path.localeCompare(b.path));
-
-  const folders = (workspace.nodes as any[])
-    .filter((node) => node?.kind === "folder")
-    .map((node) => nodePath(node))
-    .sort((a, b) => a.localeCompare(b));
-
-  const activeNode = (workspace.nodes as any[]).find(
-    (node) => node?.kind === "file" && node.id === workspace.activeFileId,
-  );
-  const entryNode = (workspace.nodes as any[]).find(
-    (node) => node?.kind === "file" && node.id === workspace.entryFileId,
-  );
-  const openTabPaths = (workspace.openTabs ?? [])
-    .map((id) => (workspace.nodes as any[]).find((node) => node?.kind === "file" && node.id === id))
-    .filter(Boolean)
-    .map((node) => nodePath(node))
-    .sort((a, b) => a.localeCompare(b));
-  const expandedPaths = (workspace.expanded ?? [])
-    .map((id) => (workspace.nodes as any[]).find((node) => node?.kind === "folder" && node.id === id))
-    .filter(Boolean)
-    .map((node) => nodePath(node))
-    .sort((a, b) => a.localeCompare(b));
-
-  return JSON.stringify({
-    version: workspace.version,
-    language: workspace.language ?? null,
-    activePath: activeNode ? nodePath(activeNode) : null,
-    entryPath: entryNode ? nodePath(entryNode) : null,
-    openTabs: openTabPaths,
-    expanded: expandedPaths,
-    stdin: workspace.stdin ?? "",
-    leftPct: workspace.leftPct ?? null,
-    folders,
-    files,
-  });
+  /**
+   * Protected registration conflicts are semantic content conflicts.
+   * Active tab, open tabs, expanded folders and splitter width are local view
+   * state and must never make a stale lesson snapshot look like new content.
+   */
+  return workspaceRegistrationKeyOf(workspace);
 }
 
 function workspaceRegistrationKeyOf(
@@ -314,10 +320,26 @@ function workspaceRegistrationKeyOf(
 
   const files = (workspace.nodes as any[])
     .filter((node) => node?.kind === "file")
-    .map((node) => ({
-      path: nodePath(node),
-      content: String(node.content ?? ""),
-    }))
+    .map((node) => {
+      const binary =
+        node?.binary?.encoding === "base64" &&
+        typeof node.binary.data === "string" &&
+        node.binary.data.length > 0
+          ? {
+              encoding: "base64",
+              data: node.binary.data,
+              mimeType: node.binary.mimeType ?? "",
+              sizeBytes: node.binary.sizeBytes ?? null,
+              checksum: node.binary.checksum ?? null,
+            }
+          : null;
+
+      return {
+        path: nodePath(node),
+        content: binary ? "" : String(node.content ?? ""),
+        binary,
+      };
+    })
     .sort((left, right) => left.path.localeCompare(right.path));
 
   const folders = (workspace.nodes as any[])
@@ -365,9 +387,16 @@ function workspaceHasAnyNonBlankFile(
         return false;
     }
 
-    return workspace.nodes.some((node) => {
-        if (node.kind !== "file") return false;
-        return String(node.content ?? "").trim().length > 0;
+    return workspace.nodes.some((node: any) => {
+        if (node?.kind !== "file") return false;
+        return (
+            (
+                node.binary?.encoding === "base64" &&
+                typeof node.binary.data === "string" &&
+                node.binary.data.length > 0
+            ) ||
+            String(node.content ?? "").trim().length > 0
+        );
     });
 }
 function firstNonBlank(...values: Array<string | null | undefined>) {

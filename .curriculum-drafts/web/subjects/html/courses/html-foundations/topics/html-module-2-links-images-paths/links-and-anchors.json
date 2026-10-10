@@ -1,0 +1,347 @@
+{
+  "title": "Links and Anchors",
+  "summary": "Create links with anchor elements and useful link text.",
+  "minutes": 16,
+  "sketchBlocks": [
+    {
+      "id": "anchor-anatomy",
+      "title": "A link needs a destination and useful text",
+      "bodyMarkdown": "The anchor element creates a link. Its `href` attribute stores the destination, while the text between the tags tells the learner what the link does.\n\n```html\n<a href=\"https://example.com/advising\">Advising resources</a>\n```\n\n`href` is an attribute on the opening `<a>` tag. The visible phrase **Advising resources** is better than vague text such as \"click here\" because it explains the destination.",
+      "cardTitle": "Source Becomes a Page"
+    },
+    {
+      "id": "fragment-links",
+      "title": "Fragment links jump to an id on the same page",
+      "bodyMarkdown": "A fragment destination begins with `#` and matches an `id` value elsewhere in the document.\n\n```html\n<a href=\"#schedule\">Jump to the schedule</a>\n\n<h2 id=\"schedule\">Tutoring schedule</h2>\n<p>Drop-in tutoring runs Monday through Thursday.</p>\n```\n\nLine by line: **First**, the anchor points to `#schedule`, which names a location on the current page. **Second**, the `<h2>` creates that destination by using `id=\"schedule\"`. **Third**, the paragraph supplies the content that belongs under the heading. The browser can now connect the link to the matching target without loading another HTML file.",
+      "cardTitle": "Read the Markup"
+    },
+    {
+      "id": "link-destinations-and-text",
+      "title": "Choose destinations and link text deliberately",
+      "bodyMarkdown": "A full web address such as `https://example.org/...` points to an external destination. A fragment such as `#clubs` points within the current page.\n\n```html\n<p>\n  <a href=\"#clubs\">Jump to student clubs</a>\n</p>\n\n<p>\n  <a href=\"https://example.org/library-guide\">Visit the library guide</a>\n</p>\n```\n\nLine by line: **First**, the opening paragraph groups a same-page navigation link. **Second**, that anchor uses a fragment destination so the browser stays on the current document. **Third**, the next paragraph groups a separate external link. **Fourth**, the final anchor uses a complete web address, so the destination does not depend on the current file's folder. Meaningful anchor text tells the learner why each destination is useful.",
+      "cardTitle": "Build Meaning First"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "links-sc-1",
+      "kind": "single_choice",
+      "title": "Identify the link destination",
+      "prompt": "Which part of an anchor element tells the browser where the link goes?",
+      "hint": "Think about the job performed by each part of the opening anchor tag.",
+      "help": {
+        "concept": "An anchor separates navigation information from the clickable label.",
+        "hint_1": "Look inside the opening tag for the piece that stores the destination.",
+        "hint_2": "Eliminate choices that represent elements or unrelated identifiers."
+      },
+      "options": [
+        "href",
+        "h1",
+        "li",
+        "title"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "links-sc-2",
+      "kind": "single_choice",
+      "title": "Choose a same-page link",
+      "prompt": "Which href points to an element whose id is `resources` on the current page?",
+      "hint": "A same-page fragment starts with a hash character.",
+      "help": {
+        "concept": "Fragment links pair href='#name' with id='name'.",
+        "hint_1": "The hash tells the browser this is a fragment identifier.",
+        "hint_2": "The characters after # must match the target id."
+      },
+      "options": [
+        "resources",
+        "#resources",
+        "/resources",
+        "https://resources"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "links-mc-1",
+      "kind": "multi_choice",
+      "title": "Recognize useful links",
+      "prompt": "Which practices make an HTML link understandable and functional? Choose all that apply.",
+      "hint": "Think about both the destination and what the learner sees.",
+      "help": {
+        "concept": "A useful link combines a valid destination with descriptive text.",
+        "hint_1": "Fragment links also need a matching id target.",
+        "hint_2": "Vague link text removes useful context."
+      },
+      "options": [
+        "Give the anchor meaningful visible text.",
+        "Use href for the destination.",
+        "Make every link text say only 'click here'.",
+        "Match a fragment href with a target id."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "links-dr-1",
+      "kind": "drag_reorder",
+      "title": "Build a fragment link and target",
+      "prompt": "Arrange the lines so the link appears before the heading it targets.",
+      "hint": "The link can appear earlier on the page, then the matching id marks its target.",
+      "help": {
+        "concept": "Fragment navigation connects href='#resources' to id='resources'.",
+        "hint_1": "Place the jump link before the destination in this exercise.",
+        "hint_2": "The paragraph belongs below the Resources heading."
+      },
+      "tokens": [
+        "<h2 id=\"resources\">Resources</h2>",
+        "<a href=\"#resources\">Jump to resources</a>",
+        "<p>Explore tutoring and advising.</p>"
+      ],
+      "correctOrder": [
+        "<a href=\"#resources\">Jump to resources</a>",
+        "<h2 id=\"resources\">Resources</h2>",
+        "<p>Explore tutoring and advising.</p>"
+      ]
+    },
+    {
+      "id": "links-fb-1",
+      "kind": "fill_blank_choice",
+      "title": "Complete an href",
+      "prompt": "Choose the attribute name that stores the destination.",
+      "hint": "Focus on the part of an opening anchor tag that pairs a name with a URL value.",
+      "help": {
+        "concept": "Anchor destinations are stored as an attribute-value pair in the opening tag.",
+        "hint_1": "The blank is the attribute name immediately before the URL.",
+        "hint_2": "Choose the navigation-related attribute rather than an element name."
+      },
+      "template": "<a [blank1]=\"https://example.com/help\">Help center</a>",
+      "choices": [
+        "href",
+        "id",
+        "h2",
+        "li"
+      ],
+      "correctValue": "href"
+    },
+    {
+      "id": "links-fb-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete a fragment destination",
+      "prompt": "Choose the href value that targets `id=\"contact\"` on this page.",
+      "hint": "A fragment destination adds # before the target id.",
+      "help": {
+        "concept": "Same-page fragment href values begin with #.",
+        "hint_1": "The target id is contact.",
+        "hint_2": "Combine the hash with the id value."
+      },
+      "template": "<a href=\"[blank1]\">Contact section</a>",
+      "choices": [
+        "contact",
+        "#contact",
+        "/contact",
+        "contact.html"
+      ],
+      "correctValue": "#contact"
+    },
+    {
+      "id": "links-ci-1",
+      "kind": "code_input",
+      "title": "Link to the real About page",
+      "prompt": "Use the Explorer to confirm `about.html` is part of the site. In `index.html`, make the `About me` anchor navigate to that page. Use Preview and click the link to verify the second page opens.",
+      "hint": "The destination is a page beside the current file.",
+      "help": {
+        "concept": "An anchor can connect one HTML document to another document in the same website.",
+        "hint_1": "Keep the visible link text and add the destination to the opening anchor tag.",
+        "hint_2": "The target page is already present beside the home page in Explorer."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+          "path": "index.html",
+          "message": "Link About me to the provided About page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html"
+        ]
+      }
+    },
+    {
+      "id": "links-ci-2",
+      "kind": "code_input",
+      "title": "Link to a page inside a folder",
+      "prompt": "The site now includes `projects/robotics.html`. In `index.html`, connect the `Robotics project` anchor to that real nested page. Click it in Preview after you edit the link.",
+      "hint": "The destination sits inside the projects folder.",
+      "help": {
+        "concept": "Anchor destinations can include folder segments when another page is nested inside the website.",
+        "hint_1": "Read the file tree from the site root to the robotics page.",
+        "hint_2": "Keep the existing About link unchanged while you connect the project link."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+          "path": "index.html",
+          "message": "Connect the Robotics project link to the nested project page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html",
+          "projects/robotics.html"
+        ]
+      }
+    },
+    {
+      "id": "links-ci-3",
+      "kind": "code_input",
+      "title": "Add the return link on About",
+      "prompt": "Open `about.html` from the Explorer. Make `Back to profile` navigate to the home page. Preview the About page, then use the link to return to the profile.",
+      "hint": "Both HTML files are in the same folder.",
+      "help": {
+        "concept": "Multi-page sites usually provide links in both directions so learners can navigate between related pages.",
+        "hint_1": "Edit the anchor in the About page, not the home page.",
+        "hint_2": "The destination is the site's entry HTML file beside the About page."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+          "path": "about.html",
+          "message": "Add a working return link on the About page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "about.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html"
+        ]
+      }
+    }
+  ]
+}

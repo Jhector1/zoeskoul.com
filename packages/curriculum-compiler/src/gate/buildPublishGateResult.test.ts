@@ -8,7 +8,7 @@ import { buildPublishGateResult } from "./buildPublishGateResult.js";
 const subjectSlug = "python--publish-gate-quality-test--draft";
 const reportRoot = path.join(
     getRepoRoot(),
-    ".curriculum-drafts",
+    ".curriculum-build",
     "python",
     "reports",
     subjectSlug,

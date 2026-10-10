@@ -2,8 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
-    getDraftCatalogRoot,
-    getDraftMessagesRoot,
+    getBuildCatalogRoot,
+    getBuildMessagesRoot,
     getRepoRoot,
 } from "@zoeskoul/curriculum-core";
 import { getProfileServices } from "@zoeskoul/curriculum-profiles";
@@ -145,7 +145,7 @@ function readTopicMessages(args: {
 }): { messages?: JsonObject; messagePath: string } {
     const subjectFolderName = path.basename(args.subjectRoot);
     const messagePath = path.join(
-        getDraftMessagesRoot(subjectFolderName),
+        getBuildMessagesRoot(subjectFolderName),
         "en",
         "subjects",
         subjectFolderName,
@@ -215,7 +215,7 @@ function findTopicBundlePaths(subjectRoot: string): string[] {
 }
 
 function findDraftSubjectRoots(): string[] {
-    const draftsRoot = path.join(repoRoot, ".curriculum-drafts");
+    const draftsRoot = path.join(repoRoot, ".curriculum-build");
     if (!fs.existsSync(draftsRoot)) return [];
 
     const subjectRoots: string[] = [];
@@ -576,7 +576,7 @@ describe("draft subject code_input goldens", () => {
     it("keeps Python Data and Functions try-it-yourself copy and multi-file/file rules aligned", () => {
         const subjectRoot = resolveDraftSubjectRoot();
         const messageRoot = path.join(
-            getDraftMessagesRoot(path.basename(subjectRoot)),
+            getBuildMessagesRoot(path.basename(subjectRoot)),
             "en",
             "subjects",
             path.basename(subjectRoot),

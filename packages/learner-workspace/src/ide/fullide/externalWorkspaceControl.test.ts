@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { resolveExternalWorkspaceApplyKey, resolveReadyWorkspaceReplacementRevision, shouldHydrateWorkspaceSnapshot } from "./externalWorkspaceControl";
+import { resolveExternalWorkspaceApplyKey, resolveReadyWorkspaceReplacementRevision, shouldHydrateWorkspaceSnapshot, workspaceControlledContentKey } from "./externalWorkspaceControl";
 
 describe("authoritative mounted workspace hydration", () => {
     it("reapplies a previously hydrated starter after learner edits", () => {
@@ -53,5 +53,100 @@ describe("resolveExternalWorkspaceApplyKey", () => {
 
         expect(sameCommandWithDifferentParentSnapshot).toBe(first);
         expect(nextCommand).not.toBe(first);
+    });
+});
+
+describe("workspaceControlledContentKey", () => {
+    const baseWorkspace = {
+        version: 2 as const,
+        language: "web",
+        activeFileId: "index",
+        entryFileId: "index",
+        openTabs: ["index"],
+        stdin: "",
+        expanded: ["images"],
+        leftPct: 26,
+        nodes: [
+            {
+                id: "index",
+                kind: "file",
+                name: "index.html",
+                parentId: null,
+                content: "<h1>Hello</h1>",
+            },
+            {
+                id: "profile",
+                kind: "file",
+                name: "profile.png",
+                parentId: "images",
+                content: "",
+                binary: {
+                    encoding: "base64",
+                    data: "iVBORw0KGgo=",
+                    mimeType: "image/png",
+                    sizeBytes: 8,
+                },
+            },
+        ],
+    };
+
+    it("ignores local presentation-only file selection and chrome state", () => {
+        const first = workspaceControlledContentKey(baseWorkspace);
+        const presentationOnly = workspaceControlledContentKey({
+            ...baseWorkspace,
+            activeFileId: "profile",
+            openTabs: ["index", "profile"],
+            expanded: [],
+            leftPct: 41,
+        });
+
+        expect(presentationOnly).toBe(first);
+    });
+
+    it("tracks text and binary payload changes", () => {
+        const first = workspaceControlledContentKey(baseWorkspace);
+        const textChanged = workspaceControlledContentKey({
+            ...baseWorkspace,
+            nodes: baseWorkspace.nodes.map((node) =>
+                node.id === "index"
+                    ? { ...node, content: "<h1>Changed</h1>" }
+                    : node,
+            ),
+        });
+        const binaryChanged = workspaceControlledContentKey({
+            ...baseWorkspace,
+            nodes: baseWorkspace.nodes.map((node) =>
+                node.id === "profile"
+                    ? {
+                          ...node,
+                          binary: {
+                              ...node.binary,
+                              data: "different-base64",
+                          },
+                      }
+                    : node,
+            ),
+        });
+
+        expect(textChanged).not.toBe(first);
+        expect(binaryChanged).not.toBe(first);
+    });
+
+    it("tracks semantic workspace changes such as entry file and stdin", () => {
+        const first = workspaceControlledContentKey(baseWorkspace);
+
+        expect(
+            workspaceControlledContentKey({
+                ...baseWorkspace,
+                entryFileId: "profile",
+            }),
+        ).not.toBe(first);
+
+        expect(
+            workspaceControlledContentKey({
+                ...baseWorkspace,
+                stdin: "input",
+            }),
+        ).not.toBe(first);
     });
 });

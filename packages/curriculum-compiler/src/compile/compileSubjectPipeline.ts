@@ -15,9 +15,9 @@ import {
     getSubjectShape,
 } from "@zoeskoul/curriculum-profiles";
 import {
-    getDraftReportsRoot,
-    getDraftTopicBundlePath,
-    getDraftTopicMessagesPath,
+    getBuildReportsRoot,
+    getBuildTopicBundlePath,
+    getBuildTopicMessagesPath,
 } from "@zoeskoul/curriculum-core";
 import { buildSubjectManifestFromPlan } from "../emit/buildSubjectManifestFromPlan.js";
 import { buildSubjectMessagesFromPlan } from "../emit/buildSubjectMessagesFromPlan.js";
@@ -42,6 +42,7 @@ import {
     extractGenerationDiagnostics,
 } from "../reports/topicGenerationAudit.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
+import { findTopicSourceDraft, writeTopicSourceDraft } from "../drafts/topicSourceDraft.js";
 import { buildCurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { extractRetryIssues } from "./topicRetryContext.js";
@@ -86,7 +87,7 @@ function getTopicReportDir(args: {
     topicId: string;
 }) {
     return path.join(
-        getDraftReportsRoot(args.subjectSlug),
+        getBuildReportsRoot(args.subjectSlug),
         `module${args.moduleOrder}`,
         args.topicId,
     );
@@ -106,7 +107,7 @@ async function isTopicAlreadyCompiled(args: {
     }
 
     const moduleDir = `module${args.moduleOrder}`;
-    const bundlePath = getDraftTopicBundlePath(
+    const bundlePath = getBuildTopicBundlePath(
         args.subjectSlug,
         moduleDir,
         args.topicId,
@@ -117,7 +118,7 @@ async function isTopicAlreadyCompiled(args: {
     }
 
     for (const locale of args.locales) {
-        const messagesPath = getDraftTopicMessagesPath(
+        const messagesPath = getBuildTopicMessagesPath(
             locale,
             args.subjectSlug,
             moduleDir,
@@ -190,7 +191,7 @@ async function writeRetrySummary(args: {
         retryCodes: string[];
     }>;
 }) {
-    const dir = getDraftReportsRoot(args.subjectSlug);
+    const dir = getBuildReportsRoot(args.subjectSlug);
     await fs.mkdir(dir, { recursive: true });
     await fs.writeFile(
         path.join(dir, "retry-summary.json"),
@@ -211,14 +212,22 @@ export async function compileSubjectPipeline(args: {
     blueprint: CourseBlueprint;
     plan: CoursePlan;
     spec?: CourseSpec | null;
-    provider: AiProvider;
+    provider?: AiProvider;
     translationProvider?: AiProvider;
     onProgress?: CompileProgressCallback;
     resume?: boolean;
     validation?: CompileValidationSkipOptions;
 }) {
     const shape = getSubjectShape(args.blueprint.profileId);
-    const translationProvider = args.translationProvider ?? args.provider;
+    const noExternalAiProvider: AiProvider = {
+        async generateJson() {
+            throw new Error(
+                "No AI provider is configured and at least one canonical topic source draft is missing.",
+            );
+        },
+    };
+    const effectiveProvider = args.provider ?? noExternalAiProvider;
+    const translationProvider = args.translationProvider ?? effectiveProvider;
     const profileServices = getProfileServices(args.blueprint.profileId);
     const validationState = resolveCompileValidationState(args.validation);
 
@@ -344,17 +353,27 @@ export async function compileSubjectPipeline(args: {
             topic: node.topic,
         });
 
+        const courseSlug = args.blueprint.courseSlug;
+        const persistedSource = courseSlug
+            ? await findTopicSourceDraft({
+                  subjectSlug: args.blueprint.subjectSlug,
+                  courseSlug,
+                  topicId: node.topic.topicId,
+              })
+            : null;
+        const sourceDraft = persistedSource?.draft;
+        const maxTopicRetries = sourceDraft ? 0 : MAX_TOPIC_RETRIES;
         const retryCodes: string[] = [];
         let finalAttempts = 0;
         let previousError: unknown = null;
 
-        for (let attempt = 0; attempt <= MAX_TOPIC_RETRIES; attempt += 1) {
+        for (let attempt = 0; attempt <= maxTopicRetries; attempt += 1) {
             finalAttempts = attempt + 1;
             const retryContext: TopicRetryContext | undefined =
                 attempt > 0 && previousError instanceof Error
                     ? {
                           attempt,
-                          maxRetries: MAX_TOPIC_RETRIES,
+                          maxRetries: maxTopicRetries,
                           previousErrorCode: errorCode(previousError),
                           previousErrorMessage: previousError.message,
                           qualityIssues: extractRetryIssues(previousError),
@@ -389,7 +408,7 @@ export async function compileSubjectPipeline(args: {
                 args.onProgress?.({
                     current: completedTopics,
                     total: totalTopics,
-                    stage: attempt > 0 ? `retrying topic draft (${attempt}/${MAX_TOPIC_RETRIES})` : "generating topic draft",
+                    stage: attempt > 0 ? `retrying topic draft (${attempt}/${maxTopicRetries})` : sourceDraft ? "loading canonical topic source draft" : "generating topic draft",
                     topicId: node.topic.topicId,
                     moduleSlug: node.module.moduleSlug,
                     sectionSlug: node.section.sectionSlug,
@@ -397,12 +416,30 @@ export async function compileSubjectPipeline(args: {
 
                 let generationAttempt;
                 try {
-                    generationAttempt = await generateTopicAuthoringDraftAttempt(args.provider, {
-                        seed,
-                        locale: sourceLocale,
-                        shape,
-                        retry: retryContext,
-                    });
+                    generationAttempt = sourceDraft
+                        ? {
+                            prompt: {
+                                system: "canonical-topic-source-draft",
+                                user: node.topic.topicId,
+                            },
+                            generation: {
+                                provider: "source-draft",
+                                model: "checked-in-json",
+                                temperature: 0,
+                                seed: 0,
+                                schemaName: "TopicAuthoringDraft" as const,
+                                strictSchema: true,
+                                rawText: JSON.stringify(sourceDraft),
+                                parsedJson: sourceDraft,
+                                value: sourceDraft,
+                            },
+                        }
+                        : await generateTopicAuthoringDraftAttempt(effectiveProvider, {
+                              seed,
+                              locale: sourceLocale,
+                              shape,
+                              retry: retryContext,
+                          });
                 } catch (error) {
                     const diagnostics = extractGenerationDiagnostics(error);
                     const prompt =
@@ -428,7 +465,7 @@ export async function compileSubjectPipeline(args: {
                         seed,
                         generation: diagnostics.generation,
                         retryAttempt: attempt,
-                        maxRetries: MAX_TOPIC_RETRIES,
+                        maxRetries: maxTopicRetries,
                     });
                     attemptArtifacts.hashes = buildTopicAttemptHashes({
                         seed,
@@ -457,7 +494,7 @@ export async function compileSubjectPipeline(args: {
                     seed,
                     generation: generationAttempt.generation,
                     retryAttempt: attempt,
-                    maxRetries: MAX_TOPIC_RETRIES,
+                    maxRetries: maxTopicRetries,
                 });
                 attemptArtifacts.hashes = buildTopicAttemptHashes({
                     seed,
@@ -476,11 +513,12 @@ export async function compileSubjectPipeline(args: {
                 });
 
                 const evaluation = await evaluateTopicDraft({
-                    provider: args.provider,
+                    provider: effectiveProvider,
                     seed,
                     rawDraft,
                     profileServices,
                     skipSemantic: validationState.semantic.skipped,
+                    mode: sourceDraft ? "source-strict" : "generated",
                 });
 
                 const draft = evaluation.draft;
@@ -676,6 +714,25 @@ export async function compileSubjectPipeline(args: {
                     }
                 }
 
+                if (!sourceDraft && courseSlug) {
+                    await writeTopicSourceDraft({
+                        subjectSlug: args.blueprint.subjectSlug,
+                        courseSlug,
+                        moduleSlug: node.module.moduleSlug,
+                        topicId: node.topic.topicId,
+                        draft,
+                        metadata: {
+                            version: 1,
+                            origin: "generated",
+                            generatedAt: new Date().toISOString(),
+                            generator: {
+                                provider: generationAttempt.generation.provider,
+                                model: generationAttempt.generation.model,
+                            },
+                        },
+                    });
+                }
+
                 const sourceMessages = buildMessagesFromDraft({
                     shape,
                     seed,
@@ -800,7 +857,7 @@ export async function compileSubjectPipeline(args: {
                 });
 
                 const canRetry =
-                    attempt < MAX_TOPIC_RETRIES &&
+                    attempt < maxTopicRetries &&
                     isRetryableTopicValidationError(error);
 
                 if (canRetry) {
@@ -843,7 +900,9 @@ export async function compileSubjectPipeline(args: {
                 if (isRetryableTopicValidationError(error)) {
                     throw new Error(
                         [
-                            `Retryable topic generation failed after ${attempt + 1} attempt(s).`,
+                            sourceDraft
+                                ? `Canonical topic compilation failed after ${attempt + 1} attempt(s).`
+                                : `Retryable topic generation failed after ${attempt + 1} attempt(s).`,
                             `Topic: ${node.module.moduleSlug}/${node.section.sectionSlug}/${node.topic.topicId}`,
                             `Last error code: ${error.code}`,
                             "",

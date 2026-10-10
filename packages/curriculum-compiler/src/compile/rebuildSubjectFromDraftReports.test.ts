@@ -6,9 +6,9 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 const tempDirs: string[] = [];
 
 vi.mock("@zoeskoul/curriculum-core", () => ({
-    getDraftReportsRoot: (subjectSlug: string) =>
+    getBuildReportsRoot: (subjectSlug: string) =>
         path.join(tempDirs.at(-1) ?? os.tmpdir(), "reports", subjectSlug),
-    getDraftTopicBundlePath: (
+    getBuildTopicBundlePath: (
         subjectSlug: string,
         moduleDir: string,
         topicId: string,
@@ -23,7 +23,7 @@ vi.mock("@zoeskoul/curriculum-core", () => ({
             topicId,
             "topic.bundle.json",
         ),
-    getDraftTopicMessagesPath: (
+    getBuildTopicMessagesPath: (
         locale: string,
         subjectSlug: string,
         moduleDir: string,

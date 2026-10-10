@@ -143,9 +143,7 @@ export async function compileCourse(args: {
               blueprint: target.blueprint,
               plan,
               spec: target.spec,
-              provider: args.provider ?? (() => {
-                  throw new Error("compileCourse requires a provider unless --rebuild-from-drafts is used");
-              })(),
+              provider: args.provider,
               translationProvider: args.translationProvider,
               onProgress: args.onProgress,
               resume: args.resume,

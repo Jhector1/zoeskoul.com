@@ -144,6 +144,19 @@
           "path": "subjects/haitian-creole/courses/haitian-creole-everyday-grammar/course.spec.json"
         }
       ]
+    },
+    {
+      "subjectSlug": "html",
+      "path": "subjects/html",
+      "courseOrder": [
+        "html-foundations"
+      ],
+      "courses": [
+        {
+          "courseSlug": "html-foundations",
+          "path": "subjects/html/courses/html-foundations/course.spec.json"
+        }
+      ]
     }
   ]
 }

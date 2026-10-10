@@ -925,6 +925,35 @@ async function validateCourseSpecFile(args: {
     return issues;
 }
 
+
+async function validateNoLearnerContentUnderAuthoring(args: {
+    authoringRoot: string;
+    subjectSlug: string;
+    courseSlugs?: string[];
+    issues: string[];
+}) {
+    const coursesRoot = path.join(
+        args.authoringRoot,
+        "subjects",
+        args.subjectSlug,
+        "courses",
+    );
+    if (!(await pathExists(coursesRoot))) return;
+
+    const courseSlugs = args.courseSlugs ?? (await fs.readdir(coursesRoot, { withFileTypes: true }))
+        .filter((entry) => entry.isDirectory())
+        .map((entry) => entry.name);
+
+    for (const courseSlug of courseSlugs) {
+        const contentRoot = path.join(coursesRoot, courseSlug, "content");
+        if (await pathExists(contentRoot)) {
+            args.issues.push(
+                `${contentRoot}: learner-facing topic content is forbidden under authoring; use .curriculum-drafts as the canonical editable source`,
+            );
+        }
+    }
+}
+
 export async function validateSubjectAuthoring(
     subjectSlug: string,
     options: ValidateSubjectAuthoringOptions = {},
@@ -1014,6 +1043,11 @@ export async function validateSubjectAuthoring(
         activeCourseSlugs: [...courseSlugsToValidate],
         issues,
     });
+    await validateNoLearnerContentUnderAuthoring({
+        authoringRoot,
+        subjectSlug,
+        issues,
+    });
 
     for (const courseSlug of courseSlugsToValidate) {
         issues.push(
@@ -1081,6 +1115,12 @@ export async function validateCourseAuthoring(
             subjectPlan: plan ?? undefined,
         })),
     );
+    await validateNoLearnerContentUnderAuthoring({
+        authoringRoot,
+        subjectSlug,
+        courseSlugs: [courseSlug],
+        issues,
+    });
 
     const resolvedPolicy = await resolveAuthoringPolicyChain({
         authoringRoot,

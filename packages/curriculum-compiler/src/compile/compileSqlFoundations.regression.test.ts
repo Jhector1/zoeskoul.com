@@ -2,9 +2,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
-    getDraftReportsRoot,
-    getDraftSubjectMessagesPath,
-    getDraftSubjectRoot,
+    getBuildReportsRoot,
+    getBuildSubjectMessagesPath,
+    getBuildSubjectRoot,
 } from "@zoeskoul/curriculum-core";
 import type {
     AiProvider,
@@ -15,10 +15,10 @@ import { buildPlanFromSpec } from "../spec/buildPlanFromSpec.js";
 import { compileSubjectPipeline } from "./compileSubjectPipeline.js";
 import { resolveAuthoringCompileTarget } from "./resolveAuthoringCompileTarget.js";
 
-const SQL_V2_DRAFT_ROOT = getDraftSubjectRoot("sql-v2");
-const SQL_V2_REPORT_ROOT = getDraftReportsRoot("sql-v2");
+const SQL_V2_DRAFT_ROOT = getBuildSubjectRoot("sql-v2");
+const SQL_V2_REPORT_ROOT = getBuildReportsRoot("sql-v2");
 const SQL_V2_MESSAGE_ROOT = path.dirname(
-    getDraftSubjectMessagesPath("en", "sql-v2"),
+    getBuildSubjectMessagesPath("en", "sql-v2"),
 );
 
 const provider: AiProvider = {

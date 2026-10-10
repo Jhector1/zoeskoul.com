@@ -12,7 +12,7 @@ function getReportsRootFromTopics(
 ) {
     const firstReportDir = topics[0]?.reportDir;
     if (!firstReportDir) {
-        return path.join(".curriculum-drafts", "reports", subjectSlug);
+        return path.join(".curriculum-build", "reports", subjectSlug);
     }
 
     return path.dirname(path.dirname(firstReportDir));

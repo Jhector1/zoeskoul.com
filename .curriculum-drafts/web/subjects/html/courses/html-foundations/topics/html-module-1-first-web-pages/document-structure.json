@@ -1,0 +1,262 @@
+{
+  "title": "The HTML Document Structure",
+  "summary": "Build the standard HTML document shell and understand which information belongs in head and which content belongs in body.",
+  "minutes": 16,
+  "sketchBlocks": [
+    {
+      "id": "document-shell",
+      "cardTitle": "Start with the Document",
+      "title": "A complete HTML page has a document-level structure",
+      "bodyMarkdown": "A browser page is more than the visible words inside it. A complete HTML **document** has a standard outer structure that identifies the document type, wraps the page in an `html` element, separates document information into `head`, and places visible page content in `body`. This structure gives the browser clear context before it renders the page.\n\nA small document shell looks like this:\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n  <head></head>\n  <body></body>\n</html>\n```\n\nRead it **line by line**. `<!DOCTYPE html>` tells the browser to use modern HTML. The opening `<html>` element wraps the document and `lang=\"en\"` identifies its primary language. The `head` holds information about the document, while the `body` holds content that belongs on the rendered page.\n\nIndentation makes the nesting easier for people to read, even though browsers can often parse less tidy markup. Building this shell correctly gives every later element a sensible home."
+    },
+    {
+      "id": "head-information",
+      "cardTitle": "Describe the Document",
+      "title": "The head stores information about the page",
+      "bodyMarkdown": "The **head** stores document information that helps the browser understand or describe the page rather than ordinary page content for the visitor. Two beginner essentials are a character encoding declaration and a page title. The encoding helps text display consistently, while the title names the document in browser surfaces such as the tab.\n\nFor example:\n\n```html\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Jordan's Portfolio</title>\n</head>\n```\n\nStep by step, `<head>` opens the document-information region, the `meta` element declares UTF-8 character encoding, and `<title>` provides the document title. None of these lines replaces the visible heading you might place in the body. A page title and an `h1` have different jobs.\n\nKeep this distinction clear: the head describes the document to the browser and related tools; the body contains the page content a visitor reads and interacts with."
+    },
+    {
+      "id": "body-content",
+      "cardTitle": "Put Content in the Body",
+      "title": "The body contains the page content the visitor sees",
+      "bodyMarkdown": "The **body** contains the document content that the browser renders as the page: headings, paragraphs, links, images, forms, and other visible or interactive structures. Once the document shell is in place, most of the HTML you write while building a simple page will live between `<body>` and `</body>`.\n\nHere is a complete worked example:\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Study Notes</title>\n  </head>\n  <body>\n    <h1>Study Notes</h1>\n    <p>Things I want to remember.</p>\n  </body>\n</html>\n```\n\nRead the structure line by line from the outside inward: document type, root element, head information, then body content. Notice that the text in the title and the text in the heading can be similar, but they serve different parts of the document. When your page behaves strangely, checking this outer structure is a useful first debugging habit."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "head-body-choice",
+      "kind": "single_choice",
+      "title": "Choose the right region",
+      "prompt": "Where should the main visible page heading normally go?",
+      "hint": "Decide whether the element describes the document or belongs to the rendered page content.",
+      "help": {
+        "concept": "The document separates browser-facing information from visitor-facing content.",
+        "hint_1": "Ask whether a visitor is expected to read the element as part of the page itself.",
+        "hint_2": "The region that holds rendered content is different from the region that holds metadata."
+      },
+      "options": [
+        "Inside the body",
+        "Inside the doctype",
+        "Inside the charset value",
+        "Before the html element"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "title-role-choice",
+      "kind": "single_choice",
+      "title": "Distinguish title from h1",
+      "prompt": "What is the main job of the title element in a beginner HTML document?",
+      "hint": "Think about document information that the browser uses outside the page's main content flow.",
+      "help": {
+        "concept": "The title names the document for browser surfaces and document metadata contexts.",
+        "hint_1": "Do not confuse the document title with the top-level visible heading in the body.",
+        "hint_2": "Choose the option about naming the document rather than creating body content."
+      },
+      "options": [
+        "It names the document for the browser.",
+        "It creates every visible paragraph.",
+        "It closes the body automatically.",
+        "It turns HTML into CSS."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "document-shell-multi",
+      "kind": "multi_choice",
+      "title": "Identify document-shell pieces",
+      "prompt": "Which items belong to the standard document structure introduced in this lesson?",
+      "hint": "Select pieces that establish or describe the whole HTML document.",
+      "help": {
+        "concept": "A complete shell includes an outer document declaration and nested document regions.",
+        "hint_1": "Look for the root and major document sections you saw in the worked example.",
+        "hint_2": "Do not select technologies that belong to later layers of web development."
+      },
+      "options": [
+        "DOCTYPE declaration",
+        "html element",
+        "head element",
+        "SQL table"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "document-order",
+      "kind": "drag_reorder",
+      "title": "Order the outer structure",
+      "prompt": "Arrange these document pieces from outer/top-level setup toward visible page content.",
+      "hint": "Start with the declaration, then move through the root and document regions.",
+      "help": {
+        "concept": "HTML nesting gives document information and page content separate places.",
+        "hint_1": "The browser first receives the document declaration before it reaches nested content.",
+        "hint_2": "The visible content region comes after the document-information region in the standard shell."
+      },
+      "tokens": [
+        "DOCTYPE declaration",
+        "html element",
+        "head element",
+        "body element"
+      ],
+      "correctOrder": [
+        "DOCTYPE declaration",
+        "html element",
+        "head element",
+        "body element"
+      ]
+    },
+    {
+      "id": "head-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete the document region",
+      "prompt": "Choose the region that contains the document title and charset declaration.",
+      "hint": "Think about the non-content information grouped near the top of the document.",
+      "help": {
+        "concept": "One major region contains metadata and the document title before the rendered content begins.",
+        "hint_1": "The correct region is a sibling of the visible-content region inside html.",
+        "hint_2": "Use the document shell from the worked example to locate it."
+      },
+      "template": "The [blank1] element contains title and metadata information.",
+      "choices": [
+        "head",
+        "body",
+        "h1",
+        "p"
+      ],
+      "correctValue": "head"
+    },
+    {
+      "id": "body-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete the content region",
+      "prompt": "Choose the region where headings and paragraphs are rendered as page content.",
+      "hint": "Think about the section a visitor's visible content belongs inside.",
+      "help": {
+        "concept": "The page-content region contains headings, paragraphs, and later other visible structures.",
+        "hint_1": "It comes after the document-information region inside the root element.",
+        "hint_2": "Choose the region that wraps what the visitor reads on the page."
+      },
+      "template": "Visible page content belongs inside the [blank1] element.",
+      "choices": [
+        "body",
+        "head",
+        "meta",
+        "title"
+      ],
+      "correctValue": "body"
+    },
+    {
+      "id": "add-document-root",
+      "kind": "code_input",
+      "title": "Create the document root",
+      "prompt": "Start the page with a modern HTML doctype and wrap the existing content in an html element whose language is English.",
+      "hint": "Add the declaration before the root element, then place the existing head and body inside the root.",
+      "help": {
+        "concept": "The doctype and html root establish the outer document structure, while the lang attribute identifies the page language.",
+        "hint_1": "Keep head and body as children of the root element.",
+        "hint_2": "Check that the root has both an opening and closing tag and includes the language attribute."
+      },
+      "starterCode": "<head>\n  <title>Practice Page</title>\n</head>\n<body>\n  <h1>Practice Page</h1>\n</body>\n",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Practice Page</title>\n  </head>\n  <body>\n    <h1>Practice Page</h1>\n  </body>\n</html>\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "index.html",
+      "recipeType": "source_checks",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)^\\s*<!doctype\\s+html\\s*>",
+          "message": "Start index.html with the HTML doctype.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<html\\b[^>]*\\blang\\s*=\\s*[\\\"']en[\\\"'][^>]*>.*</html>",
+          "message": "Wrap the document in an html element with lang set to en.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "build-head-metadata",
+      "kind": "code_input",
+      "title": "Build the head",
+      "prompt": "Inside head, add a UTF-8 charset declaration and set the document title to **Learning HTML**. Leave the visible heading in body unchanged.",
+      "hint": "The charset is a meta element; the document name belongs between title tags.",
+      "help": {
+        "concept": "Head metadata helps the browser interpret and identify the document without becoming normal body content.",
+        "hint_1": "Add both pieces inside the existing head element.",
+        "hint_2": "Check the browser tab/title surface separately from the h1 shown in the page."
+      },
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n  </head>\n  <body>\n    <h1>My Practice Page</h1>\n  </body>\n</html>\n",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Learning HTML</title>\n  </head>\n  <body>\n    <h1>My Practice Page</h1>\n  </body>\n</html>\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "index.html",
+      "recipeType": "source_checks",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<head\\b[^>]*>.*<meta\\b[^>]*\\bcharset\\s*=\\s*[\\\"']?UTF-8[\\\"']?[^>]*>.*<title\\b[^>]*>\\s*Learning HTML\\s*</title>.*</head>",
+          "message": "Put a UTF-8 charset declaration and the Learning HTML title inside head.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "complete-document-shell",
+      "kind": "code_input",
+      "title": "Complete the page shell",
+      "prompt": "Complete the document so it has a doctype, html lang, head with UTF-8 and the title **About Maya**, plus a body containing an h1 **About Maya** and a paragraph **I am building web pages.**",
+      "hint": "Work from the outside in: document declaration, root, head information, then body content.",
+      "help": {
+        "concept": "A complete HTML document combines outer structure, head metadata, and visible body content in one nested page.",
+        "hint_1": "Keep the document title in head and the visible heading in body even though their text matches.",
+        "hint_2": "Use the preview to verify the h1 and paragraph, then Check Answer for the full source structure."
+      },
+      "starterCode": "<html>\n  <head>\n    <title>Untitled</title>\n  </head>\n  <body>\n  </body>\n</html>\n",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>About Maya</title>\n  </head>\n  <body>\n    <h1>About Maya</h1>\n    <p>I am building web pages.</p>\n  </body>\n</html>\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "index.html",
+      "recipeType": "source_checks",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)^\\s*<!doctype\\s+html\\s*>",
+          "message": "Add the HTML doctype at the top of the document.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<html\\b[^>]*\\blang\\s*=\\s*[\\\"']en[\\\"'][^>]*>.*</html>",
+          "message": "Set the html document language to en.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<head\\b[^>]*>.*<meta\\b[^>]*charset\\s*=\\s*[\\\"']?UTF-8[\\\"']?[^>]*>.*<title\\b[^>]*>\\s*About Maya\\s*</title>.*</head>",
+          "message": "Complete head with UTF-8 and the About Maya title.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<body\\b[^>]*>.*<h1\\b[^>]*>\\s*About Maya\\s*</h1>.*<p\\b[^>]*>\\s*I am building web pages\\.\\s*</p>.*</body>",
+          "message": "Put the About Maya heading and required paragraph inside body.",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ]
+}

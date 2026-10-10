@@ -30,6 +30,7 @@ type FixedTestsRecipe = Extract<ManifestRecipe, { type: "fixed_tests" }>;
 type SqlQueryRecipe = Extract<ManifestRecipe, { type: "sql_query" }>;
 type SemanticRecipe = Extract<ManifestRecipe, { type: "semantic" }>;
 type ShellTaskRecipe = Extract<ManifestRecipe, { type: "shell_task" }>;
+type SourceChecksRecipe = Extract<ManifestRecipe, { type: "source_checks" }>;
 
 function withWorkspaceExpectations<T extends object>(
     expected: T,
@@ -638,6 +639,28 @@ export function buildSqlQueryExpected(args: {
 }
 
 
+
+export function buildSourceChecksExpected(args: {
+    recipe: SourceChecksRecipe;
+    workspaceExpectations?: ManifestWorkspaceExpectations;
+    sourceChecks?: ManifestCodeInput["sourceChecks"];
+}): ProgrammingExpected & { sourceChecks?: unknown[] } {
+    const expected = makeProgrammingExpected({
+        kind: "code_input",
+        language: "web",
+        checkMode: "source",
+        workspaceExpectations: args.workspaceExpectations,
+        solutionCode: args.recipe.solutionCode,
+    });
+
+    return {
+        ...expected,
+        ...(Array.isArray(args.sourceChecks) && args.sourceChecks.length > 0
+            ? { sourceChecks: args.sourceChecks }
+            : {}),
+    };
+}
+
 export function buildShellTaskExpected(args: {
     recipe: ShellTaskRecipe;
     workspaceExpectations?: ManifestWorkspaceExpectations;
@@ -690,6 +713,12 @@ export function buildCodeInputExpected(
                 workspaceExpectations,
                 terminalExpectations: exercise.terminalExpectations,
                 hiddenShellCheck: exercise.hiddenShellCheck,
+                sourceChecks: exercise.sourceChecks,
+            });
+        case "source_checks":
+            return buildSourceChecksExpected({
+                recipe: exercise.recipe,
+                workspaceExpectations,
                 sourceChecks: exercise.sourceChecks,
             });
         default:
