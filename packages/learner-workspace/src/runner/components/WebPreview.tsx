@@ -12,6 +12,10 @@ function normalizePath(input: string) {
         .trim();
 }
 
+export function normalizeWebPreviewNavigationPath(input: unknown) {
+    return normalizePath(String(input ?? "")).replace(/^\/+/, "");
+}
+
 function dirname(p: string) {
     const clean = normalizePath(p);
     const idx = clean.lastIndexOf("/");
@@ -250,10 +254,17 @@ const DEFAULT_WEB_PREVIEW_URL = "/index.html";
 export default function WebPreview(props: {
     entries: WorkspaceSyncEntry[];
     title?: string;
+    /**
+     * Preferred initial document for reference/expected-result previews.
+     * Normal learner Preview omits this and keeps the existing index.html
+     * fallback. Navigation remains fully interactive after the initial load.
+     */
+    entryPath?: string;
 }) {
     const iframeRef = useRef<HTMLIFrameElement | null>(null);
+    const preferredEntryPath = normalizePath(props.entryPath ?? "");
     const [virtualPath, setVirtualPath] = useState(
-        DEFAULT_WEB_PREVIEW_URL.slice(1),
+        preferredEntryPath || DEFAULT_WEB_PREVIEW_URL.slice(1),
     );
     const [refreshRevision, setRefreshRevision] = useState(0);
 
@@ -262,15 +273,24 @@ export default function WebPreview(props: {
         [props.entries],
     );
 
+    /**
+     * entryPath is an initial/fallback document, not a controlled route.
+     * Once the learner navigates to another valid workspace HTML file, keep
+     * that virtual path even if the parent rebuilds the solution entries.
+     */
+
     useEffect(() => {
         if (htmlPaths.includes(virtualPath)) return;
 
         const nextPath =
+            (preferredEntryPath && htmlPaths.includes(preferredEntryPath)
+                ? preferredEntryPath
+                : null) ??
             (htmlPaths.includes("index.html") ? "index.html" : htmlPaths[0]) ??
             DEFAULT_WEB_PREVIEW_URL.slice(1);
 
         setVirtualPath(nextPath);
-    }, [htmlPaths, virtualPath]);
+    }, [htmlPaths, preferredEntryPath, virtualPath]);
 
     useEffect(() => {
         const onMessage = (event: MessageEvent) => {
@@ -283,10 +303,7 @@ export default function WebPreview(props: {
 
             if (data?.type !== "zoeskoul-web-preview:navigate") return;
 
-            const path = normalizePath(String(data.path ?? "")).replace(
-                /^\+/,
-                "",
-            );
+            const path = normalizeWebPreviewNavigationPath(data.path);
 
             if (!path || !htmlPaths.includes(path)) return;
             setVirtualPath(path);

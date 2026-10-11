@@ -14,6 +14,29 @@ export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved)
         (def as any).solutionFiles ??
         def.recipe?.solutionFiles;
 
+    /**
+     * Web Expected Result is a view of the canonical solution workspace, not a
+     * second rendering system. Keep solution ownership in curriculum and feed
+     * the same files into the shared WebPreview used by learner Preview.
+     *
+     * This object is presentation-only: it is never installed into the learner
+     * runtime workspace, Explorer, or Monaco editor.
+     */
+    const expectedWebPreview =
+        Array.isArray(solutionFiles) && solutionFiles.length > 0
+            ? {
+                  kind: "web_preview",
+                  entryPath:
+                      def.entryFile ??
+                      def.workspace?.entryFile ??
+                      def.workspace?.entryFilePath ??
+                      def.workspace?.mainFile ??
+                      def.workspace?.mainFilePath ??
+                      "index.html",
+                  files: solutionFiles,
+              }
+            : null;
+
     return makeCodeInputOut({
         archetype: def.id,
         id: args.id,
@@ -52,7 +75,7 @@ export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved)
             solutionCode: def.recipe?.solutionCode,
             ...(solutionFiles !== undefined ? { solutionFiles } : {}),
         } as any,
-        expectedExample: null,
+        expectedExample: expectedWebPreview as any,
         ideConfig: def.serviceOverrides ?? null,
     });
 };

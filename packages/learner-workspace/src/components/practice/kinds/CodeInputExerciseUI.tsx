@@ -15,6 +15,7 @@ import type { FileEntry, RunResult } from "../../../lib/code/types";
 import type { CodeFeedback } from "../../../lib/code/feedback/types";
 import { pickRunFeedbackFromResult } from "../../../lib/code/feedback/index";
 import { runViaApi } from "../../../lib/code/runClient";
+import WebPreview from "../../../runner/components/WebPreview";
 import type { CodeRunnerFrame } from "../../../runner/types";
 import { resolveEditableWorkspaceFileId } from "../../../runner/workspaceEditing";
 import { ExercisePrompt } from "./ExercisePromptBridge";
@@ -101,6 +102,35 @@ function ExpectedExampleCard({
     example: CodeExpectedExample;
 }) {
     const { t } = useCodeInputI18n();
+
+    const webExample = example as any;
+    if (webExample?.kind === "web_preview") {
+        const files = Array.isArray(webExample.files) ? webExample.files : [];
+        if (files.length < 1) return null;
+
+        return (
+            <details
+                className="ui-page-surface p-3"
+                data-testid="web-expected-result"
+            >
+                <summary className="cursor-pointer select-none font-semibold ui-text">
+                    {t("expectedResultTitle")}
+                </summary>
+                <div className="mt-3 h-[360px] min-h-[260px] overflow-hidden rounded-lg border border-black/10 bg-white dark:border-white/10">
+                    <WebPreview
+                        entries={files as any}
+                        entryPath={
+                            typeof webExample.entryPath === "string"
+                                ? webExample.entryPath
+                                : "index.html"
+                        }
+                        title={t("expectedResultTitle")}
+                    />
+                </div>
+            </details>
+        );
+    }
+
     if (example.kind === "terminal") {
         const blocks: Array<{ type: "label" | "body"; text: string }> = [];
 

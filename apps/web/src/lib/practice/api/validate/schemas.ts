@@ -112,7 +112,7 @@ const CodeInputAnswerSchema = z
     .object({
         kind: z.literal("code_input"),
         language: z
-            .enum(["python", "java", "javascript", "r", "c", "cpp", "bash", "sql"])
+            .enum(["python", "java", "javascript", "r", "c", "cpp", "bash", "sql", "web"])
             .optional(),
         code: z.string().optional(),
         source: z.string().optional(),
@@ -130,6 +130,19 @@ const CodeInputAnswerSchema = z
                         kind: z.literal("file").optional(),
                         path: z.string().min(1),
                         content: z.string(),
+                    }),
+                    // FullIDE exports supplied images and other binary assets as
+                    // flat WorkspaceSyncEntry payloads. Keep the API contract in
+                    // parity with @zoeskoul/code-contracts instead of forcing a
+                    // fake text `content` field onto binary files.
+                    z.object({
+                        kind: z.literal("file").optional(),
+                        path: z.string().min(1),
+                        encoding: z.literal("base64"),
+                        data: z.string(),
+                        mimeType: z.string().min(1),
+                        sizeBytes: z.number().int().nonnegative(),
+                        checksum: z.string().optional(),
                     }),
                 ]),
             )
