@@ -1,5 +1,6 @@
 "use client";
 
+import { resolveExerciseExplorerAvailability } from "./explorerAvailability";
 import { getLearnerWorkspaceEnv, getLearnerWorkspaceStaticConfig } from "@zoeskoul/learner-workspace/runtime/appRuntime";
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
@@ -252,9 +253,13 @@ function FullIDEInner({
         (count, node) => count + (node.kind === "file" ? 1 : 0),
         0,
     );
-    const explorerAvailable =
-        services.explorer.enabled &&
-        (!exerciseStateKey || learnerVisibleFileCount > 1);
+    const explorerAvailable = resolveExerciseExplorerAvailability({
+        explorerEnabled: services.explorer.enabled,
+        exerciseStateKey,
+        learnerVisibleFileCount,
+        canCreateFiles: state.policy.canCreateFiles,
+        maxFiles: state.policy.maxFiles,
+    });
     const [explorerCollapsed, setExplorerCollapsed] = useState(false);
     const [editorSplit, setEditorSplit] = useState<{
         fileId: string;

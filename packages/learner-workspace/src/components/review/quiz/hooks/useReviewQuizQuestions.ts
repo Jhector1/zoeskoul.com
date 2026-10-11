@@ -1,3 +1,4 @@
+import { withGrowingWorkspaceIdeConfig } from "../../../../lib/ide/growingWorkspaceIdeConfig";
 // src/components/review/quiz/hooks/useReviewQuizQuestions.ts
 import { useEffect, useMemo, useState } from "react";
 import type { ReviewQuestion, ReviewQuizSpec } from "@zoeskoul/curriculum-contracts/subjects/types";
@@ -122,7 +123,7 @@ function buildLocalProjectQuestions(args: {
       stepId,
       sourceStepId: stepId,
       exerciseKey: exerciseKey || stepId,
-      projectStepManifest: step,
+      projectStepManifest: withGrowingWorkspaceIdeConfig(step),
       carryFromPrev: Boolean(step?.carryFromPrev),
       fetch: {
         subject,
