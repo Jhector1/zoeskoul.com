@@ -618,29 +618,64 @@ function listRelativeFiles(basePath) {
 
 function canonicalPublishedSubjectRoot(resolvedLiveSubjectSlug) {
   const publishedSubjectsRoot = path.join(
-      root,
-      "packages",
-      "curriculum-registry",
-      "published",
-      "subjects",
+    root,
+    "packages",
+    "curriculum-registry",
+    "published",
+    "subjects",
   );
 
-  const candidates = [
-    path.join(publishedSubjectsRoot, subjectSlug, resolvedLiveSubjectSlug),
-    path.join(publishedSubjectsRoot, resolvedLiveSubjectSlug),
-  ].filter((candidate, index, all) => all.indexOf(candidate) === index);
+  const candidates = [];
+  const addCandidate = (candidate) => {
+    if (!candidates.includes(candidate)) candidates.push(candidate);
+  };
+
+  addCandidate(
+    path.join(
+      publishedSubjectsRoot,
+      subjectSlug,
+      resolvedLiveSubjectSlug,
+    ),
+  );
+  addCandidate(
+    path.join(
+      publishedSubjectsRoot,
+      resolvedLiveSubjectSlug,
+    ),
+  );
+
+  if (existsSync(publishedSubjectsRoot)) {
+    const catalogEntries = readdirSync(
+      publishedSubjectsRoot,
+      { withFileTypes: true },
+    )
+      .filter((entry) => entry.isDirectory())
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    for (const entry of catalogEntries) {
+      addCandidate(
+        path.join(
+          publishedSubjectsRoot,
+          entry.name,
+          resolvedLiveSubjectSlug,
+        ),
+      );
+    }
+  }
 
   const existing = candidates.filter((candidate) =>
     existsSync(path.join(candidate, "subject.manifest.json")),
   );
 
-  if (existing.length === 1) return existing[0];
+  if (existing.length === 1) {
+    return existing[0];
+  }
 
   if (existing.length === 0) {
     console.error(
-        `Published subject root not found for ${subjectSlug}/${resolvedLiveSubjectSlug}.`,
+      `Published subject root not found for ${subjectSlug}/${resolvedLiveSubjectSlug}.`,
     );
-    console.error(`Checked:`);
+    console.error("Checked:");
     for (const candidate of candidates) {
       console.error(`  ${candidate}`);
     }
@@ -648,8 +683,9 @@ function canonicalPublishedSubjectRoot(resolvedLiveSubjectSlug) {
   }
 
   console.error(
-      `Ambiguous published subject roots for ${subjectSlug}/${resolvedLiveSubjectSlug}:`,
+    `Published subject root is ambiguous for ${subjectSlug}/${resolvedLiveSubjectSlug}.`,
   );
+  console.error("Matched:");
   for (const candidate of existing) {
     console.error(`  ${candidate}`);
   }
@@ -697,28 +733,94 @@ function draftMessageLocaleRoots(draftSubjectSlug) {
 }
 
 function publishedMessageLocaleRoots(resolvedLiveSubjectSlug) {
-  const messagesRoot = publishedMessagesRoot();
-  if (!existsSync(messagesRoot)) return new Map();
+  const roots = new Map();
+  const messagesRoot = path.join(
+    root,
+    "packages",
+    "curriculum-registry",
+    "published",
+    "messages",
+  );
 
-  const result = new Map();
-  for (const entry of readdirSync(messagesRoot, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue;
-    if (entry.name !== "en") continue;
+  if (!existsSync(messagesRoot)) return roots;
 
-    const subjectMessages = path.join(
-        messagesRoot,
-        entry.name,
-        "subjects",
-        subjectSlug,
-        resolvedLiveSubjectSlug,
+  const locales = readdirSync(messagesRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  for (const locale of locales) {
+    const subjectsRoot = path.join(
+      messagesRoot,
+      locale.name,
+      "subjects",
     );
 
-    if (existsSync(subjectMessages)) {
-      result.set(entry.name, subjectMessages);
+    if (!existsSync(subjectsRoot)) continue;
+
+    const candidates = [];
+    const addCandidate = (candidate) => {
+      if (!candidates.includes(candidate)) candidates.push(candidate);
+    };
+
+    addCandidate(
+      path.join(
+        subjectsRoot,
+        subjectSlug,
+        resolvedLiveSubjectSlug,
+      ),
+    );
+    addCandidate(
+      path.join(
+        subjectsRoot,
+        resolvedLiveSubjectSlug,
+      ),
+    );
+
+    const catalogEntries = readdirSync(
+      subjectsRoot,
+      { withFileTypes: true },
+    )
+      .filter((entry) => entry.isDirectory())
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    for (const entry of catalogEntries) {
+      addCandidate(
+        path.join(
+          subjectsRoot,
+          entry.name,
+          resolvedLiveSubjectSlug,
+        ),
+      );
     }
+
+    const existing = candidates.filter((candidate) => {
+      if (!existsSync(candidate)) return false;
+
+      const subjectMessage = path.join(candidate, "subject.json");
+      if (existsSync(subjectMessage)) return true;
+
+      return readdirSync(candidate, { withFileTypes: true }).some(
+        (entry) => entry.isFile() || entry.isDirectory(),
+      );
+    });
+
+    if (existing.length === 0) continue;
+
+    if (existing.length > 1) {
+      console.error(
+        `Published message root is ambiguous for ${locale.name}/${subjectSlug}/${resolvedLiveSubjectSlug}.`,
+      );
+      console.error("Matched:");
+      for (const candidate of existing) {
+        console.error(`  ${candidate}`);
+      }
+      process.exit(1);
+    }
+
+    roots.set(locale.name, existing[0]);
   }
 
-  return result;
+  return roots;
 }
 
 function removeEmptyDirectories(basePath) {
