@@ -210,6 +210,7 @@ async function writeRetrySummary(args: {
 
 export async function compileSubjectPipeline(args: {
     blueprint: CourseBlueprint;
+    authoringSubjectSlug?: string;
     plan: CoursePlan;
     spec?: CourseSpec | null;
     provider?: AiProvider;
@@ -356,7 +357,7 @@ export async function compileSubjectPipeline(args: {
         const courseSlug = args.blueprint.courseSlug;
         const persistedSource = courseSlug
             ? await findTopicSourceDraft({
-                  subjectSlug: args.blueprint.subjectSlug,
+                  subjectSlug: (args.authoringSubjectSlug ?? args.blueprint.subjectSlug),
                   courseSlug,
                   topicId: node.topic.topicId,
               })

@@ -422,9 +422,58 @@ function collectLifecycleFiles(basePath) {
   return rows;
 }
 
+
+function resolveCourseBuildNamespace(resolvedCourseSlug) {
+  const blueprintPath = path.join(
+    root,
+    "authoring",
+    "subjects",
+    subjectSlug,
+    "courses",
+    resolvedCourseSlug,
+    "course.blueprint.json",
+  );
+
+  if (!existsSync(blueprintPath)) {
+    return subjectSlug;
+  }
+
+  const blueprint = JSON.parse(readFileSync(blueprintPath, "utf8"));
+  const profileId =
+    typeof blueprint?.profileId === "string"
+      ? blueprint.profileId.trim()
+      : "";
+
+  return profileId || subjectSlug;
+}
+
+function courseBuildRoot(resolvedCourseSlug) {
+  return path.join(
+    root,
+    ".curriculum-build",
+    resolveCourseBuildNamespace(resolvedCourseSlug),
+  );
+}
+
+function courseSlugFromDraftSubjectSlug(draftSubjectSlug) {
+  const prefix = `${subjectSlug}--`;
+  const suffix = "--draft";
+
+  if (
+    !draftSubjectSlug.startsWith(prefix) ||
+    !draftSubjectSlug.endsWith(suffix)
+  ) {
+    throw new Error(
+      `Cannot resolve course slug from draft subject ${draftSubjectSlug}`,
+    );
+  }
+
+  return draftSubjectSlug.slice(prefix.length, -suffix.length);
+}
+
 function snapshotCourseDraft(resolvedCourseSlug) {
   const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
-  const draftRoot = path.join(root, ".curriculum-build", subjectSlug);
+  const draftRoot = courseBuildRoot(resolvedCourseSlug);
   const roots = [];
 
   const subjectRoot = path.join(draftRoot, "subjects", draftSubjectSlug);
@@ -711,11 +760,9 @@ function pruneExtraPublishedFiles(draftRoot, publishedRoot, label) {
 function prunePublishedCourseExtras(resolvedCourseSlug, resolvedLiveSubjectSlug) {
   const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
   const draftSubjectRoot = path.join(
-      root,
-      ".curriculum-build",
-      subjectSlug,
-      "subjects",
-      draftSubjectSlug,
+    courseBuildRoot(resolvedCourseSlug),
+    "subjects",
+    draftSubjectSlug,
   );
   const liveSubjectRoot = canonicalPublishedSubjectRoot(resolvedLiveSubjectSlug);
 
@@ -1081,10 +1128,12 @@ function backupRoot() {
 }
 
 function courseDraftPaths(draftSubjectSlug) {
+  const resolvedCourseSlug = courseSlugFromDraftSubjectSlug(draftSubjectSlug);
+  const buildRoot = courseBuildRoot(resolvedCourseSlug);
   return {
-    subject: path.join(root, ".curriculum-build", subjectSlug, "subjects", draftSubjectSlug),
-    messages: path.join(root, ".curriculum-build", subjectSlug, "messages", "en", "subjects", draftSubjectSlug),
-    reports: path.join(root, ".curriculum-build", subjectSlug, "reports", draftSubjectSlug),
+    subject: path.join(buildRoot, "subjects", draftSubjectSlug),
+    messages: path.join(buildRoot, "messages", "en", "subjects", draftSubjectSlug),
+    reports: path.join(buildRoot, "reports", draftSubjectSlug),
   };
 }
 

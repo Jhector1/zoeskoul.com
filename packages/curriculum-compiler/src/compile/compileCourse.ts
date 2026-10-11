@@ -141,6 +141,7 @@ export async function compileCourse(args: {
           })
         : await compileSubjectPipeline({
               blueprint: target.blueprint,
+              authoringSubjectSlug: args.subjectSlug,
               plan,
               spec: target.spec,
               provider: args.provider,
