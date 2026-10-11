@@ -781,42 +781,44 @@
       "moduleSlug": "html-module-6-final-capstone",
       "prefix": "html_module_6",
       "title": "Final Capstone: Personal Website",
-      "purpose": "Bring the full HTML Foundations skill set together in one complete, semantic, accessible single-page website.",
+      "purpose": "Bring the full HTML Foundations skill set together in one growing, cumulative, semantic, accessible multi-page website.",
       "learningObjectives": [
-        "Plan and build a complete single-page HTML document from a blank or minimal starter.",
-        "Combine semantic structure, text, links, images, lists or tables, and a form appropriately.",
-        "Review document metadata, nesting, headings, labels, alt text, and link text before submission.",
-        "Use the live browser preview and source validation to verify a polished final page."
+        "Build one cumulative website whose files are introduced only when the project needs them.",
+        "Connect pages with meaningful navigation, relative links, and correctly referenced image assets.",
+        "Combine semantic structure, exact content, links, images, lists, tables, and a form appropriately.",
+        "Review document metadata, nesting, headings, labels, alt text, link text, and relative paths before submission.",
+        "Use the live browser preview and source validation to verify the complete final website."
       ],
       "guidedExercises": [
-        "Build the capstone progressively in one index.html workspace",
-        "Use the browser preview after each milestone",
-        "Run Check Answer against cumulative semantic and accessibility source checks"
+        "Start with index.html only and add new files only at the milestone where they become necessary",
+        "Carry every introduced file forward through the remaining milestones",
+        "Follow the exact learner-facing text, labels, links, table values, and form wording provided in each task",
+        "Use browser preview and cumulative source checks after each milestone"
       ],
       "quizFocus": [
         "document quality",
         "semantic structure",
         "accessibility review"
       ],
-      "moduleProject": "Build and verify a complete personal website that demonstrates the HTML Foundations skill set.",
+      "moduleProject": "Build and verify one growing cumulative multi-page personal portfolio website that demonstrates the full HTML Foundations skill set.",
       "sections": [
         {
           "sectionSlug": "html-module-6-capstone",
           "role": "capstone",
           "title": "Final Capstone",
-          "summary": "Build one complete personal website that combines the course skills in a clean, accessible HTML document.",
+          "summary": "Build one cumulative portfolio website that grows from one page into a complete multi-page site; files appear only when their project role begins.",
           "topics": [
             {
               "topicId": "final-html-personal-site-capstone",
               "title": "Capstone: Build a Complete Personal Website",
-              "summary": "Plan, build, preview, review, and validate a complete semantic single-page website using only HTML.",
+              "summary": "Build one portfolio website progressively, introducing each page and asset only when needed and following exact content instructions at every milestone.",
               "minutes": 45,
               "technical": true,
               "learningGoals": [
-                "Build a complete HTML page with correct document structure and useful metadata.",
-                "Use semantic landmarks and a logical heading hierarchy.",
-                "Include appropriate text, links, images, structured content, and a labeled form.",
-                "Review accessibility basics and validate the final source in ZoeSkoul."
+                "Start a complete HTML page and grow it into a multi-page website.",
+                "Add new pages and assets only when the project needs them, then carry them forward.",
+                "Use exact provided content while practicing navigation, relative paths, images, lists, tables, semantics, accessibility, and forms.",
+                "Review and validate the complete cumulative website in ZoeSkoul."
               ],
               "practice": {
                 "tryIt": true,
@@ -829,45 +831,53 @@
                 ]
               },
               "projectBrief": {
-                "scenario": "Create a polished personal website that introduces you, organizes useful information, and includes an accessible way for a visitor to share basic contact information.",
-                "role": "Beginner web developer preparing a complete HTML page for review before moving on to CSS.",
-                "workspace": "One cumulative browser-web workspace using index.html only. The page is rendered continuously in ZoeSkoul's existing live browser preview.",
-                "deliverable": "One complete semantic and accessible single-page personal website with valid document structure, useful metadata, meaningful content, navigation, an image with alternative text, structured content, and a labeled form.",
-                "stepCountTarget": 5,
+                "scenario": "A local career-readiness mentor wants a polished personal portfolio website that can be reviewed before the learner moves on to CSS.",
+                "role": "Beginner web developer responsible for building one portfolio website from a single Home page into a complete multi-page site.",
+                "workspace": "A growing cumulative browser-web workspace. Start with index.html only. Add about.html in milestone 2; add projects/portfolio.html and images/profile.png in milestone 3; add contact.html in milestone 5. Once a file is introduced, keep it for every later milestone.",
+                "deliverable": "One complete semantic and accessible multi-page personal portfolio website with meaningful navigation, correct relative paths, a real image asset, structured content, and a labeled contact form.",
+                "stepCountTarget": 6,
                 "flow": "progressive",
                 "requirements": [
                   "Use HTML only; do not require CSS or JavaScript for correctness.",
-                  "Keep all capstone work in the same index.html workspace from the first step through final verification.",
-                  "Include <!DOCTYPE html>, an html element with a language attribute, head metadata, a title, and a body.",
-                  "Use semantic landmarks and a logical heading hierarchy instead of generic structure when a semantic element fits.",
-                  "Use meaningful link text, useful image alt text, and explicitly associated form labels.",
-                  "Use the live browser preview for visual feedback and source checks for grading; do not require Judge0 or terminal execution."
+                  "Do not expose files before the milestone that needs them.",
+                  "Once a file is introduced, keep it in every later starter and solution workspace.",
+                  "Give learners the exact visible text, labels, navigation text, table values, and form wording required by each milestone.",
+                  "Use index.html as the entry page for the entire project.",
+                  "Use projects/portfolio.html as a nested page so the project practices ../ relative paths.",
+                  "Use images/profile.png only from the milestone where the image becomes part of the website.",
+                  "Use semantic landmarks, logical headings, meaningful links, useful alt text, structured content, and explicitly associated form labels.",
+                  "Use live browser preview and source checks; do not require Judge0 or terminal execution."
                 ],
                 "stepLadder": [
                   {
                     "step": 1,
-                    "title": "Build the Document Foundation",
-                    "requirement": "Create the complete HTML document shell with doctype, language, head metadata, page title, and body, then confirm it renders in the live preview."
+                    "title": "Build the Home Page",
+                    "requirement": "Work only in index.html and enter the exact Home page content provided."
                   },
                   {
                     "step": 2,
-                    "title": "Add Semantic Page Structure",
-                    "requirement": "Add header, navigation, main content, and footer regions with a logical heading hierarchy and meaningful introductory content."
+                    "title": "Add the About Page and First Navigation",
+                    "requirement": "Introduce about.html, enter the exact About text, and connect Home and About."
                   },
                   {
                     "step": 3,
-                    "title": "Add Rich Structured Content",
-                    "requirement": "Add useful links, an image with meaningful alt text, and at least one appropriate structured-content element such as a list or table."
+                    "title": "Add Projects, Relative Paths, and the Image Asset",
+                    "requirement": "Introduce projects/portfolio.html and images/profile.png, then use the exact navigation, project text, and alt text provided."
                   },
                   {
                     "step": 4,
-                    "title": "Build an Accessible Contact Form",
-                    "requirement": "Add a form with explicitly associated labels, sensible input types, at least one choice or longer-text control, and a submit button."
+                    "title": "Add Structured Content and Semantic Page Structure",
+                    "requirement": "Improve the same existing pages with the exact skills list, project table, semantic landmarks, and reference link provided."
                   },
                   {
                     "step": 5,
-                    "title": "Review, Preview, and Validate",
-                    "requirement": "Review nesting, metadata, headings, landmarks, link text, alt text, and labels; inspect the final browser preview and pass the cumulative HTML source checks."
+                    "title": "Add the Contact Page and Accessible Form",
+                    "requirement": "Introduce contact.html and build the exact labeled form and navigation wording provided."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Review, Navigate, Preview, and Validate the Whole Website",
+                    "requirement": "Review the complete site, add the exact final metadata and required attributes, navigate every page, and pass cumulative checks."
                   }
                 ]
               }
