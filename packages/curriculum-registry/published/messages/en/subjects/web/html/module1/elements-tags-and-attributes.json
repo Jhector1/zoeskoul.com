@@ -1,0 +1,186 @@
+{
+  "topics": {
+    "html": {
+      "html-module-1-first-web-pages": {
+        "elements-tags-and-attributes": {
+          "label": "Elements, Tags, and Attributes",
+          "summary": "Read HTML as elements made from tags, content, nesting, and attributes, then practice writing balanced markup.",
+          "cards": {
+            "sketch0": {
+              "title": "See the Parts"
+            },
+            "sketch1": {
+              "title": "Put Elements Inside Elements"
+            },
+            "sketch2": {
+              "title": "Add Information to a Tag"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_elements_tags_and_attributes_sketch0": {
+              "title": "Try it yourself: Close the paragraph",
+              "prompt": "Now apply what you just learned in this task. Fix the paragraph so the sentence **Balanced tags are easier to read.** is inside matching opening and closing p tags. Produce the result for close the paragraph so it reinforces Elements, Tags, and Attributes.",
+              "hint": "The opening tag is already present; add the matching end tag after the sentence.",
+              "help": {
+                "concept": "Balanced paired elements clearly mark where content begins and ends in the document structure.",
+                "hint_1": "Keep the sentence inside the paragraph rather than placing the closing markup before it.",
+                "hint_2": "Compare the element name in the opening tag with the element name in your closing tag."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Tags</title></head>\n  <body>\n    <p>Balanced tags are easier to read.\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Tags</title></head>\n  <body>\n    <p>Balanced tags are easier to read.</p>\n  </body>\n</html>\n"
+            },
+            "try_elements_tags_and_attributes_sketch1": {
+              "title": "Try it yourself: Nest important text",
+              "prompt": "Now apply what you just learned in this task. Inside the existing paragraph, wrap only the words **HTML structure** in a strong element. Keep the full sentence inside the paragraph. Produce the result for nest important text so it reinforces Elements, Tags, and Attributes.",
+              "hint": "Place the strong opening and closing tags around the two target words without closing the paragraph early.",
+              "help": {
+                "concept": "Nested elements let one part of an outer element carry additional meaning while remaining inside that content.",
+                "hint_1": "The paragraph should open first and close last.",
+                "hint_2": "Check that the strong element begins and ends entirely between the paragraph tags."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Nesting</title></head>\n  <body>\n    <p>I am practicing HTML structure today.</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Nesting</title></head>\n  <body>\n    <p>I am practicing <strong>HTML structure</strong> today.</p>\n  </body>\n</html>\n"
+            },
+            "try_elements_tags_and_attributes_sketch2": {
+              "title": "Try it yourself: Add an attribute",
+              "prompt": "Now apply what you just learned in this task. Add a title attribute with the value **A short introduction** to the paragraph that says **Welcome to my page.** Keep the paragraph text unchanged. Produce the result for add an attribute so it reinforces Elements, Tags, and Attributes.",
+              "hint": "Put the name-and-value pair inside the paragraph's opening tag.",
+              "help": {
+                "concept": "An attribute adds information to an element while the element's visible content remains between its tags.",
+                "hint_1": "Keep the quoted value attached to the attribute name with an equals sign.",
+                "hint_2": "Inspect the opening p tag carefully; the visible sentence should stay outside the attribute quotes."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Attributes</title></head>\n  <body>\n    <p>Welcome to my page.</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Attributes</title></head>\n  <body>\n    <p title=\"A short introduction\">Welcome to my page.</p>\n  </body>\n</html>\n"
+            }
+          },
+          "practice": {
+            "closing-tag-choice": {
+              "title": "Recognize a closing tag",
+              "prompt": "Which option is a closing paragraph tag?",
+              "hint": "Look for the marker that indicates the element is ending rather than beginning.",
+              "help": {
+                "concept": "Paired HTML elements use a closing tag to mark the end of the content they wrap.",
+                "hint_1": "Compare the punctuation immediately after the opening angle bracket.",
+                "hint_2": "The closing form keeps the same element name while adding the end marker."
+              },
+              "options": {
+                "a": "</p>",
+                "b": "<p>",
+                "c": "<p title>",
+                "d": "<paragraph>"
+              }
+            },
+            "attribute-location-choice": {
+              "title": "Place an attribute",
+              "prompt": "Where is an attribute such as lang=\"en\" written?",
+              "hint": "Think about the part of an element that identifies the tag and its extra information.",
+              "help": {
+                "concept": "Attributes describe an element from its opening markup rather than becoming ordinary content text.",
+                "hint_1": "The attribute travels with the element's start tag.",
+                "hint_2": "Do not place attribute syntax after the closing tag or as unrelated body text."
+              },
+              "options": {
+                "a": "Inside the opening tag",
+                "b": "After the closing html tag",
+                "c": "Inside the doctype text",
+                "d": "As a separate paragraph"
+              }
+            },
+            "element-parts-multi": {
+              "title": "Identify element parts",
+              "prompt": "For a typical paragraph element, which parts can be present?",
+              "hint": "Compare each choice with the markup example and select only the choices that are actually present in it.",
+              "help": {
+                "concept": "Use the exact syntax shown in the example as your evidence. Do not choose an item just because it is related to web pages.",
+                "hint_1": "Check the choices one by one against the example.",
+                "hint_2": "Select every matching choice and leave unrelated choices unselected."
+              },
+              "options": {
+                "a": "Opening tag",
+                "b": "Content",
+                "c": "Closing tag",
+                "d": "Database connection"
+              }
+            },
+            "nesting-order": {
+              "title": "Order nested markup",
+              "prompt": "Arrange these pieces to make a paragraph containing a strong element with valid nesting.",
+              "hint": "The outer element opens first and closes last.",
+              "help": {
+                "concept": "Proper nesting finishes the inner element before the outer element ends.",
+                "hint_1": "Use the parent-child relationship from the worked example.",
+                "hint_2": "The paragraph surrounds the stronger text element rather than crossing its closing tag."
+              },
+              "tokens": {
+                "t1": "<p>",
+                "t2": "<strong>",
+                "t3": "Important",
+                "t4": "</strong>",
+                "t5": "</p>"
+              }
+            },
+            "attribute-name-fill": {
+              "title": "Complete the attribute pattern",
+              "prompt": "Choose the part of an attribute that comes before the equals sign in this example.",
+              "hint": "Look at the left side of the name-and-value pair.",
+              "help": {
+                "concept": "An attribute is written as a name paired with a value inside an opening tag.",
+                "hint_1": "The requested piece labels what information the attribute represents.",
+                "hint_2": "Do not choose the quoted value itself."
+              },
+              "template": "In `lang=\"en\"`, [blank1] is the attribute name.",
+              "choices": [
+                "lang",
+                "en",
+                "html",
+                "body"
+              ]
+            },
+            "content-fill": {
+              "title": "Name the text between tags",
+              "prompt": "Choose the term for the text or nested markup between an element's opening and closing tags.",
+              "hint": "Think about what the tags wrap.",
+              "help": {
+                "concept": "A paired element surrounds the material it represents between its start and end markup.",
+                "hint_1": "The requested term describes what belongs inside the element.",
+                "hint_2": "It can be plain text or other properly nested elements."
+              },
+              "template": "The material between opening and closing tags is the element's [blank1].",
+              "choices": [
+                "content",
+                "doctype",
+                "charset",
+                "filename"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "html": {
+      "html-module-1-first-web-pages": {
+        "elements-tags-and-attributes": {
+          "element-parts": {
+            "title": "An HTML element combines tags with its content",
+            "bodyMarkdown": "An HTML **element** is a meaningful piece of the document represented by markup. Many elements use an opening tag, some content, and a closing tag. The tag name tells the browser what kind of structure the content represents. Reading those three parts together makes HTML much easier to debug.\n\nA paragraph element looks like this:\n\n```html\n<p>Practice makes markup easier to read.</p>\n```\n\nThe opening `<p>` starts the paragraph, the sentence is the content, and `</p>` closes the paragraph. The slash in the closing tag matters because it tells the browser where that element ends.\n\nSome elements, such as `meta`, do not wrap visible text and therefore do not use the same opening-content-closing pattern. You will learn those exceptions as you meet them. For now, build the habit of matching the tags for elements that do wrap content and keeping the intended text between them."
+          },
+          "nesting-elements": {
+            "title": "Nesting shows which content belongs together",
+            "bodyMarkdown": "HTML **nesting** means placing one element inside another so the document structure shows a parent-and-child relationship. Correct nesting keeps the markup understandable and prevents closing tags from crossing over one another. The inner element should finish before the outer element closes.\n\nHere is a worked example:\n\n```html\n<p>I am learning <strong>semantic HTML</strong> today.</p>\n```\n\nRead it **line by line** as one nested structure: the paragraph begins first, the `strong` element begins and ends inside that paragraph, and then the paragraph closes. The words “semantic HTML” remain part of the paragraph while receiving stronger importance from the nested element.\n\nWhen markup becomes larger, indentation can make nesting easier to see. The browser may recover from some mistakes, but you should not depend on recovery. Balanced, properly nested elements make the source easier to reason about and give later accessibility and styling work a stronger foundation."
+          },
+          "attributes-add-information": {
+            "title": "Attributes add extra information to an element",
+            "bodyMarkdown": "An HTML **attribute** adds information to an element from inside its opening tag. Attributes usually have a name and a value, and the value is commonly written in quotes. You have already seen useful examples: `lang=\"en\"` describes the document language and `charset=\"UTF-8\"` describes the character encoding.\n\nAnother simple example is a title attribute on a paragraph:\n\n```html\n<p title=\"A short introduction\">Welcome to my page.</p>\n```\n\nStep by step, `p` is still the element name, `title` is the attribute name, and the quoted text is the attribute value. The visible paragraph content stays between the opening and closing tags.\n\nAttributes belong in the opening tag, not between the element's visible words. Different elements support different useful attributes, and later lessons will introduce attributes such as `href`, `src`, and `alt` when you build links and images. For now, practice recognizing the pattern `name=\"value\"` and keeping attributes attached to the element they describe."
+          }
+        }
+      }
+    }
+  }
+}

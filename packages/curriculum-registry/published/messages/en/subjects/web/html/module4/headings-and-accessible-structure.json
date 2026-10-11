@@ -1,0 +1,152 @@
+{
+  "topics": {
+    "html": {
+      "html-module-4-semantic-accessible-layout": {
+        "headings-and-accessible-structure": {
+          "label": "Headings and Accessible Structure",
+          "summary": "Create a logical heading hierarchy and use meaningful text alternatives within semantic content.",
+          "cards": {
+            "sketch0": {
+              "title": "Build a Logical Outline"
+            },
+            "sketch1": {
+              "title": "Describe Meaningful Images"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_headings_and_accessible_structure_sketch0": {
+              "title": "Try it yourself: Repair the heading hierarchy",
+              "prompt": "Now apply what you just learned in this task. Change Volunteer Days to h2 and What to bring to h3 so the headings follow the content hierarchy under the page h1. Keep all text and confirm the outline still reads naturally in Preview. Produce the result for repair the heading hierarchy so it reinforces Headings and Accessible Structure.",
+              "hint": "The page title is h1, the major section belongs one level below it, and its subsection belongs one level below that.",
+              "help": {
+                "concept": "Heading levels should follow the document hierarchy rather than skip levels for appearance.",
+                "hint_1": "Volunteer Days is a major section under the page title.",
+                "hint_2": "What to bring is a subsection inside Volunteer Days."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h3>Volunteer Days</h3>\n    <p>Volunteers meet every Saturday.</p>\n    <h4>What to bring</h4>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h2>Volunteer Days</h2>\n    <p>Volunteers meet every Saturday.</p>\n    <h3>What to bring</h3>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h3>Volunteer Days</h3>\n    <p>Volunteers meet every Saturday.</p>\n    <h4>What to bring</h4>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h2>Volunteer Days</h2>\n    <p>Volunteers meet every Saturday.</p>\n    <h3>What to bring</h3>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_headings_and_accessible_structure_sketch1": {
+              "title": "Try it yourself: Write a meaningful image alternative",
+              "prompt": "Now apply what you just learned in this task. Improve the garden story image by replacing alt=\"photo\" with alt=\"Three students planting herbs in raised garden beds\". Then add a figcaption that says Students prepare the herb garden for spring. The image file is intentionally unavailable here, so Preview can also expose the alternative text. Produce the result for write a meaningful image alternative so it reinforces Headings and Accessible Structure.",
+              "hint": "Describe the useful information the image contributes instead of naming the file type.",
+              "help": {
+                "concept": "Meaningful text alternatives communicate image content when the image cannot be perceived.",
+                "hint_1": "Replace the generic alt value with the requested concise description.",
+                "hint_2": "Keep the image inside figure and add the visible figcaption after it."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"photo\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n        <figcaption>Students prepare the herb garden for spring.</figcaption>\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"photo\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n        <figcaption>Students prepare the herb garden for spring.</figcaption>\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "accessible-structure-quiz-headings": {
+              "title": "Choose the next heading level",
+              "prompt": "A page uses h1 for Community Guide and h2 for Events. Which heading level best names Workshops inside the Events section?",
+              "hint": "Workshops is nested one level inside Events.",
+              "help": {
+                "concept": "Heading levels reflect the structure of the content.",
+                "hint_1": "Events is already h2.",
+                "hint_2": "A subsection of that h2 uses h3."
+              },
+              "options": {
+                "a": "<h3>",
+                "b": "<h1>",
+                "c": "<h4>",
+                "d": "<p>"
+              }
+            },
+            "accessible-structure-quiz-accessibility": {
+              "title": "Identify accessible structure choices",
+              "prompt": "Which two choices improve accessible structure?",
+              "hint": "Choose structure and text that communicate meaning.",
+              "help": {
+                "concept": "Accessible HTML combines logical headings with useful text alternatives.",
+                "hint_1": "One answer preserves heading hierarchy.",
+                "hint_2": "The other gives an informative image a meaningful description."
+              },
+              "options": {
+                "a": "Use h2 for a major section directly under the page h1.",
+                "b": "Use alt=\"Three students planting herbs in raised garden beds\" for an informative garden image.",
+                "c": "Jump from h1 to h4 because h4 looks smaller.",
+                "d": "Use alt=\"image.jpg\" because it matches the file name."
+              }
+            },
+            "accessible-structure-quiz-order": {
+              "title": "Arrange a heading hierarchy",
+              "prompt": "Arrange the headings from the page title to a section and then its subsection.",
+              "hint": "Move from the broadest heading to the most specific.",
+              "help": {
+                "concept": "A simple hierarchy can move h1 to h2 to h3.",
+                "hint_1": "Start with the page title.",
+                "hint_2": "Place the subsection after its parent section heading."
+              },
+              "tokens": {
+                "t1": "<h1>Community Guide</h1>",
+                "t2": "<h2>Events</h2>",
+                "t3": "<h3>Saturday Workshops</h3>"
+              }
+            },
+            "accessible-structure-quiz-blank": {
+              "title": "Choose the meaningful text alternative",
+              "prompt": "Choose the alt attribute that best describes an informative photo of two students repairing a bicycle.",
+              "hint": "Describe the useful content instead of the file name or the word image.",
+              "help": {
+                "concept": "An informative image needs a concise text alternative that communicates its relevant content.",
+                "hint_1": "Avoid generic labels like photo.",
+                "hint_2": "Choose the description a reader would need if the image were unavailable."
+              },
+              "template": "<img src=\"bike-repair.jpg\" [blank1]>",
+              "choices": [
+                "alt=\"Two students repairing a bicycle wheel\"",
+                "alt=\"photo\"",
+                "alt=\"bike-repair.jpg\"",
+                "alt=\"image\""
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "html": {
+      "html-module-4-semantic-accessible-layout": {
+        "headings-and-accessible-structure": {
+          "heading-hierarchy": {
+            "title": "Choose heading levels from content hierarchy",
+            "bodyMarkdown": "Heading levels communicate structure. Start with the page's main `<h1>`, use `<h2>` for major sections, and use `<h3>` for a subsection inside an h2 section. Choose levels from hierarchy rather than desired text size.\n\n```html\n<h1>Community Guide</h1>\n<h2>Events</h2>\n<h3>Saturday Workshops</h3>\n```\n\nRead this example line by line: h1 names the whole page, h2 starts a major Events section, and h3 names a subsection that belongs inside Events. The numbers describe nesting, not decoration."
+          },
+          "meaningful-text-alternatives": {
+            "title": "Use a useful text alternative for informative images",
+            "bodyMarkdown": "You already used `alt` with images earlier in the course. Here the focus is how that text alternative fits into an accessible article: describe the information the image contributes, not the file name or the word “image.”\n\n```html\n<figure>\n  <img src=\"garden-team.jpg\" alt=\"Students planting herbs in raised garden beds\">\n  <figcaption>Students prepare the herb garden for spring.</figcaption>\n</figure>\n```\n\nRead this example line by line: figure groups the media, img carries a concise meaningful text alternative, figcaption provides visible supporting context, and figure closes the group. If an image is purely decorative, an empty `alt=\"\"` tells assistive technology that it adds no content."
+          }
+        }
+      }
+    }
+  }
+}

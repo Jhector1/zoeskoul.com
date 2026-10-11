@@ -1,0 +1,290 @@
+{
+  "topicId": "module-4-article-page-project",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-4-semantic-accessible-layout",
+  "sectionSlug": "html-html-module-4-project",
+  "prefix": "html_module_4",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.label",
+    "summaryKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.cards.sketch0.title",
+      "sketchId": "project-brief",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "module4_article_step_1",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.projectSteps.module4_article_step_1.title",
+            "exerciseKey": "module4-article-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "module4_article_step_2",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.projectSteps.module4_article_step_2.title",
+            "exerciseKey": "module4-article-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module4_article_step_3",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.projectSteps.module4_article_step_3.title",
+            "exerciseKey": "module4-article-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-brief",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.project-brief.title",
+      "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.project-brief.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "module4-article-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<header\\b[^>]*>.*<h1\\b[^>]*>\\s*Eastside Garden Journal\\s*</h1>.*<nav\\b[^>]*>.*#story.*#visit.*</nav>.*</header>",
+          "path": "index.html",
+          "message": "Keep the title, introduction, and both jump links inside header with nav.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<main\\b[^>]*>.*Students Build New Garden Beds.*Visit the garden.*</main>",
+          "path": "index.html",
+          "message": "Keep the story and visit content inside main.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<footer\\b[^>]*>.*Contact:\\s*garden@eastside\\.example.*</footer>",
+          "path": "index.html",
+          "message": "Put the contact line inside footer.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "module4-article-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<article\\b[^>]*>.*<h2\\b[^>]*id\\s*=\\s*[\\\"']story[\\\"'][^>]*>\\s*Students Build New Garden Beds\\s*</h2>.*<section\\b[^>]*>\\s*<h3\\b[^>]*>\\s*What changed\\s*</h3>.*youth program more space for herbs and vegetables\\..*</section>.*</article>",
+          "path": "index.html",
+          "message": "Build the self-contained story as article with the What changed section inside it.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<section\\b[^>]*>\\s*<h2\\b[^>]*id\\s*=\\s*[\\\"']visit[\\\"'][^>]*>\\s*Visit the garden\\s*</h2>.*Saturday,\\s*10:00 AM\\s*—\\s*Eastside Community Center.*</section>",
+          "path": "index.html",
+          "message": "Keep Visit the garden as its own section.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<aside\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Related activity\\s*</h2>.*Seed-starting workshop\\s*—\\s*Saturday at 11:30 AM.*</aside>",
+          "path": "index.html",
+          "message": "Add the related activity as complementary aside content.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "module4-article-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h1\\b[^>]*>\\s*Eastside Garden Journal\\s*</h1>.*<h2\\b[^>]*id\\s*=\\s*[\\\"']story[\\\"'][^>]*>\\s*Students Build New Garden Beds\\s*</h2>.*<h3\\b[^>]*>\\s*What changed\\s*</h3>",
+          "path": "index.html",
+          "message": "Keep the logical h1, h2, h3 hierarchy.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<figure\\b[^>]*>.*<img\\b(?=[^>]*\\bsrc\\s*=\\s*[\\\"']garden-beds\\.jpg[\\\"'])(?=[^>]*\\balt\\s*=\\s*[\\\"']Three students filling raised garden beds with soil[\\\"'])[^>]*>.*<figcaption\\b[^>]*>\\s*Students prepare the new beds for spring planting\\.\\s*</figcaption>.*</figure>",
+          "path": "index.html",
+          "message": "Add the requested accessible garden figure inside the article.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<header\\b[^>]*>.*<nav\\b[^>]*>.*</nav>.*</header>.*<main\\b[^>]*>.*<article\\b[^>]*>.*</article>.*<aside\\b[^>]*>.*</aside>.*</main>.*<footer\\b[^>]*>.*</footer>",
+          "path": "index.html",
+          "message": "Keep the semantic page structure from the earlier steps.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

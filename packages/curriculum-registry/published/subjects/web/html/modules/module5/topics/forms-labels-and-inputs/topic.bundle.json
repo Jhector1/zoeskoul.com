@@ -1,0 +1,283 @@
+{
+  "topicId": "forms-labels-and-inputs",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-5-forms-inputs",
+  "sectionSlug": "html-html-module-5-lessons",
+  "prefix": "html_module_5",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.label",
+    "summaryKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.cards.sketch0.title",
+      "sketchId": "form-groups-controls",
+      "height": 420,
+      "tryIt": {
+        "id": "try-forms-labels-and-inputs-sketch0",
+        "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.title",
+        "promptKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.prompt",
+        "exerciseKey": "try-forms-labels-and-inputs-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.cards.sketch1.title",
+      "sketchId": "explicit-label-connection",
+      "height": 420,
+      "tryIt": {
+        "id": "try-forms-labels-and-inputs-sketch1",
+        "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.title",
+        "promptKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.prompt",
+        "exerciseKey": "try-forms-labels-and-inputs-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "form-groups-controls",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-5-forms-inputs.forms-labels-and-inputs.form-groups-controls.title",
+      "bodyKey": "sketches.html.html-module-5-forms-inputs.forms-labels-and-inputs.form-groups-controls.bodyMarkdown"
+    },
+    {
+      "id": "explicit-label-connection",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-5-forms-inputs.forms-labels-and-inputs.explicit-label-connection.title",
+      "bodyKey": "sketches.html.html-module-5-forms-inputs.forms-labels-and-inputs.explicit-label-connection.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-forms-labels-and-inputs-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<form\\b[^>]*>\\s*<label\\b[^>]*for\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*Name\\s*</label>\\s*<input\\b[^>]*id\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*</form>",
+          "path": "index.html",
+          "message": "Put the Name label and input inside one form element.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-forms-labels-and-inputs-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>",
+          "path": "index.html",
+          "message": "Connect the Email address label with for=\"email\".",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Give the email input matching id, name, and type attributes.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "forms-quiz-label",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-quiz-label",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "forms-quiz-structure",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-quiz-structure",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "forms-quiz-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-quiz-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "forms-quiz-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-quiz-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "<input id=\"city\" name=\"city\" type=\"text\">"
+      }
+    }
+  ]
+}

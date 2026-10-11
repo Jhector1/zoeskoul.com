@@ -1,0 +1,390 @@
+{
+  "topicId": "how-html-and-the-browser-work",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-1-first-web-pages",
+  "sectionSlug": "html-html-module-1-lessons",
+  "prefix": "html_module_1",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.label",
+    "summaryKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.cards.sketch0.title",
+      "sketchId": "html-is-page-structure",
+      "height": 420,
+      "tryIt": {
+        "id": "try-how-html-and-the-browser-work-sketch0",
+        "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.title",
+        "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.prompt",
+        "exerciseKey": "try-how-html-and-the-browser-work-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.cards.sketch1.title",
+      "sketchId": "browser-parses-elements",
+      "height": 420,
+      "tryIt": {
+        "id": "try-how-html-and-the-browser-work-sketch1",
+        "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.title",
+        "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.prompt",
+        "exerciseKey": "try-how-html-and-the-browser-work-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.cards.sketch2.title",
+      "sketchId": "structure-before-style",
+      "height": 420,
+      "tryIt": {
+        "id": "try-how-html-and-the-browser-work-sketch2",
+        "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.title",
+        "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.prompt",
+        "exerciseKey": "try-how-html-and-the-browser-work-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "html-is-page-structure",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.html-is-page-structure.title",
+      "bodyKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.html-is-page-structure.bodyMarkdown"
+    },
+    {
+      "id": "browser-parses-elements",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.browser-parses-elements.title",
+      "bodyKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.browser-parses-elements.bodyMarkdown"
+    },
+    {
+      "id": "structure-before-style",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.structure-before-style.title",
+      "bodyKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.structure-before-style.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "browser-role-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.browser-role-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "html-purpose-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.html-purpose-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "source-preview-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.source-preview-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "browser-flow-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.browser-flow-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "html-name-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.html-name-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "HTML"
+      }
+    },
+    {
+      "id": "render-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.render-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "preview"
+      }
+    },
+    {
+      "id": "try-how-html-and-the-browser-work-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>",
+          "message": "Add an h1 whose visible text is My First Web Page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-how-html-and-the-browser-work-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>",
+          "message": "Keep the My First Web Page h1 in the page.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*I am learning HTML\\.\\s*</p>",
+          "message": "Add a paragraph that says I am learning HTML.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-how-html-and-the-browser-work-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>\\s*<h2(?:\\s[^>]*)?>\\s*What I am Learning\\s*</h2>\\s*<p(?:\\s[^>]*)?>\\s*I am learning HTML\\.\\s*</p>",
+          "message": "Keep the h1, then add the What I am Learning h2 before the paragraph.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

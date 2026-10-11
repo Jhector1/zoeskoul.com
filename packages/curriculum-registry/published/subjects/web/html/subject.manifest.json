@@ -1,0 +1,602 @@
+{
+  "subject": {
+    "slug": "html",
+    "profileId": "web",
+    "catalogSlug": "web",
+    "genKey": "html_foundations",
+    "order": 0,
+    "accessPolicy": "paid",
+    "visibility": "public",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.html.title",
+    "descriptionKey": "subjects.html.description",
+    "serviceDefaults": null,
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 6,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.html.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "html",
+        "version": 1,
+        "status": "draft",
+        "defaultForNewEnrollments": false,
+        "supersedes": null,
+        "supersededBy": null
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "html-module-1-first-web-pages",
+      "prefix": "html_module_1",
+      "order": 1,
+      "titleKey": "modules.html.html-module-1-first-web-pages.title",
+      "descriptionKey": "modules.html.html-module-1-first-web-pages.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 72,
+        "prereqKeys": [
+          "modules.html.html-module-1-first-web-pages.title"
+        ],
+        "outcomeKeys": [
+          "modules.html.html-module-1-first-web-pages.outcomes.0",
+          "modules.html.html-module-1-first-web-pages.outcomes.1",
+          "modules.html.html-module-1-first-web-pages.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.html.html-module-1-first-web-pages.why.0",
+          "modules.html.html-module-1-first-web-pages.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "html-html-module-1-lessons",
+          "order": 1,
+          "titleKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.title",
+          "descriptionKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.bullets.0",
+              "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.bullets.1",
+              "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.bullets.2",
+              "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "how-html-and-the-browser-work",
+            "document-structure",
+            "elements-tags-and-attributes"
+          ]
+        },
+        {
+          "slug": "html-html-module-1-project",
+          "order": 2,
+          "role": "module_project",
+          "titleKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-project.title",
+          "descriptionKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-project.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-project.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-1-first-web-pages.html-html-module-1-project.bullets.0",
+              "sections.html.html-module-1-first-web-pages.html-html-module-1-project.bullets.1",
+              "sections.html.html-module-1-first-web-pages.html-html-module-1-project.bullets.2",
+              "sections.html.html-module-1-first-web-pages.html-html-module-1-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "module-1-first-page-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "html-module-2-links-images-paths",
+      "prefix": "html_module_2",
+      "order": 2,
+      "titleKey": "modules.html.html-module-2-links-images-paths.title",
+      "descriptionKey": "modules.html.html-module-2-links-images-paths.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 72,
+        "prereqKeys": [
+          "modules.html.html-module-2-links-images-paths.title"
+        ],
+        "outcomeKeys": [
+          "modules.html.html-module-2-links-images-paths.outcomes.0",
+          "modules.html.html-module-2-links-images-paths.outcomes.1",
+          "modules.html.html-module-2-links-images-paths.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.html.html-module-2-links-images-paths.why.0",
+          "modules.html.html-module-2-links-images-paths.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "html-html-module-2-lessons",
+          "order": 1,
+          "titleKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.title",
+          "descriptionKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.bullets.0",
+              "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.bullets.1",
+              "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.bullets.2",
+              "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "links-and-anchors",
+            "relative-and-absolute-paths",
+            "images-and-alt-text"
+          ]
+        },
+        {
+          "slug": "html-html-module-2-project",
+          "order": 2,
+          "role": "module_project",
+          "titleKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-project.title",
+          "descriptionKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-project.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-project.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-2-links-images-paths.html-html-module-2-project.bullets.0",
+              "sections.html.html-module-2-links-images-paths.html-html-module-2-project.bullets.1",
+              "sections.html.html-module-2-links-images-paths.html-html-module-2-project.bullets.2",
+              "sections.html.html-module-2-links-images-paths.html-html-module-2-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "module-2-profile-page-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "html-module-3-lists-tables-content",
+      "prefix": "html_module_3",
+      "order": 3,
+      "titleKey": "modules.html.html-module-3-lists-tables-content.title",
+      "descriptionKey": "modules.html.html-module-3-lists-tables-content.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 72,
+        "prereqKeys": [
+          "modules.html.html-module-3-lists-tables-content.title"
+        ],
+        "outcomeKeys": [
+          "modules.html.html-module-3-lists-tables-content.outcomes.0",
+          "modules.html.html-module-3-lists-tables-content.outcomes.1",
+          "modules.html.html-module-3-lists-tables-content.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.html.html-module-3-lists-tables-content.why.0",
+          "modules.html.html-module-3-lists-tables-content.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "html-html-module-3-lessons",
+          "order": 1,
+          "titleKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.title",
+          "descriptionKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.bullets.0",
+              "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.bullets.1",
+              "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.bullets.2",
+              "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "ordered-and-unordered-lists",
+            "nested-lists",
+            "tables-and-table-structure"
+          ]
+        },
+        {
+          "slug": "html-html-module-3-project",
+          "order": 2,
+          "role": "module_project",
+          "titleKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.title",
+          "descriptionKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.bullets.0",
+              "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.bullets.1",
+              "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.bullets.2",
+              "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "module-3-content-page-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "html-module-4-semantic-accessible-layout",
+      "prefix": "html_module_4",
+      "order": 4,
+      "titleKey": "modules.html.html-module-4-semantic-accessible-layout.title",
+      "descriptionKey": "modules.html.html-module-4-semantic-accessible-layout.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 72,
+        "prereqKeys": [
+          "modules.html.html-module-4-semantic-accessible-layout.title"
+        ],
+        "outcomeKeys": [
+          "modules.html.html-module-4-semantic-accessible-layout.outcomes.0",
+          "modules.html.html-module-4-semantic-accessible-layout.outcomes.1",
+          "modules.html.html-module-4-semantic-accessible-layout.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.html.html-module-4-semantic-accessible-layout.why.0",
+          "modules.html.html-module-4-semantic-accessible-layout.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "html-html-module-4-lessons",
+          "order": 1,
+          "titleKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.title",
+          "descriptionKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.bullets.0",
+              "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.bullets.1",
+              "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.bullets.2",
+              "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "page-landmarks",
+            "sections-articles-and-asides",
+            "headings-and-accessible-structure"
+          ]
+        },
+        {
+          "slug": "html-html-module-4-project",
+          "order": 2,
+          "role": "module_project",
+          "titleKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.title",
+          "descriptionKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.bullets.0",
+              "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.bullets.1",
+              "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.bullets.2",
+              "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "module-4-article-page-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "html-module-5-forms-inputs",
+      "prefix": "html_module_5",
+      "order": 5,
+      "titleKey": "modules.html.html-module-5-forms-inputs.title",
+      "descriptionKey": "modules.html.html-module-5-forms-inputs.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 72,
+        "prereqKeys": [
+          "modules.html.html-module-5-forms-inputs.title"
+        ],
+        "outcomeKeys": [
+          "modules.html.html-module-5-forms-inputs.outcomes.0",
+          "modules.html.html-module-5-forms-inputs.outcomes.1",
+          "modules.html.html-module-5-forms-inputs.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.html.html-module-5-forms-inputs.why.0",
+          "modules.html.html-module-5-forms-inputs.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "html-html-module-5-lessons",
+          "order": 1,
+          "titleKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.title",
+          "descriptionKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.bullets.0",
+              "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.bullets.1",
+              "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.bullets.2",
+              "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "forms-labels-and-inputs",
+            "useful-input-types",
+            "select-textarea-and-buttons"
+          ]
+        },
+        {
+          "slug": "html-html-module-5-project",
+          "order": 2,
+          "role": "module_project",
+          "titleKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-project.title",
+          "descriptionKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-project.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-project.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-5-forms-inputs.html-html-module-5-project.bullets.0",
+              "sections.html.html-module-5-forms-inputs.html-html-module-5-project.bullets.1",
+              "sections.html.html-module-5-forms-inputs.html-html-module-5-project.bullets.2",
+              "sections.html.html-module-5-forms-inputs.html-html-module-5-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "module-5-signup-form-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "html-module-6-final-capstone",
+      "prefix": "html_module_6",
+      "order": 6,
+      "role": "capstone",
+      "titleKey": "modules.html.html-module-6-final-capstone.title",
+      "descriptionKey": "modules.html.html-module-6-final-capstone.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 45,
+        "prereqKeys": [
+          "modules.html.html-module-6-final-capstone.title"
+        ],
+        "outcomeKeys": [
+          "modules.html.html-module-6-final-capstone.outcomes.0",
+          "modules.html.html-module-6-final-capstone.outcomes.1",
+          "modules.html.html-module-6-final-capstone.outcomes.2",
+          "modules.html.html-module-6-final-capstone.outcomes.3",
+          "modules.html.html-module-6-final-capstone.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.html.html-module-6-final-capstone.why.0",
+          "modules.html.html-module-6-final-capstone.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "html-html-module-6-capstone",
+          "order": 1,
+          "role": "capstone",
+          "titleKey": "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.title",
+          "descriptionKey": "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.weeks",
+            "bulletKeys": [
+              "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.bullets.0",
+              "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.bullets.1",
+              "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.bullets.2",
+              "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "final-html-personal-site-capstone"
+          ]
+        }
+      ]
+    }
+  ]
+}

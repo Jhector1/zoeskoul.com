@@ -1,0 +1,283 @@
+{
+  "topicId": "module-5-signup-form-project",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-5-forms-inputs",
+  "sectionSlug": "html-html-module-5-project",
+  "prefix": "html_module_5",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.label",
+    "summaryKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.cards.sketch0.title",
+      "sketchId": "project-brief",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "module5_signup_step_1",
+            "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.projectSteps.module5_signup_step_1.title",
+            "exerciseKey": "module5-signup-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "module5_signup_step_2",
+            "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.projectSteps.module5_signup_step_2.title",
+            "exerciseKey": "module5-signup-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module5_signup_step_3",
+            "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.projectSteps.module5_signup_step_3.title",
+            "exerciseKey": "module5-signup-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-brief",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-5-forms-inputs.module-5-signup-form-project.project-brief.title",
+      "bodyKey": "sketches.html.html-module-5-forms-inputs.module-5-signup-form-project.project-brief.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "module5-signup-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<form\\b[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']full-name[\"\\'][^>]*>\\s*Full name\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']full-name[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']full_name[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']text[\"\\'])[^>]*>.*</form>",
+          "path": "index.html",
+          "message": "Add the labeled Full name field inside the form.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Add the labeled Email address field with type email.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']workshop-date[\"\\'][^>]*>\\s*Workshop date\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']workshop-date[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']workshop_date[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']date[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Add the labeled Workshop date field with type date.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "module5-signup-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Preferred session\\s*</legend>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']morning[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])[^>]*>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']evening[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])[^>]*>.*</fieldset>",
+          "path": "index.html",
+          "message": "Add the Preferred session radio group.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']updates[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']updates[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']checkbox[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']updates[\"\\'][^>]*>\\s*Send me workshop updates\\s*</label>",
+          "path": "index.html",
+          "message": "Add and label the independent workshop updates checkbox.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']track[\"\\'][^>]*>\\s*Workshop track\\s*</label>.*<select\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']track[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']track[\"\\'])[^>]*>.*<option\\b[^>]*value\\s*=\\s*[\"\\']web[\"\\'][^>]*>\\s*Web basics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']data[\"\\'][^>]*>\\s*Data basics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']git[\"\\'][^>]*>\\s*Git basics\\s*</option>.*</select>",
+          "path": "index.html",
+          "message": "Add the labeled Workshop track select with all three options.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "module5-signup-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']goals[\"\\'][^>]*>\\s*What do you want to learn\\?\\s*</label>.*<textarea\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']goals[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']goals[\"\\'])(?=[^>]*\\brows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>\\s*</textarea>",
+          "path": "index.html",
+          "message": "Add the labeled five-row learning goals textarea.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Register for workshop\\s*</button>",
+          "path": "index.html",
+          "message": "Add the Register for workshop submit button.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

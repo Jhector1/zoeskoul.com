@@ -1,0 +1,182 @@
+{
+  "topics": {
+    "html": {
+      "html-module-4-semantic-accessible-layout": {
+        "sections-articles-and-asides": {
+          "label": "Sections, Articles, and Asides",
+          "summary": "Choose article, section, and aside when the content has a clear semantic role.",
+          "cards": {
+            "sketch0": {
+              "title": "Self-Contained Content"
+            },
+            "sketch1": {
+              "title": "Group a Theme"
+            },
+            "sketch2": {
+              "title": "Add Related Information"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_sections_articles_and_asides_sketch0": {
+              "title": "Try it yourself: Turn a standalone story into an article",
+              "prompt": "Now apply what you just learned in this task. Replace the generic div around Robotics Team Reaches Finals with article. Keep the h2 and paragraph inside it and confirm the story still appears in Preview. Produce the result for turn a standalone story into an article so it reinforces Sections, Articles, and Asides.",
+              "hint": "Ask whether this content could stand on its own as a separate story.",
+              "help": {
+                "concept": "Article is appropriate for a self-contained piece of content.",
+                "hint_1": "Replace only the wrapper around the story.",
+                "hint_2": "Keep the existing heading and paragraph inside article."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <div>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <article>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <div>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </div>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <article>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </article>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_sections_articles_and_asides_sketch1": {
+              "title": "Try it yourself: Create a named schedule section",
+              "prompt": "Now apply what you just learned in this task. Replace the generic schedule div with section and add an h2 heading that says Schedule before the two time entries. Keep both schedule paragraphs visible. Produce the result for create a named schedule section so it reinforces Sections, Articles, and Asides.",
+              "hint": "The two time entries form one named theme within the larger guide.",
+              "help": {
+                "concept": "Section groups related content under a meaningful theme.",
+                "hint_1": "Replace the schedule div with section.",
+                "hint_2": "Add the Schedule h2 as the first child of the section."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <div>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <section>\n      <h2>Schedule</h2>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </section>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <div>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </div>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <section>\n      <h2>Schedule</h2>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </section>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_sections_articles_and_asides_sketch2": {
+              "title": "Try it yourself: Mark related information as an aside",
+              "prompt": "Now apply what you just learned in this task. Replace the generic div after the library article with aside. Add an h2 heading that says Related workshop and keep the study-skills workshop text inside it. Produce the result for mark related information as an aside so it reinforces Sections, Articles, and Asides.",
+              "hint": "The workshop is related to the story but is not part of the story itself.",
+              "help": {
+                "concept": "Aside marks complementary information connected to nearby content.",
+                "hint_1": "Replace the wrapper after article with aside.",
+                "hint_2": "Add the Related workshop heading before the existing workshop paragraph."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <div>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <aside>\n      <h2>Related workshop</h2>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </aside>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <div>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </div>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <aside>\n      <h2>Related workshop</h2>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </aside>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "semantic-containers-quiz-article": {
+              "title": "Choose the self-contained element",
+              "prompt": "A school site publishes one student-written news story that could be shared by itself. Which element best represents that story?",
+              "hint": "Choose the element whose content can stand on its own.",
+              "help": {
+                "concept": "Article represents self-contained content.",
+                "hint_1": "Section groups a theme inside a larger page.",
+                "hint_2": "Choose article for the independent story."
+              },
+              "options": {
+                "a": "<article>",
+                "b": "<section>",
+                "c": "<aside>",
+                "d": "<nav>"
+              }
+            },
+            "semantic-containers-quiz-uses": {
+              "title": "Identify appropriate semantic containers",
+              "prompt": "Which two uses are semantically appropriate?",
+              "hint": "Choose based on the meaning of the content.",
+              "help": {
+                "concept": "Section and aside describe different relationships to surrounding content.",
+                "hint_1": "A themed group can be a section.",
+                "hint_2": "Complementary related information can be an aside."
+              },
+              "options": {
+                "a": "Use <section> for a named group of upcoming events.",
+                "b": "Use <aside> for related resources next to an article.",
+                "c": "Use <article> for every paragraph because article is more semantic than p.",
+                "d": "Use <section> only to create visual spacing."
+              }
+            },
+            "semantic-containers-quiz-order": {
+              "title": "Build a headed section",
+              "prompt": "Arrange the tokens into a valid section with a heading and paragraph.",
+              "hint": "The section wrapper contains both pieces of content.",
+              "help": {
+                "concept": "A section commonly begins with a heading that identifies its theme.",
+                "hint_1": "Open section before its heading.",
+                "hint_2": "Close section after the related paragraph."
+              },
+              "tokens": {
+                "t1": "<section>",
+                "t2": "<h2>Events</h2>",
+                "t3": "<p>Friday workshop</p>",
+                "t4": "</section>"
+              }
+            },
+            "semantic-containers-quiz-blank": {
+              "title": "Complete the complementary region",
+              "prompt": "Choose the markup that best fills the blank after an article with related but secondary information.",
+              "hint": "The content supports the article without belonging to its main story.",
+              "help": {
+                "concept": "Aside contains complementary content.",
+                "hint_1": "Article would imply another self-contained story.",
+                "hint_2": "Choose a complete aside element."
+              },
+              "template": "<article>...</article>\n[blank1]",
+              "choices": [
+                "<aside><h2>Related links</h2></aside>",
+                "<article><h2>Related links</h2></article>",
+                "<main><h2>Related links</h2></main>",
+                "<nav><h2>Related links</h2></nav>"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "html": {
+      "html-module-4-semantic-accessible-layout": {
+        "sections-articles-and-asides": {
+          "article-content": {
+            "title": "Use article for content that can stand on its own",
+            "bodyMarkdown": "Use `<article>` for a self-contained piece of content such as a news story, blog post, review, or forum post.\n\n```html\n<article>\n  <h2>Science Club Launches Weather Balloon</h2>\n  <p>The team collected temperature data above the city.</p>\n</article>\n```\n\nRead this example line by line: article opens the independent story, the heading names that story, the paragraph supplies its content, and the closing article ends the self-contained item. Do not choose article just because you need a generic box."
+          },
+          "section-content": {
+            "title": "Use section for a thematic group of related content",
+            "bodyMarkdown": "Use `<section>` when a part of the page forms a meaningful theme and usually deserves its own heading.\n\n```html\n<section>\n  <h2>Upcoming Events</h2>\n  <p>Open lab — Wednesday</p>\n</section>\n```\n\nRead this example line by line: section starts the themed group, the h2 names the theme, the paragraph belongs to that theme, and the closing section finishes the group. If no semantic meaning exists, do not replace every generic wrapper with section automatically."
+          },
+          "aside-content": {
+            "title": "Use aside for complementary content",
+            "bodyMarkdown": "Use `<aside>` for information related to nearby content but not required to understand the main content. Examples include related links, a short author note, or a sidebar reminder.\n\n```html\n<aside>\n  <h2>Related workshop</h2>\n  <p>Join the study-skills session on Tuesday.</p>\n</aside>\n```\n\nRead this example line by line: aside opens the complementary region, the heading identifies it, the paragraph provides related information, and the closing aside ends that secondary content."
+          }
+        }
+      }
+    }
+  }
+}

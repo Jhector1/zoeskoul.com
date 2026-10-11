@@ -1,0 +1,900 @@
+{
+  "topicId": "final-html-personal-site-capstone",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-6-final-capstone",
+  "sectionSlug": "html-html-module-6-capstone",
+  "prefix": "html_module_6",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.label",
+    "summaryKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.cards.sketch0.title",
+      "sketchId": "capstone-project-brief",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "module6_capstone_step_1",
+            "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_1.title",
+            "exerciseKey": "module6-capstone-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "module6_capstone_step_2",
+            "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_2.title",
+            "exerciseKey": "module6-capstone-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module6_capstone_step_3",
+            "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_3.title",
+            "exerciseKey": "module6-capstone-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module6_capstone_step_4",
+            "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_4.title",
+            "exerciseKey": "module6-capstone-step-4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module6_capstone_step_5",
+            "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_5.title",
+            "exerciseKey": "module6-capstone-step-5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module6_capstone_step_6",
+            "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_6.title",
+            "exerciseKey": "module6-capstone-step-6",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "capstone-project-brief",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-6-final-capstone.final-html-personal-site-capstone.capstone-project-brief.title",
+      "bodyKey": "sketches.html.html-module-6-final-capstone.final-html-personal-site-capstone.capstone-project-brief.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "module6-capstone-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h1\\b[^>]*>\\s*Jordan Lee\\s*</h1>.*Aspiring web developer building practical projects for the community\\..*This portfolio introduces my background, projects, and contact information\\.",
+          "path": "index.html",
+          "message": "Use the exact required Home page heading and paragraph text.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "module6-capstone-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<nav\\b[^>]*>.*<a\\b[^>]*href\\s*=\\s*[\"\\']index\\.html[\"\\'][^>]*>\\s*Home\\s*</a>.*<a\\b[^>]*href\\s*=\\s*[\"\\']about\\.html[\"\\'][^>]*>\\s*About\\s*</a>.*</nav>",
+          "path": "index.html",
+          "message": "Add the exact Home and About navigation to index.html.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h1\\b[^>]*>\\s*About Jordan\\s*</h1>.*I am learning web development by building useful pages and reviewing how each HTML element communicates meaning\\..*My current goal is to build clear, accessible websites before moving on to CSS\\.",
+          "path": "about.html",
+          "message": "Use the exact required About page content.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "module6-capstone-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"\\']images/profile\\.png[\"\\'])(?=[^>]*alt\\s*=\\s*[\"\\']Portrait of Jordan Lee[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Use the exact Home image path and alt text.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<nav\\b[^>]*>.*href\\s*=\\s*[\"\\']\\.\\./index\\.html[\"\\'].*href\\s*=\\s*[\"\\']\\.\\./about\\.html[\"\\'].*href\\s*=\\s*[\"\\']portfolio\\.html[\"\\'].*</nav>",
+          "path": "projects/portfolio.html",
+          "message": "Use the exact nested Projects navigation paths.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"\\']\\.\\./images/profile\\.png[\"\\'])(?=[^>]*alt\\s*=\\s*[\"\\']Portrait of Jordan Lee beside a portfolio project[\"\\'])[^>]*>",
+          "path": "projects/portfolio.html",
+          "message": "Use the exact nested image path and alt text.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "module6-capstone-step-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<header\\b[^>]*>.*<nav\\b[^>]*>.*</nav>.*</header>.*<main\\b[^>]*>.*<section\\b[^>]*>.*<h2\\b[^>]*>\\s*Welcome\\s*</h2>.*</section>.*</main>.*<footer\\b[^>]*>.*Jordan Lee's HTML portfolio\\..*</footer>",
+          "path": "index.html",
+          "message": "Use the required semantic Home structure and exact footer text.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Skills I'm practicing\\s*</h2>.*<ul\\b[^>]*>.*Semantic HTML structure.*Accessible forms and labels.*Multi-page navigation and relative paths.*</ul>",
+          "path": "about.html",
+          "message": "Use the exact required skills list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<table\\b[^>]*>.*Community Event Page.*Semantic content.*Complete.*Workshop Signup.*Accessible forms.*Complete.*</table>",
+          "path": "projects/portfolio.html",
+          "message": "Use the exact required project table values.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"\\']https://developer\\.mozilla\\.org/[\"\\'][^>]*>\\s*MDN Web Docs\\s*</a>",
+          "path": "projects/portfolio.html",
+          "message": "Use the exact MDN Web Docs link text and destination.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "module6-capstone-step-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"\\']contact\\.html[\"\\'][^>]*>\\s*Send me a message\\s*</a>",
+          "path": "index.html",
+          "message": "Add the exact Home call-to-action link to Contact.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"\\']\\.\\./contact\\.html[\"\\'][^>]*>\\s*Contact\\s*</a>",
+          "path": "projects/portfolio.html",
+          "message": "Use the correct nested Contact path from Projects.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']visitor-name[\"\\'][^>]*>\\s*Name\\s*</label>.*<input\\b(?=[^>]*id\\s*=\\s*[\"\\']visitor-name[\"\\'])(?=[^>]*type\\s*=\\s*[\"\\']text[\"\\'])[^>]*>",
+          "path": "contact.html",
+          "message": "Add the exact labeled Name text input.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']visitor-email[\"\\'][^>]*>\\s*Email address\\s*</label>.*<input\\b(?=[^>]*id\\s*=\\s*[\"\\']visitor-email[\"\\'])(?=[^>]*type\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+          "path": "contact.html",
+          "message": "Add the exact labeled Email address input.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Reason for contacting me\\s*</legend>.*Project idea.*Learning opportunity.*</fieldset>",
+          "path": "contact.html",
+          "message": "Add the exact grouped contact-reason choices.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']message[\"\\'][^>]*>\\s*Message\\s*</label>.*<textarea\\b(?=[^>]*id\\s*=\\s*[\"\\']message[\"\\'])(?=[^>]*rows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>.*</textarea>.*<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Send message\\s*</button>",
+          "path": "contact.html",
+          "message": "Add the exact Message textarea and Send message button.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "module6-capstone-step-6",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<meta\\b(?=[^>]*name\\s*=\\s*[\"\\']description[\"\\'])(?=[^>]*content\\s*=\\s*[\"\\']Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information\\.[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Use the exact Home meta description.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<meta\\b(?=[^>]*name\\s*=\\s*[\"\\']description[\"\\'])(?=[^>]*content\\s*=\\s*[\"\\']About Jordan Lee and the HTML skills currently being practiced\\.[\"\\'])[^>]*>",
+          "path": "about.html",
+          "message": "Use the exact About meta description.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<meta\\b(?=[^>]*name\\s*=\\s*[\"\\']description[\"\\'])(?=[^>]*content\\s*=\\s*[\"\\']Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility\\.[\"\\'])[^>]*>",
+          "path": "projects/portfolio.html",
+          "message": "Use the exact Projects meta description.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<meta\\b(?=[^>]*name\\s*=\\s*[\"\\']description[\"\\'])(?=[^>]*content\\s*=\\s*[\"\\']Contact Jordan Lee about project ideas and learning opportunities\\.[\"\\'])[^>]*>",
+          "path": "contact.html",
+          "message": "Use the exact Contact meta description.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<th\\b[^>]*scope\\s*=\\s*[\"\\']col[\"\\'][^>]*>\\s*Project\\s*</th>.*<th\\b[^>]*scope\\s*=\\s*[\"\\']col[\"\\'][^>]*>\\s*Focus\\s*</th>.*<th\\b[^>]*scope\\s*=\\s*[\"\\']col[\"\\'][^>]*>\\s*Status\\s*</th>",
+          "path": "projects/portfolio.html",
+          "message": "Add scope=\"col\" to all three required table headers.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*id\\s*=\\s*[\"\\']visitor-name[\"\\'])(?=[^>]*required\\b)[^>]*>.*<input\\b(?=[^>]*id\\s*=\\s*[\"\\']visitor-email[\"\\'])(?=[^>]*required\\b)[^>]*>.*<textarea\\b(?=[^>]*id\\s*=\\s*[\"\\']message[\"\\'])(?=[^>]*required\\b)[^>]*>.*</textarea>",
+          "path": "contact.html",
+          "message": "Mark Name, Email address, and Message required.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"\\']\\.\\./index\\.html[\"\\'][^>]*>\\s*Home\\s*</a>.*<a\\b[^>]*href\\s*=\\s*[\"\\']\\.\\./about\\.html[\"\\'][^>]*>\\s*About\\s*</a>.*<a\\b[^>]*href\\s*=\\s*[\"\\']\\.\\./contact\\.html[\"\\'][^>]*>\\s*Contact\\s*</a>.*<img\\b(?=[^>]*src\\s*=\\s*[\"\\']\\.\\./images/profile\\.png[\"\\'])[^>]*>",
+          "path": "projects/portfolio.html",
+          "message": "Keep the nested Projects navigation and image path correct.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    }
+  ]
+}

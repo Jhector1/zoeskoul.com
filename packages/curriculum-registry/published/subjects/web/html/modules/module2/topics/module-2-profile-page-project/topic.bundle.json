@@ -1,0 +1,440 @@
+{
+  "topicId": "module-2-profile-page-project",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-2-links-images-paths",
+  "sectionSlug": "html-html-module-2-project",
+  "prefix": "html_module_2",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.label",
+    "summaryKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.cards.sketch0.title",
+      "sketchId": "project-brief",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "module2_profile_step_1",
+            "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.projectSteps.module2_profile_step_1.title",
+            "exerciseKey": "module2-profile-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "module2_profile_step_2",
+            "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.projectSteps.module2_profile_step_2.title",
+            "exerciseKey": "module2-profile-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module2_profile_step_3",
+            "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.projectSteps.module2_profile_step_3.title",
+            "exerciseKey": "module2-profile-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-brief",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-2-links-images-paths.module-2-profile-page-project.project-brief.title",
+      "bodyKey": "sketches.html.html-module-2-links-images-paths.module-2-profile-page-project.project-brief.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "module2-profile-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+          "path": "index.html",
+          "message": "Link the profile home page to About.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+          "path": "about.html",
+          "message": "Link the About page back to the profile home page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "index.html",
+            "about.html"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "module2-profile-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.projects_robotics_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+          "path": "index.html",
+          "message": "Link the profile home page to the nested robotics page.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']\\.\\./index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+          "path": "projects/robotics.html",
+          "message": "Use a parent-folder path from the robotics page back home.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html",
+          "projects/robotics.html"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "index.html",
+            "about.html",
+            "projects/robotics.html"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/robotics.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.projects_robotics_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "module2-profile-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.projects_robotics_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"']Jordan Lee smiling outside the campus library[\"'])[^>]*>",
+          "path": "index.html",
+          "message": "Add the supplied profile image with the requested descriptive alt text.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+          "path": "index.html",
+          "message": "Keep the About link working.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+          "path": "index.html",
+          "message": "Keep the Robotics link working.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html",
+          "projects/robotics.html",
+          "images/profile.png"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/robotics.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.starterFiles.projects_robotics_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "index.html",
+            "about.html",
+            "projects/robotics.html",
+            "images/profile.png"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/robotics.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.projects_robotics_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    }
+  ]
+}

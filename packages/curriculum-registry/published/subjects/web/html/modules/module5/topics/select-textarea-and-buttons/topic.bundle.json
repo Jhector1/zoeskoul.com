@@ -1,0 +1,363 @@
+{
+  "topicId": "select-textarea-and-buttons",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-5-forms-inputs",
+  "sectionSlug": "html-html-module-5-lessons",
+  "prefix": "html_module_5",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.label",
+    "summaryKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.cards.sketch0.title",
+      "sketchId": "select-control",
+      "height": 420,
+      "tryIt": {
+        "id": "try-select-textarea-and-buttons-sketch0",
+        "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.title",
+        "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.prompt",
+        "exerciseKey": "try-select-textarea-and-buttons-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.cards.sketch1.title",
+      "sketchId": "textarea-control",
+      "height": 420,
+      "tryIt": {
+        "id": "try-select-textarea-and-buttons-sketch1",
+        "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.title",
+        "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.prompt",
+        "exerciseKey": "try-select-textarea-and-buttons-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.cards.sketch2.title",
+      "sketchId": "submit-button",
+      "height": 420,
+      "tryIt": {
+        "id": "try-select-textarea-and-buttons-sketch2",
+        "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.title",
+        "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.prompt",
+        "exerciseKey": "try-select-textarea-and-buttons-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "select-control",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.select-control.title",
+      "bodyKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.select-control.bodyMarkdown"
+    },
+    {
+      "id": "textarea-control",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.textarea-control.title",
+      "bodyKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.textarea-control.bodyMarkdown"
+    },
+    {
+      "id": "submit-button",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.submit-button.title",
+      "bodyKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.submit-button.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-select-textarea-and-buttons-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']club[\"\\'][^>]*>\\s*Choose a club\\s*</label>",
+          "path": "index.html",
+          "message": "Add a connected Choose a club label.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<select\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']club[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']club[\"\\'])[^>]*>.*<option\\b[^>]*value\\s*=\\s*[\"\\']robotics[\"\\'][^>]*>\\s*Robotics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']art[\"\\'][^>]*>\\s*Art\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']chess[\"\\'][^>]*>\\s*Chess\\s*</option>.*</select>",
+          "path": "index.html",
+          "message": "Create the club select with Robotics, Art, and Chess options.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-select-textarea-and-buttons-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']question[\"\\'][^>]*>\\s*Question\\s*</label>\\s*<textarea\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']question[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']question[\"\\'])(?=[^>]*\\brows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>\\s*</textarea>",
+          "path": "index.html",
+          "message": "Use a connected five-row textarea for the Question field.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-select-textarea-and-buttons-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<form\\b[^>]*>.*<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Send RSVP\\s*</button>.*</form>",
+          "path": "index.html",
+          "message": "Add a Send RSVP submit button inside the form.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "select-controls-quiz-long-text",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-quiz-long-text",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "select-controls-quiz-meaning",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-quiz-meaning",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "select-controls-quiz-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-quiz-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "select-controls-quiz-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-quiz-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "<button type=\"submit\">Register</button>"
+      }
+    }
+  ]
+}

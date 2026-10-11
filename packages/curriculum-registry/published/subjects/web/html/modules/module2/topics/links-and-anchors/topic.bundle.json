@@ -1,0 +1,504 @@
+{
+  "topicId": "links-and-anchors",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-2-links-images-paths",
+  "sectionSlug": "html-html-module-2-lessons",
+  "prefix": "html_module_2",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.label",
+    "summaryKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.cards.sketch0.title",
+      "sketchId": "anchor-anatomy",
+      "height": 420,
+      "tryIt": {
+        "id": "try-links-and-anchors-sketch0",
+        "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.title",
+        "promptKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.prompt",
+        "exerciseKey": "try-links-and-anchors-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.cards.sketch1.title",
+      "sketchId": "fragment-links",
+      "height": 420,
+      "tryIt": {
+        "id": "try-links-and-anchors-sketch1",
+        "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.title",
+        "promptKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.prompt",
+        "exerciseKey": "try-links-and-anchors-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.cards.sketch2.title",
+      "sketchId": "link-destinations-and-text",
+      "height": 420,
+      "tryIt": {
+        "id": "try-links-and-anchors-sketch2",
+        "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.title",
+        "promptKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.prompt",
+        "exerciseKey": "try-links-and-anchors-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "anchor-anatomy",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.anchor-anatomy.title",
+      "bodyKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.anchor-anatomy.bodyMarkdown"
+    },
+    {
+      "id": "fragment-links",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.fragment-links.title",
+      "bodyKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.fragment-links.bodyMarkdown"
+    },
+    {
+      "id": "link-destinations-and-text",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.link-destinations-and-text.title",
+      "bodyKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.link-destinations-and-text.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "links-sc-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-sc-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "links-sc-2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-sc-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "links-mc-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-mc-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "links-dr-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-dr-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t1",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "links-fb-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-fb-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "href"
+      }
+    },
+    {
+      "id": "links-fb-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-fb-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "#contact"
+      }
+    },
+    {
+      "id": "try-links-and-anchors-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+          "path": "index.html",
+          "message": "Link About me to the provided About page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "index.html",
+            "about.html"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-links-and-anchors-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/robotics.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.projects_robotics_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+          "path": "index.html",
+          "message": "Connect the Robotics project link to the nested project page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html",
+          "projects/robotics.html"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/robotics.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.starterFiles.projects_robotics_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "index.html",
+            "about.html",
+            "projects/robotics.html"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/robotics.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.projects_robotics_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-links-and-anchors-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+          "path": "about.html",
+          "message": "Add a working return link on the About page.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "index.html",
+          "about.html"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "about.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "index.html",
+            "about.html"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

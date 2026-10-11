@@ -1,0 +1,113 @@
+{
+  "topics": {
+    "html": {
+      "html-module-4-semantic-accessible-layout": {
+        "module-4-article-page-project": {
+          "label": "Project: Build a Semantic Article Page",
+          "summary": "Build an article page with landmarks, semantic content containers, logical headings, and accessible image text.",
+          "cards": {
+            "sketch0": {
+              "title": "Publish an Accessible Community Story"
+            },
+            "project": {
+              "title": "Eastside Garden Journal Semantic Article Page"
+            }
+          },
+          "projectSteps": {
+            "module4_article_step_1": {
+              "title": "Add the page landmarks and navigation"
+            },
+            "module4_article_step_2": {
+              "title": "Structure the article and related content"
+            },
+            "module4_article_step_3": {
+              "title": "Finish the accessible article structure"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module4_article_step_1": {
+                "title": "Add the page landmarks and navigation",
+                "prompt": "Start the module project. In step 1 of 3, Start the Eastside Garden Journal page by organizing it with header, nav, main, and footer. Keep the title and introduction in header, place both jump links in nav, keep the story and visit content in main, and move the contact line into footer.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Place the story and visit content in main, then put the contact line in footer."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <h1>Eastside Garden Journal</h1>\n  <p>Updates from the neighborhood garden.</p>\n  <p><a href=\"#story\">Story</a> | <a href=\"#visit\">Visit</a></p>\n\n  <h2 id=\"story\">Students Build New Garden Beds</h2>\n  <p>Volunteers built three raised beds for spring planting.</p>\n\n  <h2 id=\"visit\">Visit the garden</h2>\n  <p>Saturday, 10:00 AM — Eastside Community Center</p>\n\n  <p>Contact: garden@eastside.example</p>\n</body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <h2 id=\"story\">Students Build New Garden Beds</h2>\n    <p>Volunteers built three raised beds for spring planting.</p>\n\n    <h2 id=\"visit\">Visit the garden</h2>\n    <p>Saturday, 10:00 AM — Eastside Community Center</p>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <h1>Eastside Garden Journal</h1>\n  <p>Updates from the neighborhood garden.</p>\n  <p><a href=\"#story\">Story</a> | <a href=\"#visit\">Visit</a></p>\n\n  <h2 id=\"story\">Students Build New Garden Beds</h2>\n  <p>Volunteers built three raised beds for spring planting.</p>\n\n  <h2 id=\"visit\">Visit the garden</h2>\n  <p>Saturday, 10:00 AM — Eastside Community Center</p>\n\n  <p>Contact: garden@eastside.example</p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <h2 id=\"story\">Students Build New Garden Beds</h2>\n    <p>Volunteers built three raised beds for spring planting.</p>\n\n    <h2 id=\"visit\">Visit the garden</h2>\n    <p>Saturday, 10:00 AM — Eastside Community Center</p>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module4_article_step_2": {
+                "title": "Structure the article and related content",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same page. Wrap the garden story in article. Add a What changed section with the provided paragraph inside the article. Keep Visit the garden as its own section, and add the Related activity aside with the seed-starting workshop text.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <h2 id=\"story\">Students Build New Garden Beds</h2>\n    <p>Volunteers built three raised beds for spring planting.</p>\n\n    <h2 id=\"visit\">Visit the garden</h2>\n    <p>Saturday, 10:00 AM — Eastside Community Center</p>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n<!-- Project step 2: Structure the article and related content -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same page -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <h2 id=\"story\">Students Build New Garden Beds</h2>\n    <p>Volunteers built three raised beds for spring planting.</p>\n\n    <h2 id=\"visit\">Visit the garden</h2>\n    <p>Saturday, 10:00 AM — Eastside Community Center</p>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n<!-- Project step 2: Structure the article and related content -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same page -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module4_article_step_3": {
+                "title": "Finish the accessible article structure",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the article by adding a figure after the opening story paragraph. Use garden-beds.jpg with alt=\"Three students filling raised garden beds with soil\" and add the figcaption Students prepare the new beds for spring planting. Keep the heading hierarchy h1 for the page, h2 for major regions, and h3 for What changed.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n<!-- Project step 3: Finish the accessible article structure -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the article by adding a figure after the opening story paragraph -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <figure>\n        <img src=\"garden-beds.jpg\" alt=\"Three students filling raised garden beds with soil\">\n        <figcaption>Students prepare the new beds for spring planting.</figcaption>\n      </figure>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n<!-- Project step 3: Finish the accessible article structure -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the article by adding a figure after the opening story paragraph -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <figure>\n        <img src=\"garden-beds.jpg\" alt=\"Three students filling raised garden beds with soil\">\n        <figcaption>Students prepare the new beds for spring planting.</figcaption>\n      </figure>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "html": {
+      "html-module-4-semantic-accessible-layout": {
+        "module-4-article-page-project": {
+          "project-brief": {
+            "title": "Project brief: Eastside Garden Journal",
+            "bodyMarkdown": "### Project Brief\n\n**Scenario:** The Eastside Community Center needs a clear article page about its neighborhood garden program.\n\n**Your role:** Junior web developer preparing the story for the community website.\n\n**Workspace:** Work in `index.html` and use the live browser preview after each meaningful change.\n\n**Deliverable:** A semantic article page with page landmarks, navigation, article and section structure, complementary information, a logical heading hierarchy, and a meaningful image text alternative.\n\nBuild the page in three cumulative steps. Each new step starts from the exact working result of the previous one."
+          }
+        }
+      }
+    }
+  }
+}

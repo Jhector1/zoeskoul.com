@@ -1,0 +1,386 @@
+{
+  "topicId": "elements-tags-and-attributes",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-1-first-web-pages",
+  "sectionSlug": "html-html-module-1-lessons",
+  "prefix": "html_module_1",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.label",
+    "summaryKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.cards.sketch0.title",
+      "sketchId": "element-parts",
+      "height": 420,
+      "tryIt": {
+        "id": "try-elements-tags-and-attributes-sketch0",
+        "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.title",
+        "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.prompt",
+        "exerciseKey": "try-elements-tags-and-attributes-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.cards.sketch1.title",
+      "sketchId": "nesting-elements",
+      "height": 420,
+      "tryIt": {
+        "id": "try-elements-tags-and-attributes-sketch1",
+        "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.title",
+        "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.prompt",
+        "exerciseKey": "try-elements-tags-and-attributes-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.cards.sketch2.title",
+      "sketchId": "attributes-add-information",
+      "height": 420,
+      "tryIt": {
+        "id": "try-elements-tags-and-attributes-sketch2",
+        "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.title",
+        "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.prompt",
+        "exerciseKey": "try-elements-tags-and-attributes-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "element-parts",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.element-parts.title",
+      "bodyKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.element-parts.bodyMarkdown"
+    },
+    {
+      "id": "nesting-elements",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.nesting-elements.title",
+      "bodyKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.nesting-elements.bodyMarkdown"
+    },
+    {
+      "id": "attributes-add-information",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.attributes-add-information.title",
+      "bodyKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.attributes-add-information.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "closing-tag-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.closing-tag-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "attribute-location-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.attribute-location-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "element-parts-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.element-parts-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "nesting-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.nesting-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "attribute-name-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.attribute-name-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "lang"
+      }
+    },
+    {
+      "id": "content-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.content-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "content"
+      }
+    },
+    {
+      "id": "try-elements-tags-and-attributes-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*Balanced tags are easier to read\\.\\s*</p>",
+          "message": "Close the paragraph after the required sentence.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-elements-tags-and-attributes-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<p(?:\\s[^>]*)?>[^<]*I am practicing\\s*<strong(?:\\s[^>]*)?>\\s*HTML structure\\s*</strong>\\s*today\\.\\s*</p>",
+          "message": "Nest a strong element around HTML structure inside the paragraph.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-elements-tags-and-attributes-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<p\\b[^>]*\\btitle\\s*=\\s*[\\\"']A short introduction[\\\"'][^>]*>\\s*Welcome to my page\\.\\s*</p>",
+          "message": "Add the A short introduction title attribute to the Welcome to my page paragraph.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

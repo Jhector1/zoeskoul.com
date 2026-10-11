@@ -1,0 +1,283 @@
+{
+  "topicId": "module-1-first-page-project",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-1-first-web-pages",
+  "sectionSlug": "html-html-module-1-project",
+  "prefix": "html_module_1",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.label",
+    "summaryKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.cards.sketch0.title",
+      "sketchId": "project-roadmap",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "first_page_step_1_shell",
+            "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.projectSteps.first_page_step_1_shell.title",
+            "exerciseKey": "first-page-step-1-shell",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "first_page_step_2_content",
+            "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.projectSteps.first_page_step_2_content.title",
+            "exerciseKey": "first-page-step-2-content",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "first_page_step_3_nesting",
+            "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.projectSteps.first_page_step_3_nesting.title",
+            "exerciseKey": "first-page-step-3-nesting",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-roadmap",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-1-first-web-pages.module-1-first-page-project.project-roadmap.title",
+      "bodyKey": "sketches.html.html-module-1-first-web-pages.module-1-first-page-project.project-roadmap.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "first-page-step-1-shell",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)^\\s*<!doctype\\s+html\\s*>",
+          "message": "Start the project with the HTML doctype.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<html\\b[^>]*\\blang\\s*=\\s*[\\\"']en[\\\"'][^>]*>.*</html>",
+          "message": "Use an html root with lang set to en.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<head\\b[^>]*>.*<meta\\b[^>]*charset\\s*=\\s*[\\\"']?UTF-8[\\\"']?[^>]*>.*<title\\b[^>]*>\\s*My Learning Page\\s*</title>.*</head>",
+          "message": "Complete head with UTF-8 and the My Learning Page title.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<body\\b[^>]*>\\s*</body>",
+          "message": "Leave an empty body ready for the next project step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "first-page-step-2-content",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content.solutionCode",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<body\\b[^>]*>.*<h1\\b[^>]*>\\s*My Learning Page\\s*</h1>.*<p\\b[^>]*>\\s*I am learning how browsers read HTML\\.\\s*</p>.*<p\\b[^>]*>\\s*Clear structure helps me understand my page\\.\\s*</p>.*</body>",
+          "message": "Add the h1 and both required paragraphs inside body.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content.solutionCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "first-page-step-3-nesting",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting.solutionCode",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<h2(?:\\s[^>]*)?>\\s*What I learned\\s*</h2>",
+          "message": "Add the What I learned h2.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*I am learning how browsers read\\s*<strong(?:\\s[^>]*)?>\\s*HTML\\s*</strong>\\s*\\.\\s*</p>",
+          "message": "Wrap HTML in a strong element inside the first paragraph.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "index.html",
+          "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*Clear\\s*<em(?:\\s[^>]*)?>\\s*structure\\s*</em>\\s*helps me understand my page\\.\\s*</p>",
+          "message": "Wrap structure in an em element inside the second paragraph.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting.solutionCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    }
+  ]
+}

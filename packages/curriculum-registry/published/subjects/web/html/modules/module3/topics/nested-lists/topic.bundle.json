@@ -1,0 +1,359 @@
+{
+  "topicId": "nested-lists",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-3-lists-tables-content",
+  "sectionSlug": "html-html-module-3-lessons",
+  "prefix": "html_module_3",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-3-lists-tables-content.nested-lists.label",
+    "summaryKey": "topics.html.html-module-3-lists-tables-content.nested-lists.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.cards.sketch0.title",
+      "sketchId": "nest-inside-item",
+      "height": 420,
+      "tryIt": {
+        "id": "try-nested-lists-sketch0",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.prompt",
+        "exerciseKey": "try-nested-lists-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.cards.sketch1.title",
+      "sketchId": "mix-list-meaning",
+      "height": 420,
+      "tryIt": {
+        "id": "try-nested-lists-sketch1",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.prompt",
+        "exerciseKey": "try-nested-lists-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.cards.sketch2.title",
+      "sketchId": "readable-hierarchy",
+      "height": 420,
+      "tryIt": {
+        "id": "try-nested-lists-sketch2",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.prompt",
+        "exerciseKey": "try-nested-lists-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "nest-inside-item",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.nest-inside-item.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.nest-inside-item.bodyMarkdown"
+    },
+    {
+      "id": "mix-list-meaning",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.mix-list-meaning.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.mix-list-meaning.bodyMarkdown"
+    },
+    {
+      "id": "readable-hierarchy",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.readable-hierarchy.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.readable-hierarchy.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-nested-lists-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Programming.*</ul>\\s*</li>.*<li\\b[^>]*>\\s*Art\\s*</li>",
+          "path": "index.html",
+          "message": "Nest Sensors and Programming inside the Robotics list item.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-nested-lists-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Web Basics\\s*<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*HTML structure\\s*</li>\\s*<li\\b[^>]*>\\s*Links and images\\s*</li>\\s*</ol>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest the ordered Web Basics lesson sequence inside its parent item.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-nested-lists-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Web Development\\s*<ul\\b[^>]*>.*HTML.*CSS later.*</ul>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest HTML and CSS later under Web Development.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest Sensors and Motors under Robotics.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "nested-quiz-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-quiz-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "nested-quiz-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-quiz-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "nested-quiz-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-quiz-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "nested-quiz-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-quiz-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "<ul><li>Sensors</li><li>Programming</li></ul>"
+      }
+    }
+  ]
+}

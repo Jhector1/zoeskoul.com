@@ -1,0 +1,207 @@
+{
+  "subjects": {
+    "html": {
+      "title": "HTML Foundations",
+      "description": "A practical beginner HTML course covering documents, text, links, images, lists, tables, semantic structure, forms, metadata, accessibility, and a complete single-page capstone.",
+      "moreComingSoon": "More HTML Foundations lessons are coming soon."
+    }
+  },
+  "modules": {
+    "html": {
+      "html-module-1-first-web-pages": {
+        "title": "First Web Pages",
+        "description": "Build confidence with first web pages through visible browser-preview practice.",
+        "outcomes": [
+          "Understand HTML as document structure that a browser parses and renders.",
+          "Build a page with doctype, html, head, title, and body.",
+          "Read opening tags, closing tags, nested content, and attributes."
+        ],
+        "why": [
+          "Builds confidence with first web pages.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-2-links-images-paths": {
+        "title": "Links, Images, and Paths",
+        "description": "Build confidence with links, images, and paths through visible browser-preview practice.",
+        "outcomes": [
+          "Create links with anchor elements and useful link text.",
+          "Understand how URLs and local paths point to resources.",
+          "Add images with src and meaningful alt text."
+        ],
+        "why": [
+          "Builds confidence with links, images, and paths.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-3-lists-tables-content": {
+        "title": "Lists, Tables, and Structured Content",
+        "description": "Build confidence with lists, tables, and structured content through visible browser-preview practice.",
+        "outcomes": [
+          "Choose ordered or unordered lists based on content meaning.",
+          "Represent grouped and hierarchical information with nested lists.",
+          "Use table, caption, thead, tbody, tr, th, and td for tabular data."
+        ],
+        "why": [
+          "Builds confidence with lists, tables, and structured content.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-4-semantic-accessible-layout": {
+        "title": "Semantic and Accessible Page Structure",
+        "description": "Build confidence with semantic and accessible page structure through visible browser-preview practice.",
+        "outcomes": [
+          "Use header, nav, main, and footer to describe major page regions.",
+          "Choose semantic content containers instead of generic wrappers when meaning exists.",
+          "Create a logical heading hierarchy and meaningful text alternatives."
+        ],
+        "why": [
+          "Builds confidence with semantic and accessible page structure.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-5-forms-inputs": {
+        "title": "Forms and User Input",
+        "description": "Build confidence with forms and user input through visible browser-preview practice.",
+        "outcomes": [
+          "Connect labels to form controls and understand form structure.",
+          "Choose text, email, number, date, checkbox, radio, and other input types appropriately.",
+          "Collect longer text and choices with accessible controls."
+        ],
+        "why": [
+          "Builds confidence with forms and user input.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-6-final-capstone": {
+        "title": "Final Capstone: Personal Website",
+        "description": "Bring the full HTML Foundations skill set together in one growing, cumulative, semantic, accessible multi-page website.",
+        "outcomes": [
+          "Build one cumulative website whose files are introduced only when the project needs them.",
+          "Connect pages with meaningful navigation, relative links, and correctly referenced image assets.",
+          "Combine semantic structure, exact content, links, images, lists, tables, and a form appropriately.",
+          "Review document metadata, nesting, headings, labels, alt text, link text, and relative paths before submission.",
+          "Use the live browser preview and source validation to verify the complete final website."
+        ],
+        "why": [
+          "Builds confidence with final capstone: personal website.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "html": {
+      "html-module-1-first-web-pages": {
+        "html-html-module-1-lessons": {
+          "title": "First Web Pages",
+          "description": "Learn how html and the browser work, the html document structure, elements, tags, and attributes through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "How HTML and the Browser Work",
+            "The HTML Document Structure",
+            "Elements, Tags, and Attributes"
+          ]
+        },
+        "html-html-module-1-project": {
+          "title": "Module Project",
+          "description": "Learn project: build your first complete page through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build Your First Complete Page"
+          ]
+        }
+      },
+      "html-module-2-links-images-paths": {
+        "html-html-module-2-lessons": {
+          "title": "Links, Images, and Paths",
+          "description": "Learn links and anchors, relative and absolute paths, images and alt text through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Links and Anchors",
+            "Relative and Absolute Paths",
+            "Images and Alt Text"
+          ]
+        },
+        "html-html-module-2-project": {
+          "title": "Module Project",
+          "description": "Learn project: build a profile page through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build a Profile Page"
+          ]
+        }
+      },
+      "html-module-3-lists-tables-content": {
+        "html-html-module-3-lessons": {
+          "title": "Lists, Tables, and Structured Content",
+          "description": "Learn ordered and unordered lists, nested lists, tables and table structure through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Ordered and Unordered Lists",
+            "Nested Lists",
+            "Tables and Table Structure"
+          ]
+        },
+        "html-html-module-3-project": {
+          "title": "Module Project",
+          "description": "Learn project: build a structured content page through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build a Structured Content Page"
+          ]
+        }
+      },
+      "html-module-4-semantic-accessible-layout": {
+        "html-html-module-4-lessons": {
+          "title": "Semantic and Accessible Page Structure",
+          "description": "Learn page landmarks, sections, articles, and asides, headings and accessible structure through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Page Landmarks",
+            "Sections, Articles, and Asides",
+            "Headings and Accessible Structure"
+          ]
+        },
+        "html-html-module-4-project": {
+          "title": "Module Project",
+          "description": "Learn project: build a semantic article page through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build a Semantic Article Page"
+          ]
+        }
+      },
+      "html-module-5-forms-inputs": {
+        "html-html-module-5-lessons": {
+          "title": "Forms and User Input",
+          "description": "Learn forms, labels, and inputs, useful input types, select, textarea, and buttons through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Forms, Labels, and Inputs",
+            "Useful Input Types",
+            "Select, Textarea, and Buttons"
+          ]
+        },
+        "html-html-module-5-project": {
+          "title": "Module Project",
+          "description": "Learn project: build an accessible signup form through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build an Accessible Signup Form"
+          ]
+        }
+      },
+      "html-module-6-final-capstone": {
+        "html-html-module-6-capstone": {
+          "title": "Final Capstone",
+          "description": "Learn capstone: build a complete personal website through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Capstone: Build a Complete Personal Website"
+          ]
+        }
+      }
+    }
+  }
+}

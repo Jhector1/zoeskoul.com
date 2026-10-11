@@ -1,0 +1,394 @@
+{
+  "topicId": "tables-and-table-structure",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-3-lists-tables-content",
+  "sectionSlug": "html-html-module-3-lessons",
+  "prefix": "html_module_3",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.label",
+    "summaryKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.cards.sketch0.title",
+      "sketchId": "table-data",
+      "height": 420,
+      "tryIt": {
+        "id": "try-tables-and-table-structure-sketch0",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.prompt",
+        "exerciseKey": "try-tables-and-table-structure-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.cards.sketch1.title",
+      "sketchId": "caption-headers",
+      "height": 420,
+      "tryIt": {
+        "id": "try-tables-and-table-structure-sketch1",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.prompt",
+        "exerciseKey": "try-tables-and-table-structure-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.cards.sketch2.title",
+      "sketchId": "thead-tbody",
+      "height": 420,
+      "tryIt": {
+        "id": "try-tables-and-table-structure-sketch2",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.prompt",
+        "exerciseKey": "try-tables-and-table-structure-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "table-data",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.table-data.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.table-data.bodyMarkdown"
+    },
+    {
+      "id": "caption-headers",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.caption-headers.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.caption-headers.bodyMarkdown"
+    },
+    {
+      "id": "thead-tbody",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.thead-tbody.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.thead-tbody.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-tables-and-table-structure-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<caption\\b[^>]*>\\s*Weekly club meetings\\s*</caption>",
+          "path": "index.html",
+          "message": "Add the requested table caption.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<th\\b[^>]*>\\s*Club\\s*</th>\\s*<th\\b[^>]*>\\s*Day\\s*</th>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Club and Day header row.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Robotics\\s*</td>\\s*<td\\b[^>]*>\\s*Tuesday\\s*</td>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Robotics row.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Art\\s*</td>\\s*<td\\b[^>]*>\\s*Thursday\\s*</td>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Art row.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-tables-and-table-structure-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<thead\\b[^>]*>\\s*<tr\\b[^>]*>.*Time.*Session.*</tr>\\s*</thead>",
+          "path": "index.html",
+          "message": "Put the header row inside thead.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tbody\\b[^>]*>\\s*<tr\\b[^>]*>.*10:00.*HTML Basics.*</tr>\\s*</tbody>",
+          "path": "index.html",
+          "message": "Put the data row inside tbody.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-tables-and-table-structure-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<caption\\b[^>]*>\\s*Morning session schedule\\s*</caption>",
+          "path": "index.html",
+          "message": "Add the requested table caption.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<thead\\b[^>]*>.*Time.*Session.*Location.*</thead>",
+          "path": "index.html",
+          "message": "Build the three-column header inside thead.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tbody\\b[^>]*>.*9:00.*Welcome.*Room A.*10:00.*HTML Basics.*Lab 1.*11:00.*Robotics Demo.*Lab 2.*</tbody>",
+          "path": "index.html",
+          "message": "Put all three schedule rows inside tbody.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "tables-quiz-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-quiz-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "tables-quiz-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-quiz-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "tables-quiz-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-quiz-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "tables-quiz-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-quiz-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "<th>Time</th>"
+      }
+    }
+  ]
+}

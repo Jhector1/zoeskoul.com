@@ -1,0 +1,113 @@
+{
+  "topics": {
+    "html": {
+      "html-module-5-forms-inputs": {
+        "module-5-signup-form-project": {
+          "label": "Project: Build an Accessible Signup Form",
+          "summary": "Build a complete form with labels, sensible input types, choices, and a submit button.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Brief"
+            },
+            "project": {
+              "title": "Community Workshop Accessible Signup Form"
+            }
+          },
+          "projectSteps": {
+            "module5_signup_step_1": {
+              "title": "Step 1: Add labeled contact fields"
+            },
+            "module5_signup_step_2": {
+              "title": "Step 2: Add accessible signup choices"
+            },
+            "module5_signup_step_3": {
+              "title": "Step 3: Finish the accessible signup form"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module5_signup_step_1": {
+                "title": "Step 1: Add labeled contact fields",
+                "prompt": "Start the module project. In step 1 of 3, Start the signup form. Add one form containing Full name, Email address, and Workshop date fields. Connect every label with matching for/id values, use useful name attributes, and choose text, email, and date input types. Check the three controls in Preview.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Use text, email, and date types and keep all three controls inside one form."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n</body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n</body>\n</html>",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module5_signup_step_2": {
+                "title": "Step 2: Add accessible signup choices",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same form. Add a Preferred session radio group with Morning and Evening choices, an independent `Send me workshop updates` checkbox, and a Workshop track select with Web basics, Data basics, and Git basics options. Keep all existing fields.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n<!-- Project step 2: Step 2: Add accessible signup choices -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same form -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n<!-- Project step 2: Step 2: Add accessible signup choices -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same form -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module5_signup_step_3": {
+                "title": "Step 3: Finish the accessible signup form",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the same signup form. Add a labeled textarea asking `What do you want to learn?` with `id=\"goals\"`, `name=\"goals\"`, and `rows=\"5\"`. Then add a `Register for workshop` submit button. Keep every field and choice from the previous steps and inspect the complete form in Preview.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n<!-- Project step 3: Step 3: Finish the accessible signup form -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the same signup form -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n\n    <label for=\"goals\">What do you want to learn?</label>\n    <textarea id=\"goals\" name=\"goals\" rows=\"5\"></textarea>\n\n    <button type=\"submit\">Register for workshop</button>\n  </form>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n<!-- Project step 3: Step 3: Finish the accessible signup form -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the same signup form -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n\n    <label for=\"goals\">What do you want to learn?</label>\n    <textarea id=\"goals\" name=\"goals\" rows=\"5\"></textarea>\n\n    <button type=\"submit\">Register for workshop</button>\n  </form>\n</body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "html": {
+      "html-module-5-forms-inputs": {
+        "module-5-signup-form-project": {
+          "project-brief": {
+            "title": "Project brief: Community Workshop Signup",
+            "bodyMarkdown": "A neighborhood learning center is preparing registration for a free community workshop and needs a clear signup page before registration opens.\n\nYou are the web page author responsible for the attendee signup experience. Work in the single file `index.html`.\n\nYour deliverable is a complete, accessible **Community Workshop Signup** page that the center can preview for attendees. It must collect contact information and the workshop date, let attendees choose a preferred session and workshop track, offer an optional updates checkbox, collect a longer learning-goals response, and provide a submit button.\n\nYou will build that deliverable progressively: start with identity and contact fields, add meaningful choices, then finish with the longer-response field and submission action.\n\n```html\n<form>\n  <label for=\"full-name\">Full name</label>\n  <input id=\"full-name\" name=\"full_name\" type=\"text\">\n</form>\n```\n\nRead this starter idea line by line: the `form` creates the submission group, the `label` names the field, and the matching input `id` connects the control to that label. Each project step will extend the same `index.html` rather than starting over."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "topics": {
+    "html": {
+      "html-module-5-forms-inputs": {
+        "select-textarea-and-buttons": {
+          "label": "Select, Textarea, and Buttons",
+          "summary": "Collect longer text and choices with accessible controls.",
+          "cards": {
+            "sketch0": {
+              "title": "Offer a Menu of Choices"
+            },
+            "sketch1": {
+              "title": "Collect Longer Text"
+            },
+            "sketch2": {
+              "title": "Finish with a Clear Action"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_select_textarea_and_buttons_sketch0": {
+              "title": "Try it yourself: Create a labeled select menu",
+              "prompt": "Now apply what you just learned in this task. Replace the paragraph with a labeled select menu. Use `id=\"club\"` and `name=\"club\"`, label it `Choose a club`, and add Robotics, Art, and Chess options with lowercase values. Check the menu in Preview. Produce the result for create a labeled select menu so it reinforces Select, Textarea, and Buttons.",
+              "hint": "A select is useful because the choices come from one predefined list.",
+              "help": {
+                "concept": "Select contains option elements and should have a connected visible label.",
+                "hint_1": "Match `for=\"club\"` with `id=\"club\"`.",
+                "hint_2": "Give each option a useful lowercase value."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <p>Choose a club:</p>\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <label for=\"club\">Choose a club</label>\n    <select id=\"club\" name=\"club\">\n      <option value=\"robotics\">Robotics</option>\n      <option value=\"art\">Art</option>\n      <option value=\"chess\">Chess</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <p>Choose a club:</p>\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <label for=\"club\">Choose a club</label>\n    <select id=\"club\" name=\"club\">\n      <option value=\"robotics\">Robotics</option>\n      <option value=\"art\">Art</option>\n      <option value=\"chess\">Chess</option>\n    </select>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_select_textarea_and_buttons_sketch1": {
+              "title": "Try it yourself: Use a textarea for a longer response",
+              "prompt": "Now apply what you just learned in this task. Replace the one-line Question input with a textarea. Keep `id=\"question\"` and `name=\"question\"`, add `rows=\"5\"`, and keep the existing connected label. Compare the larger response area in Preview. Produce the result for use a textarea for a longer response so it reinforces Select, Textarea, and Buttons.",
+              "hint": "A question may need several lines, so use a control intended for longer free-form text.",
+              "help": {
+                "concept": "Textarea is designed for multi-line text and can use the same label connection pattern as an input.",
+                "hint_1": "Remove the input and open a textarea with the same id and name.",
+                "hint_2": "Close the textarea explicitly and add rows=\"5\"."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <input id=\"question\" name=\"question\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <textarea id=\"question\" name=\"question\" rows=\"5\"></textarea>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <input id=\"question\" name=\"question\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <textarea id=\"question\" name=\"question\" rows=\"5\"></textarea>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_select_textarea_and_buttons_sketch2": {
+              "title": "Try it yourself: Add a clear submit button",
+              "prompt": "Now apply what you just learned in this task. Add a button inside the form after the Name input. Give it `type=\"submit\"` and visible text `Send RSVP`. Confirm the button appears in Preview. Produce the result for add a clear submit button so it reinforces Select, Textarea, and Buttons.",
+              "hint": "The final action belongs inside the form with an explicit submit type.",
+              "help": {
+                "concept": "A submit button gives the form a clear action control.",
+                "hint_1": "Add the button after the input and before the closing form.",
+                "hint_2": "Use the exact button text Send RSVP."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n    <button type=\"submit\">Send RSVP</button>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n    <button type=\"submit\">Send RSVP</button>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "select-controls-quiz-long-text": {
+              "title": "Choose a longer-text control",
+              "prompt": "Which control is designed for a multi-line response such as a detailed question?",
+              "hint": "Choose the control made for longer free-form text.",
+              "help": {
+                "concept": "Textarea collects multi-line free-form text.",
+                "hint_1": "Input is normally a one-line control.",
+                "hint_2": "Select is for predefined choices."
+              },
+              "options": {
+                "a": "<textarea>",
+                "b": "<input>",
+                "c": "<select>",
+                "d": "<option>"
+              }
+            },
+            "select-controls-quiz-meaning": {
+              "title": "Identify appropriate controls",
+              "prompt": "Which two statements use these controls appropriately?",
+              "hint": "Match each control to the interaction it represents.",
+              "help": {
+                "concept": "Select is useful for predefined menu choices, and a submit button gives a form a clear submission action.",
+                "hint_1": "One correct statement describes a menu.",
+                "hint_2": "The other describes the final form action."
+              },
+              "options": {
+                "a": "Use select with options for a predefined menu of choices.",
+                "b": "Use a button with type=\"submit\" for the form's submission action.",
+                "c": "Use option by itself outside a select to collect a paragraph.",
+                "d": "Use textarea when the user must pick exactly one radio option."
+              }
+            },
+            "select-controls-quiz-order": {
+              "title": "Arrange a labeled select",
+              "prompt": "Arrange the tokens into a connected select control with two options.",
+              "hint": "The label comes before the select, and the options belong inside select.",
+              "help": {
+                "concept": "A select contains option elements and can be explicitly labeled.",
+                "hint_1": "Connect the label to id track.",
+                "hint_2": "Close the select after both options."
+              },
+              "tokens": {
+                "t1": "<label for=\"track\">Track</label>",
+                "t2": "<select id=\"track\" name=\"track\">",
+                "t3": "<option value=\"web\">Web</option>",
+                "t4": "<option value=\"data\">Data</option>",
+                "t5": "</select>"
+              }
+            },
+            "select-controls-quiz-blank": {
+              "title": "Complete the form action",
+              "prompt": "Choose the control that correctly fills the blank as the form's submission action.",
+              "hint": "Use a button with an explicit submit type.",
+              "help": {
+                "concept": "A submit button communicates and performs the form's submission action.",
+                "hint_1": "The button belongs inside form.",
+                "hint_2": "Choose the option with visible action text."
+              },
+              "template": "<form>\n  <label for=\"name\">Name</label>\n  <input id=\"name\" name=\"name\" type=\"text\">\n  [blank1]\n</form>",
+              "choices": [
+                "<button type=\"submit\">Register</button>",
+                "<button type=\"button\">Register</button>",
+                "<input type=\"text\">",
+                "<option value=\"register\">Register</option>"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "html": {
+      "html-module-5-forms-inputs": {
+        "select-textarea-and-buttons": {
+          "select-control": {
+            "title": "Use select and option for a compact choice list",
+            "bodyMarkdown": "Use `<select>` when a person should choose from a predefined menu. Each `<option>` provides one choice, and the select should have a connected label just like other form controls.\n\n```html\n<label for=\"track\">Workshop track</label>\n<select id=\"track\" name=\"track\">\n  <option value=\"web\">Web</option>\n  <option value=\"data\">Data</option>\n</select>\n```\n\nRead this example line by line: the label points to the select id, the select names the submitted field, and each option provides a visible choice plus a value."
+          },
+          "textarea-control": {
+            "title": "Use textarea for multi-line free-form responses",
+            "bodyMarkdown": "A one-line input is not ideal for a longer comment, question, or description. Use `<textarea>` for multi-line free-form text, and connect its visible label with `for` and `id`.\n\n```html\n<label for=\"goals\">Learning goals</label>\n<textarea id=\"goals\" name=\"goals\" rows=\"4\"></textarea>\n```\n\nRead the example line by line: the label identifies the response field, textarea opens the multi-line control, the id/name describe that control, and the closing textarea completes it. `rows` suggests a useful visible height."
+          },
+          "submit-button": {
+            "title": "Use a submit button for the form's submission action",
+            "bodyMarkdown": "A form needs a clear action control when the user is ready to send the entered values. Use a `<button type=\"submit\">` with text that describes the action.\n\n```html\n<button type=\"submit\">Register</button>\n```\n\nRead this example line by line: button creates the clickable control, `type=\"submit\"` gives it the form-submission behavior, and `Register` provides a clear visible name. This HTML course focuses on the form markup, not on a server that receives the data."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "topicId": "headings-and-accessible-structure",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-4-semantic-accessible-layout",
+  "sectionSlug": "html-html-module-4-lessons",
+  "prefix": "html_module_4",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.label",
+    "summaryKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.cards.sketch0.title",
+      "sketchId": "heading-hierarchy",
+      "height": 420,
+      "tryIt": {
+        "id": "try-headings-and-accessible-structure-sketch0",
+        "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.title",
+        "promptKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.prompt",
+        "exerciseKey": "try-headings-and-accessible-structure-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.cards.sketch1.title",
+      "sketchId": "meaningful-text-alternatives",
+      "height": 420,
+      "tryIt": {
+        "id": "try-headings-and-accessible-structure-sketch1",
+        "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.title",
+        "promptKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.prompt",
+        "exerciseKey": "try-headings-and-accessible-structure-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "heading-hierarchy",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.heading-hierarchy.title",
+      "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.heading-hierarchy.bodyMarkdown"
+    },
+    {
+      "id": "meaningful-text-alternatives",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.meaningful-text-alternatives.title",
+      "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.meaningful-text-alternatives.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-headings-and-accessible-structure-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h1\\b[^>]*>\\s*Community Garden Guide\\s*</h1>.*<h2\\b[^>]*>\\s*Volunteer Days\\s*</h2>.*<h3\\b[^>]*>\\s*What to bring\\s*</h3>",
+          "path": "index.html",
+          "message": "Use h1, then h2 for Volunteer Days, then h3 for What to bring.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-headings-and-accessible-structure-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<img\\b(?=[^>]*\\bsrc\\s*=\\s*[\\\"']garden-team\\.jpg[\\\"'])(?=[^>]*\\balt\\s*=\\s*[\\\"']Three students planting herbs in raised garden beds[\\\"'])[^>]*>",
+          "path": "index.html",
+          "message": "Give the garden image the requested meaningful alt text.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<figure\\b[^>]*>.*<img\\b[^>]*>.*<figcaption\\b[^>]*>\\s*Students prepare the herb garden for spring\\.\\s*</figcaption>.*</figure>",
+          "path": "index.html",
+          "message": "Add the requested figcaption inside figure.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "accessible-structure-quiz-headings",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-quiz-headings",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "accessible-structure-quiz-accessibility",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-quiz-accessibility",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "accessible-structure-quiz-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-quiz-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "accessible-structure-quiz-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-quiz-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "alt=\"Two students repairing a bicycle wheel\""
+      }
+    }
+  ]
+}

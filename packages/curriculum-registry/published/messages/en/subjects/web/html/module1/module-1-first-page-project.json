@@ -1,0 +1,103 @@
+{
+  "topics": {
+    "html": {
+      "html-module-1-first-web-pages": {
+        "module-1-first-page-project": {
+          "label": "Project: Build Your First Complete Page",
+          "summary": "Act as a junior web developer helping a student-success team prepare a simple learning-profile page for a new-coder orientation. Build and hand off one browser-ready index.html page in three progressive steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Your First Client-Style Page"
+            },
+            "project": {
+              "title": "Build Your First Complete Page"
+            }
+          },
+          "projectSteps": {
+            "first_page_step_1_shell": {
+              "title": "Step 1: Build the document shell"
+            },
+            "first_page_step_2_content": {
+              "title": "Step 2: Add the page content"
+            },
+            "first_page_step_3_nesting": {
+              "title": "Step 3: Finish with clear nested markup"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "first_page_step_1_shell": {
+                "title": "Step 1: Build the document shell",
+                "prompt": "Start the module project. In step 1 of 3, You are starting the student-success team's review page in index.html. Create the document foundation with a modern doctype, html lang set to English, UTF-8 charset, the title **My Learning Page**, and an empty body ready for the content the team will review in the next step.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Preview the page even though the body is empty, then use Check Answer to verify the source foundation."
+                },
+                "starterCode": "<!-- Build the document foundation here. -->\n",
+                "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n  </body>\n</html>"
+              },
+              "first_page_step_2_content": {
+                "title": "Step 2: Add the page content",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same index.html review page for the student-success team. Add an h1 **My Learning Page** and two paragraphs: **I am learning how browsers read HTML.** and **Clear structure helps me understand my page.**",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n  <!-- Project step 2: Step 2: Add the page content -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same index.html review page for the student-success team -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  </body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n  <!-- Project step 2: Step 2: Add the page content -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same index.html review page for the student-success team -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  </body>\n</html>\n"
+                  }
+                }
+              },
+              "first_page_step_3_nesting": {
+                "title": "Step 3: Finish with clear nested markup",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the same index.html handoff for the student-success team. Add an h2 **What I learned**, wrap **HTML** in strong inside the first paragraph, and wrap **structure** in em inside the second paragraph. The final browser preview should be ready for the team's review.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  <!-- Project step 3: Step 3: Finish with clear nested markup -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the same index.html handoff for the student-success team -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <h2>What I learned</h2>\n    <p>I am learning how browsers read <strong>HTML</strong>.</p>\n    <p>Clear <em>structure</em> helps me understand my page.</p>\n  </body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  <!-- Project step 3: Step 3: Finish with clear nested markup -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the same index.html handoff for the student-success team -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <h2>What I learned</h2>\n    <p>I am learning how browsers read <strong>HTML</strong>.</p>\n    <p>Clear <em>structure</em> helps me understand my page.</p>\n  </body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "html": {
+      "html-module-1-first-web-pages": {
+        "module-1-first-page-project": {
+          "project-roadmap": {
+            "title": "Build a learning-profile page for a student-success team",
+            "bodyMarkdown": "You are a **junior web developer** helping a student-success team prepare a small learning-profile page for a new-coder orientation. The team needs one clean file—`index.html`—that they can open in a browser and review without any extra setup. Your deliverable is a browser-ready page that clearly shows what the learner is studying and demonstrates sound HTML structure.\n\nYou will build that deliverable in three progressive steps. First, create the document foundation in `index.html`. Next, add the visible heading and paragraph content the team asked for. Finally, improve the page structure with a second heading and nested emphasis while keeping the document valid. Each step continues the same file, so preserve the working markup from the previous milestone rather than starting over.\n\nUse the browser preview after every change as if you were checking the page before handing it to the team. The preview should remain understandable throughout the project: first the document has a reliable foundation, then the reviewer sees useful content, and finally the page gains clearer structure and emphasis. **Check Answer** verifies the required HTML source for each milestone.\n\nThe goal is not decoration. The finished `index.html` is the team's review copy and should demonstrate that you can organize a modern HTML document, separate head information from body content, use headings and paragraphs, keep tags balanced, and nest elements correctly. Later CSS and JavaScript courses can build on this same web-development workflow."
+          }
+        }
+      }
+    }
+  }
+}

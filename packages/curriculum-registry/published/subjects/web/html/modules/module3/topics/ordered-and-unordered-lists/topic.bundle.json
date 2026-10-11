@@ -1,0 +1,361 @@
+{
+  "topicId": "ordered-and-unordered-lists",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-3-lists-tables-content",
+  "sectionSlug": "html-html-module-3-lessons",
+  "prefix": "html_module_3",
+  "minutes": 16,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.label",
+    "summaryKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.cards.sketch0.title",
+      "sketchId": "list-meaning",
+      "height": 420,
+      "tryIt": {
+        "id": "try-ordered-and-unordered-lists-sketch0",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.prompt",
+        "exerciseKey": "try-ordered-and-unordered-lists-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.cards.sketch1.title",
+      "sketchId": "ordered-sequence",
+      "height": 420,
+      "tryIt": {
+        "id": "try-ordered-and-unordered-lists-sketch1",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.prompt",
+        "exerciseKey": "try-ordered-and-unordered-lists-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.cards.sketch2.title",
+      "sketchId": "list-item-structure",
+      "height": 420,
+      "tryIt": {
+        "id": "try-ordered-and-unordered-lists-sketch2",
+        "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.title",
+        "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.prompt",
+        "exerciseKey": "try-ordered-and-unordered-lists-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "list-meaning",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.list-meaning.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.list-meaning.bodyMarkdown"
+    },
+    {
+      "id": "ordered-sequence",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.ordered-sequence.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.ordered-sequence.bodyMarkdown"
+    },
+    {
+      "id": "list-item-structure",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.list-item-structure.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.list-item-structure.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-ordered-and-unordered-lists-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<ul\\b[^>]*>\\s*<li\\b[^>]*>\\s*Student ID\\s*</li>\\s*<li\\b[^>]*>\\s*Notebook\\s*</li>\\s*<li\\b[^>]*>\\s*Water bottle\\s*</li>\\s*</ul>",
+          "path": "index.html",
+          "message": "Group Student ID, Notebook, and Water bottle inside one unordered list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-ordered-and-unordered-lists-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*Check in\\s*</li>\\s*<li\\b[^>]*>\\s*Find your seat\\s*</li>\\s*<li\\b[^>]*>\\s*Open your notebook\\s*</li>\\s*</ol>",
+          "path": "index.html",
+          "message": "Use one ordered list for the three arrival steps.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-ordered-and-unordered-lists-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Bring\\s*</h2>.*<ul\\b[^>]*>.*Laptop.*Charger.*</ul>",
+          "path": "index.html",
+          "message": "Use an unordered list for the items to bring.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Start\\s*</h2>.*<ol\\b[^>]*>.*Sign in.*Open the lesson.*</ol>",
+          "path": "index.html",
+          "message": "Use an ordered list for the starting steps.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "lists-quiz-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-quiz-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "lists-quiz-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-quiz-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "lists-quiz-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-quiz-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "lists-quiz-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-quiz-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "<li>Notebook</li>"
+      }
+    }
+  ]
+}

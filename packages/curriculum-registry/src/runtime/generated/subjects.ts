@@ -3,7 +3,7 @@
 // Do not edit manually.
 // Run: pnpm --filter @zoeskoul/curriculum-registry generate
 
-export type GeneratedSubjectGenKey = "bash_course" | "c_course" | "git_course" | "language_course" | "python_part1" | "sql_for_beginners";
+export type GeneratedSubjectGenKey = "bash_course" | "c_course" | "git_course" | "html_foundations" | "language_course" | "python_part1" | "sql_for_beginners";
 
 export type GeneratedSubjectSource = {
   subjectSlug: string;
@@ -6316,6 +6316,608 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
               "lists_and_ranges",
               "missing_data",
               "search_and_cleanup_practice"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "html": {
+    "subject": {
+      "slug": "html",
+      "profileId": "web",
+      "catalogSlug": "web",
+      "genKey": "html_foundations",
+      "order": 0,
+      "accessPolicy": "paid",
+      "visibility": "public",
+      "status": "active",
+      "imagePublicId": null,
+      "imageAlt": null,
+      "titleKey": "subjects.html.title",
+      "descriptionKey": "subjects.html.description",
+      "serviceDefaults": null,
+      "meta": {
+        "curriculum": {
+          "plannedModuleCount": 6,
+          "isTerminalRelease": false,
+          "moreComingMessageKey": "subjects.html.moreComingSoon"
+        },
+        "completionPolicy": {
+          "requireAllPublishedModules": true,
+          "rewardEnabledByDefault": true,
+          "certificateEnabledByDefault": true
+        },
+        "versioning": {
+          "family": "html",
+          "version": 1,
+          "status": "draft",
+          "defaultForNewEnrollments": false,
+          "supersedes": null,
+          "supersededBy": null
+        }
+      }
+    },
+    "modules": [
+      {
+        "slug": "html-module-1-first-web-pages",
+        "prefix": "html_module_1",
+        "order": 1,
+        "titleKey": "modules.html.html-module-1-first-web-pages.title",
+        "descriptionKey": "modules.html.html-module-1-first-web-pages.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "language": "web",
+          "supportsTerminal": false,
+          "supportsMultiFile": true,
+          "supportsFileSystem": true,
+          "supportsStdInStdOut": false,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": {
+          "requires": {
+            "files": true,
+            "multiFile": true,
+            "terminal": false
+          }
+        },
+        "meta": {
+          "estimatedMinutes": 72,
+          "prereqKeys": [
+            "modules.html.html-module-1-first-web-pages.title"
+          ],
+          "outcomeKeys": [
+            "modules.html.html-module-1-first-web-pages.outcomes.0",
+            "modules.html.html-module-1-first-web-pages.outcomes.1",
+            "modules.html.html-module-1-first-web-pages.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.html.html-module-1-first-web-pages.why.0",
+            "modules.html.html-module-1-first-web-pages.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "html-html-module-1-lessons",
+            "order": 1,
+            "titleKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.title",
+            "descriptionKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.description",
+            "meta": {
+              "module": 1,
+              "weeksKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.bullets.0",
+                "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.bullets.1",
+                "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.bullets.2",
+                "sections.html.html-module-1-first-web-pages.html-html-module-1-lessons.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "how-html-and-the-browser-work",
+              "document-structure",
+              "elements-tags-and-attributes"
+            ]
+          },
+          {
+            "slug": "html-html-module-1-project",
+            "order": 2,
+            "role": "module_project",
+            "titleKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-project.title",
+            "descriptionKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-project.description",
+            "meta": {
+              "module": 1,
+              "weeksKey": "sections.html.html-module-1-first-web-pages.html-html-module-1-project.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-1-first-web-pages.html-html-module-1-project.bullets.0",
+                "sections.html.html-module-1-first-web-pages.html-html-module-1-project.bullets.1",
+                "sections.html.html-module-1-first-web-pages.html-html-module-1-project.bullets.2",
+                "sections.html.html-module-1-first-web-pages.html-html-module-1-project.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "module-1-first-page-project"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "html-module-2-links-images-paths",
+        "prefix": "html_module_2",
+        "order": 2,
+        "titleKey": "modules.html.html-module-2-links-images-paths.title",
+        "descriptionKey": "modules.html.html-module-2-links-images-paths.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "language": "web",
+          "supportsTerminal": false,
+          "supportsMultiFile": true,
+          "supportsFileSystem": true,
+          "supportsStdInStdOut": false,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": {
+          "requires": {
+            "files": true,
+            "multiFile": true,
+            "terminal": false
+          }
+        },
+        "meta": {
+          "estimatedMinutes": 72,
+          "prereqKeys": [
+            "modules.html.html-module-2-links-images-paths.title"
+          ],
+          "outcomeKeys": [
+            "modules.html.html-module-2-links-images-paths.outcomes.0",
+            "modules.html.html-module-2-links-images-paths.outcomes.1",
+            "modules.html.html-module-2-links-images-paths.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.html.html-module-2-links-images-paths.why.0",
+            "modules.html.html-module-2-links-images-paths.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "html-html-module-2-lessons",
+            "order": 1,
+            "titleKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.title",
+            "descriptionKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.description",
+            "meta": {
+              "module": 2,
+              "weeksKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.bullets.0",
+                "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.bullets.1",
+                "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.bullets.2",
+                "sections.html.html-module-2-links-images-paths.html-html-module-2-lessons.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "links-and-anchors",
+              "relative-and-absolute-paths",
+              "images-and-alt-text"
+            ]
+          },
+          {
+            "slug": "html-html-module-2-project",
+            "order": 2,
+            "role": "module_project",
+            "titleKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-project.title",
+            "descriptionKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-project.description",
+            "meta": {
+              "module": 2,
+              "weeksKey": "sections.html.html-module-2-links-images-paths.html-html-module-2-project.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-2-links-images-paths.html-html-module-2-project.bullets.0",
+                "sections.html.html-module-2-links-images-paths.html-html-module-2-project.bullets.1",
+                "sections.html.html-module-2-links-images-paths.html-html-module-2-project.bullets.2",
+                "sections.html.html-module-2-links-images-paths.html-html-module-2-project.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "module-2-profile-page-project"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "html-module-3-lists-tables-content",
+        "prefix": "html_module_3",
+        "order": 3,
+        "titleKey": "modules.html.html-module-3-lists-tables-content.title",
+        "descriptionKey": "modules.html.html-module-3-lists-tables-content.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "language": "web",
+          "supportsTerminal": false,
+          "supportsMultiFile": true,
+          "supportsFileSystem": true,
+          "supportsStdInStdOut": false,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": {
+          "requires": {
+            "files": true,
+            "multiFile": true,
+            "terminal": false
+          }
+        },
+        "meta": {
+          "estimatedMinutes": 72,
+          "prereqKeys": [
+            "modules.html.html-module-3-lists-tables-content.title"
+          ],
+          "outcomeKeys": [
+            "modules.html.html-module-3-lists-tables-content.outcomes.0",
+            "modules.html.html-module-3-lists-tables-content.outcomes.1",
+            "modules.html.html-module-3-lists-tables-content.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.html.html-module-3-lists-tables-content.why.0",
+            "modules.html.html-module-3-lists-tables-content.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "html-html-module-3-lessons",
+            "order": 1,
+            "titleKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.title",
+            "descriptionKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.description",
+            "meta": {
+              "module": 3,
+              "weeksKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.bullets.0",
+                "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.bullets.1",
+                "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.bullets.2",
+                "sections.html.html-module-3-lists-tables-content.html-html-module-3-lessons.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "ordered-and-unordered-lists",
+              "nested-lists",
+              "tables-and-table-structure"
+            ]
+          },
+          {
+            "slug": "html-html-module-3-project",
+            "order": 2,
+            "role": "module_project",
+            "titleKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.title",
+            "descriptionKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.description",
+            "meta": {
+              "module": 3,
+              "weeksKey": "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.bullets.0",
+                "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.bullets.1",
+                "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.bullets.2",
+                "sections.html.html-module-3-lists-tables-content.html-html-module-3-project.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "module-3-content-page-project"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "html-module-4-semantic-accessible-layout",
+        "prefix": "html_module_4",
+        "order": 4,
+        "titleKey": "modules.html.html-module-4-semantic-accessible-layout.title",
+        "descriptionKey": "modules.html.html-module-4-semantic-accessible-layout.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "language": "web",
+          "supportsTerminal": false,
+          "supportsMultiFile": true,
+          "supportsFileSystem": true,
+          "supportsStdInStdOut": false,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": {
+          "requires": {
+            "files": true,
+            "multiFile": true,
+            "terminal": false
+          }
+        },
+        "meta": {
+          "estimatedMinutes": 72,
+          "prereqKeys": [
+            "modules.html.html-module-4-semantic-accessible-layout.title"
+          ],
+          "outcomeKeys": [
+            "modules.html.html-module-4-semantic-accessible-layout.outcomes.0",
+            "modules.html.html-module-4-semantic-accessible-layout.outcomes.1",
+            "modules.html.html-module-4-semantic-accessible-layout.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.html.html-module-4-semantic-accessible-layout.why.0",
+            "modules.html.html-module-4-semantic-accessible-layout.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "html-html-module-4-lessons",
+            "order": 1,
+            "titleKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.title",
+            "descriptionKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.description",
+            "meta": {
+              "module": 4,
+              "weeksKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.bullets.0",
+                "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.bullets.1",
+                "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.bullets.2",
+                "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-lessons.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "page-landmarks",
+              "sections-articles-and-asides",
+              "headings-and-accessible-structure"
+            ]
+          },
+          {
+            "slug": "html-html-module-4-project",
+            "order": 2,
+            "role": "module_project",
+            "titleKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.title",
+            "descriptionKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.description",
+            "meta": {
+              "module": 4,
+              "weeksKey": "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.bullets.0",
+                "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.bullets.1",
+                "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.bullets.2",
+                "sections.html.html-module-4-semantic-accessible-layout.html-html-module-4-project.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "module-4-article-page-project"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "html-module-5-forms-inputs",
+        "prefix": "html_module_5",
+        "order": 5,
+        "titleKey": "modules.html.html-module-5-forms-inputs.title",
+        "descriptionKey": "modules.html.html-module-5-forms-inputs.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "language": "web",
+          "supportsTerminal": false,
+          "supportsMultiFile": true,
+          "supportsFileSystem": true,
+          "supportsStdInStdOut": false,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": {
+          "requires": {
+            "files": true,
+            "multiFile": true,
+            "terminal": false
+          }
+        },
+        "meta": {
+          "estimatedMinutes": 72,
+          "prereqKeys": [
+            "modules.html.html-module-5-forms-inputs.title"
+          ],
+          "outcomeKeys": [
+            "modules.html.html-module-5-forms-inputs.outcomes.0",
+            "modules.html.html-module-5-forms-inputs.outcomes.1",
+            "modules.html.html-module-5-forms-inputs.outcomes.2"
+          ],
+          "whyKeys": [
+            "modules.html.html-module-5-forms-inputs.why.0",
+            "modules.html.html-module-5-forms-inputs.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "html-html-module-5-lessons",
+            "order": 1,
+            "titleKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.title",
+            "descriptionKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.description",
+            "meta": {
+              "module": 5,
+              "weeksKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.bullets.0",
+                "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.bullets.1",
+                "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.bullets.2",
+                "sections.html.html-module-5-forms-inputs.html-html-module-5-lessons.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "forms-labels-and-inputs",
+              "useful-input-types",
+              "select-textarea-and-buttons"
+            ]
+          },
+          {
+            "slug": "html-html-module-5-project",
+            "order": 2,
+            "role": "module_project",
+            "titleKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-project.title",
+            "descriptionKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-project.description",
+            "meta": {
+              "module": 5,
+              "weeksKey": "sections.html.html-module-5-forms-inputs.html-html-module-5-project.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-5-forms-inputs.html-html-module-5-project.bullets.0",
+                "sections.html.html-module-5-forms-inputs.html-html-module-5-project.bullets.1",
+                "sections.html.html-module-5-forms-inputs.html-html-module-5-project.bullets.2",
+                "sections.html.html-module-5-forms-inputs.html-html-module-5-project.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "module-5-signup-form-project"
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "html-module-6-final-capstone",
+        "prefix": "html_module_6",
+        "order": 6,
+        "role": "capstone",
+        "titleKey": "modules.html.html-module-6-final-capstone.title",
+        "descriptionKey": "modules.html.html-module-6-final-capstone.description",
+        "weekStart": null,
+        "weekEnd": null,
+        "accessOverride": null,
+        "runtimeDefaults": {
+          "kind": "code",
+          "language": "web",
+          "supportsTerminal": false,
+          "supportsMultiFile": true,
+          "supportsFileSystem": true,
+          "supportsStdInStdOut": false,
+          "supportsPackageInstall": false
+        },
+        "serviceDefaults": {
+          "requires": {
+            "files": true,
+            "multiFile": true,
+            "terminal": false
+          }
+        },
+        "meta": {
+          "estimatedMinutes": 45,
+          "prereqKeys": [
+            "modules.html.html-module-6-final-capstone.title"
+          ],
+          "outcomeKeys": [
+            "modules.html.html-module-6-final-capstone.outcomes.0",
+            "modules.html.html-module-6-final-capstone.outcomes.1",
+            "modules.html.html-module-6-final-capstone.outcomes.2",
+            "modules.html.html-module-6-final-capstone.outcomes.3",
+            "modules.html.html-module-6-final-capstone.outcomes.4"
+          ],
+          "whyKeys": [
+            "modules.html.html-module-6-final-capstone.why.0",
+            "modules.html.html-module-6-final-capstone.why.1"
+          ]
+        },
+        "sections": [
+          {
+            "slug": "html-html-module-6-capstone",
+            "order": 1,
+            "role": "capstone",
+            "titleKey": "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.title",
+            "descriptionKey": "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.description",
+            "meta": {
+              "module": 6,
+              "weeksKey": "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.weeks",
+              "bulletKeys": [
+                "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.bullets.0",
+                "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.bullets.1",
+                "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.bullets.2",
+                "sections.html.html-module-6-final-capstone.html-html-module-6-capstone.bullets.3"
+              ]
+            },
+            "serviceDefaults": {
+              "requires": {
+                "files": true,
+                "multiFile": true,
+                "terminal": false
+              }
+            },
+            "topics": [
+              "final-html-personal-site-capstone"
             ]
           }
         ]
@@ -178126,6 +178728,8324 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         }
       ]
     }
+  },
+  "html": {
+    "how-html-and-the-browser-work": {
+      "topicId": "how-html-and-the-browser-work",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-1-first-web-pages",
+      "sectionSlug": "html-html-module-1-lessons",
+      "prefix": "html_module_1",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.label",
+        "summaryKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.cards.sketch0.title",
+          "sketchId": "html-is-page-structure",
+          "height": 420,
+          "tryIt": {
+            "id": "try-how-html-and-the-browser-work-sketch0",
+            "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.prompt",
+            "exerciseKey": "try-how-html-and-the-browser-work-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.cards.sketch1.title",
+          "sketchId": "browser-parses-elements",
+          "height": 420,
+          "tryIt": {
+            "id": "try-how-html-and-the-browser-work-sketch1",
+            "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.prompt",
+            "exerciseKey": "try-how-html-and-the-browser-work-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.cards.sketch2.title",
+          "sketchId": "structure-before-style",
+          "height": 420,
+          "tryIt": {
+            "id": "try-how-html-and-the-browser-work-sketch2",
+            "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.prompt",
+            "exerciseKey": "try-how-html-and-the-browser-work-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "html-is-page-structure",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.html-is-page-structure.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.html-is-page-structure.bodyMarkdown"
+        },
+        {
+          "id": "browser-parses-elements",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.browser-parses-elements.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.browser-parses-elements.bodyMarkdown"
+        },
+        {
+          "id": "structure-before-style",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.structure-before-style.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.how-html-and-the-browser-work.structure-before-style.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "browser-role-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.browser-role-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "html-purpose-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.html-purpose-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "source-preview-multi",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.source-preview-multi",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "browser-flow-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.browser-flow-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4"
+            ]
+          }
+        },
+        {
+          "id": "html-name-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.html-name-fill",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "HTML"
+          }
+        },
+        {
+          "id": "render-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.render-fill",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "preview"
+          }
+        },
+        {
+          "id": "try-how-html-and-the-browser-work-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>",
+              "message": "Add an h1 whose visible text is My First Web Page.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-how-html-and-the-browser-work-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>",
+              "message": "Keep the My First Web Page h1 in the page.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*I am learning HTML\\.\\s*</p>",
+              "message": "Add a paragraph that says I am learning HTML.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-how-html-and-the-browser-work-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>\\s*<h2(?:\\s[^>]*)?>\\s*What I am Learning\\s*</h2>\\s*<p(?:\\s[^>]*)?>\\s*I am learning HTML\\.\\s*</p>",
+              "message": "Keep the h1, then add the What I am Learning h2 before the paragraph.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "document-structure": {
+      "topicId": "document-structure",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-1-first-web-pages",
+      "sectionSlug": "html-html-module-1-lessons",
+      "prefix": "html_module_1",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-1-first-web-pages.document-structure.label",
+        "summaryKey": "topics.html.html-module-1-first-web-pages.document-structure.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.cards.sketch0.title",
+          "sketchId": "document-shell",
+          "height": 420,
+          "tryIt": {
+            "id": "try-document-structure-sketch0",
+            "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.prompt",
+            "exerciseKey": "try-document-structure-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.cards.sketch1.title",
+          "sketchId": "head-information",
+          "height": 420,
+          "tryIt": {
+            "id": "try-document-structure-sketch1",
+            "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.prompt",
+            "exerciseKey": "try-document-structure-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.cards.sketch2.title",
+          "sketchId": "body-content",
+          "height": 420,
+          "tryIt": {
+            "id": "try-document-structure-sketch2",
+            "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.prompt",
+            "exerciseKey": "try-document-structure-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "document-shell",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.document-structure.document-shell.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.document-structure.document-shell.bodyMarkdown"
+        },
+        {
+          "id": "head-information",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.document-structure.head-information.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.document-structure.head-information.bodyMarkdown"
+        },
+        {
+          "id": "body-content",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.document-structure.body-content.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.document-structure.body-content.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "head-body-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.head-body-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "title-role-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.title-role-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "document-shell-multi",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.document-shell-multi",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        },
+        {
+          "id": "document-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.document-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4"
+            ]
+          }
+        },
+        {
+          "id": "head-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.head-fill",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "head"
+          }
+        },
+        {
+          "id": "body-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.body-fill",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "body"
+          }
+        },
+        {
+          "id": "try-document-structure-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)^\\s*<!doctype\\s+html\\s*>",
+              "message": "Start index.html with the HTML doctype.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<html\\b[^>]*\\blang\\s*=\\s*[\\\"']en[\\\"'][^>]*>.*</html>",
+              "message": "Wrap the document in an html element with lang set to en.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-document-structure-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<head\\b[^>]*>.*<meta\\b[^>]*\\bcharset\\s*=\\s*[\\\"']?UTF-8[\\\"']?[^>]*>.*<title\\b[^>]*>\\s*Learning HTML\\s*</title>.*</head>",
+              "message": "Put a UTF-8 charset declaration and the Learning HTML title inside head.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-document-structure-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)^\\s*<!doctype\\s+html\\s*>",
+              "message": "Add the HTML doctype at the top of the document.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<html\\b[^>]*\\blang\\s*=\\s*[\\\"']en[\\\"'][^>]*>.*</html>",
+              "message": "Set the html document language to en.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<head\\b[^>]*>.*<meta\\b[^>]*charset\\s*=\\s*[\\\"']?UTF-8[\\\"']?[^>]*>.*<title\\b[^>]*>\\s*About Maya\\s*</title>.*</head>",
+              "message": "Complete head with UTF-8 and the About Maya title.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<body\\b[^>]*>.*<h1\\b[^>]*>\\s*About Maya\\s*</h1>.*<p\\b[^>]*>\\s*I am building web pages\\.\\s*</p>.*</body>",
+              "message": "Put the About Maya heading and required paragraph inside body.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "elements-tags-and-attributes": {
+      "topicId": "elements-tags-and-attributes",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-1-first-web-pages",
+      "sectionSlug": "html-html-module-1-lessons",
+      "prefix": "html_module_1",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.label",
+        "summaryKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.cards.sketch0.title",
+          "sketchId": "element-parts",
+          "height": 420,
+          "tryIt": {
+            "id": "try-elements-tags-and-attributes-sketch0",
+            "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.prompt",
+            "exerciseKey": "try-elements-tags-and-attributes-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.cards.sketch1.title",
+          "sketchId": "nesting-elements",
+          "height": 420,
+          "tryIt": {
+            "id": "try-elements-tags-and-attributes-sketch1",
+            "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.prompt",
+            "exerciseKey": "try-elements-tags-and-attributes-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.cards.sketch2.title",
+          "sketchId": "attributes-add-information",
+          "height": 420,
+          "tryIt": {
+            "id": "try-elements-tags-and-attributes-sketch2",
+            "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.title",
+            "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.prompt",
+            "exerciseKey": "try-elements-tags-and-attributes-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "element-parts",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.element-parts.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.element-parts.bodyMarkdown"
+        },
+        {
+          "id": "nesting-elements",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.nesting-elements.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.nesting-elements.bodyMarkdown"
+        },
+        {
+          "id": "attributes-add-information",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.attributes-add-information.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.elements-tags-and-attributes.attributes-add-information.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "closing-tag-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.closing-tag-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "attribute-location-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.attribute-location-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "element-parts-multi",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.element-parts-multi",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        },
+        {
+          "id": "nesting-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.nesting-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4",
+            "t5"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4",
+              "t5"
+            ]
+          }
+        },
+        {
+          "id": "attribute-name-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.attribute-name-fill",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "lang"
+          }
+        },
+        {
+          "id": "content-fill",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.content-fill",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "content"
+          }
+        },
+        {
+          "id": "try-elements-tags-and-attributes-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*Balanced tags are easier to read\\.\\s*</p>",
+              "message": "Close the paragraph after the required sentence.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-elements-tags-and-attributes-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<p(?:\\s[^>]*)?>[^<]*I am practicing\\s*<strong(?:\\s[^>]*)?>\\s*HTML structure\\s*</strong>\\s*today\\.\\s*</p>",
+              "message": "Nest a strong element around HTML structure inside the paragraph.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-elements-tags-and-attributes-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<p\\b[^>]*\\btitle\\s*=\\s*[\\\"']A short introduction[\\\"'][^>]*>\\s*Welcome to my page\\.\\s*</p>",
+              "message": "Add the A short introduction title attribute to the Welcome to my page paragraph.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "module-1-first-page-project": {
+      "topicId": "module-1-first-page-project",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-1-first-web-pages",
+      "sectionSlug": "html-html-module-1-project",
+      "prefix": "html_module_1",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.label",
+        "summaryKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.cards.sketch0.title",
+          "sketchId": "project-roadmap",
+          "height": 420
+        },
+        {
+          "id": "project",
+          "kind": "project",
+          "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.cards.project.title",
+          "project": {
+            "difficulty": "easy",
+            "allowReveal": true,
+            "preferKind": "code_input",
+            "maxAttempts": null,
+            "steps": [
+              {
+                "id": "first_page_step_1_shell",
+                "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.projectSteps.first_page_step_1_shell.title",
+                "exerciseKey": "first-page-step-1-shell",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null
+              },
+              {
+                "id": "first_page_step_2_content",
+                "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.projectSteps.first_page_step_2_content.title",
+                "exerciseKey": "first-page-step-2-content",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "first_page_step_3_nesting",
+                "titleKey": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.projectSteps.first_page_step_3_nesting.title",
+                "exerciseKey": "first-page-step-3-nesting",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              }
+            ]
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "project-roadmap",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-1-first-web-pages.module-1-first-page-project.project-roadmap.title",
+          "bodyKey": "sketches.html.html-module-1-first-web-pages.module-1-first-page-project.project-roadmap.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "first-page-step-1-shell",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)^\\s*<!doctype\\s+html\\s*>",
+              "message": "Start the project with the HTML doctype.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<html\\b[^>]*\\blang\\s*=\\s*[\\\"']en[\\\"'][^>]*>.*</html>",
+              "message": "Use an html root with lang set to en.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<head\\b[^>]*>.*<meta\\b[^>]*charset\\s*=\\s*[\\\"']?UTF-8[\\\"']?[^>]*>.*<title\\b[^>]*>\\s*My Learning Page\\s*</title>.*</head>",
+              "message": "Complete head with UTF-8 and the My Learning Page title.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<body\\b[^>]*>\\s*</body>",
+              "message": "Leave an empty body ready for the next project step.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_1_shell.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "first-page-step-2-content",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content.solutionCode",
+              "isEntry": true,
+              "entry": true,
+              "language": "web"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<body\\b[^>]*>.*<h1\\b[^>]*>\\s*My Learning Page\\s*</h1>.*<p\\b[^>]*>\\s*I am learning how browsers read HTML\\.\\s*</p>.*<p\\b[^>]*>\\s*Clear structure helps me understand my page\\.\\s*</p>.*</body>",
+              "message": "Add the h1 and both required paragraphs inside body.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content.starterCode",
+                "isEntry": true,
+                "entry": true,
+                "language": "web"
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_2_content.solutionCode",
+                "isEntry": true,
+                "entry": true,
+                "language": "web"
+              }
+            ]
+          }
+        },
+        {
+          "id": "first-page-step-3-nesting",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting.solutionCode",
+              "isEntry": true,
+              "entry": true,
+              "language": "web"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<h2(?:\\s[^>]*)?>\\s*What I learned\\s*</h2>",
+              "message": "Add the What I learned h2.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*I am learning how browsers read\\s*<strong(?:\\s[^>]*)?>\\s*HTML\\s*</strong>\\s*\\.\\s*</p>",
+              "message": "Wrap HTML in a strong element inside the first paragraph.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*Clear\\s*<em(?:\\s[^>]*)?>\\s*structure\\s*</em>\\s*helps me understand my page\\.\\s*</p>",
+              "message": "Wrap structure in an em element inside the second paragraph.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting.starterCode",
+                "isEntry": true,
+                "entry": true,
+                "language": "web"
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-1-first-web-pages.module-1-first-page-project.moduleProject.steps.first_page_step_3_nesting.solutionCode",
+                "isEntry": true,
+                "entry": true,
+                "language": "web"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "links-and-anchors": {
+      "topicId": "links-and-anchors",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-2-links-images-paths",
+      "sectionSlug": "html-html-module-2-lessons",
+      "prefix": "html_module_2",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.label",
+        "summaryKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.cards.sketch0.title",
+          "sketchId": "anchor-anatomy",
+          "height": 420,
+          "tryIt": {
+            "id": "try-links-and-anchors-sketch0",
+            "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.prompt",
+            "exerciseKey": "try-links-and-anchors-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.cards.sketch1.title",
+          "sketchId": "fragment-links",
+          "height": 420,
+          "tryIt": {
+            "id": "try-links-and-anchors-sketch1",
+            "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.prompt",
+            "exerciseKey": "try-links-and-anchors-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.cards.sketch2.title",
+          "sketchId": "link-destinations-and-text",
+          "height": 420,
+          "tryIt": {
+            "id": "try-links-and-anchors-sketch2",
+            "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.prompt",
+            "exerciseKey": "try-links-and-anchors-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-2-links-images-paths.links-and-anchors.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "anchor-anatomy",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.anchor-anatomy.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.anchor-anatomy.bodyMarkdown"
+        },
+        {
+          "id": "fragment-links",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.fragment-links.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.fragment-links.bodyMarkdown"
+        },
+        {
+          "id": "link-destinations-and-text",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.link-destinations-and-text.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.links-and-anchors.link-destinations-and-text.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "links-sc-1",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-sc-1",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "links-sc-2",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-sc-2",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "b"
+          }
+        },
+        {
+          "id": "links-mc-1",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-mc-1",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b",
+              "d"
+            ]
+          }
+        },
+        {
+          "id": "links-dr-1",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-dr-1",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t2",
+              "t1",
+              "t3"
+            ]
+          }
+        },
+        {
+          "id": "links-fb-1",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-fb-1",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "href"
+          }
+        },
+        {
+          "id": "links-fb-2",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.practice.links-fb-2",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "#contact"
+          }
+        },
+        {
+          "id": "try-links-and-anchors-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+              "path": "index.html",
+              "message": "Link About me to the provided About page.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "about.html"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "about.html"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch0.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-links-and-anchors-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "projects/robotics.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.projects_robotics_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+              "path": "index.html",
+              "message": "Connect the Robotics project link to the nested project page.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "about.html",
+              "projects/robotics.html"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.starterFiles.projects_robotics_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "about.html",
+                "projects/robotics.html"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch1.solutionFiles.projects_robotics_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-links-and-anchors-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+              "path": "about.html",
+              "message": "Add a working return link on the About page.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "about.html"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "about.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.starterFiles.index_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "about.html"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.links-and-anchors.tryIt.try_links_and_anchors_sketch2.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "relative-and-absolute-paths": {
+      "topicId": "relative-and-absolute-paths",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-2-links-images-paths",
+      "sectionSlug": "html-html-module-2-lessons",
+      "prefix": "html_module_2",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.label",
+        "summaryKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.cards.sketch0.title",
+          "sketchId": "relative-paths-start-from-current-location",
+          "height": 420,
+          "tryIt": {
+            "id": "try-relative-and-absolute-paths-sketch0",
+            "titleKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.prompt",
+            "exerciseKey": "try-relative-and-absolute-paths-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.cards.sketch1.title",
+          "sketchId": "absolute-urls-name-complete-destinations",
+          "height": 420,
+          "tryIt": {
+            "id": "try-relative-and-absolute-paths-sketch1",
+            "titleKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.prompt",
+            "exerciseKey": "try-relative-and-absolute-paths-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.cards.sketch2.title",
+          "sketchId": "dot-dot-moves-up-one-folder",
+          "height": 420,
+          "tryIt": {
+            "id": "try-relative-and-absolute-paths-sketch2",
+            "titleKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.prompt",
+            "exerciseKey": "try-relative-and-absolute-paths-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "relative-paths-start-from-current-location",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.relative-and-absolute-paths.relative-paths-start-from-current-location.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.relative-and-absolute-paths.relative-paths-start-from-current-location.bodyMarkdown"
+        },
+        {
+          "id": "absolute-urls-name-complete-destinations",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.relative-and-absolute-paths.absolute-urls-name-complete-destinations.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.relative-and-absolute-paths.absolute-urls-name-complete-destinations.bodyMarkdown"
+        },
+        {
+          "id": "dot-dot-moves-up-one-folder",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.relative-and-absolute-paths.dot-dot-moves-up-one-folder.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.relative-and-absolute-paths.dot-dot-moves-up-one-folder.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "paths-sc-1",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.practice.paths-sc-1",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "paths-sc-2",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.practice.paths-sc-2",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "c"
+          }
+        },
+        {
+          "id": "paths-mc-1",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.practice.paths-mc-1",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        },
+        {
+          "id": "paths-dr-1",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.practice.paths-dr-1",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t3",
+              "t2",
+              "t1"
+            ]
+          }
+        },
+        {
+          "id": "paths-fb-1",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.practice.paths-fb-1",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "../"
+          }
+        },
+        {
+          "id": "paths-fb-2",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.practice.paths-fb-2",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "https://example.com/profile"
+          }
+        },
+        {
+          "id": "try-relative-and-absolute-paths-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+              "path": "index.html",
+              "message": "Use the sibling-page relative path for About me.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "about.html"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "about.html"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch0.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-relative-and-absolute-paths-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "projects/robotics.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.solutionFiles.projects_robotics_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+              "path": "index.html",
+              "message": "Use the child-folder relative path to the robotics page.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "projects/robotics.html"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.starterFiles.projects_robotics_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "projects/robotics.html"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch1.solutionFiles.projects_robotics_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-relative-and-absolute-paths-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "projects/robotics.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.solutionFiles.projects_robotics_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']\\.\\./index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+              "path": "projects/robotics.html",
+              "message": "Use a parent-folder relative path back to the home page.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "projects/robotics.html"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "projects/robotics.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.starterFiles.index_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "projects/robotics.html"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.relative-and-absolute-paths.tryIt.try_relative_and_absolute_paths_sketch2.solutionFiles.projects_robotics_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "images-and-alt-text": {
+      "topicId": "images-and-alt-text",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-2-links-images-paths",
+      "sectionSlug": "html-html-module-2-lessons",
+      "prefix": "html_module_2",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.label",
+        "summaryKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.cards.sketch0.title",
+          "sketchId": "img-src-and-alt",
+          "height": 420,
+          "tryIt": {
+            "id": "try-images-and-alt-text-sketch0",
+            "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.prompt",
+            "exerciseKey": "try-images-and-alt-text-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.cards.sketch1.title",
+          "sketchId": "alt-describes-purpose",
+          "height": 420,
+          "tryIt": {
+            "id": "try-images-and-alt-text-sketch1",
+            "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.prompt",
+            "exerciseKey": "try-images-and-alt-text-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.cards.sketch2.title",
+          "sketchId": "image-paths-follow-the-same-rules",
+          "height": 420,
+          "tryIt": {
+            "id": "try-images-and-alt-text-sketch2",
+            "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.title",
+            "promptKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.prompt",
+            "exerciseKey": "try-images-and-alt-text-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 6,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "img-src-and-alt",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.images-and-alt-text.img-src-and-alt.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.images-and-alt-text.img-src-and-alt.bodyMarkdown"
+        },
+        {
+          "id": "alt-describes-purpose",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.images-and-alt-text.alt-describes-purpose.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.images-and-alt-text.alt-describes-purpose.bodyMarkdown"
+        },
+        {
+          "id": "image-paths-follow-the-same-rules",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.images-and-alt-text.image-paths-follow-the-same-rules.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.images-and-alt-text.image-paths-follow-the-same-rules.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "images-sc-1",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-sc-1",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "b"
+          }
+        },
+        {
+          "id": "images-sc-2",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-sc-2",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "c"
+          }
+        },
+        {
+          "id": "images-mc-1",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-mc-1",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b",
+              "d"
+            ]
+          }
+        },
+        {
+          "id": "images-dr-1",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-dr-1",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t2",
+              "t3",
+              "t1",
+              "t4"
+            ]
+          }
+        },
+        {
+          "id": "images-fb-1",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-fb-1",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "images/profile.jpg"
+          }
+        },
+        {
+          "id": "images-fb-2",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-fb-2",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "Students presenting a science club poster"
+          }
+        },
+        {
+          "id": "try-images-and-alt-text-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "images/profile.png",
+              "content": "",
+              "encoding": "base64",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+              "mimeType": "image/png",
+              "sizeBytes": 465,
+              "readOnly": true,
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"'][^\"']{5,}[\"'])[^>]*>",
+              "path": "index.html",
+              "message": "Use the supplied profile asset with meaningful alt text.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "images/profile.png"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "images/profile.png"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-images-and-alt-text-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "images/profile.png",
+              "content": "",
+              "encoding": "base64",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+              "mimeType": "image/png",
+              "sizeBytes": 465,
+              "readOnly": true,
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"']Jordan Lee smiling outside the campus library[\"'])[^>]*>",
+              "path": "index.html",
+              "message": "Replace the generic alternative text with the requested descriptive text.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "images/profile.png"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "images/profile.png"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-images-and-alt-text-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "images/profile.png",
+              "content": "",
+              "encoding": "base64",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+              "mimeType": "image/png",
+              "sizeBytes": 465,
+              "readOnly": true,
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"']Jordan Lee smiling outside the campus library[\"'])[^>]*>\\s*</a>",
+              "path": "index.html",
+              "message": "Wrap the existing profile image in a link to the About page.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "about.html",
+              "images/profile.png"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "about.html",
+                "images/profile.png"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "module-2-profile-page-project": {
+      "topicId": "module-2-profile-page-project",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-2-links-images-paths",
+      "sectionSlug": "html-html-module-2-project",
+      "prefix": "html_module_2",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.label",
+        "summaryKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.cards.sketch0.title",
+          "sketchId": "project-brief",
+          "height": 420
+        },
+        {
+          "id": "project",
+          "kind": "project",
+          "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.cards.project.title",
+          "project": {
+            "difficulty": "easy",
+            "allowReveal": true,
+            "preferKind": "code_input",
+            "maxAttempts": null,
+            "steps": [
+              {
+                "id": "module2_profile_step_1",
+                "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.projectSteps.module2_profile_step_1.title",
+                "exerciseKey": "module2-profile-step-1",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null
+              },
+              {
+                "id": "module2_profile_step_2",
+                "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.projectSteps.module2_profile_step_2.title",
+                "exerciseKey": "module2-profile-step-2",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "module2_profile_step_3",
+                "titleKey": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.projectSteps.module2_profile_step_3.title",
+                "exerciseKey": "module2-profile-step-3",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              }
+            ]
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "project-brief",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-2-links-images-paths.module-2-profile-page-project.project-brief.title",
+          "bodyKey": "sketches.html.html-module-2-links-images-paths.module-2-profile-page-project.project-brief.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "module2-profile-step-1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+              "path": "index.html",
+              "message": "Link the profile home page to About.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+              "path": "about.html",
+              "message": "Link the About page back to the profile home page.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "about.html"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "about.html"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_1.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "module2-profile-step-2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "projects/robotics.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.projects_robotics_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+              "path": "index.html",
+              "message": "Link the profile home page to the nested robotics page.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']\\.\\./index\\.html[\"'][^>]*>\\s*Back to profile\\s*</a>",
+              "path": "projects/robotics.html",
+              "message": "Use a parent-folder path from the robotics page back home.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "about.html",
+              "projects/robotics.html"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "about.html",
+                "projects/robotics.html"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_2.solutionFiles.projects_robotics_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "module2-profile-step-3",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "projects/robotics.html",
+              "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.projects_robotics_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "images/profile.png",
+              "content": "",
+              "encoding": "base64",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+              "mimeType": "image/png",
+              "sizeBytes": 465,
+              "readOnly": true,
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"']images/profile\\.png[\"'])(?=[^>]*alt\\s*=\\s*[\"']Jordan Lee smiling outside the campus library[\"'])[^>]*>",
+              "path": "index.html",
+              "message": "Add the supplied profile image with the requested descriptive alt text.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']about\\.html[\"'][^>]*>\\s*About me\\s*</a>",
+              "path": "index.html",
+              "message": "Keep the About link working.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"']projects/robotics\\.html[\"'][^>]*>\\s*Robotics project\\s*</a>",
+              "path": "index.html",
+              "message": "Keep the Robotics link working.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "index.html",
+              "about.html",
+              "projects/robotics.html",
+              "images/profile.png"
+            ]
+          },
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.starterFiles.projects_robotics_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "index.html",
+                "about.html",
+                "projects/robotics.html",
+                "images/profile.png"
+              ]
+            }
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/robotics.html",
+                "content": "@:topics.html.html-module-2-links-images-paths.module-2-profile-page-project.moduleProject.steps.module2_profile_step_3.solutionFiles.projects_robotics_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "ordered-and-unordered-lists": {
+      "topicId": "ordered-and-unordered-lists",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-3-lists-tables-content",
+      "sectionSlug": "html-html-module-3-lessons",
+      "prefix": "html_module_3",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.label",
+        "summaryKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.cards.sketch0.title",
+          "sketchId": "list-meaning",
+          "height": 420,
+          "tryIt": {
+            "id": "try-ordered-and-unordered-lists-sketch0",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.prompt",
+            "exerciseKey": "try-ordered-and-unordered-lists-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.cards.sketch1.title",
+          "sketchId": "ordered-sequence",
+          "height": 420,
+          "tryIt": {
+            "id": "try-ordered-and-unordered-lists-sketch1",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.prompt",
+            "exerciseKey": "try-ordered-and-unordered-lists-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.cards.sketch2.title",
+          "sketchId": "list-item-structure",
+          "height": 420,
+          "tryIt": {
+            "id": "try-ordered-and-unordered-lists-sketch2",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.prompt",
+            "exerciseKey": "try-ordered-and-unordered-lists-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "list-meaning",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.list-meaning.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.list-meaning.bodyMarkdown"
+        },
+        {
+          "id": "ordered-sequence",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.ordered-sequence.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.ordered-sequence.bodyMarkdown"
+        },
+        {
+          "id": "list-item-structure",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.list-item-structure.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.list-item-structure.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-ordered-and-unordered-lists-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<ul\\b[^>]*>\\s*<li\\b[^>]*>\\s*Student ID\\s*</li>\\s*<li\\b[^>]*>\\s*Notebook\\s*</li>\\s*<li\\b[^>]*>\\s*Water bottle\\s*</li>\\s*</ul>",
+              "path": "index.html",
+              "message": "Group Student ID, Notebook, and Water bottle inside one unordered list.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-ordered-and-unordered-lists-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*Check in\\s*</li>\\s*<li\\b[^>]*>\\s*Find your seat\\s*</li>\\s*<li\\b[^>]*>\\s*Open your notebook\\s*</li>\\s*</ol>",
+              "path": "index.html",
+              "message": "Use one ordered list for the three arrival steps.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-ordered-and-unordered-lists-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*Bring\\s*</h2>.*<ul\\b[^>]*>.*Laptop.*Charger.*</ul>",
+              "path": "index.html",
+              "message": "Use an unordered list for the items to bring.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*Start\\s*</h2>.*<ol\\b[^>]*>.*Sign in.*Open the lesson.*</ol>",
+              "path": "index.html",
+              "message": "Use an ordered list for the starting steps.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "lists-quiz-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-quiz-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "lists-quiz-multi",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-quiz-multi",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "c"
+            ]
+          }
+        },
+        {
+          "id": "lists-quiz-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-quiz-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4"
+            ]
+          }
+        },
+        {
+          "id": "lists-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "<li>Notebook</li>"
+          }
+        }
+      ]
+    },
+    "nested-lists": {
+      "topicId": "nested-lists",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-3-lists-tables-content",
+      "sectionSlug": "html-html-module-3-lessons",
+      "prefix": "html_module_3",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-3-lists-tables-content.nested-lists.label",
+        "summaryKey": "topics.html.html-module-3-lists-tables-content.nested-lists.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.cards.sketch0.title",
+          "sketchId": "nest-inside-item",
+          "height": 420,
+          "tryIt": {
+            "id": "try-nested-lists-sketch0",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.prompt",
+            "exerciseKey": "try-nested-lists-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.cards.sketch1.title",
+          "sketchId": "mix-list-meaning",
+          "height": 420,
+          "tryIt": {
+            "id": "try-nested-lists-sketch1",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.prompt",
+            "exerciseKey": "try-nested-lists-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.cards.sketch2.title",
+          "sketchId": "readable-hierarchy",
+          "height": 420,
+          "tryIt": {
+            "id": "try-nested-lists-sketch2",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.prompt",
+            "exerciseKey": "try-nested-lists-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "nest-inside-item",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.nest-inside-item.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.nest-inside-item.bodyMarkdown"
+        },
+        {
+          "id": "mix-list-meaning",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.mix-list-meaning.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.mix-list-meaning.bodyMarkdown"
+        },
+        {
+          "id": "readable-hierarchy",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.readable-hierarchy.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.nested-lists.readable-hierarchy.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-nested-lists-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Programming.*</ul>\\s*</li>.*<li\\b[^>]*>\\s*Art\\s*</li>",
+              "path": "index.html",
+              "message": "Nest Sensors and Programming inside the Robotics list item.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-nested-lists-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<li\\b[^>]*>\\s*Web Basics\\s*<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*HTML structure\\s*</li>\\s*<li\\b[^>]*>\\s*Links and images\\s*</li>\\s*</ol>\\s*</li>",
+              "path": "index.html",
+              "message": "Nest the ordered Web Basics lesson sequence inside its parent item.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-nested-lists-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<li\\b[^>]*>\\s*Web Development\\s*<ul\\b[^>]*>.*HTML.*CSS later.*</ul>\\s*</li>",
+              "path": "index.html",
+              "message": "Nest HTML and CSS later under Web Development.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>\\s*</li>",
+              "path": "index.html",
+              "message": "Nest Sensors and Motors under Robotics.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "nested-quiz-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-quiz-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "nested-quiz-multi",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-quiz-multi",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "c"
+            ]
+          }
+        },
+        {
+          "id": "nested-quiz-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-quiz-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3"
+            ]
+          }
+        },
+        {
+          "id": "nested-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "<ul><li>Sensors</li><li>Programming</li></ul>"
+          }
+        }
+      ]
+    },
+    "tables-and-table-structure": {
+      "topicId": "tables-and-table-structure",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-3-lists-tables-content",
+      "sectionSlug": "html-html-module-3-lessons",
+      "prefix": "html_module_3",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.label",
+        "summaryKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.cards.sketch0.title",
+          "sketchId": "table-data",
+          "height": 420,
+          "tryIt": {
+            "id": "try-tables-and-table-structure-sketch0",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.prompt",
+            "exerciseKey": "try-tables-and-table-structure-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.cards.sketch1.title",
+          "sketchId": "caption-headers",
+          "height": 420,
+          "tryIt": {
+            "id": "try-tables-and-table-structure-sketch1",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.prompt",
+            "exerciseKey": "try-tables-and-table-structure-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.cards.sketch2.title",
+          "sketchId": "thead-tbody",
+          "height": 420,
+          "tryIt": {
+            "id": "try-tables-and-table-structure-sketch2",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.title",
+            "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.prompt",
+            "exerciseKey": "try-tables-and-table-structure-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "table-data",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.table-data.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.table-data.bodyMarkdown"
+        },
+        {
+          "id": "caption-headers",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.caption-headers.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.caption-headers.bodyMarkdown"
+        },
+        {
+          "id": "thead-tbody",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.thead-tbody.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.tables-and-table-structure.thead-tbody.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-tables-and-table-structure-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<caption\\b[^>]*>\\s*Weekly club meetings\\s*</caption>",
+              "path": "index.html",
+              "message": "Add the requested table caption.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<tr\\b[^>]*>\\s*<th\\b[^>]*>\\s*Club\\s*</th>\\s*<th\\b[^>]*>\\s*Day\\s*</th>\\s*</tr>",
+              "path": "index.html",
+              "message": "Add the Club and Day header row.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Robotics\\s*</td>\\s*<td\\b[^>]*>\\s*Tuesday\\s*</td>\\s*</tr>",
+              "path": "index.html",
+              "message": "Add the Robotics row.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Art\\s*</td>\\s*<td\\b[^>]*>\\s*Thursday\\s*</td>\\s*</tr>",
+              "path": "index.html",
+              "message": "Add the Art row.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-tables-and-table-structure-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<thead\\b[^>]*>\\s*<tr\\b[^>]*>.*Time.*Session.*</tr>\\s*</thead>",
+              "path": "index.html",
+              "message": "Put the header row inside thead.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<tbody\\b[^>]*>\\s*<tr\\b[^>]*>.*10:00.*HTML Basics.*</tr>\\s*</tbody>",
+              "path": "index.html",
+              "message": "Put the data row inside tbody.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-tables-and-table-structure-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<caption\\b[^>]*>\\s*Morning session schedule\\s*</caption>",
+              "path": "index.html",
+              "message": "Add the requested table caption.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<thead\\b[^>]*>.*Time.*Session.*Location.*</thead>",
+              "path": "index.html",
+              "message": "Build the three-column header inside thead.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<tbody\\b[^>]*>.*9:00.*Welcome.*Room A.*10:00.*HTML Basics.*Lab 1.*11:00.*Robotics Demo.*Lab 2.*</tbody>",
+              "path": "index.html",
+              "message": "Put all three schedule rows inside tbody.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "tables-quiz-choice",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-quiz-choice",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "tables-quiz-multi",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-quiz-multi",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "c"
+            ]
+          }
+        },
+        {
+          "id": "tables-quiz-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-quiz-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3"
+            ]
+          }
+        },
+        {
+          "id": "tables-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "<th>Time</th>"
+          }
+        }
+      ]
+    },
+    "module-3-content-page-project": {
+      "topicId": "module-3-content-page-project",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-3-lists-tables-content",
+      "sectionSlug": "html-html-module-3-project",
+      "prefix": "html_module_3",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.label",
+        "summaryKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.cards.sketch0.title",
+          "sketchId": "project-brief",
+          "height": 420
+        },
+        {
+          "id": "project",
+          "kind": "project",
+          "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.cards.project.title",
+          "project": {
+            "difficulty": "easy",
+            "allowReveal": true,
+            "preferKind": "code_input",
+            "maxAttempts": null,
+            "steps": [
+              {
+                "id": "module3_content_step_1",
+                "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.projectSteps.module3_content_step_1.title",
+                "exerciseKey": "module3-content-step-1",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null
+              },
+              {
+                "id": "module3_content_step_2",
+                "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.projectSteps.module3_content_step_2.title",
+                "exerciseKey": "module3-content-step-2",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "module3_content_step_3",
+                "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.projectSteps.module3_content_step_3.title",
+                "exerciseKey": "module3-content-step-3",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              }
+            ]
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "project-brief",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-3-lists-tables-content.module-3-content-page-project.project-brief.title",
+          "bodyKey": "sketches.html.html-module-3-lists-tables-content.module-3-content-page-project.project-brief.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "module3-content-step-1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+              "path": "index.html",
+              "message": "Keep the What to bring unordered list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+              "path": "index.html",
+              "message": "Keep the Arrival steps ordered list.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "module3-content-step-2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+              "path": "index.html",
+              "message": "Keep the What to bring unordered list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+              "path": "index.html",
+              "message": "Keep the Arrival steps ordered list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*Workshop tracks\\s*</h2>.*Web Basics.*<ul\\b[^>]*>.*HTML Structure.*Links and Images.*</ul>",
+              "path": "index.html",
+              "message": "Keep the Web Basics nested list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)Robotics.*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>",
+              "path": "index.html",
+              "message": "Keep the Robotics nested list.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "module3-content-step-3",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+              "path": "index.html",
+              "message": "Keep the What to bring unordered list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+              "path": "index.html",
+              "message": "Keep the Arrival steps ordered list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*Workshop tracks\\s*</h2>.*Web Basics.*<ul\\b[^>]*>.*HTML Structure.*Links and Images.*</ul>",
+              "path": "index.html",
+              "message": "Keep the Web Basics nested list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)Robotics.*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>",
+              "path": "index.html",
+              "message": "Keep the Robotics nested list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<caption\\b[^>]*>\\s*Saturday learning sessions\\s*</caption>",
+              "path": "index.html",
+              "message": "Add the requested schedule caption.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<thead\\b[^>]*>.*Time.*Session.*Room.*</thead>",
+              "path": "index.html",
+              "message": "Add Time, Session, and Room headers inside thead.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<tbody\\b[^>]*>.*9:00.*Opening Session.*Community Hall.*10:00.*HTML Structure.*Lab 1.*11:00.*Robotics Demo.*Lab 2.*</tbody>",
+              "path": "index.html",
+              "message": "Add all three schedule rows inside tbody.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "page-landmarks": {
+      "topicId": "page-landmarks",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-4-semantic-accessible-layout",
+      "sectionSlug": "html-html-module-4-lessons",
+      "prefix": "html_module_4",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.label",
+        "summaryKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.cards.sketch0.title",
+          "sketchId": "major-page-regions",
+          "height": 420,
+          "tryIt": {
+            "id": "try-page-landmarks-sketch0",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.title",
+            "promptKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.prompt",
+            "exerciseKey": "try-page-landmarks-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.cards.sketch1.title",
+          "sketchId": "navigation-landmark",
+          "height": 420,
+          "tryIt": {
+            "id": "try-page-landmarks-sketch1",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.title",
+            "promptKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.prompt",
+            "exerciseKey": "try-page-landmarks-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "major-page-regions",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.page-landmarks.major-page-regions.title",
+          "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.page-landmarks.major-page-regions.bodyMarkdown"
+        },
+        {
+          "id": "navigation-landmark",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.page-landmarks.navigation-landmark.title",
+          "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.page-landmarks.navigation-landmark.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-page-landmarks-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<header\\b[^>]*>.*<h1\\b[^>]*>\\s*Riverside Community News\\s*</h1>.*Stories from around the neighborhood\\..*</header>",
+              "path": "index.html",
+              "message": "Put the page title and introduction inside header.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<main\\b[^>]*>.*<h2\\b[^>]*>\\s*Lead story\\s*</h2>.*The library opened a new evening study room\\..*</main>",
+              "path": "index.html",
+              "message": "Put the Lead story inside main.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<footer\\b[^>]*>.*Contact:\\s*news@riverside\\.example.*</footer>",
+              "path": "index.html",
+              "message": "Put the contact line inside footer.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-page-landmarks-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<nav\\b[^>]*>\\s*<a\\b[^>]*href\\s*=\\s*[\\\"']#showcase[\\\"'][^>]*>\\s*Showcase\\s*</a>\\s*<a\\b[^>]*href\\s*=\\s*[\\\"']#gallery[\\\"'][^>]*>\\s*Gallery\\s*</a>\\s*</nav>",
+              "path": "index.html",
+              "message": "Place both navigation links inside one nav element.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "landmarks-quiz-main",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-quiz-main",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "landmarks-quiz-meaning",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-quiz-meaning",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "landmarks-quiz-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-quiz-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4",
+            "t5"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4",
+              "t5"
+            ]
+          }
+        },
+        {
+          "id": "landmarks-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "<main><article>Community story</article></main>"
+          }
+        }
+      ]
+    },
+    "sections-articles-and-asides": {
+      "topicId": "sections-articles-and-asides",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-4-semantic-accessible-layout",
+      "sectionSlug": "html-html-module-4-lessons",
+      "prefix": "html_module_4",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.label",
+        "summaryKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.cards.sketch0.title",
+          "sketchId": "article-content",
+          "height": 420,
+          "tryIt": {
+            "id": "try-sections-articles-and-asides-sketch0",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.title",
+            "promptKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.prompt",
+            "exerciseKey": "try-sections-articles-and-asides-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.cards.sketch1.title",
+          "sketchId": "section-content",
+          "height": 420,
+          "tryIt": {
+            "id": "try-sections-articles-and-asides-sketch1",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.title",
+            "promptKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.prompt",
+            "exerciseKey": "try-sections-articles-and-asides-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.cards.sketch2.title",
+          "sketchId": "aside-content",
+          "height": 420,
+          "tryIt": {
+            "id": "try-sections-articles-and-asides-sketch2",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.title",
+            "promptKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.prompt",
+            "exerciseKey": "try-sections-articles-and-asides-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "article-content",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.article-content.title",
+          "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.article-content.bodyMarkdown"
+        },
+        {
+          "id": "section-content",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.section-content.title",
+          "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.section-content.bodyMarkdown"
+        },
+        {
+          "id": "aside-content",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.aside-content.title",
+          "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.aside-content.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-sections-articles-and-asides-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<article\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Robotics Team Reaches Finals\\s*</h2>\\s*<p\\b[^>]*>\\s*The team will compete on Saturday\\.\\s*</p>\\s*</article>",
+              "path": "index.html",
+              "message": "Wrap the standalone robotics story in article.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-sections-articles-and-asides-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<section\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Schedule\\s*</h2>.*10:00 AM\\s*—\\s*Welcome.*11:00 AM\\s*—\\s*Lab tour.*</section>",
+              "path": "index.html",
+              "message": "Put the schedule heading and both time entries inside section.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-sections-articles-and-asides-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)</article>\\s*<aside\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Related workshop\\s*</h2>\\s*<p\\b[^>]*>\\s*Study skills workshop\\s*—\\s*Tuesday at 5:00 PM\\s*</p>\\s*</aside>",
+              "path": "index.html",
+              "message": "Place the related workshop in aside after the article.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "semantic-containers-quiz-article",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-quiz-article",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "semantic-containers-quiz-uses",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-quiz-uses",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "semantic-containers-quiz-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-quiz-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4"
+            ]
+          }
+        },
+        {
+          "id": "semantic-containers-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "<aside><h2>Related links</h2></aside>"
+          }
+        }
+      ]
+    },
+    "headings-and-accessible-structure": {
+      "topicId": "headings-and-accessible-structure",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-4-semantic-accessible-layout",
+      "sectionSlug": "html-html-module-4-lessons",
+      "prefix": "html_module_4",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.label",
+        "summaryKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.cards.sketch0.title",
+          "sketchId": "heading-hierarchy",
+          "height": 420,
+          "tryIt": {
+            "id": "try-headings-and-accessible-structure-sketch0",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.title",
+            "promptKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.prompt",
+            "exerciseKey": "try-headings-and-accessible-structure-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.cards.sketch1.title",
+          "sketchId": "meaningful-text-alternatives",
+          "height": 420,
+          "tryIt": {
+            "id": "try-headings-and-accessible-structure-sketch1",
+            "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.title",
+            "promptKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.prompt",
+            "exerciseKey": "try-headings-and-accessible-structure-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "heading-hierarchy",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.heading-hierarchy.title",
+          "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.heading-hierarchy.bodyMarkdown"
+        },
+        {
+          "id": "meaningful-text-alternatives",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.meaningful-text-alternatives.title",
+          "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.meaningful-text-alternatives.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-headings-and-accessible-structure-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h1\\b[^>]*>\\s*Community Garden Guide\\s*</h1>.*<h2\\b[^>]*>\\s*Volunteer Days\\s*</h2>.*<h3\\b[^>]*>\\s*What to bring\\s*</h3>",
+              "path": "index.html",
+              "message": "Use h1, then h2 for Volunteer Days, then h3 for What to bring.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-headings-and-accessible-structure-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<img\\b(?=[^>]*\\bsrc\\s*=\\s*[\\\"']garden-team\\.jpg[\\\"'])(?=[^>]*\\balt\\s*=\\s*[\\\"']Three students planting herbs in raised garden beds[\\\"'])[^>]*>",
+              "path": "index.html",
+              "message": "Give the garden image the requested meaningful alt text.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<figure\\b[^>]*>.*<img\\b[^>]*>.*<figcaption\\b[^>]*>\\s*Students prepare the herb garden for spring\\.\\s*</figcaption>.*</figure>",
+              "path": "index.html",
+              "message": "Add the requested figcaption inside figure.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "accessible-structure-quiz-headings",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-quiz-headings",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "accessible-structure-quiz-accessibility",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-quiz-accessibility",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "accessible-structure-quiz-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-quiz-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3"
+            ]
+          }
+        },
+        {
+          "id": "accessible-structure-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "alt=\"Two students repairing a bicycle wheel\""
+          }
+        }
+      ]
+    },
+    "module-4-article-page-project": {
+      "topicId": "module-4-article-page-project",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-4-semantic-accessible-layout",
+      "sectionSlug": "html-html-module-4-project",
+      "prefix": "html_module_4",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.label",
+        "summaryKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.cards.sketch0.title",
+          "sketchId": "project-brief",
+          "height": 420
+        },
+        {
+          "id": "project",
+          "kind": "project",
+          "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.cards.project.title",
+          "project": {
+            "difficulty": "easy",
+            "allowReveal": true,
+            "preferKind": "code_input",
+            "maxAttempts": null,
+            "steps": [
+              {
+                "id": "module4_article_step_1",
+                "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.projectSteps.module4_article_step_1.title",
+                "exerciseKey": "module4-article-step-1",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null
+              },
+              {
+                "id": "module4_article_step_2",
+                "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.projectSteps.module4_article_step_2.title",
+                "exerciseKey": "module4-article-step-2",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "module4_article_step_3",
+                "titleKey": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.projectSteps.module4_article_step_3.title",
+                "exerciseKey": "module4-article-step-3",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              }
+            ]
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "project-brief",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.project-brief.title",
+          "bodyKey": "sketches.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.project-brief.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "module4-article-step-1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<header\\b[^>]*>.*<h1\\b[^>]*>\\s*Eastside Garden Journal\\s*</h1>.*<nav\\b[^>]*>.*#story.*#visit.*</nav>.*</header>",
+              "path": "index.html",
+              "message": "Keep the title, introduction, and both jump links inside header with nav.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<main\\b[^>]*>.*Students Build New Garden Beds.*Visit the garden.*</main>",
+              "path": "index.html",
+              "message": "Keep the story and visit content inside main.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<footer\\b[^>]*>.*Contact:\\s*garden@eastside\\.example.*</footer>",
+              "path": "index.html",
+              "message": "Put the contact line inside footer.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "module4-article-step-2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<article\\b[^>]*>.*<h2\\b[^>]*id\\s*=\\s*[\\\"']story[\\\"'][^>]*>\\s*Students Build New Garden Beds\\s*</h2>.*<section\\b[^>]*>\\s*<h3\\b[^>]*>\\s*What changed\\s*</h3>.*youth program more space for herbs and vegetables\\..*</section>.*</article>",
+              "path": "index.html",
+              "message": "Build the self-contained story as article with the What changed section inside it.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<section\\b[^>]*>\\s*<h2\\b[^>]*id\\s*=\\s*[\\\"']visit[\\\"'][^>]*>\\s*Visit the garden\\s*</h2>.*Saturday,\\s*10:00 AM\\s*—\\s*Eastside Community Center.*</section>",
+              "path": "index.html",
+              "message": "Keep Visit the garden as its own section.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<aside\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Related activity\\s*</h2>.*Seed-starting workshop\\s*—\\s*Saturday at 11:30 AM.*</aside>",
+              "path": "index.html",
+              "message": "Add the related activity as complementary aside content.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "module4-article-step-3",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h1\\b[^>]*>\\s*Eastside Garden Journal\\s*</h1>.*<h2\\b[^>]*id\\s*=\\s*[\\\"']story[\\\"'][^>]*>\\s*Students Build New Garden Beds\\s*</h2>.*<h3\\b[^>]*>\\s*What changed\\s*</h3>",
+              "path": "index.html",
+              "message": "Keep the logical h1, h2, h3 hierarchy.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<figure\\b[^>]*>.*<img\\b(?=[^>]*\\bsrc\\s*=\\s*[\\\"']garden-beds\\.jpg[\\\"'])(?=[^>]*\\balt\\s*=\\s*[\\\"']Three students filling raised garden beds with soil[\\\"'])[^>]*>.*<figcaption\\b[^>]*>\\s*Students prepare the new beds for spring planting\\.\\s*</figcaption>.*</figure>",
+              "path": "index.html",
+              "message": "Add the requested accessible garden figure inside the article.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<header\\b[^>]*>.*<nav\\b[^>]*>.*</nav>.*</header>.*<main\\b[^>]*>.*<article\\b[^>]*>.*</article>.*<aside\\b[^>]*>.*</aside>.*</main>.*<footer\\b[^>]*>.*</footer>",
+              "path": "index.html",
+              "message": "Keep the semantic page structure from the earlier steps.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-4-semantic-accessible-layout.module-4-article-page-project.moduleProject.steps.module4_article_step_3.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "forms-labels-and-inputs": {
+      "topicId": "forms-labels-and-inputs",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-5-forms-inputs",
+      "sectionSlug": "html-html-module-5-lessons",
+      "prefix": "html_module_5",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.label",
+        "summaryKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.cards.sketch0.title",
+          "sketchId": "form-groups-controls",
+          "height": 420,
+          "tryIt": {
+            "id": "try-forms-labels-and-inputs-sketch0",
+            "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.title",
+            "promptKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.prompt",
+            "exerciseKey": "try-forms-labels-and-inputs-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.cards.sketch1.title",
+          "sketchId": "explicit-label-connection",
+          "height": 420,
+          "tryIt": {
+            "id": "try-forms-labels-and-inputs-sketch1",
+            "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.title",
+            "promptKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.prompt",
+            "exerciseKey": "try-forms-labels-and-inputs-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "form-groups-controls",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.forms-labels-and-inputs.form-groups-controls.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.forms-labels-and-inputs.form-groups-controls.bodyMarkdown"
+        },
+        {
+          "id": "explicit-label-connection",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.forms-labels-and-inputs.explicit-label-connection.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.forms-labels-and-inputs.explicit-label-connection.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-forms-labels-and-inputs-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<form\\b[^>]*>\\s*<label\\b[^>]*for\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*Name\\s*</label>\\s*<input\\b[^>]*id\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*</form>",
+              "path": "index.html",
+              "message": "Put the Name label and input inside one form element.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-forms-labels-and-inputs-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>",
+              "path": "index.html",
+              "message": "Connect the Email address label with for=\"email\".",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Give the email input matching id, name, and type attributes.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "forms-quiz-label",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-quiz-label",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "forms-quiz-structure",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-quiz-structure",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "forms-quiz-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-quiz-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4"
+            ]
+          }
+        },
+        {
+          "id": "forms-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "<input id=\"city\" name=\"city\" type=\"text\">"
+          }
+        }
+      ]
+    },
+    "useful-input-types": {
+      "topicId": "useful-input-types",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-5-forms-inputs",
+      "sectionSlug": "html-html-module-5-lessons",
+      "prefix": "html_module_5",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-5-forms-inputs.useful-input-types.label",
+        "summaryKey": "topics.html.html-module-5-forms-inputs.useful-input-types.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.cards.sketch0.title",
+          "sketchId": "typed-data-controls",
+          "height": 420,
+          "tryIt": {
+            "id": "try-useful-input-types-sketch0",
+            "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.title",
+            "promptKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.prompt",
+            "exerciseKey": "try-useful-input-types-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.cards.sketch1.title",
+          "sketchId": "checkbox-controls",
+          "height": 420,
+          "tryIt": {
+            "id": "try-useful-input-types-sketch1",
+            "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.title",
+            "promptKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.prompt",
+            "exerciseKey": "try-useful-input-types-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.cards.sketch2.title",
+          "sketchId": "radio-controls",
+          "height": 420,
+          "tryIt": {
+            "id": "try-useful-input-types-sketch2",
+            "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.title",
+            "promptKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.prompt",
+            "exerciseKey": "try-useful-input-types-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "typed-data-controls",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.useful-input-types.typed-data-controls.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.useful-input-types.typed-data-controls.bodyMarkdown"
+        },
+        {
+          "id": "checkbox-controls",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.useful-input-types.checkbox-controls.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.useful-input-types.checkbox-controls.bodyMarkdown"
+        },
+        {
+          "id": "radio-controls",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.useful-input-types.radio-controls.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.useful-input-types.radio-controls.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-useful-input-types-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Use type=\"email\" for the Email field.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']guests[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']number[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Use type=\"number\" for the guest count.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']visit-date[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']date[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Use type=\"date\" for the visit date.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-useful-input-types-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']checkbox[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Add the reminders checkbox with id, name, and type.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']reminders[\"\\'][^>]*>\\s*Send me event reminders\\s*</label>",
+              "path": "index.html",
+              "message": "Add a connected label for the reminders checkbox.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-useful-input-types-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Choose a session\\s*</legend>.*</fieldset>",
+              "path": "index.html",
+              "message": "Group the session choices in fieldset with a legend.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']morning[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']morning[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']morning[\"\\'][^>]*>\\s*Morning\\s*</label>",
+              "path": "index.html",
+              "message": "Create and label the Morning radio option.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']evening[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']evening[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']evening[\"\\'][^>]*>\\s*Evening\\s*</label>",
+              "path": "index.html",
+              "message": "Create and label the Evening radio option.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "input-types-quiz-email",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-quiz-email",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "input-types-quiz-choices",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-quiz-choices",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "input-types-quiz-radio-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-quiz-radio-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4",
+            "t5"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4",
+              "t5"
+            ]
+          }
+        },
+        {
+          "id": "input-types-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "<input id=\"newsletter\" name=\"newsletter\" type=\"checkbox\">"
+          }
+        }
+      ]
+    },
+    "select-textarea-and-buttons": {
+      "topicId": "select-textarea-and-buttons",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-5-forms-inputs",
+      "sectionSlug": "html-html-module-5-lessons",
+      "prefix": "html_module_5",
+      "minutes": 16,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.label",
+        "summaryKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.cards.sketch0.title",
+          "sketchId": "select-control",
+          "height": 420,
+          "tryIt": {
+            "id": "try-select-textarea-and-buttons-sketch0",
+            "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.title",
+            "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.prompt",
+            "exerciseKey": "try-select-textarea-and-buttons-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch1",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.cards.sketch1.title",
+          "sketchId": "textarea-control",
+          "height": 420,
+          "tryIt": {
+            "id": "try-select-textarea-and-buttons-sketch1",
+            "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.title",
+            "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.prompt",
+            "exerciseKey": "try-select-textarea-and-buttons-sketch1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "sketch2",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.cards.sketch2.title",
+          "sketchId": "submit-button",
+          "height": 420,
+          "tryIt": {
+            "id": "try-select-textarea-and-buttons-sketch2",
+            "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.title",
+            "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.prompt",
+            "exerciseKey": "try-select-textarea-and-buttons-sketch2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": false,
+            "maxAttempts": null
+          }
+        },
+        {
+          "id": "quiz",
+          "kind": "quiz",
+          "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.cards.quiz.title",
+          "quiz": {
+            "difficulty": "easy",
+            "n": 4,
+            "min": 4,
+            "max": 4,
+            "selectionMode": "random",
+            "allowReveal": true,
+            "preferKind": null,
+            "maxAttempts": null
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "select-control",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.select-control.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.select-control.bodyMarkdown"
+        },
+        {
+          "id": "textarea-control",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.textarea-control.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.textarea-control.bodyMarkdown"
+        },
+        {
+          "id": "submit-button",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.submit-button.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.select-textarea-and-buttons.submit-button.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "try-select-textarea-and-buttons-sketch0",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']club[\"\\'][^>]*>\\s*Choose a club\\s*</label>",
+              "path": "index.html",
+              "message": "Add a connected Choose a club label.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<select\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']club[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']club[\"\\'])[^>]*>.*<option\\b[^>]*value\\s*=\\s*[\"\\']robotics[\"\\'][^>]*>\\s*Robotics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']art[\"\\'][^>]*>\\s*Art\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']chess[\"\\'][^>]*>\\s*Chess\\s*</option>.*</select>",
+              "path": "index.html",
+              "message": "Create the club select with Robotics, Art, and Chess options.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-select-textarea-and-buttons-sketch1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']question[\"\\'][^>]*>\\s*Question\\s*</label>\\s*<textarea\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']question[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']question[\"\\'])(?=[^>]*\\brows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>\\s*</textarea>",
+              "path": "index.html",
+              "message": "Use a connected five-row textarea for the Question field.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "try-select-textarea-and-buttons-sketch2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<form\\b[^>]*>.*<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Send RSVP\\s*</button>.*</form>",
+              "path": "index.html",
+              "message": "Add a Send RSVP submit button inside the form.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "select-controls-quiz-long-text",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-quiz-long-text",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "select-controls-quiz-meaning",
+          "kind": "multi_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-quiz-meaning",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "multi_choice",
+            "optionIds": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "select-controls-quiz-order",
+          "kind": "drag_reorder",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-quiz-order",
+          "tokenIds": [
+            "t1",
+            "t2",
+            "t3",
+            "t4",
+            "t5"
+          ],
+          "expected": {
+            "kind": "drag_reorder",
+            "tokenIds": [
+              "t1",
+              "t2",
+              "t3",
+              "t4",
+              "t5"
+            ]
+          }
+        },
+        {
+          "id": "select-controls-quiz-blank",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-quiz-blank",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "<button type=\"submit\">Register</button>"
+          }
+        }
+      ]
+    },
+    "module-5-signup-form-project": {
+      "topicId": "module-5-signup-form-project",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-5-forms-inputs",
+      "sectionSlug": "html-html-module-5-project",
+      "prefix": "html_module_5",
+      "minutes": 24,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.label",
+        "summaryKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.cards.sketch0.title",
+          "sketchId": "project-brief",
+          "height": 420
+        },
+        {
+          "id": "project",
+          "kind": "project",
+          "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.cards.project.title",
+          "project": {
+            "difficulty": "easy",
+            "allowReveal": true,
+            "preferKind": "code_input",
+            "maxAttempts": null,
+            "steps": [
+              {
+                "id": "module5_signup_step_1",
+                "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.projectSteps.module5_signup_step_1.title",
+                "exerciseKey": "module5-signup-step-1",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null
+              },
+              {
+                "id": "module5_signup_step_2",
+                "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.projectSteps.module5_signup_step_2.title",
+                "exerciseKey": "module5-signup-step-2",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "module5_signup_step_3",
+                "titleKey": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.projectSteps.module5_signup_step_3.title",
+                "exerciseKey": "module5-signup-step-3",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              }
+            ]
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "project-brief",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-5-forms-inputs.module-5-signup-form-project.project-brief.title",
+          "bodyKey": "sketches.html.html-module-5-forms-inputs.module-5-signup-form-project.project-brief.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "module5-signup-step-1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<form\\b[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']full-name[\"\\'][^>]*>\\s*Full name\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']full-name[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']full_name[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']text[\"\\'])[^>]*>.*</form>",
+              "path": "index.html",
+              "message": "Add the labeled Full name field inside the form.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Add the labeled Email address field with type email.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']workshop-date[\"\\'][^>]*>\\s*Workshop date\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']workshop-date[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']workshop_date[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']date[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Add the labeled Workshop date field with type date.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "module5-signup-step-2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Preferred session\\s*</legend>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']morning[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])[^>]*>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']evening[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])[^>]*>.*</fieldset>",
+              "path": "index.html",
+              "message": "Add the Preferred session radio group.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']updates[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']updates[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']checkbox[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']updates[\"\\'][^>]*>\\s*Send me workshop updates\\s*</label>",
+              "path": "index.html",
+              "message": "Add and label the independent workshop updates checkbox.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']track[\"\\'][^>]*>\\s*Workshop track\\s*</label>.*<select\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']track[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']track[\"\\'])[^>]*>.*<option\\b[^>]*value\\s*=\\s*[\"\\']web[\"\\'][^>]*>\\s*Web basics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']data[\"\\'][^>]*>\\s*Data basics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']git[\"\\'][^>]*>\\s*Git basics\\s*</option>.*</select>",
+              "path": "index.html",
+              "message": "Add the labeled Workshop track select with all three options.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_2.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "module5-signup-step-3",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']goals[\"\\'][^>]*>\\s*What do you want to learn\\?\\s*</label>.*<textarea\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']goals[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']goals[\"\\'])(?=[^>]*\\brows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>\\s*</textarea>",
+              "path": "index.html",
+              "message": "Add the labeled five-row learning goals textarea.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Register for workshop\\s*</button>",
+              "path": "index.html",
+              "message": "Add the Register for workshop submit button.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-5-forms-inputs.module-5-signup-form-project.moduleProject.steps.module5_signup_step_3.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "final-html-personal-site-capstone": {
+      "topicId": "final-html-personal-site-capstone",
+      "subjectSlug": "html",
+      "moduleSlug": "html-module-6-final-capstone",
+      "sectionSlug": "html-html-module-6-capstone",
+      "prefix": "html_module_6",
+      "minutes": 45,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "topic": {
+        "labelKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.label",
+        "summaryKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.summary"
+      },
+      "cards": [
+        {
+          "id": "sketch0",
+          "kind": "sketch",
+          "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.cards.sketch0.title",
+          "sketchId": "capstone-project-brief",
+          "height": 420
+        },
+        {
+          "id": "project",
+          "kind": "project",
+          "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.cards.project.title",
+          "project": {
+            "difficulty": "easy",
+            "allowReveal": true,
+            "preferKind": "code_input",
+            "displayKind": "capstone",
+            "uiKind": "capstone",
+            "maxAttempts": null,
+            "steps": [
+              {
+                "id": "module6_capstone_step_1",
+                "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_1.title",
+                "exerciseKey": "module6-capstone-step-1",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null
+              },
+              {
+                "id": "module6_capstone_step_2",
+                "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_2.title",
+                "exerciseKey": "module6-capstone-step-2",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "module6_capstone_step_3",
+                "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_3.title",
+                "exerciseKey": "module6-capstone-step-3",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "module6_capstone_step_4",
+                "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_4.title",
+                "exerciseKey": "module6-capstone-step-4",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "module6_capstone_step_5",
+                "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_5.title",
+                "exerciseKey": "module6-capstone-step-5",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              },
+              {
+                "id": "module6_capstone_step_6",
+                "titleKey": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.projectSteps.module6_capstone_step_6.title",
+                "exerciseKey": "module6-capstone-step-6",
+                "difficulty": "easy",
+                "preferKind": "code_input",
+                "seedPolicy": "global",
+                "maxAttempts": null,
+                "carryFromPrev": true
+              }
+            ]
+          }
+        }
+      ],
+      "sketches": [
+        {
+          "id": "capstone-project-brief",
+          "archetype": "paragraph",
+          "titleKey": "sketches.html.html-module-6-final-capstone.final-html-personal-site-capstone.capstone-project-brief.title",
+          "bodyKey": "sketches.html.html-module-6-final-capstone.final-html-personal-site-capstone.capstone-project-brief.bodyMarkdown"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "module6-capstone-step-1",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1.solutionCode",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h1\\b[^>]*>\\s*Jordan Lee\\s*</h1>.*Aspiring web developer building practical projects for the community\\..*This portfolio introduces my background, projects, and contact information\\.",
+              "path": "index.html",
+              "message": "Use the exact required Home page heading and paragraph text.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_1.solutionCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "module6-capstone-step-2",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<nav\\b[^>]*>.*<a\\b[^>]*href\\s*=\\s*[\"\\']index\\.html[\"\\'][^>]*>\\s*Home\\s*</a>.*<a\\b[^>]*href\\s*=\\s*[\"\\']about\\.html[\"\\'][^>]*>\\s*About\\s*</a>.*</nav>",
+              "path": "index.html",
+              "message": "Add the exact Home and About navigation to index.html.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h1\\b[^>]*>\\s*About Jordan\\s*</h1>.*I am learning web development by building useful pages and reviewing how each HTML element communicates meaning\\..*My current goal is to build clear, accessible websites before moving on to CSS\\.",
+              "path": "about.html",
+              "message": "Use the exact required About page content.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_2.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "module6-capstone-step-3",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "projects/portfolio.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.projects_portfolio_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "images/profile.png",
+              "content": "",
+              "encoding": "base64",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+              "mimeType": "image/png",
+              "sizeBytes": 465,
+              "readOnly": true,
+              "isEntry": false,
+              "language": "web",
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"\\']images/profile\\.png[\"\\'])(?=[^>]*alt\\s*=\\s*[\"\\']Portrait of Jordan Lee[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Use the exact Home image path and alt text.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<nav\\b[^>]*>.*href\\s*=\\s*[\"\\']\\.\\./index\\.html[\"\\'].*href\\s*=\\s*[\"\\']\\.\\./about\\.html[\"\\'].*href\\s*=\\s*[\"\\']portfolio\\.html[\"\\'].*</nav>",
+              "path": "projects/portfolio.html",
+              "message": "Use the exact nested Projects navigation paths.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<img\\b(?=[^>]*src\\s*=\\s*[\"\\']\\.\\./images/profile\\.png[\"\\'])(?=[^>]*alt\\s*=\\s*[\"\\']Portrait of Jordan Lee beside a portfolio project[\"\\'])[^>]*>",
+              "path": "projects/portfolio.html",
+              "message": "Use the exact nested image path and alt text.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/portfolio.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_3.solutionFiles.projects_portfolio_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "isEntry": false,
+                "language": "web",
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "module6-capstone-step-4",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "projects/portfolio.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.projects_portfolio_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "images/profile.png",
+              "content": "",
+              "encoding": "base64",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+              "mimeType": "image/png",
+              "sizeBytes": 465,
+              "readOnly": true,
+              "isEntry": false,
+              "language": "web",
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<header\\b[^>]*>.*<nav\\b[^>]*>.*</nav>.*</header>.*<main\\b[^>]*>.*<section\\b[^>]*>.*<h2\\b[^>]*>\\s*Welcome\\s*</h2>.*</section>.*</main>.*<footer\\b[^>]*>.*Jordan Lee's HTML portfolio\\..*</footer>",
+              "path": "index.html",
+              "message": "Use the required semantic Home structure and exact footer text.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h2\\b[^>]*>\\s*Skills I'm practicing\\s*</h2>.*<ul\\b[^>]*>.*Semantic HTML structure.*Accessible forms and labels.*Multi-page navigation and relative paths.*</ul>",
+              "path": "about.html",
+              "message": "Use the exact required skills list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<table\\b[^>]*>.*Community Event Page.*Semantic content.*Complete.*Workshop Signup.*Accessible forms.*Complete.*</table>",
+              "path": "projects/portfolio.html",
+              "message": "Use the exact required project table values.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"\\']https://developer\\.mozilla\\.org/[\"\\'][^>]*>\\s*MDN Web Docs\\s*</a>",
+              "path": "projects/portfolio.html",
+              "message": "Use the exact MDN Web Docs link text and destination.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/portfolio.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.starterFiles.projects_portfolio_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "isEntry": false,
+                "language": "web",
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/portfolio.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_4.solutionFiles.projects_portfolio_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "isEntry": false,
+                "language": "web",
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "module6-capstone-step-5",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "projects/portfolio.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.projects_portfolio_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "images/profile.png",
+              "content": "",
+              "encoding": "base64",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+              "mimeType": "image/png",
+              "sizeBytes": 465,
+              "readOnly": true,
+              "isEntry": false,
+              "language": "web",
+              "entry": false
+            },
+            {
+              "path": "contact.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.contact_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"\\']contact\\.html[\"\\'][^>]*>\\s*Send me a message\\s*</a>",
+              "path": "index.html",
+              "message": "Add the exact Home call-to-action link to Contact.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"\\']\\.\\./contact\\.html[\"\\'][^>]*>\\s*Contact\\s*</a>",
+              "path": "projects/portfolio.html",
+              "message": "Use the correct nested Contact path from Projects.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']visitor-name[\"\\'][^>]*>\\s*Name\\s*</label>.*<input\\b(?=[^>]*id\\s*=\\s*[\"\\']visitor-name[\"\\'])(?=[^>]*type\\s*=\\s*[\"\\']text[\"\\'])[^>]*>",
+              "path": "contact.html",
+              "message": "Add the exact labeled Name text input.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']visitor-email[\"\\'][^>]*>\\s*Email address\\s*</label>.*<input\\b(?=[^>]*id\\s*=\\s*[\"\\']visitor-email[\"\\'])(?=[^>]*type\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+              "path": "contact.html",
+              "message": "Add the exact labeled Email address input.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Reason for contacting me\\s*</legend>.*Project idea.*Learning opportunity.*</fieldset>",
+              "path": "contact.html",
+              "message": "Add the exact grouped contact-reason choices.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']message[\"\\'][^>]*>\\s*Message\\s*</label>.*<textarea\\b(?=[^>]*id\\s*=\\s*[\"\\']message[\"\\'])(?=[^>]*rows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>.*</textarea>.*<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Send message\\s*</button>",
+              "path": "contact.html",
+              "message": "Add the exact Message textarea and Send message button.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/portfolio.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.starterFiles.projects_portfolio_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "isEntry": false,
+                "language": "web",
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/portfolio.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.projects_portfolio_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "isEntry": false,
+                "language": "web",
+                "entry": false
+              },
+              {
+                "path": "contact.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_5.solutionFiles.contact_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "module6-capstone-step-6",
+          "kind": "code_input",
+          "purpose": "project",
+          "weight": 1,
+          "messageBase": "topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6",
+          "language": "web",
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.index_html.content",
+              "language": "web",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "about.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.about_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "projects/portfolio.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.projects_portfolio_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            },
+            {
+              "path": "images/profile.png",
+              "content": "",
+              "encoding": "base64",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+              "mimeType": "image/png",
+              "sizeBytes": 465,
+              "readOnly": true,
+              "isEntry": false,
+              "language": "web",
+              "entry": false
+            },
+            {
+              "path": "contact.html",
+              "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.contact_html.content",
+              "language": "web",
+              "isEntry": false,
+              "entry": false
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<meta\\b(?=[^>]*name\\s*=\\s*[\"\\']description[\"\\'])(?=[^>]*content\\s*=\\s*[\"\\']Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information\\.[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Use the exact Home meta description.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<meta\\b(?=[^>]*name\\s*=\\s*[\"\\']description[\"\\'])(?=[^>]*content\\s*=\\s*[\"\\']About Jordan Lee and the HTML skills currently being practiced\\.[\"\\'])[^>]*>",
+              "path": "about.html",
+              "message": "Use the exact About meta description.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<meta\\b(?=[^>]*name\\s*=\\s*[\"\\']description[\"\\'])(?=[^>]*content\\s*=\\s*[\"\\']Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility\\.[\"\\'])[^>]*>",
+              "path": "projects/portfolio.html",
+              "message": "Use the exact Projects meta description.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<meta\\b(?=[^>]*name\\s*=\\s*[\"\\']description[\"\\'])(?=[^>]*content\\s*=\\s*[\"\\']Contact Jordan Lee about project ideas and learning opportunities\\.[\"\\'])[^>]*>",
+              "path": "contact.html",
+              "message": "Use the exact Contact meta description.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<th\\b[^>]*scope\\s*=\\s*[\"\\']col[\"\\'][^>]*>\\s*Project\\s*</th>.*<th\\b[^>]*scope\\s*=\\s*[\"\\']col[\"\\'][^>]*>\\s*Focus\\s*</th>.*<th\\b[^>]*scope\\s*=\\s*[\"\\']col[\"\\'][^>]*>\\s*Status\\s*</th>",
+              "path": "projects/portfolio.html",
+              "message": "Add scope=\"col\" to all three required table headers.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*id\\s*=\\s*[\"\\']visitor-name[\"\\'])(?=[^>]*required\\b)[^>]*>.*<input\\b(?=[^>]*id\\s*=\\s*[\"\\']visitor-email[\"\\'])(?=[^>]*required\\b)[^>]*>.*<textarea\\b(?=[^>]*id\\s*=\\s*[\"\\']message[\"\\'])(?=[^>]*required\\b)[^>]*>.*</textarea>",
+              "path": "contact.html",
+              "message": "Mark Name, Email address, and Message required.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<a\\b[^>]*href\\s*=\\s*[\"\\']\\.\\./index\\.html[\"\\'][^>]*>\\s*Home\\s*</a>.*<a\\b[^>]*href\\s*=\\s*[\"\\']\\.\\./about\\.html[\"\\'][^>]*>\\s*About\\s*</a>.*<a\\b[^>]*href\\s*=\\s*[\"\\']\\.\\./contact\\.html[\"\\'][^>]*>\\s*Contact\\s*</a>.*<img\\b(?=[^>]*src\\s*=\\s*[\"\\']\\.\\./images/profile\\.png[\"\\'])[^>]*>",
+              "path": "projects/portfolio.html",
+              "message": "Keep the nested Projects navigation and image path correct.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "workspace": {
+            "language": "web",
+            "entryFilePath": "index.html",
+            "starterFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.starterCode",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.starterFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/portfolio.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.starterFiles.projects_portfolio_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "isEntry": false,
+                "language": "web",
+                "entry": false
+              },
+              {
+                "path": "contact.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.starterFiles.contact_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          },
+          "showExpectedExample": false,
+          "recipe": {
+            "type": "source_checks",
+            "solutionCode": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "index.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.index_html.content",
+                "language": "web",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "about.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.about_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "projects/portfolio.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.projects_portfolio_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              },
+              {
+                "path": "images/profile.png",
+                "content": "",
+                "encoding": "base64",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+                "mimeType": "image/png",
+                "sizeBytes": 465,
+                "readOnly": true,
+                "isEntry": false,
+                "language": "web",
+                "entry": false
+              },
+              {
+                "path": "contact.html",
+                "content": "@:topics.html.html-module-6-final-capstone.final-html-personal-site-capstone.finalCapstone.steps.module6_capstone_step_6.solutionFiles.contact_html.content",
+                "language": "web",
+                "isEntry": false,
+                "entry": false
+              }
+            ]
+          }
+        }
+      ]
+    }
   }
 };
 
@@ -178145,7 +187065,8 @@ const GEN_KEY_BY_SUBJECT: Record<string, GeneratedSubjectGenKey> =
   "sql-analysis-reporting": "sql_for_beginners",
   "sql-data-management": "sql_for_beginners",
   "sql-v2": "sql_for_beginners",
-  "sql": "sql_for_beginners"
+  "sql": "sql_for_beginners",
+  "html": "html_foundations"
 };
 
 export const SUBJECT_GENERATOR_SOURCES: Record<string, GeneratedSubjectSource> =
@@ -178169,6 +187090,7 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   "bash_course",
   "c_course",
   "git_course",
+  "html_foundations",
   "language_course",
   "python_part1",
   "sql_for_beginners"

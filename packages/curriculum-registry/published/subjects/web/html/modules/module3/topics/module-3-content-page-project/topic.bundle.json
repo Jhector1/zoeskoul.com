@@ -1,0 +1,318 @@
+{
+  "topicId": "module-3-content-page-project",
+  "subjectSlug": "html",
+  "moduleSlug": "html-module-3-lists-tables-content",
+  "sectionSlug": "html-html-module-3-project",
+  "prefix": "html_module_3",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.label",
+    "summaryKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.cards.sketch0.title",
+      "sketchId": "project-brief",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "module3_content_step_1",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.projectSteps.module3_content_step_1.title",
+            "exerciseKey": "module3-content-step-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "module3_content_step_2",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.projectSteps.module3_content_step_2.title",
+            "exerciseKey": "module3-content-step-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module3_content_step_3",
+            "titleKey": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.projectSteps.module3_content_step_3.title",
+            "exerciseKey": "module3-content-step-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-brief",
+      "archetype": "paragraph",
+      "titleKey": "sketches.html.html-module-3-lists-tables-content.module-3-content-page-project.project-brief.title",
+      "bodyKey": "sketches.html.html-module-3-lists-tables-content.module-3-content-page-project.project-brief.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "module3-content-step-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+          "path": "index.html",
+          "message": "Keep the What to bring unordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+          "path": "index.html",
+          "message": "Keep the Arrival steps ordered list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_1.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "module3-content-step-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+          "path": "index.html",
+          "message": "Keep the What to bring unordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+          "path": "index.html",
+          "message": "Keep the Arrival steps ordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Workshop tracks\\s*</h2>.*Web Basics.*<ul\\b[^>]*>.*HTML Structure.*Links and Images.*</ul>",
+          "path": "index.html",
+          "message": "Keep the Web Basics nested list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)Robotics.*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>",
+          "path": "index.html",
+          "message": "Keep the Robotics nested list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_2.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "module3-content-step-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+          "path": "index.html",
+          "message": "Keep the What to bring unordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+          "path": "index.html",
+          "message": "Keep the Arrival steps ordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Workshop tracks\\s*</h2>.*Web Basics.*<ul\\b[^>]*>.*HTML Structure.*Links and Images.*</ul>",
+          "path": "index.html",
+          "message": "Keep the Web Basics nested list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)Robotics.*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>",
+          "path": "index.html",
+          "message": "Keep the Robotics nested list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<caption\\b[^>]*>\\s*Saturday learning sessions\\s*</caption>",
+          "path": "index.html",
+          "message": "Add the requested schedule caption.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<thead\\b[^>]*>.*Time.*Session.*Room.*</thead>",
+          "path": "index.html",
+          "message": "Add Time, Session, and Room headers inside thead.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tbody\\b[^>]*>.*9:00.*Opening Session.*Community Hall.*10:00.*HTML Structure.*Lab 1.*11:00.*Robotics Demo.*Lab 2.*</tbody>",
+          "path": "index.html",
+          "message": "Add all three schedule rows inside tbody.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.module-3-content-page-project.moduleProject.steps.module3_content_step_3.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

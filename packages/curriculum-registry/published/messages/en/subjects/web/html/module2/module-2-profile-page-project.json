@@ -1,0 +1,140 @@
+{
+  "topics": {
+    "html": {
+      "html-module-2-links-images-paths": {
+        "module-2-profile-page-project": {
+          "label": "Project: Build a Profile Page",
+          "summary": "Build a small multi-page student profile site with real relative navigation, a nested project page, and a supplied profile image.",
+          "cards": {
+            "sketch0": {
+              "title": "Your First Client-Style Page"
+            },
+            "project": {
+              "title": "Project: Build a Multi-Page Profile Site"
+            }
+          },
+          "projectSteps": {
+            "module2_profile_step_1": {
+              "title": "Build the two-page profile foundation"
+            },
+            "module2_profile_step_2": {
+              "title": "Add the nested robotics project page"
+            },
+            "module2_profile_step_3": {
+              "title": "Add the supplied profile image"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module2_profile_step_1": {
+                "title": "Build the two-page profile foundation",
+                "prompt": "Start the module project. In step 1 of 3, Use the Explorer to work in both `index.html` and `about.html`. Link `About me` from the home page to the About page, then make `Back to profile` on the About page return home. Verify both directions in Preview.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "The return destination is the entry page beside the About page."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a>About me</a></p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module2_profile_step_2": {
+                "title": "Add the nested robotics project page",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same site. Link the home page to `projects/robotics.html`. Then open that nested page and make its `Back to profile` link move up one folder to the home page. Test both links in Preview.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n<!-- Project step 2: Add the nested robotics project page -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same site -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n<!-- Project step 2: Add the nested robotics project page -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same site -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  },
+                  "projects_robotics_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module2_profile_step_3": {
+                "title": "Add the supplied profile image",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the site with the supplied `images/profile.png` asset. Add it below the h1 in `index.html` and give it descriptive alternative text. Do not remove the working About or Robotics links. Verify the image and all three pages in Preview.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n<!-- Project step 3: Add the supplied profile image -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the site with the supplied `images/profile.png` asset -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n<!-- Project step 3: Add the supplied profile image -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the site with the supplied `images/profile.png` asset -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  },
+                  "projects_robotics_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  },
+                  "projects_robotics_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "html": {
+      "html-module-2-links-images-paths": {
+        "module-2-profile-page-project": {
+          "project-brief": {
+            "title": "Project brief: Student Profile Page",
+            "bodyMarkdown": "### Project Brief\n\n**Scenario:** A student organization needs a small profile website that can become part of its member directory.\n\n**Your role:** Junior web developer.\n\n**Workspace:** Use the Full IDE Explorer. The project grows across `index.html`, `about.html`, `projects/robotics.html`, and a supplied `images/profile.png` asset.\n\n**Deliverable:** A navigable profile site where every relative path resolves to a real workspace file and the supplied image appears with meaningful alternative text.\n\nComplete the three steps in order. Each step reconstructs the previous milestone as its canonical starter state."
+          }
+        }
+      }
+    }
+  }
+}

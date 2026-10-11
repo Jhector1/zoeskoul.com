@@ -4,10 +4,10 @@
   "courseSlug": "html-foundations",
   "draftSubjectSlug": "html--html-foundations--draft",
   "lastDraftEditedAt": "2026-10-11T06:25:15.877Z",
-  "lastPublishedAt": null,
+  "lastPublishedAt": "2026-10-11T15:14:42.089Z",
   "currentDraftHash": "sha256:5a0bf4e99f2faa936708d5eb03bc615798cfa3803e0e95f19237f79c50f14932",
-  "lastPublishedDraftHash": null,
-  "liveSubjectSlug": null,
-  "hasUnpublishedChanges": true,
+  "lastPublishedDraftHash": "sha256:5a0bf4e99f2faa936708d5eb03bc615798cfa3803e0e95f19237f79c50f14932",
+  "liveSubjectSlug": "html",
+  "hasUnpublishedChanges": false,
   "draftFileCount": 44
 }

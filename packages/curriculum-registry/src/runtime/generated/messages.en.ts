@@ -47480,6 +47480,3117 @@ const messages: Record<string, any> = {
           }
         }
       }
+    },
+    "html": {
+      "html-module-1-first-web-pages": {
+        "document-structure": {
+          "label": "The HTML Document Structure",
+          "summary": "Build the standard HTML document shell and understand which information belongs in head and which content belongs in body.",
+          "cards": {
+            "sketch0": {
+              "title": "Start with the Document"
+            },
+            "sketch1": {
+              "title": "Describe the Document"
+            },
+            "sketch2": {
+              "title": "Put Content in the Body"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_document_structure_sketch0": {
+              "title": "Try it yourself: Create the document root",
+              "prompt": "Now apply what you just learned in this task. Start the page with a modern HTML doctype and wrap the existing content in an html element whose language is English. Produce the result for create the document root so it reinforces The HTML Document Structure.",
+              "hint": "Add the declaration before the root element, then place the existing head and body inside the root.",
+              "help": {
+                "concept": "The doctype and html root establish the outer document structure, while the lang attribute identifies the page language.",
+                "hint_1": "Keep head and body as children of the root element.",
+                "hint_2": "Check that the root has both an opening and closing tag and includes the language attribute."
+              },
+              "starterCode": "<head>\n  <title>Practice Page</title>\n</head>\n<body>\n  <h1>Practice Page</h1>\n</body>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Practice Page</title>\n  </head>\n  <body>\n    <h1>Practice Page</h1>\n  </body>\n</html>\n"
+            },
+            "try_document_structure_sketch1": {
+              "title": "Try it yourself: Build the head",
+              "prompt": "Now apply what you just learned in this task. Inside head, add a UTF-8 charset declaration and set the document title to **Learning HTML**. Leave the visible heading in body unchanged. Produce the result for build the head so it reinforces The HTML Document Structure.",
+              "hint": "The charset is a meta element; the document name belongs between title tags.",
+              "help": {
+                "concept": "Head metadata helps the browser interpret and identify the document without becoming normal body content.",
+                "hint_1": "Add both pieces inside the existing head element.",
+                "hint_2": "Check the browser tab/title surface separately from the h1 shown in the page."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n  </head>\n  <body>\n    <h1>My Practice Page</h1>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Learning HTML</title>\n  </head>\n  <body>\n    <h1>My Practice Page</h1>\n  </body>\n</html>\n"
+            },
+            "try_document_structure_sketch2": {
+              "title": "Try it yourself: Complete the page shell",
+              "prompt": "Now apply what you just learned in this task. Complete the document so it has a doctype, html lang, head with UTF-8 and the title **About Maya**, plus a body containing an h1 **About Maya** and a paragraph **I am building web pages.**. Produce the result for complete the page shell so it reinforces The HTML Document Structure.",
+              "hint": "Work from the outside in: document declaration, root, head information, then body content.",
+              "help": {
+                "concept": "A complete HTML document combines outer structure, head metadata, and visible body content in one nested page.",
+                "hint_1": "Keep the document title in head and the visible heading in body even though their text matches.",
+                "hint_2": "Use the preview to verify the h1 and paragraph, then Check Answer for the full source structure."
+              },
+              "starterCode": "<html>\n  <head>\n    <title>Untitled</title>\n  </head>\n  <body>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>About Maya</title>\n  </head>\n  <body>\n    <h1>About Maya</h1>\n    <p>I am building web pages.</p>\n  </body>\n</html>\n"
+            }
+          },
+          "practice": {
+            "head-body-choice": {
+              "title": "Choose the right region",
+              "prompt": "Where should the main visible page heading normally go?",
+              "hint": "Decide whether the element describes the document or belongs to the rendered page content.",
+              "help": {
+                "concept": "The document separates browser-facing information from visitor-facing content.",
+                "hint_1": "Ask whether a visitor is expected to read the element as part of the page itself.",
+                "hint_2": "The region that holds rendered content is different from the region that holds metadata."
+              },
+              "options": {
+                "a": "Inside the body",
+                "b": "Inside the doctype",
+                "c": "Inside the charset value",
+                "d": "Before the html element"
+              }
+            },
+            "title-role-choice": {
+              "title": "Distinguish title from h1",
+              "prompt": "What is the main job of the title element in a beginner HTML document?",
+              "hint": "Think about document information that the browser uses outside the page's main content flow.",
+              "help": {
+                "concept": "The title names the document for browser surfaces and document metadata contexts.",
+                "hint_1": "Do not confuse the document title with the top-level visible heading in the body.",
+                "hint_2": "Choose the option about naming the document rather than creating body content."
+              },
+              "options": {
+                "a": "It names the document for the browser.",
+                "b": "It creates every visible paragraph.",
+                "c": "It closes the body automatically.",
+                "d": "It turns HTML into CSS."
+              }
+            },
+            "document-shell-multi": {
+              "title": "Identify document-shell pieces",
+              "prompt": "Which items belong to the standard document structure introduced in this lesson?",
+              "hint": "Select pieces that establish or describe the whole HTML document.",
+              "help": {
+                "concept": "A complete shell includes an outer document declaration and nested document regions.",
+                "hint_1": "Look for the root and major document sections you saw in the worked example.",
+                "hint_2": "Do not select technologies that belong to later layers of web development."
+              },
+              "options": {
+                "a": "DOCTYPE declaration",
+                "b": "html element",
+                "c": "head element",
+                "d": "SQL table"
+              }
+            },
+            "document-order": {
+              "title": "Order the outer structure",
+              "prompt": "Arrange these document pieces from outer/top-level setup toward visible page content.",
+              "hint": "Start with the declaration, then move through the root and document regions.",
+              "help": {
+                "concept": "HTML nesting gives document information and page content separate places.",
+                "hint_1": "The browser first receives the document declaration before it reaches nested content.",
+                "hint_2": "The visible content region comes after the document-information region in the standard shell."
+              },
+              "tokens": {
+                "t1": "DOCTYPE declaration",
+                "t2": "html element",
+                "t3": "head element",
+                "t4": "body element"
+              }
+            },
+            "head-fill": {
+              "title": "Complete the document region",
+              "prompt": "Choose the region that contains the document title and charset declaration.",
+              "hint": "Think about the non-content information grouped near the top of the document.",
+              "help": {
+                "concept": "One major region contains metadata and the document title before the rendered content begins.",
+                "hint_1": "The correct region is a sibling of the visible-content region inside html.",
+                "hint_2": "Use the document shell from the worked example to locate it."
+              },
+              "template": "The [blank1] element contains title and metadata information.",
+              "choices": [
+                "head",
+                "body",
+                "h1",
+                "p"
+              ]
+            },
+            "body-fill": {
+              "title": "Complete the content region",
+              "prompt": "Choose the region where headings and paragraphs are rendered as page content.",
+              "hint": "Think about the section a visitor's visible content belongs inside.",
+              "help": {
+                "concept": "The page-content region contains headings, paragraphs, and later other visible structures.",
+                "hint_1": "It comes after the document-information region inside the root element.",
+                "hint_2": "Choose the region that wraps what the visitor reads on the page."
+              },
+              "template": "Visible page content belongs inside the [blank1] element.",
+              "choices": [
+                "body",
+                "head",
+                "meta",
+                "title"
+              ]
+            }
+          }
+        },
+        "elements-tags-and-attributes": {
+          "label": "Elements, Tags, and Attributes",
+          "summary": "Read HTML as elements made from tags, content, nesting, and attributes, then practice writing balanced markup.",
+          "cards": {
+            "sketch0": {
+              "title": "See the Parts"
+            },
+            "sketch1": {
+              "title": "Put Elements Inside Elements"
+            },
+            "sketch2": {
+              "title": "Add Information to a Tag"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_elements_tags_and_attributes_sketch0": {
+              "title": "Try it yourself: Close the paragraph",
+              "prompt": "Now apply what you just learned in this task. Fix the paragraph so the sentence **Balanced tags are easier to read.** is inside matching opening and closing p tags. Produce the result for close the paragraph so it reinforces Elements, Tags, and Attributes.",
+              "hint": "The opening tag is already present; add the matching end tag after the sentence.",
+              "help": {
+                "concept": "Balanced paired elements clearly mark where content begins and ends in the document structure.",
+                "hint_1": "Keep the sentence inside the paragraph rather than placing the closing markup before it.",
+                "hint_2": "Compare the element name in the opening tag with the element name in your closing tag."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Tags</title></head>\n  <body>\n    <p>Balanced tags are easier to read.\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Tags</title></head>\n  <body>\n    <p>Balanced tags are easier to read.</p>\n  </body>\n</html>\n"
+            },
+            "try_elements_tags_and_attributes_sketch1": {
+              "title": "Try it yourself: Nest important text",
+              "prompt": "Now apply what you just learned in this task. Inside the existing paragraph, wrap only the words **HTML structure** in a strong element. Keep the full sentence inside the paragraph. Produce the result for nest important text so it reinforces Elements, Tags, and Attributes.",
+              "hint": "Place the strong opening and closing tags around the two target words without closing the paragraph early.",
+              "help": {
+                "concept": "Nested elements let one part of an outer element carry additional meaning while remaining inside that content.",
+                "hint_1": "The paragraph should open first and close last.",
+                "hint_2": "Check that the strong element begins and ends entirely between the paragraph tags."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Nesting</title></head>\n  <body>\n    <p>I am practicing HTML structure today.</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Nesting</title></head>\n  <body>\n    <p>I am practicing <strong>HTML structure</strong> today.</p>\n  </body>\n</html>\n"
+            },
+            "try_elements_tags_and_attributes_sketch2": {
+              "title": "Try it yourself: Add an attribute",
+              "prompt": "Now apply what you just learned in this task. Add a title attribute with the value **A short introduction** to the paragraph that says **Welcome to my page.** Keep the paragraph text unchanged. Produce the result for add an attribute so it reinforces Elements, Tags, and Attributes.",
+              "hint": "Put the name-and-value pair inside the paragraph's opening tag.",
+              "help": {
+                "concept": "An attribute adds information to an element while the element's visible content remains between its tags.",
+                "hint_1": "Keep the quoted value attached to the attribute name with an equals sign.",
+                "hint_2": "Inspect the opening p tag carefully; the visible sentence should stay outside the attribute quotes."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Attributes</title></head>\n  <body>\n    <p>Welcome to my page.</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Attributes</title></head>\n  <body>\n    <p title=\"A short introduction\">Welcome to my page.</p>\n  </body>\n</html>\n"
+            }
+          },
+          "practice": {
+            "closing-tag-choice": {
+              "title": "Recognize a closing tag",
+              "prompt": "Which option is a closing paragraph tag?",
+              "hint": "Look for the marker that indicates the element is ending rather than beginning.",
+              "help": {
+                "concept": "Paired HTML elements use a closing tag to mark the end of the content they wrap.",
+                "hint_1": "Compare the punctuation immediately after the opening angle bracket.",
+                "hint_2": "The closing form keeps the same element name while adding the end marker."
+              },
+              "options": {
+                "a": "</p>",
+                "b": "<p>",
+                "c": "<p title>",
+                "d": "<paragraph>"
+              }
+            },
+            "attribute-location-choice": {
+              "title": "Place an attribute",
+              "prompt": "Where is an attribute such as lang=\"en\" written?",
+              "hint": "Think about the part of an element that identifies the tag and its extra information.",
+              "help": {
+                "concept": "Attributes describe an element from its opening markup rather than becoming ordinary content text.",
+                "hint_1": "The attribute travels with the element's start tag.",
+                "hint_2": "Do not place attribute syntax after the closing tag or as unrelated body text."
+              },
+              "options": {
+                "a": "Inside the opening tag",
+                "b": "After the closing html tag",
+                "c": "Inside the doctype text",
+                "d": "As a separate paragraph"
+              }
+            },
+            "element-parts-multi": {
+              "title": "Identify element parts",
+              "prompt": "For a typical paragraph element, which parts can be present?",
+              "hint": "Compare each choice with the markup example and select only the choices that are actually present in it.",
+              "help": {
+                "concept": "Use the exact syntax shown in the example as your evidence. Do not choose an item just because it is related to web pages.",
+                "hint_1": "Check the choices one by one against the example.",
+                "hint_2": "Select every matching choice and leave unrelated choices unselected."
+              },
+              "options": {
+                "a": "Opening tag",
+                "b": "Content",
+                "c": "Closing tag",
+                "d": "Database connection"
+              }
+            },
+            "nesting-order": {
+              "title": "Order nested markup",
+              "prompt": "Arrange these pieces to make a paragraph containing a strong element with valid nesting.",
+              "hint": "The outer element opens first and closes last.",
+              "help": {
+                "concept": "Proper nesting finishes the inner element before the outer element ends.",
+                "hint_1": "Use the parent-child relationship from the worked example.",
+                "hint_2": "The paragraph surrounds the stronger text element rather than crossing its closing tag."
+              },
+              "tokens": {
+                "t1": "<p>",
+                "t2": "<strong>",
+                "t3": "Important",
+                "t4": "</strong>",
+                "t5": "</p>"
+              }
+            },
+            "attribute-name-fill": {
+              "title": "Complete the attribute pattern",
+              "prompt": "Choose the part of an attribute that comes before the equals sign in this example.",
+              "hint": "Look at the left side of the name-and-value pair.",
+              "help": {
+                "concept": "An attribute is written as a name paired with a value inside an opening tag.",
+                "hint_1": "The requested piece labels what information the attribute represents.",
+                "hint_2": "Do not choose the quoted value itself."
+              },
+              "template": "In `lang=\"en\"`, [blank1] is the attribute name.",
+              "choices": [
+                "lang",
+                "en",
+                "html",
+                "body"
+              ]
+            },
+            "content-fill": {
+              "title": "Name the text between tags",
+              "prompt": "Choose the term for the text or nested markup between an element's opening and closing tags.",
+              "hint": "Think about what the tags wrap.",
+              "help": {
+                "concept": "A paired element surrounds the material it represents between its start and end markup.",
+                "hint_1": "The requested term describes what belongs inside the element.",
+                "hint_2": "It can be plain text or other properly nested elements."
+              },
+              "template": "The material between opening and closing tags is the element's [blank1].",
+              "choices": [
+                "content",
+                "doctype",
+                "charset",
+                "filename"
+              ]
+            }
+          }
+        },
+        "how-html-and-the-browser-work": {
+          "label": "How HTML and the Browser Work",
+          "summary": "See how HTML source becomes a visible page, then make small structural changes and confirm them in the browser preview.",
+          "cards": {
+            "sketch0": {
+              "title": "Source Becomes a Page"
+            },
+            "sketch1": {
+              "title": "Read the Markup"
+            },
+            "sketch2": {
+              "title": "Build Meaning First"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_how_html_and_the_browser_work_sketch0": {
+              "title": "Try it yourself: Create the main heading",
+              "prompt": "Now apply what you just learned in this task. Change the visible message into an h1 that says **My First Web Page**. Keep the rest of the page small and readable, then inspect the browser preview. Produce the result for create the main heading so it reinforces How HTML and the Browser Work.",
+              "hint": "Replace the paragraph element with the heading element used for the page's primary title.",
+              "help": {
+                "concept": "An h1 gives the document a clear top-level heading that the browser can render prominently.",
+                "hint_1": "Edit only the element inside the body first and watch how its default appearance changes.",
+                "hint_2": "Check both the opening and closing tag around the required heading text."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <p>Hello browser</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n"
+            },
+            "try_how_html_and_the_browser_work_sketch1": {
+              "title": "Try it yourself: Add supporting text",
+              "prompt": "Now apply what you just learned in this task. Under the existing h1, add a paragraph that says **I am learning HTML.** Keep both elements inside the body and confirm that both appear in the preview. Produce the result for add supporting text so it reinforces How HTML and the Browser Work.",
+              "hint": "Place a p element after the heading rather than changing the heading text.",
+              "help": {
+                "concept": "A paragraph adds supporting prose beneath a heading while keeping the document structure clear.",
+                "hint_1": "Keep the h1 intact and add a second element after it.",
+                "hint_2": "Make sure the new sentence is between matching paragraph tags."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n"
+            },
+            "try_how_html_and_the_browser_work_sketch2": {
+              "title": "Try it yourself: Add a second heading level",
+              "prompt": "Now apply what you just learned in this task. Between the existing h1 and paragraph, add an h2 that says **What I am Learning**. Keep the visible content in this order and inspect the browser preview. Produce the result for add a second heading level so it reinforces How HTML and the Browser Work.",
+              "hint": "Use the heading level below h1 and place it before the paragraph.",
+              "help": {
+                "concept": "An h2 introduces a topic within the page while the h1 remains the page's main title.",
+                "hint_1": "Keep the existing h1 first, then add the h2, then keep the paragraph beneath it.",
+                "hint_2": "Check that the new heading uses matching h2 tags and the exact required text."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <h2>What I am Learning</h2>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n"
+            }
+          },
+          "practice": {
+            "browser-role-choice": {
+              "title": "Identify the browser's job",
+              "prompt": "What does the browser do with HTML source?",
+              "hint": "Think about the path from markup in the editor to the page you can see.",
+              "help": {
+                "concept": "A browser interprets markup and turns the resulting document structure into a rendered page.",
+                "hint_1": "Separate the source file from the visual result it produces.",
+                "hint_2": "Choose the description that connects reading markup with displaying content."
+              },
+              "options": {
+                "a": "It parses the HTML and renders the page structure.",
+                "b": "It converts every page into a Python program.",
+                "c": "It stores all website data in a database automatically.",
+                "d": "It replaces HTML with an image before displaying it."
+              }
+            },
+            "html-purpose-choice": {
+              "title": "Choose HTML's main role",
+              "prompt": "Which statement best describes HTML in this course?",
+              "hint": "Think about meaning and structure rather than decoration.",
+              "help": {
+                "concept": "HTML names and organizes the content that belongs in a document.",
+                "hint_1": "Ask which layer tells the browser what each piece of content represents.",
+                "hint_2": "Do not choose an answer that describes visual styling or scripted behavior."
+              },
+              "options": {
+                "a": "It describes the structure and meaning of page content.",
+                "b": "It chooses all fonts and colors for the finished design.",
+                "c": "It performs database queries for every page.",
+                "d": "It installs browser extensions for the visitor."
+              }
+            },
+            "source-preview-multi": {
+              "title": "Connect source and preview",
+              "prompt": "Which actions are part of the HTML learning loop? Select all that apply.",
+              "hint": "Choose actions that connect your markup with what the browser displays.",
+              "help": {
+                "concept": "HTML practice becomes easier when you compare source structure with the rendered result.",
+                "hint_1": "One useful action happens in the editor and another happens in the visual preview.",
+                "hint_2": "Ignore actions that belong to unrelated programming or server workflows."
+              },
+              "options": {
+                "a": "Edit index.html.",
+                "b": "Inspect the browser preview.",
+                "c": "Replace the page with a database table.",
+                "d": "Manage project dependencies before each heading change."
+              }
+            },
+            "browser-flow-order": {
+              "title": "Order the page feedback loop",
+              "prompt": "Put the basic HTML workflow in a useful order.",
+              "hint": "Start with the source, then observe what the browser understood.",
+              "help": {
+                "concept": "A short feedback loop helps you connect markup changes with visible results.",
+                "hint_1": "The first action changes the document; the next action observes that change.",
+                "hint_2": "Validation comes after you have inspected the page you created."
+              },
+              "tokens": {
+                "t1": "Edit the HTML source",
+                "t2": "Inspect the browser preview",
+                "t3": "Check the required structure",
+                "t4": "Refine the markup"
+              }
+            },
+            "html-name-fill": {
+              "title": "Complete the language name",
+              "prompt": "Complete the statement about the language used to structure web pages.",
+              "hint": "Think about the markup language whose job is to describe a web page's structure.",
+              "help": {
+                "concept": "A markup language gives page content structure and meaning that a browser can interpret.",
+                "hint_1": "Eliminate the styling language, the database language, and the general-purpose programming language.",
+                "hint_2": "Choose the option associated with standard web-page markup and document structure."
+              },
+              "template": "[blank1] is the markup language used to describe this page's structure.",
+              "choices": [
+                "CSS",
+                "HTML",
+                "SQL",
+                "Python"
+              ]
+            },
+            "render-fill": {
+              "title": "Name the visible result",
+              "prompt": "Complete the sentence about what you inspect after editing markup.",
+              "hint": "Choose the phrase for the visual surface that shows the rendered page.",
+              "help": {
+                "concept": "The browser-rendered surface gives immediate visual feedback while you edit source.",
+                "hint_1": "Think about where you look to see the result rather than where you type the markup.",
+                "hint_2": "The course workspace keeps the source and rendered result side by side."
+              },
+              "template": "After editing index.html, inspect the browser [blank1].",
+              "choices": [
+                "preview",
+                "database",
+                "compiler",
+                "package"
+              ]
+            }
+          }
+        },
+        "module-1-first-page-project": {
+          "label": "Project: Build Your First Complete Page",
+          "summary": "Act as a junior web developer helping a student-success team prepare a simple learning-profile page for a new-coder orientation. Build and hand off one browser-ready index.html page in three progressive steps.",
+          "cards": {
+            "sketch0": {
+              "title": "Your First Client-Style Page"
+            },
+            "project": {
+              "title": "Build Your First Complete Page"
+            }
+          },
+          "projectSteps": {
+            "first_page_step_1_shell": {
+              "title": "Step 1: Build the document shell"
+            },
+            "first_page_step_2_content": {
+              "title": "Step 2: Add the page content"
+            },
+            "first_page_step_3_nesting": {
+              "title": "Step 3: Finish with clear nested markup"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "first_page_step_1_shell": {
+                "title": "Step 1: Build the document shell",
+                "prompt": "Start the module project. In step 1 of 3, You are starting the student-success team's review page in index.html. Create the document foundation with a modern doctype, html lang set to English, UTF-8 charset, the title **My Learning Page**, and an empty body ready for the content the team will review in the next step.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Preview the page even though the body is empty, then use Check Answer to verify the source foundation."
+                },
+                "starterCode": "<!-- Build the document foundation here. -->\n",
+                "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n  </body>\n</html>"
+              },
+              "first_page_step_2_content": {
+                "title": "Step 2: Add the page content",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same index.html review page for the student-success team. Add an h1 **My Learning Page** and two paragraphs: **I am learning how browsers read HTML.** and **Clear structure helps me understand my page.**",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n  <!-- Project step 2: Step 2: Add the page content -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same index.html review page for the student-success team -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  </body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n  <!-- Project step 2: Step 2: Add the page content -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same index.html review page for the student-success team -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  </body>\n</html>\n"
+                  }
+                }
+              },
+              "first_page_step_3_nesting": {
+                "title": "Step 3: Finish with clear nested markup",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the same index.html handoff for the student-success team. Add an h2 **What I learned**, wrap **HTML** in strong inside the first paragraph, and wrap **structure** in em inside the second paragraph. The final browser preview should be ready for the team's review.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  <!-- Project step 3: Step 3: Finish with clear nested markup -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the same index.html handoff for the student-success team -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <h2>What I learned</h2>\n    <p>I am learning how browsers read <strong>HTML</strong>.</p>\n    <p>Clear <em>structure</em> helps me understand my page.</p>\n  </body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <p>I am learning how browsers read HTML.</p>\n    <p>Clear structure helps me understand my page.</p>\n  <!-- Project step 3: Step 3: Finish with clear nested markup -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the same index.html handoff for the student-success team -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My Learning Page</title>\n  </head>\n  <body>\n    <h1>My Learning Page</h1>\n    <h2>What I learned</h2>\n    <p>I am learning how browsers read <strong>HTML</strong>.</p>\n    <p>Clear <em>structure</em> helps me understand my page.</p>\n  </body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "html-module-2-links-images-paths": {
+        "images-and-alt-text": {
+          "label": "Images and Alt Text",
+          "summary": "Add images with src and meaningful alt text.",
+          "cards": {
+            "sketch0": {
+              "title": "Source Becomes a Page"
+            },
+            "sketch1": {
+              "title": "Read the Markup"
+            },
+            "sketch2": {
+              "title": "Build Meaning First"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_images_and_alt_text_sketch0": {
+              "title": "Try it yourself: Use the supplied profile image",
+              "prompt": "Now apply what you just learned in this task. Open the `images` folder in Explorer and confirm `profile.png` is supplied. In `index.html`, add that image below the h1 and give it useful alternative text for a student profile illustration. Check the real asset in Preview. Produce the result for use the supplied profile image so it reinforces Images and Alt Text.",
+              "hint": "The image lives in a child folder of the home page.",
+              "help": {
+                "concept": "The image source path and alternative text work together: one locates the asset and the other communicates its purpose.",
+                "hint_1": "Use the folder tree to build the source path.",
+                "hint_2": "Describe the profile illustration instead of using a generic word such as image."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <!-- Add the supplied profile image here -->\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Student profile illustration\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <!-- Add the supplied profile image here -->\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Student profile illustration\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_images_and_alt_text_sketch1": {
+              "title": "Try it yourself: Improve the profile image alt text",
+              "prompt": "Now apply what you just learned in this task. The image already appears in Preview, but its alternative text is too generic. Improve the `alt` value so it identifies Jordan and describes the campus-library scene. Produce the result for improve the profile image alt text so it reinforces Images and Alt Text.",
+              "hint": "Change the text alternative, not the supplied image file.",
+              "help": {
+                "concept": "Useful alt text communicates the meaningful content of an image in its page context.",
+                "hint_1": "Include who the profile image represents.",
+                "hint_2": "Also include the relevant setting shown by the exercise."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"profile image\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"profile image\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_images_and_alt_text_sketch2": {
+              "title": "Try it yourself: Make the profile image open About",
+              "prompt": "Now apply what you just learned in this task. The website includes `about.html`. Wrap the existing profile image in an anchor so clicking the image in Preview opens the About page. Keep the image source and alternative text unchanged. Produce the result for make the profile image open About so it reinforces Images and Alt Text.",
+              "hint": "The anchor should contain the existing img element.",
+              "help": {
+                "concept": "Images can be interactive link content when an anchor wraps the image element.",
+                "hint_1": "Do not replace or edit the supplied image asset.",
+                "hint_2": "Use the neighboring About page as the anchor destination."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <a href=\"about.html\">\n    <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  </a>\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <a href=\"about.html\">\n    <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  </a>\n  <p>Computer science student and robotics club member.</p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "images-sc-1": {
+              "title": "Choose the image source attribute",
+              "prompt": "Which attribute tells an img element where to find the image file?",
+              "hint": "Think about which image attribute points to the file location.",
+              "help": {
+                "concept": "An image separates its file location from its text alternative.",
+                "hint_1": "Look for the attribute that stores the path to the file.",
+                "hint_2": "Eliminate choices used for links, text alternatives, or identifiers."
+              },
+              "options": {
+                "a": "href",
+                "b": "src",
+                "c": "alt",
+                "d": "id"
+              }
+            },
+            "images-sc-2": {
+              "title": "Choose useful alt text",
+              "prompt": "Which alt value is most useful for a profile portrait?",
+              "hint": "Describe the meaningful content instead of the file type or filename.",
+              "help": {
+                "concept": "Alt text should communicate what matters about the image.",
+                "hint_1": "Avoid generic words like image or photo.",
+                "hint_2": "Choose the description a person could understand without seeing the image."
+              },
+              "options": {
+                "a": "image",
+                "b": "profile.jpg",
+                "c": "Student smiling in front of the campus library",
+                "d": "photo"
+              }
+            },
+            "images-mc-1": {
+              "title": "Recognize a complete image element",
+              "prompt": "Which statements about img are correct? Choose all that apply.",
+              "hint": "Think about image location, alternative text, and void elements.",
+              "help": {
+                "concept": "img uses src and alt and is a void element.",
+                "hint_1": "Relative paths work in src just as they do in href.",
+                "hint_2": "There is no required closing </img> tag."
+              },
+              "options": {
+                "a": "src identifies the image file.",
+                "b": "alt provides a text alternative.",
+                "c": "img requires a closing </img> tag.",
+                "d": "A relative src can point into an images folder."
+              }
+            },
+            "images-dr-1": {
+              "title": "Assemble an image element",
+              "prompt": "Arrange the pieces into one img element with src first and alt second.",
+              "hint": "Start the img tag, add its attributes, then close the tag.",
+              "help": {
+                "concept": "Attributes belong inside the opening img tag.",
+                "hint_1": "src and alt both appear before >.",
+                "hint_2": "The result does not need a separate closing element."
+              },
+              "tokens": {
+                "t1": "alt=\"Student profile portrait\"",
+                "t2": "<img",
+                "t3": "src=\"images/profile.jpg\"",
+                "t4": ">"
+              }
+            },
+            "images-fb-1": {
+              "title": "Complete the image path",
+              "prompt": "Choose the src value for `profile.jpg` inside the `images` folder.",
+              "hint": "Build the value from the child folder name and the image filename.",
+              "help": {
+                "concept": "A relative image path can enter a child folder before naming the file.",
+                "hint_1": "Join the folder and filename with one slash.",
+                "hint_2": "The finished value should describe one child-folder step followed by the target file."
+              },
+              "template": "<img src=\"[blank1]\" alt=\"Student profile portrait\">",
+              "choices": [
+                "profile.jpg",
+                "images/profile.jpg",
+                "../profile.jpg",
+                "https://profile.jpg"
+              ]
+            },
+            "images-fb-2": {
+              "title": "Complete meaningful alt text",
+              "prompt": "Choose the most descriptive alt value.",
+              "hint": "Describe the meaningful content of the picture.",
+              "help": {
+                "concept": "Alt text is a text alternative, not a filename label.",
+                "hint_1": "Choose a concise description of what the image communicates.",
+                "hint_2": "Avoid generic words like image or picture."
+              },
+              "template": "<img src=\"images/club.jpg\" alt=\"[blank1]\">",
+              "choices": [
+                "image",
+                "club.jpg",
+                "Students presenting a science club poster",
+                "picture"
+              ]
+            }
+          }
+        },
+        "links-and-anchors": {
+          "label": "Links and Anchors",
+          "summary": "Create links with anchor elements and useful link text.",
+          "cards": {
+            "sketch0": {
+              "title": "Source Becomes a Page"
+            },
+            "sketch1": {
+              "title": "Read the Markup"
+            },
+            "sketch2": {
+              "title": "Build Meaning First"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_links_and_anchors_sketch0": {
+              "title": "Try it yourself: Link to the real About page",
+              "prompt": "Now apply what you just learned in this task. Use the Explorer to confirm `about.html` is part of the site. In `index.html`, make the `About me` anchor navigate to that page. Use Preview and click the link to verify the second page opens. Produce the result for link to the real About page so it reinforces Links and Anchors.",
+              "hint": "The destination is a page beside the current file.",
+              "help": {
+                "concept": "An anchor can connect one HTML document to another document in the same website.",
+                "hint_1": "Keep the visible link text and add the destination to the opening anchor tag.",
+                "hint_2": "The target page is already present beside the home page in Explorer."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_links_and_anchors_sketch1": {
+              "title": "Try it yourself: Link to a page inside a folder",
+              "prompt": "Now apply what you just learned in this task. The site now includes `projects/robotics.html`. In `index.html`, connect the `Robotics project` anchor to that real nested page. Click it in Preview after you edit the link. Produce the result for link to a page inside a folder so it reinforces Links and Anchors.",
+              "hint": "The destination sits inside the projects folder.",
+              "help": {
+                "concept": "Anchor destinations can include folder segments when another page is nested inside the website.",
+                "hint_1": "Read the file tree from the site root to the robotics page.",
+                "hint_2": "Keep the existing About link unchanged while you connect the project link."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_links_and_anchors_sketch2": {
+              "title": "Try it yourself: Add the return link on About",
+              "prompt": "Now apply what you just learned in this task. Open `about.html` from the Explorer. Make `Back to profile` navigate to the home page. Preview the About page, then use the link to return to the profile. Produce the result for add the return link on About so it reinforces Links and Anchors.",
+              "hint": "Both HTML files are in the same folder.",
+              "help": {
+                "concept": "Multi-page sites usually provide links in both directions so learners can navigate between related pages.",
+                "hint_1": "Edit the anchor in the About page, not the home page.",
+                "hint_2": "The destination is the site's entry HTML file beside the About page."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "links-sc-1": {
+              "title": "Identify the link destination",
+              "prompt": "Which part of an anchor element tells the browser where the link goes?",
+              "hint": "Think about the job performed by each part of the opening anchor tag.",
+              "help": {
+                "concept": "An anchor separates navigation information from the clickable label.",
+                "hint_1": "Look inside the opening tag for the piece that stores the destination.",
+                "hint_2": "Eliminate choices that represent elements or unrelated identifiers."
+              },
+              "options": {
+                "a": "href",
+                "b": "h1",
+                "c": "li",
+                "d": "title"
+              }
+            },
+            "links-sc-2": {
+              "title": "Choose a same-page link",
+              "prompt": "Which href points to an element whose id is `resources` on the current page?",
+              "hint": "A same-page fragment starts with a hash character.",
+              "help": {
+                "concept": "Fragment links pair href='#name' with id='name'.",
+                "hint_1": "The hash tells the browser this is a fragment identifier.",
+                "hint_2": "The characters after # must match the target id."
+              },
+              "options": {
+                "a": "resources",
+                "b": "#resources",
+                "c": "/resources",
+                "d": "https://resources"
+              }
+            },
+            "links-mc-1": {
+              "title": "Recognize useful links",
+              "prompt": "Which practices make an HTML link understandable and functional? Choose all that apply.",
+              "hint": "Think about both the destination and what the learner sees.",
+              "help": {
+                "concept": "A useful link combines a valid destination with descriptive text.",
+                "hint_1": "Fragment links also need a matching id target.",
+                "hint_2": "Vague link text removes useful context."
+              },
+              "options": {
+                "a": "Give the anchor meaningful visible text.",
+                "b": "Use href for the destination.",
+                "c": "Make every link text say only 'click here'.",
+                "d": "Match a fragment href with a target id."
+              }
+            },
+            "links-dr-1": {
+              "title": "Build a fragment link and target",
+              "prompt": "Arrange the lines so the link appears before the heading it targets.",
+              "hint": "The link can appear earlier on the page, then the matching id marks its target.",
+              "help": {
+                "concept": "Fragment navigation connects href='#resources' to id='resources'.",
+                "hint_1": "Place the jump link before the destination in this exercise.",
+                "hint_2": "The paragraph belongs below the Resources heading."
+              },
+              "tokens": {
+                "t1": "<h2 id=\"resources\">Resources</h2>",
+                "t2": "<a href=\"#resources\">Jump to resources</a>",
+                "t3": "<p>Explore tutoring and advising.</p>"
+              }
+            },
+            "links-fb-1": {
+              "title": "Complete an href",
+              "prompt": "Choose the attribute name that stores the destination.",
+              "hint": "Focus on the part of an opening anchor tag that pairs a name with a URL value.",
+              "help": {
+                "concept": "Anchor destinations are stored as an attribute-value pair in the opening tag.",
+                "hint_1": "The blank is the attribute name immediately before the URL.",
+                "hint_2": "Choose the navigation-related attribute rather than an element name."
+              },
+              "template": "<a [blank1]=\"https://example.com/help\">Help center</a>",
+              "choices": [
+                "href",
+                "id",
+                "h2",
+                "li"
+              ]
+            },
+            "links-fb-2": {
+              "title": "Complete a fragment destination",
+              "prompt": "Choose the href value that targets `id=\"contact\"` on this page.",
+              "hint": "A fragment destination adds # before the target id.",
+              "help": {
+                "concept": "Same-page fragment href values begin with #.",
+                "hint_1": "The target id is contact.",
+                "hint_2": "Combine the hash with the id value."
+              },
+              "template": "<a href=\"[blank1]\">Contact section</a>",
+              "choices": [
+                "contact",
+                "#contact",
+                "/contact",
+                "contact.html"
+              ]
+            }
+          }
+        },
+        "module-2-profile-page-project": {
+          "label": "Project: Build a Profile Page",
+          "summary": "Build a small multi-page student profile site with real relative navigation, a nested project page, and a supplied profile image.",
+          "cards": {
+            "sketch0": {
+              "title": "Your First Client-Style Page"
+            },
+            "project": {
+              "title": "Project: Build a Multi-Page Profile Site"
+            }
+          },
+          "projectSteps": {
+            "module2_profile_step_1": {
+              "title": "Build the two-page profile foundation"
+            },
+            "module2_profile_step_2": {
+              "title": "Add the nested robotics project page"
+            },
+            "module2_profile_step_3": {
+              "title": "Add the supplied profile image"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module2_profile_step_1": {
+                "title": "Build the two-page profile foundation",
+                "prompt": "Start the module project. In step 1 of 3, Use the Explorer to work in both `index.html` and `about.html`. Link `About me` from the home page to the About page, then make `Back to profile` on the About page return home. Verify both directions in Preview.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "The return destination is the entry page beside the About page."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a>About me</a></p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module2_profile_step_2": {
+                "title": "Add the nested robotics project page",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same site. Link the home page to `projects/robotics.html`. Then open that nested page and make its `Back to profile` link move up one folder to the home page. Test both links in Preview.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n<!-- Project step 2: Add the nested robotics project page -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same site -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n<!-- Project step 2: Add the nested robotics project page -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same site -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  },
+                  "projects_robotics_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module2_profile_step_3": {
+                "title": "Add the supplied profile image",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the site with the supplied `images/profile.png` asset. Add it below the h1 in `index.html` and give it descriptive alternative text. Do not remove the working About or Robotics links. Verify the image and all three pages in Preview.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n<!-- Project step 3: Add the supplied profile image -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the site with the supplied `images/profile.png` asset -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n<!-- Project step 3: Add the supplied profile image -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the site with the supplied `images/profile.png` asset -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  },
+                  "projects_robotics_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee Profile</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <img src=\"images/profile.png\" alt=\"Jordan Lee smiling outside the campus library\">\n  <p>Computer science student and robotics club member.</p>\n  <p><a href=\"about.html\">About me</a></p>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  },
+                  "projects_robotics_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "relative-and-absolute-paths": {
+          "label": "Relative and Absolute Paths",
+          "summary": "Understand how URLs and local paths point to resources.",
+          "cards": {
+            "sketch0": {
+              "title": "Source Becomes a Page"
+            },
+            "sketch1": {
+              "title": "Read the Markup"
+            },
+            "sketch2": {
+              "title": "Build Meaning First"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_relative_and_absolute_paths_sketch0": {
+              "title": "Try it yourself: Use a same-folder path",
+              "prompt": "Now apply what you just learned in this task. The Explorer shows `index.html` and `about.html` side by side. In `index.html`, connect `About me` to the neighboring page using a relative path. Produce the result for use a same-folder path so it reinforces Relative and Absolute Paths.",
+              "hint": "No folder change is needed for this destination.",
+              "help": {
+                "concept": "A same-folder relative path can connect sibling HTML files without a full web address.",
+                "hint_1": "The destination file is visible beside the current file in Explorer.",
+                "hint_2": "Use only the neighboring page's filename as the destination."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_relative_and_absolute_paths_sketch1": {
+              "title": "Try it yourself: Move down into a folder",
+              "prompt": "Now apply what you just learned in this task. The robotics page is nested under the `projects` folder. In `index.html`, write the relative destination that moves into that folder and opens the page. Produce the result for move down into a folder so it reinforces Relative and Absolute Paths.",
+              "hint": "Read the file tree from the current page down to the nested page.",
+              "help": {
+                "concept": "A child-folder relative path names the folder before the destination file.",
+                "hint_1": "The path begins with the folder shown in Explorer.",
+                "hint_2": "After the folder segment, name the robotics HTML file."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_relative_and_absolute_paths_sketch2": {
+              "title": "Try it yourself: Move back to the parent folder",
+              "prompt": "Now apply what you just learned in this task. Open `projects/robotics.html`. Its `Back to profile` link must return to `index.html`, which is one folder above. Add the correct parent-folder relative destination, then verify both pages in Preview. Produce the result for move back to the parent folder so it reinforces Relative and Absolute Paths.",
+              "hint": "Start by moving from the projects folder back to its parent.",
+              "help": {
+                "concept": "A parent-folder relative path lets a nested page navigate to a file higher in the website tree.",
+                "hint_1": "The current page is inside one child folder.",
+                "hint_2": "Move up one level before naming the home page."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p>Welcome to the profile home page.</p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p>Welcome to the profile home page.</p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "paths-sc-1": {
+              "title": "Choose a same-folder path",
+              "prompt": "Which href points to `about.html` in the same folder as the current page?",
+              "hint": "A same-folder relative path can name the file directly.",
+              "help": {
+                "concept": "Relative paths are interpreted from the current document location.",
+                "hint_1": "No folder change is needed for a file in the same directory.",
+                "hint_2": "Choose the filename by itself."
+              },
+              "options": {
+                "a": "about.html",
+                "b": "/about.html",
+                "c": "https://about.html",
+                "d": "../about.html"
+              }
+            },
+            "paths-sc-2": {
+              "title": "Choose an absolute URL",
+              "prompt": "Which destination is an absolute web URL?",
+              "hint": "Look for a complete URL with a scheme and host.",
+              "help": {
+                "concept": "Absolute URLs include the full network destination.",
+                "hint_1": "https:// is a strong clue.",
+                "hint_2": "Relative paths do not need a scheme or hostname."
+              },
+              "options": {
+                "a": "pages/help.html",
+                "b": "../help.html",
+                "c": "https://example.com/help",
+                "d": "help.html"
+              }
+            },
+            "paths-mc-1": {
+              "title": "Recognize relative paths",
+              "prompt": "Which values are relative paths? Choose all that apply.",
+              "hint": "Relative paths depend on the current file location.",
+              "help": {
+                "concept": "Relative paths can name same-folder, child-folder, or parent-folder destinations.",
+                "hint_1": "A full https URL is absolute.",
+                "hint_2": "Look for values without a scheme and host."
+              },
+              "options": {
+                "a": "about.html",
+                "b": "pages/contact.html",
+                "c": "../index.html",
+                "d": "https://example.com/profile"
+              }
+            },
+            "paths-dr-1": {
+              "title": "Build a child-folder path",
+              "prompt": "Arrange these pieces to form a relative path to `contact.html` inside the `pages` folder.",
+              "hint": "Start with the folder, then the slash, then the file.",
+              "help": {
+                "concept": "A child-folder path names the folder before the file.",
+                "hint_1": "The slash separates path segments.",
+                "hint_2": "The finished path is pages/contact.html."
+              },
+              "tokens": {
+                "t1": "contact.html",
+                "t2": "/",
+                "t3": "pages"
+              }
+            },
+            "paths-fb-1": {
+              "title": "Complete a parent-folder path",
+              "prompt": "Choose the prefix that moves from a child folder up to its parent before opening `index.html`.",
+              "hint": "Use the path segment that means parent folder.",
+              "help": {
+                "concept": "../ moves one folder upward.",
+                "hint_1": "The target file is outside the current folder.",
+                "hint_2": "Choose the parent-directory prefix."
+              },
+              "template": "<a href=\"[blank1]index.html\">Home</a>",
+              "choices": [
+                "../",
+                "./",
+                "https://",
+                "#"
+              ]
+            },
+            "paths-fb-2": {
+              "title": "Complete an external destination",
+              "prompt": "Choose the value that makes this link point to the complete Example site profile URL.",
+              "hint": "An external destination needs the complete absolute URL.",
+              "help": {
+                "concept": "Absolute web URLs include scheme and host.",
+                "hint_1": "The destination is on example.com, not this site's folder tree.",
+                "hint_2": "Choose the https URL."
+              },
+              "template": "<a href=\"[blank1]\">Profile</a>",
+              "choices": [
+                "profile.html",
+                "pages/profile.html",
+                "https://example.com/profile",
+                "../profile.html"
+              ]
+            }
+          }
+        }
+      },
+      "html-module-3-lists-tables-content": {
+        "module-3-content-page-project": {
+          "label": "Project: Build a Structured Content Page",
+          "summary": "Combine lists and a data table into a clear information page for a community learning event.",
+          "cards": {
+            "sketch0": {
+              "title": "Publish a Community Learning Day Guide"
+            },
+            "project": {
+              "title": "Neighborhood Learning Day Structured Content Guide"
+            }
+          },
+          "projectSteps": {
+            "module3_content_step_1": {
+              "title": "Organize event supplies and arrival steps"
+            },
+            "module3_content_step_2": {
+              "title": "Add hierarchical workshop tracks"
+            },
+            "module3_content_step_3": {
+              "title": "Finish with the session schedule table"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module3_content_step_1": {
+                "title": "Organize event supplies and arrival steps",
+                "prompt": "Start the module project. In step 1 of 3, Start the community event guide. Add a What to bring unordered list with Student ID, Notebook, and Water bottle. Then add an Arrival steps ordered list with the three provided steps. Verify both groups in Preview.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Build Arrival steps with ol without removing the event introduction."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n</body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li>\n    <li>Pick up a schedule</li>\n    <li>Go to the opening session</li>\n  </ol>\n</body>\n</html>",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li>\n    <li>Pick up a schedule</li>\n    <li>Go to the opening session</li>\n  </ol>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module3_content_step_2": {
+                "title": "Add hierarchical workshop tracks",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same page. Add Workshop tracks as an outer unordered list. Nest HTML Structure and Links and Images under Web Basics, and Sensors and Motors under Robotics. Keep both lists from step 1.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li>\n    <li>Pick up a schedule</li>\n    <li>Go to the opening session</li>\n  </ol>\n<!-- Project step 2: Add hierarchical workshop tracks -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same page -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li><li>Notebook</li><li>Water bottle</li>\n  </ul>\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li>\n  </ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics\n      <ul><li>HTML Structure</li><li>Links and Images</li></ul>\n    </li>\n    <li>Robotics\n      <ul><li>Sensors</li><li>Motors</li></ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li>\n    <li>Pick up a schedule</li>\n    <li>Go to the opening session</li>\n  </ol>\n<!-- Project step 2: Add hierarchical workshop tracks -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same page -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li><li>Notebook</li><li>Water bottle</li>\n  </ul>\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li>\n  </ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics\n      <ul><li>HTML Structure</li><li>Links and Images</li></ul>\n    </li>\n    <li>Robotics\n      <ul><li>Sensors</li><li>Motors</li></ul>\n    </li>\n  </ul>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module3_content_step_3": {
+                "title": "Finish with the session schedule table",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the community guide by adding a Session schedule table. Include the caption Saturday learning sessions, a thead with Time, Session, and Room, and a tbody with the three provided sessions. Keep every list from the earlier steps.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li><li>Notebook</li><li>Water bottle</li>\n  </ul>\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li>\n  </ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics\n      <ul><li>HTML Structure</li><li>Links and Images</li></ul>\n    </li>\n    <li>Robotics\n      <ul><li>Sensors</li><li>Motors</li></ul>\n    </li>\n  </ul>\n<!-- Project step 3: Finish with the session schedule table -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the community guide by adding a Session schedule table -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul><li>Student ID</li><li>Notebook</li><li>Water bottle</li></ul>\n  <h2>Arrival steps</h2>\n  <ol><li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li></ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics<ul><li>HTML Structure</li><li>Links and Images</li></ul></li>\n    <li>Robotics<ul><li>Sensors</li><li>Motors</li></ul></li>\n  </ul>\n\n  <h2>Session schedule</h2>\n  <table>\n    <caption>Saturday learning sessions</caption>\n    <thead><tr><th>Time</th><th>Session</th><th>Room</th></tr></thead>\n    <tbody>\n      <tr><td>9:00</td><td>Opening Session</td><td>Community Hall</td></tr>\n      <tr><td>10:00</td><td>HTML Structure</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li><li>Notebook</li><li>Water bottle</li>\n  </ul>\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li>\n  </ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics\n      <ul><li>HTML Structure</li><li>Links and Images</li></ul>\n    </li>\n    <li>Robotics\n      <ul><li>Sensors</li><li>Motors</li></ul>\n    </li>\n  </ul>\n<!-- Project step 3: Finish with the session schedule table -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the community guide by adding a Session schedule table -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul><li>Student ID</li><li>Notebook</li><li>Water bottle</li></ul>\n  <h2>Arrival steps</h2>\n  <ol><li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li></ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics<ul><li>HTML Structure</li><li>Links and Images</li></ul></li>\n    <li>Robotics<ul><li>Sensors</li><li>Motors</li></ul></li>\n  </ul>\n\n  <h2>Session schedule</h2>\n  <table>\n    <caption>Saturday learning sessions</caption>\n    <thead><tr><th>Time</th><th>Session</th><th>Room</th></tr></thead>\n    <tbody>\n      <tr><td>9:00</td><td>Opening Session</td><td>Community Hall</td></tr>\n      <tr><td>10:00</td><td>HTML Structure</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "nested-lists": {
+          "label": "Nested Lists",
+          "summary": "Represent grouped and hierarchical information with nested lists.",
+          "cards": {
+            "sketch0": {
+              "title": "Parent and Child Items"
+            },
+            "sketch1": {
+              "title": "Hierarchy Can Mix List Types"
+            },
+            "sketch2": {
+              "title": "Keep the Hierarchy Clear"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_nested_lists_sketch0": {
+              "title": "Try it yourself: Add Robotics subtopics",
+              "prompt": "Now apply what you just learned in this task. Inside the Robotics list item, add a nested unordered list containing Sensors and Programming. Keep Art as a sibling of Robotics. Produce the result for add Robotics subtopics so it reinforces Nested Lists.",
+              "hint": "The child list belongs inside the Robotics li.",
+              "help": {
+                "concept": "A nested list expresses parent-child relationships when placed inside the owning list item.",
+                "hint_1": "Do not place the child ul after the Robotics li closes.",
+                "hint_2": "Robotics should contain a ul with two li children."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics</li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Programming</li>\n      </ul>\n    </li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics</li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Programming</li>\n      </ul>\n    </li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_nested_lists_sketch1": {
+              "title": "Try it yourself: Add ordered steps inside a category",
+              "prompt": "Now apply what you just learned in this task. Inside Web Basics, add a nested ordered list with HTML structure first and Links and images second. Keep Robotics as the other outer item. Produce the result for add ordered steps inside a category so it reinforces Nested Lists.",
+              "hint": "The parent categories are unordered, but the lesson sequence is ordered.",
+              "help": {
+                "concept": "Each level of a hierarchy chooses ul or ol from its own meaning.",
+                "hint_1": "Keep the outer ul.",
+                "hint_2": "Place an ol with the two lesson steps inside the Web Basics li."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics\n      <ol>\n        <li>HTML structure</li>\n        <li>Links and images</li>\n      </ol>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics\n      <ol>\n        <li>HTML structure</li>\n        <li>Links and images</li>\n      </ol>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_nested_lists_sketch2": {
+              "title": "Try it yourself: Build two nested topic groups",
+              "prompt": "Now apply what you just learned in this task. Give both top-level learning areas their own nested unordered lists: HTML and CSS later under Web Development, and Sensors and Motors under Robotics. Produce the result for build two nested topic groups so it reinforces Nested Lists.",
+              "hint": "Each top-level li should own its own child ul.",
+              "help": {
+                "concept": "Repeated nested structures represent multiple parent groups consistently.",
+                "hint_1": "Build the Web Development child list first.",
+                "hint_2": "Then give Robotics a separate child ul before its li closes."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Motors</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Motors</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "nested-quiz-choice": {
+              "title": "Place the child list correctly",
+              "prompt": "Where should a nested list for Robotics subtopics go?",
+              "hint": "The child content belongs to its parent item.",
+              "help": {
+                "concept": "A nested list should be contained by the list item it describes.",
+                "hint_1": "Ask which element owns the subtopics.",
+                "hint_2": "Keep the child list inside the parent li."
+              },
+              "options": {
+                "a": "Inside the Robotics <li> before that list item closes",
+                "b": "After the entire outer </ul>",
+                "c": "Inside the page <title>",
+                "d": "Directly inside <head>"
+              }
+            },
+            "nested-quiz-multi": {
+              "title": "Recognize useful nested-list patterns",
+              "prompt": "Which two examples naturally call for nested lists?",
+              "hint": "Look for parent-child groups.",
+              "help": {
+                "concept": "Nested lists are useful for meaningful subgroups.",
+                "hint_1": "Choose examples with hierarchy.",
+                "hint_2": "Flat prose and metadata do not need nested lists."
+              },
+              "options": {
+                "a": "A course area with lessons grouped underneath it",
+                "b": "A single paragraph of biography text",
+                "c": "A club with project categories and projects under each category",
+                "d": "A page title in the browser tab"
+              }
+            },
+            "nested-quiz-order": {
+              "title": "Order a nested list fragment",
+              "prompt": "Arrange the tokens so Sensors becomes a child of Robotics.",
+              "hint": "The outer container must surround the parent item.",
+              "help": {
+                "concept": "The child ul belongs inside the Robotics li.",
+                "hint_1": "Open the outer ul first.",
+                "hint_2": "The complete Robotics item goes before the outer closing ul."
+              },
+              "tokens": {
+                "t1": "<ul>",
+                "t2": "<li>Robotics<ul><li>Sensors</li></ul></li>",
+                "t3": "</ul>"
+              }
+            },
+            "nested-quiz-blank": {
+              "title": "Choose the child-list container",
+              "prompt": "Fill the one blank with the list container that makes two unordered subtopics under Robotics.",
+              "hint": "The subtopics are a set, not a sequence.",
+              "help": {
+                "concept": "A nested unordered list is a ul inside the parent li.",
+                "hint_1": "The blank is already inside Robotics.",
+                "hint_2": "Choose the ul containing two li elements."
+              },
+              "template": "<li>Robotics\n  [blank1]\n</li>",
+              "choices": [
+                "<ul><li>Sensors</li><li>Programming</li></ul>",
+                "<p>Sensors, Programming</p>",
+                "<ol>Sensors, Programming</ol>",
+                "<table><td>Sensors</td></table>"
+              ]
+            }
+          }
+        },
+        "ordered-and-unordered-lists": {
+          "label": "Ordered and Unordered Lists",
+          "summary": "Choose ordered or unordered lists based on content meaning.",
+          "cards": {
+            "sketch0": {
+              "title": "Lists Have Meaning"
+            },
+            "sketch1": {
+              "title": "When Order Matters"
+            },
+            "sketch2": {
+              "title": "Build the Right Structure"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_ordered_and_unordered_lists_sketch0": {
+              "title": "Try it yourself: Group the open-house supplies",
+              "prompt": "Now apply what you just learned in this task. Replace the three supply paragraphs with one unordered list. Keep the same three item texts and watch the browser preview show them as one grouped list. Produce the result for group the open-house supplies so it reinforces Ordered and Unordered Lists.",
+              "hint": "The items belong together, but their order does not matter.",
+              "help": {
+                "concept": "An unordered list represents related items whose sequence is not meaningful.",
+                "hint_1": "Wrap the group in a ul element.",
+                "hint_2": "Each supply needs its own li element inside the ul."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <p>Student ID</p>\n  <p>Notebook</p>\n  <p>Water bottle</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <p>Student ID</p>\n  <p>Notebook</p>\n  <p>Water bottle</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_ordered_and_unordered_lists_sketch1": {
+              "title": "Try it yourself: Turn arrival instructions into steps",
+              "prompt": "Now apply what you just learned in this task. Replace the three arrival paragraphs with one ordered list so the browser communicates the required sequence. Produce the result for turn arrival instructions into steps so it reinforces Ordered and Unordered Lists.",
+              "hint": "These actions must happen in a specific order.",
+              "help": {
+                "concept": "An ordered list communicates a meaningful sequence.",
+                "hint_1": "Use an ol container around the steps.",
+                "hint_2": "Put each step in a separate li element."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <p>Check in</p>\n  <p>Find your seat</p>\n  <p>Open your notebook</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <ol>\n    <li>Check in</li>\n    <li>Find your seat</li>\n    <li>Open your notebook</li>\n  </ol>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <p>Check in</p>\n  <p>Find your seat</p>\n  <p>Open your notebook</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <ol>\n    <li>Check in</li>\n    <li>Find your seat</li>\n    <li>Open your notebook</li>\n  </ol>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_ordered_and_unordered_lists_sketch2": {
+              "title": "Try it yourself: Use both list types on one page",
+              "prompt": "Now apply what you just learned in this task. Make Bring an unordered list and Start an ordered list. Keep each heading and all four item texts. Produce the result for use both list types on one page so it reinforces Ordered and Unordered Lists.",
+              "hint": "One group is a set of supplies; the other is a sequence.",
+              "help": {
+                "concept": "Choose a list type from the meaning of each group.",
+                "hint_1": "Laptop and Charger belong in ul.",
+                "hint_2": "Sign in and Open the lesson belong in ol."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <p>Laptop</p>\n  <p>Charger</p>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <ol>\n    <li>Sign in</li>\n    <li>Open the lesson</li>\n  </ol>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <p>Laptop</p>\n  <p>Charger</p>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <ol>\n    <li>Sign in</li>\n    <li>Open the lesson</li>\n  </ol>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "lists-quiz-choice": {
+              "title": "Choose the list with the right meaning",
+              "prompt": "A page explains three steps for submitting an assignment. Which element should contain the steps?",
+              "hint": "Think about whether the sequence matters.",
+              "help": {
+                "concept": "Ordered lists represent meaningful sequence.",
+                "hint_1": "Submission instructions are steps.",
+                "hint_2": "Use the list container that communicates first, second, third."
+              },
+              "options": {
+                "a": "<ol>",
+                "b": "<ul>",
+                "c": "<table>",
+                "d": "<p>"
+              }
+            },
+            "lists-quiz-multi": {
+              "title": "Identify correct list uses",
+              "prompt": "Which two statements use list semantics appropriately?",
+              "hint": "Choose based on content meaning, not decoration.",
+              "help": {
+                "concept": "List semantics describe unordered sets or ordered sequences.",
+                "hint_1": "One correct answer describes a set; the other describes steps.",
+                "hint_2": "Ignore choices that use list tags only for appearance or omit the container."
+              },
+              "options": {
+                "a": "Use <ul> for a set of club supplies where order does not matter.",
+                "b": "Use <ol> only because you prefer numbers visually.",
+                "c": "Use <ol> for instructions that must be followed in sequence.",
+                "d": "Place list items directly in <body> without a list container."
+              }
+            },
+            "lists-quiz-order": {
+              "title": "Build an ordered list",
+              "prompt": "Arrange the tokens into a valid ordered list with two steps.",
+              "hint": "The list container surrounds its list items.",
+              "help": {
+                "concept": "A valid ordered list opens ol, contains li elements, and closes ol.",
+                "hint_1": "Start with the opening ol tag.",
+                "hint_2": "Both li elements go before the closing ol tag."
+              },
+              "tokens": {
+                "t1": "<ol>",
+                "t2": "<li>Sign in</li>",
+                "t3": "<li>Open the lesson</li>",
+                "t4": "</ol>"
+              }
+            },
+            "lists-quiz-blank": {
+              "title": "Complete the list item",
+              "prompt": "Choose the markup that correctly fills the one missing item inside this unordered list.",
+              "hint": "Look for the element that represents one item in a list.",
+              "help": {
+                "concept": "The li element represents an individual item inside ul or ol.",
+                "hint_1": "The container is already ul.",
+                "hint_2": "Fill the blank with one complete li element."
+              },
+              "template": "<ul>\n  [blank1]\n</ul>",
+              "choices": [
+                "<li>Notebook</li>",
+                "<p>Notebook</p>",
+                "<ol>Notebook</ol>",
+                "<td>Notebook</td>"
+              ]
+            }
+          }
+        },
+        "tables-and-table-structure": {
+          "label": "Tables and Table Structure",
+          "summary": "Use table, caption, thead, tbody, tr, th, and td for tabular data.",
+          "cards": {
+            "sketch0": {
+              "title": "Rows and Columns"
+            },
+            "sketch1": {
+              "title": "Explain the Table"
+            },
+            "sketch2": {
+              "title": "Group Table Sections"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_tables_and_table_structure_sketch0": {
+              "title": "Try it yourself: Turn meeting data into a table",
+              "prompt": "Now apply what you just learned in this task. Replace the two meeting paragraphs with a table captioned Weekly club meetings. Add Club and Day headers, then one row for Robotics Tuesday and one row for Art Thursday. Produce the result for turn meeting data into a table so it reinforces Tables and Table Structure.",
+              "hint": "Each club is one row with the same two columns.",
+              "help": {
+                "concept": "A table represents repeated records that share the same fields.",
+                "hint_1": "Start with table and caption, then add a header row.",
+                "hint_2": "Use th for headers and td for the two club rows."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <p>Robotics - Tuesday</p>\n  <p>Art - Thursday</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <caption>Weekly club meetings</caption>\n    <tr>\n      <th>Club</th>\n      <th>Day</th>\n    </tr>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <p>Robotics - Tuesday</p>\n  <p>Art - Thursday</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <caption>Weekly club meetings</caption>\n    <tr>\n      <th>Club</th>\n      <th>Day</th>\n    </tr>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_tables_and_table_structure_sketch1": {
+              "title": "Try it yourself: Separate the table head and body",
+              "prompt": "Now apply what you just learned in this task. Keep the existing caption and cells, but group the header row inside thead and the data row inside tbody. Produce the result for separate the table head and body so it reinforces Tables and Table Structure.",
+              "hint": "The header row and data rows belong to different table sections.",
+              "help": {
+                "concept": "thead and tbody make the roles of table rows explicit.",
+                "hint_1": "Move the row containing th cells into thead.",
+                "hint_2": "Move the row containing td cells into tbody."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <tr>\n      <th>Time</th>\n      <th>Session</th>\n    </tr>\n    <tr>\n      <td>10:00</td>\n      <td>HTML Basics</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>10:00</td>\n        <td>HTML Basics</td>\n      </tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <tr>\n      <th>Time</th>\n      <th>Session</th>\n    </tr>\n    <tr>\n      <td>10:00</td>\n      <td>HTML Basics</td>\n    </tr>\n  </table>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>10:00</td>\n        <td>HTML Basics</td>\n      </tr>\n    </tbody>\n  </table>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_tables_and_table_structure_sketch2": {
+              "title": "Try it yourself: Build a complete schedule table",
+              "prompt": "Now apply what you just learned in this task. Replace the schedule paragraphs with a table captioned Morning session schedule. Use a thead with Time, Session, and Location, then a tbody with all three schedule rows. Produce the result for build a complete schedule table so it reinforces Tables and Table Structure.",
+              "hint": "Every data row has the same three fields.",
+              "help": {
+                "concept": "A well-structured table combines caption, row groups, rows, header cells, and data cells.",
+                "hint_1": "Create the caption and three-column thead first.",
+                "hint_2": "Add three tbody rows in Time, Session, Location order."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <p>9:00 - Welcome - Room A</p>\n  <p>10:00 - HTML Basics - Lab 1</p>\n  <p>11:00 - Robotics Demo - Lab 2</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n        <th>Location</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n      <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <p>9:00 - Welcome - Room A</p>\n  <p>10:00 - HTML Basics - Lab 1</p>\n  <p>11:00 - Robotics Demo - Lab 2</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n        <th>Location</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n      <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "tables-quiz-choice": {
+              "title": "Choose table markup for structured data",
+              "prompt": "Which element represents one row in an HTML table?",
+              "hint": "Think row, not cell or section.",
+              "help": {
+                "concept": "The tr element groups the cells that make up one table row.",
+                "hint_1": "A td is one data cell.",
+                "hint_2": "Choose the element whose name means table row."
+              },
+              "options": {
+                "a": "<tr>",
+                "b": "<td>",
+                "c": "<li>",
+                "d": "<tbody>"
+              }
+            },
+            "tables-quiz-multi": {
+              "title": "Recognize table structure",
+              "prompt": "Which two statements are correct?",
+              "hint": "Choose elements whose purposes are part of table structure.",
+              "help": {
+                "concept": "th labels header cells and tbody groups body rows.",
+                "hint_1": "One correct answer is a cell type; the other is a row group.",
+                "hint_2": "Ignore elements from other HTML concepts."
+              },
+              "options": {
+                "a": "<th> identifies a header cell.",
+                "b": "<caption> creates a table data cell.",
+                "c": "<tbody> groups the main data rows.",
+                "d": "<li> creates a table column."
+              }
+            },
+            "tables-quiz-order": {
+              "title": "Order a simple table",
+              "prompt": "Arrange the tokens into a table containing one data row.",
+              "hint": "The table container surrounds its row.",
+              "help": {
+                "concept": "A tr belongs inside table.",
+                "hint_1": "Open table first.",
+                "hint_2": "Place the row before closing table."
+              },
+              "tokens": {
+                "t1": "<table>",
+                "t2": "<tr><td>Robotics</td><td>Tuesday</td></tr>",
+                "t3": "</table>"
+              }
+            },
+            "tables-quiz-blank": {
+              "title": "Choose the correct header cell",
+              "prompt": "Fill the blank with the element that marks Time as a table header cell.",
+              "hint": "The missing cell labels a column.",
+              "help": {
+                "concept": "Header cells use th rather than td.",
+                "hint_1": "The neighboring Session cell is also a header.",
+                "hint_2": "Choose the complete th element for Time."
+              },
+              "template": "<tr>\n  [blank1]\n  <th>Session</th>\n</tr>",
+              "choices": [
+                "<th>Time</th>",
+                "<td>Time</td>",
+                "<li>Time</li>",
+                "<caption>Time</caption>"
+              ]
+            }
+          }
+        }
+      },
+      "html-module-4-semantic-accessible-layout": {
+        "headings-and-accessible-structure": {
+          "label": "Headings and Accessible Structure",
+          "summary": "Create a logical heading hierarchy and use meaningful text alternatives within semantic content.",
+          "cards": {
+            "sketch0": {
+              "title": "Build a Logical Outline"
+            },
+            "sketch1": {
+              "title": "Describe Meaningful Images"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_headings_and_accessible_structure_sketch0": {
+              "title": "Try it yourself: Repair the heading hierarchy",
+              "prompt": "Now apply what you just learned in this task. Change Volunteer Days to h2 and What to bring to h3 so the headings follow the content hierarchy under the page h1. Keep all text and confirm the outline still reads naturally in Preview. Produce the result for repair the heading hierarchy so it reinforces Headings and Accessible Structure.",
+              "hint": "The page title is h1, the major section belongs one level below it, and its subsection belongs one level below that.",
+              "help": {
+                "concept": "Heading levels should follow the document hierarchy rather than skip levels for appearance.",
+                "hint_1": "Volunteer Days is a major section under the page title.",
+                "hint_2": "What to bring is a subsection inside Volunteer Days."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h3>Volunteer Days</h3>\n    <p>Volunteers meet every Saturday.</p>\n    <h4>What to bring</h4>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h2>Volunteer Days</h2>\n    <p>Volunteers meet every Saturday.</p>\n    <h3>What to bring</h3>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h3>Volunteer Days</h3>\n    <p>Volunteers meet every Saturday.</p>\n    <h4>What to bring</h4>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h2>Volunteer Days</h2>\n    <p>Volunteers meet every Saturday.</p>\n    <h3>What to bring</h3>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_headings_and_accessible_structure_sketch1": {
+              "title": "Try it yourself: Write a meaningful image alternative",
+              "prompt": "Now apply what you just learned in this task. Improve the garden story image by replacing alt=\"photo\" with alt=\"Three students planting herbs in raised garden beds\". Then add a figcaption that says Students prepare the herb garden for spring. The image file is intentionally unavailable here, so Preview can also expose the alternative text. Produce the result for write a meaningful image alternative so it reinforces Headings and Accessible Structure.",
+              "hint": "Describe the useful information the image contributes instead of naming the file type.",
+              "help": {
+                "concept": "Meaningful text alternatives communicate image content when the image cannot be perceived.",
+                "hint_1": "Replace the generic alt value with the requested concise description.",
+                "hint_2": "Keep the image inside figure and add the visible figcaption after it."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"photo\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n        <figcaption>Students prepare the herb garden for spring.</figcaption>\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"photo\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n        <figcaption>Students prepare the herb garden for spring.</figcaption>\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "accessible-structure-quiz-headings": {
+              "title": "Choose the next heading level",
+              "prompt": "A page uses h1 for Community Guide and h2 for Events. Which heading level best names Workshops inside the Events section?",
+              "hint": "Workshops is nested one level inside Events.",
+              "help": {
+                "concept": "Heading levels reflect the structure of the content.",
+                "hint_1": "Events is already h2.",
+                "hint_2": "A subsection of that h2 uses h3."
+              },
+              "options": {
+                "a": "<h3>",
+                "b": "<h1>",
+                "c": "<h4>",
+                "d": "<p>"
+              }
+            },
+            "accessible-structure-quiz-accessibility": {
+              "title": "Identify accessible structure choices",
+              "prompt": "Which two choices improve accessible structure?",
+              "hint": "Choose structure and text that communicate meaning.",
+              "help": {
+                "concept": "Accessible HTML combines logical headings with useful text alternatives.",
+                "hint_1": "One answer preserves heading hierarchy.",
+                "hint_2": "The other gives an informative image a meaningful description."
+              },
+              "options": {
+                "a": "Use h2 for a major section directly under the page h1.",
+                "b": "Use alt=\"Three students planting herbs in raised garden beds\" for an informative garden image.",
+                "c": "Jump from h1 to h4 because h4 looks smaller.",
+                "d": "Use alt=\"image.jpg\" because it matches the file name."
+              }
+            },
+            "accessible-structure-quiz-order": {
+              "title": "Arrange a heading hierarchy",
+              "prompt": "Arrange the headings from the page title to a section and then its subsection.",
+              "hint": "Move from the broadest heading to the most specific.",
+              "help": {
+                "concept": "A simple hierarchy can move h1 to h2 to h3.",
+                "hint_1": "Start with the page title.",
+                "hint_2": "Place the subsection after its parent section heading."
+              },
+              "tokens": {
+                "t1": "<h1>Community Guide</h1>",
+                "t2": "<h2>Events</h2>",
+                "t3": "<h3>Saturday Workshops</h3>"
+              }
+            },
+            "accessible-structure-quiz-blank": {
+              "title": "Choose the meaningful text alternative",
+              "prompt": "Choose the alt attribute that best describes an informative photo of two students repairing a bicycle.",
+              "hint": "Describe the useful content instead of the file name or the word image.",
+              "help": {
+                "concept": "An informative image needs a concise text alternative that communicates its relevant content.",
+                "hint_1": "Avoid generic labels like photo.",
+                "hint_2": "Choose the description a reader would need if the image were unavailable."
+              },
+              "template": "<img src=\"bike-repair.jpg\" [blank1]>",
+              "choices": [
+                "alt=\"Two students repairing a bicycle wheel\"",
+                "alt=\"photo\"",
+                "alt=\"bike-repair.jpg\"",
+                "alt=\"image\""
+              ]
+            }
+          }
+        },
+        "module-4-article-page-project": {
+          "label": "Project: Build a Semantic Article Page",
+          "summary": "Build an article page with landmarks, semantic content containers, logical headings, and accessible image text.",
+          "cards": {
+            "sketch0": {
+              "title": "Publish an Accessible Community Story"
+            },
+            "project": {
+              "title": "Eastside Garden Journal Semantic Article Page"
+            }
+          },
+          "projectSteps": {
+            "module4_article_step_1": {
+              "title": "Add the page landmarks and navigation"
+            },
+            "module4_article_step_2": {
+              "title": "Structure the article and related content"
+            },
+            "module4_article_step_3": {
+              "title": "Finish the accessible article structure"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module4_article_step_1": {
+                "title": "Add the page landmarks and navigation",
+                "prompt": "Start the module project. In step 1 of 3, Start the Eastside Garden Journal page by organizing it with header, nav, main, and footer. Keep the title and introduction in header, place both jump links in nav, keep the story and visit content in main, and move the contact line into footer.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Place the story and visit content in main, then put the contact line in footer."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <h1>Eastside Garden Journal</h1>\n  <p>Updates from the neighborhood garden.</p>\n  <p><a href=\"#story\">Story</a> | <a href=\"#visit\">Visit</a></p>\n\n  <h2 id=\"story\">Students Build New Garden Beds</h2>\n  <p>Volunteers built three raised beds for spring planting.</p>\n\n  <h2 id=\"visit\">Visit the garden</h2>\n  <p>Saturday, 10:00 AM — Eastside Community Center</p>\n\n  <p>Contact: garden@eastside.example</p>\n</body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <h2 id=\"story\">Students Build New Garden Beds</h2>\n    <p>Volunteers built three raised beds for spring planting.</p>\n\n    <h2 id=\"visit\">Visit the garden</h2>\n    <p>Saturday, 10:00 AM — Eastside Community Center</p>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <h1>Eastside Garden Journal</h1>\n  <p>Updates from the neighborhood garden.</p>\n  <p><a href=\"#story\">Story</a> | <a href=\"#visit\">Visit</a></p>\n\n  <h2 id=\"story\">Students Build New Garden Beds</h2>\n  <p>Volunteers built three raised beds for spring planting.</p>\n\n  <h2 id=\"visit\">Visit the garden</h2>\n  <p>Saturday, 10:00 AM — Eastside Community Center</p>\n\n  <p>Contact: garden@eastside.example</p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <h2 id=\"story\">Students Build New Garden Beds</h2>\n    <p>Volunteers built three raised beds for spring planting.</p>\n\n    <h2 id=\"visit\">Visit the garden</h2>\n    <p>Saturday, 10:00 AM — Eastside Community Center</p>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module4_article_step_2": {
+                "title": "Structure the article and related content",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same page. Wrap the garden story in article. Add a What changed section with the provided paragraph inside the article. Keep Visit the garden as its own section, and add the Related activity aside with the seed-starting workshop text.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <h2 id=\"story\">Students Build New Garden Beds</h2>\n    <p>Volunteers built three raised beds for spring planting.</p>\n\n    <h2 id=\"visit\">Visit the garden</h2>\n    <p>Saturday, 10:00 AM — Eastside Community Center</p>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n<!-- Project step 2: Structure the article and related content -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same page -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <h2 id=\"story\">Students Build New Garden Beds</h2>\n    <p>Volunteers built three raised beds for spring planting.</p>\n\n    <h2 id=\"visit\">Visit the garden</h2>\n    <p>Saturday, 10:00 AM — Eastside Community Center</p>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n<!-- Project step 2: Structure the article and related content -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same page -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module4_article_step_3": {
+                "title": "Finish the accessible article structure",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the article by adding a figure after the opening story paragraph. Use garden-beds.jpg with alt=\"Three students filling raised garden beds with soil\" and add the figcaption Students prepare the new beds for spring planting. Keep the heading hierarchy h1 for the page, h2 for major regions, and h3 for What changed.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n<!-- Project step 3: Finish the accessible article structure -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the article by adding a figure after the opening story paragraph -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <figure>\n        <img src=\"garden-beds.jpg\" alt=\"Three students filling raised garden beds with soil\">\n        <figcaption>Students prepare the new beds for spring planting.</figcaption>\n      </figure>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n<!-- Project step 3: Finish the accessible article structure -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the article by adding a figure after the opening story paragraph -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Eastside Garden Journal</title>\n</head>\n<body>\n  <header>\n    <h1>Eastside Garden Journal</h1>\n    <p>Updates from the neighborhood garden.</p>\n    <nav>\n      <a href=\"#story\">Story</a>\n      <a href=\"#visit\">Visit</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2 id=\"story\">Students Build New Garden Beds</h2>\n      <p>Volunteers built three raised beds for spring planting.</p>\n      <figure>\n        <img src=\"garden-beds.jpg\" alt=\"Three students filling raised garden beds with soil\">\n        <figcaption>Students prepare the new beds for spring planting.</figcaption>\n      </figure>\n      <section>\n        <h3>What changed</h3>\n        <p>The new beds give the youth program more space for herbs and vegetables.</p>\n      </section>\n    </article>\n\n    <section>\n      <h2 id=\"visit\">Visit the garden</h2>\n      <p>Saturday, 10:00 AM — Eastside Community Center</p>\n    </section>\n\n    <aside>\n      <h2>Related activity</h2>\n      <p>Seed-starting workshop — Saturday at 11:30 AM</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Contact: garden@eastside.example</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "page-landmarks": {
+          "label": "Page Landmarks",
+          "summary": "Use header, nav, main, and footer to describe the major regions of a page.",
+          "cards": {
+            "sketch0": {
+              "title": "Name the Major Regions"
+            },
+            "sketch1": {
+              "title": "Mark the Navigation"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_page_landmarks_sketch0": {
+              "title": "Try it yourself: Turn page content into major landmarks",
+              "prompt": "Now apply what you just learned in this task. Organize the Riverside Community News page with header, main, and footer. Keep the title and introduction in header, the Lead story content in main, and the contact line in footer. Check that all content still appears in Preview. Produce the result for turn page content into major landmarks so it reinforces Page Landmarks.",
+              "hint": "Choose each landmark from the role of the content, not from its visual position.",
+              "help": {
+                "concept": "Header, main, and footer identify the introduction, primary content, and closing information of a page.",
+                "hint_1": "Wrap the title and introduction together in header.",
+                "hint_2": "Place the Lead story in main and the contact line in footer."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <h1>Riverside Community News</h1>\n  <p>Stories from around the neighborhood.</p>\n  <h2>Lead story</h2>\n  <p>The library opened a new evening study room.</p>\n  <p>Contact: news@riverside.example</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <header>\n    <h1>Riverside Community News</h1>\n    <p>Stories from around the neighborhood.</p>\n  </header>\n  <main>\n    <h2>Lead story</h2>\n    <p>The library opened a new evening study room.</p>\n  </main>\n  <footer>\n    <p>Contact: news@riverside.example</p>\n  </footer>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <h1>Riverside Community News</h1>\n  <p>Stories from around the neighborhood.</p>\n  <h2>Lead story</h2>\n  <p>The library opened a new evening study room.</p>\n  <p>Contact: news@riverside.example</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <header>\n    <h1>Riverside Community News</h1>\n    <p>Stories from around the neighborhood.</p>\n  </header>\n  <main>\n    <h2>Lead story</h2>\n    <p>The library opened a new evening study room.</p>\n  </main>\n  <footer>\n    <p>Contact: news@riverside.example</p>\n  </footer>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_page_landmarks_sketch1": {
+              "title": "Try it yourself: Create a navigation landmark",
+              "prompt": "Now apply what you just learned in this task. Replace the paragraph that holds the Showcase and Gallery links with one nav element. Keep both links and their href values, then confirm they still jump to the two headings in Preview. Produce the result for create a navigation landmark so it reinforces Page Landmarks.",
+              "hint": "The two links form one major navigation group.",
+              "help": {
+                "concept": "A nav element gives a major set of navigation links a clear landmark.",
+                "hint_1": "Remove the paragraph wrapper around the two links.",
+                "hint_2": "Place both existing anchor elements inside one nav element."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <p><a href=\"#showcase\">Showcase</a> | <a href=\"#gallery\">Gallery</a></p>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <nav>\n      <a href=\"#showcase\">Showcase</a>\n      <a href=\"#gallery\">Gallery</a>\n    </nav>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <p><a href=\"#showcase\">Showcase</a> | <a href=\"#gallery\">Gallery</a></p>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <nav>\n      <a href=\"#showcase\">Showcase</a>\n      <a href=\"#gallery\">Gallery</a>\n    </nav>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "landmarks-quiz-main": {
+              "title": "Choose the primary-content landmark",
+              "prompt": "Which element should contain the unique primary content of a page?",
+              "hint": "Think about the region a screen reader can identify as the page's main content.",
+              "help": {
+                "concept": "The main element identifies the page's primary content.",
+                "hint_1": "Header introduces the page.",
+                "hint_2": "Use main for the central content that is unique to this page."
+              },
+              "options": {
+                "a": "<main>",
+                "b": "<header>",
+                "c": "<footer>",
+                "d": "<nav>"
+              }
+            },
+            "landmarks-quiz-meaning": {
+              "title": "Identify meaningful landmark uses",
+              "prompt": "Which two statements use page landmarks appropriately?",
+              "hint": "Choose based on the role of each region.",
+              "help": {
+                "concept": "Semantic landmarks describe page regions by purpose.",
+                "hint_1": "One correct choice identifies navigation.",
+                "hint_2": "The other identifies closing information."
+              },
+              "options": {
+                "a": "Use <nav> for a major group of links that moves around the page or site.",
+                "b": "Use <footer> for closing information such as authorship or contact details.",
+                "c": "Use <main> around every paragraph on the page.",
+                "d": "Use <header> only when you want text to appear bold."
+              }
+            },
+            "landmarks-quiz-order": {
+              "title": "Arrange a simple landmark structure",
+              "prompt": "Arrange the tokens into a page structure where nav belongs inside header, followed by main and footer.",
+              "hint": "Open and close header before the main content begins.",
+              "help": {
+                "concept": "Landmarks can be nested when their roles make sense.",
+                "hint_1": "The navigation group may sit inside the page header.",
+                "hint_2": "Main and footer come after the header closes."
+              },
+              "tokens": {
+                "t1": "<header>",
+                "t2": "<nav>...</nav>",
+                "t3": "</header>",
+                "t4": "<main>...</main>",
+                "t5": "<footer>...</footer>"
+              }
+            },
+            "landmarks-quiz-blank": {
+              "title": "Complete the primary-content region",
+              "prompt": "Choose the element that should fill the blank around the page's unique article content.",
+              "hint": "Only one choice identifies the page's primary content.",
+              "help": {
+                "concept": "Main identifies the dominant content of the document.",
+                "hint_1": "Nav is for navigation links.",
+                "hint_2": "Choose a complete main element."
+              },
+              "template": "<body>\n  [blank1]\n</body>",
+              "choices": [
+                "<main><article>Community story</article></main>",
+                "<nav><article>Community story</article></nav>",
+                "<footer><article>Community story</article></footer>",
+                "<header><article>Community story</article></header>"
+              ]
+            }
+          }
+        },
+        "sections-articles-and-asides": {
+          "label": "Sections, Articles, and Asides",
+          "summary": "Choose article, section, and aside when the content has a clear semantic role.",
+          "cards": {
+            "sketch0": {
+              "title": "Self-Contained Content"
+            },
+            "sketch1": {
+              "title": "Group a Theme"
+            },
+            "sketch2": {
+              "title": "Add Related Information"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_sections_articles_and_asides_sketch0": {
+              "title": "Try it yourself: Turn a standalone story into an article",
+              "prompt": "Now apply what you just learned in this task. Replace the generic div around Robotics Team Reaches Finals with article. Keep the h2 and paragraph inside it and confirm the story still appears in Preview. Produce the result for turn a standalone story into an article so it reinforces Sections, Articles, and Asides.",
+              "hint": "Ask whether this content could stand on its own as a separate story.",
+              "help": {
+                "concept": "Article is appropriate for a self-contained piece of content.",
+                "hint_1": "Replace only the wrapper around the story.",
+                "hint_2": "Keep the existing heading and paragraph inside article."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <div>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <article>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <div>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </div>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <article>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </article>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_sections_articles_and_asides_sketch1": {
+              "title": "Try it yourself: Create a named schedule section",
+              "prompt": "Now apply what you just learned in this task. Replace the generic schedule div with section and add an h2 heading that says Schedule before the two time entries. Keep both schedule paragraphs visible. Produce the result for create a named schedule section so it reinforces Sections, Articles, and Asides.",
+              "hint": "The two time entries form one named theme within the larger guide.",
+              "help": {
+                "concept": "Section groups related content under a meaningful theme.",
+                "hint_1": "Replace the schedule div with section.",
+                "hint_2": "Add the Schedule h2 as the first child of the section."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <div>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <section>\n      <h2>Schedule</h2>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </section>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <div>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </div>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <section>\n      <h2>Schedule</h2>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </section>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_sections_articles_and_asides_sketch2": {
+              "title": "Try it yourself: Mark related information as an aside",
+              "prompt": "Now apply what you just learned in this task. Replace the generic div after the library article with aside. Add an h2 heading that says Related workshop and keep the study-skills workshop text inside it. Produce the result for mark related information as an aside so it reinforces Sections, Articles, and Asides.",
+              "hint": "The workshop is related to the story but is not part of the story itself.",
+              "help": {
+                "concept": "Aside marks complementary information connected to nearby content.",
+                "hint_1": "Replace the wrapper after article with aside.",
+                "hint_2": "Add the Related workshop heading before the existing workshop paragraph."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <div>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <aside>\n      <h2>Related workshop</h2>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </aside>\n  </main>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <div>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </div>\n  </main>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <aside>\n      <h2>Related workshop</h2>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </aside>\n  </main>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "semantic-containers-quiz-article": {
+              "title": "Choose the self-contained element",
+              "prompt": "A school site publishes one student-written news story that could be shared by itself. Which element best represents that story?",
+              "hint": "Choose the element whose content can stand on its own.",
+              "help": {
+                "concept": "Article represents self-contained content.",
+                "hint_1": "Section groups a theme inside a larger page.",
+                "hint_2": "Choose article for the independent story."
+              },
+              "options": {
+                "a": "<article>",
+                "b": "<section>",
+                "c": "<aside>",
+                "d": "<nav>"
+              }
+            },
+            "semantic-containers-quiz-uses": {
+              "title": "Identify appropriate semantic containers",
+              "prompt": "Which two uses are semantically appropriate?",
+              "hint": "Choose based on the meaning of the content.",
+              "help": {
+                "concept": "Section and aside describe different relationships to surrounding content.",
+                "hint_1": "A themed group can be a section.",
+                "hint_2": "Complementary related information can be an aside."
+              },
+              "options": {
+                "a": "Use <section> for a named group of upcoming events.",
+                "b": "Use <aside> for related resources next to an article.",
+                "c": "Use <article> for every paragraph because article is more semantic than p.",
+                "d": "Use <section> only to create visual spacing."
+              }
+            },
+            "semantic-containers-quiz-order": {
+              "title": "Build a headed section",
+              "prompt": "Arrange the tokens into a valid section with a heading and paragraph.",
+              "hint": "The section wrapper contains both pieces of content.",
+              "help": {
+                "concept": "A section commonly begins with a heading that identifies its theme.",
+                "hint_1": "Open section before its heading.",
+                "hint_2": "Close section after the related paragraph."
+              },
+              "tokens": {
+                "t1": "<section>",
+                "t2": "<h2>Events</h2>",
+                "t3": "<p>Friday workshop</p>",
+                "t4": "</section>"
+              }
+            },
+            "semantic-containers-quiz-blank": {
+              "title": "Complete the complementary region",
+              "prompt": "Choose the markup that best fills the blank after an article with related but secondary information.",
+              "hint": "The content supports the article without belonging to its main story.",
+              "help": {
+                "concept": "Aside contains complementary content.",
+                "hint_1": "Article would imply another self-contained story.",
+                "hint_2": "Choose a complete aside element."
+              },
+              "template": "<article>...</article>\n[blank1]",
+              "choices": [
+                "<aside><h2>Related links</h2></aside>",
+                "<article><h2>Related links</h2></article>",
+                "<main><h2>Related links</h2></main>",
+                "<nav><h2>Related links</h2></nav>"
+              ]
+            }
+          }
+        }
+      },
+      "html-module-5-forms-inputs": {
+        "forms-labels-and-inputs": {
+          "label": "Forms, Labels, and Inputs",
+          "summary": "Connect labels to form controls and understand form structure.",
+          "cards": {
+            "sketch0": {
+              "title": "Start with the Form"
+            },
+            "sketch1": {
+              "title": "Connect Labels to Controls"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_forms_labels_and_inputs_sketch0": {
+              "title": "Try it yourself: Group the controls in a form",
+              "prompt": "Now apply what you just learned in this task. Wrap the existing Name label and input in one form element. Keep the page heading and introduction outside the form, then confirm the field still appears in Preview. Produce the result for group the controls in a form so it reinforces Forms, Labels, and Inputs.",
+              "hint": "The form should contain the interactive controls that belong to the same submission.",
+              "help": {
+                "concept": "The form element groups controls that participate in one submission.",
+                "hint_1": "Open form immediately before the Name label.",
+                "hint_2": "Close form immediately after the Name input."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_forms_labels_and_inputs_sketch1": {
+              "title": "Try it yourself: Connect a label to its input",
+              "prompt": "Now apply what you just learned in this task. Connect the Email address label to the email input. Give the input `id=\"email\"` and give the label `for=\"email\"`. Keep the existing `name` and `type` attributes, then check the field in Preview. Produce the result for connect a label to its input so it reinforces Forms, Labels, and Inputs.",
+              "hint": "The label's for value and the input's id must match exactly.",
+              "help": {
+                "concept": "Matching label for and input id values create an explicit accessible connection.",
+                "hint_1": "Add `for=\"email\"` to the label.",
+                "hint_2": "Add `id=\"email\"` to the input without removing its name or type."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "forms-quiz-label": {
+              "title": "Choose the connected label",
+              "prompt": "Which label is explicitly connected to an input with `id=\"phone\"`?",
+              "hint": "The label's for value should match the input id.",
+              "help": {
+                "concept": "Explicit labels connect with matching for and id values.",
+                "hint_1": "Look for the same identifier on both elements.",
+                "hint_2": "The correct label points to phone."
+              },
+              "options": {
+                "a": "<label for=\"phone\">Phone</label>",
+                "b": "<label id=\"phone\">Phone</label>",
+                "c": "<label name=\"phone\">Phone</label>",
+                "d": "<label type=\"phone\">Phone</label>"
+              }
+            },
+            "forms-quiz-structure": {
+              "title": "Identify sound form structure",
+              "prompt": "Which two statements describe useful form structure?",
+              "hint": "Think about grouping and label connections.",
+              "help": {
+                "concept": "Forms group related controls, and labels should identify the controls they describe.",
+                "hint_1": "One correct statement is about the form boundary.",
+                "hint_2": "The other is about matching for and id values."
+              },
+              "options": {
+                "a": "Place controls for one submission inside a form element.",
+                "b": "Match a label's for value to the related control's id.",
+                "c": "Use a heading instead of a label for every input.",
+                "d": "Give every input the same id so labels are easier to write."
+              }
+            },
+            "forms-quiz-order": {
+              "title": "Arrange a labeled form field",
+              "prompt": "Arrange the tokens so the label and input sit inside one form.",
+              "hint": "Open the form first and close it last.",
+              "help": {
+                "concept": "A labeled control belongs inside its form boundary.",
+                "hint_1": "The label can come before the input.",
+                "hint_2": "The matching for/id connection appears before the closing form."
+              },
+              "tokens": {
+                "t1": "<form>",
+                "t2": "<label for=\"name\">Name</label>",
+                "t3": "<input id=\"name\" name=\"name\" type=\"text\">",
+                "t4": "</form>"
+              }
+            },
+            "forms-quiz-blank": {
+              "title": "Complete the label connection",
+              "prompt": "Choose the input that correctly completes this explicitly labeled field.",
+              "hint": "The id should match `for=\"city\"`.",
+              "help": {
+                "concept": "The label's for value connects to the input id.",
+                "hint_1": "Keep an id of city.",
+                "hint_2": "A name gives the submitted field a useful key."
+              },
+              "template": "<label for=\"city\">City</label>\n[blank1]",
+              "choices": [
+                "<input id=\"city\" name=\"city\" type=\"text\">",
+                "<input id=\"town\" name=\"city\" type=\"text\">",
+                "<input for=\"city\" name=\"city\" type=\"text\">",
+                "<input name=\"city\" type=\"text\">"
+              ]
+            }
+          }
+        },
+        "module-5-signup-form-project": {
+          "label": "Project: Build an Accessible Signup Form",
+          "summary": "Build a complete form with labels, sensible input types, choices, and a submit button.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Brief"
+            },
+            "project": {
+              "title": "Community Workshop Accessible Signup Form"
+            }
+          },
+          "projectSteps": {
+            "module5_signup_step_1": {
+              "title": "Step 1: Add labeled contact fields"
+            },
+            "module5_signup_step_2": {
+              "title": "Step 2: Add accessible signup choices"
+            },
+            "module5_signup_step_3": {
+              "title": "Step 3: Finish the accessible signup form"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module5_signup_step_1": {
+                "title": "Step 1: Add labeled contact fields",
+                "prompt": "Start the module project. In step 1 of 3, Start the signup form. Add one form containing Full name, Email address, and Workshop date fields. Connect every label with matching for/id values, use useful name attributes, and choose text, email, and date input types. Check the three controls in Preview.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Use text, email, and date types and keep all three controls inside one form."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n</body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n</body>\n</html>",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module5_signup_step_2": {
+                "title": "Step 2: Add accessible signup choices",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 3, Continue the same form. Add a Preferred session radio group with Morning and Evening choices, an independent `Send me workshop updates` checkbox, and a Workshop track select with Web basics, Data basics, and Git basics options. Keep all existing fields.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n<!-- Project step 2: Step 2: Add accessible signup choices -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same form -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n<!-- Project step 2: Step 2: Add accessible signup choices -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Continue the same form -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module5_signup_step_3": {
+                "title": "Step 3: Finish the accessible signup form",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 3, Finish the same signup form. Add a labeled textarea asking `What do you want to learn?` with `id=\"goals\"`, `name=\"goals\"`, and `rows=\"5\"`. Then add a `Register for workshop` submit button. Keep every field and choice from the previous steps and inspect the complete form in Preview.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n<!-- Project step 3: Step 3: Finish the accessible signup form -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the same signup form -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n\n    <label for=\"goals\">What do you want to learn?</label>\n    <textarea id=\"goals\" name=\"goals\" rows=\"5\"></textarea>\n\n    <button type=\"submit\">Register for workshop</button>\n  </form>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n<!-- Project step 3: Step 3: Finish the accessible signup form -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Finish the same signup form -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n\n    <label for=\"goals\">What do you want to learn?</label>\n    <textarea id=\"goals\" name=\"goals\" rows=\"5\"></textarea>\n\n    <button type=\"submit\">Register for workshop</button>\n  </form>\n</body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "select-textarea-and-buttons": {
+          "label": "Select, Textarea, and Buttons",
+          "summary": "Collect longer text and choices with accessible controls.",
+          "cards": {
+            "sketch0": {
+              "title": "Offer a Menu of Choices"
+            },
+            "sketch1": {
+              "title": "Collect Longer Text"
+            },
+            "sketch2": {
+              "title": "Finish with a Clear Action"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_select_textarea_and_buttons_sketch0": {
+              "title": "Try it yourself: Create a labeled select menu",
+              "prompt": "Now apply what you just learned in this task. Replace the paragraph with a labeled select menu. Use `id=\"club\"` and `name=\"club\"`, label it `Choose a club`, and add Robotics, Art, and Chess options with lowercase values. Check the menu in Preview. Produce the result for create a labeled select menu so it reinforces Select, Textarea, and Buttons.",
+              "hint": "A select is useful because the choices come from one predefined list.",
+              "help": {
+                "concept": "Select contains option elements and should have a connected visible label.",
+                "hint_1": "Match `for=\"club\"` with `id=\"club\"`.",
+                "hint_2": "Give each option a useful lowercase value."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <p>Choose a club:</p>\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <label for=\"club\">Choose a club</label>\n    <select id=\"club\" name=\"club\">\n      <option value=\"robotics\">Robotics</option>\n      <option value=\"art\">Art</option>\n      <option value=\"chess\">Chess</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <p>Choose a club:</p>\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <label for=\"club\">Choose a club</label>\n    <select id=\"club\" name=\"club\">\n      <option value=\"robotics\">Robotics</option>\n      <option value=\"art\">Art</option>\n      <option value=\"chess\">Chess</option>\n    </select>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_select_textarea_and_buttons_sketch1": {
+              "title": "Try it yourself: Use a textarea for a longer response",
+              "prompt": "Now apply what you just learned in this task. Replace the one-line Question input with a textarea. Keep `id=\"question\"` and `name=\"question\"`, add `rows=\"5\"`, and keep the existing connected label. Compare the larger response area in Preview. Produce the result for use a textarea for a longer response so it reinforces Select, Textarea, and Buttons.",
+              "hint": "A question may need several lines, so use a control intended for longer free-form text.",
+              "help": {
+                "concept": "Textarea is designed for multi-line text and can use the same label connection pattern as an input.",
+                "hint_1": "Remove the input and open a textarea with the same id and name.",
+                "hint_2": "Close the textarea explicitly and add rows=\"5\"."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <input id=\"question\" name=\"question\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <textarea id=\"question\" name=\"question\" rows=\"5\"></textarea>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <input id=\"question\" name=\"question\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <textarea id=\"question\" name=\"question\" rows=\"5\"></textarea>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_select_textarea_and_buttons_sketch2": {
+              "title": "Try it yourself: Add a clear submit button",
+              "prompt": "Now apply what you just learned in this task. Add a button inside the form after the Name input. Give it `type=\"submit\"` and visible text `Send RSVP`. Confirm the button appears in Preview. Produce the result for add a clear submit button so it reinforces Select, Textarea, and Buttons.",
+              "hint": "The final action belongs inside the form with an explicit submit type.",
+              "help": {
+                "concept": "A submit button gives the form a clear action control.",
+                "hint_1": "Add the button after the input and before the closing form.",
+                "hint_2": "Use the exact button text Send RSVP."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n    <button type=\"submit\">Send RSVP</button>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n    <button type=\"submit\">Send RSVP</button>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "select-controls-quiz-long-text": {
+              "title": "Choose a longer-text control",
+              "prompt": "Which control is designed for a multi-line response such as a detailed question?",
+              "hint": "Choose the control made for longer free-form text.",
+              "help": {
+                "concept": "Textarea collects multi-line free-form text.",
+                "hint_1": "Input is normally a one-line control.",
+                "hint_2": "Select is for predefined choices."
+              },
+              "options": {
+                "a": "<textarea>",
+                "b": "<input>",
+                "c": "<select>",
+                "d": "<option>"
+              }
+            },
+            "select-controls-quiz-meaning": {
+              "title": "Identify appropriate controls",
+              "prompt": "Which two statements use these controls appropriately?",
+              "hint": "Match each control to the interaction it represents.",
+              "help": {
+                "concept": "Select is useful for predefined menu choices, and a submit button gives a form a clear submission action.",
+                "hint_1": "One correct statement describes a menu.",
+                "hint_2": "The other describes the final form action."
+              },
+              "options": {
+                "a": "Use select with options for a predefined menu of choices.",
+                "b": "Use a button with type=\"submit\" for the form's submission action.",
+                "c": "Use option by itself outside a select to collect a paragraph.",
+                "d": "Use textarea when the user must pick exactly one radio option."
+              }
+            },
+            "select-controls-quiz-order": {
+              "title": "Arrange a labeled select",
+              "prompt": "Arrange the tokens into a connected select control with two options.",
+              "hint": "The label comes before the select, and the options belong inside select.",
+              "help": {
+                "concept": "A select contains option elements and can be explicitly labeled.",
+                "hint_1": "Connect the label to id track.",
+                "hint_2": "Close the select after both options."
+              },
+              "tokens": {
+                "t1": "<label for=\"track\">Track</label>",
+                "t2": "<select id=\"track\" name=\"track\">",
+                "t3": "<option value=\"web\">Web</option>",
+                "t4": "<option value=\"data\">Data</option>",
+                "t5": "</select>"
+              }
+            },
+            "select-controls-quiz-blank": {
+              "title": "Complete the form action",
+              "prompt": "Choose the control that correctly fills the blank as the form's submission action.",
+              "hint": "Use a button with an explicit submit type.",
+              "help": {
+                "concept": "A submit button communicates and performs the form's submission action.",
+                "hint_1": "The button belongs inside form.",
+                "hint_2": "Choose the option with visible action text."
+              },
+              "template": "<form>\n  <label for=\"name\">Name</label>\n  <input id=\"name\" name=\"name\" type=\"text\">\n  [blank1]\n</form>",
+              "choices": [
+                "<button type=\"submit\">Register</button>",
+                "<button type=\"button\">Register</button>",
+                "<input type=\"text\">",
+                "<option value=\"register\">Register</option>"
+              ]
+            }
+          }
+        },
+        "useful-input-types": {
+          "label": "Useful Input Types",
+          "summary": "Choose text, email, number, date, checkbox, radio, and other input types appropriately.",
+          "cards": {
+            "sketch0": {
+              "title": "Choose a Type that Matches the Data"
+            },
+            "sketch1": {
+              "title": "Use Checkboxes for Independent Choices"
+            },
+            "sketch2": {
+              "title": "Use Radio Buttons for One Choice"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_useful_input_types_sketch0": {
+              "title": "Try it yourself: Choose input types that match the data",
+              "prompt": "Now apply what you just learned in this task. Update the three existing inputs so Email uses `type=\"email\"`, Number of guests uses `type=\"number\"`, and Visit date uses `type=\"date\"`. Keep every label, id, and name unchanged and compare the controls in Preview. Produce the result for choose input types that match the data so it reinforces Useful Input Types.",
+              "hint": "Change only the type values to match the information each field collects.",
+              "help": {
+                "concept": "Email, number, and date input types describe the kind of value expected by each control.",
+                "hint_1": "The Email field should use the email type.",
+                "hint_2": "Use number for the guest count and date for the visit date."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"text\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"text\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"number\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"text\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"text\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"number\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"date\">\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_useful_input_types_sketch1": {
+              "title": "Try it yourself: Add an independent checkbox choice",
+              "prompt": "Now apply what you just learned in this task. Inside the form, add a checkbox with `id=\"reminders\"`, `name=\"reminders\"`, and a label that says `Send me event reminders`. Connect the label with `for=\"reminders\"`, then check the control in Preview. Produce the result for add an independent checkbox choice so it reinforces Useful Input Types.",
+              "hint": "A checkbox is appropriate because this preference can be turned on or off independently.",
+              "help": {
+                "concept": "Checkboxes represent independent selections and need a clear label.",
+                "hint_1": "Create an input with type checkbox.",
+                "hint_2": "Match the input id and the label for value with reminders."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <p>Choose whether you want event reminders.</p>\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <input id=\"reminders\" name=\"reminders\" type=\"checkbox\">\n    <label for=\"reminders\">Send me event reminders</label>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <p>Choose whether you want event reminders.</p>\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <input id=\"reminders\" name=\"reminders\" type=\"checkbox\">\n    <label for=\"reminders\">Send me event reminders</label>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "try_useful_input_types_sketch2": {
+              "title": "Try it yourself: Build one-choice radio options",
+              "prompt": "Now apply what you just learned in this task. Replace the loose Morning and Evening controls with one `fieldset`. Add the legend `Choose a session`, then create two radio inputs that share `name=\"session\"`. Give them unique ids and values of `morning` and `evening`, and connect each label to its input. Produce the result for build one-choice radio options so it reinforces Useful Input Types.",
+              "hint": "Radio buttons share a name when they represent one choice from the same group.",
+              "help": {
+                "concept": "A radio group uses one shared name, unique ids and values, and a group description.",
+                "hint_1": "Wrap the choices in fieldset and describe them with legend.",
+                "hint_2": "Use id/value morning for one radio and id/value evening for the other; both names are session."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <p>Choose a session:</p>\n    <label>Morning</label>\n    <input type=\"radio\">\n    <label>Evening</label>\n    <input type=\"radio\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <fieldset>\n      <legend>Choose a session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <p>Choose a session:</p>\n    <label>Morning</label>\n    <input type=\"radio\">\n    <label>Evening</label>\n    <input type=\"radio\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <fieldset>\n      <legend>Choose a session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "input-types-quiz-email": {
+              "title": "Choose an email field",
+              "prompt": "Which input type best matches a field that collects an email address?",
+              "hint": "Choose the type that describes the expected value.",
+              "help": {
+                "concept": "Input types give the browser useful information about the value being collected.",
+                "hint_1": "Text can collect many values, but a more specific type exists.",
+                "hint_2": "Use the dedicated email type for an email address."
+              },
+              "options": {
+                "a": "type=\"email\"",
+                "b": "type=\"text\"",
+                "c": "type=\"number\"",
+                "d": "type=\"date\""
+              }
+            },
+            "input-types-quiz-choices": {
+              "title": "Distinguish checkbox and radio behavior",
+              "prompt": "Which two statements are correct?",
+              "hint": "Think about whether choices are independent or mutually exclusive.",
+              "help": {
+                "concept": "Checkboxes represent independent selections; radio buttons with one shared name represent one choice from a group.",
+                "hint_1": "One correct answer is about checkboxes.",
+                "hint_2": "The other is about radio buttons that share a name."
+              },
+              "options": {
+                "a": "Use checkboxes when several independent options may all be selected.",
+                "b": "Give radio buttons the same name when they represent one choice from a group.",
+                "c": "Use a date input for an email address.",
+                "d": "Give every radio button the same id."
+              }
+            },
+            "input-types-quiz-radio-order": {
+              "title": "Arrange an accessible radio group",
+              "prompt": "Arrange the tokens into a radio group with a group label and one connected option.",
+              "hint": "The fieldset wraps the group and legend describes it.",
+              "help": {
+                "concept": "Fieldset and legend identify the radio group, while label for connects to the unique input id.",
+                "hint_1": "Start with fieldset and legend.",
+                "hint_2": "The input and its label belong before the closing fieldset."
+              },
+              "tokens": {
+                "t1": "<fieldset>",
+                "t2": "<legend>Meal</legend>",
+                "t3": "<input id=\"veg\" name=\"meal\" type=\"radio\" value=\"veg\">",
+                "t4": "<label for=\"veg\">Vegetarian</label>",
+                "t5": "</fieldset>"
+              }
+            },
+            "input-types-quiz-blank": {
+              "title": "Complete an independent preference",
+              "prompt": "Choose the control that should fill the blank for an optional newsletter preference.",
+              "hint": "The preference can be selected independently.",
+              "help": {
+                "concept": "Checkbox is appropriate for an independent on/off preference.",
+                "hint_1": "The id should match the label's for value.",
+                "hint_2": "Keep a useful name so the preference has a key."
+              },
+              "template": "[blank1]\n<label for=\"newsletter\">Email me the newsletter</label>",
+              "choices": [
+                "<input id=\"newsletter\" name=\"newsletter\" type=\"checkbox\">",
+                "<input id=\"newsletter\" name=\"newsletter\" type=\"radio\">",
+                "<input id=\"newsletter\" name=\"newsletter\" type=\"date\">",
+                "<input id=\"newsletter\" name=\"newsletter\" type=\"number\">"
+              ]
+            }
+          }
+        }
+      },
+      "html-module-6-final-capstone": {
+        "final-html-personal-site-capstone": {
+          "label": "Capstone: Build a Complete Personal Website",
+          "summary": "Build one cumulative portfolio website that grows from one page into a complete semantic, accessible multi-page site.",
+          "cards": {
+            "sketch0": {
+              "title": "Capstone Brief"
+            },
+            "project": {
+              "title": "Complete Growing Multi-Page Personal Portfolio"
+            }
+          },
+          "projectSteps": {
+            "module6_capstone_step_1": {
+              "title": "Step 1: Build the Home page"
+            },
+            "module6_capstone_step_2": {
+              "title": "Step 2: Add the About page and first navigation"
+            },
+            "module6_capstone_step_3": {
+              "title": "Step 3: Add Projects, relative paths, and the image"
+            },
+            "module6_capstone_step_4": {
+              "title": "Step 4: Add structured content and semantic structure"
+            },
+            "module6_capstone_step_5": {
+              "title": "Step 5: Add the Contact page and accessible form"
+            },
+            "module6_capstone_step_6": {
+              "title": "Step 6: Review and validate the whole website"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "module6_capstone_step_1": {
+                "title": "Step 1: Build the Home page",
+                "prompt": "Start the final capstone project. In step 1 of 6, Work only in `index.html`. Do not create any other files yet.\n\nReplace the starter content with this exact visible text:\n\n- Main heading: `Jordan Lee`\n- First paragraph: `Aspiring web developer building practical projects for the community.`\n- Second paragraph: `This portfolio introduces my background, projects, and contact information.`\n\nKeep the page title exactly `Jordan Lee | Home`. Preview the page, then click Check Answer.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Do not create About, Projects, Contact, or image files yet."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Build the Home page for Jordan's portfolio.</p>\n</body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n</body>\n</html>",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Build the Home page for Jordan's portfolio.</p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module6_capstone_step_2": {
+                "title": "Step 2: Add the About page and first navigation",
+                "prompt": "Continue the final capstone project from the previous working step. In step 2 of 6, Keep your completed Home page and add one new file: `about.html`.\n\nIn `index.html`, add navigation with exactly these links:\n\n- `Home` → `index.html`\n- `About` → `about.html`\n\nThen add this exact sentence after the existing Home paragraphs:\n\n`Read more on the About page.`\n\nMake only the words `About page` link to `about.html`.\n\nIn `about.html`, use:\n\n- Page title: `Jordan Lee | About`\n- Main heading: `About Jordan`\n- The same `Home` and `About` navigation\n- First paragraph: `I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.`\n- Second paragraph: `My current goal is to build clear, accessible websites before moving on to CSS.`\n\nDo not create Projects, Contact, or image files yet.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n<!-- Capstone step 2: Step 2: Add the About page and first navigation -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Keep your completed Home page and add one new file: `about.html` -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n  </nav>\n\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n  <p>Read more on the <a href=\"about.html\">About page</a>.</p>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n<!-- Capstone step 2: Step 2: Add the About page and first navigation -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Keep your completed Home page and add one new file: `about.html` -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n  </nav>\n\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n  <p>Read more on the <a href=\"about.html\">About page</a>.</p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <h1>About Jordan</h1>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n  </nav>\n\n  <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n  <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module6_capstone_step_3": {
+                "title": "Step 3: Add Projects, relative paths, and the image",
+                "prompt": "Continue the final capstone project from the previous working step. In step 3 of 6, Keep `index.html` and `about.html`. Add these two project items now:\n\n- New page: `projects/portfolio.html`\n- Image asset: `images/profile.png`\n\nUpdate the navigation on Home and About to exactly:\n\n- `Home`\n- `About`\n- `Projects`\n\nOn root pages, `Projects` must link to `projects/portfolio.html`.\n\nIn `index.html`, display `images/profile.png` with exact alt text:\n\n`Portrait of Jordan Lee`\n\nThen add this exact Home sentence:\n\n`See what I am building on the Projects page.`\n\nMake only `Projects page` link to `projects/portfolio.html`.\n\nIn `projects/portfolio.html`, use:\n\n- Page title: `Jordan Lee | Projects`\n- Main heading: `Projects`\n- Navigation links:\n  - `Home` → `../index.html`\n  - `About` → `../about.html`\n  - `Projects` → `portfolio.html`\n- Image path: `../images/profile.png`\n- Exact image alt text: `Portrait of Jordan Lee beside a portfolio project`\n- Paragraph: `I use small community-focused projects to practice HTML structure and accessibility.`\n\nDo not create `contact.html` yet.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n  </nav>\n\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n  <p>Read more on the <a href=\"about.html\">About page</a>.</p>\n<!-- Capstone step 3: Step 3: Add Projects, relative paths, and the image -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Keep `index.html` and `about.html` -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n    <a href=\"projects/portfolio.html\">Projects</a>\n  </nav>\n\n  <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n  <p>Read more on the <a href=\"about.html\">About page</a>.</p>\n  <p>See what I am building on the <a href=\"projects/portfolio.html\">Projects page</a>.</p>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n  </nav>\n\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n  <p>Read more on the <a href=\"about.html\">About page</a>.</p>\n<!-- Capstone step 3: Step 3: Add Projects, relative paths, and the image -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Keep `index.html` and `about.html` -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <h1>About Jordan</h1>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n  </nav>\n\n  <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n  <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n    <a href=\"projects/portfolio.html\">Projects</a>\n  </nav>\n\n  <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n  <p>Read more on the <a href=\"about.html\">About page</a>.</p>\n  <p>See what I am building on the <a href=\"projects/portfolio.html\">Projects page</a>.</p>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <h1>About Jordan</h1>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n    <a href=\"projects/portfolio.html\">Projects</a>\n  </nav>\n\n  <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n  <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n</body>\n</html>\n"
+                  },
+                  "projects_portfolio_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Projects</title>\n</head>\n<body>\n  <h1>Projects</h1>\n\n  <nav>\n    <a href=\"../index.html\">Home</a>\n    <a href=\"../about.html\">About</a>\n    <a href=\"portfolio.html\">Projects</a>\n  </nav>\n\n  <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n\n  <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module6_capstone_step_4": {
+                "title": "Step 4: Add structured content and semantic structure",
+                "prompt": "Continue the final capstone project from the previous working step. In step 4 of 6, Improve the same Home, About, and Projects pages. Do not add any new files in this milestone.\n\nUse `header`, `nav`, `main`, and `footer` on all three pages.\n\nOn Home, add:\n\n- Section heading: `Welcome`\n- Exact sentence: `Explore my skills and project progress.`\n- Link only `skills` to `about.html`\n- Link only `project progress` to `projects/portfolio.html`\n- Footer text: `Jordan Lee's HTML portfolio.`\n\nOn About, add these exact headings and list items:\n\n- `My learning path`\n- `Skills I'm practicing`\n- `Semantic HTML structure`\n- `Accessible forms and labels`\n- `Multi-page navigation and relative paths`\n\nUse this exact footer sentence:\n\n`Return to the portfolio home page.`\n\nMake only `portfolio home page` link to `index.html`.\n\nOn Projects, use an `article` and add:\n\n- Heading: `What I'm building`\n- Heading: `Project progress`\n\nCreate this exact table:\n\n| Project | Focus | Status |\n| Community Event Page | Semantic content | Complete |\n| Workshop Signup | Accessible forms | Complete |\n\nThen add this exact sentence:\n\n`For HTML reference material, I use MDN Web Docs.`\n\nMake only `MDN Web Docs` link to `https://developer.mozilla.org/`.\n\nUse footer text:\n\n`Jordan Lee's project portfolio.`",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n    <a href=\"projects/portfolio.html\">Projects</a>\n  </nav>\n\n  <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n  <p>Read more on the <a href=\"about.html\">About page</a>.</p>\n  <p>See what I am building on the <a href=\"projects/portfolio.html\">Projects page</a>.</p>\n<!-- Capstone step 4: Step 4: Add structured content and semantic structure -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Improve the same Home, About, and Projects pages -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <h1>Jordan Lee</h1>\n  <p>Aspiring web developer building practical projects for the community.</p>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n    <a href=\"projects/portfolio.html\">Projects</a>\n  </nav>\n\n  <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n\n  <p>This portfolio introduces my background, projects, and contact information.</p>\n  <p>Read more on the <a href=\"about.html\">About page</a>.</p>\n  <p>See what I am building on the <a href=\"projects/portfolio.html\">Projects page</a>.</p>\n<!-- Capstone step 4: Step 4: Add structured content and semantic structure -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Improve the same Home, About, and Projects pages -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <h1>About Jordan</h1>\n\n  <nav>\n    <a href=\"index.html\">Home</a>\n    <a href=\"about.html\">About</a>\n    <a href=\"projects/portfolio.html\">Projects</a>\n  </nav>\n\n  <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n  <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n</body>\n</html>\n"
+                  },
+                  "projects_portfolio_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Projects</title>\n</head>\n<body>\n  <h1>Projects</h1>\n\n  <nav>\n    <a href=\"../index.html\">Home</a>\n    <a href=\"../about.html\">About</a>\n    <a href=\"portfolio.html\">Projects</a>\n  </nav>\n\n  <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n\n  <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "projects_portfolio_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Projects</title>\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th>Project</th>\n            <th>Focus</th>\n            <th>Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module6_capstone_step_5": {
+                "title": "Step 5: Add the Contact page and accessible form",
+                "prompt": "Continue the final capstone project from the previous working step. In step 5 of 6, Keep every existing file and add one new file now: `contact.html`.\n\nAdd `Contact` to the navigation on every page.\n\nUse these exact Contact paths:\n\n- From Home and About: `contact.html`\n- From Projects: `../contact.html`\n\nIn `index.html`, add this exact sentence:\n\n`Have a project idea or learning opportunity? Send me a message.`\n\nMake only `Send me a message` link to `contact.html`.\n\nBuild `contact.html` with:\n\n- Page title: `Jordan Lee | Contact`\n- Main heading: `Contact Jordan`\n- Section heading: `Start a conversation`\n- Paragraph: `Share a project idea or learning opportunity.`\n\nUse this exact form content:\n\n- Label: `Name` → text input\n- Label: `Email address` → email input\n- Group legend: `Reason for contacting me`\n- Radio choice: `Project idea`\n- Radio choice: `Learning opportunity`\n- Label: `Message` → textarea with 5 rows\n- Submit button: `Send message`\n\nUse footer text:\n\n`Jordan Lee's HTML portfolio.`",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n<!-- Capstone step 5: Step 5: Add the Contact page and accessible form -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Keep every existing file and add one new file now: `contact.html` -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n<!-- Capstone step 5: Step 5: Add the Contact page and accessible form -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Keep every existing file and add one new file now: `contact.html` -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "projects_portfolio_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Projects</title>\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th>Project</th>\n            <th>Focus</th>\n            <th>Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "projects_portfolio_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Projects</title>\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th>Project</th>\n            <th>Focus</th>\n            <th>Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "contact_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Contact</title>\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\">\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\">\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\"></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              },
+              "module6_capstone_step_6": {
+                "title": "Step 6: Review and validate the whole website",
+                "prompt": "Continue the final capstone project from the previous working step. In step 6 of 6, Do not add any new files. Review the complete five-file website.\n\nAdd these exact meta descriptions:\n\n- Home: `Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.`\n- About: `About Jordan Lee and the HTML skills currently being practiced.`\n- Projects: `Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.`\n- Contact: `Contact Jordan Lee about project ideas and learning opportunities.`\n\nOn Projects, add `scope=\"col\"` to the three table headers:\n\n- `Project`\n- `Focus`\n- `Status`\n\nOn Contact, add `required` to:\n\n- Name\n- Email address\n- Message\n\nThen use Preview to navigate:\n\n`Home → About → Projects → Contact`\n\nFrom Projects, also test the links back to Home and About and confirm the image still loads from `../images/profile.png`.\n\nDo not change the exact visible content from earlier milestones.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n<!-- Capstone step 6: Step 6: Review and validate the whole website -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Do not add any new files -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n",
+                "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n<!-- Capstone step 6: Step 6: Review and validate the whole website -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Do not add any new files -->\n<!-- Add only the focused change for this step inside the existing work. -->\n  </body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "projects_portfolio_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Projects</title>\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th>Project</th>\n            <th>Focus</th>\n            <th>Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "contact_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Jordan Lee | Contact</title>\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\">\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\">\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\"></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p>This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "about_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "projects_portfolio_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  },
+                  "contact_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "sketches": {
@@ -51671,6 +54782,254 @@ const messages: Record<string, any> = {
           }
         }
       }
+    },
+    "html": {
+      "html-module-1-first-web-pages": {
+        "document-structure": {
+          "document-shell": {
+            "title": "A complete HTML page has a document-level structure",
+            "bodyMarkdown": "A browser page is more than the visible words inside it. A complete HTML **document** has a standard outer structure that identifies the document type, wraps the page in an `html` element, separates document information into `head`, and places visible page content in `body`. This structure gives the browser clear context before it renders the page.\n\nA small document shell looks like this:\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n  <head></head>\n  <body></body>\n</html>\n```\n\nRead it **line by line**. `<!DOCTYPE html>` tells the browser to use modern HTML. The opening `<html>` element wraps the document and `lang=\"en\"` identifies its primary language. The `head` holds information about the document, while the `body` holds content that belongs on the rendered page.\n\nIndentation makes the nesting easier for people to read, even though browsers can often parse less tidy markup. Building this shell correctly gives every later element a sensible home."
+          },
+          "head-information": {
+            "title": "The head stores information about the page",
+            "bodyMarkdown": "The **head** stores document information that helps the browser understand or describe the page rather than ordinary page content for the visitor. Two beginner essentials are a character encoding declaration and a page title. The encoding helps text display consistently, while the title names the document in browser surfaces such as the tab.\n\nFor example:\n\n```html\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Jordan's Portfolio</title>\n</head>\n```\n\nStep by step, `<head>` opens the document-information region, the `meta` element declares UTF-8 character encoding, and `<title>` provides the document title. None of these lines replaces the visible heading you might place in the body. A page title and an `h1` have different jobs.\n\nKeep this distinction clear: the head describes the document to the browser and related tools; the body contains the page content a visitor reads and interacts with."
+          },
+          "body-content": {
+            "title": "The body contains the page content the visitor sees",
+            "bodyMarkdown": "The **body** contains the document content that the browser renders as the page: headings, paragraphs, links, images, forms, and other visible or interactive structures. Once the document shell is in place, most of the HTML you write while building a simple page will live between `<body>` and `</body>`.\n\nHere is a complete worked example:\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Study Notes</title>\n  </head>\n  <body>\n    <h1>Study Notes</h1>\n    <p>Things I want to remember.</p>\n  </body>\n</html>\n```\n\nRead the structure line by line from the outside inward: document type, root element, head information, then body content. Notice that the text in the title and the text in the heading can be similar, but they serve different parts of the document. When your page behaves strangely, checking this outer structure is a useful first debugging habit."
+          }
+        },
+        "elements-tags-and-attributes": {
+          "element-parts": {
+            "title": "An HTML element combines tags with its content",
+            "bodyMarkdown": "An HTML **element** is a meaningful piece of the document represented by markup. Many elements use an opening tag, some content, and a closing tag. The tag name tells the browser what kind of structure the content represents. Reading those three parts together makes HTML much easier to debug.\n\nA paragraph element looks like this:\n\n```html\n<p>Practice makes markup easier to read.</p>\n```\n\nThe opening `<p>` starts the paragraph, the sentence is the content, and `</p>` closes the paragraph. The slash in the closing tag matters because it tells the browser where that element ends.\n\nSome elements, such as `meta`, do not wrap visible text and therefore do not use the same opening-content-closing pattern. You will learn those exceptions as you meet them. For now, build the habit of matching the tags for elements that do wrap content and keeping the intended text between them."
+          },
+          "nesting-elements": {
+            "title": "Nesting shows which content belongs together",
+            "bodyMarkdown": "HTML **nesting** means placing one element inside another so the document structure shows a parent-and-child relationship. Correct nesting keeps the markup understandable and prevents closing tags from crossing over one another. The inner element should finish before the outer element closes.\n\nHere is a worked example:\n\n```html\n<p>I am learning <strong>semantic HTML</strong> today.</p>\n```\n\nRead it **line by line** as one nested structure: the paragraph begins first, the `strong` element begins and ends inside that paragraph, and then the paragraph closes. The words “semantic HTML” remain part of the paragraph while receiving stronger importance from the nested element.\n\nWhen markup becomes larger, indentation can make nesting easier to see. The browser may recover from some mistakes, but you should not depend on recovery. Balanced, properly nested elements make the source easier to reason about and give later accessibility and styling work a stronger foundation."
+          },
+          "attributes-add-information": {
+            "title": "Attributes add extra information to an element",
+            "bodyMarkdown": "An HTML **attribute** adds information to an element from inside its opening tag. Attributes usually have a name and a value, and the value is commonly written in quotes. You have already seen useful examples: `lang=\"en\"` describes the document language and `charset=\"UTF-8\"` describes the character encoding.\n\nAnother simple example is a title attribute on a paragraph:\n\n```html\n<p title=\"A short introduction\">Welcome to my page.</p>\n```\n\nStep by step, `p` is still the element name, `title` is the attribute name, and the quoted text is the attribute value. The visible paragraph content stays between the opening and closing tags.\n\nAttributes belong in the opening tag, not between the element's visible words. Different elements support different useful attributes, and later lessons will introduce attributes such as `href`, `src`, and `alt` when you build links and images. For now, practice recognizing the pattern `name=\"value\"` and keeping attributes attached to the element they describe."
+          }
+        },
+        "how-html-and-the-browser-work": {
+          "html-is-page-structure": {
+            "title": "HTML describes what belongs on a web page",
+            "bodyMarkdown": "**HTML** (HyperText Markup Language) describes the structure and meaning of content that a browser can turn into a page. The HTML file is the source; the browser reads that source, understands elements such as headings and paragraphs, and renders a visual result. This is why changing one tag in `index.html` can immediately change what you see in the browser preview.\n\nA tiny page can start with one heading:\n\n```html\n<h1>Welcome to my page</h1>\n```\n\nThe angle-bracket markup tells the browser that the words are a top-level heading. The browser normally shows that heading larger and more prominent than ordinary text because the element carries meaning. HTML is not a drawing tool: you describe the content structure, and the browser decides how that structure is presented by default.\n\nAs you work in ZoeSkoul, keep the source and the preview connected in your mind. When you add or change markup, look at the preview and ask, “What did the browser understand from the structure I wrote?”"
+          },
+          "browser-parses-elements": {
+            "title": "The browser parses elements before it renders them",
+            "bodyMarkdown": "A browser **parses** HTML by reading the markup and building an internal document structure from the elements it finds. Opening and closing tags mark where an element begins and ends, while the text between them becomes the element's content. That structure is what the browser uses to create the page you see.\n\nHere is a worked example with two elements:\n\n```html\n<h1>My Recipe Book</h1>\n<p>Recipes I want to try.</p>\n```\n\nRead it **line by line**. The first line creates the page's main heading. The second line creates a paragraph beneath it. The browser does not display the literal `<h1>` and `<p>` characters as ordinary text; it interprets them as markup and displays their content according to the role of each element.\n\nThis source-to-page cycle is the core feedback loop of the course: write markup, inspect the rendered result, then improve the structure. You do not need to memorize many tags at once. Start by noticing how one clear element produces one clear piece of page structure."
+          },
+          "structure-before-style": {
+            "title": "HTML gives the page structure before styling or behavior",
+            "bodyMarkdown": "HTML **represents** the content layer of a web page: headings identify topics and paragraphs hold supporting prose. Later, CSS can change appearance and JavaScript can add behavior, but a strong page begins with HTML that still makes sense on its own. In this course, correctness comes from the markup and its meaning, not from decorative styling.\n\nFor example, a simple content hierarchy can use two heading levels and a paragraph:\n\n```html\n<h1>Student Portfolio</h1>\n<h2>Projects</h2>\n<p>Projects I am proud of.</p>\n```\n\nRead it **line by line**. `<h1>` names the page, `<h2>` introduces a smaller topic within that page, and `<p>` supplies supporting text. The order tells the reader what is most important before adding any styling.\n\nThe live preview lets you see the immediate result, while Check Answer verifies the required source structure. Both views matter: one shows what a visitor sees, and the other confirms that the page is built from the requested HTML."
+          }
+        },
+        "module-1-first-page-project": {
+          "project-roadmap": {
+            "title": "Build a learning-profile page for a student-success team",
+            "bodyMarkdown": "You are a **junior web developer** helping a student-success team prepare a small learning-profile page for a new-coder orientation. The team needs one clean file—`index.html`—that they can open in a browser and review without any extra setup. Your deliverable is a browser-ready page that clearly shows what the learner is studying and demonstrates sound HTML structure.\n\nYou will build that deliverable in three progressive steps. First, create the document foundation in `index.html`. Next, add the visible heading and paragraph content the team asked for. Finally, improve the page structure with a second heading and nested emphasis while keeping the document valid. Each step continues the same file, so preserve the working markup from the previous milestone rather than starting over.\n\nUse the browser preview after every change as if you were checking the page before handing it to the team. The preview should remain understandable throughout the project: first the document has a reliable foundation, then the reviewer sees useful content, and finally the page gains clearer structure and emphasis. **Check Answer** verifies the required HTML source for each milestone.\n\nThe goal is not decoration. The finished `index.html` is the team's review copy and should demonstrate that you can organize a modern HTML document, separate head information from body content, use headings and paragraphs, keep tags balanced, and nest elements correctly. Later CSS and JavaScript courses can build on this same web-development workflow."
+          }
+        }
+      },
+      "html-module-2-links-images-paths": {
+        "images-and-alt-text": {
+          "img-src-and-alt": {
+            "title": "An image needs src and meaningful alt text",
+            "bodyMarkdown": "The `<img>` element embeds an image. `src` tells the browser where the image file is, and `alt` provides a text alternative.\n\n```html\n<img src=\"images/campus.jpg\" alt=\"Students crossing the campus quad\">\n```\n\nThis line has two jobs: the source path tells the browser which file to load, while the alternative text communicates the picture's meaningful content when the image cannot be seen. `<img>` is a void element, so it does not wrap content with a separate closing tag."
+          },
+          "alt-describes-purpose": {
+            "title": "Alt text should communicate the image's purpose",
+            "bodyMarkdown": "Useful alt text explains information that matters in context.\n\n```html\n<img src=\"images/lab.jpg\" alt=\"Two students building a sensor in the engineering lab\">\n```\n\nThis line pairs the image file with a concise description of what matters in the scene. Avoid alternatives such as `image`, `photo`, or a raw filename; a learner who cannot see the picture should still understand why it is present."
+          },
+          "image-paths-follow-the-same-rules": {
+            "title": "Image paths follow the same path rules",
+            "bodyMarkdown": "The `src` attribute follows the same path rules used by link destinations.\n\n```html\n<img src=\"avatar.png\" alt=\"Student club avatar\">\n<img src=\"media/avatar.png\" alt=\"Student club avatar\">\n```\n\nLine by line: **First**, `avatar.png` means the image is in the same folder as the current HTML document. **Second**, `media/avatar.png` means the browser must enter the `media` child folder before loading the file. The alt text can stay the same because both examples describe the same picture while demonstrating two different file locations."
+          }
+        },
+        "links-and-anchors": {
+          "anchor-anatomy": {
+            "title": "A link needs a destination and useful text",
+            "bodyMarkdown": "The anchor element creates a link. Its `href` attribute stores the destination, while the text between the tags tells the learner what the link does.\n\n```html\n<a href=\"https://example.com/advising\">Advising resources</a>\n```\n\n`href` is an attribute on the opening `<a>` tag. The visible phrase **Advising resources** is better than vague text such as \"click here\" because it explains the destination."
+          },
+          "fragment-links": {
+            "title": "Fragment links jump to an id on the same page",
+            "bodyMarkdown": "A fragment destination begins with `#` and matches an `id` value elsewhere in the document.\n\n```html\n<a href=\"#schedule\">Jump to the schedule</a>\n\n<h2 id=\"schedule\">Tutoring schedule</h2>\n<p>Drop-in tutoring runs Monday through Thursday.</p>\n```\n\nLine by line: **First**, the anchor points to `#schedule`, which names a location on the current page. **Second**, the `<h2>` creates that destination by using `id=\"schedule\"`. **Third**, the paragraph supplies the content that belongs under the heading. The browser can now connect the link to the matching target without loading another HTML file."
+          },
+          "link-destinations-and-text": {
+            "title": "Choose destinations and link text deliberately",
+            "bodyMarkdown": "A full web address such as `https://example.org/...` points to an external destination. A fragment such as `#clubs` points within the current page.\n\n```html\n<p>\n  <a href=\"#clubs\">Jump to student clubs</a>\n</p>\n\n<p>\n  <a href=\"https://example.org/library-guide\">Visit the library guide</a>\n</p>\n```\n\nLine by line: **First**, the opening paragraph groups a same-page navigation link. **Second**, that anchor uses a fragment destination so the browser stays on the current document. **Third**, the next paragraph groups a separate external link. **Fourth**, the final anchor uses a complete web address, so the destination does not depend on the current file's folder. Meaningful anchor text tells the learner why each destination is useful."
+          }
+        },
+        "module-2-profile-page-project": {
+          "project-brief": {
+            "title": "Project brief: Student Profile Page",
+            "bodyMarkdown": "### Project Brief\n\n**Scenario:** A student organization needs a small profile website that can become part of its member directory.\n\n**Your role:** Junior web developer.\n\n**Workspace:** Use the Full IDE Explorer. The project grows across `index.html`, `about.html`, `projects/robotics.html`, and a supplied `images/profile.png` asset.\n\n**Deliverable:** A navigable profile site where every relative path resolves to a real workspace file and the supplied image appears with meaningful alternative text.\n\nComplete the three steps in order. Each step reconstructs the previous milestone as its canonical starter state."
+          }
+        },
+        "relative-and-absolute-paths": {
+          "relative-paths-start-from-current-location": {
+            "title": "Relative paths start from the current file",
+            "bodyMarkdown": "A relative path tells the browser where a destination is **from the current HTML file**.\n\n```html\n<a href=\"schedule.html\">Tutoring schedule</a>\n<a href=\"pages/events.html\">Campus events</a>\n```\n\nLine by line: **First**, `schedule.html` tells the browser to look in the same folder as the current page. **Second**, `pages/events.html` tells the browser to enter the `pages` child folder before opening `events.html`. Relative paths are useful when related site files move together because the path is based on their folder relationship."
+          },
+          "absolute-urls-name-complete-destinations": {
+            "title": "Absolute URLs name a complete destination",
+            "bodyMarkdown": "An absolute URL includes the scheme and host, so the browser has the full destination.\n\n```html\n<a href=\"https://example.org/campus-map\">Campus map</a>\n```\n\nThis line gives the browser a complete external destination: the scheme is `https`, the host is `example.org`, and `/campus-map` identifies the resource on that site. Unlike a relative path, the destination does not depend on the current HTML file's folder."
+          },
+          "dot-dot-moves-up-one-folder": {
+            "title": "Use ../ to move up one folder",
+            "bodyMarkdown": "`../` means “move to the parent folder.”\n\nIf `profile.html` is inside `students/`, this link:\n\n```html\n<a href=\"../home.html\">Site home</a>\n```\n\nThis line first moves from `students/` to its parent folder, then asks the browser to open `home.html` there. Read a relative path from left to right: move through the folder relationship first, then arrive at the target file."
+          }
+        }
+      },
+      "html-module-3-lists-tables-content": {
+        "module-3-content-page-project": {
+          "project-brief": {
+            "title": "Project brief: Neighborhood Learning Day",
+            "bodyMarkdown": "### Project Brief\n\n**Scenario:** A neighborhood learning center needs one clear HTML page for its Saturday Learning Day.\n\n**Your role:** Junior web developer preparing the public information page.\n\n**Workspace:** Work only in `index.html` and use the live browser preview after each meaningful change.\n\n**Deliverable:** A structured event guide that uses unordered and ordered lists, nested topic groups, and a semantic schedule table with a caption and clear headers.\n\nBuild the page in three cumulative steps. Each new step starts from the exact working result of the previous one."
+          }
+        },
+        "nested-lists": {
+          "nest-inside-item": {
+            "title": "Nest a child list inside its parent list item",
+            "bodyMarkdown": "Nested lists describe hierarchy. Put the child list inside the `<li>` that owns it.\n\n```html\n<ul>\n  <li>Robotics\n    <ul>\n      <li>Sensors</li>\n      <li>Programming</li>\n    </ul>\n  </li>\n</ul>\n```\n\nSensors and Programming belong specifically to Robotics.\n\nBreak the nested example down line by line: the outer `<ul>` begins the main list, then `<li>Robotics` begins the parent item. Before that parent item closes, a second `<ul>` begins its child list. Sensors and Programming are child `<li>` elements. After the inner `</ul>` closes, the parent `</li>` closes, preserving the parent-child relationship.\n"
+          },
+          "mix-list-meaning": {
+            "title": "Choose the child list type from its own meaning",
+            "bodyMarkdown": "A nested list does not have to use the same type as its parent. A parent `<ul>` can contain an `<ol>` when the child items are steps.\n\nThe outer list answers “which groups?” while the inner list can answer “in what order?”"
+          },
+          "readable-hierarchy": {
+            "title": "Close each nested structure where it belongs",
+            "bodyMarkdown": "Indentation helps humans see nesting even though the browser follows the element structure. Keep a child list inside its parent `<li>`, then close the parent item before moving to its sibling.\n\nClear nesting makes complex content easier to read and debug."
+          }
+        },
+        "ordered-and-unordered-lists": {
+          "list-meaning": {
+            "title": "Use an unordered list when sequence does not matter",
+            "bodyMarkdown": "A list groups related items so the browser and reader understand that the items belong together.\n\nUse `<ul>` when sequence is not important, such as supplies, features, or names. Each item belongs in `<li>`.\n\n```html\n<ul>\n  <li>Notebook</li>\n  <li>Pen</li>\n</ul>\n```\n\nThe bullets are a browser default; the important HTML meaning is that these are related list items.\n\nRead this example line by line: the opening `<ul>` starts one unordered group. The first `<li>` creates the Notebook item, the second `<li>` creates the Pen item, and the closing `</ul>` ends the group. The browser may draw bullets, but the HTML structure is what says these values belong to the same unordered set.\n"
+          },
+          "ordered-sequence": {
+            "title": "Use an ordered list for a sequence",
+            "bodyMarkdown": "Use `<ol>` when changing the order would change the meaning: instructions, rankings, or steps.\n\n```html\n<ol>\n  <li>Check in</li>\n  <li>Find your seat</li>\n  <li>Open your notebook</li>\n</ol>\n```\n\nThe browser numbers the items because the sequence is part of the content.\n\nRead the ordered-list example line by line: `<ol>` opens a sequence whose order matters. Each `<li>` adds one step: Check in first, Find your seat second, and Open your notebook third. The closing `</ol>` finishes the sequence. Moving a list item would change the meaning of the instructions.\n"
+          },
+          "list-item-structure": {
+            "title": "Put list items inside the correct list container",
+            "bodyMarkdown": "`<ul>` and `<ol>` are containers. Their direct items use `<li>`.\n\nA page can use both list types when different groups have different meanings. Use an unordered list for a set of things and an ordered list for steps."
+          }
+        },
+        "tables-and-table-structure": {
+          "table-data": {
+            "title": "Use a table for row-and-column relationships",
+            "bodyMarkdown": "Tables are for data where values relate across rows and columns. Use `<table>` for the structure, `<tr>` for each row, `<th>` for header cells, and `<td>` for data cells.\n\nA list is better for a simple collection; a table is better when each row shares the same fields."
+          },
+          "caption-headers": {
+            "title": "Use a caption and clear header cells",
+            "bodyMarkdown": "`<caption>` gives the table a meaningful name. Header cells written with `<th>` identify what each column represents.\n\n```html\n<table>\n  <caption>Weekly meetings</caption>\n  <tr><th>Club</th><th>Day</th></tr>\n  <tr><td>Robotics</td><td>Tuesday</td></tr>\n</table>\n```\n\nRead the table example line by line: `<table>` opens the data structure and `<caption>` names the data. The first `<tr>` creates the header row, where two `<th>` cells label Club and Day. The next `<tr>` creates one data row, and its `<td>` cells place Robotics under Club and Tuesday under Day. The closing `</table>` ends the table.\n"
+          },
+          "thead-tbody": {
+            "title": "Separate headers from data with thead and tbody",
+            "bodyMarkdown": "`<thead>` groups header rows and `<tbody>` groups the main data rows. This makes a larger table easier to understand.\n\nUse one `<tr>` per row and keep the same logical columns from row to row."
+          }
+        }
+      },
+      "html-module-4-semantic-accessible-layout": {
+        "headings-and-accessible-structure": {
+          "heading-hierarchy": {
+            "title": "Choose heading levels from content hierarchy",
+            "bodyMarkdown": "Heading levels communicate structure. Start with the page's main `<h1>`, use `<h2>` for major sections, and use `<h3>` for a subsection inside an h2 section. Choose levels from hierarchy rather than desired text size.\n\n```html\n<h1>Community Guide</h1>\n<h2>Events</h2>\n<h3>Saturday Workshops</h3>\n```\n\nRead this example line by line: h1 names the whole page, h2 starts a major Events section, and h3 names a subsection that belongs inside Events. The numbers describe nesting, not decoration."
+          },
+          "meaningful-text-alternatives": {
+            "title": "Use a useful text alternative for informative images",
+            "bodyMarkdown": "You already used `alt` with images earlier in the course. Here the focus is how that text alternative fits into an accessible article: describe the information the image contributes, not the file name or the word “image.”\n\n```html\n<figure>\n  <img src=\"garden-team.jpg\" alt=\"Students planting herbs in raised garden beds\">\n  <figcaption>Students prepare the herb garden for spring.</figcaption>\n</figure>\n```\n\nRead this example line by line: figure groups the media, img carries a concise meaningful text alternative, figcaption provides visible supporting context, and figure closes the group. If an image is purely decorative, an empty `alt=\"\"` tells assistive technology that it adds no content."
+          }
+        },
+        "module-4-article-page-project": {
+          "project-brief": {
+            "title": "Project brief: Eastside Garden Journal",
+            "bodyMarkdown": "### Project Brief\n\n**Scenario:** The Eastside Community Center needs a clear article page about its neighborhood garden program.\n\n**Your role:** Junior web developer preparing the story for the community website.\n\n**Workspace:** Work in `index.html` and use the live browser preview after each meaningful change.\n\n**Deliverable:** A semantic article page with page landmarks, navigation, article and section structure, complementary information, a logical heading hierarchy, and a meaningful image text alternative.\n\nBuild the page in three cumulative steps. Each new step starts from the exact working result of the previous one."
+          }
+        },
+        "page-landmarks": {
+          "major-page-regions": {
+            "title": "Use header, main, and footer for the page's major regions",
+            "bodyMarkdown": "Semantic landmarks tell browsers and assistive technology what a large region of the page is for. Use `<header>` for introductory content, `<main>` for the page's primary content, and `<footer>` for closing information.\n\n```html\n<header>\n  <h1>Neighborhood Bulletin</h1>\n</header>\n<main>\n  <p>Today's community updates.</p>\n</main>\n<footer>\n  <p>Community Center</p>\n</footer>\n```\n\nRead this example line by line: the header introduces the page, the main element contains the unique primary content, and the footer closes the page with supporting information. These elements add meaning even when the browser's default appearance stays simple."
+          },
+          "navigation-landmark": {
+            "title": "Use nav for a major set of navigation links",
+            "bodyMarkdown": "Use `<nav>` around a major group of links that helps people move through the page or site. A single ordinary link does not need its own nav element.\n\n```html\n<nav>\n  <a href=\"#news\">News</a>\n  <a href=\"#events\">Events</a>\n</nav>\n```\n\nRead the example line by line: nav opens the navigation region, both anchors belong to that region, and the closing nav ends the group. The link text should tell the reader where each link goes."
+          }
+        },
+        "sections-articles-and-asides": {
+          "article-content": {
+            "title": "Use article for content that can stand on its own",
+            "bodyMarkdown": "Use `<article>` for a self-contained piece of content such as a news story, blog post, review, or forum post.\n\n```html\n<article>\n  <h2>Science Club Launches Weather Balloon</h2>\n  <p>The team collected temperature data above the city.</p>\n</article>\n```\n\nRead this example line by line: article opens the independent story, the heading names that story, the paragraph supplies its content, and the closing article ends the self-contained item. Do not choose article just because you need a generic box."
+          },
+          "section-content": {
+            "title": "Use section for a thematic group of related content",
+            "bodyMarkdown": "Use `<section>` when a part of the page forms a meaningful theme and usually deserves its own heading.\n\n```html\n<section>\n  <h2>Upcoming Events</h2>\n  <p>Open lab — Wednesday</p>\n</section>\n```\n\nRead this example line by line: section starts the themed group, the h2 names the theme, the paragraph belongs to that theme, and the closing section finishes the group. If no semantic meaning exists, do not replace every generic wrapper with section automatically."
+          },
+          "aside-content": {
+            "title": "Use aside for complementary content",
+            "bodyMarkdown": "Use `<aside>` for information related to nearby content but not required to understand the main content. Examples include related links, a short author note, or a sidebar reminder.\n\n```html\n<aside>\n  <h2>Related workshop</h2>\n  <p>Join the study-skills session on Tuesday.</p>\n</aside>\n```\n\nRead this example line by line: aside opens the complementary region, the heading identifies it, the paragraph provides related information, and the closing aside ends that secondary content."
+          }
+        }
+      },
+      "html-module-5-forms-inputs": {
+        "forms-labels-and-inputs": {
+          "form-groups-controls": {
+            "title": "Use form to group controls that belong to one submission",
+            "bodyMarkdown": "A `<form>` groups the controls that belong to one user submission. The form element describes the boundary of the interaction; the controls inside it collect the values.\n\n```html\n<form>\n  <label for=\"student-name\">Name</label>\n  <input id=\"student-name\" name=\"student_name\" type=\"text\">\n</form>\n```\n\nRead this example line by line: `form` opens the form region, the label names the field, the input collects the value, and the closing `form` ends the group. For this course, the browser preview shows the form itself; no server is required."
+          },
+          "explicit-label-connection": {
+            "title": "Match label for with the control id",
+            "bodyMarkdown": "A visible label should be programmatically connected to its control. Give the input an `id`, then use that same value in the label's `for` attribute. This makes the label useful to mouse, touch, keyboard, and assistive-technology users.\n\n```html\n<label for=\"email\">Email address</label>\n<input id=\"email\" name=\"email\" type=\"email\">\n```\n\nRead the example line by line: the label points to `email`, the input owns `id=\"email\"`, and the matching values create the connection. The `name` identifies the value when form data is submitted."
+          }
+        },
+        "module-5-signup-form-project": {
+          "project-brief": {
+            "title": "Project brief: Community Workshop Signup",
+            "bodyMarkdown": "A neighborhood learning center is preparing registration for a free community workshop and needs a clear signup page before registration opens.\n\nYou are the web page author responsible for the attendee signup experience. Work in the single file `index.html`.\n\nYour deliverable is a complete, accessible **Community Workshop Signup** page that the center can preview for attendees. It must collect contact information and the workshop date, let attendees choose a preferred session and workshop track, offer an optional updates checkbox, collect a longer learning-goals response, and provide a submit button.\n\nYou will build that deliverable progressively: start with identity and contact fields, add meaningful choices, then finish with the longer-response field and submission action.\n\n```html\n<form>\n  <label for=\"full-name\">Full name</label>\n  <input id=\"full-name\" name=\"full_name\" type=\"text\">\n</form>\n```\n\nRead this starter idea line by line: the `form` creates the submission group, the `label` names the field, and the matching input `id` connects the control to that label. Each project step will extend the same `index.html` rather than starting over."
+          }
+        },
+        "select-textarea-and-buttons": {
+          "select-control": {
+            "title": "Use select and option for a compact choice list",
+            "bodyMarkdown": "Use `<select>` when a person should choose from a predefined menu. Each `<option>` provides one choice, and the select should have a connected label just like other form controls.\n\n```html\n<label for=\"track\">Workshop track</label>\n<select id=\"track\" name=\"track\">\n  <option value=\"web\">Web</option>\n  <option value=\"data\">Data</option>\n</select>\n```\n\nRead this example line by line: the label points to the select id, the select names the submitted field, and each option provides a visible choice plus a value."
+          },
+          "textarea-control": {
+            "title": "Use textarea for multi-line free-form responses",
+            "bodyMarkdown": "A one-line input is not ideal for a longer comment, question, or description. Use `<textarea>` for multi-line free-form text, and connect its visible label with `for` and `id`.\n\n```html\n<label for=\"goals\">Learning goals</label>\n<textarea id=\"goals\" name=\"goals\" rows=\"4\"></textarea>\n```\n\nRead the example line by line: the label identifies the response field, textarea opens the multi-line control, the id/name describe that control, and the closing textarea completes it. `rows` suggests a useful visible height."
+          },
+          "submit-button": {
+            "title": "Use a submit button for the form's submission action",
+            "bodyMarkdown": "A form needs a clear action control when the user is ready to send the entered values. Use a `<button type=\"submit\">` with text that describes the action.\n\n```html\n<button type=\"submit\">Register</button>\n```\n\nRead this example line by line: button creates the clickable control, `type=\"submit\"` gives it the form-submission behavior, and `Register` provides a clear visible name. This HTML course focuses on the form markup, not on a server that receives the data."
+          }
+        },
+        "useful-input-types": {
+          "typed-data-controls": {
+            "title": "Use text, email, number, and date for the value you expect",
+            "bodyMarkdown": "The `type` attribute tells the browser what kind of value a one-line input is meant to collect. Use `text` for ordinary short text, `email` for an email address, `number` for numeric input, and `date` for a calendar date.\n\n```html\n<label for=\"email\">Email</label>\n<input id=\"email\" name=\"email\" type=\"email\">\n<label for=\"guests\">Guests</label>\n<input id=\"guests\" name=\"guests\" type=\"number\">\n```\n\nRead this example line by line: the first label/input pair collects an email address, and the second pair collects a numeric guest count. Choosing a meaningful type gives the browser more context about the expected value."
+          },
+          "checkbox-controls": {
+            "title": "Use checkbox when an option can be turned on or off independently",
+            "bodyMarkdown": "A checkbox represents an independent yes/no or on/off choice. Each checkbox should have its own label, and multiple checkboxes may all be selected at the same time.\n\n```html\n<input id=\"newsletter\" name=\"newsletter\" type=\"checkbox\">\n<label for=\"newsletter\">Send me the newsletter</label>\n```\n\nRead the example line by line: the checkbox creates the independent choice, its id is `newsletter`, and the matching label explains exactly what selecting it means."
+          },
+          "radio-controls": {
+            "title": "Give related radio buttons one shared name and a group label",
+            "bodyMarkdown": "Radio buttons are useful when the learner should choose exactly one option from a group. Give every radio button in the group the same `name`, give each one a unique `id` and `value`, and use `fieldset` with `legend` to describe the group.\n\n```html\n<fieldset>\n  <legend>Session</legend>\n  <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n  <label for=\"morning\">Morning</label>\n  <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n  <label for=\"evening\">Evening</label>\n</fieldset>\n```\n\nRead this example line by line: fieldset groups the choices, legend names the group, both radio inputs share `name=\"session\"`, and each input has its own label through a unique id."
+          }
+        }
+      },
+      "html-module-6-final-capstone": {
+        "final-html-personal-site-capstone": {
+          "capstone-project-brief": {
+            "title": "Build one portfolio website, one milestone at a time",
+            "bodyMarkdown": "A local career-readiness mentor wants a polished personal portfolio website that can be reviewed before you begin learning CSS.\n\nYou are the **beginner web developer** responsible for the whole website.\n\nThis is **one cumulative project**, not a collection of separate exercises. The workspace will grow only when the project needs a new file:\n\n1. Start with `index.html` only.\n2. Add `about.html` when the About page is introduced.\n3. Add `projects/portfolio.html` and `images/profile.png` when Projects and image paths are introduced.\n4. Keep those same files while you add structured content and semantic markup.\n5. Add `contact.html` only when you build the contact form.\n6. Finish by reviewing and validating the complete site.\n\nOnce a file appears, it stays in every later milestone.\n\nEvery task gives you the **exact visible text, labels, link text, table values, and form wording** to use. You are practicing HTML structure and integration, not inventing portfolio copy.\n\nYour final deliverable is one complete multi-page portfolio website that combines document structure, navigation, relative paths, an image asset, lists, a table, semantic markup, accessibility, and a form."
+          }
+        }
+      }
     }
   },
   "subjects": {
@@ -51748,6 +55107,11 @@ const messages: Record<string, any> = {
       "title": "SQL for beginners",
       "description": "Learn SQL from the ground up with beginner-friendly lessons on databases, SELECT, WHERE, sorting, and practical querying",
       "moreComingSoon": "More SQL lessons are coming soon."
+    },
+    "html": {
+      "title": "HTML Foundations",
+      "description": "A practical beginner HTML course covering documents, text, links, images, lists, tables, semantic structure, forms, metadata, accessibility, and a complete single-page capstone.",
+      "moreComingSoon": "More HTML Foundations lessons are coming soon."
     }
   },
   "modules": {
@@ -52691,6 +56055,88 @@ const messages: Record<string, any> = {
         "why": [
           "Real datasets often contain inconsistent text, grouped choices, and missing values",
           "These filtering tools make SQL much more useful for realistic search and cleanup tasks"
+        ]
+      }
+    },
+    "html": {
+      "html-module-1-first-web-pages": {
+        "title": "First Web Pages",
+        "description": "Build confidence with first web pages through visible browser-preview practice.",
+        "outcomes": [
+          "Understand HTML as document structure that a browser parses and renders.",
+          "Build a page with doctype, html, head, title, and body.",
+          "Read opening tags, closing tags, nested content, and attributes."
+        ],
+        "why": [
+          "Builds confidence with first web pages.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-2-links-images-paths": {
+        "title": "Links, Images, and Paths",
+        "description": "Build confidence with links, images, and paths through visible browser-preview practice.",
+        "outcomes": [
+          "Create links with anchor elements and useful link text.",
+          "Understand how URLs and local paths point to resources.",
+          "Add images with src and meaningful alt text."
+        ],
+        "why": [
+          "Builds confidence with links, images, and paths.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-3-lists-tables-content": {
+        "title": "Lists, Tables, and Structured Content",
+        "description": "Build confidence with lists, tables, and structured content through visible browser-preview practice.",
+        "outcomes": [
+          "Choose ordered or unordered lists based on content meaning.",
+          "Represent grouped and hierarchical information with nested lists.",
+          "Use table, caption, thead, tbody, tr, th, and td for tabular data."
+        ],
+        "why": [
+          "Builds confidence with lists, tables, and structured content.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-4-semantic-accessible-layout": {
+        "title": "Semantic and Accessible Page Structure",
+        "description": "Build confidence with semantic and accessible page structure through visible browser-preview practice.",
+        "outcomes": [
+          "Use header, nav, main, and footer to describe major page regions.",
+          "Choose semantic content containers instead of generic wrappers when meaning exists.",
+          "Create a logical heading hierarchy and meaningful text alternatives."
+        ],
+        "why": [
+          "Builds confidence with semantic and accessible page structure.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-5-forms-inputs": {
+        "title": "Forms and User Input",
+        "description": "Build confidence with forms and user input through visible browser-preview practice.",
+        "outcomes": [
+          "Connect labels to form controls and understand form structure.",
+          "Choose text, email, number, date, checkbox, radio, and other input types appropriately.",
+          "Collect longer text and choices with accessible controls."
+        ],
+        "why": [
+          "Builds confidence with forms and user input.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "html-module-6-final-capstone": {
+        "title": "Final Capstone: Personal Website",
+        "description": "Bring the full HTML Foundations skill set together in one growing, cumulative, semantic, accessible multi-page website.",
+        "outcomes": [
+          "Build one cumulative website whose files are introduced only when the project needs them.",
+          "Connect pages with meaningful navigation, relative links, and correctly referenced image assets.",
+          "Combine semantic structure, exact content, links, images, lists, tables, and a form appropriately.",
+          "Review document metadata, nesting, headings, labels, alt text, link text, and relative paths before submission.",
+          "Use the live browser preview and source validation to verify the complete final website."
+        ],
+        "why": [
+          "Builds confidence with final capstone: personal website.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     }
@@ -53948,6 +57394,118 @@ const messages: Record<string, any> = {
             "Lists and ranges",
             "Missing data",
             "Search and cleanup practice"
+          ]
+        }
+      }
+    },
+    "html": {
+      "html-module-1-first-web-pages": {
+        "html-html-module-1-lessons": {
+          "title": "First Web Pages",
+          "description": "Learn how html and the browser work, the html document structure, elements, tags, and attributes through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "How HTML and the Browser Work",
+            "The HTML Document Structure",
+            "Elements, Tags, and Attributes"
+          ]
+        },
+        "html-html-module-1-project": {
+          "title": "Module Project",
+          "description": "Learn project: build your first complete page through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build Your First Complete Page"
+          ]
+        }
+      },
+      "html-module-2-links-images-paths": {
+        "html-html-module-2-lessons": {
+          "title": "Links, Images, and Paths",
+          "description": "Learn links and anchors, relative and absolute paths, images and alt text through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Links and Anchors",
+            "Relative and Absolute Paths",
+            "Images and Alt Text"
+          ]
+        },
+        "html-html-module-2-project": {
+          "title": "Module Project",
+          "description": "Learn project: build a profile page through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build a Profile Page"
+          ]
+        }
+      },
+      "html-module-3-lists-tables-content": {
+        "html-html-module-3-lessons": {
+          "title": "Lists, Tables, and Structured Content",
+          "description": "Learn ordered and unordered lists, nested lists, tables and table structure through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Ordered and Unordered Lists",
+            "Nested Lists",
+            "Tables and Table Structure"
+          ]
+        },
+        "html-html-module-3-project": {
+          "title": "Module Project",
+          "description": "Learn project: build a structured content page through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build a Structured Content Page"
+          ]
+        }
+      },
+      "html-module-4-semantic-accessible-layout": {
+        "html-html-module-4-lessons": {
+          "title": "Semantic and Accessible Page Structure",
+          "description": "Learn page landmarks, sections, articles, and asides, headings and accessible structure through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Page Landmarks",
+            "Sections, Articles, and Asides",
+            "Headings and Accessible Structure"
+          ]
+        },
+        "html-html-module-4-project": {
+          "title": "Module Project",
+          "description": "Learn project: build a semantic article page through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build a Semantic Article Page"
+          ]
+        }
+      },
+      "html-module-5-forms-inputs": {
+        "html-html-module-5-lessons": {
+          "title": "Forms and User Input",
+          "description": "Learn forms, labels, and inputs, useful input types, select, textarea, and buttons through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Forms, Labels, and Inputs",
+            "Useful Input Types",
+            "Select, Textarea, and Buttons"
+          ]
+        },
+        "html-html-module-5-project": {
+          "title": "Module Project",
+          "description": "Learn project: build an accessible signup form through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Project: Build an Accessible Signup Form"
+          ]
+        }
+      },
+      "html-module-6-final-capstone": {
+        "html-html-module-6-capstone": {
+          "title": "Final Capstone",
+          "description": "Learn capstone: build a complete personal website through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Capstone: Build a Complete Personal Website"
           ]
         }
       }

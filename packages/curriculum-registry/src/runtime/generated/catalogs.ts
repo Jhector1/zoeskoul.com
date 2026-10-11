@@ -142,6 +142,28 @@ export const CATALOG_MANIFESTS: Record<string, any> =
         "family": "data"
       }
     }
+  },
+  "web": {
+    "catalog": {
+      "slug": "web",
+      "order": 25,
+      "title": "Web Development",
+      "defaultSubjectSlug": "html",
+      "description": "Hands-on web development beginning with HTML, followed by styling, browser programming, APIs, and full-stack projects.",
+      "imageAlt": "Web development catalog cover",
+      "status": "active",
+      "subjectSlugs": [
+        "html"
+      ],
+      "meta": {
+        "family": "web-development",
+        "featured": true
+      }
+    },
+    "subjectSlugs": [
+      "html"
+    ],
+    "defaultSubjectSlug": "html"
   }
 };
 
@@ -161,5 +183,6 @@ export const SUBJECT_CATALOG_SLUGS: Record<string, string> =
   "sql-v2": "sql",
   "sql-analysis-reporting": "sql",
   "multi-table-sql": "sql",
-  "sql-data-management": "sql"
+  "sql-data-management": "sql",
+  "html": "web"
 };
