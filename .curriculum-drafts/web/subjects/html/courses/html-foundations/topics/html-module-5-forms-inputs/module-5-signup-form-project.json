@@ -1,0 +1,184 @@
+{
+  "title": "Project: Build an Accessible Signup Form",
+  "summary": "Build a complete form with labels, sensible input types, choices, and a submit button.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "project-brief",
+      "cardTitle": "Project Brief",
+      "title": "Project brief: Community Workshop Signup",
+      "bodyMarkdown": "A neighborhood learning center is preparing registration for a free community workshop and needs a clear signup page before registration opens.\n\nYou are the web page author responsible for the attendee signup experience. Work in the single file `index.html`.\n\nYour deliverable is a complete, accessible **Community Workshop Signup** page that the center can preview for attendees. It must collect contact information and the workshop date, let attendees choose a preferred session and workshop track, offer an optional updates checkbox, collect a longer learning-goals response, and provide a submit button.\n\nYou will build that deliverable progressively: start with identity and contact fields, add meaningful choices, then finish with the longer-response field and submission action.\n\n```html\n<form>\n  <label for=\"full-name\">Full name</label>\n  <input id=\"full-name\" name=\"full_name\" type=\"text\">\n</form>\n```\n\nRead this starter idea line by line: the `form` creates the submission group, the `label` names the field, and the matching input `id` connects the control to that label. Each project step will extend the same `index.html` rather than starting over."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "module5-signup-step-1",
+      "kind": "code_input",
+      "title": "Step 1: Add labeled contact fields",
+      "prompt": "Start the signup form. Add one form containing Full name, Email address, and Workshop date fields. Connect every label with matching for/id values, use useful name attributes, and choose text, email, and date input types. Check the three controls in Preview.",
+      "hint": "Build the form boundary first, then create one connected label/input pair for each value.",
+      "help": {
+        "concept": "The first project step establishes accessible form structure and meaningful input types.",
+        "hint_1": "Use ids full-name, email, and workshop-date with matching label for values.",
+        "hint_2": "Use text, email, and date types and keep all three controls inside one form."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<form\\b[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']full-name[\"\\'][^>]*>\\s*Full name\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']full-name[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']full_name[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']text[\"\\'])[^>]*>.*</form>",
+          "path": "index.html",
+          "message": "Add the labeled Full name field inside the form.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Add the labeled Email address field with type email.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']workshop-date[\"\\'][^>]*>\\s*Workshop date\\s*</label>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']workshop-date[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']workshop_date[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']date[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Add the labeled Workshop date field with type date.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "module5-signup-step-2",
+      "kind": "code_input",
+      "title": "Step 2: Add accessible signup choices",
+      "prompt": "Continue the same form. Add a Preferred session radio group with Morning and Evening choices, an independent `Send me workshop updates` checkbox, and a Workshop track select with Web basics, Data basics, and Git basics options. Keep all existing fields.",
+      "hint": "Use one fieldset/legend for the radio group, a checkbox for the independent update preference, and a select for the predefined track list.",
+      "help": {
+        "concept": "This step combines three different choice patterns according to their meaning.",
+        "hint_1": "The Morning and Evening radios share the name session but have unique ids and values.",
+        "hint_2": "Use a connected updates checkbox and a labeled track select with three options."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Preferred session\\s*</legend>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']morning[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])[^>]*>.*<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']evening[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])[^>]*>.*</fieldset>",
+          "path": "index.html",
+          "message": "Add the Preferred session radio group.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']updates[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']updates[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']checkbox[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']updates[\"\\'][^>]*>\\s*Send me workshop updates\\s*</label>",
+          "path": "index.html",
+          "message": "Add and label the independent workshop updates checkbox.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']track[\"\\'][^>]*>\\s*Workshop track\\s*</label>.*<select\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']track[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']track[\"\\'])[^>]*>.*<option\\b[^>]*value\\s*=\\s*[\"\\']web[\"\\'][^>]*>\\s*Web basics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']data[\"\\'][^>]*>\\s*Data basics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']git[\"\\'][^>]*>\\s*Git basics\\s*</option>.*</select>",
+          "path": "index.html",
+          "message": "Add the labeled Workshop track select with all three options.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "module5-signup-step-3",
+      "kind": "code_input",
+      "title": "Step 3: Finish the accessible signup form",
+      "prompt": "Finish the same signup form. Add a labeled textarea asking `What do you want to learn?` with `id=\"goals\"`, `name=\"goals\"`, and `rows=\"5\"`. Then add a `Register for workshop` submit button. Keep every field and choice from the previous steps and inspect the complete form in Preview.",
+      "hint": "The final additions are the longer free-form response and the explicit submission action.",
+      "help": {
+        "concept": "Textarea handles the longer learning-goals response, and the submit button provides the form action.",
+        "hint_1": "Connect the goals label with for/id goals and use a five-row textarea.",
+        "hint_2": "Place the submit button inside the form after the textarea."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n\n    <label for=\"goals\">What do you want to learn?</label>\n    <textarea id=\"goals\" name=\"goals\" rows=\"5\"></textarea>\n\n    <button type=\"submit\">Register for workshop</button>\n  </form>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']goals[\"\\'][^>]*>\\s*What do you want to learn\\?\\s*</label>.*<textarea\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']goals[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']goals[\"\\'])(?=[^>]*\\brows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>\\s*</textarea>",
+          "path": "index.html",
+          "message": "Add the labeled five-row learning goals textarea.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Register for workshop\\s*</button>",
+          "path": "index.html",
+          "message": "Add the Register for workshop submit button.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Workshop Signup</title>\n</head>\n<body>\n  <h1>Community Workshop Signup</h1>\n  <p>Register for a free neighborhood learning workshop.</p>\n\n  <form>\n    <label for=\"full-name\">Full name</label>\n    <input id=\"full-name\" name=\"full_name\" type=\"text\">\n\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"workshop-date\">Workshop date</label>\n    <input id=\"workshop-date\" name=\"workshop_date\" type=\"date\">\n\n    <fieldset>\n      <legend>Preferred session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n\n    <input id=\"updates\" name=\"updates\" type=\"checkbox\">\n    <label for=\"updates\">Send me workshop updates</label>\n\n    <label for=\"track\">Workshop track</label>\n    <select id=\"track\" name=\"track\">\n      <option value=\"web\">Web basics</option>\n      <option value=\"data\">Data basics</option>\n      <option value=\"git\">Git basics</option>\n    </select>\n\n    <label for=\"goals\">What do you want to learn?</label>\n    <textarea id=\"goals\" name=\"goals\" rows=\"5\"></textarea>\n\n    <button type=\"submit\">Register for workshop</button>\n  </form>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Community Workshop Accessible Signup Form",
+    "stepIds": [
+      "module5-signup-step-1",
+      "module5-signup-step-2",
+      "module5-signup-step-3"
+    ]
+  }
+}
