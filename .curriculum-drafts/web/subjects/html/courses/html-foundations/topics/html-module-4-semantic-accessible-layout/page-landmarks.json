@@ -1,0 +1,208 @@
+{
+  "title": "Page Landmarks",
+  "summary": "Use header, nav, main, and footer to describe the major regions of a page.",
+  "minutes": 16,
+  "sketchBlocks": [
+    {
+      "id": "major-page-regions",
+      "cardTitle": "Name the Major Regions",
+      "title": "Use header, main, and footer for the page's major regions",
+      "bodyMarkdown": "Semantic landmarks tell browsers and assistive technology what a large region of the page is for. Use `<header>` for introductory content, `<main>` for the page's primary content, and `<footer>` for closing information.\n\n```html\n<header>\n  <h1>Neighborhood Bulletin</h1>\n</header>\n<main>\n  <p>Today's community updates.</p>\n</main>\n<footer>\n  <p>Community Center</p>\n</footer>\n```\n\nRead this example line by line: the header introduces the page, the main element contains the unique primary content, and the footer closes the page with supporting information. These elements add meaning even when the browser's default appearance stays simple."
+    },
+    {
+      "id": "navigation-landmark",
+      "cardTitle": "Mark the Navigation",
+      "title": "Use nav for a major set of navigation links",
+      "bodyMarkdown": "Use `<nav>` around a major group of links that helps people move through the page or site. A single ordinary link does not need its own nav element.\n\n```html\n<nav>\n  <a href=\"#news\">News</a>\n  <a href=\"#events\">Events</a>\n</nav>\n```\n\nRead the example line by line: nav opens the navigation region, both anchors belong to that region, and the closing nav ends the group. The link text should tell the reader where each link goes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "landmarks-try-regions",
+      "kind": "code_input",
+      "title": "Turn page content into major landmarks",
+      "prompt": "Organize the Riverside Community News page with header, main, and footer. Keep the title and introduction in header, the Lead story content in main, and the contact line in footer. Check that all content still appears in Preview.",
+      "hint": "Choose each landmark from the role of the content, not from its visual position.",
+      "help": {
+        "concept": "Header, main, and footer identify the introduction, primary content, and closing information of a page.",
+        "hint_1": "Wrap the title and introduction together in header.",
+        "hint_2": "Place the Lead story in main and the contact line in footer."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <h1>Riverside Community News</h1>\n  <p>Stories from around the neighborhood.</p>\n  <h2>Lead story</h2>\n  <p>The library opened a new evening study room.</p>\n  <p>Contact: news@riverside.example</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <header>\n    <h1>Riverside Community News</h1>\n    <p>Stories from around the neighborhood.</p>\n  </header>\n  <main>\n    <h2>Lead story</h2>\n    <p>The library opened a new evening study room.</p>\n  </main>\n  <footer>\n    <p>Contact: news@riverside.example</p>\n  </footer>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<header\\b[^>]*>.*<h1\\b[^>]*>\\s*Riverside Community News\\s*</h1>.*Stories from around the neighborhood\\..*</header>",
+          "path": "index.html",
+          "message": "Put the page title and introduction inside header.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<main\\b[^>]*>.*<h2\\b[^>]*>\\s*Lead story\\s*</h2>.*The library opened a new evening study room\\..*</main>",
+          "path": "index.html",
+          "message": "Put the Lead story inside main.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<footer\\b[^>]*>.*Contact:\\s*news@riverside\\.example.*</footer>",
+          "path": "index.html",
+          "message": "Put the contact line inside footer.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <h1>Riverside Community News</h1>\n  <p>Stories from around the neighborhood.</p>\n  <h2>Lead story</h2>\n  <p>The library opened a new evening study room.</p>\n  <p>Contact: news@riverside.example</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <header>\n    <h1>Riverside Community News</h1>\n    <p>Stories from around the neighborhood.</p>\n  </header>\n  <main>\n    <h2>Lead story</h2>\n    <p>The library opened a new evening study room.</p>\n  </main>\n  <footer>\n    <p>Contact: news@riverside.example</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "landmarks-try-nav",
+      "kind": "code_input",
+      "title": "Create a navigation landmark",
+      "prompt": "Replace the paragraph that holds the Showcase and Gallery links with one nav element. Keep both links and their href values, then confirm they still jump to the two headings in Preview.",
+      "hint": "The two links form one major navigation group.",
+      "help": {
+        "concept": "A nav element gives a major set of navigation links a clear landmark.",
+        "hint_1": "Remove the paragraph wrapper around the two links.",
+        "hint_2": "Place both existing anchor elements inside one nav element."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <p><a href=\"#showcase\">Showcase</a> | <a href=\"#gallery\">Gallery</a></p>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <nav>\n      <a href=\"#showcase\">Showcase</a>\n      <a href=\"#gallery\">Gallery</a>\n    </nav>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<nav\\b[^>]*>\\s*<a\\b[^>]*href\\s*=\\s*[\\\"']#showcase[\\\"'][^>]*>\\s*Showcase\\s*</a>\\s*<a\\b[^>]*href\\s*=\\s*[\\\"']#gallery[\\\"'][^>]*>\\s*Gallery\\s*</a>\\s*</nav>",
+          "path": "index.html",
+          "message": "Place both navigation links inside one nav element.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <p><a href=\"#showcase\">Showcase</a> | <a href=\"#gallery\">Gallery</a></p>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <nav>\n      <a href=\"#showcase\">Showcase</a>\n      <a href=\"#gallery\">Gallery</a>\n    </nav>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "landmarks-quiz-main",
+      "kind": "single_choice",
+      "title": "Choose the primary-content landmark",
+      "prompt": "Which element should contain the unique primary content of a page?",
+      "hint": "Think about the region a screen reader can identify as the page's main content.",
+      "help": {
+        "concept": "The main element identifies the page's primary content.",
+        "hint_1": "Header introduces the page.",
+        "hint_2": "Use main for the central content that is unique to this page."
+      },
+      "options": [
+        "<main>",
+        "<header>",
+        "<footer>",
+        "<nav>"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "landmarks-quiz-meaning",
+      "kind": "multi_choice",
+      "title": "Identify meaningful landmark uses",
+      "prompt": "Which two statements use page landmarks appropriately?",
+      "hint": "Choose based on the role of each region.",
+      "help": {
+        "concept": "Semantic landmarks describe page regions by purpose.",
+        "hint_1": "One correct choice identifies navigation.",
+        "hint_2": "The other identifies closing information."
+      },
+      "options": [
+        "Use <nav> for a major group of links that moves around the page or site.",
+        "Use <footer> for closing information such as authorship or contact details.",
+        "Use <main> around every paragraph on the page.",
+        "Use <header> only when you want text to appear bold."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "landmarks-quiz-order",
+      "kind": "drag_reorder",
+      "title": "Arrange a simple landmark structure",
+      "prompt": "Arrange the tokens into a page structure where nav belongs inside header, followed by main and footer.",
+      "hint": "Open and close header before the main content begins.",
+      "help": {
+        "concept": "Landmarks can be nested when their roles make sense.",
+        "hint_1": "The navigation group may sit inside the page header.",
+        "hint_2": "Main and footer come after the header closes."
+      },
+      "tokens": [
+        "<header>",
+        "<nav>...</nav>",
+        "</header>",
+        "<main>...</main>",
+        "<footer>...</footer>"
+      ],
+      "correctOrder": [
+        "<header>",
+        "<nav>...</nav>",
+        "</header>",
+        "<main>...</main>",
+        "<footer>...</footer>"
+      ]
+    },
+    {
+      "id": "landmarks-quiz-blank",
+      "kind": "fill_blank_choice",
+      "title": "Complete the primary-content region",
+      "prompt": "Choose the element that should fill the blank around the page's unique article content.",
+      "hint": "Only one choice identifies the page's primary content.",
+      "help": {
+        "concept": "Main identifies the dominant content of the document.",
+        "hint_1": "Nav is for navigation links.",
+        "hint_2": "Choose a complete main element."
+      },
+      "template": "<body>\n  [blank1]\n</body>",
+      "choices": [
+        "<main><article>Community story</article></main>",
+        "<nav><article>Community story</article></nav>",
+        "<footer><article>Community story</article></footer>",
+        "<header><article>Community story</article></header>"
+      ],
+      "correctValue": "<main><article>Community story</article></main>"
+    }
+  ]
+}
