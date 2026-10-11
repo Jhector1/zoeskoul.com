@@ -1,0 +1,280 @@
+{
+  "title": "Tables and Table Structure",
+  "summary": "Use table, caption, thead, tbody, tr, th, and td for tabular data.",
+  "minutes": 16,
+  "sketchBlocks": [
+    {
+      "id": "table-data",
+      "cardTitle": "Rows and Columns",
+      "title": "Use a table for row-and-column relationships",
+      "bodyMarkdown": "Tables are for data where values relate across rows and columns. Use `<table>` for the structure, `<tr>` for each row, `<th>` for header cells, and `<td>` for data cells.\n\nA list is better for a simple collection; a table is better when each row shares the same fields."
+    },
+    {
+      "id": "caption-headers",
+      "cardTitle": "Explain the Table",
+      "title": "Use a caption and clear header cells",
+      "bodyMarkdown": "`<caption>` gives the table a meaningful name. Header cells written with `<th>` identify what each column represents.\n\n```html\n<table>\n  <caption>Weekly meetings</caption>\n  <tr><th>Club</th><th>Day</th></tr>\n  <tr><td>Robotics</td><td>Tuesday</td></tr>\n</table>\n```\n\nRead the table example line by line: `<table>` opens the data structure and `<caption>` names the data. The first `<tr>` creates the header row, where two `<th>` cells label Club and Day. The next `<tr>` creates one data row, and its `<td>` cells place Robotics under Club and Tuesday under Day. The closing `</table>` ends the table.\n"
+    },
+    {
+      "id": "thead-tbody",
+      "cardTitle": "Group Table Sections",
+      "title": "Separate headers from data with thead and tbody",
+      "bodyMarkdown": "`<thead>` groups header rows and `<tbody>` groups the main data rows. This makes a larger table easier to understand.\n\nUse one `<tr>` per row and keep the same logical columns from row to row."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "tables-try-basic",
+      "kind": "code_input",
+      "title": "Turn meeting data into a table",
+      "prompt": "Replace the two meeting paragraphs with a table captioned Weekly club meetings. Add Club and Day headers, then one row for Robotics Tuesday and one row for Art Thursday.",
+      "hint": "Each club is one row with the same two columns.",
+      "help": {
+        "concept": "A table represents repeated records that share the same fields.",
+        "hint_1": "Start with table and caption, then add a header row.",
+        "hint_2": "Use th for headers and td for the two club rows."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <p>Robotics - Tuesday</p>\n  <p>Art - Thursday</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <caption>Weekly club meetings</caption>\n    <tr>\n      <th>Club</th>\n      <th>Day</th>\n    </tr>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<caption\\b[^>]*>\\s*Weekly club meetings\\s*</caption>",
+          "path": "index.html",
+          "message": "Add the requested table caption.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<th\\b[^>]*>\\s*Club\\s*</th>\\s*<th\\b[^>]*>\\s*Day\\s*</th>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Club and Day header row.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Robotics\\s*</td>\\s*<td\\b[^>]*>\\s*Tuesday\\s*</td>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Robotics row.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Art\\s*</td>\\s*<td\\b[^>]*>\\s*Thursday\\s*</td>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Art row.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <p>Robotics - Tuesday</p>\n  <p>Art - Thursday</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <caption>Weekly club meetings</caption>\n    <tr>\n      <th>Club</th>\n      <th>Day</th>\n    </tr>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "tables-try-sections",
+      "kind": "code_input",
+      "title": "Separate the table head and body",
+      "prompt": "Keep the existing caption and cells, but group the header row inside thead and the data row inside tbody.",
+      "hint": "The header row and data rows belong to different table sections.",
+      "help": {
+        "concept": "thead and tbody make the roles of table rows explicit.",
+        "hint_1": "Move the row containing th cells into thead.",
+        "hint_2": "Move the row containing td cells into tbody."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <tr>\n      <th>Time</th>\n      <th>Session</th>\n    </tr>\n    <tr>\n      <td>10:00</td>\n      <td>HTML Basics</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>10:00</td>\n        <td>HTML Basics</td>\n      </tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<thead\\b[^>]*>\\s*<tr\\b[^>]*>.*Time.*Session.*</tr>\\s*</thead>",
+          "path": "index.html",
+          "message": "Put the header row inside thead.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tbody\\b[^>]*>\\s*<tr\\b[^>]*>.*10:00.*HTML Basics.*</tr>\\s*</tbody>",
+          "path": "index.html",
+          "message": "Put the data row inside tbody.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <tr>\n      <th>Time</th>\n      <th>Session</th>\n    </tr>\n    <tr>\n      <td>10:00</td>\n      <td>HTML Basics</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>10:00</td>\n        <td>HTML Basics</td>\n      </tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "tables-try-complete",
+      "kind": "code_input",
+      "title": "Build a complete schedule table",
+      "prompt": "Replace the schedule paragraphs with a table captioned Morning session schedule. Use a thead with Time, Session, and Location, then a tbody with all three schedule rows.",
+      "hint": "Every data row has the same three fields.",
+      "help": {
+        "concept": "A well-structured table combines caption, row groups, rows, header cells, and data cells.",
+        "hint_1": "Create the caption and three-column thead first.",
+        "hint_2": "Add three tbody rows in Time, Session, Location order."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <p>9:00 - Welcome - Room A</p>\n  <p>10:00 - HTML Basics - Lab 1</p>\n  <p>11:00 - Robotics Demo - Lab 2</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n        <th>Location</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n      <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<caption\\b[^>]*>\\s*Morning session schedule\\s*</caption>",
+          "path": "index.html",
+          "message": "Add the requested table caption.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<thead\\b[^>]*>.*Time.*Session.*Location.*</thead>",
+          "path": "index.html",
+          "message": "Build the three-column header inside thead.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tbody\\b[^>]*>.*9:00.*Welcome.*Room A.*10:00.*HTML Basics.*Lab 1.*11:00.*Robotics Demo.*Lab 2.*</tbody>",
+          "path": "index.html",
+          "message": "Put all three schedule rows inside tbody.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <p>9:00 - Welcome - Room A</p>\n  <p>10:00 - HTML Basics - Lab 1</p>\n  <p>11:00 - Robotics Demo - Lab 2</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n        <th>Location</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n      <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "tables-quiz-choice",
+      "kind": "single_choice",
+      "title": "Choose table markup for structured data",
+      "prompt": "Which element represents one row in an HTML table?",
+      "hint": "Think row, not cell or section.",
+      "help": {
+        "concept": "The tr element groups the cells that make up one table row.",
+        "hint_1": "A td is one data cell.",
+        "hint_2": "Choose the element whose name means table row."
+      },
+      "options": [
+        "<tr>",
+        "<td>",
+        "<li>",
+        "<tbody>"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "tables-quiz-multi",
+      "kind": "multi_choice",
+      "title": "Recognize table structure",
+      "prompt": "Which two statements are correct?",
+      "hint": "Choose elements whose purposes are part of table structure.",
+      "help": {
+        "concept": "th labels header cells and tbody groups body rows.",
+        "hint_1": "One correct answer is a cell type; the other is a row group.",
+        "hint_2": "Ignore elements from other HTML concepts."
+      },
+      "options": [
+        "<th> identifies a header cell.",
+        "<caption> creates a table data cell.",
+        "<tbody> groups the main data rows.",
+        "<li> creates a table column."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "tables-quiz-order",
+      "kind": "drag_reorder",
+      "title": "Order a simple table",
+      "prompt": "Arrange the tokens into a table containing one data row.",
+      "hint": "The table container surrounds its row.",
+      "help": {
+        "concept": "A tr belongs inside table.",
+        "hint_1": "Open table first.",
+        "hint_2": "Place the row before closing table."
+      },
+      "tokens": [
+        "<table>",
+        "<tr><td>Robotics</td><td>Tuesday</td></tr>",
+        "</table>"
+      ],
+      "correctOrder": [
+        "<table>",
+        "<tr><td>Robotics</td><td>Tuesday</td></tr>",
+        "</table>"
+      ]
+    },
+    {
+      "id": "tables-quiz-blank",
+      "kind": "fill_blank_choice",
+      "title": "Choose the correct header cell",
+      "prompt": "Fill the blank with the element that marks Time as a table header cell.",
+      "hint": "The missing cell labels a column.",
+      "help": {
+        "concept": "Header cells use th rather than td.",
+        "hint_1": "The neighboring Session cell is also a header.",
+        "hint_2": "Choose the complete th element for Time."
+      },
+      "template": "<tr>\n  [blank1]\n  <th>Session</th>\n</tr>",
+      "choices": [
+        "<th>Time</th>",
+        "<td>Time</td>",
+        "<li>Time</li>",
+        "<caption>Time</caption>"
+      ],
+      "correctValue": "<th>Time</th>"
+    }
+  ]
+}

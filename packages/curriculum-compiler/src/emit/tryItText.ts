@@ -49,7 +49,7 @@ export function buildTryItPrompt(args: {
     const sketchTitle = normalizeText(args.sketchTitle);
 
     if (sketchTitle) {
-        lines.push(`Right after the sketch "${sketchTitle}", practice that exact idea with this task.`);
+        lines.push("Now apply what you just learned in this task.");
     }
 
     if (prompt) {

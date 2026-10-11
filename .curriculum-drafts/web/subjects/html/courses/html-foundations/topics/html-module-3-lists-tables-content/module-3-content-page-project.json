@@ -1,0 +1,219 @@
+{
+  "title": "Project: Build a Structured Content Page",
+  "summary": "Combine lists and a data table into a clear information page for a community learning event.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "project-brief",
+      "cardTitle": "Publish a Community Learning Day Guide",
+      "title": "Project brief: Neighborhood Learning Day",
+      "bodyMarkdown": "### Project Brief\n\n**Scenario:** A neighborhood learning center needs one clear HTML page for its Saturday Learning Day.\n\n**Your role:** Junior web developer preparing the public information page.\n\n**Workspace:** Work only in `index.html` and use the live browser preview after each meaningful change.\n\n**Deliverable:** A structured event guide that uses unordered and ordered lists, nested topic groups, and a semantic schedule table with a caption and clear headers.\n\nBuild the page in three cumulative steps. Each new step starts from the exact working result of the previous one."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "module3-content-step-1",
+      "kind": "code_input",
+      "title": "Organize event supplies and arrival steps",
+      "prompt": "Start the community event guide. Add a What to bring unordered list with Student ID, Notebook, and Water bottle. Then add an Arrival steps ordered list with the three provided steps. Verify both groups in Preview.",
+      "hint": "One group is a set of items; the other must happen in sequence.",
+      "help": {
+        "concept": "A structured information page chooses ul or ol based on whether order carries meaning.",
+        "hint_1": "Build What to bring with ul first.",
+        "hint_2": "Build Arrival steps with ol without removing the event introduction."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li>\n    <li>Pick up a schedule</li>\n    <li>Go to the opening session</li>\n  </ol>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+          "path": "index.html",
+          "message": "Keep the What to bring unordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+          "path": "index.html",
+          "message": "Keep the Arrival steps ordered list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li>\n    <li>Pick up a schedule</li>\n    <li>Go to the opening session</li>\n  </ol>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "module3-content-step-2",
+      "kind": "code_input",
+      "title": "Add hierarchical workshop tracks",
+      "prompt": "Continue the same page. Add Workshop tracks as an outer unordered list. Nest HTML Structure and Links and Images under Web Basics, and Sensors and Motors under Robotics. Keep both lists from step 1.",
+      "hint": "Each track owns a child list of its sessions.",
+      "help": {
+        "concept": "Nested lists add hierarchy without abandoning the list semantics already used elsewhere.",
+        "hint_1": "Keep the step-1 lists unchanged.",
+        "hint_2": "Place each child ul inside the parent li that owns it."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li>\n    <li>Pick up a schedule</li>\n    <li>Go to the opening session</li>\n  </ol>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li><li>Notebook</li><li>Water bottle</li>\n  </ul>\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li>\n  </ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics\n      <ul><li>HTML Structure</li><li>Links and Images</li></ul>\n    </li>\n    <li>Robotics\n      <ul><li>Sensors</li><li>Motors</li></ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+          "path": "index.html",
+          "message": "Keep the What to bring unordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+          "path": "index.html",
+          "message": "Keep the Arrival steps ordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Workshop tracks\\s*</h2>.*Web Basics.*<ul\\b[^>]*>.*HTML Structure.*Links and Images.*</ul>",
+          "path": "index.html",
+          "message": "Keep the Web Basics nested list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)Robotics.*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>",
+          "path": "index.html",
+          "message": "Keep the Robotics nested list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li>\n    <li>Pick up a schedule</li>\n    <li>Go to the opening session</li>\n  </ol>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li><li>Notebook</li><li>Water bottle</li>\n  </ul>\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li>\n  </ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics\n      <ul><li>HTML Structure</li><li>Links and Images</li></ul>\n    </li>\n    <li>Robotics\n      <ul><li>Sensors</li><li>Motors</li></ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "module3-content-step-3",
+      "kind": "code_input",
+      "title": "Finish with the session schedule table",
+      "prompt": "Finish the community guide by adding a Session schedule table. Include the caption Saturday learning sessions, a thead with Time, Session, and Room, and a tbody with the three provided sessions. Keep every list from the earlier steps.",
+      "hint": "The schedule is repeated row-and-column data, so it belongs in a table.",
+      "help": {
+        "concept": "A finished structured content page combines lists with a semantic table for repeated records.",
+        "hint_1": "Keep all earlier list markup intact and add the table after Workshop tracks.",
+        "hint_2": "Build caption and thead first, then place all three session rows inside tbody."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li><li>Notebook</li><li>Water bottle</li>\n  </ul>\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li>\n  </ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics\n      <ul><li>HTML Structure</li><li>Links and Images</li></ul>\n    </li>\n    <li>Robotics\n      <ul><li>Sensors</li><li>Motors</li></ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul><li>Student ID</li><li>Notebook</li><li>Water bottle</li></ul>\n  <h2>Arrival steps</h2>\n  <ol><li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li></ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics<ul><li>HTML Structure</li><li>Links and Images</li></ul></li>\n    <li>Robotics<ul><li>Sensors</li><li>Motors</li></ul></li>\n  </ul>\n\n  <h2>Session schedule</h2>\n  <table>\n    <caption>Saturday learning sessions</caption>\n    <thead><tr><th>Time</th><th>Session</th><th>Room</th></tr></thead>\n    <tbody>\n      <tr><td>9:00</td><td>Opening Session</td><td>Community Hall</td></tr>\n      <tr><td>10:00</td><td>HTML Structure</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*What to bring\\s*</h2>.*<ul\\b[^>]*>.*Student ID.*Notebook.*Water bottle.*</ul>",
+          "path": "index.html",
+          "message": "Keep the What to bring unordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Arrival steps\\s*</h2>.*<ol\\b[^>]*>.*Check in at the welcome desk.*Pick up a schedule.*Go to the opening session.*</ol>",
+          "path": "index.html",
+          "message": "Keep the Arrival steps ordered list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Workshop tracks\\s*</h2>.*Web Basics.*<ul\\b[^>]*>.*HTML Structure.*Links and Images.*</ul>",
+          "path": "index.html",
+          "message": "Keep the Web Basics nested list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)Robotics.*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>",
+          "path": "index.html",
+          "message": "Keep the Robotics nested list.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<caption\\b[^>]*>\\s*Saturday learning sessions\\s*</caption>",
+          "path": "index.html",
+          "message": "Add the requested schedule caption.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<thead\\b[^>]*>.*Time.*Session.*Room.*</thead>",
+          "path": "index.html",
+          "message": "Add Time, Session, and Room headers inside thead.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tbody\\b[^>]*>.*9:00.*Opening Session.*Community Hall.*10:00.*HTML Structure.*Lab 1.*11:00.*Robotics Demo.*Lab 2.*</tbody>",
+          "path": "index.html",
+          "message": "Add all three schedule rows inside tbody.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul>\n    <li>Student ID</li><li>Notebook</li><li>Water bottle</li>\n  </ul>\n  <h2>Arrival steps</h2>\n  <ol>\n    <li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li>\n  </ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics\n      <ul><li>HTML Structure</li><li>Links and Images</li></ul>\n    </li>\n    <li>Robotics\n      <ul><li>Sensors</li><li>Motors</li></ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Neighborhood Learning Day</title>\n</head>\n<body>\n  <h1>Neighborhood Learning Day</h1>\n  <p>A community learning center is hosting a Saturday event for students and families.</p>\n\n  <h2>What to bring</h2>\n  <ul><li>Student ID</li><li>Notebook</li><li>Water bottle</li></ul>\n  <h2>Arrival steps</h2>\n  <ol><li>Check in at the welcome desk</li><li>Pick up a schedule</li><li>Go to the opening session</li></ol>\n\n  <h2>Workshop tracks</h2>\n  <ul>\n    <li>Web Basics<ul><li>HTML Structure</li><li>Links and Images</li></ul></li>\n    <li>Robotics<ul><li>Sensors</li><li>Motors</li></ul></li>\n  </ul>\n\n  <h2>Session schedule</h2>\n  <table>\n    <caption>Saturday learning sessions</caption>\n    <thead><tr><th>Time</th><th>Session</th><th>Room</th></tr></thead>\n    <tbody>\n      <tr><td>9:00</td><td>Opening Session</td><td>Community Hall</td></tr>\n      <tr><td>10:00</td><td>HTML Structure</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Neighborhood Learning Day Structured Content Guide",
+    "stepIds": [
+      "module3-content-step-1",
+      "module3-content-step-2",
+      "module3-content-step-3"
+    ]
+  }
+}

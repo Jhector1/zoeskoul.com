@@ -1,0 +1,245 @@
+{
+  "title": "Nested Lists",
+  "summary": "Represent grouped and hierarchical information with nested lists.",
+  "minutes": 16,
+  "sketchBlocks": [
+    {
+      "id": "nest-inside-item",
+      "cardTitle": "Parent and Child Items",
+      "title": "Nest a child list inside its parent list item",
+      "bodyMarkdown": "Nested lists describe hierarchy. Put the child list inside the `<li>` that owns it.\n\n```html\n<ul>\n  <li>Robotics\n    <ul>\n      <li>Sensors</li>\n      <li>Programming</li>\n    </ul>\n  </li>\n</ul>\n```\n\nSensors and Programming belong specifically to Robotics.\n\nBreak the nested example down line by line: the outer `<ul>` begins the main list, then `<li>Robotics` begins the parent item. Before that parent item closes, a second `<ul>` begins its child list. Sensors and Programming are child `<li>` elements. After the inner `</ul>` closes, the parent `</li>` closes, preserving the parent-child relationship.\n"
+    },
+    {
+      "id": "mix-list-meaning",
+      "cardTitle": "Hierarchy Can Mix List Types",
+      "title": "Choose the child list type from its own meaning",
+      "bodyMarkdown": "A nested list does not have to use the same type as its parent. A parent `<ul>` can contain an `<ol>` when the child items are steps.\n\nThe outer list answers “which groups?” while the inner list can answer “in what order?”"
+    },
+    {
+      "id": "readable-hierarchy",
+      "cardTitle": "Keep the Hierarchy Clear",
+      "title": "Close each nested structure where it belongs",
+      "bodyMarkdown": "Indentation helps humans see nesting even though the browser follows the element structure. Keep a child list inside its parent `<li>`, then close the parent item before moving to its sibling.\n\nClear nesting makes complex content easier to read and debug."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "nested-try-child-list",
+      "kind": "code_input",
+      "title": "Add Robotics subtopics",
+      "prompt": "Inside the Robotics list item, add a nested unordered list containing Sensors and Programming. Keep Art as a sibling of Robotics.",
+      "hint": "The child list belongs inside the Robotics li.",
+      "help": {
+        "concept": "A nested list expresses parent-child relationships when placed inside the owning list item.",
+        "hint_1": "Do not place the child ul after the Robotics li closes.",
+        "hint_2": "Robotics should contain a ul with two li children."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics</li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Programming</li>\n      </ul>\n    </li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Programming.*</ul>\\s*</li>.*<li\\b[^>]*>\\s*Art\\s*</li>",
+          "path": "index.html",
+          "message": "Nest Sensors and Programming inside the Robotics list item.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics</li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Programming</li>\n      </ul>\n    </li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "nested-try-mixed",
+      "kind": "code_input",
+      "title": "Add ordered steps inside a category",
+      "prompt": "Inside Web Basics, add a nested ordered list with HTML structure first and Links and images second. Keep Robotics as the other outer item.",
+      "hint": "The parent categories are unordered, but the lesson sequence is ordered.",
+      "help": {
+        "concept": "Each level of a hierarchy chooses ul or ol from its own meaning.",
+        "hint_1": "Keep the outer ul.",
+        "hint_2": "Place an ol with the two lesson steps inside the Web Basics li."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics\n      <ol>\n        <li>HTML structure</li>\n        <li>Links and images</li>\n      </ol>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Web Basics\\s*<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*HTML structure\\s*</li>\\s*<li\\b[^>]*>\\s*Links and images\\s*</li>\\s*</ol>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest the ordered Web Basics lesson sequence inside its parent item.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics\n      <ol>\n        <li>HTML structure</li>\n        <li>Links and images</li>\n      </ol>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "nested-try-two-groups",
+      "kind": "code_input",
+      "title": "Build two nested topic groups",
+      "prompt": "Give both top-level learning areas their own nested unordered lists: HTML and CSS later under Web Development, and Sensors and Motors under Robotics.",
+      "hint": "Each top-level li should own its own child ul.",
+      "help": {
+        "concept": "Repeated nested structures represent multiple parent groups consistently.",
+        "hint_1": "Build the Web Development child list first.",
+        "hint_2": "Then give Robotics a separate child ul before its li closes."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Motors</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Web Development\\s*<ul\\b[^>]*>.*HTML.*CSS later.*</ul>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest HTML and CSS later under Web Development.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest Sensors and Motors under Robotics.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Motors</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "nested-quiz-choice",
+      "kind": "single_choice",
+      "title": "Place the child list correctly",
+      "prompt": "Where should a nested list for Robotics subtopics go?",
+      "hint": "The child content belongs to its parent item.",
+      "help": {
+        "concept": "A nested list should be contained by the list item it describes.",
+        "hint_1": "Ask which element owns the subtopics.",
+        "hint_2": "Keep the child list inside the parent li."
+      },
+      "options": [
+        "Inside the Robotics <li> before that list item closes",
+        "After the entire outer </ul>",
+        "Inside the page <title>",
+        "Directly inside <head>"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "nested-quiz-multi",
+      "kind": "multi_choice",
+      "title": "Recognize useful nested-list patterns",
+      "prompt": "Which two examples naturally call for nested lists?",
+      "hint": "Look for parent-child groups.",
+      "help": {
+        "concept": "Nested lists are useful for meaningful subgroups.",
+        "hint_1": "Choose examples with hierarchy.",
+        "hint_2": "Flat prose and metadata do not need nested lists."
+      },
+      "options": [
+        "A course area with lessons grouped underneath it",
+        "A single paragraph of biography text",
+        "A club with project categories and projects under each category",
+        "A page title in the browser tab"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "nested-quiz-order",
+      "kind": "drag_reorder",
+      "title": "Order a nested list fragment",
+      "prompt": "Arrange the tokens so Sensors becomes a child of Robotics.",
+      "hint": "The outer container must surround the parent item.",
+      "help": {
+        "concept": "The child ul belongs inside the Robotics li.",
+        "hint_1": "Open the outer ul first.",
+        "hint_2": "The complete Robotics item goes before the outer closing ul."
+      },
+      "tokens": [
+        "<ul>",
+        "<li>Robotics<ul><li>Sensors</li></ul></li>",
+        "</ul>"
+      ],
+      "correctOrder": [
+        "<ul>",
+        "<li>Robotics<ul><li>Sensors</li></ul></li>",
+        "</ul>"
+      ]
+    },
+    {
+      "id": "nested-quiz-blank",
+      "kind": "fill_blank_choice",
+      "title": "Choose the child-list container",
+      "prompt": "Fill the one blank with the list container that makes two unordered subtopics under Robotics.",
+      "hint": "The subtopics are a set, not a sequence.",
+      "help": {
+        "concept": "A nested unordered list is a ul inside the parent li.",
+        "hint_1": "The blank is already inside Robotics.",
+        "hint_2": "Choose the ul containing two li elements."
+      },
+      "template": "<li>Robotics\n  [blank1]\n</li>",
+      "choices": [
+        "<ul><li>Sensors</li><li>Programming</li></ul>",
+        "<p>Sensors, Programming</p>",
+        "<ol>Sensors, Programming</ol>",
+        "<table><td>Sensors</td></table>"
+      ],
+      "correctValue": "<ul><li>Sensors</li><li>Programming</li></ul>"
+    }
+  ]
+}

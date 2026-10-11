@@ -1,0 +1,247 @@
+{
+  "title": "Ordered and Unordered Lists",
+  "summary": "Choose ordered or unordered lists based on content meaning.",
+  "minutes": 16,
+  "sketchBlocks": [
+    {
+      "id": "list-meaning",
+      "cardTitle": "Lists Have Meaning",
+      "title": "Use an unordered list when sequence does not matter",
+      "bodyMarkdown": "A list groups related items so the browser and reader understand that the items belong together.\n\nUse `<ul>` when sequence is not important, such as supplies, features, or names. Each item belongs in `<li>`.\n\n```html\n<ul>\n  <li>Notebook</li>\n  <li>Pen</li>\n</ul>\n```\n\nThe bullets are a browser default; the important HTML meaning is that these are related list items.\n\nRead this example line by line: the opening `<ul>` starts one unordered group. The first `<li>` creates the Notebook item, the second `<li>` creates the Pen item, and the closing `</ul>` ends the group. The browser may draw bullets, but the HTML structure is what says these values belong to the same unordered set.\n"
+    },
+    {
+      "id": "ordered-sequence",
+      "cardTitle": "When Order Matters",
+      "title": "Use an ordered list for a sequence",
+      "bodyMarkdown": "Use `<ol>` when changing the order would change the meaning: instructions, rankings, or steps.\n\n```html\n<ol>\n  <li>Check in</li>\n  <li>Find your seat</li>\n  <li>Open your notebook</li>\n</ol>\n```\n\nThe browser numbers the items because the sequence is part of the content.\n\nRead the ordered-list example line by line: `<ol>` opens a sequence whose order matters. Each `<li>` adds one step: Check in first, Find your seat second, and Open your notebook third. The closing `</ol>` finishes the sequence. Moving a list item would change the meaning of the instructions.\n"
+    },
+    {
+      "id": "list-item-structure",
+      "cardTitle": "Build the Right Structure",
+      "title": "Put list items inside the correct list container",
+      "bodyMarkdown": "`<ul>` and `<ol>` are containers. Their direct items use `<li>`.\n\nA page can use both list types when different groups have different meanings. Use an unordered list for a set of things and an ordered list for steps."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "lists-try-ul",
+      "kind": "code_input",
+      "title": "Group the open-house supplies",
+      "prompt": "Replace the three supply paragraphs with one unordered list. Keep the same three item texts and watch the browser preview show them as one grouped list.",
+      "hint": "The items belong together, but their order does not matter.",
+      "help": {
+        "concept": "An unordered list represents related items whose sequence is not meaningful.",
+        "hint_1": "Wrap the group in a ul element.",
+        "hint_2": "Each supply needs its own li element inside the ul."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <p>Student ID</p>\n  <p>Notebook</p>\n  <p>Water bottle</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<ul\\b[^>]*>\\s*<li\\b[^>]*>\\s*Student ID\\s*</li>\\s*<li\\b[^>]*>\\s*Notebook\\s*</li>\\s*<li\\b[^>]*>\\s*Water bottle\\s*</li>\\s*</ul>",
+          "path": "index.html",
+          "message": "Group Student ID, Notebook, and Water bottle inside one unordered list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <p>Student ID</p>\n  <p>Notebook</p>\n  <p>Water bottle</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "lists-try-ol",
+      "kind": "code_input",
+      "title": "Turn arrival instructions into steps",
+      "prompt": "Replace the three arrival paragraphs with one ordered list so the browser communicates the required sequence.",
+      "hint": "These actions must happen in a specific order.",
+      "help": {
+        "concept": "An ordered list communicates a meaningful sequence.",
+        "hint_1": "Use an ol container around the steps.",
+        "hint_2": "Put each step in a separate li element."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <p>Check in</p>\n  <p>Find your seat</p>\n  <p>Open your notebook</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <ol>\n    <li>Check in</li>\n    <li>Find your seat</li>\n    <li>Open your notebook</li>\n  </ol>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*Check in\\s*</li>\\s*<li\\b[^>]*>\\s*Find your seat\\s*</li>\\s*<li\\b[^>]*>\\s*Open your notebook\\s*</li>\\s*</ol>",
+          "path": "index.html",
+          "message": "Use one ordered list for the three arrival steps.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <p>Check in</p>\n  <p>Find your seat</p>\n  <p>Open your notebook</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <ol>\n    <li>Check in</li>\n    <li>Find your seat</li>\n    <li>Open your notebook</li>\n  </ol>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "lists-try-both",
+      "kind": "code_input",
+      "title": "Use both list types on one page",
+      "prompt": "Make Bring an unordered list and Start an ordered list. Keep each heading and all four item texts.",
+      "hint": "One group is a set of supplies; the other is a sequence.",
+      "help": {
+        "concept": "Choose a list type from the meaning of each group.",
+        "hint_1": "Laptop and Charger belong in ul.",
+        "hint_2": "Sign in and Open the lesson belong in ol."
+      },
+      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <p>Laptop</p>\n  <p>Charger</p>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n",
+      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <ol>\n    <li>Sign in</li>\n    <li>Open the lesson</li>\n  </ol>\n</body>\n</html>\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Bring\\s*</h2>.*<ul\\b[^>]*>.*Laptop.*Charger.*</ul>",
+          "path": "index.html",
+          "message": "Use an unordered list for the items to bring.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Start\\s*</h2>.*<ol\\b[^>]*>.*Sign in.*Open the lesson.*</ol>",
+          "path": "index.html",
+          "message": "Use an ordered list for the starting steps.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "fixedLanguage": "web",
+      "recipeType": "source_checks",
+      "entryFilePath": "index.html",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <p>Laptop</p>\n  <p>Charger</p>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <ol>\n    <li>Sign in</li>\n    <li>Open the lesson</li>\n  </ol>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ]
+    },
+    {
+      "id": "lists-quiz-choice",
+      "kind": "single_choice",
+      "title": "Choose the list with the right meaning",
+      "prompt": "A page explains three steps for submitting an assignment. Which element should contain the steps?",
+      "hint": "Think about whether the sequence matters.",
+      "help": {
+        "concept": "Ordered lists represent meaningful sequence.",
+        "hint_1": "Submission instructions are steps.",
+        "hint_2": "Use the list container that communicates first, second, third."
+      },
+      "options": [
+        "<ol>",
+        "<ul>",
+        "<table>",
+        "<p>"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "lists-quiz-multi",
+      "kind": "multi_choice",
+      "title": "Identify correct list uses",
+      "prompt": "Which two statements use list semantics appropriately?",
+      "hint": "Choose based on content meaning, not decoration.",
+      "help": {
+        "concept": "List semantics describe unordered sets or ordered sequences.",
+        "hint_1": "One correct answer describes a set; the other describes steps.",
+        "hint_2": "Ignore choices that use list tags only for appearance or omit the container."
+      },
+      "options": [
+        "Use <ul> for a set of club supplies where order does not matter.",
+        "Use <ol> only because you prefer numbers visually.",
+        "Use <ol> for instructions that must be followed in sequence.",
+        "Place list items directly in <body> without a list container."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "lists-quiz-order",
+      "kind": "drag_reorder",
+      "title": "Build an ordered list",
+      "prompt": "Arrange the tokens into a valid ordered list with two steps.",
+      "hint": "The list container surrounds its list items.",
+      "help": {
+        "concept": "A valid ordered list opens ol, contains li elements, and closes ol.",
+        "hint_1": "Start with the opening ol tag.",
+        "hint_2": "Both li elements go before the closing ol tag."
+      },
+      "tokens": [
+        "<ol>",
+        "<li>Sign in</li>",
+        "<li>Open the lesson</li>",
+        "</ol>"
+      ],
+      "correctOrder": [
+        "<ol>",
+        "<li>Sign in</li>",
+        "<li>Open the lesson</li>",
+        "</ol>"
+      ]
+    },
+    {
+      "id": "lists-quiz-blank",
+      "kind": "fill_blank_choice",
+      "title": "Complete the list item",
+      "prompt": "Choose the markup that correctly fills the one missing item inside this unordered list.",
+      "hint": "Look for the element that represents one item in a list.",
+      "help": {
+        "concept": "The li element represents an individual item inside ul or ol.",
+        "hint_1": "The container is already ul.",
+        "hint_2": "Fill the blank with one complete li element."
+      },
+      "template": "<ul>\n  [blank1]\n</ul>",
+      "choices": [
+        "<li>Notebook</li>",
+        "<p>Notebook</p>",
+        "<ol>Notebook</ol>",
+        "<td>Notebook</td>"
+      ],
+      "correctValue": "<li>Notebook</li>"
+    }
+  ]
+}
