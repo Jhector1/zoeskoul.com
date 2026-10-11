@@ -704,9 +704,7 @@ function publishedMessagesRoot() {
 
 function draftMessageLocaleRoots(draftSubjectSlug) {
   const messagesRoot = path.join(
-      root,
-      ".curriculum-build",
-      subjectSlug,
+      courseBuildRoot(courseSlugFromDraftSubjectSlug(draftSubjectSlug)),
       "messages",
   );
 
@@ -997,9 +995,7 @@ function compareParityTree(args) {
 function assertDraftPublishedParity(resolvedCourseSlug, resolvedLiveSubjectSlug) {
   const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
   const draftSubjectRoot = path.join(
-      root,
-      ".curriculum-build",
-      subjectSlug,
+      courseBuildRoot(resolvedCourseSlug),
       "subjects",
       draftSubjectSlug,
   );
@@ -1048,7 +1044,7 @@ function assertDraftPublishedParity(resolvedCourseSlug, resolvedLiveSubjectSlug)
   if (issues.length > 0) {
     console.error("");
     console.error(
-        `Draft → published parity FAILED for ${subjectSlug}/${resolvedCourseSlug} -> ${resolvedLiveSubjectSlug}.`,
+        `Draft -> published parity FAILED for ${subjectSlug}/${resolvedCourseSlug} -> ${resolvedLiveSubjectSlug}.`,
     );
     console.error(
         `Allowed difference: draft subject identity "${draftSubjectSlug}" -> "${resolvedLiveSubjectSlug}" only.`,
@@ -1067,7 +1063,7 @@ function assertDraftPublishedParity(resolvedCourseSlug, resolvedLiveSubjectSlug)
   }
 
   console.log(
-      `Draft → published parity PASS for ${subjectSlug}/${resolvedCourseSlug} -> ${resolvedLiveSubjectSlug}`,
+      `Draft -> published parity PASS for ${subjectSlug}/${resolvedCourseSlug} -> ${resolvedLiveSubjectSlug}`,
   );
 }
 
