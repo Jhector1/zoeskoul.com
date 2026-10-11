@@ -283,6 +283,38 @@ export function normalizeCodeExpectedForSave(
 
     const canonTests = normalized.tests.slice(0, 12);
 
+    // V290S4_SOURCE_MODE_EXPECTED
+    // Browser-web/source-check exercises intentionally do not have runner stdout tests.
+    // Preserve source validation and the server-only solution payload.
+    if (String((expected as any)?.checkMode ?? "") === "source") {
+        const sourceChecks = Array.isArray((expected as any)?.sourceChecks)
+            ? (expected as any).sourceChecks.filter(
+                  (check: unknown) =>
+                      !!check &&
+                      typeof check === "object" &&
+                      !Array.isArray(check),
+              )
+            : [];
+
+        if (!sourceChecks.length) {
+            throw new Error(
+                `Generator bug: code_input source mode expected is missing sourceChecks. expected=${JSON.stringify(
+                    expected,
+                    null,
+                    2,
+                )}`,
+            );
+        }
+
+        return {
+            ...(expected as any),
+            kind: "code_input",
+            strategy: "programming",
+            checkMode: "source",
+            sourceChecks,
+        };
+    }
+
     if (!canonTests.length) {
         throw new Error(
             `Generator bug: code_input expected is missing tests/stdout. expected=${JSON.stringify(

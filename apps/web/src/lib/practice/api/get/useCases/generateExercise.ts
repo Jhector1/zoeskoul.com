@@ -24,6 +24,7 @@ import {
     getAssignmentDifficulty,
 } from "../policies/session.policy";
 import { resolveTopicFromScope } from "../services/topicResolver.service";
+import { authoredManifestTopicAliasSuffixes } from "../services/authoredManifestTopicIdentity";
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
 import { readSharedChallengeMeta } from "@/lib/practice/challenges/session";
 import { selfPacedPracticeExperienceOwnerPrefix } from "@/lib/practice/experience/authoredPracticeQueue";
@@ -250,6 +251,34 @@ async function ensureAuthoredManifestPracticeTopicRow(args: {
             })
             : Promise.resolve(null),
     ]);
+
+    const aliasSuffixes = authoredManifestTopicAliasSuffixes(candidateSlugs);
+
+    if (moduleRow?.id && aliasSuffixes.length > 0) {
+        const moduleScopedAliases = await args.prisma.practiceTopic.findMany({
+            where: {
+                moduleId: moduleRow.id,
+                OR: aliasSuffixes.map((suffix) => ({
+                    slug: { endsWith: suffix },
+                })),
+            },
+            select: {
+                id: true,
+                slug: true,
+                genKey: true,
+                meta: true,
+            },
+            take: 2,
+        });
+
+        if (moduleScopedAliases.length === 1) {
+            return moduleScopedAliases[0];
+        }
+
+        if (moduleScopedAliases.length > 1) {
+            return null;
+        }
+    }
 
     const topicMeta =
         (args.topicBundle as any)?.topic && typeof (args.topicBundle as any).topic === "object"
