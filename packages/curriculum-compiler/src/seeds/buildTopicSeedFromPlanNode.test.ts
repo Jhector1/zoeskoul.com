@@ -874,4 +874,83 @@ describe("buildTopicSeedFromPlanNode", () => {
         });
     });
 
+
+    it("never plans exercise kinds that the active profile disallows", () => {
+        const seed = buildTopicSeedFromPlanNode(makeBaseArgs({
+            blueprint: {
+                profileId: "web",
+                teachingStyle: {
+                    quizWeight: 0.25,
+                    codeInputWeight: 0.4,
+                },
+            },
+            spec: {
+                modules: [],
+                policy: {
+                    exercisePolicy: {
+                        defaultMix: {
+                            single_choice: 0.2,
+                            multi_choice: 0.15,
+                            drag_reorder: 0.1,
+                            fill_blank_choice: 0.15,
+                            code_input: 0.4,
+                        },
+                        generationTargets: {
+                            quizBankMin: 4,
+                            quizBankTarget: 6,
+                            quizVisibleDefault: 4,
+                            quizVisibleMax: 6,
+                            projectCodeInputMin: 2,
+                            projectCodeInputTarget: 3,
+                            projectCodeInputMax: 5,
+                            maxAttempts: null,
+                        },
+                    },
+                },
+            },
+            module: {
+                moduleSlug: "css-module-1-first-styles",
+                title: "First Styles and the Cascade",
+                order: 1,
+                purpose: "Learn CSS fundamentals.",
+                learningObjectives: ["Style semantic HTML"],
+                guidedExercises: ["Edit styles.css"],
+                quizFocus: ["CSS rules"],
+                moduleProject: "Style a Profile Page",
+            },
+            section: {
+                sectionSlug: "css-module-1-lessons",
+                title: "Core Lessons",
+                order: 1,
+            },
+            topic: {
+                topicId: "connecting-css-to-html",
+                order: 1,
+                title: "Connecting CSS to HTML",
+                summary: "Connect a stylesheet and see CSS affect HTML.",
+                minutes: 18,
+                learningGoals: ["Connect CSS to HTML"],
+            },
+        }));
+
+        const counts = seed.plannedExerciseCounts?.counts;
+        expect(counts).toBeDefined();
+        console.log(`WEB_PROFILE_PLANNED_COUNTS=${JSON.stringify(counts)}`);
+
+        for (const kind of [
+            "text_input",
+            "voice_input",
+            "word_bank_arrange",
+            "listen_build",
+            "pseudocode_input",
+        ] as const) {
+            expect(counts?.[kind]).toBe(0);
+        }
+
+        expect(counts?.code_input).toBe(3);
+        expect(
+            Object.values(counts ?? {}).reduce((sum, value) => sum + Number(value), 0),
+        ).toBe(seed.plannedExerciseCounts?.total);
+    });
+
 });

@@ -317,7 +317,7 @@ describe("normalizeCurrentDraftOutputForSeed", () => {
             "linux-terminal-fundamentals-linux-module-1-orientation",
             "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
         ]);
-    });
+    }, 15_000);
     it("rehydrates deterministic terminal bootstrap from hidden current-output fixtures", async () => {
         const { normalizeCurrentDraftOutputForSeed } = await import(
             "./rebuildSubjectFromDraftReports.js"

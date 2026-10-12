@@ -428,6 +428,16 @@
               "title": "Try it yourself: How do you read the results and tables?",
               "prompt": "Use the SQL editor to practice the idea from this card. Run the query, then compare the result table with the lesson explanation."
             }
+          },
+          "practice": {
+            "practice-run-student-columns": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name\nFROM students;"
+            },
+            "practice-run-student-city-query": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, city\nFROM students;"
+            }
           }
         }
       }

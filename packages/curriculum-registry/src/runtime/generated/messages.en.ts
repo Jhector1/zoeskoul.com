@@ -44802,6 +44802,16 @@ const messages: Record<string, any> = {
               "title": "Run a different one-row query",
               "prompt": "Return the text `Practice ready` in a one-row result with the column heading `check_in`. Run the statement, then verify the Results table shows that heading and value."
             }
+          },
+          "practice": {
+            "practice-run-student-columns": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name\nFROM students;"
+            },
+            "practice-run-student-city-query": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, city\nFROM students;"
+            }
           }
         },
         "module-0-student-roster-project": {
@@ -44936,6 +44946,20 @@ const messages: Record<string, any> = {
                 "c": "A saved password",
                 "d": "A programming command"
               }
+            }
+          },
+          "practice": {
+            "practice-ask-for-student-names": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name\nFROM students;"
+            },
+            "practice-ask-for-student-grades": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, grade\nFROM students;"
+            },
+            "practice-inspect-student-record-columns": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name, grade, city\nFROM students;"
             }
           }
         }
@@ -45091,6 +45115,12 @@ const messages: Record<string, any> = {
                 "hint_1": "Check the comma between selected columns and make sure FROM appears before the table name.",
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
+            }
+          },
+          "practice": {
+            "practice-repair-missing-from": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price\nFROM products;"
             }
           }
         },
@@ -45315,6 +45345,12 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-select-name-price-stock": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price, stock\nFROM products;"
+            }
           }
         }
       },
@@ -45471,6 +45507,12 @@ const messages: Record<string, any> = {
                 "hint_1": "Write one category condition and one stock condition, then connect them with AND.",
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
+            }
+          },
+          "practice": {
+            "practice-home-products-in-stock": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Home'\n  AND stock >= 10;"
             }
           }
         },
@@ -45877,6 +45919,12 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
+          },
+          "practice": {
+            "practice-cheapest-two-products": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC, name ASC\nLIMIT 2;"
+            }
           }
         },
         "module-3-sales-leaderboard-project": {
@@ -46110,6 +46158,12 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
+          },
+          "practice": {
+            "practice-sort-stock-then-name": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;"
+            }
           }
         }
       },
@@ -46272,6 +46326,12 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-active-inactive-status-list": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'inactive');"
+            }
           }
         },
         "intro_to_like": {
@@ -46413,6 +46473,16 @@ const messages: Record<string, any> = {
                 "hint_1": "For a prefix match, place the fixed starting text before `%`.",
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
+            }
+          },
+          "practice": {
+            "practice-like-name-ending-a": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a';"
+            },
+            "practice-like-city-starting-s": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city LIKE 'S%';"
             }
           }
         },
@@ -46643,6 +46713,12 @@ const messages: Record<string, any> = {
                 "hint_1": "Use the dedicated missing-value check on the email column.",
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
+            }
+          },
+          "practice": {
+            "practice-find-missing-email-active-customers": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'active'\n  AND email IS NULL;"
             }
           }
         }
@@ -53210,6 +53286,10 @@ const messages: Record<string, any> = {
           "sketch_elif_chain": {
             "title": "Choose among several paths with elif",
             "bodyMarkdown": "Use `elif` when a program needs more than two possible branches.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\nPython checks the chain from top to bottom:\n\n1. check the `if` condition;\n2. if it is false, check the `elif` condition;\n3. if neither condition matched, run `else`.\n\nOnly one branch in this chain runs.\n\nExamples:\n\n- `8` prints `positive`;\n- `-3` prints `negative`;\n- `0` prints `zero`.\n\nA later lesson will focus on how to order overlapping or special cases. Here, the goal is to build a correct multi-branch chain.\n"
+          },
+          "sketch_order_matters": {
+            "title": "Check special cases first",
+            "bodyMarkdown": "The order of `if` and `elif` conditions matters. Python stops at the first true condition.\n\nLook at this example:\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"pass\")\nelif score == 100:\n    print(\"perfect\")\n```\n\nThis prints `pass`, not `perfect`, because `score >= 60` is already true. Python never reaches the `elif`.\n\nA better order is:\n\n```python\nscore = 100\n\nif score == 100:\n    print(\"perfect\")\nelif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")\n```\n\nNow the special case is checked first.\n\nMain idea:\n- Put narrower or more specific cases before broader cases.\n- Put the catch-all case in `else`.\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
           }
         },
         "indentation-and-blocks": {

@@ -10,7 +10,7 @@ import {
 
 describe("AI provider catalog", () => {
   it("registers the supported provider ids with defaults", () => {
-    expect(AI_PROVIDER_IDS).toEqual(["openai", "gemini", "claude", "deepseek"]);
+    expect(AI_PROVIDER_IDS).toEqual(["openai", "gemini", "claude", "deepseek", "deepl"]);
 
     for (const providerId of AI_PROVIDER_IDS) {
       const entry = AI_PROVIDER_CATALOG[providerId];

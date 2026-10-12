@@ -285,6 +285,10 @@
           "sketch_elif_chain": {
             "title": "Choose among several paths with elif",
             "bodyMarkdown": "Use `elif` when a program needs more than two possible branches.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\nPython checks the chain from top to bottom:\n\n1. check the `if` condition;\n2. if it is false, check the `elif` condition;\n3. if neither condition matched, run `else`.\n\nOnly one branch in this chain runs.\n\nExamples:\n\n- `8` prints `positive`;\n- `-3` prints `negative`;\n- `0` prints `zero`.\n\nA later lesson will focus on how to order overlapping or special cases. Here, the goal is to build a correct multi-branch chain.\n"
+          },
+          "sketch_order_matters": {
+            "title": "Check special cases first",
+            "bodyMarkdown": "The order of `if` and `elif` conditions matters. Python stops at the first true condition.\n\nLook at this example:\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"pass\")\nelif score == 100:\n    print(\"perfect\")\n```\n\nThis prints `pass`, not `perfect`, because `score >= 60` is already true. Python never reaches the `elif`.\n\nA better order is:\n\n```python\nscore = 100\n\nif score == 100:\n    print(\"perfect\")\nelif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")\n```\n\nNow the special case is checked first.\n\nMain idea:\n- Put narrower or more specific cases before broader cases.\n- Put the catch-all case in `else`.\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
           }
         }
       }

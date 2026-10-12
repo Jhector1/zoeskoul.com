@@ -1,0 +1,32 @@
+{
+  "policyId": "css-browser-workspace",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "css-browser-workspace",
+  "uiTerms": {
+    "editor": "CSS editor",
+    "runButton": "Preview",
+    "output": "browser preview"
+  },
+  "preferredTerms": {
+    "output panel": "browser preview",
+    "run": "preview",
+    "program": "web page"
+  },
+  "learnerInstructions": [
+    "Edit styles.css while using the provided semantic HTML as the page structure.",
+    "Watch the browser preview update as you work.",
+    "Click Check Answer when the required styles and responsive behavior are present.",
+    "Every CSS code exercise must keep index.html as valid HTML. Raw CSS rules must never replace the HTML document.",
+    "Inline style attributes and <style> elements are allowed in index.html when a lesson explicitly teaches or requires them.",
+    "After the inline/internal/external introduction, learners work primarily in styles.css and edit HTML only when a task explicitly needs markup such as a class, id, stylesheet link, or inline style.",
+    "CSS Foundations inherits the completed multi-file Jordan Lee portfolio from the final HTML Foundations capstone. Preserve index.html, about.html, contact.html, projects/portfolio.html, and images/profile.png across the CSS course. Add or change HTML only when a CSS task explicitly needs a stylesheet link, class, id, wrapper, inline style, or style element. The cumulative styles.css produced by each module project becomes the starting stylesheet for the next CSS module."
+  ],
+  "forbiddenActions": [
+    "terminal",
+    "command line",
+    "Judge0",
+    "npm install",
+    "package installation",
+    "local IDE"
+  ]
+}

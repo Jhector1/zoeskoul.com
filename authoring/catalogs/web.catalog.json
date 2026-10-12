@@ -8,7 +8,8 @@
     "imageAlt": "Web development catalog cover",
     "status": "active",
     "subjectSlugs": [
-      "html"
+      "html",
+      "css"
     ],
     "meta": {
       "family": "web-development",
@@ -16,7 +17,8 @@
     }
   },
   "subjectSlugs": [
-    "html"
+    "html",
+    "css"
   ],
   "defaultSubjectSlug": "html"
 }

@@ -234,6 +234,12 @@
                 "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-home-products-in-stock": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Home'\n  AND stock >= 10;"
+            }
           }
         }
       }

@@ -160,6 +160,12 @@
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-active-inactive-status-list": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'inactive');"
+            }
           }
         }
       }

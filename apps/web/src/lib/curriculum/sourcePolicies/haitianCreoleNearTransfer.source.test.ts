@@ -3,10 +3,12 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+const repoRoot = path.resolve(process.cwd(), "../..");
+
 const root = path.resolve(
-    process.cwd(),
-    "authoring/subjects/haitian-creole/courses/" +
-        "haitian-creole-foundations/content",
+    repoRoot,
+    ".curriculum-drafts/haitian-creole/subjects/haitian-creole/" +
+        "courses/haitian-creole-foundations/topics",
 );
 
 type Json = Record<string, any>;
@@ -248,7 +250,9 @@ describe(
 
                 for (
                     const file
-                    of jsonFiles(root)
+                    of jsonFiles(root).filter(
+                        (file) => !file.endsWith(".source.json"),
+                    )
                 ) {
                     const json =
                         JSON.parse(
@@ -294,7 +298,9 @@ describe(
 
                 for (
                     const file
-                    of jsonFiles(root)
+                    of jsonFiles(root).filter(
+                        (file) => !file.endsWith(".source.json"),
+                    )
                 ) {
                     const json =
                         JSON.parse(

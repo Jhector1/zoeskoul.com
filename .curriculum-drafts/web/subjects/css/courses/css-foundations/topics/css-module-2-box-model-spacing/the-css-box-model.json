@@ -1,0 +1,509 @@
+{
+  "title": "The CSS Box Model",
+  "summary": "Use the inherited portfolio to see how content, padding, border, and margin create the space every element occupies.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "box-model-sketch-0",
+      "cardTitle": "Every visible element is a box",
+      "title": "Every visible element is a box",
+      "bodyMarkdown": "The portfolio already has semantic `main`, `section`, `header`, `footer`, form, table, and image content. CSS treats each rendered element as a rectangular box.\n\n```css\nmain {\n  padding: 1.5rem;\n}\n```\n\nPadding creates space **inside** the edge of the element, between its content and border.\n\n**Line by line:** `main` selects the page's main content area. The opening brace starts the rule. `padding: 1.5rem;` adds inner breathing room on all four sides. The closing brace ends the rule. The HTML stays unchanged; only its presentation box grows."
+    },
+    {
+      "id": "box-model-sketch-1",
+      "cardTitle": "A border makes the box edge visible",
+      "title": "A border makes the box edge visible",
+      "bodyMarkdown": "A border sits outside padding and inside margin. It is useful for seeing the true edge of a box while learning.\n\n```css\nsection {\n  border: 1px solid #cbd5e1;\n}\n```\n\n**Line by line:** `section` selects existing semantic sections. `border` combines width, style, and color. `1px` is the thickness, `solid` is the line style, and `#cbd5e1` is the color."
+    },
+    {
+      "id": "box-model-sketch-2",
+      "cardTitle": "Margin separates neighboring boxes",
+      "title": "Margin separates neighboring boxes",
+      "bodyMarkdown": "Margin belongs outside the border. It creates space between one box and surrounding boxes.\n\n```css\nfooter {\n  margin-top: 2rem;\n}\n```\n\n**Line by line:** `footer` selects the inherited site footer. `margin-top` adds space outside its top edge. The footer content does not change; only the distance from the content above it changes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "the-css-box-model-single-1",
+      "kind": "single_choice",
+      "title": "Check the first box-model decision",
+      "prompt": "Which box-model layer sits directly around the content before the border?",
+      "hint": "Choose the property or layer whose location matches the question.",
+      "help": {
+        "concept": "Use the box-model concept named in the lesson rather than guessing from visual appearance alone.",
+        "hint_1": "Compare what happens inside the border with what happens outside it.",
+        "hint_2": "Choose the option that matches the exact CSS responsibility described."
+      },
+      "options": [
+        "padding",
+        "margin",
+        "outline",
+        "display"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "the-css-box-model-multi-2",
+      "kind": "multi_choice",
+      "title": "Recognize what margin does",
+      "prompt": "Which statements correctly describe CSS margin?",
+      "hint": "Evaluate each statement independently against the lesson. More than one choice may be correct.",
+      "help": {
+        "concept": "A multi-select can have several correct statements.",
+        "hint_1": "Check each statement independently against the prompt.",
+        "hint_2": "Select every statement that is fully correct and leave the others unselected."
+      },
+      "options": [
+        "It creates space outside an element's border.",
+        "It can separate neighboring boxes.",
+        "It sits between content and border.",
+        "It changes an element's semantic HTML."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "the-css-box-model-multi",
+      "kind": "multi_choice",
+      "title": "Select every correct box-model idea",
+      "prompt": "Which are standard box-model layers?",
+      "hint": "Evaluate each option independently against the definition in the lesson. More than one choice may be correct.",
+      "help": {
+        "concept": "A multi-select question can have more than one correct choice.",
+        "hint_1": "Check each choice independently instead of assuming only one is correct.",
+        "hint_2": "Select only the choices that satisfy the definition stated in the prompt."
+      },
+      "options": [
+        "content",
+        "padding",
+        "border",
+        "margin"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "the-css-box-model-reorder",
+      "kind": "drag_reorder",
+      "title": "Put the box-model idea in order",
+      "prompt": "Order the CSS box model from the inside outward.",
+      "hint": "Start with the first conceptual or physical step and move outward or forward.",
+      "help": {
+        "concept": "Ordering helps make the CSS relationship explicit instead of memorizing disconnected terms.",
+        "hint_1": "Identify the item that must come first.",
+        "hint_2": "Then place each remaining item in the sequence described by the lesson."
+      },
+      "tokens": [
+        "content",
+        "padding",
+        "border",
+        "margin"
+      ],
+      "correctOrder": [
+        "content",
+        "padding",
+        "border",
+        "margin"
+      ]
+    },
+    {
+      "id": "the-css-box-model-fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the first CSS statement",
+      "prompt": "Choose the term that makes the statement correct.",
+      "hint": "Match the missing term to the lesson's box-model definition.",
+      "help": {
+        "concept": "Match the missing term to the exact CSS concept described by the sentence.",
+        "hint_1": "Read what part of the box or behavior the sentence is describing.",
+        "hint_2": "Choose the property or value that performs that responsibility."
+      },
+      "template": "Space between content and border is called [blank1].",
+      "choices": [
+        "padding",
+        "margin",
+        "display",
+        "overflow"
+      ],
+      "correctValue": "padding"
+    },
+    {
+      "id": "the-css-box-model-fill-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the second CSS statement",
+      "prompt": "Choose the term that makes the statement correct.",
+      "hint": "Use the precise property or value described in the sentence.",
+      "help": {
+        "concept": "Match the missing term to the exact CSS concept described by the sentence.",
+        "hint_1": "Read what part of the box or behavior the sentence is describing.",
+        "hint_2": "Choose the property or value that performs that responsibility."
+      },
+      "template": "Space outside the border is called [blank1].",
+      "choices": [
+        "margin",
+        "padding",
+        "content",
+        "width"
+      ],
+      "correctValue": "margin"
+    },
+    {
+      "id": "try-the-css-box-model-sketch0",
+      "kind": "code_input",
+      "title": "Add inner space to the main content box",
+      "prompt": "## CSS task\n\nThe Module 1 styling is consistent, but main content still sits too close to its own edges. Padding creates breathing room inside the content box without pushing neighboring boxes away. Start from the exact Module 1 checkpoint. In `styles.css`, add `main { padding: 1.5rem; }`. Keep every earlier selector and declaration. Preview several pages: main content should feel less cramped while its outer position stays otherwise unchanged.\n\n### File to edit\n\n`styles.css`\n\n### Check your work\n\nKeep the site's existing cumulative work, make the requested change, then compare the **Preview** with the **Expected result** before moving on.",
+      "hint": "Think inside the main box rather than outside it.",
+      "help": {
+        "concept": "Padding creates breathing room inside the content box without pushing neighboring boxes away.",
+        "hint_1": "Think inside the main box rather than outside it.",
+        "hint_2": "Preview several pages: main content should feel less cramped while its outer position stays otherwise unchanged."
+      },
+      "starterCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n",
+      "solutionCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "styles.css",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "index.html",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*padding\\s*:\\s*1\\.5rem\\s*;?[^}]*\\}",
+          "message": "Add 1.5rem padding to main.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-the-css-box-model-sketch1",
+      "kind": "code_input",
+      "title": "Reveal section box edges with a border",
+      "prompt": "## CSS task\n\nThe semantic content sections blend into the page because their box edges are invisible. A `border` makes the box boundary visible, which helps you see exactly where later `padding` and `margin` act. Keep the cumulative stylesheet and add `section { border: 1px solid #cbd5e1; }`. Preview existing semantic sections without adding wrappers. Check pages with sections: each existing section should gain a subtle `outline` without adding any wrapper HTML.\n\n### File to edit\n\n`styles.css`\n\n### Check your work\n\nKeep the site's existing cumulative work, make the requested change, then compare the **Preview** with the **Expected result** before moving on.",
+      "hint": "Style the existing section boxes directly.",
+      "help": {
+        "concept": "A `border` makes the box boundary visible, which helps you see exactly where later `padding` and `margin` act.",
+        "hint_1": "Style the existing section boxes directly.",
+        "hint_2": "Check pages with sections: each existing section should gain a subtle `outline` without adding any wrapper HTML."
+      },
+      "starterCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n",
+      "solutionCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "styles.css",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "index.html",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)section\\s*\\{[^}]*border\\s*:\\s*1px\\s+solid\\s+#cbd5e1\\s*;?[^}]*\\}",
+          "message": "Add the section border.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-the-css-box-model-sketch2",
+      "kind": "code_input",
+      "title": "Separate the footer with outside space",
+      "prompt": "## CSS task\n\nThe footer still crowds the content above it even though the content boxes themselves are clearer. Margin creates separation outside the footer box, unlike `padding` which would only add space inside it. Keep all previous CSS and add `footer { margin-top: 2rem; }`. The space should be outside the footer's box. Preview the bottom of several pages: there should be a clear `gap` before the footer while the footer's internal size stays the same.\n\n### File to edit\n\n`styles.css`\n\n### Check your work\n\nKeep the site's existing cumulative work, make the requested change, then compare the **Preview** with the **Expected result** before moving on.",
+      "hint": "Choose the spacing property that lives outside the element's `border`.",
+      "help": {
+        "concept": "Margin creates separation outside the footer box, unlike `padding` which would only add space inside it.",
+        "hint_1": "Choose the spacing property that lives outside the element's `border`.",
+        "hint_2": "Preview the bottom of several pages: there should be a clear `gap` before the footer while the footer's internal size stays the same."
+      },
+      "starterCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n",
+      "solutionCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "styles.css",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "index.html",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)footer\\s*\\{[^}]*margin-top\\s*:\\s*2rem\\s*;?[^}]*\\}",
+          "message": "Add a 2rem top margin to footer.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

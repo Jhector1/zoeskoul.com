@@ -1,0 +1,521 @@
+{
+  "title": "Media Queries and Mobile-First Design",
+  "summary": "Start with a usable small-screen layout and enhance it as more space becomes available.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "media-query-sketch-0",
+      "cardTitle": "Mobile-first starts with the narrow layout",
+      "title": "Mobile-first starts with the narrow layout",
+      "bodyMarkdown": "A mobile-first stylesheet makes the default rules usable in constrained space. Wider layouts are enhancements rather than prerequisites.\n\n**Worked example:**\n\n```css\nmain {\n  grid-template-columns: 1fr;\n}\n```\n\n**Line by line:** `main {` targets the existing Grid container. `grid-template-columns: 1fr;` makes one flexible column the default layout, which works naturally at narrow widths. The closing `}` ends the base rule. No media query is needed for this narrow-screen default."
+    },
+    {
+      "id": "media-query-sketch-1",
+      "cardTitle": "min-width enhances when space is available",
+      "title": "min-width enhances when space is available",
+      "bodyMarkdown": "A `min-width` media query applies additional rules once the viewport reaches a meaningful width.\n\n**Worked example:**\n\n```css\n@media (min-width: 48rem) {\n  main {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n```\n\n**Line by line:** `@media (min-width: 48rem) {` begins an enhancement that only applies when the viewport is at least 48rem wide. `main {` targets the existing Grid inside that condition. `grid-template-columns: repeat(2, minmax(0, 1fr));` changes the wider layout to two equal flexible columns while allowing Grid items to shrink safely. The first closing `}` ends the `main` rule, and the final `}` ends the media query."
+    },
+    {
+      "id": "media-query-sketch-2",
+      "cardTitle": "Choose breakpoints from the layout",
+      "title": "Choose breakpoints from the layout",
+      "bodyMarkdown": "A breakpoint should answer a layout need: enhance the Grid when the content has enough room for another useful column instead of targeting a device model.\n\n**Worked example:**\n\n```css\n@media (min-width: 64rem) {\n  main {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}\n```\n\n**Line by line:** `@media (min-width: 64rem) {` starts a wider layout enhancement. `main {` selects the inherited Grid container. `grid-template-columns: repeat(3, minmax(0, 1fr));` creates three equal flexible columns once that extra space is available. The inner `}` closes the `main` rule, and the outer `}` closes the media query."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "media-queries-and-mobile-first-design-single",
+      "kind": "single_choice",
+      "title": "Choose the mobile-first query",
+      "prompt": "Which condition enhances a layout when the viewport becomes at least a chosen width?",
+      "hint": "Choose the one option that matches the lesson definition.",
+      "help": {
+        "concept": "Use the lesson definition and evaluate each choice against it.",
+        "hint_1": "Check each option independently rather than relying on position.",
+        "hint_2": "Choose only the option or options that fully satisfy the prompt."
+      },
+      "options": [
+        "@media (min-width: 48rem)",
+        "@media (color: blue)",
+        "@grid 48rem",
+        "@flex 48rem"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "media-queries-and-mobile-first-design-multi-1",
+      "kind": "multi_choice",
+      "title": "Select the correct mobile-first statements 1",
+      "prompt": "Which statements describe a mobile-first approach?",
+      "hint": "Evaluate each statement independently. More than one choice may be correct.",
+      "help": {
+        "concept": "Use the lesson definition and evaluate each choice against it.",
+        "hint_1": "Check each option independently rather than relying on position.",
+        "hint_2": "Choose only the option or options that fully satisfy the prompt."
+      },
+      "options": [
+        "Default rules should work at narrow widths.",
+        "Wider layouts can be added with min-width queries.",
+        "Every device model needs its own breakpoint.",
+        "The HTML must be duplicated for each viewport."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "media-queries-and-mobile-first-design-multi-2",
+      "kind": "multi_choice",
+      "title": "Select the correct breakpoint statements 2",
+      "prompt": "Which are good reasons to add a breakpoint?",
+      "hint": "Evaluate each statement independently. More than one choice may be correct.",
+      "help": {
+        "concept": "Use the lesson definition and evaluate each choice against it.",
+        "hint_1": "Check each option independently rather than relying on position.",
+        "hint_2": "Choose only the option or options that fully satisfy the prompt."
+      },
+      "options": [
+        "The content has enough space for an additional useful column.",
+        "The existing layout becomes awkward and needs an enhancement.",
+        "A particular phone brand was released.",
+        "You want a random extra rule."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "media-queries-and-mobile-first-design-reorder",
+      "kind": "drag_reorder",
+      "title": "Order the mobile-first workflow",
+      "prompt": "Order the reasoning for adding a responsive breakpoint.",
+      "hint": "Start with the first reasoning step and move through the sequence.",
+      "help": {
+        "concept": "Use the lesson definition and evaluate each choice against it.",
+        "hint_1": "Check each option independently rather than relying on position.",
+        "hint_2": "Choose only the option or options that fully satisfy the prompt."
+      },
+      "tokens": [
+        "Make the default narrow layout usable.",
+        "Resize the preview and identify where more space becomes useful.",
+        "Add a min-width media query at that layout-driven point.",
+        "Preview again on both sides of the breakpoint."
+      ],
+      "correctOrder": [
+        "Make the default narrow layout usable.",
+        "Resize the preview and identify where more space becomes useful.",
+        "Add a min-width media query at that layout-driven point.",
+        "Preview again on both sides of the breakpoint."
+      ]
+    },
+    {
+      "id": "media-queries-and-mobile-first-design-fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the media-query statement 1",
+      "prompt": "Choose the CSS term that makes the statement correct.",
+      "hint": "Match the missing term to the exact CSS concept described.",
+      "help": {
+        "concept": "Use the lesson definition and evaluate each choice against it.",
+        "hint_1": "Check each option independently rather than relying on position.",
+        "hint_2": "Choose only the option or options that fully satisfy the prompt."
+      },
+      "template": "A mobile-first enhancement commonly uses a [blank1] width condition.",
+      "choices": [
+        "min-width",
+        "font-name",
+        "device-brand",
+        "z-index"
+      ],
+      "correctValue": "min-width"
+    },
+    {
+      "id": "media-queries-and-mobile-first-design-fill-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the media-query statement 2",
+      "prompt": "Choose the CSS term that makes the statement correct.",
+      "hint": "Match the missing term to the exact CSS concept described.",
+      "help": {
+        "concept": "Use the lesson definition and evaluate each choice against it.",
+        "hint_1": "Check each option independently rather than relying on position.",
+        "hint_2": "Choose only the option or options that fully satisfy the prompt."
+      },
+      "template": "Responsive rules grouped by a viewport condition are written inside [blank1].",
+      "choices": [
+        "@media",
+        "@font-face",
+        "@keyframes-only",
+        "@counter-style"
+      ],
+      "correctValue": "@media"
+    },
+    {
+      "id": "try-media-queries-and-mobile-first-design-sketch0",
+      "kind": "code_input",
+      "title": "Make one column the narrow-screen default",
+      "prompt": "## CSS task\n\nBefore adding breakpoint enhancements, the narrow-screen experience needs one predictable base layout. Mobile-first CSS places the simple one-column default outside media queries so larger layouts become optional enhancements rather than requirements. Start the responsive phase from the fluid Grid checkpoint. Append `main { grid-template-columns: 1fr; }` so the default layout is one column. Narrow the preview: main should resolve to a single readable column before any wider-screen rule applies.\n\n### File to edit\n\n`styles.css`\n\n### Check your work\n\nKeep the site's existing cumulative work, make the requested change, then compare the **Preview** with the **Expected result** before moving on.",
+      "hint": "Set the narrow default directly on main, outside a media query.",
+      "help": {
+        "concept": "Mobile-first CSS places the simple one-column default outside media queries so larger layouts become optional enhancements rather than requirements.",
+        "hint_1": "Set the narrow default directly on main, outside a media query.",
+        "hint_2": "Narrow the preview: main should resolve to a single readable column before any wider-screen rule applies."
+      },
+      "starterCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n",
+      "solutionCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "styles.css",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "index.html",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*grid-template-columns\\s*:\\s*1fr\\s*;?[^}]*\\}",
+          "message": "Set a one-column default Grid.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-media-queries-and-mobile-first-design-sketch1",
+      "kind": "code_input",
+      "title": "Enhance to two columns and keep Grid items shrink-safe",
+      "prompt": "## CSS task\n\nThe one-column base is safe, but medium-`width` screens have enough room for two columns; Grid items also need permission to shrink inside those tracks. A `min-width` enhancement adds columns only when space allows, and `min-width: 0 prevents long intrinsic content from forcing a Grid item wider than its track`. Add a `@media (min-width: 48rem)` enhancement that gives `main` two equal `minmax(0, 1fr)` columns. Also add `main > * { min-width: 0; }` so direct Grid items can shrink safely. Around and above 48rem, the preview should gain two equal columns while direct Grid children remain shrink-safe instead of causing horizontal `overflow`.\n\n### File to edit\n\n`styles.css`\n\n### Check your work\n\nKeep the site's existing cumulative work, make the requested change, then compare the **Preview** with the **Expected result** before moving on.",
+      "hint": "Keep the narrow default, enhance at the breakpoint, and make the existing direct Grid children shrink-safe.",
+      "help": {
+        "concept": "A `min-width` enhancement adds columns only when space allows, and `min-width: 0 prevents long intrinsic content from forcing a Grid item wider than its track`.",
+        "hint_1": "Keep the narrow default, enhance at the breakpoint, and make the existing direct Grid children shrink-safe.",
+        "hint_2": "Around and above 48rem, the preview should gain two equal columns while direct Grid children remain shrink-safe instead of causing horizontal `overflow`."
+      },
+      "starterCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n",
+      "solutionCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n\n@media (min-width: 48rem) {\n  main {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\nmain > * {\n  min-width: 0;\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "styles.css",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n\n@media (min-width: 48rem) {\n  main {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\nmain > * {\n  min-width: 0;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "index.html",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)@media\\s*\\(\\s*min-width\\s*:\\s*48rem\\s*\\)\\s*\\{.*?main\\s*\\{[^}]*grid-template-columns\\s*:\\s*repeat\\(\\s*2\\s*,\\s*minmax\\(\\s*0\\s*,\\s*1fr\\s*\\)\\s*\\)\\s*;?[^}]*\\}",
+          "message": "Add the 48rem two-column enhancement.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*>\\s*\\*\\s*\\{[^}]*min-width\\s*:\\s*0\\s*;?[^}]*\\}",
+          "message": "Allow main Grid items to shrink safely.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-media-queries-and-mobile-first-design-sketch2",
+      "kind": "code_input",
+      "title": "Finish the wide responsive Grid checkpoint",
+      "prompt": "## CSS task\n\nWide screens can support a third column, and the first content item can use that extra space to become a stronger visual feature. A second `min-width` enhancement can add the third track and change only the first item's span at that same wide-layout stage. Add a `@media (min-width: 64rem)` enhancement that gives `main` three equal `minmax(0, 1fr)` columns. In a 64rem-wide enhancement, let `main > :first-child` span two columns. At 64rem and wider, main should show three equal columns and its first direct child should span two of them; narrower layouts should keep the earlier behavior.\n\n### File to edit\n\n`styles.css`\n\n### Check your work\n\nKeep the site's existing cumulative work, make the requested change, then compare the **Preview** with the **Expected result** before moving on.",
+      "hint": "Add the wide-screen track enhancement and feature the existing first child without adding markup.",
+      "help": {
+        "concept": "A second `min-width` enhancement can add the third track and change only the first item's span at that same wide-layout stage.",
+        "hint_1": "Add the wide-screen track enhancement and feature the existing first child without adding markup.",
+        "hint_2": "At 64rem and wider, main should show three equal columns and its first direct child should span two of them; narrower layouts should keep the earlier behavior."
+      },
+      "starterCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n\n@media (min-width: 48rem) {\n  main {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\nmain > * {\n  min-width: 0;\n}\n",
+      "solutionCode": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n\n@media (min-width: 48rem) {\n  main {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\nmain > * {\n  min-width: 0;\n}\n\n@media (min-width: 64rem) {\n  main {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}\n\n@media (min-width: 64rem) {\n  main > :first-child {\n    grid-column: span 2;\n  }\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "styles.css",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n\n@media (min-width: 48rem) {\n  main {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\nmain > * {\n  min-width: 0;\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Personal portfolio of Jordan Lee, an aspiring web developer sharing skills, projects, and contact information.\">\n  <title>Jordan Lee | Home</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Jordan Lee</h1>\n    <p>Aspiring web developer building practical projects for the community.</p>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Welcome</h2>\n      <img src=\"images/profile.png\" alt=\"Portrait of Jordan Lee\">\n      <p class=\"intro\">This portfolio introduces my background, projects, and contact information.</p>\n      <p>Explore my <a href=\"about.html\">skills</a> and <a href=\"projects/portfolio.html\">project progress</a>.</p>\n      <p>Have a project idea or learning opportunity? <a href=\"contact.html\">Send me a message</a>.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "about.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"About Jordan Lee and the HTML skills currently being practiced.\">\n  <title>Jordan Lee | About</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>About Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>My learning path</h2>\n      <p>I am learning web development by building useful pages and reviewing how each HTML element communicates meaning.</p>\n    </section>\n\n    <section>\n      <h2>Skills I'm practicing</h2>\n      <ul>\n        <li>Semantic HTML structure</li>\n        <li>Accessible forms and labels</li>\n        <li>Multi-page navigation and relative paths</li>\n      </ul>\n      <p>My current goal is to build clear, accessible websites before moving on to CSS.</p>\n    </section>\n  </main>\n\n  <footer>\n    <p>Return to the <a href=\"index.html\">portfolio home page</a>.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Portfolio projects by Jordan Lee demonstrating semantic HTML and accessibility.\">\n  <title>Jordan Lee | Projects</title>\n  <link rel=\"stylesheet\" href=\"../styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Projects</h1>\n\n    <nav>\n      <a href=\"../index.html\">Home</a>\n      <a href=\"../about.html\">About</a>\n      <a href=\"portfolio.html\">Projects</a>\n      <a href=\"../contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>What I'm building</h2>\n      <img src=\"../images/profile.png\" alt=\"Portrait of Jordan Lee beside a portfolio project\">\n      <p>I use small community-focused projects to practice HTML structure and accessibility.</p>\n\n      <h3>Project progress</h3>\n      <table>\n        <thead>\n          <tr>\n            <th scope=\"col\">Project</th>\n            <th scope=\"col\">Focus</th>\n            <th scope=\"col\">Status</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Community Event Page</td>\n            <td>Semantic content</td>\n            <td>Complete</td>\n          </tr>\n          <tr>\n            <td>Workshop Signup</td>\n            <td>Accessible forms</td>\n            <td>Complete</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>For HTML reference material, I use <a href=\"https://developer.mozilla.org/\">MDN Web Docs</a>.</p>\n    </article>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's project portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"Contact Jordan Lee about project ideas and learning opportunities.\">\n  <title>Jordan Lee | Contact</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <header>\n    <h1>Contact Jordan</h1>\n\n    <nav>\n      <a href=\"index.html\">Home</a>\n      <a href=\"about.html\">About</a>\n      <a href=\"projects/portfolio.html\">Projects</a>\n      <a href=\"contact.html\">Contact</a>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Start a conversation</h2>\n      <p>Share a project idea or learning opportunity.</p>\n\n      <form>\n        <label for=\"visitor-name\">Name</label>\n        <input id=\"visitor-name\" name=\"name\" type=\"text\" required>\n\n        <label for=\"visitor-email\">Email address</label>\n        <input id=\"visitor-email\" name=\"email\" type=\"email\" required>\n\n        <fieldset>\n          <legend>Reason for contacting me</legend>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"project\">\n            Project idea\n          </label>\n          <label>\n            <input type=\"radio\" name=\"reason\" value=\"learning\">\n            Learning opportunity\n          </label>\n        </fieldset>\n\n        <label for=\"message\">Message</label>\n        <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\n        <button type=\"submit\">Send message</button>\n      </form>\n    </section>\n  </main>\n\n  <footer>\n    <p>Jordan Lee's HTML portfolio.</p>\n  </footer>\n</body>\n</html>\n",
+          "language": "web",
+          "isEntry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "h1 {\n  color: #0f766e;\n}\n\np {\n  color: #334155;\n}\n\n.intro {\n  font-weight: 600;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nbody {\n  background-color: #f8fafc;\n  color: #1e293b;\n  font-family: Arial, sans-serif;\n}\n\nh2 {\n  color: #0f172a;\n}\n\np {\n  line-height: 1.6;\n}\n\nmain {\n  color: #334155;\n}\n\nheader,\nfooter {\n  background-color: #e2e8f0;\n  color: #0f172a;\n}\n\np {\n  color: #475569;\n}\n\n.intro {\n  color: #0f766e;\n}\n\nnav a {\n  font-weight: 600;\n  text-decoration: none;\n}\n\nmain h2 {\n  color: #0f766e;\n}\n\nnav a {\n  color: #0f172a;\n}\n\nnav a {\n  color: #0f766e;\n}\n\nheader p {\n  color: #475569;\n}\n\n.intro {\n  font-weight: 700;\n}\n\nmain {\n  padding: 1.5rem;\n}\n\nsection {\n  border: 1px solid #cbd5e1;\n}\n\nfooter {\n  margin-top: 2rem;\n}\n\nheader {\n  padding: 1rem 1.5rem;\n}\n\nnav a {\n  margin-right: 1rem;\n}\n\nimg {\n  border: 4px solid #cbd5e1;\n  padding: 0.25rem;\n}\n\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\nimg {\n  max-width: 100%;\n  height: auto;\n}\n\nmain {\n  width: 90%;\n  max-width: 64rem;\n}\n\nnav a {\n  display: inline-block;\n}\n\nmain section,\nmain article {\n  border: 1px solid #cbd5e1;\n  padding: 1.25rem;\n  margin-block: 1rem;\n}\n\ntable {\n  display: block;\n  overflow-x: auto;\n}\n\nform {\n  max-width: 36rem;\n  padding: 1.5rem;\n  border: 1px solid #cbd5e1;\n}\n\nform label {\n  display: block;\n}\n\ntable {\n  width: 100%;\n}\n\nimg {\n  display: block;\n  margin-inline: auto;\n}\n\nnav {\n  display: flex;\n}\n\nheader {\n  display: flex;\n  flex-direction: column;\n}\n\nmain {\n  display: flex;\n  flex-direction: column;\n}\n\nnav {\n  justify-content: center;\n}\n\nheader {\n  align-items: center;\n}\n\nnav {\n  gap: 1rem;\n}\n\nnav {\n  flex-wrap: wrap;\n}\n\nform {\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\nmain {\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\nmain > section,\nmain > article {\n  flex: 1 1 18rem;\n}\n\nnav {\n  align-items: center;\n}\n\nnav a {\n  flex: 0 0 auto;\n}\n\nmain {\n  display: grid;\n}\n\nmain {\n  grid-template-columns: 1fr 1fr;\n}\n\nmain {\n  grid-template-rows: auto;\n}\n\nmain {\n  gap: 1rem;\n}\n\nmain {\n  grid-template-columns: repeat(2, 1fr);\n}\n\nmain > :first-child {\n  grid-column: 1 / -1;\n}\n\nmain {\n  width: 100%;\n}\n\nmain {\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n}\n\nmain {\n  max-width: 72rem;\n  margin-inline: auto;\n}\n\nmain {\n  grid-template-columns: 1fr;\n}\n\n@media (min-width: 48rem) {\n  main {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\nmain > * {\n  min-width: 0;\n}\n\n@media (min-width: 64rem) {\n  main {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}\n\n@media (min-width: 64rem) {\n  main > :first-child {\n    grid-column: span 2;\n  }\n}\n",
+          "language": "web",
+          "isEntry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "index.html",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)@media\\s*\\(\\s*min-width\\s*:\\s*64rem\\s*\\)\\s*\\{.*?main\\s*\\{[^}]*grid-template-columns\\s*:\\s*repeat\\(\\s*3\\s*,\\s*minmax\\(\\s*0\\s*,\\s*1fr\\s*\\)\\s*\\)\\s*;?[^}]*\\}",
+          "message": "Add the 64rem three-column enhancement.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)@media\\s*\\(\\s*min-width\\s*:\\s*64rem\\s*\\)\\s*\\{.*?main\\s*>\\s*:first-child\\s*\\{[^}]*grid-column\\s*:\\s*span\\s+2\\s*;?[^}]*\\}",
+          "message": "Let the first gallery item span two columns on wide layouts.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

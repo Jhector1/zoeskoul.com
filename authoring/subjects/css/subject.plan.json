@@ -1,0 +1,31 @@
+{
+  "subjectSlug": "css",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "accessPolicy": "paid",
+  "courseOrder": [
+    "css-foundations"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "css-foundations",
+    "courseSlug": "css-foundations",
+    "channel": "draft"
+  },
+  "versioning": {
+    "family": "css",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "css-foundations",
+      "title": "CSS Foundations",
+      "order": 1,
+      "path": "courses/css-foundations/course.spec.json",
+      "status": "draft"
+    }
+  ]
+}

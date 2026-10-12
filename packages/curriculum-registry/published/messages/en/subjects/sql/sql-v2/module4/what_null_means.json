@@ -156,6 +156,12 @@
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-find-missing-email-active-customers": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'active'\n  AND email IS NULL;"
+            }
           }
         }
       }

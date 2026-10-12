@@ -1,13 +1,15 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
+
+const repoRoot = fileURLToPath(new URL("../../../../", import.meta.url));
 describe("curriculum quality multi-file entry contract", () => {
   it("allows known alternate entry files by workspace capability, not profile name", () => {
     const source = fs.readFileSync(
-      path.resolve(
-        process.cwd(),
+      path.resolve(repoRoot,
         "packages/curriculum-compiler/src/quality/buildCurriculumQualityReport.ts",
       ),
       "utf8",

@@ -1,0 +1,867 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "css",
+  "courseSlug": "css-foundations",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "css-browser-workspace",
+  "title": "CSS Foundations",
+  "subtitle": "Style real web pages and build responsive layouts you can see live",
+  "intendedFor": "Absolute beginners who know basic HTML, students continuing from HTML Foundations, and learners preparing for JavaScript or frontend development.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "courseOverview": {
+    "recommendedSequence": "Complete modules in order. Every technical topic connects CSS source to a visible browser-preview change.",
+    "summary": "A practical beginner CSS course covering the cascade, selectors, typography, the box model, Flexbox, Grid, responsive design, reusable CSS, accessible states, and a complete multi-page responsive capstone.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "First Styles and the Cascade",
+        "coreSkill": "Connect CSS to HTML and reason about selectors, declarations, inheritance, and the cascade.",
+        "outputFocus": "Style a semantic profile page with readable typography, color, and predictable rule precedence."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "The Box Model and Spacing",
+        "coreSkill": "Control element dimensions and spacing with the box model.",
+        "outputFocus": "Create consistent content surfaces using spacing, sizing, borders, and display behavior."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Flexbox Layout",
+        "coreSkill": "Build adaptable one-dimensional layouts with Flexbox.",
+        "outputFocus": "Create flexible navigation, headers, and content rows that align and wrap cleanly."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Grid and Responsive Design",
+        "coreSkill": "Build fluid two-dimensional layouts and adapt them with mobile-first responsive rules.",
+        "outputFocus": "Create a responsive project gallery using Grid, fluid tracks, and media queries."
+      },
+      {
+        "moduleNumber": 5,
+        "title": "Polish, Reuse, and Accessible Styling",
+        "coreSkill": "Turn one-off styling into reusable, maintainable CSS with accessible interaction states.",
+        "outputFocus": "Build a consistent visual system with custom properties, reusable classes, and visible focus styles."
+      },
+      {
+        "moduleNumber": 6,
+        "title": "Final Capstone: Responsive Personal Website",
+        "coreSkill": "Combine the complete CSS Foundations skill set on a real multi-page portfolio.",
+        "outputFocus": "Deliver one polished responsive site with reusable CSS and accessible interaction states."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "css-foundations",
+      "startModuleNumber": 1,
+      "endModuleNumber": 6
+    },
+    "releases": [
+      {
+        "name": "css-foundations",
+        "startModuleNumber": 1,
+        "endModuleNumber": 6
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.2,
+        "multi_choice": 0.15,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.15,
+        "code_input": 0.4
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 3,
+        "projectCodeInputMax": 5,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 0,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 320
+    }
+  },
+  "authoringGuidance": [
+    "This course uses profileId web, workspaceProfileId browser-web-runner, and workspacePolicyId css-browser-workspace.",
+    "Hands-on CSS tasks use kind code_input, fixedLanguage web, recipeType source_checks, semantic HTML starter files, and styles.css.",
+    "Every code_input must include explicit sourceChecks and must not include stdout tests.",
+    "Prefer source_regex checks that allow harmless whitespace and declaration-order differences.",
+    "The live browser preview is the visual feedback surface; do not tell learners to open a terminal or run Judge0.",
+    "Keep CSS Foundations JavaScript-free and framework-free. Bootstrap, Tailwind, preprocessors, package installation, and backend tooling are outside this course.",
+    "Use semantic HTML starters so the learner's primary task remains CSS.",
+    "Teach keyboard focus and readable contrast as normal styling practice.",
+    "Topic and section counts are pedagogy-driven; do not add filler content to satisfy numeric targets."
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "One module per week or two short topics per study session.",
+    "recommendedCourseDeliverables": [
+      "Short concept sketches",
+      "CSS source checks",
+      "Live browser-preview exercises",
+      "Five module projects",
+      "One final responsive capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul CSS editor",
+      "Live browser preview",
+      "Check Answer source validation"
+    ],
+    "closingNote": "Learners finish able to style responsive, maintainable, accessible web pages and are ready to add JavaScript interactivity."
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "css-module-1-first-styles",
+      "prefix": "css_module_1",
+      "title": "First Styles and the Cascade",
+      "purpose": "Build confidence with first CSS rules and understand why the browser applies one style instead of another.",
+      "learningObjectives": [
+        "Compare inline, internal, and external CSS, then use external stylesheets for reusable presentation.",
+        "Write clear selectors and declaration blocks.",
+        "Use color and typography to create visual hierarchy.",
+        "Reason about the cascade, inheritance, and specificity."
+      ],
+      "guidedExercises": [
+        "Edit styles.css beside provided semantic HTML.",
+        "Observe the browser preview after each meaningful style change.",
+        "Use Check Answer to validate required CSS source patterns.",
+        "Start with a one-off inline style in index.html.",
+        "Refactor the same visual rule into a <style> block for one-page organization.",
+        "Move the same rule into styles.css and link it from semantic HTML.",
+        "From later lessons onward, work primarily in styles.css while editing HTML only when selectors or linking require markup.",
+        "Reuse the completed HTML Foundations Jordan Lee portfolio instead of rebuilding HTML.",
+        "Keep index.html, about.html, contact.html, projects/portfolio.html, and images/profile.png throughout CSS Foundations.",
+        "Carry the cumulative styles.css forward from one CSS topic and module project to the next."
+      ],
+      "quizFocus": [
+        "CSS rule anatomy",
+        "selector choice",
+        "cascade and inheritance"
+      ],
+      "moduleProject": "Style the inherited multi-file Jordan Lee HTML Foundations portfolio with one cumulative styles.css, preserving the HTML content and image except for tiny selector/link hooks explicitly required by CSS tasks.",
+      "sections": [
+        {
+          "sectionSlug": "css-module-1-lessons",
+          "title": "First Styles and the Cascade",
+          "summary": "Learn the core CSS ideas for connecting, targeting, and styling a page.",
+          "topics": [
+            {
+              "topicId": "connecting-css-to-html",
+              "title": "Connecting CSS to HTML",
+              "summary": "Apply CSS inline, with an internal <style> block, and with an external stylesheet; compare what each method solves and when external CSS becomes cleaner.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Apply a one-off inline style with the HTML style attribute.",
+                "Move page-level rules into an internal <style> element.",
+                "Link styles.css as an external stylesheet and explain why reusable CSS scales better.",
+                "Choose between inline, internal, and external CSS based on scope and maintainability."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "selectors-declarations-and-rules",
+              "title": "Selectors, Declarations, and Rules",
+              "summary": "Target elements and write CSS rules using selectors, properties, values, and declaration blocks.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Write type, class, and simple descendant selectors.",
+                "Build valid declaration blocks with properties and values."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "color-backgrounds-and-typography",
+              "title": "Color, Backgrounds, and Typography",
+              "summary": "Create visual hierarchy with readable color choices, backgrounds, font properties, and text spacing.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Apply foreground and background colors intentionally.",
+                "Control font family, size, weight, line height, and text alignment."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "cascade-inheritance-and-specificity",
+              "title": "Cascade, Inheritance, and Specificity",
+              "summary": "Predict which CSS declaration wins and avoid unnecessary selector conflicts.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Explain how source order, inheritance, and specificity affect computed styles.",
+                "Resolve simple styling conflicts without over-specific selectors."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "css-module-2-box-model-spacing",
+      "prefix": "css_module_2",
+      "title": "The Box Model and Spacing",
+      "purpose": "Make page structure visually understandable through predictable sizing, spacing, and box behavior.",
+      "learningObjectives": [
+        "Explain and manipulate content, padding, border, and margin on the inherited portfolio.",
+        "Use spacing and borders to improve grouping without rebuilding HTML.",
+        "Use border-box, width, max-width, and image constraints to make sizing predictable.",
+        "Use display and overflow to improve existing navigation, tables, forms, and images."
+      ],
+      "guidedExercises": [
+        "Continue from the exact final Module 1 six-file portfolio checkpoint.",
+        "Add padding, borders, and margin to existing semantic elements.",
+        "Keep the inherited profile image and make it fit its container safely.",
+        "Use display and overflow only to solve concrete box behavior.",
+        "Do not introduce Flexbox or Grid in Module 2."
+      ],
+      "quizFocus": [
+        "box-model layers",
+        "spacing choice",
+        "sizing behavior"
+      ],
+      "moduleProject": "Turn the existing multi-page portfolio into a clearer card-based interface using only box-model, sizing, display, and overflow skills. The final styles.css becomes Module 3's checkpoint.",
+      "sections": [
+        {
+          "sectionSlug": "css-module-2-lessons",
+          "title": "The Box Model and Spacing",
+          "summary": "Control the boxes, dimensions, and spacing that shape page content.",
+          "topics": [
+            {
+              "topicId": "the-css-box-model",
+              "title": "The CSS Box Model",
+              "summary": "Use the inherited portfolio to see how content, padding, border, and margin create the space every element occupies.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Identify content, padding, border, and margin as the four box-model layers.",
+                "Use padding to create space inside an element.",
+                "Use borders to reveal an element's edge.",
+                "Use margin to create space outside an element."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "margin-padding-and-borders",
+              "title": "Margin, Padding, and Borders",
+              "summary": "Refine spacing and visible edges across the same portfolio without changing its HTML content.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Choose margin for outside spacing and padding for inside spacing.",
+                "Use directional spacing properties intentionally.",
+                "Build borders from width, style, and color.",
+                "Apply spacing consistently to repeated site elements."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "sizing-and-box-sizing",
+              "title": "Sizing and box-sizing",
+              "summary": "Control how the inherited portfolio's boxes measure width and keep images from overflowing their pages.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Explain the difference between content-box and border-box sizing.",
+                "Use border-box to make declared sizes easier to reason about.",
+                "Constrain images with max-width and automatic height.",
+                "Use width and max-width together for readable page sizing."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "display-and-overflow",
+              "title": "Display and Overflow",
+              "summary": "Control how existing portfolio boxes participate in normal flow and handle content that is wider than its container.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Distinguish common block and inline behavior.",
+                "Use inline-block when an inline element needs box-like spacing.",
+                "Use overflow-x to preserve wide content without breaking the page.",
+                "Use display changes only when they solve a concrete layout behavior."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "css-module-3-flexbox-layout",
+      "prefix": "css_module_3",
+      "title": "Flexbox Layout",
+      "purpose": "Build one-dimensional layouts that align, distribute, and wrap content cleanly.",
+      "learningObjectives": [
+        "Create Flexbox containers from existing semantic portfolio regions.",
+        "Reason about main and cross axes from flex-direction.",
+        "Align and distribute items with justify-content, align-items, and gap.",
+        "Use wrapping and flexible bases for navigation and content cards."
+      ],
+      "guidedExercises": [
+        "Start from the exact locked Module 2 six-file portfolio checkpoint.",
+        "Work in styles.css and preserve all inherited HTML and the profile image.",
+        "Use Flexbox for one-dimensional layout relationships in existing semantic regions.",
+        "Do not introduce Grid or media queries before Module 4."
+      ],
+      "quizFocus": [
+        "main vs cross axis",
+        "alignment properties",
+        "wrapping and sizing"
+      ],
+      "moduleProject": "Build a flexible navigation/profile layout on the same inherited portfolio, including a flex contact form and footer. Carry the final styles.css into Module 4.",
+      "sections": [
+        {
+          "sectionSlug": "css-module-3-lessons",
+          "title": "Flexbox Layout",
+          "summary": "Build flexible rows, navigation, and aligned content using Flexbox.",
+          "topics": [
+            {
+              "topicId": "flex-containers-and-axes",
+              "title": "Flex Containers and Axes",
+              "summary": "Turn existing portfolio regions into Flexbox containers and reason about the main and cross axes without changing the semantic HTML.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Create a Flexbox formatting context.",
+                "Explain how flex-direction changes the main axis."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "alignment-distribution-and-gap",
+              "title": "Alignment, Distribution, and Gap",
+              "summary": "Align and distribute the portfolio's existing flex items with justify-content, align-items, and gap.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Use justify-content and align-items for layout alignment.",
+                "Use gap for consistent spacing between flex items."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "wrapping-sizing-and-flex-patterns",
+              "title": "Wrapping, Sizing, and Flex Patterns",
+              "summary": "Let navigation and content cards wrap when space is limited and give repeated content flexible base sizes.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Use flex-wrap when items should move to additional rows.",
+                "Reason about flex grow, shrink, and basis at a beginner level.",
+                "Apply Flexbox to navigation and card-row patterns."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "css-module-4-grid-responsive-design",
+      "prefix": "css_module_4",
+      "title": "Grid and Responsive Design",
+      "purpose": "Build two-dimensional layouts that adapt across viewport sizes without device-specific hacks.",
+      "learningObjectives": [
+        "Create CSS Grid layouts with columns, rows, gap, and repeat().",
+        "Use relative units, fr, and minmax() for fluid sizing.",
+        "Apply mobile-first media queries for responsive changes."
+      ],
+      "guidedExercises": [
+        "Resize the browser preview while editing Grid declarations.",
+        "Compare fixed tracks with fluid minmax-based tracks.",
+        "Use Check Answer to validate required responsive source rules."
+      ],
+      "quizFocus": [
+        "Grid tracks",
+        "fluid sizing",
+        "mobile-first media queries"
+      ],
+      "moduleProject": "Project: Build a Responsive Project Gallery",
+      "sections": [
+        {
+          "sectionSlug": "css-module-4-lessons",
+          "title": "Grid and Responsive Design",
+          "summary": "Build fluid two-dimensional layouts and adapt them across viewport sizes.",
+          "topics": [
+            {
+              "topicId": "grid-columns-and-rows",
+              "title": "Grid Columns and Rows",
+              "summary": "Create two-dimensional layouts with explicit grid columns and rows.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Create a grid container.",
+                "Define columns and rows using grid-template properties."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "grid-placement-gap-and-repeat",
+              "title": "Grid Placement, Gap, and repeat()",
+              "summary": "Place content in a grid and create repeated tracks without duplicating declarations.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Use gap for grid spacing.",
+                "Use repeat() to express repeated tracks.",
+                "Place items in simple grid regions."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "responsive-units-minmax-and-fluid-tracks",
+              "title": "Responsive Units, minmax(), and Fluid Tracks",
+              "summary": "Build layouts that adapt naturally using percentages, rem, fr, minmax(), and flexible constraints.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Choose relative units for responsive sizing.",
+                "Use fr and minmax() to create fluid Grid tracks."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "media-queries-and-mobile-first-design",
+              "title": "Media Queries and Mobile-First Design",
+              "summary": "Start with a usable small-screen layout and enhance it as more space becomes available.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Write a basic media query.",
+                "Apply mobile-first responsive changes at meaningful breakpoints.",
+                "Avoid breakpoint choices that depend on one device model."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "css-module-5-polish-reuse-accessibility",
+      "prefix": "css_module_5",
+      "title": "Polish, Reuse, and Accessible Styling",
+      "purpose": "Turn one-off styling into a small, consistent, maintainable visual system with accessible states.",
+      "learningObjectives": [
+        "Use custom properties for reusable design values.",
+        "Create reusable classes and organize stylesheet sections clearly.",
+        "Style hover and keyboard-focus states with readable contrast."
+      ],
+      "guidedExercises": [
+        "Replace repeated literal values with custom properties.",
+        "Refactor repeated rule sets into reusable classes.",
+        "Test keyboard focus visibility in the browser preview."
+      ],
+      "quizFocus": [
+        "custom properties",
+        "reusability",
+        "accessible interaction states"
+      ],
+      "moduleProject": "Project: Build a Reusable Visual System",
+      "sections": [
+        {
+          "sectionSlug": "css-module-5-lessons",
+          "title": "Polish, Reuse, and Accessible Styling",
+          "summary": "Create consistent reusable styling and accessible interaction feedback.",
+          "topics": [
+            {
+              "topicId": "custom-properties-and-reusable-values",
+              "title": "Custom Properties and Reusable Values",
+              "summary": "Define reusable design values for color, spacing, and other repeated decisions.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Declare and consume CSS custom properties.",
+                "Use reusable values to make visual changes consistent."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "reusable-classes-and-maintainable-css",
+              "title": "Reusable Classes and Maintainable CSS",
+              "summary": "Organize CSS around reusable patterns instead of copying nearly identical rules.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Create reusable classes for repeated visual patterns.",
+                "Group and order stylesheet sections so future edits remain understandable."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "hover-focus-and-accessible-states",
+              "title": "Hover, Focus, and Accessible States",
+              "summary": "Style interactive elements so mouse and keyboard users can understand their state.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Use pseudo-classes for hover and focus states.",
+                "Create a visible keyboard focus treatment.",
+                "Preserve readable contrast in default and interactive states."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 6,
+      "moduleSlug": "css-module-6-final-capstone",
+      "prefix": "css_module_6",
+      "title": "Final Capstone: Build a Responsive Event Website",
+      "purpose": "Transfer the CSS skills from the cumulative learning portfolio to a fresh multi-page project with unfamiliar content and layout requirements.",
+      "learningObjectives": [
+        "Apply one consistent stylesheet across a multi-page semantic website.",
+        "Combine cascade, typography, box model, Flexbox, Grid, responsive design, and reusable CSS appropriately.",
+        "Preserve semantic HTML while improving the presentation layer.",
+        "Review accessible interaction states and responsive behavior before submission."
+      ],
+      "guidedExercises": [
+        "Keep the provided semantic HTML stable and work primarily in styles.css.",
+        "Carry every CSS improvement forward through the remaining milestones.",
+        "Use the browser preview at narrow and wide viewport sizes after each major layout change.",
+        "Run cumulative source checks after each milestone."
+      ],
+      "quizFocus": [
+        "layout choice",
+        "responsive reasoning",
+        "maintainability and accessibility review"
+      ],
+      "moduleProject": "Build a Responsive Community Tech Festival Website",
+      "sections": [
+        {
+          "sectionSlug": "css-module-6-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Style one cumulative semantic portfolio into a polished, reusable, responsive, accessible website.",
+          "topics": [
+            {
+              "topicId": "final-css-responsive-site-capstone",
+              "title": "Build a Responsive Community Tech Festival Website",
+              "summary": "Transform a provided semantic multi-page portfolio into one polished responsive design system using a cumulative styles.css file.",
+              "minutes": 55,
+              "technical": true,
+              "learningGoals": [
+                "Apply a consistent color and typography system across multiple semantic pages.",
+                "Use the box model, Flexbox, and Grid where each layout problem fits best.",
+                "Create mobile-first responsive behavior with fluid sizing and media queries.",
+                "Use reusable custom properties and classes instead of duplicated styling.",
+                "Provide visible focus states and readable contrast for interactive content.",
+                "Review the complete site in the live browser preview and pass cumulative source checks."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A local career-readiness mentor already has a semantic multi-page portfolio in HTML and wants it transformed into a polished responsive site that looks professional on phones and larger screens.",
+                "role": "Beginner frontend developer responsible for the presentation layer of an existing semantic website.",
+                "workspace": "A cumulative browser-web workspace containing the provided semantic HTML portfolio, its existing image asset, and one styles.css file. Keep the HTML content stable unless a task explicitly requires a class or stylesheet-link relationship needed for CSS.",
+                "deliverable": "One complete responsive multi-page portfolio with consistent typography and color, deliberate spacing, Flexbox and Grid layouts, reusable CSS, mobile-first behavior, and accessible interaction states.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Focus on CSS; do not turn the capstone into an HTML-authoring exercise.",
+                  "Use the provided semantic page structure and content as the starting point.",
+                  "Use one cumulative styles.css file across the site.",
+                  "Use the cascade intentionally and avoid unnecessary selector specificity.",
+                  "Use the box model for spacing and sizing, Flexbox for one-dimensional alignment, and Grid for two-dimensional layouts.",
+                  "Use mobile-first responsive rules and fluid sizing rather than device-specific breakpoints.",
+                  "Use custom properties and reusable classes for repeated design decisions.",
+                  "Provide visible keyboard focus and readable contrast.",
+                  "Use live browser preview and source checks; do not require Judge0 or terminal execution."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Connect the Stylesheet and Establish the Visual Foundation",
+                    "requirement": "Connect styles.css across the provided pages and establish the exact base typography, colors, and page-wide defaults required by the task."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Build Consistent Spacing and Content Surfaces",
+                    "requirement": "Use the box model, max-width, spacing, borders, and reusable surface styles to organize the existing content clearly."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Lay Out Navigation and Flexible Content with Flexbox",
+                    "requirement": "Use Flexbox for the required navigation, header, and one-dimensional content relationships while preserving usable wrapping."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Build the Project Gallery with Grid",
+                    "requirement": "Use CSS Grid, gap, repeat(), and fluid tracks to organize the existing project content."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Make the Site Responsive",
+                    "requirement": "Apply mobile-first responsive sizing and media queries so the complete site works cleanly from narrow to wide viewports."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Refactor, Polish, and Validate Accessibility",
+                    "requirement": "Use custom properties and reusable classes, verify focus visibility and contrast, preview every page, and pass cumulative source checks."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "role": "capstone"
+    }
+  ]
+}

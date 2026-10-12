@@ -1,0 +1,57 @@
+{
+  "subjectSlug": "css",
+  "courseSlug": "css-foundations",
+  "catalogSlug": "web",
+  "trackSlug": "web-development",
+  "profileId": "web",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "css-browser-workspace",
+  "title": "CSS Foundations",
+  "description": "Style semantic web pages with CSS, build responsive layouts with Flexbox and Grid, and refine accessible designs in ZoeSkoul's live browser preview.",
+  "moduleOrder": [
+    "css-module-1-first-styles",
+    "css-module-2-box-model-spacing",
+    "css-module-3-flexbox-layout",
+    "css-module-4-grid-responsive-design",
+    "css-module-5-polish-reuse-accessibility",
+    "css-module-6-final-capstone"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "css-module-1-first-styles",
+      "moduleNumber": 1,
+      "title": "First Styles and the Cascade",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "css-module-2-box-model-spacing",
+      "moduleNumber": 2,
+      "title": "The Box Model and Spacing",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "css-module-3-flexbox-layout",
+      "moduleNumber": 3,
+      "title": "Flexbox Layout",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "css-module-4-grid-responsive-design",
+      "moduleNumber": 4,
+      "title": "Grid and Responsive Design",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "css-module-5-polish-reuse-accessibility",
+      "moduleNumber": 5,
+      "title": "Polish, Reuse, and Accessible Styling",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "css-module-6-final-capstone",
+      "moduleNumber": 6,
+      "title": "Final Capstone: Build a Responsive Event Website",
+      "role": "capstone"
+    }
+  ]
+}

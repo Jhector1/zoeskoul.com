@@ -235,6 +235,12 @@
                 "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-sort-stock-then-name": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;"
+            }
           }
         }
       }

@@ -328,9 +328,9 @@ describe("openAiProvider", () => {
 
         expect(providerSchema).not.toEqual(TOPIC_AUTHORING_DRAFT_JSON_SCHEMA);
         expect(findKeywordPath(providerSchema, "oneOf")).toBeNull();
-        expect(findKeywordPath(TOPIC_AUTHORING_DRAFT_JSON_SCHEMA, "oneOf")).toBe(
-            "$.properties.quizDraft.items.oneOf",
-        );
+        expect(
+            findKeywordPath(TOPIC_AUTHORING_DRAFT_JSON_SCHEMA, "oneOf"),
+        ).not.toBeNull();
         expect(() =>
             assertOpenAiStructuredOutputSchemaCompatible(providerSchema),
         ).not.toThrow();

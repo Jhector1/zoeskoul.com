@@ -1,0 +1,16 @@
+{
+  "subjectSlug": "css",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "title": "CSS",
+  "summary": "A hands-on CSS path from first styles through the cascade, box model, Flexbox, Grid, responsive design, reusable patterns, and accessible visual polish.",
+  "courseOrder": [
+    "css-foundations"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "css-foundations",
+      "outcome": "Transform a semantic multi-page HTML portfolio into a polished, responsive, accessible website using modern CSS and the live browser preview."
+    }
+  ]
+}

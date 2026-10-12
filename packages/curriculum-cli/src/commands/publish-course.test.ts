@@ -3,11 +3,13 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const mockedCompiler = vi.hoisted(() => ({
     resolveAuthoringCompileTarget: vi.fn(),
     publishDraftToLive: vi.fn(),
+    rebuildRegistries: vi.fn(),
 }));
 
 vi.mock("@zoeskoul/curriculum-compiler", () => ({
     resolveAuthoringCompileTarget: mockedCompiler.resolveAuthoringCompileTarget,
     publishDraftToLive: mockedCompiler.publishDraftToLive,
+    rebuildRegistries: mockedCompiler.rebuildRegistries,
 }));
 
 import {
@@ -43,6 +45,7 @@ describe("runPublishCourse", () => {
     beforeEach(() => {
         mockedCompiler.resolveAuthoringCompileTarget.mockReset();
         mockedCompiler.publishDraftToLive.mockReset();
+        mockedCompiler.rebuildRegistries.mockReset();
     });
 
     it("publishes a checked draft into the resolved live subject", async () => {
@@ -80,6 +83,7 @@ describe("runPublishCourse", () => {
             draftSubjectSlug: "python--python-data-functions--draft",
             liveSubjectSlug: "python-v2",
         });
+        expect(mockedCompiler.rebuildRegistries).toHaveBeenCalledTimes(1);
     });
 
     it("refuses when publish resolves a different course", async () => {
@@ -95,5 +99,6 @@ describe("runPublishCourse", () => {
             "Course publish resolved the wrong course: requested python-data-functions but resolved different-course. Aborting.",
         );
         expect(mockedCompiler.publishDraftToLive).not.toHaveBeenCalled();
+        expect(mockedCompiler.rebuildRegistries).not.toHaveBeenCalled();
     });
 });

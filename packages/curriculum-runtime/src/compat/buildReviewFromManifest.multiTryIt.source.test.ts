@@ -1,12 +1,8 @@
 import fs from "node:fs";
-import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 const source = fs.readFileSync(
-    path.resolve(
-        process.cwd(),
-        "packages/curriculum-runtime/src/compat/buildReviewFromManifest.ts",
-    ),
+    new URL("./buildReviewFromManifest.ts", import.meta.url),
     "utf8",
 );
 

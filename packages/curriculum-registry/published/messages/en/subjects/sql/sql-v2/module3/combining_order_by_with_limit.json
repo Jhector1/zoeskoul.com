@@ -152,6 +152,12 @@
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
+          },
+          "practice": {
+            "practice-cheapest-two-products": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC, name ASC\nLIMIT 2;"
+            }
           }
         }
       }

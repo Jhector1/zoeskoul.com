@@ -1,0 +1,30 @@
+{
+  "policyId": "css-shared-validation",
+  "extendsValidation": [
+    "course-structure",
+    "versioning",
+    "workspace-language"
+  ],
+  "runtime": {
+    "language": "web"
+  },
+  "validationRequirements": {
+    "cssCodeInputNeedsSourceChecks": true,
+    "judge0NotRequired": true,
+    "browserPreviewRequired": true
+  },
+  "rules": {
+    "executionValidation": [
+      "Every CSS code_input must use recipeType source_checks",
+      "Every CSS code_input must include at least one sourceChecks rule",
+      "Use source_regex or source_contains checks against styles.css and only inspect HTML when the styling task requires a selector-to-markup relationship",
+      "Do not create stdout tests for CSS-only exercises"
+    ],
+    "pedagogy": [
+      "Keep CSS Foundations focused on styling, layout, responsive design, maintainability, and accessible visual states",
+      "Each hands-on exercise should create a visible result in the browser preview",
+      "Provide semantic HTML starters so learners practice CSS instead of re-authoring prerequisite HTML",
+      "Do not require JavaScript or CSS frameworks to complete CSS Foundations"
+    ]
+  }
+}

@@ -153,6 +153,12 @@
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-repair-missing-from": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price\nFROM products;"
+            }
           }
         }
       }

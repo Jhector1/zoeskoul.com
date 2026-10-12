@@ -157,6 +157,19 @@
           "path": "subjects/html/courses/html-foundations/course.spec.json"
         }
       ]
+    },
+    {
+      "subjectSlug": "css",
+      "path": "subjects/css",
+      "courseOrder": [
+        "css-foundations"
+      ],
+      "courses": [
+        {
+          "courseSlug": "css-foundations",
+          "path": "subjects/css/courses/css-foundations/course.spec.json"
+        }
+      ]
     }
   ]
 }

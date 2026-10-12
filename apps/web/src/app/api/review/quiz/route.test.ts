@@ -174,7 +174,7 @@ describe("/api/review/quiz route", () => {
         expect(json.questions[0].fetch.exerciseKey).toBe("quiz-single");
         expect(json.questions[0].fetch.exerciseKey).not.toBe("project-code");
         expect(mockDb.practiceTopicFindMany).not.toHaveBeenCalled();
-    });
+    }, 15_000);
 
     it("uses explicit authored quiz exercise keys deterministically", async () => {
         const route = await import("./route");

@@ -243,8 +243,8 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
             .toContain('"strictSchema": true');
         await expect(fs.readFile(path.join(attemptDir, "emitted-topic-bundle.json"), "utf8")).resolves
             .toContain('"subjectSlug": "sql-v2"');
-        expect(prompt.system).toContain("TopicAuthoringDraft");
-        expect(prompt.user).toContain('"profileId": "sql"');
+        expect(prompt.system).toBe("canonical-topic-source-draft");
+        expect(prompt.user).toBe("what_sql_is");
         expect(hashes.promptHash).toBeTypeOf("string");
         expect(hashes.compiledTopicBundleHash).toBeTypeOf("string");
     });

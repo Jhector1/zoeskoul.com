@@ -112,6 +112,16 @@
               "title": "Run a different one-row query",
               "prompt": "Return the text `Practice ready` in a one-row result with the column heading `check_in`. Run the statement, then verify the Results table shows that heading and value."
             }
+          },
+          "practice": {
+            "practice-run-student-columns": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name\nFROM students;"
+            },
+            "practice-run-student-city-query": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, city\nFROM students;"
+            }
           }
         }
       }

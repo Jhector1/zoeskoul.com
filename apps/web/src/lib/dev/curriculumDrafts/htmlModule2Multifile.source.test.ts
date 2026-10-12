@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-const repoRoot = path.resolve(process.cwd());
+const repoRoot = path.resolve(process.cwd(), "../..");
 
 function readJson(relativePath: string) {
   return JSON.parse(

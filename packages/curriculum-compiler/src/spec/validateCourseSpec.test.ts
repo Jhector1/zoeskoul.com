@@ -337,7 +337,7 @@ describe("validateCourseSpec", () => {
     it("accepts the current applied-python-projects authored structure", () => {
         const spec = JSON.parse(
             readFileSync(
-                "/Users/admin/Documents/NextJSProject/zoeskoul.com/authoring/subjects/python/courses/applied-python-projects/course.spec.json",
+                new URL("../../../../authoring/subjects/python/courses/applied-python-projects/course.spec.json", import.meta.url),
                 "utf8",
             ),
         );

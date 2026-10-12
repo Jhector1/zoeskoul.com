@@ -2,10 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
+const repoRoot = path.resolve(process.cwd(), "../..");
+
 const root = path.resolve(
-    process.cwd(),
-    "authoring/subjects/haitian-creole/courses/" +
-        "haitian-creole-foundations/content",
+    repoRoot,
+    ".curriculum-drafts/haitian-creole/subjects/haitian-creole/" +
+        "courses/haitian-creole-foundations/topics",
 );
 
 function jsonFiles(dir: string): string[] {
@@ -95,7 +97,9 @@ describe("Haitian Creole learner-facing copy", () => {
     it("does not expose internal or rote-copy wording", () => {
         const violations: string[] = [];
 
-        for (const file of jsonFiles(root)) {
+        for (const file of jsonFiles(root).filter(
+                        (file) => !file.endsWith(".source.json"),
+                    )) {
             const json = JSON.parse(
                 fs.readFileSync(file, "utf8"),
             );

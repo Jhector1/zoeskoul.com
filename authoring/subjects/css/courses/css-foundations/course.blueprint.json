@@ -1,0 +1,61 @@
+{
+  "subjectSlug": "css",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "css-browser-workspace",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "title": "CSS Foundations",
+  "description": "A hands-on beginner CSS course that teaches the cascade, selectors, color and typography, the box model, Flexbox, Grid, responsive design, reusable CSS, and accessible visual states through a live browser preview.",
+  "level": "beginner",
+  "audience": [
+    "absolute beginners who know basic HTML",
+    "students continuing from HTML Foundations",
+    "programming students learning frontend development",
+    "learners preparing for JavaScript and interactive web development"
+  ],
+  "goals": [
+    "Connect an external stylesheet to semantic HTML and write clear CSS rules",
+    "Use the cascade, inheritance, selectors, color, and typography intentionally",
+    "Control spacing, sizing, and visual structure with the box model",
+    "Build flexible page layouts with Flexbox and CSS Grid",
+    "Create responsive designs with relative units, minmax, and media queries",
+    "Use reusable CSS patterns, custom properties, and accessible interaction states",
+    "Style a complete responsive multi-page portfolio in the ZoeSkoul browser workspace"
+  ],
+  "teachingStyle": {
+    "tone": "friendly, visual, practical, beginner-safe, and build-first",
+    "quizWeight": 0.25,
+    "projectWeight": 0.4,
+    "codeInputWeight": 0.6
+  },
+  "constraints": {
+    "moduleCount": 6,
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 8,
+    "moduleSlugFormat": "<subjectSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<subjectSlug>-module-<number>-<short-section-role>",
+    "prefixFormat": "css_module_<number>"
+  },
+  "courseSlug": "css-foundations",
+  "trackSlug": "web-development",
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser-web-preview",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "CSS editor",
+      "output panel": "browser preview",
+      "run button": "Preview"
+    },
+    "notes": [
+      "Use fixedLanguage web and recipeType source_checks for CSS code_input exercises.",
+      "Use semantic HTML starter files and styles.css so exercises focus on CSS rather than prerequisite markup authoring.",
+      "Every technical topic should connect a CSS source change to a visible browser-preview result.",
+      "Use source checks that allow harmless whitespace and declaration-order differences whenever possible.",
+      "Do not require JavaScript, frameworks, preprocessors, npm, or terminal execution.",
+      "Topic and section counts are pedagogy-driven; never add filler topics to satisfy a quota."
+    ]
+  },
+  "modulePolicies": []
+}

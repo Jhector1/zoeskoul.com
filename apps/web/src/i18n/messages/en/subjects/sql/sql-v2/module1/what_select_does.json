@@ -236,6 +236,12 @@
                 "hint_2": "Run the query and compare the returned columns, rows, and order with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-select-name-price-stock": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price, stock\nFROM products;"
+            }
           }
         }
       }

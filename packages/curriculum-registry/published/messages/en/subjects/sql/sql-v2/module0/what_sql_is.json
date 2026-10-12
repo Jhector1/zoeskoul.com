@@ -81,6 +81,20 @@
                 "d": "A programming command"
               }
             }
+          },
+          "practice": {
+            "practice-ask-for-student-names": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name\nFROM students;"
+            },
+            "practice-ask-for-student-grades": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, grade\nFROM students;"
+            },
+            "practice-inspect-student-record-columns": {
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name, grade, city\nFROM students;"
+            }
           }
         }
       }

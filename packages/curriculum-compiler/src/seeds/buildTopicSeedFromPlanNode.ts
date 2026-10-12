@@ -439,15 +439,31 @@ export function buildTopicSeedFromPlanNode(args: {
         generationTargets.quizBankTarget +
         generationTargets.projectCodeInputTarget;
 
+    // Planned counts must respect the active profile's exercise capabilities.
+    // The global planner knows every exercise kind (including language-native
+    // kinds), so constrain unsupported kinds to zero before distributing the
+    // topic total. This preserves native language kinds for profiles that own
+    // them while preventing programming/web profiles from planning exercises
+    // their own quality gate rejects.
+    const profileExerciseCountConstraints = Object.fromEntries(
+        Object.keys(exercisePolicy.mix)
+            .filter((kind) => !profile.allowedExerciseKinds.includes(kind))
+            .map((kind) => [kind, { min: 0, max: 0 }]),
+    );
+    const profileSupportsCodeInput = profile.allowedExerciseKinds.includes("code_input");
+
     const plannedExerciseCounts = planExerciseCounts({
         policy: exercisePolicy,
         total: totalGeneratedExercises,
         constraints: {
-            code_input: {
-                min: generationTargets.projectCodeInputTarget,
-                max: generationTargets.projectCodeInputTarget,
-            },
-        },
+            ...profileExerciseCountConstraints,
+            code_input: profileSupportsCodeInput
+                ? {
+                    min: generationTargets.projectCodeInputTarget,
+                    max: generationTargets.projectCodeInputTarget,
+                }
+                : { min: 0, max: 0 },
+        } as Parameters<typeof planExerciseCounts>[0]["constraints"],
     });
     const resolvedPractice = resolvePractice({
         inheritedPractice,

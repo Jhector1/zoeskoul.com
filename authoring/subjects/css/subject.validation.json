@@ -1,0 +1,19 @@
+{
+  "validationSuite": "cssSubjectValidation",
+  "appliesTo": "css_courses",
+  "runtime": {
+    "language": "web"
+  },
+  "rules": {
+    "executionValidation": [
+      "Every CSS code input uses source_checks and at least one authored source check",
+      "CSS-only exercises do not require Judge0 or stdout tests",
+      "Hands-on CSS exercises use styles.css with provided semantic HTML in the web workspace"
+    ],
+    "pedagogy": [
+      "Every technical topic should create a visible browser-preview result",
+      "Teach CSS as the presentation layer on top of semantic HTML",
+      "Responsive behavior and accessible interaction states should be introduced as normal CSS practice"
+    ]
+  }
+}
