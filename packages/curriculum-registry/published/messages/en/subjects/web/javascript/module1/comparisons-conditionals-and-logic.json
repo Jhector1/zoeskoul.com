@@ -1,0 +1,200 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-1-values-decisions": {
+        "comparisons-conditionals-and-logic": {
+          "label": "Comparisons, Conditionals, and Logic",
+          "summary": "Turn comparisons into booleans, use if/else to choose a path, and combine requirements with logical operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Ask a yes-or-no question"
+            },
+            "sketch1": {
+              "title": "Choose what the program should do"
+            },
+            "sketch2": {
+              "title": "Require more than one condition"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_comparisons_conditionals_and_logic_sketch0": {
+              "title": "Try it yourself: Check whether inventory is empty",
+              "prompt": "Now apply what you just learned in this task. Problem: An inventory screen needs to know whether there are no items left so it can decide what state to show next. Task: Create `isEmpty` by checking whether `itemsLeft` is exactly 0, then log the boolean result. Expected result: the Console shows `true` only when inventory is empty. Produce the result for check whether inventory is empty so it reinforces Comparisons, Conditionals, and Logic.",
+              "hint": "This task needs an equality comparison that produces true or false.",
+              "help": {
+                "concept": "A comparison produces a boolean value.",
+                "hint_1": "Compare `itemsLeft` with the number `0`.",
+                "hint_2": "Use strict equality and assign the result to `isEmpty` before logging it."
+              },
+              "starterCode": "const itemsLeft = 0;\n\n// Create isEmpty from a strict comparison.\n// Log isEmpty.\n",
+              "solutionCode": "const itemsLeft = 0;\nconst isEmpty = itemsLeft === 0;\nconsole.log(isEmpty);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const itemsLeft = 0;\n\n// Create isEmpty from a strict comparison.\n// Log isEmpty.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const itemsLeft = 0;\nconst isEmpty = itemsLeft === 0;\nconsole.log(isEmpty);\n"
+                }
+              }
+            },
+            "try_comparisons_conditionals_and_logic_sketch1": {
+              "title": "Try it yourself: Choose a membership message",
+              "prompt": "Now apply what you just learned in this task. Problem: An access screen must show a different message for members and guests instead of displaying the same text to everyone. Task: Use `if/else` with `isMember`. Assign `\"Member access\"` when it is true and `\"Guest access\"` otherwise, then log `accessMessage`. Expected result: the Console shows the message that matches the current membership state. Produce the result for choose a membership message so it reinforces Comparisons, Conditionals, and Logic.",
+              "hint": "Let the boolean choose between two message assignments.",
+              "help": {
+                "concept": "An if/else statement chooses one of two paths from a boolean condition.",
+                "hint_1": "Use `if (isMember)` for the first branch.",
+                "hint_2": "Assign one message inside `if` and the other inside `else`, then log `accessMessage` afterward."
+              },
+              "starterCode": "const isMember = true;\nlet accessMessage;\n\n// Use if/else to assign the access message.\n\nconsole.log(accessMessage);\n",
+              "solutionCode": "const isMember = true;\nlet accessMessage;\n\nif (isMember) {\n  accessMessage = \"Member access\";\n} else {\n  accessMessage = \"Guest access\";\n}\n\nconsole.log(accessMessage);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const isMember = true;\nlet accessMessage;\n\n// Use if/else to assign the access message.\n\nconsole.log(accessMessage);\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const isMember = true;\nlet accessMessage;\n\nif (isMember) {\n  accessMessage = \"Member access\";\n} else {\n  accessMessage = \"Guest access\";\n}\n\nconsole.log(accessMessage);\n"
+                }
+              }
+            },
+            "try_comparisons_conditionals_and_logic_sketch2": {
+              "title": "Try it yourself: Check whether a book can be borrowed",
+              "prompt": "Now apply what you just learned in this task. Problem: A library cannot allow a loan just because someone has a card; the borrower must also have no overdue book. Task: Create `canBorrow`. It should be true only when `hasLibraryCard` is true and the borrower does not have an overdue book. Log the result. Expected result: the Console shows the combined borrowing decision. Produce the result for check whether a book can be borrowed so it reinforces Comparisons, Conditionals, and Logic.",
+              "hint": "Both borrowing requirements must pass.",
+              "help": {
+                "concept": "Logical AND combines requirements; negation flips a boolean condition.",
+                "hint_1": "Start with `hasLibraryCard && ...` because both rules are required.",
+                "hint_2": "Use `!hasOverdueBook` for the second requirement."
+              },
+              "starterCode": "const hasLibraryCard = true;\nconst hasOverdueBook = false;\n\n// Create canBorrow from both rules.\n// Log canBorrow.\n",
+              "solutionCode": "const hasLibraryCard = true;\nconst hasOverdueBook = false;\nconst canBorrow = hasLibraryCard && !hasOverdueBook;\nconsole.log(canBorrow);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const hasLibraryCard = true;\nconst hasOverdueBook = false;\n\n// Create canBorrow from both rules.\n// Log canBorrow.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const hasLibraryCard = true;\nconst hasOverdueBook = false;\nconst canBorrow = hasLibraryCard && !hasOverdueBook;\nconsole.log(canBorrow);\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "comparisons-conditionals-and-logic-check": {
+              "title": "Choose the matching rule",
+              "prompt": "Registration should open only when seats remain and the deadline has not passed. Which expression matches that rule?",
+              "hint": "The word “and” means both requirements must pass.",
+              "help": {
+                "concept": "combining boolean requirements",
+                "hint_1": "Start with the comparison that checks whether seats remain.",
+                "hint_2": "Then combine it with “deadline has not passed” using `&&`."
+              },
+              "options": {
+                "a": "seatsRemaining > 0 || deadlinePassed",
+                "b": "seatsRemaining === 0 && !deadlinePassed",
+                "c": "seatsRemaining > 0 || !deadlinePassed",
+                "d": "seatsRemaining > 0 && !deadlinePassed"
+              }
+            },
+            "comparisons-conditionals-and-logic-multi": {
+              "title": "Recognize closed-registration cases",
+              "prompt": "Which situations should make registration closed? Select all that apply.",
+              "hint": "The open rule requires seats remaining and a deadline that has not passed.",
+              "help": {
+                "concept": "negating an AND rule",
+                "hint_1": "If either required condition fails, the registration cannot be open.",
+                "hint_2": "No seats and a passed deadline each break one requirement."
+              },
+              "options": {
+                "a": "`seatsRemaining` is 0",
+                "b": "`deadlinePassed` is true",
+                "c": "`seatsRemaining` is 5 and `deadlinePassed` is false",
+                "d": "The event name is non-empty"
+              }
+            },
+            "comparisons-conditionals-and-logic-blank": {
+              "title": "Complete the open-registration condition",
+              "prompt": "Choose the logical operator that requires both conditions to pass.",
+              "hint": "Choose the operator whose result is true only when both sides are true.",
+              "help": {
+                "concept": "combining two boolean requirements",
+                "hint_1": "One choice succeeds when either side is true; this rule needs the stricter behavior.",
+                "hint_2": "Test one false side mentally: the whole registration condition should then be false."
+              },
+              "template": "`seatsRemaining > 0` [blank1] `!deadlinePassed`",
+              "choices": [
+                "||",
+                "&&",
+                "===",
+                "!=="
+              ]
+            },
+            "comparisons-conditionals-and-logic-order": {
+              "title": "Follow an if/else decision",
+              "prompt": "Arrange the steps JavaScript follows for an if/else statement.",
+              "hint": "JavaScript must know whether the condition is true before it chooses a branch.",
+              "help": {
+                "concept": "if/else control flow",
+                "hint_1": "The condition is evaluated first.",
+                "hint_2": "Exactly one branch runs, then execution continues after the conditional."
+              },
+              "tokens": {
+                "t1": "Evaluate the if condition",
+                "t2": "Run the if block when the condition is true",
+                "t3": "Otherwise run the else block",
+                "t4": "Continue with the code after the conditional"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-1-values-decisions": {
+        "comparisons-conditionals-and-logic": {
+          "comparisons-conditionals-and-logic-comparisons": {
+            "title": "Comparisons produce booleans",
+            "bodyMarkdown": "A **comparison** asks JavaScript a yes-or-no question and produces a boolean result. For an event, one useful question is whether any seats remain:\n\n```js\nconst seatsRemaining = 4;\nconsole.log(seatsRemaining > 0);\n```\n\nLine by line:\n\n1. `const seatsRemaining = 4;` stores the current seat count.\n2. `seatsRemaining > 0` asks whether that count is greater than zero.\n3. `console.log(...)` shows the boolean result, which is `true` for this example.\n\nYou can also compare values for exact equality with `===` or inequality with `!==`. Prefer these strict comparison operators in this course so JavaScript does not quietly convert one type into another while comparing."
+          },
+          "comparisons-conditionals-and-logic-branches": {
+            "title": "if/else turns a boolean into a decision",
+            "bodyMarkdown": "A comparison becomes useful when the program chooses what to do with its result. An `if` block runs when its condition is `true`; `else` handles the other path.\n\n```js\nconst seatsRemaining = 2;\nlet message;\n\nif (seatsRemaining > 0) {\n  message = \"Registration open\";\n} else {\n  message = \"Registration closed\";\n}\n\nconsole.log(message);\n```\n\nStep by step:\n\n1. `const seatsRemaining = 2;` stores the fact the decision will use.\n2. `let message;` creates a binding that either branch can update.\n3. `if (seatsRemaining > 0)` evaluates the comparison.\n4. Because the comparison is `true`, JavaScript assigns `\"Registration open\"` and skips the `else` block.\n5. `console.log(message);` shows the branch result.\n\nIf the comparison were `false`, JavaScript would skip the first block and run `else` instead. Only one branch runs for this decision."
+          },
+          "comparisons-conditionals-and-logic-logical": {
+            "title": "Combine boolean rules with &&, ||, and !",
+            "bodyMarkdown": "Real decisions often depend on more than one fact. Registration should be open only when seats remain **and** the deadline has not passed:\n\n```js\nconst seatsRemaining = 5;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\n\nconsole.log(isOpen);\n```\n\nLine by line:\n\n1. `seatsRemaining` stores the current seat count.\n2. `deadlinePassed` stores whether the deadline is already over.\n3. `seatsRemaining > 0 && !deadlinePassed` checks both rules and stores the combined boolean in `isOpen`.\n4. `console.log(isOpen);` shows whether registration is open under those two rules.\n\n`&&` means **both conditions must be true**. The first condition checks for seats. `!deadlinePassed` flips `false` to `true`, so it means “the deadline has not passed.”\n\nUse `||` when either condition is enough. Use `!` when you need the opposite of a boolean value. Keep the expression close to the rule you would say out loud."
+          }
+        }
+      }
+    }
+  }
+}

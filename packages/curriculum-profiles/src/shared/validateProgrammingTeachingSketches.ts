@@ -75,9 +75,12 @@ function teachingSketchBlocks(draft: TopicAuthoringDraft) {
 }
 
 function codeInputCount(draft: TopicAuthoringDraft): number {
-    return Array.isArray(draft.quizDraft)
-        ? draft.quizDraft.filter((exercise) => exercise?.kind === "code_input").length
-        : 0;
+    const authoredExercises = [
+        ...draft.quizDraft,
+        ...draft.sketchBlocks.flatMap((block) => block.tryItExercises ?? []),
+    ];
+
+    return authoredExercises.filter((exercise) => exercise.kind === "code_input").length;
 }
 
 export function validateProgrammingTeachingSketches(args: {
@@ -130,6 +133,16 @@ export function validateProgrammingTeachingSketches(args: {
     const placement = args.seed?.practice?.tryItPlacement;
     const requiredTryItCount = placement === "all_sketches" ? blocks.length : 1;
     const actualCodeInputs = codeInputCount(args.draft);
+    const dedicatedCodeInputCounts = blocks.map(
+        (block) =>
+            (block.tryItExercises ?? []).filter(
+                (exercise) => exercise.kind === "code_input",
+            ).length,
+    );
+    const usesDedicatedTryIts = dedicatedCodeInputCounts.some((count) => count > 0);
+    const dedicatedCoveredSketchCount = dedicatedCodeInputCounts.filter(
+        (count) => count > 0,
+    ).length;
 
     if (!conceptualOnly && requiresTryIt && actualCodeInputs < 1) {
         issues.push({
@@ -137,7 +150,7 @@ export function validateProgrammingTeachingSketches(args: {
             category: "pedagogy",
             severity: "error",
             message:
-                `Programming profile "${args.profileId}" requires Try It coverage for this hands-on topic, but draft.quizDraft does not contain a code_input practice path.`,
+                `Programming profile "${args.profileId}" requires Try It coverage for this hands-on topic, but the authored exercise surface does not contain a code_input Try It path.`,
         });
     }
 
@@ -146,7 +159,11 @@ export function validateProgrammingTeachingSketches(args: {
         requiresTryIt &&
         placement === "all_sketches" &&
         blocks.length > 0 &&
-        actualCodeInputs < requiredTryItCount
+        (
+            usesDedicatedTryIts
+                ? dedicatedCoveredSketchCount < requiredTryItCount
+                : actualCodeInputs < requiredTryItCount
+        )
     ) {
         issues.push({
             code: "PROGRAMMING_TRY_IT_PER_SKETCH_MISSING",

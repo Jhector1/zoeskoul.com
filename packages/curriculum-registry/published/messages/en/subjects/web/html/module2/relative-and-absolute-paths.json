@@ -23,87 +23,15 @@
             "allowReveal": false,
             "try_relative_and_absolute_paths_sketch0": {
               "title": "Try it yourself: Use a same-folder path",
-              "prompt": "Now apply what you just learned in this task. The Explorer shows `index.html` and `about.html` side by side. In `index.html`, connect `About me` to the neighboring page using a relative path. Produce the result for use a same-folder path so it reinforces Relative and Absolute Paths.",
-              "hint": "No folder change is needed for this destination.",
-              "help": {
-                "concept": "A same-folder relative path can connect sibling HTML files without a full web address.",
-                "hint_1": "The destination file is visible beside the current file in Explorer.",
-                "hint_2": "Use only the neighboring page's filename as the destination."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n"
-                },
-                "about_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n"
-                },
-                "about_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. The Explorer shows `index.html` and `about.html` side by side. In `index.html`, connect `About me` to the neighboring page using a relative path. Produce the result for use a same-folder path so it reinforces Relative and Absolute Paths."
             },
             "try_relative_and_absolute_paths_sketch1": {
               "title": "Try it yourself: Move down into a folder",
-              "prompt": "Now apply what you just learned in this task. The robotics page is nested under the `projects` folder. In `index.html`, write the relative destination that moves into that folder and opens the page. Produce the result for move down into a folder so it reinforces Relative and Absolute Paths.",
-              "hint": "Read the file tree from the current page down to the nested page.",
-              "help": {
-                "concept": "A child-folder relative path names the folder before the destination file.",
-                "hint_1": "The path begins with the folder shown in Explorer.",
-                "hint_2": "After the folder segment, name the robotics HTML file."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n"
-                },
-                "projects_robotics_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
-                },
-                "projects_robotics_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. The robotics page is nested under the `projects` folder. In `index.html`, write the relative destination that moves into that folder and opens the page. Produce the result for move down into a folder so it reinforces Relative and Absolute Paths."
             },
             "try_relative_and_absolute_paths_sketch2": {
               "title": "Try it yourself: Move back to the parent folder",
-              "prompt": "Now apply what you just learned in this task. Open `projects/robotics.html`. Its `Back to profile` link must return to `index.html`, which is one folder above. Add the correct parent-folder relative destination, then verify both pages in Preview. Produce the result for move back to the parent folder so it reinforces Relative and Absolute Paths.",
-              "hint": "Start by moving from the projects folder back to its parent.",
-              "help": {
-                "concept": "A parent-folder relative path lets a nested page navigate to a file higher in the website tree.",
-                "hint_1": "The current page is inside one child folder.",
-                "hint_2": "Move up one level before naming the home page."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p>Welcome to the profile home page.</p>\n</body>\n</html>\n"
-                },
-                "projects_robotics_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p>Welcome to the profile home page.</p>\n</body>\n</html>\n"
-                },
-                "projects_robotics_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Open `projects/robotics.html`. Its `Back to profile` link must return to `index.html`, which is one folder above. Add the correct parent-folder relative destination, then verify both pages in Preview. Produce the result for move back to the parent folder so it reinforces Relative and Absolute Paths."
             }
           },
           "practice": {
@@ -203,6 +131,90 @@
                 "https://example.com/profile",
                 "../profile.html"
               ]
+            },
+            "paths-ci-1": {
+              "title": "Use a same-folder path",
+              "prompt": "The Explorer shows `index.html` and `about.html` side by side. In `index.html`, connect `About me` to the neighboring page using a relative path.",
+              "hint": "No folder change is needed for this destination.",
+              "help": {
+                "concept": "A same-folder relative path can connect sibling HTML files without a full web address.",
+                "hint_1": "The destination file is visible beside the current file in Explorer.",
+                "hint_2": "Use only the neighboring page's filename as the destination."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>About me</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"about.html\">About me</a></p>\n</body>\n</html>\n"
+                },
+                "about_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>About Jordan Lee</title>\n</head>\n<body>\n  <h1>About Jordan Lee</h1>\n  <p>Jordan studies computer science and builds robotics projects.</p>\n  <p><a href=\"index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "paths-ci-2": {
+              "title": "Move down into a folder",
+              "prompt": "The robotics page is nested under the `projects` folder. In `index.html`, write the relative destination that moves into that folder and opens the page.",
+              "hint": "Read the file tree from the current page down to the nested page.",
+              "help": {
+                "concept": "A child-folder relative path names the folder before the destination file.",
+                "hint_1": "The path begins with the folder shown in Explorer.",
+                "hint_2": "After the folder segment, name the robotics HTML file."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a>Robotics project</a></p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p><a href=\"projects/robotics.html\">Robotics project</a></p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "paths-ci-3": {
+              "title": "Move back to the parent folder",
+              "prompt": "Open `projects/robotics.html`. Its `Back to profile` link must return to `index.html`, which is one folder above. Add the correct parent-folder relative destination, then verify both pages in Preview.",
+              "hint": "Start by moving from the projects folder back to its parent.",
+              "help": {
+                "concept": "A parent-folder relative path lets a nested page navigate to a file higher in the website tree.",
+                "hint_1": "The current page is inside one child folder.",
+                "hint_2": "Move up one level before naming the home page."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p>Welcome to the profile home page.</p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a>Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Profile</title>\n</head>\n<body>\n  <h1>Student Profile</h1>\n  <p>Welcome to the profile home page.</p>\n</body>\n</html>\n"
+                },
+                "projects_robotics_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Robotics Project</title>\n</head>\n<body>\n  <h1>Robotics Project</h1>\n  <p>Jordan is building a sensor-driven campus robot.</p>\n  <p><a href=\"../index.html\">Back to profile</a></p>\n</body>\n</html>\n"
+                }
+              }
             }
           }
         }

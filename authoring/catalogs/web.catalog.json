@@ -9,7 +9,8 @@
     "status": "active",
     "subjectSlugs": [
       "html",
-      "css"
+      "css",
+      "javascript"
     ],
     "meta": {
       "family": "web-development",
@@ -18,7 +19,8 @@
   },
   "subjectSlugs": [
     "html",
-    "css"
+    "css",
+    "javascript"
   ],
   "defaultSubjectSlug": "html"
 }

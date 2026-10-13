@@ -23,69 +23,15 @@
             "allowReveal": false,
             "try_nested_lists_sketch0": {
               "title": "Try it yourself: Add Robotics subtopics",
-              "prompt": "Now apply what you just learned in this task. Inside the Robotics list item, add a nested unordered list containing Sensors and Programming. Keep Art as a sibling of Robotics. Produce the result for add Robotics subtopics so it reinforces Nested Lists.",
-              "hint": "The child list belongs inside the Robotics li.",
-              "help": {
-                "concept": "A nested list expresses parent-child relationships when placed inside the owning list item.",
-                "hint_1": "Do not place the child ul after the Robotics li closes.",
-                "hint_2": "Robotics should contain a ul with two li children."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics</li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Programming</li>\n      </ul>\n    </li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics</li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Programming</li>\n      </ul>\n    </li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Inside the Robotics list item, add a nested unordered list containing Sensors and Programming. Keep Art as a sibling of Robotics. Produce the result for add Robotics subtopics so it reinforces Nested Lists."
             },
             "try_nested_lists_sketch1": {
               "title": "Try it yourself: Add ordered steps inside a category",
-              "prompt": "Now apply what you just learned in this task. Inside Web Basics, add a nested ordered list with HTML structure first and Links and images second. Keep Robotics as the other outer item. Produce the result for add ordered steps inside a category so it reinforces Nested Lists.",
-              "hint": "The parent categories are unordered, but the lesson sequence is ordered.",
-              "help": {
-                "concept": "Each level of a hierarchy chooses ul or ol from its own meaning.",
-                "hint_1": "Keep the outer ul.",
-                "hint_2": "Place an ol with the two lesson steps inside the Web Basics li."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics\n      <ol>\n        <li>HTML structure</li>\n        <li>Links and images</li>\n      </ol>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics\n      <ol>\n        <li>HTML structure</li>\n        <li>Links and images</li>\n      </ol>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Inside Web Basics, add a nested ordered list with HTML structure first and Links and images second. Keep Robotics as the other outer item. Produce the result for add ordered steps inside a category so it reinforces Nested Lists."
             },
             "try_nested_lists_sketch2": {
-              "title": "Try it yourself: Build two nested topic groups",
-              "prompt": "Now apply what you just learned in this task. Give both top-level learning areas their own nested unordered lists: HTML and CSS later under Web Development, and Sensors and Motors under Robotics. Produce the result for build two nested topic groups so it reinforces Nested Lists.",
-              "hint": "Each top-level li should own its own child ul.",
-              "help": {
-                "concept": "Repeated nested structures represent multiple parent groups consistently.",
-                "hint_1": "Build the Web Development child list first.",
-                "hint_2": "Then give Robotics a separate child ul before its li closes."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Motors</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Motors</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>\n"
-                }
-              }
+              "title": "Try it yourself: Nest the Web Development topics",
+              "prompt": "**Problem**\n\nWeb Development is a broad learning area, but its HTML and CSS topics are still missing from the hierarchy.\n\n**Task**\n\nInside the Web Development list item, add a nested unordered list containing HTML and CSS later. Keep Robotics unchanged for now."
             }
           },
           "practice": {
@@ -152,6 +98,94 @@
                 "<ol>Sensors, Programming</ol>",
                 "<table><td>Sensors</td></table>"
               ]
+            },
+            "nested-try-child-list": {
+              "title": "Add Robotics subtopics",
+              "prompt": "Inside the Robotics list item, add a nested unordered list containing Sensors and Programming. Keep Art as a sibling of Robotics.",
+              "hint": "The child list belongs inside the Robotics li.",
+              "help": {
+                "concept": "A nested list expresses parent-child relationships when placed inside the owning list item.",
+                "hint_1": "Do not place the child ul after the Robotics li closes.",
+                "hint_2": "Robotics should contain a ul with two li children."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics</li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Programming</li>\n      </ul>\n    </li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics</li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Clubs</title>\n</head>\n<body>\n  <h1>Student Clubs</h1>\n  <ul>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Programming</li>\n      </ul>\n    </li>\n    <li>Art</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "nested-try-mixed": {
+              "title": "Add ordered steps inside a category",
+              "prompt": "Inside Web Basics, add a nested ordered list with HTML structure first and Links and images second. Keep Robotics as the other outer item.",
+              "hint": "The parent categories are unordered, but the lesson sequence is ordered.",
+              "help": {
+                "concept": "Each level of a hierarchy chooses ul or ol from its own meaning.",
+                "hint_1": "Keep the outer ul.",
+                "hint_2": "Place an ol with the two lesson steps inside the Web Basics li."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics\n      <ol>\n        <li>HTML structure</li>\n        <li>Links and images</li>\n      </ol>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Tracks</title>\n</head>\n<body>\n  <h1>Workshop Tracks</h1>\n  <ul>\n    <li>Web Basics\n      <ol>\n        <li>HTML structure</li>\n        <li>Links and images</li>\n      </ol>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "nested-try-two-groups": {
+              "title": "Nest the Web Development topics",
+              "prompt": "**Problem**\n\nWeb Development is a broad learning area, but its HTML and CSS topics are still missing from the hierarchy.\n\n**Task**\n\nInside the Web Development list item, add a nested unordered list containing HTML and CSS later. Keep Robotics unchanged for now.",
+              "hint": "Place the child ul inside the Web Development li.",
+              "help": {
+                "concept": "A child list belongs inside the parent li it describes.",
+                "hint_1": "Open the Web Development li before the nested ul.",
+                "hint_2": "Close the nested ul before closing the parent li."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development</li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "nested-try-two-groups-robotics": {
+              "title": "Nest the Robotics topics",
+              "prompt": "**Problem**\n\nWeb Development now has its child topics, but Robotics still has no nested details.\n\n**Task**\n\nInside the Robotics list item, add a nested unordered list containing Sensors and Motors. Keep the completed Web Development hierarchy unchanged.",
+              "hint": "Place the Sensors and Motors ul inside the Robotics li.",
+              "help": {
+                "concept": "Each parent item can own its own nested list.",
+                "hint_1": "Open the Robotics li before its child ul.",
+                "hint_2": "Keep the existing Web Development child list unchanged."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Motors</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Path</title>\n</head>\n<body>\n  <h1>Learning Path</h1>\n  <ul>\n    <li>Web Development\n      <ul>\n        <li>HTML</li>\n        <li>CSS later</li>\n      </ul>\n    </li>\n    <li>Robotics\n      <ul>\n        <li>Sensors</li>\n        <li>Motors</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
             }
           }
         }

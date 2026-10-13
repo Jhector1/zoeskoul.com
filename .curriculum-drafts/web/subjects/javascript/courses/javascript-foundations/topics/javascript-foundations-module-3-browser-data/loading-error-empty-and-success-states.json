@@ -1,0 +1,262 @@
+{
+  "title": "Loading, Error, Empty, and Success States",
+  "summary": "Represent asynchronous UI states explicitly so the learner always knows whether data is loading, failed, empty, or ready.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "loading-success",
+      "cardTitle": "Show progress, then success",
+      "title": "Update the UI before and after awaited work",
+      "bodyMarkdown": "Async interfaces should not look frozen while work is happening.\n\n```js\nconst status = document.querySelector(\"#status\");\n\nasync function showSchedule() {\n  status.textContent = \"Loading schedule...\";\n\n  const events = await Promise.resolve([\"Jazz Night\", \"Robotics Lab\"]);\n\n  status.textContent = `Loaded ${events.length} events`;\n}\n\nshowSchedule();\n```\n\nStep by step:\n\n1. Show loading immediately.\n2. Await the future result.\n3. Replace loading after the data arrives.\n4. Let success describe the actual result.\n\nThe temporal rule matters: **loading before await; success after await**."
+    },
+    {
+      "id": "empty-success",
+      "cardTitle": "Distinguish empty from ready",
+      "title": "An empty result is not an error",
+      "bodyMarkdown": "A successful request can return no records.\n\n```js\nconst events = [];\nconst status = document.querySelector(\"#status\");\n\nif (events.length === 0) {\n  status.textContent = \"No events found\";\n} else {\n  status.textContent = `${events.length} events available`;\n}\n```\n\nLine by line:\n\n1. The data exists successfully as an array.\n2. Its length decides whether success is empty or non-empty.\n3. The empty branch explains that nothing matched.\n4. The other branch reports available content.\n\nGood interfaces distinguish **nothing matched** from **something broke**."
+    },
+    {
+      "id": "error-state",
+      "cardTitle": "Give failure its own state",
+      "title": "catch turns an async failure into visible recovery feedback",
+      "bodyMarkdown": "When awaited work fails, the page should not remain stuck on loading.\n\n```js\nconst status = document.querySelector(\"#status\");\n\nasync function refresh() {\n  status.textContent = \"Loading...\";\n\n  try {\n    await Promise.reject(new Error(\"Offline\"));\n    status.textContent = \"Ready\";\n  } catch (error) {\n    status.textContent = \"Could not load data\";\n  }\n}\n\nrefresh();\n```\n\nStep by step:\n\n1. Show loading.\n2. Enter the risky async path.\n3. The Promise rejects.\n4. `catch` replaces loading with an error message.\n\nEvery path should end in a state the learner can understand."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "states-choice",
+      "kind": "single_choice",
+      "title": "Choose the right idea",
+      "prompt": "A request succeeds and returns an empty array. Which UI state best describes that?",
+      "options": [
+        "Loading",
+        "Error",
+        "Empty",
+        "Request not started"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Focus on the responsibility described by the question.",
+      "help": {
+        "concept": "The correct option matches the specific job the code needs to do.",
+        "hint_1": "Separate DOM, data, events, and async responsibilities.",
+        "hint_2": "Choose the behavior that directly produces the requested outcome."
+      }
+    },
+    {
+      "id": "states-multi",
+      "kind": "multi_choice",
+      "title": "Recognize correct behavior",
+      "prompt": "Which statements are true?",
+      "options": [
+        "Loading belongs before awaited work.",
+        "catch can replace loading with an error.",
+        "An empty array can be successful.",
+        "A failure should leave Loading forever."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "More than one statement can be correct.",
+      "help": {
+        "concept": "This check separates the responsibilities introduced in the lesson.",
+        "hint_1": "Keep only statements that match the actual JavaScript or browser behavior.",
+        "hint_2": "Reject statements that assign the concept a different job."
+      }
+    },
+    {
+      "id": "states-blank",
+      "kind": "fill_blank_choice",
+      "title": "Complete the idea",
+      "prompt": "Choose the count that represents an empty array.",
+      "template": "if (items.length === [blank1]) { status.textContent = \"No items\"; }",
+      "choices": [
+        "1",
+        "-1",
+        "0",
+        "null"
+      ],
+      "correctValue": "0",
+      "hint": "Use the role described in the sentence to choose the missing term.",
+      "help": {
+        "concept": "The blank names the feature that performs the stated responsibility.",
+        "hint_1": "Eliminate choices from unrelated browser responsibilities.",
+        "hint_2": "Choose the term whose behavior fits the sentence."
+      }
+    },
+    {
+      "id": "states-order",
+      "kind": "drag_reorder",
+      "title": "Put the flow in order",
+      "prompt": "Arrange the steps in the order a beginner-friendly solution should follow.",
+      "tokens": [
+        "Show loading",
+        "Begin awaited work",
+        "Receive the successful data",
+        "Choose empty or success from the data",
+        "Use catch if the work fails"
+      ],
+      "correctOrder": [
+        "Show loading",
+        "Begin awaited work",
+        "Receive the successful data",
+        "Choose empty or success from the data",
+        "Use catch if the work fails"
+      ],
+      "hint": "Start with the dependency that must exist first.",
+      "help": {
+        "concept": "The sequence follows data and control dependencies.",
+        "hint_1": "Each later step depends on the earlier step having happened.",
+        "hint_2": "Place the visible result after the operation that produces it."
+      }
+    },
+    {
+      "id": "try-loading-error-empty-and-success-states-sketch0",
+      "kind": "code_input",
+      "title": "Show loading then ready",
+      "prompt": "Problem: Loading a profile takes time, and without feedback the user cannot tell whether the page is working. Task: Set `#profile-status` to `\"Loading profile...\"` before awaiting `profilePromise`, then show `\"Profile ready\"`. Expected result: the interface communicates both the waiting state and the completed state.",
+      "hint": "Loading must happen before await.",
+      "help": {
+        "concept": "Loading is temporary UI before awaited work completes; success replaces it afterward.",
+        "hint_1": "Update status first.",
+        "hint_2": "Await the Promise, then replace the message."
+      },
+      "starterCode": "const status = document.querySelector(\"#profile-status\");\nconst profilePromise = Promise.resolve({name:\"Maya\"});\nasync function loadProfile() {\n  // Loading -> await -> ready\n}\nloadProfile();\n",
+      "solutionCode": "const status = document.querySelector(\"#profile-status\");\nconst profilePromise = Promise.resolve({name:\"Maya\"});\nasync function loadProfile() {\n  status.textContent = \"Loading profile...\";\n  await profilePromise;\n  status.textContent = \"Profile ready\";\n}\nloadProfile();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"profile-status\">Idle</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const status = document.querySelector(\"#profile-status\");\nconst profilePromise = Promise.resolve({name:\"Maya\"});\nasync function loadProfile() {\n  // Loading -> await -> ready\n}\nloadProfile();\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"profile-status\">Idle</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const status = document.querySelector(\"#profile-status\");\nconst profilePromise = Promise.resolve({name:\"Maya\"});\nasync function loadProfile() {\n  status.textContent = \"Loading profile...\";\n  await profilePromise;\n  status.textContent = \"Profile ready\";\n}\nloadProfile();\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "Loading profile\\.\\.\\.[\\s\\S]*await\\s+profilePromise[\\s\\S]*Profile ready",
+          "message": "Show loading before await and ready after.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-loading-error-empty-and-success-states-sketch1",
+      "kind": "code_input",
+      "title": "Show an empty search result",
+      "prompt": "Problem: A search can succeed but return no records, and showing the same message for zero and many results would be misleading. Task: If `results` is empty, show `\"No matches\"`; otherwise show the number of matches. Expected result: the Preview distinguishes an empty result from a non-empty result.",
+      "hint": "Use array length to choose between two successful states.",
+      "help": {
+        "concept": "An empty state is a successful collection with zero records.",
+        "hint_1": "Compare results.length with the empty count.",
+        "hint_2": "Use the other branch for the non-empty count."
+      },
+      "starterCode": "const results = [];\nconst status = document.querySelector(\"#search-status\");\n// Show empty or success.\n",
+      "solutionCode": "const results = [];\nconst status = document.querySelector(\"#search-status\");\nif (results.length === 0) {\n  status.textContent = \"No matches\";\n} else {\n  status.textContent = `${results.length} matches`;\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"search-status\">Waiting</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const results = [];\nconst status = document.querySelector(\"#search-status\");\n// Show empty or success.\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"search-status\">Waiting</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const results = [];\nconst status = document.querySelector(\"#search-status\");\nif (results.length === 0) {\n  status.textContent = \"No matches\";\n} else {\n  status.textContent = `${results.length} matches`;\n}\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "results\\.length\\s*===\\s*0",
+          "message": "Check for an empty array.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-loading-error-empty-and-success-states-sketch2",
+      "kind": "code_input",
+      "title": "Recover from a failed backup",
+      "prompt": "Problem: A backup operation can fail after it starts, so the user needs feedback both while waiting and if recovery is needed. Task: Show `\"Backing up...\"`, await `backupPromise` in `try`, and show `\"Backup failed\"` in `catch`. Expected result: the interface exposes the in-progress state and a clear failure state.",
+      "hint": "The catch block should replace the temporary loading state.",
+      "help": {
+        "concept": "An error state should visibly replace loading when awaited work fails.",
+        "hint_1": "Put the awaited Promise inside try.",
+        "hint_2": "Set the failure message inside catch."
+      },
+      "starterCode": "const status = document.querySelector(\"#backup-status\");\nconst backupPromise = Promise.reject(new Error(\"Storage unavailable\"));\nasync function runBackup() {\n  // Loading, try await, catch failure.\n}\nrunBackup();\n",
+      "solutionCode": "const status = document.querySelector(\"#backup-status\");\nconst backupPromise = Promise.reject(new Error(\"Storage unavailable\"));\nasync function runBackup() {\n  status.textContent = \"Backing up...\";\n  try {\n    await backupPromise;\n    status.textContent = \"Backup complete\";\n  } catch (error) {\n    status.textContent = \"Backup failed\";\n  }\n}\nrunBackup();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"backup-status\">Idle</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const status = document.querySelector(\"#backup-status\");\nconst backupPromise = Promise.reject(new Error(\"Storage unavailable\"));\nasync function runBackup() {\n  // Loading, try await, catch failure.\n}\nrunBackup();\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"backup-status\">Idle</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const status = document.querySelector(\"#backup-status\");\nconst backupPromise = Promise.reject(new Error(\"Storage unavailable\"));\nasync function runBackup() {\n  status.textContent = \"Backing up...\";\n  try {\n    await backupPromise;\n    status.textContent = \"Backup complete\";\n  } catch (error) {\n    status.textContent = \"Backup failed\";\n  }\n}\nrunBackup();\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "Backing up\\.\\.\\.[\\s\\S]*await\\s+backupPromise",
+          "message": "Show loading before awaiting.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "catch\\s*\\([^)]*\\)\\s*\\{[\\s\\S]*Backup failed",
+          "message": "Show failure in catch.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

@@ -1,0 +1,799 @@
+{
+  "topicId": "the-css-box-model",
+  "subjectSlug": "css",
+  "moduleSlug": "css-module-2-box-model-spacing",
+  "sectionSlug": "css-css-module-2-lessons",
+  "prefix": "css_module_2",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.label",
+    "summaryKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.cards.sketch0.title",
+      "sketchId": "box-model-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-the-css-box-model-sketch0",
+        "titleKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.tryIt.try_the_css_box_model_sketch0.title",
+        "promptKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.tryIt.try_the_css_box_model_sketch0.prompt",
+        "exerciseKey": "try-the-css-box-model-sketch0",
+        "exerciseKeys": [
+          "try-the-css-box-model-sketch0"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.cards.sketch1.title",
+      "sketchId": "box-model-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-the-css-box-model-sketch1",
+        "titleKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.tryIt.try_the_css_box_model_sketch1.title",
+        "promptKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.tryIt.try_the_css_box_model_sketch1.prompt",
+        "exerciseKey": "try-the-css-box-model-sketch1",
+        "exerciseKeys": [
+          "try-the-css-box-model-sketch1"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.cards.sketch2.title",
+      "sketchId": "box-model-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-the-css-box-model-sketch2",
+        "titleKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.tryIt.try_the_css_box_model_sketch2.title",
+        "promptKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.tryIt.try_the_css_box_model_sketch2.prompt",
+        "exerciseKey": "try-the-css-box-model-sketch2",
+        "exerciseKeys": [
+          "try-the-css-box-model-sketch2"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.css.css-module-2-box-model-spacing.the-css-box-model.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "box-model-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-2-box-model-spacing.the-css-box-model.box-model-sketch-0.title",
+      "bodyKey": "sketches.css.css-module-2-box-model-spacing.the-css-box-model.box-model-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "box-model-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-2-box-model-spacing.the-css-box-model.box-model-sketch-1.title",
+      "bodyKey": "sketches.css.css-module-2-box-model-spacing.the-css-box-model.box-model-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "box-model-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-2-box-model-spacing.the-css-box-model.box-model-sketch-2.title",
+      "bodyKey": "sketches.css.css-module-2-box-model-spacing.the-css-box-model.box-model-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "the-css-box-model-single-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.the-css-box-model-single-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "the-css-box-model-multi-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.the-css-box-model-multi-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "the-css-box-model-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.the-css-box-model-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "the-css-box-model-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.the-css-box-model-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "the-css-box-model-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.the-css-box-model-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "padding"
+      }
+    },
+    {
+      "id": "the-css-box-model-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.the-css-box-model-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "margin"
+      }
+    },
+    {
+      "id": "try-the-css-box-model-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*padding\\s*:\\s*1\\.5rem\\s*;?[^}]*\\}",
+          "message": "Add 1.5rem padding to main.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch0.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-the-css-box-model-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)section\\s*\\{[^}]*border\\s*:\\s*1px\\s+solid\\s+#cbd5e1\\s*;?[^}]*\\}",
+          "message": "Add the section border.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch1.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-the-css-box-model-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)footer\\s*\\{[^}]*margin-top\\s*:\\s*2rem\\s*;?[^}]*\\}",
+          "message": "Add a 2rem top margin to footer.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-2-box-model-spacing.the-css-box-model.practice.try-the-css-box-model-sketch2.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

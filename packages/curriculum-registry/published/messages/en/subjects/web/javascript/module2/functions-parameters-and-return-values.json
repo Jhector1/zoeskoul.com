@@ -1,0 +1,201 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-2-collections-functions": {
+        "functions-parameters-and-return-values": {
+          "label": "Functions, Parameters, and Return Values",
+          "summary": "Name reusable work, pass values through parameters, and return results to the caller.",
+          "cards": {
+            "sketch0": {
+              "title": "Name reusable work"
+            },
+            "sketch1": {
+              "title": "Give a function inputs"
+            },
+            "sketch2": {
+              "title": "Send a result back"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_functions_parameters_and_return_values_sketch0": {
+              "title": "Try it yourself: Create a reusable status message",
+              "prompt": "Now apply what you just learned in this task. Problem: The same ready message is needed in more than one place, and duplicating the same `console.log` line makes future changes harder. Task: Define `showReady()` so it logs `\"Ready\"`, then call the function twice. Expected result: the Console shows `Ready` twice using one reusable function. Produce the result for create a reusable status message so it reinforces Functions, Parameters, and Return Values.",
+              "hint": "Define the function once; reuse it with two calls.",
+              "help": {
+                "concept": "A function definition can be called repeatedly without duplicating its body.",
+                "hint_1": "Put the log statement inside the function body.",
+                "hint_2": "After the closing brace, write two separate `showReady();` calls."
+              },
+              "starterCode": "// Define showReady().\n// It should log \"Ready\".\n// Call it twice.\n",
+              "solutionCode": "function showReady() {\n  console.log(\"Ready\");\n}\n\nshowReady();\nshowReady();\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Define showReady().\n// It should log \"Ready\".\n// Call it twice.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "function showReady() {\n  console.log(\"Ready\");\n}\n\nshowReady();\nshowReady();\n"
+                }
+              }
+            },
+            "try_functions_parameters_and_return_values_sketch1": {
+              "title": "Try it yourself: Greet different learners",
+              "prompt": "Now apply what you just learned in this task. Problem: A greeting feature must work for different learners without creating a separate function for each name. Task: Define `greetLearner(name)` so it logs a template-literal greeting. Call it once with `\"Maya\"` and once with `\"Leo\"`. Expected result: the Console shows a personalized greeting for each learner. Produce the result for greet different learners so it reinforces Functions, Parameters, and Return Values.",
+              "hint": "One parameter should make the same function work for both names.",
+              "help": {
+                "concept": "Parameters let a reusable function receive different input values on different calls.",
+                "hint_1": "Place `name` between the function parentheses.",
+                "hint_2": "Use `${name}` inside a template literal, then make the two calls after the function definition."
+              },
+              "starterCode": "// Define greetLearner(name).\n// Log a greeting that includes name.\n// Call the function for Maya and Leo.\n",
+              "solutionCode": "function greetLearner(name) {\n  console.log(`Welcome, ${name}!`);\n}\n\ngreetLearner(\"Maya\");\ngreetLearner(\"Leo\");\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Define greetLearner(name).\n// Log a greeting that includes name.\n// Call the function for Maya and Leo.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "function greetLearner(name) {\n  console.log(`Welcome, ${name}!`);\n}\n\ngreetLearner(\"Maya\");\ngreetLearner(\"Leo\");\n"
+                }
+              }
+            },
+            "try_functions_parameters_and_return_values_sketch2": {
+              "title": "Try it yourself: Calculate an order total",
+              "prompt": "Now apply what you just learned in this task. Problem: An order screen needs the same price-times-quantity calculation for many possible orders, so the calculation should be reusable. Task: Define `calculateTotal(price, quantity)` so it returns their product. Store the result of `calculateTotal(8, 3)` in `total`, then log `total`. Expected result: the Console shows `24`. Produce the result for calculate an order total so it reinforces Functions, Parameters, and Return Values.",
+              "hint": "The function should produce a value rather than print from inside the function.",
+              "help": {
+                "concept": "return sends a calculated value back to the caller.",
+                "hint_1": "Multiply the two parameters inside the function.",
+                "hint_2": "Return the product, store the function call in `total`, and log `total` afterward."
+              },
+              "starterCode": "// Define calculateTotal(price, quantity).\n// Return price * quantity.\n// Store calculateTotal(8, 3) in total.\n// Log total.\n",
+              "solutionCode": "function calculateTotal(price, quantity) {\n  return price * quantity;\n}\n\nconst total = calculateTotal(8, 3);\nconsole.log(total);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Define calculateTotal(price, quantity).\n// Return price * quantity.\n// Store calculateTotal(8, 3) in total.\n// Log total.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "function calculateTotal(price, quantity) {\n  return price * quantity;\n}\n\nconst total = calculateTotal(8, 3);\nconsole.log(total);\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "functions-return-choice": {
+              "title": "Return or display?",
+              "prompt": "Which statement best describes `return` inside a function?",
+              "hint": "Think about what the caller can receive from the function.",
+              "help": {
+                "concept": "A function can produce a value that later code stores or combines.",
+                "hint_1": "Displaying a value and returning a value are separate responsibilities.",
+                "hint_2": "Choose the option that lets the caller use the result."
+              },
+              "options": {
+                "a": "It always prints the value in the Console.",
+                "b": "It sends a result back to the caller.",
+                "c": "It creates an array automatically.",
+                "d": "It repeats the function forever."
+              }
+            },
+            "functions-facts-multi": {
+              "title": "Reason about functions",
+              "prompt": "Which statements are true? Select all that apply.",
+              "hint": "Focus on reuse, inputs, and results.",
+              "help": {
+                "concept": "Functions can receive inputs and produce results without necessarily printing.",
+                "hint_1": "A function definition can support many calls with different arguments.",
+                "hint_2": "Reject the statement that makes Console output mandatory."
+              },
+              "options": {
+                "a": "A parameter is a local name for an input.",
+                "b": "A function can be called more than once.",
+                "c": "`return` can produce a value for the caller.",
+                "d": "Every function must use `console.log`."
+              }
+            },
+            "functions-return-fill": {
+              "title": "Complete the function result",
+              "prompt": "Choose the keyword that sends the calculated value back to the caller.",
+              "hint": "Think about how a caller receives a value produced inside a function.",
+              "help": {
+                "concept": "The missing keyword finishes the function with a result.",
+                "hint_1": "It is not a declaration, condition, or array operation.",
+                "hint_2": "Choose the function-control keyword that hands a value back."
+              },
+              "template": "function double(number) { [blank1] number * 2; }",
+              "choices": [
+                "const",
+                "if",
+                "return",
+                "push"
+              ]
+            },
+            "functions-call-order": {
+              "title": "Trace a function call",
+              "prompt": "Arrange what happens when a function with one parameter is called.",
+              "hint": "Separate defining the reusable operation from running one call.",
+              "help": {
+                "concept": "A call supplies an argument before the body can use its parameter.",
+                "hint_1": "The body works with the received value.",
+                "hint_2": "A returned result is available only after the function body reaches return."
+              },
+              "tokens": {
+                "t1": "Define the function and its parameter",
+                "t2": "Call the function with an argument",
+                "t3": "The parameter receives that argument value",
+                "t4": "The function body runs",
+                "t5": "The returned value goes back to the caller"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-2-collections-functions": {
+        "functions-parameters-and-return-values": {
+          "define-and-call": {
+            "title": "A function gives a repeatable action a name",
+            "bodyMarkdown": "A **function** groups a set of instructions under a name. Defining a function describes the work; calling it tells JavaScript to run that work.\n\n```js\nfunction showWelcome() {\n  console.log(\"Welcome to the event guide\");\n}\n\nshowWelcome();\nshowWelcome();\n```\n\nLine by line:\n\n1. `function showWelcome()` defines a function named `showWelcome`.\n2. The code inside `{ ... }` is the function body.\n3. `showWelcome();` calls the function once.\n4. Calling it again runs the same body again.\n\nA function is useful when the same responsibility should be easy to run again without copying its implementation."
+          },
+          "parameters-as-inputs": {
+            "title": "Parameters let one function work with different values",
+            "bodyMarkdown": "A function becomes more flexible when it receives values through **parameters**.\n\n```js\nfunction announceEvent(name) {\n  console.log(`Now showing: ${name}`);\n}\n\nannounceEvent(\"Jazz Night\");\nannounceEvent(\"Robotics Lab\");\n```\n\nLine by line:\n\n1. `name` is a parameter: a local name the function can use.\n2. The template literal builds output from whatever value `name` receives.\n3. The first call passes `\"Jazz Night\"` as an argument.\n4. The second call passes a different argument, but the same function logic still works.\n\nThe parameter belongs to the function body; each call supplies the concrete value for that run."
+          },
+          "return-values": {
+            "title": "return lets other code use a function's result",
+            "bodyMarkdown": "Some functions should **produce a value** instead of printing immediately. `return` sends a result back to the code that called the function.\n\n```js\nfunction seatsLeft(capacity, registered) {\n  const remaining = capacity - registered;\n  return remaining;\n}\n\nconst openSeats = seatsLeft(40, 27);\nconsole.log(openSeats);\n```\n\nStep by step:\n\n1. `capacity` and `registered` receive the two arguments.\n2. The function calculates a local value named `remaining`.\n3. `return remaining` sends that value back to the caller.\n4. The call `seatsLeft(40, 27)` therefore produces `13`.\n5. `openSeats` stores that returned value for later use.\n\n`console.log` displays a value. `return` makes a value available to the rest of the program. Those jobs are not interchangeable."
+          }
+        }
+      }
+    }
+  }
+}

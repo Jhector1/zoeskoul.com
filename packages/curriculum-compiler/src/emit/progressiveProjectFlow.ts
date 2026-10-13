@@ -52,6 +52,15 @@ function progressivePrompt(args: {
     totalSteps: number;
 }) {
     const originalPrompt = normalizeText(args.exercise.prompt);
+
+    // Structured project prompts already provide their own learner-facing
+    // hierarchy. Do not prepend redundant "Start/Continue" or "In step X of Y"
+    // prose when the authored prompt intentionally begins with a Problem
+    // heading. The project-step UI already shows step progress separately.
+    if (/^\*\*Problem\*\*(?:\s|$)/.test(originalPrompt)) {
+        return originalPrompt;
+    }
+
     const suffix =
         originalPrompt ||
         `complete ${args.projectConfig.projectStepLabel ?? "the next project step"}`;

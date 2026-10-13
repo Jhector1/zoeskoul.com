@@ -1,0 +1,802 @@
+{
+  "topicId": "custom-properties-and-reusable-values",
+  "subjectSlug": "css",
+  "moduleSlug": "css-module-5-polish-reuse-accessibility",
+  "sectionSlug": "css-css-module-5-lessons",
+  "prefix": "css_module_5",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.label",
+    "summaryKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.cards.sketch0.title",
+      "sketchId": "custom-properties-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-custom-properties-and-reusable-values-sketch0",
+        "titleKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.tryIt.try_custom_properties_and_reusable_values_sketch0.title",
+        "promptKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.tryIt.try_custom_properties_and_reusable_values_sketch0.prompt",
+        "exerciseKey": "try-custom-properties-and-reusable-values-sketch0",
+        "exerciseKeys": [
+          "try-custom-properties-and-reusable-values-sketch0"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.cards.sketch1.title",
+      "sketchId": "custom-properties-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-custom-properties-and-reusable-values-sketch1",
+        "titleKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.tryIt.try_custom_properties_and_reusable_values_sketch1.title",
+        "promptKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.tryIt.try_custom_properties_and_reusable_values_sketch1.prompt",
+        "exerciseKey": "try-custom-properties-and-reusable-values-sketch1",
+        "exerciseKeys": [
+          "try-custom-properties-and-reusable-values-sketch1"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.cards.sketch2.title",
+      "sketchId": "custom-properties-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-custom-properties-and-reusable-values-sketch2",
+        "titleKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.tryIt.try_custom_properties_and_reusable_values_sketch2.title",
+        "promptKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.tryIt.try_custom_properties_and_reusable_values_sketch2.prompt",
+        "exerciseKey": "try-custom-properties-and-reusable-values-sketch2",
+        "exerciseKeys": [
+          "try-custom-properties-and-reusable-values-sketch2"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "custom-properties-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.custom-properties-sketch-0.title",
+      "bodyKey": "sketches.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.custom-properties-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "custom-properties-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.custom-properties-sketch-1.title",
+      "bodyKey": "sketches.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.custom-properties-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "custom-properties-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.custom-properties-sketch-2.title",
+      "bodyKey": "sketches.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.custom-properties-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "custom-properties-and-reusable-values-single",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.custom-properties-and-reusable-values-single",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "custom-properties-and-reusable-values-multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.custom-properties-and-reusable-values-multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "custom-properties-and-reusable-values-multi-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.custom-properties-and-reusable-values-multi-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "custom-properties-and-reusable-values-drag",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.custom-properties-and-reusable-values-drag",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t6",
+          "t4",
+          "t5",
+          "t6"
+        ]
+      }
+    },
+    {
+      "id": "custom-properties-and-reusable-values-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.custom-properties-and-reusable-values-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "var"
+      }
+    },
+    {
+      "id": "custom-properties-and-reusable-values-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.custom-properties-and-reusable-values-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "--space-section"
+      }
+    },
+    {
+      "id": "try-custom-properties-and-reusable-values-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is):root\\s*\\{[^}]*--color-accent\\s*:\\s*#1d4ed8\\s*;?[^}]*--color-accent-strong\\s*:\\s*#1e40af\\s*;?[^}]*--space-section\\s*:\\s*1\\.5rem\\s*;?[^}]*\\}",
+          "message": "Define the three reusable design values in :root.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch0.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-custom-properties-and-reusable-values-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)a\\s*\\{[^}]*color\\s*:\\s*var\\(\\s*--color-accent\\s*\\)\\s*;?[^}]*\\}",
+          "message": "Use the reusable accent custom property for links.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch1.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-custom-properties-and-reusable-values-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*gap\\s*:\\s*var\\(\\s*--space-section\\s*\\)\\s*;?[^}]*\\}",
+          "message": "Use the reusable section spacing value for main's gap.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-5-polish-reuse-accessibility.custom-properties-and-reusable-values.practice.try-custom-properties-and-reusable-values-sketch2.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

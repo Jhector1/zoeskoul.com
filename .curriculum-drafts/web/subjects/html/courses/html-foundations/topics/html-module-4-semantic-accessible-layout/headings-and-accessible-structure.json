@@ -7,107 +7,146 @@
       "id": "heading-hierarchy",
       "cardTitle": "Build a Logical Outline",
       "title": "Choose heading levels from content hierarchy",
-      "bodyMarkdown": "Heading levels communicate structure. Start with the page's main `<h1>`, use `<h2>` for major sections, and use `<h3>` for a subsection inside an h2 section. Choose levels from hierarchy rather than desired text size.\n\n```html\n<h1>Community Guide</h1>\n<h2>Events</h2>\n<h3>Saturday Workshops</h3>\n```\n\nRead this example line by line: h1 names the whole page, h2 starts a major Events section, and h3 names a subsection that belongs inside Events. The numbers describe nesting, not decoration."
+      "bodyMarkdown": "Heading levels communicate structure. Start with the page's main `<h1>`, use `<h2>` for major sections, and use `<h3>` for a subsection inside an h2 section. Choose levels from hierarchy rather than desired text size.\n\n```html\n<h1>Community Guide</h1>\n<h2>Events</h2>\n<h3>Saturday Workshops</h3>\n```\n\nRead this example line by line: h1 names the whole page, h2 starts a major Events section, and h3 names a subsection that belongs inside Events. The numbers describe nesting, not decoration.",
+      "tryItExercises": [
+        {
+          "id": "accessible-structure-try-headings",
+          "kind": "code_input",
+          "title": "Repair the heading hierarchy",
+          "prompt": "Change Volunteer Days to h2 and What to bring to h3 so the headings follow the content hierarchy under the page h1. Keep all text and confirm the outline still reads naturally in Preview.",
+          "hint": "The page title is h1, the major section belongs one level below it, and its subsection belongs one level below that.",
+          "help": {
+            "concept": "Heading levels should follow the document hierarchy rather than skip levels for appearance.",
+            "hint_1": "Volunteer Days is a major section under the page title.",
+            "hint_2": "What to bring is a subsection inside Volunteer Days."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h3>Volunteer Days</h3>\n    <p>Volunteers meet every Saturday.</p>\n    <h4>What to bring</h4>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h2>Volunteer Days</h2>\n    <p>Volunteers meet every Saturday.</p>\n    <h3>What to bring</h3>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<h1\\b[^>]*>\\s*Community Garden Guide\\s*</h1>.*<h2\\b[^>]*>\\s*Volunteer Days\\s*</h2>.*<h3\\b[^>]*>\\s*What to bring\\s*</h3>",
+              "path": "index.html",
+              "message": "Use h1, then h2 for Volunteer Days, then h3 for What to bring.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h3>Volunteer Days</h3>\n    <p>Volunteers meet every Saturday.</p>\n    <h4>What to bring</h4>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h2>Volunteer Days</h2>\n    <p>Volunteers meet every Saturday.</p>\n    <h3>What to bring</h3>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "meaningful-text-alternatives",
       "cardTitle": "Describe Meaningful Images",
       "title": "Use a useful text alternative for informative images",
-      "bodyMarkdown": "You already used `alt` with images earlier in the course. Here the focus is how that text alternative fits into an accessible article: describe the information the image contributes, not the file name or the word “image.”\n\n```html\n<figure>\n  <img src=\"garden-team.jpg\" alt=\"Students planting herbs in raised garden beds\">\n  <figcaption>Students prepare the herb garden for spring.</figcaption>\n</figure>\n```\n\nRead this example line by line: figure groups the media, img carries a concise meaningful text alternative, figcaption provides visible supporting context, and figure closes the group. If an image is purely decorative, an empty `alt=\"\"` tells assistive technology that it adds no content."
+      "bodyMarkdown": "You already used `alt` with images earlier in the course. Here the focus is how that text alternative fits into an accessible article: describe the information the image contributes, not the file name or the word “image.”\n\n```html\n<figure>\n  <img src=\"garden-team.jpg\" alt=\"Students planting herbs in raised garden beds\">\n  <figcaption>Students prepare the herb garden for spring.</figcaption>\n</figure>\n```\n\nRead this example line by line: figure groups the media, img carries a concise meaningful text alternative, figcaption provides visible supporting context, and figure closes the group. If an image is purely decorative, an empty `alt=\"\"` tells assistive technology that it adds no content.",
+      "tryItExercises": [
+        {
+          "id": "accessible-structure-try-alt",
+          "kind": "code_input",
+          "title": "Write a meaningful image alternative",
+          "prompt": "**Problem**\n\nThe garden image uses the generic alternative text `photo`, which does not communicate the information the image contributes.\n\n**Task**\n\nReplace `alt=\"photo\"` with `alt=\"Three students planting herbs in raised garden beds\"`. Do not add a visible caption yet.",
+          "hint": "Change only the img alt value in this step.",
+          "help": {
+            "concept": "Meaningful alt text describes the information an informative image contributes instead of naming the file or saying 'image'.",
+            "hint_1": "Keep src unchanged.",
+            "hint_2": "Replace only the alt value with the requested description."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"photo\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<img\\b(?=[^>]*\\bsrc\\s*=\\s*[\\\"']garden-team\\.jpg[\\\"'])(?=[^>]*\\balt\\s*=\\s*[\\\"']Three students planting herbs in raised garden beds[\\\"'])[^>]*>",
+              "path": "index.html",
+              "message": "Give the garden image the requested meaningful alt text.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"photo\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        },
+        {
+          "id": "accessible-structure-try-figcaption",
+          "kind": "code_input",
+          "title": "Add visible supporting context with figcaption",
+          "prompt": "**Problem**\n\nThe image now has a useful text alternative for assistive technology, but the figure still needs visible supporting context for everyone.\n\n**Task**\n\nInside the existing `figure`, add a `figcaption` after the image that says **Students prepare the herb garden for spring.** Keep the improved `alt` text unchanged.",
+          "hint": "Add figcaption directly after the existing img inside figure.",
+          "help": {
+            "concept": "figcaption provides visible supporting context for media grouped inside a figure.",
+            "hint_1": "Keep the improved img alt unchanged.",
+            "hint_2": "Add the requested figcaption after the img."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n        <figcaption>Students prepare the herb garden for spring.</figcaption>\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<figure\\b[^>]*>.*<img\\b[^>]*>.*<figcaption\\b[^>]*>\\s*Students prepare the herb garden for spring\\.\\s*</figcaption>.*</figure>",
+              "path": "index.html",
+              "message": "Add the requested figcaption inside figure.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n        <figcaption>Students prepare the herb garden for spring.</figcaption>\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "quizDraft": [
-    {
-      "id": "accessible-structure-try-headings",
-      "kind": "code_input",
-      "title": "Repair the heading hierarchy",
-      "prompt": "Change Volunteer Days to h2 and What to bring to h3 so the headings follow the content hierarchy under the page h1. Keep all text and confirm the outline still reads naturally in Preview.",
-      "hint": "The page title is h1, the major section belongs one level below it, and its subsection belongs one level below that.",
-      "help": {
-        "concept": "Heading levels should follow the document hierarchy rather than skip levels for appearance.",
-        "hint_1": "Volunteer Days is a major section under the page title.",
-        "hint_2": "What to bring is a subsection inside Volunteer Days."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h3>Volunteer Days</h3>\n    <p>Volunteers meet every Saturday.</p>\n    <h4>What to bring</h4>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h2>Volunteer Days</h2>\n    <p>Volunteers meet every Saturday.</p>\n    <h3>What to bring</h3>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<h1\\b[^>]*>\\s*Community Garden Guide\\s*</h1>.*<h2\\b[^>]*>\\s*Volunteer Days\\s*</h2>.*<h3\\b[^>]*>\\s*What to bring\\s*</h3>",
-          "path": "index.html",
-          "message": "Use h1, then h2 for Volunteer Days, then h3 for What to bring.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h3>Volunteer Days</h3>\n    <p>Volunteers meet every Saturday.</p>\n    <h4>What to bring</h4>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Garden Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Community Garden Guide</h1>\n    <h2>Volunteer Days</h2>\n    <p>Volunteers meet every Saturday.</p>\n    <h3>What to bring</h3>\n    <p>Gloves and a water bottle.</p>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
-    {
-      "id": "accessible-structure-try-alt",
-      "kind": "code_input",
-      "title": "Write a meaningful image alternative",
-      "prompt": "Improve the garden story image by replacing alt=\"photo\" with alt=\"Three students planting herbs in raised garden beds\". Then add a figcaption that says Students prepare the herb garden for spring. The image file is intentionally unavailable here, so Preview can also expose the alternative text.",
-      "hint": "Describe the useful information the image contributes instead of naming the file type.",
-      "help": {
-        "concept": "Meaningful text alternatives communicate image content when the image cannot be perceived.",
-        "hint_1": "Replace the generic alt value with the requested concise description.",
-        "hint_2": "Keep the image inside figure and add the visible figcaption after it."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"photo\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n        <figcaption>Students prepare the herb garden for spring.</figcaption>\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<img\\b(?=[^>]*\\bsrc\\s*=\\s*[\\\"']garden-team\\.jpg[\\\"'])(?=[^>]*\\balt\\s*=\\s*[\\\"']Three students planting herbs in raised garden beds[\\\"'])[^>]*>",
-          "path": "index.html",
-          "message": "Give the garden image the requested meaningful alt text.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<figure\\b[^>]*>.*<img\\b[^>]*>.*<figcaption\\b[^>]*>\\s*Students prepare the herb garden for spring\\.\\s*</figcaption>.*</figure>",
-          "path": "index.html",
-          "message": "Add the requested figcaption inside figure.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"photo\">\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Garden Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Students Restore the Community Garden</h1>\n      <p>The gardening club planted herbs and repaired raised beds.</p>\n      <figure>\n        <img src=\"garden-team.jpg\" alt=\"Three students planting herbs in raised garden beds\">\n        <figcaption>Students prepare the herb garden for spring.</figcaption>\n      </figure>\n    </article>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
     {
       "id": "accessible-structure-quiz-headings",
       "kind": "single_choice",

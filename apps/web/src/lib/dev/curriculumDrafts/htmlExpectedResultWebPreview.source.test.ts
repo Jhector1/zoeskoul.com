@@ -40,7 +40,9 @@ describe("HTML expected result ownership", () => {
 
     expect(preview).toContain("entryPath?: string");
     expect(preview).toContain('normalizePath(props.entryPath ?? "")');
-    expect(preview).toContain("buildWebPreviewSrcDoc(props.entries, virtualPath)");
+    expect(preview).toContain(
+      "buildWebPreviewSrcDoc(props.entries, virtualPath, {",
+    );
   });
 
   it("does not add screenshot-based expected-result ownership", () => {

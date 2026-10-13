@@ -1,0 +1,215 @@
+{
+  "title": "Select and Update the DOM",
+  "summary": "Connect JavaScript to the page by selecting elements, changing text, and creating new elements safely.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "select-and-change",
+      "cardTitle": "Connect code to the page",
+      "title": "querySelector finds an element; textContent changes what it says",
+      "bodyMarkdown": "The **DOM** is JavaScript's object representation of the page. Before JavaScript can change an element, it needs a reference to that element.\n\n```js\nconst status = document.querySelector(\"#event-status\");\nstatus.textContent = \"Registration is open\";\n```\n\nLine by line:\n\n1. `document.querySelector(\"#event-status\")` finds the first matching element.\n2. The result is stored in `status`.\n3. `status.textContent = ...` replaces the element's text.\n\nKeep selection and update as separate visible steps while learning. That makes it easier to tell whether a bug came from **finding the element** or **changing the element**."
+    },
+    {
+      "id": "create-and-append",
+      "cardTitle": "Create new page content",
+      "title": "createElement and append build DOM content one element at a time",
+      "bodyMarkdown": "When data contains several records, create real DOM elements instead of building one large HTML string.\n\n```js\nconst list = document.querySelector(\"#event-list\");\nconst item = document.createElement(\"li\");\n\nitem.textContent = \"Jazz Night - Music Center\";\nlist.append(item);\n```\n\nStep by step:\n\n1. `list` refers to the existing list.\n2. `createElement(\"li\")` creates a new list item.\n3. `textContent` gives it readable content.\n4. `append` inserts it into the page.\n\nYou do not need `innerHTML` or `map(...).join(...)` to render beginner projects."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "dom-choice",
+      "kind": "single_choice",
+      "title": "Choose the right idea",
+      "prompt": "Which operation finds an existing page element so JavaScript can work with it?",
+      "options": [
+        "document.querySelector(...)",
+        "JSON.parse(...)",
+        "fetch(...)",
+        "Promise.resolve(...)"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on the responsibility described by the question.",
+      "help": {
+        "concept": "The correct option matches the specific job the code needs to do.",
+        "hint_1": "Separate DOM, data, events, and async responsibilities.",
+        "hint_2": "Choose the behavior that directly produces the requested outcome."
+      }
+    },
+    {
+      "id": "dom-multi",
+      "kind": "multi_choice",
+      "title": "Recognize correct behavior",
+      "prompt": "Which statements about basic DOM work are true?",
+      "options": [
+        "querySelector can find an existing element.",
+        "textContent can replace element text.",
+        "createElement can make a new element.",
+        "append parses JSON text."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "More than one statement can be correct.",
+      "help": {
+        "concept": "This check separates the responsibilities introduced in the lesson.",
+        "hint_1": "Keep only statements that match the actual JavaScript or browser behavior.",
+        "hint_2": "Reject statements that assign the concept a different job."
+      }
+    },
+    {
+      "id": "dom-blank",
+      "kind": "fill_blank_choice",
+      "title": "Complete the idea",
+      "prompt": "Choose the property used to replace plain text inside an element.",
+      "template": "message.[blank1] = \"Saved\";",
+      "choices": [
+        "value",
+        "textContent",
+        "length",
+        "push"
+      ],
+      "correctValue": "textContent",
+      "hint": "Use the role described in the sentence to choose the missing term.",
+      "help": {
+        "concept": "The blank names the feature that performs the stated responsibility.",
+        "hint_1": "Eliminate choices from unrelated browser responsibilities.",
+        "hint_2": "Choose the term whose behavior fits the sentence."
+      }
+    },
+    {
+      "id": "dom-order",
+      "kind": "drag_reorder",
+      "title": "Put the flow in order",
+      "prompt": "Arrange the steps in the order a beginner-friendly solution should follow.",
+      "tokens": [
+        "Select the existing parent",
+        "Create a new child element",
+        "Set the child text",
+        "Append the child to the parent"
+      ],
+      "correctOrder": [
+        "Select the existing parent",
+        "Create a new child element",
+        "Set the child text",
+        "Append the child to the parent"
+      ],
+      "hint": "Start with the dependency that must exist first.",
+      "help": {
+        "concept": "The sequence follows data and control dependencies.",
+        "hint_1": "Each later step depends on the earlier step having happened.",
+        "hint_2": "Place the visible result after the operation that produces it."
+      }
+    },
+    {
+      "id": "try-select-and-update-the-dom-sketch0",
+      "kind": "code_input",
+      "title": "Update a reading goal",
+      "prompt": "Problem: A reading-goal page has an existing status element, but its message is outdated. Task: Select `#reading-goal` and change its text to `\"Read 20 pages today\"`. Expected result: the Preview shows the new reading goal in the existing element.",
+      "hint": "Select first, then update the selected element.",
+      "help": {
+        "concept": "DOM code needs an element reference before it can change that element.",
+        "hint_1": "Use the id selector for reading-goal.",
+        "hint_2": "Assign the new sentence to the element's text property."
+      },
+      "starterCode": "// Select #reading-goal.\n// Change its displayed text.\n",
+      "solutionCode": "const goal = document.querySelector(\"#reading-goal\");\ngoal.textContent = \"Read 20 pages today\";\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"reading-goal\">No goal yet</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "// Select #reading-goal.\n// Change its displayed text.\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"reading-goal\">No goal yet</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const goal = document.querySelector(\"#reading-goal\");\ngoal.textContent = \"Read 20 pages today\";\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "document\\.querySelector\\(\\s*[\"\\']#reading-goal[\"\\']\\s*\\)",
+          "message": "Select #reading-goal.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "textContent\\s*=\\s*[\"\\']Read 20 pages today[\"\\']",
+          "message": "Set the requested text.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-select-and-update-the-dom-sketch1",
+      "kind": "code_input",
+      "title": "Add a grocery item",
+      "prompt": "Problem: A grocery page already has a list, but a new item must be added as real page content rather than replacing the entire list. Task: Select `#grocery-list`, create an `li`, set its text to `\"Oranges\"`, and append it. Expected result: the Preview shows Oranges as a new list item.",
+      "hint": "Create the new element before inserting it.",
+      "help": {
+        "concept": "createElement makes a new element and append inserts it into an existing parent.",
+        "hint_1": "Create an li and give it readable text.",
+        "hint_2": "Append the finished li to the selected ul."
+      },
+      "starterCode": "// Select the list.\n// Create an li.\n// Set its text.\n// Append it.\n",
+      "solutionCode": "const groceryList = document.querySelector(\"#grocery-list\");\nconst item = document.createElement(\"li\");\nitem.textContent = \"Oranges\";\ngroceryList.append(item);\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <ul id=\"grocery-list\"><li>Bread</li></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "// Select the list.\n// Create an li.\n// Set its text.\n// Append it.\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <ul id=\"grocery-list\"><li>Bread</li></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const groceryList = document.querySelector(\"#grocery-list\");\nconst item = document.createElement(\"li\");\nitem.textContent = \"Oranges\";\ngroceryList.append(item);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "document\\.createElement\\(\\s*[\"\\']li[\"\\']\\s*\\)",
+          "message": "Create an li.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "groceryList\\.append\\(\\s*item\\s*\\)",
+          "message": "Append the new item.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

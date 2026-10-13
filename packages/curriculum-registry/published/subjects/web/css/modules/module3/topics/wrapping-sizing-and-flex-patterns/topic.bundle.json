@@ -1,0 +1,1550 @@
+{
+  "topicId": "wrapping-sizing-and-flex-patterns",
+  "subjectSlug": "css",
+  "moduleSlug": "css-module-3-flexbox-layout",
+  "sectionSlug": "css-css-module-3-lessons",
+  "prefix": "css_module_3",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.label",
+    "summaryKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.cards.sketch0.title",
+      "sketchId": "flexbox-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-wrapping-sizing-and-flex-patterns-sketch0",
+        "titleKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.tryIt.try_wrapping_sizing_and_flex_patterns_sketch0.title",
+        "promptKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.tryIt.try_wrapping_sizing_and_flex_patterns_sketch0.prompt",
+        "exerciseKey": "try-wrapping-sizing-and-flex-patterns-sketch0",
+        "exerciseKeys": [
+          "try-wrapping-sizing-and-flex-patterns-sketch0",
+          "try-wrapping-sizing-and-flex-patterns-form-flow"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.cards.sketch1.title",
+      "sketchId": "flexbox-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-wrapping-sizing-and-flex-patterns-sketch1",
+        "titleKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.tryIt.try_wrapping_sizing_and_flex_patterns_sketch1.title",
+        "promptKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.tryIt.try_wrapping_sizing_and_flex_patterns_sketch1.prompt",
+        "exerciseKey": "try-wrapping-sizing-and-flex-patterns-sketch1",
+        "exerciseKeys": [
+          "try-wrapping-sizing-and-flex-patterns-sketch1",
+          "try-wrapping-sizing-and-flex-patterns-footer-pattern"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.cards.sketch2.title",
+      "sketchId": "flexbox-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-wrapping-sizing-and-flex-patterns-sketch2",
+        "titleKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.tryIt.try_wrapping_sizing_and_flex_patterns_sketch2.title",
+        "promptKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.tryIt.try_wrapping_sizing_and_flex_patterns_sketch2.prompt",
+        "exerciseKey": "try-wrapping-sizing-and-flex-patterns-sketch2",
+        "exerciseKeys": [
+          "try-wrapping-sizing-and-flex-patterns-sketch2",
+          "try-wrapping-sizing-and-flex-patterns-nav-alignment",
+          "try-wrapping-sizing-and-flex-patterns-nav-link-flex"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "flexbox-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.flexbox-sketch-0.title",
+      "bodyKey": "sketches.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.flexbox-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "flexbox-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.flexbox-sketch-1.title",
+      "bodyKey": "sketches.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.flexbox-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "flexbox-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.flexbox-sketch-2.title",
+      "bodyKey": "sketches.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.flexbox-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "wrapping-sizing-and-flex-patterns-single",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.wrapping-sizing-and-flex-patterns-single",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "wrapping-sizing-and-flex-patterns-multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.wrapping-sizing-and-flex-patterns-multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "wrapping-sizing-and-flex-patterns-multi-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.wrapping-sizing-and-flex-patterns-multi-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "wrapping-sizing-and-flex-patterns-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.wrapping-sizing-and-flex-patterns-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "wrapping-sizing-and-flex-patterns-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.wrapping-sizing-and-flex-patterns-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "wrap"
+      }
+    },
+    {
+      "id": "wrapping-sizing-and-flex-patterns-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.wrapping-sizing-and-flex-patterns-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "basis"
+      }
+    },
+    {
+      "id": "try-wrapping-sizing-and-flex-patterns-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)nav\\s*\\{[^}]*flex-wrap\\s*:\\s*wrap\\s*;?[^}]*\\}",
+          "message": "Allow nav items to wrap.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch0.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-wrapping-sizing-and-flex-patterns-form-flow",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)form\\s*\\{[^}]*display\\s*:\\s*flex\\s*;?[^}]*flex-direction\\s*:\\s*column\\s*;?[^}]*gap\\s*:\\s*0\\.75rem\\s*;?[^}]*\\}",
+          "message": "Make the existing form a column flex container with gap.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-form-flow.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-wrapping-sizing-and-flex-patterns-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*flex-direction\\s*:\\s*row\\s*;?[^}]*flex-wrap\\s*:\\s*wrap\\s*;?[^}]*gap\\s*:\\s*1\\.5rem\\s*;?[^}]*\\}",
+          "message": "Make main a wrapping flex row with gap.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch1.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-wrapping-sizing-and-flex-patterns-footer-pattern",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)footer\\s*\\{[^}]*display\\s*:\\s*flex\\s*;?[^}]*flex-wrap\\s*:\\s*wrap\\s*;?[^}]*justify-content\\s*:\\s*space-between\\s*;?[^}]*gap\\s*:\\s*1rem\\s*;?[^}]*\\}",
+          "message": "Make footer a wrapping flex row with distributed items.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-footer-pattern.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-wrapping-sizing-and-flex-patterns-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*>\\s*section\\s*,\\s*main\\s*>\\s*article\\s*\\{[^}]*flex\\s*:\\s*1\\s+1\\s+18rem\\s*;?[^}]*\\}",
+          "message": "Give main sections/articles a flexible 18rem basis.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-sketch2.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-wrapping-sizing-and-flex-patterns-nav-alignment",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)nav\\s*\\{[^}]*align-items\\s*:\\s*center\\s*;?[^}]*\\}",
+          "message": "Center nav items on the cross axis.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-alignment.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-wrapping-sizing-and-flex-patterns-nav-link-flex",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)nav\\s+a\\s*\\{[^}]*flex\\s*:\\s*0\\s+0\\s+auto\\s*;?[^}]*\\}",
+          "message": "Keep nav links at their content-sized flex basis.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-3-flexbox-layout.wrapping-sizing-and-flex-patterns.practice.try-wrapping-sizing-and-flex-patterns-nav-link-flex.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

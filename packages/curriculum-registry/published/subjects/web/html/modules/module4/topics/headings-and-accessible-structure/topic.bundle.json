@@ -36,7 +36,10 @@
         "id": "try-headings-and-accessible-structure-sketch0",
         "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.title",
         "promptKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.prompt",
-        "exerciseKey": "try-headings-and-accessible-structure-sketch0",
+        "exerciseKey": "accessible-structure-try-headings",
+        "exerciseKeys": [
+          "accessible-structure-try-headings"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,9 +58,13 @@
         "id": "try-headings-and-accessible-structure-sketch1",
         "titleKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.title",
         "promptKey": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.prompt",
-        "exerciseKey": "try-headings-and-accessible-structure-sketch1",
+        "exerciseKey": "accessible-structure-try-alt",
+        "exerciseKeys": [
+          "accessible-structure-try-alt",
+          "accessible-structure-try-figcaption"
+        ],
         "difficulty": "easy",
-        "preferKind": "code_input",
+        "preferKind": null,
         "seedPolicy": "global",
         "required": true,
         "allowReveal": false,
@@ -95,119 +102,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-headings-and-accessible-structure-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<h1\\b[^>]*>\\s*Community Garden Guide\\s*</h1>.*<h2\\b[^>]*>\\s*Volunteer Days\\s*</h2>.*<h3\\b[^>]*>\\s*What to bring\\s*</h3>",
-          "path": "index.html",
-          "message": "Use h1, then h2 for Volunteer Days, then h3 for What to bring.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-headings-and-accessible-structure-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<img\\b(?=[^>]*\\bsrc\\s*=\\s*[\\\"']garden-team\\.jpg[\\\"'])(?=[^>]*\\balt\\s*=\\s*[\\\"']Three students planting herbs in raised garden beds[\\\"'])[^>]*>",
-          "path": "index.html",
-          "message": "Give the garden image the requested meaningful alt text.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<figure\\b[^>]*>.*<img\\b[^>]*>.*<figcaption\\b[^>]*>\\s*Students prepare the herb garden for spring\\.\\s*</figcaption>.*</figure>",
-          "path": "index.html",
-          "message": "Add the requested figcaption inside figure.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.tryIt.try_headings_and_accessible_structure_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "accessible-structure-quiz-headings",
       "kind": "single_choice",
@@ -275,6 +169,165 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "alt=\"Two students repairing a bicycle wheel\""
+      }
+    },
+    {
+      "id": "accessible-structure-try-headings",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-headings",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-headings.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h1\\b[^>]*>\\s*Community Garden Guide\\s*</h1>.*<h2\\b[^>]*>\\s*Volunteer Days\\s*</h2>.*<h3\\b[^>]*>\\s*What to bring\\s*</h3>",
+          "path": "index.html",
+          "message": "Use h1, then h2 for Volunteer Days, then h3 for What to bring.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-headings.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-headings.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-headings.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "accessible-structure-try-alt",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-alt",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-alt.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<img\\b(?=[^>]*\\bsrc\\s*=\\s*[\\\"']garden-team\\.jpg[\\\"'])(?=[^>]*\\balt\\s*=\\s*[\\\"']Three students planting herbs in raised garden beds[\\\"'])[^>]*>",
+          "path": "index.html",
+          "message": "Give the garden image the requested meaningful alt text.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-alt.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-alt.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-alt.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "accessible-structure-try-figcaption",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-figcaption",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-figcaption.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<figure\\b[^>]*>.*<img\\b[^>]*>.*<figcaption\\b[^>]*>\\s*Students prepare the herb garden for spring\\.\\s*</figcaption>.*</figure>",
+          "path": "index.html",
+          "message": "Add the requested figcaption inside figure.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-figcaption.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-figcaption.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.headings-and-accessible-structure.practice.accessible-structure-try-figcaption.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

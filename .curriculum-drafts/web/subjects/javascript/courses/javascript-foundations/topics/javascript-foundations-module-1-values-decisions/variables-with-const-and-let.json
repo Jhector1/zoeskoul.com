@@ -1,0 +1,232 @@
+{
+  "title": "Variables with const and let",
+  "summary": "Give values clear names with const, use let when a value must change, and practice reassignment without redeclaring the variable.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "variables-with-const-and-let-const",
+      "cardTitle": "Give a value a name",
+      "title": "Use const for bindings that stay put",
+      "bodyMarkdown": "A **variable binding** connects a useful name to a value. Good names make later code easier to read because the code explains what the value means.\n\n```js\nconst eventName = \"Career Fair\";\nconst capacity = 80;\n\nconsole.log(eventName, capacity);\n```\n\nLine by line:\n\n1. `const eventName = \"Career Fair\";` creates a binding named `eventName` and stores the event title.\n2. `const capacity = 80;` stores the event capacity under a second clear name.\n3. `console.log(eventName, capacity);` reads both bindings and shows their current values in the Console.\n\nUse `const` when your code does not need to assign a different value to that binding later. This is a good default because it makes accidental reassignment harder."
+    },
+    {
+      "id": "variables-with-const-and-let-let",
+      "cardTitle": "Change a value on purpose",
+      "title": "Use let when the binding must be reassigned",
+      "bodyMarkdown": "Some values are meant to change while a program runs. Imagine tracking how many seats remain after one person registers:\n\n```js\nlet seatsRemaining = 24;\nseatsRemaining = seatsRemaining - 1;\nconsole.log(seatsRemaining);\n```\n\nLine by line:\n\n1. `let seatsRemaining = 24;` creates a binding that is allowed to receive a new value later.\n2. `seatsRemaining = seatsRemaining - 1;` reads the current value `24`, subtracts `1`, and stores the new value `23` back in the same binding.\n3. `console.log(seatsRemaining);` shows the updated value so you can confirm the reassignment happened.\n\nReassignment is different from declaration: you write `let` only when creating the binding. When you update it later, use the existing name by itself."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "variables-with-const-and-let-check",
+      "kind": "single_choice",
+      "title": "Choose const or let",
+      "prompt": "Which binding most clearly needs `let`?",
+      "hint": "Ask which value must be assigned a new value later.",
+      "help": {
+        "concept": "choosing const versus let",
+        "hint_1": "`const` fits values that stay the same during this task.",
+        "hint_2": "The seat count changes as registrations happen, so that binding must allow reassignment."
+      },
+      "options": [
+        "A fixed event ID",
+        "A venue name that never changes",
+        "A remaining-seat count that decreases after registrations",
+        "A constant registration URL"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "variables-with-const-and-let-multi",
+      "kind": "multi_choice",
+      "title": "Find the changing bindings",
+      "prompt": "Which values would reasonably use `let` in an event program? Select all that apply.",
+      "hint": "Choose values whose contents are expected to change while the program runs.",
+      "help": {
+        "concept": "mutable bindings",
+        "hint_1": "Counts often change as the program records activity.",
+        "hint_2": "Names such as the event title or building can stay in `const` for this task."
+      },
+      "options": [
+        "A count of registered attendees that increases",
+        "The event title",
+        "A remaining-seat count that decreases",
+        "The building name"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "variables-with-const-and-let-blank",
+      "kind": "fill_blank_choice",
+      "title": "Complete the declaration rule",
+      "prompt": "Choose the keyword that fits a binding you plan to reassign later.",
+      "hint": "Choose the declaration intended for a binding whose value will be assigned again.",
+      "help": {
+        "concept": "choosing a declaration based on whether a binding changes",
+        "hint_1": "One declaration keeps the same binding assignment; the other is designed for reassignment.",
+        "hint_2": "Because this value changes later, choose the reassignable declaration."
+      },
+      "template": "Use [blank1] when the binding needs a different value later.",
+      "choices": [
+        "if",
+        "const",
+        "let",
+        "typeof"
+      ],
+      "correctValue": "let"
+    },
+    {
+      "id": "variables-with-const-and-let-order",
+      "kind": "drag_reorder",
+      "title": "Trace one registration",
+      "prompt": "Arrange the steps for updating a changing seat count.",
+      "hint": "The binding must exist before JavaScript can read and replace its value.",
+      "help": {
+        "concept": "reassignment flow",
+        "hint_1": "Start by declaring the changing binding.",
+        "hint_2": "Reassignment calculates a new value from the old one, then stores it under the same name."
+      },
+      "tokens": [
+        "Create `let seatsRemaining = 24`",
+        "Read the current value of `seatsRemaining`",
+        "Subtract 1 from that value",
+        "Store the new value back in `seatsRemaining`"
+      ],
+      "correctOrder": [
+        "Create `let seatsRemaining = 24`",
+        "Read the current value of `seatsRemaining`",
+        "Subtract 1 from that value",
+        "Store the new value back in `seatsRemaining`"
+      ]
+    },
+    {
+      "id": "try-variables-with-const-and-let-sketch0",
+      "kind": "code_input",
+      "title": "Name stable learner facts",
+      "prompt": "Problem: A learner profile needs stable facts that should not be reassigned accidentally while the program runs. Task: Create `learnerName` and `completedCourses` with `const`, then log both values. Expected result: the Console shows the learner name and completed-course count from constants.",
+      "hint": "These facts stay fixed during this small task.",
+      "help": {
+        "concept": "Use `const` to give stable values clear names.",
+        "hint_1": "The learner name should be quoted text; the course count should be a number.",
+        "hint_2": "After both declarations, pass `learnerName` and `completedCourses` to `console.log`."
+      },
+      "starterCode": "// Create learnerName with const.\n// Create completedCourses with const.\n// Log both values.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// Create learnerName with const.\n// Create completedCourses with const.\n// Log both values.\n"
+        }
+      ],
+      "solutionCode": "const learnerName = \"Maya\";\nconst completedCourses = 3;\nconsole.log(learnerName, completedCourses);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const learnerName = \"Maya\";\nconst completedCourses = 3;\nconsole.log(learnerName, completedCourses);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "\\bconst\\s+learnerName\\s*=\\s*[\"\\'][^\"\\']+[\"\\']",
+          "message": "Create learnerName with const and a text value.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "\\bconst\\s+completedCourses\\s*=\\s*\\d+",
+          "message": "Create completedCourses with const and a number value.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*learnerName\\s*,\\s*completedCourses\\s*\\)",
+          "message": "Log learnerName and completedCourses.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-variables-with-const-and-let-sketch1",
+      "kind": "code_input",
+      "title": "Update a game score",
+      "prompt": "Problem: A game score changes during play, so storing it as a value that can never be reassigned would block later updates. Task: Create `score` with `let` starting at 10. Add 5 points by assigning `score + 5` back to `score`, then log the updated score. Expected result: the Console shows `15`.",
+      "hint": "The same binding should hold the old score first and the new score afterward.",
+      "help": {
+        "concept": "Use `let` when a binding needs reassignment.",
+        "hint_1": "Declare the changing score once with `let`.",
+        "hint_2": "On the next line, assign `score + 5` back to `score`."
+      },
+      "starterCode": "// Start score at 10 with let.\n// Add 5 points by reassigning score.\n// Log the updated score.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// Start score at 10 with let.\n// Add 5 points by reassigning score.\n// Log the updated score.\n"
+        }
+      ],
+      "solutionCode": "let score = 10;\nscore = score + 5;\nconsole.log(score);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "let score = 10;\nscore = score + 5;\nconsole.log(score);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "\\blet\\s+score\\s*=\\s*10",
+          "message": "Create score with let and start it at 10.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "score\\s*=\\s*score\\s*\\+\\s*5",
+          "message": "Reassign score to its current value plus five.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*score\\s*\\)",
+          "message": "Log the updated score.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

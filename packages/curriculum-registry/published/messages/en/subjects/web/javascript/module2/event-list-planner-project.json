@@ -1,0 +1,255 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-2-collections-functions": {
+        "event-list-planner-project": {
+          "label": "Build an Event List Planner",
+          "summary": "Build a complete event-list pipeline cumulatively: records, reusable functions, filtering, mapping, and final iteration.",
+          "cards": {
+            "sketch0": {
+              "title": "Plan the data pipeline"
+            },
+            "project": {
+              "title": "Build an Event List Planner"
+            }
+          },
+          "projectSteps": {
+            "planner_first_record": {
+              "title": "Step 1: Start the event collection"
+            },
+            "planner_complete_data": {
+              "title": "Step 2: Complete the schedule data"
+            },
+            "planner_category_predicate": {
+              "title": "Step 3: Identify Technology events"
+            },
+            "planner_event_formatter": {
+              "title": "Step 4: Format one event"
+            },
+            "planner_filter_events": {
+              "title": "Step 5: Select Technology events"
+            },
+            "planner_format_lines": {
+              "title": "Step 6: Format the selected schedule"
+            },
+            "planner_show_schedule": {
+              "title": "Step 7: Show every schedule line"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "planner_first_record": {
+                "title": "Step 1: Start the event collection",
+                "prompt": "Problem: The event planner cannot process a schedule until each event is represented as one structured record. Task: Create `events` as an array containing one event object with `name`, `category`, and `location`. Expected result: Check Answer confirms one correctly shaped event record; the Console stays unchanged.",
+                "hint": "Start with one complete record before growing the collection.",
+                "help": {
+                  "concept": "store one structured record inside an array",
+                  "hint_1": "Use one object inside the array.",
+                  "hint_2": "Give it name, category, and location."
+                },
+                "starterCode": "// Build the event planner one stable data-processing step at a time.\n",
+                "solutionCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" }\n];\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "// Build the event planner one stable data-processing step at a time.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" }\n];\n"
+                  }
+                }
+              },
+              "planner_complete_data": {
+                "title": "Step 2: Complete the schedule data",
+                "prompt": "Problem: One event is not enough to test a real planner, especially filtering across different categories. Task: Keep the first event and add three more event objects with the same `name`, `category`, and `location` shape. Expected result: Check Answer confirms a four-event collection with consistent records; the Console stays unchanged.",
+                "hint": "Preserve the first object and repeat the same record shape.",
+                "help": {
+                  "concept": "grow a consistent record collection",
+                  "hint_1": "Use the same three property names.",
+                  "hint_2": "Include at least two Technology events."
+                },
+                "starterCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" }\n];\n",
+                "solutionCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" }\n];\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n"
+                  }
+                }
+              },
+              "planner_category_predicate": {
+                "title": "Step 3: Identify Technology events",
+                "prompt": "Problem: The planner will need to select only Technology events, so it first needs one reusable yes-or-no rule for a single event. Task: Keep the complete event array and add only `isTechnology(event)` returning whether the category equals `Technology`. Expected result: Check Answer confirms the reusable category predicate; the Console stays unchanged.",
+                "hint": "This function answers one yes/no question.",
+                "help": {
+                  "concept": "write one reusable predicate",
+                  "hint_1": "Receive one event.",
+                  "hint_2": "Return the category comparison."
+                },
+                "starterCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n",
+                "solutionCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n"
+                  }
+                }
+              },
+              "planner_event_formatter": {
+                "title": "Step 4: Format one event",
+                "prompt": "Problem: Event objects are useful for code, but a student reading a schedule needs a short line with the event name and location. Task: Keep the data and predicate and add only `formatEvent(event)` returning `name — location`. Expected result: Check Answer confirms one event can be turned into a readable schedule line; the Console stays unchanged.",
+                "hint": "Transform one record into one display string.",
+                "help": {
+                  "concept": "write one reusable formatter",
+                  "hint_1": "Use event.name.",
+                  "hint_2": "Use event.location in the same template literal."
+                },
+                "starterCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n",
+                "solutionCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n"
+                  }
+                }
+              },
+              "planner_filter_events": {
+                "title": "Step 5: Select Technology events",
+                "prompt": "Problem: The planner still contains every category, but this schedule should include only Technology events. Task: Keep every previous function and add only `selectedEvents = events.filter(isTechnology)`. Expected result: Check Answer confirms the collection now has a Technology-only subset; the Console stays unchanged.",
+                "hint": "Reuse the predicate.",
+                "help": {
+                  "concept": "filter with a reusable predicate",
+                  "hint_1": "Call filter on events.",
+                  "hint_2": "Pass isTechnology."
+                },
+                "starterCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n",
+                "solutionCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\n"
+                  }
+                }
+              },
+              "planner_format_lines": {
+                "title": "Step 6: Format the selected schedule",
+                "prompt": "Problem: The planner has selected the correct Technology event objects, but raw objects are not readable schedule lines for a student. Task: Keep the selected event array and add only `scheduleLines = selectedEvents.map(formatEvent)`. Expected result: Check Answer confirms each selected record has been transformed into readable schedule text; the Console stays unchanged.",
+                "hint": "Reuse the formatter.",
+                "help": {
+                  "concept": "map selected records into strings",
+                  "hint_1": "Call map on selectedEvents.",
+                  "hint_2": "Pass formatEvent."
+                },
+                "starterCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\n",
+                "solutionCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\nconst scheduleLines = selectedEvents.map(formatEvent);\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\nconst scheduleLines = selectedEvents.map(formatEvent);\n"
+                  }
+                }
+              },
+              "planner_show_schedule": {
+                "title": "Step 7: Show every schedule line",
+                "prompt": "Problem: The schedule lines are ready in memory, but the planner has not shown them anywhere yet. Task: Keep the complete data pipeline and add only a `for...of` loop that logs every line in `scheduleLines`. Expected result: the Console shows one formatted line for each Technology event.",
+                "hint": "The lines are already selected and formatted.",
+                "help": {
+                  "concept": "iterate over final transformed output",
+                  "hint_1": "Loop over scheduleLines.",
+                  "hint_2": "Log the current line."
+                },
+                "starterCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\nconst scheduleLines = selectedEvents.map(formatEvent);\n",
+                "solutionCode": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\nconst scheduleLines = selectedEvents.map(formatEvent);\n\nfor (const line of scheduleLines) {\n  console.log(line);\n}\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\nconst scheduleLines = selectedEvents.map(formatEvent);\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const events = [\n  { name: \"Robotics Open Lab\", category: \"Technology\", location: \"Engineering Hall\" },\n  { name: \"Campus Garden Meetup\", category: \"Community\", location: \"North Garden\" },\n  { name: \"Student Jazz Night\", category: \"Arts\", location: \"Music Center\" },\n  { name: \"Code Clinic\", category: \"Technology\", location: \"Library Lab\" }\n];\n\nfunction isTechnology(event) {\n  return event.category === \"Technology\";\n}\n\nfunction formatEvent(event) {\n  return `${event.name} — ${event.location}`;\n}\n\nconst selectedEvents = events.filter(isTechnology);\nconst scheduleLines = selectedEvents.map(formatEvent);\n\nfor (const line of scheduleLines) {\n  console.log(line);\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-2-collections-functions": {
+        "event-list-planner-project": {
+          "planner-pipeline": {
+            "title": "Move from structured records to useful output",
+            "bodyMarkdown": "A useful planner separates **data**, **selection**, **formatting**, and **output** instead of mixing every responsibility together.\n\nThis library example uses the same ideas without giving away the event project:\n\n```js\nconst books = [\n  { title: \"North Star\", available: true },\n  { title: \"Deep Blue\", available: false }\n];\n\nfunction isAvailable(book) {\n  return book.available;\n}\n\nfunction labelBook(book) {\n  return `Book: ${book.title}`;\n}\n\nconst availableBooks = books.filter(isAvailable);\nconst labels = availableBooks.map(labelBook);\n\nfor (const label of labels) {\n  console.log(label);\n}\n```\n\nStep by step:\n\n1. The array stores structured object records.\n2. `isAvailable` returns a boolean, so `filter` can use it as a selection callback.\n3. `labelBook` returns text, so `map` can transform each selected object.\n4. `for...of` visits the finished labels and displays them.\n\nThe project uses this same **shape of thinking**, but with campus events and different function names."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,748 @@
+{
+  "topicId": "event-announcement-generator-project",
+  "subjectSlug": "javascript",
+  "moduleSlug": "javascript-foundations-module-1-values-decisions",
+  "sectionSlug": "javascript-javascript-foundations-section-1-module-project",
+  "prefix": "javascript_module_1",
+  "minutes": 35,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.label",
+    "summaryKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.cards.sketch0.title",
+      "sketchId": "event-announcement-generator-project-brief",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "announcement_event_identity",
+            "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.projectSteps.announcement_event_identity.title",
+            "exerciseKey": "announcement-event-identity",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "announcement_registration_numbers",
+            "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.projectSteps.announcement_registration_numbers.title",
+            "exerciseKey": "announcement-registration-numbers",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "announcement_seats_remaining",
+            "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.projectSteps.announcement_seats_remaining.title",
+            "exerciseKey": "announcement-seats-remaining",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "announcement_deadline_state",
+            "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.projectSteps.announcement_deadline_state.title",
+            "exerciseKey": "announcement-deadline-state",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "announcement_open_rule",
+            "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.projectSteps.announcement_open_rule.title",
+            "exerciseKey": "announcement-open-rule",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "announcement_status_decision",
+            "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.projectSteps.announcement_status_decision.title",
+            "exerciseKey": "announcement-status-decision",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "announcement_final_message",
+            "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.projectSteps.announcement_final_message.title",
+            "exerciseKey": "announcement-final-message",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "announcement_show_result",
+            "titleKey": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.projectSteps.announcement_show_result.title",
+            "exerciseKey": "announcement-show-result",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "event-announcement-generator-project-brief",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.event-announcement-generator-project-brief.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.event-announcement-generator-project-brief.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "announcement-event-identity",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_event_identity",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_event_identity.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_event_identity.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+eventName\\s*=[\\s\\S]*const\\s+location\\s*=",
+          "message": "Create eventName and location constants.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_event_identity.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_event_identity.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_event_identity.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_event_identity.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_event_identity.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "announcement-registration-numbers",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_registration_numbers",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_registration_numbers.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_registration_numbers.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+capacity\\s*=\\s*\\d+[\\s\\S]*const\\s+registered\\s*=\\s*\\d+",
+          "message": "Create capacity and registered.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_registration_numbers.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_registration_numbers.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_registration_numbers.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_registration_numbers.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_registration_numbers.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "announcement-seats-remaining",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_seats_remaining",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_seats_remaining.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_seats_remaining.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+seatsRemaining\\s*=\\s*capacity\\s*-\\s*registered",
+          "message": "Calculate seatsRemaining.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_seats_remaining.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_seats_remaining.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_seats_remaining.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_seats_remaining.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_seats_remaining.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "announcement-deadline-state",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_deadline_state",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_deadline_state.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_deadline_state.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+deadlinePassed\\s*=\\s*(?:true|false)",
+          "message": "Create deadlinePassed.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_deadline_state.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_deadline_state.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_deadline_state.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_deadline_state.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_deadline_state.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "announcement-open-rule",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_open_rule",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_open_rule.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_open_rule.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+isOpen\\s*=\\s*seatsRemaining\\s*>\\s*0\\s*&&\\s*!deadlinePassed",
+          "message": "Calculate isOpen.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_open_rule.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_open_rule.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_open_rule.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_open_rule.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_open_rule.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "announcement-status-decision",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_status_decision",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_status_decision.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_status_decision.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "let\\s+statusText[\\s\\S]*if\\s*\\(\\s*isOpen\\s*\\)[\\s\\S]*Registration open[\\s\\S]*else[\\s\\S]*Registration closed",
+          "message": "Assign statusText in both branches.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_status_decision.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_status_decision.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_status_decision.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_status_decision.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_status_decision.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "announcement-final-message",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_final_message",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_final_message.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_final_message.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+announcement\\s*=\\s*`[^`]*\\$\\{eventName\\}[^`]*\\$\\{location\\}[^`]*\\$\\{statusText\\}[^`]*\\$\\{seatsRemaining\\}[^`]*`",
+          "message": "Build the final announcement.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_final_message.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_final_message.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_final_message.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_final_message.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_final_message.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "announcement-show-result",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_show_result",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_show_result.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_show_result.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*announcement\\s*\\)",
+          "message": "Log the final announcement.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_show_result.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_show_result.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_show_result.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_show_result.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-1-values-decisions.event-announcement-generator-project.moduleProject.steps.announcement_show_result.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

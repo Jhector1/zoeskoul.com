@@ -1,0 +1,165 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "select-and-update-the-dom": {
+          "label": "Select and Update the DOM",
+          "summary": "Connect JavaScript to the page by selecting elements, changing text, and creating new elements safely.",
+          "cards": {
+            "sketch0": {
+              "title": "Connect code to the page"
+            },
+            "sketch1": {
+              "title": "Create new page content"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_select_and_update_the_dom_sketch0": {
+              "title": "Try it yourself: Update a reading goal",
+              "prompt": "Now apply what you just learned in this task. Problem: A reading-goal page has an existing status element, but its message is outdated. Task: Select `#reading-goal` and change its text to `\"Read 20 pages today\"`. Expected result: the Preview shows the new reading goal in the existing element. Produce the result for update a reading goal so it reinforces Select and Update the DOM.",
+              "hint": "Select first, then update the selected element.",
+              "help": {
+                "concept": "DOM code needs an element reference before it can change that element.",
+                "hint_1": "Use the id selector for reading-goal.",
+                "hint_2": "Assign the new sentence to the element's text property."
+              },
+              "starterCode": "// Select #reading-goal.\n// Change its displayed text.\n",
+              "solutionCode": "const goal = document.querySelector(\"#reading-goal\");\ngoal.textContent = \"Read 20 pages today\";\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"reading-goal\">No goal yet</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Select #reading-goal.\n// Change its displayed text.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"reading-goal\">No goal yet</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const goal = document.querySelector(\"#reading-goal\");\ngoal.textContent = \"Read 20 pages today\";\n"
+                }
+              }
+            },
+            "try_select_and_update_the_dom_sketch1": {
+              "title": "Try it yourself: Add a grocery item",
+              "prompt": "Now apply what you just learned in this task. Problem: A grocery page already has a list, but a new item must be added as real page content rather than replacing the entire list. Task: Select `#grocery-list`, create an `li`, set its text to `\"Oranges\"`, and append it. Expected result: the Preview shows Oranges as a new list item. Produce the result for add a grocery item so it reinforces Select and Update the DOM.",
+              "hint": "Create the new element before inserting it.",
+              "help": {
+                "concept": "createElement makes a new element and append inserts it into an existing parent.",
+                "hint_1": "Create an li and give it readable text.",
+                "hint_2": "Append the finished li to the selected ul."
+              },
+              "starterCode": "// Select the list.\n// Create an li.\n// Set its text.\n// Append it.\n",
+              "solutionCode": "const groceryList = document.querySelector(\"#grocery-list\");\nconst item = document.createElement(\"li\");\nitem.textContent = \"Oranges\";\ngroceryList.append(item);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <ul id=\"grocery-list\"><li>Bread</li></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Select the list.\n// Create an li.\n// Set its text.\n// Append it.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <ul id=\"grocery-list\"><li>Bread</li></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const groceryList = document.querySelector(\"#grocery-list\");\nconst item = document.createElement(\"li\");\nitem.textContent = \"Oranges\";\ngroceryList.append(item);\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "dom-choice": {
+              "title": "Choose the right idea",
+              "prompt": "Which operation finds an existing page element so JavaScript can work with it?",
+              "hint": "Focus on the responsibility described by the question.",
+              "help": {
+                "concept": "The correct option matches the specific job the code needs to do.",
+                "hint_1": "Separate DOM, data, events, and async responsibilities.",
+                "hint_2": "Choose the behavior that directly produces the requested outcome."
+              },
+              "options": {
+                "a": "document.querySelector(...)",
+                "b": "JSON.parse(...)",
+                "c": "fetch(...)",
+                "d": "Promise.resolve(...)"
+              }
+            },
+            "dom-multi": {
+              "title": "Recognize correct behavior",
+              "prompt": "Which statements about basic DOM work are true?",
+              "hint": "More than one statement can be correct.",
+              "help": {
+                "concept": "This check separates the responsibilities introduced in the lesson.",
+                "hint_1": "Keep only statements that match the actual JavaScript or browser behavior.",
+                "hint_2": "Reject statements that assign the concept a different job."
+              },
+              "options": {
+                "a": "querySelector can find an existing element.",
+                "b": "textContent can replace element text.",
+                "c": "createElement can make a new element.",
+                "d": "append parses JSON text."
+              }
+            },
+            "dom-blank": {
+              "title": "Complete the idea",
+              "prompt": "Choose the property used to replace plain text inside an element.",
+              "hint": "Use the role described in the sentence to choose the missing term.",
+              "help": {
+                "concept": "The blank names the feature that performs the stated responsibility.",
+                "hint_1": "Eliminate choices from unrelated browser responsibilities.",
+                "hint_2": "Choose the term whose behavior fits the sentence."
+              },
+              "template": "message.[blank1] = \"Saved\";",
+              "choices": [
+                "value",
+                "textContent",
+                "length",
+                "push"
+              ]
+            },
+            "dom-order": {
+              "title": "Put the flow in order",
+              "prompt": "Arrange the steps in the order a beginner-friendly solution should follow.",
+              "hint": "Start with the dependency that must exist first.",
+              "help": {
+                "concept": "The sequence follows data and control dependencies.",
+                "hint_1": "Each later step depends on the earlier step having happened.",
+                "hint_2": "Place the visible result after the operation that produces it."
+              },
+              "tokens": {
+                "t1": "Select the existing parent",
+                "t2": "Create a new child element",
+                "t3": "Set the child text",
+                "t4": "Append the child to the parent"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "select-and-update-the-dom": {
+          "select-and-change": {
+            "title": "querySelector finds an element; textContent changes what it says",
+            "bodyMarkdown": "The **DOM** is JavaScript's object representation of the page. Before JavaScript can change an element, it needs a reference to that element.\n\n```js\nconst status = document.querySelector(\"#event-status\");\nstatus.textContent = \"Registration is open\";\n```\n\nLine by line:\n\n1. `document.querySelector(\"#event-status\")` finds the first matching element.\n2. The result is stored in `status`.\n3. `status.textContent = ...` replaces the element's text.\n\nKeep selection and update as separate visible steps while learning. That makes it easier to tell whether a bug came from **finding the element** or **changing the element**."
+          },
+          "create-and-append": {
+            "title": "createElement and append build DOM content one element at a time",
+            "bodyMarkdown": "When data contains several records, create real DOM elements instead of building one large HTML string.\n\n```js\nconst list = document.querySelector(\"#event-list\");\nconst item = document.createElement(\"li\");\n\nitem.textContent = \"Jazz Night - Music Center\";\nlist.append(item);\n```\n\nStep by step:\n\n1. `list` refers to the existing list.\n2. `createElement(\"li\")` creates a new list item.\n3. `textContent` gives it readable content.\n4. `append` inserts it into the page.\n\nYou do not need `innerHTML` or `map(...).join(...)` to render beginner projects."
+          }
+        }
+      }
+    }
+  }
+}

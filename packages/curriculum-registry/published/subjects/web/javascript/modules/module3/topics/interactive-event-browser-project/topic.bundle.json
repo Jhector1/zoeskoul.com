@@ -1,0 +1,1634 @@
+{
+  "topicId": "interactive-event-browser-project",
+  "subjectSlug": "javascript",
+  "moduleSlug": "javascript-foundations-module-3-browser-data",
+  "sectionSlug": "javascript-javascript-foundations-section-3-module-project",
+  "prefix": "javascript_module_3",
+  "minutes": 40,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.label",
+    "summaryKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.cards.sketch0.title",
+      "sketchId": "browser-pipeline",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "event_browser_select_list",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_select_list.title",
+            "exerciseKey": "event-browser-select-list",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "event_browser_render_list",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_render_list.title",
+            "exerciseKey": "event-browser-render-list",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_select_status",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_select_status.title",
+            "exerciseKey": "event-browser-select-status",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_state",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_state.title",
+            "exerciseKey": "event-browser-state",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_loading_state",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_loading_state.title",
+            "exerciseKey": "event-browser-loading-state",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_request_data",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_request_data.title",
+            "exerciseKey": "event-browser-request-data",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_check_response",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_check_response.title",
+            "exerciseKey": "event-browser-check-response",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_decode_data",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_decode_data.title",
+            "exerciseKey": "event-browser-decode-data",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_render_loaded",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_render_loaded.title",
+            "exerciseKey": "event-browser-render-loaded",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_empty_state",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_empty_state.title",
+            "exerciseKey": "event-browser-empty-state",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_error_state",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_error_state.title",
+            "exerciseKey": "event-browser-error-state",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_select_filter",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_select_filter.title",
+            "exerciseKey": "event-browser-select-filter",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_filter_function",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_filter_function.title",
+            "exerciseKey": "event-browser-filter-function",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_show_category",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_show_category.title",
+            "exerciseKey": "event-browser-show-category",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "event_browser_wire_filter",
+            "titleKey": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.projectSteps.event_browser_wire_filter.title",
+            "exerciseKey": "event-browser-wire-filter",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "browser-pipeline",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.browser-pipeline.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.browser-pipeline.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "event-browser-select-list",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+eventList\\s*=\\s*document\\.querySelector\\(\\s*[\"\\']#event-list[\"\\']\\s*\\)",
+          "message": "Select #event-list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_list.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-render-list",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+renderEvents[\\s\\S]*eventList\\.textContent\\s*=\\s*[\"\\'][\\\"\\'][\\s\\S]*for\\s*\\(\\s*const\\s+event\\s+of\\s+events\\s*\\)[\\s\\S]*createElement\\(\\s*[\"\\']li[\"\\']\\s*\\)[\\s\\S]*eventList\\.append",
+          "message": "Render events with familiar DOM methods.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_list.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-select-status",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+status\\s*=\\s*document\\.querySelector\\(\\s*[\"\\']#status[\"\\']\\s*\\)",
+          "message": "Select #status.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_status.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-state",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "let\\s+allEvents\\s*=\\s*\\[\\s*\\]",
+          "message": "Create allEvents.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_state.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-loading-state",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "async\\s+function\\s+loadEvents[\\s\\S]*Loading events\\.\\.\\.[\\s\\S]*loadEvents\\(\\s*\\)",
+          "message": "Show the loading state.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_loading_state.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-request-data",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+response\\s*=\\s*await\\s+fetch\\(\\s*[\"\\']\\./data/events\\.json[\"\\']\\s*\\)",
+          "message": "Fetch local events.json.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_request_data.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-check-response",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "!response\\.ok[\\s\\S]*throw\\s+new\\s+Error\\(\\s*[\"\\']Could not load events[\"\\']\\s*\\)",
+          "message": "Reject failed responses.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_check_response.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-decode-data",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\s*=\\s*await\\s+response\\.json\\(\\s*\\)[\\s\\S]*allEvents\\.length[\\s\\S]*events loaded",
+          "message": "Decode and count the events.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_decode_data.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-render-loaded",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\s*=\\s*await\\s+response\\.json\\(\\s*\\)[\\s\\S]*renderEvents\\(\\s*allEvents\\s*\\)",
+          "message": "Render loaded events.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_render_loaded.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-empty-state",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\.length\\s*===\\s*0[\\s\\S]*No events found[\\s\\S]*renderEvents\\(\\s*\\[\\s*\\]\\s*\\)[\\s\\S]*return",
+          "message": "Handle an empty event array.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_empty_state.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-error-state",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "try\\s*\\{[\\s\\S]*await\\s+fetch[\\s\\S]*catch\\s*\\([\\s\\S]*Could not load events",
+          "message": "Handle load failures.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_error_state.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-select-filter",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+categoryFilter\\s*=\\s*document\\.querySelector\\(\\s*[\"\\']#category-filter[\"\\']\\s*\\)",
+          "message": "Select the category filter.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_select_filter.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-filter-function",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+eventsForCategory[\\s\\S]*category\\s*===\\s*[\"\\']All[\"\\'][\\s\\S]*allEvents\\.filter",
+          "message": "Define eventsForCategory.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_filter_function.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-show-category",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+showCategory[\\s\\S]*eventsForCategory[\\s\\S]*renderEvents\\(\\s*visibleEvents\\s*\\)[\\s\\S]*No matching events[\\s\\S]*events shown",
+          "message": "Define showCategory.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_show_category.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-browser-wire-filter",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.solutionFiles.script_js.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "path": "data/events.json",
+          "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.solutionFiles.data_events_json.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+handleCategoryChange[\\s\\S]*event\\.currentTarget\\.value[\\s\\S]*categoryFilter\\.addEventListener\\(\\s*[\"\\']change[\"\\']",
+          "message": "Wire the filter change event.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.starterFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.solutionFiles.script_js.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "path": "data/events.json",
+            "content": "@:topics.javascript.javascript-foundations-module-3-browser-data.interactive-event-browser-project.moduleProject.steps.event_browser_wire_filter.solutionFiles.data_events_json.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    }
+  ]
+}

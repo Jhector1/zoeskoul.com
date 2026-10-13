@@ -1,0 +1,43 @@
+{
+  "subjectSlug": "javascript",
+  "courseSlug": "javascript-foundations",
+  "catalogSlug": "web",
+  "trackSlug": "web-development",
+  "profileId": "web",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "javascript-browser-workspace",
+  "title": "JavaScript Foundations",
+  "description": "Learn JavaScript fundamentals, browser interaction, and asynchronous local data by building toward a Campus Event Explorer.",
+  "moduleOrder": [
+    "javascript-foundations-module-1-values-decisions",
+    "javascript-foundations-module-2-collections-functions",
+    "javascript-foundations-module-3-browser-data",
+    "javascript-foundations-module-4-campus-event-explorer"
+  ],
+  "modules": [
+    {
+      "moduleSlug": "javascript-foundations-module-1-values-decisions",
+      "moduleNumber": 1,
+      "title": "Values, Variables, and Decisions",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "javascript-foundations-module-2-collections-functions",
+      "moduleNumber": 2,
+      "title": "Collections, Repetition, and Functions",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "javascript-foundations-module-3-browser-data",
+      "moduleNumber": 3,
+      "title": "Browser Interaction and Asynchronous Data",
+      "role": "standard"
+    },
+    {
+      "moduleSlug": "javascript-foundations-module-4-campus-event-explorer",
+      "moduleNumber": 4,
+      "title": "Final Capstone: Campus Event Explorer",
+      "role": "capstone"
+    }
+  ]
+}

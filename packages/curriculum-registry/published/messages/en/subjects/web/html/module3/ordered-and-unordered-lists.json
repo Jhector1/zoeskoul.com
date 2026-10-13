@@ -23,69 +23,15 @@
             "allowReveal": false,
             "try_ordered_and_unordered_lists_sketch0": {
               "title": "Try it yourself: Group the open-house supplies",
-              "prompt": "Now apply what you just learned in this task. Replace the three supply paragraphs with one unordered list. Keep the same three item texts and watch the browser preview show them as one grouped list. Produce the result for group the open-house supplies so it reinforces Ordered and Unordered Lists.",
-              "hint": "The items belong together, but their order does not matter.",
-              "help": {
-                "concept": "An unordered list represents related items whose sequence is not meaningful.",
-                "hint_1": "Wrap the group in a ul element.",
-                "hint_2": "Each supply needs its own li element inside the ul."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <p>Student ID</p>\n  <p>Notebook</p>\n  <p>Water bottle</p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <p>Student ID</p>\n  <p>Notebook</p>\n  <p>Water bottle</p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Replace the three supply paragraphs with one unordered list. Keep the same three item texts and watch the browser preview show them as one grouped list. Produce the result for group the open-house supplies so it reinforces Ordered and Unordered Lists."
             },
             "try_ordered_and_unordered_lists_sketch1": {
               "title": "Try it yourself: Turn arrival instructions into steps",
-              "prompt": "Now apply what you just learned in this task. Replace the three arrival paragraphs with one ordered list so the browser communicates the required sequence. Produce the result for turn arrival instructions into steps so it reinforces Ordered and Unordered Lists.",
-              "hint": "These actions must happen in a specific order.",
-              "help": {
-                "concept": "An ordered list communicates a meaningful sequence.",
-                "hint_1": "Use an ol container around the steps.",
-                "hint_2": "Put each step in a separate li element."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <p>Check in</p>\n  <p>Find your seat</p>\n  <p>Open your notebook</p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <ol>\n    <li>Check in</li>\n    <li>Find your seat</li>\n    <li>Open your notebook</li>\n  </ol>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <p>Check in</p>\n  <p>Find your seat</p>\n  <p>Open your notebook</p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <ol>\n    <li>Check in</li>\n    <li>Find your seat</li>\n    <li>Open your notebook</li>\n  </ol>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Replace the three arrival paragraphs with one ordered list so the browser communicates the required sequence. Produce the result for turn arrival instructions into steps so it reinforces Ordered and Unordered Lists."
             },
             "try_ordered_and_unordered_lists_sketch2": {
-              "title": "Try it yourself: Use both list types on one page",
-              "prompt": "Now apply what you just learned in this task. Make Bring an unordered list and Start an ordered list. Keep each heading and all four item texts. Produce the result for use both list types on one page so it reinforces Ordered and Unordered Lists.",
-              "hint": "One group is a set of supplies; the other is a sequence.",
-              "help": {
-                "concept": "Choose a list type from the meaning of each group.",
-                "hint_1": "Laptop and Charger belong in ul.",
-                "hint_2": "Sign in and Open the lesson belong in ol."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <p>Laptop</p>\n  <p>Charger</p>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <ol>\n    <li>Sign in</li>\n    <li>Open the lesson</li>\n  </ol>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <p>Laptop</p>\n  <p>Charger</p>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <ol>\n    <li>Sign in</li>\n    <li>Open the lesson</li>\n  </ol>\n</body>\n</html>\n"
-                }
-              }
+              "title": "Try it yourself: Group the items to bring",
+              "prompt": "**Problem**\n\nThe items under **Bring** are still separate paragraphs even though their order does not matter.\n\n**Task**\n\nReplace only the Laptop and Charger paragraphs with one unordered list. Keep the **Start** items as paragraphs for the next step."
             }
           },
           "practice": {
@@ -153,6 +99,94 @@
                 "<ol>Notebook</ol>",
                 "<td>Notebook</td>"
               ]
+            },
+            "lists-try-ul": {
+              "title": "Group the open-house supplies",
+              "prompt": "Replace the three supply paragraphs with one unordered list. Keep the same three item texts and watch the browser preview show them as one grouped list.",
+              "hint": "The items belong together, but their order does not matter.",
+              "help": {
+                "concept": "An unordered list represents related items whose sequence is not meaningful.",
+                "hint_1": "Wrap the group in a ul element.",
+                "hint_2": "Each supply needs its own li element inside the ul."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <p>Student ID</p>\n  <p>Notebook</p>\n  <p>Water bottle</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <p>Student ID</p>\n  <p>Notebook</p>\n  <p>Water bottle</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Club Open House</title>\n</head>\n<body>\n  <h1>Campus Club Open House</h1>\n  <p>Bring these items:</p>\n  <ul>\n    <li>Student ID</li>\n    <li>Notebook</li>\n    <li>Water bottle</li>\n  </ul>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "lists-try-ol": {
+              "title": "Turn arrival instructions into steps",
+              "prompt": "Replace the three arrival paragraphs with one ordered list so the browser communicates the required sequence.",
+              "hint": "These actions must happen in a specific order.",
+              "help": {
+                "concept": "An ordered list communicates a meaningful sequence.",
+                "hint_1": "Use an ol container around the steps.",
+                "hint_2": "Put each step in a separate li element."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <p>Check in</p>\n  <p>Find your seat</p>\n  <p>Open your notebook</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <ol>\n    <li>Check in</li>\n    <li>Find your seat</li>\n    <li>Open your notebook</li>\n  </ol>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <p>Check in</p>\n  <p>Find your seat</p>\n  <p>Open your notebook</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Arrival</title>\n</head>\n<body>\n  <h1>Workshop Arrival</h1>\n  <p>Follow these steps in order:</p>\n  <ol>\n    <li>Check in</li>\n    <li>Find your seat</li>\n    <li>Open your notebook</li>\n  </ol>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "lists-try-both": {
+              "title": "Group the items to bring",
+              "prompt": "**Problem**\n\nThe items under **Bring** are still separate paragraphs even though their order does not matter.\n\n**Task**\n\nReplace only the Laptop and Charger paragraphs with one unordered list. Keep the **Start** items as paragraphs for the next step.",
+              "hint": "Change only the Bring items into a ul with two li elements.",
+              "help": {
+                "concept": "Use an unordered list when the item order is not meaningful.",
+                "hint_1": "Wrap Laptop and Charger in ul.",
+                "hint_2": "Each item belongs in its own li."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <p>Laptop</p>\n  <p>Charger</p>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <p>Laptop</p>\n  <p>Charger</p>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "lists-try-both-start-ordered": {
+              "title": "Turn the starting actions into ordered steps",
+              "prompt": "**Problem**\n\nThe **Bring** items are grouped correctly, but the **Start** actions still look like unrelated paragraphs even though their sequence matters.\n\n**Task**\n\nReplace the Sign in and Open the lesson paragraphs with one ordered list. Keep the existing unordered Bring list unchanged.",
+              "hint": "Change only the Start items into an ol with two li elements.",
+              "help": {
+                "concept": "Use an ordered list when sequence communicates meaning.",
+                "hint_1": "Wrap the two Start actions in ol.",
+                "hint_2": "Keep the Bring ul unchanged."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <ol>\n    <li>Sign in</li>\n    <li>Open the lesson</li>\n  </ol>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <p>Sign in</p>\n  <p>Open the lesson</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session</h1>\n  <h2>Bring</h2>\n  <ul>\n    <li>Laptop</li>\n    <li>Charger</li>\n  </ul>\n  <h2>Start</h2>\n  <ol>\n    <li>Sign in</li>\n    <li>Open the lesson</li>\n  </ol>\n</body>\n</html>\n"
+                }
+              }
             }
           }
         }

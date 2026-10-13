@@ -1,0 +1,448 @@
+{
+  "topicId": "loops-and-array-iteration",
+  "subjectSlug": "javascript",
+  "moduleSlug": "javascript-foundations-module-2-collections-functions",
+  "sectionSlug": "javascript-javascript-foundations-section-2-collections-functions",
+  "prefix": "javascript_module_2",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.label",
+    "summaryKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.cards.sketch0.title",
+      "sketchId": "for-of",
+      "height": 420,
+      "tryIt": {
+        "id": "try-loops-and-array-iteration-sketch0",
+        "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.title",
+        "promptKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.prompt",
+        "exerciseKey": "try-loops-and-array-iteration-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.cards.sketch1.title",
+      "sketchId": "map-transform",
+      "height": 420,
+      "tryIt": {
+        "id": "try-loops-and-array-iteration-sketch1",
+        "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.title",
+        "promptKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.prompt",
+        "exerciseKey": "try-loops-and-array-iteration-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.cards.sketch2.title",
+      "sketchId": "filter-matches",
+      "height": 420,
+      "tryIt": {
+        "id": "try-loops-and-array-iteration-sketch2",
+        "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.title",
+        "promptKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.prompt",
+        "exerciseKey": "try-loops-and-array-iteration-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "for-of",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.for-of.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.for-of.bodyMarkdown"
+    },
+    {
+      "id": "map-transform",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.map-transform.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.map-transform.bodyMarkdown"
+    },
+    {
+      "id": "filter-matches",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.filter-matches.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.filter-matches.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "iteration-method-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.practice.iteration-method-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "iteration-facts-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.practice.iteration-facts-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "iteration-map-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.practice.iteration-map-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "map"
+      }
+    },
+    {
+      "id": "iteration-pipeline-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.practice.iteration-pipeline-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "try-loops-and-array-iteration-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+tasks\\s*=\\s*\\[[^\\]]*,[^\\]]*,[^\\]]*\\]",
+          "message": "Create tasks with at least three items.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "for\\s*\\(\\s*const\\s+task\\s+of\\s+tasks\\s*\\)",
+          "message": "Use for...of to iterate through tasks.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch0.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-loops-and-array-iteration-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "fahrenheit\\s*=\\s*celsius\\.map\\s*\\(\\s*\\(\\s*temp\\s*\\)\\s*=>\\s*temp\\s*\\*\\s*9\\s*/\\s*5\\s*\\+\\s*32\\s*\\)",
+          "message": "Create fahrenheit by mapping every celsius value.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*fahrenheit\\s*\\)",
+          "message": "Log the fahrenheit array.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch1.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-loops-and-array-iteration-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "passingScores\\s*=\\s*scores\\.filter\\s*\\(\\s*\\(\\s*score\\s*\\)\\s*=>\\s*score\\s*>=\\s*70\\s*\\)",
+          "message": "Filter scores using a score >= 70 condition.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*passingScores\\s*\\)",
+          "message": "Log passingScores.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.loops-and-array-iteration.tryIt.try_loops_and_array_iteration_sketch2.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

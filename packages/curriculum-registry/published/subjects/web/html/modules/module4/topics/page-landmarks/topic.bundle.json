@@ -36,7 +36,10 @@
         "id": "try-page-landmarks-sketch0",
         "titleKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.title",
         "promptKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.prompt",
-        "exerciseKey": "try-page-landmarks-sketch0",
+        "exerciseKey": "landmarks-try-regions",
+        "exerciseKeys": [
+          "landmarks-try-regions"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-page-landmarks-sketch1",
         "titleKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.title",
         "promptKey": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.prompt",
-        "exerciseKey": "try-page-landmarks-sketch1",
+        "exerciseKey": "landmarks-try-nav",
+        "exerciseKeys": [
+          "landmarks-try-nav"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -95,126 +101,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-page-landmarks-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<header\\b[^>]*>.*<h1\\b[^>]*>\\s*Riverside Community News\\s*</h1>.*Stories from around the neighborhood\\..*</header>",
-          "path": "index.html",
-          "message": "Put the page title and introduction inside header.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<main\\b[^>]*>.*<h2\\b[^>]*>\\s*Lead story\\s*</h2>.*The library opened a new evening study room\\..*</main>",
-          "path": "index.html",
-          "message": "Put the Lead story inside main.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<footer\\b[^>]*>.*Contact:\\s*news@riverside\\.example.*</footer>",
-          "path": "index.html",
-          "message": "Put the contact line inside footer.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-page-landmarks-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<nav\\b[^>]*>\\s*<a\\b[^>]*href\\s*=\\s*[\\\"']#showcase[\\\"'][^>]*>\\s*Showcase\\s*</a>\\s*<a\\b[^>]*href\\s*=\\s*[\\\"']#gallery[\\\"'][^>]*>\\s*Gallery\\s*</a>\\s*</nav>",
-          "path": "index.html",
-          "message": "Place both navigation links inside one nav element.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.tryIt.try_page_landmarks_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "landmarks-quiz-main",
       "kind": "single_choice",
@@ -286,6 +172,126 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "<main><article>Community story</article></main>"
+      }
+    },
+    {
+      "id": "landmarks-try-regions",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-regions",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-regions.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<header\\b[^>]*>.*<h1\\b[^>]*>\\s*Riverside Community News\\s*</h1>.*Stories from around the neighborhood\\..*</header>",
+          "path": "index.html",
+          "message": "Put the page title and introduction inside header.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<main\\b[^>]*>.*<h2\\b[^>]*>\\s*Lead story\\s*</h2>.*The library opened a new evening study room\\..*</main>",
+          "path": "index.html",
+          "message": "Put the Lead story inside main.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<footer\\b[^>]*>.*Contact:\\s*news@riverside\\.example.*</footer>",
+          "path": "index.html",
+          "message": "Put the contact line inside footer.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-regions.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-regions.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-regions.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "landmarks-try-nav",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-nav",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-nav.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<nav\\b[^>]*>\\s*<a\\b[^>]*href\\s*=\\s*[\\\"']#showcase[\\\"'][^>]*>\\s*Showcase\\s*</a>\\s*<a\\b[^>]*href\\s*=\\s*[\\\"']#gallery[\\\"'][^>]*>\\s*Gallery\\s*</a>\\s*</nav>",
+          "path": "index.html",
+          "message": "Place both navigation links inside one nav element.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-nav.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-nav.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.page-landmarks.practice.landmarks-try-nav.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

@@ -1,0 +1,178 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "fetch-local-event-data": {
+          "label": "Fetch Local Event Data",
+          "summary": "Load a local JSON file with fetch, check the HTTP response, and parse its body into JavaScript data.",
+          "cards": {
+            "sketch0": {
+              "title": "Request a local file"
+            },
+            "sketch1": {
+              "title": "Read the JSON body"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_fetch_local_event_data_sketch0": {
+              "title": "Try it yourself: Request a local book file",
+              "prompt": "Now apply what you just learned in this task. Problem: A page needs a local book file, but a completed `fetch` does not guarantee that the file was actually returned successfully. Task: Fetch `\"./data/books.json\"` inside `checkBooks`. Throw if `response.ok` is false, then show `\"Book response ready\"`. Expected result: a successful local response shows the ready message, while a failed response is rejected. Produce the result for request a local book file so it reinforces Fetch Local Event Data.",
+              "hint": "The success message belongs after the HTTP guard.",
+              "help": {
+                "concept": "fetch first produces a Response whose success should be checked.",
+                "hint_1": "Await the fetch call.",
+                "hint_2": "Use a negative response.ok guard before the success message."
+              },
+              "starterCode": "const status = document.querySelector(\"#status\");\nasync function checkBooks() {\n  // Fetch, check, then show success.\n}\ncheckBooks();\n",
+              "solutionCode": "const status = document.querySelector(\"#status\");\nasync function checkBooks() {\n  const response = await fetch(\"./data/books.json\");\n  if (!response.ok) {\n    throw new Error(\"Could not load books\");\n  }\n  status.textContent = \"Book response ready\";\n}\ncheckBooks();\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"status\">Waiting</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const status = document.querySelector(\"#status\");\nasync function checkBooks() {\n  // Fetch, check, then show success.\n}\ncheckBooks();\n"
+                },
+                "data_books_json": {
+                  "content": "[{\"title\":\"North Star\"},{\"title\":\"Deep Blue\"}]\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"status\">Waiting</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const status = document.querySelector(\"#status\");\nasync function checkBooks() {\n  const response = await fetch(\"./data/books.json\");\n  if (!response.ok) {\n    throw new Error(\"Could not load books\");\n  }\n  status.textContent = \"Book response ready\";\n}\ncheckBooks();\n"
+                },
+                "data_books_json": {
+                  "content": "[{\"title\":\"North Star\"},{\"title\":\"Deep Blue\"}]\n"
+                }
+              }
+            },
+            "try_fetch_local_event_data_sketch1": {
+              "title": "Try it yourself: Load a room list",
+              "prompt": "Now apply what you just learned in this task. Problem: A room directory needs to know how many rooms are in a local JSON file, which requires requesting, validating, and decoding the response before counting it. Task: Fetch `\"./data/rooms.json\"`, check the Response, parse it, and show the number of rooms in `#room-count`. Expected result: the Preview shows the count from the loaded room array. Produce the result for load a room list so it reinforces Fetch Local Event Data.",
+              "hint": "Request, guard, parse, then use the array.",
+              "help": {
+                "concept": "response.json asynchronously parses a successful response body into JavaScript data.",
+                "hint_1": "Check response.ok before parsing.",
+                "hint_2": "Await response.json, then use the parsed array length."
+              },
+              "starterCode": "const output = document.querySelector(\"#room-count\");\nasync function loadRooms() {\n  // Fetch, check, parse, show count.\n}\nloadRooms();\n",
+              "solutionCode": "const output = document.querySelector(\"#room-count\");\nasync function loadRooms() {\n  const response = await fetch(\"./data/rooms.json\");\n  if (!response.ok) {\n    throw new Error(\"Could not load rooms\");\n  }\n  const rooms = await response.json();\n  output.textContent = `${rooms.length} rooms`;\n}\nloadRooms();\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"room-count\">No rooms loaded</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const output = document.querySelector(\"#room-count\");\nasync function loadRooms() {\n  // Fetch, check, parse, show count.\n}\nloadRooms();\n"
+                },
+                "data_rooms_json": {
+                  "content": "[{\"name\":\"Studio A\"},{\"name\":\"Lab 204\"},{\"name\":\"Reading Room\"}]\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"room-count\">No rooms loaded</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const output = document.querySelector(\"#room-count\");\nasync function loadRooms() {\n  const response = await fetch(\"./data/rooms.json\");\n  if (!response.ok) {\n    throw new Error(\"Could not load rooms\");\n  }\n  const rooms = await response.json();\n  output.textContent = `${rooms.length} rooms`;\n}\nloadRooms();\n"
+                },
+                "data_rooms_json": {
+                  "content": "[{\"name\":\"Studio A\"},{\"name\":\"Lab 204\"},{\"name\":\"Reading Room\"}]\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "fetch-choice": {
+              "title": "Choose the right idea",
+              "prompt": "Why check `response.ok` before treating fetched data as successful?",
+              "hint": "Focus on the responsibility described by the question.",
+              "help": {
+                "concept": "The correct option matches the specific job the code needs to do.",
+                "hint_1": "Separate DOM, data, events, and async responsibilities.",
+                "hint_2": "Choose the behavior that directly produces the requested outcome."
+              },
+              "options": {
+                "a": "An HTTP error can still produce a Response object",
+                "b": "It creates the JSON file",
+                "c": "It selects a DOM node",
+                "d": "It registers a listener"
+              }
+            },
+            "fetch-multi": {
+              "title": "Recognize correct behavior",
+              "prompt": "Which statements are true?",
+              "hint": "More than one statement can be correct.",
+              "help": {
+                "concept": "This check separates the responsibilities introduced in the lesson.",
+                "hint_1": "Keep only statements that match the actual JavaScript or browser behavior.",
+                "hint_2": "Reject statements that assign the concept a different job."
+              },
+              "options": {
+                "a": "fetch returns a Promise for a Response.",
+                "b": "response.ok can be checked before parsing.",
+                "c": "response.json parses the response body.",
+                "d": "response.json creates a click listener."
+              }
+            },
+            "fetch-blank": {
+              "title": "Complete the idea",
+              "prompt": "Choose the Response method that parses a JSON body.",
+              "hint": "Use the role described in the sentence to choose the missing term.",
+              "help": {
+                "concept": "The blank names the feature that performs the stated responsibility.",
+                "hint_1": "Eliminate choices from unrelated browser responsibilities.",
+                "hint_2": "Choose the term whose behavior fits the sentence."
+              },
+              "template": "const data = await response.[blank1]();",
+              "choices": [
+                "ok",
+                "json",
+                "append",
+                "value"
+              ]
+            },
+            "fetch-order": {
+              "title": "Put the flow in order",
+              "prompt": "Arrange the steps in the order a beginner-friendly solution should follow.",
+              "hint": "Start with the dependency that must exist first.",
+              "help": {
+                "concept": "The sequence follows data and control dependencies.",
+                "hint_1": "Each later step depends on the earlier step having happened.",
+                "hint_2": "Place the visible result after the operation that produces it."
+              },
+              "tokens": {
+                "t1": "Start fetch",
+                "t2": "Await the Response",
+                "t3": "Check response.ok",
+                "t4": "Parse response.json()",
+                "t5": "Use the parsed data"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "fetch-local-event-data": {
+          "fetch-response": {
+            "title": "fetch gives you a Response; response.ok tells you whether HTTP succeeded",
+            "bodyMarkdown": "`fetch` asks the browser to load a resource and returns a Promise for a **Response**.\n\n```js\nasync function loadEvents() {\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  console.log(\"Response received\");\n}\n\nloadEvents();\n```\n\nStep by step:\n\n1. `fetch` starts the local request.\n2. `await` gives the Response.\n3. `response.ok` distinguishes successful HTTP status codes.\n4. A failed status throws instead of pretending success.\n5. Only the success path continues.\n\nA 404 can still produce a Response object, so checking `response.ok` matters."
+          },
+          "parse-response": {
+            "title": "response.json parses the body into JavaScript data",
+            "bodyMarkdown": "After checking the Response, parse its body.\n\n```js\nasync function loadEvents() {\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  const events = await response.json();\n  console.log(events.length);\n}\n\nloadEvents();\n```\n\nLine by line after the request:\n\n1. The `response.ok` guard protects the success path.\n2. `response.json()` returns another Promise.\n3. `await response.json()` produces parsed JavaScript data.\n4. The program can now use the array.\n\nKeep the sequence clear: **request -> check -> parse -> use**."
+          }
+        }
+      }
+    }
+  }
+}

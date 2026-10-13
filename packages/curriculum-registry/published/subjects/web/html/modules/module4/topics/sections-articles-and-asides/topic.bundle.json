@@ -36,7 +36,10 @@
         "id": "try-sections-articles-and-asides-sketch0",
         "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.title",
         "promptKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.prompt",
-        "exerciseKey": "try-sections-articles-and-asides-sketch0",
+        "exerciseKey": "semantic-containers-try-article",
+        "exerciseKeys": [
+          "semantic-containers-try-article"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-sections-articles-and-asides-sketch1",
         "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.title",
         "promptKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.prompt",
-        "exerciseKey": "try-sections-articles-and-asides-sketch1",
+        "exerciseKey": "semantic-containers-try-section",
+        "exerciseKeys": [
+          "semantic-containers-try-section"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,7 +80,10 @@
         "id": "try-sections-articles-and-asides-sketch2",
         "titleKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.title",
         "promptKey": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.prompt",
-        "exerciseKey": "try-sections-articles-and-asides-sketch2",
+        "exerciseKey": "semantic-containers-try-aside",
+        "exerciseKeys": [
+          "semantic-containers-try-aside"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -120,165 +129,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-sections-articles-and-asides-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<article\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Robotics Team Reaches Finals\\s*</h2>\\s*<p\\b[^>]*>\\s*The team will compete on Saturday\\.\\s*</p>\\s*</article>",
-          "path": "index.html",
-          "message": "Wrap the standalone robotics story in article.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-sections-articles-and-asides-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<section\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Schedule\\s*</h2>.*10:00 AM\\s*—\\s*Welcome.*11:00 AM\\s*—\\s*Lab tour.*</section>",
-          "path": "index.html",
-          "message": "Put the schedule heading and both time entries inside section.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-sections-articles-and-asides-sketch2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)</article>\\s*<aside\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Related workshop\\s*</h2>\\s*<p\\b[^>]*>\\s*Study skills workshop\\s*—\\s*Tuesday at 5:00 PM\\s*</p>\\s*</aside>",
-          "path": "index.html",
-          "message": "Place the related workshop in aside after the article.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.tryIt.try_sections_articles_and_asides_sketch2.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "semantic-containers-quiz-article",
       "kind": "single_choice",
@@ -348,6 +198,165 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "<aside><h2>Related links</h2></aside>"
+      }
+    },
+    {
+      "id": "semantic-containers-try-article",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-article",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-article.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<article\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Robotics Team Reaches Finals\\s*</h2>\\s*<p\\b[^>]*>\\s*The team will compete on Saturday\\.\\s*</p>\\s*</article>",
+          "path": "index.html",
+          "message": "Wrap the standalone robotics story in article.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-article.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-article.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-article.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "semantic-containers-try-section",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-section",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-section.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<section\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Schedule\\s*</h2>.*10:00 AM\\s*—\\s*Welcome.*11:00 AM\\s*—\\s*Lab tour.*</section>",
+          "path": "index.html",
+          "message": "Put the schedule heading and both time entries inside section.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-section.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-section.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-section.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "semantic-containers-try-aside",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-aside",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-aside.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)</article>\\s*<aside\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Related workshop\\s*</h2>\\s*<p\\b[^>]*>\\s*Study skills workshop\\s*—\\s*Tuesday at 5:00 PM\\s*</p>\\s*</aside>",
+          "path": "index.html",
+          "message": "Place the related workshop in aside after the article.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-aside.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-aside.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-4-semantic-accessible-layout.sections-articles-and-asides.practice.semantic-containers-try-aside.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

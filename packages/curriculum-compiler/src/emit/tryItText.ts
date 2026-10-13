@@ -41,7 +41,18 @@ export function buildTryItPrompt(args: {
     seed: TopicSeed;
     sketchTitle?: string;
 }) {
-    const prompt = ensureSentence(args.exercisePrompt);
+    const authoredPrompt = normalizeText(args.exercisePrompt);
+
+    // Structured learner prompts already define their own visual hierarchy.
+    // Preserve them verbatim instead of wrapping them in generic Try It copy
+    // such as "Now apply...", task labels, file-to-edit guidance, or
+    // check-your-work prose. Legacy plain prompts still use the existing
+    // enrichment path below.
+    if (/^\*\*Problem\*\*(?:\s|$)/.test(authoredPrompt)) {
+        return authoredPrompt;
+    }
+
+    const prompt = ensureSentence(authoredPrompt);
     const exerciseTitle = normalizeText(args.exerciseTitle);
     const topicTitle = normalizeText(args.topicTitle);
     const lines: string[] = [];

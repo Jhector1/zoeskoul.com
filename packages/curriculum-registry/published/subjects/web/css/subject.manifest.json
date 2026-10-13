@@ -1,0 +1,472 @@
+{
+  "subject": {
+    "slug": "css",
+    "profileId": "web",
+    "catalogSlug": "web",
+    "genKey": "html_foundations",
+    "order": 0,
+    "accessPolicy": "paid",
+    "visibility": "public",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.css.title",
+    "descriptionKey": "subjects.css.description",
+    "serviceDefaults": null,
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 6,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.css.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "css",
+        "version": 1,
+        "status": "draft",
+        "defaultForNewEnrollments": false,
+        "supersedes": null,
+        "supersededBy": null
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "css-module-1-first-styles",
+      "prefix": "css_module_1",
+      "order": 1,
+      "titleKey": "modules.css.css-module-1-first-styles.title",
+      "descriptionKey": "modules.css.css-module-1-first-styles.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 72,
+        "prereqKeys": [
+          "modules.css.css-module-1-first-styles.title"
+        ],
+        "outcomeKeys": [
+          "modules.css.css-module-1-first-styles.outcomes.0",
+          "modules.css.css-module-1-first-styles.outcomes.1",
+          "modules.css.css-module-1-first-styles.outcomes.2",
+          "modules.css.css-module-1-first-styles.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.css.css-module-1-first-styles.why.0",
+          "modules.css.css-module-1-first-styles.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "css-css-module-1-lessons",
+          "order": 1,
+          "titleKey": "sections.css.css-module-1-first-styles.css-css-module-1-lessons.title",
+          "descriptionKey": "sections.css.css-module-1-first-styles.css-css-module-1-lessons.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.css.css-module-1-first-styles.css-css-module-1-lessons.weeks",
+            "bulletKeys": [
+              "sections.css.css-module-1-first-styles.css-css-module-1-lessons.bullets.0",
+              "sections.css.css-module-1-first-styles.css-css-module-1-lessons.bullets.1",
+              "sections.css.css-module-1-first-styles.css-css-module-1-lessons.bullets.2",
+              "sections.css.css-module-1-first-styles.css-css-module-1-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "connecting-css-to-html",
+            "selectors-declarations-and-rules",
+            "color-backgrounds-and-typography",
+            "cascade-inheritance-and-specificity"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "css-module-2-box-model-spacing",
+      "prefix": "css_module_2",
+      "order": 2,
+      "titleKey": "modules.css.css-module-2-box-model-spacing.title",
+      "descriptionKey": "modules.css.css-module-2-box-model-spacing.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 72,
+        "prereqKeys": [
+          "modules.css.css-module-2-box-model-spacing.title"
+        ],
+        "outcomeKeys": [
+          "modules.css.css-module-2-box-model-spacing.outcomes.0",
+          "modules.css.css-module-2-box-model-spacing.outcomes.1",
+          "modules.css.css-module-2-box-model-spacing.outcomes.2",
+          "modules.css.css-module-2-box-model-spacing.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.css.css-module-2-box-model-spacing.why.0",
+          "modules.css.css-module-2-box-model-spacing.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "css-css-module-2-lessons",
+          "order": 1,
+          "titleKey": "sections.css.css-module-2-box-model-spacing.css-css-module-2-lessons.title",
+          "descriptionKey": "sections.css.css-module-2-box-model-spacing.css-css-module-2-lessons.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.css.css-module-2-box-model-spacing.css-css-module-2-lessons.weeks",
+            "bulletKeys": [
+              "sections.css.css-module-2-box-model-spacing.css-css-module-2-lessons.bullets.0",
+              "sections.css.css-module-2-box-model-spacing.css-css-module-2-lessons.bullets.1",
+              "sections.css.css-module-2-box-model-spacing.css-css-module-2-lessons.bullets.2",
+              "sections.css.css-module-2-box-model-spacing.css-css-module-2-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "the-css-box-model",
+            "margin-padding-and-borders",
+            "sizing-and-box-sizing",
+            "display-and-overflow"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "css-module-3-flexbox-layout",
+      "prefix": "css_module_3",
+      "order": 3,
+      "titleKey": "modules.css.css-module-3-flexbox-layout.title",
+      "descriptionKey": "modules.css.css-module-3-flexbox-layout.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 54,
+        "prereqKeys": [
+          "modules.css.css-module-3-flexbox-layout.title"
+        ],
+        "outcomeKeys": [
+          "modules.css.css-module-3-flexbox-layout.outcomes.0",
+          "modules.css.css-module-3-flexbox-layout.outcomes.1",
+          "modules.css.css-module-3-flexbox-layout.outcomes.2",
+          "modules.css.css-module-3-flexbox-layout.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.css.css-module-3-flexbox-layout.why.0",
+          "modules.css.css-module-3-flexbox-layout.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "css-css-module-3-lessons",
+          "order": 1,
+          "titleKey": "sections.css.css-module-3-flexbox-layout.css-css-module-3-lessons.title",
+          "descriptionKey": "sections.css.css-module-3-flexbox-layout.css-css-module-3-lessons.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.css.css-module-3-flexbox-layout.css-css-module-3-lessons.weeks",
+            "bulletKeys": [
+              "sections.css.css-module-3-flexbox-layout.css-css-module-3-lessons.bullets.0",
+              "sections.css.css-module-3-flexbox-layout.css-css-module-3-lessons.bullets.1",
+              "sections.css.css-module-3-flexbox-layout.css-css-module-3-lessons.bullets.2",
+              "sections.css.css-module-3-flexbox-layout.css-css-module-3-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "flex-containers-and-axes",
+            "alignment-distribution-and-gap",
+            "wrapping-sizing-and-flex-patterns"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "css-module-4-grid-responsive-design",
+      "prefix": "css_module_4",
+      "order": 4,
+      "titleKey": "modules.css.css-module-4-grid-responsive-design.title",
+      "descriptionKey": "modules.css.css-module-4-grid-responsive-design.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 72,
+        "prereqKeys": [
+          "modules.css.css-module-4-grid-responsive-design.title"
+        ],
+        "outcomeKeys": [
+          "modules.css.css-module-4-grid-responsive-design.outcomes.0",
+          "modules.css.css-module-4-grid-responsive-design.outcomes.1",
+          "modules.css.css-module-4-grid-responsive-design.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.css.css-module-4-grid-responsive-design.why.0",
+          "modules.css.css-module-4-grid-responsive-design.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "css-css-module-4-lessons",
+          "order": 1,
+          "titleKey": "sections.css.css-module-4-grid-responsive-design.css-css-module-4-lessons.title",
+          "descriptionKey": "sections.css.css-module-4-grid-responsive-design.css-css-module-4-lessons.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.css.css-module-4-grid-responsive-design.css-css-module-4-lessons.weeks",
+            "bulletKeys": [
+              "sections.css.css-module-4-grid-responsive-design.css-css-module-4-lessons.bullets.0",
+              "sections.css.css-module-4-grid-responsive-design.css-css-module-4-lessons.bullets.1",
+              "sections.css.css-module-4-grid-responsive-design.css-css-module-4-lessons.bullets.2",
+              "sections.css.css-module-4-grid-responsive-design.css-css-module-4-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "grid-columns-and-rows",
+            "grid-placement-gap-and-repeat",
+            "responsive-units-minmax-and-fluid-tracks",
+            "media-queries-and-mobile-first-design"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "css-module-5-polish-reuse-accessibility",
+      "prefix": "css_module_5",
+      "order": 5,
+      "titleKey": "modules.css.css-module-5-polish-reuse-accessibility.title",
+      "descriptionKey": "modules.css.css-module-5-polish-reuse-accessibility.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 54,
+        "prereqKeys": [
+          "modules.css.css-module-5-polish-reuse-accessibility.title"
+        ],
+        "outcomeKeys": [
+          "modules.css.css-module-5-polish-reuse-accessibility.outcomes.0",
+          "modules.css.css-module-5-polish-reuse-accessibility.outcomes.1",
+          "modules.css.css-module-5-polish-reuse-accessibility.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.css.css-module-5-polish-reuse-accessibility.why.0",
+          "modules.css.css-module-5-polish-reuse-accessibility.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "css-css-module-5-lessons",
+          "order": 1,
+          "titleKey": "sections.css.css-module-5-polish-reuse-accessibility.css-css-module-5-lessons.title",
+          "descriptionKey": "sections.css.css-module-5-polish-reuse-accessibility.css-css-module-5-lessons.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.css.css-module-5-polish-reuse-accessibility.css-css-module-5-lessons.weeks",
+            "bulletKeys": [
+              "sections.css.css-module-5-polish-reuse-accessibility.css-css-module-5-lessons.bullets.0",
+              "sections.css.css-module-5-polish-reuse-accessibility.css-css-module-5-lessons.bullets.1",
+              "sections.css.css-module-5-polish-reuse-accessibility.css-css-module-5-lessons.bullets.2",
+              "sections.css.css-module-5-polish-reuse-accessibility.css-css-module-5-lessons.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "custom-properties-and-reusable-values",
+            "reusable-classes-and-maintainable-css",
+            "hover-focus-and-accessible-states"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "css-module-6-final-capstone",
+      "prefix": "css_module_6",
+      "order": 6,
+      "role": "capstone",
+      "titleKey": "modules.css.css-module-6-final-capstone.title",
+      "descriptionKey": "modules.css.css-module-6-final-capstone.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 55,
+        "prereqKeys": [
+          "modules.css.css-module-6-final-capstone.title"
+        ],
+        "outcomeKeys": [
+          "modules.css.css-module-6-final-capstone.outcomes.0",
+          "modules.css.css-module-6-final-capstone.outcomes.1",
+          "modules.css.css-module-6-final-capstone.outcomes.2",
+          "modules.css.css-module-6-final-capstone.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.css.css-module-6-final-capstone.why.0",
+          "modules.css.css-module-6-final-capstone.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "css-css-module-6-capstone",
+          "order": 1,
+          "role": "capstone",
+          "titleKey": "sections.css.css-module-6-final-capstone.css-css-module-6-capstone.title",
+          "descriptionKey": "sections.css.css-module-6-final-capstone.css-css-module-6-capstone.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.css.css-module-6-final-capstone.css-css-module-6-capstone.weeks",
+            "bulletKeys": [
+              "sections.css.css-module-6-final-capstone.css-css-module-6-capstone.bullets.0",
+              "sections.css.css-module-6-final-capstone.css-css-module-6-capstone.bullets.1",
+              "sections.css.css-module-6-final-capstone.css-css-module-6-capstone.bullets.2",
+              "sections.css.css-module-6-final-capstone.css-css-module-6-capstone.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "final-css-responsive-site-capstone"
+          ]
+        }
+      ]
+    }
+  ]
+}

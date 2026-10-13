@@ -7,148 +7,154 @@
       "id": "article-content",
       "cardTitle": "Self-Contained Content",
       "title": "Use article for content that can stand on its own",
-      "bodyMarkdown": "Use `<article>` for a self-contained piece of content such as a news story, blog post, review, or forum post.\n\n```html\n<article>\n  <h2>Science Club Launches Weather Balloon</h2>\n  <p>The team collected temperature data above the city.</p>\n</article>\n```\n\nRead this example line by line: article opens the independent story, the heading names that story, the paragraph supplies its content, and the closing article ends the self-contained item. Do not choose article just because you need a generic box."
+      "bodyMarkdown": "Use `<article>` for a self-contained piece of content such as a news story, blog post, review, or forum post.\n\n```html\n<article>\n  <h2>Science Club Launches Weather Balloon</h2>\n  <p>The team collected temperature data above the city.</p>\n</article>\n```\n\nRead this example line by line: article opens the independent story, the heading names that story, the paragraph supplies its content, and the closing article ends the self-contained item. Do not choose article just because you need a generic box.",
+      "tryItExercises": [
+        {
+          "id": "semantic-containers-try-article",
+          "kind": "code_input",
+          "title": "Turn a standalone story into an article",
+          "prompt": "Replace the generic div around Robotics Team Reaches Finals with article. Keep the h2 and paragraph inside it and confirm the story still appears in Preview.",
+          "hint": "Ask whether this content could stand on its own as a separate story.",
+          "help": {
+            "concept": "Article is appropriate for a self-contained piece of content.",
+            "hint_1": "Replace only the wrapper around the story.",
+            "hint_2": "Keep the existing heading and paragraph inside article."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <div>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <article>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </article>\n  </main>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<article\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Robotics Team Reaches Finals\\s*</h2>\\s*<p\\b[^>]*>\\s*The team will compete on Saturday\\.\\s*</p>\\s*</article>",
+              "path": "index.html",
+              "message": "Wrap the standalone robotics story in article.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <div>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <article>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </article>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "section-content",
       "cardTitle": "Group a Theme",
       "title": "Use section for a thematic group of related content",
-      "bodyMarkdown": "Use `<section>` when a part of the page forms a meaningful theme and usually deserves its own heading.\n\n```html\n<section>\n  <h2>Upcoming Events</h2>\n  <p>Open lab — Wednesday</p>\n</section>\n```\n\nRead this example line by line: section starts the themed group, the h2 names the theme, the paragraph belongs to that theme, and the closing section finishes the group. If no semantic meaning exists, do not replace every generic wrapper with section automatically."
+      "bodyMarkdown": "Use `<section>` when a part of the page forms a meaningful theme and usually deserves its own heading.\n\n```html\n<section>\n  <h2>Upcoming Events</h2>\n  <p>Open lab — Wednesday</p>\n</section>\n```\n\nRead this example line by line: section starts the themed group, the h2 names the theme, the paragraph belongs to that theme, and the closing section finishes the group. If no semantic meaning exists, do not replace every generic wrapper with section automatically.",
+      "tryItExercises": [
+        {
+          "id": "semantic-containers-try-section",
+          "kind": "code_input",
+          "title": "Create a named schedule section",
+          "prompt": "Replace the generic schedule div with section and add an h2 heading that says Schedule before the two time entries. Keep both schedule paragraphs visible.",
+          "hint": "The two time entries form one named theme within the larger guide.",
+          "help": {
+            "concept": "Section groups related content under a meaningful theme.",
+            "hint_1": "Replace the schedule div with section.",
+            "hint_2": "Add the Schedule h2 as the first child of the section."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <div>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <section>\n      <h2>Schedule</h2>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </section>\n  </main>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<section\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Schedule\\s*</h2>.*10:00 AM\\s*—\\s*Welcome.*11:00 AM\\s*—\\s*Lab tour.*</section>",
+              "path": "index.html",
+              "message": "Put the schedule heading and both time entries inside section.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <div>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <section>\n      <h2>Schedule</h2>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </section>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "aside-content",
       "cardTitle": "Add Related Information",
       "title": "Use aside for complementary content",
-      "bodyMarkdown": "Use `<aside>` for information related to nearby content but not required to understand the main content. Examples include related links, a short author note, or a sidebar reminder.\n\n```html\n<aside>\n  <h2>Related workshop</h2>\n  <p>Join the study-skills session on Tuesday.</p>\n</aside>\n```\n\nRead this example line by line: aside opens the complementary region, the heading identifies it, the paragraph provides related information, and the closing aside ends that secondary content."
+      "bodyMarkdown": "Use `<aside>` for information related to nearby content but not required to understand the main content. Examples include related links, a short author note, or a sidebar reminder.\n\n```html\n<aside>\n  <h2>Related workshop</h2>\n  <p>Join the study-skills session on Tuesday.</p>\n</aside>\n```\n\nRead this example line by line: aside opens the complementary region, the heading identifies it, the paragraph provides related information, and the closing aside ends that secondary content.",
+      "tryItExercises": [
+        {
+          "id": "semantic-containers-try-aside",
+          "kind": "code_input",
+          "title": "Mark related information as an aside",
+          "prompt": "Replace the generic div after the library article with aside. Add an h2 heading that says Related workshop and keep the study-skills workshop text inside it.",
+          "hint": "The workshop is related to the story but is not part of the story itself.",
+          "help": {
+            "concept": "Aside marks complementary information connected to nearby content.",
+            "hint_1": "Replace the wrapper after article with aside.",
+            "hint_2": "Add the Related workshop heading before the existing workshop paragraph."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <div>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <aside>\n      <h2>Related workshop</h2>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </aside>\n  </main>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)</article>\\s*<aside\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Related workshop\\s*</h2>\\s*<p\\b[^>]*>\\s*Study skills workshop\\s*—\\s*Tuesday at 5:00 PM\\s*</p>\\s*</aside>",
+              "path": "index.html",
+              "message": "Place the related workshop in aside after the article.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <div>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </div>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <aside>\n      <h2>Related workshop</h2>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </aside>\n  </main>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "quizDraft": [
-    {
-      "id": "semantic-containers-try-article",
-      "kind": "code_input",
-      "title": "Turn a standalone story into an article",
-      "prompt": "Replace the generic div around Robotics Team Reaches Finals with article. Keep the h2 and paragraph inside it and confirm the story still appears in Preview.",
-      "hint": "Ask whether this content could stand on its own as a separate story.",
-      "help": {
-        "concept": "Article is appropriate for a self-contained piece of content.",
-        "hint_1": "Replace only the wrapper around the story.",
-        "hint_2": "Keep the existing heading and paragraph inside article."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <div>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </div>\n  </main>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <article>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </article>\n  </main>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<article\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Robotics Team Reaches Finals\\s*</h2>\\s*<p\\b[^>]*>\\s*The team will compete on Saturday\\.\\s*</p>\\s*</article>",
-          "path": "index.html",
-          "message": "Wrap the standalone robotics story in article.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <div>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </div>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student Journal</title>\n</head>\n<body>\n  <main>\n    <h1>Student Journal</h1>\n    <article>\n      <h2>Robotics Team Reaches Finals</h2>\n      <p>The team will compete on Saturday.</p>\n    </article>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
-    {
-      "id": "semantic-containers-try-section",
-      "kind": "code_input",
-      "title": "Create a named schedule section",
-      "prompt": "Replace the generic schedule div with section and add an h2 heading that says Schedule before the two time entries. Keep both schedule paragraphs visible.",
-      "hint": "The two time entries form one named theme within the larger guide.",
-      "help": {
-        "concept": "Section groups related content under a meaningful theme.",
-        "hint_1": "Replace the schedule div with section.",
-        "hint_2": "Add the Schedule h2 as the first child of the section."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <div>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </div>\n  </main>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <section>\n      <h2>Schedule</h2>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </section>\n  </main>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<section\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Schedule\\s*</h2>.*10:00 AM\\s*—\\s*Welcome.*11:00 AM\\s*—\\s*Lab tour.*</section>",
-          "path": "index.html",
-          "message": "Put the schedule heading and both time entries inside section.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <div>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </div>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Open House Guide</title>\n</head>\n<body>\n  <main>\n    <h1>Open House Guide</h1>\n    <p>Meet teachers and tour student spaces.</p>\n    <section>\n      <h2>Schedule</h2>\n      <p>10:00 AM — Welcome</p>\n      <p>11:00 AM — Lab tour</p>\n    </section>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
-    {
-      "id": "semantic-containers-try-aside",
-      "kind": "code_input",
-      "title": "Mark related information as an aside",
-      "prompt": "Replace the generic div after the library article with aside. Add an h2 heading that says Related workshop and keep the study-skills workshop text inside it.",
-      "hint": "The workshop is related to the story but is not part of the story itself.",
-      "help": {
-        "concept": "Aside marks complementary information connected to nearby content.",
-        "hint_1": "Replace the wrapper after article with aside.",
-        "hint_2": "Add the Related workshop heading before the existing workshop paragraph."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <div>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </div>\n  </main>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <aside>\n      <h2>Related workshop</h2>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </aside>\n  </main>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)</article>\\s*<aside\\b[^>]*>\\s*<h2\\b[^>]*>\\s*Related workshop\\s*</h2>\\s*<p\\b[^>]*>\\s*Study skills workshop\\s*—\\s*Tuesday at 5:00 PM\\s*</p>\\s*</aside>",
-          "path": "index.html",
-          "message": "Place the related workshop in aside after the article.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <div>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </div>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Story</title>\n</head>\n<body>\n  <main>\n    <article>\n      <h1>Library Adds Evening Hours</h1>\n      <p>The library will stay open until 9:00 PM on weekdays.</p>\n    </article>\n    <aside>\n      <h2>Related workshop</h2>\n      <p>Study skills workshop — Tuesday at 5:00 PM</p>\n    </aside>\n  </main>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
     {
       "id": "semantic-containers-quiz-article",
       "kind": "single_choice",

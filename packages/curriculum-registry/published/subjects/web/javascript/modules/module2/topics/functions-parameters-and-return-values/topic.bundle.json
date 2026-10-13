@@ -1,0 +1,464 @@
+{
+  "topicId": "functions-parameters-and-return-values",
+  "subjectSlug": "javascript",
+  "moduleSlug": "javascript-foundations-module-2-collections-functions",
+  "sectionSlug": "javascript-javascript-foundations-section-2-collections-functions",
+  "prefix": "javascript_module_2",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.label",
+    "summaryKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.cards.sketch0.title",
+      "sketchId": "define-and-call",
+      "height": 420,
+      "tryIt": {
+        "id": "try-functions-parameters-and-return-values-sketch0",
+        "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.title",
+        "promptKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.prompt",
+        "exerciseKey": "try-functions-parameters-and-return-values-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.cards.sketch1.title",
+      "sketchId": "parameters-as-inputs",
+      "height": 420,
+      "tryIt": {
+        "id": "try-functions-parameters-and-return-values-sketch1",
+        "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.title",
+        "promptKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.prompt",
+        "exerciseKey": "try-functions-parameters-and-return-values-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.cards.sketch2.title",
+      "sketchId": "return-values",
+      "height": 420,
+      "tryIt": {
+        "id": "try-functions-parameters-and-return-values-sketch2",
+        "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.title",
+        "promptKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.prompt",
+        "exerciseKey": "try-functions-parameters-and-return-values-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "define-and-call",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.define-and-call.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.define-and-call.bodyMarkdown"
+    },
+    {
+      "id": "parameters-as-inputs",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.parameters-as-inputs.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.parameters-as-inputs.bodyMarkdown"
+    },
+    {
+      "id": "return-values",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.return-values.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.return-values.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "functions-return-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.practice.functions-return-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "functions-facts-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.practice.functions-facts-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "functions-return-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.practice.functions-return-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "return"
+      }
+    },
+    {
+      "id": "functions-call-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.practice.functions-call-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "try-functions-parameters-and-return-values-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+showReady\\s*\\(\\s*\\)\\s*\\{[\\s\\S]*console\\.log\\(",
+          "message": "Define showReady with a Console action in its body.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "showReady\\s*\\(\\s*\\)\\s*;[\\s\\S]*showReady\\s*\\(\\s*\\)\\s*;",
+          "message": "Call showReady twice.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch0.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-functions-parameters-and-return-values-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+greetLearner\\s*\\(\\s*name\\s*\\)",
+          "message": "Define greetLearner with a name parameter.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "`[^`]*\\$\\{name\\}[^`]*`",
+          "message": "Use name inside a template literal.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "greetLearner\\s*\\(\\s*[\"\\']Maya[\"\\']\\s*\\)[\\s\\S]*greetLearner\\s*\\(\\s*[\"\\']Leo[\"\\']\\s*\\)",
+          "message": "Call greetLearner for Maya and Leo.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch1.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-functions-parameters-and-return-values-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+calculateTotal\\s*\\(\\s*price\\s*,\\s*quantity\\s*\\)",
+          "message": "Define calculateTotal with price and quantity parameters.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "return\\s+price\\s*\\*\\s*quantity",
+          "message": "Return the product of price and quantity.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+total\\s*=\\s*calculateTotal\\s*\\(\\s*8\\s*,\\s*3\\s*\\)",
+          "message": "Store the returned result in total.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.functions-parameters-and-return-values.tryIt.try_functions_parameters_and_return_values_sketch2.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

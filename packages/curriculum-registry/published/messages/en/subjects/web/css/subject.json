@@ -1,0 +1,172 @@
+{
+  "subjects": {
+    "css": {
+      "title": "CSS Foundations",
+      "description": "A practical beginner CSS course covering the cascade, selectors, typography, the box model, Flexbox, Grid, responsive design, reusable CSS, accessible states, and a complete multi-page responsive capstone.",
+      "moreComingSoon": "More CSS Foundations lessons are coming soon."
+    }
+  },
+  "modules": {
+    "css": {
+      "css-module-1-first-styles": {
+        "title": "First Styles and the Cascade",
+        "description": "Build confidence with first CSS rules and understand why the browser applies one style instead of another.",
+        "outcomes": [
+          "Compare inline, internal, and external CSS, then use external stylesheets for reusable presentation.",
+          "Write clear selectors and declaration blocks.",
+          "Use color and typography to create visual hierarchy.",
+          "Reason about the cascade, inheritance, and specificity."
+        ],
+        "why": [
+          "Builds confidence with first styles and the cascade.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "css-module-2-box-model-spacing": {
+        "title": "The Box Model and Spacing",
+        "description": "Make page structure visually understandable through predictable sizing, spacing, and box behavior.",
+        "outcomes": [
+          "Explain and manipulate content, padding, border, and margin on the inherited portfolio.",
+          "Use spacing and borders to improve grouping without rebuilding HTML.",
+          "Use border-box, width, max-width, and image constraints to make sizing predictable.",
+          "Use display and overflow to improve existing navigation, tables, forms, and images."
+        ],
+        "why": [
+          "Builds confidence with the box model and spacing.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "css-module-3-flexbox-layout": {
+        "title": "Flexbox Layout",
+        "description": "Build one-dimensional layouts that align, distribute, and wrap content cleanly.",
+        "outcomes": [
+          "Create Flexbox containers from existing semantic portfolio regions.",
+          "Reason about main and cross axes from flex-direction.",
+          "Align and distribute items with justify-content, align-items, and gap.",
+          "Use wrapping and flexible bases for navigation and content cards."
+        ],
+        "why": [
+          "Builds confidence with flexbox layout.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "css-module-4-grid-responsive-design": {
+        "title": "Grid and Responsive Design",
+        "description": "Build two-dimensional layouts that adapt across viewport sizes without device-specific hacks.",
+        "outcomes": [
+          "Create CSS Grid layouts with columns, rows, gap, and repeat().",
+          "Use relative units, fr, and minmax() for fluid sizing.",
+          "Apply mobile-first media queries for responsive changes."
+        ],
+        "why": [
+          "Builds confidence with grid and responsive design.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "css-module-5-polish-reuse-accessibility": {
+        "title": "Polish, Reuse, and Accessible Styling",
+        "description": "Turn one-off styling into a small, consistent, maintainable visual system with accessible states.",
+        "outcomes": [
+          "Use custom properties for reusable design values.",
+          "Create reusable classes and organize stylesheet sections clearly.",
+          "Style hover and keyboard-focus states with readable contrast."
+        ],
+        "why": [
+          "Builds confidence with polish, reuse, and accessible styling.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "css-module-6-final-capstone": {
+        "title": "Final Capstone: Build a Responsive Event Website",
+        "description": "Transfer the CSS skills from the cumulative learning portfolio to a fresh multi-page project with unfamiliar content and layout requirements.",
+        "outcomes": [
+          "Apply one consistent stylesheet across a multi-page semantic website.",
+          "Combine cascade, typography, box model, Flexbox, Grid, responsive design, and reusable CSS appropriately.",
+          "Preserve semantic HTML while improving the presentation layer.",
+          "Review accessible interaction states and responsive behavior before submission."
+        ],
+        "why": [
+          "Builds confidence with final capstone: build a responsive event website.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "css": {
+      "css-module-1-first-styles": {
+        "css-css-module-1-lessons": {
+          "title": "First Styles and the Cascade",
+          "description": "Learn connecting css to html, selectors, declarations, and rules, color, backgrounds, and typography through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Connecting CSS to HTML",
+            "Selectors, Declarations, and Rules",
+            "Color, Backgrounds, and Typography",
+            "Cascade, Inheritance, and Specificity"
+          ]
+        }
+      },
+      "css-module-2-box-model-spacing": {
+        "css-css-module-2-lessons": {
+          "title": "The Box Model and Spacing",
+          "description": "Learn the css box model, margin, padding, and borders, sizing and box-sizing through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "The CSS Box Model",
+            "Margin, Padding, and Borders",
+            "Sizing and box-sizing",
+            "Display and Overflow"
+          ]
+        }
+      },
+      "css-module-3-flexbox-layout": {
+        "css-css-module-3-lessons": {
+          "title": "Flexbox Layout",
+          "description": "Learn flex containers and axes, alignment, distribution, and gap, wrapping, sizing, and flex patterns through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Flex Containers and Axes",
+            "Alignment, Distribution, and Gap",
+            "Wrapping, Sizing, and Flex Patterns"
+          ]
+        }
+      },
+      "css-module-4-grid-responsive-design": {
+        "css-css-module-4-lessons": {
+          "title": "Grid and Responsive Design",
+          "description": "Learn grid columns and rows, grid placement, gap, and repeat(), responsive units, minmax(), and fluid tracks through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Grid Columns and Rows",
+            "Grid Placement, Gap, and repeat()",
+            "Responsive Units, minmax(), and Fluid Tracks",
+            "Media Queries and Mobile-First Design"
+          ]
+        }
+      },
+      "css-module-5-polish-reuse-accessibility": {
+        "css-css-module-5-lessons": {
+          "title": "Polish, Reuse, and Accessible Styling",
+          "description": "Learn custom properties and reusable values, reusable classes and maintainable css, hover, focus, and accessible states through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Custom Properties and Reusable Values",
+            "Reusable Classes and Maintainable CSS",
+            "Hover, Focus, and Accessible States"
+          ]
+        }
+      },
+      "css-module-6-final-capstone": {
+        "css-css-module-6-capstone": {
+          "title": "Final Capstone",
+          "description": "Learn build a responsive community tech festival website through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Build a Responsive Community Tech Festival Website"
+          ]
+        }
+      }
+    }
+  }
+}

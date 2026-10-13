@@ -1,0 +1,3337 @@
+{
+  "topicId": "final-css-responsive-site-capstone",
+  "subjectSlug": "css",
+  "moduleSlug": "css-module-6-final-capstone",
+  "sectionSlug": "css-css-module-6-capstone",
+  "prefix": "css_module_6",
+  "minutes": 55,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.label",
+    "summaryKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.cards.sketch0.title",
+      "sketchId": "responsive-project-sketch-0",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "capstone_css_01",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_01.title",
+            "exerciseKey": "capstone-css-01",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "capstone_css_02",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_02.title",
+            "exerciseKey": "capstone-css-02",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_03",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_03.title",
+            "exerciseKey": "capstone-css-03",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_04",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_04.title",
+            "exerciseKey": "capstone-css-04",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_05",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_05.title",
+            "exerciseKey": "capstone-css-05",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_06",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_06.title",
+            "exerciseKey": "capstone-css-06",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_07",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_07.title",
+            "exerciseKey": "capstone-css-07",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_08",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_08.title",
+            "exerciseKey": "capstone-css-08",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_09",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_09.title",
+            "exerciseKey": "capstone-css-09",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_10",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_10.title",
+            "exerciseKey": "capstone-css-10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_11",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_11.title",
+            "exerciseKey": "capstone-css-11",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_12",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_12.title",
+            "exerciseKey": "capstone-css-12",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_13",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_13.title",
+            "exerciseKey": "capstone-css-13",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_14",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_14.title",
+            "exerciseKey": "capstone-css-14",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_15",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_15.title",
+            "exerciseKey": "capstone-css-15",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_16",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_16.title",
+            "exerciseKey": "capstone-css-16",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_17",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_17.title",
+            "exerciseKey": "capstone-css-17",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_css_18",
+            "titleKey": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.projectSteps.capstone_css_18.title",
+            "exerciseKey": "capstone-css-18",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "responsive-project-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-6-final-capstone.final-css-responsive-site-capstone.responsive-project-sketch-0.title",
+      "bodyKey": "sketches.css.css-module-6-final-capstone.final-css-responsive-site-capstone.responsive-project-sketch-0.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "capstone-css-01",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is):root\\s*\\{[^}]*\\-\\-page\\s*:\\s*\\#f8fafc\\s*;?",
+          "message": "Add `--page: #f8fafc;` to the intended `:root` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_01.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-02",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)body\\s*\\{[^}]*background\\s*:\\s*var\\(\\-\\-page\\)\\s*;?",
+          "message": "Add `background: var(--page);` to the intended `body` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_02.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-03",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main,\\s+\\.site\\-header,\\s+footer\\s*\\{[^}]*width\\s*:\\s*min\\(70rem,\\s+calc\\(100%\\s+\\-\\s+2rem\\)\\)\\s*;?",
+          "message": "Add `width: min(70rem, calc(100% - 2rem));` to the intended `main,\n.site-header,\nfooter` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_03.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-04",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.eyebrow,\\s+\\.speaker\\-role\\s*\\{[^}]*color\\s*:\\s*var\\(\\-\\-accent\\-strong\\)\\s*;?",
+          "message": "Add `color: var(--accent-strong);` to the intended `.eyebrow,\n.speaker-role` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_04.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-05",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.lede,\\s+\\.page\\-heading\\s+p,\\s+\\.event\\-card\\s+p,\\s+\\.schedule\\-card\\s+p,\\s+\\.speaker\\-card\\s+p\\s*\\{[^}]*color\\s*:\\s*var\\(\\-\\-muted\\)\\s*;?",
+          "message": "Add `color: var(--muted);` to the intended `.lede,\n.page-heading p,\n.event-card p,\n.schedule-card p,\n.speaker-card p` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_05.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-06",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.site\\-header\\s*\\{[^}]*display\\s*:\\s*flex\\s*;?",
+          "message": "Add `display: flex;` to the intended `.site-header` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_06.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-07",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.brand,\\s+nav\\s*\\{[^}]*display\\s*:\\s*flex\\s*;?",
+          "message": "Add `display: flex;` to the intended `.brand,\nnav` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_07.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-08",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.brand\\s*\\{[^}]*font\\-weight\\s*:\\s*800\\s*;?",
+          "message": "Add `font-weight: 800;` to the intended `.brand` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_08.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-09",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)nav\\s*\\{[^}]*flex\\-wrap\\s*:\\s*wrap\\s*;?",
+          "message": "Add `flex-wrap: wrap;` to the intended `nav` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_09.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)nav\\s+a\\s*\\{[^}]*text\\-decoration\\s*:\\s*none\\s*;?",
+          "message": "Add `text-decoration: none;` to the intended `nav a` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_10.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-11",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.event\\-grid,\\s+\\.schedule\\-grid,\\s+\\.speaker\\-grid\\s*\\{[^}]*display\\s*:\\s*grid\\s*;?",
+          "message": "Add `display: grid;` to the intended `.event-grid,\n.schedule-grid,\n.speaker-grid` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_11.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-12",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.event\\-card,\\s+\\.schedule\\-card,\\s+\\.speaker\\-card,\\s+\\.hero\\-note,\\s+\\.registration\\-form\\s*\\{[^}]*background\\s*:\\s*var\\(\\-\\-surface\\)\\s*;?",
+          "message": "Add `background: var(--surface);` to the intended `.event-card,\n.schedule-card,\n.speaker-card,\n.hero-note,\n.registration-form` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_12.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-13",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.button\\-link,\\s+button\\s*\\{[^}]*display\\s*:\\s*inline\\-block\\s*;?",
+          "message": "Add `display: inline-block;` to the intended `.button-link,\nbutton` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_13.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-14",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.registration\\-form\\s*\\{[^}]*display\\s*:\\s*grid\\s*;?",
+          "message": "Add `display: grid;` to the intended `.registration-form` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_14.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-15",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)input,\\s+select,\\s+textarea\\s*\\{[^}]*width\\s*:\\s*100%\\s*;?",
+          "message": "Add `width: 100%;` to the intended `input,\nselect,\ntextarea` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_15.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-16",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)@media\\s+\\(min\\-width:\\s+48rem\\)\\s*\\{[\\s\\S]*?\\.hero\\s*\\{[^}]*display\\s*:\\s*grid\\s*;?",
+          "message": "Add `display: grid;` to the intended `.hero` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_16.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-17",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)nav\\s+a:hover,\\s+\\.button\\-link:hover,\\s+button:hover\\s*\\{[^}]*color\\s*:\\s*\\#ffffff\\s*;?",
+          "message": "Add `color: #ffffff;` to the intended `nav a:hover,\n.button-link:hover,\nbutton:hover` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_17.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-css-18",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "schedule.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.schedule_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "speakers.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.speakers_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "register.html",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.register_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/festival-mark.svg",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.images_festival_mark_svg.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.styles_css.content",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)a:focus\\-visible,\\s+button:focus\\-visible,\\s+input:focus\\-visible,\\s+select:focus\\-visible,\\s+textarea:focus\\-visible\\s*\\{[^}]*outline\\s*:\\s*0\\.2rem\\s+solid\\s+\\#f59e0b\\s*;?",
+          "message": "Add `outline: 0.2rem solid #f59e0b;` to the intended `a:focus-visible,\nbutton:focus-visible,\ninput:focus-visible,\nselect:focus-visible,\ntextarea:focus-visible` rule for this step.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.starterFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.starterFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.starterFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.starterFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.starterCode",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "schedule.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.schedule_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "speakers.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.speakers_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "register.html",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.register_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/festival-mark.svg",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.images_festival_mark_svg.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-6-final-capstone.final-css-responsive-site-capstone.finalCapstone.steps.capstone_css_18.solutionFiles.styles_css.content",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          }
+        ]
+      }
+    }
+  ]
+}

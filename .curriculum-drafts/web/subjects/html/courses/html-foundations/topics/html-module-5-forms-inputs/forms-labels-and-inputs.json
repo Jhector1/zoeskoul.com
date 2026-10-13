@@ -7,107 +7,111 @@
       "id": "form-groups-controls",
       "cardTitle": "Start with the Form",
       "title": "Use form to group controls that belong to one submission",
-      "bodyMarkdown": "A `<form>` groups the controls that belong to one user submission. The form element describes the boundary of the interaction; the controls inside it collect the values.\n\n```html\n<form>\n  <label for=\"student-name\">Name</label>\n  <input id=\"student-name\" name=\"student_name\" type=\"text\">\n</form>\n```\n\nRead this example line by line: `form` opens the form region, the label names the field, the input collects the value, and the closing `form` ends the group. For this course, the browser preview shows the form itself; no server is required."
+      "bodyMarkdown": "A `<form>` groups the controls that belong to one user submission. The form element describes the boundary of the interaction; the controls inside it collect the values.\n\n```html\n<form>\n  <label for=\"student-name\">Name</label>\n  <input id=\"student-name\" name=\"student_name\" type=\"text\">\n</form>\n```\n\nRead this example line by line: `form` opens the form region, the label names the field, the input collects the value, and the closing `form` ends the group. For this course, the browser preview shows the form itself; no server is required.",
+      "tryItExercises": [
+        {
+          "id": "forms-try-form-boundary",
+          "kind": "code_input",
+          "title": "Group the controls in a form",
+          "prompt": "Wrap the existing Name label and input in one form element. Keep the page heading and introduction outside the form, then confirm the field still appears in Preview.",
+          "hint": "The form should contain the interactive controls that belong to the same submission.",
+          "help": {
+            "concept": "The form element groups controls that participate in one submission.",
+            "hint_1": "Open form immediately before the Name label.",
+            "hint_2": "Close form immediately after the Name input."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<form\\b[^>]*>\\s*<label\\b[^>]*for\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*Name\\s*</label>\\s*<input\\b[^>]*id\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*</form>",
+              "path": "index.html",
+              "message": "Put the Name label and input inside one form element.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "explicit-label-connection",
       "cardTitle": "Connect Labels to Controls",
       "title": "Match label for with the control id",
-      "bodyMarkdown": "A visible label should be programmatically connected to its control. Give the input an `id`, then use that same value in the label's `for` attribute. This makes the label useful to mouse, touch, keyboard, and assistive-technology users.\n\n```html\n<label for=\"email\">Email address</label>\n<input id=\"email\" name=\"email\" type=\"email\">\n```\n\nRead the example line by line: the label points to `email`, the input owns `id=\"email\"`, and the matching values create the connection. The `name` identifies the value when form data is submitted."
+      "bodyMarkdown": "A visible label should be programmatically connected to its control. Give the input an `id`, then use that same value in the label's `for` attribute. This makes the label useful to mouse, touch, keyboard, and assistive-technology users.\n\n```html\n<label for=\"email\">Email address</label>\n<input id=\"email\" name=\"email\" type=\"email\">\n```\n\nRead the example line by line: the label points to `email`, the input owns `id=\"email\"`, and the matching values create the connection. The `name` identifies the value when form data is submitted.",
+      "tryItExercises": [
+        {
+          "id": "forms-try-label-connection",
+          "kind": "code_input",
+          "title": "Connect a label to its input",
+          "prompt": "Connect the Email address label to the email input. Give the input `id=\"email\"` and give the label `for=\"email\"`. Keep the existing `name` and `type` attributes, then check the field in Preview.",
+          "hint": "The label's for value and the input's id must match exactly.",
+          "help": {
+            "concept": "Matching label for and input id values create an explicit accessible connection.",
+            "hint_1": "Add `for=\"email\"` to the label.",
+            "hint_2": "Add `id=\"email\"` to the input without removing its name or type."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>",
+              "path": "index.html",
+              "message": "Connect the Email address label with for=\"email\".",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Give the email input matching id, name, and type attributes.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "quizDraft": [
-    {
-      "id": "forms-try-form-boundary",
-      "kind": "code_input",
-      "title": "Group the controls in a form",
-      "prompt": "Wrap the existing Name label and input in one form element. Keep the page heading and introduction outside the form, then confirm the field still appears in Preview.",
-      "hint": "The form should contain the interactive controls that belong to the same submission.",
-      "help": {
-        "concept": "The form element groups controls that participate in one submission.",
-        "hint_1": "Open form immediately before the Name label.",
-        "hint_2": "Close form immediately after the Name input."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<form\\b[^>]*>\\s*<label\\b[^>]*for\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*Name\\s*</label>\\s*<input\\b[^>]*id\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*</form>",
-          "path": "index.html",
-          "message": "Put the Name label and input inside one form element.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
-    {
-      "id": "forms-try-label-connection",
-      "kind": "code_input",
-      "title": "Connect a label to its input",
-      "prompt": "Connect the Email address label to the email input. Give the input `id=\"email\"` and give the label `for=\"email\"`. Keep the existing `name` and `type` attributes, then check the field in Preview.",
-      "hint": "The label's for value and the input's id must match exactly.",
-      "help": {
-        "concept": "Matching label for and input id values create an explicit accessible connection.",
-        "hint_1": "Add `for=\"email\"` to the label.",
-        "hint_2": "Add `id=\"email\"` to the input without removing its name or type."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>",
-          "path": "index.html",
-          "message": "Connect the Email address label with for=\"email\".",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Give the email input matching id, name, and type attributes.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
     {
       "id": "forms-quiz-label",
       "kind": "single_choice",

@@ -1,0 +1,73 @@
+{
+  "policyId": "javascript-foundations-validation",
+  "allowedConcepts": [
+    "JavaScript values",
+    "variables",
+    "const",
+    "let",
+    "strings",
+    "template literals",
+    "numbers",
+    "booleans",
+    "comparison operators",
+    "logical operators",
+    "conditionals",
+    "arrays",
+    "loops",
+    "objects",
+    "functions",
+    "parameters",
+    "return values",
+    "array methods",
+    "DOM selection",
+    "DOM updates",
+    "event listeners",
+    "form events",
+    "JSON",
+    "JSON.parse",
+    "JSON.stringify",
+    "promises",
+    "async-await",
+    "local fetch",
+    "loading states",
+    "error states",
+    "empty states",
+    "accessible status messages"
+  ],
+  "disallowedConcepts": [
+    "React",
+    "Vue",
+    "Angular",
+    "JavaScript frameworks",
+    "TypeScript",
+    "Node package installation",
+    "npm",
+    "bundlers",
+    "backend APIs",
+    "external network requests",
+    "advanced metaprogramming"
+  ],
+  "validationRequirements": {
+    "usesWebProfile": true,
+    "usesSourceChecksRecipe": true,
+    "usesBrowserPreview": true,
+    "judge0NotRequired": true,
+    "entryFile": "index.html",
+    "javascriptFile": "script.js"
+  },
+  "rules": {
+    "executionValidation": [
+      "Every JavaScript code_input uses fixedLanguage web and recipeType source_checks",
+      "Every source_checks exercise includes one or more sourceChecks entries",
+      "Use local fixture files for fetch exercises and never depend on external network access",
+      "Do not publish fixed_tests, template_io, semantic, shell_task, or sql_query recipes in JavaScript Foundations"
+    ],
+    "pedagogy": [
+      "Teach expressions and control flow before collections and functions",
+      "Teach collections and functions before DOM events and asynchronous data",
+      "Teach JSON, promises and async-await, local fetch, and resilient UI states before the capstone",
+      "Require meaningful visible behavior rather than exact formatting when source checks can remain flexible",
+      "Keep the final capstone to one progressive topic after all prerequisites have been taught"
+    ]
+  }
+}

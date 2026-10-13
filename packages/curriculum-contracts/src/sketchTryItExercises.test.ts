@@ -58,7 +58,7 @@ describe("sketchBlock.tryItExercises", () => {
         expect(() => assertTopicAuthoringDraft(makeDraft(undefined))).not.toThrow();
     });
 
-    it("accepts 1-3 exercises using the same canonical exercise validator", () => {
+    it("accepts one or more exercises using the same canonical exercise validator", () => {
         expect(() =>
             assertTopicAuthoringDraft(
                 makeDraft([
@@ -70,7 +70,7 @@ describe("sketchBlock.tryItExercises", () => {
         ).not.toThrow();
     });
 
-    it("rejects more than three dedicated exercises", () => {
+    it("accepts more than three dedicated exercises", () => {
         expect(() =>
             assertTopicAuthoringDraft(
                 makeDraft([
@@ -80,7 +80,7 @@ describe("sketchBlock.tryItExercises", () => {
                     dedicated("try-4"),
                 ]),
             ),
-        ).toThrow(/must contain 1 to 3 dedicated exercises/);
+        ).not.toThrow();
     });
 
     it("validates nested exercises with the same language rules", () => {

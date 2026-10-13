@@ -1,0 +1,232 @@
+{
+  "title": "JavaScript Values and First Expressions",
+  "summary": "Recognize common JavaScript values, observe them in the Console, and evaluate simple expressions that produce new values.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "javascript-values-and-first-expressions-values",
+      "cardTitle": "Meet JavaScript values",
+      "title": "Text, numbers, and true/false values",
+      "bodyMarkdown": "JavaScript programs work with **values**: pieces of data the program can use. For now, focus on three kinds you will see constantly: strings for text, numbers for quantities, and booleans for `true` or `false`.\n\nYou can observe a value with `console.log(...)`:\n\n```js\nconsole.log(\"Campus Movie Night\");\nconsole.log(24);\nconsole.log(true);\n```\n\nFirst, the quoted text is a **string**. Second, `24` is a **number**. Third, `true` is a **boolean**. `console.log` does not change those values; it simply shows them in the Console so you can see what the program is working with.\n\nJavaScript also has values for “nothing here.” `null` is an intentional empty value, while `undefined` often means a value has not been provided yet. You only need to recognize those names for now; later lessons will give them more context."
+    },
+    {
+      "id": "javascript-values-and-first-expressions-expressions",
+      "cardTitle": "Let JavaScript calculate",
+      "title": "Expressions produce new values",
+      "bodyMarkdown": "An **expression** is code that JavaScript evaluates to produce a value. Arithmetic is a simple example:\n\n```js\nconsole.log(18 + 6);\nconsole.log(30 - 12);\n```\n\nOn the first line, JavaScript evaluates `18 + 6` and produces `24`. On the second line, it evaluates `30 - 12` and produces `18`. The Console shows the result of each expression.\n\nYou can also ask JavaScript what kind of value it sees:\n\n```js\nconsole.log(typeof \"24\");\nconsole.log(typeof 24);\n```\n\nThe first line prints `string` because the quotes make `\"24\"` text. The second prints `number` because `24` is numeric. The characters may look similar to us, but JavaScript treats their types differently. That distinction will matter when you start storing and combining values."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "javascript-values-and-first-expressions-check",
+      "kind": "single_choice",
+      "title": "Spot the boolean",
+      "prompt": "Which line logs a boolean value?",
+      "hint": "A boolean is written without quotation marks.",
+      "help": {
+        "concept": "JavaScript boolean literals",
+        "hint_1": "Strings use quotes; booleans do not.",
+        "hint_2": "Look for the literal value that is exactly `true` or `false`."
+      },
+      "options": [
+        "console.log(\"true\");",
+        "console.log(1);",
+        "console.log(true);",
+        "console.log(\"yes\");"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "javascript-values-and-first-expressions-multi",
+      "kind": "multi_choice",
+      "title": "Find the numeric expressions",
+      "prompt": "Which expressions produce numbers? Select all that apply.",
+      "hint": "Choose the expressions JavaScript can evaluate as arithmetic.",
+      "help": {
+        "concept": "numeric expressions",
+        "hint_1": "Numbers can participate directly in arithmetic.",
+        "hint_2": "Quoted digits are text, and `false` is a boolean."
+      },
+      "options": [
+        "12 + 8",
+        "30 - 7",
+        "\"20\"",
+        "false"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "javascript-values-and-first-expressions-blank",
+      "kind": "fill_blank_choice",
+      "title": "Read a value type",
+      "prompt": "Use `typeof` to complete the statement.",
+      "hint": "Compare how JavaScript treats a quoted value with how it treats an unquoted number.",
+      "help": {
+        "concept": "using typeof to inspect a value",
+        "hint_1": "The quotation marks are part of the clue; they change how JavaScript interprets the value.",
+        "hint_2": "`typeof` returns a type label, so choose the label that matches quoted text."
+      },
+      "template": "`typeof \"Campus Fair\"` evaluates to [blank1].",
+      "choices": [
+        "number",
+        "boolean",
+        "string",
+        "undefined"
+      ],
+      "correctValue": "string"
+    },
+    {
+      "id": "javascript-values-and-first-expressions-order",
+      "kind": "drag_reorder",
+      "title": "Follow an expression",
+      "prompt": "Arrange what happens when JavaScript evaluates `20 + 4` and logs it.",
+      "hint": "The expression is evaluated before `console.log` displays its result.",
+      "help": {
+        "concept": "expression evaluation",
+        "hint_1": "Start with the values and operator.",
+        "hint_2": "The Console can only display the result after JavaScript has produced it."
+      },
+      "tokens": [
+        "Read the two number values",
+        "Apply the + operator",
+        "Produce the value 24",
+        "Display 24 in the Console"
+      ],
+      "correctOrder": [
+        "Read the two number values",
+        "Apply the + operator",
+        "Produce the value 24",
+        "Display 24 in the Console"
+      ]
+    },
+    {
+      "id": "try-javascript-values-and-first-expressions-sketch0",
+      "kind": "code_input",
+      "title": "Observe profile values",
+      "prompt": "Problem: A learner profile can contain different kinds of data, and you need to verify that JavaScript can represent each kind correctly. Task: Use three `console.log` calls to show a favorite color as text, a number of completed lessons, and a boolean that says whether notifications are enabled. Expected result: the Console shows one string, one number, and one boolean value.",
+      "hint": "Show one text value, one number value, and one boolean value.",
+      "help": {
+        "concept": "JavaScript can work with different kinds of values and display them directly in the Console.",
+        "hint_1": "Put the color in quotes, but write the lesson count and boolean without quotes.",
+        "hint_2": "Your three logs should demonstrate text, number, then boolean."
+      },
+      "starterCode": "// Log three profile values:\n// 1. A favorite color as text\n// 2. A completed lesson count as a number\n// 3. Whether notifications are enabled as a boolean\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// Log three profile values:\n// 1. A favorite color as text\n// 2. A completed lesson count as a number\n// 3. Whether notifications are enabled as a boolean\n"
+        }
+      ],
+      "solutionCode": "console.log(\"Green\");\nconsole.log(7);\nconsole.log(true);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "console.log(\"Green\");\nconsole.log(7);\nconsole.log(true);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*[\"\\'][^\"\\']+[\"\\']\\s*\\)",
+          "message": "Log a non-empty text value.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*\\d+\\s*\\)",
+          "message": "Log a number value without quotes.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*(?:true|false)\\s*\\)",
+          "message": "Log a boolean value.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-javascript-values-and-first-expressions-sketch1",
+      "kind": "code_input",
+      "title": "Evaluate a score expression",
+      "prompt": "Problem: A score calculation and a text label can look similar on screen even though JavaScript treats them as different value types. Task: Log the result of `9 + 4`. Then log the type of the number `13` and the type of the text value `\"13\"`. Expected result: the Console shows `13`, then `number`, then `string`.",
+      "hint": "Let JavaScript evaluate both the arithmetic expression and each `typeof` operation.",
+      "help": {
+        "concept": "Expressions produce values, and `typeof` reports what kind of value JavaScript sees.",
+        "hint_1": "Keep `9 + 4` as an expression instead of replacing it with its result.",
+        "hint_2": "Use `typeof 13` for the number and `typeof \"13\"` for the quoted text."
+      },
+      "starterCode": "// 1. Log the result of 9 + 4.\n// 2. Log the type of 13.\n// 3. Log the type of \"13\".\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// 1. Log the result of 9 + 4.\n// 2. Log the type of 13.\n// 3. Log the type of \"13\".\n"
+        }
+      ],
+      "solutionCode": "console.log(9 + 4);\nconsole.log(typeof 13);\nconsole.log(typeof \"13\");\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "console.log(9 + 4);\nconsole.log(typeof 13);\nconsole.log(typeof \"13\");\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*9\\s*\\+\\s*4\\s*\\)",
+          "message": "Log the addition expression 9 + 4.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*typeof\\s+13\\s*\\)",
+          "message": "Use typeof on the number 13.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*typeof\\s+[\"\\']13[\"\\']\\s*\\)",
+          "message": "Use typeof on the text value \"13\".",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

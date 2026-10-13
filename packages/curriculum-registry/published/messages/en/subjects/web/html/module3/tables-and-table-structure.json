@@ -22,70 +22,16 @@
           "tryIt": {
             "allowReveal": false,
             "try_tables_and_table_structure_sketch0": {
-              "title": "Try it yourself: Turn meeting data into a table",
-              "prompt": "Now apply what you just learned in this task. Replace the two meeting paragraphs with a table captioned Weekly club meetings. Add Club and Day headers, then one row for Robotics Tuesday and one row for Art Thursday. Produce the result for turn meeting data into a table so it reinforces Tables and Table Structure.",
-              "hint": "Each club is one row with the same two columns.",
-              "help": {
-                "concept": "A table represents repeated records that share the same fields.",
-                "hint_1": "Start with table and caption, then add a header row.",
-                "hint_2": "Use th for headers and td for the two club rows."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <p>Robotics - Tuesday</p>\n  <p>Art - Thursday</p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <caption>Weekly club meetings</caption>\n    <tr>\n      <th>Club</th>\n      <th>Day</th>\n    </tr>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <p>Robotics - Tuesday</p>\n  <p>Art - Thursday</p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <caption>Weekly club meetings</caption>\n    <tr>\n      <th>Club</th>\n      <th>Day</th>\n    </tr>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n"
-                }
-              }
+              "title": "Try it yourself: Turn the meeting data into table rows",
+              "prompt": "**Problem**\n\nThe meeting information is written as paragraphs, so the relationship between each club and its meeting day is not represented as rows and columns.\n\n**Task**\n\nReplace the two meeting paragraphs with a table containing two data rows. Put Robotics and Tuesday in the first row, then Art and Thursday in the second row. Use `td` cells only in this step."
             },
             "try_tables_and_table_structure_sketch1": {
-              "title": "Try it yourself: Separate the table head and body",
-              "prompt": "Now apply what you just learned in this task. Keep the existing caption and cells, but group the header row inside thead and the data row inside tbody. Produce the result for separate the table head and body so it reinforces Tables and Table Structure.",
-              "hint": "The header row and data rows belong to different table sections.",
-              "help": {
-                "concept": "thead and tbody make the roles of table rows explicit.",
-                "hint_1": "Move the row containing th cells into thead.",
-                "hint_2": "Move the row containing td cells into tbody."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <tr>\n      <th>Time</th>\n      <th>Session</th>\n    </tr>\n    <tr>\n      <td>10:00</td>\n      <td>HTML Basics</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>10:00</td>\n        <td>HTML Basics</td>\n      </tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <tr>\n      <th>Time</th>\n      <th>Session</th>\n    </tr>\n    <tr>\n      <td>10:00</td>\n      <td>HTML Basics</td>\n    </tr>\n  </table>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Schedule</title>\n</head>\n<body>\n  <h1>Workshop Schedule</h1>\n  <table>\n    <caption>Saturday workshops</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>10:00</td>\n        <td>HTML Basics</td>\n      </tr>\n    </tbody>\n  </table>\n</body>\n</html>\n"
-                }
-              }
+              "title": "Try it yourself: Add a caption and clear column headers",
+              "prompt": "**Problem**\n\nThe table has data rows, but visitors still need a clear table label and labels for the two columns.\n\n**Task**\n\nKeep both existing data rows. Add the caption **Weekly club meetings** and add a header row with `th` cells **Club** and **Day** above the data."
             },
             "try_tables_and_table_structure_sketch2": {
-              "title": "Try it yourself: Build a complete schedule table",
-              "prompt": "Now apply what you just learned in this task. Replace the schedule paragraphs with a table captioned Morning session schedule. Use a thead with Time, Session, and Location, then a tbody with all three schedule rows. Produce the result for build a complete schedule table so it reinforces Tables and Table Structure.",
-              "hint": "Every data row has the same three fields.",
-              "help": {
-                "concept": "A well-structured table combines caption, row groups, rows, header cells, and data cells.",
-                "hint_1": "Create the caption and three-column thead first.",
-                "hint_2": "Add three tbody rows in Time, Session, Location order."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <p>9:00 - Welcome - Room A</p>\n  <p>10:00 - HTML Basics - Lab 1</p>\n  <p>11:00 - Robotics Demo - Lab 2</p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n        <th>Location</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n      <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <p>9:00 - Welcome - Room A</p>\n  <p>10:00 - HTML Basics - Lab 1</p>\n  <p>11:00 - Robotics Demo - Lab 2</p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n        <th>Location</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n      <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n"
-                }
-              }
+              "title": "Try it yourself: Separate table headers from the data body",
+              "prompt": "**Problem**\n\nThe schedule already has its caption, header row, and all three data rows, but the header and data are not grouped into semantic table sections.\n\n**Task**\n\nKeep the caption and all cell content unchanged. Wrap the existing header row in `thead`, then wrap all three schedule rows in `tbody`."
             }
           },
           "practice": {
@@ -152,6 +98,72 @@
                 "<li>Time</li>",
                 "<caption>Time</caption>"
               ]
+            },
+            "tables-try-basic": {
+              "title": "Turn the meeting data into table rows",
+              "prompt": "**Problem**\n\nThe meeting information is written as paragraphs, so the relationship between each club and its meeting day is not represented as rows and columns.\n\n**Task**\n\nReplace the two meeting paragraphs with a table containing two data rows. Put Robotics and Tuesday in the first row, then Art and Thursday in the second row. Use `td` cells only in this step.",
+              "hint": "Create one table with two tr rows and two td cells in each row.",
+              "help": {
+                "concept": "Tables represent related values through rows and columns.",
+                "hint_1": "Use table > tr > td.",
+                "hint_2": "Do not add caption or header cells yet."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <p>Robotics - Tuesday</p>\n  <p>Art - Thursday</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <p>Robotics - Tuesday</p>\n  <p>Art - Thursday</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "tables-try-caption-headers": {
+              "title": "Add a caption and clear column headers",
+              "prompt": "**Problem**\n\nThe table has data rows, but visitors still need a clear table label and labels for the two columns.\n\n**Task**\n\nKeep both existing data rows. Add the caption **Weekly club meetings** and add a header row with `th` cells **Club** and **Day** above the data.",
+              "hint": "Add caption first, then a header tr with two th cells.",
+              "help": {
+                "concept": "A caption names the table and th cells identify column meaning.",
+                "hint_1": "Use `<caption>Weekly club meetings</caption>`.",
+                "hint_2": "Add Club and Day as th cells in a new first row."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <caption>Weekly club meetings</caption>\n    <tr>\n      <th>Club</th>\n      <th>Day</th>\n    </tr>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Meeting Times</title>\n</head>\n<body>\n  <h1>Club Meeting Times</h1>\n  <table>\n    <caption>Weekly club meetings</caption>\n    <tr>\n      <th>Club</th>\n      <th>Day</th>\n    </tr>\n    <tr>\n      <td>Robotics</td>\n      <td>Tuesday</td>\n    </tr>\n    <tr>\n      <td>Art</td>\n      <td>Thursday</td>\n    </tr>\n  </table>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "tables-try-complete": {
+              "title": "Separate table headers from the data body",
+              "prompt": "**Problem**\n\nThe schedule already has its caption, header row, and all three data rows, but the header and data are not grouped into semantic table sections.\n\n**Task**\n\nKeep the caption and all cell content unchanged. Wrap the existing header row in `thead`, then wrap all three schedule rows in `tbody`.",
+              "hint": "Do not rebuild the table; only add thead around the header row and tbody around the data rows.",
+              "help": {
+                "concept": "thead groups header rows and tbody groups the table's data rows.",
+                "hint_1": "Move only the header tr inside thead.",
+                "hint_2": "Place all three data tr elements inside tbody."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <tr>\n      <th>Time</th>\n      <th>Session</th>\n      <th>Location</th>\n    </tr>\n    <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n    <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n    <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n  </table>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n        <th>Location</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n      <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <tr>\n      <th>Time</th>\n      <th>Session</th>\n      <th>Location</th>\n    </tr>\n    <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n    <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n    <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n  </table>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Learning Center Schedule</title>\n</head>\n<body>\n  <h1>Learning Center Schedule</h1>\n  <table>\n    <caption>Morning session schedule</caption>\n    <thead>\n      <tr>\n        <th>Time</th>\n        <th>Session</th>\n        <th>Location</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>9:00</td><td>Welcome</td><td>Room A</td></tr>\n      <tr><td>10:00</td><td>HTML Basics</td><td>Lab 1</td></tr>\n      <tr><td>11:00</td><td>Robotics Demo</td><td>Lab 2</td></tr>\n    </tbody>\n  </table>\n</body>\n</html>\n"
+                }
+              }
             }
           }
         }

@@ -23,39 +23,15 @@
             "allowReveal": false,
             "try_document_structure_sketch0": {
               "title": "Try it yourself: Create the document root",
-              "prompt": "Now apply what you just learned in this task. Start the page with a modern HTML doctype and wrap the existing content in an html element whose language is English. Produce the result for create the document root so it reinforces The HTML Document Structure.",
-              "hint": "Add the declaration before the root element, then place the existing head and body inside the root.",
-              "help": {
-                "concept": "The doctype and html root establish the outer document structure, while the lang attribute identifies the page language.",
-                "hint_1": "Keep head and body as children of the root element.",
-                "hint_2": "Check that the root has both an opening and closing tag and includes the language attribute."
-              },
-              "starterCode": "<head>\n  <title>Practice Page</title>\n</head>\n<body>\n  <h1>Practice Page</h1>\n</body>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Practice Page</title>\n  </head>\n  <body>\n    <h1>Practice Page</h1>\n  </body>\n</html>\n"
+              "prompt": "Now apply what you just learned in this task. Start the page with a modern HTML doctype and wrap the existing content in an html element whose language is English. Produce the result for create the document root so it reinforces The HTML Document Structure."
             },
             "try_document_structure_sketch1": {
               "title": "Try it yourself: Build the head",
-              "prompt": "Now apply what you just learned in this task. Inside head, add a UTF-8 charset declaration and set the document title to **Learning HTML**. Leave the visible heading in body unchanged. Produce the result for build the head so it reinforces The HTML Document Structure.",
-              "hint": "The charset is a meta element; the document name belongs between title tags.",
-              "help": {
-                "concept": "Head metadata helps the browser interpret and identify the document without becoming normal body content.",
-                "hint_1": "Add both pieces inside the existing head element.",
-                "hint_2": "Check the browser tab/title surface separately from the h1 shown in the page."
-              },
-              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n  </head>\n  <body>\n    <h1>My Practice Page</h1>\n  </body>\n</html>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Learning HTML</title>\n  </head>\n  <body>\n    <h1>My Practice Page</h1>\n  </body>\n</html>\n"
+              "prompt": "Now apply what you just learned in this task. Inside head, add a UTF-8 charset declaration and set the document title to **Learning HTML**. Leave the visible heading in body unchanged. Produce the result for build the head so it reinforces The HTML Document Structure."
             },
             "try_document_structure_sketch2": {
-              "title": "Try it yourself: Complete the page shell",
-              "prompt": "Now apply what you just learned in this task. Complete the document so it has a doctype, html lang, head with UTF-8 and the title **About Maya**, plus a body containing an h1 **About Maya** and a paragraph **I am building web pages.**. Produce the result for complete the page shell so it reinforces The HTML Document Structure.",
-              "hint": "Work from the outside in: document declaration, root, head information, then body content.",
-              "help": {
-                "concept": "A complete HTML document combines outer structure, head metadata, and visible body content in one nested page.",
-                "hint_1": "Keep the document title in head and the visible heading in body even though their text matches.",
-                "hint_2": "Use the preview to verify the h1 and paragraph, then Check Answer for the full source structure."
-              },
-              "starterCode": "<html>\n  <head>\n    <title>Untitled</title>\n  </head>\n  <body>\n  </body>\n</html>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>About Maya</title>\n  </head>\n  <body>\n    <h1>About Maya</h1>\n    <p>I am building web pages.</p>\n  </body>\n</html>\n"
+              "title": "Try it yourself: Complete the body content",
+              "prompt": "**Problem**\n\nThe document root and head metadata are already complete, but the body is still empty. Visitors need visible page content.\n\n**Task**\n\nInside the existing `body`, add an `h1` that says **About Maya** and a paragraph that says **I am building web pages.** Keep the completed doctype, `html lang=\"en\"`, UTF-8 metadata, and title unchanged."
             }
           },
           "practice": {
@@ -156,6 +132,42 @@
                 "meta",
                 "title"
               ]
+            },
+            "add-document-root": {
+              "title": "Create the document root",
+              "prompt": "Start the page with a modern HTML doctype and wrap the existing content in an html element whose language is English.",
+              "hint": "Add the declaration before the root element, then place the existing head and body inside the root.",
+              "help": {
+                "concept": "The doctype and html root establish the outer document structure, while the lang attribute identifies the page language.",
+                "hint_1": "Keep head and body as children of the root element.",
+                "hint_2": "Check that the root has both an opening and closing tag and includes the language attribute."
+              },
+              "starterCode": "<head>\n  <title>Practice Page</title>\n</head>\n<body>\n  <h1>Practice Page</h1>\n</body>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Practice Page</title>\n  </head>\n  <body>\n    <h1>Practice Page</h1>\n  </body>\n</html>\n"
+            },
+            "build-head-metadata": {
+              "title": "Build the head",
+              "prompt": "Inside head, add a UTF-8 charset declaration and set the document title to **Learning HTML**. Leave the visible heading in body unchanged.",
+              "hint": "The charset is a meta element; the document name belongs between title tags.",
+              "help": {
+                "concept": "Head metadata helps the browser interpret and identify the document without becoming normal body content.",
+                "hint_1": "Add both pieces inside the existing head element.",
+                "hint_2": "Check the browser tab/title surface separately from the h1 shown in the page."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n  </head>\n  <body>\n    <h1>My Practice Page</h1>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Learning HTML</title>\n  </head>\n  <body>\n    <h1>My Practice Page</h1>\n  </body>\n</html>\n"
+            },
+            "complete-document-shell": {
+              "title": "Complete the body content",
+              "prompt": "**Problem**\n\nThe document root and head metadata are already complete, but the body is still empty. Visitors need visible page content.\n\n**Task**\n\nInside the existing `body`, add an `h1` that says **About Maya** and a paragraph that says **I am building web pages.** Keep the completed doctype, `html lang=\"en\"`, UTF-8 metadata, and title unchanged.",
+              "hint": "Edit only the body content: add the required h1 and paragraph.",
+              "help": {
+                "concept": "The body contains the visible content of the page; document-level and head metadata are already complete in this exercise.",
+                "hint_1": "Work only inside the existing body element.",
+                "hint_2": "Add `<h1>About Maya</h1>` followed by `<p>I am building web pages.</p>`."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>About Maya</title>\n  </head>\n  <body>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>About Maya</title>\n  </head>\n  <body>\n    <h1>About Maya</h1>\n    <p>I am building web pages.</p>\n  </body>\n</html>\n"
             }
           }
         }

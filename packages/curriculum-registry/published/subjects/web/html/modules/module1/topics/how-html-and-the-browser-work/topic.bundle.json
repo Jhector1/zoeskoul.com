@@ -36,7 +36,10 @@
         "id": "try-how-html-and-the-browser-work-sketch0",
         "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.prompt",
-        "exerciseKey": "try-how-html-and-the-browser-work-sketch0",
+        "exerciseKey": "make-main-heading",
+        "exerciseKeys": [
+          "make-main-heading"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-how-html-and-the-browser-work-sketch1",
         "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.prompt",
-        "exerciseKey": "try-how-html-and-the-browser-work-sketch1",
+        "exerciseKey": "add-intro-paragraph",
+        "exerciseKeys": [
+          "add-intro-paragraph"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,7 +80,10 @@
         "id": "try-how-html-and-the-browser-work-sketch2",
         "titleKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.prompt",
-        "exerciseKey": "try-how-html-and-the-browser-work-sketch2",
+        "exerciseKey": "add-section-heading",
+        "exerciseKeys": [
+          "add-section-heading"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -221,16 +230,16 @@
       }
     },
     {
-      "id": "try-how-html-and-the-browser-work-sketch0",
+      "id": "make-main-heading",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0",
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.make-main-heading",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.make-main-heading.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -251,7 +260,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.make-main-heading.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -261,11 +270,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.make-main-heading.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch0.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.make-main-heading.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -274,16 +283,16 @@
       }
     },
     {
-      "id": "try-how-html-and-the-browser-work-sketch1",
+      "id": "add-intro-paragraph",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1",
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-intro-paragraph",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-intro-paragraph.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -311,7 +320,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-intro-paragraph.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -321,11 +330,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-intro-paragraph.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch1.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-intro-paragraph.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -334,16 +343,16 @@
       }
     },
     {
-      "id": "try-how-html-and-the-browser-work-sketch2",
+      "id": "add-section-heading",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2",
+      "messageBase": "topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-section-heading",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-section-heading.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -364,7 +373,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-section-heading.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -374,11 +383,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-section-heading.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.tryIt.try_how_html_and_the_browser_work_sketch2.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.how-html-and-the-browser-work.practice.add-section-heading.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true

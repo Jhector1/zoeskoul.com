@@ -36,7 +36,10 @@
         "id": "try-ordered-and-unordered-lists-sketch0",
         "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.prompt",
-        "exerciseKey": "try-ordered-and-unordered-lists-sketch0",
+        "exerciseKey": "lists-try-ul",
+        "exerciseKeys": [
+          "lists-try-ul"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-ordered-and-unordered-lists-sketch1",
         "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.prompt",
-        "exerciseKey": "try-ordered-and-unordered-lists-sketch1",
+        "exerciseKey": "lists-try-ol",
+        "exerciseKeys": [
+          "lists-try-ol"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,9 +80,13 @@
         "id": "try-ordered-and-unordered-lists-sketch2",
         "titleKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.prompt",
-        "exerciseKey": "try-ordered-and-unordered-lists-sketch2",
+        "exerciseKey": "lists-try-both",
+        "exerciseKeys": [
+          "lists-try-both",
+          "lists-try-both-start-ordered"
+        ],
         "difficulty": "easy",
-        "preferKind": "code_input",
+        "preferKind": null,
         "seedPolicy": "global",
         "required": true,
         "allowReveal": false,
@@ -120,172 +130,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-ordered-and-unordered-lists-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<ul\\b[^>]*>\\s*<li\\b[^>]*>\\s*Student ID\\s*</li>\\s*<li\\b[^>]*>\\s*Notebook\\s*</li>\\s*<li\\b[^>]*>\\s*Water bottle\\s*</li>\\s*</ul>",
-          "path": "index.html",
-          "message": "Group Student ID, Notebook, and Water bottle inside one unordered list.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-ordered-and-unordered-lists-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*Check in\\s*</li>\\s*<li\\b[^>]*>\\s*Find your seat\\s*</li>\\s*<li\\b[^>]*>\\s*Open your notebook\\s*</li>\\s*</ol>",
-          "path": "index.html",
-          "message": "Use one ordered list for the three arrival steps.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-ordered-and-unordered-lists-sketch2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<h2\\b[^>]*>\\s*Bring\\s*</h2>.*<ul\\b[^>]*>.*Laptop.*Charger.*</ul>",
-          "path": "index.html",
-          "message": "Use an unordered list for the items to bring.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<h2\\b[^>]*>\\s*Start\\s*</h2>.*<ol\\b[^>]*>.*Sign in.*Open the lesson.*</ol>",
-          "path": "index.html",
-          "message": "Use an ordered list for the starting steps.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.tryIt.try_ordered_and_unordered_lists_sketch2.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "lists-quiz-choice",
       "kind": "single_choice",
@@ -355,6 +199,218 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "<li>Notebook</li>"
+      }
+    },
+    {
+      "id": "lists-try-ul",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ul",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ul.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<ul\\b[^>]*>\\s*<li\\b[^>]*>\\s*Student ID\\s*</li>\\s*<li\\b[^>]*>\\s*Notebook\\s*</li>\\s*<li\\b[^>]*>\\s*Water bottle\\s*</li>\\s*</ul>",
+          "path": "index.html",
+          "message": "Group Student ID, Notebook, and Water bottle inside one unordered list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ul.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ul.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ul.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "lists-try-ol",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ol",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ol.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*Check in\\s*</li>\\s*<li\\b[^>]*>\\s*Find your seat\\s*</li>\\s*<li\\b[^>]*>\\s*Open your notebook\\s*</li>\\s*</ol>",
+          "path": "index.html",
+          "message": "Use one ordered list for the three arrival steps.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ol.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ol.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-ol.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "lists-try-both",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Bring\\s*</h2>.*<ul\\b[^>]*>.*Laptop.*Charger.*</ul>",
+          "path": "index.html",
+          "message": "Use an unordered list for the items to bring.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "lists-try-both-start-ordered",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both-start-ordered",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both-start-ordered.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<h2\\b[^>]*>\\s*Start\\s*</h2>.*<ol\\b[^>]*>.*Sign in.*Open the lesson.*</ol>",
+          "path": "index.html",
+          "message": "Use an ordered list for the starting steps.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both-start-ordered.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both-start-ordered.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.ordered-and-unordered-lists.practice.lists-try-both-start-ordered.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

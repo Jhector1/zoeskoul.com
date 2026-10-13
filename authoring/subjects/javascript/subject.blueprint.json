@@ -1,0 +1,16 @@
+{
+  "subjectSlug": "javascript",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "title": "JavaScript",
+  "summary": "A beginner-friendly path from JavaScript values and control flow through functions, browser interaction, asynchronous data, and a complete interactive event explorer.",
+  "courseOrder": [
+    "javascript-foundations"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "javascript-foundations",
+      "outcome": "Build an accessible browser application that loads local event data, supports user interaction, and communicates loading, error, and empty states clearly."
+    }
+  ]
+}

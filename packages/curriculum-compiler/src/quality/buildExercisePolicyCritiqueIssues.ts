@@ -40,22 +40,22 @@ function dominantKinds(mix: Record<Kind, number>): Kind[] {
 }
 
 function countKinds(draft: TopicAuthoringDraft): Record<Kind, number> {
-    const counts: Record<Kind, number> = {
-        single_choice: 0,
-        multi_choice: 0,
-        drag_reorder: 0,
-        fill_blank_choice: 0,
-        text_input: 0,
-        voice_input: 0,
-        word_bank_arrange: 0,
-        listen_build: 0,
-        pseudocode_input: 0,
-        code_input: 0,
-    };
+    const counts = Object.fromEntries(
+        KINDS.map((kind) => [kind, 0]),
+    ) as Record<Kind, number>;
 
-    for (const exercise of draft.quizDraft) {
-        if (exercise.kind in counts) {
-            counts[exercise.kind as Kind] += 1;
+    // Exercise policy applies to the complete authored exercise surface.
+    // Dedicated sketch Try Its are real learner exercises, not hidden metadata,
+    // so count them alongside the general quizDraft pool.
+    const authoredExercises = [
+        ...draft.quizDraft,
+        ...draft.sketchBlocks.flatMap((block) => block.tryItExercises ?? []),
+    ];
+
+    for (const exercise of authoredExercises) {
+        const kind = exercise.kind as Kind;
+        if (Object.prototype.hasOwnProperty.call(counts, kind)) {
+            counts[kind] += 1;
         }
     }
 
@@ -178,6 +178,16 @@ function buildCountBasedIssues(args: {
                     message: `Exercise policy expects ${expected} "code_input" exercise(s), but the draft has ${actual}.`,
                 });
             }
+            continue;
+        }
+
+        // For ordinary lessons, planned code_input counts are an authoring target,
+        // not a ceiling. A sketch may legitimately own multiple focused native
+        // Try Its, so splitting one overloaded exercise into several cumulative
+        // code_input exercises must not create a policy failure. Projects and
+        // capstones remain strict because their code_input count represents
+        // authored project-step sizing.
+        if (kind === "code_input" && !projectTopic && actual > expected) {
             continue;
         }
 

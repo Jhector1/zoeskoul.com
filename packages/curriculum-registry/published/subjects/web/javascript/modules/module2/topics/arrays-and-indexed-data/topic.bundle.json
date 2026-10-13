@@ -1,0 +1,353 @@
+{
+  "topicId": "arrays-and-indexed-data",
+  "subjectSlug": "javascript",
+  "moduleSlug": "javascript-foundations-module-2-collections-functions",
+  "sectionSlug": "javascript-javascript-foundations-section-2-collections-functions",
+  "prefix": "javascript_module_2",
+  "minutes": 22,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.label",
+    "summaryKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.cards.sketch0.title",
+      "sketchId": "ordered-values",
+      "height": 420,
+      "tryIt": {
+        "id": "try-arrays-and-indexed-data-sketch0",
+        "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.title",
+        "promptKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.prompt",
+        "exerciseKey": "try-arrays-and-indexed-data-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.cards.sketch1.title",
+      "sketchId": "changing-an-array",
+      "height": 420,
+      "tryIt": {
+        "id": "try-arrays-and-indexed-data-sketch1",
+        "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.title",
+        "promptKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.prompt",
+        "exerciseKey": "try-arrays-and-indexed-data-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "ordered-values",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.ordered-values.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.ordered-values.bodyMarkdown"
+    },
+    {
+      "id": "changing-an-array",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.changing-an-array.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.changing-an-array.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "arrays-index-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.practice.arrays-index-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "arrays-facts-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.practice.arrays-facts-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "arrays-first-index-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.practice.arrays-first-index-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "0"
+      }
+    },
+    {
+      "id": "arrays-grow-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.practice.arrays-grow-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "try-arrays-and-indexed-data-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+tracks\\s*=\\s*\\[[^\\]]*,[^\\]]*,[^\\]]*\\]",
+          "message": "Create tracks with at least three items.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "secondTrack\\s*=\\s*tracks\\s*\\[\\s*1\\s*\\]",
+          "message": "Read the second track by its array index.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*secondTrack\\s*,\\s*tracks\\.length\\s*\\)",
+          "message": "Log secondTrack and tracks.length.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch0.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-arrays-and-indexed-data-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+shoppingList\\s*=\\s*\\[[^\\]]*,[^\\]]*\\]",
+          "message": "Create shoppingList with at least two items.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "shoppingList\\.push\\(",
+          "message": "Append a new shopping-list item with push.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*shoppingList\\.length\\s*\\)",
+          "message": "Log the updated shoppingList length.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.arrays-and-indexed-data.tryIt.try_arrays_and_indexed_data_sketch1.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

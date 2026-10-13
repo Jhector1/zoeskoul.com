@@ -1,0 +1,851 @@
+{
+  "title": "Build an Interactive Event Browser",
+  "summary": "Build an interactive event browser cumulatively: DOM rendering, visible async states, local data loading, and category filtering.",
+  "minutes": 70,
+  "sketchBlocks": [
+    {
+      "id": "browser-pipeline",
+      "cardTitle": "Combine the browser pieces",
+      "title": "Keep rendering and selection as separate responsibilities",
+      "bodyMarkdown": "This recipe-browser example uses the same architecture without giving away the event project:\n\n```js\nfunction renderRecipes(recipes) {\n  recipeList.textContent = \"\";\n\n  for (const recipe of recipes) {\n    const item = document.createElement(\"li\");\n    item.textContent = recipe.name;\n    recipeList.append(item);\n  }\n}\n\nfunction recipesForMeal(mealType) {\n  if (mealType === \"All\") {\n    return allRecipes;\n  }\n\n  return allRecipes.filter((recipe) => recipe.meal === mealType);\n}\n```\n\nStep by step:\n\n1. `renderRecipes` owns DOM output.\n2. `recipesForMeal` owns the selection rule.\n3. The filter function returns data instead of manipulating the page.\n4. The renderer receives data instead of deciding what category is active.\n\nThe Event Browser uses the same architecture with different data, names, markup, and output."
+    },
+    {
+      "id": "browser-states",
+      "cardTitle": "Build in three working checkpoints",
+      "title": "Each project step should leave the browser in a usable state",
+      "bodyMarkdown": "The project grows cumulatively:\n\n**Step 1 - Render records.** Build a reusable `renderEvents` function.\n\n**Step 2 - Load local JSON.** Fetch `data/events.json`, check `response.ok`, parse it, and show loading, empty, success, or error.\n\n**Step 3 - Filter interactively.** Store the loaded records, respond to category changes, filter the data, and rerender.\n\nEach step starts from the previous complete solution. The project intentionally stops at **one category filter** so the final Campus Event Explorer capstone can demand more independent product decisions."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "event-browser-select-list",
+      "kind": "code_input",
+      "title": "Step 1: Select the event list",
+      "prompt": "Problem: The event browser will eventually render event records, but JavaScript first needs a reference to the list already provided by the page. Task: Select only `#event-list` and store it in `eventList`. Expected result: Check Answer confirms the DOM destination; the Preview stays unchanged.",
+      "hint": "Connect JavaScript to one existing list.",
+      "help": {
+        "concept": "select one DOM destination",
+        "hint_1": "The HTML already contains #event-list.",
+        "hint_2": "Use querySelector once."
+      },
+      "starterCode": "// Build the browser application one stable responsibility at a time.\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "// Build the browser application one stable responsibility at a time.\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+eventList\\s*=\\s*document\\.querySelector\\(\\s*[\"\\']#event-list[\"\\']\\s*\\)",
+          "message": "Select #event-list.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-render-list",
+      "kind": "code_input",
+      "title": "Step 2: Render an event array",
+      "prompt": "Problem: Loaded event objects cannot help a student until the browser can turn them into visible list items. Task: Keep `eventList` and add only `renderEvents(events)`: clear the list, loop with `for...of`, create one `li` per event, set `name - location`, and append it. Expected result: Check Answer confirms the reusable renderer; nothing calls it yet, so the Preview stays unchanged.",
+      "hint": "The whole function has one responsibility: render an event array.",
+      "help": {
+        "concept": "render records into DOM items",
+        "hint_1": "Clear before the loop.",
+        "hint_2": "Create, fill, and append one li inside for...of."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+renderEvents[\\s\\S]*eventList\\.textContent\\s*=\\s*[\"\\'][\\\"\\'][\\s\\S]*for\\s*\\(\\s*const\\s+event\\s+of\\s+events\\s*\\)[\\s\\S]*createElement\\(\\s*[\"\\']li[\"\\']\\s*\\)[\\s\\S]*eventList\\.append",
+          "message": "Render events with familiar DOM methods.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-select-status",
+      "kind": "code_input",
+      "title": "Step 3: Select the status element",
+      "prompt": "Problem: Loading, empty, success, and error states need one visible place where the browser can explain what is happening. Task: Keep the complete renderer and select only `#status` into `status`. Expected result: Check Answer confirms the status destination; the Preview stays unchanged.",
+      "hint": "Capture the existing status paragraph.",
+      "help": {
+        "concept": "select one status destination",
+        "hint_1": "Use #status.",
+        "hint_2": "Store it in status."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+status\\s*=\\s*document\\.querySelector\\(\\s*[\"\\']#status[\"\\']\\s*\\)",
+          "message": "Select #status.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-state",
+      "kind": "code_input",
+      "title": "Step 4: Add event state",
+      "prompt": "Problem: Filtering later will require the browser to remember the complete loaded event list instead of losing the source records after rendering. Task: Keep all DOM references and the renderer and add only `let allEvents = []`. Expected result: Check Answer confirms the app has a stable place for loaded records; the Preview stays unchanged.",
+      "hint": "Do not load data yet.",
+      "help": {
+        "concept": "create one application-state container",
+        "hint_1": "Use let.",
+        "hint_2": "Initialize to an empty array."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "let\\s+allEvents\\s*=\\s*\\[\\s*\\]",
+          "message": "Create allEvents.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-loading-state",
+      "kind": "code_input",
+      "title": "Step 5: Show the loading state",
+      "prompt": "Problem: Loading local data is asynchronous, so the page should immediately tell the learner that work has started instead of appearing frozen. Task: Keep everything from Step 4 and add and call `loadEvents()` with one responsibility: set the status to `Loading events...`. Expected result: the Preview visibly changes from Ready to Loading events....",
+      "hint": "Do not fetch yet.",
+      "help": {
+        "concept": "start an async flow with visible loading",
+        "hint_1": "Make loadEvents async.",
+        "hint_2": "Call it after the function."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n}\n\nloadEvents();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "async\\s+function\\s+loadEvents[\\s\\S]*Loading events\\.\\.\\.[\\s\\S]*loadEvents\\(\\s*\\)",
+          "message": "Show the loading state.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-request-data",
+      "kind": "code_input",
+      "title": "Step 6: Request the local event data",
+      "prompt": "Problem: The browser currently has no event records to render because the data lives in a local JSON file. Task: Keep the visible loading behavior and update only `loadEvents()` to await `fetch(\"./data/events.json\")` into `response`. Expected result: the Preview continues showing Loading events...; Check Answer confirms the local request.",
+      "hint": "Stop at the Response object.",
+      "help": {
+        "concept": "request one local JSON resource",
+        "hint_1": "Use the explicit relative path.",
+        "hint_2": "Store the awaited fetch result in response."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n}\n\nloadEvents();\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n}\n\nloadEvents();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+response\\s*=\\s*await\\s+fetch\\(\\s*[\"\\']\\./data/events\\.json[\"\\']\\s*\\)",
+          "message": "Fetch local events.json.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-check-response",
+      "kind": "code_input",
+      "title": "Step 7: Reject a failed response",
+      "prompt": "Problem: `fetch` can return a Response even when the local request failed, so decoding blindly could treat an error response as valid event data. Task: Keep the local request and add only the `response.ok` guard, throwing `Could not load events` when false. Expected result: successful requests continue; failed requests now reject before decoding.",
+      "hint": "A completed fetch is not automatically successful.",
+      "help": {
+        "concept": "validate one Response boundary",
+        "hint_1": "Check !response.ok.",
+        "hint_2": "Throw a new Error."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n}\n\nloadEvents();\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n}\n\nloadEvents();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "!response\\.ok[\\s\\S]*throw\\s+new\\s+Error\\(\\s*[\"\\']Could not load events[\"\\']\\s*\\)",
+          "message": "Reject failed responses.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-decode-data",
+      "kind": "code_input",
+      "title": "Step 8: Decode and count the events",
+      "prompt": "Problem: The browser has a successful Response object, but the renderer needs JavaScript event records rather than the raw response body. Task: Keep the request and response check, decode JSON into `allEvents`, then show the loaded count. Expected result: the Preview changes to `4 events loaded` with the supplied fixture; no event items are rendered yet.",
+      "hint": "Convert the response into application state and report the direct result.",
+      "help": {
+        "concept": "decode JSON into application state",
+        "hint_1": "Await response.json() into allEvents.",
+        "hint_2": "Use allEvents.length in the status."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n}\n\nloadEvents();\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n}\n\nloadEvents();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\s*=\\s*await\\s+response\\.json\\(\\s*\\)[\\s\\S]*allEvents\\.length[\\s\\S]*events loaded",
+          "message": "Decode and count the events.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-render-loaded",
+      "kind": "code_input",
+      "title": "Step 9: Render the loaded events",
+      "prompt": "Problem: The event records are now loaded into memory, but students still cannot see them on the page. Task: Keep the complete load flow and add only `renderEvents(allEvents)` after the successful decode/count. Expected result: the Preview now shows the four event items beneath `4 events loaded`.",
+      "hint": "Reuse the renderer already built.",
+      "help": {
+        "concept": "connect loaded state to the renderer",
+        "hint_1": "Do not rebuild list-item logic.",
+        "hint_2": "Pass allEvents to renderEvents."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n}\n\nloadEvents();\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\s*=\\s*await\\s+response\\.json\\(\\s*\\)[\\s\\S]*renderEvents\\(\\s*allEvents\\s*\\)",
+          "message": "Render loaded events.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-empty-state",
+      "kind": "code_input",
+      "title": "Step 10: Handle an empty event file",
+      "prompt": "Problem: A successful JSON request may contain zero events, and a blank list with no explanation would look broken. Task: Keep the successful load and rendering behavior and add only the zero-length branch: show `No events found`, render an empty list, and return. Expected result: with the supplied fixture, the same four events remain visible; with `[]`, the page shows the empty-state message.",
+      "hint": "Add one alternate successful branch.",
+      "help": {
+        "concept": "handle a successful empty result",
+        "hint_1": "Check allEvents.length after decoding.",
+        "hint_2": "Handle empty before normal success."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n\n  if (allEvents.length === 0) {\n    status.textContent = \"No events found\";\n    renderEvents([]);\n    return;\n  }\n\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n\n  if (allEvents.length === 0) {\n    status.textContent = \"No events found\";\n    renderEvents([]);\n    return;\n  }\n\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\.length\\s*===\\s*0[\\s\\S]*No events found[\\s\\S]*renderEvents\\(\\s*\\[\\s*\\]\\s*\\)[\\s\\S]*return",
+          "message": "Handle an empty event array.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-error-state",
+      "kind": "code_input",
+      "title": "Step 11: Handle loading errors",
+      "prompt": "Problem: Network or data-loading failures should not leave the browser stuck on `Loading events...` with no explanation. Task: Keep the complete success and empty behavior and wrap only the load path in `try...catch`; in `catch`, clear the list and show `Could not load events`. Expected result: the valid fixture still shows four events, while a failed load now produces a clear error state.",
+      "hint": "Protect the existing behavior; do not replace it.",
+      "help": {
+        "concept": "add one async error boundary",
+        "hint_1": "Move the working load path into try.",
+        "hint_2": "Update eventList and status in catch."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n\n  if (allEvents.length === 0) {\n    status.textContent = \"No events found\";\n    renderEvents([]);\n    return;\n  }\n\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n\n  if (allEvents.length === 0) {\n    status.textContent = \"No events found\";\n    renderEvents([]);\n    return;\n  }\n\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "try\\s*\\{[\\s\\S]*await\\s+fetch[\\s\\S]*catch\\s*\\([\\s\\S]*Could not load events",
+          "message": "Handle load failures.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-select-filter",
+      "kind": "code_input",
+      "title": "Step 12: Select the category control",
+      "prompt": "Problem: The event browser has loaded all events, but it cannot react to a category choice until JavaScript has a reference to the existing filter control. Task: Keep the fully working loader and select only `#category-filter` into `categoryFilter`. Expected result: the four loaded events still appear; Check Answer confirms the control reference.",
+      "hint": "Do not add the listener yet.",
+      "help": {
+        "concept": "select one user control",
+        "hint_1": "Use #category-filter.",
+        "hint_2": "Store it in categoryFilter."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+categoryFilter\\s*=\\s*document\\.querySelector\\(\\s*[\"\\']#category-filter[\"\\']\\s*\\)",
+          "message": "Select the category filter.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-filter-function",
+      "kind": "code_input",
+      "title": "Step 13: Derive events for one category",
+      "prompt": "Problem: The app must show one category without destroying the complete event list that future filter choices still need. Task: Keep the loaded source data and add only `eventsForCategory(category)`: return all events for `All`, otherwise return the matching subset. Expected result: the Preview remains unchanged; Check Answer confirms a reusable derived-view function.",
+      "hint": "This function returns data and makes no DOM changes.",
+      "help": {
+        "concept": "derive a filtered view from source state",
+        "hint_1": "Handle All first.",
+        "hint_2": "Otherwise filter allEvents by category."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+eventsForCategory[\\s\\S]*category\\s*===\\s*[\"\\']All[\"\\'][\\s\\S]*allEvents\\.filter",
+          "message": "Define eventsForCategory.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-show-category",
+      "kind": "code_input",
+      "title": "Step 14: Show one category view",
+      "prompt": "Problem: A filtered array by itself is not useful to the learner until the browser renders it and explains whether anything matched. Task: Keep every previous feature and add only `showCategory(category)`: derive visible events, render them, then show `No matching events` or the visible count. Expected result: the loaded page stays the same until this function is called; Check Answer confirms the complete category-view behavior.",
+      "hint": "This function owns one responsibility: show the requested category view.",
+      "help": {
+        "concept": "render a derived view and its status",
+        "hint_1": "Reuse eventsForCategory and renderEvents.",
+        "hint_2": "Branch on visibleEvents.length."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+showCategory[\\s\\S]*eventsForCategory[\\s\\S]*renderEvents\\(\\s*visibleEvents\\s*\\)[\\s\\S]*No matching events[\\s\\S]*events shown",
+          "message": "Define showCategory.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "event-browser-wire-filter",
+      "kind": "code_input",
+      "title": "Step 15: Update the view when the category changes",
+      "prompt": "Problem: The category-view logic is complete, but changing the select control still does nothing because no event connects the user's choice to that logic. Task: Keep the complete application, add `handleCategoryChange(event)` so it calls `showCategory(event.currentTarget.value)`, then attach it to the filter's `change` event. Expected result: the page still loads all events, and changing the category immediately shows only matching events with an updated count.",
+      "hint": "The view function is complete; only wire the control to it.",
+      "help": {
+        "concept": "connect the change event to the category view",
+        "hint_1": "Read event.currentTarget.value.",
+        "hint_2": "Use addEventListener on categoryFilter."
+      },
+      "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n",
+      "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n\nfunction handleCategoryChange(event) {\n  showCategory(event.currentTarget.value);\n}\n\ncategoryFilter.addEventListener(\"change\", handleCategoryChange);\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n\nfunction handleCategoryChange(event) {\n  showCategory(event.currentTarget.value);\n}\n\ncategoryFilter.addEventListener(\"change\", handleCategoryChange);\n"
+        },
+        {
+          "path": "data/events.json",
+          "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+handleCategoryChange[\\s\\S]*event\\.currentTarget\\.value[\\s\\S]*categoryFilter\\.addEventListener\\(\\s*[\"\\']change[\"\\']",
+          "message": "Wire the filter change event.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ],
+  "projectDraft": {
+    "title": "Build an Interactive Event Browser",
+    "stepIds": [
+      "event-browser-select-list",
+      "event-browser-render-list",
+      "event-browser-select-status",
+      "event-browser-state",
+      "event-browser-loading-state",
+      "event-browser-request-data",
+      "event-browser-check-response",
+      "event-browser-decode-data",
+      "event-browser-render-loaded",
+      "event-browser-empty-state",
+      "event-browser-error-state",
+      "event-browser-select-filter",
+      "event-browser-filter-function",
+      "event-browser-show-category",
+      "event-browser-wire-filter"
+    ]
+  }
+}

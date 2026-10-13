@@ -7,19 +7,110 @@
       "id": "html-is-page-structure",
       "cardTitle": "Source Becomes a Page",
       "title": "HTML describes what belongs on a web page",
-      "bodyMarkdown": "**HTML** (HyperText Markup Language) describes the structure and meaning of content that a browser can turn into a page. The HTML file is the source; the browser reads that source, understands elements such as headings and paragraphs, and renders a visual result. This is why changing one tag in `index.html` can immediately change what you see in the browser preview.\n\nA tiny page can start with one heading:\n\n```html\n<h1>Welcome to my page</h1>\n```\n\nThe angle-bracket markup tells the browser that the words are a top-level heading. The browser normally shows that heading larger and more prominent than ordinary text because the element carries meaning. HTML is not a drawing tool: you describe the content structure, and the browser decides how that structure is presented by default.\n\nAs you work in ZoeSkoul, keep the source and the preview connected in your mind. When you add or change markup, look at the preview and ask, “What did the browser understand from the structure I wrote?”"
+      "bodyMarkdown": "**HTML** (HyperText Markup Language) describes the structure and meaning of content that a browser can turn into a page. The HTML file is the source; the browser reads that source, understands elements such as headings and paragraphs, and renders a visual result. This is why changing one tag in `index.html` can immediately change what you see in the browser preview.\n\nA tiny page can start with one heading:\n\n```html\n<h1>Welcome to my page</h1>\n```\n\nThe angle-bracket markup tells the browser that the words are a top-level heading. The browser normally shows that heading larger and more prominent than ordinary text because the element carries meaning. HTML is not a drawing tool: you describe the content structure, and the browser decides how that structure is presented by default.\n\nAs you work in ZoeSkoul, keep the source and the preview connected in your mind. When you add or change markup, look at the preview and ask, “What did the browser understand from the structure I wrote?”",
+      "tryItExercises": [
+        {
+          "id": "make-main-heading",
+          "kind": "code_input",
+          "title": "Create the main heading",
+          "prompt": "Change the visible message into an h1 that says **My First Web Page**. Keep the rest of the page small and readable, then inspect the browser preview.",
+          "hint": "Replace the paragraph element with the heading element used for the page's primary title.",
+          "help": {
+            "concept": "An h1 gives the document a clear top-level heading that the browser can render prominently.",
+            "hint_1": "Edit only the element inside the body first and watch how its default appearance changes.",
+            "hint_2": "Check both the opening and closing tag around the required heading text."
+          },
+          "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <p>Hello browser</p>\n  </body>\n</html>\n",
+          "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n",
+          "fixedLanguage": "web",
+          "entryFilePath": "index.html",
+          "recipeType": "source_checks",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>",
+              "message": "Add an h1 whose visible text is My First Web Page.",
+              "normalizeWhitespace": false
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "browser-parses-elements",
       "cardTitle": "Read the Markup",
       "title": "The browser parses elements before it renders them",
-      "bodyMarkdown": "A browser **parses** HTML by reading the markup and building an internal document structure from the elements it finds. Opening and closing tags mark where an element begins and ends, while the text between them becomes the element's content. That structure is what the browser uses to create the page you see.\n\nHere is a worked example with two elements:\n\n```html\n<h1>My Recipe Book</h1>\n<p>Recipes I want to try.</p>\n```\n\nRead it **line by line**. The first line creates the page's main heading. The second line creates a paragraph beneath it. The browser does not display the literal `<h1>` and `<p>` characters as ordinary text; it interprets them as markup and displays their content according to the role of each element.\n\nThis source-to-page cycle is the core feedback loop of the course: write markup, inspect the rendered result, then improve the structure. You do not need to memorize many tags at once. Start by noticing how one clear element produces one clear piece of page structure."
+      "bodyMarkdown": "A browser **parses** HTML by reading the markup and building an internal document structure from the elements it finds. Opening and closing tags mark where an element begins and ends, while the text between them becomes the element's content. That structure is what the browser uses to create the page you see.\n\nHere is a worked example with two elements:\n\n```html\n<h1>My Recipe Book</h1>\n<p>Recipes I want to try.</p>\n```\n\nRead it **line by line**. The first line creates the page's main heading. The second line creates a paragraph beneath it. The browser does not display the literal `<h1>` and `<p>` characters as ordinary text; it interprets them as markup and displays their content according to the role of each element.\n\nThis source-to-page cycle is the core feedback loop of the course: write markup, inspect the rendered result, then improve the structure. You do not need to memorize many tags at once. Start by noticing how one clear element produces one clear piece of page structure.",
+      "tryItExercises": [
+        {
+          "id": "add-intro-paragraph",
+          "kind": "code_input",
+          "title": "Add supporting text",
+          "prompt": "Under the existing h1, add a paragraph that says **I am learning HTML.** Keep both elements inside the body and confirm that both appear in the preview.",
+          "hint": "Place a p element after the heading rather than changing the heading text.",
+          "help": {
+            "concept": "A paragraph adds supporting prose beneath a heading while keeping the document structure clear.",
+            "hint_1": "Keep the h1 intact and add a second element after it.",
+            "hint_2": "Make sure the new sentence is between matching paragraph tags."
+          },
+          "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n",
+          "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
+          "fixedLanguage": "web",
+          "entryFilePath": "index.html",
+          "recipeType": "source_checks",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>",
+              "message": "Keep the My First Web Page h1 in the page.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*I am learning HTML\\.\\s*</p>",
+              "message": "Add a paragraph that says I am learning HTML.",
+              "normalizeWhitespace": false
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "structure-before-style",
       "cardTitle": "Build Meaning First",
       "title": "HTML gives the page structure before styling or behavior",
-      "bodyMarkdown": "HTML **represents** the content layer of a web page: headings identify topics and paragraphs hold supporting prose. Later, CSS can change appearance and JavaScript can add behavior, but a strong page begins with HTML that still makes sense on its own. In this course, correctness comes from the markup and its meaning, not from decorative styling.\n\nFor example, a simple content hierarchy can use two heading levels and a paragraph:\n\n```html\n<h1>Student Portfolio</h1>\n<h2>Projects</h2>\n<p>Projects I am proud of.</p>\n```\n\nRead it **line by line**. `<h1>` names the page, `<h2>` introduces a smaller topic within that page, and `<p>` supplies supporting text. The order tells the reader what is most important before adding any styling.\n\nThe live preview lets you see the immediate result, while Check Answer verifies the required source structure. Both views matter: one shows what a visitor sees, and the other confirms that the page is built from the requested HTML."
+      "bodyMarkdown": "HTML **represents** the content layer of a web page: headings identify topics and paragraphs hold supporting prose. Later, CSS can change appearance and JavaScript can add behavior, but a strong page begins with HTML that still makes sense on its own. In this course, correctness comes from the markup and its meaning, not from decorative styling.\n\nFor example, a simple content hierarchy can use two heading levels and a paragraph:\n\n```html\n<h1>Student Portfolio</h1>\n<h2>Projects</h2>\n<p>Projects I am proud of.</p>\n```\n\nRead it **line by line**. `<h1>` names the page, `<h2>` introduces a smaller topic within that page, and `<p>` supplies supporting text. The order tells the reader what is most important before adding any styling.\n\nThe live preview lets you see the immediate result, while Check Answer verifies the required source structure. Both views matter: one shows what a visitor sees, and the other confirms that the page is built from the requested HTML.",
+      "tryItExercises": [
+        {
+          "id": "add-section-heading",
+          "kind": "code_input",
+          "title": "Add a second heading level",
+          "prompt": "Between the existing h1 and paragraph, add an h2 that says **What I am Learning**. Keep the visible content in this order and inspect the browser preview.",
+          "hint": "Use the heading level below h1 and place it before the paragraph.",
+          "help": {
+            "concept": "An h2 introduces a topic within the page while the h1 remains the page's main title.",
+            "hint_1": "Keep the existing h1 first, then add the h2, then keep the paragraph beneath it.",
+            "hint_2": "Check that the new heading uses matching h2 tags and the exact required text."
+          },
+          "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
+          "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <h2>What I am Learning</h2>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
+          "fixedLanguage": "web",
+          "entryFilePath": "index.html",
+          "recipeType": "source_checks",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "index.html",
+              "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>\\s*<h2(?:\\s[^>]*)?>\\s*What I am Learning\\s*</h2>\\s*<p(?:\\s[^>]*)?>\\s*I am learning HTML\\.\\s*</p>",
+              "message": "Keep the h1, then add the What I am Learning h2 before the paragraph.",
+              "normalizeWhitespace": false
+            }
+          ]
+        }
+      ]
     }
   ],
   "quizDraft": [
@@ -150,91 +241,6 @@
         "package"
       ],
       "correctValue": "preview"
-    },
-    {
-      "id": "make-main-heading",
-      "kind": "code_input",
-      "title": "Create the main heading",
-      "prompt": "Change the visible message into an h1 that says **My First Web Page**. Keep the rest of the page small and readable, then inspect the browser preview.",
-      "hint": "Replace the paragraph element with the heading element used for the page's primary title.",
-      "help": {
-        "concept": "An h1 gives the document a clear top-level heading that the browser can render prominently.",
-        "hint_1": "Edit only the element inside the body first and watch how its default appearance changes.",
-        "hint_2": "Check both the opening and closing tag around the required heading text."
-      },
-      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <p>Hello browser</p>\n  </body>\n</html>\n",
-      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n",
-      "fixedLanguage": "web",
-      "entryFilePath": "index.html",
-      "recipeType": "source_checks",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "path": "index.html",
-          "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>",
-          "message": "Add an h1 whose visible text is My First Web Page.",
-          "normalizeWhitespace": false
-        }
-      ]
-    },
-    {
-      "id": "add-intro-paragraph",
-      "kind": "code_input",
-      "title": "Add supporting text",
-      "prompt": "Under the existing h1, add a paragraph that says **I am learning HTML.** Keep both elements inside the body and confirm that both appear in the preview.",
-      "hint": "Place a p element after the heading rather than changing the heading text.",
-      "help": {
-        "concept": "A paragraph adds supporting prose beneath a heading while keeping the document structure clear.",
-        "hint_1": "Keep the h1 intact and add a second element after it.",
-        "hint_2": "Make sure the new sentence is between matching paragraph tags."
-      },
-      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n",
-      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
-      "fixedLanguage": "web",
-      "entryFilePath": "index.html",
-      "recipeType": "source_checks",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "path": "index.html",
-          "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>",
-          "message": "Keep the My First Web Page h1 in the page.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "path": "index.html",
-          "pattern": "(?is)<p(?:\\s[^>]*)?>\\s*I am learning HTML\\.\\s*</p>",
-          "message": "Add a paragraph that says I am learning HTML.",
-          "normalizeWhitespace": false
-        }
-      ]
-    },
-    {
-      "id": "add-section-heading",
-      "kind": "code_input",
-      "title": "Add a second heading level",
-      "prompt": "Between the existing h1 and paragraph, add an h2 that says **What I am Learning**. Keep the visible content in this order and inspect the browser preview.",
-      "hint": "Use the heading level below h1 and place it before the paragraph.",
-      "help": {
-        "concept": "An h2 introduces a topic within the page while the h1 remains the page's main title.",
-        "hint_1": "Keep the existing h1 first, then add the h2, then keep the paragraph beneath it.",
-        "hint_2": "Check that the new heading uses matching h2 tags and the exact required text."
-      },
-      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
-      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <h2>What I am Learning</h2>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
-      "fixedLanguage": "web",
-      "entryFilePath": "index.html",
-      "recipeType": "source_checks",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "path": "index.html",
-          "pattern": "(?is)<h1(?:\\s[^>]*)?>\\s*My First Web Page\\s*</h1>\\s*<h2(?:\\s[^>]*)?>\\s*What I am Learning\\s*</h2>\\s*<p(?:\\s[^>]*)?>\\s*I am learning HTML\\.\\s*</p>",
-          "message": "Keep the h1, then add the What I am Learning h2 before the paragraph.",
-          "normalizeWhitespace": false
-        }
-      ]
     }
   ]
 }

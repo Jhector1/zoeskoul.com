@@ -1,0 +1,662 @@
+{
+  "topicId": "event-list-planner-project",
+  "subjectSlug": "javascript",
+  "moduleSlug": "javascript-foundations-module-2-collections-functions",
+  "sectionSlug": "javascript-javascript-foundations-section-2-module-project",
+  "prefix": "javascript_module_2",
+  "minutes": 40,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.label",
+    "summaryKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.cards.sketch0.title",
+      "sketchId": "planner-pipeline",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "planner_first_record",
+            "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.projectSteps.planner_first_record.title",
+            "exerciseKey": "planner-first-record",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "planner_complete_data",
+            "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.projectSteps.planner_complete_data.title",
+            "exerciseKey": "planner-complete-data",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "planner_category_predicate",
+            "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.projectSteps.planner_category_predicate.title",
+            "exerciseKey": "planner-category-predicate",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "planner_event_formatter",
+            "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.projectSteps.planner_event_formatter.title",
+            "exerciseKey": "planner-event-formatter",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "planner_filter_events",
+            "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.projectSteps.planner_filter_events.title",
+            "exerciseKey": "planner-filter-events",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "planner_format_lines",
+            "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.projectSteps.planner_format_lines.title",
+            "exerciseKey": "planner-format-lines",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "planner_show_schedule",
+            "titleKey": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.projectSteps.planner_show_schedule.title",
+            "exerciseKey": "planner-show-schedule",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "planner-pipeline",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.planner-pipeline.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.planner-pipeline.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "planner-first-record",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_first_record",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_first_record.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_first_record.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+events\\s*=\\s*\\[\\s*\\{[\\s\\S]*name[\\s\\S]*category[\\s\\S]*location[\\s\\S]*\\}\\s*\\]",
+          "message": "Create one complete event record.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_first_record.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_first_record.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_first_record.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_first_record.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_first_record.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "planner-complete-data",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_complete_data",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_complete_data.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_complete_data.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+events\\s*=\\s*\\[[\\s\\S]*\\{[\\s\\S]*\\}[\\s\\S]*\\{[\\s\\S]*\\}[\\s\\S]*\\{[\\s\\S]*\\}[\\s\\S]*\\{[\\s\\S]*\\}",
+          "message": "Keep four event objects.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_complete_data.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_complete_data.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_complete_data.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_complete_data.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_complete_data.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "planner-category-predicate",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_category_predicate",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_category_predicate.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_category_predicate.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+isTechnology\\s*\\(\\s*event\\s*\\)[\\s\\S]*return\\s+event\\.category\\s*===\\s*[\"\\']Technology[\"\\']",
+          "message": "Define isTechnology.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_category_predicate.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_category_predicate.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_category_predicate.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_category_predicate.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_category_predicate.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "planner-event-formatter",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_event_formatter",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_event_formatter.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_event_formatter.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+formatEvent\\s*\\(\\s*event\\s*\\)[\\s\\S]*return\\s+`[^`]*\\$\\{event\\.name\\}[^`]*\\$\\{event\\.location\\}[^`]*`",
+          "message": "Define formatEvent.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_event_formatter.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_event_formatter.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_event_formatter.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_event_formatter.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_event_formatter.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "planner-filter-events",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_filter_events",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_filter_events.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_filter_events.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+selectedEvents\\s*=\\s*events\\.filter\\(\\s*isTechnology\\s*\\)",
+          "message": "Filter with isTechnology.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_filter_events.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_filter_events.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_filter_events.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_filter_events.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_filter_events.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "planner-format-lines",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_format_lines",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_format_lines.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_format_lines.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+scheduleLines\\s*=\\s*selectedEvents\\.map\\(\\s*formatEvent\\s*\\)",
+          "message": "Map with formatEvent.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_format_lines.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_format_lines.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_format_lines.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_format_lines.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_format_lines.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "planner-show-schedule",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_show_schedule",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_show_schedule.solutionFiles.index_html.content",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "script.js",
+          "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_show_schedule.solutionFiles.script_js.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "for\\s*\\(\\s*const\\s+line\\s+of\\s+scheduleLines\\s*\\)[\\s\\S]*console\\.log\\(\\s*line\\s*\\)",
+          "message": "Log every schedule line with for...of.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_show_schedule.starterFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_show_schedule.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_show_schedule.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_show_schedule.solutionFiles.index_html.content",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "script.js",
+            "content": "@:topics.javascript.javascript-foundations-module-2-collections-functions.event-list-planner-project.moduleProject.steps.planner_show_schedule.solutionFiles.script_js.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

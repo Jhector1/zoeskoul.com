@@ -811,7 +811,7 @@
                 "role": "Beginner frontend developer responsible for the presentation layer of an existing semantic website.",
                 "workspace": "A cumulative browser-web workspace containing the provided semantic HTML portfolio, its existing image asset, and one styles.css file. Keep the HTML content stable unless a task explicitly requires a class or stylesheet-link relationship needed for CSS.",
                 "deliverable": "One complete responsive multi-page portfolio with consistent typography and color, deliberate spacing, Flexbox and Grid layouts, reusable CSS, mobile-first behavior, and accessible interaction states.",
-                "stepCountTarget": 6,
+                "stepCountTarget": 18,
                 "flow": "progressive",
                 "requirements": [
                   "Focus on CSS; do not turn the capstone into an HTML-authoring exercise.",
@@ -827,33 +827,93 @@
                 "stepLadder": [
                   {
                     "step": 1,
-                    "title": "Connect the Stylesheet and Establish the Visual Foundation",
-                    "requirement": "Connect styles.css across the provided pages and establish the exact base typography, colors, and page-wide defaults required by the task."
+                    "title": "Define the shared design tokens",
+                    "requirement": "**Problem**\n\nThe festival site needs repeated colors, spacing, and radius values to stay consistent without copying the same literals into every component.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n:root {\n  --page: #f8fafc;\n  --surface: #ffffff;\n  --text: #0f172a;\n  --muted: #475569;\n  --accent: #0284c7;\n  --accent-strong: #075985;\n  --space: 1.25rem;\n  --radius: 1rem;\n}\n```"
                   },
                   {
                     "step": 2,
-                    "title": "Build Consistent Spacing and Content Surfaces",
-                    "requirement": "Use the box model, max-width, spacing, borders, and reusable surface styles to organize the existing content clearly."
+                    "title": "Apply the page foundation",
+                    "requirement": "**Problem**\n\nThe fresh capstone has only reset styles, so the pages do not yet share the intended background, text color, and reading rhythm.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\nbody {\n  background: var(--page);\n  color: var(--text);\n  line-height: 1.6;\n}\n```"
                   },
                   {
                     "step": 3,
-                    "title": "Lay Out Navigation and Flexible Content with Flexbox",
-                    "requirement": "Use Flexbox for the required navigation, header, and one-dimensional content relationships while preserving usable wrapping."
+                    "title": "Center the shared page content",
+                    "requirement": "**Problem**\n\nOn wide screens, unconstrained content stretches too far and becomes harder to scan. The main regions need one shared readable width.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\nmain,\n.site-header,\nfooter {\n  width: min(70rem, calc(100% - 2rem));\n  margin-inline: auto;\n}\n```"
                   },
                   {
                     "step": 4,
-                    "title": "Build the Project Gallery with Grid",
-                    "requirement": "Use CSS Grid, gap, repeat(), and fluid tracks to organize the existing project content."
+                    "title": "Style the supporting text",
+                    "requirement": "**Problem**\n\nSecondary festival text currently competes with primary headings and body content. It needs a quieter visual role.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.eyebrow,\n.speaker-role {\n  color: var(--accent-strong);\n  font-weight: 700;\n}\n```"
                   },
                   {
                     "step": 5,
-                    "title": "Make the Site Responsive",
-                    "requirement": "Apply mobile-first responsive sizing and media queries so the complete site works cleanly from narrow to wide viewports."
+                    "title": "Style the supporting text",
+                    "requirement": "**Problem**\n\nSecondary festival text currently competes with primary headings and body content. It needs a quieter visual role.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.lede,\n.page-heading p,\n.event-card p,\n.schedule-card p,\n.speaker-card p {\n  color: var(--muted);\n}\n```"
                   },
                   {
                     "step": 6,
-                    "title": "Refactor, Polish, and Validate Accessibility",
-                    "requirement": "Use custom properties and reusable classes, verify focus visibility and contrast, preview every page, and pass cumulative source checks."
+                    "title": "Lay out the site header",
+                    "requirement": "**Problem**\n\nThe logo area and navigation currently follow normal document flow, so the header does not behave like one coordinated horizontal region.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.site-header {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n  gap: 1rem;\n}\n```"
+                  },
+                  {
+                    "step": 7,
+                    "title": "Style the navigation links",
+                    "requirement": "**Problem**\n\nThe links are positioned now, but they still look like default browser links instead of part of the festival interface.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.brand,\nnav {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n}\n```"
+                  },
+                  {
+                    "step": 8,
+                    "title": "Align the brand",
+                    "requirement": "**Problem**\n\nThe brand's icon and text need to read as one unit instead of two loosely positioned pieces.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.brand {\n  font-weight: 800;\n  text-decoration: none;\n}\n```"
+                  },
+                  {
+                    "step": 9,
+                    "title": "Style the navigation links",
+                    "requirement": "**Problem**\n\nThe links are positioned now, but they still look like default browser links instead of part of the festival interface.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\nnav {\n  flex-wrap: wrap;\n}\n```"
+                  },
+                  {
+                    "step": 10,
+                    "title": "Style the navigation links",
+                    "requirement": "**Problem**\n\nThe links are positioned now, but they still look like default browser links instead of part of the festival interface.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\nnav a {\n  text-decoration: none;\n  font-weight: 650;\n}\n```"
+                  },
+                  {
+                    "step": 11,
+                    "title": "Build the event grid",
+                    "requirement": "**Problem**\n\nEvent cards need a two-dimensional layout that can create useful columns without hand-positioning each card.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.event-grid,\n.schedule-grid,\n.speaker-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));\n  gap: var(--space);\n}\n```"
+                  },
+                  {
+                    "step": 12,
+                    "title": "Style the reusable content surfaces",
+                    "requirement": "**Problem**\n\nThe content groups have layout, but they still need a shared visual surface so related information is easy to scan.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.event-card,\n.schedule-card,\n.speaker-card,\n.hero-note,\n.registration-form {\n  background: var(--surface);\n  border-radius: var(--radius);\n  padding: var(--space);\n}\n```"
+                  },
+                  {
+                    "step": 13,
+                    "title": "Style the primary actions",
+                    "requirement": "**Problem**\n\nThe site's important actions still look like default controls, so they do not clearly signal where the visitor should act.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.button-link,\nbutton {\n  display: inline-block;\n  border: 0;\n  border-radius: 0.7rem;\n  background: var(--accent);\n  color: #ffffff;\n  padding: 0.75rem 1rem;\n  font-weight: 750;\n  text-decoration: none;\n}\n```"
+                  },
+                  {
+                    "step": 14,
+                    "title": "Lay out the registration form",
+                    "requirement": "**Problem**\n\nThe registration fields need a predictable flow and spacing so the form is easy to scan and complete.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n.registration-form {\n  display: grid;\n  gap: 0.75rem;\n  max-width: 40rem;\n}\n```"
+                  },
+                  {
+                    "step": 15,
+                    "title": "Style the form controls",
+                    "requirement": "**Problem**\n\nThe form layout is in place, but browser-default controls do not yet match the site's reusable visual system.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\ninput,\nselect,\ntextarea {\n  width: 100%;\n  padding: 0.75rem;\n  border: 1px solid #cbd5e1;\n  border-radius: 0.6rem;\n}\n```"
+                  },
+                  {
+                    "step": 16,
+                    "title": "Compose the wide-screen hero",
+                    "requirement": "**Problem**\n\nThe mobile-first hero works in a narrow viewport, but wider screens have room for a more deliberate composition.\n\n**Task**\n\nKeep every previous capstone rule. Add only this focused CSS responsibility in `styles.css`:\n\n```css\n@media (min-width: 48rem) {\n  .hero {\n      display: grid;\n      grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);\n      align-items: center;\n      gap: 2rem;\n    }\n}\n```"
+                  },
+                  {
+                    "step": 17,
+                    "title": "Add hover feedback",
+                    "requirement": "**Problem**\n\nInteractive links and buttons already have their base styling, but pointer users still need visible feedback when they hover over something they can activate.\n\n**Task**\n\nKeep every previous capstone rule. Add only the hover-state rule below so navigation links and primary actions respond consistently to pointer hover.\n\n```css\nnav a:hover,\n.button-link:hover,\nbutton:hover {\n  color: #ffffff;\n  background: var(--accent-strong);\n}\n```"
+                  },
+                  {
+                    "step": 18,
+                    "title": "Add keyboard focus visibility",
+                    "requirement": "**Problem**\n\nThe interface now responds to pointer hover, but keyboard users also need a clear visual indicator showing which interactive control currently has focus.\n\n**Task**\n\nKeep every previous capstone rule. Add only the `:focus-visible` rule below so links, buttons, inputs, selects, and textareas show a visible keyboard-focus outline.\n\n```css\na:focus-visible,\nbutton:focus-visible,\ninput:focus-visible,\nselect:focus-visible,\ntextarea:focus-visible {\n  outline: 0.2rem solid #f59e0b;\n  outline-offset: 0.2rem;\n}\n```"
                   }
                 ]
               }
@@ -863,5 +923,6 @@
       ],
       "role": "capstone"
     }
-  ]
+  ],
+  "topicPolicies": {}
 }

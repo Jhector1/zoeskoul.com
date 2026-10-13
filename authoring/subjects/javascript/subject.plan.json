@@ -1,0 +1,31 @@
+{
+  "subjectSlug": "javascript",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "accessPolicy": "paid",
+  "courseOrder": [
+    "javascript-foundations"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "javascript-foundations",
+    "courseSlug": "javascript-foundations",
+    "channel": "draft"
+  },
+  "versioning": {
+    "family": "javascript",
+    "version": 1,
+    "status": "draft",
+    "defaultForNewEnrollments": false,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "javascript-foundations",
+      "title": "JavaScript Foundations",
+      "order": 1,
+      "path": "courses/javascript-foundations/course.spec.json",
+      "status": "draft"
+    }
+  ]
+}

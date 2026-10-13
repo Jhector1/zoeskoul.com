@@ -1,0 +1,286 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-1-values-decisions": {
+        "event-announcement-generator-project": {
+          "label": "Build an Event Announcement Generator",
+          "summary": "Build one stable part of an event announcement at a time, carrying every completed value and decision into the next step.",
+          "cards": {
+            "sketch0": {
+              "title": "Build your first connected program"
+            },
+            "project": {
+              "title": "Build an Event Announcement Generator"
+            }
+          },
+          "projectSteps": {
+            "announcement_event_identity": {
+              "title": "Step 1: Store the event identity"
+            },
+            "announcement_registration_numbers": {
+              "title": "Step 2: Store registration numbers"
+            },
+            "announcement_seats_remaining": {
+              "title": "Step 3: Calculate remaining seats"
+            },
+            "announcement_deadline_state": {
+              "title": "Step 4: Store the deadline state"
+            },
+            "announcement_open_rule": {
+              "title": "Step 5: Calculate whether registration is open"
+            },
+            "announcement_status_decision": {
+              "title": "Step 6: Choose the status text"
+            },
+            "announcement_final_message": {
+              "title": "Step 7: Build the final announcement"
+            },
+            "announcement_show_result": {
+              "title": "Step 8: Show the finished announcement"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "announcement_event_identity": {
+                "title": "Step 1: Store the event identity",
+                "prompt": "Problem: The campus announcement cannot describe an event until the program knows which event it is talking about and where it takes place. Task: Create only `eventName` and `location` as constants. Expected result: Check Answer confirms the event identity is stored; the Console stays unchanged.",
+                "hint": "This step stores only the two text facts that identify the event.",
+                "help": {
+                  "concept": "store stable event identity values",
+                  "hint_1": "Use const for facts that do not change.",
+                  "hint_2": "Create one constant for the name and one for the location."
+                },
+                "starterCode": "// Build one stable part of the event announcement at a time.\n",
+                "solutionCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "// Build one stable part of the event announcement at a time.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\n"
+                  }
+                }
+              },
+              "announcement_registration_numbers": {
+                "title": "Step 2: Store registration numbers",
+                "prompt": "Problem: The announcement will eventually tell students whether space is available, but the program first needs the total capacity and current registration count. Task: Keep the complete Step 1 code and add only `capacity` and `registered` as number constants. Expected result: Check Answer confirms both registration numbers are available; the Console stays unchanged.",
+                "hint": "Add the source numbers without calculating anything yet.",
+                "help": {
+                  "concept": "store numeric source values",
+                  "hint_1": "capacity is total seats.",
+                  "hint_2": "registered is seats already taken."
+                },
+                "starterCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\n",
+                "solutionCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\n"
+                  }
+                }
+              },
+              "announcement_seats_remaining": {
+                "title": "Step 3: Calculate remaining seats",
+                "prompt": "Problem: Raw capacity and registration counts do not directly tell a student how many seats are still open. Task: Keep all previous values and add only `seatsRemaining = capacity - registered`. Expected result: Check Answer confirms the project can derive the remaining-seat count; the Console stays unchanged.",
+                "hint": "Use the two registration numbers already stored.",
+                "help": {
+                  "concept": "derive one value from existing data",
+                  "hint_1": "Open seats equal capacity minus registered.",
+                  "hint_2": "Store the result in seatsRemaining."
+                },
+                "starterCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\n",
+                "solutionCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\n"
+                  }
+                }
+              },
+              "announcement_deadline_state": {
+                "title": "Step 4: Store the deadline state",
+                "prompt": "Problem: Available seats alone are not enough to decide whether registration is open because the signup deadline may already have passed. Task: Keep the complete previous solution and add only the boolean `deadlinePassed`. Expected result: Check Answer confirms the project can represent the deadline state; the Console stays unchanged.",
+                "hint": "Add one boolean fact and no decision logic yet.",
+                "help": {
+                  "concept": "represent one true-or-false condition",
+                  "hint_1": "Use a boolean literal.",
+                  "hint_2": "For the supplied event, keep the deadline active."
+                },
+                "starterCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\n",
+                "solutionCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\n"
+                  }
+                }
+              },
+              "announcement_open_rule": {
+                "title": "Step 5: Calculate whether registration is open",
+                "prompt": "Problem: The program now knows seat availability and deadline state, but it still needs one clear rule for whether a student may register. Task: Add only `isOpen` so registration is open when seats remain and the deadline has not passed. Expected result: Check Answer confirms the complete availability rule; the Console stays unchanged.",
+                "hint": "Combine the two registration requirements.",
+                "help": {
+                  "concept": "combine conditions into one boolean rule",
+                  "hint_1": "Require seatsRemaining > 0.",
+                  "hint_2": "Combine it with !deadlinePassed using &&."
+                },
+                "starterCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\n",
+                "solutionCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\n"
+                  }
+                }
+              },
+              "announcement_status_decision": {
+                "title": "Step 6: Choose the status text",
+                "prompt": "Problem: The boolean `isOpen` is useful to code, but students need a readable registration message. Task: Keep the complete availability rule and add `statusText` with one `if/else` that assigns `Registration open` or `Registration closed`. Expected result: Check Answer confirms both readable decision branches; the Console stays unchanged.",
+                "hint": "Translate the completed boolean into readable text.",
+                "help": {
+                  "concept": "turn a boolean decision into user-facing text",
+                  "hint_1": "Declare statusText before the conditional.",
+                  "hint_2": "Use isOpen directly in the if."
+                },
+                "starterCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\n",
+                "solutionCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n"
+                  }
+                }
+              },
+              "announcement_final_message": {
+                "title": "Step 7: Build the final announcement",
+                "prompt": "Problem: The project now has all of the facts and decisions, but they are still separate values instead of one announcement a student can read. Task: Add only the `announcement` template literal using the event name, location, status text, and remaining seats. Expected result: Check Answer confirms one complete announcement string is assembled; nothing is logged yet.",
+                "hint": "All message inputs already exist.",
+                "help": {
+                  "concept": "compose a final message from existing values",
+                  "hint_1": "Use one template literal.",
+                  "hint_2": "Include all four required pieces."
+                },
+                "starterCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n",
+                "solutionCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n\nconst announcement = `${eventName} at ${location}: ${statusText}. ${seatsRemaining} seats remaining.`;\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n\nconst announcement = `${eventName} at ${location}: ${statusText}. ${seatsRemaining} seats remaining.`;\n"
+                  }
+                }
+              },
+              "announcement_show_result": {
+                "title": "Step 8: Show the finished announcement",
+                "prompt": "Problem: The announcement is complete in memory, but nobody can see it until the program outputs it. Task: Keep the entire working project and add only `console.log(announcement)`. Expected result: the Console shows one final campus-event announcement containing the event name, location, registration status, and remaining-seat count.",
+                "hint": "The message is already complete; only display it.",
+                "help": {
+                  "concept": "output the completed project result",
+                  "hint_1": "Do not rebuild the string.",
+                  "hint_2": "Log announcement once."
+                },
+                "starterCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n\nconst announcement = `${eventName} at ${location}: ${statusText}. ${seatsRemaining} seats remaining.`;\n",
+                "solutionCode": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n\nconst announcement = `${eventName} at ${location}: ${statusText}. ${seatsRemaining} seats remaining.`;\nconsole.log(announcement);\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n\nconst announcement = `${eventName} at ${location}: ${statusText}. ${seatsRemaining} seats remaining.`;\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event Announcement Generator</title>\n</head>\n<body>\n  <h1>Event Announcement Generator</h1>\n  <p>Build the announcement one working step at a time and check each result in the Console.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventName = \"Robotics Open Lab\";\nconst location = \"Engineering Hall\";\nconst capacity = 24;\nconst registered = 18;\nconst seatsRemaining = capacity - registered;\nconst deadlinePassed = false;\nconst isOpen = seatsRemaining > 0 && !deadlinePassed;\nlet statusText;\n\nif (isOpen) {\n  statusText = \"Registration open\";\n} else {\n  statusText = \"Registration closed\";\n}\n\nconst announcement = `${eventName} at ${location}: ${statusText}. ${seatsRemaining} seats remaining.`;\nconsole.log(announcement);\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-1-values-decisions": {
+        "event-announcement-generator-project": {
+          "event-announcement-generator-project-brief": {
+            "title": "Project brief: Event Announcement Generator",
+            "bodyMarkdown": "A campus events team wants a small program that can turn raw event details into a useful registration announcement. You will build it in three cumulative steps, and each step starts from the working result of the one before it.\n\nBy the end, your program will:\n\n- store the event name, location, capacity, and registration count;\n- calculate how many seats remain;\n- decide whether registration is open;\n- produce one readable announcement for the event team.\n\nThis project uses only ideas you have already practiced in Module 1: values, `const` and `let`, arithmetic, template literals, comparisons, logical operators, and `if/else`."
+          }
+        }
+      }
+    }
+  }
+}

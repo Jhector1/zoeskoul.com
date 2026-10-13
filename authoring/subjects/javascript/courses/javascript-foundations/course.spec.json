@@ -1,0 +1,1036 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "javascript",
+  "courseSlug": "javascript-foundations",
+  "catalogSlug": "web",
+  "profileId": "web",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "javascript-browser-workspace",
+  "title": "JavaScript Foundations",
+  "subtitle": "Build interactive browser experiences with data and resilient interface states",
+  "intendedFor": "Beginners who know basic HTML and want to add behavior, interaction, and local data to web pages.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "courseOverview": {
+    "recommendedSequence": "Complete modules in order. Each module builds language and browser skills needed by the Campus Event Explorer capstone.",
+    "summary": "A practical beginner JavaScript course covering values, decisions, collections, functions, DOM interaction, events, JSON, promises, async-await, local fetch, resilient interface states, and a complete event explorer.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Values, Variables, and Decisions",
+        "coreSkill": "Represent information and make decisions with JavaScript values and expressions.",
+        "outputFocus": "Build a small event announcement generator that responds to changing input data."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Collections, Repetition, and Functions",
+        "coreSkill": "Organize event data and reusable behavior with arrays, objects, loops, and functions.",
+        "outputFocus": "Build a reusable event list planner from structured in-memory data."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Browser Interaction and Asynchronous Data",
+        "coreSkill": "Render interactive browser interfaces and load local JSON data asynchronously.",
+        "outputFocus": "Build an interactive event browser with explicit loading, error, empty, and success states."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Final Capstone: Campus Event Explorer",
+        "coreSkill": "Combine JavaScript fundamentals, browser events, local data loading, and resilient UI states.",
+        "outputFocus": "Build and verify a complete Campus Event Explorer."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "javascript-foundations",
+      "startModuleNumber": 1,
+      "endModuleNumber": 4
+    },
+    "releases": [
+      {
+        "name": "javascript-foundations",
+        "startModuleNumber": 1,
+        "endModuleNumber": 4
+      }
+    ]
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "javascript-foundations-module-1-values-decisions",
+      "prefix": "javascript_module_1",
+      "title": "Values, Variables, and Decisions",
+      "purpose": "Build a reliable mental model for JavaScript values and use expressions and conditions to turn event information into useful messages.",
+      "learningObjectives": [
+        "Distinguish strings, numbers, booleans, null, and undefined.",
+        "Store values with const and let and name them clearly.",
+        "Build readable text with string methods and template literals.",
+        "Use comparisons, logical operators, and conditionals to choose behavior."
+      ],
+      "guidedExercises": [
+        "Inspect values and expressions in small browser-connected examples.",
+        "Transform event names, locations, capacities, and availability into messages.",
+        "Trace conditional branches before implementing them."
+      ],
+      "quizFocus": [
+        "value types",
+        "variable choice",
+        "expression evaluation",
+        "conditional reasoning"
+      ],
+      "moduleProject": "Build an Event Announcement Generator that produces clear messages from event values and availability rules.",
+      "role": "standard",
+      "sections": [
+        {
+          "sectionSlug": "javascript-foundations-section-1-language-basics",
+          "role": "lesson",
+          "title": "JavaScript Values and Expressions",
+          "summary": "Use the core building blocks of JavaScript to represent and transform event information.",
+          "topics": [
+            {
+              "topicId": "javascript-values-and-first-expressions",
+              "title": "JavaScript Values and First Expressions",
+              "summary": "Evaluate strings, numbers, booleans, null, and undefined and observe how expressions produce new values.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Recognize JavaScript's common primitive values.",
+                "Explain the difference between a value and an expression.",
+                "Use typeof carefully to inspect values."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "variables-with-const-and-let",
+              "title": "Variables with const and let",
+              "summary": "Name event information clearly and choose const or let based on whether a binding must change.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Declare variables with const and let.",
+                "Choose clear camelCase names.",
+                "Update a let binding without confusing reassignment with mutation."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "strings-numbers-and-template-literals",
+              "title": "Strings, Numbers, and Template Literals",
+              "summary": "Format event details with string operations, arithmetic, and readable template literals.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Combine strings without accidental numeric coercion.",
+                "Perform basic arithmetic for capacity and availability.",
+                "Interpolate values into template literals."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "comparisons-conditionals-and-logic",
+              "title": "Comparisons, Conditionals, and Logic",
+              "summary": "Use strict comparisons, logical operators, and conditional branches to decide what an interface should say.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Compare values with strict equality and relational operators.",
+                "Combine boolean conditions with logical operators.",
+                "Choose between if, else if, and else branches."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "javascript-foundations-section-1-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Apply values, formatting, comparisons, and conditions in one focused event-message project.",
+          "topics": [
+            {
+              "topicId": "event-announcement-generator-project",
+              "title": "Build an Event Announcement Generator",
+              "summary": "Create announcement text that changes with event location, capacity, and registration availability.",
+              "minutes": 35,
+              "technical": true,
+              "learningGoals": [
+                "Represent an event with clearly named values.",
+                "Compute remaining capacity.",
+                "Generate an appropriate registration message with conditionals."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "standalone"
+              },
+              "projectBrief": {
+                "scenario": "A campus activities office needs a small JavaScript program that turns event facts into one clear registration announcement.",
+                "role": "Beginner JavaScript developer responsible for the announcement data and decision logic.",
+                "workspace": "A browser JavaScript workspace with script.js and Console output. No framework, package installation, backend, or external network is required.",
+                "deliverable": "An Event Announcement Generator that stores event data, calculates remaining seats, decides registration status, builds one readable message, and outputs the finished announcement.",
+                "requirements": [
+                  "Use only JavaScript values, variables, operators, boolean logic, conditionals, template literals, and Console output taught in Module 1.",
+                  "Build the project cumulatively so every step begins with the complete previous solution.",
+                  "Add one clear responsibility per step and preserve all previously completed behavior.",
+                  "Avoid temporary progress logs that later steps must delete.",
+                  "Produce one final announcement output at the end of the project."
+                ],
+                "stepCountTarget": 8,
+                "flow": "progressive",
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Store the event identity",
+                    "requirement": "Problem: The campus announcement cannot describe an event until the program knows which event it is talking about and where it takes place. Task: Create only `eventName` and `location` as constants."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Store registration numbers",
+                    "requirement": "Problem: The announcement will eventually tell students whether space is available, but the program first needs the total capacity and current registration count. Task: Keep the complete Step 1 code and add only `capacity` and `registered` as number constants."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Calculate remaining seats",
+                    "requirement": "Problem: Raw capacity and registration counts do not directly tell a student how many seats are still open. Task: Keep all previous values and add only `seatsRemaining = capacity - registered`."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Store the deadline state",
+                    "requirement": "Problem: Available seats alone are not enough to decide whether registration is open because the signup deadline may already have passed. Task: Keep the complete previous solution and add only the boolean `deadlinePassed`."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Calculate whether registration is open",
+                    "requirement": "Problem: The program now knows seat availability and deadline state, but it still needs one clear rule for whether a student may register. Task: Add only `isOpen` so registration is open when seats remain and the deadline has not passed."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Choose the status text",
+                    "requirement": "Problem: The boolean `isOpen` is useful to code, but students need a readable registration message. Task: Keep the complete availability rule and add `statusText` with one `if/else` that assigns `Registration open` or `Registration closed`."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Build the final announcement",
+                    "requirement": "Problem: The project now has all of the facts and decisions, but they are still separate values instead of one announcement a student can read. Task: Add only the `announcement` template literal using the event name, location, status text, and remaining seats."
+                  },
+                  {
+                    "step": 8,
+                    "title": "Show the finished announcement",
+                    "requirement": "Problem: The announcement is complete in memory, but nobody can see it until the program outputs it. Task: Keep the entire working project and add only `console.log(announcement)`."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "javascript-foundations-module-2-collections-functions",
+      "prefix": "javascript_module_2",
+      "title": "Collections, Repetition, and Functions",
+      "purpose": "Help learners organize related data, name reusable operations, and process collections with clear iteration patterns before moving into browser interaction.",
+      "learningObjectives": [
+        "Create arrays, read indexed values, inspect length, and append items with push.",
+        "Model structured records with objects and combine objects inside arrays.",
+        "Define reusable functions with parameters and return values.",
+        "Use for...of, map, and filter to process collections.",
+        "Combine collections and functions in a cumulative Event List Planner."
+      ],
+      "guidedExercises": [
+        "Model several campus events with arrays and objects.",
+        "Trace iteration one element at a time.",
+        "Extract repeated formatting and filtering behavior into functions."
+      ],
+      "quizFocus": [
+        "collection choice",
+        "iteration tracing",
+        "function inputs and outputs",
+        "scope"
+      ],
+      "moduleProject": "Build an Event List Planner that filters and formats structured event records with reusable functions.",
+      "role": "standard",
+      "sections": [
+        {
+          "sectionSlug": "javascript-foundations-section-2-collections-functions",
+          "role": "lesson",
+          "title": "Collections, Functions, and Iteration",
+          "summary": "Organize data with arrays and objects, name reusable work with functions, then process collections with for...of, map, and filter.",
+          "topics": [
+            {
+              "topicId": "arrays-and-indexed-data",
+              "title": "Arrays and Indexed Data",
+              "summary": "Store ordered values together, read items by position, and grow a collection with push.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Create arrays that hold related values in order.",
+                "Read array items by index and distinguish index from length.",
+                "Append a new value with push."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "objects-and-event-records",
+              "title": "Objects and Event Records",
+              "summary": "Group related facts into objects, read and update properties, and combine objects inside arrays.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Create object records with named properties.",
+                "Read and update properties with dot notation.",
+                "Use arrays of objects as a collection of structured records."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "drag_reorder",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "functions-parameters-and-return-values",
+              "title": "Functions, Parameters, and Return Values",
+              "summary": "Name reusable work, pass values through parameters, and return results to the caller.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Define and call reusable functions.",
+                "Use parameters to receive different input values.",
+                "Return a result that other code can store and reuse."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "loops-and-array-iteration",
+              "title": "Loops and Array Iteration",
+              "summary": "Visit every array item with for...of, transform items with map, and keep matching items with filter.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Use for...of to visit every value in an array.",
+                "Use map with a callback to transform every item.",
+                "Use filter with a boolean callback to keep matching items."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "javascript-foundations-section-2-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Combine arrays, objects, iteration, and functions in an event-planning program.",
+          "topics": [
+            {
+              "topicId": "event-list-planner-project",
+              "title": "Build an Event List Planner",
+              "summary": "Filter a collection of event records and format a useful schedule with reusable functions.",
+              "minutes": 40,
+              "technical": true,
+              "learningGoals": [
+                "Model multiple events with an array of objects.",
+                "Filter events by a learner-selected criterion.",
+                "Format selected events through a reusable function."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "standalone"
+              },
+              "projectBrief": {
+                "scenario": "A campus programs team needs a small JavaScript planner that selects Technology events and turns them into readable schedule lines.",
+                "role": "Beginner JavaScript developer responsible for the event collection and reusable data-processing functions.",
+                "workspace": "A browser JavaScript workspace with script.js and Console output. No framework, package installation, backend, or external network is required.",
+                "deliverable": "An Event List Planner that stores event objects, uses focused predicate and formatting functions, filters and maps the collection, and outputs the selected schedule.",
+                "requirements": [
+                  "Use only arrays, objects, functions, filter, map, for...of, template literals, and Console output taught in Module 2.",
+                  "Build the project cumulatively so every step begins with the complete previous solution.",
+                  "Add one clear responsibility per step and preserve all previously completed behavior.",
+                  "Keep source data, filtering, formatting, and final output as focused responsibilities."
+                ],
+                "stepCountTarget": 7,
+                "flow": "progressive",
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Start the event collection",
+                    "requirement": "Problem: The event planner cannot process a schedule until each event is represented as one structured record. Task: Create `events` as an array containing one event object with `name`, `category`, and `location`."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Complete the schedule data",
+                    "requirement": "Problem: One event is not enough to test a real planner, especially filtering across different categories. Task: Keep the first event and add three more event objects with the same `name`, `category`, and `location` shape."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Identify Technology events",
+                    "requirement": "Problem: The planner will need to select only Technology events, so it first needs one reusable yes-or-no rule for a single event. Task: Keep the complete event array and add only `isTechnology(event)` returning whether the category equals `Technology`."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Format one event",
+                    "requirement": "Problem: Event objects are useful for code, but a student reading a schedule needs a short line with the event name and location. Task: Keep the data and predicate and add only `formatEvent(event)` returning `name — location`."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Select Technology events",
+                    "requirement": "Problem: The planner still contains every category, but this schedule should include only Technology events. Task: Keep every previous function and add only `selectedEvents = events.filter(isTechnology)`."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Format the selected schedule",
+                    "requirement": "Problem: The planner has selected the correct Technology event objects, but raw objects are not readable schedule lines for a student. Task: Keep the selected event array and add only `scheduleLines = selectedEvents.map(formatEvent)`."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Show every schedule line",
+                    "requirement": "Problem: The schedule lines are ready in memory, but the planner has not shown them anywhere yet. Task: Keep the complete data pipeline and add only a `for...of` loop that logs every line in `scheduleLines`."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "javascript-foundations-module-3-browser-data",
+      "prefix": "javascript_module_3",
+      "title": "Browser Interaction and Data",
+      "purpose": "Connect JavaScript to browser behavior, user input, local JSON data, async control flow, and explicit interface states.",
+      "learningObjectives": [
+        "Select, update, create, and append DOM elements.",
+        "Respond to clicks, form submissions, and changed controls.",
+        "Parse JSON and check broad data shape at boundaries.",
+        "Use Promises, async/await, and try/catch.",
+        "Fetch local JSON and check response.ok before parsing.",
+        "Represent loading, empty, success, and error states explicitly.",
+        "Build an Interactive Event Browser with one category filter."
+      ],
+      "guidedExercises": [
+        "Render one event card from an object before rendering a collection.",
+        "Connect a filter control to a render function.",
+        "Trace promise states before using async-await.",
+        "Use a local events.json fixture so fetch behavior remains deterministic."
+      ],
+      "quizFocus": [
+        "DOM update flow",
+        "event handling",
+        "JSON boundaries",
+        "asynchronous control flow",
+        "resilient UI states"
+      ],
+      "moduleProject": "Build an Interactive Event Browser that loads local data and supports filtering with resilient interface feedback.",
+      "role": "standard",
+      "sections": [
+        {
+          "sectionSlug": "javascript-foundations-section-3-browser-data",
+          "role": "lesson",
+          "title": "DOM, Events, and Async Data",
+          "summary": "Connect JavaScript to the page, respond to input, then load and validate local data asynchronously.",
+          "topics": [
+            {
+              "topicId": "select-and-update-the-dom",
+              "title": "Select and Update the DOM",
+              "summary": "Connect JavaScript to the page by selecting elements, changing text, and creating new elements safely.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Select elements with querySelector and querySelectorAll.",
+                "Update textContent and relevant attributes.",
+                "Render repeated event records without mixing data decisions into markup unnecessarily."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "events-forms-and-user-input",
+              "title": "Events, Forms, and User Input",
+              "summary": "Respond to clicks, handle form submission without reloading, and read values from form controls.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Register event listeners with named callbacks.",
+                "Read values from form controls.",
+                "Update rendered results after a user interaction."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "json-and-data-boundaries",
+              "title": "JSON and Data Boundaries",
+              "summary": "Distinguish JSON text from JavaScript values, parse incoming text, and check the broad shape of parsed data.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Distinguish JSON text from JavaScript objects and arrays.",
+                "Parse valid JSON with JSON.parse.",
+                "Serialize supported JavaScript data with JSON.stringify."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "promises-and-async-await",
+              "title": "Promises and async-await",
+              "summary": "Understand a Promise as a future result, use await inside async functions, and handle rejected work with try/catch.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Describe the states of a promise.",
+                "Use await only inside an async function.",
+                "Handle rejected asynchronous work with try and catch."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "fetch-local-event-data",
+              "title": "Fetch Local Event Data",
+              "summary": "Load a local JSON file with fetch, check the HTTP response, and parse its body into JavaScript data.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Fetch a local JSON file without external network access.",
+                "Check response.ok before decoding a response body.",
+                "Await response.json and render the resulting event array."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "loading-error-empty-and-success-states",
+              "title": "Loading, Error, Empty, and Success States",
+              "summary": "Represent asynchronous UI states explicitly so the learner always knows whether data is loading, failed, empty, or ready.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Show a loading state before awaiting data.",
+                "Present useful error feedback after a failed request or parse.",
+                "Distinguish an empty result from an error.",
+                "Render success content and accessible status messages."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "drag_reorder",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "javascript-foundations-section-3-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Combine DOM rendering, local JSON loading, explicit UI states, and one category filter.",
+          "topics": [
+            {
+              "topicId": "interactive-event-browser-project",
+              "title": "Build an Interactive Event Browser",
+              "summary": "Build a browser app that renders local event data, communicates async states, and filters events by one category.",
+              "minutes": 40,
+              "technical": true,
+              "learningGoals": [
+                "Load local JSON data with async-await and fetch.",
+                "Render and filter event records in response to user input.",
+                "Keep loading, error, empty, and success states mutually understandable."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A campus engagement page needs a small browser application that loads local event data, renders it, and lets students filter the visible events.",
+                "role": "Beginner frontend JavaScript developer responsible for DOM rendering, local data loading, visible states, and category interaction.",
+                "workspace": "A cumulative browser-web workspace with index.html, script.js, and a local data/events.json fixture. No framework, backend, package installation, or external network is required.",
+                "deliverable": "An Interactive Event Browser that renders event records, loads local JSON safely, communicates loading/error/empty/success outcomes, and filters the visible list by category.",
+                "requirements": [
+                  "Use browser DOM, form/control events, for...of, filter, async/await, fetch, response.ok, and response.json patterns taught in Module 3.",
+                  "Keep the JSON fixture local so the project works without external network access.",
+                  "Build the project cumulatively so every step begins with the complete previous solution.",
+                  "Add one clear responsibility per step and preserve all previously completed behavior.",
+                  "Do not use temporary preview records that later steps must remove.",
+                  "Make observable states and alternate branches explicit in each step's expected result."
+                ],
+                "stepCountTarget": 15,
+                "flow": "progressive",
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Select the event list",
+                    "requirement": "Problem: The event browser will eventually render event records, but JavaScript first needs a reference to the list already provided by the page. Task: Select only `#event-list` and store it in `eventList`."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Render an event array",
+                    "requirement": "Problem: Loaded event objects cannot help a student until the browser can turn them into visible list items. Task: Keep `eventList` and add only `renderEvents(events)`: clear the list, loop with `for...of`, create one `li` per event, set `name - location`, and append it."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Select the status element",
+                    "requirement": "Problem: Loading, empty, success, and error states need one visible place where the browser can explain what is happening. Task: Keep the complete renderer and select only `#status` into `status`."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Add event state",
+                    "requirement": "Problem: Filtering later will require the browser to remember the complete loaded event list instead of losing the source records after rendering. Task: Keep all DOM references and the renderer and add only `let allEvents = []`."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Show the loading state",
+                    "requirement": "Problem: Loading local data is asynchronous, so the page should immediately tell the learner that work has started instead of appearing frozen. Task: Keep everything from Step 4 and add and call `loadEvents()` with one responsibility: set the status to `Loading events...`."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Request the local event data",
+                    "requirement": "Problem: The browser currently has no event records to render because the data lives in a local JSON file. Task: Keep the visible loading behavior and update only `loadEvents()` to await `fetch(\"./data/events.json\")` into `response`."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Reject a failed response",
+                    "requirement": "Problem: `fetch` can return a Response even when the local request failed, so decoding blindly could treat an error response as valid event data. Task: Keep the local request and add only the `response.ok` guard, throwing `Could not load events` when false."
+                  },
+                  {
+                    "step": 8,
+                    "title": "Decode and count the events",
+                    "requirement": "Problem: The browser has a successful Response object, but the renderer needs JavaScript event records rather than the raw response body. Task: Keep the request and response check, decode JSON into `allEvents`, then show the loaded count."
+                  },
+                  {
+                    "step": 9,
+                    "title": "Render the loaded events",
+                    "requirement": "Problem: The event records are now loaded into memory, but students still cannot see them on the page. Task: Keep the complete load flow and add only `renderEvents(allEvents)` after the successful decode/count."
+                  },
+                  {
+                    "step": 10,
+                    "title": "Handle an empty event file",
+                    "requirement": "Problem: A successful JSON request may contain zero events, and a blank list with no explanation would look broken. Task: Keep the successful load and rendering behavior and add only the zero-length branch: show `No events found`, render an empty list, and return."
+                  },
+                  {
+                    "step": 11,
+                    "title": "Handle loading errors",
+                    "requirement": "Problem: Network or data-loading failures should not leave the browser stuck on `Loading events...` with no explanation. Task: Keep the complete success and empty behavior and wrap only the load path in `try...catch`; in `catch`, clear the list and show `Could not load events`."
+                  },
+                  {
+                    "step": 12,
+                    "title": "Select the category control",
+                    "requirement": "Problem: The event browser has loaded all events, but it cannot react to a category choice until JavaScript has a reference to the existing filter control. Task: Keep the fully working loader and select only `#category-filter` into `categoryFilter`."
+                  },
+                  {
+                    "step": 13,
+                    "title": "Derive events for one category",
+                    "requirement": "Problem: The app must show one category without destroying the complete event list that future filter choices still need. Task: Keep the loaded source data and add only `eventsForCategory(category)`: return all events for `All`, otherwise return the matching subset."
+                  },
+                  {
+                    "step": 14,
+                    "title": "Show one category view",
+                    "requirement": "Problem: A filtered array by itself is not useful to the learner until the browser renders it and explains whether anything matched. Task: Keep every previous feature and add only `showCategory(category)`: derive visible events, render them, then show `No matching events` or the visible count."
+                  },
+                  {
+                    "step": 15,
+                    "title": "Update the view when the category changes",
+                    "requirement": "Problem: The category-view logic is complete, but changing the select control still does nothing because no event connects the user's choice to that logic. Task: Keep the complete application, add `handleCategoryChange(event)` so it calls `showCategory(event.currentTarget.value)`, then attach it to the filter's `change` event."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "javascript-foundations-module-4-campus-event-explorer",
+      "prefix": "javascript_module_4",
+      "title": "Final Capstone: Campus Event Explorer",
+      "purpose": "Transfer the complete JavaScript Foundations skill set into one progressive, data-driven browser application.",
+      "learningObjectives": [
+        "Model, load, filter, and render campus event data.",
+        "Organize behavior into focused functions with explicit inputs and outputs.",
+        "Respond to user controls with clear and accessible interface updates.",
+        "Handle loading, error, empty, and success states deliberately."
+      ],
+      "guidedExercises": [
+        "Work through the capstone milestones in order in one cumulative browser workspace.",
+        "Keep events.json local and deterministic.",
+        "Check keyboard interaction and status messaging after each major interface change.",
+        "Run cumulative source checks after each milestone."
+      ],
+      "quizFocus": [
+        "data flow",
+        "event-driven rendering",
+        "asynchronous error handling",
+        "accessible interface states"
+      ],
+      "moduleProject": "Build the Campus Event Explorer.",
+      "role": "capstone",
+      "sections": [
+        {
+          "sectionSlug": "javascript-foundations-section-4-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Build one progressive Campus Event Explorer that loads local data, supports discovery controls, and communicates every interface state.",
+          "topics": [
+            {
+              "topicId": "campus-event-explorer-capstone",
+              "title": "Campus Event Explorer",
+              "summary": "Build a complete browser application for discovering campus events from a local JSON data source.",
+              "minutes": 70,
+              "technical": true,
+              "learningGoals": [
+                "Load and validate local campus event data.",
+                "Render useful event cards from structured records.",
+                "Filter events through accessible controls.",
+                "Communicate loading, error, empty, and success states.",
+                "Refactor repeated behavior into focused functions and verify the complete application."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A campus engagement office needs a small browser application that helps students discover upcoming events without depending on an external service.",
+                "role": "Beginner frontend developer responsible for the application's JavaScript behavior and data flow.",
+                "workspace": "A cumulative browser-web workspace with semantic starter HTML, a small stylesheet, script.js, and a local events.json fixture. No terminal, package installation, framework, backend, or external network is required.",
+                "deliverable": "A Campus Event Explorer that loads local event data, renders accessible event cards, supports useful filtering, and presents clear loading, error, empty, and success states.",
+                "stepCountTarget": 18,
+                "flow": "progressive",
+                "requirements": [
+                  "Use JavaScript language and browser APIs taught in this course; do not introduce a framework or build tool.",
+                  "Keep events.json local so the project works without external network access.",
+                  "Separate data loading, filtering, and rendering into focused functions.",
+                  "Use event listeners for learner controls and avoid inline JavaScript handlers.",
+                  "Check response.ok and handle rejected or invalid data paths.",
+                  "Provide distinguishable loading, error, empty, and success states.",
+                  "Keep status feedback understandable to keyboard and assistive-technology users.",
+                  "Use the browser preview and cumulative source checks; do not require Judge0 or terminal execution."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Format one event",
+                    "requirement": "Problem: Each event card needs one concise line that helps students understand the category, location, and seat availability without reading raw object fields. Task: Complete only `formatEventMeta(event)` and return one string containing those three values."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Build one event card",
+                    "requirement": "Problem: The explorer has formatted event details, but it still needs a reusable DOM structure for showing one event consistently. Task: Keep the formatter and add only `createEventCard(event)`. Create an `article`, `h2`, and `p`, fill them with `textContent`, append the heading and metadata, and return the article."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Select the events section",
+                    "requirement": "Problem: Reusable event cards cannot appear until JavaScript knows which page section should contain them. Task: Select `#events` and store it in `eventsElement`."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Render an event list",
+                    "requirement": "Problem: The explorer can build one card, but students need the whole event array rendered as a visible list of cards. Task: Keep every previous function and add only `renderEvents(events)`: clear the events section, loop with `for...of`, and append one card for each event."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Add application state",
+                    "requirement": "Problem: Filtering must always start from the complete loaded event list, so the app needs one stable place to remember that source data. Task: Add only `let allEvents = []`."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Filter by category",
+                    "requirement": "Problem: Students need to narrow the explorer by category without deleting the original loaded records. Task: Add only `filterEvents(category)`. Return every event when the category is `all`; otherwise return only matching events."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Select the filter controls",
+                    "requirement": "Problem: The filter logic exists, but the app cannot read the learner's category choice until JavaScript has references to the form and select elements. Task: Select `#filters` and `#category` into `filtersForm` and `categorySelect`."
+                  },
+                  {
+                    "step": 8,
+                    "title": "Apply the filter on submit",
+                    "requirement": "Problem: Choosing a category still does nothing because the form submission is not connected to the existing filter and renderer. Task: Add one `submit` listener to `filtersForm`, prevent the page reload, read `categorySelect.value`, filter `allEvents`, and render the visible events."
+                  },
+                  {
+                    "step": 9,
+                    "title": "Request the local JSON file",
+                    "requirement": "Problem: The explorer currently has no real event records because its data lives in the workspace's local `events.json` file. Task: Add only `fetchEvents()` with one `await fetch(\"./events.json\")` call, then return the Response."
+                  },
+                  {
+                    "step": 10,
+                    "title": "Reject failed responses",
+                    "requirement": "Problem: A completed fetch is not proof that the event file loaded successfully, so the app must reject failed responses before treating them as data. Task: Keep the local request and add only the `response.ok` guard, throwing `Could not load events` when false."
+                  },
+                  {
+                    "step": 11,
+                    "title": "Decode the JSON body",
+                    "requirement": "Problem: A successful Response object still is not the event array that the rest of the explorer needs. Task: Update only `fetchEvents()`: await `response.json()`, store the decoded value in `records`, and return it."
+                  },
+                  {
+                    "step": 12,
+                    "title": "Validate the data boundary",
+                    "requirement": "Problem: Valid JSON can still have the wrong shape, and the renderer expects an array of events rather than an arbitrary object or value. Task: Update only `fetchEvents()` to verify `records` with `Array.isArray(records)` and throw if it is not an array."
+                  },
+                  {
+                    "step": 13,
+                    "title": "Show a ready status",
+                    "requirement": "Problem: Before loading begins, the explorer should tell the learner that it is ready rather than leaving the status area blank. Task: Keep everything from the previous step, select `#status`, add `showStatus(message)` using `textContent`, then call it with `Ready to load events.`."
+                  },
+                  {
+                    "step": 14,
+                    "title": "Start in the loading state",
+                    "requirement": "Problem: Once startup begins, the explorer should immediately show that data is being loaded so the page does not appear unresponsive. Task: Keep the complete project and add and call `start()` with one responsibility: change the status to `Loading events…`. Do not fetch data yet."
+                  },
+                  {
+                    "step": 15,
+                    "title": "Load the event data",
+                    "requirement": "Problem: The loading state is visible, but the application still has no event records in its state. Task: Keep every function and listener, update only `start()` so it awaits `fetchEvents()`, stores the returned array in `allEvents`, and reports the count."
+                  },
+                  {
+                    "step": 16,
+                    "title": "Render the loaded events",
+                    "requirement": "Problem: The explorer now knows there are three events, but students still cannot see the actual events. Task: Keep the entire working project and add only `renderEvents(allEvents)` after the successful load."
+                  },
+                  {
+                    "step": 17,
+                    "title": "Handle an empty event list",
+                    "requirement": "Problem: A valid event file can contain zero records, and leaving the card area blank would make the explorer look broken. Task: Keep every previous feature and add only the empty-array branch inside `start()`: show `No events found.`, render an empty list, and return."
+                  },
+                  {
+                    "step": 18,
+                    "title": "Handle loading errors",
+                    "requirement": "Problem: A request or data-validation failure should not leave the explorer stuck on a loading message with no explanation. Task: Keep the complete application and wrap only the startup load path in `try...catch`, showing `Could not load events.` in `catch`."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "One module per week or two short topics per study session.",
+    "recommendedCourseDeliverables": [
+      "Short concept sketches",
+      "Browser JavaScript source-check exercises",
+      "Three module projects",
+      "One progressive Campus Event Explorer capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul JavaScript editor",
+      "Live browser preview",
+      "Check Answer source validation"
+    ],
+    "closingNote": "Learners finish able to build beginner browser applications with interaction, local asynchronous data, and resilient interface states."
+  },
+  "authoringGuidance": [
+    "This course uses profileId web, workspaceProfileId browser-web-runner, and workspacePolicyId javascript-browser-workspace.",
+    "Hands-on JavaScript tasks use kind code_input, fixedLanguage web, recipeType source_checks, and local browser workspace files.",
+    "Every code_input must include explicit sourceChecks and must not include stdout tests.",
+    "Use local events.json fixtures for fetch practice because the browser workspace does not provide external network access.",
+    "Teach visible behavior and state transitions in the browser preview; do not tell learners to use a terminal or Judge0.",
+    "Keep JavaScript Foundations framework-free and package-free.",
+    "Teach JSON, promises and async-await, local fetch, and loading, error, empty, and success states before the capstone.",
+    "Topic and section counts are pedagogy-driven for this course; do not generalize them into fixed curriculum cardinality rules."
+  ],
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.2,
+        "multi_choice": 0.15,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.15,
+        "code_input": 0.4
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 3,
+        "projectCodeInputMax": 5,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 3,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 320,
+      "slugConvention": "explicit_module_section"
+    }
+  }
+}

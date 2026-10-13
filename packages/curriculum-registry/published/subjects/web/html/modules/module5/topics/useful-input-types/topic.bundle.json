@@ -36,7 +36,10 @@
         "id": "try-useful-input-types-sketch0",
         "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.title",
         "promptKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.prompt",
-        "exerciseKey": "try-useful-input-types-sketch0",
+        "exerciseKey": "input-types-try-data",
+        "exerciseKeys": [
+          "input-types-try-data"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-useful-input-types-sketch1",
         "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.title",
         "promptKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.prompt",
-        "exerciseKey": "try-useful-input-types-sketch1",
+        "exerciseKey": "input-types-try-checkbox",
+        "exerciseKeys": [
+          "input-types-try-checkbox"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,7 +80,10 @@
         "id": "try-useful-input-types-sketch2",
         "titleKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.title",
         "promptKey": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.prompt",
-        "exerciseKey": "try-useful-input-types-sketch2",
+        "exerciseKey": "input-types-try-radio",
+        "exerciseKeys": [
+          "input-types-try-radio"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -120,200 +129,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-useful-input-types-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Use type=\"email\" for the Email field.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']guests[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']number[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Use type=\"number\" for the guest count.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']visit-date[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']date[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Use type=\"date\" for the visit date.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-useful-input-types-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']checkbox[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Add the reminders checkbox with id, name, and type.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']reminders[\"\\'][^>]*>\\s*Send me event reminders\\s*</label>",
-          "path": "index.html",
-          "message": "Add a connected label for the reminders checkbox.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-useful-input-types-sketch2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Choose a session\\s*</legend>.*</fieldset>",
-          "path": "index.html",
-          "message": "Group the session choices in fieldset with a legend.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']morning[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']morning[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']morning[\"\\'][^>]*>\\s*Morning\\s*</label>",
-          "path": "index.html",
-          "message": "Create and label the Morning radio option.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']evening[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']evening[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']evening[\"\\'][^>]*>\\s*Evening\\s*</label>",
-          "path": "index.html",
-          "message": "Create and label the Evening radio option.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.tryIt.try_useful_input_types_sketch2.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "input-types-quiz-email",
       "kind": "single_choice",
@@ -385,6 +200,200 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "<input id=\"newsletter\" name=\"newsletter\" type=\"checkbox\">"
+      }
+    },
+    {
+      "id": "input-types-try-data",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-data",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-data.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Use type=\"email\" for the Email field.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']guests[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']number[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Use type=\"number\" for the guest count.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']visit-date[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']date[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Use type=\"date\" for the visit date.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-data.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-data.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-data.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "input-types-try-checkbox",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-checkbox",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-checkbox.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']checkbox[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Add the reminders checkbox with id, name, and type.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']reminders[\"\\'][^>]*>\\s*Send me event reminders\\s*</label>",
+          "path": "index.html",
+          "message": "Add a connected label for the reminders checkbox.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-checkbox.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-checkbox.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-checkbox.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "input-types-try-radio",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-radio",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-radio.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Choose a session\\s*</legend>.*</fieldset>",
+          "path": "index.html",
+          "message": "Group the session choices in fieldset with a legend.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']morning[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']morning[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']morning[\"\\'][^>]*>\\s*Morning\\s*</label>",
+          "path": "index.html",
+          "message": "Create and label the Morning radio option.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']evening[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']evening[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']evening[\"\\'][^>]*>\\s*Evening\\s*</label>",
+          "path": "index.html",
+          "message": "Create and label the Evening radio option.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-radio.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-radio.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.useful-input-types.practice.input-types-try-radio.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

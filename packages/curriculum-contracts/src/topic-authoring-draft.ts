@@ -947,7 +947,6 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                     tryItExercises: {
                         type: "array",
                         minItems: 1,
-                        maxItems: 3,
                         items: authoringExerciseItemSchema,
                     },
                     tools: toolPresentationSchema,
@@ -2054,11 +2053,10 @@ export function assertTopicAuthoringDraft(
         if (block.tryItExercises !== undefined) {
             if (
                 !Array.isArray(block.tryItExercises) ||
-                block.tryItExercises.length < 1 ||
-                block.tryItExercises.length > 3
+                block.tryItExercises.length < 1
             ) {
                 fail(
-                    `sketchBlocks[${i}].tryItExercises must contain 1 to 3 dedicated exercises`,
+                    `sketchBlocks[${i}].tryItExercises must contain at least 1 dedicated exercise`,
                 );
             }
 

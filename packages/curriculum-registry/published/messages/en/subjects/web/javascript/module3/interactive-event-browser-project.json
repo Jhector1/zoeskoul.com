@@ -1,0 +1,593 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "interactive-event-browser-project": {
+          "label": "Build an Interactive Event Browser",
+          "summary": "Build an interactive event browser cumulatively: DOM rendering, visible async states, local data loading, and category filtering.",
+          "cards": {
+            "sketch0": {
+              "title": "Combine the browser pieces"
+            },
+            "project": {
+              "title": "Build an Interactive Event Browser"
+            }
+          },
+          "projectSteps": {
+            "event_browser_select_list": {
+              "title": "Step 1: Select the event list"
+            },
+            "event_browser_render_list": {
+              "title": "Step 2: Render an event array"
+            },
+            "event_browser_select_status": {
+              "title": "Step 3: Select the status element"
+            },
+            "event_browser_state": {
+              "title": "Step 4: Add event state"
+            },
+            "event_browser_loading_state": {
+              "title": "Step 5: Show the loading state"
+            },
+            "event_browser_request_data": {
+              "title": "Step 6: Request the local event data"
+            },
+            "event_browser_check_response": {
+              "title": "Step 7: Reject a failed response"
+            },
+            "event_browser_decode_data": {
+              "title": "Step 8: Decode and count the events"
+            },
+            "event_browser_render_loaded": {
+              "title": "Step 9: Render the loaded events"
+            },
+            "event_browser_empty_state": {
+              "title": "Step 10: Handle an empty event file"
+            },
+            "event_browser_error_state": {
+              "title": "Step 11: Handle loading errors"
+            },
+            "event_browser_select_filter": {
+              "title": "Step 12: Select the category control"
+            },
+            "event_browser_filter_function": {
+              "title": "Step 13: Derive events for one category"
+            },
+            "event_browser_show_category": {
+              "title": "Step 14: Show one category view"
+            },
+            "event_browser_wire_filter": {
+              "title": "Step 15: Update the view when the category changes"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "event_browser_select_list": {
+                "title": "Step 1: Select the event list",
+                "prompt": "Start the module project. In step 1 of 15, Problem: The event browser will eventually render event records, but JavaScript first needs a reference to the list already provided by the page. Task: Select only `#event-list` and store it in `eventList`. Expected result: Check Answer confirms the DOM destination; the Preview stays unchanged.",
+                "hint": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting page, then inspect it in the browser preview before moving on.",
+                  "hint_2": "Use querySelector once."
+                },
+                "starterCode": "// Build the browser application one stable responsibility at a time.\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "// Build the browser application one stable responsibility at a time.\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_render_list": {
+                "title": "Step 2: Render an event array",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 15, Problem: Loaded event objects cannot help a student until the browser can turn them into visible list items. Task: Keep `eventList` and add only `renderEvents(events)`: clear the list, loop with `for...of`, create one `li` per event, set `name - location`, and append it. Expected result: Check Answer confirms the reusable renderer; nothing calls it yet, so the Preview stays unchanged.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n<!-- Project step 2: Step 2: Render an event array -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Loaded event objects cannot help a student until the browser can turn them into visible list items -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n<!-- Project step 2: Step 2: Render an event array -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Loaded event objects cannot help a student until the browser can turn them into visible list items -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_select_status": {
+                "title": "Step 3: Select the status element",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 15, Problem: Loading, empty, success, and error states need one visible place where the browser can explain what is happening. Task: Keep the complete renderer and select only `#status` into `status`. Expected result: Check Answer confirms the status destination; the Preview stays unchanged.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n<!-- Project step 3: Step 3: Select the status element -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Loading, empty, success, and error states need one visible place where the browser can explain what is happening -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n<!-- Project step 3: Step 3: Select the status element -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Loading, empty, success, and error states need one visible place where the browser can explain what is happening -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_state": {
+                "title": "Step 4: Add event state",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 15, Problem: Filtering later will require the browser to remember the complete loaded event list instead of losing the source records after rendering. Task: Keep all DOM references and the renderer and add only `let allEvents = []`. Expected result: Check Answer confirms the app has a stable place for loaded records; the Preview stays unchanged.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n<!-- Project step 4: Step 4: Add event state -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Filtering later will require the browser to remember the complete loaded event list instead of losing the source records after rendering -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n<!-- Project step 4: Step 4: Add event state -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Filtering later will require the browser to remember the complete loaded event list instead of losing the source records after rendering -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_loading_state": {
+                "title": "Step 5: Show the loading state",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 15, Problem: Loading local data is asynchronous, so the page should immediately tell the learner that work has started instead of appearing frozen. Task: Keep everything from Step 4 and add and call `loadEvents()` with one responsibility: set the status to `Loading events...`. Expected result: the Preview visibly changes from Ready to Loading events....",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n<!-- Project step 5: Step 5: Show the loading state -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Loading local data is asynchronous, so the page should immediately tell the learner that work has started instead of appearing frozen -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n}\n\nloadEvents();\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n<!-- Project step 5: Step 5: Show the loading state -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Loading local data is asynchronous, so the page should immediately tell the learner that work has started instead of appearing frozen -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n}\n\nloadEvents();\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_request_data": {
+                "title": "Step 6: Request the local event data",
+                "prompt": "Continue the same module project from the previous working step. In step 6 of 15, Problem: The browser currently has no event records to render because the data lives in a local JSON file. Task: Keep the visible loading behavior and update only `loadEvents()` to await `fetch(\"./data/events.json\")` into `response`. Expected result: the Preview continues showing Loading events...; Check Answer confirms the local request.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n}\n\nloadEvents();\n<!-- Project step 6: Step 6: Request the local event data -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The browser currently has no event records to render because the data lives in a local JSON file -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n}\n\nloadEvents();\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n}\n\nloadEvents();\n<!-- Project step 6: Step 6: Request the local event data -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The browser currently has no event records to render because the data lives in a local JSON file -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n}\n\nloadEvents();\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_check_response": {
+                "title": "Step 7: Reject a failed response",
+                "prompt": "Continue the same module project from the previous working step. In step 7 of 15, Problem: `fetch` can return a Response even when the local request failed, so decoding blindly could treat an error response as valid event data. Task: Keep the local request and add only the `response.ok` guard, throwing `Could not load events` when false. Expected result: successful requests continue; failed requests now reject before decoding.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n}\n\nloadEvents();\n<!-- Project step 7: Step 7: Reject a failed response -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: `fetch` can return a Response even when the local request failed, so decoding blindly could treat an error response as valid event data -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n}\n\nloadEvents();\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n}\n\nloadEvents();\n<!-- Project step 7: Step 7: Reject a failed response -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: `fetch` can return a Response even when the local request failed, so decoding blindly could treat an error response as valid event data -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n}\n\nloadEvents();\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_decode_data": {
+                "title": "Step 8: Decode and count the events",
+                "prompt": "Continue the same module project from the previous working step. In step 8 of 15, Problem: The browser has a successful Response object, but the renderer needs JavaScript event records rather than the raw response body. Task: Keep the request and response check, decode JSON into `allEvents`, then show the loaded count. Expected result: the Preview changes to `4 events loaded` with the supplied fixture; no event items are rendered yet.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n}\n\nloadEvents();\n<!-- Project step 8: Step 8: Decode and count the events -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The browser has a successful Response object, but the renderer needs JavaScript event records rather than the raw response body -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n}\n\nloadEvents();\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n}\n\nloadEvents();\n<!-- Project step 8: Step 8: Decode and count the events -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The browser has a successful Response object, but the renderer needs JavaScript event records rather than the raw response body -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n}\n\nloadEvents();\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_render_loaded": {
+                "title": "Step 9: Render the loaded events",
+                "prompt": "Continue the same module project from the previous working step. In step 9 of 15, Problem: The event records are now loaded into memory, but students still cannot see them on the page. Task: Keep the complete load flow and add only `renderEvents(allEvents)` after the successful decode/count. Expected result: the Preview now shows the four event items beneath `4 events loaded`.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n}\n\nloadEvents();\n<!-- Project step 9: Step 9: Render the loaded events -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The event records are now loaded into memory, but students still cannot see them on the page -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n}\n\nloadEvents();\n<!-- Project step 9: Step 9: Render the loaded events -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The event records are now loaded into memory, but students still cannot see them on the page -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_empty_state": {
+                "title": "Step 10: Handle an empty event file",
+                "prompt": "Continue the same module project from the previous working step. In step 10 of 15, Problem: A successful JSON request may contain zero events, and a blank list with no explanation would look broken. Task: Keep the successful load and rendering behavior and add only the zero-length branch: show `No events found`, render an empty list, and return. Expected result: with the supplied fixture, the same four events remain visible; with `[]`, the page shows the empty-state message.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n<!-- Project step 10: Step 10: Handle an empty event file -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: A successful JSON request may contain zero events, and a blank list with no explanation would look broken -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n\n  if (allEvents.length === 0) {\n    status.textContent = \"No events found\";\n    renderEvents([]);\n    return;\n  }\n\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n<!-- Project step 10: Step 10: Handle an empty event file -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: A successful JSON request may contain zero events, and a blank list with no explanation would look broken -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n\n  if (allEvents.length === 0) {\n    status.textContent = \"No events found\";\n    renderEvents([]);\n    return;\n  }\n\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_error_state": {
+                "title": "Step 11: Handle loading errors",
+                "prompt": "Continue the same module project from the previous working step. In step 11 of 15, Problem: Network or data-loading failures should not leave the browser stuck on `Loading events...` with no explanation. Task: Keep the complete success and empty behavior and wrap only the load path in `try...catch`; in `catch`, clear the list and show `Could not load events`. Expected result: the valid fixture still shows four events, while a failed load now produces a clear error state.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n\n  if (allEvents.length === 0) {\n    status.textContent = \"No events found\";\n    renderEvents([]);\n    return;\n  }\n\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n<!-- Project step 11: Step 11: Handle loading errors -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Network or data-loading failures should not leave the browser stuck on `Loading events...` with no explanation -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n  const response = await fetch(\"./data/events.json\");\n\n  if (!response.ok) {\n    throw new Error(\"Could not load events\");\n  }\n\n  allEvents = await response.json();\n\n  if (allEvents.length === 0) {\n    status.textContent = \"No events found\";\n    renderEvents([]);\n    return;\n  }\n\n  status.textContent = `${allEvents.length} events loaded`;\n  renderEvents(allEvents);\n}\n\nloadEvents();\n<!-- Project step 11: Step 11: Handle loading errors -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: Network or data-loading failures should not leave the browser stuck on `Loading events...` with no explanation -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_select_filter": {
+                "title": "Step 12: Select the category control",
+                "prompt": "Continue the same module project from the previous working step. In step 12 of 15, Problem: The event browser has loaded all events, but it cannot react to a category choice until JavaScript has a reference to the existing filter control. Task: Keep the fully working loader and select only `#category-filter` into `categoryFilter`. Expected result: the four loaded events still appear; Check Answer confirms the control reference.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n<!-- Project step 12: Step 12: Select the category control -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The event browser has loaded all events, but it cannot react to a category choice until JavaScript has a reference to the existing filter control -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n<!-- Project step 12: Step 12: Select the category control -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The event browser has loaded all events, but it cannot react to a category choice until JavaScript has a reference to the existing filter control -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_filter_function": {
+                "title": "Step 13: Derive events for one category",
+                "prompt": "Continue the same module project from the previous working step. In step 13 of 15, Problem: The app must show one category without destroying the complete event list that future filter choices still need. Task: Keep the loaded source data and add only `eventsForCategory(category)`: return all events for `All`, otherwise return the matching subset. Expected result: the Preview remains unchanged; Check Answer confirms a reusable derived-view function.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n<!-- Project step 13: Step 13: Derive events for one category -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The app must show one category without destroying the complete event list that future filter choices still need -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n<!-- Project step 13: Step 13: Derive events for one category -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The app must show one category without destroying the complete event list that future filter choices still need -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_show_category": {
+                "title": "Step 14: Show one category view",
+                "prompt": "Continue the same module project from the previous working step. In step 14 of 15, Problem: A filtered array by itself is not useful to the learner until the browser renders it and explains whether anything matched. Task: Keep every previous feature and add only `showCategory(category)`: derive visible events, render them, then show `No matching events` or the visible count. Expected result: the loaded page stays the same until this function is called; Check Answer confirms the complete category-view behavior.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n<!-- Project step 14: Step 14: Show one category view -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: A filtered array by itself is not useful to the learner until the browser renders it and explains whether anything matched -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n<!-- Project step 14: Step 14: Show one category view -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: A filtered array by itself is not useful to the learner until the browser renders it and explains whether anything matched -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              },
+              "event_browser_wire_filter": {
+                "title": "Step 15: Update the view when the category changes",
+                "prompt": "Continue the same module project from the previous working step. In step 15 of 15, Problem: The category-view logic is complete, but changing the select control still does nothing because no event connects the user's choice to that logic. Task: Keep the complete application, add `handleCategoryChange(event)` so it calls `showCategory(event.currentTarget.value)`, then attach it to the filter's `change` event. Expected result: the page still loads all events, and changing the category immediately shows only matching events with an updated count.",
+                "hint": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working HTML from the previous step. Keep that markup, use the browser preview, and add only the next focused structure.",
+                  "hint_2": "Preview the previous working page first, then make only the focused HTML change for this step."
+                },
+                "starterCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n<!-- Project step 15: Step 15: Update the view when the category changes -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The category-view logic is complete, but changing the select control still does nothing because no event connects the user's choice to that logic -->\n<!-- Add only the focused change for this step inside the existing work. -->\n",
+                "solutionCode": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n\nfunction handleCategoryChange(event) {\n  showCategory(event.currentTarget.value);\n}\n\ncategoryFilter.addEventListener(\"change\", handleCategoryChange);\n",
+                "starterFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n<!-- Project step 15: Step 15: Update the view when the category changes -->\n<!-- Keep the working code above from the previous step. -->\n<!-- Next, Problem: The category-view logic is complete, but changing the select control still does nothing because no event connects the user's choice to that logic -->\n<!-- Add only the focused change for this step inside the existing work. -->\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                },
+                "solutionFiles": {
+                  "index_html": {
+                    "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <h1>Campus Events</h1>\n  <select id=\"category-filter\"><option value=\"All\">All</option><option value=\"Technology\">Technology</option><option value=\"Community\">Community</option><option value=\"Arts\">Arts</option></select>\n  <p id=\"status\">Ready</p>\n  <ul id=\"event-list\"></ul>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                  },
+                  "script_js": {
+                    "content": "const eventList = document.querySelector(\"#event-list\");\n\nfunction renderEvents(events) {\n  eventList.textContent = \"\";\n  for (const event of events) {\n    const item = document.createElement(\"li\");\n    item.textContent = `${event.name} - ${event.location}`;\n    eventList.append(item);\n  }\n}\n\nconst status = document.querySelector(\"#status\");\n\nlet allEvents = [];\n\nasync function loadEvents() {\n  status.textContent = \"Loading events...\";\n\n  try {\n    const response = await fetch(\"./data/events.json\");\n\n    if (!response.ok) {\n      throw new Error(\"Could not load events\");\n    }\n\n    allEvents = await response.json();\n\n    if (allEvents.length === 0) {\n      status.textContent = \"No events found\";\n      renderEvents([]);\n      return;\n    }\n\n    status.textContent = `${allEvents.length} events loaded`;\n    renderEvents(allEvents);\n  } catch (error) {\n    eventList.textContent = \"\";\n    status.textContent = \"Could not load events\";\n  }\n}\n\nloadEvents();\n\nconst categoryFilter = document.querySelector(\"#category-filter\");\n\nfunction eventsForCategory(category) {\n  if (category === \"All\") {\n    return allEvents;\n  }\n  return allEvents.filter((event) => event.category === category);\n}\n\nfunction showCategory(category) {\n  const visibleEvents = eventsForCategory(category);\n  renderEvents(visibleEvents);\n\n  if (visibleEvents.length === 0) {\n    status.textContent = \"No matching events\";\n  } else {\n    status.textContent = `${visibleEvents.length} events shown`;\n  }\n}\n\nfunction handleCategoryChange(event) {\n  showCategory(event.currentTarget.value);\n}\n\ncategoryFilter.addEventListener(\"change\", handleCategoryChange);\n"
+                  },
+                  "data_events_json": {
+                    "content": "[{\"name\":\"Robotics Open Lab\",\"category\":\"Technology\",\"location\":\"Engineering Hall\"},{\"name\":\"Campus Garden Meetup\",\"category\":\"Community\",\"location\":\"North Garden\"},{\"name\":\"Student Jazz Night\",\"category\":\"Arts\",\"location\":\"Music Center\"},{\"name\":\"Code Clinic\",\"category\":\"Technology\",\"location\":\"Library Lab\"}]\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "interactive-event-browser-project": {
+          "browser-pipeline": {
+            "title": "Keep rendering and selection as separate responsibilities",
+            "bodyMarkdown": "This recipe-browser example uses the same architecture without giving away the event project:\n\n```js\nfunction renderRecipes(recipes) {\n  recipeList.textContent = \"\";\n\n  for (const recipe of recipes) {\n    const item = document.createElement(\"li\");\n    item.textContent = recipe.name;\n    recipeList.append(item);\n  }\n}\n\nfunction recipesForMeal(mealType) {\n  if (mealType === \"All\") {\n    return allRecipes;\n  }\n\n  return allRecipes.filter((recipe) => recipe.meal === mealType);\n}\n```\n\nStep by step:\n\n1. `renderRecipes` owns DOM output.\n2. `recipesForMeal` owns the selection rule.\n3. The filter function returns data instead of manipulating the page.\n4. The renderer receives data instead of deciding what category is active.\n\nThe Event Browser uses the same architecture with different data, names, markup, and output."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "title": "Strings, Numbers, and Template Literals",
+  "summary": "Calculate event quantities with numbers, then place those results inside readable messages with template literals.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "strings-numbers-and-template-literals-numbers",
+      "cardTitle": "Calculate what the event needs",
+      "title": "Numbers turn event data into useful results",
+      "bodyMarkdown": "Once values have names, JavaScript can calculate with them just like it calculates with number literals. Suppose an event can hold 50 people and 34 are registered:\n\n```js\nconst capacity = 50;\nconst registered = 34;\nconst seatsRemaining = capacity - registered;\n\nconsole.log(seatsRemaining);\n```\n\nLine by line:\n\n1. `const capacity = 50;` stores the total number of seats.\n2. `const registered = 34;` stores how many seats are already taken.\n3. `const seatsRemaining = capacity - registered;` subtracts the two numbers and gives that result a useful name.\n4. `console.log(seatsRemaining);` shows `16` in the Console.\n\nNaming the result matters: `seatsRemaining` communicates why the subtraction exists, which will make the next decision easier to understand."
+    },
+    {
+      "id": "strings-numbers-and-template-literals-templates",
+      "cardTitle": "Turn results into a message",
+      "title": "Template literals mix text with live values",
+      "bodyMarkdown": "A calculation is useful to the program, but people usually need a readable message. A **template literal** uses backticks and `${...}` to place values inside text:\n\n```js\nconst eventName = \"Poetry Reading\";\nconst seatsRemaining = 8;\nconst message = `${eventName} has ${seatsRemaining} seats left.`;\n\nconsole.log(message);\n```\n\nLine by line:\n\n1. `const eventName = ...` stores the text you want to mention.\n2. `const seatsRemaining = 8;` stores the number that should appear in the message.\n3. The template literal evaluates `${eventName}` and `${seatsRemaining}` and combines both values into one finished string.\n4. `console.log(message);` shows that finished string in the Console.\n\nThe backticks matter. Writing `\"${eventName}\"` with ordinary quotes would keep those characters as text instead of interpolating the value."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "strings-numbers-and-template-literals-check",
+      "kind": "single_choice",
+      "title": "Calculate the remaining seats",
+      "prompt": "An event has capacity 60 and 42 registered attendees. What does `capacity - registered` produce?",
+      "hint": "Subtract the registered count from the total capacity.",
+      "help": {
+        "concept": "numeric subtraction",
+        "hint_1": "Capacity is the total; registered is the amount already used.",
+        "hint_2": "The result answers how many seats are still available."
+      },
+      "options": [
+        "102",
+        "42",
+        "18",
+        "60"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "strings-numbers-and-template-literals-multi",
+      "kind": "multi_choice",
+      "title": "Recognize real interpolation",
+      "prompt": "Which template literals actually insert JavaScript values? Select all that apply.",
+      "hint": "Look for backticks plus `${...}` around the values or expressions.",
+      "help": {
+        "concept": "template-literal interpolation",
+        "hint_1": "Backticks create the template literal.",
+        "hint_2": "Inside backticks, `${...}` evaluates a JavaScript expression and inserts its result."
+      },
+      "options": [
+        "`${eventName} has ${seatsRemaining} seats left.`",
+        "`${eventName}: ${capacity - registered} seats left.`",
+        "\"${eventName} has ${seatsRemaining} seats left.\"",
+        "`eventName has seatsRemaining seats left.`"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "strings-numbers-and-template-literals-blank",
+      "kind": "fill_blank_choice",
+      "title": "Complete the interpolation syntax",
+      "prompt": "Choose the syntax that inserts an expression inside a template literal.",
+      "hint": "Look for the choice that marks an inserted expression rather than ordinary grouping.",
+      "help": {
+        "concept": "marking an expression inside a template literal",
+        "hint_1": "Parentheses and square brackets have other jobs in JavaScript.",
+        "hint_2": "The placeholder uses a special prefix together with curly braces."
+      },
+      "template": "Inside backticks, write [blank1] to insert a value.",
+      "choices": [
+        "(...)",
+        "[...]",
+        "${...}",
+        "{...}"
+      ],
+      "correctValue": "${...}"
+    },
+    {
+      "id": "strings-numbers-and-template-literals-order",
+      "kind": "drag_reorder",
+      "title": "Build the announcement in order",
+      "prompt": "Arrange the steps for turning capacity data into a readable message.",
+      "hint": "Calculate the data before placing it in the message.",
+      "help": {
+        "concept": "calculation-to-message flow",
+        "hint_1": "The template literal needs the values you want to insert.",
+        "hint_2": "After the string is complete, `console.log` makes the result observable."
+      },
+      "tokens": [
+        "Calculate `seatsRemaining`",
+        "Start a template literal with backticks",
+        "Insert `eventName` and `seatsRemaining` with `${...}`",
+        "Log the finished announcement"
+      ],
+      "correctOrder": [
+        "Calculate `seatsRemaining`",
+        "Start a template literal with backticks",
+        "Insert `eventName` and `seatsRemaining` with `${...}`",
+        "Log the finished announcement"
+      ]
+    },
+    {
+      "id": "try-strings-numbers-and-template-literals-sketch0",
+      "kind": "code_input",
+      "title": "Calculate money left in a budget",
+      "prompt": "Problem: A budget screen knows the starting budget and what has already been spent, but it still needs the amount that remains. Task: Use `budget` and `spent` to calculate `moneyLeft`, then log the result. Expected result: the Console shows the remaining budget.",
+      "hint": "The amount left comes from subtraction.",
+      "help": {
+        "concept": "Arithmetic expressions can combine named number values and produce a new useful value.",
+        "hint_1": "Create a new constant named `moneyLeft`.",
+        "hint_2": "Assign `budget - spent` to `moneyLeft`, then log it."
+      },
+      "starterCode": "const budget = 90;\nconst spent = 57;\n\n// Calculate moneyLeft.\n// Log the result.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const budget = 90;\nconst spent = 57;\n\n// Calculate moneyLeft.\n// Log the result.\n"
+        }
+      ],
+      "solutionCode": "const budget = 90;\nconst spent = 57;\nconst moneyLeft = budget - spent;\nconsole.log(moneyLeft);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const budget = 90;\nconst spent = 57;\nconst moneyLeft = budget - spent;\nconsole.log(moneyLeft);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "\\bconst\\s+moneyLeft\\s*=\\s*budget\\s*-\\s*spent",
+          "message": "Calculate moneyLeft with budget minus spent.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*moneyLeft\\s*\\)",
+          "message": "Log moneyLeft.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-strings-numbers-and-template-literals-sketch1",
+      "kind": "code_input",
+      "title": "Build a bus arrival message",
+      "prompt": "Problem: A transit notice has separate route and stop values, but riders need one readable message. Task: Create `notice` with a template literal that includes both `routeName` and `stopName`, then log the finished notice. Expected result: the Console shows one message containing both values.",
+      "hint": "Use backticks so `${...}` can insert both variable values.",
+      "help": {
+        "concept": "Template literals combine text with values from variables.",
+        "hint_1": "The notice should contain `${routeName}` and `${stopName}`.",
+        "hint_2": "Assign the template literal to `notice`, then pass `notice` to `console.log`."
+      },
+      "starterCode": "const routeName = \"Blue Line\";\nconst stopName = \"Library\";\n\n// Build notice with a template literal.\n// Log the finished notice.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const routeName = \"Blue Line\";\nconst stopName = \"Library\";\n\n// Build notice with a template literal.\n// Log the finished notice.\n"
+        }
+      ],
+      "solutionCode": "const routeName = \"Blue Line\";\nconst stopName = \"Library\";\nconst notice = `${routeName} arrives at ${stopName}.`;\nconsole.log(notice);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Run your JavaScript and use the Console below the preview to observe the result.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const routeName = \"Blue Line\";\nconst stopName = \"Library\";\nconst notice = `${routeName} arrives at ${stopName}.`;\nconsole.log(notice);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "notice\\s*=\\s*`[^`]*\\$\\{routeName\\}[^`]*\\$\\{stopName\\}[^`]*`",
+          "message": "Build notice with a template literal that inserts routeName and stopName.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*notice\\s*\\)",
+          "message": "Log the finished notice.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

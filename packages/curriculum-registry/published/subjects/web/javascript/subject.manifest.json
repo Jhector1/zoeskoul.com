@@ -1,0 +1,421 @@
+{
+  "subject": {
+    "slug": "javascript",
+    "profileId": "web",
+    "catalogSlug": "web",
+    "genKey": "html_foundations",
+    "order": 0,
+    "accessPolicy": "paid",
+    "visibility": "public",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.javascript.title",
+    "descriptionKey": "subjects.javascript.description",
+    "serviceDefaults": null,
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 4,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.javascript.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "javascript",
+        "version": 1,
+        "status": "draft",
+        "defaultForNewEnrollments": false,
+        "supersedes": null,
+        "supersededBy": null
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "javascript-foundations-module-1-values-decisions",
+      "prefix": "javascript_module_1",
+      "order": 1,
+      "role": "standard",
+      "titleKey": "modules.javascript.javascript-foundations-module-1-values-decisions.title",
+      "descriptionKey": "modules.javascript.javascript-foundations-module-1-values-decisions.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 122,
+        "prereqKeys": [
+          "modules.javascript.javascript-foundations-module-1-values-decisions.title"
+        ],
+        "outcomeKeys": [
+          "modules.javascript.javascript-foundations-module-1-values-decisions.outcomes.0",
+          "modules.javascript.javascript-foundations-module-1-values-decisions.outcomes.1",
+          "modules.javascript.javascript-foundations-module-1-values-decisions.outcomes.2",
+          "modules.javascript.javascript-foundations-module-1-values-decisions.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.javascript.javascript-foundations-module-1-values-decisions.why.0",
+          "modules.javascript.javascript-foundations-module-1-values-decisions.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "javascript-javascript-foundations-section-1-language-basics",
+          "order": 1,
+          "role": "lesson",
+          "titleKey": "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-language-basics.title",
+          "descriptionKey": "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-language-basics.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-language-basics.weeks",
+            "bulletKeys": [
+              "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-language-basics.bullets.0",
+              "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-language-basics.bullets.1",
+              "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-language-basics.bullets.2",
+              "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-language-basics.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "javascript-values-and-first-expressions",
+            "variables-with-const-and-let",
+            "strings-numbers-and-template-literals",
+            "comparisons-conditionals-and-logic"
+          ]
+        },
+        {
+          "slug": "javascript-javascript-foundations-section-1-module-project",
+          "order": 2,
+          "role": "module_project",
+          "titleKey": "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-module-project.title",
+          "descriptionKey": "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-module-project.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-module-project.weeks",
+            "bulletKeys": [
+              "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-module-project.bullets.0",
+              "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-module-project.bullets.1",
+              "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-module-project.bullets.2",
+              "sections.javascript.javascript-foundations-module-1-values-decisions.javascript-javascript-foundations-section-1-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "event-announcement-generator-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "javascript-foundations-module-2-collections-functions",
+      "prefix": "javascript_module_2",
+      "order": 2,
+      "role": "standard",
+      "titleKey": "modules.javascript.javascript-foundations-module-2-collections-functions.title",
+      "descriptionKey": "modules.javascript.javascript-foundations-module-2-collections-functions.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 140,
+        "prereqKeys": [
+          "modules.javascript.javascript-foundations-module-2-collections-functions.title"
+        ],
+        "outcomeKeys": [
+          "modules.javascript.javascript-foundations-module-2-collections-functions.outcomes.0",
+          "modules.javascript.javascript-foundations-module-2-collections-functions.outcomes.1",
+          "modules.javascript.javascript-foundations-module-2-collections-functions.outcomes.2",
+          "modules.javascript.javascript-foundations-module-2-collections-functions.outcomes.3",
+          "modules.javascript.javascript-foundations-module-2-collections-functions.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.javascript.javascript-foundations-module-2-collections-functions.why.0",
+          "modules.javascript.javascript-foundations-module-2-collections-functions.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "javascript-javascript-foundations-section-2-collections-functions",
+          "order": 1,
+          "role": "lesson",
+          "titleKey": "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-collections-functions.title",
+          "descriptionKey": "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-collections-functions.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-collections-functions.weeks",
+            "bulletKeys": [
+              "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-collections-functions.bullets.0",
+              "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-collections-functions.bullets.1",
+              "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-collections-functions.bullets.2",
+              "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-collections-functions.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "arrays-and-indexed-data",
+            "objects-and-event-records",
+            "functions-parameters-and-return-values",
+            "loops-and-array-iteration"
+          ]
+        },
+        {
+          "slug": "javascript-javascript-foundations-section-2-module-project",
+          "order": 2,
+          "role": "module_project",
+          "titleKey": "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-module-project.title",
+          "descriptionKey": "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-module-project.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-module-project.weeks",
+            "bulletKeys": [
+              "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-module-project.bullets.0",
+              "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-module-project.bullets.1",
+              "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-module-project.bullets.2",
+              "sections.javascript.javascript-foundations-module-2-collections-functions.javascript-javascript-foundations-section-2-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "event-list-planner-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "javascript-foundations-module-3-browser-data",
+      "prefix": "javascript_module_3",
+      "order": 3,
+      "role": "standard",
+      "titleKey": "modules.javascript.javascript-foundations-module-3-browser-data.title",
+      "descriptionKey": "modules.javascript.javascript-foundations-module-3-browser-data.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 196,
+        "prereqKeys": [
+          "modules.javascript.javascript-foundations-module-3-browser-data.title"
+        ],
+        "outcomeKeys": [
+          "modules.javascript.javascript-foundations-module-3-browser-data.outcomes.0",
+          "modules.javascript.javascript-foundations-module-3-browser-data.outcomes.1",
+          "modules.javascript.javascript-foundations-module-3-browser-data.outcomes.2",
+          "modules.javascript.javascript-foundations-module-3-browser-data.outcomes.3",
+          "modules.javascript.javascript-foundations-module-3-browser-data.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.javascript.javascript-foundations-module-3-browser-data.why.0",
+          "modules.javascript.javascript-foundations-module-3-browser-data.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "javascript-javascript-foundations-section-3-browser-data",
+          "order": 1,
+          "role": "lesson",
+          "titleKey": "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-browser-data.title",
+          "descriptionKey": "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-browser-data.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-browser-data.weeks",
+            "bulletKeys": [
+              "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-browser-data.bullets.0",
+              "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-browser-data.bullets.1",
+              "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-browser-data.bullets.2",
+              "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-browser-data.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "select-and-update-the-dom",
+            "events-forms-and-user-input",
+            "json-and-data-boundaries",
+            "promises-and-async-await",
+            "fetch-local-event-data",
+            "loading-error-empty-and-success-states"
+          ]
+        },
+        {
+          "slug": "javascript-javascript-foundations-section-3-module-project",
+          "order": 2,
+          "role": "module_project",
+          "titleKey": "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-module-project.title",
+          "descriptionKey": "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-module-project.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-module-project.weeks",
+            "bulletKeys": [
+              "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-module-project.bullets.0",
+              "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-module-project.bullets.1",
+              "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-module-project.bullets.2",
+              "sections.javascript.javascript-foundations-module-3-browser-data.javascript-javascript-foundations-section-3-module-project.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "interactive-event-browser-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "javascript-foundations-module-4-campus-event-explorer",
+      "prefix": "javascript_module_4",
+      "order": 4,
+      "role": "capstone",
+      "titleKey": "modules.javascript.javascript-foundations-module-4-campus-event-explorer.title",
+      "descriptionKey": "modules.javascript.javascript-foundations-module-4-campus-event-explorer.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "web",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": false,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
+      "meta": {
+        "estimatedMinutes": 70,
+        "prereqKeys": [
+          "modules.javascript.javascript-foundations-module-4-campus-event-explorer.title"
+        ],
+        "outcomeKeys": [
+          "modules.javascript.javascript-foundations-module-4-campus-event-explorer.outcomes.0",
+          "modules.javascript.javascript-foundations-module-4-campus-event-explorer.outcomes.1",
+          "modules.javascript.javascript-foundations-module-4-campus-event-explorer.outcomes.2",
+          "modules.javascript.javascript-foundations-module-4-campus-event-explorer.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.javascript.javascript-foundations-module-4-campus-event-explorer.why.0",
+          "modules.javascript.javascript-foundations-module-4-campus-event-explorer.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "javascript-javascript-foundations-section-4-capstone",
+          "order": 1,
+          "role": "capstone",
+          "titleKey": "sections.javascript.javascript-foundations-module-4-campus-event-explorer.javascript-javascript-foundations-section-4-capstone.title",
+          "descriptionKey": "sections.javascript.javascript-foundations-module-4-campus-event-explorer.javascript-javascript-foundations-section-4-capstone.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.javascript.javascript-foundations-module-4-campus-event-explorer.javascript-javascript-foundations-section-4-capstone.weeks",
+            "bulletKeys": [
+              "sections.javascript.javascript-foundations-module-4-campus-event-explorer.javascript-javascript-foundations-section-4-capstone.bullets.0",
+              "sections.javascript.javascript-foundations-module-4-campus-event-explorer.javascript-javascript-foundations-section-4-capstone.bullets.1",
+              "sections.javascript.javascript-foundations-module-4-campus-event-explorer.javascript-javascript-foundations-section-4-capstone.bullets.2",
+              "sections.javascript.javascript-foundations-module-4-campus-event-explorer.javascript-javascript-foundations-section-4-capstone.bullets.3"
+            ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
+          "topics": [
+            "campus-event-explorer-capstone"
+          ]
+        }
+      ]
+    }
+  ]
+}

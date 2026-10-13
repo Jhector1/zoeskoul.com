@@ -23,39 +23,15 @@
             "allowReveal": false,
             "try_how_html_and_the_browser_work_sketch0": {
               "title": "Try it yourself: Create the main heading",
-              "prompt": "Now apply what you just learned in this task. Change the visible message into an h1 that says **My First Web Page**. Keep the rest of the page small and readable, then inspect the browser preview. Produce the result for create the main heading so it reinforces How HTML and the Browser Work.",
-              "hint": "Replace the paragraph element with the heading element used for the page's primary title.",
-              "help": {
-                "concept": "An h1 gives the document a clear top-level heading that the browser can render prominently.",
-                "hint_1": "Edit only the element inside the body first and watch how its default appearance changes.",
-                "hint_2": "Check both the opening and closing tag around the required heading text."
-              },
-              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <p>Hello browser</p>\n  </body>\n</html>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n"
+              "prompt": "Now apply what you just learned in this task. Change the visible message into an h1 that says **My First Web Page**. Keep the rest of the page small and readable, then inspect the browser preview. Produce the result for create the main heading so it reinforces How HTML and the Browser Work."
             },
             "try_how_html_and_the_browser_work_sketch1": {
               "title": "Try it yourself: Add supporting text",
-              "prompt": "Now apply what you just learned in this task. Under the existing h1, add a paragraph that says **I am learning HTML.** Keep both elements inside the body and confirm that both appear in the preview. Produce the result for add supporting text so it reinforces How HTML and the Browser Work.",
-              "hint": "Place a p element after the heading rather than changing the heading text.",
-              "help": {
-                "concept": "A paragraph adds supporting prose beneath a heading while keeping the document structure clear.",
-                "hint_1": "Keep the h1 intact and add a second element after it.",
-                "hint_2": "Make sure the new sentence is between matching paragraph tags."
-              },
-              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n"
+              "prompt": "Now apply what you just learned in this task. Under the existing h1, add a paragraph that says **I am learning HTML.** Keep both elements inside the body and confirm that both appear in the preview. Produce the result for add supporting text so it reinforces How HTML and the Browser Work."
             },
             "try_how_html_and_the_browser_work_sketch2": {
               "title": "Try it yourself: Add a second heading level",
-              "prompt": "Now apply what you just learned in this task. Between the existing h1 and paragraph, add an h2 that says **What I am Learning**. Keep the visible content in this order and inspect the browser preview. Produce the result for add a second heading level so it reinforces How HTML and the Browser Work.",
-              "hint": "Use the heading level below h1 and place it before the paragraph.",
-              "help": {
-                "concept": "An h2 introduces a topic within the page while the h1 remains the page's main title.",
-                "hint_1": "Keep the existing h1 first, then add the h2, then keep the paragraph beneath it.",
-                "hint_2": "Check that the new heading uses matching h2 tags and the exact required text."
-              },
-              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <h2>What I am Learning</h2>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n"
+              "prompt": "Now apply what you just learned in this task. Between the existing h1 and paragraph, add an h2 that says **What I am Learning**. Keep the visible content in this order and inspect the browser preview. Produce the result for add a second heading level so it reinforces How HTML and the Browser Work."
             }
           },
           "practice": {
@@ -156,6 +132,42 @@
                 "compiler",
                 "package"
               ]
+            },
+            "make-main-heading": {
+              "title": "Create the main heading",
+              "prompt": "Change the visible message into an h1 that says **My First Web Page**. Keep the rest of the page small and readable, then inspect the browser preview.",
+              "hint": "Replace the paragraph element with the heading element used for the page's primary title.",
+              "help": {
+                "concept": "An h1 gives the document a clear top-level heading that the browser can render prominently.",
+                "hint_1": "Edit only the element inside the body first and watch how its default appearance changes.",
+                "hint_2": "Check both the opening and closing tag around the required heading text."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <p>Hello browser</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n"
+            },
+            "add-intro-paragraph": {
+              "title": "Add supporting text",
+              "prompt": "Under the existing h1, add a paragraph that says **I am learning HTML.** Keep both elements inside the body and confirm that both appear in the preview.",
+              "hint": "Place a p element after the heading rather than changing the heading text.",
+              "help": {
+                "concept": "A paragraph adds supporting prose beneath a heading while keeping the document structure clear.",
+                "hint_1": "Keep the h1 intact and add a second element after it.",
+                "hint_2": "Make sure the new sentence is between matching paragraph tags."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n"
+            },
+            "add-section-heading": {
+              "title": "Add a second heading level",
+              "prompt": "Between the existing h1 and paragraph, add an h2 that says **What I am Learning**. Keep the visible content in this order and inspect the browser preview.",
+              "hint": "Use the heading level below h1 and place it before the paragraph.",
+              "help": {
+                "concept": "An h2 introduces a topic within the page while the h1 remains the page's main title.",
+                "hint_1": "Keep the existing h1 first, then add the h2, then keep the paragraph beneath it.",
+                "hint_2": "Check that the new heading uses matching h2 tags and the exact required text."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>My First Web Page</h1>\n    <h2>What I am Learning</h2>\n    <p>I am learning HTML.</p>\n  </body>\n</html>\n"
             }
           }
         }

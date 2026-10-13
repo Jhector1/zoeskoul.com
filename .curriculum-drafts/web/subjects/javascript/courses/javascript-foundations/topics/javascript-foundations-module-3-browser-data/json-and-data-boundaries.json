@@ -1,0 +1,215 @@
+{
+  "title": "JSON and Data Boundaries",
+  "summary": "Distinguish JSON text from JavaScript values, parse incoming text, and check the broad shape of parsed data.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "json-text",
+      "cardTitle": "Cross from text into JavaScript",
+      "title": "JSON.parse turns JSON text into values your code can use",
+      "bodyMarkdown": "**JSON** is a text format for representing data.\n\n```js\nconst rawProfile = '{\"name\":\"Maya\",\"score\":18}';\nconst profile = JSON.parse(rawProfile);\n\nconsole.log(profile.name);\n```\n\nLine by line:\n\n1. `rawProfile` is one JavaScript string containing JSON text.\n2. `JSON.parse(rawProfile)` creates a JavaScript object.\n3. `profile.name` works because the parsed value is now an object.\n4. The Console shows `Maya`.\n\nParsing is a **boundary step**: data crosses from an external text representation into JavaScript values."
+    },
+    {
+      "id": "check-shape",
+      "cardTitle": "Check what arrived",
+      "title": "Valid JSON syntax does not guarantee the shape your app expects",
+      "bodyMarkdown": "After parsing, check the broad shape before the rest of the program depends on it.\n\n```js\nconst rawBooks = '[{\"title\":\"North Star\"},{\"title\":\"Deep Blue\"}]';\nconst books = JSON.parse(rawBooks);\n\nif (Array.isArray(books)) {\n  console.log(`Loaded ${books.length} books`);\n} else {\n  console.log(\"Expected a book list\");\n}\n```\n\nStep by step:\n\n1. Parse the JSON text.\n2. `Array.isArray(books)` checks the broad collection shape.\n3. Only the array path uses `.length` as a collection count.\n4. The fallback makes a bad assumption visible.\n\nThis is a beginner validation habit, not full schema validation."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "json-choice",
+      "kind": "single_choice",
+      "title": "Choose the right idea",
+      "prompt": "Why parse JSON text?",
+      "options": [
+        "To turn JSON text into JavaScript values",
+        "To register a click listener",
+        "To create a DOM element",
+        "To submit a form"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on the responsibility described by the question.",
+      "help": {
+        "concept": "The correct option matches the specific job the code needs to do.",
+        "hint_1": "Separate DOM, data, events, and async responsibilities.",
+        "hint_2": "Choose the behavior that directly produces the requested outcome."
+      }
+    },
+    {
+      "id": "json-multi",
+      "kind": "multi_choice",
+      "title": "Recognize correct behavior",
+      "prompt": "Which statements are true?",
+      "options": [
+        "JSON can represent arrays and objects as text.",
+        "JSON.parse can produce JavaScript values.",
+        "Array.isArray can check a parsed collection shape.",
+        "Valid JSON guarantees every app-specific field exists."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "More than one statement can be correct.",
+      "help": {
+        "concept": "This check separates the responsibilities introduced in the lesson.",
+        "hint_1": "Keep only statements that match the actual JavaScript or browser behavior.",
+        "hint_2": "Reject statements that assign the concept a different job."
+      }
+    },
+    {
+      "id": "json-blank",
+      "kind": "fill_blank_choice",
+      "title": "Complete the idea",
+      "prompt": "Choose the built-in check that determines whether `records` is an array.",
+      "template": "if ([blank1](records)) { console.log(records.length); }",
+      "choices": [
+        "JSON.parse",
+        "Array.isArray",
+        "fetch",
+        "document.querySelector"
+      ],
+      "correctValue": "Array.isArray",
+      "hint": "Use the role described in the sentence to choose the missing term.",
+      "help": {
+        "concept": "The blank names the feature that performs the stated responsibility.",
+        "hint_1": "Eliminate choices from unrelated browser responsibilities.",
+        "hint_2": "Choose the term whose behavior fits the sentence."
+      }
+    },
+    {
+      "id": "json-order",
+      "kind": "drag_reorder",
+      "title": "Put the flow in order",
+      "prompt": "Arrange the steps in the order a beginner-friendly solution should follow.",
+      "tokens": [
+        "Receive JSON text",
+        "Parse the text",
+        "Check the parsed value's broad shape",
+        "Use the validated value"
+      ],
+      "correctOrder": [
+        "Receive JSON text",
+        "Parse the text",
+        "Check the parsed value's broad shape",
+        "Use the validated value"
+      ],
+      "hint": "Start with the dependency that must exist first.",
+      "help": {
+        "concept": "The sequence follows data and control dependencies.",
+        "hint_1": "Each later step depends on the earlier step having happened.",
+        "hint_2": "Place the visible result after the operation that produces it."
+      }
+    },
+    {
+      "id": "try-json-and-data-boundaries-sketch0",
+      "kind": "code_input",
+      "title": "Parse a settings record",
+      "prompt": "Problem: Settings received as JSON text cannot be used like a JavaScript object until the text is decoded. Task: Parse `rawSettings` into `settings`, then log `settings.language`. Expected result: the Console shows the language read from the parsed settings object.",
+      "hint": "Convert the text before reading a property.",
+      "help": {
+        "concept": "JSON.parse converts JSON text into a JavaScript value.",
+        "hint_1": "Create settings from JSON.parse(rawSettings).",
+        "hint_2": "Read the language property after parsing."
+      },
+      "starterCode": "const rawSettings = '{\"language\":\"Kreyol\",\"compactMode\":true}';\n\n// Parse and log the language.\n",
+      "solutionCode": "const rawSettings = '{\"language\":\"Kreyol\",\"compactMode\":true}';\nconst settings = JSON.parse(rawSettings);\nconsole.log(settings.language);\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p>Open the Console to inspect the parsed setting.</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const rawSettings = '{\"language\":\"Kreyol\",\"compactMode\":true}';\n\n// Parse and log the language.\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p>Open the Console to inspect the parsed setting.</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const rawSettings = '{\"language\":\"Kreyol\",\"compactMode\":true}';\nconst settings = JSON.parse(rawSettings);\nconsole.log(settings.language);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "settings\\s*=\\s*JSON\\.parse\\(\\s*rawSettings\\s*\\)",
+          "message": "Parse rawSettings.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*settings\\.language\\s*\\)",
+          "message": "Log the language.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-json-and-data-boundaries-sketch1",
+      "kind": "code_input",
+      "title": "Check an inventory payload",
+      "prompt": "Problem: An inventory response may decode successfully but still have the wrong shape, so the interface must verify that it received a list before counting items. Task: Parse `rawInventory`. If the result is an array, show its item count in `#result`; otherwise show `Expected inventory list`. Expected result: the Preview reports either a valid count or a clear shape error.",
+      "hint": "Parse first, then branch on the broad shape.",
+      "help": {
+        "concept": "Boundary code can verify a collection before later code assumes array behavior.",
+        "hint_1": "Use the built-in array shape check.",
+        "hint_2": "Only the array branch should use .length as a count."
+      },
+      "starterCode": "const rawInventory = '[{\"sku\":\"A1\"},{\"sku\":\"B2\"},{\"sku\":\"C3\"}]';\nconst result = document.querySelector(\"#result\");\n\n// Parse and check the shape.\n",
+      "solutionCode": "const rawInventory = '[{\"sku\":\"A1\"},{\"sku\":\"B2\"},{\"sku\":\"C3\"}]';\nconst result = document.querySelector(\"#result\");\nconst inventory = JSON.parse(rawInventory);\nif (Array.isArray(inventory)) {\n  result.textContent = `${inventory.length} items`;\n} else {\n  result.textContent = \"Expected inventory list\";\n}\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"result\">Not checked</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const rawInventory = '[{\"sku\":\"A1\"},{\"sku\":\"B2\"},{\"sku\":\"C3\"}]';\nconst result = document.querySelector(\"#result\");\n\n// Parse and check the shape.\n"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"result\">Not checked</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+        },
+        {
+          "path": "script.js",
+          "content": "const rawInventory = '[{\"sku\":\"A1\"},{\"sku\":\"B2\"},{\"sku\":\"C3\"}]';\nconst result = document.querySelector(\"#result\");\nconst inventory = JSON.parse(rawInventory);\nif (Array.isArray(inventory)) {\n  result.textContent = `${inventory.length} items`;\n} else {\n  result.textContent = \"Expected inventory list\";\n}\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "inventory\\s*=\\s*JSON\\.parse\\(\\s*rawInventory\\s*\\)",
+          "message": "Parse rawInventory.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "Array\\.isArray\\(\\s*inventory\\s*\\)",
+          "message": "Check whether inventory is an array.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

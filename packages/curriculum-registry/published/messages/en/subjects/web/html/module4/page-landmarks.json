@@ -20,47 +20,11 @@
             "allowReveal": false,
             "try_page_landmarks_sketch0": {
               "title": "Try it yourself: Turn page content into major landmarks",
-              "prompt": "Now apply what you just learned in this task. Organize the Riverside Community News page with header, main, and footer. Keep the title and introduction in header, the Lead story content in main, and the contact line in footer. Check that all content still appears in Preview. Produce the result for turn page content into major landmarks so it reinforces Page Landmarks.",
-              "hint": "Choose each landmark from the role of the content, not from its visual position.",
-              "help": {
-                "concept": "Header, main, and footer identify the introduction, primary content, and closing information of a page.",
-                "hint_1": "Wrap the title and introduction together in header.",
-                "hint_2": "Place the Lead story in main and the contact line in footer."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <h1>Riverside Community News</h1>\n  <p>Stories from around the neighborhood.</p>\n  <h2>Lead story</h2>\n  <p>The library opened a new evening study room.</p>\n  <p>Contact: news@riverside.example</p>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <header>\n    <h1>Riverside Community News</h1>\n    <p>Stories from around the neighborhood.</p>\n  </header>\n  <main>\n    <h2>Lead story</h2>\n    <p>The library opened a new evening study room.</p>\n  </main>\n  <footer>\n    <p>Contact: news@riverside.example</p>\n  </footer>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <h1>Riverside Community News</h1>\n  <p>Stories from around the neighborhood.</p>\n  <h2>Lead story</h2>\n  <p>The library opened a new evening study room.</p>\n  <p>Contact: news@riverside.example</p>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <header>\n    <h1>Riverside Community News</h1>\n    <p>Stories from around the neighborhood.</p>\n  </header>\n  <main>\n    <h2>Lead story</h2>\n    <p>The library opened a new evening study room.</p>\n  </main>\n  <footer>\n    <p>Contact: news@riverside.example</p>\n  </footer>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Organize the Riverside Community News page with header, main, and footer. Keep the title and introduction in header, the Lead story content in main, and the contact line in footer. Check that all content still appears in Preview. Produce the result for turn page content into major landmarks so it reinforces Page Landmarks."
             },
             "try_page_landmarks_sketch1": {
               "title": "Try it yourself: Create a navigation landmark",
-              "prompt": "Now apply what you just learned in this task. Replace the paragraph that holds the Showcase and Gallery links with one nav element. Keep both links and their href values, then confirm they still jump to the two headings in Preview. Produce the result for create a navigation landmark so it reinforces Page Landmarks.",
-              "hint": "The two links form one major navigation group.",
-              "help": {
-                "concept": "A nav element gives a major set of navigation links a clear landmark.",
-                "hint_1": "Remove the paragraph wrapper around the two links.",
-                "hint_2": "Place both existing anchor elements inside one nav element."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <p><a href=\"#showcase\">Showcase</a> | <a href=\"#gallery\">Gallery</a></p>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <nav>\n      <a href=\"#showcase\">Showcase</a>\n      <a href=\"#gallery\">Gallery</a>\n    </nav>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <p><a href=\"#showcase\">Showcase</a> | <a href=\"#gallery\">Gallery</a></p>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <nav>\n      <a href=\"#showcase\">Showcase</a>\n      <a href=\"#gallery\">Gallery</a>\n    </nav>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Replace the paragraph that holds the Showcase and Gallery links with one nav element. Keep both links and their href values, then confirm they still jump to the two headings in Preview. Produce the result for create a navigation landmark so it reinforces Page Landmarks."
             }
           },
           "practice": {
@@ -129,6 +93,50 @@
                 "<footer><article>Community story</article></footer>",
                 "<header><article>Community story</article></header>"
               ]
+            },
+            "landmarks-try-regions": {
+              "title": "Turn page content into major landmarks",
+              "prompt": "Organize the Riverside Community News page with header, main, and footer. Keep the title and introduction in header, the Lead story content in main, and the contact line in footer. Check that all content still appears in Preview.",
+              "hint": "Choose each landmark from the role of the content, not from its visual position.",
+              "help": {
+                "concept": "Header, main, and footer identify the introduction, primary content, and closing information of a page.",
+                "hint_1": "Wrap the title and introduction together in header.",
+                "hint_2": "Place the Lead story in main and the contact line in footer."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <h1>Riverside Community News</h1>\n  <p>Stories from around the neighborhood.</p>\n  <h2>Lead story</h2>\n  <p>The library opened a new evening study room.</p>\n  <p>Contact: news@riverside.example</p>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <header>\n    <h1>Riverside Community News</h1>\n    <p>Stories from around the neighborhood.</p>\n  </header>\n  <main>\n    <h2>Lead story</h2>\n    <p>The library opened a new evening study room.</p>\n  </main>\n  <footer>\n    <p>Contact: news@riverside.example</p>\n  </footer>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <h1>Riverside Community News</h1>\n  <p>Stories from around the neighborhood.</p>\n  <h2>Lead story</h2>\n  <p>The library opened a new evening study room.</p>\n  <p>Contact: news@riverside.example</p>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Riverside Community News</title>\n</head>\n<body>\n  <header>\n    <h1>Riverside Community News</h1>\n    <p>Stories from around the neighborhood.</p>\n  </header>\n  <main>\n    <h2>Lead story</h2>\n    <p>The library opened a new evening study room.</p>\n  </main>\n  <footer>\n    <p>Contact: news@riverside.example</p>\n  </footer>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "landmarks-try-nav": {
+              "title": "Create a navigation landmark",
+              "prompt": "Replace the paragraph that holds the Showcase and Gallery links with one nav element. Keep both links and their href values, then confirm they still jump to the two headings in Preview.",
+              "hint": "The two links form one major navigation group.",
+              "help": {
+                "concept": "A nav element gives a major set of navigation links a clear landmark.",
+                "hint_1": "Remove the paragraph wrapper around the two links.",
+                "hint_2": "Place both existing anchor elements inside one nav element."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <p><a href=\"#showcase\">Showcase</a> | <a href=\"#gallery\">Gallery</a></p>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <nav>\n      <a href=\"#showcase\">Showcase</a>\n      <a href=\"#gallery\">Gallery</a>\n    </nav>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <p><a href=\"#showcase\">Showcase</a> | <a href=\"#gallery\">Gallery</a></p>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Campus Arts Bulletin</title>\n</head>\n<body>\n  <header>\n    <h1>Campus Arts Bulletin</h1>\n    <p>Student performances and exhibitions.</p>\n    <nav>\n      <a href=\"#showcase\">Showcase</a>\n      <a href=\"#gallery\">Gallery</a>\n    </nav>\n  </header>\n  <main>\n    <h2 id=\"showcase\">Showcase</h2>\n    <p>Friday at 6:00 PM.</p>\n    <h2 id=\"gallery\">Gallery</h2>\n    <p>Open all weekend.</p>\n  </main>\n  <footer>\n    <p>Arts Center</p>\n  </footer>\n</body>\n</html>\n"
+                }
+              }
             }
           }
         }

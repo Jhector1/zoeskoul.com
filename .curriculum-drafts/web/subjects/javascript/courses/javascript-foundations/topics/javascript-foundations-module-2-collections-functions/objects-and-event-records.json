@@ -1,0 +1,280 @@
+{
+  "title": "Objects and Event Records",
+  "summary": "Group related facts into objects, read and update properties, and combine objects inside arrays.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "object-records",
+      "cardTitle": "Keep one record together",
+      "title": "An object names the facts that belong to one thing",
+      "bodyMarkdown": "An **object** groups related values under property names. Instead of keeping an event's name, room, and seat count in unrelated variables, one object can describe the whole event.\n\n```js\nconst event = {\n  name: \"Welcome Fair\",\n  room: \"Atrium\",\n  seats: 30\n};\n\nconsole.log(event.name);\nconsole.log(event.room);\n```\n\nLine by line:\n\n1. `event` refers to one object.\n2. `name`, `room`, and `seats` are properties of that object.\n3. `event.name` reads the value stored under `name`.\n4. `event.room` reads another known property from the same record.\n\nDot notation is enough for the records in this course. You do not need bracket notation yet."
+    },
+    {
+      "id": "updating-properties",
+      "cardTitle": "Update one fact",
+      "title": "A const object can still have changing properties",
+      "bodyMarkdown": "`const` prevents you from assigning a completely different value to the variable, but it does not freeze the properties inside an object.\n\n```js\nconst event = {\n  name: \"Poetry Reading\",\n  seats: 12\n};\n\nevent.seats = event.seats - 1;\n\nconsole.log(event.seats);\n```\n\nStep by step:\n\n1. `event` keeps referring to the same object.\n2. `event.seats` starts at `12`.\n3. The assignment changes that property to `11`.\n4. Logging the property confirms the updated state.\n\nThis is useful when the **record stays the same thing** but one fact about it changes."
+    },
+    {
+      "id": "arrays-of-objects",
+      "cardTitle": "Build a collection of records",
+      "title": "Arrays and objects work together",
+      "bodyMarkdown": "Real programs often need many structured records. Put objects inside an array when you need a collection of things that share the same kinds of properties.\n\n```js\nconst events = [\n  { name: \"Jazz Night\", room: \"Music Center\" },\n  { name: \"Robotics Lab\", room: \"Engineering Hall\" }\n];\n\nconsole.log(events[1].name);\n```\n\nLine by line:\n\n1. `events` is an array with two items.\n2. Each item is an object with `name` and `room` properties.\n3. `events[1]` reads the second object.\n4. `.name` then reads the `name` property from that object.\n\nThis combination—**array of objects**—becomes the main data shape for the rest of the course."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "objects-dot-choice",
+      "kind": "single_choice",
+      "title": "Read a property",
+      "prompt": "Given `const book = { title: \"Dawn\", pages: 240 };`, which expression reads the title?",
+      "hint": "Look for the object name followed by a known property name.",
+      "help": {
+        "concept": "Dot notation reads a named property from an object.",
+        "hint_1": "The object is `book`; the property is `title`.",
+        "hint_2": "Choose the expression that connects those names with a dot."
+      },
+      "options": [
+        "book[0]",
+        "book.title",
+        "title.book",
+        "book.length"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "objects-facts-multi",
+      "kind": "multi_choice",
+      "title": "Reason about object records",
+      "prompt": "Which statements are true? Select all that apply.",
+      "hint": "Distinguish object properties from array positions.",
+      "help": {
+        "concept": "Objects use named properties; const keeps the binding stable but does not freeze every property.",
+        "hint_1": "A property name such as `.score` is different from an array index.",
+        "hint_2": "Reject the statement that treats every object like an indexed array."
+      },
+      "options": [
+        "An object can group several related facts.",
+        "A property can be read with dot notation.",
+        "A property of a const object can be reassigned.",
+        "An object automatically has numeric array indexes."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "objects-property-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete a property update",
+      "prompt": "Choose the property name that changes the player's score.",
+      "hint": "Use the property that represents the value being changed.",
+      "help": {
+        "concept": "Dot notation places the property name after the object name.",
+        "hint_1": "The assignment target should describe the player's numeric result.",
+        "hint_2": "Choose the property whose meaning matches the new value `18`."
+      },
+      "template": "player.[blank1] = 18;",
+      "choices": [
+        "name",
+        "length",
+        "score",
+        "push"
+      ],
+      "correctValue": "score"
+    },
+    {
+      "id": "objects-record-order",
+      "kind": "drag_reorder",
+      "title": "Trace a record update",
+      "prompt": "Arrange the steps for changing one property and observing it.",
+      "hint": "The object must exist before one of its properties can change.",
+      "help": {
+        "concept": "Think from record creation to one targeted update.",
+        "hint_1": "The changed value belongs to a property on the existing object.",
+        "hint_2": "Observe the property only after the assignment has happened."
+      },
+      "tokens": [
+        "Create the object",
+        "Read the property you want to change",
+        "Assign the updated property value",
+        "Log the updated property"
+      ],
+      "correctOrder": [
+        "Create the object",
+        "Read the property you want to change",
+        "Assign the updated property value",
+        "Log the updated property"
+      ]
+    },
+    {
+      "id": "try-objects-and-event-records-sketch0",
+      "kind": "code_input",
+      "title": "Create a book record",
+      "prompt": "Problem: A library system needs the title, author, and page count to travel together as one book record instead of as unrelated variables. Task: Create `book` with `title`, `author`, and `pages` properties, then log the title and page count. Expected result: the Console shows values read from the same object.",
+      "hint": "Keep all three facts inside one object.",
+      "help": {
+        "concept": "An object groups related values under named properties.",
+        "hint_1": "Use an object literal assigned to `book`.",
+        "hint_2": "Read `book.title` and `book.pages` when you log the result."
+      },
+      "starterCode": "// Create one book object with title, author, and pages.\n// Log its title and page count.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// Create one book object with title, author, and pages.\n// Log its title and page count.\n"
+        }
+      ],
+      "solutionCode": "const book = {\n  title: \"The Long Road\",\n  author: \"A. Cole\",\n  pages: 280\n};\n\nconsole.log(book.title, book.pages);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const book = {\n  title: \"The Long Road\",\n  author: \"A. Cole\",\n  pages: 280\n};\n\nconsole.log(book.title, book.pages);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+book\\s*=\\s*\\{[\\s\\S]*title\\s*:[\\s\\S]*author\\s*:[\\s\\S]*pages\\s*:",
+          "message": "Create book with title, author, and pages properties.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*book\\.title\\s*,\\s*book\\.pages\\s*\\)",
+          "message": "Log book.title and book.pages.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-objects-and-event-records-sketch1",
+      "kind": "code_input",
+      "title": "Update a game character",
+      "prompt": "Problem: A game character's health belongs to that character record and must change when the character takes damage. Task: Create `player` with `name` and `health`. Reduce `player.health` by 20, then log the updated health. Expected result: the Console shows the reduced health value from the player object.",
+      "hint": "Keep the same object and change only one property.",
+      "help": {
+        "concept": "A property inside a const object can still be updated.",
+        "hint_1": "Start health at a numeric value large enough to subtract 20.",
+        "hint_2": "Assign `player.health - 20` back to `player.health` before logging it."
+      },
+      "starterCode": "// Create player with name and health.\n// Reduce health by 20.\n// Log the updated health.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// Create player with name and health.\n// Reduce health by 20.\n// Log the updated health.\n"
+        }
+      ],
+      "solutionCode": "const player = {\n  name: \"Nova\",\n  health: 100\n};\n\nplayer.health = player.health - 20;\n\nconsole.log(player.health);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const player = {\n  name: \"Nova\",\n  health: 100\n};\n\nplayer.health = player.health - 20;\n\nconsole.log(player.health);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+player\\s*=\\s*\\{[\\s\\S]*name\\s*:[\\s\\S]*health\\s*:",
+          "message": "Create player with name and health properties.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "player\\.health\\s*=\\s*player\\.health\\s*-\\s*20",
+          "message": "Reduce player.health by 20.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-objects-and-event-records-sketch2",
+      "kind": "code_input",
+      "title": "Read from a product catalog",
+      "prompt": "Problem: A product catalog contains multiple products with the same data shape, and the storefront needs to read one product from the collection. Task: Create `products` as an array of two objects with `name` and `price` properties. Log the name of the second product. Expected result: the Console shows the second product's name.",
+      "hint": "Read the array item first, then its property.",
+      "help": {
+        "concept": "Arrays can hold structured objects, and indexing can select one record before dot notation reads a property.",
+        "hint_1": "The collection should contain two object literals.",
+        "hint_2": "Use the second array position, then `.name`."
+      },
+      "starterCode": "// Create products with two { name, price } objects.\n// Log the second product's name.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// Create products with two { name, price } objects.\n// Log the second product's name.\n"
+        }
+      ],
+      "solutionCode": "const products = [\n  { name: \"Notebook\", price: 6 },\n  { name: \"Desk Lamp\", price: 24 }\n];\n\nconsole.log(products[1].name);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const products = [\n  { name: \"Notebook\", price: 6 },\n  { name: \"Desk Lamp\", price: 24 }\n];\n\nconsole.log(products[1].name);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+products\\s*=\\s*\\[[\\s\\S]*\\{[\\s\\S]*name\\s*:[\\s\\S]*price\\s*:[\\s\\S]*\\}[\\s\\S]*\\{[\\s\\S]*name\\s*:[\\s\\S]*price\\s*:",
+          "message": "Create products as an array containing two structured objects.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*products\\s*\\[\\s*1\\s*\\]\\.name\\s*\\)",
+          "message": "Log the name from the second product object.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

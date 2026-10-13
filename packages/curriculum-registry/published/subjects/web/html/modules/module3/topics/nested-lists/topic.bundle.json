@@ -36,7 +36,10 @@
         "id": "try-nested-lists-sketch0",
         "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.prompt",
-        "exerciseKey": "try-nested-lists-sketch0",
+        "exerciseKey": "nested-try-child-list",
+        "exerciseKeys": [
+          "nested-try-child-list"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-nested-lists-sketch1",
         "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.prompt",
-        "exerciseKey": "try-nested-lists-sketch1",
+        "exerciseKey": "nested-try-mixed",
+        "exerciseKeys": [
+          "nested-try-mixed"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,9 +80,13 @@
         "id": "try-nested-lists-sketch2",
         "titleKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.prompt",
-        "exerciseKey": "try-nested-lists-sketch2",
+        "exerciseKey": "nested-try-two-groups",
+        "exerciseKeys": [
+          "nested-try-two-groups",
+          "nested-try-two-groups-robotics"
+        ],
         "difficulty": "easy",
-        "preferKind": "code_input",
+        "preferKind": null,
         "seedPolicy": "global",
         "required": true,
         "allowReveal": false,
@@ -120,172 +130,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-nested-lists-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Programming.*</ul>\\s*</li>.*<li\\b[^>]*>\\s*Art\\s*</li>",
-          "path": "index.html",
-          "message": "Nest Sensors and Programming inside the Robotics list item.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-nested-lists-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<li\\b[^>]*>\\s*Web Basics\\s*<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*HTML structure\\s*</li>\\s*<li\\b[^>]*>\\s*Links and images\\s*</li>\\s*</ol>\\s*</li>",
-          "path": "index.html",
-          "message": "Nest the ordered Web Basics lesson sequence inside its parent item.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-nested-lists-sketch2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<li\\b[^>]*>\\s*Web Development\\s*<ul\\b[^>]*>.*HTML.*CSS later.*</ul>\\s*</li>",
-          "path": "index.html",
-          "message": "Nest HTML and CSS later under Web Development.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>\\s*</li>",
-          "path": "index.html",
-          "message": "Nest Sensors and Motors under Robotics.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.tryIt.try_nested_lists_sketch2.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "nested-quiz-choice",
       "kind": "single_choice",
@@ -353,6 +197,218 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "<ul><li>Sensors</li><li>Programming</li></ul>"
+      }
+    },
+    {
+      "id": "nested-try-child-list",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-child-list",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-child-list.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Programming.*</ul>\\s*</li>.*<li\\b[^>]*>\\s*Art\\s*</li>",
+          "path": "index.html",
+          "message": "Nest Sensors and Programming inside the Robotics list item.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-child-list.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-child-list.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-child-list.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "nested-try-mixed",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-mixed",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-mixed.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Web Basics\\s*<ol\\b[^>]*>\\s*<li\\b[^>]*>\\s*HTML structure\\s*</li>\\s*<li\\b[^>]*>\\s*Links and images\\s*</li>\\s*</ol>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest the ordered Web Basics lesson sequence inside its parent item.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-mixed.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-mixed.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-mixed.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "nested-try-two-groups",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Web Development\\s*<ul\\b[^>]*>.*HTML.*CSS later.*</ul>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest HTML and CSS later under Web Development.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "nested-try-two-groups-robotics",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups-robotics",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups-robotics.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<li\\b[^>]*>\\s*Robotics\\s*<ul\\b[^>]*>.*Sensors.*Motors.*</ul>\\s*</li>",
+          "path": "index.html",
+          "message": "Nest Sensors and Motors under Robotics.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups-robotics.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups-robotics.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.nested-lists.practice.nested-try-two-groups-robotics.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

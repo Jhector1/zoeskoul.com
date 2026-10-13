@@ -1,0 +1,200 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-2-collections-functions": {
+        "loops-and-array-iteration": {
+          "label": "Loops and Array Iteration",
+          "summary": "Visit every array item with for...of, transform items with map, and keep matching items with filter.",
+          "cards": {
+            "sketch0": {
+              "title": "Visit every item"
+            },
+            "sketch1": {
+              "title": "Transform every item"
+            },
+            "sketch2": {
+              "title": "Keep only matching items"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_loops_and_array_iteration_sketch0": {
+              "title": "Try it yourself: Log every daily task",
+              "prompt": "Now apply what you just learned in this task. Problem: A daily planner has several tasks, and writing a separate `console.log` for every item would not scale as the list grows. Task: Create `tasks` with three task names and use `for...of` to log every task. Expected result: the Console shows each task using one loop. Produce the result for log every daily task so it reinforces Loops and Array Iteration.",
+              "hint": "The loop variable should represent the current task during each pass.",
+              "help": {
+                "concept": "for...of visits every value in an array without manually managing indexes.",
+                "hint_1": "Create the array before the loop.",
+                "hint_2": "Use `for (const task of tasks)` and log `task` inside the block."
+              },
+              "starterCode": "// Create tasks with three task names.\n// Use for...of to log every task.\n",
+              "solutionCode": "const tasks = [\"Read\", \"Practice\", \"Review\"];\n\nfor (const task of tasks) {\n  console.log(task);\n}\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Create tasks with three task names.\n// Use for...of to log every task.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const tasks = [\"Read\", \"Practice\", \"Review\"];\n\nfor (const task of tasks) {\n  console.log(task);\n}\n"
+                }
+              }
+            },
+            "try_loops_and_array_iteration_sketch1": {
+              "title": "Try it yourself: Convert temperatures",
+              "prompt": "Now apply what you just learned in this task. Problem: A weather tool has Celsius readings but needs a new Fahrenheit list while preserving the original readings. Task: Use `map` to create `fahrenheit` from `celsius` with `(temp) => temp * 9 / 5 + 32`, then log the new array. Expected result: the Console shows a transformed Fahrenheit array with the same number of items. Produce the result for convert temperatures so it reinforces Loops and Array Iteration.",
+              "hint": "Each input temperature should produce one transformed output value.",
+              "help": {
+                "concept": "map creates a new array from the values returned by its callback.",
+                "hint_1": "Call `.map(...)` on `celsius`.",
+                "hint_2": "Use an arrow callback whose parameter is `temp`, then store the returned array in `fahrenheit`."
+              },
+              "starterCode": "const celsius = [0, 10, 20];\n\n// Create fahrenheit with map.\n// Log fahrenheit.\n",
+              "solutionCode": "const celsius = [0, 10, 20];\nconst fahrenheit = celsius.map((temp) => temp * 9 / 5 + 32);\n\nconsole.log(fahrenheit);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const celsius = [0, 10, 20];\n\n// Create fahrenheit with map.\n// Log fahrenheit.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const celsius = [0, 10, 20];\nconst fahrenheit = celsius.map((temp) => temp * 9 / 5 + 32);\n\nconsole.log(fahrenheit);\n"
+                }
+              }
+            },
+            "try_loops_and_array_iteration_sketch2": {
+              "title": "Try it yourself: Keep passing scores",
+              "prompt": "Now apply what you just learned in this task. Problem: A grade report should focus on passing scores without deleting or changing the original score list. Task: Use `filter` to create `passingScores` containing only values from `scores` that are at least 70. Log the new array. Expected result: the Console shows only the passing values. Produce the result for keep passing scores so it reinforces Loops and Array Iteration.",
+              "hint": "The callback should answer whether one score belongs in the result.",
+              "help": {
+                "concept": "filter keeps array items whose callback condition evaluates to true.",
+                "hint_1": "Call `.filter(...)` on `scores`.",
+                "hint_2": "Use an arrow callback that checks whether the current score is greater than or equal to 70."
+              },
+              "starterCode": "const scores = [62, 88, 71, 54, 95];\n\n// Create passingScores with filter.\n// Log passingScores.\n",
+              "solutionCode": "const scores = [62, 88, 71, 54, 95];\nconst passingScores = scores.filter((score) => score >= 70);\n\nconsole.log(passingScores);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const scores = [62, 88, 71, 54, 95];\n\n// Create passingScores with filter.\n// Log passingScores.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const scores = [62, 88, 71, 54, 95];\nconst passingScores = scores.filter((score) => score >= 70);\n\nconsole.log(passingScores);\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "iteration-method-choice": {
+              "title": "Choose the right array tool",
+              "prompt": "You need a new array containing only scores greater than 70. Which tool best matches that goal?",
+              "hint": "Think about whether the task should transform every value or keep only some of them.",
+              "help": {
+                "concept": "This task needs a selection operation: each score is tested, and only the scores that pass should remain in the new array.",
+                "hint_1": "The output should contain fewer items when some scores do not meet the rule.",
+                "hint_2": "Choose the array operation whose callback answers a yes-or-no question for each item."
+              },
+              "options": {
+                "a": "for...of only",
+                "b": "push",
+                "c": "filter",
+                "d": "length"
+              }
+            },
+            "iteration-facts-multi": {
+              "title": "Compare iteration tools",
+              "prompt": "Which statements are true? Select all that apply.",
+              "hint": "Separate visiting, transforming, and selecting.",
+              "help": {
+                "concept": "The three tools solve different iteration problems.",
+                "hint_1": "map is about produced values; filter is about a yes-or-no test.",
+                "hint_2": "Reject the statement that gives map the job of filter."
+              },
+              "options": {
+                "a": "`for...of` can visit each array value directly.",
+                "b": "`map` creates a new array of transformed results.",
+                "c": "`filter` keeps items that pass a condition.",
+                "d": "`map` removes every item whose callback returns false."
+              }
+            },
+            "iteration-map-fill": {
+              "title": "Complete the transformation",
+              "prompt": "Choose the array method that creates a new array from one result per input item.",
+              "hint": "The callback should produce one new value for every original value.",
+              "help": {
+                "concept": "The missing method should create a new array by collecting one transformed result for each input item.",
+                "hint_1": "The output keeps the same number of positions as the input because every number produces one result.",
+                "hint_2": "Choose the method used for transformation, not the one used for selecting only matching items."
+              },
+              "template": "const doubled = numbers.[blank1]((number) => number * 2);",
+              "choices": [
+                "filter",
+                "length",
+                "map",
+                "push"
+              ]
+            },
+            "iteration-pipeline-order": {
+              "title": "Trace a filter-and-map pipeline",
+              "prompt": "Arrange the conceptual steps for selecting records and then turning them into labels.",
+              "hint": "Selection happens before transformation in this pipeline.",
+              "help": {
+                "concept": "The first operation decides which records survive.",
+                "hint_1": "Only the surviving records need labels.",
+                "hint_2": "The final consumer works with the mapped labels, not the original records."
+              },
+              "tokens": {
+                "t1": "Start with the original records",
+                "t2": "Filter to the records that match",
+                "t3": "Map each remaining record to a label",
+                "t4": "Use the resulting labels"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-2-collections-functions": {
+        "loops-and-array-iteration": {
+          "for-of": {
+            "title": "for...of repeats a block for each array value",
+            "bodyMarkdown": "Use `for...of` when you need to perform the same kind of work for every item in an array.\n\n```js\nconst eventNames = [\"Welcome Fair\", \"Jazz Night\", \"Poetry Reading\"];\n\nfor (const name of eventNames) {\n  console.log(name);\n}\n```\n\nStep by step:\n\n1. `eventNames` contains three strings.\n2. `for (const name of eventNames)` starts one pass for each array item.\n3. During each pass, `name` refers to the current string.\n4. `console.log(name)` runs three times, once per item.\n\nThe loop does not require you to manage numeric indexes when you only need each value directly."
+          },
+          "map-transform": {
+            "title": "map builds a new array from a transformation",
+            "bodyMarkdown": "`map` creates a new array by transforming every item from an existing array. It needs a **callback function**: a function JavaScript runs once for each item.\n\n```js\nconst seats = [2, 4, 6];\nconst doubled = seats.map((count) => count * 2);\n\nconsole.log(doubled);\n```\n\nLine by line:\n\n1. `seats` contains three numbers.\n2. `(count) => count * 2` is an **arrow function**, a compact function used here as the callback.\n3. `map` calls that callback for each number.\n4. Each returned value becomes one item in the new `doubled` array.\n5. The original `seats` array is unchanged.\n\nRead `count => count * 2` as: **for this count, produce count times two**."
+          },
+          "filter-matches": {
+            "title": "filter keeps items whose callback returns true",
+            "bodyMarkdown": "`filter` also runs a callback for each item, but its job is different from `map`. The callback answers a yes-or-no question. Items that produce `true` stay in the new array.\n\n```js\nconst seatCounts = [0, 4, 9];\nconst available = seatCounts.filter((count) => count > 0);\n\nconsole.log(available);\n```\n\nLine by line:\n\n1. `seatCounts` contains three numbers.\n2. The callback asks whether each `count` is greater than zero.\n3. `0` produces `false`, so it is left out.\n4. `4` and `9` produce `true`, so they remain.\n5. `available` becomes `[4, 9]`; the original array still exists unchanged.\n\nUse `map` when every item should become something. Use `filter` when only some items should remain."
+          }
+        }
+      }
+    }
+  }
+}

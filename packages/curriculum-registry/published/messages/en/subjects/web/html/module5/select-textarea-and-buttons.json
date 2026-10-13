@@ -23,69 +23,15 @@
             "allowReveal": false,
             "try_select_textarea_and_buttons_sketch0": {
               "title": "Try it yourself: Create a labeled select menu",
-              "prompt": "Now apply what you just learned in this task. Replace the paragraph with a labeled select menu. Use `id=\"club\"` and `name=\"club\"`, label it `Choose a club`, and add Robotics, Art, and Chess options with lowercase values. Check the menu in Preview. Produce the result for create a labeled select menu so it reinforces Select, Textarea, and Buttons.",
-              "hint": "A select is useful because the choices come from one predefined list.",
-              "help": {
-                "concept": "Select contains option elements and should have a connected visible label.",
-                "hint_1": "Match `for=\"club\"` with `id=\"club\"`.",
-                "hint_2": "Give each option a useful lowercase value."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <p>Choose a club:</p>\n  </form>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <label for=\"club\">Choose a club</label>\n    <select id=\"club\" name=\"club\">\n      <option value=\"robotics\">Robotics</option>\n      <option value=\"art\">Art</option>\n      <option value=\"chess\">Chess</option>\n    </select>\n  </form>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <p>Choose a club:</p>\n  </form>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <label for=\"club\">Choose a club</label>\n    <select id=\"club\" name=\"club\">\n      <option value=\"robotics\">Robotics</option>\n      <option value=\"art\">Art</option>\n      <option value=\"chess\">Chess</option>\n    </select>\n  </form>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Replace the paragraph with a labeled select menu. Use `id=\"club\"` and `name=\"club\"`, label it `Choose a club`, and add Robotics, Art, and Chess options with lowercase values. Check the menu in Preview. Produce the result for create a labeled select menu so it reinforces Select, Textarea, and Buttons."
             },
             "try_select_textarea_and_buttons_sketch1": {
               "title": "Try it yourself: Use a textarea for a longer response",
-              "prompt": "Now apply what you just learned in this task. Replace the one-line Question input with a textarea. Keep `id=\"question\"` and `name=\"question\"`, add `rows=\"5\"`, and keep the existing connected label. Compare the larger response area in Preview. Produce the result for use a textarea for a longer response so it reinforces Select, Textarea, and Buttons.",
-              "hint": "A question may need several lines, so use a control intended for longer free-form text.",
-              "help": {
-                "concept": "Textarea is designed for multi-line text and can use the same label connection pattern as an input.",
-                "hint_1": "Remove the input and open a textarea with the same id and name.",
-                "hint_2": "Close the textarea explicitly and add rows=\"5\"."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <input id=\"question\" name=\"question\" type=\"text\">\n  </form>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <textarea id=\"question\" name=\"question\" rows=\"5\"></textarea>\n  </form>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <input id=\"question\" name=\"question\" type=\"text\">\n  </form>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <textarea id=\"question\" name=\"question\" rows=\"5\"></textarea>\n  </form>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Replace the one-line Question input with a textarea. Keep `id=\"question\"` and `name=\"question\"`, add `rows=\"5\"`, and keep the existing connected label. Compare the larger response area in Preview. Produce the result for use a textarea for a longer response so it reinforces Select, Textarea, and Buttons."
             },
             "try_select_textarea_and_buttons_sketch2": {
               "title": "Try it yourself: Add a clear submit button",
-              "prompt": "Now apply what you just learned in this task. Add a button inside the form after the Name input. Give it `type=\"submit\"` and visible text `Send RSVP`. Confirm the button appears in Preview. Produce the result for add a clear submit button so it reinforces Select, Textarea, and Buttons.",
-              "hint": "The final action belongs inside the form with an explicit submit type.",
-              "help": {
-                "concept": "A submit button gives the form a clear action control.",
-                "hint_1": "Add the button after the input and before the closing form.",
-                "hint_2": "Use the exact button text Send RSVP."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n    <button type=\"submit\">Send RSVP</button>\n  </form>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n  </form>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n    <button type=\"submit\">Send RSVP</button>\n  </form>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Add a button inside the form after the Name input. Give it `type=\"submit\"` and visible text `Send RSVP`. Confirm the button appears in Preview. Produce the result for add a clear submit button so it reinforces Select, Textarea, and Buttons."
             }
           },
           "practice": {
@@ -154,6 +100,72 @@
                 "<input type=\"text\">",
                 "<option value=\"register\">Register</option>"
               ]
+            },
+            "select-controls-try-select": {
+              "title": "Create a labeled select menu",
+              "prompt": "Replace the paragraph with a labeled select menu. Use `id=\"club\"` and `name=\"club\"`, label it `Choose a club`, and add Robotics, Art, and Chess options with lowercase values. Check the menu in Preview.",
+              "hint": "A select is useful because the choices come from one predefined list.",
+              "help": {
+                "concept": "Select contains option elements and should have a connected visible label.",
+                "hint_1": "Match `for=\"club\"` with `id=\"club\"`.",
+                "hint_2": "Give each option a useful lowercase value."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <p>Choose a club:</p>\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <label for=\"club\">Choose a club</label>\n    <select id=\"club\" name=\"club\">\n      <option value=\"robotics\">Robotics</option>\n      <option value=\"art\">Art</option>\n      <option value=\"chess\">Chess</option>\n    </select>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <p>Choose a club:</p>\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Club Interest Form</title>\n</head>\n<body>\n  <h1>Club Interest Form</h1>\n  <form>\n    <label for=\"club\">Choose a club</label>\n    <select id=\"club\" name=\"club\">\n      <option value=\"robotics\">Robotics</option>\n      <option value=\"art\">Art</option>\n      <option value=\"chess\">Chess</option>\n    </select>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "select-controls-try-textarea": {
+              "title": "Use a textarea for a longer response",
+              "prompt": "Replace the one-line Question input with a textarea. Keep `id=\"question\"` and `name=\"question\"`, add `rows=\"5\"`, and keep the existing connected label. Compare the larger response area in Preview.",
+              "hint": "A question may need several lines, so use a control intended for longer free-form text.",
+              "help": {
+                "concept": "Textarea is designed for multi-line text and can use the same label connection pattern as an input.",
+                "hint_1": "Remove the input and open a textarea with the same id and name.",
+                "hint_2": "Close the textarea explicitly and add rows=\"5\"."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <input id=\"question\" name=\"question\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <textarea id=\"question\" name=\"question\" rows=\"5\"></textarea>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <input id=\"question\" name=\"question\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Mentor Request</title>\n</head>\n<body>\n  <h1>Mentor Request</h1>\n  <form>\n    <label for=\"question\">Question</label>\n    <textarea id=\"question\" name=\"question\" rows=\"5\"></textarea>\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "select-controls-try-button": {
+              "title": "Add a clear submit button",
+              "prompt": "Add a button inside the form after the Name input. Give it `type=\"submit\"` and visible text `Send RSVP`. Confirm the button appears in Preview.",
+              "hint": "The final action belongs inside the form with an explicit submit type.",
+              "help": {
+                "concept": "A submit button gives the form a clear action control.",
+                "hint_1": "Add the button after the input and before the closing form.",
+                "hint_2": "Use the exact button text Send RSVP."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n    <button type=\"submit\">Send RSVP</button>\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Event RSVP</title>\n</head>\n<body>\n  <h1>Event RSVP</h1>\n  <form>\n    <label for=\"name\">Name</label>\n    <input id=\"name\" name=\"name\" type=\"text\">\n    <button type=\"submit\">Send RSVP</button>\n  </form>\n</body>\n</html>\n"
+                }
+              }
             }
           }
         }

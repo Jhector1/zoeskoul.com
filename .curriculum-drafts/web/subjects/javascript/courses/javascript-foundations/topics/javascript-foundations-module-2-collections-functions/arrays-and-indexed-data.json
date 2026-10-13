@@ -1,0 +1,233 @@
+{
+  "title": "Arrays and Indexed Data",
+  "summary": "Store ordered values together, read items by position, and grow a collection with push.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "ordered-values",
+      "cardTitle": "Keep related values in order",
+      "title": "An array gives many values one shared home",
+      "bodyMarkdown": "An **array** stores an ordered collection of values. Use one when several values belong together and their position matters.\n\n```js\nconst eventNames = [\"Welcome Fair\", \"Jazz Night\", \"Poetry Reading\"];\n\nconsole.log(eventNames[0]);\nconsole.log(eventNames.length);\n```\n\nLine by line:\n\n1. `eventNames` stores three strings inside one array.\n2. `eventNames[0]` reads the first item. JavaScript array positions start at `0`.\n3. `eventNames.length` reports how many items are in the array, so it produces `3`.\n\nIndexes answer **where is this item?** while `length` answers **how many items are there?** Those are different questions, and keeping them separate prevents off-by-one mistakes."
+    },
+    {
+      "id": "changing-an-array",
+      "cardTitle": "Add to a collection",
+      "title": "push adds one new item at the end",
+      "bodyMarkdown": "Arrays can grow while a program runs. `push` adds a new item to the end of an existing array.\n\n```js\nconst rooms = [\"Atrium\", \"Library\"];\nrooms.push(\"Gym\");\n\nconsole.log(rooms);\nconsole.log(rooms.length);\n```\n\nLine by line:\n\n1. `rooms` begins with two values.\n2. `rooms.push(\"Gym\")` changes that array by appending one new value.\n3. The first `console.log` shows the updated collection.\n4. The second shows that its length is now `3`.\n\nFor now, focus on reading by index, checking `length`, and adding with `push`. You do not need a long list of array methods yet."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "arrays-index-choice",
+      "kind": "single_choice",
+      "title": "Read the third item",
+      "prompt": "Which expression reads the third item from `colors`?",
+      "hint": "Think about how JavaScript numbers array positions.",
+      "help": {
+        "concept": "Array indexes start at zero.",
+        "hint_1": "The first item uses the first index position, then the positions increase by one.",
+        "hint_2": "Choose the expression whose position corresponds to the third item."
+      },
+      "options": [
+        "colors[3]",
+        "colors.length",
+        "colors[2]",
+        "colors.push(2)"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "arrays-facts-multi",
+      "kind": "multi_choice",
+      "title": "Recognize array behavior",
+      "prompt": "Which statements about arrays are true? Select all that apply.",
+      "hint": "Separate position, count, and adding an item.",
+      "help": {
+        "concept": "Indexes, length, and push answer different array questions.",
+        "hint_1": "One operation reads by position, one reports the collection size, and one changes the collection.",
+        "hint_2": "Reject the statement that shifts the first position forward by one."
+      },
+      "options": [
+        "`items[0]` reads the first item.",
+        "`items.length` reports how many items are stored.",
+        "`items.push(value)` appends a value to the end.",
+        "`items[1]` always reads the first item."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "arrays-first-index-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete the array access",
+      "prompt": "Choose the index that reads the first item.",
+      "hint": "Think about the starting position used by JavaScript arrays.",
+      "help": {
+        "concept": "An array's first position is the starting index, not its human counting number.",
+        "hint_1": "The first item is stored before the position used for the second item.",
+        "hint_2": "Choose the numeric starting index."
+      },
+      "template": "const first = names[[blank1]];",
+      "choices": [
+        "1",
+        "length",
+        "0",
+        "push"
+      ],
+      "correctValue": "0"
+    },
+    {
+      "id": "arrays-grow-order",
+      "kind": "drag_reorder",
+      "title": "Trace a growing array",
+      "prompt": "Arrange the steps from creating a collection to observing its new size.",
+      "hint": "The collection must exist before it can be changed.",
+      "help": {
+        "concept": "Array updates happen after creation and before observing the updated state.",
+        "hint_1": "Start with the collection itself, then perform the mutation.",
+        "hint_2": "Measure the changed collection before displaying that measurement."
+      },
+      "tokens": [
+        "Create the array",
+        "Append a new item with push",
+        "Read the updated length",
+        "Log the result"
+      ],
+      "correctOrder": [
+        "Create the array",
+        "Append a new item with push",
+        "Read the updated length",
+        "Log the result"
+      ]
+    },
+    {
+      "id": "try-arrays-and-indexed-data-sketch0",
+      "kind": "code_input",
+      "title": "Read from a playlist",
+      "prompt": "Problem: A playlist stores several song titles together, and the player needs to retrieve one specific track without creating a separate variable for every song. Task: Create `tracks` with three song titles. Create `secondTrack` from the second array item, then log `secondTrack` and the array length. Expected result: the Console shows the second title and a length of 3.",
+      "hint": "Use the array position for the second item and keep the length check separate.",
+      "help": {
+        "concept": "Array indexing reads a value by position, while length reports the collection size.",
+        "hint_1": "The array needs three text values before you read from it.",
+        "hint_2": "Create `secondTrack` from the position immediately after the first index, then log it with `tracks.length`."
+      },
+      "starterCode": "// Create tracks with three song titles.\n// Read the second item into secondTrack.\n// Log secondTrack and the number of tracks.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// Create tracks with three song titles.\n// Read the second item into secondTrack.\n// Log secondTrack and the number of tracks.\n"
+        }
+      ],
+      "solutionCode": "const tracks = [\"Sunrise\", \"Night Walk\", \"City Lights\"];\nconst secondTrack = tracks[1];\n\nconsole.log(secondTrack, tracks.length);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const tracks = [\"Sunrise\", \"Night Walk\", \"City Lights\"];\nconst secondTrack = tracks[1];\n\nconsole.log(secondTrack, tracks.length);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+tracks\\s*=\\s*\\[[^\\]]*,[^\\]]*,[^\\]]*\\]",
+          "message": "Create tracks with at least three items.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "secondTrack\\s*=\\s*tracks\\s*\\[\\s*1\\s*\\]",
+          "message": "Read the second track by its array index.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*secondTrack\\s*,\\s*tracks\\.length\\s*\\)",
+          "message": "Log secondTrack and tracks.length.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "try-arrays-and-indexed-data-sketch1",
+      "kind": "code_input",
+      "title": "Add an item to a shopping list",
+      "prompt": "Problem: A shopping list must grow when a shopper remembers another item after the list has already been created. Task: Start `shoppingList` with two items. Use `push` to add one more item, then log the updated length. Expected result: the Console shows a length of 3.",
+      "hint": "Change the existing array rather than creating a second array.",
+      "help": {
+        "concept": "push appends one value to the end of an array.",
+        "hint_1": "Create the array first with two text values.",
+        "hint_2": "Call `shoppingList.push(...)` before logging `shoppingList.length`."
+      },
+      "starterCode": "// Create shoppingList with two items.\n// Append one more item.\n// Log the updated number of items.\n",
+      "fixedLanguage": "web",
+      "entryFilePath": "script.js",
+      "starterFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "// Create shoppingList with two items.\n// Append one more item.\n// Log the updated number of items.\n"
+        }
+      ],
+      "solutionCode": "const shoppingList = [\"Bread\", \"Apples\"];\nshoppingList.push(\"Milk\");\n\nconsole.log(shoppingList.length);\n",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Foundations</title>\n</head>\n<body>\n  <h1>Campus Event Lab</h1>\n  <p>Write JavaScript in script.js, then use Check Answer.</p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+          "readOnly": true
+        },
+        {
+          "path": "script.js",
+          "content": "const shoppingList = [\"Bread\", \"Apples\"];\nshoppingList.push(\"Milk\");\n\nconsole.log(shoppingList.length);\n"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+shoppingList\\s*=\\s*\\[[^\\]]*,[^\\]]*\\]",
+          "message": "Create shoppingList with at least two items.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "shoppingList\\.push\\(",
+          "message": "Append a new shopping-list item with push.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "console\\.log\\(\\s*shoppingList\\.length\\s*\\)",
+          "message": "Log the updated shoppingList length.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

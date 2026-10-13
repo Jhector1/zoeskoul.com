@@ -23,39 +23,15 @@
             "allowReveal": false,
             "try_elements_tags_and_attributes_sketch0": {
               "title": "Try it yourself: Close the paragraph",
-              "prompt": "Now apply what you just learned in this task. Fix the paragraph so the sentence **Balanced tags are easier to read.** is inside matching opening and closing p tags. Produce the result for close the paragraph so it reinforces Elements, Tags, and Attributes.",
-              "hint": "The opening tag is already present; add the matching end tag after the sentence.",
-              "help": {
-                "concept": "Balanced paired elements clearly mark where content begins and ends in the document structure.",
-                "hint_1": "Keep the sentence inside the paragraph rather than placing the closing markup before it.",
-                "hint_2": "Compare the element name in the opening tag with the element name in your closing tag."
-              },
-              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Tags</title></head>\n  <body>\n    <p>Balanced tags are easier to read.\n  </body>\n</html>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Tags</title></head>\n  <body>\n    <p>Balanced tags are easier to read.</p>\n  </body>\n</html>\n"
+              "prompt": "Now apply what you just learned in this task. Fix the paragraph so the sentence **Balanced tags are easier to read.** is inside matching opening and closing p tags. Produce the result for close the paragraph so it reinforces Elements, Tags, and Attributes."
             },
             "try_elements_tags_and_attributes_sketch1": {
               "title": "Try it yourself: Nest important text",
-              "prompt": "Now apply what you just learned in this task. Inside the existing paragraph, wrap only the words **HTML structure** in a strong element. Keep the full sentence inside the paragraph. Produce the result for nest important text so it reinforces Elements, Tags, and Attributes.",
-              "hint": "Place the strong opening and closing tags around the two target words without closing the paragraph early.",
-              "help": {
-                "concept": "Nested elements let one part of an outer element carry additional meaning while remaining inside that content.",
-                "hint_1": "The paragraph should open first and close last.",
-                "hint_2": "Check that the strong element begins and ends entirely between the paragraph tags."
-              },
-              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Nesting</title></head>\n  <body>\n    <p>I am practicing HTML structure today.</p>\n  </body>\n</html>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Nesting</title></head>\n  <body>\n    <p>I am practicing <strong>HTML structure</strong> today.</p>\n  </body>\n</html>\n"
+              "prompt": "Now apply what you just learned in this task. Inside the existing paragraph, wrap only the words **HTML structure** in a strong element. Keep the full sentence inside the paragraph. Produce the result for nest important text so it reinforces Elements, Tags, and Attributes."
             },
             "try_elements_tags_and_attributes_sketch2": {
               "title": "Try it yourself: Add an attribute",
-              "prompt": "Now apply what you just learned in this task. Add a title attribute with the value **A short introduction** to the paragraph that says **Welcome to my page.** Keep the paragraph text unchanged. Produce the result for add an attribute so it reinforces Elements, Tags, and Attributes.",
-              "hint": "Put the name-and-value pair inside the paragraph's opening tag.",
-              "help": {
-                "concept": "An attribute adds information to an element while the element's visible content remains between its tags.",
-                "hint_1": "Keep the quoted value attached to the attribute name with an equals sign.",
-                "hint_2": "Inspect the opening p tag carefully; the visible sentence should stay outside the attribute quotes."
-              },
-              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Attributes</title></head>\n  <body>\n    <p>Welcome to my page.</p>\n  </body>\n</html>\n",
-              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Attributes</title></head>\n  <body>\n    <p title=\"A short introduction\">Welcome to my page.</p>\n  </body>\n</html>\n"
+              "prompt": "Now apply what you just learned in this task. Add a title attribute with the value **A short introduction** to the paragraph that says **Welcome to my page.** Keep the paragraph text unchanged. Produce the result for add an attribute so it reinforces Elements, Tags, and Attributes."
             }
           },
           "practice": {
@@ -157,6 +133,42 @@
                 "charset",
                 "filename"
               ]
+            },
+            "close-the-paragraph": {
+              "title": "Close the paragraph",
+              "prompt": "Fix the paragraph so the sentence **Balanced tags are easier to read.** is inside matching opening and closing p tags.",
+              "hint": "The opening tag is already present; add the matching end tag after the sentence.",
+              "help": {
+                "concept": "Balanced paired elements clearly mark where content begins and ends in the document structure.",
+                "hint_1": "Keep the sentence inside the paragraph rather than placing the closing markup before it.",
+                "hint_2": "Compare the element name in the opening tag with the element name in your closing tag."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Tags</title></head>\n  <body>\n    <p>Balanced tags are easier to read.\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Tags</title></head>\n  <body>\n    <p>Balanced tags are easier to read.</p>\n  </body>\n</html>\n"
+            },
+            "nest-strong-text": {
+              "title": "Nest important text",
+              "prompt": "Inside the existing paragraph, wrap only the words **HTML structure** in a strong element. Keep the full sentence inside the paragraph.",
+              "hint": "Place the strong opening and closing tags around the two target words without closing the paragraph early.",
+              "help": {
+                "concept": "Nested elements let one part of an outer element carry additional meaning while remaining inside that content.",
+                "hint_1": "The paragraph should open first and close last.",
+                "hint_2": "Check that the strong element begins and ends entirely between the paragraph tags."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Nesting</title></head>\n  <body>\n    <p>I am practicing HTML structure today.</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Nesting</title></head>\n  <body>\n    <p>I am practicing <strong>HTML structure</strong> today.</p>\n  </body>\n</html>\n"
+            },
+            "add-title-attribute": {
+              "title": "Add an attribute",
+              "prompt": "Add a title attribute with the value **A short introduction** to the paragraph that says **Welcome to my page.** Keep the paragraph text unchanged.",
+              "hint": "Put the name-and-value pair inside the paragraph's opening tag.",
+              "help": {
+                "concept": "An attribute adds information to an element while the element's visible content remains between its tags.",
+                "hint_1": "Keep the quoted value attached to the attribute name with an equals sign.",
+                "hint_2": "Inspect the opening p tag carefully; the visible sentence should stay outside the attribute quotes."
+              },
+              "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Attributes</title></head>\n  <body>\n    <p>Welcome to my page.</p>\n  </body>\n</html>\n",
+              "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head><title>Attributes</title></head>\n  <body>\n    <p title=\"A short introduction\">Welcome to my page.</p>\n  </body>\n</html>\n"
             }
           }
         }

@@ -7,183 +7,189 @@
       "id": "typed-data-controls",
       "cardTitle": "Choose a Type that Matches the Data",
       "title": "Use text, email, number, and date for the value you expect",
-      "bodyMarkdown": "The `type` attribute tells the browser what kind of value a one-line input is meant to collect. Use `text` for ordinary short text, `email` for an email address, `number` for numeric input, and `date` for a calendar date.\n\n```html\n<label for=\"email\">Email</label>\n<input id=\"email\" name=\"email\" type=\"email\">\n<label for=\"guests\">Guests</label>\n<input id=\"guests\" name=\"guests\" type=\"number\">\n```\n\nRead this example line by line: the first label/input pair collects an email address, and the second pair collects a numeric guest count. Choosing a meaningful type gives the browser more context about the expected value."
+      "bodyMarkdown": "The `type` attribute tells the browser what kind of value a one-line input is meant to collect. Use `text` for ordinary short text, `email` for an email address, `number` for numeric input, and `date` for a calendar date.\n\n```html\n<label for=\"email\">Email</label>\n<input id=\"email\" name=\"email\" type=\"email\">\n<label for=\"guests\">Guests</label>\n<input id=\"guests\" name=\"guests\" type=\"number\">\n```\n\nRead this example line by line: the first label/input pair collects an email address, and the second pair collects a numeric guest count. Choosing a meaningful type gives the browser more context about the expected value.",
+      "tryItExercises": [
+        {
+          "id": "input-types-try-data",
+          "kind": "code_input",
+          "title": "Choose input types that match the data",
+          "prompt": "Update the three existing inputs so Email uses `type=\"email\"`, Number of guests uses `type=\"number\"`, and Visit date uses `type=\"date\"`. Keep every label, id, and name unchanged and compare the controls in Preview.",
+          "hint": "Change only the type values to match the information each field collects.",
+          "help": {
+            "concept": "Email, number, and date input types describe the kind of value expected by each control.",
+            "hint_1": "The Email field should use the email type.",
+            "hint_2": "Use number for the guest count and date for the visit date."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"text\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"text\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"number\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Use type=\"email\" for the Email field.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']guests[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']number[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Use type=\"number\" for the guest count.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']visit-date[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']date[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Use type=\"date\" for the visit date.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"text\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"text\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"number\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "checkbox-controls",
       "cardTitle": "Use Checkboxes for Independent Choices",
       "title": "Use checkbox when an option can be turned on or off independently",
-      "bodyMarkdown": "A checkbox represents an independent yes/no or on/off choice. Each checkbox should have its own label, and multiple checkboxes may all be selected at the same time.\n\n```html\n<input id=\"newsletter\" name=\"newsletter\" type=\"checkbox\">\n<label for=\"newsletter\">Send me the newsletter</label>\n```\n\nRead the example line by line: the checkbox creates the independent choice, its id is `newsletter`, and the matching label explains exactly what selecting it means."
+      "bodyMarkdown": "A checkbox represents an independent yes/no or on/off choice. Each checkbox should have its own label, and multiple checkboxes may all be selected at the same time.\n\n```html\n<input id=\"newsletter\" name=\"newsletter\" type=\"checkbox\">\n<label for=\"newsletter\">Send me the newsletter</label>\n```\n\nRead the example line by line: the checkbox creates the independent choice, its id is `newsletter`, and the matching label explains exactly what selecting it means.",
+      "tryItExercises": [
+        {
+          "id": "input-types-try-checkbox",
+          "kind": "code_input",
+          "title": "Add an independent checkbox choice",
+          "prompt": "Inside the form, add a checkbox with `id=\"reminders\"`, `name=\"reminders\"`, and a label that says `Send me event reminders`. Connect the label with `for=\"reminders\"`, then check the control in Preview.",
+          "hint": "A checkbox is appropriate because this preference can be turned on or off independently.",
+          "help": {
+            "concept": "Checkboxes represent independent selections and need a clear label.",
+            "hint_1": "Create an input with type checkbox.",
+            "hint_2": "Match the input id and the label for value with reminders."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <p>Choose whether you want event reminders.</p>\n  </form>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <input id=\"reminders\" name=\"reminders\" type=\"checkbox\">\n    <label for=\"reminders\">Send me event reminders</label>\n  </form>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']checkbox[\"\\'])[^>]*>",
+              "path": "index.html",
+              "message": "Add the reminders checkbox with id, name, and type.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']reminders[\"\\'][^>]*>\\s*Send me event reminders\\s*</label>",
+              "path": "index.html",
+              "message": "Add a connected label for the reminders checkbox.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <p>Choose whether you want event reminders.</p>\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <input id=\"reminders\" name=\"reminders\" type=\"checkbox\">\n    <label for=\"reminders\">Send me event reminders</label>\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "radio-controls",
       "cardTitle": "Use Radio Buttons for One Choice",
       "title": "Give related radio buttons one shared name and a group label",
-      "bodyMarkdown": "Radio buttons are useful when the learner should choose exactly one option from a group. Give every radio button in the group the same `name`, give each one a unique `id` and `value`, and use `fieldset` with `legend` to describe the group.\n\n```html\n<fieldset>\n  <legend>Session</legend>\n  <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n  <label for=\"morning\">Morning</label>\n  <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n  <label for=\"evening\">Evening</label>\n</fieldset>\n```\n\nRead this example line by line: fieldset groups the choices, legend names the group, both radio inputs share `name=\"session\"`, and each input has its own label through a unique id."
+      "bodyMarkdown": "Radio buttons are useful when the learner should choose exactly one option from a group. Give every radio button in the group the same `name`, give each one a unique `id` and `value`, and use `fieldset` with `legend` to describe the group.\n\n```html\n<fieldset>\n  <legend>Session</legend>\n  <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n  <label for=\"morning\">Morning</label>\n  <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n  <label for=\"evening\">Evening</label>\n</fieldset>\n```\n\nRead this example line by line: fieldset groups the choices, legend names the group, both radio inputs share `name=\"session\"`, and each input has its own label through a unique id.",
+      "tryItExercises": [
+        {
+          "id": "input-types-try-radio",
+          "kind": "code_input",
+          "title": "Build one-choice radio options",
+          "prompt": "Replace the loose Morning and Evening controls with one `fieldset`. Add the legend `Choose a session`, then create two radio inputs that share `name=\"session\"`. Give them unique ids and values of `morning` and `evening`, and connect each label to its input.",
+          "hint": "Radio buttons share a name when they represent one choice from the same group.",
+          "help": {
+            "concept": "A radio group uses one shared name, unique ids and values, and a group description.",
+            "hint_1": "Wrap the choices in fieldset and describe them with legend.",
+            "hint_2": "Use id/value morning for one radio and id/value evening for the other; both names are session."
+          },
+          "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <p>Choose a session:</p>\n    <label>Morning</label>\n    <input type=\"radio\">\n    <label>Evening</label>\n    <input type=\"radio\">\n  </form>\n</body>\n</html>\n",
+          "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <fieldset>\n      <legend>Choose a session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n  </form>\n</body>\n</html>\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Choose a session\\s*</legend>.*</fieldset>",
+              "path": "index.html",
+              "message": "Group the session choices in fieldset with a legend.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']morning[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']morning[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']morning[\"\\'][^>]*>\\s*Morning\\s*</label>",
+              "path": "index.html",
+              "message": "Create and label the Morning radio option.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']evening[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']evening[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']evening[\"\\'][^>]*>\\s*Evening\\s*</label>",
+              "path": "index.html",
+              "message": "Create and label the Evening radio option.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "fixedLanguage": "web",
+          "recipeType": "source_checks",
+          "entryFilePath": "index.html",
+          "starterFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <p>Choose a session:</p>\n    <label>Morning</label>\n    <input type=\"radio\">\n    <label>Evening</label>\n    <input type=\"radio\">\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "index.html",
+              "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <fieldset>\n      <legend>Choose a session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n  </form>\n</body>\n</html>\n",
+              "language": "web",
+              "isEntry": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "quizDraft": [
-    {
-      "id": "input-types-try-data",
-      "kind": "code_input",
-      "title": "Choose input types that match the data",
-      "prompt": "Update the three existing inputs so Email uses `type=\"email\"`, Number of guests uses `type=\"number\"`, and Visit date uses `type=\"date\"`. Keep every label, id, and name unchanged and compare the controls in Preview.",
-      "hint": "Change only the type values to match the information each field collects.",
-      "help": {
-        "concept": "Email, number, and date input types describe the kind of value expected by each control.",
-        "hint_1": "The Email field should use the email type.",
-        "hint_2": "Use number for the guest count and date for the visit date."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"text\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"text\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"text\">\n  </form>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"number\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Use type=\"email\" for the Email field.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']guests[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']number[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Use type=\"number\" for the guest count.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']visit-date[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']date[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Use type=\"date\" for the visit date.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"text\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"text\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"text\">\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Workshop Registration</title>\n</head>\n<body>\n  <h1>Workshop Registration</h1>\n  <form>\n    <label for=\"email\">Email</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n\n    <label for=\"guests\">Number of guests</label>\n    <input id=\"guests\" name=\"guests\" type=\"number\">\n\n    <label for=\"visit-date\">Visit date</label>\n    <input id=\"visit-date\" name=\"visit_date\" type=\"date\">\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
-    {
-      "id": "input-types-try-checkbox",
-      "kind": "code_input",
-      "title": "Add an independent checkbox choice",
-      "prompt": "Inside the form, add a checkbox with `id=\"reminders\"`, `name=\"reminders\"`, and a label that says `Send me event reminders`. Connect the label with `for=\"reminders\"`, then check the control in Preview.",
-      "hint": "A checkbox is appropriate because this preference can be turned on or off independently.",
-      "help": {
-        "concept": "Checkboxes represent independent selections and need a clear label.",
-        "hint_1": "Create an input with type checkbox.",
-        "hint_2": "Match the input id and the label for value with reminders."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <p>Choose whether you want event reminders.</p>\n  </form>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <input id=\"reminders\" name=\"reminders\" type=\"checkbox\">\n    <label for=\"reminders\">Send me event reminders</label>\n  </form>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']reminders[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']checkbox[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Add the reminders checkbox with id, name, and type.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']reminders[\"\\'][^>]*>\\s*Send me event reminders\\s*</label>",
-          "path": "index.html",
-          "message": "Add a connected label for the reminders checkbox.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <p>Choose whether you want event reminders.</p>\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Community Updates</title>\n</head>\n<body>\n  <h1>Community Updates</h1>\n  <form>\n    <input id=\"reminders\" name=\"reminders\" type=\"checkbox\">\n    <label for=\"reminders\">Send me event reminders</label>\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
-    {
-      "id": "input-types-try-radio",
-      "kind": "code_input",
-      "title": "Build one-choice radio options",
-      "prompt": "Replace the loose Morning and Evening controls with one `fieldset`. Add the legend `Choose a session`, then create two radio inputs that share `name=\"session\"`. Give them unique ids and values of `morning` and `evening`, and connect each label to its input.",
-      "hint": "Radio buttons share a name when they represent one choice from the same group.",
-      "help": {
-        "concept": "A radio group uses one shared name, unique ids and values, and a group description.",
-        "hint_1": "Wrap the choices in fieldset and describe them with legend.",
-        "hint_2": "Use id/value morning for one radio and id/value evening for the other; both names are session."
-      },
-      "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <p>Choose a session:</p>\n    <label>Morning</label>\n    <input type=\"radio\">\n    <label>Evening</label>\n    <input type=\"radio\">\n  </form>\n</body>\n</html>\n",
-      "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <fieldset>\n      <legend>Choose a session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n  </form>\n</body>\n</html>\n",
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<fieldset\\b[^>]*>.*<legend\\b[^>]*>\\s*Choose a session\\s*</legend>.*</fieldset>",
-          "path": "index.html",
-          "message": "Group the session choices in fieldset with a legend.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']morning[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']morning[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']morning[\"\\'][^>]*>\\s*Morning\\s*</label>",
-          "path": "index.html",
-          "message": "Create and label the Morning radio option.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']evening[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']session[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']radio[\"\\'])(?=[^>]*\\bvalue\\s*=\\s*[\"\\']evening[\"\\'])[^>]*>.*<label\\b[^>]*for\\s*=\\s*[\"\\']evening[\"\\'][^>]*>\\s*Evening\\s*</label>",
-          "path": "index.html",
-          "message": "Create and label the Evening radio option.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "fixedLanguage": "web",
-      "recipeType": "source_checks",
-      "entryFilePath": "index.html",
-      "starterFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <p>Choose a session:</p>\n    <label>Morning</label>\n    <input type=\"radio\">\n    <label>Evening</label>\n    <input type=\"radio\">\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Study Session</title>\n</head>\n<body>\n  <h1>Study Session Signup</h1>\n  <form>\n    <fieldset>\n      <legend>Choose a session</legend>\n\n      <input id=\"morning\" name=\"session\" type=\"radio\" value=\"morning\">\n      <label for=\"morning\">Morning</label>\n\n      <input id=\"evening\" name=\"session\" type=\"radio\" value=\"evening\">\n      <label for=\"evening\">Evening</label>\n    </fieldset>\n  </form>\n</body>\n</html>\n",
-          "language": "web",
-          "isEntry": true
-        }
-      ]
-    },
     {
       "id": "input-types-quiz-email",
       "kind": "single_choice",

@@ -36,7 +36,10 @@
         "id": "try-forms-labels-and-inputs-sketch0",
         "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.title",
         "promptKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.prompt",
-        "exerciseKey": "try-forms-labels-and-inputs-sketch0",
+        "exerciseKey": "forms-try-form-boundary",
+        "exerciseKeys": [
+          "forms-try-form-boundary"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-forms-labels-and-inputs-sketch1",
         "titleKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.title",
         "promptKey": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.prompt",
-        "exerciseKey": "try-forms-labels-and-inputs-sketch1",
+        "exerciseKey": "forms-try-label-connection",
+        "exerciseKeys": [
+          "forms-try-label-connection"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -95,119 +101,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-forms-labels-and-inputs-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<form\\b[^>]*>\\s*<label\\b[^>]*for\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*Name\\s*</label>\\s*<input\\b[^>]*id\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*</form>",
-          "path": "index.html",
-          "message": "Put the Name label and input inside one form element.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-forms-labels-and-inputs-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>",
-          "path": "index.html",
-          "message": "Connect the Email address label with for=\"email\".",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
-          "path": "index.html",
-          "message": "Give the email input matching id, name, and type attributes.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.tryIt.try_forms_labels_and_inputs_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "forms-quiz-label",
       "kind": "single_choice",
@@ -277,6 +170,119 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "<input id=\"city\" name=\"city\" type=\"text\">"
+      }
+    },
+    {
+      "id": "forms-try-form-boundary",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-form-boundary",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-form-boundary.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<form\\b[^>]*>\\s*<label\\b[^>]*for\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*Name\\s*</label>\\s*<input\\b[^>]*id\\s*=\\s*[\"\\']volunteer-name[\"\\'][^>]*>\\s*</form>",
+          "path": "index.html",
+          "message": "Put the Name label and input inside one form element.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-form-boundary.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-form-boundary.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-form-boundary.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "forms-try-label-connection",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-label-connection",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-label-connection.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']email[\"\\'][^>]*>\\s*Email address\\s*</label>",
+          "path": "index.html",
+          "message": "Connect the Email address label with for=\"email\".",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<input\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']email[\"\\'])(?=[^>]*\\btype\\s*=\\s*[\"\\']email[\"\\'])[^>]*>",
+          "path": "index.html",
+          "message": "Give the email input matching id, name, and type attributes.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-label-connection.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-label-connection.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.forms-labels-and-inputs.practice.forms-try-label-connection.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

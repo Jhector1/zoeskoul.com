@@ -36,7 +36,10 @@
         "id": "try-tables-and-table-structure-sketch0",
         "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.prompt",
-        "exerciseKey": "try-tables-and-table-structure-sketch0",
+        "exerciseKey": "tables-try-basic",
+        "exerciseKeys": [
+          "tables-try-basic"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-tables-and-table-structure-sketch1",
         "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.prompt",
-        "exerciseKey": "try-tables-and-table-structure-sketch1",
+        "exerciseKey": "tables-try-caption-headers",
+        "exerciseKeys": [
+          "tables-try-caption-headers"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,7 +80,10 @@
         "id": "try-tables-and-table-structure-sketch2",
         "titleKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.title",
         "promptKey": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.prompt",
-        "exerciseKey": "try-tables-and-table-structure-sketch2",
+        "exerciseKey": "tables-try-complete",
+        "exerciseKeys": [
+          "tables-try-complete"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -120,207 +129,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-tables-and-table-structure-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<caption\\b[^>]*>\\s*Weekly club meetings\\s*</caption>",
-          "path": "index.html",
-          "message": "Add the requested table caption.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<tr\\b[^>]*>\\s*<th\\b[^>]*>\\s*Club\\s*</th>\\s*<th\\b[^>]*>\\s*Day\\s*</th>\\s*</tr>",
-          "path": "index.html",
-          "message": "Add the Club and Day header row.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Robotics\\s*</td>\\s*<td\\b[^>]*>\\s*Tuesday\\s*</td>\\s*</tr>",
-          "path": "index.html",
-          "message": "Add the Robotics row.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Art\\s*</td>\\s*<td\\b[^>]*>\\s*Thursday\\s*</td>\\s*</tr>",
-          "path": "index.html",
-          "message": "Add the Art row.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-tables-and-table-structure-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<thead\\b[^>]*>\\s*<tr\\b[^>]*>.*Time.*Session.*</tr>\\s*</thead>",
-          "path": "index.html",
-          "message": "Put the header row inside thead.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<tbody\\b[^>]*>\\s*<tr\\b[^>]*>.*10:00.*HTML Basics.*</tr>\\s*</tbody>",
-          "path": "index.html",
-          "message": "Put the data row inside tbody.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-tables-and-table-structure-sketch2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<caption\\b[^>]*>\\s*Morning session schedule\\s*</caption>",
-          "path": "index.html",
-          "message": "Add the requested table caption.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<thead\\b[^>]*>.*Time.*Session.*Location.*</thead>",
-          "path": "index.html",
-          "message": "Build the three-column header inside thead.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<tbody\\b[^>]*>.*9:00.*Welcome.*Room A.*10:00.*HTML Basics.*Lab 1.*11:00.*Robotics Demo.*Lab 2.*</tbody>",
-          "path": "index.html",
-          "message": "Put all three schedule rows inside tbody.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.tryIt.try_tables_and_table_structure_sketch2.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "tables-quiz-choice",
       "kind": "single_choice",
@@ -388,6 +196,186 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "<th>Time</th>"
+      }
+    },
+    {
+      "id": "tables-try-basic",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-basic",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-basic.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Robotics\\s*</td>\\s*<td\\b[^>]*>\\s*Tuesday\\s*</td>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Robotics row.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Art\\s*</td>\\s*<td\\b[^>]*>\\s*Thursday\\s*</td>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Art row.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-basic.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-basic.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-basic.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "tables-try-caption-headers",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-caption-headers",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-caption-headers.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<caption\\b[^>]*>\\s*Weekly club meetings\\s*</caption>",
+          "path": "index.html",
+          "message": "Add the requested table caption.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tr\\b[^>]*>\\s*<th\\b[^>]*>\\s*Club\\s*</th>\\s*<th\\b[^>]*>\\s*Day\\s*</th>\\s*</tr>",
+          "path": "index.html",
+          "message": "Add the Club and Day header row.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-caption-headers.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-caption-headers.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-caption-headers.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "tables-try-complete",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-complete",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-complete.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<thead\\b[^>]*>.*Time.*Session.*Location.*</thead>",
+          "path": "index.html",
+          "message": "Build the three-column header inside thead.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<tbody\\b[^>]*>.*9:00.*Welcome.*Room A.*10:00.*HTML Basics.*Lab 1.*11:00.*Robotics Demo.*Lab 2.*</tbody>",
+          "path": "index.html",
+          "message": "Put all three schedule rows inside tbody.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-complete.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-complete.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-3-lists-tables-content.tables-and-table-structure.practice.tables-try-complete.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

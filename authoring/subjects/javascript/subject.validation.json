@@ -1,0 +1,19 @@
+{
+  "validationSuite": "javascriptSubjectValidation",
+  "appliesTo": "javascript_courses",
+  "runtime": {
+    "language": "web"
+  },
+  "rules": {
+    "executionValidation": [
+      "Every JavaScript code input uses source_checks with authored checks against browser workspace files",
+      "JavaScript Foundations does not require Judge0, stdout tests, package installation, or external network access",
+      "Hands-on exercises use local HTML, JavaScript, and data files in the browser workspace"
+    ],
+    "pedagogy": [
+      "Teach JavaScript expressions and control flow before browser events and asynchronous data",
+      "Connect technical topics to observable browser behavior and state changes",
+      "Teach loading, error, and empty states before the final data-driven capstone"
+    ]
+  }
+}

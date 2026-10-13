@@ -36,7 +36,10 @@
         "id": "try-document-structure-sketch0",
         "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.prompt",
-        "exerciseKey": "try-document-structure-sketch0",
+        "exerciseKey": "add-document-root",
+        "exerciseKeys": [
+          "add-document-root"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-document-structure-sketch1",
         "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.prompt",
-        "exerciseKey": "try-document-structure-sketch1",
+        "exerciseKey": "build-head-metadata",
+        "exerciseKeys": [
+          "build-head-metadata"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,7 +80,10 @@
         "id": "try-document-structure-sketch2",
         "titleKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.prompt",
-        "exerciseKey": "try-document-structure-sketch2",
+        "exerciseKey": "complete-document-shell",
+        "exerciseKeys": [
+          "complete-document-shell"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -222,16 +231,16 @@
       }
     },
     {
-      "id": "try-document-structure-sketch0",
+      "id": "add-document-root",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0",
+      "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.add-document-root",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.add-document-root.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -259,7 +268,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.add-document-root.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -269,11 +278,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.add-document-root.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch0.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.add-document-root.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -282,16 +291,16 @@
       }
     },
     {
-      "id": "try-document-structure-sketch1",
+      "id": "build-head-metadata",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1",
+      "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.build-head-metadata",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.build-head-metadata.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -312,7 +321,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.build-head-metadata.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -322,11 +331,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.build-head-metadata.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch1.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.build-head-metadata.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -335,43 +344,22 @@
       }
     },
     {
-      "id": "try-document-structure-sketch2",
+      "id": "complete-document-shell",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2",
+      "messageBase": "topics.html.html-module-1-first-web-pages.document-structure.practice.complete-document-shell",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.complete-document-shell.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
         }
       ],
       "sourceChecks": [
-        {
-          "type": "source_regex",
-          "path": "index.html",
-          "pattern": "(?is)^\\s*<!doctype\\s+html\\s*>",
-          "message": "Add the HTML doctype at the top of the document.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "path": "index.html",
-          "pattern": "(?is)<html\\b[^>]*\\blang\\s*=\\s*[\\\"']en[\\\"'][^>]*>.*</html>",
-          "message": "Set the html document language to en.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "path": "index.html",
-          "pattern": "(?is)<head\\b[^>]*>.*<meta\\b[^>]*charset\\s*=\\s*[\\\"']?UTF-8[\\\"']?[^>]*>.*<title\\b[^>]*>\\s*About Maya\\s*</title>.*</head>",
-          "message": "Complete head with UTF-8 and the About Maya title.",
-          "normalizeWhitespace": false
-        },
         {
           "type": "source_regex",
           "path": "index.html",
@@ -386,7 +374,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.complete-document-shell.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -396,11 +384,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.complete-document-shell.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.tryIt.try_document_structure_sketch2.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.document-structure.practice.complete-document-shell.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true

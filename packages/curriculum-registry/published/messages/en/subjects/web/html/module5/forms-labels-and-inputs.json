@@ -20,47 +20,11 @@
             "allowReveal": false,
             "try_forms_labels_and_inputs_sketch0": {
               "title": "Try it yourself: Group the controls in a form",
-              "prompt": "Now apply what you just learned in this task. Wrap the existing Name label and input in one form element. Keep the page heading and introduction outside the form, then confirm the field still appears in Preview. Produce the result for group the controls in a form so it reinforces Forms, Labels, and Inputs.",
-              "hint": "The form should contain the interactive controls that belong to the same submission.",
-              "help": {
-                "concept": "The form element groups controls that participate in one submission.",
-                "hint_1": "Open form immediately before the Name label.",
-                "hint_2": "Close form immediately after the Name input."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Wrap the existing Name label and input in one form element. Keep the page heading and introduction outside the form, then confirm the field still appears in Preview. Produce the result for group the controls in a form so it reinforces Forms, Labels, and Inputs."
             },
             "try_forms_labels_and_inputs_sketch1": {
               "title": "Try it yourself: Connect a label to its input",
-              "prompt": "Now apply what you just learned in this task. Connect the Email address label to the email input. Give the input `id=\"email\"` and give the label `for=\"email\"`. Keep the existing `name` and `type` attributes, then check the field in Preview. Produce the result for connect a label to its input so it reinforces Forms, Labels, and Inputs.",
-              "hint": "The label's for value and the input's id must match exactly.",
-              "help": {
-                "concept": "Matching label for and input id values create an explicit accessible connection.",
-                "hint_1": "Add `for=\"email\"` to the label.",
-                "hint_2": "Add `id=\"email\"` to the input without removing its name or type."
-              },
-              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
-              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
-              "starterFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n"
-                }
-              },
-              "solutionFiles": {
-                "index_html": {
-                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n"
-                }
-              }
+              "prompt": "Now apply what you just learned in this task. Connect the Email address label to the email input. Give the input `id=\"email\"` and give the label `for=\"email\"`. Keep the existing `name` and `type` attributes, then check the field in Preview. Produce the result for connect a label to its input so it reinforces Forms, Labels, and Inputs."
             }
           },
           "practice": {
@@ -128,6 +92,50 @@
                 "<input for=\"city\" name=\"city\" type=\"text\">",
                 "<input name=\"city\" type=\"text\">"
               ]
+            },
+            "forms-try-form-boundary": {
+              "title": "Group the controls in a form",
+              "prompt": "Wrap the existing Name label and input in one form element. Keep the page heading and introduction outside the form, then confirm the field still appears in Preview.",
+              "hint": "The form should contain the interactive controls that belong to the same submission.",
+              "help": {
+                "concept": "The form element groups controls that participate in one submission.",
+                "hint_1": "Open form immediately before the Name label.",
+                "hint_2": "Close form immediately after the Name input."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <label for=\"volunteer-name\">Name</label>\n  <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Volunteer Interest Form</title>\n</head>\n<body>\n  <h1>Volunteer Interest Form</h1>\n  <p>Tell us who is interested in volunteering.</p>\n\n  <form>\n    <label for=\"volunteer-name\">Name</label>\n    <input id=\"volunteer-name\" name=\"volunteer_name\" type=\"text\">\n  </form>\n</body>\n</html>\n"
+                }
+              }
+            },
+            "forms-try-label-connection": {
+              "title": "Connect a label to its input",
+              "prompt": "Connect the Email address label to the email input. Give the input `id=\"email\"` and give the label `for=\"email\"`. Keep the existing `name` and `type` attributes, then check the field in Preview.",
+              "hint": "The label's for value and the input's id must match exactly.",
+              "help": {
+                "concept": "Matching label for and input id values create an explicit accessible connection.",
+                "hint_1": "Add `for=\"email\"` to the label.",
+                "hint_2": "Add `id=\"email\"` to the input without removing its name or type."
+              },
+              "starterCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
+              "solutionCode": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label>Email address</label>\n    <input name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Library Card Request</title>\n</head>\n<body>\n  <h1>Library Card Request</h1>\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" name=\"email\" type=\"email\">\n  </form>\n</body>\n</html>\n"
+                }
+              }
             }
           }
         }

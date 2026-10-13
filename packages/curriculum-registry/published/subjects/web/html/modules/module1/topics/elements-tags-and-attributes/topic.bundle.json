@@ -36,7 +36,10 @@
         "id": "try-elements-tags-and-attributes-sketch0",
         "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.prompt",
-        "exerciseKey": "try-elements-tags-and-attributes-sketch0",
+        "exerciseKey": "close-the-paragraph",
+        "exerciseKeys": [
+          "close-the-paragraph"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-elements-tags-and-attributes-sketch1",
         "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.prompt",
-        "exerciseKey": "try-elements-tags-and-attributes-sketch1",
+        "exerciseKey": "nest-strong-text",
+        "exerciseKeys": [
+          "nest-strong-text"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,7 +80,10 @@
         "id": "try-elements-tags-and-attributes-sketch2",
         "titleKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.title",
         "promptKey": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.prompt",
-        "exerciseKey": "try-elements-tags-and-attributes-sketch2",
+        "exerciseKey": "add-title-attribute",
+        "exerciseKeys": [
+          "add-title-attribute"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -224,16 +233,16 @@
       }
     },
     {
-      "id": "try-elements-tags-and-attributes-sketch0",
+      "id": "close-the-paragraph",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0",
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.close-the-paragraph",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.close-the-paragraph.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -254,7 +263,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.close-the-paragraph.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -264,11 +273,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.close-the-paragraph.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch0.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.close-the-paragraph.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -277,16 +286,16 @@
       }
     },
     {
-      "id": "try-elements-tags-and-attributes-sketch1",
+      "id": "nest-strong-text",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1",
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.nest-strong-text",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.nest-strong-text.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -307,7 +316,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.nest-strong-text.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -317,11 +326,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.nest-strong-text.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch1.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.nest-strong-text.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -330,16 +339,16 @@
       }
     },
     {
-      "id": "try-elements-tags-and-attributes-sketch2",
+      "id": "add-title-attribute",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2",
+      "messageBase": "topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.add-title-attribute",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+          "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.add-title-attribute.solutionCode",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -360,7 +369,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.starterCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.add-title-attribute.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -370,11 +379,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+        "solutionCode": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.add-title-attribute.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.tryIt.try_elements_tags_and_attributes_sketch2.solutionCode",
+            "content": "@:topics.html.html-module-1-first-web-pages.elements-tags-and-attributes.practice.add-title-attribute.solutionCode",
             "language": "web",
             "isEntry": true,
             "entry": true

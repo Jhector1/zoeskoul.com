@@ -1,0 +1,201 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "events-forms-and-user-input": {
+          "label": "Events, Forms, and User Input",
+          "summary": "Respond to clicks, handle form submission without reloading, and read values from form controls.",
+          "cards": {
+            "sketch0": {
+              "title": "Respond to user actions"
+            },
+            "sketch1": {
+              "title": "Handle a form without reloading"
+            },
+            "sketch2": {
+              "title": "React to a changed control"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_events_forms_and_user_input_sketch0": {
+              "title": "Try it yourself: Reveal a study tip",
+              "prompt": "Now apply what you just learned in this task. Problem: A study tip should appear only after the learner asks for it instead of being permanently visible. Task: When `#tip-button` is clicked, change `#tip` to `\"Review for 10 minutes\"`. Expected result: clicking the button reveals the study tip in the Preview. Produce the result for reveal a study tip so it reinforces Events, Forms, and User Input.",
+              "hint": "Put the page update inside a function registered for click.",
+              "help": {
+                "concept": "A click listener runs a handler later in response to user interaction.",
+                "hint_1": "Select the button and output first.",
+                "hint_2": "Pass the handler function without calling it."
+              },
+              "starterCode": "// Select the elements.\n// Define the handler.\n// Register it for click.\n",
+              "solutionCode": "const button = document.querySelector(\"#tip-button\");\nconst tip = document.querySelector(\"#tip\");\nfunction revealTip() {\n  tip.textContent = \"Review for 10 minutes\";\n}\nbutton.addEventListener(\"click\", revealTip);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <button id=\"tip-button\">Show tip</button>\n  <p id=\"tip\">No tip yet</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Select the elements.\n// Define the handler.\n// Register it for click.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <button id=\"tip-button\">Show tip</button>\n  <p id=\"tip\">No tip yet</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const button = document.querySelector(\"#tip-button\");\nconst tip = document.querySelector(\"#tip\");\nfunction revealTip() {\n  tip.textContent = \"Review for 10 minutes\";\n}\nbutton.addEventListener(\"click\", revealTip);\n"
+                }
+              }
+            },
+            "try_events_forms_and_user_input_sketch1": {
+              "title": "Try it yourself: Handle a nickname form",
+              "prompt": "Now apply what you just learned in this task. Problem: A nickname form should display what the learner entered without reloading the page and losing the interaction. Task: Handle `#nickname-form`, prevent the default submit, read `#nickname`, and show the value in `#nickname-output`. Expected result: submitting the form keeps the page in place and displays the entered nickname. Produce the result for handle a nickname form so it reinforces Events, Forms, and User Input.",
+              "hint": "Read the current value inside the submit handler.",
+              "help": {
+                "concept": "A submit handler can stop navigation and use the form's current data.",
+                "hint_1": "The handler needs the event parameter.",
+                "hint_2": "Call preventDefault before copying the input value into the output."
+              },
+              "starterCode": "// Select form, input, output.\n// Handle submit.\n",
+              "solutionCode": "const form = document.querySelector(\"#nickname-form\");\nconst input = document.querySelector(\"#nickname\");\nconst output = document.querySelector(\"#nickname-output\");\nfunction saveNickname(event) {\n  event.preventDefault();\n  output.textContent = input.value;\n}\nform.addEventListener(\"submit\", saveNickname);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <form id=\"nickname-form\"><label>Nickname <input id=\"nickname\"></label><button>Save</button></form>\n  <p id=\"nickname-output\"></p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Select form, input, output.\n// Handle submit.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <form id=\"nickname-form\"><label>Nickname <input id=\"nickname\"></label><button>Save</button></form>\n  <p id=\"nickname-output\"></p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const form = document.querySelector(\"#nickname-form\");\nconst input = document.querySelector(\"#nickname\");\nconst output = document.querySelector(\"#nickname-output\");\nfunction saveNickname(event) {\n  event.preventDefault();\n  output.textContent = input.value;\n}\nform.addEventListener(\"submit\", saveNickname);\n"
+                }
+              }
+            },
+            "try_events_forms_and_user_input_sketch2": {
+              "title": "Try it yourself: Track a theme selection",
+              "prompt": "Now apply what you just learned in this task. Problem: A theme settings screen needs to react when the learner chooses a different option. Task: When `#theme-choice` changes, show its current value in `#theme-output` using `event.currentTarget.value`. Expected result: changing the selection immediately updates the visible theme value. Produce the result for track a theme selection so it reinforces Events, Forms, and User Input.",
+              "hint": "Read the value from the control whose listener is running.",
+              "help": {
+                "concept": "currentTarget gives the handler access to the element that owns the listener.",
+                "hint_1": "Define a handler with an event parameter.",
+                "hint_2": "Use event.currentTarget.value for the output."
+              },
+              "starterCode": "// Select the control and output.\n// Handle change.\n",
+              "solutionCode": "const choice = document.querySelector(\"#theme-choice\");\nconst output = document.querySelector(\"#theme-output\");\nfunction showTheme(event) {\n  output.textContent = event.currentTarget.value;\n}\nchoice.addEventListener(\"change\", showTheme);\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <select id=\"theme-choice\"><option value=\"light\">Light</option><option value=\"dark\">Dark</option></select>\n  <p id=\"theme-output\">light</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "// Select the control and output.\n// Handle change.\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <select id=\"theme-choice\"><option value=\"light\">Light</option><option value=\"dark\">Dark</option></select>\n  <p id=\"theme-output\">light</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const choice = document.querySelector(\"#theme-choice\");\nconst output = document.querySelector(\"#theme-output\");\nfunction showTheme(event) {\n  output.textContent = event.currentTarget.value;\n}\nchoice.addEventListener(\"change\", showTheme);\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "events-choice": {
+              "title": "Choose the right idea",
+              "prompt": "Which line registers `showMenu` to run later when `button` is clicked?",
+              "hint": "Focus on the responsibility described by the question.",
+              "help": {
+                "concept": "The correct option matches the specific job the code needs to do.",
+                "hint_1": "Separate DOM, data, events, and async responsibilities.",
+                "hint_2": "Choose the behavior that directly produces the requested outcome."
+              },
+              "options": {
+                "a": "button.addEventListener(\"click\", showMenu)",
+                "b": "showMenu()",
+                "c": "button.textContent = showMenu",
+                "d": "JSON.parse(showMenu)"
+              }
+            },
+            "events-multi": {
+              "title": "Recognize correct behavior",
+              "prompt": "Which statements about forms and events are true?",
+              "hint": "More than one statement can be correct.",
+              "help": {
+                "concept": "This check separates the responsibilities introduced in the lesson.",
+                "hint_1": "Keep only statements that match the actual JavaScript or browser behavior.",
+                "hint_2": "Reject statements that assign the concept a different job."
+              },
+              "options": {
+                "a": "preventDefault can stop normal form navigation.",
+                "b": "An input value can be read with .value.",
+                "c": "A submit listener can run a handler.",
+                "d": "currentTarget always means the whole document."
+              }
+            },
+            "events-blank": {
+              "title": "Complete the idea",
+              "prompt": "Choose the property that reads the current value from a form control.",
+              "hint": "Use the role described in the sentence to choose the missing term.",
+              "help": {
+                "concept": "The blank names the feature that performs the stated responsibility.",
+                "hint_1": "Eliminate choices from unrelated browser responsibilities.",
+                "hint_2": "Choose the term whose behavior fits the sentence."
+              },
+              "template": "const term = searchInput.[blank1];",
+              "choices": [
+                "textContent",
+                "value",
+                "length",
+                "append"
+              ]
+            },
+            "events-order": {
+              "title": "Put the flow in order",
+              "prompt": "Arrange the steps in the order a beginner-friendly solution should follow.",
+              "hint": "Start with the dependency that must exist first.",
+              "help": {
+                "concept": "The sequence follows data and control dependencies.",
+                "hint_1": "Each later step depends on the earlier step having happened.",
+                "hint_2": "Place the visible result after the operation that produces it."
+              },
+              "tokens": {
+                "t1": "Select the form and controls",
+                "t2": "Register the listener",
+                "t3": "Prevent the default action inside the handler",
+                "t4": "Read the current value",
+                "t5": "Update the page"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "events-forms-and-user-input": {
+          "click-listener": {
+            "title": "addEventListener connects an event to a function",
+            "bodyMarkdown": "Browser **events** tell your code that something happened.\n\n```js\nconst button = document.querySelector(\"#details-button\");\nconst message = document.querySelector(\"#details-message\");\n\nfunction showDetails() {\n  message.textContent = \"Doors open at 6:30 PM\";\n}\n\nbutton.addEventListener(\"click\", showDetails);\n```\n\nStep by step:\n\n1. Select the button and output.\n2. Define the work in `showDetails`.\n3. Register that function for the click.\n4. The browser calls it later.\n\nPassing `showDetails` is different from calling `showDetails()` immediately."
+          },
+          "form-submit": {
+            "title": "submit, preventDefault, and value work together",
+            "bodyMarkdown": "A form normally asks the browser to navigate. JavaScript can take control of that submission.\n\n```js\nconst form = document.querySelector(\"#signup-form\");\nconst nameInput = document.querySelector(\"#name\");\n\nfunction handleSubmit(event) {\n  event.preventDefault();\n  console.log(nameInput.value);\n}\n\nform.addEventListener(\"submit\", handleSubmit);\n```\n\nLine by line:\n\n1. Select the form and input.\n2. The handler receives the browser event.\n3. `preventDefault()` stops normal navigation.\n4. `.value` reads the current user input.\n5. The listener connects the form to the handler."
+          },
+          "change-value": {
+            "title": "currentTarget gives the handler the control that fired its listener",
+            "bodyMarkdown": "A select emits a `change` event when its selected option changes.\n\n```js\nconst category = document.querySelector(\"#category\");\n\nfunction handleCategoryChange(event) {\n  const selected = event.currentTarget.value;\n  console.log(selected);\n}\n\ncategory.addEventListener(\"change\", handleCategoryChange);\n```\n\nStep by step:\n\n1. Select the control.\n2. The browser passes an event object.\n3. `event.currentTarget` is the element whose listener is running.\n4. `.value` reads the selected option.\n5. That value can drive filtering or another page update."
+          }
+        }
+      }
+    }
+  }
+}

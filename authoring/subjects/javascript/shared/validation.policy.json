@@ -1,0 +1,31 @@
+{
+  "policyId": "javascript-shared-validation",
+  "extendsValidation": [
+    "course-structure",
+    "versioning",
+    "workspace-language"
+  ],
+  "runtime": {
+    "language": "web"
+  },
+  "validationRequirements": {
+    "javascriptCodeInputNeedsSourceChecks": true,
+    "judge0NotRequired": true,
+    "browserPreviewRequired": true,
+    "externalNetworkForbidden": true
+  },
+  "rules": {
+    "executionValidation": [
+      "Every JavaScript code_input uses fixedLanguage web and recipeType source_checks",
+      "Every JavaScript code_input includes at least one sourceChecks rule",
+      "Use local browser workspace files and deterministic fixtures instead of external network requests",
+      "Do not create stdout tests for browser JavaScript exercises"
+    ],
+    "pedagogy": [
+      "Keep JavaScript Foundations focused on language fundamentals, DOM interaction, events, and local asynchronous data",
+      "Introduce one source of complexity at a time and make state changes visible in the browser preview",
+      "Teach data and asynchronous prerequisites before the capstone",
+      "Do not require frameworks, build tools, package installation, or backend services"
+    ]
+  }
+}

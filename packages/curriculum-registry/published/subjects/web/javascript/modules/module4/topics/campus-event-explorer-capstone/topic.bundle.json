@@ -1,0 +1,2491 @@
+{
+  "topicId": "campus-event-explorer-capstone",
+  "subjectSlug": "javascript",
+  "moduleSlug": "javascript-foundations-module-4-campus-event-explorer",
+  "sectionSlug": "javascript-javascript-foundations-section-4-capstone",
+  "prefix": "javascript_module_4",
+  "minutes": 70,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.label",
+    "summaryKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.cards.sketch0.title",
+      "sketchId": "campus-event-explorer-capstone-concept",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "capstone_format_meta",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_format_meta.title",
+            "exerciseKey": "capstone-format-meta",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "capstone_create_card",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_create_card.title",
+            "exerciseKey": "capstone-create-card",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_select_events",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_select_events.title",
+            "exerciseKey": "capstone-select-events",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_render_events",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_render_events.title",
+            "exerciseKey": "capstone-render-events",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_state",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_state.title",
+            "exerciseKey": "capstone-state",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_filter",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_filter.title",
+            "exerciseKey": "capstone-filter",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_select_controls",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_select_controls.title",
+            "exerciseKey": "capstone-select-controls",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_submit_filter",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_submit_filter.title",
+            "exerciseKey": "capstone-submit-filter",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_fetch_local",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_fetch_local.title",
+            "exerciseKey": "capstone-fetch-local",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_check_response",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_check_response.title",
+            "exerciseKey": "capstone-check-response",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_decode_json",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_decode_json.title",
+            "exerciseKey": "capstone-decode-json",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_validate_data",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_validate_data.title",
+            "exerciseKey": "capstone-validate-data",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_status_ready",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_status_ready.title",
+            "exerciseKey": "capstone-status-ready",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_start_loading",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_start_loading.title",
+            "exerciseKey": "capstone-start-loading",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_load_events",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_load_events.title",
+            "exerciseKey": "capstone-load-events",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_render_loaded_events",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_render_loaded_events.title",
+            "exerciseKey": "capstone-render-loaded-events",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_empty_state",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_empty_state.title",
+            "exerciseKey": "capstone-empty-state",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_error_state",
+            "titleKey": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.projectSteps.capstone_error_state.title",
+            "exerciseKey": "capstone-error-state",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "campus-event-explorer-capstone-concept",
+      "archetype": "paragraph",
+      "titleKey": "sketches.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.campus-event-explorer-capstone-concept.title",
+      "bodyKey": "sketches.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.campus-event-explorer-capstone-concept.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "capstone-format-meta",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionFiles.script_js.content",
+          "path": "script.js",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+formatEventMeta\\s*\\(event\\)[\\s\\S]*event\\.seats\\s*>\\s*0[\\s\\S]*return\\s+`[\\s\\S]*event\\.category[\\s\\S]*event\\.location",
+          "message": "Return category, location, and seat availability from formatEventMeta.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.starterCode",
+            "path": "script.js",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionFiles.script_js.content",
+            "path": "script.js",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_format_meta.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-create-card",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+createEventCard[\\s\\S]*createElement\\(\\s*[\"\\']article[\"\\']\\s*\\)[\\s\\S]*article\\.append\\(\\s*heading\\s*\\)[\\s\\S]*article\\.append\\(\\s*meta\\s*\\)[\\s\\S]*return\\s+article",
+          "message": "Build one card with createElement, textContent, and append.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_create_card.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-select-events",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+eventsElement\\s*=\\s*document\\.querySelector\\(\\s*[\\\"']#events[\\\"']\\s*\\)",
+          "message": "Select #events into eventsElement.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_events.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-render-events",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+renderEvents[\\s\\S]*eventsElement\\.textContent\\s*=\\s*[\"\\'][\\\"\\'][\\s\\S]*for\\s*\\(\\s*const\\s+event\\s+of\\s+events\\s*\\)[\\s\\S]*eventsElement\\.append",
+          "message": "Render with textContent, for...of, and append.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_events.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-state",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "let\\s+allEvents\\s*=\\s*\\[\\s*\\]",
+          "message": "Create allEvents as an empty array.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_state.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-filter",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+filterEvents\\s*\\(category\\)[\\s\\S]*category\\s*===\\s*[\\\"']all[\\\"'][\\s\\S]*allEvents\\.filter\\([\\s\\S]*event\\.category\\s*===\\s*category",
+          "message": "Return all events for all, otherwise filter by category.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_filter.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-select-controls",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+filtersForm\\s*=\\s*document\\.querySelector\\(\\s*[\\\"']#filters[\\\"']\\s*\\)[\\s\\S]*const\\s+categorySelect\\s*=\\s*document\\.querySelector\\(\\s*[\\\"']#category[\\\"']\\s*\\)",
+          "message": "Select both the filter form and category select.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_select_controls.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-submit-filter",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "filtersForm\\.addEventListener\\(\\s*[\\\"']submit[\\\"'][\\s\\S]*preventDefault\\(\\s*\\)[\\s\\S]*filterEvents\\(\\s*categorySelect\\.value\\s*\\)[\\s\\S]*renderEvents\\(",
+          "message": "Prevent form navigation and render the filtered events on submit.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_submit_filter.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-fetch-local",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "async\\s+function\\s+fetchEvents\\s*\\(\\s*\\)[\\s\\S]*await\\s+fetch\\(\\s*[\\\"']\\./events\\.json[\\\"']\\s*\\)[\\s\\S]*return\\s+response",
+          "message": "Request ./events.json and return the response.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_fetch_local.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-check-response",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "!response\\.ok[\\s\\S]*throw\\s+new\\s+Error\\(\\s*[\"\\']Could not load events[\"\\']\\s*\\)",
+          "message": "Reject failed responses with the familiar error pattern.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_check_response.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-decode-json",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "const\\s+records\\s*=\\s*await\\s+response\\.json\\(\\s*\\)[\\s\\S]*return\\s+records",
+          "message": "Decode response.json() into records and return it.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_decode_json.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-validate-data",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "Array\\.isArray\\(\\s*records\\s*\\)[\\s\\S]*throw\\s+new\\s+Error[\\s\\S]*return\\s+records",
+          "message": "Reject decoded data that is not an array.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_validate_data.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-status-ready",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "function\\s+showStatus\\s*\\(\\s*message\\s*\\)[\\s\\S]*statusElement\\.textContent\\s*=\\s*message[\\s\\S]*Ready to load events\\.",
+          "message": "Define showStatus with textContent and show the ready message.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_status_ready.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-start-loading",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "async\\s+function\\s+start[\\s\\S]*showStatus\\(\\s*[\"\\']Loading events…[\"\\']\\s*\\)[\\s\\S]*start\\(\\s*\\)",
+          "message": "Define and call start() so the preview enters the loading state.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_start_loading.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-load-events",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\s*=\\s*await\\s+fetchEvents\\(\\s*\\)[\\s\\S]*allEvents\\.length[\\s\\S]*events found",
+          "message": "Load the local events into allEvents and report the loaded count.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_load_events.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-render-loaded-events",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\s*=\\s*await\\s+fetchEvents\\(\\s*\\)[\\s\\S]*renderEvents\\(\\s*allEvents\\s*\\)",
+          "message": "Render the loaded allEvents array after the successful load.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_render_loaded_events.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-empty-state",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "allEvents\\.length\\s*===\\s*0[\\s\\S]*showStatus\\(\\s*[\"\\']No events found\\.[\"\\']\\s*\\)[\\s\\S]*renderEvents\\(\\s*\\[\\s*\\]\\s*\\)",
+          "message": "Handle the empty loaded-array branch before the normal success path.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_empty_state.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-error-state",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionFiles.index_html.content",
+          "path": "index.html",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionFiles.script_js.content",
+          "path": "script.js",
+          "isEntry": true,
+          "entry": true,
+          "language": "web"
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionFiles.styles_css.content",
+          "path": "styles.css",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionFiles.events_json.content",
+          "path": "events.json",
+          "readOnly": true,
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "script.js",
+          "pattern": "try\\s*\\{[\\s\\S]*allEvents\\s*=\\s*await\\s+fetchEvents\\(\\s*\\)[\\s\\S]*catch\\s*\\([\\s\\S]*showStatus\\(\\s*[\"\\']Could not load events\\.[\"\\']\\s*\\)",
+          "message": "Catch startup failures while preserving the existing empty and success behavior.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "script.js",
+        "starterFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.starterFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.starterCode",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.starterFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.starterFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionCode",
+        "solutionFiles": [
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionFiles.index_html.content",
+            "path": "index.html",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionFiles.script_js.content",
+            "path": "script.js",
+            "isEntry": true,
+            "entry": true,
+            "language": "web"
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionFiles.styles_css.content",
+            "path": "styles.css",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "content": "@:topics.javascript.javascript-foundations-module-4-campus-event-explorer.campus-event-explorer-capstone.finalCapstone.steps.capstone_error_state.solutionFiles.events_json.content",
+            "path": "events.json",
+            "readOnly": true,
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      }
+    }
+  ]
+}

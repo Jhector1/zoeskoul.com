@@ -1,0 +1,148 @@
+{
+  "subjects": {
+    "javascript": {
+      "title": "JavaScript Foundations",
+      "description": "A practical beginner JavaScript course covering values, decisions, collections, functions, DOM interaction, events, JSON, promises, async-await, local fetch, resilient interface states, and a complete event explorer.",
+      "moreComingSoon": "More JavaScript Foundations lessons are coming soon."
+    }
+  },
+  "modules": {
+    "javascript": {
+      "javascript-foundations-module-1-values-decisions": {
+        "title": "Values, Variables, and Decisions",
+        "description": "Build a reliable mental model for JavaScript values and use expressions and conditions to turn event information into useful messages.",
+        "outcomes": [
+          "Distinguish strings, numbers, booleans, null, and undefined.",
+          "Store values with const and let and name them clearly.",
+          "Build readable text with string methods and template literals.",
+          "Use comparisons, logical operators, and conditionals to choose behavior."
+        ],
+        "why": [
+          "Builds confidence with values, variables, and decisions.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "javascript-foundations-module-2-collections-functions": {
+        "title": "Collections, Repetition, and Functions",
+        "description": "Help learners organize related data, name reusable operations, and process collections with clear iteration patterns before moving into browser interaction.",
+        "outcomes": [
+          "Create arrays, read indexed values, inspect length, and append items with push.",
+          "Model structured records with objects and combine objects inside arrays.",
+          "Define reusable functions with parameters and return values.",
+          "Use for...of, map, and filter to process collections.",
+          "Combine collections and functions in a cumulative Event List Planner."
+        ],
+        "why": [
+          "Builds confidence with collections, repetition, and functions.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "javascript-foundations-module-3-browser-data": {
+        "title": "Browser Interaction and Data",
+        "description": "Connect JavaScript to browser behavior, user input, local JSON data, async control flow, and explicit interface states.",
+        "outcomes": [
+          "Select, update, create, and append DOM elements.",
+          "Respond to clicks, form submissions, and changed controls.",
+          "Parse JSON and check broad data shape at boundaries.",
+          "Use Promises, async/await, and try/catch.",
+          "Fetch local JSON and check response.ok before parsing."
+        ],
+        "why": [
+          "Builds confidence with browser interaction and data.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "javascript-foundations-module-4-campus-event-explorer": {
+        "title": "Final Capstone: Campus Event Explorer",
+        "description": "Transfer the complete JavaScript Foundations skill set into one progressive, data-driven browser application.",
+        "outcomes": [
+          "Model, load, filter, and render campus event data.",
+          "Organize behavior into focused functions with explicit inputs and outputs.",
+          "Respond to user controls with clear and accessible interface updates.",
+          "Handle loading, error, empty, and success states deliberately."
+        ],
+        "why": [
+          "Builds confidence with final capstone: campus event explorer.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "javascript": {
+      "javascript-foundations-module-1-values-decisions": {
+        "javascript-javascript-foundations-section-1-language-basics": {
+          "title": "JavaScript Values and Expressions",
+          "description": "Learn javascript values and first expressions, variables with const and let, strings, numbers, and template literals through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "JavaScript Values and First Expressions",
+            "Variables with const and let",
+            "Strings, Numbers, and Template Literals",
+            "Comparisons, Conditionals, and Logic"
+          ]
+        },
+        "javascript-javascript-foundations-section-1-module-project": {
+          "title": "Module Project",
+          "description": "Learn build an event announcement generator through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Build an Event Announcement Generator"
+          ]
+        }
+      },
+      "javascript-foundations-module-2-collections-functions": {
+        "javascript-javascript-foundations-section-2-collections-functions": {
+          "title": "Collections, Functions, and Iteration",
+          "description": "Learn arrays and indexed data, objects and event records, functions, parameters, and return values through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Arrays and Indexed Data",
+            "Objects and Event Records",
+            "Functions, Parameters, and Return Values",
+            "Loops and Array Iteration"
+          ]
+        },
+        "javascript-javascript-foundations-section-2-module-project": {
+          "title": "Module Project",
+          "description": "Learn build an event list planner through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Build an Event List Planner"
+          ]
+        }
+      },
+      "javascript-foundations-module-3-browser-data": {
+        "javascript-javascript-foundations-section-3-browser-data": {
+          "title": "DOM, Events, and Async Data",
+          "description": "Learn select and update the dom, events, forms, and user input, json and data boundaries through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Select and Update the DOM",
+            "Events, Forms, and User Input",
+            "JSON and Data Boundaries",
+            "Promises and async-await"
+          ]
+        },
+        "javascript-javascript-foundations-section-3-module-project": {
+          "title": "Module Project",
+          "description": "Learn build an interactive event browser through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Build an Interactive Event Browser"
+          ]
+        }
+      },
+      "javascript-foundations-module-4-campus-event-explorer": {
+        "javascript-javascript-foundations-section-4-capstone": {
+          "title": "Final Capstone",
+          "description": "Learn campus event explorer through focused examples and practice.",
+          "weeks": null,
+          "bullets": [
+            "Campus Event Explorer"
+          ]
+        }
+      }
+    }
+  }
+}

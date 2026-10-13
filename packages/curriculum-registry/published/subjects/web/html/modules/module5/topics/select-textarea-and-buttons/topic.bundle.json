@@ -36,7 +36,10 @@
         "id": "try-select-textarea-and-buttons-sketch0",
         "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.title",
         "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.prompt",
-        "exerciseKey": "try-select-textarea-and-buttons-sketch0",
+        "exerciseKey": "select-controls-try-select",
+        "exerciseKeys": [
+          "select-controls-try-select"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-select-textarea-and-buttons-sketch1",
         "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.title",
         "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.prompt",
-        "exerciseKey": "try-select-textarea-and-buttons-sketch1",
+        "exerciseKey": "select-controls-try-textarea",
+        "exerciseKeys": [
+          "select-controls-try-textarea"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,7 +80,10 @@
         "id": "try-select-textarea-and-buttons-sketch2",
         "titleKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.title",
         "promptKey": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.prompt",
-        "exerciseKey": "try-select-textarea-and-buttons-sketch2",
+        "exerciseKey": "select-controls-try-button",
+        "exerciseKeys": [
+          "select-controls-try-button"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -120,172 +129,6 @@
     }
   ],
   "exercises": [
-    {
-      "id": "try-select-textarea-and-buttons-sketch0",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']club[\"\\'][^>]*>\\s*Choose a club\\s*</label>",
-          "path": "index.html",
-          "message": "Add a connected Choose a club label.",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<select\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']club[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']club[\"\\'])[^>]*>.*<option\\b[^>]*value\\s*=\\s*[\"\\']robotics[\"\\'][^>]*>\\s*Robotics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']art[\"\\'][^>]*>\\s*Art\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']chess[\"\\'][^>]*>\\s*Chess\\s*</option>.*</select>",
-          "path": "index.html",
-          "message": "Create the club select with Robotics, Art, and Chess options.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch0.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-select-textarea-and-buttons-sketch1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']question[\"\\'][^>]*>\\s*Question\\s*</label>\\s*<textarea\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']question[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']question[\"\\'])(?=[^>]*\\brows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>\\s*</textarea>",
-          "path": "index.html",
-          "message": "Use a connected five-row textarea for the Question field.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch1.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
-    {
-      "id": "try-select-textarea-and-buttons-sketch2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2",
-      "language": "web",
-      "solutionFiles": [
-        {
-          "path": "index.html",
-          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
-          "language": "web",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "(?is)<form\\b[^>]*>.*<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Send RSVP\\s*</button>.*</form>",
-          "path": "index.html",
-          "message": "Add a Send RSVP submit button inside the form.",
-          "normalizeWhitespace": false
-        }
-      ],
-      "workspace": {
-        "language": "web",
-        "entryFilePath": "index.html",
-        "starterFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.starterCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "index.html",
-            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.tryIt.try_select_textarea_and_buttons_sketch2.solutionCode",
-            "language": "web",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      }
-    },
     {
       "id": "select-controls-quiz-long-text",
       "kind": "single_choice",
@@ -357,6 +200,172 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "<button type=\"submit\">Register</button>"
+      }
+    },
+    {
+      "id": "select-controls-try-select",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-select",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-select.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']club[\"\\'][^>]*>\\s*Choose a club\\s*</label>",
+          "path": "index.html",
+          "message": "Add a connected Choose a club label.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<select\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']club[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']club[\"\\'])[^>]*>.*<option\\b[^>]*value\\s*=\\s*[\"\\']robotics[\"\\'][^>]*>\\s*Robotics\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']art[\"\\'][^>]*>\\s*Art\\s*</option>.*<option\\b[^>]*value\\s*=\\s*[\"\\']chess[\"\\'][^>]*>\\s*Chess\\s*</option>.*</select>",
+          "path": "index.html",
+          "message": "Create the club select with Robotics, Art, and Chess options.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-select.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-select.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-select.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "select-controls-try-textarea",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-textarea",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-textarea.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<label\\b[^>]*for\\s*=\\s*[\"\\']question[\"\\'][^>]*>\\s*Question\\s*</label>\\s*<textarea\\b(?=[^>]*\\bid\\s*=\\s*[\"\\']question[\"\\'])(?=[^>]*\\bname\\s*=\\s*[\"\\']question[\"\\'])(?=[^>]*\\brows\\s*=\\s*[\"\\']5[\"\\'])[^>]*>\\s*</textarea>",
+          "path": "index.html",
+          "message": "Use a connected five-row textarea for the Question field.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-textarea.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-textarea.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-textarea.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "select-controls-try-button",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-button",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-button.solutionCode",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "(?is)<form\\b[^>]*>.*<button\\b[^>]*type\\s*=\\s*[\"\\']submit[\"\\'][^>]*>\\s*Send RSVP\\s*</button>.*</form>",
+          "path": "index.html",
+          "message": "Add a Send RSVP submit button inside the form.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "index.html",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-button.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-button.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.html.html-module-5-forms-inputs.select-textarea-and-buttons.practice.select-controls-try-button.solutionCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
       }
     }
   ]

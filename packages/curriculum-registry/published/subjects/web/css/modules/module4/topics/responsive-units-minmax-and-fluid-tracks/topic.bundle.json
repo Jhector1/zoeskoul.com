@@ -1,0 +1,798 @@
+{
+  "topicId": "responsive-units-minmax-and-fluid-tracks",
+  "subjectSlug": "css",
+  "moduleSlug": "css-module-4-grid-responsive-design",
+  "sectionSlug": "css-css-module-4-lessons",
+  "prefix": "css_module_4",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.label",
+    "summaryKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.cards.sketch0.title",
+      "sketchId": "responsive-tracks-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-responsive-units-minmax-and-fluid-tracks-sketch0",
+        "titleKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.tryIt.try_responsive_units_minmax_and_fluid_tracks_sketch0.title",
+        "promptKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.tryIt.try_responsive_units_minmax_and_fluid_tracks_sketch0.prompt",
+        "exerciseKey": "try-responsive-units-minmax-and-fluid-tracks-sketch0",
+        "exerciseKeys": [
+          "try-responsive-units-minmax-and-fluid-tracks-sketch0"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.cards.sketch1.title",
+      "sketchId": "responsive-tracks-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-responsive-units-minmax-and-fluid-tracks-sketch1",
+        "titleKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.tryIt.try_responsive_units_minmax_and_fluid_tracks_sketch1.title",
+        "promptKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.tryIt.try_responsive_units_minmax_and_fluid_tracks_sketch1.prompt",
+        "exerciseKey": "try-responsive-units-minmax-and-fluid-tracks-sketch1",
+        "exerciseKeys": [
+          "try-responsive-units-minmax-and-fluid-tracks-sketch1"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.cards.sketch2.title",
+      "sketchId": "responsive-tracks-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-responsive-units-minmax-and-fluid-tracks-sketch2",
+        "titleKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.tryIt.try_responsive_units_minmax_and_fluid_tracks_sketch2.title",
+        "promptKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.tryIt.try_responsive_units_minmax_and_fluid_tracks_sketch2.prompt",
+        "exerciseKey": "try-responsive-units-minmax-and-fluid-tracks-sketch2",
+        "exerciseKeys": [
+          "try-responsive-units-minmax-and-fluid-tracks-sketch2"
+        ],
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "responsive-tracks-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.responsive-tracks-sketch-0.title",
+      "bodyKey": "sketches.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.responsive-tracks-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "responsive-tracks-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.responsive-tracks-sketch-1.title",
+      "bodyKey": "sketches.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.responsive-tracks-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "responsive-tracks-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.responsive-tracks-sketch-2.title",
+      "bodyKey": "sketches.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.responsive-tracks-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "responsive-units-minmax-and-fluid-tracks-single",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.responsive-units-minmax-and-fluid-tracks-single",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "responsive-units-minmax-and-fluid-tracks-multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.responsive-units-minmax-and-fluid-tracks-multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "responsive-units-minmax-and-fluid-tracks-multi-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.responsive-units-minmax-and-fluid-tracks-multi-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "responsive-units-minmax-and-fluid-tracks-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.responsive-units-minmax-and-fluid-tracks-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "responsive-units-minmax-and-fluid-tracks-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.responsive-units-minmax-and-fluid-tracks-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "minmax()"
+      }
+    },
+    {
+      "id": "responsive-units-minmax-and-fluid-tracks-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.responsive-units-minmax-and-fluid-tracks-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "fr"
+      }
+    },
+    {
+      "id": "try-responsive-units-minmax-and-fluid-tracks-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*width\\s*:\\s*100%\\s*;?[^}]*\\}",
+          "message": "Give main a fluid 100% width.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch0.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-responsive-units-minmax-and-fluid-tracks-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*grid-template-columns\\s*:\\s*repeat\\(\\s*auto-fit\\s*,\\s*minmax\\(\\s*16rem\\s*,\\s*1fr\\s*\\)\\s*\\)\\s*;?[^}]*\\}",
+          "message": "Use auto-fit with minmax(16rem, 1fr).",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch1.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-responsive-units-minmax-and-fluid-tracks-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*max-width\\s*:\\s*72rem\\s*;?[^}]*margin-inline\\s*:\\s*auto\\s*;?[^}]*\\}",
+          "message": "Cap and center the fluid main Grid.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-4-grid-responsive-design.responsive-units-minmax-and-fluid-tracks.practice.try-responsive-units-minmax-and-fluid-tracks-sketch2.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

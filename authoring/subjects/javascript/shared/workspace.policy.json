@@ -1,0 +1,31 @@
+{
+  "policyId": "javascript-browser-workspace",
+  "workspaceProfileId": "browser-web-runner",
+  "workspacePolicyId": "javascript-browser-workspace",
+  "uiTerms": {
+    "editor": "JavaScript editor",
+    "runButton": "Preview",
+    "output": "browser preview"
+  },
+  "preferredTerms": {
+    "output panel": "browser preview",
+    "run": "preview",
+    "program": "browser application"
+  },
+  "learnerInstructions": [
+    "Edit script.js and the provided browser workspace files.",
+    "Use the browser preview to observe rendered content and interactions.",
+    "Click Check Answer when the required behavior and source structure are present.",
+    "Use local JSON fixtures for fetch practice so exercises remain deterministic and work without external network access.",
+    "Carry the event data model and interface patterns forward into the Campus Event Explorer capstone."
+  ],
+  "forbiddenActions": [
+    "terminal",
+    "command line",
+    "Judge0",
+    "npm install",
+    "package installation",
+    "external API calls",
+    "JavaScript frameworks"
+  ]
+}

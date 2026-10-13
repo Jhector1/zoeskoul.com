@@ -36,7 +36,10 @@
         "id": "try-images-and-alt-text-sketch0",
         "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.title",
         "promptKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.prompt",
-        "exerciseKey": "try-images-and-alt-text-sketch0",
+        "exerciseKey": "images-ci-1",
+        "exerciseKeys": [
+          "images-ci-1"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -55,7 +58,10 @@
         "id": "try-images-and-alt-text-sketch1",
         "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.title",
         "promptKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.prompt",
-        "exerciseKey": "try-images-and-alt-text-sketch1",
+        "exerciseKey": "images-ci-2",
+        "exerciseKeys": [
+          "images-ci-2"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -74,7 +80,10 @@
         "id": "try-images-and-alt-text-sketch2",
         "titleKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.title",
         "promptKey": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.prompt",
-        "exerciseKey": "try-images-and-alt-text-sketch2",
+        "exerciseKey": "images-ci-3",
+        "exerciseKeys": [
+          "images-ci-3"
+        ],
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -222,16 +231,16 @@
       }
     },
     {
-      "id": "try-images-and-alt-text-sketch0",
+      "id": "images-ci-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0",
+      "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-1",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.solutionFiles.index_html.content",
+          "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-1.solutionFiles.index_html.content",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -270,7 +279,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.starterCode",
+            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-1.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -298,11 +307,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.solutionCode",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-1.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch0.solutionFiles.index_html.content",
+            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-1.solutionFiles.index_html.content",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -323,16 +332,16 @@
       }
     },
     {
-      "id": "try-images-and-alt-text-sketch1",
+      "id": "images-ci-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1",
+      "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-2",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.solutionFiles.index_html.content",
+          "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-2.solutionFiles.index_html.content",
           "language": "web",
           "isEntry": true,
           "entry": true
@@ -371,7 +380,7 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.starterCode",
+            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-2.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -399,11 +408,11 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.solutionCode",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-2.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch1.solutionFiles.index_html.content",
+            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-2.solutionFiles.index_html.content",
             "language": "web",
             "isEntry": true,
             "entry": true
@@ -424,23 +433,23 @@
       }
     },
     {
-      "id": "try-images-and-alt-text-sketch2",
+      "id": "images-ci-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2",
+      "messageBase": "topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-3",
       "language": "web",
       "solutionFiles": [
         {
           "path": "index.html",
-          "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionFiles.index_html.content",
+          "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-3.solutionFiles.index_html.content",
           "language": "web",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "about.html",
-          "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionFiles.about_html.content",
+          "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-3.solutionFiles.about_html.content",
           "language": "web",
           "isEntry": false,
           "entry": false
@@ -480,14 +489,14 @@
         "starterFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.starterCode",
+            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-3.starterCode",
             "language": "web",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "about.html",
-            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.starterFiles.about_html.content",
+            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-3.starterFiles.about_html.content",
             "language": "web",
             "isEntry": false,
             "entry": false
@@ -516,18 +525,18 @@
       "showExpectedExample": false,
       "recipe": {
         "type": "source_checks",
-        "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionCode",
+        "solutionCode": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-3.solutionCode",
         "solutionFiles": [
           {
             "path": "index.html",
-            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionFiles.index_html.content",
+            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-3.solutionFiles.index_html.content",
             "language": "web",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "about.html",
-            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.tryIt.try_images_and_alt_text_sketch2.solutionFiles.about_html.content",
+            "content": "@:topics.html.html-module-2-links-images-paths.images-and-alt-text.practice.images-ci-3.solutionFiles.about_html.content",
             "language": "web",
             "isEntry": false,
             "entry": false

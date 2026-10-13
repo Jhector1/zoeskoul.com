@@ -153,7 +153,9 @@ export const CATALOG_MANIFESTS: Record<string, any> =
       "imageAlt": "Web development catalog cover",
       "status": "active",
       "subjectSlugs": [
-        "html"
+        "html",
+        "css",
+        "javascript"
       ],
       "meta": {
         "family": "web-development",
@@ -162,7 +164,8 @@ export const CATALOG_MANIFESTS: Record<string, any> =
     },
     "subjectSlugs": [
       "html",
-      "css"
+      "css",
+      "javascript"
     ],
     "defaultSubjectSlug": "html"
   }
@@ -185,5 +188,7 @@ export const SUBJECT_CATALOG_SLUGS: Record<string, string> =
   "sql-analysis-reporting": "sql",
   "multi-table-sql": "sql",
   "sql-data-management": "sql",
-  "html": "web"
+  "html": "web",
+  "css": "web",
+  "javascript": "web"
 };

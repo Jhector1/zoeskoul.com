@@ -1,0 +1,1926 @@
+{
+  "topicId": "cascade-inheritance-and-specificity",
+  "subjectSlug": "css",
+  "moduleSlug": "css-module-1-first-styles",
+  "sectionSlug": "css-css-module-1-lessons",
+  "prefix": "css_module_1",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "web",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": false,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.label",
+    "summaryKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.cards.sketch0.title",
+      "sketchId": "inheritance-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-cascade-inheritance-and-specificity-sketch0",
+        "titleKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.tryIt.try_cascade_inheritance_and_specificity_sketch0.title",
+        "promptKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.tryIt.try_cascade_inheritance_and_specificity_sketch0.prompt",
+        "exerciseKey": "try-cascade-inheritance-and-specificity-sketch0",
+        "exerciseKeys": [
+          "try-cascade-inheritance-and-specificity-sketch0",
+          "try-cascade-inheritance-and-specificity-header-footer"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.cards.sketch1.title",
+      "sketchId": "specificity-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-cascade-inheritance-and-specificity-sketch1",
+        "titleKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.tryIt.try_cascade_inheritance_and_specificity_sketch1.title",
+        "promptKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.tryIt.try_cascade_inheritance_and_specificity_sketch1.prompt",
+        "exerciseKey": "try-cascade-inheritance-and-specificity-sketch1",
+        "exerciseKeys": [
+          "try-cascade-inheritance-and-specificity-sketch1",
+          "try-cascade-inheritance-and-specificity-intro-color",
+          "try-cascade-inheritance-and-specificity-nav-presentation",
+          "try-cascade-inheritance-and-specificity-heading-descendant"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.cards.sketch2.title",
+      "sketchId": "source-order",
+      "height": 420,
+      "tryIt": {
+        "id": "try-cascade-inheritance-and-specificity-sketch2",
+        "titleKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.tryIt.try_cascade_inheritance_and_specificity_sketch2.title",
+        "promptKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.tryIt.try_cascade_inheritance_and_specificity_sketch2.prompt",
+        "exerciseKey": "try-cascade-inheritance-and-specificity-sketch2",
+        "exerciseKeys": [
+          "try-cascade-inheritance-and-specificity-sketch2",
+          "try-cascade-inheritance-and-specificity-header-paragraph",
+          "try-cascade-inheritance-and-specificity-intro-weight"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": false,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "inheritance-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-1-first-styles.cascade-inheritance-and-specificity.inheritance-basics.title",
+      "bodyKey": "sketches.css.css-module-1-first-styles.cascade-inheritance-and-specificity.inheritance-basics.bodyMarkdown"
+    },
+    {
+      "id": "specificity-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-1-first-styles.cascade-inheritance-and-specificity.specificity-basics.title",
+      "bodyKey": "sketches.css.css-module-1-first-styles.cascade-inheritance-and-specificity.specificity-basics.bodyMarkdown"
+    },
+    {
+      "id": "source-order",
+      "archetype": "paragraph",
+      "titleKey": "sketches.css.css-module-1-first-styles.cascade-inheritance-and-specificity.source-order.title",
+      "bodyKey": "sketches.css.css-module-1-first-styles.cascade-inheritance-and-specificity.source-order.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "inheritance-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.inheritance-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "specificity-choice",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.specificity-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "cascade-debug-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.cascade-debug-multi",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "cascade-reason-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.cascade-reason-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "source-order-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.source-order-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "later"
+      }
+    },
+    {
+      "id": "specificity-type-selector-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.specificity-type-selector-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "type"
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s*\\{[^}]*color\\s*:\\s*#334155\\s*;?[^}]*\\}",
+          "message": "Add the main inherited-color rule.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch0.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-header-footer",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)header\\s*,\\s*footer\\s*\\{[^}]*background-color\\s*:\\s*#e2e8f0\\s*;?[^}]*color\\s*:\\s*#0f172a\\s*;?[^}]*\\}",
+          "message": "Add the grouped header/footer color rule.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-footer.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)p\\s*\\{[^}]*color\\s*:\\s*#475569\\s*;?[^}]*\\}",
+          "message": "Set the paragraph type-selector color.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch1.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-intro-color",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.intro\\s*\\{[^}]*color\\s*:\\s*#0f766e\\s*;?[^}]*\\}",
+          "message": "Set the more-specific .intro color.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-color.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-nav-presentation",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)nav\\s+a\\s*\\{[^}]*font-weight\\s*:\\s*600\\s*;?[^}]*text-decoration\\s*:\\s*none\\s*;?[^}]*\\}",
+          "message": "Add navigation weight and remove the underline in the cumulative nav a rule.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-nav-presentation.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-heading-descendant",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)main\\s+h2\\s*\\{[^}]*color\\s*:\\s*#0f766e\\s*;?[^}]*\\}",
+          "message": "Add the main h2 descendant-selector color rule.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-heading-descendant.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)nav\\s+a\\s*\\{[^}]*color\\s*:\\s*#0f172a\\s*;?[^}]*\\}.*nav\\s+a\\s*\\{[^}]*color\\s*:\\s*#0f766e\\s*;?[^}]*\\}",
+          "message": "Add the two equal-specificity nav a rules in the requested source order.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-sketch2.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-header-paragraph",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)header\\s+p\\s*\\{[^}]*color\\s*:\\s*#475569\\s*;?[^}]*\\}",
+          "message": "Add the header paragraph color rule.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-header-paragraph.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-cascade-inheritance-and-specificity-intro-weight",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight",
+      "language": "web",
+      "solutionFiles": [
+        {
+          "path": "index.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.index_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "about.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.about_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "projects/portfolio.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.projects_portfolio_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "contact.html",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.contact_html.content",
+          "language": "web",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "images/profile.png",
+          "content": "",
+          "encoding": "base64",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+          "mimeType": "image/png",
+          "sizeBytes": 465,
+          "readOnly": true,
+          "isEntry": false,
+          "language": "web",
+          "entry": false
+        },
+        {
+          "path": "styles.css",
+          "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.styles_css.content",
+          "language": "web",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "styles.css",
+          "pattern": "(?is)\\.intro\\s*\\{[^}]*color\\s*:\\s*#0f766e\\s*;?[^}]*font-weight\\s*:\\s*700\\s*;?[^}]*\\}",
+          "message": "Keep the .intro color and finish it with font-weight 700.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "workspaceExpectations": {
+        "entryFilePath": "styles.css",
+        "requiredFiles": [
+          "index.html",
+          "styles.css"
+        ]
+      },
+      "workspace": {
+        "language": "web",
+        "entryFilePath": "styles.css",
+        "starterFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.starterFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.starterFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.starterFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.starterFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.starterCode",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "entryFilePath": "styles.css",
+          "requiredFiles": [
+            "index.html",
+            "styles.css"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "source_checks",
+        "solutionCode": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "index.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.index_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "about.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.about_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "projects/portfolio.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.projects_portfolio_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "contact.html",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.contact_html.content",
+            "language": "web",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "images/profile.png",
+            "content": "",
+            "encoding": "base64",
+            "data": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABmElEQVR42u3bsU3EQBAF0GkEESCEdBnSlUMBkFEEdVEPEaKDQyBBiO/wyjPrecHPfBf853WwOxtvH+8nyUsoAQAAAQBAAAAQAAAEAAABAEAAABAAAATAn3l9eQCwVdGXBkBS8TNBxJ6LnwEiOhRfGSK6lV8NITqWXwkhupZfBSE6l18BIbqXn42QBnA83JZLG4CK5WchAOgGULn8DAQAAAAoPxEBAAAAALoAVNt+qLAtEcrPRSi/Am6ur36zxe92vQIAAADg+w8AAIDk8wDlTwLwdH/4zppCL/2PNmfCFQFaHcpvsQqqv/1TjKVsBWAuaDDCDG//VJNxP4UulXrucybjViIsxWyo6Wj3A9wPcEPGHTF3xNySdE8YwD9z9/y4mK+iz3kOwKDCRwVAQukVMaJr6VUwQvG5EKH8XIRQfC5EKD8XIZSfixCKz4UI5eciANgLQKfyRyKE8nMRAMwO0Ln8EQgAZgZQ/noEAAAAAAAAQPlJCFaATxAAAAAAAJgRAILNOADOAxzIAHAmbCrCVAQAk3FTTsZ9AqQNBHMK4bMVAAAAAElFTkSuQmCC",
+            "mimeType": "image/png",
+            "sizeBytes": 465,
+            "readOnly": true,
+            "isEntry": false,
+            "language": "web",
+            "entry": false
+          },
+          {
+            "path": "styles.css",
+            "content": "@:topics.css.css-module-1-first-styles.cascade-inheritance-and-specificity.practice.try-cascade-inheritance-and-specificity-intro-weight.solutionFiles.styles_css.content",
+            "language": "web",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

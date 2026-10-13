@@ -16,9 +16,9 @@ describe("HTML IDE ownership", () => {
     );
 
     expect(shared).toContain("<iframe");
-    expect(output).toContain(
-      "<WebPreview entries={model.entries} title={model.title} />",
-    );
+    expect(output).toContain("<WebPreview");
+    expect(output).toContain("entries={model.entries}");
+    expect(output).toContain("sessionKey={model.sessionKey}");
   });
 
   it("keeps Web's compatibility wrapper thin", () => {

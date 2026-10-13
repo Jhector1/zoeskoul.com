@@ -170,6 +170,19 @@
           "path": "subjects/css/courses/css-foundations/course.spec.json"
         }
       ]
+    },
+    {
+      "subjectSlug": "javascript",
+      "path": "subjects/javascript",
+      "courseOrder": [
+        "javascript-foundations"
+      ],
+      "courses": [
+        {
+          "courseSlug": "javascript-foundations",
+          "path": "subjects/javascript/courses/javascript-foundations/course.spec.json"
+        }
+      ]
     }
   ]
 }

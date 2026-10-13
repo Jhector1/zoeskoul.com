@@ -1,0 +1,166 @@
+{
+  "topics": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "promises-and-async-await": {
+          "label": "Promises and async-await",
+          "summary": "Understand a Promise as a future result, use await inside async functions, and handle rejected work with try/catch.",
+          "cards": {
+            "sketch0": {
+              "title": "Wait for a future value"
+            },
+            "sketch1": {
+              "title": "Handle failed async work"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": false,
+            "try_promises_and_async_await_sketch0": {
+              "title": "Try it yourself: Await a saved preference",
+              "prompt": "Now apply what you just learned in this task. Problem: A saved preference arrives later, so the page cannot display the value until the asynchronous operation finishes. Task: Inside `showPreference`, await `preferencePromise` and show the result in `#preference`. Expected result: the Preview displays the resolved preference after the Promise completes. Produce the result for await a saved preference so it reinforces Promises and async-await.",
+              "hint": "Update the DOM after the awaited value exists.",
+              "help": {
+                "concept": "await sequences code that depends on a Promise result.",
+                "hint_1": "Make the function async.",
+                "hint_2": "Store the awaited value before updating the paragraph."
+              },
+              "starterCode": "const preferencePromise = Promise.resolve(\"Dark mode\");\nconst output = document.querySelector(\"#preference\");\n\nasync function showPreference() {\n  // Await and show the value.\n}\n\nshowPreference();\n",
+              "solutionCode": "const preferencePromise = Promise.resolve(\"Dark mode\");\nconst output = document.querySelector(\"#preference\");\n\nasync function showPreference() {\n  const preference = await preferencePromise;\n  output.textContent = preference;\n}\n\nshowPreference();\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"preference\">Loading preference...</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const preferencePromise = Promise.resolve(\"Dark mode\");\nconst output = document.querySelector(\"#preference\");\n\nasync function showPreference() {\n  // Await and show the value.\n}\n\nshowPreference();\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"preference\">Loading preference...</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const preferencePromise = Promise.resolve(\"Dark mode\");\nconst output = document.querySelector(\"#preference\");\n\nasync function showPreference() {\n  const preference = await preferencePromise;\n  output.textContent = preference;\n}\n\nshowPreference();\n"
+                }
+              }
+            },
+            "try_promises_and_async_await_sketch1": {
+              "title": "Try it yourself: Show a failed sync message",
+              "prompt": "Now apply what you just learned in this task. Problem: A sync operation can fail, and leaving the interface unchanged would make the failure invisible to the user. Task: Await the rejected `syncPromise` inside `try`. In `catch`, change `#sync-status` to `\"Sync failed\"`. Expected result: the Preview shows a clear failure message when the Promise rejects. Produce the result for show a failed sync message so it reinforces Promises and async-await.",
+              "hint": "Put normal async work in try and fallback UI in catch.",
+              "help": {
+                "concept": "try/catch provides separate success and failure paths around awaited work.",
+                "hint_1": "Await syncPromise inside try.",
+                "hint_2": "Use catch to replace the UI with the failure message."
+              },
+              "starterCode": "const syncPromise = Promise.reject(new Error(\"Offline\"));\nconst status = document.querySelector(\"#sync-status\");\n\nasync function showSyncResult() {\n  // Try the awaited work and handle failure.\n}\n\nshowSyncResult();\n",
+              "solutionCode": "const syncPromise = Promise.reject(new Error(\"Offline\"));\nconst status = document.querySelector(\"#sync-status\");\n\nasync function showSyncResult() {\n  try {\n    await syncPromise;\n    status.textContent = \"Sync complete\";\n  } catch (error) {\n    status.textContent = \"Sync failed\";\n  }\n}\n\nshowSyncResult();\n",
+              "starterFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"sync-status\">Syncing...</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const syncPromise = Promise.reject(new Error(\"Offline\"));\nconst status = document.querySelector(\"#sync-status\");\n\nasync function showSyncResult() {\n  // Try the awaited work and handle failure.\n}\n\nshowSyncResult();\n"
+                }
+              },
+              "solutionFiles": {
+                "index_html": {
+                  "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>JavaScript Practice</title>\n</head>\n<body>\n  <p id=\"sync-status\">Syncing...</p>\n  <script src=\"script.js\" defer></script>\n</body>\n</html>\n"
+                },
+                "script_js": {
+                  "content": "const syncPromise = Promise.reject(new Error(\"Offline\"));\nconst status = document.querySelector(\"#sync-status\");\n\nasync function showSyncResult() {\n  try {\n    await syncPromise;\n    status.textContent = \"Sync complete\";\n  } catch (error) {\n    status.textContent = \"Sync failed\";\n  }\n}\n\nshowSyncResult();\n"
+                }
+              }
+            }
+          },
+          "practice": {
+            "async-choice": {
+              "title": "Choose the right idea",
+              "prompt": "What does `await` do in these beginner async functions?",
+              "hint": "Focus on the responsibility described by the question.",
+              "help": {
+                "concept": "The correct option matches the specific job the code needs to do.",
+                "hint_1": "Separate DOM, data, events, and async responsibilities.",
+                "hint_2": "Choose the behavior that directly produces the requested outcome."
+              },
+              "options": {
+                "a": "Waits for a Promise result before dependent lines continue",
+                "b": "Creates a DOM element",
+                "c": "Parses every string as JSON",
+                "d": "Registers a click listener"
+              }
+            },
+            "async-multi": {
+              "title": "Recognize correct behavior",
+              "prompt": "Which statements are true?",
+              "hint": "More than one statement can be correct.",
+              "help": {
+                "concept": "This check separates the responsibilities introduced in the lesson.",
+                "hint_1": "Keep only statements that match the actual JavaScript or browser behavior.",
+                "hint_2": "Reject statements that assign the concept a different job."
+              },
+              "options": {
+                "a": "await is used inside async functions in these examples.",
+                "b": "A rejected awaited Promise can reach catch.",
+                "c": "Code after await can use the fulfilled value.",
+                "d": "Every Promise is always successful."
+              }
+            },
+            "async-blank": {
+              "title": "Complete the idea",
+              "prompt": "Choose the keyword paired with try for handling a failure.",
+              "hint": "Use the role described in the sentence to choose the missing term.",
+              "help": {
+                "concept": "The blank names the feature that performs the stated responsibility.",
+                "hint_1": "Eliminate choices from unrelated browser responsibilities.",
+                "hint_2": "Choose the term whose behavior fits the sentence."
+              },
+              "template": "try { /* awaited work */ } [blank1] (error) { console.log(\"Failed\"); }",
+              "choices": [
+                "return",
+                "catch",
+                "if",
+                "await"
+              ]
+            },
+            "async-order": {
+              "title": "Put the flow in order",
+              "prompt": "Arrange the steps in the order a beginner-friendly solution should follow.",
+              "hint": "Start with the dependency that must exist first.",
+              "help": {
+                "concept": "The sequence follows data and control dependencies.",
+                "hint_1": "Each later step depends on the earlier step having happened.",
+                "hint_2": "Place the visible result after the operation that produces it."
+              },
+              "tokens": {
+                "t1": "Start the async function",
+                "t2": "Obtain a Promise",
+                "t3": "Await the Promise",
+                "t4": "Receive the fulfilled value",
+                "t5": "Use the value"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "javascript": {
+      "javascript-foundations-module-3-browser-data": {
+        "promises-and-async-await": {
+          "await-future": {
+            "title": "A Promise represents a result that may arrive later",
+            "bodyMarkdown": "A **Promise** represents a result that may not be available yet. `await` lets an `async` function pause its dependent work until that result arrives.\n\n```js\nasync function showStatus() {\n  const statusPromise = Promise.resolve(\"Ready\");\n  const status = await statusPromise;\n  console.log(status);\n}\n\nshowStatus();\n```\n\nLine by line:\n\n1. `async function` allows `await` inside the function.\n2. `Promise.resolve(\"Ready\")` gives a simple fulfilled Promise for learning.\n3. `await statusPromise` waits for its value.\n4. `status` receives `\"Ready\"`.\n5. The dependent log runs afterward.\n\nThe whole browser does not freeze; this function waits at its dependency point."
+          },
+          "catch-rejection": {
+            "title": "try/catch gives rejected work an error path",
+            "bodyMarkdown": "Async work can fail, so the failure path needs to be explicit.\n\n```js\nasync function loadStatus() {\n  try {\n    const status = await Promise.reject(new Error(\"Unavailable\"));\n    console.log(status);\n  } catch (error) {\n    console.log(\"Could not load status\");\n  }\n}\n\nloadStatus();\n```\n\nStep by step:\n\n1. The async function enters `try`.\n2. The Promise rejects.\n3. Execution jumps to `catch`.\n4. The fallback runs instead of leaving the rejection unhandled.\n\nThe next topic uses the same control flow around real `fetch` work."
+          }
+        }
+      }
+    }
+  }
+}
