@@ -10,6 +10,19 @@ export type ExpectedExample =
         stdout: string;
       }
     | {
+        kind: "web_preview";
+        entryPath: string;
+        files: Array<{
+            path?: string;
+            name?: string;
+            content: string;
+            language?: string;
+            isEntry?: boolean;
+            entry?: boolean;
+            readOnly?: boolean;
+        }>;
+      }
+    | {
         kind: "sql_result";
         meta?: string;
         columns: string[];
@@ -119,7 +132,7 @@ export function buildTerminalExpectedExample(args: {
     def: ExpectedExampleDef;
     resolved: ResolvedExpectedExampleContext;
     tests: readonly TestLike[];
-}): ExpectedExample | null {
+}): Extract<ExpectedExample, { kind: "terminal" }> | null {
     const {
         def,
         resolved,
@@ -155,6 +168,44 @@ export function buildTerminalExpectedExample(args: {
     };
 }
 
+export function buildSourceChecksExpectedExample(args: {
+    def: ExpectedExampleDef;
+    resolved: ResolvedExpectedExampleContext;
+    language?: string;
+    runtimeKind?: string;
+    entryPath?: string;
+    solutionFiles?: Array<{
+        path?: string;
+        name?: string;
+        content: string;
+        language?: string;
+        isEntry?: boolean;
+        entry?: boolean;
+        readOnly?: boolean;
+    }>;
+    tests?: readonly TestLike[];
+}): ExpectedExample | null {
+    const language = String(args.language ?? "").trim().toLowerCase();
+    const runtimeKind = String(args.runtimeKind ?? "").trim().toLowerCase();
+    const solutionFiles = Array.isArray(args.solutionFiles)
+        ? args.solutionFiles
+        : [];
+
+    if ((language === "web" || runtimeKind === "web") && solutionFiles.length > 0) {
+        return {
+            kind: "web_preview",
+            entryPath: args.entryPath?.trim() || "index.html",
+            files: solutionFiles,
+        };
+    }
+
+    return buildTerminalExpectedExample({
+        def: args.def,
+        resolved: args.resolved,
+        tests: args.tests ?? [],
+    });
+}
+
 export function buildSqlExpectedExample(args: {
     def: ExpectedExampleDef;
     resolved: ResolvedExpectedExampleContext;
@@ -163,7 +214,7 @@ export function buildSqlExpectedExample(args: {
     solutionCode: string;
     checkSql?: string;
     maxRows?: number;
-}): ExpectedExample | null {
+}): Extract<ExpectedExample, { kind: "sql_result" }> | null {
     const {
         def,
         resolved,

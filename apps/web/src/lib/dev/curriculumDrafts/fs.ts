@@ -11,6 +11,7 @@ export type DraftTopicSummary = {
   topicSlug: string;
   topicId?: string | null;
   title?: string | null;
+  sourcePath?: string;
   bundlePath: string;
   messagesPath?: string | null;
 };
@@ -733,9 +734,11 @@ export async function writeDraftJsonFile(_args: {
   filePath: string;
   value: unknown;
 }) {
-  throw new Error(
-    "Compiled curriculum build artifacts are read-only. Edit the canonical .curriculum-drafts topic source and recompile.",
+  const error = new Error(
+    "READ_ONLY_DERIVED_ARTIFACT: .curriculum-build artifacts are generated and read-only. Edit canonical .curriculum-drafts source instead.",
   );
+  error.name = "READ_ONLY_DERIVED_ARTIFACT";
+  throw error;
 }
 
 export function getNestedValue(root: unknown, keyPath: string) {

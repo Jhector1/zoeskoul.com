@@ -6,6 +6,7 @@ import { pythonProfileServices } from "./python/profileServices.js";
 import { cProfileServices } from "./c/profileServices.js";
 import { languageProfileServices } from "./language/profileServices.js";
 import { webProfileServices } from "./web/profileServices.js";
+import { apiProfileServices } from "./api/profileServices.js";
 
 const PROFILE_SERVICES: Record<string, ProfileServices> = {
     bash: bashProfileServices,
@@ -15,6 +16,7 @@ const PROFILE_SERVICES: Record<string, ProfileServices> = {
     c: cProfileServices,
     language: languageProfileServices,
     web: webProfileServices,
+    api: apiProfileServices,
 };
 
 export function getProfileServices(profileId: string): ProfileServices {

@@ -80,6 +80,117 @@ function safeLocaleName(locale) {
 function jsonLiteral(value) {
   return JSON.stringify(value, null, 2);
 }
+const generationLockPath = path.join(outputRoot, ".generate.lock");
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isProcessAlive(pid) {
+  if (!Number.isInteger(pid) || pid <= 0) return false;
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (error) {
+    return error?.code === "EPERM";
+  }
+}
+
+async function acquireGenerationLock() {
+  await fs.mkdir(outputRoot, { recursive: true });
+
+  const deadline = Date.now() + 120_000;
+
+  for (;;) {
+    try {
+      const handle = await fs.open(generationLockPath, "wx");
+      await handle.writeFile(
+        JSON.stringify({
+          pid: process.pid,
+          startedAt: new Date().toISOString(),
+        }),
+        "utf8",
+      );
+      return handle;
+    } catch (error) {
+      if (error?.code !== "EEXIST") throw error;
+
+      let removeStaleLock = false;
+
+      try {
+        const raw = await fs.readFile(generationLockPath, "utf8");
+        const owner = JSON.parse(raw);
+        const ownerPid = Number(owner?.pid);
+        removeStaleLock = !isProcessAlive(ownerPid);
+      } catch (readError) {
+        if (readError?.code === "ENOENT") continue;
+
+        try {
+          const stat = await fs.stat(generationLockPath);
+          removeStaleLock = Date.now() - stat.mtimeMs > 300_000;
+        } catch (statError) {
+          if (statError?.code === "ENOENT") continue;
+          throw statError;
+        }
+      }
+
+      if (removeStaleLock) {
+        try {
+          await fs.unlink(generationLockPath);
+        } catch (unlinkError) {
+          if (unlinkError?.code !== "ENOENT") throw unlinkError;
+        }
+        continue;
+      }
+
+      if (Date.now() >= deadline) {
+        throw new Error(
+          `Timed out waiting for curriculum registry generation lock: ${generationLockPath}`,
+        );
+      }
+
+      await sleep(100);
+    }
+  }
+}
+
+async function withGenerationLock(task) {
+  const handle = await acquireGenerationLock();
+
+  try {
+    return await task();
+  } finally {
+    try {
+      await handle.close();
+    } finally {
+      try {
+        await fs.unlink(generationLockPath);
+      } catch (error) {
+        if (error?.code !== "ENOENT") throw error;
+      }
+    }
+  }
+}
+
+async function writeGeneratedFile(filePath, contents, encoding = "utf8") {
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+
+  const temporaryPath =
+    `${filePath}.tmp-${process.pid}-${Date.now()}-` +
+    Math.random().toString(16).slice(2);
+
+  try {
+    await fs.writeFile(temporaryPath, contents, encoding);
+    await fs.rename(temporaryPath, filePath);
+  } finally {
+    try {
+      await fs.unlink(temporaryPath);
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+    }
+  }
+}
+
 
 function moduleSlugForPhysicalDir(manifest, moduleDir) {
   const match = /^module(\d+)$/.exec(moduleDir);
@@ -345,7 +456,7 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
 `;
 
   await fs.mkdir(outputRoot, { recursive: true });
-  await fs.writeFile(
+  await writeGeneratedFile(
     path.join(outputRoot, "subjects.ts"),
     subjectsTs,
     "utf8",
@@ -532,7 +643,7 @@ export const SUBJECT_CATALOG_SLUGS: Record<string, string> =
   ${jsonLiteral(subjectCatalogSlugs)};
 `;
 
-  await fs.writeFile(
+  await writeGeneratedFile(
     path.join(outputRoot, "catalogs.ts"),
     catalogsTs,
     "utf8",
@@ -566,7 +677,7 @@ async function generateMessages() {
 
     const safe = safeLocaleName(locale);
 
-    await fs.writeFile(
+    await writeGeneratedFile(
       path.join(outputRoot, `messages.${safe}.ts`),
       `/* eslint-disable */
 // AUTO-GENERATED canonical curriculum messages for ${locale}.
@@ -583,7 +694,7 @@ export default messages;
     );
   }
 
-  await fs.writeFile(
+  await writeGeneratedFile(
     path.join(outputRoot, "messages.ts"),
     `/* eslint-disable */
 // AUTO-GENERATED canonical curriculum message loader.
@@ -628,7 +739,7 @@ async function main() {
   );
 }
 
-main().catch((error) => {
+withGenerationLock(main).catch((error) => {
   console.error(error instanceof Error ? error.stack ?? error.message : error);
   process.exit(1);
 });

@@ -1,0 +1,191 @@
+{
+  "title": "JSON Bodies and API Contracts",
+  "summary": "Design predictable JSON request and response bodies and understand why stable field names and shapes matter to API clients.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "json-bodies-and-api-contracts-json",
+      "cardTitle": "Carry structured data",
+      "title": "JSON bodies represent API data",
+      "bodyMarkdown": "Many APIs use JSON to carry structured data.\n\nA JavaScript event object might look like:\n\n```js\nconst event = {\n  id: 42,\n  title: \"Campus Film Night\",\n  location: \"Auditorium\",\n};\n```\n\nLine by line: the first line starts the JavaScript object, the next three lines assign stable event fields, and the closing brace finishes the value. Each field name becomes part of the structure that can later be serialized.\n\nIts JSON representation uses the same familiar object shape:\n\n```json\n{\n  \"id\": 42,\n  \"title\": \"Campus Film Night\",\n  \"location\": \"Auditorium\"\n}\n```\n\nRead the JSON step by step: the opening brace starts the object, each quoted key names one public field, and the closing brace completes the representation. JSON uses quoted property names in its text form.\n\nIn an HTTP message, the JSON body is separate from the method, path, status, and headers.\n\nFor example, a create request could conceptually contain:\n\n```text\nPOST /api/events\nContent-Type: application/json\n\n{ \"title\": \"Campus Film Night\", \"location\": \"Auditorium\" }\n```\n\nFollow the request from top to bottom: **First,** `POST /api/events` states the operation and path. **Second,** the `Content-Type` line tells the server how to interpret the body. **Third,** the final line carries the event fields as JSON data.\n\nThe method and path say what operation is requested. The header says how to interpret the body. The body contains the event data.",
+      "tryItExercises": [
+        {
+          "id": "try-json-bodies-and-api-contracts-json-body",
+          "kind": "code_input",
+          "title": "Build a create-request body",
+          "prompt": "**Problem** An events client needs to send structured data for a new event. **Task** Create `requestBody` with `title`, `location`, and `category` fields. Create `jsonBody` using `JSON.stringify(requestBody)` and log it. **Expected result** The source models one stable event shape and explicitly converts it to JSON text.",
+          "hint": "Create the object first; stringify it second.",
+          "help": {
+            "concept": "JSON is a text representation of structured data that can travel in an HTTP message body.",
+            "hint_1": "Use the exact field names `title`, `location`, and `category`.",
+            "hint_2": "Pass the object to `JSON.stringify` rather than building JSON with string concatenation."
+          },
+          "starterCode": "const requestBody = {\n  // title:\n  // location:\n  // category:\n};\n\nconst jsonBody = \"\";\nconsole.log(jsonBody);\n",
+          "solutionCode": "const requestBody = {\n  title: \"Poetry Open Mic\",\n  location: \"Student Center\",\n  category: \"arts\",\n};\n\nconst jsonBody = JSON.stringify(requestBody);\nconsole.log(jsonBody);\n",
+          "fixedLanguage": "javascript",
+          "entryFilePath": "main.js",
+          "tests": [
+            {
+              "stdout": "{\"title\":\"Poetry Open Mic\",\"location\":\"Student Center\",\"category\":\"arts\"}\n",
+              "match": "exact"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "const\\s+requestBody\\s*=\\s*\\{[\\s\\S]*title\\s*:[\\s\\S]*location\\s*:[\\s\\S]*category\\s*:",
+              "message": "Create title, location, and category fields.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "JSON\\.stringify\\(\\s*requestBody\\s*\\)",
+              "message": "Convert the request body with JSON.stringify.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "recipeType": "source_checks"
+        }
+      ]
+    },
+    {
+      "id": "json-bodies-and-api-contracts-contract",
+      "cardTitle": "Keep clients predictable",
+      "title": "An API contract makes response shapes dependable",
+      "bodyMarkdown": "A client becomes easier to build when the API returns predictable shapes.\n\nSuppose one route returns:\n\n```json\n{ \"id\": 42, \"title\": \"Campus Film Night\" }\n```\n\nbut another successful event response unexpectedly returns:\n\n```json\n{ \"eventNumber\": 42, \"name\": \"Campus Film Night\" }\n```\n\nBoth objects contain similar information, but the client now needs extra branching because the field names changed.\n\nAn **API contract** is the agreed behavior clients can depend on: methods, paths, status codes, headers, and data shapes.\n\nConsistency also helps errors. A simple beginner error shape might be:\n\n```json\n{\n  \"error\": {\n    \"code\": \"NOT_FOUND\",\n    \"message\": \"Event not found\"\n  }\n}\n```\n\nLine by line: the outer object establishes the response shape, the `error` object groups failure details, `code` gives a machine-friendly identifier, and `message` gives a human-readable explanation.\n\nLater modules will validate input and return errors from real Express routes. For now, focus on the principle: clients should not have to guess the shape of a response.",
+      "tryItExercises": [
+        {
+          "id": "try-json-bodies-and-api-contracts-contract",
+          "kind": "code_input",
+          "title": "Keep event responses consistent",
+          "prompt": "**Problem** Two client screens both need the same event representation. **Task** Write a `makeEventResponse(event)` function that returns an object with exactly `id`, `title`, and `location` fields copied from the supplied event. Call it for a sample event and log the result. **Expected result** The function creates one predictable public shape rather than returning arbitrary field names.",
+          "hint": "Return a new object with the same three contract field names every time.",
+          "help": {
+            "concept": "A stable API contract lets multiple clients depend on the same response field names and shape.",
+            "hint_1": "The function should accept one `event` parameter.",
+            "hint_2": "Return `id`, `title`, and `location` from that parameter."
+          },
+          "starterCode": "function makeEventResponse(event) {\n  // Return the public API shape.\n}\n\nconst event = {\n  id: 8,\n  title: \"Chess Meetup\",\n  location: \"Library\",\n  internalNote: \"staff only\",\n};\n\nconsole.log(makeEventResponse(event));\n",
+          "solutionCode": "function makeEventResponse(event) {\n  return {\n    id: event.id,\n    title: event.title,\n    location: event.location,\n  };\n}\n\nconst event = {\n  id: 8,\n  title: \"Chess Meetup\",\n  location: \"Library\",\n  internalNote: \"staff only\",\n};\n\nconsole.log(makeEventResponse(event));\n",
+          "fixedLanguage": "javascript",
+          "entryFilePath": "main.js",
+          "tests": [
+            {
+              "stdout": "{ id: 8, title: 'Chess Meetup', location: 'Library' }\n",
+              "match": "exact"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "function\\s+makeEventResponse\\s*\\(\\s*event\\s*\\)",
+              "message": "Define makeEventResponse with an event parameter.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "return\\s*\\{[\\s\\S]*id\\s*:\\s*event\\.id[\\s\\S]*title\\s*:\\s*event\\.title[\\s\\S]*location\\s*:\\s*event\\.location[\\s\\S]*\\}",
+              "message": "Return the stable id/title/location contract.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "recipeType": "source_checks"
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "json-bodies-and-api-contracts-json-purpose",
+      "kind": "single_choice",
+      "title": "Identify the JSON body's job",
+      "prompt": "What is the main job of a JSON request body?",
+      "hint": "Separate message data from HTTP metadata.",
+      "help": {
+        "concept": "JSON message bodies",
+        "hint_1": "Identify the responsibility described in the question.",
+        "hint_2": "Choose the option that matches the HTTP/API contract, not an implementation detail."
+      },
+      "options": [
+        "Carry structured request data",
+        "Choose the HTTP method",
+        "Choose the server port",
+        "Replace the response status"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "json-bodies-and-api-contracts-stable-contract",
+      "kind": "multi_choice",
+      "title": "Recognize a stable contract",
+      "prompt": "Which choices help keep an API response contract predictable? Select all that apply.",
+      "hint": "Choose behaviors that reduce guessing for clients.",
+      "help": {
+        "concept": "Stable API contracts",
+        "hint_1": "Evaluate each option independently.",
+        "hint_2": "Select every option that satisfies the API rule."
+      },
+      "options": [
+        "Use consistent field names for the same resource",
+        "Use a documented JSON shape",
+        "Randomly rename fields between requests",
+        "Use consistent error shapes"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "json-bodies-and-api-contracts-stringify",
+      "kind": "fill_blank_choice",
+      "title": "Convert an object to JSON text",
+      "prompt": "Complete the JavaScript operation.",
+      "hint": "Choose the operation that serializes a JavaScript value rather than reading JSON text back into a value.",
+      "help": {
+        "concept": "Serializing structured JavaScript data as JSON text",
+        "hint_1": "Read the request or response role around the blank.",
+        "hint_2": "Use the term or value that makes the statement technically precise."
+      },
+      "template": "`JSON.[blank1](event)` converts a JavaScript value into JSON text.",
+      "choices": [
+        "stringify",
+        "parse",
+        "status",
+        "header"
+      ],
+      "correctValue": "stringify"
+    },
+    {
+      "id": "json-bodies-and-api-contracts-create-message",
+      "kind": "drag_reorder",
+      "title": "Assemble a JSON create request",
+      "prompt": "Order the conceptual pieces of a JSON create request.",
+      "hint": "Move from operation metadata to body data, then send the complete message.",
+      "help": {
+        "concept": "JSON request contract",
+        "hint_1": "Start with the client action.",
+        "hint_2": "The server must receive and handle the request before the client can use the response."
+      },
+      "tokens": [
+        "Choose POST /api/events",
+        "Declare Content-Type: application/json",
+        "Place the event fields in the JSON body",
+        "Send the request using the agreed API contract"
+      ],
+      "correctOrder": [
+        "Choose POST /api/events",
+        "Declare Content-Type: application/json",
+        "Place the event fields in the JSON body",
+        "Send the request using the agreed API contract"
+      ]
+    }
+  ]
+}

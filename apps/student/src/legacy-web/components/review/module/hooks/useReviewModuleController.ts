@@ -3104,7 +3104,8 @@ export function useReviewModuleController({
             showDesktopLeft: panels.showDesktopLeft,
             leftCollapsed: panels.leftCollapsed,
             leftW: panels.leftW,
-            onResizeStart: panels.onMouseDownLeftHandle,
+            onResizeStart: panels.onPointerDownLeftHandle,
+            onResizeKeyDown: panels.onKeyDownLeftHandle,
             padStyle: panels.padStyle,
             sidebarProps: {
                 mod,
@@ -3160,7 +3161,8 @@ export function useReviewModuleController({
             rightW: panels.rightW,
             containerRef: stackedToolsRef,
             shouldRenderStackedTools,
-            onResizeStart: panels.onMouseDownRightHandle,
+            onResizeStart: panels.onPointerDownRightHandle,
+            onResizeKeyDown: panels.onKeyDownRightHandle,
             toolsPanelProps: {
                 onCollapse: panels.handleCollapseRight,
                 onUnbind: handleUnbindFromToolsPanel,

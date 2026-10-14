@@ -72,6 +72,7 @@ const PROFILE_LANGUAGE_BY_ID: Record<
   sql: { id: "sql", language: "sql" },
   java: { id: "java", language: "java" },
   javascript: { id: "javascript", language: "javascript" },
+  api: { id: "javascript", language: "javascript" },
   r: { id: "r", language: "r" },
   typescript: { id: "typescript", language: "typescript" },
   c: { id: "c", language: "c" },

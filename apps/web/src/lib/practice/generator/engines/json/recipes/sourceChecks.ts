@@ -1,4 +1,5 @@
 import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
+import { buildSourceChecksExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import type { RecipeHandler } from "./types";
 
 export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved) => {
@@ -14,28 +15,31 @@ export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved)
         (def as any).solutionFiles ??
         def.recipe?.solutionFiles;
 
-    /**
-     * Web Expected Result is a view of the canonical solution workspace, not a
-     * second rendering system. Keep solution ownership in curriculum and feed
-     * the same files into the shared WebPreview used by learner Preview.
-     *
-     * This object is presentation-only: it is never installed into the learner
-     * runtime workspace, Explorer, or Monaco editor.
-     */
-    const expectedWebPreview =
-        Array.isArray(solutionFiles) && solutionFiles.length > 0
-            ? {
-                  kind: "web_preview",
-                  entryPath:
-                      def.entryFile ??
-                      def.workspace?.entryFile ??
-                      def.workspace?.entryFilePath ??
-                      def.workspace?.mainFile ??
-                      def.workspace?.mainFilePath ??
-                      "index.html",
-                  files: solutionFiles,
-              }
-            : null;
+    const language =
+        def.language ??
+        def.workspace?.language ??
+        (def as any).topicRuntimeDefaults?.language ??
+        "web";
+    const entryFile =
+        def.entryFile ??
+        def.workspace?.entryFile ??
+        def.workspace?.entryFilePath ??
+        def.workspace?.mainFile ??
+        def.workspace?.mainFilePath ??
+        (language === "web" ? "index.html" : undefined);
+    const expectedExample = buildSourceChecksExpectedExample({
+        def,
+        resolved,
+        language,
+        runtimeKind: def.runtime?.kind ?? (def as any).topicRuntimeDefaults?.kind,
+        entryPath: entryFile,
+        solutionFiles: Array.isArray(solutionFiles) ? solutionFiles : undefined,
+        tests: Array.isArray(def.recipe?.tests)
+            ? def.recipe.tests
+            : Array.isArray((def as any).tests)
+                ? (def as any).tests
+                : [],
+    });
 
     return makeCodeInputOut({
         archetype: def.id,
@@ -44,7 +48,7 @@ export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved)
         diff: args.diff,
         title: resolved.title,
         prompt: resolved.prompt,
-        language: def.language ?? "web",
+        language,
         workspace: def.workspace,
         starterFiles: def.workspace?.starterFiles,
         files: (def as any).files ?? def.workspace?.files,
@@ -57,13 +61,13 @@ export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved)
             def.workspace?.entryFilePath ??
             def.workspace?.mainFile ??
             def.workspace?.mainFilePath ??
-            "index.html",
+            entryFile,
         help: resolved.help,
         hint: resolved.hint,
         expected: {
             kind: "code_input",
             strategy: "programming",
-            language: "web",
+            language,
             checkMode: "source",
             sourceChecks,
             ...(def.workspaceExpectations ?? def.workspace?.workspaceExpectations
@@ -75,7 +79,7 @@ export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved)
             solutionCode: def.recipe?.solutionCode,
             ...(solutionFiles !== undefined ? { solutionFiles } : {}),
         } as any,
-        expectedExample: expectedWebPreview as any,
+        expectedExample,
         ideConfig: def.serviceOverrides ?? null,
     });
 };

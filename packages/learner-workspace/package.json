@@ -274,9 +274,11 @@
     "./tools/code/reviewWorkspaceRuntimeCommit": "./src/tools/code/reviewWorkspaceRuntimeCommit.ts",
     "./tools/code/workspaceSnapshot": "./src/tools/code/workspaceSnapshot.ts",
     "./tools/hooks/useElementSize": "./src/tools/hooks/useElementSize.ts",
+    "./tools/resolveActiveTool": "./src/tools/resolveActiveTool.ts",
     "./tools/types": "./src/tools/types.ts",
     "./tools/utils/cx": "./src/tools/utils/cx.ts",
     "./tools/utils/storage": "./src/tools/utils/storage.ts",
+    "./ui/ResizeSeparator": "./src/ui/ResizeSeparator.tsx",
     "./ui/Tooltip": "./src/ui/Tooltip.tsx",
     "./ui/markdown/MathMarkdown": "./src/ui/markdown/MathMarkdown.tsx"
   },

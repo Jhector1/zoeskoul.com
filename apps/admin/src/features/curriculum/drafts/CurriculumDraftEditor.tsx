@@ -4,20 +4,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "@/app/browserNavigation";
 import { adminFetch, websiteHref } from "@/lib/adminApi";
 import DiagnosticsPanel from "./DiagnosticsPanel";
-import ExerciseTable from "./ExerciseTable";
-import ExerciseJsonEditor from "./ExerciseJsonEditor";
-import ExerciseMessageEditor from "./ExerciseMessageEditor";
 import { keepEditorSelection } from "./editorSelection";
-import FilePairEditor from "./FilePairEditor";
 import JsonEditor from "./JsonEditor";
 import ProjectFlowPanel from "./ProjectFlowPanel";
-import SketchesEditor from "./SketchesEditor";
 import type { DraftCatalogSummary, DraftListDebug, DraftModuleSummary, DraftSubjectSummary, DraftTopicSummary, LoadedTopic } from "./types";
 
-type TabKey = "overview" | "bundle" | "messages" | "sketches" | "exercises" | "files" | "project" | "validation";
+type TabKey = "overview" | "source" | "bundle" | "messages" | "project" | "validation";
 
 type JsonObject = Record<string, unknown>;
-type FileSide = "starter" | "solution";
 
 type CommandResult = {
   ok?: boolean;
@@ -38,8 +32,9 @@ type BackupResult = {
 
 const tabs: Array<{ key: TabKey; label: string }> = [
   { key: "overview", label: "Overview" },
-  { key: "bundle", label: "Bundle JSON (read-only)" },
-  { key: "messages", label: "Messages JSON (read-only)" },
+  { key: "source", label: "Source JSON (canonical)" },
+  { key: "bundle", label: "Bundle JSON (derived · read-only)" },
+  { key: "messages", label: "Messages JSON (derived · read-only)" },
   { key: "project", label: "Project Flow" },
   { key: "validation", label: "Validation" },
 ];
@@ -50,11 +45,6 @@ function jsonPretty(value: unknown) {
 
 function asObject(value: unknown): JsonObject | null {
   return typeof value === "object" && value !== null && !Array.isArray(value) ? (value as JsonObject) : null;
-}
-
-function exerciseId(value: unknown) {
-  const object = asObject(value);
-  return typeof object?.id === "string" ? object.id : null;
 }
 
 function cleanRouteSegment(value: unknown, fallback = "item") {
@@ -160,77 +150,6 @@ function previewTargetFromBundle(bundleJson: unknown, selectedExerciseId: string
   return { sectionSlug, topicSlug, targetKind: cardTargetKind(firstCard), targetSlug: cardTargetSlug(firstCard) };
 }
 
-function sketchId(value: unknown) {
-  const object = asObject(value);
-  return typeof object?.id === "string" ? object.id : null;
-}
-
-function replaceSketchInBundle(bundleJson: unknown, sketchIdToReplace: string, nextSketch: unknown) {
-  const bundle = asObject(bundleJson);
-  if (!bundle || !Array.isArray(bundle.sketches)) throw new Error("Bundle JSON does not contain a sketches array.");
-
-  let replaced = false;
-  const sketches = bundle.sketches.map((sketch) => {
-    if (sketchId(sketch) !== sketchIdToReplace) return sketch;
-    replaced = true;
-    return nextSketch;
-  });
-
-  if (!replaced) throw new Error(`Sketch not found in bundle: ${sketchIdToReplace}`);
-  return { ...bundle, sketches };
-}
-
-function replaceExerciseInBundle(bundleJson: unknown, exerciseIdToReplace: string, nextExercise: unknown) {
-  const bundle = asObject(bundleJson);
-  if (!bundle || !Array.isArray(bundle.exercises)) throw new Error("Bundle JSON does not contain an exercises array.");
-
-  let replaced = false;
-  const exercises = bundle.exercises.map((exercise) => {
-    if (exerciseId(exercise) !== exerciseIdToReplace) return exercise;
-    replaced = true;
-    return nextExercise;
-  });
-
-  if (!replaced) throw new Error(`Exercise not found in bundle: ${exerciseIdToReplace}`);
-  return { ...bundle, exercises };
-}
-
-function updateExerciseFileContentInBundle(bundleJson: unknown, exerciseIdToUpdate: string, filePath: string, side: FileSide, content: string) {
-  const field = side === "starter" ? "starterFiles" : "solutionFiles";
-  const bundle = asObject(bundleJson);
-  if (!bundle || !Array.isArray(bundle.exercises)) throw new Error("Bundle JSON does not contain an exercises array.");
-
-  let updated = false;
-  const exercises = bundle.exercises.map((exercise) => {
-    const object = asObject(exercise);
-    if (!object || exerciseId(object) !== exerciseIdToUpdate) return exercise;
-
-    const updateFiles = (files: unknown) => {
-      if (!Array.isArray(files)) return files;
-      return files.map((file) => {
-        const fileObject = asObject(file);
-        if (!fileObject || fileObject.path !== filePath) return file;
-        updated = true;
-        return { ...fileObject, content };
-      });
-    };
-
-    if (Array.isArray(object[field])) {
-      return { ...object, [field]: updateFiles(object[field]) };
-    }
-
-    const recipe = asObject(object.recipe);
-    if (recipe && Array.isArray(recipe[field])) {
-      return { ...object, recipe: { ...recipe, [field]: updateFiles(recipe[field]) } };
-    }
-
-    return exercise;
-  });
-
-  if (!updated) throw new Error(`Could not find ${side} file ${filePath} in ${exerciseIdToUpdate}.`);
-  return { ...bundle, exercises };
-}
-
 function parseJsonOrError(text: string) {
   try {
     return { value: JSON.parse(text) as unknown, error: null };
@@ -263,10 +182,10 @@ export default function CurriculumDraftEditor() {
   const [search, setSearch] = useState("");
   const [tab, setTab] = useState<TabKey>("overview");
   const [loadedTopic, setLoadedTopic] = useState<LoadedTopic | null>(null);
+  const [sourceText, setSourceText] = useState("{}");
   const [bundleText, setBundleText] = useState("{}");
   const [messagesText, setMessagesText] = useState("{}");
   const [selectedExerciseId, setSelectedExerciseId] = useState<string | null>(null);
-  const [selectedSketchId, setSelectedSketchId] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -341,8 +260,8 @@ export default function CurriculumDraftEditor() {
 
   const bundleParse = useMemo(() => parseJsonOrError(bundleText), [bundleText]);
   const messagesParse = useMemo(() => parseJsonOrError(messagesText), [messagesText]);
-  const dirtyBundle = loadedTopic ? bundleText !== jsonPretty(loadedTopic.bundleJson) : false;
-  const dirtyMessages = loadedTopic ? messagesText !== jsonPretty(loadedTopic.messagesJson ?? {}) : false;
+  const sourceParse = useMemo(() => parseJsonOrError(sourceText), [sourceText]);
+  const dirtySource = loadedTopic ? sourceText !== jsonPretty(loadedTopic.sourceJson) : false;
   const selectCatalog = (value: string) => {
     const catalog = catalogs.find((item) => item.catalog === value);
     const subject = catalog?.subjects[0];
@@ -394,6 +313,7 @@ export default function CurriculumDraftEditor() {
       const response = await adminFetch(`/api/admin/curriculum-drafts/topic?${params.toString()}`, { cache: "no-store" });
       const topic = await readJsonResponse<LoadedTopic>(response);
       setLoadedTopic(topic);
+      setSourceText(jsonPretty(topic.sourceJson));
       setBundleText(jsonPretty(topic.bundleJson));
       setMessagesText(jsonPretty(topic.messagesJson ?? {}));
       setSelectedTopic(topic.topicDir);
@@ -406,17 +326,7 @@ export default function CurriculumDraftEditor() {
           : defaultExerciseId,
       );
 
-      const bundle = asObject(topic.bundleJson);
-      const sketchIds = Array.isArray(bundle?.sketches)
-        ? bundle.sketches.map(sketchId).filter((id): id is string => Boolean(id))
-        : [];
-      setSelectedSketchId((current) =>
-        options.preserveEditorSelection
-          ? keepEditorSelection(current, sketchIds, sketchIds[0] ?? null)
-          : sketchIds[0] ?? null,
-      );
-
-      setStatus(`Loaded ${topic.paths.bundle}`);
+      setStatus(`Loaded saved source ${topic.paths.source}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to load topic");
     } finally {
@@ -435,116 +345,34 @@ export default function CurriculumDraftEditor() {
     void loadTopic();
   }, [catalogs.length, loadedTopic, loading, selectedCatalog, selectedModule, selectedSubject, selectedTopic]);
 
-  const saveBundle = async () => {
+  const saveSource = async () => {
     if (!loadedTopic) return;
-    if (bundleParse.error) {
-      setError(bundleParse.error);
+    if (sourceParse.error) {
+      setError(sourceParse.error);
       return;
     }
     setLoading(true);
     setError(null);
     try {
-      const response = await adminFetch("/api/admin/curriculum-drafts/topic/bundle", {
+      const response = await adminFetch("/api/admin/curriculum-drafts/topic/source", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...loadedTopic, module: loadedTopic.moduleDir, topic: loadedTopic.topicDir, bundleJson: bundleParse.value }),
+        body: JSON.stringify({
+          catalog: loadedTopic.catalog,
+          subject: loadedTopic.subject,
+          module: loadedTopic.moduleDir,
+          topic: loadedTopic.topicDir,
+          locale: loadedTopic.locale,
+          sourceJson: sourceParse.value,
+        }),
       });
       await readJsonResponse(response);
       await reloadCurrentTopic();
-      setStatus("Saved topic.bundle.json directly to the draft.");
+      setStatus("Saved canonical source and refreshed the in-memory runtime.");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to save bundle");
+      setError(err instanceof Error ? err.message : "Unable to save canonical source");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const saveMessages = async () => {
-    if (!loadedTopic) return;
-    if (messagesParse.error) {
-      setError(messagesParse.error);
-      return;
-    }
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await adminFetch("/api/admin/curriculum-drafts/topic/messages", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...loadedTopic, module: loadedTopic.moduleDir, topic: loadedTopic.topicDir, messagesJson: messagesParse.value }),
-      });
-      await readJsonResponse(response);
-      await reloadCurrentTopic();
-      setStatus("Saved messages JSON directly to the draft.");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to save messages");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const saveMessageKey = async (keyPath: string, value: string) => {
-    if (!loadedTopic) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await adminFetch("/api/admin/curriculum-drafts/topic/message-key", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...loadedTopic, module: loadedTopic.moduleDir, topic: loadedTopic.topicDir, keyPath, value }),
-      });
-      await readJsonResponse(response);
-      await reloadCurrentTopic();
-      setStatus(`Saved ${keyPath}`);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to save message key");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-  const applySketchJson = (sketchIdToUpdate: string, sketchJson: unknown) => {
-    try {
-      if (sketchId(sketchJson) !== sketchIdToUpdate) {
-        throw new Error(`Sketch id must stay as ${sketchIdToUpdate}.`);
-      }
-      const parsed = parseJsonOrError(bundleText);
-      if (parsed.error) throw new Error(parsed.error);
-      const nextBundle = replaceSketchInBundle(parsed.value, sketchIdToUpdate, sketchJson);
-      setBundleText(jsonPretty(nextBundle));
-      setStatus(`Applied ${sketchIdToUpdate} to Bundle JSON. Save Bundle to persist.`);
-      setTab("bundle");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to apply sketch JSON");
-    }
-  };
-
-  const applyExerciseJson = (exerciseIdToUpdate: string, exerciseJson: unknown) => {
-    try {
-      if (exerciseId(exerciseJson) !== exerciseIdToUpdate) {
-        throw new Error(`Exercise id must stay as ${exerciseIdToUpdate}.`);
-      }
-      const parsed = parseJsonOrError(bundleText);
-      if (parsed.error) throw new Error(parsed.error);
-      const nextBundle = replaceExerciseInBundle(parsed.value, exerciseIdToUpdate, exerciseJson);
-      setBundleText(jsonPretty(nextBundle));
-      setStatus(`Applied ${exerciseIdToUpdate} to Bundle JSON. Save Bundle to persist.`);
-      setTab("bundle");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to apply exercise JSON");
-    }
-  };
-
-  const applyBundleFileContent = (exerciseIdToUpdate: string, path: string, side: FileSide, value: string) => {
-    try {
-      const parsed = parseJsonOrError(bundleText);
-      if (parsed.error) throw new Error(parsed.error);
-      const nextBundle = updateExerciseFileContentInBundle(parsed.value, exerciseIdToUpdate, path, side, value);
-      setBundleText(jsonPretty(nextBundle));
-      setStatus(`Applied ${side} file ${path} to Bundle JSON. Save Bundle to persist.`);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to apply inline file content");
     }
   };
 
@@ -554,10 +382,10 @@ export default function CurriculumDraftEditor() {
       return;
     }
 
-    if (dirtyBundle || dirtyMessages) {
+    if (dirtySource) {
       const proceed = window.confirm(
         source === "draft"
-          ? "Local editor state differs from the compiled build. Recompile canonical .curriculum-drafts source before relying on this preview. Continue anyway?"
+          ? "Source JSON has unsaved edits. Draft QA uses the saved canonical source, not local editor text. Continue anyway?"
           : "You have unsaved changes. Generated preview reads topics.generated.ts. Save and run Gen manifests first for the most accurate preview. Continue anyway?",
       );
       if (!proceed) return;
@@ -598,7 +426,7 @@ export default function CurriculumDraftEditor() {
       window.open(websiteHref(previewUrl), "_blank", "noopener,noreferrer");
       setStatus(
         source === "draft"
-          ? "Opened build QA preview from .curriculum-build. Progress persistence is off; recompile canonical source to refresh this preview."
+          ? "Opened Draft QA compiled in memory from saved canonical source. Progress persistence is off."
           : "Opened generated QA preview with progress persistence off. Run Gen manifests first if you changed draft files.",
       );
     } catch (err) {
@@ -660,7 +488,7 @@ export default function CurriculumDraftEditor() {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-950">
       <div className="border-b border-amber-200 bg-amber-50 px-6 py-3 text-sm text-amber-950">
-        <span className="font-semibold">Local curriculum build QA</span> — reads generated <span className="font-mono">.curriculum-build</span> artifacts. Canonical editable topic source lives in <span className="font-mono">.curriculum-drafts</span>.
+        <span className="font-semibold">Canonical Draft Editor / Draft QA</span> — Source JSON is editable in <span className="font-mono">.curriculum-drafts</span>. Bundle and Messages JSON are compiled in memory and read-only. Preview and Check Answer use the saved source.
       </div>
 
       <div className="grid min-h-[calc(100vh-45px)] grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)_360px]">
@@ -727,7 +555,7 @@ export default function CurriculumDraftEditor() {
               </details>
               <div className="mt-3 rounded-xl bg-white/70 p-2">
                 Add this to <span className="font-mono">apps/web/.env.local</span> if needed:<br />
-                <span className="font-mono">DEV_CURRICULUM_BUILD_ROOT=/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-build</span>
+                <span className="font-mono">DEV_CURRICULUM_SOURCE_ROOT=/absolute/path/to/.curriculum-drafts</span>
               </div>
             </div>
           ) : null}
@@ -737,14 +565,14 @@ export default function CurriculumDraftEditor() {
           <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h1 className="text-lg font-bold">Curriculum Build QA</h1>
+                <h1 className="text-lg font-bold">Canonical Draft Editor</h1>
                 <p className="mt-1 max-w-4xl truncate font-mono text-xs text-slate-500">
-                  {loadedTopic ? `${loadedTopic.paths.bundle} · ${loadedTopic.paths.messages}` : "Choose a topic from the left sidebar."}
+                  {loadedTopic ? loadedTopic.paths.source : "Choose a topic from the left sidebar."}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <button type="button" onClick={() => void reloadCurrentTopic()} disabled={loading || !selectedTopic} className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-50 disabled:opacity-40">
-                  {loading ? "Loading…" : "Load"}
+                  {loading ? "Loading…" : "Reload saved draft"}
                 </button>
                 <button type="button" onClick={() => previewLoadedTopic("draft")} disabled={!loadedTopic} className="rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white disabled:opacity-40">Preview Draft</button>
                 <button type="button" onClick={() => previewLoadedTopic("generated")} disabled={!loadedTopic} className="rounded-xl border border-indigo-200 px-3 py-2 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 disabled:opacity-40">Preview Generated</button>
@@ -755,8 +583,7 @@ export default function CurriculumDraftEditor() {
               </div>
             </div>
             <div className="mt-3 flex flex-wrap gap-2 text-xs">
-              {dirtyBundle ? <span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">bundle dirty</span> : null}
-              {dirtyMessages ? <span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">messages dirty</span> : null}
+              {dirtySource ? <span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">source has unsaved edits</span> : null}
               {status ? <span className="rounded-full bg-emerald-50 px-2 py-1 text-emerald-700">{status}</span> : null}
               {error ? <span className="rounded-full bg-red-50 px-2 py-1 text-red-700">{error}</span> : null}
             </div>
@@ -776,7 +603,7 @@ export default function CurriculumDraftEditor() {
           </div>
 
           {!loadedTopic ? (
-            <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500">Load a compiled topic to inspect its generated build artifacts.</div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500">Load a canonical topic source to edit it and inspect its in-memory runtime.</div>
           ) : null}
 
           {loadedTopic && tab === "overview" ? (
@@ -796,48 +623,9 @@ export default function CurriculumDraftEditor() {
             </section>
           ) : null}
 
-          {loadedTopic && tab === "bundle" ? <JsonEditor title="topic.bundle.json" value={bundleText} onChange={setBundleText} onSave={saveBundle} disabled={true} error={bundleParse.error} /> : null}
-          {loadedTopic && tab === "messages" ? <JsonEditor title="messages JSON" value={messagesText} onChange={setMessagesText} onSave={saveMessages} disabled={true} error={messagesParse.error} /> : null}
-
-          {loadedTopic && tab === "sketches" ? (
-            <SketchesEditor
-              bundleJson={bundleParse.value}
-              messagesJson={messagesParse.value}
-              selectedSketchId={selectedSketchId}
-              onSelectSketch={setSelectedSketchId}
-              onApplySketchJson={applySketchJson}
-              onSaveMessageKey={saveMessageKey}
-            />
-          ) : null}
-          {loadedTopic && tab === "exercises" ? (
-            <div className="space-y-4">
-              <ExerciseTable exercises={loadedTopic.exercises} selectedExerciseId={selectedExerciseId} onSelect={setSelectedExerciseId} />
-              <ExerciseMessageEditor
-                exercises={loadedTopic.exercises}
-                selectedExerciseId={selectedExerciseId}
-                bundleJson={bundleParse.value}
-                messagesJson={messagesParse.value}
-                onSelect={setSelectedExerciseId}
-                onSaveMessageKey={saveMessageKey}
-              />
-              <ExerciseJsonEditor
-                exercises={loadedTopic.exercises}
-                selectedExerciseId={selectedExerciseId}
-                bundleJson={bundleParse.value}
-                onSelect={setSelectedExerciseId}
-                onApplyExerciseJson={applyExerciseJson}
-              />
-            </div>
-          ) : null}
-          {loadedTopic && tab === "files" ? (
-            <FilePairEditor
-              topicKey={`${loadedTopic.catalog}:${loadedTopic.subject}:${loadedTopic.moduleDir}:${loadedTopic.topicDir}`}
-              filePairs={loadedTopic.filePairs}
-              selectedExerciseId={selectedExerciseId}
-              onSaveMessageKey={saveMessageKey}
-              onApplyBundleFileContent={applyBundleFileContent}
-            />
-          ) : null}
+          {loadedTopic && tab === "source" ? <JsonEditor title="Source JSON · canonical and editable" value={sourceText} onChange={setSourceText} onSave={saveSource} error={sourceParse.error} /> : null}
+          {loadedTopic && tab === "bundle" ? <JsonEditor title="Bundle JSON · derived in memory" value={bundleText} onChange={setBundleText} disabled error={bundleParse.error} /> : null}
+          {loadedTopic && tab === "messages" ? <JsonEditor title="Messages JSON · derived in memory" value={messagesText} onChange={setMessagesText} disabled error={messagesParse.error} /> : null}
           {loadedTopic && tab === "project" ? <ProjectFlowPanel steps={loadedTopic.projectFlow} /> : null}
           {loadedTopic && tab === "validation" ? <DiagnosticsPanel diagnostics={loadedTopic.diagnostics} /> : null}
 

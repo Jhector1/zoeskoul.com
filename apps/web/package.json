@@ -71,6 +71,7 @@
     "@zoeskoul/auth-client": "workspace:*",
     "@zoeskoul/code-contracts": "workspace:*",
     "@zoeskoul/curriculum-contracts": "workspace:*",
+    "@zoeskoul/curriculum-compiler": "workspace:*",
     "@zoeskoul/curriculum-profiles": "workspace:*",
     "@zoeskoul/curriculum-registry": "workspace:*",
     "@zoeskoul/curriculum-runtime": "workspace:*",

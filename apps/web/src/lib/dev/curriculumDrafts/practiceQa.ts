@@ -11,7 +11,8 @@ import type {
   ManifestExercise,
   TopicBundleManifest,
 } from "@/lib/subjects/_core/manifestTypes";
-import { loadDraftTopic, type DraftRef } from "@/lib/dev/curriculumDrafts/fs";
+import type { DraftRef } from "@/lib/dev/curriculumDrafts/fs";
+import { loadSourceTopic } from "@/lib/dev/curriculumDrafts/sourceFs";
 import { buildExerciseFromManifest } from "@/lib/practice/generator/engines/json/buildExerciseFromManifest";
 import { rngFromActor } from "@/lib/practice/catalog";
 
@@ -219,7 +220,7 @@ export async function loadDraftQaPractice(args: {
   difficulty?: unknown;
 }) {
   const difficulty = normalizeDifficulty(args.difficulty);
-  const loaded = await loadDraftTopic(args.ref);
+  const loaded = await loadSourceTopic(args.ref);
   const manifest = loaded.bundleJson as TopicBundleManifest;
   const manifestExercise = findExercise(manifest, args.exerciseKey);
   const topicSlug = topicSlugOf(manifest);
@@ -287,7 +288,7 @@ export async function loadDraftQaPractice(args: {
 
   // Never let a missing Draft QA message lookup silently become visible UI.
   // Published/live practice already resolves through the normal message layer;
-  // this guard protects the raw .curriculum-build adapter specifically.
+  // this guard protects the canonical-source preview adapter specifically.
   assertNoUnresolvedDraftMessageRefs(exercise, "exercise");
   assertNoUnresolvedDraftMessageRefs(expected, "expected");
 

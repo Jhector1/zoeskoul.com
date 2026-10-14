@@ -60,7 +60,7 @@ describe("curriculum draft fs helpers", () => {
         value: { title: "Git Foundations" },
       }),
     ).rejects.toThrow(
-      /Compiled curriculum build artifacts are read-only/,
+      /READ_ONLY_DERIVED_ARTIFACT.*\.curriculum-build artifacts are generated and read-only/,
     );
 
     await expect(pathExists(filePath)).resolves.toBe(false);

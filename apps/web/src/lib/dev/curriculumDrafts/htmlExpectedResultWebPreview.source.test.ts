@@ -14,9 +14,9 @@ describe("HTML expected result ownership", () => {
       "apps/web/src/lib/practice/generator/engines/json/recipes/sourceChecks.ts",
     );
 
-    expect(recipe).toContain('kind: "web_preview"');
-    expect(recipe).toContain("files: solutionFiles");
-    expect(recipe).toContain("expectedExample: expectedWebPreview");
+    expect(recipe).toContain("buildSourceChecksExpectedExample");
+    expect(recipe).toContain("solutionFiles:");
+    expect(recipe).toContain("expectedExample,");
   });
 
   it("renders through the shared learner-workspace WebPreview", () => {
@@ -27,7 +27,7 @@ describe("HTML expected result ownership", () => {
     expect(ui).toContain(
       'import WebPreview from "../../../runner/components/WebPreview"',
     );
-    expect(ui).toContain('webExample?.kind === "web_preview"');
+    expect(ui).toContain('example.kind === "web_preview"');
     expect(ui).toContain('data-testid="web-expected-result"');
     expect(ui).toContain("<WebPreview");
     expect(ui).not.toContain("<iframe");

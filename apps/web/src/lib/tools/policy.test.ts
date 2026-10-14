@@ -15,6 +15,12 @@ describe("toolsPolicyForSubject", () => {
         ).toEqual({ codeEnabled: true });
     });
 
+    it("enables the JavaScript workspace for the API curriculum profile", () => {
+        expect(
+            toolsPolicyForSubject("api-foundations", undefined, "api"),
+        ).toEqual({ codeEnabled: true });
+    });
+
     it("still honors an explicit authored tools override", () => {
         expect(
             toolsPolicyForSubject(

@@ -405,6 +405,9 @@ importers:
       '@zoeskoul/curriculum-contracts':
         specifier: workspace:*
         version: link:../../packages/curriculum-contracts
+      '@zoeskoul/curriculum-compiler':
+        specifier: workspace:*
+        version: link:../../packages/curriculum-compiler
       '@zoeskoul/curriculum-profiles':
         specifier: workspace:*
         version: link:../../packages/curriculum-profiles

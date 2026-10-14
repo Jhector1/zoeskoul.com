@@ -708,6 +708,99 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     expect((result.exercise as any).expectedExample).toBeUndefined();
   });
 
+  it("renders API JavaScript source-check expectations as terminal output", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        language: "javascript",
+        showExpectedExample: true,
+        workspace: {
+          language: "javascript",
+          entryFilePath: "main.js",
+        },
+        solutionFiles: [
+          {
+            path: "main.js",
+            content: "console.log({ status: 200 });\n",
+          },
+        ],
+        sourceChecks: [
+          {
+            type: "source_regex",
+            pattern: "status\\s*:\\s*200",
+            message: "Use status 200.",
+          },
+        ],
+        recipe: {
+          type: "source_checks",
+          solutionCode: "console.log({ status: 200 });\n",
+          tests: [
+            {
+              stdout: "{ status: 200 }\n",
+              match: "exact",
+            },
+          ],
+        },
+      }),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "javascript",
+          supportsTerminal: true,
+        },
+      } as any,
+    );
+
+    expect((result.expected as any).language).toBe("javascript");
+    expect((result.exercise as any).expectedExample).toMatchObject({
+      kind: "terminal",
+      stdout: "{ status: 200 }\n",
+    });
+  });
+
+  it("preserves Web Preview for explicitly web source-check exercises", () => {
+    const solutionFiles = [
+      {
+        path: "index.html",
+        content: "<h1>Hello</h1>\n",
+      },
+    ];
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        language: "web",
+        workspace: {
+          language: "web",
+          entryFilePath: "index.html",
+        },
+        solutionFiles,
+        sourceChecks: [
+          {
+            type: "source_contains",
+            pattern: "<h1>",
+            message: "Add a heading.",
+          },
+        ],
+        recipe: {
+          type: "source_checks",
+          solutionFiles,
+        },
+      }),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "web",
+          language: "web",
+        },
+      } as any,
+    );
+
+    expect((result.exercise as any).expectedExample).toEqual({
+      kind: "web_preview",
+      entryPath: "index.html",
+      files: solutionFiles,
+    });
+  });
+
   it("builds semantic recipes with runtime tests as behavior-first hybrid checks", () => {
     const result = buildExerciseFromManifest(
       makeCodeInputDef({

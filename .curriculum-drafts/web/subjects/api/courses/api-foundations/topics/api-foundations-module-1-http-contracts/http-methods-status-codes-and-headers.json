@@ -1,0 +1,211 @@
+{
+  "title": "HTTP Methods, Status Codes, and Headers",
+  "summary": "Choose methods for resource operations, interpret status families, and use headers as metadata about an HTTP message.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "http-methods-status-codes-and-headers-methods",
+      "cardTitle": "Choose the operation",
+      "title": "HTTP methods communicate intent",
+      "bodyMarkdown": "HTTP methods tell the server what kind of operation the client wants.\n\nFor the event resource in this course, we will use:\n\n```text\nGET     read resources\nPOST    create a new resource\nPATCH   change part of an existing resource\nDELETE  remove a resource\n```\n\nStep by step: `GET` reads existing data, `POST` creates a new resource, `PATCH` changes part of an existing resource, and `DELETE` removes one. The method communicates intent before the server runs any application logic.\n\nExamples:\n\n```text\nGET    /api/events\nPOST   /api/events\nPATCH  /api/events/42\nDELETE /api/events/42\n```\n\nRead the examples line by line: the first request reads the collection, the second creates inside that collection, the third targets one event for a partial update, and the fourth targets one event for removal.\n\nThe method is part of the API contract. A client should not have to guess that `GET` secretly deletes something or that `POST` is being used only to read data.\n\nYou may also encounter `PUT`, which commonly replaces a complete resource representation. We will focus on `PATCH` for partial updates because it lets us change only the fields supplied by the client.",
+      "tryItExercises": [
+        {
+          "id": "try-http-methods-status-codes-and-headers-methods",
+          "kind": "code_input",
+          "title": "Match club operations to methods",
+          "prompt": "**Problem** A student-club admin needs four API operations. **Task** Create an `operations` object whose `list`, `create`, `rename`, and `remove` properties use `GET`, `POST`, `PATCH`, and `DELETE` respectively. Log the object. **Expected result** Each operation communicates its intended HTTP action.",
+          "hint": "Read is GET, create is POST, partial update is PATCH, and removal is DELETE.",
+          "help": {
+            "concept": "HTTP methods communicate the client's intended operation on a resource.",
+            "hint_1": "Use uppercase method names as strings.",
+            "hint_2": "The rename operation changes only part of an existing event, so use PATCH."
+          },
+          "starterCode": "const operations = {\n  list: \"\",\n  create: \"\",\n  rename: \"\",\n  remove: \"\",\n};\n\nconsole.log(operations);\n",
+          "solutionCode": "const operations = {\n  list: \"GET\",\n  create: \"POST\",\n  rename: \"PATCH\",\n  remove: \"DELETE\",\n};\n\nconsole.log(operations);\n",
+          "fixedLanguage": "javascript",
+          "entryFilePath": "main.js",
+          "tests": [
+            {
+              "stdout": "{ list: 'GET', create: 'POST', rename: 'PATCH', remove: 'DELETE' }\n",
+              "match": "exact"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "list\\s*:\\s*[\"\\']GET[\"\\']",
+              "message": "Use GET for list.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "create\\s*:\\s*[\"\\']POST[\"\\']",
+              "message": "Use POST for create.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "rename\\s*:\\s*[\"\\']PATCH[\"\\']",
+              "message": "Use PATCH for a partial rename.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "remove\\s*:\\s*[\"\\']DELETE[\"\\']",
+              "message": "Use DELETE for remove.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "recipeType": "source_checks"
+        }
+      ]
+    },
+    {
+      "id": "http-methods-status-codes-and-headers-status",
+      "cardTitle": "Read the server result",
+      "title": "Status codes and headers explain the response",
+      "bodyMarkdown": "A response status code summarizes the outcome of the request.\n\nUseful beginner examples:\n\n```text\n200 OK             successful read or update\n201 Created        a resource was created\n204 No Content     success with no response body\n400 Bad Request    the client's input is invalid\n404 Not Found      the requested resource does not exist\n500 Server Error   an unexpected server failure occurred\n```\n\nStep by step, read the first digit before the exact label: the `2xx` lines describe successful outcomes, the `4xx` lines describe requests the server cannot fulfill as sent, and the `5xx` line describes a server-side failure.\n\nThe first digit gives the broad family:\n\n- `2xx` → success\n- `4xx` → the request cannot be fulfilled as sent\n- `5xx` → the server failed while handling a valid-looking request\n\n**Headers** carry metadata about the message. For JSON, a common response header is:\n\n```text\nContent-Type: application/json\n```\n\nThe header explains how to interpret the body; it is not the body itself.",
+      "tryItExercises": [
+        {
+          "id": "try-http-methods-status-codes-and-headers-response",
+          "kind": "code_input",
+          "title": "Describe a not-found response",
+          "prompt": "**Problem** A campus room lookup cannot find room 77. **Task** Create a `response` object with `status: 404`, a `headers` object containing `content-type: \"application/json\"`, and a `body` object with an `error` string. Log the response. **Expected result** Status, headers, and body remain separate parts of one response representation.",
+          "hint": "Use the client-error status for a missing resource; Content-Type still describes how to interpret the JSON body.",
+          "help": {
+            "concept": "Status, headers, and body have different jobs inside an HTTP response.",
+            "hint_1": "Keep the numeric status at the response's top level.",
+            "hint_2": "Put `content-type` inside the headers object."
+          },
+          "starterCode": "const response = {\n  status: 0,\n  headers: {\n    \"content-type\": \"\",\n  },\n  body: {\n    id: 0,\n    title: \"\",\n  },\n};\n\nconsole.log(response);\n",
+          "solutionCode": "const response = {\n  status: 404,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    error: \"Room not found\",\n  },\n};\n\nconsole.log(response);\n",
+          "fixedLanguage": "javascript",
+          "entryFilePath": "main.js",
+          "tests": [
+            {
+              "stdout": "{ status: 404, headers: { 'content-type': 'application/json' }, body: { error: 'Room not found' } }\n",
+              "match": "exact"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "status\\s*:\\s*404",
+              "message": "Use status 404 for the missing resource.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "[\"\\']content-type[\"\\']\\s*:\\s*[\"\\']application/json[\"\\']",
+              "message": "Declare the JSON content type.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "body\\s*:\\s*\\{[\\s\\S]*error\\s*:\\s*[\"\\'][^\"\\']+[\"\\']",
+              "message": "Include an error message in the JSON-like body.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "recipeType": "source_checks"
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "http-methods-status-codes-and-headers-create",
+      "kind": "single_choice",
+      "title": "Choose a creation method",
+      "prompt": "Which method best represents creating a new event at `/api/events`?",
+      "hint": "Choose the method whose normal resource intent is creation.",
+      "help": {
+        "concept": "HTTP method semantics",
+        "hint_1": "Identify the responsibility described in the question.",
+        "hint_2": "Choose the option that matches the HTTP/API contract, not an implementation detail."
+      },
+      "options": [
+        "GET",
+        "POST",
+        "PATCH",
+        "DELETE"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "http-methods-status-codes-and-headers-success",
+      "kind": "multi_choice",
+      "title": "Find successful statuses",
+      "prompt": "Which status codes are in the successful 2xx family? Select all that apply.",
+      "hint": "The first digit identifies the broad status family.",
+      "help": {
+        "concept": "HTTP status families",
+        "hint_1": "Evaluate each option independently.",
+        "hint_2": "Select every option that satisfies the API rule."
+      },
+      "options": [
+        "200",
+        "201",
+        "404",
+        "500"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "http-methods-status-codes-and-headers-content-type",
+      "kind": "fill_blank_choice",
+      "title": "Name JSON metadata",
+      "prompt": "Complete the response header.",
+      "hint": "Select the value that describes the response body format rather than an HTTP method or status.",
+      "help": {
+        "concept": "Content-Type header",
+        "hint_1": "Read the request or response role around the blank.",
+        "hint_2": "Use the term or value that makes the statement technically precise."
+      },
+      "template": "`Content-Type: [blank1]` tells a client that the response body is JSON.",
+      "choices": [
+        "text/plain",
+        "application/json",
+        "GET",
+        "201"
+      ],
+      "correctValue": "application/json"
+    },
+    {
+      "id": "http-methods-status-codes-and-headers-post-flow",
+      "kind": "drag_reorder",
+      "title": "Follow a successful create",
+      "prompt": "Order the conceptual steps for a successful create request.",
+      "hint": "Start with the request method and end with the response.",
+      "help": {
+        "concept": "Create request lifecycle",
+        "hint_1": "Start with the client action.",
+        "hint_2": "The server must receive and handle the request before the client can use the response."
+      },
+      "tokens": [
+        "The client sends POST /api/events",
+        "The server handles the submitted event data",
+        "The server creates the resource",
+        "The server returns 201 with the created representation"
+      ],
+      "correctOrder": [
+        "The client sends POST /api/events",
+        "The server handles the submitted event data",
+        "The server creates the resource",
+        "The server returns 201 with the created representation"
+      ]
+    }
+  ]
+}

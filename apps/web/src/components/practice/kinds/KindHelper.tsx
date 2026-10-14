@@ -1,7 +1,10 @@
 "use client";
 
 import MathMarkdown from "@/components/markdown/MathMarkdown";
-import { normalizeMath } from "@zoeskoul/learner-ui/lib/markdown/normalizeMath";
+import {
+    normalizeMath,
+    normalizeStructuredExercisePromptLayout,
+} from "@zoeskoul/learner-ui/lib/markdown/normalizeMath";
 import React from "react";
 import type { Exercise } from "@/lib/practice/types";
 import { useTaggedT } from "@/i18n/tagged";
@@ -41,7 +44,7 @@ export function ExercisePrompt({ exercise }: { exercise: Exercise | any }) {
                 "[&_.katex-display]:overflow-x-auto",
                 "[&_.katex-display]:py-2",
             ].join(" ")}
-            content={normalizeMath(resolvedPrompt)}
+            content={normalizeMath(normalizeStructuredExercisePromptLayout(resolvedPrompt))}
         />
     );
 }

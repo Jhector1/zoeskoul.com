@@ -1,0 +1,59 @@
+{
+  "subjectSlug": "api",
+  "catalogSlug": "web",
+  "profileId": "api",
+  "workspaceProfileId": "node-api-runner",
+  "workspacePolicyId": "api-node-workspace",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "title": "API Foundations",
+  "description": "A hands-on beginner JavaScript course covering values, decisions, collections, functions, the DOM, events, JSON, promises, async-await, local fetch, and resilient interface states.",
+  "level": "beginner",
+  "audience": [
+    "absolute beginners who know basic HTML",
+    "students continuing through the web development catalog",
+    "learners preparing for frontend application development"
+  ],
+  "goals": [
+    "Use JavaScript values, variables, expressions, and control flow confidently",
+    "Organize repeated work with arrays, loops, objects, and functions",
+    "Respond to browser events and update page content through the DOM",
+    "Parse JSON and work with promises, async-await, and local fetch",
+    "Represent loading, error, empty, and success states clearly",
+    "Build a complete Campus Event Explorer in the browser workspace"
+  ],
+  "teachingStyle": {
+    "tone": "friendly, practical, beginner-safe, and behavior-first",
+    "quizWeight": 0.25,
+    "projectWeight": 0.4,
+    "codeInputWeight": 0.6
+  },
+  "constraints": {
+    "moduleCount": 5,
+    "topicsPerModuleMin": 1,
+    "topicsPerModuleMax": 7,
+    "moduleSlugFormat": "<courseSlug>-module-<number>-<short-topic-area>",
+    "sectionSlugFormat": "<courseSlug>-section-<number>-<short-section-role>",
+    "prefixFormat": "javascript_module_<number>"
+  },
+  "courseSlug": "api-foundations",
+  "trackSlug": "web-development",
+  "courseGenerationPolicy": {
+    "studentActionStyle": "browser-web-preview",
+    "forbidUnavailableWorkspaceActions": true,
+    "preferredTerms": {
+      "editor": "JavaScript editor",
+      "output panel": "browser preview",
+      "run button": "Preview"
+    },
+    "notes": [
+      "Use fixedLanguage web and recipeType source_checks for browser JavaScript code_input exercises.",
+      "Use script.js with small provided HTML fixtures so learners can focus on JavaScript behavior.",
+      "Use local JSON files for fetch instruction; external network access is unavailable.",
+      "Teach JSON, promises and async-await, local fetch, and loading, error, and empty states in Module 3 before the capstone.",
+      "Do not require frameworks, bundlers, npm, a terminal, or backend services.",
+      "Module, section, and topic counts are specific to this course design and are not global curriculum cardinality rules."
+    ]
+  },
+  "modulePolicies": []
+}

@@ -7,7 +7,7 @@ import { TOOL_SPECS } from "./registry";
 
 export default function ToolTabs(props: {
     ctx: ToolsCtx;
-    value: ToolId;
+    value: ToolId | null;
     onChange: (v: ToolId) => void;
     hideDisabled?: boolean;
 }) {

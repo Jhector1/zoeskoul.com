@@ -16,6 +16,7 @@ export type DraftTopicSummary = {
   topicSlug: string;
   topicId?: string | null;
   title?: string | null;
+  sourcePath?: string;
   bundlePath: string;
   messagesPath?: string | null;
 };
@@ -92,9 +93,11 @@ export type LoadedTopic = {
   moduleDir: string;
   topicDir: string;
   paths: {
+    source: string;
     bundle: string;
     messages: string;
   };
+  sourceJson: unknown;
   bundleJson: unknown;
   messagesJson: unknown | null;
   diagnostics: DraftDiagnostic[];

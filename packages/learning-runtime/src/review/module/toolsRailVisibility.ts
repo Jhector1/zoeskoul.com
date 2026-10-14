@@ -102,9 +102,8 @@ export function resolveToolsRailVisibility(args: ResolveToolsRailVisibilityArgs)
         args.hasRegistryWorkspaceExercise,
     );
 
-    const isNonWorkspaceEmbeddedTryIt =
-        args.cardHasEmbeddedTryIt &&
-        !isExerciseBound;
+    const isInactiveEmbeddedTryIt =
+        args.cardHasEmbeddedTryIt && !isExerciseTarget;
 
     /**
      * Quiz ownership is intentionally stricter than inherited topic policy.
@@ -125,13 +124,14 @@ export function resolveToolsRailVisibility(args: ResolveToolsRailVisibilityArgs)
         : authoredDefaultVisible ?? isExerciseBound;
 
     /**
-     * Non-workspace embedded Try It is learner-opt-in.
+     * An embedded Try It is learner-opt-in until its exercise route is active.
      *
-     * Even an inherited topic/card defaultVisible=true must not automatically
-     * expose the right rail. The Tools button remains available through
-     * allowOpen, so the learner can open Notes/Tools explicitly.
+     * Registry discovery proves that the workspace is available; it does not
+     * mean the learner has activated it. Even an inherited topic/card
+     * defaultVisible=true must not automatically expose the right rail on the
+     * surrounding reading card. The exercise route still opens the workspace.
      */
-    const defaultVisible = isNonWorkspaceEmbeddedTryIt
+    const defaultVisible = isInactiveEmbeddedTryIt
         ? false
         : inferredDefaultVisible;
 

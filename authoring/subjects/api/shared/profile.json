@@ -1,0 +1,18 @@
+{
+  "profileId": "api",
+  "language": "web",
+  "runtime": {
+    "kind": "code",
+    "language": "javascript",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "workspaceProfileId": "node-api-runner",
+  "workspacePolicyId": "api-node-workspace",
+  "checker": {
+    "defaultRecipe": "source_checks"
+  }
+}

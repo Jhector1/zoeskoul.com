@@ -31,6 +31,7 @@ import { ExerciseToolsProvider } from "@/components/tools/context/ExerciseToolsC
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import ResizeSeparator from "@zoeskoul/learner-workspace/ui/ResizeSeparator";
 
 function firstText(...values: unknown[]) {
   for (const value of values) {
@@ -125,13 +126,15 @@ function PracticeLeftRail({
   width,
   padStyle,
   onResizeStart,
+  onResizeKeyDown,
   children,
 }: {
   show: boolean;
   collapsed: boolean;
   width: number;
   padStyle: React.CSSProperties;
-  onResizeStart: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onResizeStart: React.PointerEventHandler<HTMLDivElement>;
+  onResizeKeyDown: React.KeyboardEventHandler<HTMLDivElement>;
   children: React.ReactNode;
 }) {
   const t = useTranslations("Practice.workspace");
@@ -145,6 +148,7 @@ function PracticeLeftRail({
           collapsed && "w-0",
         )}
         style={{ width: collapsed ? 0 : width }}
+        data-review-left-rail
       >
         <div
           className="h-full min-h-0 overflow-auto overscroll-contain [scrollbar-gutter:stable]"
@@ -155,9 +159,15 @@ function PracticeLeftRail({
         </div>
       </aside>
       {!collapsed ? (
-        <div
-          onMouseDown={onResizeStart}
-          className="w-2 shrink-0 cursor-col-resize rounded-xl bg-neutral-200/60 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10"
+        <ResizeSeparator
+          orientation="vertical"
+          onPointerDown={onResizeStart}
+          onKeyDown={onResizeKeyDown}
+          tabIndex={0}
+          aria-label={t("header.resizeNavigator")}
+          aria-valuemin={48}
+          aria-valuenow={Math.round(width)}
+          data-review-left-resize-handle
           title={t("header.resizeNavigator")}
         />
       ) : null}
@@ -485,7 +495,8 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
           collapsed={panels.leftCollapsedEff}
           width={panels.leftW}
           padStyle={panels.padStyle}
-          onResizeStart={panels.onMouseDownLeftHandle}
+          onResizeStart={panels.onPointerDownLeftHandle}
+          onResizeKeyDown={panels.onKeyDownLeftHandle}
         >
           {navigator}
         </PracticeLeftRail>
@@ -497,7 +508,8 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
           }
           rightCollapsed={panels.rightCollapsedEff}
           rightW={panels.rightW}
-          onResizeStart={panels.onMouseDownRightHandle}
+          onResizeStart={panels.onPointerDownRightHandle}
+          onResizeKeyDown={panels.onKeyDownRightHandle}
           toolsPanelProps={tools.panelProps}
         />
       }

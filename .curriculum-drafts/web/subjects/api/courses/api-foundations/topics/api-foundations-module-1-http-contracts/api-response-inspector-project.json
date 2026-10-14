@@ -1,0 +1,242 @@
+{
+  "title": "Build an API Response Inspector",
+  "summary": "Combine request/response vocabulary, statuses, headers, and JSON-body reasoning in a cumulative Node.js inspection utility.",
+  "minutes": 38,
+  "sketchBlocks": [
+    {
+      "id": "api-response-inspector-project-brief",
+      "cardTitle": "Module project",
+      "title": "Inspect one API response as a complete contract",
+      "bodyMarkdown": "Build a small **API Response Inspector**. You are not creating an Express server yet. Instead, you will receive one JavaScript object that represents an HTTP exchange and build utilities that explain it.\n\nThe finished program will report:\n\n- method and endpoint\n- numeric status and status family\n- content type\n- a useful body summary\n\nThis project keeps Module 1 focused on HTTP reasoning. In Module 2, these same ideas move into real Express route handlers."
+    },
+    {
+      "id": "api-response-inspector-project-flow",
+      "cardTitle": "Build cumulatively",
+      "title": "Each milestone keeps the previous solution",
+      "bodyMarkdown": "The five milestones are cumulative. Every starter contains the complete solution from the previous milestone.\n\nDo not replace the response object with hardcoded report text. The inspector should derive its report from the response data so the same functions can inspect different responses later."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "api-response-inspector-response-record",
+      "kind": "code_input",
+      "title": "Milestone 1: Store the response record",
+      "prompt": "Create the complete `response` object with method, endpoint, status, headers, and body, then log it.",
+      "hint": "Preserve the complete working solution from the previous milestone and add only the new responsibility.",
+      "help": {
+        "concept": "The API Response Inspector grows cumulatively while keeping HTTP metadata and body data understandable.",
+        "hint_1": "Read the existing code first and identify the one responsibility named by this milestone.",
+        "hint_2": "Do not delete earlier working behavior; the project is cumulative."
+      },
+      "starterCode": "// Create the response record required by the project.\n",
+      "solutionCode": "// Step 1: store one API response record.\nconst response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nconsole.log(response);\n",
+      "fixedLanguage": "javascript",
+      "entryFilePath": "inspector.js",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "const\\s+response\\s*=\\s*\\{[\\s\\S]*method\\s*:\\s*[\"\\']GET[\"\\'][\\s\\S]*endpoint\\s*:\\s*[\"\\']/api/events/42[\"\\'][\\s\\S]*status\\s*:\\s*200",
+          "message": "Create the response method, endpoint, and status.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "headers\\s*:\\s*\\{[\\s\\S]*[\"\\']content-type[\"\\']\\s*:\\s*[\"\\']application/json[\"\\']",
+          "message": "Include the JSON content-type header.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "body\\s*:\\s*\\{[\\s\\S]*id\\s*:\\s*42[\\s\\S]*title\\s*:",
+          "message": "Include the event body.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "api-response-inspector-status",
+      "kind": "code_input",
+      "title": "Milestone 2: Classify the status",
+      "prompt": "Keep the response record and add `classifyStatus(status)` that returns `success`, `client error`, `server error`, or `other` from the numeric status.",
+      "hint": "Preserve the complete working solution from the previous milestone and add only the new responsibility.",
+      "help": {
+        "concept": "The API Response Inspector grows cumulatively while keeping HTTP metadata and body data understandable.",
+        "hint_1": "Read the existing code first and identify the one responsibility named by this milestone.",
+        "hint_2": "Do not delete earlier working behavior; the project is cumulative."
+      },
+      "starterCode": "// Step 1: store one API response record.\nconst response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nconsole.log(response);\n",
+      "solutionCode": "const response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nfunction classifyStatus(status) {\n  if (status >= 200 && status < 300) return \"success\";\n  if (status >= 400 && status < 500) return \"client error\";\n  if (status >= 500) return \"server error\";\n  return \"other\";\n}\n\nconsole.log(response);\nconsole.log(classifyStatus(response.status));\n",
+      "fixedLanguage": "javascript",
+      "entryFilePath": "inspector.js",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "function\\s+classifyStatus\\s*\\(\\s*status\\s*\\)",
+          "message": "Define classifyStatus.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "status\\s*>=\\s*200[\\s\\S]*status\\s*<\\s*300[\\s\\S]*[\"\\']success[\"\\']",
+          "message": "Classify 2xx as success.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "status\\s*>=\\s*400[\\s\\S]*status\\s*<\\s*500[\\s\\S]*[\"\\']client error[\"\\']",
+          "message": "Classify 4xx as client error.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "status\\s*>=\\s*500[\\s\\S]*[\"\\']server error[\"\\']",
+          "message": "Classify 5xx as server error.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "api-response-inspector-content-type",
+      "kind": "code_input",
+      "title": "Milestone 3: Read the content type",
+      "prompt": "Keep everything from milestone 2 and add `getContentType(headers)` that returns the `content-type` value or `unknown` when it is absent.",
+      "hint": "Preserve the complete working solution from the previous milestone and add only the new responsibility.",
+      "help": {
+        "concept": "The API Response Inspector grows cumulatively while keeping HTTP metadata and body data understandable.",
+        "hint_1": "Read the existing code first and identify the one responsibility named by this milestone.",
+        "hint_2": "Do not delete earlier working behavior; the project is cumulative."
+      },
+      "starterCode": "const response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nfunction classifyStatus(status) {\n  if (status >= 200 && status < 300) return \"success\";\n  if (status >= 400 && status < 500) return \"client error\";\n  if (status >= 500) return \"server error\";\n  return \"other\";\n}\n\nconsole.log(response);\nconsole.log(classifyStatus(response.status));\n",
+      "solutionCode": "const response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nfunction classifyStatus(status) {\n  if (status >= 200 && status < 300) return \"success\";\n  if (status >= 400 && status < 500) return \"client error\";\n  if (status >= 500) return \"server error\";\n  return \"other\";\n}\n\nfunction getContentType(headers) {\n  return headers[\"content-type\"] ?? \"unknown\";\n}\n\nconsole.log(response);\nconsole.log(classifyStatus(response.status));\nconsole.log(getContentType(response.headers));\n",
+      "fixedLanguage": "javascript",
+      "entryFilePath": "inspector.js",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "function\\s+getContentType\\s*\\(\\s*headers\\s*\\)",
+          "message": "Define getContentType.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "headers\\[\\s*[\"\\']content-type[\"\\']\\s*\\]",
+          "message": "Read the content-type header.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "[\"\\']unknown[\"\\']",
+          "message": "Provide an unknown fallback.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "api-response-inspector-body",
+      "kind": "code_input",
+      "title": "Milestone 4: Summarize the body",
+      "prompt": "Keep the complete milestone 3 solution and add `summarizeBody(body)`. Arrays should report their item count; an object with a title should report `Event: <title>`.",
+      "hint": "Preserve the complete working solution from the previous milestone and add only the new responsibility.",
+      "help": {
+        "concept": "The API Response Inspector grows cumulatively while keeping HTTP metadata and body data understandable.",
+        "hint_1": "Read the existing code first and identify the one responsibility named by this milestone.",
+        "hint_2": "Do not delete earlier working behavior; the project is cumulative."
+      },
+      "starterCode": "const response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nfunction classifyStatus(status) {\n  if (status >= 200 && status < 300) return \"success\";\n  if (status >= 400 && status < 500) return \"client error\";\n  if (status >= 500) return \"server error\";\n  return \"other\";\n}\n\nfunction getContentType(headers) {\n  return headers[\"content-type\"] ?? \"unknown\";\n}\n\nconsole.log(response);\nconsole.log(classifyStatus(response.status));\nconsole.log(getContentType(response.headers));\n",
+      "solutionCode": "const response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nfunction classifyStatus(status) {\n  if (status >= 200 && status < 300) return \"success\";\n  if (status >= 400 && status < 500) return \"client error\";\n  if (status >= 500) return \"server error\";\n  return \"other\";\n}\n\nfunction getContentType(headers) {\n  return headers[\"content-type\"] ?? \"unknown\";\n}\n\nfunction summarizeBody(body) {\n  if (Array.isArray(body)) return `${body.length} item(s)`;\n  if (body && typeof body === \"object\" && \"title\" in body) {\n    return `Event: ${body.title}`;\n  }\n  return \"No event summary\";\n}\n\nconsole.log(response);\nconsole.log(classifyStatus(response.status));\nconsole.log(getContentType(response.headers));\nconsole.log(summarizeBody(response.body));\n",
+      "fixedLanguage": "javascript",
+      "entryFilePath": "inspector.js",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "function\\s+summarizeBody\\s*\\(\\s*body\\s*\\)",
+          "message": "Define summarizeBody.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "Array\\.isArray\\(\\s*body\\s*\\)",
+          "message": "Handle array bodies.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "body\\.title",
+          "message": "Use the event title for an object summary.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    },
+    {
+      "id": "api-response-inspector-report",
+      "kind": "code_input",
+      "title": "Milestone 5: Print the inspection report",
+      "prompt": "Keep all previous helpers and add `buildInspectionReport(response)` that returns one multi-line report with method + endpoint, status classification, content type, and body summary. Log the final report.",
+      "hint": "Preserve the complete working solution from the previous milestone and add only the new responsibility.",
+      "help": {
+        "concept": "The API Response Inspector grows cumulatively while keeping HTTP metadata and body data understandable.",
+        "hint_1": "Read the existing code first and identify the one responsibility named by this milestone.",
+        "hint_2": "Do not delete earlier working behavior; the project is cumulative."
+      },
+      "starterCode": "const response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nfunction classifyStatus(status) {\n  if (status >= 200 && status < 300) return \"success\";\n  if (status >= 400 && status < 500) return \"client error\";\n  if (status >= 500) return \"server error\";\n  return \"other\";\n}\n\nfunction getContentType(headers) {\n  return headers[\"content-type\"] ?? \"unknown\";\n}\n\nfunction summarizeBody(body) {\n  if (Array.isArray(body)) return `${body.length} item(s)`;\n  if (body && typeof body === \"object\" && \"title\" in body) {\n    return `Event: ${body.title}`;\n  }\n  return \"No event summary\";\n}\n\nconsole.log(response);\nconsole.log(classifyStatus(response.status));\nconsole.log(getContentType(response.headers));\nconsole.log(summarizeBody(response.body));\n",
+      "solutionCode": "const response = {\n  method: \"GET\",\n  endpoint: \"/api/events/42\",\n  status: 200,\n  headers: {\n    \"content-type\": \"application/json\",\n  },\n  body: {\n    id: 42,\n    title: \"Campus Film Night\",\n    location: \"Auditorium\",\n  },\n};\n\nfunction classifyStatus(status) {\n  if (status >= 200 && status < 300) return \"success\";\n  if (status >= 400 && status < 500) return \"client error\";\n  if (status >= 500) return \"server error\";\n  return \"other\";\n}\n\nfunction getContentType(headers) {\n  return headers[\"content-type\"] ?? \"unknown\";\n}\n\nfunction summarizeBody(body) {\n  if (Array.isArray(body)) return `${body.length} item(s)`;\n  if (body && typeof body === \"object\" && \"title\" in body) {\n    return `Event: ${body.title}`;\n  }\n  return \"No event summary\";\n}\n\nfunction buildInspectionReport(response) {\n  return [\n    `${response.method} ${response.endpoint}`,\n    `Status: ${response.status} (${classifyStatus(response.status)})`,\n    `Content-Type: ${getContentType(response.headers)}`,\n    `Body: ${summarizeBody(response.body)}`,\n  ].join(\"\\n\");\n}\n\nconsole.log(buildInspectionReport(response));\n",
+      "fixedLanguage": "javascript",
+      "entryFilePath": "inspector.js",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "function\\s+buildInspectionReport\\s*\\(\\s*response\\s*\\)",
+          "message": "Define buildInspectionReport.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "classifyStatus\\(\\s*response\\.status\\s*\\)",
+          "message": "Use classifyStatus in the report.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "getContentType\\(\\s*response\\.headers\\s*\\)",
+          "message": "Use getContentType in the report.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "summarizeBody\\(\\s*response\\.body\\s*\\)",
+          "message": "Use summarizeBody in the report.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "inspector.js",
+          "pattern": "console\\.log\\(\\s*buildInspectionReport\\(\\s*response\\s*\\)\\s*\\)",
+          "message": "Log the completed report.",
+          "normalizeWhitespace": false
+        }
+      ],
+      "recipeType": "source_checks"
+    }
+  ]
+}

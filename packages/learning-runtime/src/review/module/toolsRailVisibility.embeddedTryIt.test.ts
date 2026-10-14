@@ -59,10 +59,26 @@ describe("embedded Try It Tools visibility", () => {
         });
     });
 
-    it("still auto-opens a registry-backed code workspace", () => {
+    it("keeps a registry-backed Try It closed on its reading card", () => {
         expect(
             resolveToolsRailVisibility({
                 ...baseArgs,
+                hasRegistryWorkspaceExercise: true,
+            }),
+        ).toMatchObject({
+            defaultVisible: false,
+            isAvailable: true,
+            shouldCollapseByDefault: true,
+            isExerciseBound: true,
+        });
+    });
+
+    it("opens the registry-backed code workspace on the exercise route", () => {
+        expect(
+            resolveToolsRailVisibility({
+                ...baseArgs,
+                routeTargetKind: "exercise",
+                routeTargetTargetKind: "exercise",
                 hasRegistryWorkspaceExercise: true,
             }),
         ).toMatchObject({

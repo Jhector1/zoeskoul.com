@@ -257,7 +257,7 @@ function ToolsHeader({
                          onCollapse,
                      }: {
     ctx: ToolsCtx;
-    active: ToolId;
+    active: ToolId | null;
     setActive: (v: ToolId) => void;
     boundId: string | null;
     pendingExerciseBinding: boolean;

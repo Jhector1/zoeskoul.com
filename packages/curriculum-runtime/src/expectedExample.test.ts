@@ -5,6 +5,7 @@ import {
 } from "vitest";
 
 import {
+    buildSourceChecksExpectedExample,
     buildSqlExpectedExample,
     buildTerminalExpectedExample,
 } from "./expectedExample.js";
@@ -193,6 +194,61 @@ describe("shared Expected Example materialization", () => {
             meta: "Expected example",
             stdin: "Ada\n",
             stdout: "Hello Ada\n",
+        });
+    });
+
+    it("uses the terminal helper for JavaScript source-check exercises", () => {
+        expect(
+            buildSourceChecksExpectedExample({
+                def: {
+                    showExpectedExample: true,
+                },
+                resolved: {},
+                language: "javascript",
+                runtimeKind: "code",
+                entryPath: "main.js",
+                solutionFiles: [
+                    {
+                        path: "main.js",
+                        content: "console.log('ok');\n",
+                    },
+                ],
+                tests: [
+                    {
+                        stdout: "ok\n",
+                    },
+                ],
+            }),
+        ).toEqual({
+            kind: "terminal",
+            stdout: "ok\n",
+        });
+    });
+
+    it("uses Web Preview only for an explicit web language or runtime", () => {
+        expect(
+            buildSourceChecksExpectedExample({
+                def: {},
+                resolved: {},
+                language: "web",
+                runtimeKind: "web",
+                entryPath: "index.html",
+                solutionFiles: [
+                    {
+                        path: "index.html",
+                        content: "<h1>Hello</h1>\n",
+                    },
+                ],
+            }),
+        ).toEqual({
+            kind: "web_preview",
+            entryPath: "index.html",
+            files: [
+                {
+                    path: "index.html",
+                    content: "<h1>Hello</h1>\n",
+                },
+            ],
         });
     });
 });

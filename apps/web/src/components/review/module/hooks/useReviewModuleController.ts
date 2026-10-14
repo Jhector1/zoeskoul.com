@@ -1686,7 +1686,10 @@ export function useReviewModuleController({
     );
 
     const shouldDefaultCollapseRightRail = shouldDefaultCollapseToolsRail({
-        showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
+        // Draft QA is a learner-parity preview. The dev-only debug override
+        // must not force open a rail that the canonical learner policy closes.
+        showDebugLearningUi:
+            learnerUiFlags.showDebugLearningUi && !draftQaMode,
         activeCard,
         topicTools: activeTopicTools,
         exerciseTools: activeCardExerciseTools,
@@ -3150,7 +3153,8 @@ export function useReviewModuleController({
             showDesktopLeft: panels.showDesktopLeft,
             leftCollapsed: panels.leftCollapsed,
             leftW: panels.leftW,
-            onResizeStart: panels.onMouseDownLeftHandle,
+            onResizeStart: panels.onPointerDownLeftHandle,
+            onResizeKeyDown: panels.onKeyDownLeftHandle,
             padStyle: panels.padStyle,
             sidebarProps: {
                 mod,
@@ -3206,7 +3210,8 @@ export function useReviewModuleController({
             rightW: panels.rightW,
             containerRef: stackedToolsRef,
             shouldRenderStackedTools,
-            onResizeStart: panels.onMouseDownRightHandle,
+            onResizeStart: panels.onPointerDownRightHandle,
+            onResizeKeyDown: panels.onKeyDownRightHandle,
             toolsPanelProps: {
                 onCollapse: panels.handleCollapseRight,
                 onUnbind: handleUnbindFromToolsPanel,

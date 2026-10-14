@@ -47,9 +47,24 @@ export type SqlResultExpectedExample = {
     rows: Array<Array<string | number | null>>;
 };
 
+export type WebPreviewExpectedExample = {
+    kind: "web_preview";
+    entryPath: string;
+    files: Array<{
+        path?: string;
+        name?: string;
+        content: string;
+        language?: string;
+        isEntry?: boolean;
+        entry?: boolean;
+        readOnly?: boolean;
+    }>;
+};
+
 export type CodeExpectedExample =
     | TerminalExpectedExample
-    | SqlResultExpectedExample;
+    | SqlResultExpectedExample
+    | WebPreviewExpectedExample;
 
 
 export type TopicSlug = string;

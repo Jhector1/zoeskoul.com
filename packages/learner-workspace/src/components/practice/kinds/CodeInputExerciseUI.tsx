@@ -103,8 +103,8 @@ function ExpectedExampleCard({
 }) {
     const { t } = useCodeInputI18n();
 
-    const webExample = example as any;
-    if (webExample?.kind === "web_preview") {
+    if (example.kind === "web_preview") {
+        const webExample = example;
         const files = Array.isArray(webExample.files) ? webExample.files : [];
         if (files.length < 1) return null;
 

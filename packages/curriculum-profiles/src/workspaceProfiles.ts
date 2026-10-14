@@ -331,6 +331,64 @@ export const WORKSPACE_PROFILES: Record<string, WorkspaceProfile> = {
         ],
         forbiddenActionLanguage: [],
     },
+    "node-api-runner": {
+        id: "node-api-runner",
+        name: "Node.js API workspace",
+        ui: {
+            editorLabel: "Node.js editor",
+            runButtonLabel: "Run",
+            outputPanelLabel: "server output",
+            feedbackPanelLabel: "feedback area",
+            terminalPanelLabel: "terminal",
+            filesPanelLabel: "file explorer",
+        },
+        capabilities: {
+            singleFileCodeInput: { enabled: true },
+            multiFileProjects: {
+                enabled: true,
+                label: "API project files",
+                notes: "Learners build Node.js/Express APIs across focused route, repository, and data files.",
+            },
+            terminal: {
+                enabled: true,
+                label: "Terminal",
+                notes: "Learners run the local Node.js server and deterministic localhost HTTP checks.",
+            },
+            filesystem: {
+                enabled: true,
+                label: "API workspace",
+                notes: "The workspace contains JavaScript source files and local SQLite database files.",
+            },
+            stdinStdout: { enabled: true },
+            packageInstall: {
+                enabled: false,
+                notes: "Express and required runtime tooling are pre-provisioned by Zoéskoul.",
+            },
+            externalNetwork: {
+                enabled: false,
+                notes: "API Foundations uses localhost only; public network calls are not required.",
+            },
+            uploads: { enabled: false },
+            createFiles: { enabled: true, label: "Create file" },
+            createFolders: { enabled: true, label: "Create folder" },
+        },
+        preferredActionLanguage: [
+            "Edit the provided JavaScript files in the Node.js editor.",
+            "Use the terminal to run the local server with the course-provided command.",
+            "Use curl against 127.0.0.1 to inspect local HTTP responses when the lesson asks for it.",
+            "Store local SQLite files under the authored data/ workspace when persistence is introduced.",
+            "Click Check Answer when the source and workspace match the task.",
+        ],
+        forbiddenActionLanguage: [
+            "Run npm install",
+            "Install packages",
+            "Use sudo",
+            "Use public or external network APIs",
+            "Leave the lesson workspace",
+            "Edit hidden solution files",
+        ],
+    },
+
     "terminal-workspace-runner": {
         id: "terminal-workspace-runner",
         name: "Terminal workspace runner",

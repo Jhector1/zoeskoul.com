@@ -1,0 +1,36 @@
+{
+  "policyId": "api-node-workspace",
+  "workspaceProfileId": "node-api-runner",
+  "workspacePolicyId": "api-node-workspace",
+  "uiTerms": {
+    "editor": "JavaScript editor",
+    "runButton": "Run",
+    "output": "terminal and HTTP responses",
+    "terminal": "terminal",
+    "files": "file explorer"
+  },
+  "preferredTerms": {
+    "output panel": "terminal",
+    "run": "run the server",
+    "program": "API service",
+    "database": "local SQLite database"
+  },
+  "learnerInstructions": [
+    "Edit the provided JavaScript files in the Node.js workspace.",
+    "Use the integrated terminal to run the local server with the course-provided command.",
+    "Use curl with 127.0.0.1 for deterministic local HTTP requests when the lesson asks for it.",
+    "Use the pre-provisioned Express runtime; do not install packages.",
+    "When persistence is introduced, keep SQLite database files inside the authored lesson workspace.",
+    "Click Check Answer when the required source structure and workspace state are present."
+  ],
+  "forbiddenActions": [
+    "external API calls",
+    "public network dependencies",
+    "npm install",
+    "package installation",
+    "sudo",
+    "Docker",
+    "frontend frameworks",
+    "editing hidden solution files"
+  ]
+}

@@ -165,7 +165,8 @@ export const CATALOG_MANIFESTS: Record<string, any> =
     "subjectSlugs": [
       "html",
       "css",
-      "javascript"
+      "javascript",
+      "api"
     ],
     "defaultSubjectSlug": "html"
   }

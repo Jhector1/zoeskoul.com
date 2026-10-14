@@ -18,6 +18,7 @@ import { cProfile, cProfileAdapter } from "./c/index.js";
 import { mathProfile, mathProfileAdapter } from "./math/index.js";
 import { languageProfile, languageProfileAdapter } from "./language/index.js";
 import { webProfile, webProfileAdapter } from "./web/index.js";
+import { apiProfile, apiProfileAdapter } from "./api/index.js";
 
 const builtinProfiles = [
     bashProfile,
@@ -28,6 +29,7 @@ const builtinProfiles = [
     mathProfile,
     languageProfile,
     webProfile,
+    apiProfile,
 ] satisfies CourseProfile[];
 const builtinAdapters = [
     bashProfileAdapter,
@@ -38,6 +40,7 @@ const builtinAdapters = [
     mathProfileAdapter,
     languageProfileAdapter,
     webProfileAdapter,
+    apiProfileAdapter,
 ] satisfies CourseProfileAdapter[];
 
 const profileRegistry = new Map<string, CourseProfile>(

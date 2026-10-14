@@ -1,0 +1,212 @@
+{
+  "title": "API Requests, Responses, and Endpoints",
+  "summary": "Trace one HTTP exchange and identify the client, server, endpoint, request, and response without mixing those responsibilities.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "api-requests-responses-and-endpoints-request-cycle",
+      "cardTitle": "Follow one API exchange",
+      "title": "A client asks; a server responds",
+      "bodyMarkdown": "An **API exchange** begins when a client sends a request to a server. The request states what resource the client wants to work with and carries the information needed for that operation.\n\nImagine a campus app needs the event list:\n\n```text\nClient → GET /api/events → Server\nClient ← 200 + event data ← Server\n```\n\nStep by step: **First,** the first line shows the client sending a `GET` request to the events endpoint. **Second,** the second line shows the server returning a successful status plus event data to that same client.\n\nThe **request** travels from client to server. The **response** travels back from server to client. One request produces one response.\n\nThe server may read files, query a database, validate data, or call application code internally. Those are implementation details. From the client's point of view, the important contract is the request it can send and the response it can expect.\n\nA useful first habit is to describe every exchange with four questions:\n\n1. Who is the client?\n2. What endpoint is requested?\n3. What does the server do with that request?\n4. What response comes back?\n\nKeeping those roles separate makes later Express code much easier to reason about.",
+      "tryItExercises": [
+        {
+          "id": "try-api-requests-responses-and-endpoints-cycle",
+          "kind": "code_input",
+          "title": "Model a request and response",
+          "prompt": "**Problem** A campus map asks a venue service for the available locations. **Task** Create a `request` object with `method: \"GET\"` and `path: \"/api/venues\"`. Create a `response` object with `status: 200` and a `body` array containing at least one venue object. Log both objects. **Expected result** The source clearly models the request separately from the response.",
+          "hint": "Keep request metadata in one object and response metadata/data in another.",
+          "help": {
+            "concept": "An API request and its response are two separate messages with different directions and responsibilities.",
+            "hint_1": "The request needs a method and a path.",
+            "hint_2": "The response needs a status and a body."
+          },
+          "starterCode": "// Model the message sent by the client.\nconst request = {\n  // method:\n  // path:\n};\n\n// Model the message returned by the server.\nconst response = {\n  // status:\n  // body:\n};\n\nconsole.log(request);\nconsole.log(response);\n",
+          "solutionCode": "const request = {\n  method: \"GET\",\n  path: \"/api/venues\",\n};\n\nconst response = {\n  status: 200,\n  body: [\n    { id: 7, name: \"Science Hall\" },\n  ],\n};\n\nconsole.log(request);\nconsole.log(response);\n",
+          "fixedLanguage": "javascript",
+          "entryFilePath": "main.js",
+          "tests": [
+            {
+              "stdout": "{ method: 'GET', path: '/api/venues' }\n{ status: 200, body: [ { id: 7, name: 'Science Hall' } ] }\n",
+              "match": "exact"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "const\\s+request\\s*=\\s*\\{[\\s\\S]*method\\s*:\\s*[\"\\']GET[\"\\'][\\s\\S]*path\\s*:\\s*[\"\\']/api/venues[\"\\']",
+              "message": "Create the GET /api/venues request object.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "const\\s+response\\s*=\\s*\\{[\\s\\S]*status\\s*:\\s*200[\\s\\S]*body\\s*:\\s*\\[",
+              "message": "Create a 200 response with an array body.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "console\\.log\\(\\s*request\\s*\\)[\\s\\S]*console\\.log\\(\\s*response\\s*\\)",
+              "message": "Log the request and response separately.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "recipeType": "source_checks"
+        }
+      ]
+    },
+    {
+      "id": "api-requests-responses-and-endpoints-url-endpoint",
+      "cardTitle": "Name the resource boundary",
+      "title": "URLs identify locations; endpoints define API entry points",
+      "bodyMarkdown": "A URL can describe the complete network location of a resource:\n\n```text\nhttp://127.0.0.1:3000/api/events/42\n```\n\nFor this course, we will often focus on the API **path**:\n\n```text\n/api/events/42\n```\n\nAn **endpoint** is the API entry point formed by an HTTP method plus a path. These are different endpoints even though they share a path:\n\n```text\nGET    /api/events/42\nPATCH  /api/events/42\nDELETE /api/events/42\n```\n\nLine by line: the first line reads event 42, the second line requests a partial change to event 42, and the third line requests removal of event 42. The path stays the same while the method changes the requested operation.\n\nThe path identifies the resource location. The method describes the requested operation.\n\nCollections and individual resources usually have related paths:\n\n```text\n/api/events       collection\n/api/events/42    one event\n```\n\nRead the two lines in order: **First,** `/api/events` names the collection. **Second,** adding `/42` narrows the path to one resource inside that collection.\n\nThis distinction becomes important when we design Express routes in the next module.",
+      "tryItExercises": [
+        {
+          "id": "try-api-requests-responses-and-endpoints-paths",
+          "kind": "code_input",
+          "title": "Separate a collection path from a resource path",
+          "prompt": "**Problem** A student-organizations screen needs both the full club collection and club 7. **Task** Create `collectionPath` with `/api/clubs` and `clubPath` with `/api/clubs/7`. Create `collectionEndpoint` and `clubEndpoint` strings that begin with `GET ` and include the matching path. Log both endpoint strings. **Expected result** Your code distinguishes the collection endpoint from the single-resource endpoint.",
+          "hint": "The resource path extends the collection path with the event id.",
+          "help": {
+            "concept": "API paths can represent collections or individual resources, while the HTTP method completes the endpoint identity.",
+            "hint_1": "The collection path stops at `/api/events`.",
+            "hint_2": "The individual resource path includes `/42`."
+          },
+          "starterCode": "const collectionPath = \"\";\nconst clubPath = \"\";\n\nconst collectionEndpoint = \"\";\nconst clubEndpoint = \"\";\n\nconsole.log(collectionEndpoint);\nconsole.log(clubEndpoint);\n",
+          "solutionCode": "const collectionPath = \"/api/clubs\";\nconst clubPath = \"/api/clubs/7\";\n\nconst collectionEndpoint = `GET ${collectionPath}`;\nconst clubEndpoint = `GET ${clubPath}`;\n\nconsole.log(collectionEndpoint);\nconsole.log(clubEndpoint);\n",
+          "fixedLanguage": "javascript",
+          "entryFilePath": "main.js",
+          "tests": [
+            {
+              "stdout": "GET /api/clubs\nGET /api/clubs/7\n",
+              "match": "exact"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "collectionPath\\s*=\\s*[\"\\']/api/clubs[\"\\']",
+              "message": "Set the collection path to /api/clubs.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "clubPath\\s*=\\s*[\"\\']/api/clubs/7[\"\\']",
+              "message": "Set the resource path to /api/clubs/7.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "collectionEndpoint\\s*=\\s*`GET\\s+\\$\\{collectionPath\\}`",
+              "message": "Build the GET collection endpoint.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "main.js",
+              "pattern": "clubEndpoint\\s*=\\s*`GET\\s+\\$\\{clubPath\\}`",
+              "message": "Build the GET single-club endpoint.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "recipeType": "source_checks"
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "api-requests-responses-and-endpoints-client",
+      "kind": "single_choice",
+      "title": "Find the client",
+      "prompt": "A student app sends `GET /api/events` to the events service. Which component is the client?",
+      "hint": "Look for the component that initiates the request.",
+      "help": {
+        "concept": "Client and server roles in an API exchange",
+        "hint_1": "Identify the responsibility described in the question.",
+        "hint_2": "Choose the option that matches the HTTP/API contract, not an implementation detail."
+      },
+      "options": [
+        "The student app",
+        "The events service",
+        "The response body",
+        "The endpoint path"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "api-requests-responses-and-endpoints-response-parts",
+      "kind": "multi_choice",
+      "title": "Recognize response information",
+      "prompt": "Which items can describe an HTTP response? Select all that apply.",
+      "hint": "Focus on information that belongs to the server's reply.",
+      "help": {
+        "concept": "HTTP response structure",
+        "hint_1": "Evaluate each option independently.",
+        "hint_2": "Select every option that satisfies the API rule."
+      },
+      "options": [
+        "A status code",
+        "A response body",
+        "The server's reply direction",
+        "The client's mouse position"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "api-requests-responses-and-endpoints-endpoint",
+      "kind": "fill_blank_choice",
+      "title": "Complete the endpoint idea",
+      "prompt": "Choose the term that completes the statement.",
+      "hint": "Think about the combined method-and-path identity that a server exposes to clients.",
+      "help": {
+        "concept": "Method-and-path identity in an HTTP API",
+        "hint_1": "Read the request or response role around the blank.",
+        "hint_2": "Use the term or value that makes the statement technically precise."
+      },
+      "template": "An API [blank1] combines an HTTP method with a path that the server handles.",
+      "choices": [
+        "endpoint",
+        "database",
+        "variable",
+        "browser"
+      ],
+      "correctValue": "endpoint"
+    },
+    {
+      "id": "api-requests-responses-and-endpoints-order",
+      "kind": "drag_reorder",
+      "title": "Trace the exchange",
+      "prompt": "Put the API exchange in order.",
+      "hint": "Follow the direction from the client to the server and back.",
+      "help": {
+        "concept": "Request-response lifecycle",
+        "hint_1": "Start with the client action.",
+        "hint_2": "The server must receive and handle the request before the client can use the response."
+      },
+      "tokens": [
+        "The client creates a request",
+        "The server receives the request",
+        "The server creates a response",
+        "The client receives the response"
+      ],
+      "correctOrder": [
+        "The client creates a request",
+        "The server receives the request",
+        "The server creates a response",
+        "The client receives the response"
+      ]
+    }
+  ]
+}

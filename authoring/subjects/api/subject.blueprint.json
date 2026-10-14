@@ -1,0 +1,16 @@
+{
+  "subjectSlug": "api",
+  "catalogSlug": "web",
+  "profileId": "api",
+  "title": "API",
+  "summary": "A beginner backend path from HTTP request/response contracts through Node.js, Express routing, resource mutations, validation, errors, and a complete local Campus Events API.",
+  "courseOrder": [
+    "api-foundations"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "api-foundations",
+      "outcome": "Build and verify a local Express API with REST-style read/write routes, JSON contracts, validation, and predictable errors."
+    }
+  ]
+}

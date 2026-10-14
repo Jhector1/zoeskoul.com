@@ -45,7 +45,7 @@ describe("curriculum draft backup ownership", () => {
 
   it("keeps compiled curriculum build artifacts read-only", () => {
     expect(source).toContain(
-      "Compiled curriculum build artifacts are read-only.",
+      "READ_ONLY_DERIVED_ARTIFACT: .curriculum-build artifacts are generated and read-only.",
     );
   });
 });

@@ -70,3 +70,4 @@ export * from "./seeds/buildTopicSeedFromPlanNode.js";
 export * from "./spec/validateCourseSpecForSubject.js";
 export * from "./spec/validateSubjectAuthoring.js";
 export * from "./policy/resolveAuthoringPolicyChain.js";
+export * from "./preview/buildTopicPreviewFromSource.js";

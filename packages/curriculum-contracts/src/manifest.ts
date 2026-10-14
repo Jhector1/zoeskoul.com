@@ -441,12 +441,20 @@ export type ManifestRecipe =
     }
   | {
       /**
-       * Source-only grading for browser-rendered work such as HTML/CSS.
+       * Source-only grading for work such as HTML/CSS or API contract exercises.
        * Runtime execution is intentionally skipped after authored source checks pass.
+       * Optional tests provide canonical stdin/stdout presentation data without
+       * changing the source-only grading strategy.
        */
       type: "source_checks";
       solutionCode?: string;
       solutionFiles?: ManifestStarterFiles;
+      tests?: Array<{
+        stdin?: string;
+        stdout: string;
+        match?: "exact" | "includes";
+        files?: ManifestFileFixture[];
+      }>;
     };
 
 export type ManifestCodeInputExpectedExample =

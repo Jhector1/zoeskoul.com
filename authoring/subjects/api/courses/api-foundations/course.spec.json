@@ -1,0 +1,1120 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "api",
+  "courseSlug": "api-foundations",
+  "catalogSlug": "web",
+  "profileId": "api",
+  "workspaceProfileId": "node-api-runner",
+  "workspacePolicyId": "api-node-workspace",
+  "title": "API Foundations",
+  "subtitle": "Build reliable HTTP APIs with JavaScript, Node.js, Express, JSON, validation, and clear errors",
+  "intendedFor": "Learners who completed JavaScript Foundations and want to understand HTTP and build their first backend APIs with server-side JavaScript.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "courseOverview": {
+    "recommendedSequence": "Complete modules in order. HTTP contracts come first, then read-only Express routes, then mutations/validation, then SQLite persistence, followed by the persistent Campus Events API capstone.",
+    "summary": "A hands-on beginner API course covering HTTP requests and responses, methods, status codes, headers, JSON contracts, Node.js, Express, routes, route/query parameters, POST/PATCH/DELETE, validation, error handling, SQLite persistence, parameterized SQL, repository boundaries, and a complete deterministic local API.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "HTTP and API Contracts",
+        "coreSkill": "Read and reason about HTTP requests, responses, and JSON contracts.",
+        "outputFocus": "Build an API Response Inspector."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Build Read APIs with Node.js and Express",
+        "coreSkill": "Implement deterministic local GET routes with ids and filters.",
+        "outputFocus": "Build a Read-Only Events API."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Write Routes, Validation, and Errors",
+        "coreSkill": "Create, update, delete, validate, and return consistent errors.",
+        "outputFocus": "Build a Writable Events API."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Persist APIs with SQLite",
+        "coreSkill": "Replace temporary in-memory state with parameterized SQLite persistence.",
+        "outputFocus": "Build a Database-Backed Events API."
+      },
+      {
+        "moduleNumber": 5,
+        "title": "Final Capstone: Campus Events API",
+        "coreSkill": "Integrate the complete beginner API contract with persistent SQLite storage.",
+        "outputFocus": "Build and verify the persistent Campus Events API."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "api-foundations",
+      "startModuleNumber": 1,
+      "endModuleNumber": 5
+    },
+    "releases": [
+      {
+        "name": "api-foundations",
+        "startModuleNumber": 1,
+        "endModuleNumber": 5
+      }
+    ]
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "api-foundations-module-1-http-contracts",
+      "prefix": "api_module_1",
+      "title": "HTTP and API Contracts",
+      "purpose": "Build a concrete mental model of HTTP requests and responses before writing server routes.",
+      "learningObjectives": [
+        "Trace client-server request/response exchanges.",
+        "Choose HTTP methods and interpret status codes.",
+        "Read headers and JSON message bodies.",
+        "Describe a small stable API contract."
+      ],
+      "guidedExercises": [
+        "Trace request and response records line by line.",
+        "Choose methods and statuses for concrete resource operations.",
+        "Inspect JSON bodies separately from HTTP metadata."
+      ],
+      "quizFocus": [
+        "HTTP vocabulary",
+        "methods",
+        "status codes",
+        "headers",
+        "JSON contracts"
+      ],
+      "moduleProject": "Build an API Response Inspector.",
+      "role": "standard",
+      "sections": [
+        {
+          "sectionSlug": "api-foundations-section-1-http-contracts",
+          "role": "lesson",
+          "title": "HTTP Requests and Responses",
+          "summary": "Understand the protocol and data contract an API exposes before implementing a server.",
+          "topics": [
+            {
+              "topicId": "api-requests-responses-and-endpoints",
+              "title": "API Requests, Responses, and Endpoints",
+              "summary": "Trace an HTTP exchange and identify the client, server, method, URL, endpoint, request, and response.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Distinguish client and server responsibilities in an API exchange.",
+                "Read a URL and identify the endpoint being requested.",
+                "Explain how one request produces one response."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "http-methods-status-codes-and-headers",
+              "title": "HTTP Methods, Status Codes, and Headers",
+              "summary": "Choose appropriate HTTP methods, interpret common status codes, and read the metadata carried by headers.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Use GET, POST, PATCH, and DELETE according to the operation being requested.",
+                "Interpret common 2xx, 4xx, and 5xx status codes.",
+                "Explain how request and response headers carry metadata."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "json-bodies-and-api-contracts",
+              "title": "JSON Bodies and API Contracts",
+              "summary": "Read and build JSON request and response bodies while keeping field names and data shapes predictable.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Distinguish HTTP metadata from a JSON message body.",
+                "Design a small predictable JSON resource shape.",
+                "Explain why clients depend on stable response contracts."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "api-foundations-section-1-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Interpret one complete API response record with JavaScript.",
+          "topics": [
+            {
+              "topicId": "api-response-inspector-project",
+              "title": "Build an API Response Inspector",
+              "summary": "Create a Node.js program that interprets a small HTTP-response record and prints a useful summary.",
+              "minutes": 38,
+              "technical": true,
+              "learningGoals": [
+                "Represent response metadata with a JavaScript object.",
+                "Interpret status, headers, and JSON body together.",
+                "Produce a readable API-response summary."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "standalone"
+              },
+              "projectBrief": {
+                "scenario": "A frontend team needs a tiny diagnostic utility for understanding the responses returned by a campus events service.",
+                "role": "JavaScript developer responsible for interpreting a small API response contract.",
+                "workspace": "A local Node.js workspace with server.js, package.json, terminal access, and deterministic localhost HTTP requests. Express is provided by the course environment; learners do not install packages or call public APIs.",
+                "deliverable": "A command-line API Response Inspector that reports method, endpoint, status category, content type, and a useful body summary.",
+                "requirements": [
+                  "Use JavaScript objects, conditionals, functions, and JSON concepts already learned in JavaScript Foundations.",
+                  "Treat method, endpoint, status, headers, and body as separate responsibilities.",
+                  "Build cumulatively: every step keeps the complete previous solution.",
+                  "Do not make external network requests."
+                ],
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Store the response record",
+                    "requirement": "Create one response object containing method, endpoint, status, headers, and body."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Classify the status",
+                    "requirement": "Keep the response object and add one function that classifies the status as success, client error, or server error."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Read the content type",
+                    "requirement": "Keep all previous code and derive the content type from the response headers."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Summarize the JSON body",
+                    "requirement": "Add one focused function that summarizes the response body without changing earlier behavior."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Print the inspection report",
+                    "requirement": "Keep the entire solution and print one readable report containing endpoint, status classification, content type, and body summary."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "api-foundations-module-2-express-read-api",
+      "prefix": "api_module_2",
+      "title": "Build Read APIs with Node.js and Express",
+      "purpose": "Turn HTTP concepts into a running local Express service with focused GET routes.",
+      "learningObjectives": [
+        "Start a local Express server.",
+        "Return JSON from GET routes.",
+        "Use route parameters for identity and query parameters for filtering.",
+        "Trace middleware and request flow."
+      ],
+      "guidedExercises": [
+        "Start from one route before adding a collection.",
+        "Use localhost requests to inspect status and JSON output.",
+        "Keep lookup, filtering, and response construction focused."
+      ],
+      "quizFocus": [
+        "Express setup",
+        "GET routing",
+        "route params",
+        "query params",
+        "middleware order"
+      ],
+      "moduleProject": "Build a Read-Only Events API.",
+      "role": "standard",
+      "sections": [
+        {
+          "sectionSlug": "api-foundations-section-2-express-read-api",
+          "role": "lesson",
+          "title": "Express Read Routes",
+          "summary": "Build and query a deterministic local JSON API.",
+          "topics": [
+            {
+              "topicId": "node-and-express-first-server",
+              "title": "Your First Node.js and Express Server",
+              "summary": "Start a local Express application, listen on a provided port, and return the first HTTP response.",
+              "minutes": 30,
+              "technical": true,
+              "learningGoals": [
+                "Explain the role of Node.js in running server-side JavaScript.",
+                "Create an Express application and start the local server.",
+                "Return a simple response from a route handler."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "get-routes-and-json-responses",
+              "title": "GET Routes and JSON Responses",
+              "summary": "Create read-only routes that return predictable JSON resources and collections.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Define GET routes for a collection and a single resource.",
+                "Return JSON with an explicit successful status.",
+                "Keep route handlers focused on one responsibility."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "route-parameters-and-query-parameters",
+              "title": "Route Parameters and Query Parameters",
+              "summary": "Read path parameters for resource identity and query parameters for optional filtering.",
+              "minutes": 30,
+              "technical": true,
+              "learningGoals": [
+                "Read an id from a route parameter.",
+                "Read optional filters from the query string.",
+                "Return 404 when a requested resource does not exist."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "express-middleware-and-request-flow",
+              "title": "Express Middleware and Request Flow",
+              "summary": "Use built-in middleware and trace how a request moves through parsing, routing, and response handling.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Use express.json when JSON request parsing is required.",
+                "Explain middleware order at a beginner level.",
+                "Keep request parsing separate from resource lookup and response construction."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "api-foundations-section-2-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Combine server startup, GET routes, ids, filters, and 404 behavior.",
+          "topics": [
+            {
+              "topicId": "read-only-events-api-project",
+              "title": "Build a Read-Only Events API",
+              "summary": "Create an Express service that lists events, finds one event by id, and filters the collection with a query parameter.",
+              "minutes": 50,
+              "technical": true,
+              "learningGoals": [
+                "Serve an in-memory event collection through Express.",
+                "Implement collection and resource GET routes.",
+                "Use route and query parameters predictably."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "standalone"
+              },
+              "projectBrief": {
+                "scenario": "A campus website needs a local events service that frontend code can read without knowing how the event data is stored.",
+                "role": "Junior backend developer responsible for the read side of the events API.",
+                "workspace": "A local Node.js workspace with server.js, package.json, terminal access, and deterministic localhost HTTP requests. Express is provided by the course environment; learners do not install packages or call public APIs.",
+                "deliverable": "A local Express API with GET /api/events, GET /api/events/:id, and category filtering.",
+                "requirements": [
+                  "Use only local in-memory event data; no database or public network is required.",
+                  "Return JSON consistently.",
+                  "Use meaningful status codes, including 404 for a missing event.",
+                  "Preserve every working route while adding the next responsibility."
+                ],
+                "stepCountTarget": 8,
+                "flow": "progressive",
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Create the Express application",
+                    "requirement": "Create the app and server startup using the provided local port contract."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Store the event collection",
+                    "requirement": "Add an in-memory events array with several consistently shaped event objects."
+                  },
+                  {
+                    "step": 3,
+                    "title": "List all events",
+                    "requirement": "Add GET /api/events returning the complete collection as JSON."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Find one event by id",
+                    "requirement": "Add GET /api/events/:id and locate the matching event."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Handle a missing event",
+                    "requirement": "Preserve the route and return a 404 JSON response when the id is not found."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Read a category filter",
+                    "requirement": "Extend GET /api/events to read an optional category query parameter."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Filter without changing source data",
+                    "requirement": "Return only matching events when category is supplied while preserving the original collection."
+                  },
+                  {
+                    "step": 8,
+                    "title": "Verify the read API",
+                    "requirement": "Keep the complete server and verify the collection, resource, missing-resource, and filter responses through localhost requests."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "api-foundations-module-3-write-validation-errors",
+      "prefix": "api_module_3",
+      "title": "Write Routes, Validation, and Errors",
+      "purpose": "Add controlled resource mutations while protecting the API contract from invalid input and missing resources.",
+      "learningObjectives": [
+        "Create resources with POST.",
+        "Partially update resources with PATCH.",
+        "Delete resources intentionally.",
+        "Validate client input and return consistent errors."
+      ],
+      "guidedExercises": [
+        "Validate before mutating data.",
+        "Preserve read routes while adding write behavior.",
+        "Compare client errors with unexpected server failures."
+      ],
+      "quizFocus": [
+        "request bodies",
+        "POST",
+        "PATCH",
+        "DELETE",
+        "validation",
+        "400/404/500"
+      ],
+      "moduleProject": "Build a Writable Events API.",
+      "role": "standard",
+      "sections": [
+        {
+          "sectionSlug": "api-foundations-section-3-write-validation-errors",
+          "role": "lesson",
+          "title": "Mutations and Error Contracts",
+          "summary": "Create, update, and delete resources without sacrificing predictable behavior.",
+          "topics": [
+            {
+              "topicId": "post-json-and-create-resources",
+              "title": "POST JSON and Create Resources",
+              "summary": "Accept a JSON request body, validate the required fields, create a resource, and return the created representation.",
+              "minutes": 32,
+              "technical": true,
+              "learningGoals": [
+                "Read parsed JSON from req.body.",
+                "Validate required fields before creating a resource.",
+                "Return 201 with the created resource."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "patch-and-delete-resources",
+              "title": "PATCH and DELETE Resources",
+              "summary": "Update only supplied fields with PATCH and remove a resource with DELETE while handling missing ids.",
+              "minutes": 34,
+              "technical": true,
+              "learningGoals": [
+                "Use PATCH for a partial resource update.",
+                "Use DELETE for resource removal.",
+                "Return appropriate success and not-found statuses."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "validation-and-client-errors",
+              "title": "Validation and Client Errors",
+              "summary": "Reject malformed client input with consistent 400 responses and clear field-level messages.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Separate validation decisions from mutation.",
+                "Return 400 for invalid request data.",
+                "Use a predictable JSON error shape."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "server-errors-and-consistent-api-responses",
+              "title": "Server Errors and Consistent API Responses",
+              "summary": "Handle unexpected failures without leaking implementation details and keep success/error response shapes understandable.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Distinguish expected client errors from unexpected server failures.",
+                "Return a safe 500 response for unexpected failures.",
+                "Use consistent response conventions across routes."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "api-foundations-section-3-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Extend the Events API into a validated local CRUD service.",
+          "topics": [
+            {
+              "topicId": "writable-events-api-project",
+              "title": "Build a Writable Events API",
+              "summary": "Extend an Express events service with create, update, delete, validation, and consistent error responses.",
+              "minutes": 60,
+              "technical": true,
+              "learningGoals": [
+                "Create resources with POST.",
+                "Partially update resources with PATCH.",
+                "Delete resources and preserve clear error behavior."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "standalone"
+              },
+              "projectBrief": {
+                "scenario": "The campus events team can now read events, but staff also need a controlled API for creating, editing, and removing event records.",
+                "role": "Junior backend developer responsible for safe event mutations and client-facing validation.",
+                "workspace": "A local Node.js workspace with server.js, package.json, terminal access, and deterministic localhost HTTP requests. Express is provided by the course environment; learners do not install packages or call public APIs.",
+                "deliverable": "A CRUD-style local Events API with POST, PATCH, DELETE, validation, and consistent errors.",
+                "requirements": [
+                  "Keep the existing read routes working.",
+                  "Validate client input before mutating the in-memory collection.",
+                  "Use 201, 400, 404, and successful delete/update responses intentionally.",
+                  "Do not add authentication, a database, or deployment yet."
+                ],
+                "stepCountTarget": 10,
+                "flow": "progressive",
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Enable JSON request parsing",
+                    "requirement": "Add the Express JSON middleware required by write routes."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Validate new event input",
+                    "requirement": "Add one focused validation function for the required event fields."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Create an event",
+                    "requirement": "Add POST /api/events and append one valid event with a generated local id."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Return created status",
+                    "requirement": "Return the created event with HTTP 201 without changing the read routes."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Reject invalid creates",
+                    "requirement": "Return a consistent 400 JSON error when required fields are missing or invalid."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Find an event for updates",
+                    "requirement": "Add the resource lookup needed by PATCH /api/events/:id."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Patch supplied fields",
+                    "requirement": "Update only allowed fields that were supplied in the request body."
+                  },
+                  {
+                    "step": 8,
+                    "title": "Delete an event",
+                    "requirement": "Add DELETE /api/events/:id and remove the matching resource."
+                  },
+                  {
+                    "step": 9,
+                    "title": "Handle missing mutation targets",
+                    "requirement": "Return a consistent 404 response from PATCH and DELETE when the id does not exist."
+                  },
+                  {
+                    "step": 10,
+                    "title": "Verify the complete writable API",
+                    "requirement": "Exercise create, invalid create, patch, delete, and missing-resource behavior against localhost."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "api-foundations-module-4-sqlite-persistence",
+      "prefix": "api_module_4",
+      "title": "Persist APIs with SQLite",
+      "purpose": "Replace temporary in-memory state with a local relational database while preserving a clean HTTP contract.",
+      "learningObjectives": [
+        "Persist API resources in SQLite.",
+        "Use parameterized SQL from Node.js.",
+        "Separate repository/database responsibilities from Express routes.",
+        "Preserve API behavior across server restarts."
+      ],
+      "guidedExercises": [
+        "Create and inspect a local SQLite database inside the learner workspace.",
+        "Use prepared statements rather than interpolating client input into SQL.",
+        "Replace one in-memory operation at a time so HTTP behavior stays stable."
+      ],
+      "quizFocus": [
+        "persistence",
+        "SQLite",
+        "prepared statements",
+        "parameterized SQL",
+        "repository layer",
+        "persistent CRUD"
+      ],
+      "moduleProject": "Build a Database-Backed Events API.",
+      "role": "standard",
+      "sections": [
+        {
+          "sectionSlug": "api-foundations-section-4-sqlite-persistence",
+          "role": "lesson",
+          "title": "SQLite Persistence",
+          "summary": "Connect Express routes to a local SQLite database through focused data-access code.",
+          "topics": [
+            {
+              "topicId": "sqlite-persistence-for-apis",
+              "title": "SQLite Persistence for APIs",
+              "summary": "Replace temporary in-memory data with a local SQLite database that survives server restarts.",
+              "minutes": 32,
+              "technical": true,
+              "learningGoals": [
+                "Explain why in-memory arrays lose data when a server restarts.",
+                "Open a local SQLite database from Node.js.",
+                "Create a small events table with stable columns and constraints."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "parameterized-sql-from-node",
+              "title": "Parameterized SQL from Node.js",
+              "summary": "Use prepared statements and parameters so API input becomes safe database queries instead of string-built SQL.",
+              "minutes": 34,
+              "technical": true,
+              "learningGoals": [
+                "Prepare SELECT, INSERT, UPDATE, and DELETE statements from Node.js.",
+                "Bind values with parameters instead of concatenating user input.",
+                "Map database rows to predictable JSON resources."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "repository-layer-and-persistent-crud",
+              "title": "Repository Layer and Persistent CRUD",
+              "summary": "Move database access behind focused repository functions so Express routes stay about HTTP.",
+              "minutes": 36,
+              "technical": true,
+              "learningGoals": [
+                "Separate route handling from database access.",
+                "Implement persistent event lookup, creation, update, and deletion.",
+                "Preserve API status/error behavior while changing the storage layer."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "single_choice",
+                  "multi_choice",
+                  "fill_blank_choice",
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "api-foundations-section-4-module-project",
+          "role": "module_project",
+          "title": "Module Project",
+          "summary": "Replace in-memory event storage with durable SQLite persistence.",
+          "topics": [
+            {
+              "topicId": "database-backed-events-api-project",
+              "title": "Build a Database-Backed Events API",
+              "summary": "Replace the Events API in-memory collection with SQLite while preserving the existing HTTP contract.",
+              "minutes": 65,
+              "technical": true,
+              "learningGoals": [
+                "Create and initialize the events database.",
+                "Move CRUD operations into repository functions.",
+                "Keep the Express routes stable while persistence changes underneath."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "standalone"
+              },
+              "projectBrief": {
+                "scenario": "The campus Events API works, but every restart loses the event data. The team needs local persistent storage without changing the frontend-facing API contract.",
+                "role": "Backend developer responsible for adding persistence behind an existing HTTP API.",
+                "workspace": "A local Node.js workspace with Express, curl, SQLite, terminal access, and deterministic localhost HTTP requests. Course dependencies are pre-provisioned by Zoéskoul; learners do not install packages.",
+                "deliverable": "A local Express Events API whose CRUD operations persist to data/events.db.",
+                "requirements": [
+                  "Use the course-provided Node.js, Express, SQLite, and curl tooling.",
+                  "Keep external network access disabled.",
+                  "Use parameterized SQL for values supplied by clients.",
+                  "Keep SQL/database logic out of route handlers where practical.",
+                  "Preserve the existing GET, POST, PATCH, DELETE, validation, and error contracts."
+                ],
+                "stepCountTarget": 10,
+                "flow": "progressive",
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Create the database module",
+                    "requirement": "Open data/events.db and create the events table when it does not exist."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Seed deterministic starting events",
+                    "requirement": "Insert the provided starter rows only when the table is empty."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Read all events from SQLite",
+                    "requirement": "Replace the in-memory collection read with a parameterized database query."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Read one event by id",
+                    "requirement": "Query one event by id and preserve the existing 404 behavior."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Create a persistent event",
+                    "requirement": "Insert a validated event and return the stored row with 201."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Patch a persistent event",
+                    "requirement": "Update allowed supplied fields without replacing unspecified values."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Delete a persistent event",
+                    "requirement": "Delete the target row and preserve missing-resource behavior."
+                  },
+                  {
+                    "step": 8,
+                    "title": "Extract repository functions",
+                    "requirement": "Keep SQL/database access in focused repository functions used by the routes."
+                  },
+                  {
+                    "step": 9,
+                    "title": "Verify persistence",
+                    "requirement": "Create data, restart the server, and confirm the event remains available."
+                  },
+                  {
+                    "step": 10,
+                    "title": "Verify the complete contract",
+                    "requirement": "Use localhost requests to verify read, filter, create, invalid create, patch, delete, and 404 behavior."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "api-foundations-module-5-final-capstone",
+      "prefix": "api_module_5",
+      "title": "Final Capstone: Campus Events API",
+      "purpose": "Integrate HTTP, Express, validation, error handling, and SQLite persistence into one coherent local API service.",
+      "learningObjectives": [
+        "Design a coherent REST-style event resource contract.",
+        "Implement read and write routes cumulatively.",
+        "Apply validation and predictable status/error behavior.",
+        "Verify the complete API locally."
+      ],
+      "guidedExercises": [
+        "Trace the complete contract before implementation.",
+        "Preserve all working routes as capabilities are added.",
+        "Verify each HTTP outcome through localhost."
+      ],
+      "quizFocus": [
+        "API design",
+        "routing",
+        "validation",
+        "error handling",
+        "end-to-end contract reasoning"
+      ],
+      "moduleProject": "Build and verify the Campus Events API.",
+      "role": "capstone",
+      "sections": [
+        {
+          "sectionSlug": "api-foundations-section-5-final-capstone",
+          "role": "capstone",
+          "title": "Final Capstone",
+          "summary": "Build the complete persistent Campus Events API with Express and SQLite.",
+          "topics": [
+            {
+              "topicId": "campus-events-api-capstone",
+              "title": "Final Capstone: Build the Campus Events API",
+              "summary": "Build a complete local Express API for campus events with SQLite persistence, read routes, filters, mutations, validation, and resilient error responses.",
+              "minutes": 90,
+              "technical": true,
+              "learningGoals": [
+                "Design and implement a coherent REST-style resource API.",
+                "Preserve predictable JSON contracts across read and write routes.",
+                "Persist event resources in SQLite through focused repository functions.",
+                "Validate client input and distinguish 400, 404, and 500 outcomes.",
+                "Verify the API through deterministic localhost requests."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "standalone"
+              },
+              "projectBrief": {
+                "scenario": "The Campus Event Explorer is ready for a real backend boundary. Build the local service that could power its event list, filters, detail views, and staff updates.",
+                "role": "API developer responsible for the complete HTTP contract and Express implementation.",
+                "workspace": "A local Node.js workspace with server.js, package.json, terminal access, and deterministic localhost HTTP requests. Express is provided by the course environment; learners do not install packages or call public APIs.",
+                "deliverable": "A complete persistent Campus Events API with GET collection/resource routes, filtering, POST, PATCH, DELETE, validation, SQLite persistence, and consistent success/error responses.",
+                "requirements": [
+                  "Use JavaScript, Node.js, Express, and local SQLite only.",
+                  "Keep API behavior deterministic and testable on 127.0.0.1.",
+                  "Use parameterized SQL for client-supplied database values.",
+                  "Keep route, validation, and repository responsibilities understandable.",
+                  "Build cumulatively so each step begins with the complete previous solution.",
+                  "Do not introduce authentication, deployment, TypeScript, hosted databases, or frontend frameworks."
+                ],
+                "stepCountTarget": 15,
+                "flow": "progressive",
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Create the server shell",
+                    "requirement": "Create the Express app, JSON middleware, and local server startup contract."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Model the event resource",
+                    "requirement": "Add a small in-memory collection whose event objects share one documented shape."
+                  },
+                  {
+                    "step": 3,
+                    "title": "List events",
+                    "requirement": "Implement GET /api/events with a predictable JSON collection response."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Filter events",
+                    "requirement": "Extend the collection route with an optional category query filter."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Read one event",
+                    "requirement": "Implement GET /api/events/:id for a matching resource."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Handle missing reads",
+                    "requirement": "Return a consistent 404 JSON error when a requested event is absent."
+                  },
+                  {
+                    "step": 7,
+                    "title": "Validate event input",
+                    "requirement": "Add one reusable validator for fields accepted by create and update operations."
+                  },
+                  {
+                    "step": 8,
+                    "title": "Create events",
+                    "requirement": "Implement POST /api/events and return the created resource with 201."
+                  },
+                  {
+                    "step": 9,
+                    "title": "Reject invalid creates",
+                    "requirement": "Return a consistent 400 response without mutating data when create input is invalid."
+                  },
+                  {
+                    "step": 10,
+                    "title": "Patch events",
+                    "requirement": "Implement PATCH /api/events/:id so only allowed supplied fields change."
+                  },
+                  {
+                    "step": 11,
+                    "title": "Delete events",
+                    "requirement": "Implement DELETE /api/events/:id while preserving all read and update behavior."
+                  },
+                  {
+                    "step": 12,
+                    "title": "Unify client errors",
+                    "requirement": "Make 400 and 404 responses follow one understandable JSON error convention."
+                  },
+                  {
+                    "step": 13,
+                    "title": "Persist events with SQLite",
+                    "requirement": "Replace temporary in-memory event storage with repository functions backed by data/events.db."
+                  },
+                  {
+                    "step": 14,
+                    "title": "Handle unexpected failures",
+                    "requirement": "Add a final safe error handler that returns 500 without exposing internal details."
+                  },
+                  {
+                    "step": 15,
+                    "title": "Verify the complete contract",
+                    "requirement": "Run deterministic localhost checks for list, filter, detail, create, invalid input, patch, delete, 404, and error response behavior."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "One module per week or two short topics per study session.",
+    "recommendedCourseDeliverables": [
+      "Short HTTP and API concept sketches",
+      "Node.js and Express source-check exercises",
+      "Deterministic localhost request/response practice",
+      "Three module projects",
+      "One final Campus Events API capstone"
+    ],
+    "toolingSuggestions": [
+      "ZoeSkoul JavaScript editor",
+      "Live terminal and HTTP responses",
+      "Check Answer source validation"
+    ],
+    "closingNote": "Learners finish able to build beginner API services with interaction, local asynchronous data, and resilient interface states."
+  },
+  "authoringGuidance": [
+    "This course uses profileId \"api\", workspaceProfileId \"node-api-runner\", and workspacePolicyId \"api-node-workspace\".",
+    "Hands-on tasks use JavaScript in a local Node.js/Express workspace with an integrated terminal.",
+    "Use deterministic 127.0.0.1 HTTP behavior only; public network access must not be required.",
+    "Express, curl, SQLite tooling, and Node.js are provisioned by Zoéskoul. Do not ask learners to install packages.",
+    "Teach in-memory CRUD before SQLite so learners separate HTTP behavior from persistence.",
+    "When SQLite is introduced, use parameterized SQL and keep database files inside the learner workspace.",
+    "Ordinary lesson Try Its belong in sketchBlocks[].tryItExercises; reserve quizDraft code_input exercises for deliberate progressive module projects and the final capstone.",
+    "Topic, section, sketch, Try It, and module counts are pedagogy-driven; do not impose fixed curriculum cardinality."
+  ],
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.2,
+        "multi_choice": 0.15,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.15,
+        "code_input": 0.4
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 2,
+        "projectCodeInputTarget": 3,
+        "projectCodeInputMax": 5,
+        "maxAttempts": null
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 3,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 320,
+      "slugConvention": "explicit_module_section"
+    }
+  }
+}

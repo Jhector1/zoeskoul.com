@@ -49,6 +49,18 @@ export function parseSaveBundleBody(body: unknown) {
   };
 }
 
+export function parseSaveSourceBody(body: unknown) {
+  const object = asObject(body);
+  return {
+    catalog: requiredString(object, "catalog"),
+    subject: requiredString(object, "subject"),
+    module: requiredString(object, "module"),
+    topic: requiredString(object, "topic"),
+    locale: typeof object.locale === "string" ? object.locale : "en",
+    sourceJson: object.sourceJson,
+  };
+}
+
 export function parseSaveMessagesBody(body: unknown) {
   const object = asObject(body);
   return {

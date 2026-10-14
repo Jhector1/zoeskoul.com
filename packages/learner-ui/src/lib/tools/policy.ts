@@ -2,6 +2,7 @@ const CODE_WORKSPACE_PROFILES = new Set([
     "python",
     "java",
     "javascript",
+    "api",
     "typescript",
     "c",
     "cpp",

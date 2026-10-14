@@ -4,7 +4,8 @@ import {
 } from "@/lib/admin/curriculumDraftRoute";
 import { NextResponse } from "next/server";
 import { analyzeDraftTopic } from "@/lib/dev/curriculumDrafts/diagnostics";
-import { isCurriculumDraftEditorEnabled, loadDraftTopic } from "@/lib/dev/curriculumDrafts/fs";
+import { isCurriculumDraftEditorEnabled } from "@/lib/dev/curriculumDrafts/fs";
+import { loadSourceTopic } from "@/lib/dev/curriculumDrafts/sourceFs";
 import { parseDraftQuery, parseJsonBody } from "@/lib/dev/curriculumDrafts/schema";
 
 export const runtime = "nodejs";
@@ -18,7 +19,7 @@ async function handleGET(request: Request) {
   try {
     const url = new URL(request.url);
     const ref = parseDraftQuery(url.searchParams);
-    const loaded = await loadDraftTopic(ref);
+    const loaded = await loadSourceTopic(ref);
     return NextResponse.json(analyzeDraftTopic({ bundleJson: loaded.bundleJson, messagesJson: loaded.messagesJson }));
   } catch (error) {
     return NextResponse.json(
@@ -42,7 +43,7 @@ async function handlePOST(request: Request) {
       topic: String(body.topic ?? ""),
       locale: typeof body.locale === "string" ? body.locale : "en",
     };
-    const loaded = await loadDraftTopic(ref);
+    const loaded = await loadSourceTopic(ref);
     return NextResponse.json(analyzeDraftTopic({ bundleJson: loaded.bundleJson, messagesJson: loaded.messagesJson }));
   } catch (error) {
     return NextResponse.json(

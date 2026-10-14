@@ -10,7 +10,8 @@
     "subjectSlugs": [
       "html",
       "css",
-      "javascript"
+      "javascript",
+      "api"
     ],
     "meta": {
       "family": "web-development",
@@ -20,7 +21,8 @@
   "subjectSlugs": [
     "html",
     "css",
-    "javascript"
+    "javascript",
+    "api"
   ],
   "defaultSubjectSlug": "html"
 }

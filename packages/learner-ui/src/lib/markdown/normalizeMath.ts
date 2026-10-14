@@ -24,3 +24,27 @@ export function normalizeMath(md: string) {
 
   return display;
 }
+
+const STRUCTURED_EXERCISE_PROMPT_START =
+  /^\s*\*\*(?:Problem|Task|Expected result)\*\*(?=\s|$)/;
+
+const STRUCTURED_EXERCISE_PROMPT_LABEL =
+  /(?:[ \t]*\r?\n)*[ \t]*(\*\*(?:Problem|Task|Expected result)\*\*)[ \t]*(?:(?:\r?\n)[ \t]*)*/g;
+
+export function normalizeStructuredExercisePromptLayout(
+  value: string,
+): string {
+  const source = String(value ?? "");
+
+  if (!STRUCTURED_EXERCISE_PROMPT_START.test(source)) {
+    return source;
+  }
+
+  return source
+    .replace(
+      STRUCTURED_EXERCISE_PROMPT_LABEL,
+      (_match, label: string, offset: number) =>
+        `${offset === 0 ? "" : "\n\n"}${label}\n\n`,
+    )
+    .replace(/^\n+/, "");
+}

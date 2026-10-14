@@ -14,12 +14,13 @@ import type {
 } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { PracticeKind } from "@zoeskoul/db";
 import {
-  loadDraftModuleAuthoredTopicOrder,
-  loadDraftModuleTopics,
-  loadDraftSubjectManifest,
   type DraftRef,
-  type LoadedDraftTopic,
 } from "./fs";
+import {
+  loadSourceModuleAuthoredTopicOrder,
+  loadSourceModuleTopics,
+  type LoadedSourceTopic,
+} from "./sourceFs";
 import { orderDraftQaTopicsByManifest } from "./draftQaTopicOrder";
 
 type JsonObject = Record<string, unknown>;
@@ -470,7 +471,7 @@ function enrichReviewTopic(args: {
   } as ReviewTopicShape;
 }
 
-function buildDraftPreviewTopic(loadedTopic: LoadedDraftTopic) {
+function buildDraftPreviewTopic(loadedTopic: LoadedSourceTopic) {
   const manifest = loadedTopic.bundleJson as TopicBundleManifest;
   const resolveMessage = createDraftMessageResolver(loadedTopic.messagesJson);
   const pool = buildPool(manifest);
@@ -508,11 +509,7 @@ function humanizeSlug(value: string) {
 }
 
 export async function buildDraftPreviewReviewModule(ref: DraftRef): Promise<ReviewModule> {
-  const draftModule = await loadDraftModuleTopics(ref);
-  const subjectManifest = await loadDraftSubjectManifest({
-    catalog: ref.catalog,
-    subject: ref.subject,
-  });
+  const draftModule = await loadSourceModuleTopics(ref);
   if (!draftModule.topics.length) {
     throw new Error(`No draft topics found for ${ref.catalog}/${ref.subject}/${ref.module}`);
   }
@@ -530,11 +527,7 @@ export async function buildDraftPreviewReviewModule(ref: DraftRef): Promise<Revi
   }
   const primaryManifest = primary.manifest;
 
-  const authoredTopicOrder = await loadDraftModuleAuthoredTopicOrder({
-    catalog: ref.catalog,
-    subject: ref.subject,
-    moduleSlug: primaryManifest.moduleSlug,
-  });
+  const authoredTopicOrder = await loadSourceModuleAuthoredTopicOrder(ref);
   const builtTopics = orderDraftQaTopicsByManifest(
     discoveredBuiltTopics,
     authoredTopicOrder,
@@ -554,7 +547,7 @@ export async function buildDraftPreviewReviewModule(ref: DraftRef): Promise<Revi
         humanizeSlug(sectionSlug),
       ),
       summary: null,
-      description: "Dev-only draft preview loaded directly from .curriculum-build.",
+      description: "Dev-only draft preview compiled in memory from saved canonical source.",
       order: sectionBySlug.size + 1,
       runtimeDefaults: manifest.runtimeDefaults ?? null,
       topics: [],
@@ -571,19 +564,9 @@ export async function buildDraftPreviewReviewModule(ref: DraftRef): Promise<Revi
   return {
     id: primaryManifest.moduleSlug,
     title: humanizeSlug(primaryManifest.moduleSlug),
-    subtitle: "Draft preview — loaded directly from .curriculum-build",
+    subtitle: "Draft preview — compiled from saved .curriculum-drafts source",
     startPracticeSectionSlug: firstSectionSlug,
-    profileId: (() => {
-      const profileId = asString(
-        asRecord(subjectManifest.subject)?.profileId,
-      );
-      if (!profileId) {
-        throw new Error(
-          `Draft subject manifest is missing subject.profileId for ${ref.catalog}/${ref.subject}. Recompile the draft curriculum before previewing it.`,
-        );
-      }
-      return profileId;
-    })(),
+    profileId: draftModule.profileId,
     versionFamily: ref.catalog,
     runtimeDefaults: primaryManifest.runtimeDefaults ?? null,
     serviceDefaults: (primaryManifest as any).serviceDefaults ?? null,

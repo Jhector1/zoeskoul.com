@@ -846,15 +846,19 @@ async function validateSubjectCatalogVersioning(
             );
         }
 
+        const replacingCatalogDefault =
+            Boolean(supersedes) && defaultSubjectSlug === supersedes;
+
         if (
             plan.publishTarget?.channel === "current" &&
             plan.versioning?.status === "active" &&
             plan.versioning.defaultForNewEnrollments === true &&
             isNonEmptyString(liveSubjectSlug) &&
+            replacingCatalogDefault &&
             defaultSubjectSlug !== liveSubjectSlug
         ) {
             issues.push(
-                `${filePath}: catalog.defaultSubjectSlug must equal publishTarget.liveSubjectSlug "${liveSubjectSlug}" for active default current release`,
+                `${filePath}: catalog.defaultSubjectSlug must equal publishTarget.liveSubjectSlug "${liveSubjectSlug}" when the active current release replaces the catalog default "${supersedes}"`,
             );
         }
     } catch (error) {

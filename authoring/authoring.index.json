@@ -183,6 +183,19 @@
           "path": "subjects/javascript/courses/javascript-foundations/course.spec.json"
         }
       ]
+    },
+    {
+      "subjectSlug": "api",
+      "path": "subjects/api",
+      "courseOrder": [
+        "api-foundations"
+      ],
+      "courses": [
+        {
+          "courseSlug": "api-foundations",
+          "path": "subjects/api/courses/api-foundations/course.spec.json"
+        }
+      ]
     }
   ]
 }

@@ -4,7 +4,8 @@ import {
 } from "@/lib/admin/curriculumDraftRoute";
 import { NextResponse } from "next/server";
 import { analyzeDraftTopic } from "@/lib/dev/curriculumDrafts/diagnostics";
-import { isCurriculumDraftEditorEnabled, loadDraftTopic } from "@/lib/dev/curriculumDrafts/fs";
+import { isCurriculumDraftEditorEnabled } from "@/lib/dev/curriculumDrafts/fs";
+import { loadSourceTopic } from "@/lib/dev/curriculumDrafts/sourceFs";
 import { parseDraftQuery } from "@/lib/dev/curriculumDrafts/schema";
 
 export const runtime = "nodejs";
@@ -18,7 +19,7 @@ async function handleGET(request: Request) {
   try {
     const url = new URL(request.url);
     const ref = parseDraftQuery(url.searchParams);
-    const topic = await loadDraftTopic(ref);
+    const topic = await loadSourceTopic(ref);
     const diagnostics = analyzeDraftTopic({
       bundleJson: topic.bundleJson,
       messagesJson: topic.messagesJson,
@@ -33,9 +34,11 @@ async function handleGET(request: Request) {
       moduleDir: topic.moduleDir,
       topicDir: topic.topicDir,
       paths: {
-        bundle: topic.relativeBundlePath,
-        messages: topic.relativeMessagesPath,
+        source: topic.relativeSourcePath,
+        bundle: "derived in memory (read-only)",
+        messages: "derived in memory (read-only)",
       },
+      sourceJson: topic.sourceJson,
       bundleJson: topic.bundleJson,
       messagesJson: topic.messagesJson,
       ...diagnostics,
