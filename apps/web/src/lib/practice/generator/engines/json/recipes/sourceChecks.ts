@@ -2,7 +2,18 @@ import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
 import { buildSourceChecksExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import type { RecipeHandler } from "./types";
 
+type SourceChecksExpectedArgs = Parameters<
+    typeof buildSourceChecksExpectedExample
+>[0];
+
 export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved) => {
+    const extendedDef = def as typeof def & {
+        topicRuntimeDefaults?: {
+            language?: string;
+            kind?: SourceChecksExpectedArgs["runtimeKind"];
+        };
+        tests?: SourceChecksExpectedArgs["tests"];
+    };
     const sourceChecks = Array.isArray((def as any).sourceChecks)
         ? (def as any).sourceChecks
         : [];
@@ -18,7 +29,7 @@ export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved)
     const language =
         def.language ??
         def.workspace?.language ??
-        (def as any).topicRuntimeDefaults?.language ??
+        extendedDef.topicRuntimeDefaults?.language ??
         "web";
     const entryFile =
         def.entryFile ??
@@ -31,13 +42,13 @@ export const buildSourceChecksRecipe: RecipeHandler<any> = (def, args, resolved)
         def,
         resolved,
         language,
-        runtimeKind: def.runtime?.kind ?? (def as any).topicRuntimeDefaults?.kind,
+        runtimeKind: def.runtime?.kind ?? extendedDef.topicRuntimeDefaults?.kind,
         entryPath: entryFile,
         solutionFiles: Array.isArray(solutionFiles) ? solutionFiles : undefined,
         tests: Array.isArray(def.recipe?.tests)
             ? def.recipe.tests
-            : Array.isArray((def as any).tests)
-                ? (def as any).tests
+            : Array.isArray(extendedDef.tests)
+                ? extendedDef.tests
                 : [],
     });
 

@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import { buildWebPreviewSrcDoc } from "./WebPreview";
 
+type WebPreviewEntries = Parameters<typeof buildWebPreviewSrcDoc>[0];
+
 describe("WebPreview virtual workspace fetch", () => {
     it("serves relative JSON workspace files through fetch", () => {
         const html = buildWebPreviewSrcDoc(
@@ -23,7 +25,7 @@ describe("WebPreview virtual workspace fetch", () => {
                     path: "data/events.json",
                     content: '[{"name":"Robotics Lab"}]',
                 },
-            ] as any,
+            ] as WebPreviewEntries,
             "index.html",
             { bridgeId: "test-bridge" },
         );
@@ -60,7 +62,7 @@ describe("WebPreview virtual workspace fetch", () => {
                     path: "data/items.json",
                     content: '[1,2,3]',
                 },
-            ] as any,
+            ] as WebPreviewEntries,
             "pages/demo.html",
             { bridgeId: "test-bridge" },
         );
@@ -85,7 +87,7 @@ describe("WebPreview virtual workspace fetch", () => {
                     content:
                         'fetch("./data/missing.json").then((response) => response.ok);',
                 },
-            ] as any,
+            ] as WebPreviewEntries,
             "index.html",
             { bridgeId: "test-bridge" },
         );
@@ -108,7 +110,7 @@ describe("WebPreview virtual workspace fetch", () => {
                     path: "script.js",
                     content: 'console.log("ready");',
                 },
-            ] as any,
+            ] as WebPreviewEntries,
             "index.html",
             { bridgeId: "bridge-order" },
         );

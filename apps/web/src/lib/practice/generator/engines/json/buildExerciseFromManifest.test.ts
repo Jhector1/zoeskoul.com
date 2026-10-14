@@ -748,13 +748,15 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
           language: "javascript",
           supportsTerminal: true,
         },
-      } as any,
+      } as Parameters<typeof buildExerciseFromManifest>[2],
     );
 
-    expect((result.expected as any).language).toBe("javascript");
-    expect((result.exercise as any).expectedExample).toMatchObject({
-      kind: "terminal",
-      stdout: "{ status: 200 }\n",
+    expect(result.expected).toMatchObject({ language: "javascript" });
+    expect(result.exercise).toMatchObject({
+      expectedExample: {
+        kind: "terminal",
+        stdout: "{ status: 200 }\n",
+      },
     });
   });
 
@@ -791,13 +793,15 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
           kind: "web",
           language: "web",
         },
-      } as any,
+      } as unknown as Parameters<typeof buildExerciseFromManifest>[2],
     );
 
-    expect((result.exercise as any).expectedExample).toEqual({
-      kind: "web_preview",
-      entryPath: "index.html",
-      files: solutionFiles,
+    expect(result.exercise).toMatchObject({
+      expectedExample: {
+        kind: "web_preview",
+        entryPath: "index.html",
+        files: solutionFiles,
+      },
     });
   });
 

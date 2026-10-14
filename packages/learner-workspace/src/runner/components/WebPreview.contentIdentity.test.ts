@@ -2,8 +2,10 @@ import { describe, expect, it } from "vitest";
 
 import { hashWebPreviewContent } from "./WebPreview";
 
+type WebPreviewEntries = Parameters<typeof hashWebPreviewContent>[0];
+
 describe("WebPreview content identity", () => {
-    const entries = [
+    const entries: WebPreviewEntries = [
         {
             kind: "file",
             path: "index.html",
@@ -19,7 +21,7 @@ describe("WebPreview content identity", () => {
             path: "data/events.json",
             content: '[{"name":"Robotics Lab"}]',
         },
-    ] as any;
+    ];
 
     it("is stable when the same workspace entries arrive in a different order", () => {
         const forward = hashWebPreviewContent(entries, "exercise-a\0index.html");
@@ -34,7 +36,7 @@ describe("WebPreview content identity", () => {
     it("still changes when actual file content changes", () => {
         const original = hashWebPreviewContent(entries, "exercise-a\0index.html");
         const edited = hashWebPreviewContent(
-            entries.map((entry: any) =>
+            entries.map((entry) =>
                 entry.path === "script.js"
                     ? { ...entry, content: 'console.log("changed");' }
                     : entry,

@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import process from "node:process";
+import { setTimeout as delay } from "node:timers/promises";
+
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -83,7 +86,7 @@ function jsonLiteral(value) {
 const generationLockPath = path.join(outputRoot, ".generate.lock");
 
 function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return delay(ms);
 }
 
 function isProcessAlive(pid) {
@@ -115,7 +118,7 @@ async function acquireGenerationLock() {
     } catch (error) {
       if (error?.code !== "EEXIST") throw error;
 
-      let removeStaleLock = false;
+      let removeStaleLock;
 
       try {
         const raw = await fs.readFile(generationLockPath, "utf8");
@@ -146,11 +149,20 @@ async function acquireGenerationLock() {
       if (Date.now() >= deadline) {
         throw new Error(
           `Timed out waiting for curriculum registry generation lock: ${generationLockPath}`,
+          { cause: error },
         );
       }
 
       await sleep(100);
     }
+  }
+}
+
+async function unlinkIfExists(filePath) {
+  try {
+    await fs.unlink(filePath);
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
   }
 }
 
@@ -163,11 +175,7 @@ async function withGenerationLock(task) {
     try {
       await handle.close();
     } finally {
-      try {
-        await fs.unlink(generationLockPath);
-      } catch (error) {
-        if (error?.code !== "ENOENT") throw error;
-      }
+      await unlinkIfExists(generationLockPath);
     }
   }
 }
@@ -183,11 +191,7 @@ async function writeGeneratedFile(filePath, contents, encoding = "utf8") {
     await fs.writeFile(temporaryPath, contents, encoding);
     await fs.rename(temporaryPath, filePath);
   } finally {
-    try {
-      await fs.unlink(temporaryPath);
-    } catch (error) {
-      if (error?.code !== "ENOENT") throw error;
-    }
+    await unlinkIfExists(temporaryPath);
   }
 }
 

@@ -133,7 +133,7 @@ function planTopic(plan: CoursePlan, topicId: string) {
 }
 
 export async function listSourceDraftsWithDebug(
-  locale = "en",
+  _locale = "en",
 ): Promise<DraftListResult> {
   const repoRoot = await findRepoRoot();
   const draftRoot = await findSourceDraftRoot();

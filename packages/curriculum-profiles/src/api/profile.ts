@@ -19,7 +19,9 @@ function normalizePath(value: string, label: string) {
     try {
         return normalizeWorkspacePath(value);
     } catch (error) {
-        throw new Error(`${label}: ${(error as Error).message}`);
+        throw new Error(`${label}: ${(error as Error).message}`, {
+            cause: error,
+        });
     }
 }
 

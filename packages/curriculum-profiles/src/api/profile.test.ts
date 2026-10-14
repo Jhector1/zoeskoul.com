@@ -1,6 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { apiProfile, apiProfileAdapter } from "./index.js";
 
+type ApiCodeInputCapability = NonNullable<typeof apiProfile.codeInput>;
+type RepairDraftArgs = Parameters<
+    NonNullable<ApiCodeInputCapability["repairDraft"]>
+>[0];
+type BuildManifestArgs = Parameters<
+    NonNullable<ApiCodeInputCapability["buildManifest"]>
+>[0];
+
 describe("api curriculum profile", () => {
     it("owns Node.js terminal-first runtime defaults", () => {
         expect(apiProfile.id).toBe("api");
@@ -36,8 +44,8 @@ describe("api curriculum profile", () => {
                 prompt: "Create GET /api/events.",
                 fixedLanguage: "web",
                 recipeType: "fixed_tests",
-            } as any,
-            seed: {} as any,
+            } as RepairDraftArgs["exercise"],
+            seed: {} as RepairDraftArgs["seed"],
         });
 
         expect(repaired).toMatchObject({
@@ -78,10 +86,10 @@ describe("api curriculum profile", () => {
                     },
                 ],
                 recipeType: "source_checks",
-            } as any,
+            } as BuildManifestArgs["exercise"],
             seed: {
                 topicId: "api-output",
-            } as any,
+            } as BuildManifestArgs["seed"],
             messageBase: "topics.api_output.quiz.api_output",
         });
 
