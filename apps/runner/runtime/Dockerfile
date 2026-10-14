@@ -60,7 +60,7 @@ RUN set -eux; \
   global_root="$(npm root --global)"; \
   ln -s "${global_root}" /opt/zoeskoul-node-modules; \
   NODE_PATH=/opt/zoeskoul-node-modules node -e 'const express = require("express"); if (typeof express !== "function") process.exit(1);'; \
-  node -e 'const { DatabaseSync } = require("node:sqlite"); const db = new DatabaseSync(":memory:"); db.exec("CREATE TABLE health(id INTEGER PRIMARY KEY, value TEXT); INSERT INTO health(value) VALUES (ok)"); const row = db.prepare("SELECT value FROM health WHERE id = 1").get(); if (!row || row.value !== "ok") process.exit(1); db.close();';   sqlite3 --version;   curl --version >/dev/null
+  node -e 'const { DatabaseSync } = require("node:sqlite"); const db = new DatabaseSync(":memory:"); db.exec("CREATE TABLE health(id INTEGER PRIMARY KEY, value TEXT)"); db.prepare("INSERT INTO health(value) VALUES (?)").run("ok"); const row = db.prepare("SELECT value FROM health WHERE id = 1").get(); if (!row || row.value !== "ok") process.exit(1); db.close();';   sqlite3 --version;   curl --version >/dev/null
 
 RUN mkdir -p /opt/runner /workspace /tmp \
  && if ! getent group 1000 >/dev/null; then groupadd --gid 1000 sandbox; fi \
