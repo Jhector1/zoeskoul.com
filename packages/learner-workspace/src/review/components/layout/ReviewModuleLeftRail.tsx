@@ -2,14 +2,14 @@
 
 import React from "react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
+import ResizeSeparator from "../../../ui/ResizeSeparator";
 
 export type ReviewModuleLeftRailProps = {
   showDesktopLeft: boolean;
   leftCollapsed: boolean;
   leftW: number;
-  onResizeStart: (
-    e: React.MouseEvent<HTMLDivElement>,
-  ) => void;
+  onResizeStart: React.PointerEventHandler<HTMLDivElement>;
+  onResizeKeyDown: React.KeyboardEventHandler<HTMLDivElement>;
   padStyle: React.CSSProperties;
   sidebar: React.ReactNode;
 };
@@ -19,6 +19,7 @@ export default function ReviewModuleLeftRail({
   leftCollapsed,
   leftW,
   onResizeStart,
+  onResizeKeyDown,
   padStyle,
   sidebar,
 }: ReviewModuleLeftRailProps) {
@@ -27,6 +28,7 @@ export default function ReviewModuleLeftRail({
   return (
     <>
       <aside
+        data-review-left-rail
         className={cn(
           "min-h-0 shrink-0 transition-[width] duration-300 ease-out overflow-hidden",
           leftCollapsed && "w-0",
@@ -44,9 +46,15 @@ export default function ReviewModuleLeftRail({
       </aside>
 
       {!leftCollapsed ? (
-        <div
-          onMouseDown={onResizeStart}
-          className="w-2 shrink-0 cursor-col-resize rounded-xl bg-neutral-200/60 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10"
+        <ResizeSeparator
+          orientation="vertical"
+          tabIndex={0}
+          aria-label="Resize topics panel"
+          aria-valuemin={48}
+          aria-valuenow={Math.round(leftW)}
+          onPointerDown={onResizeStart}
+          onKeyDown={onResizeKeyDown}
+          data-review-left-resize-handle
           title="Drag to resize sidebar"
         />
       ) : null}

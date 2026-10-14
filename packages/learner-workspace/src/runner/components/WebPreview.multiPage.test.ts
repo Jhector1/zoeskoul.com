@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import type { WorkspaceSyncEntry } from "@zoeskoul/learner-workspace/runner/runtime";
 
 import { buildWebPreviewSrcDoc } from "./WebPreview";
 
@@ -8,12 +9,13 @@ describe("WebPreview multi-page virtual website", () => {
       [
         { kind: "file", path: "index.html", content: '<a href="about.html">About</a>' },
         { kind: "file", path: "about.html", content: '<a href="index.html">Home</a>' },
-      ] as any,
+      ] as WorkspaceSyncEntry[],
       "index.html",
     );
 
     expect(html).toContain('data-zoeskoul-preview-path="/about.html"');
-    expect(html).toContain("zoeskoul-web-preview:navigate");
+    expect(html).toContain("zoeskoul-web-preview:bridge");
+    expect(html).toContain('post("navigate", { path })');
   });
 
   it("resolves parent-folder links from a nested html page", () => {
@@ -21,7 +23,7 @@ describe("WebPreview multi-page virtual website", () => {
       [
         { kind: "file", path: "index.html", content: "<h1>Home</h1>" },
         { kind: "file", path: "projects/robotics.html", content: '<a href="../index.html">Back</a>' },
-      ] as any,
+      ] as WorkspaceSyncEntry[],
       "projects/robotics.html",
     );
 
@@ -42,7 +44,7 @@ describe("WebPreview multi-page virtual website", () => {
           mimeType: "image/png",
           sizeBytes: 4,
         },
-      ] as any,
+      ] as WorkspaceSyncEntry[],
       "about.html",
     );
 

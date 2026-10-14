@@ -3,6 +3,7 @@
 import * as React from "react";
 import type { TerminalDock } from "@zoeskoul/learner-workspace/runner/types";
 import { clamp } from "@zoeskoul/learner-workspace/runner/utils/text";
+import { beginViewportResizeDrag } from "../../ui/resizeDrag";
 
 type Size = {
     w: number;
@@ -18,25 +19,6 @@ function sameSize(a: Size, b: Size) {
     return a.w === b.w && a.h === b.h;
 }
 
-function createImmediateSplitDragShield(cursor: "row-resize" | "col-resize") {
-    if (typeof document === "undefined") return null;
-
-    const shield = document.createElement("div");
-    shield.setAttribute("aria-hidden", "true");
-    shield.dataset.runnerSplitDragShield = "imperative";
-    Object.assign(shield.style, {
-        position: "fixed",
-        inset: "0",
-        zIndex: "2147483647",
-        cursor,
-        touchAction: "none",
-        userSelect: "none",
-        background: "transparent",
-    });
-    document.body.appendChild(shield);
-    return shield;
-}
-
 export function useSplitSizing(args: {
     height: number;
 
@@ -50,11 +32,6 @@ export function useSplitSizing(args: {
     requestLayout: () => void;
 
     splitPx?: number;
-
-    minEditorH?: number;
-    minTermH?: number;
-    minEditorW?: number;
-    minTermW?: number;
 
     hardMinEditorH?: number;
     hardMinTermH?: number;
@@ -73,15 +50,10 @@ export function useSplitSizing(args: {
 
         splitPx = 8,
 
-        minEditorH = 160,
-        minTermH = 140,
-        minEditorW = 320,
-        minTermW = 240,
-
         hardMinEditorH = 80,
         hardMinTermH = 80,
-        hardMinEditorW = 180,
-        hardMinTermW = 180,
+        hardMinEditorW = 48,
+        hardMinTermW = 48,
     } = args;
 
     const hasSplit = showEditor && showTerminal;
@@ -204,8 +176,6 @@ export function useSplitSizing(args: {
         ? getBottomMaxTerm({
             totalH,
             splitPx,
-            minEditorH,
-            minTermH,
             hardMinEditorH,
             hardMinTermH,
         })
@@ -215,8 +185,6 @@ export function useSplitSizing(args: {
         ? getRightMaxTerm({
             totalW,
             splitPx,
-            minEditorW,
-            minTermW,
             hardMinEditorW,
             hardMinTermW,
         })
@@ -241,8 +209,6 @@ export function useSplitSizing(args: {
         const maxTerm = getBottomMaxTerm({
             totalH,
             splitPx,
-            minEditorH,
-            minTermH,
             hardMinEditorH,
             hardMinTermH,
         });
@@ -254,8 +220,6 @@ export function useSplitSizing(args: {
     }, [
         totalH,
         splitPx,
-        minEditorH,
-        minTermH,
         hardMinEditorH,
         hardMinTermH,
         scheduleLayout,
@@ -265,8 +229,6 @@ export function useSplitSizing(args: {
         const maxTerm = getRightMaxTerm({
             totalW,
             splitPx,
-            minEditorW,
-            minTermW,
             hardMinEditorW,
             hardMinTermW,
         });
@@ -278,8 +240,6 @@ export function useSplitSizing(args: {
     }, [
         totalW,
         splitPx,
-        minEditorW,
-        minTermW,
         hardMinEditorW,
         hardMinTermW,
         scheduleLayout,
@@ -309,7 +269,9 @@ export function useSplitSizing(args: {
             const pointerId = e.pointerId;
             try {
                 divider.setPointerCapture(pointerId);
-            } catch {}
+            } catch {
+                // Global listeners and the viewport shield keep the drag active.
+            }
 
             userResizedRef.current = true;
 
@@ -324,7 +286,9 @@ export function useSplitSizing(args: {
             ) {
                 try {
                     active.blur();
-                } catch {}
+                } catch {
+                    // Some embedded controls do not expose a callable blur.
+                }
             }
 
             splitDragRef.current = {
@@ -340,12 +304,10 @@ export function useSplitSizing(args: {
             // Install the drag shield synchronously, before React has time to
             // render the declarative shield, so every file type uses the same
             // continuous split-resize interaction.
-            const dragShield = createImmediateSplitDragShield(
+            const endViewportDrag = beginViewportResizeDrag(
                 dock === "bottom" ? "row-resize" : "col-resize",
             );
 
-            const prevSelect = document.body.style.userSelect;
-            const prevCursor = document.body.style.cursor;
             const pdfEmbeds = [...mainRef.current?.querySelectorAll<HTMLElement>(
                 'object[type="application/pdf"], embed[type="application/pdf"]',
             ) ?? []].map((element) => ({
@@ -353,26 +315,35 @@ export function useSplitSizing(args: {
                 pointerEvents: element.style.pointerEvents,
             }));
 
-            document.body.style.userSelect = "none";
-            document.body.style.cursor = dock === "bottom" ? "row-resize" : "col-resize";
             for (const { element } of pdfEmbeds) {
                 element.style.pointerEvents = "none";
             }
 
-            const onMove = (ev: PointerEvent) => {
+            let latestPointer: PointerEvent | null = null;
+            let moveRaf: number | null = null;
+            const applyLatestPointer = () => {
+                moveRaf = null;
+                const ev = latestPointer;
                 const d = splitDragRef.current;
-                if (!d) return;
+                if (!d || !ev) return;
 
                 if (d.dock === "bottom") {
-                    const dy = ev.clientY - d.startY;
-                    resizeBottomTo(d.startSize - dy);
+                    resizeBottomTo(d.startSize - (ev.clientY - d.startY));
                 } else {
-                    const dx = ev.clientX - d.startX;
-                    resizeRightTo(d.startSize - dx);
+                    resizeRightTo(d.startSize - (ev.clientX - d.startX));
                 }
             };
 
+            const onMove = (ev: PointerEvent) => {
+                latestPointer = ev;
+                if (moveRaf == null) moveRaf = requestAnimationFrame(applyLatestPointer);
+            };
+
             const onUp = () => {
+                if (moveRaf != null) {
+                    cancelAnimationFrame(moveRaf);
+                    applyLatestPointer();
+                }
                 splitDragRef.current = null;
                 dragCleanupRef.current = null;
                 window.removeEventListener("pointermove", onMove);
@@ -382,10 +353,10 @@ export function useSplitSizing(args: {
                     if (divider.hasPointerCapture(pointerId)) {
                         divider.releasePointerCapture(pointerId);
                     }
-                } catch {}
-                dragShield?.remove();
-                document.body.style.userSelect = prevSelect;
-                document.body.style.cursor = prevCursor;
+                } catch {
+                    // Capture may already be released by the browser.
+                }
+                endViewportDrag();
                 for (const { element, pointerEvents } of pdfEmbeds) {
                     element.style.pointerEvents = pointerEvents;
                 }
@@ -400,7 +371,9 @@ export function useSplitSizing(args: {
                     } catch {
                         try {
                             toRestore.focus();
-                        } catch {}
+                        } catch {
+                            // Focus restoration is best effort after resizing.
+                        }
                     }
                 }
             };
@@ -509,45 +482,19 @@ export function useSplitSizing(args: {
 function getBottomMaxTerm(args: {
     totalH: number;
     splitPx: number;
-    minEditorH: number;
-    minTermH: number;
     hardMinEditorH: number;
     hardMinTermH: number;
 }) {
-    const { totalH, splitPx, minEditorH, minTermH, hardMinEditorH, hardMinTermH } = args;
-
-    const minEditorEff = Math.min(
-        minEditorH,
-        Math.max(hardMinEditorH, totalH - splitPx - hardMinTermH),
-    );
-    const minTermEff = Math.min(
-        minTermH,
-        Math.max(hardMinTermH, totalH - splitPx - hardMinEditorH),
-    );
-
-    const maxTerm = Math.max(hardMinTermH, totalH - splitPx - minEditorEff);
-    return Math.max(minTermEff, maxTerm);
+    const { totalH, splitPx, hardMinEditorH, hardMinTermH } = args;
+    return Math.max(hardMinTermH, totalH - splitPx - hardMinEditorH);
 }
 
 function getRightMaxTerm(args: {
     totalW: number;
     splitPx: number;
-    minEditorW: number;
-    minTermW: number;
     hardMinEditorW: number;
     hardMinTermW: number;
 }) {
-    const { totalW, splitPx, minEditorW, minTermW, hardMinEditorW, hardMinTermW } = args;
-
-    const minEditorEff = Math.min(
-        minEditorW,
-        Math.max(hardMinEditorW, totalW - splitPx - hardMinTermW),
-    );
-    const minTermEff = Math.min(
-        minTermW,
-        Math.max(hardMinTermW, totalW - splitPx - hardMinEditorW),
-    );
-
-    const maxTerm = Math.max(hardMinTermW, totalW - splitPx - minEditorEff);
-    return Math.max(minTermEff, maxTerm);
+    const { totalW, splitPx, hardMinEditorW, hardMinTermW } = args;
+    return Math.max(hardMinTermW, totalW - splitPx - hardMinEditorW);
 }

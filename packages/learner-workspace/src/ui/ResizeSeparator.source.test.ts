@@ -12,6 +12,18 @@ const desktop = read(
 const runner = read(
   "packages/learner-workspace/src/runner/CodeRunner.tsx",
 );
+const reviewLeft = read(
+  "packages/learner-workspace/src/review/components/layout/ReviewModuleLeftRail.tsx",
+);
+const reviewRight = read(
+  "packages/learner-workspace/src/review/components/layout/ReviewModuleRightRail.tsx",
+);
+const reviewSizing = read(
+  "packages/learner-workspace/src/review/hooks/useResizablePanels.ts",
+);
+const splitSizing = read(
+  "packages/learner-workspace/src/runner/hooks/useSplitSizing.ts",
+);
 
 describe("shared ResizeSeparator", () => {
   it("is the single visual owner for left, bottom, and right resizers", () => {
@@ -21,6 +33,17 @@ describe("shared ResizeSeparator", () => {
     expect(runner).toContain('orientation="horizontal"');
     expect(runner).toContain('data-testid="runner-right-split-resizer"');
     expect(runner).toContain('orientation="vertical"');
+    expect(reviewLeft).toContain("<ResizeSeparator");
+    expect(reviewRight).toContain("<ResizeSeparator");
+  });
+
+  it("uses pointer-safe, frame-coalesced resizing across shared workspaces", () => {
+    expect(reviewSizing).toContain("requestAnimationFrame(applyLatestWidth)");
+    expect(reviewSizing).toContain('panel.style.transition = "none"');
+    expect(reviewSizing).toContain("beginViewportResizeDrag");
+    expect(reviewSizing).not.toContain("rightMin = 520");
+    expect(splitSizing).toContain("requestAnimationFrame(applyLatestPointer)");
+    expect(splitSizing).toContain("beginViewportResizeDrag");
   });
 
   it("owns size and cursor with inline runtime styles", () => {

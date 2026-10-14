@@ -814,7 +814,6 @@ export default function EditorPane(props: {
                 style={{ touchAction: isNarrowScreen ? "pan-y" : "auto" }}
             >
                 <Monaco
-                    key={path}
                     height={height}
                     path={path}
                     keepCurrentModel

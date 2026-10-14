@@ -14,6 +14,7 @@ describe("Review layout shell behavior", () => {
         leftCollapsed: false,
         leftW: 280,
         onResizeStart: () => {},
+        onResizeKeyDown: () => {},
         padStyle: {},
         sidebar: React.createElement("div", null, "sidebar"),
       }),
@@ -44,6 +45,7 @@ describe("Review layout shell behavior", () => {
         rightCollapsed: false,
         rightW: 420,
         onResizeStart: () => {},
+        onResizeKeyDown: () => {},
         toolsPanel: React.createElement("div", null, "tools"),
       }),
     );

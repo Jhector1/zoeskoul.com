@@ -32,6 +32,7 @@ export type OutputSurfaceModel =
     kind: "web-preview";
     entries: WorkspaceSyncEntry[];
     title?: string;
+    sessionKey?: string;
 };
 
 export default function OutputSurface(props: {
@@ -57,7 +58,11 @@ export default function OutputSurface(props: {
         case "web-preview":
             return (
                 <div className="h-full min-h-0">
-                    <WebPreview entries={model.entries} title={model.title} />
+                    <WebPreview
+                        entries={model.entries}
+                        title={model.title}
+                        sessionKey={model.sessionKey}
+                    />
                 </div>
             );
 

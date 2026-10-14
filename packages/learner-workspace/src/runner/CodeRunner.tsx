@@ -28,6 +28,7 @@ import OutputSurface, {
 } from "@zoeskoul/learner-workspace/runner/components/OutputSurface";
 import { useSplitSizing } from "@zoeskoul/learner-workspace/runner/hooks/useSplitSizing";
 import ResizeSeparator from "../ui/ResizeSeparator";
+import { beginViewportResizeDrag } from "../ui/resizeDrag";
 import type { WorkspaceLanguage, SqlDialect } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import { runViaApi } from "@zoeskoul/learner-workspace/lib/code/runClient";
 import { useCodeRunnerController } from "@zoeskoul/learner-workspace/runner/hooks/controller/useCodeRunnerController";
@@ -2635,6 +2636,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 kind: "web-preview",
                 entries: webPreviewEntries,
                 title: t("previewTab"),
+                sessionKey: effectiveExerciseStateKey,
             };
         }
 
@@ -2667,6 +2669,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlSetupSql,
         sqlInitialTableSnapshots,
         sqlPaneOptions,
+        effectiveExerciseStateKey,
         effectiveEditorModelKey,
         sqlDatasetId,
         sqlDialect,
@@ -2972,33 +2975,46 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
             const divider = event.currentTarget;
             const pointerId = event.pointerId;
-            const previousUserSelect = document.body.style.userSelect;
-            const previousCursor = document.body.style.cursor;
-
-            document.body.style.userSelect = "none";
-            document.body.style.cursor = "col-resize";
+            const finishViewportDrag = beginViewportResizeDrag("col-resize");
+            let latestClientX = event.clientX;
+            let moveFrame: number | null = null;
 
             try {
                 divider.setPointerCapture(pointerId);
-            } catch {}
+            } catch {
+                // Global listeners and the viewport shield keep the drag active.
+            }
+
+            const applyLatestPointer = () => {
+                moveFrame = null;
+                updateEditorSplitRatioFromClientX(latestClientX);
+            };
 
             const onMove = (moveEvent: PointerEvent) => {
-                updateEditorSplitRatioFromClientX(moveEvent.clientX);
+                latestClientX = moveEvent.clientX;
+                if (moveFrame == null) {
+                    moveFrame = requestAnimationFrame(applyLatestPointer);
+                }
             };
 
             const cleanup = () => {
+                if (moveFrame != null) {
+                    cancelAnimationFrame(moveFrame);
+                    applyLatestPointer();
+                }
                 window.removeEventListener("pointermove", onMove, true);
                 window.removeEventListener("pointerup", cleanup, true);
                 window.removeEventListener("pointercancel", cleanup, true);
                 divider.removeEventListener("lostpointercapture", cleanup);
-                document.body.style.userSelect = previousUserSelect;
-                document.body.style.cursor = previousCursor;
+                finishViewportDrag();
 
                 try {
                     if (divider.hasPointerCapture(pointerId)) {
                         divider.releasePointerCapture(pointerId);
                     }
-                } catch {}
+                } catch {
+                    // Capture may already be released by the browser.
+                }
 
                 if (editorSplitDragCleanupRef.current === cleanup) {
                     editorSplitDragCleanupRef.current = null;
@@ -3094,7 +3110,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             />
                         ) : null}
                         <EditorPane
-                            key={args.modelKey}
                             frame={frame}
                             lang={args.editorLanguage}
                             mobileEditMode="auto"

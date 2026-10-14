@@ -32,6 +32,11 @@ describe("resolveEditorSplitOrder", () => {
 });
 
 describe("editor split sizing", () => {
+    it("keeps both editor panes recoverable near either edge", () => {
+        expect(EDITOR_SPLIT_MIN_RATIO).toBe(0.04);
+        expect(EDITOR_SPLIT_MAX_RATIO).toBe(0.96);
+    });
+
     it("clamps invalid and extreme ratios", () => {
         expect(clampEditorSplitRatio(Number.NaN)).toBe(
             EDITOR_SPLIT_DEFAULT_RATIO,

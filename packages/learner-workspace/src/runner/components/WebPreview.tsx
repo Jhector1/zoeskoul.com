@@ -1,8 +1,21 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+    useEffect,
+    useId,
+    useMemo,
+    useReducer,
+    useRef,
+    useState,
+} from "react";
 import type { WorkspaceSyncEntry } from "@zoeskoul/learner-workspace/runner/runtime";
 import { isBinaryWorkspaceEntry } from "@zoeskoul/learner-workspace/lib/ide/workspaceFileContent";
+import WebConsole from "./WebConsole";
+import {
+    acceptWebPreviewBridgeMessage,
+    buildWebPreviewBridgeScript,
+    webPreviewConsoleReducer,
+} from "./webPreviewBridge";
 
 function normalizePath(input: string) {
     return String(input ?? "")
@@ -78,6 +91,156 @@ function rewriteCssAssets(args: {
     );
 }
 
+function webPreviewVirtualContentType(path: string) {
+    const lower = path.toLowerCase();
+
+    if (lower.endsWith(".json")) return "application/json; charset=utf-8";
+    if (lower.endsWith(".html") || lower.endsWith(".htm")) {
+        return "text/html; charset=utf-8";
+    }
+    if (lower.endsWith(".css")) return "text/css; charset=utf-8";
+    if (lower.endsWith(".js") || lower.endsWith(".mjs")) {
+        return "text/javascript; charset=utf-8";
+    }
+    if (lower.endsWith(".svg")) return "image/svg+xml; charset=utf-8";
+    if (lower.endsWith(".xml")) return "application/xml; charset=utf-8";
+
+    return "text/plain; charset=utf-8";
+}
+
+function buildWebPreviewVirtualFetchScript(
+    fileMap: Map<string, string>,
+    htmlPath: string,
+) {
+    const resources = Object.fromEntries(
+        [...fileMap.entries()].map(([path, content]) => [
+            path,
+            {
+                body: content,
+                contentType: webPreviewVirtualContentType(path),
+            },
+        ]),
+    );
+
+    const serializedResources = JSON.stringify(resources).replace(
+        /</g,
+        "\\u003c",
+    );
+    const serializedPagePath = JSON.stringify(htmlPath || "index.html").replace(
+        /</g,
+        "\\u003c",
+    );
+
+    return `
+<script>
+(function () {
+  var resources = ${serializedResources};
+  var pagePath = ${serializedPagePath};
+  var nativeFetch = window.fetch.bind(window);
+
+  function normalizeVirtualPath(value) {
+    var parts = String(value || "").replace(/\\\\/g, "/").split("/");
+    var out = [];
+
+    for (var index = 0; index < parts.length; index += 1) {
+      var part = parts[index];
+      if (!part || part === ".") continue;
+
+      if (part === "..") {
+        out.pop();
+        continue;
+      }
+
+      out.push(part);
+    }
+
+    return out.join("/");
+  }
+
+  function resolveVirtualPath(target) {
+    var raw = String(target || "");
+
+    var hashIndex = raw.indexOf("#");
+    if (hashIndex >= 0) raw = raw.slice(0, hashIndex);
+
+    var queryIndex = raw.indexOf("?");
+    if (queryIndex >= 0) raw = raw.slice(0, queryIndex);
+
+    if (!raw) return "";
+
+    if (/^[a-z][a-z0-9+.-]*:/i.test(raw) || raw.slice(0, 2) === "//") {
+      return "";
+    }
+
+    if (raw.charAt(0) === "/") {
+      return normalizeVirtualPath(raw.slice(1));
+    }
+
+    var currentPage = normalizeVirtualPath(pagePath);
+    var slashIndex = currentPage.lastIndexOf("/");
+    var baseDirectory =
+      slashIndex >= 0 ? currentPage.slice(0, slashIndex + 1) : "";
+
+    return normalizeVirtualPath(baseDirectory + raw);
+  }
+
+  window.fetch = function zoeskoulVirtualWorkspaceFetch(input, init) {
+    var raw =
+      typeof input === "string"
+        ? input
+        : input && typeof input.url === "string"
+          ? input.url
+          : "";
+
+    var method = String(
+      (init && init.method) ||
+        (input && typeof input.method === "string" ? input.method : "GET"),
+    ).toUpperCase();
+
+    var virtualPath = resolveVirtualPath(raw);
+    var isVirtualMethod = method === "GET" || method === "HEAD";
+
+    if (
+      virtualPath &&
+      isVirtualMethod &&
+      Object.prototype.hasOwnProperty.call(resources, virtualPath)
+    ) {
+      var resource = resources[virtualPath];
+
+      return Promise.resolve(
+        new Response(method === "HEAD" ? null : resource.body, {
+          status: 200,
+          statusText: "OK",
+          headers: {
+            "Content-Type": resource.contentType,
+          },
+        }),
+      );
+    }
+
+    var isRelativeOrRootPath =
+      raw &&
+      !/^[a-z][a-z0-9+.-]*:/i.test(raw) &&
+      raw.slice(0, 2) !== "//";
+
+    if (isRelativeOrRootPath && isVirtualMethod) {
+      return Promise.resolve(
+        new Response(method === "HEAD" ? null : "Not Found", {
+          status: 404,
+          statusText: "Not Found",
+          headers: {
+            "Content-Type": "text/plain; charset=utf-8",
+          },
+        }),
+      );
+    }
+
+    return nativeFetch(input, init);
+  };
+})();
+<\/script>`;
+}
+
 export function listWebPreviewHtmlPaths(entries: WorkspaceSyncEntry[]) {
     const paths: string[] = [];
 
@@ -93,6 +256,7 @@ export function listWebPreviewHtmlPaths(entries: WorkspaceSyncEntry[]) {
 export function buildWebPreviewSrcDoc(
     entries: WorkspaceSyncEntry[],
     requestedPath = "index.html",
+    options?: { bridgeId?: string },
 ) {
     const fileMap = new Map<string, string>();
     const assetMap = new Map<string, string>();
@@ -178,7 +342,7 @@ ${rewrittenCss}
 
             return `<script${before ?? ""}${after ?? ""} data-inline-src="${resolved}">
 ${js}
-<\/script>`;
+</script>`;
         },
     );
 
@@ -208,48 +372,69 @@ ${js}
         },
     );
 
-    const navigationBridge = `
-<script>
-document.addEventListener("click", function (event) {
-  var node = event.target;
-  var anchor = node && node.closest
-    ? node.closest("a[data-zoeskoul-preview-path]")
-    : null;
-  if (!anchor) return;
-
-  var path = anchor.getAttribute("data-zoeskoul-preview-path");
-  if (!path) return;
-
-  event.preventDefault();
-  window.parent.postMessage(
-    { type: "zoeskoul-web-preview:navigate", path: path },
-    "*"
-  );
-});
-<\/script>`;
-
-    const errorBridge = `
-<script>
-window.addEventListener("error", function (event) {
-  const pre = document.createElement("pre");
-  pre.textContent = "Preview error: " + (event.message || "Unknown error");
-  pre.style.cssText = "position:fixed;left:12px;right:12px;bottom:12px;z-index:999999;padding:10px 12px;border-radius:12px;background:rgba(127,29,29,.95);color:white;font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;";
-  document.body.appendChild(pre);
-});
-<\/script>`;
-
-    const bridges = `${navigationBridge}${errorBridge}`;
-
-    if (out.includes("</body>")) {
-        out = out.replace("</body>", `${bridges}</body>`);
+    const bridge = buildWebPreviewBridgeScript(options?.bridgeId ?? "standalone");
+    const virtualFetchBridge = buildWebPreviewVirtualFetchScript(
+        fileMap,
+        htmlPath || "index.html",
+    );
+    const headMatch = /<head(?:\s[^>]*)?>/i.exec(out);
+    if (headMatch) {
+        const insertionPoint = (headMatch.index ?? 0) + headMatch[0].length;
+        out = `${out.slice(0, insertionPoint)}${bridge}${virtualFetchBridge}${out.slice(insertionPoint)}`;
     } else {
-        out += bridges;
+        out = `${bridge}${virtualFetchBridge}${out}`;
     }
 
     return out;
 }
 
 const DEFAULT_WEB_PREVIEW_URL = "/index.html";
+export function hashWebPreviewContent(
+    entries: WorkspaceSyncEntry[],
+    path: string,
+) {
+    let hash = 2_166_136_261;
+    const update = (value: string) => {
+        for (let index = 0; index < value.length; index += 1) {
+            hash ^= value.charCodeAt(index);
+            hash = Math.imul(hash, 16_777_619);
+        }
+    };
+
+    /**
+     * Workspace entry ordering is presentation/editor state, not preview
+     * content identity. Switching active files can cause the same workspace
+     * files to be emitted in a different array order. Hash a canonical
+     * projection so file selection does not create a false preview session.
+     */
+    const canonicalEntries = entries
+        .map((entry) => ({
+            kind: entry.kind ?? "file",
+            path: normalizePath(entry.path),
+            content:
+                entry.kind === "directory"
+                    ? ""
+                    : isBinaryWorkspaceEntry(entry)
+                      ? entry.data
+                      : String(entry.content ?? ""),
+        }))
+        .sort(
+            (left, right) =>
+                left.path.localeCompare(right.path) ||
+                left.kind.localeCompare(right.kind) ||
+                left.content.localeCompare(right.content),
+        );
+
+    update(path);
+
+    for (const entry of canonicalEntries) {
+        update(entry.kind);
+        update(entry.path);
+        update(entry.content);
+    }
+
+    return (hash >>> 0).toString(36);
+}
 
 export default function WebPreview(props: {
     entries: WorkspaceSyncEntry[];
@@ -260,18 +445,53 @@ export default function WebPreview(props: {
      * fallback. Navigation remains fully interactive after the initial load.
      */
     entryPath?: string;
+    /** Generic presentation option for console-first web experiences. */
+    consoleInitiallyOpen?: boolean;
+    /** Resets iframe diagnostics when the owning workspace/exercise changes. */
+    sessionKey?: string;
 }) {
     const iframeRef = useRef<HTMLIFrameElement | null>(null);
+    const componentId = useId();
     const preferredEntryPath = normalizePath(props.entryPath ?? "");
     const [virtualPath, setVirtualPath] = useState(
         preferredEntryPath || DEFAULT_WEB_PREVIEW_URL.slice(1),
     );
     const [refreshRevision, setRefreshRevision] = useState(0);
+    const [consoleOpen, setConsoleOpen] = useState(
+        props.consoleInitiallyOpen ?? false,
+    );
+    const [unreadCount, setUnreadCount] = useState(0);
+    const consoleOpenRef = useRef(consoleOpen);
 
     const htmlPaths = useMemo(
         () => listWebPreviewHtmlPaths(props.entries),
         [props.entries],
     );
+    const contentIdentity = useMemo(
+        () =>
+            hashWebPreviewContent(
+                props.entries,
+                `${props.sessionKey ?? ""}\0${virtualPath}`,
+            ),
+        [props.entries, props.sessionKey, virtualPath],
+    );
+    const bridgeId = `${componentId}:${contentIdentity}:${refreshRevision}`;
+    const [consoleState, dispatchConsole] = useReducer(webPreviewConsoleReducer, {
+        sessionId: bridgeId,
+        entries: [],
+    });
+    const consoleEntries =
+        consoleState.sessionId === bridgeId ? consoleState.entries : [];
+
+    useEffect(() => {
+        consoleOpenRef.current = consoleOpen;
+    }, [consoleOpen]);
+
+    useEffect(() => {
+        dispatchConsole({ type: "reset-session", sessionId: bridgeId });
+        setUnreadCount(0);
+        setConsoleOpen(props.consoleInitiallyOpen ?? false);
+    }, [bridgeId, props.consoleInitiallyOpen]);
 
     /**
      * entryPath is an initial/fallback document, not a controlled route.
@@ -294,28 +514,50 @@ export default function WebPreview(props: {
 
     useEffect(() => {
         const onMessage = (event: MessageEvent) => {
-            if (event.source !== iframeRef.current?.contentWindow) return;
+            const message = acceptWebPreviewBridgeMessage({
+                eventSource: event.source,
+                activeIframeWindow: iframeRef.current?.contentWindow,
+                data: event.data,
+                bridgeId,
+            });
+            if (!message) return;
 
-            const data =
-                event.data && typeof event.data === "object"
-                    ? (event.data as { type?: unknown; path?: unknown })
-                    : null;
+            if (message.kind === "navigate") {
+                const path = normalizeWebPreviewNavigationPath(message.path);
+                if (!path || !htmlPaths.includes(path)) return;
+                setVirtualPath(path);
+                return;
+            }
 
-            if (data?.type !== "zoeskoul-web-preview:navigate") return;
+            if (message.kind !== "console-entry") return;
+            dispatchConsole({
+                type: "append",
+                sessionId: bridgeId,
+                entry: message.entry,
+            });
 
-            const path = normalizeWebPreviewNavigationPath(data.path);
-
-            if (!path || !htmlPaths.includes(path)) return;
-            setVirtualPath(path);
+            if (
+                message.entry.kind === "runtime-error" ||
+                message.entry.kind === "unhandled-rejection"
+            ) {
+                consoleOpenRef.current = true;
+                setConsoleOpen(true);
+                setUnreadCount(0);
+            } else if (!consoleOpenRef.current) {
+                setUnreadCount((current) => current + 1);
+            }
         };
 
         window.addEventListener("message", onMessage);
         return () => window.removeEventListener("message", onMessage);
-    }, [htmlPaths]);
+    }, [bridgeId, htmlPaths]);
 
     const srcDoc = useMemo(
-        () => buildWebPreviewSrcDoc(props.entries, virtualPath),
-        [props.entries, virtualPath],
+        () =>
+            buildWebPreviewSrcDoc(props.entries, virtualPath, {
+                bridgeId,
+            }),
+        [bridgeId, props.entries, virtualPath],
     );
 
     return (
@@ -346,7 +588,17 @@ export default function WebPreview(props: {
                     key={refreshRevision}
                     title={props.title ?? "Web preview"}
                     srcDoc={srcDoc}
-                    sandbox="allow-scripts allow-modals"
+                    sandbox="allow-scripts allow-forms allow-modals"
+                    onLoad={(event) => {
+                        event.currentTarget.contentWindow?.postMessage(
+                            {
+                                type: "zoeskoul-web-preview:bridge",
+                                bridgeId,
+                                kind: "connect",
+                            },
+                            "*",
+                        );
+                    }}
                     data-web-preview-frame
                     className="h-full w-full border-0 bg-white"
                     style={{
@@ -355,6 +607,21 @@ export default function WebPreview(props: {
                     }}
                 />
             </div>
+
+            <WebConsole
+                entries={consoleEntries}
+                open={consoleOpen}
+                unreadCount={unreadCount}
+                onOpenChange={(open) => {
+                    consoleOpenRef.current = open;
+                    setConsoleOpen(open);
+                    if (open) setUnreadCount(0);
+                }}
+                onClear={() => {
+                    dispatchConsole({ type: "clear", sessionId: bridgeId });
+                    setUnreadCount(0);
+                }}
+            />
         </div>
     );
 }

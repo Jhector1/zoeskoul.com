@@ -23,12 +23,9 @@ describe("WebPreview expected-result navigation ownership", () => {
   });
 
   it("keeps virtual navigation in the shared preview", () => {
-    expect(source).toContain(
-      'if (data?.type !== "zoeskoul-web-preview:navigate") return;',
-    );
+    expect(source).toContain("acceptWebPreviewBridgeMessage({");
+    expect(source).toContain('if (message.kind === "navigate")');
     expect(source).toContain("setVirtualPath(path);");
-    expect(source).toContain(
-      "buildWebPreviewSrcDoc(props.entries, virtualPath)",
-    );
+    expect(source).toContain("buildWebPreviewSrcDoc(props.entries, virtualPath, {");
   });
 });

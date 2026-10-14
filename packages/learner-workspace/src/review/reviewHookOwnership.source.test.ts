@@ -25,7 +25,7 @@ const migrated = [
         exportKey: "./review/hooks/useResizablePanels",
         shared: "packages/learner-workspace/src/review/hooks/useResizablePanels.ts",
         app: "useResizablePanels.ts",
-        markers: ["draggingRef", "window.addEventListener", "onMouseDownLeftHandle"],
+        markers: ["beginPanelDrag", "window.addEventListener", "onPointerDownLeftHandle"],
     },
     {
         exportKey: "./review/hooks/useDebouncedSketchState",

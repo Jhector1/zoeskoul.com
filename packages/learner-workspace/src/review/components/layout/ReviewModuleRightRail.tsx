@@ -2,6 +2,7 @@
 
 import React from "react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
+import ResizeSeparator from "../../../ui/ResizeSeparator";
 
 export type ReviewModuleRightRailProps = {
   showDesktopRight: boolean;
@@ -9,9 +10,8 @@ export type ReviewModuleRightRailProps = {
   rightW: number;
   shouldRenderStackedTools?: boolean;
   containerRef?: React.Ref<HTMLElement>;
-  onResizeStart: (
-    e: React.MouseEvent<HTMLDivElement>,
-  ) => void;
+  onResizeStart: React.PointerEventHandler<HTMLDivElement>;
+  onResizeKeyDown: React.KeyboardEventHandler<HTMLDivElement>;
   toolsPanel: React.ReactNode;
 };
 
@@ -19,7 +19,9 @@ export default function ReviewModuleRightRail({
   showDesktopRight,
   rightCollapsed,
   rightW,
+  containerRef,
   onResizeStart,
+  onResizeKeyDown,
   toolsPanel,
 }: ReviewModuleRightRailProps) {
   if (!showDesktopRight) return null;
@@ -27,14 +29,22 @@ export default function ReviewModuleRightRail({
   return (
     <>
       {!rightCollapsed ? (
-        <div
-          onMouseDown={onResizeStart}
-          className="w-2 shrink-0 cursor-col-resize rounded-xl bg-neutral-200/60 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10"
+        <ResizeSeparator
+          orientation="vertical"
+          tabIndex={0}
+          aria-label="Resize tools panel"
+          aria-valuemin={48}
+          aria-valuenow={Math.round(rightW)}
+          onPointerDown={onResizeStart}
+          onKeyDown={onResizeKeyDown}
+          data-review-right-resize-handle
           title="Drag to resize tools panel"
         />
       ) : null}
 
       <aside
+        ref={containerRef}
+        data-review-right-rail
         className={cn(
           "min-h-0 shrink-0 transition-[width] duration-300 ease-out overflow-hidden",
           rightCollapsed && "w-0",

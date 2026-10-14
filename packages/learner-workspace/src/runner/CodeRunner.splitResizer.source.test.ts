@@ -9,6 +9,13 @@ const source = fs.readFileSync(
   ),
   "utf8",
 );
+const separatorSource = fs.readFileSync(
+  path.resolve(
+    process.cwd(),
+    "packages/learner-workspace/src/ui/ResizeSeparator.tsx",
+  ),
+  "utf8",
+);
 
 describe("CodeRunner terminal/editor split-resizer presentation", () => {
   it("keeps both draggable separator owners in the shared runner", () => {
@@ -18,18 +25,12 @@ describe("CodeRunner terminal/editor split-resizer presentation", () => {
     expect(source).toContain("split.separatorProps.onKeyDown");
   });
 
-  it("uses explicit pointer/focus state for the resizer grip", () => {
-    expect(source).toContain(
-      "const [isSplitResizerActive, setIsSplitResizerActive] = useState(false);",
-    );
-    expect(source).toContain(
-      "onPointerEnter={() => setIsSplitResizerActive(true)}",
-    );
-    expect(source).toContain(
-      "onPointerLeave={() => setIsSplitResizerActive(false)}",
-    );
-    expect(source).toContain("onFocus={() => setIsSplitResizerActive(true)}");
-    expect(source).toContain("onBlur={() => setIsSplitResizerActive(false)}");
+  it("delegates pointer and focus state to the shared separator", () => {
+    expect(source).toContain('import ResizeSeparator from "../ui/ResizeSeparator"');
+    expect(separatorSource).toContain("const [hovered, setHovered] = React.useState(false)");
+    expect(separatorSource).toContain("const [focused, setFocused] = React.useState(false)");
+    expect(separatorSource).toContain("onPointerEnter={(event) =>");
+    expect(separatorSource).toContain("onPointerLeave={(event) =>");
   });
 
   it("does not use the old Tailwind-owned split grip constants", () => {
@@ -38,25 +39,21 @@ describe("CodeRunner terminal/editor split-resizer presentation", () => {
   });
 
   it("suppresses the browser white focus flash on the separator", () => {
-    expect(source).toContain('outline: "none"');
-    expect(source).toContain('boxShadow: "none"');
-    expect(source).toContain('background: "transparent"');
+    expect(separatorSource).toContain('outline: "none"');
+    expect(separatorSource).toContain('boxShadow: "none"');
   });
 
-  it("shows the grip from inline state on hover/focus or while dragging", () => {
-    expect(source).toContain('data-testid="runner-bottom-split-grip"');
-    expect(source).toContain('data-testid="runner-right-split-grip"');
-    expect(source).toContain(
-      "isSplitResizerActive || split.isResizing ? 1 : 0",
+  it("shows shared inline hover and focus feedback", () => {
+    expect(separatorSource).toContain(
+      "backgroundColor: active ? ACTIVE_BACKGROUND : IDLE_BACKGROUND",
     );
-    expect(source).toContain('"rgba(148, 163, 184, 0.95)"');
-    expect(source).toContain('"rgb(14 165 233)"');
+    expect(separatorSource).toContain('transition: "background-color 120ms ease"');
   });
 
-  it("keeps the resize cursors and 8px hit targets", () => {
-    expect(source).toContain('"group relative z-20 h-2 shrink-0 touch-none"');
-    expect(source).toContain('"group relative z-20 w-2 shrink-0 touch-none"');
-    expect(source).toContain("cursor-row-resize");
-    expect(source).toContain("cursor-col-resize");
+  it("keeps axis-specific resize cursors and hit targets", () => {
+    expect(separatorSource).toContain("height: 6");
+    expect(separatorSource).toContain("width: 6");
+    expect(separatorSource).toContain('"row-resize"');
+    expect(separatorSource).toContain('"col-resize"');
   });
 });

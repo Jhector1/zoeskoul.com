@@ -1,8 +1,8 @@
 import type { EditorSplitPlacement } from "@zoeskoul/learner-workspace/runner/types";
 
 export const EDITOR_SPLIT_DEFAULT_RATIO = 0.5;
-export const EDITOR_SPLIT_MIN_RATIO = 0.15;
-export const EDITOR_SPLIT_MAX_RATIO = 0.85;
+export const EDITOR_SPLIT_MIN_RATIO = 0.04;
+export const EDITOR_SPLIT_MAX_RATIO = 0.96;
 export const EDITOR_SPLIT_KEYBOARD_STEP = 0.05;
 
 export function clampEditorSplitRatio(value: number): number {
