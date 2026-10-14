@@ -153,6 +153,31 @@ function inferredCatalogCandidates(subjectSlug: string | null): string[] {
     return Array.from(out);
 }
 
+const KNOWN_DRAFT_CATALOGS = [
+    "c",
+    "git",
+    "haitian-creole",
+    "linux",
+    "python",
+    "sql",
+    "web",
+] as const;
+
+function draftCatalogCandidates(subjectSlug: string): string[] {
+    const out = new Set<string>(inferredCatalogCandidates(subjectSlug));
+
+    /*
+     * Keep the inferred catalog first, then probe the finite canonical catalog
+     * set. This preserves legacy aliases without enumerating .curriculum-build,
+     * which would make Turbopack trace every generated curriculum artifact.
+     */
+    for (const catalog of KNOWN_DRAFT_CATALOGS) {
+        out.add(catalog);
+    }
+
+    return Array.from(out);
+}
+
 async function resolveSubjectRootCandidates(args: {
     localeRoot: string;
     subjectSlug: string | null;
@@ -238,12 +263,6 @@ async function resolveDraftTopicFile(args: {
             "../..",
         );
 
-    const draftsRoot =
-        path.join(
-            repoRoot,
-            ".curriculum-build",
-        );
-
     const fileName =
         `${parseTopicBase(
             args.topicSlug,
@@ -255,69 +274,41 @@ async function resolveDraftTopicFile(args: {
             args.topicSlug,
         );
 
-    for (
-        const catalog
-        of await childDirectoryNames(
-            draftsRoot,
-        )
-    ) {
+    /*
+     * Do not enumerate .curriculum-build or the per-catalog subjects folder.
+     * Those generated trees are large, and a root readdir causes Turbopack to
+     * trace every artifact. Probe only exact canonical owner paths instead.
+     */
+    for (const catalog of draftCatalogCandidates(subjectSlug)) {
         const subjectsRoot =
             path.join(
-                draftsRoot,
+                repoRoot,
+                ".curriculum-build",
                 catalog,
                 "messages",
                 args.locale,
                 "subjects",
             );
 
-        if (
-            !(await directoryExists(
-                subjectsRoot,
-            ))
-        ) {
-            continue;
-        }
+        const subjectNames = Array.from(
+            new Set([
+                subjectSlug,
+                `${catalog}--${subjectSlug}--draft`,
+            ]),
+        );
 
-        const subjectNames =
-            await childDirectoryNames(
-                subjectsRoot,
-            );
-
-        /*
-         * Requests can carry either:
-         *
-         *   haitian-creole--haitian-creole-everyday-grammar--draft
-         *
-         * or the course/live alias:
-         *
-         *   haitian-creole-everyday-grammar
-         *
-         * Match only the exact draft owner for that alias.
-         */
-        const matchingSubjectNames =
-            subjectNames.filter(
-                (candidate) =>
-                    candidate ===
-                        subjectSlug ||
-                    candidate.endsWith(
-                        `--${subjectSlug}--draft`,
-                    ),
-            );
-
-        for (
-            const candidate
-            of matchingSubjectNames
-        ) {
+        for (const candidate of subjectNames) {
             const subjectRoot =
                 path.join(
                     subjectsRoot,
                     candidate,
                 );
 
-            for (
-                const mod
-                of moduleDirs
-            ) {
+            if (!(await directoryExists(subjectRoot))) {
+                continue;
+            }
+
+            for (const mod of moduleDirs) {
                 const direct =
                     path.join(
                         subjectRoot,
@@ -337,10 +328,9 @@ async function resolveDraftTopicFile(args: {
             }
 
             /*
-             * Course module slugs are semantic rather than numeric,
-             * while draft emission uses module0/module1/... directories.
-             * Recursive search stays inside this one exact draft subject,
-             * so it cannot bleed across courses.
+             * Course module slugs can be semantic while draft emission uses
+             * module0/module1/... directories. Recursive search remains inside
+             * this one exact draft subject, so it cannot bleed across courses.
              */
             const found =
                 await findFirstFileRecursive(
