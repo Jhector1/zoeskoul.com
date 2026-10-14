@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { DatabaseSync } from "node:sqlite";
+import { createRequire } from "node:module";
 import type { RunSqlFn } from "./runner.js";
 
 type SqliteColumn = {
@@ -25,8 +25,21 @@ type SqliteDatabase = {
 
 type SqliteDatabaseConstructor = new (filename: string) => SqliteDatabase;
 
-function getInProcessSqlite(): SqliteDatabaseConstructor {
-    return DatabaseSync as unknown as SqliteDatabaseConstructor;
+const nodeRequire = createRequire(import.meta.url);
+
+function getInProcessSqlite(): SqliteDatabaseConstructor | null {
+    try {
+        const sqlite =
+            nodeRequire("node:sqlite") as {
+                DatabaseSync?: unknown;
+            };
+
+        return typeof sqlite.DatabaseSync === "function"
+            ? sqlite.DatabaseSync as SqliteDatabaseConstructor
+            : null;
+    } catch {
+        return null;
+    }
 }
 
 function normalizeCell(value: unknown): string | number | boolean | null {
