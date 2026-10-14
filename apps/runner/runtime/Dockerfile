@@ -11,7 +11,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LC_ALL=C.UTF-8 \
     TERM=xterm-256color \
     PYTHONUNBUFFERED=1 \
-    HOME=/tmp
+    HOME=/tmp \
+    NODE_PATH=/opt/zoeskoul-node-modules
 
 RUN set -eux; \
   apt_install_retry() { \
@@ -47,12 +48,20 @@ RUN set -eux; \
     libc6-dev \
     make \
     nodejs \
+    sqlite3 \
     openjdk-21-jdk-headless \
     python3 \
     r-base \
     tini; \
-  apt-get purge -y --auto-remove curl gpg; \
+  apt-get purge -y --auto-remove gpg; \
   rm -rf /var/lib/apt/lists/*
+RUN set -eux; \
+  npm install --global --omit=dev --no-audit --no-fund express@5.2.1; \
+  global_root="$(npm root --global)"; \
+  ln -s "${global_root}" /opt/zoeskoul-node-modules; \
+  NODE_PATH=/opt/zoeskoul-node-modules node -e 'const express = require("express"); if (typeof express !== "function") process.exit(1);'; \
+  node -e 'const { DatabaseSync } = require("node:sqlite"); const db = new DatabaseSync(":memory:"); db.exec("CREATE TABLE health(id INTEGER PRIMARY KEY, value TEXT); INSERT INTO health(value) VALUES (ok)"); const row = db.prepare("SELECT value FROM health WHERE id = 1").get(); if (!row || row.value !== "ok") process.exit(1); db.close();';   sqlite3 --version;   curl --version >/dev/null
+
 RUN mkdir -p /opt/runner /workspace /tmp \
  && if ! getent group 1000 >/dev/null; then groupadd --gid 1000 sandbox; fi \
  && if ! getent passwd 1000 >/dev/null; then \

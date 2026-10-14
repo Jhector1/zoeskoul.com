@@ -359,6 +359,7 @@ async function startDockerSessionUncoordinated(
         "HOME=/workspace",
         "TMPDIR=/tmp",
         "PATH=/usr/bin:/bin",
+        "NODE_PATH=/opt/zoeskoul-node-modules",
         "BASH_ENV=/dev/null",
         "ENV=/dev/null",
         "HISTFILE=/tmp/.bash_history",
