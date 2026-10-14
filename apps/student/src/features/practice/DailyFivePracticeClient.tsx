@@ -196,7 +196,7 @@ export default function DailyFivePracticeClient(props: {
 
   const handleStart = async (
     selection: PracticeChooserSelection,
-    targetCount: number,
+    _targetCount: number,
   ) => {
     if (props.mode === "subscriber") {
       await startSubscriberPractice(selection);
