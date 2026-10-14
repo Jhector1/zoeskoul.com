@@ -7,15 +7,15 @@
     "html-foundations"
   ],
   "publishTarget": {
-    "liveSubjectSlug": "html-foundations",
+    "liveSubjectSlug": "html",
     "courseSlug": "html-foundations",
-    "channel": "draft"
+    "channel": "current"
   },
   "versioning": {
     "family": "html",
     "version": 1,
-    "status": "draft",
-    "defaultForNewEnrollments": false,
+    "status": "active",
+    "defaultForNewEnrollments": true,
     "supersedes": null,
     "supersededBy": null
   },
@@ -25,7 +25,7 @@
       "title": "HTML Foundations",
       "order": 1,
       "path": "courses/html-foundations/course.spec.json",
-      "status": "draft"
+      "status": "active"
     }
   ]
 }

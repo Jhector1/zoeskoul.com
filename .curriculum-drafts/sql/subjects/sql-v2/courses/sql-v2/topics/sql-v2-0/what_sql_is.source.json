@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "origin": "generated",
+  "generatedAt": "2026-10-12T07:15:05.665Z",
+  "generator": {
+    "provider": "test",
+    "model": "test-model"
+  }
+}

@@ -7,15 +7,15 @@
     "javascript-foundations"
   ],
   "publishTarget": {
-    "liveSubjectSlug": "javascript-foundations",
+    "liveSubjectSlug": "javascript",
     "courseSlug": "javascript-foundations",
-    "channel": "draft"
+    "channel": "current"
   },
   "versioning": {
     "family": "javascript",
     "version": 1,
-    "status": "draft",
-    "defaultForNewEnrollments": false,
+    "status": "active",
+    "defaultForNewEnrollments": true,
     "supersedes": null,
     "supersededBy": null
   },
@@ -25,7 +25,7 @@
       "title": "JavaScript Foundations",
       "order": 1,
       "path": "courses/javascript-foundations/course.spec.json",
-      "status": "draft"
+      "status": "active"
     }
   ]
 }

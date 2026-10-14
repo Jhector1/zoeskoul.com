@@ -7,15 +7,15 @@
     "css-foundations"
   ],
   "publishTarget": {
-    "liveSubjectSlug": "css-foundations",
+    "liveSubjectSlug": "css",
     "courseSlug": "css-foundations",
-    "channel": "draft"
+    "channel": "current"
   },
   "versioning": {
     "family": "css",
     "version": 1,
-    "status": "draft",
-    "defaultForNewEnrollments": false,
+    "status": "active",
+    "defaultForNewEnrollments": true,
     "supersedes": null,
     "supersededBy": null
   },
@@ -25,7 +25,7 @@
       "title": "CSS Foundations",
       "order": 1,
       "path": "courses/css-foundations/course.spec.json",
-      "status": "draft"
+      "status": "active"
     }
   ]
 }
