@@ -1,0 +1,201 @@
+{
+  "title": "Parameterized SQL from Node.js",
+  "summary": "Use prepared statements and parameters so API input becomes safe database queries instead of string-built SQL.",
+  "minutes": 34,
+  "sketchBlocks": [
+    {
+      "id": "prepare-and-bind-select",
+      "cardTitle": "Keep values out of SQL text",
+      "title": "Prepared statements separate SQL structure from client-supplied values",
+      "bodyMarkdown": "When a request value becomes part of a query, keep the SQL text fixed and bind the value separately.\n\n```js\nconst findByCategory = db.prepare(`\n  SELECT id, title, category\n  FROM events\n  WHERE category = ?\n  ORDER BY id\n`);\n\nconst rows = findByCategory.all(category);\n```\n\n**Line by line:** `db.prepare(...)` creates a reusable statement. The `?` placeholder marks a value position without embedding the value into the SQL string. `.all(category)` binds the JavaScript value when the query runs and returns all matching rows. The row columns line up with the API's JSON resource fields.\n\nDo not build SQL such as `\"... WHERE category = '\" + category + \"'\"`. Keep client values separate from SQL structure.",
+      "tryItExercises": [
+        {
+          "id": "try-parameterized-category-query",
+          "kind": "code_input",
+          "title": "Query clubs by focus",
+          "prompt": "Prepare a query that selects `id`, `name`, and `focus` from `clubs` where `focus = ?`, ordered by id. Run it with the value `engineering`.",
+          "hint": "Use one placeholder in fixed SQL and bind the value when executing the statement.",
+          "help": {
+            "concept": "Parameterized SQL keeps client values separate from query structure.",
+            "hint_1": "Prepare the statement once with a placeholder.",
+            "hint_2": "Use the statement's row-returning method with the focus value."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const { DatabaseSync } = require(\"node:sqlite\");\n\nconst db = new DatabaseSync(\"data/clubs.db\");\n\n// Prepare one query that reads clubs by focus.\n// Bind the focus value instead of concatenating it into SQL.\n",
+          "solutionCode": "const { DatabaseSync } = require(\"node:sqlite\");\n\nconst db = new DatabaseSync(\"data/clubs.db\");\n\nconst findByFocus = db.prepare(`\n  SELECT id, name, focus\n  FROM clubs\n  WHERE focus = ?\n  ORDER BY id\n`);\n\nconst rows = findByFocus.all(\"engineering\");\nconsole.log(rows);\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "db\\.prepare\\(",
+              "message": "Prepare the SQL statement.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "FROM\\s+clubs[\\s\\S]*WHERE\\s+focus\\s*=\\s*\\?",
+              "message": "Use a placeholder for the focus value.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "\\.all\\(\\s*[\"\\']engineering[\"\\']\\s*\\)",
+              "message": "Bind the focus value when executing.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "parameterized-write-and-readback",
+      "cardTitle": "Write values safely and read the stored row",
+      "title": "INSERT parameters create durable rows without string-building SQL",
+      "bodyMarkdown": "INSERT statements should bind values the same way SELECT statements do.\n\n```js\nconst insertEvent = db.prepare(`\n  INSERT INTO events (title, category)\n  VALUES (?, ?)\n`);\n\nconst result = insertEvent.run(title, category);\nconst created = findById.get(Number(result.lastInsertRowid));\n```\n\n**Step by step:** the SQL declares the columns and two placeholders. `.run(title, category)` binds the values and performs the insert. SQLite reports the generated row id. A parameterized lookup then reads the stored row back so the API can return the database representation rather than a guessed object.\n\nThe same placeholder rule applies to UPDATE and DELETE values as the persistence layer grows.",
+      "tryItExercises": [
+        {
+          "id": "try-parameterized-club-insert",
+          "kind": "code_input",
+          "title": "Insert and read back a club",
+          "prompt": "Prepare an INSERT into `clubs(name, focus)` using placeholders. Run it with `Design Circle` and `design`, then use the generated id in a parameterized SELECT to read the created club.",
+          "hint": "Bind both INSERT values and the generated id through statement parameters.",
+          "help": {
+            "concept": "Parameterized writes keep request values out of SQL text and let the application read back the actual stored row.",
+            "hint_1": "The INSERT needs one placeholder per inserted column.",
+            "hint_2": "Use the generated row id as the bound value in a second prepared statement."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const { DatabaseSync } = require(\"node:sqlite\");\n\nconst db = new DatabaseSync(\"data/clubs.db\");\n\n// Prepare an INSERT for name/focus.\n// Run it with values, then read the inserted row by its generated id.\n",
+          "solutionCode": "const { DatabaseSync } = require(\"node:sqlite\");\n\nconst db = new DatabaseSync(\"data/clubs.db\");\n\nconst insertClub = db.prepare(`\n  INSERT INTO clubs (name, focus)\n  VALUES (?, ?)\n`);\n\nconst result = insertClub.run(\"Design Circle\", \"design\");\n\nconst findClubById = db.prepare(`\n  SELECT id, name, focus\n  FROM clubs\n  WHERE id = ?\n`);\n\nconst createdClub = findClubById.get(Number(result.lastInsertRowid));\nconsole.log(createdClub);\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "INSERT\\s+INTO\\s+clubs\\s*\\(\\s*name\\s*,\\s*focus\\s*\\)[\\s\\S]*VALUES\\s*\\(\\s*\\?\\s*,\\s*\\?\\s*\\)",
+              "message": "Insert club values through placeholders.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "\\.run\\(\\s*[\"\\']Design Circle[\"\\']\\s*,\\s*[\"\\']design[\"\\']\\s*\\)",
+              "message": "Bind both INSERT values.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "WHERE\\s+id\\s*=\\s*\\?",
+              "message": "Use a parameterized id lookup.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "lastInsertRowid",
+              "message": "Read the generated row id.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "parameterized-sql-purpose",
+      "kind": "single_choice",
+      "title": "Separate SQL from values",
+      "prompt": "Which query style follows this module's rule for request-supplied values?",
+      "hint": "Choose the query where the SQL structure remains fixed.",
+      "help": {
+        "concept": "Parameterized SQL binds data values separately from the SQL command text.",
+        "hint_1": "Look for a placeholder inside the SQL.",
+        "hint_2": "The JavaScript value should be supplied when the statement executes."
+      },
+      "options": [
+        "`db.prepare(\"SELECT * FROM events WHERE category = ?\").all(category)`",
+        "`db.exec(\"SELECT * FROM events WHERE category = '\" + category + \"'\")`",
+        "`db.prepare(category).all(\"SELECT * FROM events\")`",
+        "`fetch(\"/database/\" + category)`"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "prepared-statement-benefits",
+      "kind": "multi_choice",
+      "title": "Recognize prepared-statement responsibilities",
+      "prompt": "Which two statements match the prepared-statement approach taught here?",
+      "hint": "Choose the options about fixed SQL and bound data.",
+      "help": {
+        "concept": "Prepared statements keep query structure stable while values are supplied separately.",
+        "hint_1": "One correct choice concerns placeholders.",
+        "hint_2": "Another concerns the execution call."
+      },
+      "options": [
+        "Use placeholders for values inside fixed SQL.",
+        "Bind JavaScript values when running the statement.",
+        "Concatenate request strings directly into SQL.",
+        "Require a public database service for every query."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "sql-placeholder",
+      "kind": "fill_blank_choice",
+      "title": "Complete the parameterized query",
+      "prompt": "Choose the placeholder used for a bound value in these beginner SQLite statements.",
+      "hint": "Choose the marker that leaves the SQL structure fixed while execution supplies the value.",
+      "help": {
+        "concept": "The query text should not contain the actual request value.",
+        "hint_1": "The execution method receives the JavaScript value separately.",
+        "hint_2": "Use the dedicated value marker from the examples."
+      },
+      "template": "The query `WHERE id = [blank1]` leaves the id value to be supplied when the statement executes.",
+      "choices": [
+        "?",
+        "${id}",
+        "' + id + '",
+        "request-id"
+      ],
+      "correctValue": "?"
+    },
+    {
+      "id": "insert-readback-flow",
+      "kind": "drag_reorder",
+      "title": "Order a persistent create operation",
+      "prompt": "Arrange the database work used to create and return a stored resource.",
+      "hint": "The row must be inserted before its generated id is available.",
+      "help": {
+        "concept": "A persistent create moves from prepared write to generated identity to readback.",
+        "hint_1": "Start with the fixed SQL statement.",
+        "hint_2": "Finish by returning what the database actually stored."
+      },
+      "tokens": [
+        "Prepare the INSERT",
+        "Bind values and run it",
+        "Read the generated id",
+        "Query the stored row"
+      ],
+      "correctOrder": [
+        "Prepare the INSERT",
+        "Bind values and run it",
+        "Read the generated id",
+        "Query the stored row"
+      ]
+    }
+  ]
+}

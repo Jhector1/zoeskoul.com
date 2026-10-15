@@ -1,0 +1,208 @@
+{
+  "title": "POST JSON and Create Resources",
+  "summary": "Read parsed JSON from request bodies, validate required fields, create resources, and return the created representation.",
+  "minutes": 32,
+  "sketchBlocks": [
+    {
+      "id": "json-body-parsing",
+      "cardTitle": "Prepare JSON request bodies",
+      "title": "Write routes depend on JSON parsing before they read req.body",
+      "bodyMarkdown": "A write route receives new data in the HTTP request body. Express must parse that JSON before a handler can use `req.body`.\n\n```js\nconst app = express();\napp.use(express.json());\n\napp.post(\"/api/events\", (req, res) => {\n  const incoming = req.body;\n  return res.status(200).json({ received: incoming });\n});\n```\n\n**Line by line:** `express.json()` is middleware, so it is registered before the POST route. When JSON arrives, Express stores the parsed JavaScript value on `req.body`. The route can then inspect that value.\n\nParsing and validation are separate responsibilities. Parsing turns the request body into JavaScript data. Validation decides whether that data is acceptable.",
+      "tryItExercises": [
+        {
+          "id": "try-post-body-preview",
+          "kind": "code_input",
+          "title": "Read a notice request body",
+          "prompt": "Register JSON parsing and implement `POST /api/notices/preview`. Return status `200` with `{ preview: req.body }`.",
+          "hint": "Make body parsing available before the route, then use the parsed request value.",
+          "help": {
+            "concept": "JSON middleware prepares structured request data for later write-route logic.",
+            "hint_1": "Register the built-in parser on the application before the POST route.",
+            "hint_2": "The route should return the parsed request value without creating a resource yet."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\n// Register JSON parsing before this route.\n\napp.post(\"/api/notices/preview\", (req, res) => {\n  // Return the parsed body as { preview: ... }.\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\napp.use(express.json());\n\napp.post(\"/api/notices/preview\", (req, res) => {\n  return res.status(200).json({ preview: req.body });\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.use\\(\\s*express\\.json\\(\\s*\\)\\s*\\)",
+              "message": "Register JSON request parsing.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.post\\(\\s*[\"\\']/api/notices/preview[\"\\']",
+              "message": "Register the POST preview route.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "json\\(\\s*\\{\\s*preview\\s*:\\s*req\\.body\\s*\\}\\s*\\)",
+              "message": "Return the parsed request body.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "create-after-validation",
+      "cardTitle": "Create only valid resources",
+      "title": "Validate before mutation, then return the created resource",
+      "bodyMarkdown": "A create route should protect the collection before changing it.\n\n```js\napp.post(\"/api/events\", (req, res) => {\n  const { title, category } = req.body;\n\n  if (!title || !category) {\n    return res.status(400).json({ error: \"title and category are required\" });\n  }\n\n  const event = {\n    id: events.length + 1,\n    title,\n    category,\n  };\n\n  events.push(event);\n  return res.status(201).json(event);\n});\n```\n\n**Step by step:** read the expected fields, reject missing input before mutation, construct one new resource, store it exactly once, then return the created representation. Invalid input must leave the collection unchanged.",
+      "tryItExercises": [
+        {
+          "id": "try-create-club",
+          "kind": "code_input",
+          "title": "Create a club resource",
+          "prompt": "Implement `POST /api/clubs`. Require `name` and `focus`; return `400` JSON if either is missing. Otherwise create the next id, push the club, and return it with status `201`.",
+          "hint": "Check required fields before calling `clubs.push(...)`.",
+          "help": {
+            "concept": "A safe create route validates required input before it mutates shared state.",
+            "hint_1": "Read the two allowed fields from the parsed request body.",
+            "hint_2": "Only after validation should the route build and store a new object."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\napp.use(express.json());\n\nconst clubs = [\n  { id: 1, name: \"Robotics Club\", focus: \"engineering\" },\n];\n\n// Add POST /api/clubs.\n// Require name and focus before mutating clubs.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\napp.use(express.json());\n\nconst clubs = [\n  { id: 1, name: \"Robotics Club\", focus: \"engineering\" },\n];\n\napp.post(\"/api/clubs\", (req, res) => {\n  const { name, focus } = req.body;\n\n  if (!name || !focus) {\n    return res.status(400).json({ error: \"name and focus are required\" });\n  }\n\n  const club = {\n    id: clubs.length + 1,\n    name,\n    focus,\n  };\n\n  clubs.push(club);\n  return res.status(201).json(club);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.post\\(\\s*[\"\\']/api/clubs[\"\\']",
+              "message": "Register POST /api/clubs.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "const\\s*\\{\\s*name\\s*,\\s*focus\\s*\\}\\s*=\\s*req\\.body",
+              "message": "Read required body fields.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*400\\s*\\)\\.json\\(",
+              "message": "Reject missing required fields.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "clubs\\.push\\(\\s*club\\s*\\)",
+              "message": "Store the created club.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*201\\s*\\)\\.json\\(\\s*club\\s*\\)",
+              "message": "Return the created club.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "post-body-source",
+      "kind": "single_choice",
+      "title": "Find parsed request data",
+      "prompt": "Where does Express expose a parsed JSON request body after `express.json()` runs?",
+      "hint": "Choose the request property prepared by the JSON middleware.",
+      "help": {
+        "concept": "JSON middleware prepares one request property for structured body data.",
+        "hint_1": "The application object registers middleware but does not hold the current request body.",
+        "hint_2": "The response object sends data outward rather than storing incoming data."
+      },
+      "options": [
+        "`req.body`",
+        "`res.body`",
+        "`app.body`",
+        "`req.params`"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "create-route-safety",
+      "kind": "multi_choice",
+      "title": "Protect resource creation",
+      "prompt": "Which two actions belong at the safe create boundary?",
+      "hint": "Choose the actions that protect state and communicate creation deliberately.",
+      "help": {
+        "concept": "Create routes should reject unacceptable input before state changes and respond deliberately after creation.",
+        "hint_1": "One correct choice protects the collection before it changes.",
+        "hint_2": "Another communicates the new resource after it has been stored."
+      },
+      "options": [
+        "Validate required fields before pushing.",
+        "Return the created representation with the creation status.",
+        "Delete the collection before reading the body.",
+        "Treat missing fields as a server crash."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "post-created-status",
+      "kind": "fill_blank_choice",
+      "title": "Complete the create response",
+      "prompt": "Choose the status used when a new resource has been successfully created.",
+      "hint": "Choose the success option that specifically communicates creation.",
+      "help": {
+        "concept": "HTTP has a dedicated success outcome for creating a new representation.",
+        "hint_1": "The answer is not a client-error outcome.",
+        "hint_2": "Prefer the option more specific than a normal read success."
+      },
+      "template": "A successful create route returns HTTP status [blank1] with the created representation.",
+      "choices": [
+        "200",
+        "201",
+        "400",
+        "404"
+      ],
+      "correctValue": "201"
+    },
+    {
+      "id": "post-create-flow",
+      "kind": "drag_reorder",
+      "title": "Order a safe create route",
+      "prompt": "Arrange the create flow from parsed input to response.",
+      "hint": "The collection should not change until the input has been checked.",
+      "help": {
+        "concept": "A safe create route reads, validates, mutates, then responds.",
+        "hint_1": "Start with the parsed incoming data.",
+        "hint_2": "The response comes after valid data has been stored."
+      },
+      "tokens": [
+        "Read req.body",
+        "Validate required fields",
+        "Create and store the resource",
+        "Return the created representation"
+      ],
+      "correctOrder": [
+        "Read req.body",
+        "Validate required fields",
+        "Create and store the resource",
+        "Return the created representation"
+      ]
+    }
+  ]
+}

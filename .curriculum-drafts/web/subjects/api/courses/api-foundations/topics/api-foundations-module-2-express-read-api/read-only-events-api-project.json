@@ -1,0 +1,341 @@
+{
+  "title": "Build a Read-Only Events API",
+  "summary": "Create an Express service that lists events, finds one event by id, and filters the collection with a query parameter.",
+  "minutes": 50,
+  "sketchBlocks": [
+    {
+      "id": "read-events-project-brief",
+      "cardTitle": "Project brief",
+      "title": "Serve campus event data through a small read API",
+      "bodyMarkdown": "A campus website needs a local service that exposes event data without making frontend code depend on how that data is stored.\n\nYou are the junior backend developer responsible for the **read side** of the service. The final API must support:\n\n- `GET /api/events`\n- `GET /api/events/:id`\n- optional `?category=...` filtering\n- `404` JSON for a missing event\n\nThe data stays in memory in this module. There is no database and no public network dependency. Each milestone must preserve the previous working behavior."
+    },
+    {
+      "id": "read-events-project-flow",
+      "cardTitle": "Build cumulatively",
+      "title": "Each milestone extends one complete server",
+      "bodyMarkdown": "The eight project milestones are cumulative. Do not treat them as unrelated snippets.\n\n**Step by step:** first create the Express app. Next add deterministic event data. Then expose the collection, add resource lookup, handle `404`, read the query filter, apply the filter without mutation, and finally exercise the complete API through localhost requests.\n\nLater `starterCode` begins from the prior milestone's full solution. This keeps the project focused on extending a working service rather than repeatedly rebuilding it."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "read-events-api-create-app",
+      "kind": "code_input",
+      "title": "Milestone 1: Create the Express application",
+      "prompt": "Create the Express `app` and start the local server on `127.0.0.1:3000`.",
+      "hint": "Begin with one application object and one local listener; routes come in later milestones.",
+      "help": {
+        "concept": "The project begins with the same deterministic local Express startup contract used in the lessons.",
+        "hint_1": "Load Express before creating the application.",
+        "hint_2": "Use the provided host and port rather than a public network address."
+      },
+      "fixedLanguage": "javascript",
+      "recipeType": "source_checks",
+      "entryFilePath": "server.js",
+      "starterCode": "const express = require(\"express\");\n\n// Create the Express app and local listener.\n",
+      "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "const\\s+app\\s*=\\s*express\\(\\s*\\)",
+          "message": "Create the Express application.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "app\\.listen\\(\\s*3000\\s*,\\s*[\"\\']127\\.0\\.0\\.1[\"\\']",
+          "message": "Start the local listener.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "read-events-api-store-events",
+      "kind": "code_input",
+      "title": "Milestone 2: Store the event collection",
+      "prompt": "Keep the working server and add an in-memory `events` array with at least three consistently shaped objects containing `id`, `title`, and `category`.",
+      "hint": "Keep data deterministic and local; every event should use the same three core fields.",
+      "help": {
+        "concept": "A small in-memory collection keeps this module focused on HTTP routing rather than persistence.",
+        "hint_1": "Place the resource collection outside the route handlers.",
+        "hint_2": "Use numeric ids and consistent property names so later lookups and filters are predictable."
+      },
+      "fixedLanguage": "javascript",
+      "recipeType": "source_checks",
+      "entryFilePath": "server.js",
+      "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "const\\s+events\\s*=\\s*\\[",
+          "message": "Create the event collection.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "id\\s*:\\s*1[\\s\\S]*title\\s*:",
+          "message": "Include event ids and titles.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "category\\s*:",
+          "message": "Include event categories.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "read-events-api-list-route",
+      "kind": "code_input",
+      "title": "Milestone 3: List all events",
+      "prompt": "Keep the server and event collection. Add `GET /api/events` and return the full collection with status `200` as JSON.",
+      "hint": "This is the collection route; return the existing array without rebuilding or mutating it.",
+      "help": {
+        "concept": "The first project endpoint exposes the whole in-memory collection through a focused GET route.",
+        "hint_1": "Register the collection path on the Express app.",
+        "hint_2": "Use the same explicit status-and-JSON response pattern practiced earlier."
+      },
+      "fixedLanguage": "javascript",
+      "recipeType": "source_checks",
+      "entryFilePath": "server.js",
+      "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  return res.status(200).json(events);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "app\\.get\\(\\s*[\"\\']/api/events[\"\\']",
+          "message": "Register GET /api/events.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*events\\s*\\)",
+          "message": "Return the event collection as status-200 JSON.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "read-events-api-resource-route",
+      "kind": "code_input",
+      "title": "Milestone 4: Find one event by id",
+      "prompt": "Keep the collection route. Add `GET /api/events/:id`, convert the route id to a number, find the event, and return the found event with status `200`.",
+      "hint": "The incoming route parameter is text, while the event ids are numeric.",
+      "help": {
+        "concept": "The resource route turns a path parameter into a deterministic lookup against the same collection.",
+        "hint_1": "Read the named id from `req.params`.",
+        "hint_2": "Use a non-mutating lookup that returns one matching object."
+      },
+      "fixedLanguage": "javascript",
+      "recipeType": "source_checks",
+      "entryFilePath": "server.js",
+      "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  return res.status(200).json(events);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  return res.status(200).json(events);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  return res.status(200).json(event);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "app\\.get\\(\\s*[\"\\']/api/events/:id[\"\\']",
+          "message": "Register the event resource route.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "Number\\(\\s*req\\.params\\.id\\s*\\)",
+          "message": "Convert the incoming route id.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "events\\.find\\(",
+          "message": "Find one event by id.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "read-events-api-missing-404",
+      "kind": "code_input",
+      "title": "Milestone 5: Handle a missing event",
+      "prompt": "Keep both GET routes. Extend the id route so a missing event returns status `404` with JSON `{ error: \"Event not found\" }`; found events must still return `200`.",
+      "hint": "Branch immediately after the lookup and stop the handler from continuing into the success response.",
+      "help": {
+        "concept": "A resource route must distinguish a successful lookup from a valid request for a resource that does not exist.",
+        "hint_1": "Test whether the lookup result is absent.",
+        "hint_2": "Return directly from the not-found branch before the success response."
+      },
+      "fixedLanguage": "javascript",
+      "recipeType": "source_checks",
+      "entryFilePath": "server.js",
+      "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  return res.status(200).json(events);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  return res.status(200).json(event);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  return res.status(200).json(events);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "if\\s*\\(\\s*!event\\s*\\)",
+          "message": "Branch when no event was found.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "res\\.status\\(\\s*404\\s*\\)\\.json\\(\\s*\\{\\s*error\\s*:\\s*[\"\\']Event not found[\"\\']\\s*\\}",
+          "message": "Return the project 404 JSON error.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*event\\s*\\)",
+          "message": "Preserve the success response.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "read-events-api-read-filter",
+      "kind": "code_input",
+      "title": "Milestone 6: Read a category filter",
+      "prompt": "Keep the resource route and 404 behavior. Extend `GET /api/events` to read optional `req.query.category` into a local `category` value before choosing the result.",
+      "hint": "This milestone reads the optional filter; the next milestone applies it to a new result array.",
+      "help": {
+        "concept": "A query parameter can optionally refine the collection route without changing the route path.",
+        "hint_1": "Read the query value from the request object inside the collection handler.",
+        "hint_2": "Do not move the filter into the resource-by-id route."
+      },
+      "fixedLanguage": "javascript",
+      "recipeType": "source_checks",
+      "entryFilePath": "server.js",
+      "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  return res.status(200).json(events);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  const category = req.query.category;\n  const result = category ? events : events;\n  return res.status(200).json(result);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "const\\s+category\\s*=\\s*req\\.query\\.category",
+          "message": "Read the category query parameter.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "app\\.get\\(\\s*[\"\\']/api/events[\"\\']",
+          "message": "Keep the collection route.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "read-events-api-filter-results",
+      "kind": "code_input",
+      "title": "Milestone 7: Filter without changing source data",
+      "prompt": "Keep every previous route and branch. When `category` is present, return only matching events; otherwise return the full collection. Do not mutate the original `events` array.",
+      "hint": "Choose between a newly filtered array and the original collection.",
+      "help": {
+        "concept": "Filtering should produce the response representation without mutating the deterministic source collection.",
+        "hint_1": "Use the array method that creates a new array from matching items.",
+        "hint_2": "The no-filter branch should still return every event."
+      },
+      "fixedLanguage": "javascript",
+      "recipeType": "source_checks",
+      "entryFilePath": "server.js",
+      "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  const category = req.query.category;\n  const result = category ? events : events;\n  return res.status(200).json(result);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  const category = req.query.category;\n  const result = category\n    ? events.filter((event) => event.category === category)\n    : events;\n\n  return res.status(200).json(result);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "events\\.filter\\(\\s*\\(\\s*event\\s*\\)\\s*=>\\s*event\\.category\\s*===\\s*category\\s*\\)",
+          "message": "Filter events by category.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "category[\\s\\S]*\\?[\\s\\S]*events\\.filter[\\s\\S]*:[\\s\\S]*events",
+          "message": "Choose filtered or full collection.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*result\\s*\\)",
+          "message": "Return the selected collection result.",
+          "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "read-events-api-verify",
+      "kind": "code_input",
+      "title": "Milestone 8: Verify the read API",
+      "prompt": "Keep the complete API. In the local listen callback, request the collection, an existing event, a missing event, and the `arts` filter through `http://127.0.0.1:3000`; log each response status, then close the server.",
+      "hint": "Verification stays on localhost and should exercise all four read behaviors already built.",
+      "help": {
+        "concept": "A final local verification pass checks collection, resource, not-found, and filtering behavior without public-network dependencies.",
+        "hint_1": "Use the local base URL after the listener is ready.",
+        "hint_2": "The verification cases should include both success and not-found behavior before closing the server."
+      },
+      "fixedLanguage": "javascript",
+      "recipeType": "source_checks",
+      "entryFilePath": "server.js",
+      "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  const category = req.query.category;\n  const result = category\n    ? events.filter((event) => event.category === category)\n    : events;\n\n  return res.status(200).json(result);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+      "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  const category = req.query.category;\n  const result = category\n    ? events.filter((event) => event.category === category)\n    : events;\n\n  return res.status(200).json(result);\n});\n\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n\nconst server = app.listen(3000, \"127.0.0.1\", async () => {\n  const baseUrl = \"http://127.0.0.1:3000\";\n\n  const listResponse = await fetch(`${baseUrl}/api/events`);\n  const oneResponse = await fetch(`${baseUrl}/api/events/1`);\n  const missingResponse = await fetch(`${baseUrl}/api/events/999`);\n  const filterResponse = await fetch(`${baseUrl}/api/events?category=arts`);\n\n  console.log(\"list\", listResponse.status);\n  console.log(\"one\", oneResponse.status);\n  console.log(\"missing\", missingResponse.status);\n  console.log(\"filter\", filterResponse.status);\n\n  server.close();\n});\n",
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "const\\s+server\\s*=\\s*app\\.listen\\(",
+          "message": "Keep a server handle for final verification.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "fetch\\(\\s*`\\$\\{baseUrl\\}/api/events`\\s*\\)",
+          "message": "Verify the collection route locally.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "fetch\\(\\s*`\\$\\{baseUrl\\}/api/events/1`\\s*\\)",
+          "message": "Verify an existing resource locally.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "fetch\\(\\s*`\\$\\{baseUrl\\}/api/events/999`\\s*\\)",
+          "message": "Verify the missing-resource case locally.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "fetch\\(\\s*`\\$\\{baseUrl\\}/api/events\\?category=arts`\\s*\\)",
+          "message": "Verify the category filter locally.",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "path": "server.js",
+          "pattern": "server\\.close\\(\\s*\\)",
+          "message": "Close the local server after verification.",
+          "normalizeWhitespace": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "title": "Repository Layer and Persistent CRUD",
+  "summary": "Move database access behind focused repository functions so Express routes stay about HTTP.",
+  "minutes": 36,
+  "sketchBlocks": [
+    {
+      "id": "repository-functions-own-sql",
+      "cardTitle": "Give SQL one focused home",
+      "title": "Repository functions hide storage details from HTTP routes",
+      "bodyMarkdown": "As persistence grows, route handlers become easier to read when SQL lives in focused data-access functions.\n\n```js\nfunction listEvents(category) {\n  if (category) {\n    return db\n      .prepare(\"SELECT id, title, category FROM events WHERE category = ?\")\n      .all(category);\n  }\n\n  return db\n    .prepare(\"SELECT id, title, category FROM events ORDER BY id\")\n    .all();\n}\n```\n\n**Line by line:** the repository function accepts an application value rather than an Express request object. When a category exists, it runs a parameterized filtered query. Otherwise it returns the full collection. The function returns rows; it does not choose HTTP status codes or send responses.\n\nThis boundary keeps SQL/database responsibility separate from HTTP responsibility.",
+      "tryItExercises": [
+        {
+          "id": "try-list-clubs-repository",
+          "kind": "code_input",
+          "title": "Create a club repository read",
+          "prompt": "Create `listClubs(focus)`. With a focus value, return a parameterized filtered club list; without one, return every club ordered by id.",
+          "hint": "The repository function should accept plain values, not `req` or `res`.",
+          "help": {
+            "concept": "Repository functions own database access while remaining independent of Express request/response objects.",
+            "hint_1": "Use a parameterized query for the optional filter.",
+            "hint_2": "Return database rows directly to the caller."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const { DatabaseSync } = require(\"node:sqlite\");\n\nconst db = new DatabaseSync(\"data/clubs.db\");\n\n// Create a repository function named listClubs(focus).\n// It should query all clubs when focus is absent and use a parameter when present.\n",
+          "solutionCode": "const { DatabaseSync } = require(\"node:sqlite\");\n\nconst db = new DatabaseSync(\"data/clubs.db\");\n\nfunction listClubs(focus) {\n  if (focus) {\n    return db\n      .prepare(`\n        SELECT id, name, focus\n        FROM clubs\n        WHERE focus = ?\n        ORDER BY id\n      `)\n      .all(focus);\n  }\n\n  return db\n    .prepare(`\n      SELECT id, name, focus\n      FROM clubs\n      ORDER BY id\n    `)\n    .all();\n}\n\nconsole.log(listClubs(\"engineering\"));\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "function\\s+listClubs\\(\\s*focus\\s*\\)",
+              "message": "Define the repository function.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "WHERE\\s+focus\\s*=\\s*\\?",
+              "message": "Parameterize the optional filter.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "\\.all\\(\\s*focus\\s*\\)",
+              "message": "Bind the filter value.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "FROM\\s+clubs[\\s\\S]*ORDER\\s+BY\\s+id",
+              "message": "Return a deterministic club list.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "routes-call-repository",
+      "cardTitle": "Keep routes about HTTP",
+      "title": "Express routes can preserve status/error behavior while storage changes underneath",
+      "bodyMarkdown": "Once repository functions exist, an Express route can focus on request parsing and response behavior.\n\n```js\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = findEventById(id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n```\n\n**Step by step:** the route reads and normalizes the HTTP parameter, calls the repository with a plain id, checks whether a row was returned, preserves the existing `404` contract, and returns the same success JSON shape. The SQL is no longer mixed into route logic.\n\nChanging the storage layer should not force the frontend-facing HTTP contract to change.",
+      "tryItExercises": [
+        {
+          "id": "try-room-route-repository",
+          "kind": "code_input",
+          "title": "Use a repository from a route",
+          "prompt": "Keep the provided `findRoomById(id)` repository. Implement `GET /api/rooms/:id` using it. Preserve status `404` JSON `{ error: \"Room not found\" }` and status `200` JSON for a found room.",
+          "hint": "The route should know the id and HTTP outcomes; the repository should know the SQL.",
+          "help": {
+            "concept": "A route can preserve its HTTP contract while database access moves behind a repository function.",
+            "hint_1": "Normalize the route id before calling the repository.",
+            "hint_2": "Branch on a missing row before sending the success response."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\nconst { DatabaseSync } = require(\"node:sqlite\");\n\nconst app = express();\nconst db = new DatabaseSync(\"data/rooms.db\");\n\nfunction findRoomById(id) {\n  return db\n    .prepare(\"SELECT id, name, capacity FROM rooms WHERE id = ?\")\n    .get(id);\n}\n\n// Add GET /api/rooms/:id that uses findRoomById.\n// Preserve 404 JSON for a missing event.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\nconst { DatabaseSync } = require(\"node:sqlite\");\n\nconst app = express();\nconst db = new DatabaseSync(\"data/rooms.db\");\n\nfunction findRoomById(id) {\n  return db\n    .prepare(\"SELECT id, name, capacity FROM rooms WHERE id = ?\")\n    .get(id);\n}\n\napp.get(\"/api/rooms/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const room = findRoomById(id);\n\n  if (!room) {\n    return res.status(404).json({ error: \"Room not found\" });\n  }\n\n  return res.status(200).json(room);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "findRoomById\\(\\s*id\\s*\\)",
+              "message": "Call the repository with the normalized id.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*404\\s*\\)\\.json\\(\\s*\\{\\s*error\\s*:\\s*[\"\\']Room not found[\"\\']\\s*\\}",
+              "message": "Preserve the 404 contract.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*room\\s*\\)",
+              "message": "Return the found room.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "repository-boundary",
+      "kind": "single_choice",
+      "title": "Choose the repository responsibility",
+      "prompt": "Which task belongs most directly inside an event repository function?",
+      "hint": "Choose storage work rather than HTTP response work.",
+      "help": {
+        "concept": "A repository owns database access and returns application data to its caller.",
+        "hint_1": "Status codes belong to the route layer.",
+        "hint_2": "SQL statements belong behind the repository boundary."
+      },
+      "options": [
+        "Run a parameterized query and return event rows.",
+        "Read `req.params` and send `res.status(404)`.",
+        "Render a frontend component.",
+        "Open a public network connection."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "route-repository-separation",
+      "kind": "multi_choice",
+      "title": "Separate HTTP and database responsibilities",
+      "prompt": "Which two responsibilities should remain in the Express route after a repository layer is introduced?",
+      "hint": "Choose request/response concerns rather than SQL mechanics.",
+      "help": {
+        "concept": "Routes translate HTTP input/output while repositories handle persistent data access.",
+        "hint_1": "One correct choice concerns interpreting the request.",
+        "hint_2": "Another concerns choosing the HTTP outcome."
+      },
+      "options": [
+        "Normalize route/query/body input.",
+        "Choose success and error HTTP responses.",
+        "Construct SQL strings for every CRUD operation.",
+        "Manage table creation inside each request handler."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "repository-http-stability",
+      "kind": "fill_blank_choice",
+      "title": "Complete the storage-layer rule",
+      "prompt": "Choose what should remain stable for clients while the API moves from arrays to SQLite.",
+      "hint": "Choose the client-facing behavior rather than an internal implementation detail.",
+      "help": {
+        "concept": "Routes should keep the same methods, paths, statuses, and JSON shapes.",
+        "hint_1": "The persistence change belongs behind the service boundary.",
+        "hint_2": "Think about what frontend code already depends on."
+      },
+      "template": "Replacing in-memory storage with SQLite should preserve the existing [blank1].",
+      "choices": [
+        "HTTP contract",
+        "database filename only",
+        "process id",
+        "terminal history"
+      ],
+      "correctValue": "HTTP contract"
+    },
+    {
+      "id": "repository-route-flow",
+      "kind": "drag_reorder",
+      "title": "Order a repository-backed route",
+      "prompt": "Arrange the request flow from HTTP input to response.",
+      "hint": "The route needs application data before it can decide the response.",
+      "help": {
+        "concept": "Repository-backed routes translate HTTP input into a data operation and translate the result back into HTTP.",
+        "hint_1": "Begin with incoming request data.",
+        "hint_2": "Finish with the client-facing response."
+      },
+      "tokens": [
+        "Read and normalize request input",
+        "Call the repository",
+        "Interpret the returned row/result",
+        "Send the HTTP response"
+      ],
+      "correctOrder": [
+        "Read and normalize request input",
+        "Call the repository",
+        "Interpret the returned row/result",
+        "Send the HTTP response"
+      ]
+    }
+  ]
+}

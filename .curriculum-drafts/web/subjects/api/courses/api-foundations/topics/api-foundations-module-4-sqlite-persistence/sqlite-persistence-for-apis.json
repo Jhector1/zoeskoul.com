@@ -1,0 +1,201 @@
+{
+  "title": "SQLite Persistence for APIs",
+  "summary": "Replace temporary in-memory data with a local SQLite database that survives server restarts.",
+  "minutes": 32,
+  "sketchBlocks": [
+    {
+      "id": "open-local-sqlite-database",
+      "cardTitle": "Move state out of memory",
+      "title": "A file-backed SQLite database survives when the Node.js process stops",
+      "bodyMarkdown": "An in-memory array belongs to one running server process. When that process stops, the array disappears. A file-backed database moves durable state into the learner workspace.\n\n```js\nconst { mkdirSync } = require(\"node:fs\");\nconst { DatabaseSync } = require(\"node:sqlite\");\n\nmkdirSync(\"data\", { recursive: true });\nconst db = new DatabaseSync(\"data/events.db\");\n```\n\n**Line by line:** `mkdirSync` ensures the authored `data/` directory exists. `DatabaseSync` comes from Node.js's local SQLite support. `new DatabaseSync(\"data/events.db\")` opens the database file, creating it when necessary. Because the data is stored in `data/events.db` rather than only in a JavaScript variable, later server processes can open the same file.\n\nThis course keeps the database local. No public database service or external network is required.",
+      "tryItExercises": [
+        {
+          "id": "try-open-clubs-database",
+          "kind": "code_input",
+          "title": "Open a local clubs database",
+          "prompt": "Create the `data/` directory and open `data/clubs.db` with Node.js `DatabaseSync`. Log a short message after the database opens.",
+          "hint": "Keep the database file inside the learner workspace rather than using an in-memory database.",
+          "help": {
+            "concept": "A file-backed SQLite database gives a local API durable state across process restarts.",
+            "hint_1": "Create the parent directory before opening the file.",
+            "hint_2": "Use Node.js's provided SQLite module and a workspace-relative path."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const { mkdirSync } = require(\"node:fs\");\nconst { DatabaseSync } = require(\"node:sqlite\");\n\n// Create data/ and open data/clubs.db.\n",
+          "solutionCode": "const { mkdirSync } = require(\"node:fs\");\nconst { DatabaseSync } = require(\"node:sqlite\");\n\nmkdirSync(\"data\", { recursive: true });\nconst db = new DatabaseSync(\"data/clubs.db\");\n\nconsole.log(\"Opened data/clubs.db\");\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "require\\(\\s*[\"\\']node:sqlite[\"\\']\\s*\\)",
+              "message": "Load Node.js SQLite support.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "mkdirSync\\(\\s*[\"\\']data[\"\\']\\s*,\\s*\\{\\s*recursive\\s*:\\s*true\\s*\\}",
+              "message": "Ensure the data directory exists.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "new\\s+DatabaseSync\\(\\s*[\"\\']data/clubs\\.db[\"\\']\\s*\\)",
+              "message": "Open the file-backed clubs database.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "create-events-table",
+      "cardTitle": "Define durable resource shape",
+      "title": "The events table gives stored resources stable columns and constraints",
+      "bodyMarkdown": "The database needs a table whose columns match the API resource contract.\n\n```js\ndb.exec(`\n  CREATE TABLE IF NOT EXISTS events (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    category TEXT NOT NULL\n  )\n`);\n```\n\n**Step by step:** `CREATE TABLE IF NOT EXISTS` makes initialization safe to run again on restart. `id INTEGER PRIMARY KEY` gives every event a stable identity. The `title` and `category` columns use `TEXT NOT NULL`, so stored rows must include those values. The route contract still speaks JSON; this table only changes where the data lives.\n\nInitialization should be deterministic and repeatable. Restarting the server must not destroy an existing table.",
+      "tryItExercises": [
+        {
+          "id": "try-create-clubs-table",
+          "kind": "code_input",
+          "title": "Create a clubs table",
+          "prompt": "Using the open `db`, create a `clubs` table if it does not exist. Give it `id INTEGER PRIMARY KEY`, `name TEXT NOT NULL`, and `focus TEXT NOT NULL`.",
+          "hint": "Use repeatable initialization so running the server again does not fail because the table already exists.",
+          "help": {
+            "concept": "A stable table schema turns API resource fields into durable relational columns.",
+            "hint_1": "Define the id as the table's primary key.",
+            "hint_2": "Make the two required text fields non-null."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const { mkdirSync } = require(\"node:fs\");\nconst { DatabaseSync } = require(\"node:sqlite\");\n\nmkdirSync(\"data\", { recursive: true });\nconst db = new DatabaseSync(\"data/clubs.db\");\n\n// Create the clubs table if it does not exist.\n",
+          "solutionCode": "const { mkdirSync } = require(\"node:fs\");\nconst { DatabaseSync } = require(\"node:sqlite\");\n\nmkdirSync(\"data\", { recursive: true });\nconst db = new DatabaseSync(\"data/clubs.db\");\n\ndb.exec(`\n  CREATE TABLE IF NOT EXISTS clubs (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    focus TEXT NOT NULL\n  )\n`);\n\nconsole.log(\"Clubs table ready\");\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "CREATE\\s+TABLE\\s+IF\\s+NOT\\s+EXISTS\\s+clubs",
+              "message": "Create the clubs table repeatably.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "id\\s+INTEGER\\s+PRIMARY\\s+KEY",
+              "message": "Define the primary-key id.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "name\\s+TEXT\\s+NOT\\s+NULL",
+              "message": "Require the club name.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "focus\\s+TEXT\\s+NOT\\s+NULL",
+              "message": "Require the club focus.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "sqlite-persistence-reason",
+      "kind": "single_choice",
+      "title": "Choose durable state",
+      "prompt": "Why does this module replace the in-memory events array with a file-backed SQLite database?",
+      "hint": "Focus on what happens after the Node.js process stops and starts again.",
+      "help": {
+        "concept": "Persistence means application data is stored outside one temporary process lifetime.",
+        "hint_1": "A JavaScript array belongs to the current process.",
+        "hint_2": "A workspace database file can be reopened by a later process."
+      },
+      "options": [
+        "So event data can survive server restarts.",
+        "So every request must use the public internet.",
+        "So Express is no longer needed.",
+        "So JSON responses become HTML."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "sqlite-init-properties",
+      "kind": "multi_choice",
+      "title": "Recognize safe database initialization",
+      "prompt": "Which two choices make beginner SQLite initialization repeatable and local?",
+      "hint": "Choose one filesystem behavior and one SQL behavior.",
+      "help": {
+        "concept": "Reliable local initialization prepares both the directory and schema without destroying existing data.",
+        "hint_1": "One correct choice concerns ensuring the database directory exists.",
+        "hint_2": "Another avoids failing when the table is already present."
+      },
+      "options": [
+        "Create the data directory when needed.",
+        "Use `CREATE TABLE IF NOT EXISTS`.",
+        "Delete the database on every startup.",
+        "Download a remote database before each request."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "sqlite-file-location",
+      "kind": "fill_blank_choice",
+      "title": "Complete the storage boundary",
+      "prompt": "Choose the workspace location used by this module for the persistent events database.",
+      "hint": "Choose the workspace-relative file path rather than a temporary or external location.",
+      "help": {
+        "concept": "The database belongs inside the learner's authored workspace.",
+        "hint_1": "It should remain available to a later local server process.",
+        "hint_2": "Do not choose an in-memory or network location."
+      },
+      "template": "The API opens its durable database at [blank1].",
+      "choices": [
+        "data/events.db",
+        ":memory:",
+        "remote/events.db",
+        "/system/events.db"
+      ],
+      "correctValue": "data/events.db"
+    },
+    {
+      "id": "sqlite-initialization-order",
+      "kind": "drag_reorder",
+      "title": "Order database initialization",
+      "prompt": "Arrange the startup work from filesystem preparation to a usable table.",
+      "hint": "The parent directory must exist before a file inside it can be opened.",
+      "help": {
+        "concept": "Database startup moves from filesystem preparation to connection to schema readiness.",
+        "hint_1": "Begin with the workspace directory.",
+        "hint_2": "The table must exist before CRUD code depends on it."
+      },
+      "tokens": [
+        "Ensure the data directory",
+        "Open the database file",
+        "Create the table if needed",
+        "Use the table from application code"
+      ],
+      "correctOrder": [
+        "Ensure the data directory",
+        "Open the database file",
+        "Create the table if needed",
+        "Use the table from application code"
+      ]
+    }
+  ]
+}

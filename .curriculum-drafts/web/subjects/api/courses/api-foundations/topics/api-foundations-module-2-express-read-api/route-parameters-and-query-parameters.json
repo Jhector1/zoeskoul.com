@@ -1,0 +1,201 @@
+{
+  "title": "Route Parameters and Query Parameters",
+  "summary": "Read path parameters for resource identity and query parameters for optional filtering.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "route-parameter-identity",
+      "cardTitle": "Read identity from the path",
+      "title": "Route parameters let one handler serve many resource ids",
+      "bodyMarkdown": "A route parameter marks a variable part of the URL path.\n\n```js\napp.get(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  return res.status(200).json(event);\n});\n```\n\n**Line by line:** `:id` names the route parameter. Express exposes the path value as `req.params.id`, which arrives as text, so `Number(...)` converts it before comparison with numeric ids. `.find(...)` selects one resource. If no resource exists, the handler returns a `404` JSON error and stops. Otherwise it returns the event with `200`.\n\nThis gives one handler a clear identity rule instead of hard-coding a separate route for every id.",
+      "tryItExercises": [
+        {
+          "id": "try-route-param-club",
+          "kind": "code_input",
+          "title": "Look up a club by route id",
+          "prompt": "Implement `GET /api/clubs/:id`. Convert the route id to a number, find the matching club, return `404` JSON when absent, otherwise return the club with `200`.",
+          "hint": "The path value begins as text, while the provided object ids are numbers.",
+          "help": {
+            "concept": "A route parameter supplies resource identity; the handler converts, looks up, and handles the missing-resource branch.",
+            "hint_1": "Read the value from the route-parameter object on the request.",
+            "hint_2": "Return from the 404 branch so the success response does not also run."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst clubs = [\n  { id: 1, name: \"Robotics Club\" },\n  { id: 2, name: \"Film Society\" },\n];\n\n// Add GET /api/clubs/:id.\n// Convert req.params.id to a number, find the club, and return 404 JSON if missing.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst clubs = [\n  { id: 1, name: \"Robotics Club\" },\n  { id: 2, name: \"Film Society\" },\n];\n\napp.get(\"/api/clubs/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const club = clubs.find((item) => item.id === id);\n\n  if (!club) {\n    return res.status(404).json({ error: \"Club not found\" });\n  }\n\n  return res.status(200).json(club);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.get\\(\\s*[\"\\']/api/clubs/:id[\"\\']",
+              "message": "Register the club id route.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "Number\\(\\s*req\\.params\\.id\\s*\\)",
+              "message": "Convert the route id to a number.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "clubs\\.find\\(",
+              "message": "Find a club from the collection.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*404\\s*\\)\\.json\\(",
+              "message": "Return a 404 JSON response for a missing club.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "query-parameter-filtering",
+      "cardTitle": "Read optional filters from the query string",
+      "title": "Query parameters refine a collection without changing its identity",
+      "bodyMarkdown": "A **query parameter** is optional information after the `?` in a URL. The path still identifies the collection; the query narrows the representation.\n\nFor a request such as `/api/events?category=arts`, Express exposes the value through `req.query.category`:\n\n```js\napp.get(\"/api/events\", (req, res) => {\n  const category = req.query.category;\n  const result = category\n    ? events.filter((event) => event.category === category)\n    : events;\n\n  return res.status(200).json(result);\n});\n```\n\n**Step by step:** read the optional query value, choose either a filtered result or the original collection, then send that result. `.filter(...)` creates a new array, so the source `events` array is not mutated.\n\nUse route parameters for required resource identity and query parameters for optional collection controls such as filters.",
+      "tryItExercises": [
+        {
+          "id": "try-query-param-category",
+          "kind": "code_input",
+          "title": "Filter events by category",
+          "prompt": "Implement `GET /api/events`. Read optional `req.query.category`; when it exists, return only matching events. Without the query value, return the full collection.",
+          "hint": "Choose a result array; do not remove items from the original `events` collection.",
+          "help": {
+            "concept": "Query parameters provide optional collection filters while the collection route remains the same.",
+            "hint_1": "Read the value from `req.query` before deciding which array to return.",
+            "hint_2": "Use a non-mutating array operation for the filtered branch."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\n// Add GET /api/events.\n// If req.query.category is present, return only matching events.\n// Otherwise return the full collection.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst events = [\n  { id: 1, title: \"Open Mic\", category: \"arts\" },\n  { id: 2, title: \"Career Fair\", category: \"career\" },\n  { id: 3, title: \"Gallery Walk\", category: \"arts\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  const category = req.query.category;\n  const result = category\n    ? events.filter((event) => event.category === category)\n    : events;\n\n  return res.status(200).json(result);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "req\\.query\\.category",
+              "message": "Read the category query parameter.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "events\\.filter\\(",
+              "message": "Filter the event collection without mutation.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*result\\s*\\)",
+              "message": "Return the selected result as JSON.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "route-vs-query-param",
+      "kind": "single_choice",
+      "title": "Choose the identity parameter",
+      "prompt": "Which request value should identify the required event id in `GET /api/events/:id`?",
+      "hint": "The id is part of the matched path rather than an optional collection filter.",
+      "help": {
+        "concept": "Route parameters represent variable path segments used for resource identity.",
+        "hint_1": "Look for the request property associated with named path segments.",
+        "hint_2": "Query values belong after `?` and are better suited to optional controls."
+      },
+      "options": [
+        "`req.params.id`",
+        "`req.query.id`",
+        "`res.params.id`",
+        "`app.params.id`"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "parameter-jobs",
+      "kind": "multi_choice",
+      "title": "Match parameters to their jobs",
+      "prompt": "Which two statements describe the parameter conventions taught here?",
+      "hint": "One parameter form is required by the resource path; the other optionally refines a collection.",
+      "help": {
+        "concept": "Route and query parameters carry different kinds of request information.",
+        "hint_1": "Resource identity belongs in the path pattern.",
+        "hint_2": "Optional filtering can leave the collection path unchanged."
+      },
+      "options": [
+        "A route parameter can identify one required resource id.",
+        "A query parameter can optionally filter a collection.",
+        "A query parameter must always be present for every GET route.",
+        "A route parameter is used only to choose the server port."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "missing-resource-status",
+      "kind": "fill_blank_choice",
+      "title": "Complete the missing-resource contract",
+      "prompt": "Choose the status code that represents a requested resource that does not exist.",
+      "hint": "Use the client-facing status for a resource path that was valid but had no matching resource.",
+      "help": {
+        "concept": "A missing resource in a valid lookup route is represented with the not-found HTTP status.",
+        "hint_1": "It is not a success status.",
+        "hint_2": "It also does not mean the server crashed."
+      },
+      "template": "When `GET /api/events/:id` cannot find the requested event, the route returns status [blank1].",
+      "choices": [
+        "200",
+        "201",
+        "404",
+        "500"
+      ],
+      "correctValue": "404"
+    },
+    {
+      "id": "route-param-lookup-flow",
+      "kind": "drag_reorder",
+      "title": "Order a resource lookup",
+      "prompt": "Arrange the lookup flow for `GET /api/events/:id`.",
+      "hint": "The collection cannot be searched correctly until the incoming id has the expected type.",
+      "help": {
+        "concept": "Resource lookup follows parameter extraction, normalization, lookup, then response branching.",
+        "hint_1": "Start with the incoming path value.",
+        "hint_2": "The response decision comes after lookup succeeds or fails."
+      },
+      "tokens": [
+        "Read the route id",
+        "Convert it to the data's id type",
+        "Find the matching event",
+        "Return 404 or the event"
+      ],
+      "correctOrder": [
+        "Read the route id",
+        "Convert it to the data's id type",
+        "Find the matching event",
+        "Return 404 or the event"
+      ]
+    }
+  ]
+}

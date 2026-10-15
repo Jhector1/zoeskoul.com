@@ -1,0 +1,180 @@
+{
+  "title": "GET Routes and JSON Responses",
+  "summary": "Create read-only routes that return predictable JSON resources and collections.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "collection-json-route",
+      "cardTitle": "Return a collection",
+      "title": "A GET collection route returns a predictable JSON array",
+      "bodyMarkdown": "A read API often starts with a **collection route**. The route represents a set of resources and responds with JSON.\n\n```js\nconst events = [\n  { id: 1, title: \"Open Mic\" },\n  { id: 2, title: \"Career Fair\" },\n];\n\napp.get(\"/api/events\", (req, res) => {\n  res.status(200).json(events);\n});\n```\n\n**Line by line:** the array is deterministic in-memory data for this course. `app.get(\"/api/events\", ...)` registers the collection endpoint. `res.status(200)` makes the successful status explicit. `.json(events)` serializes the JavaScript array and sends it with a JSON response.\n\nKeep the route focused: it should select the data to return and construct the response, not perform unrelated work.",
+      "tryItExercises": [
+        {
+          "id": "try-json-collection-route",
+          "kind": "code_input",
+          "title": "Return a club collection",
+          "prompt": "Add `GET /api/clubs` and return the provided `clubs` array with status `200` as JSON.",
+          "hint": "The route should use the existing collection rather than rebuilding it inside the handler.",
+          "help": {
+            "concept": "A collection GET route sends a deterministic array as a successful JSON response.",
+            "hint_1": "Register the route with the read-method helper on the Express app.",
+            "hint_2": "Chain an explicit success status with the JSON response method."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst clubs = [\n  { id: 1, name: \"Robotics Club\" },\n  { id: 2, name: \"Film Society\" },\n];\n\n// Add GET /api/clubs that returns the collection as JSON.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst clubs = [\n  { id: 1, name: \"Robotics Club\" },\n  { id: 2, name: \"Film Society\" },\n];\n\napp.get(\"/api/clubs\", (req, res) => {\n  res.status(200).json(clubs);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.get\\(\\s*[\"\\']/api/clubs[\"\\']",
+              "message": "Register GET /api/clubs.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*clubs\\s*\\)",
+              "message": "Return clubs as status-200 JSON.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "resource-json-route",
+      "cardTitle": "Return one resource",
+      "title": "A specific path can return one JSON object",
+      "bodyMarkdown": "A read API also needs routes that return one resource. Before route parameters are introduced, a fixed path is enough to see the response shape clearly.\n\n```js\nconst venue = {\n  id: 7,\n  name: \"Library Hall\",\n};\n\napp.get(\"/api/venues/7\", (req, res) => {\n  res.status(200).json(venue);\n});\n```\n\n**Step by step:** the path identifies one resource location, the handler selects one object, and the response sends exactly that object as JSON. The status and body together form the HTTP contract.\n\nThe next topic will replace a fixed id in the path with a route parameter so one handler can work for many resource ids.",
+      "tryItExercises": [
+        {
+          "id": "try-json-single-resource",
+          "kind": "code_input",
+          "title": "Return a venue resource",
+          "prompt": "Add `GET /api/venues/3` and return the provided `venue` object with status `200` as JSON.",
+          "hint": "This exercise uses one fixed resource path; route parameters come next.",
+          "help": {
+            "concept": "A resource GET route can return one structured object with a predictable success status.",
+            "hint_1": "Keep the provided object outside the handler.",
+            "hint_2": "Use the same explicit status-and-JSON response pattern as the collection route."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst venue = {\n  id: 3,\n  name: \"Student Center\",\n  capacity: 240,\n};\n\n// Add GET /api/venues/3 that returns the venue as JSON.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst venue = {\n  id: 3,\n  name: \"Student Center\",\n  capacity: 240,\n};\n\napp.get(\"/api/venues/3\", (req, res) => {\n  res.status(200).json(venue);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.get\\(\\s*[\"\\']/api/venues/3[\"\\']",
+              "message": "Register the venue resource route.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*venue\\s*\\)",
+              "message": "Return the venue as status-200 JSON.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "json-response-method",
+      "kind": "single_choice",
+      "title": "Choose the structured response",
+      "prompt": "Which response style directly sends a JavaScript collection as JSON with an explicit success status?",
+      "hint": "Look for the response API that handles structured JavaScript data.",
+      "help": {
+        "concept": "Express can serialize JavaScript values with `res.json` while status remains explicit.",
+        "hint_1": "The body in this question is an array, not plain display text.",
+        "hint_2": "The successful status is part of the response contract too."
+      },
+      "options": [
+        "`res.status(200).json(events)`",
+        "`req.status(200).send(events)`",
+        "`app.json(events).status(200)`",
+        "`express(events).listen(200)`"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "read-route-contract",
+      "kind": "multi_choice",
+      "title": "Recognize a predictable GET response",
+      "prompt": "Which two choices strengthen a predictable beginner GET route?",
+      "hint": "Focus on response status and body shape.",
+      "help": {
+        "concept": "A GET route contract is clearer when both status and JSON shape are deliberate.",
+        "hint_1": "One correct choice concerns the HTTP status.",
+        "hint_2": "Another concerns returning the intended resource data consistently."
+      },
+      "options": [
+        "Return a deliberate HTTP status.",
+        "Return a consistent JSON resource or collection shape.",
+        "Install a new package inside every route handler.",
+        "Change the collection into unrelated data on each request."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "collection-response-kind",
+      "kind": "fill_blank_choice",
+      "title": "Name the collection shape",
+      "prompt": "Complete the statement about a collection endpoint.",
+      "hint": "Focus on whether the endpoint represents one resource or several resources returned together.",
+      "help": {
+        "concept": "Collection endpoints return several resources together in one structured JSON response.",
+        "hint_1": "The missing term names the body shape used when multiple resources are grouped in one response.",
+        "hint_2": "Contrast this collection response with the single-object resource response from the next sketch."
+      },
+      "template": "A route such as `/api/events` commonly returns a JSON [blank1] containing multiple event resources.",
+      "choices": [
+        "array",
+        "header",
+        "method",
+        "port"
+      ],
+      "correctValue": "array"
+    },
+    {
+      "id": "json-route-flow",
+      "kind": "drag_reorder",
+      "title": "Trace a read-route response",
+      "prompt": "Put these actions in the order a focused GET handler follows.",
+      "hint": "The route must first be selected before its handler can build the response.",
+      "help": {
+        "concept": "A route moves from request matching to data selection to response construction.",
+        "hint_1": "Start with the incoming request identity.",
+        "hint_2": "Finish with the body being sent to the client."
+      },
+      "tokens": [
+        "Match the GET method and path",
+        "Select the intended resource data",
+        "Choose the response status",
+        "Send the JSON body"
+      ],
+      "correctOrder": [
+        "Match the GET method and path",
+        "Select the intended resource data",
+        "Choose the response status",
+        "Send the JSON body"
+      ]
+    }
+  ]
+}

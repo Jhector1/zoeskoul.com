@@ -1,0 +1,215 @@
+{
+  "title": "Server Errors and Consistent API Responses",
+  "summary": "Distinguish expected client errors from unexpected server failures and return safe, consistent JSON.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "expected-vs-unexpected-errors",
+      "cardTitle": "Separate expected outcomes from failures",
+      "title": "Expected client errors differ from unexpected exceptions",
+      "bodyMarkdown": "Validation errors and missing resources are expected branches in the API contract. An unexpected exception is different.\n\n```js\napp.get(\"/api/report\", (req, res) => {\n  try {\n    const report = buildReport();\n    return res.status(200).json(report);\n  } catch (error) {\n    console.error(\"report failed\", error);\n    return res.status(500).json({\n      error: \"Internal server error\",\n    });\n  }\n});\n```\n\n**Step by step:** the route enters the `try` block and runs the normal report-building work. If that work succeeds, the handler returns the JSON result with status `200`. If an unexpected exception is thrown, control moves to `catch`. The server logs the internal error for diagnostics, then returns only a stable `500` JSON message to the client. Stack traces, file paths, and other implementation details stay out of the public response.",
+      "tryItExercises": [
+        {
+          "id": "try-safe-server-error",
+          "kind": "code_input",
+          "title": "Protect a report route",
+          "prompt": "Implement `GET /api/summary` with `try/catch`. Call `buildSummary()`, return it with status `200`, and on an exception log a short server-side message then return status `500` JSON `{ error: \"Internal server error\" }`.",
+          "hint": "Keep internal exception details out of the JSON response.",
+          "help": {
+            "concept": "Unexpected failures should produce a safe client response while diagnostics stay server-side.",
+            "hint_1": "Put the normal response path inside the try block.",
+            "hint_2": "The catch may log details but should send only the stable public message."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nfunction buildSummary() {\n  return { events: 3, categories: 2 };\n}\n\n// Add GET /api/summary with safe error handling.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nfunction buildSummary() {\n  return { events: 3, categories: 2 };\n}\n\napp.get(\"/api/summary\", (req, res) => {\n  try {\n    const summary = buildSummary();\n    return res.status(200).json(summary);\n  } catch (error) {\n    console.error(\"summary failed\", error);\n    return res.status(500).json({ error: \"Internal server error\" });\n  }\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "try\\s*\\{",
+              "message": "Use a protected normal path.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "buildSummary\\(\\s*\\)",
+              "message": "Call the summary builder.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "catch\\s*\\(\\s*error\\s*\\)",
+              "message": "Catch unexpected failures.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "console\\.error\\(",
+              "message": "Log diagnostics server-side.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*500\\s*\\)\\.json\\(",
+              "message": "Return the safe server-error response.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "consistent-error-helper",
+      "cardTitle": "Keep client error shapes predictable",
+      "title": "A focused helper can reuse one error JSON shape",
+      "bodyMarkdown": "When routes use the same error shape, clients need less special-case code.\n\n```js\nfunction sendError(res, status, message) {\n  return res.status(status).json({ error: message });\n}\n\nif (!event) {\n  return sendError(res, 404, \"Event not found\");\n}\n```\n\n**Line by line:** `sendError` receives the current response object, the status selected by the route, and a public message. `res.status(status)` applies the route's chosen HTTP outcome, and `.json({ error: message })` sends the shared error shape. The route still performs the lookup and decides *which* error occurred; the helper only removes repeated response-formatting code.",
+      "tryItExercises": [
+        {
+          "id": "try-consistent-error-helper",
+          "kind": "code_input",
+          "title": "Reuse one error response shape",
+          "prompt": "Create `sendError(res, status, message)` returning `{ error: message }`. Use it in `GET /api/rooms/:id` so a missing room returns `404` with `Room not found`; a found room returns status `200` JSON.",
+          "hint": "Keep lookup logic in the route and response formatting in the helper.",
+          "help": {
+            "concept": "A focused response helper removes repeated formatting without hiding domain decisions.",
+            "hint_1": "The helper accepts the response object, status, and public message.",
+            "hint_2": "The route still performs the lookup and chooses when to use the helper."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst rooms = [\n  { id: 1, name: \"Lab A\" },\n];\n\n// Add sendError(...).\n// Add GET /api/rooms/:id using the helper for a missing room.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst rooms = [\n  { id: 1, name: \"Lab A\" },\n];\n\nfunction sendError(res, status, message) {\n  return res.status(status).json({ error: message });\n}\n\napp.get(\"/api/rooms/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const room = rooms.find((item) => item.id === id);\n\n  if (!room) {\n    return sendError(res, 404, \"Room not found\");\n  }\n\n  return res.status(200).json(room);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "function\\s+sendError\\(\\s*res\\s*,\\s*status\\s*,\\s*message\\s*\\)",
+              "message": "Define the error helper.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*status\\s*\\)\\.json\\(\\s*\\{\\s*error\\s*:\\s*message\\s*\\}\\s*\\)",
+              "message": "Format errors consistently.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "sendError\\(\\s*res\\s*,\\s*404\\s*,\\s*[\"\\']Room not found[\"\\']\\s*\\)",
+              "message": "Use the helper for a missing room.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*room\\s*\\)",
+              "message": "Preserve success.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "server-error-boundary",
+      "kind": "single_choice",
+      "title": "Choose the unexpected-failure response",
+      "prompt": "Which client response is appropriate when an unexpected exception escapes normal route logic?",
+      "hint": "Choose the safe public outcome rather than exposing implementation details.",
+      "help": {
+        "concept": "Unexpected failures need a stable public response and private diagnostics.",
+        "hint_1": "Do not expose stack traces to clients.",
+        "hint_2": "The server may log details internally while returning a generic body."
+      },
+      "options": [
+        "A safe server-error status with a generic JSON message.",
+        "A success status with the stack trace.",
+        "A validation status for every exception.",
+        "A redirect to a debugging website."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "expected-vs-unexpected",
+      "kind": "multi_choice",
+      "title": "Distinguish error categories",
+      "prompt": "Which two outcomes are expected client-facing branches rather than unexpected server failures?",
+      "hint": "Choose cases the route can deliberately recognize and explain.",
+      "help": {
+        "concept": "Expected API errors are part of the contract and should not be treated like crashes.",
+        "hint_1": "One correct choice concerns invalid submitted data.",
+        "hint_2": "Another concerns a lookup with no match."
+      },
+      "options": [
+        "Validation rejects malformed input.",
+        "A requested resource id does not exist.",
+        "A helper throws an unanticipated exception.",
+        "The process encounters an unknown defect."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "server-failure-status",
+      "kind": "fill_blank_choice",
+      "title": "Complete the unexpected failure response",
+      "prompt": "Choose the status used for an unexpected server-side failure in this module.",
+      "hint": "Choose the option representing an internal failure rather than a correctable client problem.",
+      "help": {
+        "concept": "This outcome is separate from validation and missing-resource branches.",
+        "hint_1": "The public response should remain generic and safe.",
+        "hint_2": "Select the unexpected server-side outcome."
+      },
+      "template": "When an unanticipated exception reaches the route's failure boundary, the API returns HTTP status [blank1].",
+      "choices": [
+        "400",
+        "404",
+        "500",
+        "204"
+      ],
+      "correctValue": "500"
+    },
+    {
+      "id": "safe-error-flow",
+      "kind": "drag_reorder",
+      "title": "Order unexpected error handling",
+      "prompt": "Arrange the route behavior for an unexpected exception.",
+      "hint": "Internal details may be logged after the failure is caught, but should not be sent to the client.",
+      "help": {
+        "concept": "Unexpected failures move from protected work to private diagnostics and a safe public response.",
+        "hint_1": "Start with normal route work.",
+        "hint_2": "Finish with the stable client-facing error."
+      },
+      "tokens": [
+        "Attempt the normal route work",
+        "Catch the unexpected exception",
+        "Log internal diagnostics",
+        "Return a safe generic JSON error"
+      ],
+      "correctOrder": [
+        "Attempt the normal route work",
+        "Catch the unexpected exception",
+        "Log internal diagnostics",
+        "Return a safe generic JSON error"
+      ]
+    }
+  ]
+}

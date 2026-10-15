@@ -1,0 +1,215 @@
+{
+  "title": "Validation and Client Errors",
+  "summary": "Separate validation from mutation, return 400 for invalid request data, and use a predictable JSON error shape.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "focused-validation-function",
+      "cardTitle": "Make validation a separate decision",
+      "title": "A validator reports input problems without mutating data",
+      "bodyMarkdown": "Validation is easier to reason about when it is a pure decision step.\n\n```js\nfunction validateEvent(input) {\n  const fields = [];\n\n  if (!input.title || typeof input.title !== \"string\") {\n    fields.push(\"title\");\n  }\n\n  if (!input.category || typeof input.category !== \"string\") {\n    fields.push(\"category\");\n  }\n\n  return fields;\n}\n```\n\n**Step by step:** The example keeps validation in one focused function instead of scattering checks across route handlers. The function receives plain input data, checks each required field against the API contract, and collects the names of fields that are missing or invalid. It returns that result to the route without sending an HTTP response itself. The route can then decide whether to continue with the mutation or return a predictable client error.\n\nThe helper does not mutate the collection or send a response. It only reports problems. The route decides whether to reject the request or continue to mutation.",
+      "tryItExercises": [
+        {
+          "id": "try-validate-workshop",
+          "kind": "code_input",
+          "title": "Validate workshop input",
+          "prompt": "Create `validateWorkshop(input)` that returns invalid field names. `title` must be a non-empty string and `seats` a positive number.",
+          "hint": "Return field names describing invalid input; do not mutate data or send a response.",
+          "help": {
+            "concept": "A focused validator reports input problems and leaves HTTP/mutation decisions to the route.",
+            "hint_1": "Check each required field independently.",
+            "hint_2": "Return the collected problem names after all checks."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "// Write a pure validation helper.\n// title: non-empty string\n// seats: positive number\n\nfunction validateWorkshop(input) {\n  // Return invalid field names.\n}\n",
+          "solutionCode": "function validateWorkshop(input) {\n  const fields = [];\n\n  if (!input.title || typeof input.title !== \"string\") {\n    fields.push(\"title\");\n  }\n\n  if (typeof input.seats !== \"number\" || input.seats <= 0) {\n    fields.push(\"seats\");\n  }\n\n  return fields;\n}\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "function\\s+validateWorkshop\\(\\s*input\\s*\\)",
+              "message": "Define the validator.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "fields\\.push\\(\\s*[\"\\']title[\"\\']\\s*\\)",
+              "message": "Report invalid title.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "fields\\.push\\(\\s*[\"\\']seats[\"\\']\\s*\\)",
+              "message": "Report invalid seats.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "return\\s+fields",
+              "message": "Return validation problems.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "predictable-400-shape",
+      "cardTitle": "Return one client-error shape",
+      "title": "Invalid input should produce a predictable JSON contract",
+      "bodyMarkdown": "A route can turn validation results into one stable client-error response.\n\n```js\nconst fields = validateEvent(req.body);\n\nif (fields.length > 0) {\n  return res.status(400).json({\n    error: \"Validation failed\",\n    fields,\n  });\n}\n```\n\n**Step by step:** validate first, inspect the returned problems, and stop when any exist. A consistent `{ error, fields }` shape makes client behavior predictable. This is different from a missing resource and from an unexpected server failure.",
+      "tryItExercises": [
+        {
+          "id": "try-400-validation-shape",
+          "kind": "code_input",
+          "title": "Reject invalid workshop input",
+          "prompt": "Implement `POST /api/workshops` using the provided validator. Invalid input returns status `400` with `{ error: \"Validation failed\", fields }`; valid input returns status `200` with `{ accepted: true }`.",
+          "hint": "Call the validator before either response branch.",
+          "help": {
+            "concept": "A route converts validation results into one predictable client-error contract.",
+            "hint_1": "Check the returned problem count.",
+            "hint_2": "Return directly from the invalid branch."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\napp.use(express.json());\n\nfunction validateWorkshop(input) {\n  const fields = [];\n  if (!input.title || typeof input.title !== \"string\") fields.push(\"title\");\n  if (typeof input.seats !== \"number\" || input.seats <= 0) fields.push(\"seats\");\n  return fields;\n}\n\n// Add POST /api/workshops.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\napp.use(express.json());\n\nfunction validateWorkshop(input) {\n  const fields = [];\n  if (!input.title || typeof input.title !== \"string\") fields.push(\"title\");\n  if (typeof input.seats !== \"number\" || input.seats <= 0) fields.push(\"seats\");\n  return fields;\n}\n\napp.post(\"/api/workshops\", (req, res) => {\n  const fields = validateWorkshop(req.body);\n\n  if (fields.length > 0) {\n    return res.status(400).json({\n      error: \"Validation failed\",\n      fields,\n    });\n  }\n\n  return res.status(200).json({ accepted: true });\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "validateWorkshop\\(\\s*req\\.body\\s*\\)",
+              "message": "Validate the parsed body.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "fields\\.length\\s*>\\s*0",
+              "message": "Branch on invalid input.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*400\\s*\\)\\.json\\(",
+              "message": "Return the client-error status.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "error\\s*:\\s*[\"\\']Validation failed[\"\\']",
+              "message": "Use the predictable error message.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "fields\\s*[,}]",
+              "message": "Include the field list.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "validation-before-mutation",
+      "kind": "single_choice",
+      "title": "Choose the safe validation boundary",
+      "prompt": "When should a create route mutate its collection?",
+      "hint": "The route should first know that the candidate input is acceptable.",
+      "help": {
+        "concept": "Validation protects application state by running before mutation.",
+        "hint_1": "Think about what happens if invalid data is stored first.",
+        "hint_2": "Only accepted input should change state."
+      },
+      "options": [
+        "After required input passes validation.",
+        "Before reading the request body.",
+        "Immediately when the route starts.",
+        "Only after returning an error response."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "client-error-contract",
+      "kind": "multi_choice",
+      "title": "Recognize a useful validation response",
+      "prompt": "Which two properties make a validation error easier for clients to handle?",
+      "hint": "Choose predictable information the client can use to correct its request.",
+      "help": {
+        "concept": "Client-facing validation errors should be stable and actionable.",
+        "hint_1": "One correct choice gives a stable top-level message.",
+        "hint_2": "Another identifies which inputs need attention."
+      },
+      "options": [
+        "A stable error message/key.",
+        "A list of invalid fields.",
+        "A raw internal stack trace.",
+        "A random body shape."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "validation-client-status",
+      "kind": "fill_blank_choice",
+      "title": "Complete the validation response",
+      "prompt": "Choose the status for malformed client input in this module.",
+      "hint": "Choose the client-error option used when submitted data needs correction.",
+      "help": {
+        "concept": "Validation failure is separate from missing-resource and unexpected-failure outcomes.",
+        "hint_1": "The client can change its submitted data and try again.",
+        "hint_2": "Select the invalid-request outcome."
+      },
+      "template": "When required request data fails validation, the route returns HTTP status [blank1].",
+      "choices": [
+        "201",
+        "400",
+        "404",
+        "500"
+      ],
+      "correctValue": "400"
+    },
+    {
+      "id": "validation-route-flow",
+      "kind": "drag_reorder",
+      "title": "Order validation before mutation",
+      "prompt": "Arrange the route flow that protects shared state.",
+      "hint": "The mutation must come after the invalid branch has been ruled out.",
+      "help": {
+        "concept": "Validation is a gate between parsed input and state mutation.",
+        "hint_1": "Start with structured request data.",
+        "hint_2": "Only accepted input reaches mutation."
+      },
+      "tokens": [
+        "Parse the request body",
+        "Run validation",
+        "Return a client error if invalid",
+        "Mutate only valid data"
+      ],
+      "correctOrder": [
+        "Parse the request body",
+        "Run validation",
+        "Return a client error if invalid",
+        "Mutate only valid data"
+      ]
+    }
+  ]
+}

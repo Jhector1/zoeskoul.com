@@ -1,0 +1,222 @@
+{
+  "title": "PATCH and DELETE Resources",
+  "summary": "Update only supplied fields with PATCH and remove resources intentionally with DELETE while handling missing ids.",
+  "minutes": 34,
+  "sketchBlocks": [
+    {
+      "id": "patch-supplied-fields",
+      "cardTitle": "Change only what the client supplied",
+      "title": "PATCH performs a partial update",
+      "bodyMarkdown": "A PATCH route changes selected fields on an existing resource while preserving fields the client did not send.\n\n```js\napp.patch(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const event = events.find((item) => item.id === id);\n\n  if (!event) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  if (req.body.title !== undefined) event.title = req.body.title;\n  if (req.body.category !== undefined) event.category = req.body.category;\n\n  return res.status(200).json(event);\n});\n```\n\n**Line by line:** find the target first, stop on a missing id, check each allowed field independently, and return the updated resource. An omitted field remains unchanged.",
+      "tryItExercises": [
+        {
+          "id": "try-patch-room",
+          "kind": "code_input",
+          "title": "Patch a room resource",
+          "prompt": "Implement `PATCH /api/rooms/:id`. Return `404` JSON if absent. Update only supplied `name` and `capacity`, then return the updated room with status `200`.",
+          "hint": "Check each allowed field independently so omitted values remain unchanged.",
+          "help": {
+            "concept": "PATCH applies only supplied allowed fields while preserving the rest of the resource.",
+            "hint_1": "Find the room before changing it.",
+            "hint_2": "Use an explicit undefined check for each field."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\napp.use(express.json());\n\nconst rooms = [\n  { id: 1, name: \"Lab A\", capacity: 24 },\n  { id: 2, name: \"Studio B\", capacity: 18 },\n];\n\n// Add PATCH /api/rooms/:id.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\napp.use(express.json());\n\nconst rooms = [\n  { id: 1, name: \"Lab A\", capacity: 24 },\n  { id: 2, name: \"Studio B\", capacity: 18 },\n];\n\napp.patch(\"/api/rooms/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const room = rooms.find((item) => item.id === id);\n\n  if (!room) {\n    return res.status(404).json({ error: \"Room not found\" });\n  }\n\n  if (req.body.name !== undefined) {\n    room.name = req.body.name;\n  }\n\n  if (req.body.capacity !== undefined) {\n    room.capacity = req.body.capacity;\n  }\n\n  return res.status(200).json(room);\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.patch\\(\\s*[\"\\']/api/rooms/:id[\"\\']",
+              "message": "Register the PATCH route.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "rooms\\.find\\(",
+              "message": "Find the target room.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "req\\.body\\.name\\s*!==\\s*undefined",
+              "message": "Update name only when supplied.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "req\\.body\\.capacity\\s*!==\\s*undefined",
+              "message": "Update capacity only when supplied.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*200\\s*\\)\\.json\\(\\s*room\\s*\\)",
+              "message": "Return the updated room.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "delete-one-resource",
+      "cardTitle": "Remove one matching resource",
+      "title": "DELETE finds the target before mutating",
+      "bodyMarkdown": "DELETE should remove exactly one identified resource.\n\n```js\napp.delete(\"/api/events/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const index = events.findIndex((item) => item.id === id);\n\n  if (index === -1) {\n    return res.status(404).json({ error: \"Event not found\" });\n  }\n\n  events.splice(index, 1);\n  return res.status(204).send();\n});\n```\n\n**Step by step:** normalize the id, locate the array index, stop on the missing sentinel, remove one item, and send an intentional no-content success response.",
+      "tryItExercises": [
+        {
+          "id": "try-delete-announcement",
+          "kind": "code_input",
+          "title": "Delete an announcement",
+          "prompt": "Implement `DELETE /api/announcements/:id`. Find the index, return `404` JSON if absent, otherwise remove exactly one item and return status `204` with no body.",
+          "hint": "Use the index lookup to distinguish a valid position from the missing sentinel.",
+          "help": {
+            "concept": "DELETE should locate exactly one target before mutating the collection.",
+            "hint_1": "Convert the route id before comparing numeric ids.",
+            "hint_2": "Remove one item only after handling the missing branch."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst announcements = [\n  { id: 1, title: \"Welcome Week\" },\n  { id: 2, title: \"Library Hours\" },\n];\n\n// Add DELETE /api/announcements/:id.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\nconst announcements = [\n  { id: 1, title: \"Welcome Week\" },\n  { id: 2, title: \"Library Hours\" },\n];\n\napp.delete(\"/api/announcements/:id\", (req, res) => {\n  const id = Number(req.params.id);\n  const index = announcements.findIndex((item) => item.id === id);\n\n  if (index === -1) {\n    return res.status(404).json({ error: \"Announcement not found\" });\n  }\n\n  announcements.splice(index, 1);\n  return res.status(204).send();\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.delete\\(\\s*[\"\\']/api/announcements/:id[\"\\']",
+              "message": "Register the DELETE route.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "announcements\\.findIndex\\(",
+              "message": "Locate the target index.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "index\\s*===\\s*-1",
+              "message": "Handle a missing target.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "announcements\\.splice\\(\\s*index\\s*,\\s*1\\s*\\)",
+              "message": "Remove exactly one item.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.status\\(\\s*204\\s*\\)\\.send\\(\\s*\\)",
+              "message": "Return no-content success.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "patch-purpose",
+      "kind": "single_choice",
+      "title": "Recognize a partial update",
+      "prompt": "Which description matches PATCH in this module?",
+      "hint": "Choose the behavior that preserves omitted fields.",
+      "help": {
+        "concept": "A partial update changes selected allowed properties without replacing the whole resource.",
+        "hint_1": "Imagine the client sends only one field.",
+        "hint_2": "Unsent properties should survive."
+      },
+      "options": [
+        "Update only allowed fields that were supplied.",
+        "Replace every field whether supplied or not.",
+        "Create a new collection on every request.",
+        "Use the method only for reads."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "mutation-target-safety",
+      "kind": "multi_choice",
+      "title": "Protect mutation targets",
+      "prompt": "Which two checks help PATCH and DELETE avoid mutating the wrong resource?",
+      "hint": "Focus on identity and the missing-target branch.",
+      "help": {
+        "concept": "Mutation routes need a trustworthy lookup and a clear not-found outcome before state changes.",
+        "hint_1": "One correct choice normalizes the incoming id.",
+        "hint_2": "Another stops when no target exists."
+      },
+      "options": [
+        "Convert the route id to the data's id type.",
+        "Handle the missing target before mutating.",
+        "Ignore the route id and mutate the first item.",
+        "Treat every missing id as successful."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "delete-no-content-status",
+      "kind": "fill_blank_choice",
+      "title": "Complete the delete outcome",
+      "prompt": "Choose the successful no-content status used by the delete example.",
+      "hint": "Choose the success option whose semantics allow an intentionally empty body.",
+      "help": {
+        "concept": "A deletion can succeed without returning a resource representation.",
+        "hint_1": "The answer is not a client-error outcome.",
+        "hint_2": "Look for the no-body success choice."
+      },
+      "template": "After removing the resource and sending no response body, the route returns HTTP status [blank1].",
+      "choices": [
+        "200",
+        "201",
+        "204",
+        "404"
+      ],
+      "correctValue": "204"
+    },
+    {
+      "id": "delete-flow",
+      "kind": "drag_reorder",
+      "title": "Order a safe delete",
+      "prompt": "Arrange the delete route from identity to response.",
+      "hint": "Do not mutate the collection before the route knows whether a target exists.",
+      "help": {
+        "concept": "A safe delete performs identity lookup before mutation.",
+        "hint_1": "Begin with the route parameter.",
+        "hint_2": "The removal happens after the missing branch."
+      },
+      "tokens": [
+        "Read and normalize the id",
+        "Find the matching index",
+        "Handle the missing case",
+        "Remove one item and respond"
+      ],
+      "correctOrder": [
+        "Read and normalize the id",
+        "Find the matching index",
+        "Handle the missing case",
+        "Remove one item and respond"
+      ]
+    }
+  ]
+}

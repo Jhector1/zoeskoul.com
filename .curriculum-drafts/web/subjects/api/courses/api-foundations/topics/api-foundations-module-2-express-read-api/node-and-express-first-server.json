@@ -1,0 +1,187 @@
+{
+  "title": "Your First Node.js and Express Server",
+  "summary": "Start a local Express application, listen on a provided port, and return the first HTTP response.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "node-runs-server-javascript",
+      "cardTitle": "Run JavaScript on the server",
+      "title": "Node.js hosts the process; Express organizes HTTP handling",
+      "bodyMarkdown": "Node.js lets JavaScript run as a long-lived server process instead of only inside a browser. Express sits on top of Node's HTTP capabilities and gives the application a small routing API.\n\nA minimal server begins with the Express package, creates one application object, and starts listening on the course's local port:\n\n```js\nconst express = require(\"express\");\n\nconst app = express();\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n```\n\n**Line by line:** the first line loads Express. `express()` creates the application that will own routes and middleware. `app.listen(...)` starts the local HTTP server on port `3000`. The callback runs only after the server is ready. The address is localhost-only, so this course does not depend on a public network.\n\nAt this stage the server is alive, but it does not yet have a route that answers a request.",
+      "tryItExercises": [
+        {
+          "id": "try-first-express-application",
+          "kind": "code_input",
+          "title": "Start a different local Express service",
+          "prompt": "Create an Express application named `app` and start it on port `3000` at `127.0.0.1`. Log a short ready message from the listen callback.",
+          "hint": "Separate creating the application from starting the listener.",
+          "help": {
+            "concept": "An Express server needs one application object and one local listener before routes can receive requests.",
+            "hint_1": "Load Express first, then call it to create the application.",
+            "hint_2": "The listener belongs after application creation and uses the provided local host and port."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\n// Create the Express application below.\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "const\\s+express\\s*=\\s*require\\(\\s*[\"\\']express[\"\\']\\s*\\)",
+              "message": "Load Express with require.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "const\\s+app\\s*=\\s*express\\(\\s*\\)",
+              "message": "Create the Express application.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.listen\\(\\s*3000\\s*,\\s*[\"\\']127\\.0\\.0\\.1[\"\\']",
+              "message": "Listen on the provided local host and port.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "first-route-handler",
+      "cardTitle": "Give one request a handler",
+      "title": "A route connects a method and path to response code",
+      "bodyMarkdown": "Once the application is listening, a route tells Express what to do for a specific HTTP method and path.\n\n```js\napp.get(\"/api/hello\", (req, res) => {\n  res.send(\"Hello from the API\");\n});\n```\n\n**Step by step:** `app.get` registers a handler for a GET request. `\"/api/hello\"` is the path. Express passes the incoming request as `req` and the response object as `res`. Calling `res.send(...)` completes the response.\n\nThe route must be registered before the listener is useful to a client. One route should have one clear responsibility: recognize its method and path, then send its response.",
+      "tryItExercises": [
+        {
+          "id": "try-first-express-route",
+          "kind": "code_input",
+          "title": "Add a readiness route",
+          "prompt": "Keep the local Express server and add `GET /api/status`. Respond with the text `Campus API ready`.",
+          "hint": "Register the read route on the `app` object before the listener.",
+          "help": {
+            "concept": "An Express GET route pairs one path with one handler and completes the response through `res`.",
+            "hint_1": "The route registration uses the application object and a path string.",
+            "hint_2": "The handler receives request and response objects; only the response object needs to send this text."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\n// Add GET /api/status here.\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\napp.get(\"/api/status\", (req, res) => {\n  res.send(\"Campus API ready\");\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.get\\(\\s*[\"\\']/api/status[\"\\']",
+              "message": "Register GET /api/status.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "res\\.send\\(\\s*[\"\\']Campus API ready[\"\\']\\s*\\)",
+              "message": "Send the readiness text.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "node-express-role",
+      "kind": "single_choice",
+      "title": "Separate Node and Express responsibilities",
+      "prompt": "Which statement best describes the relationship used in this course?",
+      "hint": "One runs the server-side JavaScript process; the other gives that process routing helpers.",
+      "help": {
+        "concept": "Node.js and Express have different responsibilities in a backend application.",
+        "hint_1": "Think about which layer provides the JavaScript runtime.",
+        "hint_2": "Then identify the layer that exposes methods such as `app.get`."
+      },
+      "options": [
+        "Node.js runs server-side JavaScript; Express organizes HTTP routes and middleware.",
+        "Express replaces JavaScript with a new programming language.",
+        "Node.js is only the JSON format returned by an API.",
+        "Express is the network address used by localhost."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "first-server-parts",
+      "kind": "multi_choice",
+      "title": "Identify the server-startup pieces",
+      "prompt": "Which two actions are part of starting this minimal local Express service?",
+      "hint": "Choose the steps that create the application and make it listen locally.",
+      "help": {
+        "concept": "Express startup separates application creation from network listening.",
+        "hint_1": "One action produces the object that owns routes.",
+        "hint_2": "Another action binds that application to the provided local port."
+      },
+      "options": [
+        "Create the application with `express()`.",
+        "Start the local listener with `app.listen(...)`.",
+        "Send every response with `JSON.stringify` manually.",
+        "Connect to a public API before defining routes."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "first-server-handler-object",
+      "kind": "fill_blank_choice",
+      "title": "Choose the response object",
+      "prompt": "Complete the route-handler statement with the object used to send the HTTP response.",
+      "hint": "The handler receives one object describing what came in and one object used to send data back.",
+      "help": {
+        "concept": "A route callback receives input through one argument and sends output through another.",
+        "hint_1": "Focus on the argument used for outgoing data.",
+        "hint_2": "The input-side argument is not the one used to send output."
+      },
+      "template": "Inside `(req, res) => { ... }`, the handler sends data through [blank1].",
+      "choices": [
+        "req",
+        "res",
+        "app",
+        "express"
+      ],
+      "correctValue": "res"
+    },
+    {
+      "id": "first-server-order",
+      "kind": "drag_reorder",
+      "title": "Put basic server setup in order",
+      "prompt": "Arrange these conceptual steps from setup to a server that can answer the route.",
+      "hint": "The application must exist before a route can be registered on it.",
+      "help": {
+        "concept": "Server setup has a dependency order: dependency, app, route, listener.",
+        "hint_1": "Start with the dependency required to create the application.",
+        "hint_2": "The listener is the final startup step after the route exists."
+      },
+      "tokens": [
+        "Load Express",
+        "Create the app",
+        "Register the GET route",
+        "Start the local listener"
+      ],
+      "correctOrder": [
+        "Load Express",
+        "Create the app",
+        "Register the GET route",
+        "Start the local listener"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "title": "Express Middleware and Request Flow",
+  "summary": "Use built-in middleware and trace how a request moves through parsing, routing, and response handling.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "middleware-next-flow",
+      "cardTitle": "Run work before the route",
+      "title": "Middleware can inspect a request and pass control onward",
+      "bodyMarkdown": "Express middleware runs in registration order. A middleware function receives `req`, `res`, and `next`.\n\n```js\napp.use((req, res, next) => {\n  console.log(`${req.method} ${req.path}`);\n  next();\n});\n\napp.get(\"/api/events\", (req, res) => {\n  res.status(200).json(events);\n});\n```\n\n**Line by line:** `app.use(...)` registers middleware for incoming requests. The middleware reads request metadata and logs it. Calling `next()` passes control to the next matching middleware or route. The GET handler then builds the response.\n\nIf middleware neither sends a response nor calls `next()`, the request can stop before it reaches the route. That makes request flow and ordering part of the API design.",
+      "tryItExercises": [
+        {
+          "id": "try-request-logger-middleware",
+          "kind": "code_input",
+          "title": "Trace requests before the route",
+          "prompt": "Add middleware that logs `${req.method} ${req.path}` and then calls `next()`. Keep `GET /api/status` working.",
+          "hint": "The middleware must hand control onward after logging.",
+          "help": {
+            "concept": "Middleware can perform shared request work before route handling, then continue the chain with `next()`.",
+            "hint_1": "Register the middleware with the application before the route.",
+            "hint_2": "Logging alone does not continue request processing."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\n// Add middleware that logs: METHOD PATH\n// Then call next() so GET /api/status can run.\n\napp.get(\"/api/status\", (req, res) => {\n  res.status(200).json({ status: \"ready\" });\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\napp.use((req, res, next) => {\n  console.log(`${req.method} ${req.path}`);\n  next();\n});\n\napp.get(\"/api/status\", (req, res) => {\n  res.status(200).json({ status: \"ready\" });\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.use\\(\\s*\\(\\s*req\\s*,\\s*res\\s*,\\s*next\\s*\\)",
+              "message": "Register request middleware.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "req\\.method",
+              "message": "Read the request method.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "req\\.path",
+              "message": "Read the request path.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "next\\(\\s*\\)",
+              "message": "Continue to the next handler.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    },
+    {
+      "id": "middleware-order-and-json",
+      "cardTitle": "Register middleware before dependent routes",
+      "title": "Order matters when later handlers depend on middleware",
+      "bodyMarkdown": "Built-in middleware can prepare the request for later routes. `express.json()` parses a JSON request body when a request actually has one.\n\n```js\napp.use(express.json());\n\napp.use((req, res, next) => {\n  req.apiName = \"campus-api\";\n  next();\n});\n\napp.get(\"/api/about\", (req, res) => {\n  res.status(200).json({ api: req.apiName });\n});\n```\n\n**Step by step:** JSON parsing is registered first. The next middleware adds shared request context and calls `next()`. The route runs afterward and can read that context. Registration order therefore describes the path a request follows.\n\nThe current module remains read-only; JSON body parsing is introduced here so the middleware model is clear before Module 3 adds write routes that consume request bodies.",
+      "tryItExercises": [
+        {
+          "id": "try-middleware-order",
+          "kind": "code_input",
+          "title": "Prepare request context before a route",
+          "prompt": "Register `express.json()` before routes. Then add middleware that sets `req.apiName = \"campus-api\"`, calls `next()`, and lets `GET /api/about` return that value as JSON.",
+          "hint": "Anything the route depends on must be registered earlier in the middleware chain.",
+          "help": {
+            "concept": "Middleware registration order controls which request preparation is available to later route handlers.",
+            "hint_1": "Place the built-in parser before the custom middleware and route.",
+            "hint_2": "The custom middleware must set the request field before continuing."
+          },
+          "fixedLanguage": "javascript",
+          "recipeType": "source_checks",
+          "entryFilePath": "server.js",
+          "starterCode": "const express = require(\"express\");\n\nconst app = express();\n\n// Register Express JSON parsing before the routes.\n// Add middleware that stores \"campus-api\" on req.apiName and calls next().\n\napp.get(\"/api/about\", (req, res) => {\n  res.status(200).json({ api: req.apiName });\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "solutionCode": "const express = require(\"express\");\n\nconst app = express();\n\napp.use(express.json());\n\napp.use((req, res, next) => {\n  req.apiName = \"campus-api\";\n  next();\n});\n\napp.get(\"/api/about\", (req, res) => {\n  res.status(200).json({ api: req.apiName });\n});\n\napp.listen(3000, \"127.0.0.1\", () => {\n  console.log(\"API listening on http://127.0.0.1:3000\");\n});\n",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "app\\.use\\(\\s*express\\.json\\(\\s*\\)\\s*\\)",
+              "message": "Register Express JSON parsing.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "req\\.apiName\\s*=\\s*[\"\\']campus-api[\"\\']",
+              "message": "Store shared request context.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "next\\(\\s*\\)",
+              "message": "Continue after custom middleware.",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_regex",
+              "path": "server.js",
+              "pattern": "json\\(\\s*\\{\\s*api\\s*:\\s*req\\.apiName\\s*\\}\\s*\\)",
+              "message": "Return the prepared request context.",
+              "normalizeWhitespace": false
+            }
+          ],
+          "tests": []
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "middleware-next",
+      "kind": "single_choice",
+      "title": "Continue the middleware chain",
+      "prompt": "A middleware function logs the request but does not send a response. What allows the matching route to run next?",
+      "hint": "Choose the operation that transfers control to the next handler.",
+      "help": {
+        "concept": "Express middleware must either complete the response or continue the chain.",
+        "hint_1": "The request should keep moving rather than end in this middleware.",
+        "hint_2": "The needed operation is supplied as the third middleware argument."
+      },
+      "options": [
+        "`next()`",
+        "`req.listen()`",
+        "`res.route()`",
+        "`app.params()`"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "middleware-responsibilities",
+      "kind": "multi_choice",
+      "title": "Recognize middleware uses",
+      "prompt": "Which two tasks fit the middleware role taught in this topic?",
+      "hint": "Look for shared request preparation or observation that can happen before focused routes.",
+      "help": {
+        "concept": "Middleware is useful for cross-cutting request work that precedes route-specific logic.",
+        "hint_1": "One correct task observes requests.",
+        "hint_2": "Another prepares request data for later handlers."
+      },
+      "options": [
+        "Log method and path for incoming requests.",
+        "Parse JSON bodies before routes that need them.",
+        "Replace every resource lookup with a new server process.",
+        "Change the API port separately for each request."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "middleware-order",
+      "kind": "fill_blank_choice",
+      "title": "Complete the request-flow idea",
+      "prompt": "Choose the word that describes why registration sequence matters.",
+      "hint": "The missing word describes sequence, not data storage or network addressing.",
+      "help": {
+        "concept": "Express request flow follows middleware registration sequence.",
+        "hint_1": "Think about which handler is registered first, second, and later.",
+        "hint_2": "A later route cannot use preparation that has not run yet."
+      },
+      "template": "Express runs matching middleware in registration [blank1], so preparation must come before a route that depends on it.",
+      "choices": [
+        "order",
+        "database",
+        "hostname",
+        "format"
+      ],
+      "correctValue": "order"
+    },
+    {
+      "id": "middleware-request-flow",
+      "kind": "drag_reorder",
+      "title": "Trace middleware into a route",
+      "prompt": "Arrange the request flow used in the worked example.",
+      "hint": "The route handler comes after middleware has passed control onward.",
+      "help": {
+        "concept": "Middleware is part of an ordered request-processing chain.",
+        "hint_1": "Start from the incoming request.",
+        "hint_2": "The transfer of control occurs before the route can run."
+      },
+      "tokens": [
+        "Receive the request",
+        "Run registered middleware",
+        "Call next when work is complete",
+        "Run the matching route handler"
+      ],
+      "correctOrder": [
+        "Receive the request",
+        "Run registered middleware",
+        "Call next when work is complete",
+        "Run the matching route handler"
+      ]
+    }
+  ]
+}
