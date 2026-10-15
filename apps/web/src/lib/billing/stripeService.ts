@@ -10,6 +10,7 @@ import {
   isCheckoutAttemptId,
 } from "@/lib/billing/checkoutAttempt";
 import { releaseBillingCheckoutReservation } from "@/lib/billing/billingCheckoutReservation";
+import { reconcileBuildAiSubscriptionGrantForUser } from "@/lib/billing/buildAiFeatureGrant";
 
 function priceUnitAmountMinor(p: Stripe.Price): number | null {
     if (typeof p.unit_amount === "number") return p.unit_amount;
@@ -605,6 +606,8 @@ export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hin
         },
     });
 
+    await reconcileBuildAiSubscriptionGrantForUser(user.id);
+
     const checkoutAttemptId = sub.metadata?.checkoutAttemptId;
     if (isCheckoutAttemptId(checkoutAttemptId)) {
         await releaseBillingCheckoutReservation(
@@ -647,6 +650,8 @@ async function expireLocalSubscriptionsMissingFromStripe(
             cancelAtPeriodEnd: false,
         },
     });
+
+    await reconcileBuildAiSubscriptionGrantForUser(userId);
 }
 
 /**

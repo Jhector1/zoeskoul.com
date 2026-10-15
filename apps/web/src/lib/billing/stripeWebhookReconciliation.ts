@@ -7,6 +7,7 @@ import { getStripe } from "@/lib/stripe";
 import { upsertFromStripeSubscription } from "@/lib/billing/stripeService";
 import { isCheckoutAttemptId } from "@/lib/billing/checkoutAttempt";
 import { releaseBillingCheckoutReservation } from "@/lib/billing/billingCheckoutReservation";
+import { reconcileBuildAiSubscriptionGrantForUser } from "@/lib/billing/buildAiFeatureGrant";
 import {
   isTutoringCreditCheckoutEvent,
   isTutoringCreditPaymentIntentEvent,
@@ -216,6 +217,11 @@ function isStripeResourceMissingError(error: unknown): boolean {
 }
 
 async function defaultCancelDeletedCustomer(customerId: string) {
+  const affectedUsers = await prisma.user.findMany({
+    where: { stripeCustomerId: customerId },
+    select: { id: true },
+  });
+
   const [users, subscriptions] = await prisma.$transaction([
     prisma.user.updateMany({
       where: { stripeCustomerId: customerId },
@@ -231,6 +237,10 @@ async function defaultCancelDeletedCustomer(customerId: string) {
       },
     }),
   ]);
+
+  for (const user of affectedUsers) {
+    await reconcileBuildAiSubscriptionGrantForUser(user.id);
+  }
 
   return { users: users.count, subscriptions: subscriptions.count };
 }

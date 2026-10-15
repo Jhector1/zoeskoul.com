@@ -9,6 +9,8 @@ import { snapshotWorkspaceRoute } from "./routes/sessions.snapshotWorkspace.js";
 import { sessionsReplaceWorkspaceRoute } from "./routes/sessions.replaceWorkspaceRoute.js";
 import { heartbeatSessionRoute } from "./routes/sessions.heartbeat.js";
 import { activeSessionsRoute } from "./routes/sessions.active.js";
+import { validateBuildJobRoute } from "./routes/build.jobs.validate.js";
+import { executeBuildDependencyLockBootstrapRoute } from "./routes/build.jobs.dependencyLockBootstrap.js";
 import { getSessionStats } from "./services/sessions/sessionStore.js";
 import { env } from "./lib/env.js";
 import {
@@ -67,6 +69,8 @@ app.get("/metrics", async (_req, res) => {
   }
 });
 
+app.post("/build/jobs/validate", validateBuildJobRoute);
+app.post("/build/jobs/dependency-lock-bootstrap", executeBuildDependencyLockBootstrapRoute);
 app.post("/sessions/start", startSessionRoute);
 app.post("/sessions/active", activeSessionsRoute);
 app.post("/sessions/:sessionId/input", inputSessionRoute);

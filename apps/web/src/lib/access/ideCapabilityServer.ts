@@ -10,7 +10,7 @@ import {
 } from "./ideCapabilities";
 import { Actor } from "@/lib/practice/actor";
 
-const IDE_FEATURE_KEYS: FeatureKey[] = [
+const IDE_FEATURE_KEYS = [
     FeatureKey.ide_multi_file,
     FeatureKey.ide_save_cloud,
     FeatureKey.ide_project_create,
@@ -19,7 +19,7 @@ const IDE_FEATURE_KEYS: FeatureKey[] = [
     FeatureKey.ide_project_scope_assignment,
     FeatureKey.ide_project_share,
     FeatureKey.ide_project_unlimited,
-];
+] as const satisfies readonly FeatureKey[];
 
 export async function checkIdeCapability(
     prisma: PrismaClient,
@@ -29,10 +29,18 @@ export async function checkIdeCapability(
     },
 ) {
     const snapshot = await getAccessSnapshot(prisma, args.actor, {
-        featureKeys: IDE_FEATURE_KEYS,
+        featureKeys: [...IDE_FEATURE_KEYS],
     });
 
-    const capabilities = resolveIdeCapabilities(snapshot);
+    const capabilities = resolveIdeCapabilities({
+        hasUser: snapshot.hasUser,
+        isSubscribed: snapshot.isSubscribed,
+        featureAccess: new Set(
+            IDE_FEATURE_KEYS.filter((feature) =>
+                snapshot.featureAccess.has(feature),
+            ),
+        ),
+    });
 
     if (hasIdeCapability(capabilities, args.capability)) {
         return {

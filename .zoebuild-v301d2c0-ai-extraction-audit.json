@@ -1,0 +1,622 @@
+{
+  "wave": "ZOESKOUL NEUTRAL AI TRANSPORT EXTRACTION AUDIT V301D2C0",
+  "targets": {
+    "packages/curriculum-ai/package.json": {
+      "lines": 28,
+      "imports_exports": [],
+      "interesting": [],
+      "json": {
+        "name": "@zoeskoul/curriculum-ai",
+        "version": "0.0.0",
+        "private": true,
+        "type": "module",
+        "main": "./dist/index.js",
+        "types": "./dist/index.d.ts",
+        "exports": {
+          ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+          }
+        },
+        "scripts": {
+          "build": "tsc -p tsconfig.json",
+          "clean": "rm -rf dist",
+          "pretest": "pnpm --filter @zoeskoul/curriculum-contracts build && pnpm --filter @zoeskoul/curriculum-profiles build",
+          "test": "vitest run --root ../.. packages/curriculum-ai/src",
+          "test:ai:smoke": "vitest run --root ../.. packages/curriculum-ai/src/providers/openai.structured-output.smoke.test.ts"
+        },
+        "dependencies": {
+          "@anthropic-ai/sdk": "^0.66.0",
+          "@google/genai": "^1.21.0",
+          "@zoeskoul/curriculum-contracts": "workspace:*",
+          "@zoeskoul/curriculum-profiles": "workspace:*",
+          "openai": "^6.34.0"
+        }
+      }
+    },
+    "packages/curriculum-ai/tsconfig.json": {
+      "lines": 17,
+      "imports_exports": [],
+      "interesting": []
+    },
+    "packages/curriculum-ai/src/index.ts": {
+      "lines": 8,
+      "imports_exports": [
+        "export * from \"./types.js\";",
+        "export * from \"./providers/index.js\";",
+        "export * from \"./generators/generateCoursePlan.js\";",
+        "export * from \"./generators/repairCoursePlan.js\";",
+        "export * from \"./generators/generateTopicRecipe.js\";",
+        "export * from \"./generators/translateMessages.js\";",
+        "export * from \"./generators/repairExercise.js\"",
+        "export * from \"./generators/generateTopicAuthoringDraft.js\";"
+      ],
+      "interesting": [
+        "3: export * from \"./generators/generateCoursePlan.js\";",
+        "4: export * from \"./generators/repairCoursePlan.js\";",
+        "8: export * from \"./generators/generateTopicAuthoringDraft.js\";"
+      ]
+    },
+    "packages/curriculum-ai/src/types.ts": {
+      "lines": 115,
+      "imports_exports": [
+        "import type {",
+        "export type GenerateJsonArgs = {",
+        "export type AiProviderId = \"openai\" | \"gemini\" | \"claude\" | \"deepseek\" | \"deepl\";",
+        "export type AiModelPurpose =",
+        "export type AiModelOption = {",
+        "export type AiProviderCatalogEntry = {",
+        "export type GeneratedJsonMetadata = {",
+        "export type GeneratedJsonResult<T> = GeneratedJsonMetadata & {",
+        "export class GeneratedJsonError extends Error {",
+        "export type PlanRepairDraft = {",
+        "export type TranslatedEntries = {",
+        "export type AiProvider = {",
+        "export type TopicRetryContext = {"
+      ],
+      "interesting": [
+        "2:   NormalizedCoursePlan,",
+        "3:   TopicAuthoringDraft,",
+        "9:   schemaName:",
+        "10:       | \"CoursePlan\"",
+        "11:       | \"NormalizedPlanRepair\"",
+        "12:       | \"TopicAuthoringDraft\"",
+        "13:       | \"TranslatedEntries\";",
+        "47:   schemaName: GenerateJsonArgs[\"schemaName\"];",
+        "87:   repairedPlan: NormalizedCoursePlan;",
+        "91: export type TranslatedEntries = {",
+        "102:   generateJsonDetailed?<T>(args: GenerateJsonArgs): Promise<GeneratedJsonResult<T>>;"
+      ]
+    },
+    "packages/curriculum-ai/src/providers/index.ts": {
+      "lines": 7,
+      "imports_exports": [
+        "export * from \"./providerCatalog.js\";",
+        "export * from \"./createAiProvider.js\";",
+        "export * from \"./openai.js\";",
+        "export * from \"./gemini.js\";",
+        "export * from \"./claude.js\";",
+        "export * from \"./deepseek.js\";",
+        "export * from \"./deepl.js\";"
+      ],
+      "interesting": []
+    },
+    "packages/curriculum-ai/src/providers/createAiProvider.ts": {
+      "lines": 30,
+      "imports_exports": [
+        "import type { AiProvider, AiProviderId } from \"../types.js\";",
+        "import { createClaudeProvider } from \"./claude.js\";",
+        "import { createDeepSeekProvider } from \"./deepseek.js\";",
+        "import { createDeepLProvider } from \"./deepl.js\";",
+        "import { createGeminiProvider } from \"./gemini.js\";",
+        "import { createOpenAiProvider } from \"./openai.js\";",
+        "export type CreateAiProviderOptions = {",
+        "export function createAiProvider(options: CreateAiProviderOptions): AiProvider {"
+      ],
+      "interesting": [
+        "2: import { createClaudeProvider } from \"./claude.js\";",
+        "3: import { createDeepSeekProvider } from \"./deepseek.js\";",
+        "4: import { createDeepLProvider } from \"./deepl.js\";",
+        "5: import { createGeminiProvider } from \"./gemini.js\";",
+        "6: import { createOpenAiProvider } from \"./openai.js\";",
+        "16:       return createOpenAiProvider({ model: options.model });",
+        "18:       return createGeminiProvider({ model: options.model });",
+        "20:       return createClaudeProvider({ model: options.model });",
+        "22:       return createDeepSeekProvider({ model: options.model });",
+        "24:       return createDeepLProvider({ model: options.model });"
+      ]
+    },
+    "packages/curriculum-ai/src/providers/providerCatalog.ts": {
+      "lines": 242,
+      "imports_exports": [
+        "import type { AiProviderId, AiModelOption, AiProviderCatalogEntry } from \"../types.js\";",
+        "export const AI_PROVIDER_CATALOG = {",
+        "export const AI_PROVIDER_IDS = Object.keys(AI_PROVIDER_CATALOG) as AiProviderId[];",
+        "export function isAiProviderId(value: string): value is AiProviderId {",
+        "export function normalizeAiProviderId(value: string | undefined | null): AiProviderId | undefined {",
+        "export function getAiProviderCatalogEntry(provider: AiProviderId): AiProviderCatalogEntry {",
+        "export function getDefaultModelForProvider(provider: AiProviderId): string {",
+        "export function getProviderModelEnv(provider: AiProviderId): string {",
+        "export function resolveModelForProvider(args: {",
+        "export function formatAiModelCatalog(): string {"
+      ],
+      "interesting": [
+        "7:     apiKeyEnv: \"OPENAI_API_KEY\",",
+        "50:     apiKeyEnv: \"GEMINI_API_KEY\",",
+        "76:     apiKeyEnv: \"ANTHROPIC_API_KEY\",",
+        "107:     apiKeyEnv: \"DEEPSEEK_API_KEY\",",
+        "139:     apiKeyEnv: \"DEEPL_API_KEY\","
+      ]
+    },
+    "packages/curriculum-ai/src/providers/jsonProviderUtils.ts": {
+      "lines": 124,
+      "imports_exports": [
+        "import type { GenerateJsonArgs, GeneratedJsonResult, GeneratedJsonMetadata } from \"../types.js\";",
+        "import { GeneratedJsonError } from \"../types.js\";",
+        "export const JSON_PROVIDER_DEFAULT_TEMPERATURE = 0;",
+        "export function stripCodeFences(text: string): string {",
+        "export function parseProviderJsonText<T>(text: string): T {",
+        "export function normalizeProviderJsonValue(",
+        "export function getRuntimeValidationErrors(",
+        "export function buildGeneratedJsonResult<T>(args: {",
+        "export function strictJsonSystemPrompt(system: string): string {",
+        "export function generatedJsonMetadata(args: {"
+      ],
+      "interesting": [
+        "56:   schemaName: GenerateJsonArgs[\"schemaName\"],",
+        "59:   if (schemaName === \"TopicAuthoringDraft\") {",
+        "67:   _schemaName: GenerateJsonArgs[\"schemaName\"],",
+        "77:   schemaName: GenerateJsonArgs[\"schemaName\"];",
+        "79:   const normalizedValue = normalizeProviderJsonValue(args.schemaName, args.parsedJson);",
+        "80:   const validationErrors = getRuntimeValidationErrors(args.schemaName, normalizedValue);",
+        "101: export function strictJsonSystemPrompt(system: string): string {",
+        "114:   schemaName: GenerateJsonArgs[\"schemaName\"];",
+        "121:     schemaName: args.schemaName,"
+      ]
+    },
+    "packages/curriculum-ai/src/providers/openai.ts": {
+      "lines": 975,
+      "imports_exports": [
+        "import OpenAI from \"openai\";",
+        "import type {",
+        "import { GeneratedJsonError } from \"../types.js\";",
+        "export type OpenAiProviderOptions = {",
+        "export function setOpenAiClientFactoryForTests(",
+        "export function resetOpenAiClientFactoryForTests(): void {",
+        "export function setOpenAiModelResolverForTests(",
+        "export function resetOpenAiModelResolverForTests(): void {",
+        "export function assertOpenAiStructuredOutputSchemaCompatible(",
+        "export function getOpenAiStructuredOutputSchema(",
+        "export function createOpenAiProvider(options: OpenAiProviderOptions = {}): AiProvider {",
+        "export const openAiProvider: AiProvider = createOpenAiProvider();"
+      ],
+      "interesting": [
+        "532: function getEnv(name: \"OPENAI_API_KEY\" | \"OPENAI_MODEL\"): string {",
+        "541:   return new OpenAI({ apiKey: getEnv(\"OPENAI_API_KEY\") });",
+        "628:   schemaName: GenerateJsonArgs[\"schemaName\"],",
+        "631:   if (schemaName === \"TopicAuthoringDraft\") {",
+        "638:     _schemaName: GenerateJsonArgs[\"schemaName\"],",
+        "644: export function assertOpenAiStructuredOutputSchemaCompatible(",
+        "660:           assertOpenAiStructuredOutputSchemaCompatible(",
+        "675:             assertOpenAiStructuredOutputSchemaCompatible(",
+        "684:       assertOpenAiStructuredOutputSchemaCompatible(",
+        "692: export function getOpenAiStructuredOutputSchema(",
+        "693:   schemaName: GenerateJsonArgs[\"schemaName\"],",
+        "695:   const schema = getSchema(schemaName);",
+        "697:   assertOpenAiStructuredOutputSchemaCompatible(schema);",
+        "701: function getSchema(schemaName: GenerateJsonArgs[\"schemaName\"]): JsonSchema {",
+        "702:   switch (schemaName) {",
+        "703:     case \"CoursePlan\":",
+        "797:     case \"TopicAuthoringDraft\":",
+        "800:     case \"NormalizedPlanRepair\":",
+        "817:     case \"TranslatedEntries\":",
+        "839:       throw new Error(`No strict schema registered for ${schemaName}`);",
+        "842: function useStrictSchema(schemaName: GenerateJsonArgs[\"schemaName\"]) {",
+        "844:       schemaName === \"CoursePlan\" ||",
+        "845:       schemaName === \"NormalizedPlanRepair\" ||",
+        "846:       schemaName === \"TopicAuthoringDraft\" ||",
+        "847:       schemaName === \"TranslatedEntries\"",
+        "879: export function createOpenAiProvider(options: OpenAiProviderOptions = {}): AiProvider {",
+        "886:     async generateJsonDetailed<T>(",
+        "891:       const strictSchema = useStrictSchema(args.schemaName);",
+        "900:         schemaName: args.schemaName,",
+        "914:                 name: args.schemaName,",
+        "916:                 schema: getOpenAiStructuredOutputSchema(args.schemaName),",
+        "945:       const normalizedValue = normalizeProviderJsonValue(args.schemaName, parsedJson);",
+        "946:       const validationErrors = getRuntimeValidationErrors(args.schemaName, normalizedValue);",
+        "967:       const result = await provider.generateJsonDetailed!<T>(args);",
+        "975: export const openAiProvider: AiProvider = createOpenAiProvider();"
+      ]
+    },
+    "packages/curriculum-ai/src/providers/gemini.ts": {
+      "lines": 112,
+      "imports_exports": [
+        "import type { AiProvider, GenerateJsonArgs, GeneratedJsonResult } from \"../types.js\";",
+        "import {",
+        "import { getDefaultModelForProvider } from \"./providerCatalog.js\";",
+        "export type GeminiProviderOptions = {",
+        "export function createGeminiProvider(options: GeminiProviderOptions = {}): AiProvider {"
+      ],
+      "interesting": [
+        "7:   strictJsonSystemPrompt,",
+        "17:   const value = apiKey ?? process.env.GEMINI_API_KEY;",
+        "19:     throw new Error(\"Missing GEMINI_API_KEY\");",
+        "44: export function createGeminiProvider(options: GeminiProviderOptions = {}): AiProvider {",
+        "51:     async generateJsonDetailed<T>(",
+        "59:         schemaName: args.schemaName,",
+        "70:                   strictJsonSystemPrompt(args.system),",
+        "91:           `Gemini returned invalid JSON for ${args.schemaName} with ${model}: ${",
+        "101:         schemaName: args.schemaName,",
+        "106:       const result = await provider.generateJsonDetailed!<T>(args);"
+      ]
+    },
+    "packages/curriculum-ai/src/providers/claude.ts": {
+      "lines": 89,
+      "imports_exports": [
+        "import type { AiProvider, GenerateJsonArgs, GeneratedJsonResult } from \"../types.js\";",
+        "import {",
+        "import { getDefaultModelForProvider } from \"./providerCatalog.js\";",
+        "export type ClaudeProviderOptions = {",
+        "export function createClaudeProvider(options: ClaudeProviderOptions = {}): AiProvider {"
+      ],
+      "interesting": [
+        "7:   strictJsonSystemPrompt,",
+        "17:   const value = apiKey ?? process.env.ANTHROPIC_API_KEY;",
+        "19:     throw new Error(\"Missing ANTHROPIC_API_KEY\");",
+        "35: export function createClaudeProvider(options: ClaudeProviderOptions = {}): AiProvider {",
+        "42:     async generateJsonDetailed<T>(",
+        "50:         schemaName: args.schemaName,",
+        "57:         system: strictJsonSystemPrompt(args.system),",
+        "68:           `Claude returned invalid JSON for ${args.schemaName} with ${model}: ${",
+        "78:         schemaName: args.schemaName,",
+        "83:       const result = await provider.generateJsonDetailed!<T>(args);"
+      ]
+    },
+    "packages/curriculum-ai/src/providers/deepseek.ts": {
+      "lines": 106,
+      "imports_exports": [
+        "import OpenAI from \"openai\";",
+        "import type { AiProvider, GenerateJsonArgs, GeneratedJsonResult } from \"../types.js\";",
+        "import {",
+        "import { getDefaultModelForProvider } from \"./providerCatalog.js\";",
+        "export type DeepSeekProviderOptions = {",
+        "export function createDeepSeekProvider(options: DeepSeekProviderOptions = {}): AiProvider {"
+      ],
+      "interesting": [
+        "9:   strictJsonSystemPrompt,",
+        "20:   const value = apiKey ?? process.env.DEEPSEEK_API_KEY;",
+        "22:     throw new Error(\"Missing DEEPSEEK_API_KEY\");",
+        "46: export function createDeepSeekProvider(options: DeepSeekProviderOptions = {}): AiProvider {",
+        "54:     async generateJsonDetailed<T>(",
+        "65:         schemaName: args.schemaName,",
+        "71:           { role: \"system\", content: strictJsonSystemPrompt(args.system) },",
+        "85:           `DeepSeek returned invalid JSON for ${args.schemaName} with ${model}: ${",
+        "95:         schemaName: args.schemaName,",
+        "100:       const result = await provider.generateJsonDetailed!<T>(args);"
+      ]
+    },
+    "packages/curriculum-ai/src/providers/deepl.ts": {
+      "lines": 646,
+      "imports_exports": [
+        "import type {",
+        "import {",
+        "import { getDefaultModelForProvider } from \"./providerCatalog.js\";",
+        "export type DeepLProviderOptions = {",
+        "export function createDeepLProvider(options: DeepLProviderOptions = {}): AiProvider {"
+      ],
+      "interesting": [
+        "5:   TranslatedEntries,",
+        "61:   const value = apiKey ?? process.env.DEEPL_API_KEY;",
+        "64:     throw new Error(\"Missing DEEPL_API_KEY\");",
+        "104:   if (args.schemaName !== \"TranslatedEntries\") {",
+        "108:         `Unsupported schemaName: ${args.schemaName}`,",
+        "124:       `DeepL provider could not parse TranslatedEntries prompt payload: ${",
+        "519: }): Promise<TranslatedEntries> {",
+        "594: export function createDeepLProvider(options: DeepLProviderOptions = {}): AiProvider {",
+        "603:     async generateJsonDetailed<T>(",
+        "609:         schemaName: args.schemaName,",
+        "635:         schemaName: args.schemaName,",
+        "640:       const result = await provider.generateJsonDetailed!<T>(args);"
+      ]
+    },
+    "packages/build-ai/package.json": {
+      "lines": 23,
+      "imports_exports": [],
+      "interesting": [],
+      "json": {
+        "name": "@zoeskoul/build-ai",
+        "version": "0.0.1",
+        "private": true,
+        "type": "module",
+        "sideEffects": false,
+        "exports": {
+          ".": "./src/index.ts"
+        },
+        "scripts": {
+          "build": "tsc -p tsconfig.json --noEmit",
+          "typecheck": "tsc -p tsconfig.json --noEmit",
+          "test": "vitest run --root ../.. packages/build-ai/src"
+        },
+        "dependencies": {
+          "@zoeskoul/build-contracts": "workspace:*",
+          "@zoeskoul/build-core": "workspace:*",
+          "@zoeskoul/build-registry": "workspace:*"
+        },
+        "devDependencies": {
+          "vitest": "^4.1.5"
+        }
+      }
+    },
+    "packages/build-ai/src/index.ts": {
+      "lines": 160,
+      "imports_exports": [
+        "import {",
+        "import {",
+        "import {",
+        "export const BUILD_AI_PROMPT_LIMITS = {",
+        "export type BuildAiGenerationMetadata = Readonly<{",
+        "export type BuildAiPlannerResult = Readonly<{",
+        "export interface BuildAiPlanner {",
+        "export type PlanBuildProjectFromPromptResult = Readonly<{",
+        "export class BuildAiPlanningError extends Error {",
+        "export async function planBuildProjectFromPrompt("
+      ],
+      "interesting": []
+    },
+    "apps/zoebuild/package.json": {
+      "lines": 42,
+      "imports_exports": [],
+      "interesting": [],
+      "json": {
+        "name": "@zoeskoul/zoebuild",
+        "private": true,
+        "version": "0.0.1",
+        "scripts": {
+          "dev": "next dev --port 3004",
+          "build": "next build",
+          "start": "next start --port 3004",
+          "typecheck": "tsc -p tsconfig.json --noEmit",
+          "check:boundary": "node scripts/check-app-boundary.mjs",
+          "test:build": "vitest run src/lib/build src/app/api/build"
+        },
+        "dependencies": {
+          "@zoeskoul/app-config": "workspace:*",
+          "@zoeskoul/build-application": "workspace:*",
+          "@zoeskoul/build-executor-contracts": "workspace:*",
+          "@zoeskoul/build-imports": "workspace:*",
+          "@zoeskoul/build-preparation": "workspace:*",
+          "@zoeskoul/code-contracts": "workspace:*",
+          "@zoeskoul/db": "workspace:*",
+          "@zoeskoul/learner-workspace": "workspace:*",
+          "@zoeskoul/permissions": "workspace:*",
+          "@zoeskoul/platform-auth": "workspace:*",
+          "@zoeskoul/platform-server": "workspace:*",
+          "@zoeskoul/platform-ui": "workspace:*",
+          "@zoeskoul/preferences": "workspace:*",
+          "next": "16.1.1",
+          "next-auth": "^5.0.0-beta.30",
+          "next-themes": "^0.4.6",
+          "react": "19.2.3",
+          "react-dom": "19.2.3"
+        },
+        "devDependencies": {
+          "@tailwindcss/postcss": "^4",
+          "@types/node": "^20",
+          "@types/react": "^19",
+          "@types/react-dom": "^19",
+          "tailwindcss": "^4",
+          "typescript": "^5",
+          "vitest": "^4.1.5"
+        }
+      }
+    }
+  },
+  "external_importers": [
+    {
+      "path": "packages/curriculum-cli/src/utils/selectProviderModel.ts",
+      "lines": [
+        "} from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/utils/resolveAiProviderOptions.ts",
+      "lines": [
+        "} from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/commands/critique-subject-draft.ts",
+      "lines": [
+        "import { openAiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/commands/critique-subject.ts",
+      "lines": [
+        "import { openAiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/commands/critique-topic.ts",
+      "lines": [
+        "import { openAiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/commands/review-draft.ts",
+      "lines": [
+        "import { openAiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/commands/critique-subject-draft.test.ts",
+      "lines": [
+        "vi.mock(\"@zoeskoul/curriculum-ai\", () => ({"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/commands/critique-topic-draft.ts",
+      "lines": [
+        "import { openAiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/commands/plan.ts",
+      "lines": [
+        "import { generateCoursePlan, openAiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/quality/evaluateTopicDraft.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/spec/resolvePlan.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";",
+        "import { generateCoursePlan } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/planning/generatePlan.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";",
+        "import { generateCoursePlan } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/normalize/repairIncompleteExercises.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/normalize/repairIncompleteExercises.edge.test.ts",
+      "lines": [
+        "vi.mock(\"@zoeskoul/curriculum-ai\", () => ({"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/normalize/repairIncompleteExercises.test.ts",
+      "lines": [
+        "vi.mock(\"@zoeskoul/curriculum-ai\", () => ({"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/compileSubjectPipeline.ts",
+      "lines": [
+        "import type { AiProvider, TopicRetryContext } from \"@zoeskoul/curriculum-ai\";",
+        "import { generateTopicAuthoringDraftAttempt } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/compileCourse.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/compileTopic.ts",
+      "lines": [
+        "import type { AiProvider, TopicRetryContext } from \"@zoeskoul/curriculum-ai\";",
+        "import { generateTopicAuthoringDraftAttempt } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/critiqueSubjectDraft.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/topicRetryContext.ts",
+      "lines": [
+        "import type { TopicRetryContext } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/critiqueTopic.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";",
+        "import { generateTopicAuthoringDraft } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/compileSubject.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/compileSqlFoundations.regression.test.ts",
+      "lines": [
+        "} from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/reviewSubjectDraft.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/critiqueSubject.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/compile/critiqueTopicDraft.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/emit/translateNonEmptyMessages.ts",
+      "lines": [
+        "import type { AiProvider } from \"@zoeskoul/curriculum-ai\";",
+        "import { translateMessages } from \"@zoeskoul/curriculum-ai\";"
+      ]
+    },
+    {
+      "path": "packages/curriculum-compiler/src/reports/topicGenerationAudit.ts",
+      "lines": [
+        "import type { GeneratedJsonError, GeneratedJsonResult } from \"@zoeskoul/curriculum-ai\";",
+        "} from \"@zoeskoul/curriculum-ai\";"
+      ]
+    }
+  ],
+  "provider_tests": [
+    {
+      "path": "packages/curriculum-ai/src/providers/openai.language-exercise-schema.test.ts",
+      "provider_refs": [
+        "openai.ts"
+      ]
+    },
+    {
+      "path": "packages/curriculum-ai/src/providers/openai.structured-output.smoke.test.ts",
+      "provider_refs": [
+        "openai.ts"
+      ]
+    },
+    {
+      "path": "packages/curriculum-ai/src/providers/openai.test.ts",
+      "provider_refs": [
+        "openai.ts"
+      ]
+    },
+    {
+      "path": "packages/curriculum-ai/src/providers/providerCatalog.test.ts",
+      "provider_refs": [
+        "openai.ts",
+        "gemini.ts",
+        "claude.ts",
+        "deepseek.ts",
+        "deepl.ts",
+        "providerCatalog.ts"
+      ]
+    }
+  ]
+}

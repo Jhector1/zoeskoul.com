@@ -1,0 +1,163 @@
+{
+  "seed_files": [
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/BuildWorkspaceClient.tsx",
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/page.tsx",
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/page.tsx",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/preparation/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+    "apps/web/src/app/api/build/projects/route.owner.test.ts",
+    "apps/web/src/app/api/build/projects/route.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.owner.test.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.test.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.ts",
+    "apps/web/src/lib/build/buildAccessSnapshot.ts",
+    "apps/web/src/lib/build/buildDependencyLockBootstrapRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildExecutorValidation.owner.test.ts",
+    "apps/web/src/lib/build/buildExecutorValidation.ts",
+    "apps/web/src/lib/build/buildPreparationRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildProjectDetailRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildProjectSourceRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildWorkspaceMutation.test.ts",
+    "apps/web/src/lib/build/buildWorkspaceMutation.ts",
+    "apps/web/src/lib/build/buildWorkspaceShell.owner.test.ts",
+    "apps/web/src/lib/build/createBuildProject.owner.test.ts",
+    "apps/web/src/lib/build/createBuildProject.ts",
+    "apps/web/src/lib/build/currentBuildAccess.owner.test.ts",
+    "apps/web/src/lib/build/currentBuildAccess.ts",
+    "apps/web/src/lib/build/readBuildProjects.owner.test.ts",
+    "apps/web/src/lib/build/readBuildProjects.ts",
+    "apps/web/src/lib/build/saveBuildProjectSource.owner.test.ts",
+    "apps/web/src/lib/build/saveBuildProjectSource.ts"
+  ],
+  "owned_closure": [
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/BuildWorkspaceClient.tsx",
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/page.tsx",
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/page.tsx",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/preparation/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+    "apps/web/src/app/api/build/projects/route.owner.test.ts",
+    "apps/web/src/app/api/build/projects/route.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.owner.test.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.test.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.ts",
+    "apps/web/src/lib/build/buildAccessSnapshot.ts",
+    "apps/web/src/lib/build/buildDependencyLockBootstrapRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildExecutorValidation.owner.test.ts",
+    "apps/web/src/lib/build/buildExecutorValidation.ts",
+    "apps/web/src/lib/build/buildPreparationRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildProjectDetailRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildProjectSourceRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildWorkspaceMutation.test.ts",
+    "apps/web/src/lib/build/buildWorkspaceMutation.ts",
+    "apps/web/src/lib/build/buildWorkspaceShell.owner.test.ts",
+    "apps/web/src/lib/build/createBuildProject.owner.test.ts",
+    "apps/web/src/lib/build/createBuildProject.ts",
+    "apps/web/src/lib/build/currentBuildAccess.owner.test.ts",
+    "apps/web/src/lib/build/currentBuildAccess.ts",
+    "apps/web/src/lib/build/readBuildProjects.owner.test.ts",
+    "apps/web/src/lib/build/readBuildProjects.ts",
+    "apps/web/src/lib/build/saveBuildProjectSource.owner.test.ts",
+    "apps/web/src/lib/build/saveBuildProjectSource.ts"
+  ],
+  "targets": {
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/BuildWorkspaceClient.tsx": "apps/zoebuild/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/BuildWorkspaceClient.tsx",
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/page.tsx": "apps/zoebuild/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/page.tsx",
+    "apps/web/src/app/(public)/[locale]/(platform)/build/projects/page.tsx": "apps/zoebuild/src/app/(public)/[locale]/(platform)/build/projects/page.tsx",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts": "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/preparation/route.ts": "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preparation/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/route.ts": "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/route.ts",
+    "apps/web/src/app/api/build/projects/[buildProjectId]/source/route.ts": "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+    "apps/web/src/app/api/build/projects/route.owner.test.ts": "apps/zoebuild/src/app/api/build/projects/route.owner.test.ts",
+    "apps/web/src/app/api/build/projects/route.ts": "apps/zoebuild/src/app/api/build/projects/route.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.owner.test.ts": "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.owner.test.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.test.ts": "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.test.ts",
+    "apps/web/src/lib/build/bootstrapBuildProjectLockfile.ts": "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.ts",
+    "apps/web/src/lib/build/buildAccessSnapshot.ts": "apps/zoebuild/src/lib/build/buildAccessSnapshot.ts",
+    "apps/web/src/lib/build/buildDependencyLockBootstrapRoute.owner.test.ts": "apps/zoebuild/src/lib/build/buildDependencyLockBootstrapRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildExecutorValidation.owner.test.ts": "apps/zoebuild/src/lib/build/buildExecutorValidation.owner.test.ts",
+    "apps/web/src/lib/build/buildExecutorValidation.ts": "apps/zoebuild/src/lib/build/buildExecutorValidation.ts",
+    "apps/web/src/lib/build/buildPreparationRoute.owner.test.ts": "apps/zoebuild/src/lib/build/buildPreparationRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildProjectDetailRoute.owner.test.ts": "apps/zoebuild/src/lib/build/buildProjectDetailRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildProjectSourceRoute.owner.test.ts": "apps/zoebuild/src/lib/build/buildProjectSourceRoute.owner.test.ts",
+    "apps/web/src/lib/build/buildWorkspaceMutation.test.ts": "apps/zoebuild/src/lib/build/buildWorkspaceMutation.test.ts",
+    "apps/web/src/lib/build/buildWorkspaceMutation.ts": "apps/zoebuild/src/lib/build/buildWorkspaceMutation.ts",
+    "apps/web/src/lib/build/buildWorkspaceShell.owner.test.ts": "apps/zoebuild/src/lib/build/buildWorkspaceShell.owner.test.ts",
+    "apps/web/src/lib/build/createBuildProject.owner.test.ts": "apps/zoebuild/src/lib/build/createBuildProject.owner.test.ts",
+    "apps/web/src/lib/build/createBuildProject.ts": "apps/zoebuild/src/lib/build/createBuildProject.ts",
+    "apps/web/src/lib/build/currentBuildAccess.owner.test.ts": "apps/zoebuild/src/lib/build/currentBuildAccess.owner.test.ts",
+    "apps/web/src/lib/build/currentBuildAccess.ts": "apps/zoebuild/src/lib/build/currentBuildAccess.ts",
+    "apps/web/src/lib/build/readBuildProjects.owner.test.ts": "apps/zoebuild/src/lib/build/readBuildProjects.owner.test.ts",
+    "apps/web/src/lib/build/readBuildProjects.ts": "apps/zoebuild/src/lib/build/readBuildProjects.ts",
+    "apps/web/src/lib/build/saveBuildProjectSource.owner.test.ts": "apps/zoebuild/src/lib/build/saveBuildProjectSource.owner.test.ts",
+    "apps/web/src/lib/build/saveBuildProjectSource.ts": "apps/zoebuild/src/lib/build/saveBuildProjectSource.ts"
+  },
+  "seams": {
+    "apps/web/src/components/ide/fullide/FullIDE.tsx": {
+      "category": "APP_UI_OR_ROUTE",
+      "importers": [
+        "apps/web/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/BuildWorkspaceClient.tsx",
+        "apps/web/src/lib/build/buildWorkspaceShell.owner.test.ts"
+      ]
+    },
+    "apps/web/src/lib/access/currentUserAccess.ts": {
+      "category": "AUTH_ADAPTER",
+      "importers": [
+        "apps/web/src/lib/build/currentBuildAccess.ts"
+      ]
+    },
+    "apps/web/src/lib/practice/api/shared/http.ts": {
+      "category": "HTTP_UTILITY",
+      "importers": [
+        "apps/web/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+        "apps/web/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+        "apps/web/src/app/api/build/projects/route.ts"
+      ]
+    },
+    "apps/web/src/lib/prisma.ts": {
+      "category": "DATABASE_ADAPTER",
+      "importers": [
+        "apps/web/src/app/(public)/[locale]/(platform)/build/projects/[buildProjectId]/page.tsx",
+        "apps/web/src/app/(public)/[locale]/(platform)/build/projects/page.tsx",
+        "apps/web/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+        "apps/web/src/app/api/build/projects/[buildProjectId]/preparation/route.ts",
+        "apps/web/src/app/api/build/projects/[buildProjectId]/route.ts",
+        "apps/web/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+        "apps/web/src/app/api/build/projects/route.ts",
+        "apps/web/src/lib/build/createBuildProject.ts"
+      ]
+    },
+    "apps/web/src/lib/projects/saveCodeProject.ts": {
+      "category": "PROJECT_PERSISTENCE",
+      "importers": [
+        "apps/web/src/lib/build/createBuildProject.ts",
+        "apps/web/src/lib/build/saveBuildProjectSource.ts"
+      ]
+    },
+    "apps/web/src/lib/security/ratelimit.ts": {
+      "category": "SECURITY_UTILITY",
+      "importers": [
+        "apps/web/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+        "apps/web/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+        "apps/web/src/app/api/build/projects/route.ts"
+      ]
+    },
+    "apps/web/src/lib/server/runnerActorKey.ts": {
+      "category": "SERVER_UTILITY",
+      "importers": [
+        "apps/web/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts"
+      ]
+    },
+    "apps/web/src/lib/server/runnerClient.ts": {
+      "category": "SERVER_UTILITY",
+      "importers": [
+        "apps/web/src/lib/build/buildExecutorValidation.ts"
+      ]
+    }
+  },
+  "target_collisions": {},
+  "v300k_fixture_state": "V300K_TEST_FIXTURE_STILL_BROKEN"
+}

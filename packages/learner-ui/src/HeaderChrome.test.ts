@@ -10,7 +10,7 @@ const readSource = (relativePath: string) =>
 
 describe("HeaderChrome ownership boundary", () => {
   it("keeps the shared chrome framework-neutral", () => {
-    const source = readSource("./HeaderChrome.tsx");
+    const source = readSource("../../platform-ui/src/HeaderChrome.tsx");
 
     for (const forbidden of [
       "next-auth",
@@ -29,7 +29,7 @@ describe("HeaderChrome ownership boundary", () => {
   });
 
   it("owns the exact shared header geometry", () => {
-    const source = readSource("./HeaderChrome.tsx");
+    const source = readSource("../../platform-ui/src/HeaderChrome.tsx");
 
     for (const required of [
       'className="sticky top-0 z-50"',

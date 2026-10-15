@@ -19,6 +19,9 @@
 @import "./ui/tooltip.css";
 @import "./ui-v2.css";
 
+/* Shared platform chrome utility source. */
+@source "../platform-ui/src";
+
 @layer base {
 
     :root {

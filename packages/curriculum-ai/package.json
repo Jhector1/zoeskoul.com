@@ -19,8 +19,7 @@
     "test:ai:smoke": "vitest run --root ../.. packages/curriculum-ai/src/providers/openai.structured-output.smoke.test.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.66.0",
-    "@google/genai": "^1.21.0",
+    "@zoeskoul/ai-json": "workspace:*",
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-profiles": "workspace:*",
     "openai": "^6.34.0"

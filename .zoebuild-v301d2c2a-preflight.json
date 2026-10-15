@@ -1,0 +1,408 @@
+{
+  "wave": "ZOESKOUL MULTIMODAL BUILD PLAN PREFLIGHT V301D2C2A",
+  "targets": {
+    "apps/zoebuild/src/components/builder/ZoeBuildPromptComposer.tsx": {
+      "lines": 139,
+      "imports_exports": [
+        "import {",
+        "import {",
+        "export function ZoeBuildPromptComposer(props: {"
+      ],
+      "interesting": []
+    },
+    "apps/zoebuild/src/components/builder/zoebuildMinimalBuilder.owner.test.ts": {
+      "lines": 132,
+      "imports_exports": [
+        "import {",
+        "import {",
+        "import {"
+      ],
+      "interesting": [
+        "2:   readFileSync,",
+        "17:   return readFileSync("
+      ]
+    },
+    "apps/zoebuild/src/app/api/build/projects/route.ts": {
+      "lines": 227,
+      "imports_exports": [
+        "import { NextResponse } from \"next/server\";",
+        "import {",
+        "import { loadCurrentBuildAccessSnapshot } from \"@/lib/build/currentBuildAccess\";",
+        "import { createPrismaBuildProjectPersistence } from \"@/lib/build/createBuildProject\";",
+        "import { createPrismaBuildProjectReader } from \"@/lib/build/readBuildProjects\";",
+        "import { prisma } from \"@zoeskoul/platform-server/prisma\";",
+        "import {",
+        "import { rateLimit } from \"@zoeskoul/platform-server/security/ratelimit\";",
+        "export const runtime = \"nodejs\";",
+        "export const dynamic = \"force-dynamic\";",
+        "export async function GET() {",
+        "export async function POST(req: Request) {"
+      ],
+      "interesting": [
+        "11: import { loadCurrentBuildAccessSnapshot } from \"@/lib/build/currentBuildAccess\";",
+        "20: import { rateLimit } from \"@zoeskoul/platform-server/security/ratelimit\";",
+        "65:       { ok: false, code: \"BUILD_AUTH_REQUIRED\", message: \"Unauthorized.\" },",
+        "86:     console.error(\"[/api/build/projects] list failed\", {",
+        "124:       { ok: false, code: \"BUILD_AUTH_REQUIRED\", message: \"Unauthorized.\" },",
+        "129:   const limited = await rateLimit(`zoebuild-create:${userId}`, {",
+        "134:     console.error(\"[/api/build/projects] rate limit unavailable\", {",
+        "216:     console.error(\"[/api/build/projects] create failed\", {"
+      ]
+    },
+    "apps/zoebuild/src/app/api/build/projects/route.owner.test.ts": {
+      "lines": 45,
+      "imports_exports": [
+        "import { readFileSync } from \"node:fs\";",
+        "import { fileURLToPath } from \"node:url\";",
+        "import { describe, expect, it } from \"vitest\";"
+      ],
+      "interesting": [
+        "1: import { readFileSync } from \"node:fs\";",
+        "6:   return readFileSync(fileURLToPath(new URL(relative, import.meta.url)), \"utf8\");",
+        "10:   it(\"keeps transport abuse/auth/spec validation ahead of persistence\", () => {",
+        "16:     expect(source).toContain(\"rateLimit(`zoebuild-create:${userId}`\");"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/currentBuildAccess.ts": {
+      "lines": 20,
+      "imports_exports": [
+        "import \"server-only\";",
+        "import type { BuildAccessSnapshot } from \"@zoeskoul/build-application\";",
+        "import { getCurrentUserAccess } from \"@/lib/access/currentUserAccess\";",
+        "import { loadBuildAccessSnapshot } from \"@/lib/build/buildAccessSnapshot\";",
+        "export async function loadCurrentBuildAccessSnapshot(): Promise<BuildAccessSnapshot> {"
+      ],
+      "interesting": [
+        "12:  * instead of trusting a provider/session identifier directly.",
+        "17:     current.authenticated && current.user ? current.user.id.trim() : \"\";"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/currentBuildAccess.owner.test.ts": {
+      "lines": 19,
+      "imports_exports": [
+        "import { readFileSync } from \"node:fs\";",
+        "import { fileURLToPath } from \"node:url\";",
+        "import { describe, expect, it } from \"vitest\";"
+      ],
+      "interesting": [
+        "1: import { readFileSync } from \"node:fs\";",
+        "6:   return readFileSync(fileURLToPath(new URL(relative, import.meta.url)), \"utf8\");",
+        "10:   it(\"resolves the canonical internal account before Build authorization\", () => {",
+        "11:     const source = read(\"./currentBuildAccess.ts\");",
+        "17:     expect(source).not.toContain(\"session.user\");"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/createBuildProject.ts": {
+      "lines": 114,
+      "imports_exports": [
+        "import \"server-only\";",
+        "import {",
+        "import {",
+        "import { prisma } from \"@zoeskoul/platform-server/prisma\";",
+        "import { saveCodeProjectInTransaction } from \"@zoeskoul/platform-server/projects/saveCodeProject\";",
+        "export function createPrismaBuildProjectPersistence(",
+        "export async function createPersistedBuildProject(args: {"
+      ],
+      "interesting": []
+    },
+    "packages/build-ai/src/index.ts": {
+      "lines": 257,
+      "imports_exports": [
+        "import {",
+        "import {",
+        "import {",
+        "export const BUILD_AI_PROMPT_LIMITS = {",
+        "export type BuildAiGenerationMetadata = Readonly<{",
+        "export type BuildAiPlannerResult = Readonly<{",
+        "export type BuildPromptMedia =",
+        "export interface BuildAiPlanner {",
+        "export type PlanBuildProjectFromPromptResult = Readonly<{",
+        "export class BuildAiPlanningError extends Error {",
+        "export async function planBuildProjectFromPrompt(",
+        "import {",
+        "export const BUILD_PROJECT_SPECIFICATION_SCHEMA_NAME =",
+        "export const BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT = [",
+        "export function createBuildAiPlannerFromJsonTransport("
+      ],
+      "interesting": [
+        "199:   \"requirements must contain booleans for backend, database, auth, storage, payments, email, and commerce.\","
+      ]
+    },
+    "packages/ai-json/src/index.ts": {
+      "lines": 153,
+      "imports_exports": [
+        "export const AI_JSON_DEFAULT_TEMPERATURE = 0;",
+        "export type AiJsonMediaKind =",
+        "export type AiJsonMediaSource =",
+        "export type AiJsonMediaInput = Readonly<{",
+        "export type AiJsonRequest = Readonly<{",
+        "export type AiJsonTransportCapabilities =",
+        "export type AiJsonTransportMetadata =",
+        "export type AiJsonTextResult = Readonly<{",
+        "export class AiJsonUnsupportedModalityError",
+        "export interface AiJsonTransport {",
+        "export function assertAiJsonMediaSupported(",
+        "export function stripAiJsonCodeFences(",
+        "export function parseAiJsonText<T>(",
+        "export {",
+        "export {",
+        "export {"
+      ],
+      "interesting": []
+    },
+    "packages/ai-json/src/gemini.ts": {
+      "lines": 219,
+      "imports_exports": [
+        "import {",
+        "export type GeminiAiJsonTransportOptions =",
+        "export function createGeminiAiJsonTransport("
+      ],
+      "interesting": [
+        "34:     process.env.GEMINI_API_KEY;",
+        "38:       \"Missing GEMINI_API_KEY\","
+      ]
+    },
+    "packages/ai-json/src/claude.ts": {
+      "lines": 207,
+      "imports_exports": [
+        "import {",
+        "export type ClaudeAiJsonTransportOptions =",
+        "export function createClaudeAiJsonTransport("
+      ],
+      "interesting": [
+        "34:     process.env.ANTHROPIC_API_KEY;",
+        "38:       \"Missing ANTHROPIC_API_KEY\","
+      ]
+    },
+    "packages/ai-json/src/deepseek.ts": {
+      "lines": 244,
+      "imports_exports": [
+        "import OpenAI from \"openai\";",
+        "import {",
+        "export type DeepSeekAiJsonTransportOptions =",
+        "export function supportsDeepSeekImageInput(",
+        "export function createDeepSeekAiJsonTransport("
+      ],
+      "interesting": [
+        "42:     process.env.DEEPSEEK_API_KEY;",
+        "46:       \"Missing DEEPSEEK_API_KEY\","
+      ]
+    },
+    "packages/platform-auth/src/index.ts": {
+      "lines": 261,
+      "imports_exports": [
+        "import NextAuth, { customFetch } from \"next-auth\";",
+        "import Keycloak from \"next-auth/providers/keycloak\";",
+        "import Google from \"next-auth/providers/google\";",
+        "import { PrismaAdapter } from \"@auth/prisma-adapter\";",
+        "export type PlatformAuthCreatedUser = Readonly<{",
+        "export type PlatformAuthFactoryOptions = Readonly<{",
+        "export function createPlatformAuth(options: PlatformAuthFactoryOptions) {"
+      ],
+      "interesting": [
+        "1: import NextAuth, { customFetch } from \"next-auth\";",
+        "2: import Keycloak from \"next-auth/providers/keycloak\";",
+        "3: import Google from \"next-auth/providers/google\";",
+        "4: import { PrismaAdapter } from \"@auth/prisma-adapter\";",
+        "95:     return fetch(input, init);",
+        "107:   headers.set(\"user-agent\", \"zoeskoul-auth/1.0\");",
+        "109:   const response = await fetch(input, {",
+        "146:     console.info(\"[auth][keycloak-discovery] success\", details);",
+        "148:     console.error(\"[auth][keycloak-discovery] failure\", details);",
+        "155:   const signInPath = options.signInPath ?? \"/authenticate\";",
+        "159:     session: { strategy: \"jwt\" },",
+        "185:         authorization: {",
+        "210:           if (parsed.origin === baseUrl) return url;",
+        "218:       async jwt({ token, user, account, trigger, session }) {",
+        "223:           (typeof session === \"object\" &&",
+        "224:             session !== null &&",
+        "225:             \"refreshProfile\" in session &&",
+        "226:             session.refreshProfile === true);",
+        "246:       async session({ session, token }) {",
+        "247:         if (session.user) {",
+        "249:             (session.user as any).id = (token as SessionProfileToken).uid as string;",
+        "252:           session.user.name = token.name ?? null;",
+        "253:           session.user.email = token.email ?? session.user.email;",
+        "254:           session.user.image = token.picture ?? null;",
+        "257:         return session;"
+      ]
+    },
+    "packages/platform-server/src/security/inMemoryRateLimit.ts": {
+      "lines": 90,
+      "imports_exports": [
+        "export type InMemoryRateLimitConfig = {",
+        "export type InMemoryRateLimitResult =",
+        "export function inMemoryRateLimit(",
+        "export function resetInMemoryRateLimitsForTests(): void {"
+      ],
+      "interesting": [
+        "55: export function inMemoryRateLimit("
+      ]
+    },
+    "packages/platform-server/src/security/ratelimit.ts": {
+      "lines": 133,
+      "imports_exports": [
+        "import { Ratelimit } from \"@upstash/ratelimit\";",
+        "import { Redis } from \"@upstash/redis\";",
+        "import { inMemoryRateLimit } from \"./inMemoryRateLimit\";",
+        "export async function rateLimit("
+      ],
+      "interesting": [
+        "5: import { inMemoryRateLimit } from \"./inMemoryRateLimit\";",
+        "99: export async function rateLimit(",
+        "128:         return inMemoryRateLimit("
+      ]
+    },
+    "apps/zoebuild/package.json": {
+      "lines": 42,
+      "imports_exports": [],
+      "interesting": [
+        "23:     \"@zoeskoul/platform-auth\": \"workspace:*\",",
+        "28:     \"next-auth\": \"^5.0.0-beta.30\","
+      ]
+    }
+  },
+  "env_references": [
+    {
+      "path": "packages/curriculum-agents/README.md",
+      "terms": [
+        "OPENAI_API_KEY"
+      ]
+    },
+    {
+      "path": "packages/ai-json/src/deepseek.ts",
+      "terms": [
+        "DEEPSEEK_API_KEY"
+      ]
+    },
+    {
+      "path": "packages/ai-json/src/gemini.ts",
+      "terms": [
+        "GEMINI_API_KEY"
+      ]
+    },
+    {
+      "path": "packages/ai-json/src/claude.ts",
+      "terms": [
+        "ANTHROPIC_API_KEY"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/utils/selectProviderModel.test.ts",
+      "terms": [
+        "AI_PROVIDER",
+        "AI_MODEL",
+        "GEMINI_MODEL",
+        "OPENAI_MODEL",
+        "DEEPSEEK_MODEL"
+      ]
+    },
+    {
+      "path": "packages/curriculum-cli/src/utils/selectProviderModel.ts",
+      "terms": [
+        "AI_PROVIDER",
+        "AI_MODEL",
+        "OPENAI_MODEL"
+      ]
+    },
+    {
+      "path": "packages/curriculum-agents/src/cli/student.ts",
+      "terms": [
+        "OPENAI_API_KEY"
+      ]
+    },
+    {
+      "path": "packages/curriculum-ai/src/providers/providerCatalog.test.ts",
+      "terms": [
+        "AI_PROVIDER",
+        "GEMINI_MODEL"
+      ]
+    },
+    {
+      "path": "packages/curriculum-ai/src/providers/openai.ts",
+      "terms": [
+        "AI_MODEL",
+        "OPENAI_MODEL",
+        "OPENAI_API_KEY"
+      ]
+    },
+    {
+      "path": "packages/curriculum-ai/src/providers/openai.structured-output.smoke.test.ts",
+      "terms": [
+        "AI_MODEL",
+        "OPENAI_MODEL",
+        "OPENAI_API_KEY"
+      ]
+    },
+    {
+      "path": "packages/curriculum-ai/src/providers/providerCatalog.ts",
+      "terms": [
+        "AI_PROVIDER",
+        "AI_MODEL",
+        "GEMINI_MODEL",
+        "GEMINI_API_KEY",
+        "OPENAI_MODEL",
+        "OPENAI_API_KEY",
+        "ANTHROPIC_API_KEY",
+        "DEEPSEEK_API_KEY",
+        "DEEPSEEK_MODEL"
+      ]
+    }
+  ],
+  "relevant_files": [
+    {
+      "path": "apps/zoebuild/src/app/api/build/projects/route.ts",
+      "hits": [
+        "sameOrigin"
+      ]
+    },
+    {
+      "path": "apps/zoebuild/src/app/api/build/projects/route.owner.test.ts",
+      "hits": [
+        "sameOrigin"
+      ]
+    },
+    {
+      "path": "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+      "hits": [
+        "sameOrigin"
+      ]
+    },
+    {
+      "path": "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+      "hits": [
+        "sameOrigin"
+      ]
+    },
+    {
+      "path": "apps/zoebuild/src/lib/build/buildDependencyLockBootstrapRoute.owner.test.ts",
+      "hits": [
+        "sameOrigin"
+      ]
+    },
+    {
+      "path": "apps/zoebuild/src/lib/build/buildProjectSourceRoute.owner.test.ts",
+      "hits": [
+        "sameOrigin"
+      ]
+    },
+    {
+      "path": "packages/platform-server/src/http.ts",
+      "hits": [
+        "sameOrigin"
+      ]
+    },
+    {
+      "path": "packages/platform-server/src/security/inMemoryRateLimit.ts",
+      "hits": [
+        "inMemoryRateLimit"
+      ]
+    },
+    {
+      "path": "packages/platform-server/src/security/ratelimit.ts",
+      "hits": [
+        "inMemoryRateLimit"
+      ]
+    }
+  ]
+}

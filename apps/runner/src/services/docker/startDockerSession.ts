@@ -37,6 +37,7 @@ import {
 } from "../workspace/cleanupWorkspace.js";
 
 import { getExecutionPlan } from "../execution/executionPlan.js";
+import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { docker } from "./dockerClient.js";
 import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
 import { killSession } from "./killSession.js";
@@ -329,8 +330,10 @@ async function startDockerSessionUncoordinated(
     await ensureWorkspaceRuntimeFiles(resolvedWorkspaceDir, plan.prepareDirs ?? []);
     await ensureWorkspaceWritableForShellUser(resolvedWorkspaceDir);
 
+    const sandboxProfile = resolveSandboxProfile("learn");
+
     const container = await docker.createContainer({
-      Image: env.runnerImage,
+      Image: sandboxProfile.image,
       name: containerName,
       Tty: true,
       OpenStdin: true,
@@ -339,11 +342,13 @@ async function startDockerSessionUncoordinated(
       AttachStdout: true,
       AttachStderr: true,
       WorkingDir: sessionCwd,
-      User: `${env.execUid}:${env.execGid}`,
+      User: sandboxProfile.user,
       Labels: {
         "com.zoeskoul.runner": "true",
         "com.zoeskoul.runner.session": sessionId,
         "com.zoeskoul.runner.owner": ownerKey.slice(0, 64),
+        "com.zoeskoul.runner.purpose": "learn",
+        "com.zoeskoul.runner.profile": sandboxProfile.id,
       },
       Env: [
         `PREPARE_DIRS_JSON=${JSON.stringify(plan.prepareDirs ?? [])}`,
@@ -376,20 +381,17 @@ async function startDockerSessionUncoordinated(
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: {
         Binds: [`${resolvedWorkspaceDir}:/workspace`],
-        NetworkMode: env.childNetwork,
-        ReadonlyRootfs: true,
-        CapDrop: ["ALL"],
-        Memory: env.memoryLimitBytes,
-        MemorySwap: env.memoryLimitBytes,
+        NetworkMode: sandboxProfile.networkMode,
+        ReadonlyRootfs: sandboxProfile.readonlyRootfs,
+        CapDrop: [...sandboxProfile.capDrop],
+        Memory: sandboxProfile.memoryBytes,
+        MemorySwap: sandboxProfile.memoryBytes,
         CpuPeriod: 100000,
-        CpuQuota: env.cpuQuota,
-        PidsLimit: env.pidsLimit,
+        CpuQuota: sandboxProfile.cpuQuota,
+        PidsLimit: sandboxProfile.pidsLimit,
         AutoRemove: true,
-        SecurityOpt: ["no-new-privileges:true"],
-        Tmpfs: {
-          "/tmp": "rw,noexec,nosuid,size=64m",
-          "/run": "rw,noexec,nosuid,size=16m",
-        },
+        SecurityOpt: [...sandboxProfile.securityOpt],
+        Tmpfs: { ...sandboxProfile.tmpfs },
       },
     });
 

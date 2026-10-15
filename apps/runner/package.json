@@ -7,7 +7,8 @@
     "build": "tsc -p tsconfig.json --outDir dist",
     "start": "node dist/server.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run --config vitest.config.ts"  },
+    "test": "vitest run --config vitest.config.ts"
+  },
   "keywords": [],
   "author": "info@zoeskoul.com",
   "license": "ISC",
@@ -20,7 +21,9 @@
     "express": "^5.2.1",
     "uuid": "^13.0.0",
     "ws": "^8.20.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "@zoeskoul/build-executor-contracts": "workspace:*",
+    "@zoeskoul/build-preparation": "workspace:*"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

@@ -23,6 +23,12 @@ export const zoeSkoulApps = {
     localPort: 3003,
     productionOrigin: "https://teacher.zoeskoul.com",
   },
+  zoebuild: {
+    id: "zoebuild",
+    label: "ZoeBuild",
+    localPort: 3004,
+    productionOrigin: "https://build.zoeskoul.com",
+  },
 } as const;
 
 export type ZoeSkoulAppId = keyof typeof zoeSkoulApps;
@@ -31,6 +37,7 @@ export const browserAppIds = [
   "admin",
   "student",
   "teacher",
+  "zoebuild",
 ] as const satisfies readonly ZoeSkoulAppId[];
 
 export type ZoeSkoulBrowserAppId = (typeof browserAppIds)[number];

@@ -1,0 +1,330 @@
+@import "tailwindcss";
+@import "../../../../packages/ui-styles/ui.css";
+
+:root {
+  --zb-bg: #f7f8fb;
+  --zb-surface: rgba(255, 255, 255, 0.92);
+  --zb-text: #16181d;
+  --zb-muted: #626875;
+  --zb-border: rgba(22, 24, 29, 0.12);
+  --zb-accent: #6d5dfc;
+  --zb-accent-text: #ffffff;
+}
+
+.dark {
+  --zb-bg: #0d0f14;
+  --zb-surface: rgba(20, 23, 31, 0.92);
+  --zb-text: #f7f8fb;
+  --zb-muted: #aeb4c0;
+  --zb-border: rgba(247, 248, 251, 0.13);
+  --zb-accent: #9185ff;
+  --zb-accent-text: #0b0d12;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--zb-bg);
+  color: var(--zb-text);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.zb-builder-shell {
+  display: grid;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr)
+    auto;
+  height: calc(100dvh - 64px);
+  min-height: 520px;
+}
+
+.zb-builder-toolbar {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 6px 14px;
+  border-bottom:
+    1px solid var(--zb-border);
+  background: var(--zb-surface);
+}
+
+.zb-project-title {
+  position: absolute;
+  left: 16px;
+  max-width: min(30vw, 320px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--zb-muted);
+}
+
+.zb-mode-tabs {
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  border:
+    1px solid var(--zb-border);
+  border-radius: 10px;
+  background: var(--zb-surface);
+}
+
+.zb-mode-tab {
+  min-height: 30px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--zb-muted);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.zb-mode-tab.is-active {
+  background: rgb(var(--ui-text));
+  color: rgb(var(--ui-surface));
+}
+
+.zb-builder-stage {
+  min-height: 0;
+  overflow: hidden;
+  background: var(--zb-bg);
+}
+
+.zb-stage-quiet {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--zb-muted);
+  font-size: 0.78rem;
+}
+
+.zb-code-stage {
+  height: 100%;
+  min-height: 0;
+}
+
+.zb-ai-panel {
+  height: 100%;
+  overflow: auto;
+  padding: 20px;
+}
+
+.zb-ai-message {
+  width: min(760px, 94%);
+  margin: 0 auto 10px;
+  padding: 13px 15px;
+  border:
+    1px solid var(--zb-border);
+  border-radius: 13px;
+  background: var(--zb-surface);
+  line-height: 1.5;
+}
+
+.zb-prompt-dock {
+  padding: 10px;
+  border-top:
+    1px solid var(--zb-border);
+  background: var(--zb-surface);
+}
+
+.zb-composer-wrap {
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+.zb-prompt-composer {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border:
+    1px solid var(--zb-border);
+  border-radius: 16px;
+  background: rgb(var(--ui-surface));
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.zb-prompt-composer textarea {
+  width: 100%;
+  min-height: 72px;
+  max-height: 180px;
+  resize: vertical;
+  border: 0;
+  outline: none;
+  padding: 8px 10px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1.5;
+}
+
+.zb-prompt-composer textarea::placeholder,
+.zb-shopify-import input::placeholder {
+  color: var(--zb-muted);
+}
+
+.zb-composer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.zb-composer-actions button,
+.zb-shopify-import button {
+  min-height: 36px;
+  border-radius: 9px;
+  padding: 0 13px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.zb-build-button {
+  border: 0;
+  background: var(--zb-accent);
+  color: var(--zb-accent-text);
+}
+
+.zb-build-button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.zb-import-button,
+.zb-import-cancel {
+  border:
+    1px solid var(--zb-border);
+  background: transparent;
+  color: inherit;
+}
+
+.zb-shopify-import {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    auto;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 8px;
+  border:
+    1px solid var(--zb-border);
+  border-radius: 12px;
+  background: var(--zb-surface);
+}
+
+.zb-shopify-import input {
+  min-height: 38px;
+  min-width: 0;
+  border:
+    1px solid var(--zb-border);
+  border-radius: 8px;
+  padding: 0 11px;
+  background: rgb(var(--ui-surface));
+  color: inherit;
+  font: inherit;
+}
+
+.zb-shopify-import button[type="submit"] {
+  border: 0;
+  background: var(--zb-accent);
+  color: var(--zb-accent-text);
+}
+
+.zb-composer-error {
+  grid-column: 1 / -1;
+  color: #b42318;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 700px) {
+  .zb-project-title {
+    display: none;
+  }
+
+  .zb-shopify-import {
+    grid-template-columns: 1fr;
+  }
+
+  .zb-composer-actions {
+    justify-content: stretch;
+  }
+
+  .zb-composer-actions button {
+    flex: 1;
+  }
+}
+/* ZoeBuild multimodal composer V301D2C2B */
+.zb-media-input {
+  display: none;
+}
+
+.zb-composer-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0 0.1rem;
+}
+
+.zb-media-chip {
+  display: inline-flex;
+  max-width: min(100%, 22rem);
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgb(var(--ui-border) / 0.82);
+  border-radius: 999px;
+  padding: 0.32rem 0.45rem 0.32rem 0.68rem;
+  background: rgb(var(--ui-surface) / 0.82);
+  font-size: 0.76rem;
+}
+
+.zb-media-chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zb-media-chip button {
+  display: grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.zb-media-button {
+  white-space: nowrap;
+}
+
+.zb-ai-message-plan {
+  white-space: pre-line;
+}

@@ -1,14 +1,21 @@
-import OpenAI from "openai";
+import {
+  createDeepSeekAiJsonTransport,
+} from "@zoeskoul/ai-json";
 
-import type { AiProvider, GenerateJsonArgs, GeneratedJsonResult } from "../types.js";
+import type {
+  AiProvider,
+  GenerateJsonArgs,
+  GeneratedJsonResult,
+} from "../types.js";
 import {
   buildGeneratedJsonResult,
   generatedJsonMetadata,
-  JSON_PROVIDER_DEFAULT_TEMPERATURE,
   parseProviderJsonText,
   strictJsonSystemPrompt,
 } from "./jsonProviderUtils.js";
-import { getDefaultModelForProvider } from "./providerCatalog.js";
+import {
+  getDefaultModelForProvider,
+} from "./providerCatalog.js";
 
 export type DeepSeekProviderOptions = {
   model?: string;
@@ -16,91 +23,87 @@ export type DeepSeekProviderOptions = {
   baseURL?: string;
 };
 
-function getDeepSeekApiKey(apiKey?: string): string {
-  const value = apiKey ?? process.env.DEEPSEEK_API_KEY;
-  if (!value?.trim()) {
-    throw new Error("Missing DEEPSEEK_API_KEY");
-  }
-  return value;
-}
+export function createDeepSeekProvider(
+  options: DeepSeekProviderOptions = {},
+): AiProvider {
+  const model =
+    options.model?.trim() ||
+    getDefaultModelForProvider(
+      "deepseek",
+    );
 
-function getTextFromOpenAiCompatibleCompletion(response: any): string {
-  const message = response?.choices?.[0]?.message;
+  const transport =
+    createDeepSeekAiJsonTransport({
+      model,
+      apiKey: options.apiKey,
+      baseURL: options.baseURL,
+    });
 
-  if (typeof message?.content === "string" && message.content.trim()) {
-    return message.content;
-  }
-
-  if (Array.isArray(message?.content)) {
-    const text = message.content
-      .filter((part: any) => part?.type === "text")
-      .map((part: any) => part.text ?? "")
-      .join("");
-
-    if (text.trim()) return text;
-  }
-
-  throw new Error("DeepSeek returned no text content");
-}
-
-export function createDeepSeekProvider(options: DeepSeekProviderOptions = {}): AiProvider {
-  const model = options.model?.trim() || getDefaultModelForProvider("deepseek");
-  const baseURL = options.baseURL ?? process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek.com";
-
-  const provider: AiProvider = {
+  const resultProvider: AiProvider = {
     providerId: "deepseek",
     model,
 
     async generateJsonDetailed<T>(
       args: GenerateJsonArgs,
     ): Promise<GeneratedJsonResult<T>> {
-      const client = new OpenAI({
-        apiKey: getDeepSeekApiKey(options.apiKey),
-        baseURL,
-      });
+      const metadata =
+        generatedJsonMetadata({
+          provider: "deepseek",
+          model,
+          schemaName:
+            args.schemaName,
+        });
 
-      const metadata = generatedJsonMetadata({
-        provider: "deepseek",
-        model,
-        schemaName: args.schemaName,
-      });
+      const generated =
+        await transport.generateJsonText({
+          system:
+            strictJsonSystemPrompt(
+              args.system,
+            ),
+          user: args.user,
+          schemaName:
+            args.schemaName,
+        });
 
-      const response = await client.chat.completions.create({
-        model,
-        messages: [
-          { role: "system", content: strictJsonSystemPrompt(args.system) },
-          { role: "user", content: args.user },
-        ],
-        response_format: { type: "json_object" },
-        temperature: JSON_PROVIDER_DEFAULT_TEMPERATURE,
-      } as any);
-
-      const text = getTextFromOpenAiCompatibleCompletion(response);
       let parsedJson: unknown;
 
       try {
-        parsedJson = parseProviderJsonText<unknown>(text);
+        parsedJson =
+          parseProviderJsonText<unknown>(
+            generated.text,
+          );
       } catch (error) {
         throw new Error(
           `DeepSeek returned invalid JSON for ${args.schemaName} with ${model}: ${
-            error instanceof Error ? error.message : String(error)
+            error instanceof Error
+              ? error.message
+              : String(error)
           }`,
         );
       }
 
       return buildGeneratedJsonResult<T>({
         metadata,
-        rawText: text,
+        rawText:
+          generated.text,
+        schemaName:
+          args.schemaName,
         parsedJson,
-        schemaName: args.schemaName,
       });
     },
 
-    async generateJson<T>(args: GenerateJsonArgs): Promise<T> {
-      const result = await provider.generateJsonDetailed!<T>(args);
+    async generateJson<T>(
+      args: GenerateJsonArgs,
+    ): Promise<T> {
+      const result =
+        await resultProvider
+          .generateJsonDetailed!<T>(
+            args,
+          );
+
       return result.value;
     },
   };
 
-  return provider;
+  return resultProvider;
 }

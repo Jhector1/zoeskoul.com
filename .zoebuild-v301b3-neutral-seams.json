@@ -1,0 +1,104 @@
+{
+  "apps_web_build_owned_files": 30,
+  "partial_platform_server_cleaned": true,
+  "installed_server_only_version": null,
+  "current_user_access_student_specific": false,
+  "seams": {
+    "apps/web/src/lib/access/currentUserAccess.ts": {
+      "exports": [
+        "CurrentUserAccess",
+        "getCurrentUserAccess"
+      ],
+      "local_imports": [
+        "@/lib/auth",
+        "@/lib/prisma",
+        "@/lib/access/roleCapabilities"
+      ],
+      "package_imports": [
+        "react"
+      ],
+      "student_specific_detected": false
+    },
+    "apps/web/src/lib/practice/api/shared/http.ts": {
+      "exports": [
+        "hardenApiResponse",
+        "bodyJsonResponse",
+        "bodyJsonWithGuestCookie",
+        "jsonApiResponse",
+        "jsonApiWithGuestCookie",
+        "getClientIp",
+        "getContentLength",
+        "exceedsContentLength",
+        "safeSameOriginUrl",
+        "enforceSameOriginPost",
+        "readJsonSafe"
+      ],
+      "local_imports": [
+        "@/lib/practice/actor"
+      ],
+      "package_imports": [
+        "next/server"
+      ],
+      "student_specific_detected": true
+    },
+    "apps/web/src/lib/prisma.ts": {
+      "exports": [],
+      "local_imports": [],
+      "package_imports": [
+        "@zoeskoul/db",
+        "@zoeskoul/db"
+      ],
+      "student_specific_detected": false
+    },
+    "apps/web/src/lib/projects/saveCodeProject.ts": {
+      "exports": [
+        "ProjectVersionConflictError",
+        "SaveCodeProjectInput",
+        "saveCodeProjectInTransaction",
+        "saveCodeProject"
+      ],
+      "local_imports": [
+        "@/lib/prisma"
+      ],
+      "package_imports": [
+        "node:crypto",
+        "@zoeskoul/db"
+      ],
+      "student_specific_detected": false
+    },
+    "apps/web/src/lib/security/ratelimit.ts": {
+      "exports": [
+        "rateLimit"
+      ],
+      "local_imports": [],
+      "package_imports": [
+        "@upstash/ratelimit",
+        "@upstash/redis"
+      ],
+      "student_specific_detected": false
+    },
+    "apps/web/src/lib/server/runnerActorKey.ts": {
+      "exports": [
+        "requireRunnerActorKey"
+      ],
+      "local_imports": [
+        "@/lib/auth"
+      ],
+      "package_imports": [
+        "node:crypto"
+      ],
+      "student_specific_detected": false
+    },
+    "apps/web/src/lib/server/runnerClient.ts": {
+      "exports": [
+        "RunnerHttpError",
+        "runnerPost"
+      ],
+      "local_imports": [],
+      "package_imports": [
+        "@zoeskoul/curriculum-runtime"
+      ],
+      "student_specific_detected": false
+    }
+  }
+}

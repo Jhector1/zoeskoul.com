@@ -1,0 +1,29 @@
+{
+  "name": "@zoeskoul/platform-server",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./http": "./src/http.ts",
+    "./access/reconcileFeatureGrant": "./src/access/reconcileFeatureGrant.ts",
+    "./prisma": "./src/prisma.ts",
+    "./projects/saveCodeProject": "./src/projects/saveCodeProject.ts",
+    "./security/inMemoryRateLimit": "./src/security/inMemoryRateLimit.ts",
+    "./security/ratelimit": "./src/security/ratelimit.ts",
+    "./server/runnerClient": "./src/server/runnerClient.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.36.3",
+    "@zoeskoul/curriculum-runtime": "workspace:*",
+    "@zoeskoul/db": "workspace:*",
+    "next": "16.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.2"
+  }
+}

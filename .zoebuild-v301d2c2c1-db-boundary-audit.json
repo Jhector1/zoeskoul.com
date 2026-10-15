@@ -1,0 +1,50 @@
+{
+  "wave": "ZOESKOUL BUILD AI FEATURE GRANT DB BOUNDARY AUDIT V301D2C2C1",
+  "zoebuild_db_consumers": [
+    "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/page.tsx",
+    "apps/zoebuild/src/app/[locale]/projects/page.tsx",
+    "apps/zoebuild/src/app/api/build/plan/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preparation/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/route.owner.test.ts",
+    "apps/zoebuild/src/app/api/build/projects/route.ts",
+    "apps/zoebuild/src/components/builder/multimodalBuildPlan.owner.test.ts",
+    "apps/zoebuild/src/lib/access/currentUserAccess.ts",
+    "apps/zoebuild/src/lib/auth.ts",
+    "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.owner.test.ts",
+    "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.test.ts",
+    "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.ts",
+    "apps/zoebuild/src/lib/build/buildDependencyLockBootstrapRoute.owner.test.ts",
+    "apps/zoebuild/src/lib/build/buildExecutorValidation.ts",
+    "apps/zoebuild/src/lib/build/buildPreparationRoute.owner.test.ts",
+    "apps/zoebuild/src/lib/build/buildProjectDetailRoute.owner.test.ts",
+    "apps/zoebuild/src/lib/build/buildProjectSourceRoute.owner.test.ts",
+    "apps/zoebuild/src/lib/build/createBuildProject.owner.test.ts",
+    "apps/zoebuild/src/lib/build/createBuildProject.ts",
+    "apps/zoebuild/src/lib/build/readBuildProjects.ts",
+    "apps/zoebuild/src/lib/build/saveBuildProjectSource.ts"
+  ],
+  "platform_server_db_exports": [
+    "packages/platform-server/src/prisma.ts",
+    "packages/platform-server/src/projects/saveCodeProject.ts"
+  ],
+  "db_exports": [
+    "apps/admin/src/architecture.test.ts",
+    "apps/teacher/src/features/school/TeacherSchool.owner.test.ts",
+    "apps/teacher/src/features/school/TeacherSchoolCourses.owner.test.ts",
+    "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/page.tsx",
+    "apps/zoebuild/src/app/[locale]/projects/page.tsx",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preparation/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/route.ts",
+    "apps/zoebuild/src/lib/access/currentUserAccess.ts",
+    "apps/zoebuild/src/lib/auth.ts",
+    "apps/zoebuild/src/lib/build/createBuildProject.ts",
+    "apps/zoebuild/src/lib/build/readBuildProjects.ts",
+    "apps/zoebuild/src/lib/build/saveBuildProjectSource.ts"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "wave": "ZOESKOUL BUILD AI GRANT PROVISIONING OWNER AUDIT V301D2C2D0",
+  "feature_grant_writers": [],
+  "subscription_owners": [
+    "apps/web/src/app/api/billing/checkout/route.test.ts",
+    "apps/web/src/app/api/billing/checkout/route.ts",
+    "apps/web/src/app/api/billing/status/route.ts",
+    "apps/web/src/app/api/billing/subscription/resume/route.test.ts",
+    "apps/web/src/app/api/billing/subscription/resume/route.ts",
+    "apps/web/src/lib/access/accessSnapshot.ts",
+    "apps/web/src/lib/billing/entitlement.test.ts",
+    "apps/web/src/lib/billing/entitlement.ts",
+    "apps/web/src/lib/billing/period.test.ts",
+    "apps/web/src/lib/billing/period.ts",
+    "apps/web/src/lib/billing/requireEntitledUser.ts",
+    "apps/web/src/lib/billing/stripeService.ts",
+    "apps/web/src/lib/practice/experience/viewer.ts",
+    "apps/web/src/lib/tutoring/tutoringCommercial.test.ts",
+    "apps/web/src/lib/tutoring/tutoringCommercial.ts",
+    "apps/web/src/lib/tutoring/tutoringCreditCheckout.test.ts",
+    "apps/web/src/lib/tutoring/tutoringCreditCheckout.ts",
+    "apps/web/src/lib/tutoring/tutoringCreditWebhook.test.ts",
+    "apps/web/src/lib/tutoring/tutoringCreditWebhook.ts",
+    "apps/web/src/lib/tutoring/tutoringSavedCardPayment.test.ts",
+    "apps/web/src/lib/tutoring/tutoringSavedCardWebhook.test.ts",
+    "packages/db/prisma/schema.prisma"
+  ],
+  "admin_owners": [
+    "apps/admin/src/app/AdminAccessGate.tsx"
+  ],
+  "billing_env_owners": [
+    "apps/web/src/app/api/billing/checkout/route.test.ts",
+    "apps/web/src/app/api/billing/checkout/route.ts",
+    "apps/web/src/app/api/billing/status/route.ts",
+    "apps/web/src/lib/billing/stripeService.checkout.test.ts",
+    "apps/web/src/lib/billing/stripeService.ts"
+  ]
+}
