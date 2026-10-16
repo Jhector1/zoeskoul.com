@@ -571,6 +571,69 @@ async function runInstall(
   }
 }
 
+export function decodeDockerExecMultiplexedOutput(
+  raw: Buffer,
+): Readonly<{
+  stdout: Buffer;
+  stderr: Buffer;
+}> {
+  const stdout: Buffer[] = [];
+  const stderr: Buffer[] = [];
+
+  let offset = 0;
+
+  while (offset < raw.length) {
+    if (raw.length - offset < 8) {
+      throw new Error(
+        "Trusted preview HTTP bridge returned an invalid Docker stream.",
+      );
+    }
+
+    const streamType = raw[offset];
+    const frameLength =
+      raw.readUInt32BE(offset + 4);
+    const frameStart =
+      offset + 8;
+    const frameEnd =
+      frameStart + frameLength;
+
+    if (
+      frameEnd >
+      raw.length
+    ) {
+      throw new Error(
+        "Trusted preview HTTP bridge returned an invalid Docker stream.",
+      );
+    }
+
+    const payload =
+      raw.subarray(
+        frameStart,
+        frameEnd,
+      );
+
+    if (streamType === 1) {
+      stdout.push(payload);
+    } else if (streamType === 2) {
+      stderr.push(payload);
+    } else {
+      throw new Error(
+        "Trusted preview HTTP bridge returned an invalid Docker stream.",
+      );
+    }
+
+    offset =
+      frameEnd;
+  }
+
+  return {
+    stdout:
+      Buffer.concat(stdout),
+    stderr:
+      Buffer.concat(stderr),
+  };
+}
+
 async function captureExec(
   containerId: string,
   command:
@@ -589,7 +652,7 @@ async function captureExec(
       AttachStdout: true,
       AttachStderr: true,
       AttachStdin: false,
-      Tty: true,
+      Tty: false,
     });
 
   const stream =
@@ -630,18 +693,36 @@ async function captureExec(
   const inspection =
     await exec.inspect();
 
+  const decoded =
+    decodeDockerExecMultiplexedOutput(
+      Buffer.concat(
+        chunks,
+      ),
+    );
+
   if (
     inspection.ExitCode !==
     0
   ) {
+    const detail =
+      decoded.stderr
+        .toString(
+          "utf8",
+        )
+        .trim()
+        .slice(
+          0,
+          2048,
+        );
+
     throw new Error(
-      "Trusted preview HTTP bridge failed.",
+      detail
+        ? `Trusted preview HTTP bridge failed: ${detail}`
+        : "Trusted preview HTTP bridge failed.",
     );
   }
 
-  return Buffer.concat(
-    chunks,
-  )
+  return decoded.stdout
     .toString(
       "utf8",
     )
