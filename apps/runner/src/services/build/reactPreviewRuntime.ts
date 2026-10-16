@@ -49,6 +49,11 @@ import {
   buildProductionBuildContainerOptions,
 } from "./executeProductionBuild.js";
 
+import {
+  REACT_VITE_V1_PREBUILT_LOCK_SHA256,
+  REACT_VITE_V1_PREBUILT_ROOT,
+} from "./reactVitePrebuiltDependencies.js";
+
 const PREVIEW_IDLE_MS =
   10 * 60_000;
 
@@ -526,6 +531,157 @@ async function waitForContainer(
       );
     }
   }
+}
+
+let prebuiltReactViteRuntimeAvailable:
+  Promise<boolean> |
+  null =
+    null;
+
+function requestLockSha256(
+  files:
+    readonly PreviewSourceFile[],
+): string | null {
+  const lock =
+    files.find(
+      (file) =>
+        file.path ===
+        "pnpm-lock.yaml",
+    );
+
+  if (!lock) {
+    return null;
+  }
+
+  return createHash(
+    "sha256",
+  )
+    .update(
+      sourceFileBytes(
+        lock,
+      ),
+    )
+    .digest(
+      "hex",
+    );
+}
+
+async function probePrebuiltReactViteRuntime(
+  workspaceDir: string,
+): Promise<boolean> {
+  if (
+    prebuiltReactViteRuntimeAvailable
+  ) {
+    return prebuiltReactViteRuntimeAvailable;
+  }
+
+  prebuiltReactViteRuntimeAvailable =
+    (async () => {
+      const checkScript = [
+        'const fs = require("node:fs");',
+        'const root = "/opt/zoeskoul/react-vite-v1";',
+        'const expected = process.argv[1];',
+        'const actual = fs.readFileSync(`${root}/.lock-sha256`, "utf8").trim();',
+        'if (actual !== expected) process.exit(2);',
+        'fs.accessSync(`${root}/node_modules/.bin/vite`);',
+        'fs.accessSync(`${root}/node_modules/.bin/tsc`);',
+      ].join("");
+
+      const options =
+        buildProductionBuildContainerOptions({
+          workspaceDir,
+          command: [
+            "node",
+            "-e",
+            checkScript,
+            REACT_VITE_V1_PREBUILT_LOCK_SHA256,
+          ],
+          step:
+            "build",
+        });
+
+      const container =
+        await docker.createContainer(
+          options,
+        );
+
+      try {
+        await container.start();
+
+        const result =
+          await waitForContainer(
+            container,
+            5_000,
+          );
+
+        return (
+          result.StatusCode ===
+          0
+        );
+      } catch {
+        return false;
+      } finally {
+        await container
+          .remove({
+            force: true,
+          })
+          .catch(
+            () => undefined,
+          );
+      }
+    })();
+
+  return prebuiltReactViteRuntimeAvailable;
+}
+
+async function preparePrebuiltReactViteDependencies(
+  workspaceDir: string,
+  files:
+    readonly PreviewSourceFile[],
+): Promise<boolean> {
+  if (
+    requestLockSha256(
+      files,
+    ) !==
+    REACT_VITE_V1_PREBUILT_LOCK_SHA256
+  ) {
+    return false;
+  }
+
+  const nodeModulesPath =
+    path.join(
+      workspaceDir,
+      "node_modules",
+    );
+
+  const existing =
+    await fs
+      .lstat(
+        nodeModulesPath,
+      )
+      .catch(
+        () => null,
+      );
+
+  if (existing) {
+    return false;
+  }
+
+  if (
+    !await probePrebuiltReactViteRuntime(
+      workspaceDir,
+    )
+  ) {
+    return false;
+  }
+
+  await fs.symlink(
+    `${REACT_VITE_V1_PREBUILT_ROOT}/node_modules`,
+    nodeModulesPath,
+    "dir",
+  );
+
+  return true;
 }
 
 async function runInstall(
@@ -1212,9 +1368,29 @@ export async function startReactPreview(
       workspaceDir,
     );
 
-    await runInstall(
-      workspaceDir,
-      plan.installCommand,
+    const usingPrebuiltDependencies =
+      await preparePrebuiltReactViteDependencies(
+        workspaceDir,
+        request.files,
+      );
+
+    if (!usingPrebuiltDependencies) {
+      await runInstall(
+        workspaceDir,
+        plan.installCommand,
+      );
+    }
+
+    console.log(
+      "RUNNER React preview dependency mode",
+      {
+        buildProjectId:
+          request.buildProjectId,
+        mode:
+          usingPrebuiltDependencies
+            ? "prebuilt"
+            : "frozen-install",
+      },
     );
 
     const previewId =
@@ -1270,6 +1446,18 @@ export async function startReactPreview(
 
         HostConfig: {
           ...options.HostConfig,
+
+          // The immutable prebuilt node_modules layer lives on the read-only
+          // runtime rootfs. Vite's transient optimizer/config caches get
+          // per-preview tmpfs mounts instead of mutating that shared layer.
+          Tmpfs: {
+            ...options.HostConfig
+              .Tmpfs,
+            [`${REACT_VITE_V1_PREBUILT_ROOT}/node_modules/.vite`]:
+              "rw,noexec,nosuid,size=64m",
+            [`${REACT_VITE_V1_PREBUILT_ROOT}/node_modules/.vite-temp`]:
+              "rw,noexec,nosuid,size=32m",
+          },
 
           // No public preview port. The runner reaches Vite only through a
           // Docker exec inside this container and proxies bounded HTTP bytes.
