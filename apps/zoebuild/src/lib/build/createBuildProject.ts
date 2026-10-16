@@ -43,9 +43,9 @@ function buildSourceMeta(input: InitialBuildProjectPersistenceInput) {
 
 /**
  * Prisma is an infrastructure adapter for the provider-neutral Build
- * application service. CodeProject + its initial revision + BuildProject are
- * created in one transaction so Build metadata can never point at a partially
- * bootstrapped source project.
+ * application service. CodeProject + its initial revision + BuildProject +
+ * an optional ZoeBuild Native CommerceStore are created in one transaction so
+ * Build metadata can never point at a partially bootstrapped source project.
  */
 export function createPrismaBuildProjectPersistence(
   client: PrismaClient,
@@ -86,6 +86,21 @@ export function createPrismaBuildProjectPersistence(
           },
           select: { id: true },
         });
+
+        if (
+          input.specification.requirements.commerce &&
+          input.specification.commerce?.provider === "zoebuild-native"
+        ) {
+          await tx.commerceStore.create({
+            data: {
+              buildProjectId: buildProject.id,
+              status: "draft",
+              name: input.title,
+              defaultCurrency: "USD",
+            },
+            select: { id: true },
+          });
+        }
 
         return {
           codeProjectId: saved.project.id,

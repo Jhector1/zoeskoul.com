@@ -30,4 +30,22 @@ describe("ZoeBuild persistence ownership", () => {
     expect(writer).toContain("saveCodeProjectInTransaction");
     expect(adapter).not.toContain("codeProjectRevision.create");
   });
+  it("provisions ZoeBuild Native commerce in the same transaction without inventing a BuildResource", () => {
+    const source = readFileSync(buildAdapterPath, "utf8");
+    const buildProjectCreate = source.indexOf("tx.buildProject.create");
+    const commerceStoreCreate = source.indexOf("tx.commerceStore.create");
+
+    expect(source).toContain("input.specification.requirements.commerce");
+    expect(source).toContain(
+      'input.specification.commerce?.provider === "zoebuild-native"',
+    );
+    expect(buildProjectCreate).toBeGreaterThan(-1);
+    expect(commerceStoreCreate).toBeGreaterThan(buildProjectCreate);
+    expect(source).toContain("buildProjectId: buildProject.id");
+    expect(source).toContain('status: "draft"');
+    expect(source).toContain("name: input.title");
+    expect(source).toContain('defaultCurrency: "USD"');
+    expect(source).not.toContain("tx.buildResource.create");
+  });
+
 });
