@@ -268,7 +268,7 @@ export const BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT = [
   'Allowed projectType values: "static-site", "frontend-app", "fullstack-app", "mobile-app".',
   'Allowed targets: "web", "ios", "android".',
   "requirements must contain booleans for backend, database, auth, storage, payments, email, and commerce.",
-  'commerce must be null for non-commerce work or a bounded object with provider "zoebuild-native" or "shopify" and storefrontRuntime "static" or "react-vite".',
+  'commerce must be null for non-commerce work or a bounded object with storefrontRuntime "static" or "react-vite"; commerce provider ownership is resolved server-side and must not appear in the Build specification.',
   "Commerce provider/runtime are architecture metadata and deterministic ZoeBuild planning owns the final values.",
   "pages must be an array of concise page names.",
   `Registered stacks: ${BUILD_AI_REGISTERED_STACK_GUIDANCE}.`,

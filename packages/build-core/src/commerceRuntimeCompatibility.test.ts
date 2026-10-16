@@ -15,7 +15,7 @@ function specification(runtime: "static" | "react-vite", stackId: string): Proje
     },
     pages: ["Home"],
     stackId,
-    commerce: { provider: "zoebuild-native", storefrontRuntime: runtime },
+    commerce: { storefrontRuntime: runtime },
     deployment: { preference: "static" },
   };
 }
