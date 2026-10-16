@@ -334,6 +334,7 @@ export default function EditorPane(props: {
     frame?: RunnerFrame;
     mobileEditMode?: MobileEditMode;
 }) {
+    useZoeBuildMonacoDiagnostics();
     const {
         lang,
         code,
@@ -1006,4 +1007,62 @@ export default function EditorPane(props: {
             ) : null}
         </div>
     );
+}
+
+/**
+ * ZoeBuild renders source from registered templates without installing the
+ * project's node_modules into the browser-side Monaco language service.
+ *
+ * Keep parser/syntax diagnostics, enable TSX/JSX parsing, and suppress only
+ * browser-side semantic/suggestion diagnostics in ZoeBuild. Trusted runner
+ * build/preview validation remains authoritative for package/type resolution.
+ */
+function useZoeBuildMonacoDiagnostics() {
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const appName = String(
+            getLearnerWorkspaceStaticConfig().appName ?? "",
+        )
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, "");
+
+        const isZoeBuild =
+            appName === "zoebuild" ||
+            window.location.port === "3004" ||
+            window.location.hostname.toLowerCase() === "build.zoeskoul.com";
+
+        if (!isZoeBuild) return;
+
+        let active = true;
+
+        void import("monaco-editor").then((monaco) => {
+            if (!active) return;
+
+            const defaults = [
+                monaco.typescript.typescriptDefaults,
+                monaco.typescript.javascriptDefaults,
+            ];
+
+            for (const languageDefaults of defaults) {
+                languageDefaults.setCompilerOptions({
+                    ...languageDefaults.getCompilerOptions(),
+                    jsx: monaco.typescript.JsxEmit.ReactJSX,
+                    allowJs: true,
+                    allowNonTsExtensions: true,
+                });
+
+                languageDefaults.setDiagnosticsOptions({
+                    noSyntaxValidation: false,
+                    noSemanticValidation: true,
+                    noSuggestionDiagnostics: true,
+                });
+            }
+        });
+
+        return () => {
+            active = false;
+        };
+    }, []);
 }
