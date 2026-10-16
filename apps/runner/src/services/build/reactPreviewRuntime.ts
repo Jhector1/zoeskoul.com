@@ -69,6 +69,9 @@ const PREVIEW_RESPONSE_MAX_BYTES =
 const PREVIEW_START_TIMEOUT_MS =
   20_000;
 
+const PREVIEW_START_CONNECTION_GRACE_MS =
+  40_000;
+
 const INSTALL_TIMEOUT_MS =
   3 * 60_000;
 
@@ -1132,22 +1135,64 @@ export async function fetchReactPreviewHttpByCapability(
   });
 }
 
+function isTransientPreviewStartupError(
+  error: unknown,
+) {
+  if (!error) {
+    return false;
+  }
+
+  const message =
+    error instanceof Error
+      ? error.message
+      : String(error);
+
+  return (
+    /ECONNREFUSED/i.test(message) ||
+    /Connection refused/i.test(message) ||
+    /ConnectionRefusedError/i.test(message)
+  );
+}
+
 async function waitForPreviewReady(
   record:
     MutablePreviewRecord,
 ) {
+  const startedAt =
+    currentTime();
+
   const deadline =
-    currentTime() +
+    startedAt +
     PREVIEW_START_TIMEOUT_MS;
+
+  const connectionGraceDeadline =
+    deadline +
+    PREVIEW_START_CONNECTION_GRACE_MS;
 
   let lastError:
     unknown =
       null;
 
-  while (
-    currentTime() <
-    deadline
-  ) {
+  while (true) {
+    const now =
+      currentTime();
+
+    const withinPrimaryDeadline =
+      now < deadline;
+
+    const withinConnectionGrace =
+      now < connectionGraceDeadline &&
+      isTransientPreviewStartupError(
+        lastError,
+      );
+
+    if (
+      !withinPrimaryDeadline &&
+      !withinConnectionGrace
+    ) {
+      break;
+    }
+
     const state =
       await docker
         .getContainer(
@@ -1186,6 +1231,11 @@ async function waitForPreviewReady(
       ) {
         return;
       }
+
+      lastError =
+        new Error(
+          `Preview readiness HTTP ${response.status}.`,
+        );
     } catch (error) {
       lastError =
         error;
@@ -1200,12 +1250,26 @@ async function waitForPreviewReady(
     );
   }
 
+  console.warn(
+    "RUNNER React preview readiness deadline exceeded",
+    {
+      previewId:
+        record.id,
+      buildProjectId:
+        record.buildProjectId,
+      containerId:
+        record.containerId,
+      cause:
+        isTransientPreviewStartupError(
+          lastError,
+        )
+          ? "connection-refused"
+          : "not-ready",
+    },
+  );
+
   throw new Error(
-    `Trusted React preview server did not become ready${
-      lastError instanceof Error
-        ? `: ${lastError.message}`
-        : "."
-    }`,
+    "Trusted React preview server did not become ready.",
   );
 }
 
