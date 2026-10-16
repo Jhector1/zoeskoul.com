@@ -29,6 +29,44 @@ export function normalizeWebPreviewNavigationPath(input: unknown) {
     return normalizePath(String(input ?? "")).replace(/^\/+/, "");
 }
 
+/**
+ * Resolve a browser-facing static route to a concrete workspace HTML file.
+ *
+ * Keep this candidate order aligned with ZoeBuild's published static resolver:
+ * exact path -> <path>.html -> <path>/index.html -> index.html fallback.
+ */
+export function resolveWebPreviewHtmlPath(
+    htmlPaths: readonly string[],
+    requestedPath: unknown,
+) {
+    const path = normalizeWebPreviewNavigationPath(requestedPath);
+    const candidates = path ? [path] : ["index.html"];
+    const leaf = path.split("/").at(-1) ?? "";
+
+    if (path && !leaf.includes(".")) {
+        candidates.push(`${path}.html`, `${path}/index.html`);
+    }
+
+    for (const candidate of candidates) {
+        if (htmlPaths.includes(candidate)) {
+            return candidate;
+        }
+    }
+
+    return htmlPaths.includes("index.html") ? "index.html" : null;
+}
+
+function isWebPreviewDocumentNavigationTarget(value: unknown) {
+    const href = String(value ?? "").trim();
+
+    return Boolean(
+        href &&
+            !href.startsWith("#") &&
+            !href.startsWith("//") &&
+            !/^[a-z][a-z0-9+.-]*:/i.test(href),
+    );
+}
+
 function dirname(p: string) {
     const clean = normalizePath(p);
     const idx = clean.lastIndexOf("/");
@@ -51,7 +89,7 @@ function resolveRelativePath(fromFile: string, target: string) {
     }
 
     const cleanTarget = raw.split(/[?#]/, 1)[0] ?? "";
-    const baseDir = dirname(fromFile);
+    const baseDir = raw.startsWith("/") ? "" : dirname(fromFile);
     const joined = normalizePath(
         baseDir ? `${baseDir}/${cleanTarget}` : cleanTarget,
     );
@@ -280,16 +318,13 @@ export function buildWebPreviewSrcDoc(
         }
     }
 
-    const requested = normalizePath(requestedPath).replace(/^\/+/, "");
+    const htmlPaths = [...fileMap.keys()].filter((path) =>
+        path.toLowerCase().endsWith(".html"),
+    );
     const htmlPath =
-        (requested &&
-        requested.toLowerCase().endsWith(".html") &&
-        fileMap.has(requested)
-            ? requested
-            : "") ||
-        (fileMap.has("index.html")
-            ? "index.html"
-            : [...fileMap.keys()].find((path) => path.endsWith(".html")) ?? "");
+        resolveWebPreviewHtmlPath(htmlPaths, requestedPath) ??
+        htmlPaths[0] ??
+        "";
 
     const html =
         (htmlPath && fileMap.get(htmlPath)) ||
@@ -358,17 +393,18 @@ ${js}
     out = out.replace(
         /<a\b([^>]*?)href=(['"])([^'"]+)\2([^>]*)>/gi,
         (full, before, quote, href, after) => {
-            const resolved = resolveRelativePath(htmlPath || "index.html", href);
-
-            if (
-                !resolved ||
-                !resolved.toLowerCase().endsWith(".html") ||
-                !fileMap.has(resolved)
-            ) {
+            if (!isWebPreviewDocumentNavigationTarget(href)) {
                 return full;
             }
 
-            return `<a${before ?? ""}href=${quote}${href}${quote}${after ?? ""} data-zoeskoul-preview-path="/${resolved}">`;
+            const resolved = resolveRelativePath(htmlPath || "index.html", href);
+            const routePath = resolveWebPreviewHtmlPath(htmlPaths, resolved);
+
+            if (!routePath) {
+                return full;
+            }
+
+            return `<a${before ?? ""}href=${quote}${href}${quote}${after ?? ""} data-zoeskoul-preview-path="/${routePath}">`;
         },
     );
 
@@ -523,8 +559,11 @@ export default function WebPreview(props: {
             if (!message) return;
 
             if (message.kind === "navigate") {
-                const path = normalizeWebPreviewNavigationPath(message.path);
-                if (!path || !htmlPaths.includes(path)) return;
+                const path = resolveWebPreviewHtmlPath(
+                    htmlPaths,
+                    message.path,
+                );
+                if (!path) return;
                 setVirtualPath(path);
                 return;
             }

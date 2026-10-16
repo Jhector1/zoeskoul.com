@@ -505,8 +505,44 @@ export function installWebPreviewBridge(
 
     documentTarget.addEventListener("click", (event) => {
         const node = event.target as Element | null;
-        const anchor = node?.closest?.("a[data-zoeskoul-preview-path]");
+        const anchor = node?.closest?.("a");
         if (!anchor) return;
+
+        const href = anchor.getAttribute("href");
+
+        /**
+         * srcDoc inherits the embedding document's base URL. Native "#section"
+         * navigation can therefore resolve against the ZoeBuild project route and
+         * load the host application inside the sandboxed iframe. Keep hash
+         * navigation entirely inside the preview document instead.
+         */
+        if (href?.startsWith("#")) {
+            event.preventDefault();
+
+            const encodedTarget = href.slice(1);
+
+            if (!encodedTarget) {
+                documentTarget.documentElement?.scrollIntoView?.({
+                    block: "start",
+                });
+                return;
+            }
+
+            let targetId = encodedTarget;
+
+            try {
+                targetId = decodeURIComponent(encodedTarget);
+            } catch {
+                // Keep the literal fragment when it is not valid URI encoding.
+            }
+
+            documentTarget
+                .getElementById(targetId)
+                ?.scrollIntoView?.({
+                    block: "start",
+                });
+            return;
+        }
 
         const path = anchor.getAttribute("data-zoeskoul-preview-path");
         if (!path) return;
