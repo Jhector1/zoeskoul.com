@@ -1,0 +1,327 @@
+{
+  "wave": "ZOESKOUL MULTIMODAL BUILD PLAN OWNERSHIP AUDIT V301D2C2A1",
+  "files": {
+    "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx": {
+      "lines": 96,
+      "hits": [
+        "10:   ZoeBuildPromptComposer,",
+        "11: } from \"@/components/builder/ZoeBuildPromptComposer\";",
+        "88:         <ZoeBuildPromptComposer",
+        "89:           onPrompt={addMessage}"
+      ]
+    },
+    "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/page.tsx": {
+      "lines": 81,
+      "hits": [
+        "11:   loadCurrentBuildAccessSnapshot,",
+        "39:     await loadCurrentBuildAccessSnapshot();"
+      ]
+    },
+    "apps/zoebuild/src/app/[locale]/projects/page.tsx": {
+      "lines": 88,
+      "hits": [
+        "6: import { loadCurrentBuildAccessSnapshot } from \"@/lib/build/currentBuildAccess\";",
+        "23:   const access = await loadCurrentBuildAccessSnapshot();"
+      ]
+    },
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts": {
+      "lines": 221,
+      "hits": [
+        "14: import { loadCurrentBuildAccessSnapshot } from \"@/lib/build/currentBuildAccess\";",
+        "19: import { enforceSameOriginPost } from \"@zoeskoul/platform-server/http\";",
+        "43:   if (!enforceSameOriginPost(req)) {",
+        "51:   const access = await loadCurrentBuildAccessSnapshot();",
+        "62:   const limited = await rateLimit("
+      ]
+    },
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preparation/route.ts": {
+      "lines": 118,
+      "hits": [
+        "9: import { loadCurrentBuildAccessSnapshot } from \"@/lib/build/currentBuildAccess\";",
+        "32:   const access = await loadCurrentBuildAccessSnapshot();"
+      ]
+    },
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/route.ts": {
+      "lines": 90,
+      "hits": [
+        "9: import { loadCurrentBuildAccessSnapshot } from \"@/lib/build/currentBuildAccess\";",
+        "32:   const access = await loadCurrentBuildAccessSnapshot();"
+      ]
+    },
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/source/route.ts": {
+      "lines": 250,
+      "hits": [
+        "10: import { loadCurrentBuildAccessSnapshot } from \"@/lib/build/currentBuildAccess\";",
+        "18:   enforceSameOriginPost,",
+        "52:   if (!enforceSameOriginPost(req)) {",
+        "72:   const access = await loadCurrentBuildAccessSnapshot();",
+        "83:   const limited = await rateLimit("
+      ]
+    },
+    "apps/zoebuild/src/app/api/build/projects/route.owner.test.ts": {
+      "lines": 45,
+      "hits": [
+        "13:     expect(source).toContain(\"enforceSameOriginPost(req)\");",
+        "15:     expect(source).toContain(\"loadCurrentBuildAccessSnapshot()\");",
+        "16:     expect(source).toContain(\"rateLimit(`zoebuild-create:${userId}`\");",
+        "19:     expect(source).toContain(\"createBuildProjectCommand({\");",
+        "37:   it(\"keeps the entitlement loader as a replaceable server-side seam\", () => {"
+      ]
+    },
+    "apps/zoebuild/src/app/api/build/projects/route.ts": {
+      "lines": 227,
+      "hits": [
+        "7:   createBuildProjectCommand,",
+        "11: import { loadCurrentBuildAccessSnapshot } from \"@/lib/build/currentBuildAccess\";",
+        "16:   enforceSameOriginPost,",
+        "60:   const access = await loadCurrentBuildAccessSnapshot();",
+        "103:   if (!enforceSameOriginPost(req)) {",
+        "119:   const access = await loadCurrentBuildAccessSnapshot();",
+        "129:   const limited = await rateLimit(`zoebuild-create:${userId}`, {",
+        "163:     const result = await createBuildProjectCommand({"
+      ]
+    },
+    "apps/zoebuild/src/components/builder/ZoeBuildLanding.tsx": {
+      "lines": 77,
+      "hits": [
+        "10:   ZoeBuildPromptComposer,",
+        "11: } from \"./ZoeBuildPromptComposer\";",
+        "70:         <ZoeBuildPromptComposer",
+        "71:           onPrompt={prompt}"
+      ]
+    },
+    "apps/zoebuild/src/components/builder/ZoeBuildPromptComposer.tsx": {
+      "lines": 139,
+      "hits": [
+        "13: export function ZoeBuildPromptComposer(props: {",
+        "14:   onPrompt: (prompt: string) => void;",
+        "36:     props.onPrompt(prompt);"
+      ]
+    },
+    "apps/zoebuild/src/components/builder/shopifyImportInput.owner.test.ts": {
+      "lines": 80,
+      "hits": [
+        "30:           \"apps/zoebuild/src/components/builder/ZoeBuildPromptComposer.tsx\","
+      ]
+    },
+    "apps/zoebuild/src/components/builder/zoebuildMinimalBuilder.owner.test.ts": {
+      "lines": 132,
+      "hits": [
+        "36:           \"apps/zoebuild/src/components/builder/ZoeBuildPromptComposer.tsx\",",
+        "75:           \"<ZoeBuildPromptComposer\","
+      ]
+    },
+    "apps/zoebuild/src/lib/access/roleCapabilities.ts": {
+      "lines": 5,
+      "hits": [
+        "5: } from \"@zoeskoul/permissions\";"
+      ]
+    },
+    "apps/zoebuild/src/lib/appOrigins.ts": {
+      "lines": 50,
+      "hits": [
+        "7:   if (process.env.NODE_ENV === \"test\") return \"test\";",
+        "8:   if (process.env.NODE_ENV === \"development\") return \"development\";",
+        "10:   const vercelEnv = process.env.VERCEL_ENV;",
+        "14:   return process.env.NODE_ENV === \"production\""
+      ]
+    },
+    "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.test.ts": {
+      "lines": 235,
+      "hits": [
+        "140:       access: { userId: \"user_1\", entitlements: [] },",
+        "190:         access: { userId: \"user_1\", entitlements: [] },",
+        "220:         access: { userId: \"user_1\", entitlements: [] },"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.ts": {
+      "lines": 125,
+      "hits": [
+        "6:   type BuildAccessSnapshot,",
+        "46:   access: BuildAccessSnapshot;"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/buildAccessSnapshot.ts": {
+      "lines": 25,
+      "hits": [
+        "4:   BuildAccessSnapshot,",
+        "9:  * Infrastructure seam for ZoeBuild entitlements.",
+        "15: export async function loadBuildAccessSnapshot(",
+        "17: ): Promise<BuildAccessSnapshot> {",
+        "19:   const entitlements: BuildEntitlementKey[] = [];",
+        "23:     entitlements,"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/buildDependencyLockBootstrapRoute.owner.test.ts": {
+      "lines": 52,
+      "hits": [
+        "14:     expect(source).toContain(\"enforceSameOriginPost(req)\");",
+        "15:     expect(source).toContain(\"loadCurrentBuildAccessSnapshot()\");"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/buildPreparationRoute.owner.test.ts": {
+      "lines": 45,
+      "hits": [
+        "14:     expect(source).toContain(\"loadCurrentBuildAccessSnapshot()\");"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/buildProjectDetailRoute.owner.test.ts": {
+      "lines": 30,
+      "hits": [
+        "14:     expect(source).toContain(\"loadCurrentBuildAccessSnapshot()\");"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/buildProjectSourceRoute.owner.test.ts": {
+      "lines": 45,
+      "hits": [
+        "14:     expect(source).toContain(\"enforceSameOriginPost(req)\");",
+        "16:     expect(source).toContain(\"loadCurrentBuildAccessSnapshot()\");"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/currentBuildAccess.owner.test.ts": {
+      "lines": 19,
+      "hits": [
+        "16:     expect(source).toContain(\"loadBuildAccessSnapshot(userId)\");"
+      ]
+    },
+    "apps/zoebuild/src/lib/build/currentBuildAccess.ts": {
+      "lines": 20,
+      "hits": [
+        "3: import type { BuildAccessSnapshot } from \"@zoeskoul/build-application\";",
+        "6: import { loadBuildAccessSnapshot } from \"@/lib/build/buildAccessSnapshot\";",
+        "14: export async function loadCurrentBuildAccessSnapshot(): Promise<BuildAccessSnapshot> {",
+        "19:   return loadBuildAccessSnapshot(userId);"
+      ]
+    },
+    "apps/zoebuild/src/lib/server/runnerActorKey.ts": {
+      "lines": 26,
+      "hits": [
+        "18:     process.env.E2E_ALLOW_DEV_ROUTES === \"1\" ||",
+        "19:     process.env.PLAYWRIGHT === \"1\" ||",
+        "20:     process.env.PLAYWRIGHT_TEST === \"1\""
+      ]
+    },
+    "packages/app-config/src/index.ts": {
+      "lines": 748,
+      "hits": [
+        "297:     \"permissions\","
+      ]
+    },
+    "packages/build-application/src/access.test.ts": {
+      "lines": 106,
+      "hits": [
+        "6:   createBuildProjectCommand,",
+        "45:     const decision = resolveBuildAccess({ userId: \" user_1 \", entitlements: [] });",
+        "58:       createBuildProjectCommand({",
+        "59:         access: { userId: null, entitlements: [\"build_create\"] },",
+        "69:   it(\"can later require an explicit build_create entitlement without changing the command\", async () => {",
+        "72:       createBuildProjectCommand({",
+        "73:         access: { userId: \"user_1\", entitlements: [] },",
+        "84:       createBuildProjectCommand({",
+        "85:         access: { userId: \"user_1\", entitlements: [\"build_create\"] },",
+        "97:       createBuildProjectCommand({",
+        "98:         access: { userId: \"user_1\", entitlements: [] },"
+      ]
+    },
+    "packages/build-application/src/index.ts": {
+      "lines": 465,
+      "hits": [
+        "152:  * Product entitlement vocabulary is deliberately provider-neutral. The web",
+        "158:   \"build_ai_generate\",",
+        "159:   \"build_ai_edit\",",
+        "172: export type BuildAccessSnapshot = Readonly<{",
+        "174:   entitlements: readonly BuildEntitlementKey[];",
+        "208:   snapshot: BuildAccessSnapshot,",
+        "213:   const entitlements = new Set<BuildEntitlementKey>(snapshot.entitlements);",
+        "215:     authenticated && entitlements.has(key);",
+        "222:       (policy.allowAuthenticatedCreate || entitlements.has(\"build_create\")),",
+        "223:     canGenerateWithAi: entitled(\"build_ai_generate\"),",
+        "224:     canEditWithAi: entitled(\"build_ai_edit\"),",
+        "248:   snapshot: BuildAccessSnapshot,",
+        "269:   access: BuildAccessSnapshot;",
+        "276: export async function createBuildProjectCommand(",
+        "352:   snapshot: BuildAccessSnapshot,",
+        "365:   access: BuildAccessSnapshot;",
+        "373:   access: BuildAccessSnapshot;",
+        "435:   access: BuildAccessSnapshot;"
+      ]
+    },
+    "packages/build-application/src/read.test.ts": {
+      "lines": 59,
+      "hits": [
+        "22:         access: { userId: \" user_1 \", entitlements: [] },",
+        "35:         access: { userId: null, entitlements: [] },",
+        "48:         access: { userId: \"user_2\", entitlements: [] },"
+      ]
+    },
+    "packages/build-application/src/sourceSave.test.ts": {
+      "lines": 104,
+      "hits": [
+        "53:         access: { userId: \" user_1 \", entitlements: [] },",
+        "78:         access: { userId: null, entitlements: [] },",
+        "94:         access: { userId: \"user_1\", entitlements: [] },"
+      ]
+    },
+    "packages/permissions/package.json": {
+      "lines": 21,
+      "hits": [
+        "2:   \"name\": \"@zoeskoul/permissions\",",
+        "13:     \"test\": \"vitest run --root ../.. packages/permissions/src\","
+      ]
+    },
+    "packages/permissions/src/index.test.ts": {
+      "lines": 113,
+      "hits": [
+        "14: describe(\"permission contracts\", () => {"
+      ]
+    }
+  },
+  "composer_consumers": [
+    "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx",
+    "apps/zoebuild/src/components/builder/ZoeBuildLanding.tsx",
+    "apps/zoebuild/src/components/builder/shopifyImportInput.owner.test.ts",
+    "apps/zoebuild/src/components/builder/zoebuildMinimalBuilder.owner.test.ts"
+  ],
+  "build_access_owners": [
+    "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/page.tsx",
+    "apps/zoebuild/src/app/[locale]/projects/page.tsx",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preparation/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/[buildProjectId]/source/route.ts",
+    "apps/zoebuild/src/app/api/build/projects/route.owner.test.ts",
+    "apps/zoebuild/src/app/api/build/projects/route.ts",
+    "apps/zoebuild/src/lib/access/roleCapabilities.ts",
+    "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.test.ts",
+    "apps/zoebuild/src/lib/build/bootstrapBuildProjectLockfile.ts",
+    "apps/zoebuild/src/lib/build/buildAccessSnapshot.ts",
+    "apps/zoebuild/src/lib/build/buildDependencyLockBootstrapRoute.owner.test.ts",
+    "apps/zoebuild/src/lib/build/buildPreparationRoute.owner.test.ts",
+    "apps/zoebuild/src/lib/build/buildProjectDetailRoute.owner.test.ts",
+    "apps/zoebuild/src/lib/build/buildProjectSourceRoute.owner.test.ts",
+    "apps/zoebuild/src/lib/build/currentBuildAccess.owner.test.ts",
+    "apps/zoebuild/src/lib/build/currentBuildAccess.ts",
+    "packages/app-config/src/index.ts",
+    "packages/build-application/src/access.test.ts",
+    "packages/build-application/src/index.ts",
+    "packages/build-application/src/read.test.ts",
+    "packages/build-application/src/sourceSave.test.ts",
+    "packages/permissions/package.json",
+    "packages/permissions/src/index.test.ts"
+  ],
+  "env_owners": [
+    "apps/zoebuild/src/lib/appOrigins.ts",
+    "apps/zoebuild/src/lib/server/runnerActorKey.ts",
+    "packages/ai-json/src/claude.ts",
+    "packages/ai-json/src/deepseek.ts",
+    "packages/ai-json/src/gemini.ts",
+    "packages/curriculum-ai/src/providers/deepl.ts",
+    "packages/curriculum-ai/src/providers/openai.structured-output.smoke.test.ts",
+    "packages/curriculum-ai/src/providers/openai.ts",
+    "packages/curriculum-ai/src/providers/providerCatalog.test.ts",
+    "packages/curriculum-ai/src/providers/providerCatalog.ts",
+    "packages/curriculum-cli/src/utils/renderProgressBar.ts",
+    "packages/curriculum-cli/src/utils/selectProviderModel.test.ts",
+    "packages/curriculum-cli/src/utils/selectProviderModel.ts"
+  ]
+}

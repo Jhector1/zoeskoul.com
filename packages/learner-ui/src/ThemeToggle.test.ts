@@ -13,7 +13,7 @@ const exists = (relativePath: string) =>
 
 describe("ThemeToggle shared ownership", () => {
   it("keeps theme behavior shared without app routing or auth dependencies", () => {
-    const source = readSource("./ThemeToggle.tsx");
+    const source = readSource("../../platform-ui/src/ThemeToggle.tsx");
 
     expect(source).toContain('from "next-themes"');
     expect(source).toContain('from "@zoeskoul/preferences/react"');

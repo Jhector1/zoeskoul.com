@@ -74,6 +74,7 @@ model CodeProject {
   subject        PracticeSubject?      @relation("SubjectCodeProjects", fields: [subjectId], references: [id])
   grants         CodeProjectGrant[]
   revisions      CodeProjectRevision[]
+  buildProject   BuildProject?
 
   @@index([ownerId, updatedAt])
   @@index([ownerId, scopeKind, updatedAt])
@@ -123,6 +124,126 @@ model CodeProjectGrant {
   @@index([actorKey])
   @@index([userId])
   @@index([role])
+}
+
+model BuildProject {
+  id            String             @id @default(cuid())
+  codeProjectId String             @unique
+  status        BuildProjectStatus @default(draft)
+  specVersion   Int                @default(1)
+  stackId       String?
+  specification Json?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  codeProject   CodeProject        @relation(fields: [codeProjectId], references: [id], onDelete: Cascade)
+  runs          BuildRun[]
+  resources     BuildResource[]
+  deployments   BuildDeployment[]
+  artifacts     BuildArtifact[]
+
+  @@index([status, updatedAt])
+  @@index([stackId])
+}
+
+model BuildRun {
+  id             String            @id @default(cuid())
+  buildProjectId String
+  operation      BuildRunOperation
+  status         BuildRunStatus    @default(queued)
+  sourceVersion  Int?
+  provider       String?
+  model          String?
+  summary        String?
+  errorCode      String?
+  meta           Json?
+  startedAt      DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  buildProject   BuildProject      @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+
+  @@index([buildProjectId, createdAt])
+  @@index([status, createdAt])
+  @@index([operation, createdAt])
+}
+
+model BuildResource {
+  id             String              @id @default(cuid())
+  buildProjectId String
+  type           BuildResourceType
+  provider       String
+  providerRef    String?
+  status         BuildResourceStatus @default(requested)
+  region         String?
+  secretRef      String?
+  config         Json?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  buildProject   BuildProject        @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+
+  @@index([buildProjectId, type])
+  @@index([provider, providerRef])
+  @@index([status, updatedAt])
+}
+
+model BuildDeployment {
+  id              String                @id @default(cuid())
+  buildProjectId  String
+  buildArtifactId String?
+  sourceVersion   Int
+  environment    String                @default("production")
+  kind           String
+  provider       String
+  providerRef    String?
+  status         BuildDeploymentStatus @default(queued)
+  hostname       String?
+  artifactHash   String?               @db.VarChar(64)
+  meta           Json?
+  deployedAt     DateTime?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  buildProject   BuildProject          @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+  buildArtifact  BuildArtifact?        @relation(fields: [buildArtifactId], references: [id], onDelete: SetNull)
+
+  @@index([buildProjectId, createdAt])
+  @@index([buildArtifactId])
+  @@index([buildProjectId, environment, status])
+  @@index([provider, providerRef])
+  @@index([hostname])
+}
+
+
+model BuildArtifact {
+  id             String              @id @default(cuid())
+  buildProjectId String
+  sourceVersion  Int
+  kind           String
+  outputPath     String
+  provider       String
+  artifactHash   String              @db.VarChar(64)
+  fileCount      Int
+  totalBytes     Int
+  createdAt      DateTime            @default(now())
+  buildProject   BuildProject        @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+  files          BuildArtifactFile[]
+  deployments    BuildDeployment[]
+
+  @@unique([buildProjectId, sourceVersion, artifactHash])
+  @@index([buildProjectId, createdAt])
+  @@index([provider, artifactHash])
+}
+
+model BuildArtifactFile {
+  id        String        @id @default(cuid())
+  artifactId String
+  path      String        @db.VarChar(1024)
+  content   Bytes
+  sizeBytes Int
+  createdAt DateTime      @default(now())
+  artifact  BuildArtifact @relation(fields: [artifactId], references: [id], onDelete: Cascade)
+
+  @@unique([artifactId, path])
+  @@index([artifactId])
 }
 
 model ModuleAccessGrant {
@@ -661,31 +782,31 @@ model ReviewQuizInstance {
 }
 
 model PracticeChallengeLink {
-  id               String                         @id @default(cuid())
-  code             String                         @unique @db.VarChar(24)
-  locale           String                         @default("en") @db.VarChar(8)
-  subjectSlug      String
-  moduleSlug       String
-  sectionSlug      String
-  topicSlug        String
-  exerciseKey      String
-  exercisePurpose  PracticePurpose                @default(project)
-  signedToken      String
-  shareTitle       String?
-  shareDescription String?
+  id                  String                         @id @default(cuid())
+  code                String                         @unique @db.VarChar(24)
+  locale              String                         @default("en") @db.VarChar(8)
+  subjectSlug         String
+  moduleSlug          String
+  sectionSlug         String
+  topicSlug           String
+  exerciseKey         String
+  exercisePurpose     PracticePurpose                @default(project)
+  signedToken         String
+  shareTitle          String?
+  shareDescription    String?
   ogImagePublicId     String?
   ogImageAlt          String?
   tiktokImagePublicId String?
   tiktokImageAlt      String?
-  createdById      String?
-  expiresAt        DateTime?
-  revokedAt        DateTime?
-  createdAt        DateTime                       @default(now())
-  updatedAt        DateTime                       @updatedAt
-  createdBy        User?                          @relation("UserPracticeChallengeLinks", fields: [createdById], references: [id], onDelete: SetNull)
-  socialPosts      PublicChallengeSocialPost[]
-  dailyDispatches  PublicChallengeDailyDispatch[]
-  emailDispatches  PublicChallengeEmailDispatch[]
+  createdById         String?
+  expiresAt           DateTime?
+  revokedAt           DateTime?
+  createdAt           DateTime                       @default(now())
+  updatedAt           DateTime                       @updatedAt
+  createdBy           User?                          @relation("UserPracticeChallengeLinks", fields: [createdById], references: [id], onDelete: SetNull)
+  socialPosts         PublicChallengeSocialPost[]
+  dailyDispatches     PublicChallengeDailyDispatch[]
+  emailDispatches     PublicChallengeEmailDispatch[]
 
   @@index([exerciseKey])
   @@index([subjectSlug, moduleSlug])
@@ -717,11 +838,11 @@ model PublicChallengeDailyDispatch {
   occurrenceKey String                @unique @db.VarChar(220)
   dispatchDate  String                @db.VarChar(10)
   locale        String                @db.VarChar(8)
-  subjectSlug  String
-  challengeId  String
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @updatedAt
-  challenge    PracticeChallengeLink @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  subjectSlug   String
+  challengeId   String
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  challenge     PracticeChallengeLink @relation(fields: [challengeId], references: [id], onDelete: Cascade)
 
   @@index([subjectSlug, dispatchDate])
   @@index([challengeId])
@@ -1571,6 +1692,66 @@ enum FeatureKey {
   ide_project_scope_assignment
   ide_project_share
   ide_project_unlimited
+  build_ai_generate
+}
+
+enum BuildProjectStatus {
+  draft
+  planning
+  generating
+  validating
+  ready
+  deploying
+  deployed
+  failed
+  archived
+}
+
+enum BuildRunOperation {
+  plan
+  generate
+  ai_edit
+  build
+  test
+  migrate
+  deploy
+  provision_resource
+  cleanup
+}
+
+enum BuildRunStatus {
+  queued
+  running
+  succeeded
+  failed
+  canceled
+}
+
+enum BuildResourceType {
+  database
+  backend_runtime
+  object_storage
+  auth
+  cache
+}
+
+enum BuildResourceStatus {
+  requested
+  provisioning
+  ready
+  failed
+  deleting
+  deleted
+}
+
+enum BuildDeploymentStatus {
+  queued
+  building
+  deploying
+  ready
+  failed
+  canceled
+  deleted
 }
 
 enum CodeProjectScopeKind {

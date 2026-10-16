@@ -102,6 +102,12 @@ importers:
 
   apps/runner:
     dependencies:
+      '@zoeskoul/build-executor-contracts':
+        specifier: workspace:*
+        version: link:../../packages/build-executor-contracts
+      '@zoeskoul/build-preparation':
+        specifier: workspace:*
+        version: link:../../packages/build-preparation
       '@zoeskoul/code-contracts':
         specifier: workspace:*
         version: link:../../packages/code-contracts
@@ -399,15 +405,24 @@ importers:
       '@zoeskoul/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
+      '@zoeskoul/build-application':
+        specifier: workspace:*
+        version: link:../../packages/build-application
+      '@zoeskoul/build-executor-contracts':
+        specifier: workspace:*
+        version: link:../../packages/build-executor-contracts
+      '@zoeskoul/build-preparation':
+        specifier: workspace:*
+        version: link:../../packages/build-preparation
       '@zoeskoul/code-contracts':
         specifier: workspace:*
         version: link:../../packages/code-contracts
-      '@zoeskoul/curriculum-contracts':
-        specifier: workspace:*
-        version: link:../../packages/curriculum-contracts
       '@zoeskoul/curriculum-compiler':
         specifier: workspace:*
         version: link:../../packages/curriculum-compiler
+      '@zoeskoul/curriculum-contracts':
+        specifier: workspace:*
+        version: link:../../packages/curriculum-contracts
       '@zoeskoul/curriculum-profiles':
         specifier: workspace:*
         version: link:../../packages/curriculum-profiles
@@ -447,6 +462,12 @@ importers:
       '@zoeskoul/permissions':
         specifier: workspace:*
         version: link:../../packages/permissions
+      '@zoeskoul/platform-auth':
+        specifier: workspace:*
+        version: link:../../packages/platform-auth
+      '@zoeskoul/platform-server':
+        specifier: workspace:*
+        version: link:../../packages/platform-server
       '@zoeskoul/practice-checks':
         specifier: workspace:*
         version: link:../../packages/practice-checks
@@ -629,6 +650,110 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5(@types/node@20.19.37)(vite@8.1.5(@types/node@20.19.37)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
 
+  apps/zoebuild:
+    dependencies:
+      '@zoeskoul/ai-json':
+        specifier: workspace:*
+        version: link:../../packages/ai-json
+      '@zoeskoul/app-config':
+        specifier: workspace:*
+        version: link:../../packages/app-config
+      '@zoeskoul/auth-client':
+        specifier: workspace:*
+        version: link:../../packages/auth-client
+      '@zoeskoul/build-ai':
+        specifier: workspace:*
+        version: link:../../packages/build-ai
+      '@zoeskoul/build-application':
+        specifier: workspace:*
+        version: link:../../packages/build-application
+      '@zoeskoul/build-executor-contracts':
+        specifier: workspace:*
+        version: link:../../packages/build-executor-contracts
+      '@zoeskoul/build-imports':
+        specifier: workspace:*
+        version: link:../../packages/build-imports
+      '@zoeskoul/build-preparation':
+        specifier: workspace:*
+        version: link:../../packages/build-preparation
+      '@zoeskoul/build-routing':
+        specifier: workspace:*
+        version: link:../../packages/build-routing
+      '@zoeskoul/code-contracts':
+        specifier: workspace:*
+        version: link:../../packages/code-contracts
+      '@zoeskoul/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@zoeskoul/learner-workspace':
+        specifier: workspace:*
+        version: link:../../packages/learner-workspace
+      '@zoeskoul/permissions':
+        specifier: workspace:*
+        version: link:../../packages/permissions
+      '@zoeskoul/platform-auth':
+        specifier: workspace:*
+        version: link:../../packages/platform-auth
+      '@zoeskoul/platform-server':
+        specifier: workspace:*
+        version: link:../../packages/platform-server
+      '@zoeskoul/platform-ui':
+        specifier: workspace:*
+        version: link:../../packages/platform-ui
+      '@zoeskoul/preferences':
+        specifier: workspace:*
+        version: link:../../packages/preferences
+      next:
+        specifier: 16.1.1
+        version: 16.1.1(@babel/core@7.29.0)(@playwright/test@1.59.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4
+        version: 4.2.2
+      '@types/node':
+        specifier: ^20
+        version: 20.19.39
+      '@types/react':
+        specifier: ^19
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.14)
+      tailwindcss:
+        specifier: ^4
+        version: 4.2.2
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@20.19.39)(vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/ai-json:
+    dependencies:
+      '@anthropic-ai/sdk':
+        specifier: ^0.66.0
+        version: 0.66.0(zod@4.3.6)
+      '@google/genai':
+        specifier: ^1.21.0
+        version: 1.52.0
+      openai:
+        specifier: ^6.34.0
+        version: 6.34.0(ws@8.21.3)(zod@4.3.6)
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
   packages/api-client:
     devDependencies:
       eslint:
@@ -675,6 +800,148 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
 
+  packages/build-ai:
+    dependencies:
+      '@zoeskoul/ai-json':
+        specifier: workspace:*
+        version: link:../ai-json
+      '@zoeskoul/build-contracts':
+        specifier: workspace:*
+        version: link:../build-contracts
+      '@zoeskoul/build-core':
+        specifier: workspace:*
+        version: link:../build-core
+      '@zoeskoul/build-registry':
+        specifier: workspace:*
+        version: link:../build-registry
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-application:
+    dependencies:
+      '@zoeskoul/build-contracts':
+        specifier: workspace:*
+        version: link:../build-contracts
+      '@zoeskoul/build-materializer':
+        specifier: workspace:*
+        version: link:../build-materializer
+      '@zoeskoul/build-template-registry':
+        specifier: workspace:*
+        version: link:../build-template-registry
+      '@zoeskoul/workspace-contracts':
+        specifier: workspace:*
+        version: link:../workspace-contracts
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-contracts: {}
+
+  packages/build-core:
+    dependencies:
+      '@zoeskoul/build-contracts':
+        specifier: workspace:*
+        version: link:../build-contracts
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-executor-contracts:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.19.37
+        version: 20.19.39
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@20.19.39)(vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-imports:
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-materializer:
+    dependencies:
+      '@zoeskoul/build-contracts':
+        specifier: workspace:*
+        version: link:../build-contracts
+      '@zoeskoul/build-core':
+        specifier: workspace:*
+        version: link:../build-core
+      '@zoeskoul/build-registry':
+        specifier: workspace:*
+        version: link:../build-registry
+      '@zoeskoul/build-template-registry':
+        specifier: workspace:*
+        version: link:../build-template-registry
+      '@zoeskoul/workspace-contracts':
+        specifier: workspace:*
+        version: link:../workspace-contracts
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-preparation:
+    dependencies:
+      '@zoeskoul/build-contracts':
+        specifier: workspace:*
+        version: link:../build-contracts
+      '@zoeskoul/build-executor-contracts':
+        specifier: workspace:*
+        version: link:../build-executor-contracts
+      '@zoeskoul/build-registry':
+        specifier: workspace:*
+        version: link:../build-registry
+      '@zoeskoul/build-template-registry':
+        specifier: workspace:*
+        version: link:../build-template-registry
+      '@zoeskoul/workspace-contracts':
+        specifier: workspace:*
+        version: link:../workspace-contracts
+    devDependencies:
+      '@zoeskoul/build-materializer':
+        specifier: workspace:*
+        version: link:../build-materializer
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-registry:
+    dependencies:
+      '@zoeskoul/build-contracts':
+        specifier: workspace:*
+        version: link:../build-contracts
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-routing:
+    dependencies:
+      '@zoeskoul/build-contracts':
+        specifier: workspace:*
+        version: link:../build-contracts
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/build-template-registry:
+    dependencies:
+      '@zoeskoul/workspace-contracts':
+        specifier: workspace:*
+        version: link:../workspace-contracts
+    devDependencies:
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
   packages/code-contracts:
     dependencies:
       zod:
@@ -708,12 +975,9 @@ importers:
 
   packages/curriculum-ai:
     dependencies:
-      '@anthropic-ai/sdk':
-        specifier: ^0.66.0
-        version: 0.66.0(zod@4.3.6)
-      '@google/genai':
-        specifier: ^1.21.0
-        version: 1.52.0
+      '@zoeskoul/ai-json':
+        specifier: workspace:*
+        version: link:../ai-json
       '@zoeskoul/curriculum-contracts':
         specifier: workspace:*
         version: link:../curriculum-contracts
@@ -824,7 +1088,7 @@ importers:
         version: 7.8.0
       '@prisma/client':
         specifier: latest
-        version: 7.8.0(prisma@7.8.0(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2))(typescript@7.0.2)
+        version: 7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2))(typescript@7.0.2)
       dotenv:
         specifier: ^17.2.3
         version: 17.3.1
@@ -840,7 +1104,7 @@ importers:
         version: 8.11.11
       prisma:
         specifier: latest
-        version: 7.8.0(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2)
+        version: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2)
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -880,6 +1144,9 @@ importers:
       '@zoeskoul/permissions':
         specifier: workspace:*
         version: link:../permissions
+      '@zoeskoul/platform-ui':
+        specifier: workspace:*
+        version: link:../platform-ui
       '@zoeskoul/practice-contracts':
         specifier: workspace:*
         version: link:../practice-contracts
@@ -1133,6 +1400,78 @@ importers:
       eslint:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/platform-auth:
+    dependencies:
+      '@auth/prisma-adapter':
+        specifier: ^2.11.1
+        version: 2.11.1(@prisma/client@7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@6.0.3))(typescript@6.0.3))
+      next-auth:
+        specifier: ^5.0.0-beta.30
+        version: 5.0.0-beta.30(next@16.1.1(@babel/core@7.29.0)(@playwright/test@1.59.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+    devDependencies:
+      typescript:
+        specifier: ^6.0.2
+        version: 6.0.3
+
+  packages/platform-server:
+    dependencies:
+      '@upstash/ratelimit':
+        specifier: ^2.0.8
+        version: 2.0.8(@upstash/redis@1.37.0)
+      '@upstash/redis':
+        specifier: ^1.36.3
+        version: 1.37.0
+      '@zoeskoul/curriculum-runtime':
+        specifier: workspace:*
+        version: link:../curriculum-runtime
+      '@zoeskoul/db':
+        specifier: workspace:*
+        version: link:../db
+      next:
+        specifier: 16.1.1
+        version: 16.1.1(@babel/core@7.29.0)(@playwright/test@1.59.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+    devDependencies:
+      '@types/node':
+        specifier: ^25.6.0
+        version: 25.6.0
+      typescript:
+        specifier: ^6.0.2
+        version: 6.0.3
+
+  packages/platform-ui:
+    dependencies:
+      '@zoeskoul/preferences':
+        specifier: workspace:*
+        version: link:../preferences
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      tailwind-merge:
+        specifier: ^3.4.0
+        version: 3.5.0
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.0.0
+        version: 19.2.3(@types/react@19.2.14)
+      typescript:
+        specifier: ^6.0.2
+        version: 6.0.3
       vitest:
         specifier: ^4.1.5
         version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
@@ -6164,14 +6503,6 @@ packages:
     resolution: {integrity: sha512-u9r3uZC0bdpGOXtlxUIdwf9pkmvhqJdrVCH9fapQtgy/OeTTMZ1nqH7agtvEfmGui6e1XxjcdrlxvxJvc3sMqw==}
     engines: {node: '>=18'}
 
-  tinyglobby@0.2.15:
-    resolution: {integrity: sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==}
-    engines: {node: '>=12.0.0'}
-
-  tinyglobby@0.2.16:
-    resolution: {integrity: sha512-pn99VhoACYR8nFHhxqix+uvsbXineAasWm5ojXoN8xEwK5Kd3/TrhNn1wByuD52UxWRLy8pu+kRMniEi6Eq9Zg==}
-    engines: {node: '>=12.0.0'}
-
   tinyglobby@0.2.17:
     resolution: {integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==}
     engines: {node: '>=12.0.0'}
@@ -6653,6 +6984,15 @@ snapshots:
       - '@simplewebauthn/server'
       - nodemailer
 
+  '@auth/prisma-adapter@2.11.1(@prisma/client@7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@6.0.3))(typescript@6.0.3))':
+    dependencies:
+      '@auth/core': 0.41.1
+      '@prisma/client': 7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@6.0.3))(typescript@6.0.3)
+    transitivePeerDependencies:
+      - '@simplewebauthn/browser'
+      - '@simplewebauthn/server'
+      - nodemailer
+
   '@babel/code-frame@7.29.0':
     dependencies:
       '@babel/helper-validator-identifier': 7.28.5
@@ -6963,7 +7303,7 @@ snapshots:
       google-auth-library: 10.9.0
       p-retry: 4.6.2
       protobufjs: 7.5.4
-      ws: 8.20.0
+      ws: 8.21.3
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -7508,7 +7848,7 @@ snapshots:
       detect-libc: 2.1.2
       is-glob: 4.0.3
       node-addon-api: 7.1.1
-      picomatch: 4.0.4
+      picomatch: 4.0.5
     optionalDependencies:
       '@parcel/watcher-android-arm64': 2.5.6
       '@parcel/watcher-darwin-arm64': 2.5.6
@@ -7546,11 +7886,18 @@ snapshots:
       prisma: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
       typescript: 5.9.3
 
-  '@prisma/client@7.8.0(prisma@7.8.0(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2))(typescript@7.0.2)':
+  '@prisma/client@7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@6.0.3))(typescript@6.0.3)':
     dependencies:
       '@prisma/client-runtime-utils': 7.8.0
     optionalDependencies:
-      prisma: 7.8.0(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2)
+      prisma: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@6.0.3)
+      typescript: 6.0.3
+
+  '@prisma/client@7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2))(typescript@7.0.2)':
+    dependencies:
+      '@prisma/client-runtime-utils': 7.8.0
+    optionalDependencies:
+      prisma: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2)
       typescript: 7.0.2
 
   '@prisma/config@7.8.0':
@@ -7587,6 +7934,29 @@ snapshots:
       zeptomatch: 2.1.0
     transitivePeerDependencies:
       - typescript
+
+  '@prisma/dev@0.24.3(typescript@6.0.3)':
+    dependencies:
+      '@electric-sql/pglite': 0.4.1
+      '@electric-sql/pglite-socket': 0.1.1(@electric-sql/pglite@0.4.1)
+      '@electric-sql/pglite-tools': 0.3.1(@electric-sql/pglite@0.4.1)
+      '@hono/node-server': 1.19.11(hono@4.12.15)
+      '@prisma/get-platform': 7.2.0
+      '@prisma/query-plan-executor': 7.2.0
+      '@prisma/streams-local': 0.1.2
+      foreground-child: 3.3.1
+      get-port-please: 3.2.0
+      hono: 4.12.15
+      http-status-codes: 2.3.0
+      pathe: 2.0.3
+      proper-lockfile: 4.1.2
+      remeda: 2.33.4
+      std-env: 3.10.0
+      valibot: 1.2.0(typescript@6.0.3)
+      zeptomatch: 2.1.0
+    transitivePeerDependencies:
+      - typescript
+    optional: true
 
   '@prisma/dev@0.24.3(typescript@7.0.2)':
     dependencies:
@@ -8286,7 +8656,7 @@ snapshots:
       debug: 4.4.3
       minimatch: 10.2.4
       semver: 7.7.4
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -8301,7 +8671,7 @@ snapshots:
       debug: 4.4.3
       minimatch: 10.2.4
       semver: 7.7.4
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@6.0.2)
       typescript: 6.0.2
     transitivePeerDependencies:
@@ -9254,7 +9624,7 @@ snapshots:
       get-tsconfig: 4.13.7
       is-bun-module: 2.0.0
       stable-hash: 0.0.5
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.17
       unrs-resolver: 1.11.1
     optionalDependencies:
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.6.1))
@@ -9564,10 +9934,6 @@ snapshots:
   fd-package-json@2.0.0:
     dependencies:
       walk-up-path: 4.0.0
-
-  fdir@6.5.0(picomatch@4.0.4):
-    optionalDependencies:
-      picomatch: 4.0.4
 
   fdir@6.5.0(picomatch@4.0.5):
     optionalDependencies:
@@ -11235,7 +11601,26 @@ snapshots:
       - react
       - react-dom
 
-  prisma@7.8.0(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2):
+  prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@6.0.3):
+    dependencies:
+      '@prisma/config': 7.8.0
+      '@prisma/dev': 0.24.3(typescript@6.0.3)
+      '@prisma/engines': 7.8.0
+      '@prisma/studio-core': 0.27.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      mysql2: 3.15.3
+      postgres: 3.4.7
+    optionalDependencies:
+      better-sqlite3: 12.8.0
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - magicast
+      - react
+      - react-dom
+    optional: true
+
+  prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@7.0.2):
     dependencies:
       '@prisma/config': 7.8.0
       '@prisma/dev': 0.24.3(typescript@7.0.2)
@@ -11913,16 +12298,6 @@ snapshots:
 
   tinyexec@1.0.4: {}
 
-  tinyglobby@0.2.15:
-    dependencies:
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
-
-  tinyglobby@0.2.16:
-    dependencies:
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
-
   tinyglobby@0.2.17:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.5)
@@ -12203,6 +12578,11 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
+  valibot@1.2.0(typescript@6.0.3):
+    optionalDependencies:
+      typescript: 6.0.3
+    optional: true
+
   valibot@1.2.0(typescript@7.0.2):
     optionalDependencies:
       typescript: 7.0.2
@@ -12300,11 +12680,11 @@ snapshots:
       magic-string: 0.30.21
       obug: 2.1.1
       pathe: 2.0.3
-      picomatch: 4.0.4
+      picomatch: 4.0.5
       std-env: 4.1.0
       tinybench: 2.9.0
       tinyexec: 1.0.4
-      tinyglobby: 0.2.16
+      tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
       vite: 8.1.5(@types/node@20.19.37)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
       why-is-node-running: 2.3.0
@@ -12327,11 +12707,11 @@ snapshots:
       magic-string: 0.30.21
       obug: 2.1.1
       pathe: 2.0.3
-      picomatch: 4.0.4
+      picomatch: 4.0.5
       std-env: 4.1.0
       tinybench: 2.9.0
       tinyexec: 1.0.4
-      tinyglobby: 0.2.16
+      tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
       vite: 8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
       why-is-node-running: 2.3.0
@@ -12354,11 +12734,11 @@ snapshots:
       magic-string: 0.30.21
       obug: 2.1.1
       pathe: 2.0.3
-      picomatch: 4.0.4
+      picomatch: 4.0.5
       std-env: 4.1.0
       tinybench: 2.9.0
       tinyexec: 1.0.4
-      tinyglobby: 0.2.16
+      tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
       vite: 8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
       why-is-node-running: 2.3.0

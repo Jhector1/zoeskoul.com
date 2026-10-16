@@ -23,15 +23,16 @@
     "test": "vitest run --root ../.. packages/learner-ui/src/achievements.test.ts packages/learner-ui/src/HeaderChrome.test.ts packages/learner-ui/src/ThemeToggle.test.ts packages/learner-ui/src/UserMenuChrome.test.ts packages/learner-ui/src/LocaleSwitcherChrome.test.ts"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.563.0",
-    "tailwind-merge": "^3.4.0",
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/permissions": "workspace:*",
+    "@zoeskoul/platform-ui": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/preferences": "workspace:*",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.563.0",
     "next-themes": "^0.4.6",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^3.4.0"
   },
   "peerDependencies": {
     "react": ">=18.0.0"

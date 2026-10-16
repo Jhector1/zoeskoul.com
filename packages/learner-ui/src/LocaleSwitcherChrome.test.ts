@@ -13,7 +13,7 @@ const exists = (relativePath: string) =>
 
 describe("LocaleSwitcherChrome ownership boundary", () => {
   it("keeps locale routing and persistence out of shared presentation", () => {
-    const source = readSource("./LocaleSwitcherChrome.tsx");
+    const source = readSource("../../platform-ui/src/LocaleSwitcherChrome.tsx");
 
     for (const forbidden of [
       "next-intl",
@@ -37,7 +37,7 @@ describe("LocaleSwitcherChrome ownership boundary", () => {
   });
 
   it("owns the exact locale switcher chrome and pending presentation", () => {
-    const source = readSource("./LocaleSwitcherChrome.tsx");
+    const source = readSource("../../platform-ui/src/LocaleSwitcherChrome.tsx");
 
     for (const required of [
       '"relative max-w-full"',

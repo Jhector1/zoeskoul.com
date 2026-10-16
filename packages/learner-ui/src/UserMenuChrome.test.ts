@@ -10,7 +10,7 @@ const exists = (relativePath: string) =>
 
 describe("UserMenuChrome ownership boundary", () => {
   it("keeps framework and app wiring out of shared presentation", () => {
-    const source = readSource("./UserMenuChrome.tsx");
+    const source = readSource("../../platform-ui/src/UserMenuChrome.tsx");
 
     for (const forbidden of [
       "next/image",

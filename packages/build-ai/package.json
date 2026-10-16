@@ -1,0 +1,24 @@
+{
+  "name": "@zoeskoul/build-ai",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --root ../.. packages/build-ai/src"
+  },
+  "dependencies": {
+    "@zoeskoul/ai-json": "workspace:*",
+    "@zoeskoul/build-contracts": "workspace:*",
+    "@zoeskoul/build-core": "workspace:*",
+    "@zoeskoul/build-registry": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.5"
+  }
+}

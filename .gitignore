@@ -102,3 +102,6 @@ apps/web/.playwright/
 !.curriculum-drafts/**
 # Generated curriculum compiler output; canonical editable source lives in .curriculum-drafts/.
 .curriculum-build/
+
+# Safe shared environment template
+!.env.shared.example

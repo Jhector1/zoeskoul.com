@@ -5,6 +5,22 @@ import {
   workspaceBase64DecodedByteLength,
 } from "@zoeskoul/code-contracts";
 
+export const WORKSPACE_MODES = ["learn", "practice", "build"] as const;
+
+export type WorkspaceMode = (typeof WORKSPACE_MODES)[number];
+
+export function isWorkspaceMode(value: unknown): value is WorkspaceMode {
+  return typeof value === "string" &&
+    (WORKSPACE_MODES as readonly string[]).includes(value);
+}
+
+export function resolveWorkspaceMode(
+  value: unknown,
+  fallback: WorkspaceMode = "learn",
+): WorkspaceMode {
+  return isWorkspaceMode(value) ? value : fallback;
+}
+
 export function defaultMainFile(lang: WorkspaceLanguage): string {
   const names: Record<string, string> = {
     python: "main.py", java: "Main.java", javascript: "main.js",

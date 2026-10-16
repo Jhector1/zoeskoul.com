@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const chrome = readFileSync(
-  new URL("./HeaderChrome.tsx", import.meta.url),
+  new URL("../../platform-ui/src/HeaderChrome.tsx", import.meta.url),
   "utf8",
 );
 

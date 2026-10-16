@@ -1,0 +1,45 @@
+{
+  "name": "@zoeskoul/zoebuild",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "node ../../scripts/run-with-shared-env.mjs next dev --port 3004",
+    "build": "next build",
+    "start": "next start --port 3004",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check:boundary": "node scripts/check-app-boundary.mjs",
+    "test:build": "vitest run src/lib/build src/app/api/build"
+  },
+  "dependencies": {
+    "@zoeskoul/ai-json": "workspace:*",
+    "@zoeskoul/app-config": "workspace:*",
+    "@zoeskoul/auth-client": "workspace:*",
+    "@zoeskoul/build-ai": "workspace:*",
+    "@zoeskoul/build-application": "workspace:*",
+    "@zoeskoul/build-executor-contracts": "workspace:*",
+    "@zoeskoul/build-imports": "workspace:*",
+    "@zoeskoul/build-preparation": "workspace:*",
+    "@zoeskoul/code-contracts": "workspace:*",
+    "@zoeskoul/db": "workspace:*",
+    "@zoeskoul/learner-workspace": "workspace:*",
+    "@zoeskoul/permissions": "workspace:*",
+    "@zoeskoul/platform-auth": "workspace:*",
+    "@zoeskoul/platform-server": "workspace:*",
+    "@zoeskoul/platform-ui": "workspace:*",
+    "@zoeskoul/preferences": "workspace:*",
+    "next": "16.1.1",
+    "next-themes": "^0.4.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "@zoeskoul/build-routing": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.5"
+  }
+}

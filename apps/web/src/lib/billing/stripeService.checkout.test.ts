@@ -33,6 +33,14 @@ vi.mock("@/lib/prisma", () => ({
     },
   },
 }));
+vi.mock("@/lib/billing/buildAiFeatureGrant", () => ({
+  reconcileBuildAiSubscriptionGrantForUser: vi.fn(async () => ({
+    id: "fg_test",
+    active: true,
+    changed: true,
+  })),
+}));
+
 vi.mock("@/lib/stripe", () => ({
   getStripe: () => ({
     customers: {

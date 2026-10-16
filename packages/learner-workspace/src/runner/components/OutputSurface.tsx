@@ -6,6 +6,8 @@ import RunnerOutputSurface from "@zoeskoul/learner-workspace/runner/components/R
 import SqlOutputSurface from "@zoeskoul/learner-workspace/runner/components/SqlOutputSurface";
 import type { SqlPaneOptions } from "@zoeskoul/learner-workspace/runner/components/sql/results-pane/index";
 import WebPreview from "@zoeskoul/learner-workspace/runner/components/WebPreview";
+import RemoteWebPreview from "@zoeskoul/learner-workspace/runner/components/RemoteWebPreview";
+import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 
 export type OutputSurfaceModel =
     | {
@@ -33,6 +35,10 @@ export type OutputSurfaceModel =
     entries: WorkspaceSyncEntry[];
     title?: string;
     sessionKey?: string;
+}
+    | {
+    kind: "remote-web-preview";
+    preview: RemoteWebPreviewDescriptor;
 };
 
 export default function OutputSurface(props: {
@@ -63,6 +69,13 @@ export default function OutputSurface(props: {
                         title={model.title}
                         sessionKey={model.sessionKey}
                     />
+                </div>
+            );
+
+        case "remote-web-preview":
+            return (
+                <div className="h-full min-h-0">
+                    <RemoteWebPreview preview={model.preview} />
                 </div>
             );
 

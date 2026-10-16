@@ -1,0 +1,46 @@
+{
+  "wave": "ZOESKOUL BUILD AI SUBSCRIPTION RECONCILIATION OWNER AUDIT V301D2C2D1",
+  "matches": [
+    "apps/web/src/app/api/billing/checkout/route.test.ts",
+    "apps/web/src/app/api/billing/checkout/route.ts",
+    "apps/web/src/app/api/billing/confirm/route.test.ts",
+    "apps/web/src/app/api/billing/confirm/route.ts",
+    "apps/web/src/app/api/billing/status/route.ts",
+    "apps/web/src/app/api/billing/subscription/resume/route.test.ts",
+    "apps/web/src/app/api/billing/subscription/resume/route.ts",
+    "apps/web/src/app/api/stripe/webhook/route.test.ts",
+    "apps/web/src/app/api/stripe/webhook/route.ts",
+    "apps/web/src/lib/billing/requireEntitledUser.ts",
+    "apps/web/src/lib/billing/stripeEventLedger.test.ts",
+    "apps/web/src/lib/billing/stripeService.checkout.test.ts",
+    "apps/web/src/lib/billing/stripeService.ts",
+    "apps/web/src/lib/billing/stripeWebhookReconciliation.test.ts",
+    "apps/web/src/lib/billing/stripeWebhookReconciliation.ts",
+    "apps/web/src/lib/billing/stripeWebhookTutoringIntegration.test.ts",
+    "apps/web/src/lib/tutoring/tutoringCreditWebhook.test.ts",
+    "apps/web/src/lib/tutoring/tutoringCreditWebhook.ts"
+  ],
+  "subscription_writers": [
+    "apps/web/src/app/api/billing/checkout/route.test.ts",
+    "apps/web/src/app/api/billing/checkout/route.ts",
+    "apps/web/src/app/api/billing/confirm/route.test.ts",
+    "apps/web/src/app/api/billing/confirm/route.ts",
+    "apps/web/src/app/api/billing/status/route.ts",
+    "apps/web/src/app/api/billing/subscription/resume/route.test.ts",
+    "apps/web/src/app/api/billing/subscription/resume/route.ts",
+    "apps/web/src/lib/billing/requireEntitledUser.ts",
+    "apps/web/src/lib/billing/stripeService.checkout.test.ts",
+    "apps/web/src/lib/billing/stripeService.ts",
+    "apps/web/src/lib/billing/stripeWebhookReconciliation.ts"
+  ],
+  "webhook_owners": [
+    "apps/web/src/app/api/stripe/webhook/route.test.ts",
+    "apps/web/src/app/api/stripe/webhook/route.ts",
+    "apps/web/src/lib/billing/stripeEventLedger.test.ts",
+    "apps/web/src/lib/billing/stripeWebhookReconciliation.test.ts",
+    "apps/web/src/lib/billing/stripeWebhookReconciliation.ts",
+    "apps/web/src/lib/billing/stripeWebhookTutoringIntegration.test.ts",
+    "apps/web/src/lib/tutoring/tutoringCreditWebhook.test.ts",
+    "apps/web/src/lib/tutoring/tutoringCreditWebhook.ts"
+  ]
+}

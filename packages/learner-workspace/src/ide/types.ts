@@ -1,6 +1,7 @@
 import type { WorkspaceLanguage } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { TerminalEvidence } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import type { SqlPaneOptions } from "@zoeskoul/learner-workspace/runner/components/sql/results-pane/index";
+import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import type { ToolRunnerPanePolicy, ToolSurface } from "@zoeskoul/curriculum-contracts";
 
 
@@ -112,6 +113,7 @@ export type FullIDEProps = {
     onTerminalEvidenceChange?: (evidence: TerminalEvidence) => void;
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
+    remoteWebPreview?: RemoteWebPreviewDescriptor;
     initialSqlDialect?: SqlDialect;
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;

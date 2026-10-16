@@ -1,0 +1,19 @@
+{
+  "name": "@zoeskoul/platform-auth",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.11.1",
+    "next-auth": "^5.0.0-beta.30"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  }
+}

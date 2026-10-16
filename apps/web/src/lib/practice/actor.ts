@@ -6,6 +6,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { createHmac, timingSafeEqual, createHash } from "node:crypto";
+import { canonicalUserActorKey } from "@zoeskoul/platform-server/access/reconcileFeatureGrant";
 
 export type Actor = { userId: string | null; guestId: string | null };
 
@@ -182,7 +183,7 @@ export function attachGuestCookie(
 const sha = (s: string) => createHash("sha256").update(s).digest("hex");
 
 export function actorKeyOf(actor: Actor): string {
-  if (actor.userId) return `u:${sha(actor.userId)}`;
+  if (actor.userId) return canonicalUserActorKey(actor.userId);
   if (actor.guestId) return `g:${sha(actor.guestId)}`;
   return "g:missing";
 }
