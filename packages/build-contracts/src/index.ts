@@ -49,14 +49,6 @@ export const BUILD_DEPLOYMENT_PREFERENCES = [
 export type BuildDeploymentPreference =
   (typeof BUILD_DEPLOYMENT_PREFERENCES)[number];
 
-export const BUILD_COMMERCE_PROVIDERS = [
-  "zoebuild-native",
-  "shopify",
-] as const;
-
-export type BuildCommerceProvider =
-  (typeof BUILD_COMMERCE_PROVIDERS)[number];
-
 export const BUILD_STOREFRONT_RUNTIMES = [
   "static",
   "react-vite",
@@ -66,7 +58,6 @@ export type BuildStorefrontRuntime =
   (typeof BUILD_STOREFRONT_RUNTIMES)[number];
 
 export type BuildCommerceSpecification = Readonly<{
-  provider: BuildCommerceProvider;
   storefrontRuntime: BuildStorefrontRuntime;
 }>;
 
@@ -74,17 +65,12 @@ export const BUILD_COMMERCE_JSON_SCHEMA = {
   type: "object",
   additionalProperties: false,
   properties: {
-    provider: {
-      type: "string",
-      enum: [...BUILD_COMMERCE_PROVIDERS],
-    },
     storefrontRuntime: {
       type: "string",
       enum: [...BUILD_STOREFRONT_RUNTIMES],
     },
   },
   required: [
-    "provider",
     "storefrontRuntime",
   ],
 } as const;
@@ -740,16 +726,6 @@ export function parseProjectSpecification(value: unknown): ProjectSpecification 
           "Commerce specification must be an object or null.",
         );
       } else {
-        const provider =
-          typeof commerceInput.provider === "string" &&
-          (
-            BUILD_COMMERCE_PROVIDERS as readonly string[]
-          ).includes(
-            commerceInput.provider,
-          )
-            ? commerceInput.provider as BuildCommerceProvider
-            : null;
-
         const storefrontRuntime =
           typeof commerceInput.storefrontRuntime === "string" &&
           (
@@ -760,24 +736,14 @@ export function parseProjectSpecification(value: unknown): ProjectSpecification 
             ? commerceInput.storefrontRuntime as BuildStorefrontRuntime
             : null;
 
-        if (!provider) {
-          issues.push(
-            "Commerce provider is not supported.",
-          );
-        }
-
         if (!storefrontRuntime) {
           issues.push(
             "Storefront runtime is not supported.",
           );
         }
 
-        if (
-          provider &&
-          storefrontRuntime
-        ) {
+        if (storefrontRuntime) {
           commerce = {
-            provider,
             storefrontRuntime,
           };
         }
@@ -790,7 +756,7 @@ export function parseProjectSpecification(value: unknown): ProjectSpecification 
     !commerce
   ) {
     issues.push(
-      "Commerce projects require a commerce provider and storefront runtime.",
+      "Commerce projects require a storefront runtime.",
     );
   }
 

@@ -20,7 +20,6 @@ const specification: ProjectSpecification = {
   pages: ["Home", "Shop", "Cart"],
   stackId: "commerce-static-v1",
   commerce: {
-    provider: "zoebuild-native",
     storefrontRuntime: "static",
   },
   deployment: { preference: "static" },

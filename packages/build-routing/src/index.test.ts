@@ -32,8 +32,6 @@ describe(
           commerceMode:
             "cart-checkout",
           commerce: {
-            provider:
-              "zoebuild-native",
             storefrontRuntime:
               "static",
           },
@@ -217,7 +215,6 @@ describe(
           "commerce-react-vite-v1",
         );
         expect(profile.commerce).toEqual({
-          provider: "zoebuild-native",
           storefrontRuntime: "react-vite",
         });
       },
@@ -244,8 +241,6 @@ describe(
         expect(
           profile.commerce,
         ).toEqual({
-          provider:
-            "zoebuild-native",
           storefrontRuntime:
             "react-vite",
         });

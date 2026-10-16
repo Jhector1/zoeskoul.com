@@ -17,6 +17,10 @@ import {
 import { prisma } from "@zoeskoul/platform-server/prisma";
 import { saveCodeProjectInTransaction } from "@zoeskoul/platform-server/projects/saveCodeProject";
 
+import {
+  defaultNativeCommerceProviderRoutes,
+} from "../commerce/nativeCommerceProvider";
+
 function toPrismaJson(value: unknown): Prisma.InputJsonValue {
   return JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
 }
@@ -44,7 +48,7 @@ function buildSourceMeta(input: InitialBuildProjectPersistenceInput) {
 /**
  * Prisma is an infrastructure adapter for the provider-neutral Build
  * application service. CodeProject + its initial revision + BuildProject +
- * an optional ZoeBuild Native CommerceStore are created in one transaction so
+ * an optional provider-neutral CommerceStore are created in one transaction so
  * Build metadata can never point at a partially bootstrapped source project.
  */
 export function createPrismaBuildProjectPersistence(
@@ -88,8 +92,7 @@ export function createPrismaBuildProjectPersistence(
         });
 
         if (
-          input.specification.requirements.commerce &&
-          input.specification.commerce?.provider === "zoebuild-native"
+          input.specification.requirements.commerce
         ) {
           await tx.commerceStore.create({
             data: {
@@ -97,6 +100,10 @@ export function createPrismaBuildProjectPersistence(
               status: "draft",
               name: input.title,
               defaultCurrency: "USD",
+              providerRoutes: {
+                create:
+                  defaultNativeCommerceProviderRoutes(),
+              },
             },
             select: { id: true },
           });

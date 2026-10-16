@@ -18,6 +18,31 @@ export const COMMERCE_PROVIDER_CAPABILITIES = [
 export type CommerceProviderCapability =
   (typeof COMMERCE_PROVIDER_CAPABILITIES)[number];
 
+export const ZOEBUILD_NATIVE_COMMERCE_PROVIDER =
+  "zoebuild-native" as const;
+
+export const ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES = [
+  "catalog",
+  "inventory",
+  "cart",
+  "orders",
+  "checkout",
+] as const satisfies readonly CommerceProviderCapability[];
+
+export function defaultNativeCommerceProviderRoutes() {
+  return COMMERCE_PROVIDER_ENVIRONMENTS.flatMap(
+    (environment) =>
+      ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES.map(
+        (capability) => ({
+          environment,
+          capability,
+          provider:
+            ZOEBUILD_NATIVE_COMMERCE_PROVIDER,
+        }),
+      ),
+  );
+}
+
 export type CommerceStorefrontSurface =
   | "preview"
   | "published";

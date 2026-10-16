@@ -312,7 +312,7 @@ export const COMMERCE_STATIC_TEMPLATE_V1 = {
     },
     {
       path: "COMMERCE.md",
-      content: "# ZoeBuild commerce storefront\n\nGenerated presentation code depends on a trusted provider-neutral commerce binding.\n\nThe project commerce plan selects ZoeBuild Native or an external provider and selects the storefront runtime. Generated source does not select Shopify, Stripe, payment providers, tax engines, credentials, or secret keys.\n\nAt runtime ZoeBuild supplies an authorized __ZOEBUILD_COMMERCE__ binding. If it is absent, the storefront remains a design preview and live commerce actions fail closed.\n\nNever put API tokens, private credentials, secret keys, or raw card data in generated source.\n",
+      content: "# ZoeBuild commerce storefront\n\nGenerated presentation code depends on a trusted provider-neutral commerce binding.\n\nThe project commerce plan selects only the storefront runtime. Trusted ZoeBuild commerce middleware routes each commerce capability to its configured server-side provider. Generated source does not select commerce providers, payment providers, tax engines, credentials, or secret keys.\n\nAt runtime ZoeBuild supplies an authorized __ZOEBUILD_COMMERCE__ binding. If it is absent, the storefront remains a design preview and live commerce actions fail closed.\n\nNever put API tokens, private credentials, secret keys, or raw card data in generated source.\n",
     },
   ],
 

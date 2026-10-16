@@ -115,8 +115,6 @@ describe(
         expect(
           storefront.commerce,
         ).toEqual({
-          provider:
-            "zoebuild-native",
           storefrontRuntime:
             "static",
         });

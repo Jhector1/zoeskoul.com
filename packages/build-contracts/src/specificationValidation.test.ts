@@ -66,13 +66,11 @@ describe("ProjectSpecification runtime validation", () => {
         projectType: "frontend-app",
         stackId: "commerce-static-v1",
         commerce: {
-          provider: "zoebuild-native",
           storefrontRuntime: "static",
         },
       });
 
     expect(parsed.commerce).toEqual({
-      provider: "zoebuild-native",
       storefrontRuntime: "static",
     });
   });
@@ -82,7 +80,6 @@ describe("ProjectSpecification runtime validation", () => {
       parseProjectSpecification({
         ...validSpecification(),
         commerce: {
-          provider: "shopify",
           storefrontRuntime: "static",
         },
       }),

@@ -381,8 +381,6 @@ export function classifyBuildRequest(
       commerceMode:
         "marketplace",
       commerce: {
-        provider:
-          "zoebuild-native",
         storefrontRuntime:
           "react-vite",
       },
@@ -469,8 +467,6 @@ export function classifyBuildRequest(
           "cart-checkout",
 
         commerce: {
-          provider:
-            "zoebuild-native",
           storefrontRuntime:
             "react-vite",
         },
@@ -530,8 +526,6 @@ export function classifyBuildRequest(
         "cart-checkout",
 
       commerce: {
-        provider:
-          "zoebuild-native",
         storefrontRuntime:
           richStorefront
             ? "react-vite"

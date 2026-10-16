@@ -7,7 +7,6 @@ import {
 import {
   BUILD_CAPABILITIES,
   BUILD_COMMERCE_JSON_SCHEMA,
-  BUILD_COMMERCE_PROVIDERS,
   BUILD_DEPLOYMENT_PREFERENCES,
   BUILD_PROJECT_TYPES,
   BUILD_STOREFRONT_RUNTIMES,
@@ -76,10 +75,19 @@ describe("ProjectSpecification JSON Schema ownership", () => {
     });
 
     expect(
-      BUILD_COMMERCE_JSON_SCHEMA
-        .properties.provider.enum,
+      Object.keys(
+        BUILD_COMMERCE_JSON_SCHEMA
+          .properties,
+      ),
     ).toEqual([
-      ...BUILD_COMMERCE_PROVIDERS,
+      "storefrontRuntime",
+    ]);
+
+    expect(
+      BUILD_COMMERCE_JSON_SCHEMA
+        .required,
+    ).toEqual([
+      "storefrontRuntime",
     ]);
 
     expect(
