@@ -17,6 +17,13 @@ import {
 } from "@/lib/commerce/nativeCommerceCartRateLimit";
 
 import {
+  CommerceProviderResolutionError,
+  ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
+  requireCommerceProviderAdapter,
+  resolveCommerceProvider,
+} from "@/lib/commerce/commerceProviderResolver";
+
+import {
   buildPublishedStaticFileMap,
   publishedStaticContentType,
   resolvePublishedStaticFile,
@@ -73,6 +80,27 @@ function unavailable() {
       },
     },
   );
+}
+
+async function requireNativeCommerceCapability(
+  input: Readonly<{
+    buildProjectId: string;
+    surface: "preview" | "published";
+    capability: "catalog" | "cart";
+  }>,
+) {
+  const resolved =
+    await resolveCommerceProvider(
+      prisma,
+      input,
+    );
+
+  requireCommerceProviderAdapter(
+    resolved,
+    ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
+  );
+
+  return resolved;
 }
 
 function responseForPublishedFile(
@@ -342,6 +370,15 @@ export async function POST(
   }
 
   try {
+    await requireNativeCommerceCapability({
+      buildProjectId:
+        normalizedProjectId,
+      surface:
+        "published",
+      capability:
+        "cart",
+    });
+
     const command =
       parseNativeCommerceCartCommand(
         await readPublishedCommerceJson(
@@ -387,6 +424,26 @@ export async function POST(
       },
     );
   } catch (error) {
+    if (
+      error instanceof
+      CommerceProviderResolutionError
+    ) {
+      return new Response(
+        "Commerce service unavailable.",
+        {
+          status: 503,
+          headers: {
+            "Cache-Control":
+              "no-store",
+            "Content-Type":
+              "text/plain; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+          },
+        },
+      );
+    }
+
     if (
       error instanceof
       NativeCommerceCartError
@@ -568,6 +625,15 @@ export async function GET(
       );
 
     try {
+      await requireNativeCommerceCapability({
+        buildProjectId:
+          normalizedProjectId,
+        surface:
+          "published",
+        capability:
+          "catalog",
+      });
+
       const id =
         url.searchParams.get(
           "id",
@@ -645,6 +711,26 @@ export async function GET(
           error.message,
           {
             status: 400,
+            headers: {
+              "Cache-Control":
+                "no-store",
+              "Content-Type":
+                "text/plain; charset=utf-8",
+              "X-Content-Type-Options":
+                "nosniff",
+            },
+          },
+        );
+      }
+
+      if (
+        error instanceof
+        CommerceProviderResolutionError
+      ) {
+        return new Response(
+          "Commerce service unavailable.",
+          {
+            status: 503,
             headers: {
               "Cache-Control":
                 "no-store",

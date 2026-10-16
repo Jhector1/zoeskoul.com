@@ -16,6 +16,12 @@ import {
 import {
   enforceNativeCommerceCartRateLimit,
 } from "@/lib/commerce/nativeCommerceCartRateLimit";
+import {
+  CommerceProviderResolutionError,
+  ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
+  requireCommerceProviderAdapter,
+  resolveCommerceProvider,
+} from "@/lib/commerce/commerceProviderResolver";
 import { prisma } from "@zoeskoul/platform-server/prisma";
 import { parseReactPreviewId, ReactPreviewRequestError } from "@/lib/build/reactPreviewServer";
 import { normalizeReactPreviewProxyPath } from "@/lib/build/reactPreviewProxyPath";
@@ -39,6 +45,27 @@ function errorResponse(message: string, status: number) {
 
 function validCapability(value: string) {
   return /^[A-Za-z0-9_-]{32}$/.test(value);
+}
+
+async function requireNativeCommerceCapability(
+  input: Readonly<{
+    buildProjectId: string;
+    surface: "preview" | "published";
+    capability: "catalog" | "cart";
+  }>,
+) {
+  const resolved =
+    await resolveCommerceProvider(
+      prisma,
+      input,
+    );
+
+  requireCommerceProviderAdapter(
+    resolved,
+    ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
+  );
+
+  return resolved;
 }
 
 async function proxy(
@@ -103,6 +130,15 @@ async function proxy(
       }
 
       try {
+        await requireNativeCommerceCapability({
+          buildProjectId:
+            context.buildProjectId,
+          surface:
+            "preview",
+          capability:
+            "catalog",
+        });
+
         const id =
           url.searchParams.get(
             "id",
@@ -182,6 +218,16 @@ async function proxy(
           return errorResponse(
             error.message,
             400,
+          );
+        }
+
+        if (
+          error instanceof
+          CommerceProviderResolutionError
+        ) {
+          return errorResponse(
+            "Commerce service unavailable.",
+            503,
           );
         }
 
@@ -413,6 +459,15 @@ export async function POST(
       );
     }
 
+    await requireNativeCommerceCapability({
+      buildProjectId:
+        context.buildProjectId,
+      surface:
+        "preview",
+      capability:
+        "cart",
+    });
+
     const command =
       parseNativeCommerceCartCommand(
         await readCommerceJson(
@@ -456,6 +511,16 @@ export async function POST(
       },
     );
   } catch (error) {
+    if (
+      error instanceof
+      CommerceProviderResolutionError
+    ) {
+      return errorResponse(
+        "Commerce service unavailable.",
+        503,
+      );
+    }
+
     if (
       error instanceof
       NativeCommerceCartError

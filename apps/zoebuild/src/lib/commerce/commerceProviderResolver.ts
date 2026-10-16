@@ -55,7 +55,8 @@ export type CommerceProviderResolutionErrorCode =
   | "COMMERCE_PROVIDER_CAPABILITY_UNSUPPORTED"
   | "COMMERCE_PROVIDER_ENVIRONMENT_UNSUPPORTED"
   | "COMMERCE_PROVIDER_CONNECTION_REQUIRED"
-  | "COMMERCE_PROVIDER_CONNECTION_INVALID";
+  | "COMMERCE_PROVIDER_CONNECTION_INVALID"
+  | "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE";
 
 export class CommerceProviderResolutionError
   extends Error {
@@ -234,6 +235,25 @@ function registeredProvider(
   }
 
   return registration;
+}
+
+export function requireCommerceProviderAdapter<
+  TAdapter extends CommerceProviderAdapter,
+>(
+  resolved: ResolvedCommerceProvider,
+  adapter: TAdapter,
+): TAdapter {
+  if (
+    resolved.adapter !==
+    adapter
+  ) {
+    throw new CommerceProviderResolutionError(
+      "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+      "Configured commerce provider is not available on this execution path.",
+    );
+  }
+
+  return adapter;
 }
 
 export async function resolveCommerceProvider(

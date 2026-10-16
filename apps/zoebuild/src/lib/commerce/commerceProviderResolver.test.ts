@@ -13,6 +13,7 @@ import {
   CommerceProviderResolutionError,
   ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
   createCommerceProviderRegistry,
+  requireCommerceProviderAdapter,
   resolveCommerceProvider,
   type CommerceProviderRegistration,
 } from "./commerceProviderResolver";
@@ -629,6 +630,91 @@ describe(
               "primary",
           },
         });
+      },
+    );
+
+    it(
+      "prevents a resolved external provider from entering the native execution path",
+      async () => {
+        const registry =
+          createCommerceProviderRegistry([
+            externalRegistration(),
+          ]);
+
+        const fake =
+          fakeClient({
+            store: {
+              id: "store_1",
+              status:
+                "active",
+            },
+            route: {
+              provider:
+                "external-commerce",
+              connectionId:
+                "connection_1",
+              connection: {
+                id:
+                  "connection_1",
+                storeId:
+                  "store_1",
+                provider:
+                  "external-commerce",
+                environment:
+                  "live",
+                status:
+                  "active",
+                externalAccountRef:
+                  "acct_1",
+                credentialsSecretRef:
+                  "secret://commerce/live",
+                webhookSecretRef:
+                  null,
+                config:
+                  null,
+              },
+            },
+          });
+
+        const resolved =
+          await resolveCommerceProvider(
+            fake.client,
+            {
+              buildProjectId:
+                "build_1",
+              surface:
+                "published",
+              capability:
+                "catalog",
+            },
+            registry,
+          );
+
+        expect(
+          () =>
+            requireCommerceProviderAdapter(
+              resolved,
+              ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
+            ),
+        ).toThrow(
+          CommerceProviderResolutionError,
+        );
+
+        try {
+          requireCommerceProviderAdapter(
+            resolved,
+            ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
+          );
+        } catch (error) {
+          expect(
+            (
+              error as
+                CommerceProviderResolutionError
+            ).code,
+          ).toBe(
+            "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+          );
+        }
       },
     );
 
