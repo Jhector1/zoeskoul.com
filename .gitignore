@@ -105,3 +105,7 @@ apps/web/.playwright/
 
 # Safe shared environment template
 !.env.shared.example
+
+# Keep trusted runner source directories named build in source control/context.
+!apps/runner/src/services/build/
+!apps/runner/src/services/build/**
