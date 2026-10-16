@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json --outDir dist",
-    "start": "node dist/server.js",
+    "start": "node --import=tsx dist/server.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run --config vitest.config.ts"
+    "test": "vitest run --config vitest.config.ts",
+    "smoke:runtime": "node --import=tsx dist/runtimeWorkspaceSmoke.js",
+    "postbuild": "pnpm run smoke:runtime"
   },
   "keywords": [],
   "author": "info@zoeskoul.com",
@@ -23,7 +25,8 @@
     "ws": "^8.20.0",
     "zod": "^4.3.6",
     "@zoeskoul/build-executor-contracts": "workspace:*",
-    "@zoeskoul/build-preparation": "workspace:*"
+    "@zoeskoul/build-preparation": "workspace:*",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -31,7 +34,6 @@
     "@types/express": "^5.0.6",
     "@types/node": "^20.19.37",
     "@types/ws": "^8.18.1",
-    "tsx": "^4.21.0",
     "typescript": "^6.0.2",
     "vitest": "^4.1.5"
   }
