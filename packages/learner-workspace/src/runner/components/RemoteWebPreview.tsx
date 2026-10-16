@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
+
+type FrameIndex = 0 | 1;
 
 function withRevision(src: string, revision: number) {
     const separator = src.includes("?") ? "&" : "?";
     return `${src}${separator}__zb_preview_revision=${revision}`;
+}
+
+function otherFrame(index: FrameIndex): FrameIndex {
+    return index === 0 ? 1 : 0;
 }
 
 export default function RemoteWebPreview(props: {
@@ -23,6 +29,77 @@ export default function RemoteWebPreview(props: {
         [localRefresh, preview.revision, preview.src],
     );
 
+    const [frameSources, setFrameSources] = useState<
+        [string | null, string | null]
+    >([null, null]);
+    const [activeFrame, setActiveFrame] = useState<FrameIndex | null>(null);
+    const expiredCandidateRef = useRef<string | null>(null);
+
+    const activeSrc =
+        activeFrame === null ? null : frameSources[activeFrame];
+
+    useEffect(() => {
+        if (!iframeSrc) {
+            if (activeFrame === null) {
+                setFrameSources([null, null]);
+            }
+            return;
+        }
+
+        if (activeSrc === iframeSrc) return;
+
+        const controller = new AbortController();
+        let cancelled = false;
+
+        void (async () => {
+            try {
+                const response = await fetch(iframeSrc, {
+                    method: "GET",
+                    credentials: "same-origin",
+                    cache: "no-store",
+                    signal: controller.signal,
+                });
+
+                if (cancelled) return;
+
+                if (response.status === 404) {
+                    if (expiredCandidateRef.current !== iframeSrc) {
+                        expiredCandidateRef.current = iframeSrc;
+                        preview.onRetry?.();
+                    }
+                    return;
+                }
+
+                expiredCandidateRef.current = null;
+
+                setFrameSources((current) => {
+                    const target: FrameIndex =
+                        activeFrame === null ? 0 : otherFrame(activeFrame);
+
+                    if (current[target] === iframeSrc) {
+                        return current;
+                    }
+
+                    const next: [string | null, string | null] = [...current];
+                    next[target] = iframeSrc;
+                    return next;
+                });
+            } catch (error) {
+                if (
+                    error instanceof DOMException &&
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+            }
+        })();
+
+        return () => {
+            cancelled = true;
+            controller.abort();
+        };
+    }, [activeFrame, activeSrc, iframeSrc, preview.onRetry]);
+
     const statusLabel =
         preview.state === "starting"
             ? "Starting preview…"
@@ -31,6 +108,27 @@ export default function RemoteWebPreview(props: {
               : preview.state === "error"
                 ? "Preview unavailable"
                 : "Live preview";
+
+    const displayUrl = preview.src ? "/" : statusLabel;
+
+    function activateFrame(index: FrameIndex, src: string) {
+        if (src !== iframeSrc) return;
+
+        setActiveFrame(index);
+        setFrameSources((current) => {
+            if (current[index] !== src) return current;
+
+            const previous = otherFrame(index);
+            if (current[previous] === null) return current;
+
+            const next: [string | null, string | null] = [...current];
+            next[previous] = null;
+            return next;
+        });
+    }
+
+    const showStatusSurface =
+        preview.state === "error" || activeFrame === null;
 
     return (
         <div
@@ -52,6 +150,7 @@ export default function RemoteWebPreview(props: {
                             preview.onRetry?.();
                             return;
                         }
+
                         setLocalRefresh((value) => value + 1);
                     }}
                     disabled={!iframeSrc && preview.state !== "error"}
@@ -62,7 +161,7 @@ export default function RemoteWebPreview(props: {
 
                 <input
                     aria-label="Preview URL"
-                    value={preview.src ?? statusLabel}
+                    value={displayUrl}
                     readOnly
                     data-testid="remote-web-preview-url"
                     className="min-w-0 flex-1 truncate rounded-md border border-neutral-200 bg-white px-2 py-1 font-mono text-[11px] text-neutral-600 outline-none dark:border-white/10 dark:bg-neutral-900 dark:text-white/70"
@@ -76,20 +175,43 @@ export default function RemoteWebPreview(props: {
                 </span>
             </div>
 
-            <div className="relative min-h-0 flex-1">
-                {iframeSrc && preview.state !== "error" ? (
-                    <iframe
-                        key={iframeSrc}
-                        title={preview.title ?? "Web preview"}
-                        src={iframeSrc}
-                        sandbox="allow-scripts allow-forms allow-modals"
-                        data-remote-web-preview-frame
-                        className="h-full w-full border-0 bg-white"
-                        style={{ colorScheme: "light", backgroundColor: "#ffffff" }}
-                    />
-                ) : (
+            <div className="relative min-h-0 flex-1 overflow-hidden bg-white">
+                {frameSources.map((src, rawIndex) => {
+                    if (!src) return null;
+
+                    const index = rawIndex as FrameIndex;
+                    const isActive =
+                        preview.state !== "error" && index === activeFrame;
+
+                    return (
+                        <iframe
+                            key={index}
+                            title={preview.title ?? "Web preview"}
+                            src={src}
+                            sandbox="allow-scripts allow-forms allow-modals"
+                            data-remote-web-preview-frame
+                            data-preview-frame-active={
+                                isActive ? "true" : "false"
+                            }
+                            aria-hidden={!isActive}
+                            onLoad={() => activateFrame(index, src)}
+                            className={[
+                                "absolute inset-0 h-full w-full border-0 bg-white",
+                                isActive
+                                    ? "z-10 opacity-100"
+                                    : "pointer-events-none z-0 opacity-0",
+                            ].join(" ")}
+                            style={{
+                                colorScheme: "light",
+                                backgroundColor: "#ffffff",
+                            }}
+                        />
+                    );
+                })}
+
+                {showStatusSurface ? (
                     <div
-                        className="flex h-full min-h-[240px] items-center justify-center bg-white p-6 text-center dark:bg-black/30"
+                        className="absolute inset-0 z-20 flex h-full min-h-[240px] items-center justify-center bg-white p-6 text-center dark:bg-black/30"
                         role={preview.state === "error" ? "alert" : "status"}
                     >
                         <div className="max-w-md">
@@ -112,7 +234,7 @@ export default function RemoteWebPreview(props: {
                             ) : null}
                         </div>
                     </div>
-                )}
+                ) : null}
             </div>
         </div>
     );
