@@ -79,3 +79,7 @@ infra/postgres-data
 infra/redis-data
 zoe-infra/postgres-data
 zoe-infra/redis-data
+
+# Keep trusted runner source directories named build in source control/context.
+!apps/runner/src/services/build/
+!apps/runner/src/services/build/**

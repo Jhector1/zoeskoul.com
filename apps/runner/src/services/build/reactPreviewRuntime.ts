@@ -1,0 +1,1350 @@
+import {
+  createHash,
+  randomBytes,
+  randomUUID,
+} from "node:crypto";
+
+import fs from "node:fs/promises";
+import path from "node:path";
+
+import type {
+  ProductionBuildJobRequestV1,
+} from "@zoeskoul/build-executor-contracts";
+
+import {
+  assertRegisteredProductionBuildFiles,
+  resolveRegisteredReactPreviewServerPlan,
+} from "@zoeskoul/build-preparation";
+
+import {
+  env,
+} from "../../lib/env.js";
+
+import {
+  docker,
+} from "../docker/dockerClient.js";
+
+import {
+  countActiveSessionsForActor,
+  countActiveSessionsGlobal,
+} from "../sessions/sessionStore.js";
+
+import {
+  consumeStartToken,
+} from "../sessions/startRateLimit.js";
+
+import {
+  cleanupWorkspaceNow,
+} from "../workspace/cleanupWorkspace.js";
+
+import {
+  createWorkspace,
+} from "../workspace/createWorkspace.js";
+
+import {
+  ensureWorkspaceWritableForShellUser,
+} from "../workspace/workspacePermissions.js";
+
+import {
+  buildProductionBuildContainerOptions,
+} from "./executeProductionBuild.js";
+
+const PREVIEW_IDLE_MS =
+  10 * 60_000;
+
+const PREVIEW_HARD_LIFETIME_MS =
+  60 * 60_000;
+
+const PREVIEW_CLEANUP_INTERVAL_MS =
+  30_000;
+
+const PREVIEW_RESPONSE_MAX_BYTES =
+  4 * 1024 * 1024;
+
+const PREVIEW_START_TIMEOUT_MS =
+  20_000;
+
+const INSTALL_TIMEOUT_MS =
+  3 * 60_000;
+
+type PreviewSourceFile =
+  ProductionBuildJobRequestV1[
+    "files"
+  ][number];
+
+type MutablePreviewRecord = {
+  id: string;
+  ownerKey: string;
+  buildProjectId: string;
+  sourceVersion: number;
+  containerId: string;
+  workspaceDir: string;
+  port: 5173;
+  basePath: string;
+  sourcePaths:
+    Set<string>;
+  dependencyFingerprint:
+    string;
+  createdAt: number;
+  lastActivityAt: number;
+};
+
+const previews =
+  new Map<
+    string,
+    MutablePreviewRecord
+  >();
+
+const pendingPreviewStartsByActor =
+  new Map<string, number>();
+
+let pendingPreviewStartsGlobal =
+  0;
+
+function currentTime() {
+  return Date.now();
+}
+
+function activePreviewCountForActor(
+  ownerKey: string,
+) {
+  let count =
+    pendingPreviewStartsByActor.get(
+      ownerKey,
+    ) ?? 0;
+
+  for (
+    const preview of
+    previews.values()
+  ) {
+    if (
+      preview.ownerKey ===
+      ownerKey
+    ) {
+      count += 1;
+    }
+  }
+
+  return count;
+}
+
+function reservePreviewCapacity(
+  ownerKey: string,
+) {
+  const actorTotal =
+    countActiveSessionsForActor(
+      ownerKey,
+    ) +
+    activePreviewCountForActor(
+      ownerKey,
+    );
+
+  if (
+    actorTotal >=
+    env.maxConcurrentPerActor
+  ) {
+    throw new Error(
+      `Too many active sessions. Limit is ${env.maxConcurrentPerActor} per user.`,
+    );
+  }
+
+  const globalTotal =
+    countActiveSessionsGlobal() +
+    previews.size +
+    pendingPreviewStartsGlobal;
+
+  if (
+    globalTotal >=
+    env.maxConcurrentGlobal
+  ) {
+    throw new Error(
+      `Runner is busy. Global active session limit is ${env.maxConcurrentGlobal}.`,
+    );
+  }
+
+  pendingPreviewStartsByActor.set(
+    ownerKey,
+    (
+      pendingPreviewStartsByActor.get(
+        ownerKey,
+      ) ?? 0
+    ) + 1,
+  );
+
+  pendingPreviewStartsGlobal +=
+    1;
+
+  let released =
+    false;
+
+  return () => {
+    if (released) {
+      return;
+    }
+
+    released =
+      true;
+
+    const current =
+      pendingPreviewStartsByActor.get(
+        ownerKey,
+      ) ?? 0;
+
+    if (
+      current <= 1
+    ) {
+      pendingPreviewStartsByActor.delete(
+        ownerKey,
+      );
+    } else {
+      pendingPreviewStartsByActor.set(
+        ownerKey,
+        current - 1,
+      );
+    }
+
+    pendingPreviewStartsGlobal =
+      Math.max(
+        0,
+        pendingPreviewStartsGlobal - 1,
+      );
+  };
+}
+
+function safePreviewBasePath(
+  buildProjectId: string,
+  previewId: string,
+  publicAccessKey: string,
+) {
+  if (
+    !/^[A-Za-z0-9_-]{32}$/.test(
+      publicAccessKey,
+    )
+  ) {
+    throw new Error(
+      "Invalid preview capability.",
+    );
+  }
+
+  return (
+    `/api/build/projects/${encodeURIComponent(
+      buildProjectId,
+    )}` +
+    `/preview/${encodeURIComponent(
+      previewId,
+    )}` +
+    `/content/${encodeURIComponent(
+      publicAccessKey,
+    )}/`
+  );
+}
+
+function sourceFileBytes(
+  file:
+    PreviewSourceFile,
+): Buffer {
+  const candidate =
+    file as unknown as {
+      content?: string;
+      data?: string;
+    };
+
+  if (
+    typeof candidate.content ===
+    "string"
+  ) {
+    return Buffer.from(
+      candidate.content,
+      "utf8",
+    );
+  }
+
+  if (
+    typeof candidate.data ===
+    "string"
+  ) {
+    return Buffer.from(
+      candidate.data,
+      "base64",
+    );
+  }
+
+  throw new Error(
+    "Trusted preview source file is invalid.",
+  );
+}
+
+function dependencyFingerprint(
+  files:
+    readonly PreviewSourceFile[],
+) {
+  const digest =
+    createHash(
+      "sha256",
+    );
+
+  const dependencyFiles =
+    [...files]
+      .filter(
+        (file) =>
+          file.path ===
+            "package.json" ||
+          file.path ===
+            "pnpm-lock.yaml",
+      )
+      .sort(
+        (left, right) =>
+          left.path.localeCompare(
+            right.path,
+          ),
+      );
+
+  for (
+    const file of
+    dependencyFiles
+  ) {
+    digest.update(
+      file.path,
+      "utf8",
+    );
+
+    digest.update(
+      "\0",
+      "utf8",
+    );
+
+    digest.update(
+      sourceFileBytes(
+        file,
+      ),
+    );
+
+    digest.update(
+      "\0",
+      "utf8",
+    );
+  }
+
+  return digest.digest(
+    "hex",
+  );
+}
+
+function requireOwnedPreview(
+  previewId: string,
+  ownerKey: string,
+) {
+  const preview =
+    previews.get(
+      previewId,
+    );
+
+  if (!preview) {
+    throw new Error(
+      "Preview not found.",
+    );
+  }
+
+  if (
+    preview.ownerKey !==
+    ownerKey
+  ) {
+    throw new Error(
+      "Forbidden.",
+    );
+  }
+
+  preview.lastActivityAt =
+    currentTime();
+
+  return preview;
+}
+
+function safeWorkspacePath(
+  workspaceDir: string,
+  relPath: string,
+) {
+  if (
+    relPath ===
+      "node_modules" ||
+    relPath.startsWith(
+      "node_modules/",
+    )
+  ) {
+    throw new Error(
+      "Preview source cannot write node_modules.",
+    );
+  }
+
+  const root =
+    path.resolve(
+      workspaceDir,
+    );
+
+  const absolute =
+    path.resolve(
+      root,
+      relPath,
+    );
+
+  if (
+    absolute !== root &&
+    !absolute.startsWith(
+      `${root}${path.sep}`,
+    )
+  ) {
+    throw new Error(
+      "Unsafe preview source path.",
+    );
+  }
+
+  return absolute;
+}
+
+async function syncPreviewSourceFiles(
+  record:
+    MutablePreviewRecord,
+  files:
+    readonly PreviewSourceFile[],
+) {
+  const nextFingerprint =
+    dependencyFingerprint(
+      files,
+    );
+
+  if (
+    nextFingerprint !==
+    record.dependencyFingerprint
+  ) {
+    throw new Error(
+      "Preview dependencies changed. Restart the preview.",
+    );
+  }
+
+  const nextPaths =
+    new Set(
+      files.map(
+        (file) =>
+          file.path,
+      ),
+    );
+
+  for (
+    const oldPath of
+    record.sourcePaths
+  ) {
+    if (
+      nextPaths.has(
+        oldPath,
+      )
+    ) {
+      continue;
+    }
+
+    await fs.rm(
+      safeWorkspacePath(
+        record.workspaceDir,
+        oldPath,
+      ),
+      {
+        force: true,
+      },
+    );
+  }
+
+  for (
+    const file of
+    files
+  ) {
+    const absolute =
+      safeWorkspacePath(
+        record.workspaceDir,
+        file.path,
+      );
+
+    await fs.mkdir(
+      path.dirname(
+        absolute,
+      ),
+      {
+        recursive: true,
+      },
+    );
+
+    await fs.writeFile(
+      absolute,
+      sourceFileBytes(
+        file,
+      ),
+    );
+  }
+
+  record.sourcePaths =
+    nextPaths;
+
+  await ensureWorkspaceWritableForShellUser(
+    record.workspaceDir,
+  );
+}
+
+async function waitForContainer(
+  container:
+    ReturnType<
+      typeof docker.getContainer
+    >,
+  timeoutMs: number,
+) {
+  let timer:
+    NodeJS.Timeout |
+    null =
+      null;
+
+  try {
+    return await Promise.race([
+      container.wait(),
+
+      new Promise<never>(
+        (_resolve, reject) => {
+          timer =
+            setTimeout(
+              () => {
+                reject(
+                  new Error(
+                    "Trusted preview install timed out.",
+                  ),
+                );
+              },
+              timeoutMs,
+            );
+        },
+      ),
+    ]);
+  } finally {
+    if (timer) {
+      clearTimeout(
+        timer,
+      );
+    }
+  }
+}
+
+async function runInstall(
+  workspaceDir: string,
+  command:
+    readonly string[],
+) {
+  const container =
+    await docker.createContainer(
+      buildProductionBuildContainerOptions({
+        workspaceDir,
+        command,
+        step:
+          "install",
+      }),
+    );
+
+  try {
+    await container.start();
+
+    const result =
+      await waitForContainer(
+        container,
+        INSTALL_TIMEOUT_MS,
+      );
+
+    if (
+      result.StatusCode !==
+      0
+    ) {
+      throw new Error(
+        `Trusted React preview dependency install failed with exit status ${result.StatusCode}.`,
+      );
+    }
+  } finally {
+    await container
+      .remove({
+        force: true,
+      })
+      .catch(
+        () => undefined,
+      );
+  }
+}
+
+async function captureExec(
+  containerId: string,
+  command:
+    readonly string[],
+): Promise<string> {
+  const container =
+    docker.getContainer(
+      containerId,
+    );
+
+  const exec =
+    await container.exec({
+      Cmd: [
+        ...command,
+      ],
+      AttachStdout: true,
+      AttachStderr: true,
+      AttachStdin: false,
+      Tty: true,
+    });
+
+  const stream =
+    await exec.start({
+      hijack: true,
+      stdin: false,
+    });
+
+  const chunks:
+    Buffer[] =
+      [];
+
+  await new Promise<void>(
+    (resolve, reject) => {
+      stream.on(
+        "data",
+        (chunk) => {
+          chunks.push(
+            Buffer.from(
+              chunk,
+            ),
+          );
+        },
+      );
+
+      stream.on(
+        "end",
+        resolve,
+      );
+
+      stream.on(
+        "error",
+        reject,
+      );
+    },
+  );
+
+  const inspection =
+    await exec.inspect();
+
+  if (
+    inspection.ExitCode !==
+    0
+  ) {
+    throw new Error(
+      "Trusted preview HTTP bridge failed.",
+    );
+  }
+
+  return Buffer.concat(
+    chunks,
+  )
+    .toString(
+      "utf8",
+    )
+    .trim();
+}
+
+function normalizePreviewRequestPath(
+  record:
+    MutablePreviewRecord,
+  input: string,
+) {
+  const raw =
+    String(
+      input ?? "",
+    ).trim();
+
+  if (
+    !raw ||
+    raw.length > 4096 ||
+    raw.includes("\0") ||
+    raw.includes("\\") ||
+    /^[a-z][a-z0-9+.-]*:/i.test(
+      raw,
+    ) ||
+    !raw.startsWith(
+      record.basePath,
+    )
+  ) {
+    throw new Error(
+      "Unsafe preview request path.",
+    );
+  }
+
+  return raw;
+}
+
+const PYTHON_FETCH_SCRIPT = String.raw`
+import base64
+import json
+import sys
+import urllib.error
+import urllib.request
+
+path = sys.argv[1]
+method = sys.argv[2]
+limit = int(sys.argv[3])
+url = "http://127.0.0.1:5173" + path
+
+request = urllib.request.Request(
+    url,
+    method=method,
+)
+
+try:
+    response = urllib.request.urlopen(
+        request,
+        timeout=5,
+    )
+except urllib.error.HTTPError as error:
+    response = error
+
+body = response.read(limit + 1)
+
+if len(body) > limit:
+    raise RuntimeError(
+        "Preview response exceeds limit."
+    )
+
+headers = {}
+
+for name in [
+    "Content-Type",
+    "Cache-Control",
+    "ETag",
+    "Location",
+]:
+    value = response.headers.get(name)
+    if value:
+        headers[name.lower()] = value
+
+print(json.dumps({
+    "status": int(response.status),
+    "headers": headers,
+    "bodyBase64": base64.b64encode(body).decode("ascii"),
+}))
+`;
+
+export async function fetchReactPreviewHttp(
+  input: Readonly<{
+    previewId: string;
+    ownerKey: string;
+    path: string;
+    method:
+      "GET" |
+      "HEAD";
+  }>,
+) {
+  const record =
+    requireOwnedPreview(
+      input.previewId,
+      input.ownerKey,
+    );
+
+  const safePath =
+    normalizePreviewRequestPath(
+      record,
+      input.path,
+    );
+
+  const raw =
+    await captureExec(
+      record.containerId,
+      [
+        "/usr/bin/python3",
+        "-c",
+        PYTHON_FETCH_SCRIPT,
+        safePath,
+        input.method,
+        String(
+          PREVIEW_RESPONSE_MAX_BYTES,
+        ),
+      ],
+    );
+
+  const parsed =
+    JSON.parse(
+      raw,
+    ) as {
+      status: number;
+      headers:
+        Record<
+          string,
+          string
+        >;
+      bodyBase64: string;
+    };
+
+  if (
+    !Number.isInteger(
+      parsed.status,
+    ) ||
+    parsed.status < 100 ||
+    parsed.status > 599 ||
+    typeof parsed.bodyBase64 !==
+      "string" ||
+    !parsed.headers ||
+    typeof parsed.headers !==
+      "object"
+  ) {
+    throw new Error(
+      "Trusted preview HTTP response is invalid.",
+    );
+  }
+
+  return parsed;
+}
+
+/**
+ * Read-only HTTP bridge for the browser-facing ZoeBuild preview proxy.
+ *
+ * The caller is still a service-authenticated ZoeBuild server request, but it
+ * intentionally has no end-user actor cookie. Possession of the unguessable
+ * capability path is the preview-content authorization boundary. Start/sync/
+ * cancel remain actor-owned.
+ */
+export async function fetchReactPreviewHttpByCapability(
+  input: Readonly<{
+    previewId: string;
+    path: string;
+    method:
+      "GET" |
+      "HEAD";
+  }>,
+) {
+  const record =
+    previews.get(
+      input.previewId,
+    );
+
+  if (!record) {
+    throw new Error(
+      "Preview not found.",
+    );
+  }
+
+  // fetchReactPreviewHttp performs the canonical basePath check. basePath now
+  // contains a 192-bit random capability segment, so preview id alone is not
+  // sufficient to read content.
+  return fetchReactPreviewHttp({
+    previewId:
+      input.previewId,
+    ownerKey:
+      record.ownerKey,
+    path:
+      input.path,
+    method:
+      input.method,
+  });
+}
+
+async function waitForPreviewReady(
+  record:
+    MutablePreviewRecord,
+) {
+  const deadline =
+    currentTime() +
+    PREVIEW_START_TIMEOUT_MS;
+
+  let lastError:
+    unknown =
+      null;
+
+  while (
+    currentTime() <
+    deadline
+  ) {
+    const state =
+      await docker
+        .getContainer(
+          record.containerId,
+        )
+        .inspect()
+        .catch(
+          () => null,
+        );
+
+    if (
+      !state ||
+      !state.State.Running
+    ) {
+      throw new Error(
+        "Trusted React preview server exited before becoming ready.",
+      );
+    }
+
+    try {
+      const response =
+        await fetchReactPreviewHttp({
+          previewId:
+            record.id,
+          ownerKey:
+            record.ownerKey,
+          path:
+            record.basePath,
+          method:
+            "GET",
+        });
+
+      if (
+        response.status >= 200 &&
+        response.status < 500
+      ) {
+        return;
+      }
+    } catch (error) {
+      lastError =
+        error;
+    }
+
+    await new Promise(
+      (resolve) =>
+        setTimeout(
+          resolve,
+          250,
+        ),
+    );
+  }
+
+  throw new Error(
+    `Trusted React preview server did not become ready${
+      lastError instanceof Error
+        ? `: ${lastError.message}`
+        : "."
+    }`,
+  );
+}
+
+async function destroyPreview(
+  record:
+    MutablePreviewRecord,
+) {
+  previews.delete(
+    record.id,
+  );
+
+  await docker
+    .getContainer(
+      record.containerId,
+    )
+    .remove({
+      force: true,
+    })
+    .catch(
+      () => undefined,
+    );
+
+  await cleanupWorkspaceNow(
+    record.workspaceDir,
+  ).catch(
+    () => undefined,
+  );
+}
+
+async function destroyExistingProjectPreview(
+  ownerKey: string,
+  buildProjectId: string,
+) {
+  for (
+    const preview of
+    [...previews.values()]
+  ) {
+    if (
+      preview.ownerKey ===
+        ownerKey &&
+      preview.buildProjectId ===
+        buildProjectId
+    ) {
+      await destroyPreview(
+        preview,
+      );
+    }
+  }
+}
+
+export async function startReactPreview(
+  input: Readonly<{
+    ownerKey: string;
+    request:
+      ProductionBuildJobRequestV1;
+  }>,
+) {
+  const {
+    ownerKey,
+    request,
+  } = input;
+
+  if (!ownerKey) {
+    throw new Error(
+      "Forbidden.",
+    );
+  }
+
+  const plan =
+    resolveRegisteredReactPreviewServerPlan({
+      stackId:
+        request.stackId,
+      templateId:
+        request.templateId,
+    });
+
+  assertRegisteredProductionBuildFiles({
+    stackId:
+      request.stackId,
+    templateId:
+      request.templateId,
+    files:
+      request.files,
+  });
+
+  await destroyExistingProjectPreview(
+    ownerKey,
+    request.buildProjectId,
+  );
+
+  consumeStartToken(
+    ownerKey,
+    "code",
+  );
+
+  const releaseCapacity =
+    reservePreviewCapacity(
+      ownerKey,
+    );
+
+  let workspaceDir:
+    string |
+    null =
+      null;
+
+  let containerId:
+    string |
+    null =
+      null;
+
+  try {
+    workspaceDir =
+      await createWorkspace(
+        [...request.files],
+      );
+
+    await ensureWorkspaceWritableForShellUser(
+      workspaceDir,
+    );
+
+    await runInstall(
+      workspaceDir,
+      plan.installCommand,
+    );
+
+    const previewId =
+      `preview_${randomUUID()}`;
+
+    const publicAccessKey =
+      randomBytes(
+        24,
+      ).toString(
+        "base64url",
+      );
+
+    const basePath =
+      safePreviewBasePath(
+        request.buildProjectId,
+        previewId,
+        publicAccessKey,
+      );
+
+    const devCommand = [
+      ...plan.devCommand,
+      "--port",
+      String(
+        plan.port,
+      ),
+      "--strictPort",
+      "--base",
+      basePath,
+    ];
+
+    const options =
+      buildProductionBuildContainerOptions({
+        workspaceDir,
+        command:
+          devCommand,
+        step:
+          "build",
+      });
+
+    const container =
+      await docker.createContainer({
+        ...options,
+
+        Labels: {
+          ...options.Labels,
+
+          "com.zoeskoul.runner.purpose":
+            "react-vite-preview",
+
+          "com.zoeskoul.runner.preview":
+            previewId,
+        },
+
+        HostConfig: {
+          ...options.HostConfig,
+
+          // No public preview port. The runner reaches Vite only through a
+          // Docker exec inside this container and proxies bounded HTTP bytes.
+          NetworkMode:
+            "none",
+        },
+      });
+
+    containerId =
+      container.id;
+
+    await container.start();
+
+    const createdAt =
+      currentTime();
+
+    const record:
+      MutablePreviewRecord = {
+        id:
+          previewId,
+        ownerKey,
+        buildProjectId:
+          request.buildProjectId,
+        sourceVersion:
+          request.sourceVersion,
+        containerId:
+          container.id,
+        workspaceDir,
+        port:
+          5173,
+        basePath,
+        sourcePaths:
+          new Set(
+            request.files.map(
+              (file) =>
+                file.path,
+            ),
+          ),
+        dependencyFingerprint:
+          dependencyFingerprint(
+            request.files,
+          ),
+        createdAt,
+        lastActivityAt:
+          createdAt,
+      };
+
+    previews.set(
+      previewId,
+      record,
+    );
+
+    releaseCapacity();
+
+    try {
+      await waitForPreviewReady(
+        record,
+      );
+    } catch (error) {
+      await destroyPreview(
+        record,
+      );
+
+      throw error;
+    }
+
+    return {
+      previewId,
+      buildProjectId:
+        request.buildProjectId,
+      sourceVersion:
+        request.sourceVersion,
+      basePath,
+      port:
+        5173 as const,
+    };
+  } catch (error) {
+    releaseCapacity();
+
+    if (
+      containerId &&
+      ![...previews.values()]
+        .some(
+          (preview) =>
+            preview.containerId ===
+            containerId,
+        )
+    ) {
+      await docker
+        .getContainer(
+          containerId,
+        )
+        .remove({
+          force: true,
+        })
+        .catch(
+          () => undefined,
+        );
+    }
+
+    if (workspaceDir) {
+      await cleanupWorkspaceNow(
+        workspaceDir,
+      ).catch(
+        () => undefined,
+      );
+    }
+
+    throw error;
+  }
+}
+
+export async function syncReactPreview(
+  input: Readonly<{
+    previewId: string;
+    ownerKey: string;
+    request:
+      ProductionBuildJobRequestV1;
+  }>,
+) {
+  const record =
+    requireOwnedPreview(
+      input.previewId,
+      input.ownerKey,
+    );
+
+  if (
+    record.buildProjectId !==
+      input.request.buildProjectId ||
+    input.request.stackId !==
+      "react-vite-v1" ||
+    input.request.templateId !==
+      "react-vite-v1"
+  ) {
+    throw new Error(
+      "Preview source identity does not match.",
+    );
+  }
+
+  assertRegisteredProductionBuildFiles({
+    stackId:
+      input.request.stackId,
+    templateId:
+      input.request.templateId,
+    files:
+      input.request.files,
+  });
+
+  await syncPreviewSourceFiles(
+    record,
+    input.request.files,
+  );
+
+  record.sourceVersion =
+    input.request.sourceVersion;
+
+  record.lastActivityAt =
+    currentTime();
+
+  return {
+    ok:
+      true as const,
+    previewId:
+      record.id,
+  };
+}
+
+export async function stopReactPreview(
+  input: Readonly<{
+    previewId: string;
+    ownerKey: string;
+  }>,
+) {
+  const record =
+    requireOwnedPreview(
+      input.previewId,
+      input.ownerKey,
+    );
+
+  await destroyPreview(
+    record,
+  );
+
+  return {
+    ok:
+      true as const,
+  };
+}
+
+export async function runReactPreviewCleanupSweep(
+  at =
+    currentTime(),
+) {
+  for (
+    const preview of
+    [...previews.values()]
+  ) {
+    const idleFor =
+      at -
+      preview.lastActivityAt;
+
+    const lifetime =
+      at -
+      preview.createdAt;
+
+    if (
+      idleFor >=
+        PREVIEW_IDLE_MS ||
+      lifetime >=
+        PREVIEW_HARD_LIFETIME_MS
+    ) {
+      await destroyPreview(
+        preview,
+      );
+    }
+  }
+}
+
+const cleanupTimer =
+  setInterval(
+    () => {
+      void runReactPreviewCleanupSweep()
+        .catch(
+          (error) => {
+            console.error(
+              "RUNNER React preview cleanup failed",
+              {
+                message:
+                  error instanceof Error
+                    ? error.message
+                    : String(
+                        error,
+                      ),
+              },
+            );
+          },
+        );
+    },
+    PREVIEW_CLEANUP_INTERVAL_MS,
+  );
+
+if (
+  typeof cleanupTimer.unref ===
+  "function"
+) {
+  cleanupTimer.unref();
+}
+
+export function __resetReactPreviewsForTests() {
+  previews.clear();
+  pendingPreviewStartsByActor.clear();
+  pendingPreviewStartsGlobal =
+    0;
+}

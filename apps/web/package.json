@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3000",
+    "dev": "node ../../scripts/run-with-shared-env.mjs next dev --port 3000",
     "build": "next build",
     "i18n:generate": "cd ../.. && pnpm --filter @zoeskoul/curriculum-registry build && node packages/curriculum-registry/dist/generate/generateI18nManifest.js --app-root apps/web",
     "i18n:audit-ui": "node scripts/audit-hardcoded-ui-text.mjs",
