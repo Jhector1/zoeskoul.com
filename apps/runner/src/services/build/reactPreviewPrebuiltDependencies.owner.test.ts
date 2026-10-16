@@ -130,6 +130,41 @@ describe(
     );
 
     it(
+      "retries transient prebuilt runtime probe failures instead of pinning fallback",
+      () => {
+        expect(
+          runtimeSource,
+        ).toContain(
+          "PREBUILT_RUNTIME_PROBE_TIMEOUT_MS",
+        );
+
+        expect(
+          runtimeSource,
+        ).toContain(
+          "prebuiltReactViteRuntimeAvailable =\n      null;",
+        );
+
+        expect(
+          runtimeSource,
+        ).toContain(
+          "RUNNER React preview prebuilt runtime probe unavailable",
+        );
+
+        expect(
+          runtimeSource,
+        ).toContain(
+          "RUNNER React preview prebuilt runtime probe failed",
+        );
+
+        expect(
+          runtimeSource,
+        ).toContain(
+          "const probePromise =",
+        );
+      },
+    );
+
+    it(
       "preserves the opaque network boundary and gives Vite transient cache mounts",
       () => {
         expect(

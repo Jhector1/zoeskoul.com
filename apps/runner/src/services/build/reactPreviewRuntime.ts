@@ -533,6 +533,9 @@ async function waitForContainer(
   }
 }
 
+const PREBUILT_RUNTIME_PROBE_TIMEOUT_MS =
+  15_000;
+
 let prebuiltReactViteRuntimeAvailable:
   Promise<boolean> |
   null =
@@ -575,7 +578,7 @@ async function probePrebuiltReactViteRuntime(
     return prebuiltReactViteRuntimeAvailable;
   }
 
-  prebuiltReactViteRuntimeAvailable =
+  const probePromise =
     (async () => {
       const checkScript = [
         'const fs = require("node:fs");',
@@ -600,38 +603,88 @@ async function probePrebuiltReactViteRuntime(
             "build",
         });
 
-      const container =
-        await docker.createContainer(
-          options,
-        );
+      let container:
+        Awaited<
+          ReturnType<
+            typeof docker.createContainer
+          >
+        > |
+        null =
+          null;
 
       try {
+        container =
+          await docker.createContainer(
+            options,
+          );
+
         await container.start();
 
         const result =
           await waitForContainer(
             container,
-            5_000,
+            PREBUILT_RUNTIME_PROBE_TIMEOUT_MS,
           );
 
-        return (
+        const available =
           result.StatusCode ===
-          0
+          0;
+
+        if (!available) {
+          console.warn(
+            "RUNNER React preview prebuilt runtime probe failed",
+            {
+              statusCode:
+                result.StatusCode,
+            },
+          );
+        }
+
+        return available;
+      } catch (error) {
+        console.warn(
+          "RUNNER React preview prebuilt runtime probe unavailable",
+          {
+            message:
+              error instanceof Error
+                ? error.message
+                : String(error),
+          },
         );
-      } catch {
+
         return false;
       } finally {
-        await container
-          .remove({
-            force: true,
-          })
-          .catch(
-            () => undefined,
-          );
+        if (container) {
+          await container
+            .remove({
+              force: true,
+            })
+            .catch(
+              () => undefined,
+            );
+        }
       }
     })();
 
-  return prebuiltReactViteRuntimeAvailable;
+  prebuiltReactViteRuntimeAvailable =
+    probePromise;
+
+  const available =
+    await probePromise;
+
+  if (
+    !available &&
+    prebuiltReactViteRuntimeAvailable ===
+      probePromise
+  ) {
+    // Cache successful verification, but never pin a transient cold-host probe
+    // failure for the lifetime of the runner. The existing frozen-install
+    // fallback remains fail-safe for this request; a later cold preview retries.
+    prebuiltReactViteRuntimeAvailable =
+      null;
+  }
+
+  return available;
 }
 
 async function preparePrebuiltReactViteDependencies(
