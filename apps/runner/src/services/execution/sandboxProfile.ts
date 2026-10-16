@@ -71,7 +71,11 @@ function productionBuildProfile(): SandboxProfile {
 
     pidsLimit:
       env.buildPidsLimit,
-  };
+
+    tmpfs: {
+      ...base.tmpfs,
+      "/tmp": "rw,noexec,nosuid,size=256m",
+    },};
 }
 
 /**

@@ -69,6 +69,12 @@ RUN mkdir -p /opt/runner /workspace /tmp \
     fi \
  && chown -R 1000:1000 /opt/runner /workspace /tmp \
  && chmod 1777 /tmp
+# ZoeBuild trusted React/Vite build runtime.
+# Pin pnpm in the image so hardened build containers never rely on
+# Corepack network activation at execution time.
+RUN npm install --global --ignore-scripts pnpm@10.33.0 \
+ && command -v pnpm \
+ && pnpm --version
 
 WORKDIR /workspace
 
