@@ -76,6 +76,22 @@ RUN npm install --global --ignore-scripts pnpm@10.33.0 \
  && command -v pnpm \
  && pnpm --version
 
+# ZoeBuild's registered React/Vite dependency layer is immutable runtime
+# infrastructure. Project source never writes this directory.
+COPY --chown=1000:1000 apps/runner/runtime/react-vite-v1/package.json \
+  /opt/zoeskoul/react-vite-v1/package.json
+COPY --chown=1000:1000 apps/runner/runtime/react-vite-v1/pnpm-lock.yaml \
+  /opt/zoeskoul/react-vite-v1/pnpm-lock.yaml
+
+RUN set -eux; \
+  cd /opt/zoeskoul/react-vite-v1; \
+  pnpm install --frozen-lockfile; \
+  mkdir -p node_modules/.vite node_modules/.vite-temp; \
+  sha256sum pnpm-lock.yaml | awk '{print $1}' > .lock-sha256; \
+  test -x node_modules/.bin/vite; \
+  test -x node_modules/.bin/tsc; \
+  chown -R 1000:1000 /opt/zoeskoul/react-vite-v1
+
 WORKDIR /workspace
 
 COPY --chown=1000:1000 apps/runner/pty-runner.py /opt/runner/pty-runner.py
