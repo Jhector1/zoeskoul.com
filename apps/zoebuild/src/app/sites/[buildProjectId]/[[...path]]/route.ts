@@ -3,6 +3,12 @@ import {
 } from "@zoeskoul/platform-server/prisma";
 
 import {
+  getNativeCommerceProduct,
+  listNativeCommerceProducts,
+  NativeCommerceCatalogInputError,
+} from "@/lib/commerce/nativeCommerceCatalog";
+
+import {
   buildPublishedStaticFileMap,
   publishedStaticContentType,
   resolvePublishedStaticFile,
@@ -262,6 +268,109 @@ export async function GET(
 
   const requestedPath =
     path.join("/");
+
+  if (
+    requestedPath ===
+    "__zoebuild/commerce/products"
+  ) {
+    const url =
+      new URL(
+        request.url,
+      );
+
+    try {
+      const id =
+        url.searchParams.get(
+          "id",
+        );
+      const slug =
+        url.searchParams.get(
+          "slug",
+        );
+
+      const payload =
+        id || slug
+          ? {
+              ok: true,
+              product:
+                await getNativeCommerceProduct(
+                  prisma,
+                  {
+                    buildProjectId:
+                      normalizedProjectId,
+                    surface:
+                      "published",
+                    id,
+                    slug,
+                  },
+                ),
+            }
+          : {
+              ok: true,
+              products:
+                await listNativeCommerceProducts(
+                  prisma,
+                  {
+                    buildProjectId:
+                      normalizedProjectId,
+                    surface:
+                      "published",
+                    first:
+                      url.searchParams.get(
+                        "first",
+                      ),
+                  },
+                ),
+            };
+
+      return new Response(
+        JSON.stringify(
+          payload,
+        ),
+        {
+          status: 200,
+          headers: {
+            "Cache-Control":
+              "no-store, max-age=0",
+            "Content-Type":
+              "application/json; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+            "Referrer-Policy":
+              "strict-origin-when-cross-origin",
+            "X-ZoeBuild-Deployment":
+              deployment.id,
+            "X-ZoeBuild-Source-Version":
+              String(
+                deployment.sourceVersion,
+              ),
+          },
+        },
+      );
+    } catch (error) {
+      if (
+        error instanceof
+        NativeCommerceCatalogInputError
+      ) {
+        return new Response(
+          error.message,
+          {
+            status: 400,
+            headers: {
+              "Cache-Control":
+                "no-store",
+              "Content-Type":
+                "text/plain; charset=utf-8",
+              "X-Content-Type-Options":
+                "nosniff",
+            },
+          },
+        );
+      }
+
+      throw error;
+    }
+  }
 
   const acceptsHtml =
     (

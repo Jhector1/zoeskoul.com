@@ -1,5 +1,14 @@
 import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
-import { proxyFetchTrustedReactPreviewAtRunner } from "@/lib/build/reactPreviewRunnerClient";
+import {
+  proxyFetchTrustedReactPreviewAtRunner,
+  resolveTrustedReactPreviewCapabilityAtRunner,
+} from "@/lib/build/reactPreviewRunnerClient";
+import {
+  getNativeCommerceProduct,
+  listNativeCommerceProducts,
+  NativeCommerceCatalogInputError,
+} from "@/lib/commerce/nativeCommerceCatalog";
+import { prisma } from "@zoeskoul/platform-server/prisma";
 import { parseReactPreviewId, ReactPreviewRequestError } from "@/lib/build/reactPreviewServer";
 import { normalizeReactPreviewProxyPath } from "@/lib/build/reactPreviewProxyPath";
 
@@ -57,6 +66,119 @@ async function proxy(
 
     if (!normalizedPathname) {
       return errorResponse("Invalid preview path.", 404);
+    }
+
+    const relativePath =
+      normalizedPathname.slice(
+        basePath.length,
+      );
+
+    if (
+      relativePath ===
+      "__zoebuild/commerce/products"
+    ) {
+      const context =
+        await resolveTrustedReactPreviewCapabilityAtRunner({
+          previewId,
+          path:
+            normalizedPathname,
+        });
+
+      if (
+        context.buildProjectId !==
+        buildProjectId
+      ) {
+        return errorResponse(
+          "Preview capability does not match this project.",
+          404,
+        );
+      }
+
+      try {
+        const id =
+          url.searchParams.get(
+            "id",
+          );
+        const slug =
+          url.searchParams.get(
+            "slug",
+          );
+
+        const payload =
+          id || slug
+            ? {
+                ok: true,
+                product:
+                  await getNativeCommerceProduct(
+                    prisma,
+                    {
+                      buildProjectId:
+                        context.buildProjectId,
+                      surface:
+                        "preview",
+                      id,
+                      slug,
+                    },
+                  ),
+              }
+            : {
+                ok: true,
+                products:
+                  await listNativeCommerceProducts(
+                    prisma,
+                    {
+                      buildProjectId:
+                        context.buildProjectId,
+                      surface:
+                        "preview",
+                      first:
+                        url.searchParams.get(
+                          "first",
+                        ),
+                    },
+                  ),
+              };
+
+        const headers =
+          new Headers({
+            "Access-Control-Allow-Origin":
+              "*",
+            "Cross-Origin-Resource-Policy":
+              "cross-origin",
+            "Cache-Control":
+              "no-store, max-age=0",
+            "Content-Type":
+              "application/json; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+            "Referrer-Policy":
+              "no-referrer",
+          });
+
+        return new Response(
+          method === "HEAD"
+            ? null
+            : JSON.stringify(
+                payload,
+              ),
+          {
+            status: 200,
+            headers,
+          },
+        );
+      } catch (error) {
+        if (
+          error instanceof
+          NativeCommerceCatalogInputError
+        ) {
+          return errorResponse(
+            error.message,
+            400,
+          );
+        }
+
+        throw error;
+      }
     }
 
     const result = await proxyFetchTrustedReactPreviewAtRunner({

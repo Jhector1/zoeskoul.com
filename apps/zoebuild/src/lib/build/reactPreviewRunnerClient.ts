@@ -17,6 +17,12 @@ export type ReactPreviewFetchResult = Readonly<{
   bodyBase64: string;
 }>;
 
+export type ReactPreviewCapabilityContext = Readonly<{
+  previewId: string;
+  buildProjectId: string;
+  sourceVersion: number;
+}>;
+
 export async function startTrustedReactPreviewAtRunner(args: Readonly<{
   actorKey: string;
   request: ProductionBuildJobRequestV1;
@@ -50,6 +56,22 @@ export async function cancelTrustedReactPreviewAtRunner(args: Readonly<{
     args.actorKey,
     {},
   );
+}
+
+export async function resolveTrustedReactPreviewCapabilityAtRunner(args: Readonly<{
+  previewId: string;
+  path: string;
+}>) {
+  const result = await runnerPost<{
+    ok: true;
+    context: ReactPreviewCapabilityContext;
+  }>(
+    `/build/previews/${encodeURIComponent(args.previewId)}/resolve-capability`,
+    "zoebuild-preview-proxy",
+    { path: args.path },
+  );
+
+  return result.context;
 }
 
 export async function proxyFetchTrustedReactPreviewAtRunner(args: Readonly<{

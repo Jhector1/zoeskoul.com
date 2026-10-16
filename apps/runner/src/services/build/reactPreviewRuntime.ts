@@ -1135,6 +1135,47 @@ export async function fetchReactPreviewHttpByCapability(
   });
 }
 
+
+/**
+ * Resolve trusted preview identity from possession of the exact capability
+ * path. The browser-supplied buildProjectId is never the authority.
+ */
+export function resolveReactPreviewContextByCapability(
+  input: Readonly<{
+    previewId: string;
+    path: string;
+  }>,
+) {
+  const record =
+    previews.get(
+      input.previewId,
+    );
+
+  if (!record) {
+    throw new Error(
+      "Preview not found.",
+    );
+  }
+
+  // Reuse the same canonical basePath guard used by preview content fetches.
+  normalizePreviewRequestPath(
+    record,
+    input.path,
+  );
+
+  record.lastActivityAt =
+    currentTime();
+
+  return {
+    previewId:
+      record.id,
+    buildProjectId:
+      record.buildProjectId,
+    sourceVersion:
+      record.sourceVersion,
+  };
+}
+
 function isTransientPreviewStartupError(
   error: unknown,
 ) {
