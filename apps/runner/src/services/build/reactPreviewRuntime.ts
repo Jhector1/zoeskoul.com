@@ -1026,25 +1026,104 @@ async function destroyPreview(
   );
 }
 
-async function destroyExistingProjectPreview(
+async function reuseExistingProjectPreview(
   ownerKey: string,
-  buildProjectId: string,
-) {
+  request:
+    ProductionBuildJobRequestV1,
+): Promise<MutablePreviewRecord | null> {
+  const requestedFingerprint =
+    dependencyFingerprint(
+      request.files,
+    );
+
   for (
     const preview of
     [...previews.values()]
   ) {
     if (
-      preview.ownerKey ===
-        ownerKey &&
-      preview.buildProjectId ===
-        buildProjectId
+      preview.ownerKey !==
+        ownerKey ||
+      preview.buildProjectId !==
+        request.buildProjectId
     ) {
+      continue;
+    }
+
+    if (
+      preview.dependencyFingerprint !==
+        requestedFingerprint
+    ) {
+      await destroyPreview(
+        preview,
+      );
+
+      continue;
+    }
+
+    try {
+      const state =
+        await docker
+          .getContainer(
+            preview.containerId,
+          )
+          .inspect()
+          .catch(
+            () => null,
+          );
+
+      if (
+        !state ||
+        !state.State.Running
+      ) {
+        await destroyPreview(
+          preview,
+        );
+
+        continue;
+      }
+
+      const response =
+        await fetchReactPreviewHttp({
+          previewId:
+            preview.id,
+          ownerKey,
+          path:
+            preview.basePath,
+          method:
+            "GET",
+        });
+
+      if (
+        response.status < 200 ||
+        response.status >= 500
+      ) {
+        await destroyPreview(
+          preview,
+        );
+
+        continue;
+      }
+
+      await syncPreviewSourceFiles(
+        preview,
+        request.files,
+      );
+
+      preview.sourceVersion =
+        request.sourceVersion;
+
+      preview.lastActivityAt =
+        currentTime();
+
+      return preview;
+    } catch {
       await destroyPreview(
         preview,
       );
     }
   }
+
+  return null;
 }
 
 export async function startReactPreview(
@@ -1082,15 +1161,31 @@ export async function startReactPreview(
       request.files,
   });
 
-  await destroyExistingProjectPreview(
-    ownerKey,
-    request.buildProjectId,
-  );
-
   consumeStartToken(
     ownerKey,
     "code",
   );
+
+  const reusedPreview =
+    await reuseExistingProjectPreview(
+      ownerKey,
+      request,
+    );
+
+  if (reusedPreview) {
+    return {
+      previewId:
+        reusedPreview.id,
+      buildProjectId:
+        reusedPreview.buildProjectId,
+      sourceVersion:
+        reusedPreview.sourceVersion,
+      basePath:
+        reusedPreview.basePath,
+      port:
+        reusedPreview.port,
+    };
+  }
 
   const releaseCapacity =
     reservePreviewCapacity(
