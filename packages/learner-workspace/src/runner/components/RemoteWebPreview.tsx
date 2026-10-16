@@ -62,8 +62,11 @@ export default function RemoteWebPreview(props: {
 
                 if (cancelled) return;
 
-                if (response.status === 404) {
-                    if (expiredCandidateRef.current !== iframeSrc) {
+                if (!response.ok) {
+                    if (
+                        response.status === 404 &&
+                        expiredCandidateRef.current !== iframeSrc
+                    ) {
                         expiredCandidateRef.current = iframeSrc;
                         preview.onRetry?.();
                     }

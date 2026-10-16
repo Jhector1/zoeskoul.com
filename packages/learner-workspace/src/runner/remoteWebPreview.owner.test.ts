@@ -54,4 +54,15 @@ describe("generic remote web preview seam", () => {
     expect(remote).toContain("preview.onRetry?.()");
     expect(remote).toContain('cache: "no-store"');
   });
+    it("never promotes a non-success proxy response into the preview frame buffer", () => {
+        const remote = source("./components/RemoteWebPreview.tsx");
+        expect(remote).toContain("if (!response.ok) {");
+        expect(remote).toContain("response.status === 404");
+        expect(remote).toContain("preview.onRetry?.();");
+        const failureGate = remote.indexOf("if (!response.ok) {");
+        const framePromotion = remote.indexOf("setFrameSources((current)");
+        expect(failureGate).toBeGreaterThan(-1);
+        expect(framePromotion).toBeGreaterThan(failureGate);
+    });
+
 });
