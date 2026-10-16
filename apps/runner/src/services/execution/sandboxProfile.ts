@@ -14,6 +14,7 @@ export type SandboxProfile = Readonly<{
   memoryBytes: number;
   cpuQuota: number;
   pidsLimit: number;
+  maxFileWriteBytes: number;
   tmpfs: Readonly<Record<string, string>>;
 }>;
 
@@ -29,6 +30,7 @@ function learningProfile(): SandboxProfile {
     memoryBytes: env.memoryLimitBytes,
     cpuQuota: env.cpuQuota,
     pidsLimit: env.pidsLimit,
+    maxFileWriteBytes: env.maxWorkspaceBytes,
     tmpfs: {
       "/tmp": "rw,noexec,nosuid,size=64m",
       "/run": "rw,noexec,nosuid,size=16m",
@@ -72,6 +74,8 @@ function productionBuildProfile(): SandboxProfile {
     pidsLimit:
       env.buildPidsLimit,
 
+
+    maxFileWriteBytes: 64 * 1024 * 1024,
     tmpfs: {
       ...base.tmpfs,
       "/tmp": "rw,noexec,nosuid,size=256m",

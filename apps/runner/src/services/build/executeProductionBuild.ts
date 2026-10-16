@@ -102,6 +102,7 @@ export function buildProductionBuildContainerOptions(
       trustedRuntimeCommandEnv(args.command),
       "HOME=/tmp",
       "CI=1",
+      `RUNNER_MAX_FILE_WRITE_BYTES=${profile.maxFileWriteBytes}`,
       "NPM_CONFIG_REGISTRY=https://registry.npmjs.org/",
       "npm_config_registry=https://registry.npmjs.org/",
     ],
