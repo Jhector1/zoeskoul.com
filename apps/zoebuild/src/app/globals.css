@@ -955,10 +955,8 @@ a {
 .zb-project-mode-tabs {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-
-  padding: 3px;
-
+  gap: 2px;
+  padding: 2px;
   border:
     1px solid
     color-mix(
@@ -966,28 +964,32 @@ a {
       currentColor 10%,
       transparent
     );
-
-  border-radius: 10px;
+  border-radius: 9px;
 }
 
 .zb-project-mode-tab {
-  min-height: 31px;
-
-  padding:
-    0 12px;
-
+  display: inline-flex;
+  min-height: 27px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 9px;
   border: 0;
   border-radius: 7px;
-
   background: transparent;
   color: inherit;
-
   font: inherit;
-  font-size: 0.77rem;
+  font-size: 0.72rem;
   font-weight: 700;
-
   opacity: 0.58;
   cursor: pointer;
+}
+
+.zb-project-mode-icon {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  stroke-width: 2;
 }
 
 .zb-project-mode-tab:hover {
@@ -1884,16 +1886,28 @@ a {
 }
 
 .zb-project-publish-button {
-  min-height: 34px;
-  padding: 0 14px;
+  display: inline-flex;
+  min-height: 29px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 11px;
   border: 1px solid rgba(16, 185, 129, 0.35);
-  border-radius: 9px;
+  border-radius: 8px;
   background: rgb(16, 185, 129);
   color: #fff;
   font: inherit;
+  font-size: 0.74rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
+}
+
+.zb-project-publish-icon {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  stroke-width: 2.1;
 }
 
 .zb-project-publish-button:hover:not(:disabled) {
@@ -1937,4 +1951,66 @@ a {
     flex: 1;
     max-width: none;
   }
+}
+
+/* ZOEBUILD_COMPACT_PROJECT_TOPBAR_V2 */
+.zb-project-modebar .zb-project-mode-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  padding: 2px;
+  border-radius: 8px;
+}
+
+.zb-project-modebar .zb-project-mode-tab {
+  display: inline-flex !important;
+  width: auto !important;
+  height: 25px !important;
+  min-height: 25px !important;
+  flex: 0 0 auto !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  padding: 0 8px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  font-size: 11px !important;
+}
+
+.zb-project-modebar .zb-project-mode-icon,
+.zb-project-modebar .zb-project-mode-tab svg {
+  display: block !important;
+  width: 11px !important;
+  height: 11px !important;
+  min-width: 11px !important;
+  min-height: 11px !important;
+  flex: 0 0 11px !important;
+}
+
+.zb-project-modebar-actions .zb-project-publish-button {
+  display: inline-flex !important;
+  width: auto !important;
+  height: 27px !important;
+  min-height: 27px !important;
+  flex: 0 0 auto !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  padding: 0 9px !important;
+  border-radius: 7px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  font-size: 11px !important;
+}
+
+.zb-project-modebar-actions .zb-project-publish-icon,
+.zb-project-modebar-actions .zb-project-publish-button svg {
+  display: block !important;
+  width: 11px !important;
+  height: 11px !important;
+  min-width: 11px !important;
+  min-height: 11px !important;
+  flex: 0 0 11px !important;
 }

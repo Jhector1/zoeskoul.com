@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  ProjectCodeIcon,
+  ProjectPreviewIcon,
+} from "@/components/builder/ProjectTopbarIcons";
+
+import {
   useState,
 } from "react";
 
@@ -44,9 +49,7 @@ export default function ProjectBuilderShell(props: {
     >[0]["initialDeployment"];
 }) {
   const [mode, setMode] =
-    useState<ZoeBuildMode>(
-      "code",
-    );
+    useState<ZoeBuildMode>("preview");
 
   const [commerceOpen, setCommerceOpen] =
     useState(false);
@@ -424,6 +427,7 @@ export default function ProjectBuilderShell(props: {
                 setMode("preview");
               }}
             >
+              <ProjectPreviewIcon className="zb-project-mode-icon" />
               Preview
             </button>
 
@@ -445,6 +449,7 @@ export default function ProjectBuilderShell(props: {
                 setMode("code");
               }}
             >
+              <ProjectCodeIcon className="zb-project-mode-icon" />
               Code
             </button>
 

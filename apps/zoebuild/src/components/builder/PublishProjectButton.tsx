@@ -1,6 +1,10 @@
 "use client";
 
 import {
+  ProjectPublishIcon,
+} from "./ProjectTopbarIcons";
+
+import {
   useState,
 } from "react";
 
@@ -162,6 +166,7 @@ export function PublishProjectButton(
         disabled={publishing}
         onClick={publish}
       >
+          <ProjectPublishIcon className="zb-project-publish-icon" />
         {publishing
           ? "Publishing…"
           : "Publish"}
