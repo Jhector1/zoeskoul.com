@@ -8,7 +8,7 @@ import {
   AuthClientError,
   createAuthClient,
   type AppSessionResponse,
-} from "./index.js";
+} from "./index";
 
 export type AppSessionLoadState =
   | {

@@ -139,6 +139,7 @@ model BuildProject {
   runs          BuildRun[]
   resources     BuildResource[]
   deployments   BuildDeployment[]
+  artifacts     BuildArtifact[]
 
   @@index([status, updatedAt])
   @@index([stackId])
@@ -186,9 +187,10 @@ model BuildResource {
 }
 
 model BuildDeployment {
-  id             String                @id @default(cuid())
-  buildProjectId String
-  sourceVersion  Int
+  id              String                @id @default(cuid())
+  buildProjectId  String
+  buildArtifactId String?
+  sourceVersion   Int
   environment    String                @default("production")
   kind           String
   provider       String
@@ -201,11 +203,47 @@ model BuildDeployment {
   createdAt      DateTime              @default(now())
   updatedAt      DateTime              @updatedAt
   buildProject   BuildProject          @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+  buildArtifact  BuildArtifact?        @relation(fields: [buildArtifactId], references: [id], onDelete: SetNull)
 
   @@index([buildProjectId, createdAt])
+  @@index([buildArtifactId])
   @@index([buildProjectId, environment, status])
   @@index([provider, providerRef])
   @@index([hostname])
+}
+
+
+model BuildArtifact {
+  id             String              @id @default(cuid())
+  buildProjectId String
+  sourceVersion  Int
+  kind           String
+  outputPath     String
+  provider       String
+  artifactHash   String              @db.VarChar(64)
+  fileCount      Int
+  totalBytes     Int
+  createdAt      DateTime            @default(now())
+  buildProject   BuildProject        @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+  files          BuildArtifactFile[]
+  deployments    BuildDeployment[]
+
+  @@unique([buildProjectId, sourceVersion, artifactHash])
+  @@index([buildProjectId, createdAt])
+  @@index([provider, artifactHash])
+}
+
+model BuildArtifactFile {
+  id        String        @id @default(cuid())
+  artifactId String
+  path      String        @db.VarChar(1024)
+  content   Bytes
+  sizeBytes Int
+  createdAt DateTime      @default(now())
+  artifact  BuildArtifact @relation(fields: [artifactId], references: [id], onDelete: Cascade)
+
+  @@unique([artifactId, path])
+  @@index([artifactId])
 }
 
 model ModuleAccessGrant {

@@ -1,6 +1,9 @@
 export const BUILD_EXECUTOR_PROTOCOL_VERSION = 1 as const;
 
-export const TRUSTED_BUILD_OPERATIONS = ["dependency-lock-bootstrap"] as const;
+export const TRUSTED_BUILD_OPERATIONS = [
+  "dependency-lock-bootstrap",
+  "production-build",
+] as const;
 export type TrustedBuildOperation = (typeof TRUSTED_BUILD_OPERATIONS)[number];
 
 export const BUILD_EXECUTOR_LIMITS = {
@@ -24,7 +27,31 @@ export type DependencyLockBootstrapJobRequestV1 = Readonly<{
   files: readonly BuildExecutorTextFile[];
 }>;
 
-export type TrustedBuildJobRequest = DependencyLockBootstrapJobRequestV1;
+export type ProductionBuildJobRequestV1 = Readonly<{
+  protocolVersion: typeof BUILD_EXECUTOR_PROTOCOL_VERSION;
+  operation: "production-build";
+  buildProjectId: string;
+  sourceVersion: number;
+  stackId: string;
+  templateId: string;
+  files: readonly BuildExecutorTextFile[];
+}>;
+
+export type TrustedBuildJobRequest =
+  | DependencyLockBootstrapJobRequestV1
+  | ProductionBuildJobRequestV1;
+
+export const PRODUCTION_BUILD_ARTIFACT_LIMITS = {
+  files: 300,
+  fileBytes: 2 * 1024 * 1024,
+  totalBytes: 4 * 1024 * 1024,
+} as const;
+
+export type ProductionBuildArtifactFileV1 = Readonly<{
+  path: string;
+  encoding: "base64";
+  data: string;
+}>;
 
 export type TrustedBuildJobValidationResponse = Readonly<{
   ok: true;
@@ -115,7 +142,10 @@ function utf8ByteLength(value: string): number {
   return bytes;
 }
 
-function parseFiles(value: unknown): BuildExecutorTextFile[] {
+function parseFiles(
+  value: unknown,
+  operation: TrustedBuildOperation,
+): BuildExecutorTextFile[] {
   if (!Array.isArray(value)) {
     throw new BuildExecutorContractError("Executor files must be an array.");
   }
@@ -158,11 +188,33 @@ function parseFiles(value: unknown): BuildExecutorTextFile[] {
   }
 
   if (!files.some((file) => file.path === "package.json")) {
-    throw new BuildExecutorContractError("Dependency lock bootstrap requires package.json.");
+    throw new BuildExecutorContractError(
+      "Trusted Build execution requires package.json.",
+    );
   }
-  if (files.some((file) => file.path === "pnpm-lock.yaml")) {
-    throw new BuildExecutorContractError("Dependency lock bootstrap requires pnpm-lock.yaml to be absent.");
+
+  const lockfile = files.find(
+    (file) => file.path === "pnpm-lock.yaml",
+  );
+
+  if (
+    operation === "dependency-lock-bootstrap" &&
+    lockfile
+  ) {
+    throw new BuildExecutorContractError(
+      "Dependency lock bootstrap requires pnpm-lock.yaml to be absent.",
+    );
   }
+
+  if (
+    operation === "production-build" &&
+    (!lockfile || !lockfile.content.trim())
+  ) {
+    throw new BuildExecutorContractError(
+      "Production build requires a non-empty pnpm-lock.yaml.",
+    );
+  }
+
   return files;
 }
 
@@ -183,21 +235,61 @@ export function parseTrustedBuildJobRequest(value: unknown): TrustedBuildJobRequ
   if (input.protocolVersion !== BUILD_EXECUTOR_PROTOCOL_VERSION) {
     throw new BuildExecutorContractError(`Executor protocolVersion must be ${BUILD_EXECUTOR_PROTOCOL_VERSION}.`);
   }
-  if (input.operation !== "dependency-lock-bootstrap") {
-    throw new BuildExecutorContractError("Trusted Build executor operation is not supported.");
+  if (
+    input.operation !== "dependency-lock-bootstrap" &&
+    input.operation !== "production-build"
+  ) {
+    throw new BuildExecutorContractError(
+      "Trusted Build executor operation is not supported.",
+    );
   }
-  if (!Number.isSafeInteger(input.sourceVersion) || Number(input.sourceVersion) < 1) {
-    throw new BuildExecutorContractError("Executor sourceVersion must be a positive integer.");
+
+  if (
+    !Number.isSafeInteger(input.sourceVersion) ||
+    Number(input.sourceVersion) < 1
+  ) {
+    throw new BuildExecutorContractError(
+      "Executor sourceVersion must be a positive integer.",
+    );
+  }
+
+  const operation = input.operation;
+  const common = {
+    protocolVersion: BUILD_EXECUTOR_PROTOCOL_VERSION,
+    buildProjectId: boundedId(
+      input.buildProjectId,
+      "buildProjectId",
+      BUILD_EXECUTOR_LIMITS.idChars,
+    ),
+    sourceVersion: Number(input.sourceVersion),
+    stackId: boundedId(
+      input.stackId,
+      "stackId",
+      BUILD_EXECUTOR_LIMITS.stackIdChars,
+    ),
+    templateId: boundedId(
+      input.templateId,
+      "templateId",
+      BUILD_EXECUTOR_LIMITS.templateIdChars,
+    ),
+    files: parseFiles(
+      input.files,
+      operation,
+    ),
+  };
+
+  if (
+    operation === "dependency-lock-bootstrap"
+  ) {
+    return {
+      ...common,
+      operation,
+    };
   }
 
   return {
-    protocolVersion: BUILD_EXECUTOR_PROTOCOL_VERSION,
-    operation: "dependency-lock-bootstrap",
-    buildProjectId: boundedId(input.buildProjectId, "buildProjectId", BUILD_EXECUTOR_LIMITS.idChars),
-    sourceVersion: Number(input.sourceVersion),
-    stackId: boundedId(input.stackId, "stackId", BUILD_EXECUTOR_LIMITS.stackIdChars),
-    templateId: boundedId(input.templateId, "templateId", BUILD_EXECUTOR_LIMITS.templateIdChars),
-    files: parseFiles(input.files),
+    ...common,
+    operation: "production-build",
   };
 }
 
@@ -211,6 +303,24 @@ export type DependencyLockBootstrapExecutionResponseV1 = Readonly<{
     output: Readonly<{
       path: "pnpm-lock.yaml";
       content: string;
+    }>;
+  }>;
+}>;
+
+
+export type ProductionBuildExecutionResponseV1 = Readonly<{
+  ok: true;
+  result: Readonly<{
+    protocolVersion: typeof BUILD_EXECUTOR_PROTOCOL_VERSION;
+    operation: "production-build";
+    buildProjectId: string;
+    sourceVersion: number;
+    artifact: Readonly<{
+      type: "static-directory";
+      outputPath: "dist";
+      totalBytes: number;
+      sha256: string;
+      files: readonly ProductionBuildArtifactFileV1[];
     }>;
   }>;
 }>;

@@ -1,5 +1,8 @@
+import { buildZoeBuildWebAuthenticateUrl } from "@/lib/webAuthHandoff";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+
+import CreateBuildProjectClient from "@/components/builder/CreateBuildProjectClient";
 
 import { listBuildProjectsCommand } from "@zoeskoul/build-application";
 
@@ -25,7 +28,10 @@ export default async function ZoeBuildProjectsPage({
   if (!access.userId) {
     const callbackUrl = `/${locale}/projects`;
     redirect(
-      `/api/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`,
+      buildZoeBuildWebAuthenticateUrl({
+          callbackUrl,
+          locale,
+        }),
     );
   }
 
@@ -36,22 +42,43 @@ export default async function ZoeBuildProjectsPage({
 
   return (
     <main className="ui-container py-8">
-      <div className="mb-7">
-        <div className="ui-section-kicker">Zoé Build</div>
-        <h1 className="ui-section-title">Your projects</h1>
-        <p className="ui-section-subtitle">
-          Source projects are stored in Zoéskoul. Build execution and publishing
-          remain disabled until their dedicated runtime boundaries are enabled.
-        </p>
+      <div className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <div className="ui-section-kicker">
+            Zoé Build
+          </div>
+
+          <h1 className="ui-section-title">
+            Your projects
+          </h1>
+
+          <p className="ui-section-subtitle">
+            Create a project, then open it anytime to build with Zoé,
+            preview the result, or edit the source.
+          </p>
+        </div>
+
+        <CreateBuildProjectClient locale={locale} />
       </div>
 
       {projects.length === 0 ? (
-        <section className="ui-page-surface p-6">
-          <h2 className="text-lg font-semibold">No Build projects yet</h2>
-          <p className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-            The authenticated create-project API is ready. The guided Zoé
-            creation experience comes in a later UI wave.
-          </p>
+        <section className="ui-page-surface p-8">
+          <div className="max-w-xl">
+            <div className="ui-section-kicker">
+              Start building
+            </div>
+
+            <h2 className="mt-2 text-xl font-semibold">
+              Create your first project
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.9)]">
+              Start with a website, web app, or storefront. Once the
+              project opens, tell Zoé whether you want a business site,
+              landing page, portfolio, content site, store, or something
+              more custom.
+            </p>
+          </div>
         </section>
       ) : (
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

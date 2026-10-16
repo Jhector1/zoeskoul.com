@@ -5,9 +5,12 @@ import {
   usePathname,
 } from "next/navigation";
 import {
-  signOut,
-  useSession,
-} from "next-auth/react";
+  buildAuthenticateUrl,
+  buildLogoutUrl,
+} from "@zoeskoul/auth-client";
+import {
+  useAppSession,
+} from "@zoeskoul/auth-client/react";
 
 import {
   HeaderChrome,
@@ -47,12 +50,17 @@ const COPY = {
   },
 } as const;
 
-export function ZoeBuildHeader() {
+export function ZoeBuildHeader(props: {
+  websiteOrigin: string;
+  zoebuildOrigin: string;
+}) {
   const pathname = usePathname() || "/";
   const { preferences } =
     useAppPreferences();
-  const { data: session, status } =
-    useSession();
+  const sessionState =
+    useAppSession({
+      apiOrigin: props.websiteOrigin,
+    });
 
   const locale =
     preferences.locale === "fr" ||
@@ -63,7 +71,35 @@ export function ZoeBuildHeader() {
 
   const projectsHref =
     `/${locale}/projects`;
-  const user = session?.user;
+  const user =
+    sessionState.status === "authenticated"
+      ? sessionState.session.user
+      : null;
+
+  const callbackUrl =
+    new URL(
+      pathname,
+      props.zoebuildOrigin,
+    ).toString();
+
+  const signInHref =
+    buildAuthenticateUrl({
+      websiteOrigin: props.websiteOrigin,
+      callbackUrl,
+      locale,
+    });
+
+  const profileHref =
+    new URL(
+      `/${locale}/profile`,
+      props.websiteOrigin,
+    ).toString();
+
+  const logoutHref =
+    buildLogoutUrl({
+      websiteOrigin: props.websiteOrigin,
+      locale,
+    });
 
   const brandGroup = (
     <Link
@@ -79,7 +115,7 @@ export function ZoeBuildHeader() {
   );
 
   const account =
-    status === "loading"
+    sessionState.status === "loading"
       ? null
       : user
         ? (
@@ -99,12 +135,12 @@ export function ZoeBuildHeader() {
             profileLabel={t.profile}
             progressLabel={t.projects}
             logoutLabel={t.logout}
-            profileHref="/profile"
+            profileHref={profileHref}
             progressHref={projectsHref}
             onSignOut={() => {
-              void signOut({
-                redirectTo: "/",
-              });
+              window.location.assign(
+                logoutHref,
+              );
             }}
             renderLink={({
               href,
@@ -125,7 +161,7 @@ export function ZoeBuildHeader() {
         : (
           <Link
             className="ui-btn-secondary h-8"
-            href={`/authenticate?callbackUrl=${encodeURIComponent(pathname)}`}
+            href={signInHref}
           >
             {t.signIn}
           </Link>
@@ -148,7 +184,17 @@ export function ZoeBuildHeader() {
     </div>
   );
 
-  return (
+
+  const isProjectEditor =
+    /^\/(?:en|fr|ht)\/projects\/[^/]+\/?$/.test(
+      pathname,
+    );
+
+  if (isProjectEditor) {
+    return null;
+  }
+
+return (
     <HeaderChrome
       brandGroup={brandGroup}
       topRowActions={topRowActions}

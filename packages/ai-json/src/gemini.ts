@@ -195,6 +195,12 @@ export function createGeminiAiJsonTransport(
           config: {
             responseMimeType:
               "application/json",
+            ...(request.responseJsonSchema
+              ? {
+                  responseJsonSchema:
+                    request.responseJsonSchema,
+                }
+              : {}),
             temperature:
               AI_JSON_DEFAULT_TEMPERATURE,
           },

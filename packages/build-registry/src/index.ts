@@ -48,7 +48,44 @@ export const REACT_VITE_STACK_V1 = {
   deploymentAdapterId: "static-assets-v1",
 } as const satisfies BuildStackDefinition;
 
+export const COMMERCE_STOREFRONT_STACK_V1 = {
+  id: "commerce-storefront-v1",
+  projectTypes: ["frontend-app"],
+  targets: ["web"],
+
+  // The generated storefront itself is static.
+  // Catalog/cart/checkout are delegated to the managed
+  // commerce provider instead of requiring ZoeBuild to
+  // operate a customer database or payment backend.
+  runtimeProfileId: "build-static-v1",
+
+  templateId: "commerce-storefront-v1",
+
+  commands: {
+    build: [],
+  },
+
+  preview: {
+    type: "static",
+  },
+
+  artifact: {
+    type: "static-directory",
+    outputPath: ".",
+  },
+
+  supportedCapabilities: [
+    "payments",
+    "commerce",
+  ],
+
+  deploymentAdapterId:
+    "static-assets-v1",
+} as const satisfies BuildStackDefinition;
+
+
 export const BUILD_STACKS_V1 = [
+  COMMERCE_STOREFRONT_STACK_V1,
   STATIC_HTML_STACK_V1,
   REACT_VITE_STACK_V1,
 ] as const satisfies readonly BuildStackDefinition[];

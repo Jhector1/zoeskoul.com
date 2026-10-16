@@ -11,6 +11,12 @@ import { heartbeatSessionRoute } from "./routes/sessions.heartbeat.js";
 import { activeSessionsRoute } from "./routes/sessions.active.js";
 import { validateBuildJobRoute } from "./routes/build.jobs.validate.js";
 import { executeBuildDependencyLockBootstrapRoute } from "./routes/build.jobs.dependencyLockBootstrap.js";
+import { executeBuildProductionRoute } from "./routes/build.jobs.productionBuild.js";
+import { startBuildPreviewRoute } from "./routes/build.previews.start.js";
+import { syncBuildPreviewRoute } from "./routes/build.previews.sync.js";
+import { fetchBuildPreviewRoute } from "./routes/build.previews.fetch.js";
+import { proxyFetchBuildPreviewRoute } from "./routes/build.previews.proxyFetch.js";
+import { cancelBuildPreviewRoute } from "./routes/build.previews.cancel.js";
 import { getSessionStats } from "./services/sessions/sessionStore.js";
 import { env } from "./lib/env.js";
 import {
@@ -71,6 +77,12 @@ app.get("/metrics", async (_req, res) => {
 
 app.post("/build/jobs/validate", validateBuildJobRoute);
 app.post("/build/jobs/dependency-lock-bootstrap", executeBuildDependencyLockBootstrapRoute);
+app.post("/build/jobs/production-build", executeBuildProductionRoute);
+app.post("/build/previews/start", startBuildPreviewRoute);
+app.post("/build/previews/:previewId/sync", syncBuildPreviewRoute);
+app.post("/build/previews/:previewId/fetch", fetchBuildPreviewRoute);
+app.post("/build/previews/:previewId/proxy-fetch", proxyFetchBuildPreviewRoute);
+app.post("/build/previews/:previewId/cancel", cancelBuildPreviewRoute);
 app.post("/sessions/start", startSessionRoute);
 app.post("/sessions/active", activeSessionsRoute);
 app.post("/sessions/:sessionId/input", inputSessionRoute);

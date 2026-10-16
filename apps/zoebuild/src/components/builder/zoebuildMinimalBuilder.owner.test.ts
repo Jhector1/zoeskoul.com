@@ -61,24 +61,52 @@ describe(
       },
     );
 
-    it(
-      "reuses builder controls on project workspace",
-      () => {
-        const shell = source(
-          "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx",
+      it(
+    "keeps landing mode tabs while project owns the Lovable workspace modebar",
+    () => {
+      const landing =
+        readFileSync(
+          new URL(
+            "./ZoeBuildLanding.tsx",
+            import.meta.url,
+          ),
+          "utf8",
         );
 
-        expect(shell).toContain(
-          "<ZoeBuildModeTabs",
+      const project =
+        readFileSync(
+          new URL(
+            "../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx",
+            import.meta.url,
+          ),
+          "utf8",
         );
-        expect(shell).toContain(
-          "<ZoeBuildPromptComposer",
-        );
-        expect(shell).toContain(
-          "<BuildWorkspaceClient",
-        );
-      },
-    );
+
+      expect(
+        landing,
+      ).toContain(
+        "<ZoeBuildModeTabs",
+      );
+
+      expect(
+        project,
+      ).not.toContain(
+        "<ZoeBuildModeTabs",
+      );
+
+      expect(
+        project,
+      ).toContain(
+        'className="zb-project-mode-tabs"',
+      );
+
+      expect(
+        project,
+      ).toContain(
+        'className="zb-project-assistant-rail"',
+      );
+    },
+  );
 
     it(
       "keeps Shopify import as a validated seam without fake success",

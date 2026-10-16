@@ -59,7 +59,13 @@ describe("ZoeBuild multimodal AI planning boundary", () => {
     expect(route).toContain("assertCanGenerateBuildWithAi(");
     expect(route).toContain('"zoebuild-ai-plan"');
     expect(route).toContain("await req.formData()");
-    expect(route).toContain("planBuildProjectFromPrompt({");
+    expect(route).toContain("planCostAwareZoeBuildProject({");
+
+    const costAwarePlanner = source(
+      "apps/zoebuild/src/lib/build/costAwareZoeBuildPlanning.ts",
+    );
+
+    expect(costAwarePlanner).toContain("planBuildProjectFromPrompt({");
 
     for (const forbidden of [
       "createBuildProjectCommand",

@@ -40,10 +40,302 @@ export type BuildRequirements = Readonly<{
   commerce: boolean;
 }>;
 
+export const BUILD_DEPLOYMENT_PREFERENCES = [
+  "static",
+  "managed-runtime",
+  "mobile-cloud",
+] as const;
+
 export type BuildDeploymentPreference =
-  | "static"
-  | "managed-runtime"
-  | "mobile-cloud";
+  (typeof BUILD_DEPLOYMENT_PREFERENCES)[number];
+
+
+/**
+ * Presentation-only design contract for ZoeBuild.
+ *
+ * Models may choose these bounded values. They never receive a surface for
+ * arbitrary HTML, CSS, JavaScript, provider configuration, credentials,
+ * commerce mechanics, or application architecture.
+ */
+export const BUILD_DESIGN_STYLES = [
+  "minimal",
+  "editorial",
+  "bold",
+  "luxury",
+  "playful",
+  "technical",
+] as const;
+
+export type BuildDesignStyle =
+  (typeof BUILD_DESIGN_STYLES)[number];
+
+export const BUILD_DESIGN_HERO_LAYOUTS = [
+  "split",
+  "centered",
+  "editorial",
+] as const;
+
+export type BuildDesignHeroLayout =
+  (typeof BUILD_DESIGN_HERO_LAYOUTS)[number];
+
+export const BUILD_DESIGN_PRODUCT_DENSITIES = [
+  "compact",
+  "comfortable",
+  "airy",
+] as const;
+
+export type BuildDesignProductDensity =
+  (typeof BUILD_DESIGN_PRODUCT_DENSITIES)[number];
+
+export const BUILD_DESIGN_CARD_TREATMENTS = [
+  "soft",
+  "sharp",
+  "minimal",
+] as const;
+
+export type BuildDesignCardTreatment =
+  (typeof BUILD_DESIGN_CARD_TREATMENTS)[number];
+
+export type BuildDesignPalette = Readonly<{
+  surface: string;
+  surfaceSoft: string;
+  text: string;
+  muted: string;
+  border: string;
+  accent: string;
+  accentContrast: string;
+  artStart: string;
+  artEnd: string;
+}>;
+
+export type BuildDesignLayout = Readonly<{
+  hero: BuildDesignHeroLayout;
+  productDensity: BuildDesignProductDensity;
+  cardTreatment: BuildDesignCardTreatment;
+}>;
+
+export type BuildDesignContent = Readonly<{
+  brandName: string;
+  eyebrow: string;
+  heroTitle: string;
+  heroBody: string;
+  heroCta: string;
+  featuredHeading: string;
+  storyHeading: string;
+  storyBody: string;
+}>;
+
+export type BuildDesignSpecificationV1 = Readonly<{
+  version: 1;
+  style: BuildDesignStyle;
+  palette: BuildDesignPalette;
+  layout: BuildDesignLayout;
+  content: BuildDesignContent;
+}>;
+
+export type BuildDesignSpecification =
+  BuildDesignSpecificationV1;
+
+export const BUILD_DESIGN_JSON_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+
+  properties: {
+    version: {
+      type: "integer",
+      const: 1,
+    },
+
+    style: {
+      type: "string",
+      enum: [
+        ...BUILD_DESIGN_STYLES,
+      ],
+    },
+
+    palette: {
+      type: "object",
+      additionalProperties: false,
+
+      properties: {
+        surface: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+
+        surfaceSoft: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+
+        text: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+
+        muted: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+
+        border: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+
+        accent: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+
+        accentContrast: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+
+        artStart: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+
+        artEnd: {
+          type: "string",
+          pattern:
+            "^#[0-9A-Fa-f]{6}$",
+        },
+      },
+
+      required: [
+        "surface",
+        "surfaceSoft",
+        "text",
+        "muted",
+        "border",
+        "accent",
+        "accentContrast",
+        "artStart",
+        "artEnd",
+      ],
+    },
+
+    layout: {
+      type: "object",
+      additionalProperties: false,
+
+      properties: {
+        hero: {
+          type: "string",
+          enum: [
+            ...BUILD_DESIGN_HERO_LAYOUTS,
+          ],
+        },
+
+        productDensity: {
+          type: "string",
+          enum: [
+            ...BUILD_DESIGN_PRODUCT_DENSITIES,
+          ],
+        },
+
+        cardTreatment: {
+          type: "string",
+          enum: [
+            ...BUILD_DESIGN_CARD_TREATMENTS,
+          ],
+        },
+      },
+
+      required: [
+        "hero",
+        "productDensity",
+        "cardTreatment",
+      ],
+    },
+
+    content: {
+      type: "object",
+      additionalProperties: false,
+
+      properties: {
+        brandName: {
+          type: "string",
+          minLength: 1,
+          maxLength: 80,
+        },
+
+        eyebrow: {
+          type: "string",
+          minLength: 1,
+          maxLength: 80,
+        },
+
+        heroTitle: {
+          type: "string",
+          minLength: 1,
+          maxLength: 160,
+        },
+
+        heroBody: {
+          type: "string",
+          minLength: 1,
+          maxLength: 320,
+        },
+
+        heroCta: {
+          type: "string",
+          minLength: 1,
+          maxLength: 60,
+        },
+
+        featuredHeading: {
+          type: "string",
+          minLength: 1,
+          maxLength: 120,
+        },
+
+        storyHeading: {
+          type: "string",
+          minLength: 1,
+          maxLength: 160,
+        },
+
+        storyBody: {
+          type: "string",
+          minLength: 1,
+          maxLength: 420,
+        },
+      },
+
+      required: [
+        "brandName",
+        "eyebrow",
+        "heroTitle",
+        "heroBody",
+        "heroCta",
+        "featuredHeading",
+        "storyHeading",
+        "storyBody",
+      ],
+    },
+  },
+
+  required: [
+    "version",
+    "style",
+    "palette",
+    "layout",
+    "content",
+  ],
+} as const;
+
 
 export type ProjectSpecificationV1 = Readonly<{
   version: typeof BUILD_SPEC_VERSION;
@@ -53,6 +345,8 @@ export type ProjectSpecificationV1 = Readonly<{
   requirements: BuildRequirements;
   pages: readonly string[];
   stackId: string;
+  design?: BuildDesignSpecification | null;
+
   deployment: Readonly<{
     preference: BuildDeploymentPreference;
   }>;
@@ -122,6 +416,110 @@ export const BUILD_SPEC_LIMITS = {
   pages: 100,
   pageChars: 120,
 } as const;
+
+const BUILD_REQUIREMENT_JSON_SCHEMA_PROPERTIES =
+  Object.fromEntries(
+    BUILD_CAPABILITIES.map((capability) => [
+      capability,
+      { type: "boolean" as const },
+    ]),
+  ) as Record<
+    BuildCapability,
+    Readonly<{ type: "boolean" }>
+  >;
+
+/**
+ * Provider-neutral JSON Schema for AI generation.
+ *
+ * This schema constrains generation but does not replace
+ * parseProjectSpecification(), which remains the authoritative runtime
+ * validator for untrusted AI/import/HTTP input.
+ *
+ * Keep this schema within the JSON Schema subset supported by our
+ * structured-output providers.
+ */
+const PROJECT_SPECIFICATION_BASE_JSON_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    version: {
+      type: "integer",
+      enum: [BUILD_SPEC_VERSION],
+    },
+    name: {
+      type: "string",
+    },
+    projectType: {
+      type: "string",
+      enum: [...BUILD_PROJECT_TYPES],
+    },
+    targets: {
+      type: "array",
+      minItems: 1,
+      maxItems: BUILD_TARGETS.length,
+      items: {
+        type: "string",
+        enum: [...BUILD_TARGETS],
+      },
+    },
+    requirements: {
+      type: "object",
+      additionalProperties: false,
+      properties:
+        BUILD_REQUIREMENT_JSON_SCHEMA_PROPERTIES,
+      required: [...BUILD_CAPABILITIES],
+    },
+    pages: {
+      type: "array",
+      maxItems: BUILD_SPEC_LIMITS.pages,
+      items: {
+        type: "string",
+      },
+    },
+    stackId: {
+      type: "string",
+    },
+    deployment: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        preference: {
+          type: "string",
+          enum: [...BUILD_DEPLOYMENT_PREFERENCES],
+        },
+      },
+      required: ["preference"],
+    },
+  },
+  required: [
+    "version",
+    "name",
+    "projectType",
+    "targets",
+    "requirements",
+    "pages",
+    "stackId",
+    "deployment",
+  ],
+} as const satisfies Readonly<Record<string, unknown>>;
+
+export const PROJECT_SPECIFICATION_JSON_SCHEMA = {
+  ...PROJECT_SPECIFICATION_BASE_JSON_SCHEMA,
+
+  properties: {
+    ...PROJECT_SPECIFICATION_BASE_JSON_SCHEMA.properties,
+
+    design: {
+      anyOf: [
+        BUILD_DESIGN_JSON_SCHEMA,
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+} as const;
+
 
 export class BuildSpecificationError extends Error {
   readonly code = "BUILD_SPEC_INVALID" as const;
@@ -261,13 +659,49 @@ export function parseProjectSpecification(value: unknown): ProjectSpecification 
     issues,
   );
 
+  const designProvided =
+    Object.prototype.hasOwnProperty.call(
+      input,
+      "design",
+    );
+
+  let design:
+    BuildDesignSpecification |
+    null |
+    undefined;
+
+  if (designProvided) {
+    if (input.design === null) {
+      design = null;
+    } else {
+      try {
+        design =
+          parseBuildDesignSpecification(
+            input.design,
+          );
+      } catch (error) {
+        if (
+          error instanceof
+          BuildDesignSpecificationError
+        ) {
+          issues.push(
+            ...error.issues,
+          );
+        } else {
+          throw error;
+        }
+      }
+    }
+  }
+
   const deploymentInput = asBuildRecord(input.deployment);
   const deploymentPreference = deploymentInput?.preference;
   const validDeploymentPreference =
-    deploymentPreference === "static" ||
-    deploymentPreference === "managed-runtime" ||
-    deploymentPreference === "mobile-cloud"
-      ? deploymentPreference
+    typeof deploymentPreference === "string" &&
+    (
+      BUILD_DEPLOYMENT_PREFERENCES as readonly string[]
+    ).includes(deploymentPreference)
+      ? (deploymentPreference as BuildDeploymentPreference)
       : null;
   if (!validDeploymentPreference) {
     issues.push("Deployment preference is not supported.");
@@ -285,8 +719,329 @@ export function parseProjectSpecification(value: unknown): ProjectSpecification 
     requirements: requirementValues,
     pages,
     stackId,
+
+    ...(designProvided
+      ? {
+          design:
+            design ?? null,
+        }
+      : {}),
+
     deployment: {
       preference: validDeploymentPreference,
     },
+  };
+}
+
+export class BuildDesignSpecificationError
+  extends Error {
+  readonly code =
+    "BUILD_DESIGN_INVALID" as const;
+
+  constructor(
+    readonly issues:
+      readonly string[],
+  ) {
+    super(
+      issues.length
+        ? issues.join(" ")
+        : "Invalid ZoeBuild design specification.",
+    );
+
+    this.name =
+      "BuildDesignSpecificationError";
+  }
+}
+
+function designRecord(
+  value: unknown,
+  label: string,
+  issues: string[],
+): Record<string, unknown> {
+  const record =
+    asBuildRecord(value);
+
+  if (!record) {
+    issues.push(
+      `${label} must be an object.`,
+    );
+
+    return {};
+  }
+
+  return record;
+}
+
+function designEnum<
+  T extends string,
+>(
+  value: unknown,
+  allowed:
+    readonly T[],
+  label: string,
+  issues: string[],
+): T {
+  if (
+    typeof value === "string" &&
+    allowed.includes(
+      value as T,
+    )
+  ) {
+    return value as T;
+  }
+
+  issues.push(
+    `${label} is not supported.`,
+  );
+
+  return allowed[0]!;
+}
+
+function designColor(
+  value: unknown,
+  label: string,
+  issues: string[],
+): string {
+  const normalized =
+    normalizedBoundedString(
+      value,
+      label,
+      7,
+      issues,
+    );
+
+  if (
+    normalized &&
+    !/^#[0-9A-Fa-f]{6}$/.test(
+      normalized,
+    )
+  ) {
+    issues.push(
+      `${label} must be a six-digit hex color.`,
+    );
+  }
+
+  return normalized.toUpperCase();
+}
+
+export function parseBuildDesignSpecification(
+  value: unknown,
+): BuildDesignSpecification {
+  const issues: string[] = [];
+
+  const input =
+    designRecord(
+      value,
+      "Design",
+      issues,
+    );
+
+  if (input.version !== 1) {
+    issues.push(
+      "Design version must be 1.",
+    );
+  }
+
+  const style =
+    designEnum(
+      input.style,
+      BUILD_DESIGN_STYLES,
+      "Design style",
+      issues,
+    );
+
+  const paletteInput =
+    designRecord(
+      input.palette,
+      "Design palette",
+      issues,
+    );
+
+  const palette:
+    BuildDesignPalette = {
+      surface:
+        designColor(
+          paletteInput.surface,
+          "Design surface",
+          issues,
+        ),
+
+      surfaceSoft:
+        designColor(
+          paletteInput.surfaceSoft,
+          "Design soft surface",
+          issues,
+        ),
+
+      text:
+        designColor(
+          paletteInput.text,
+          "Design text",
+          issues,
+        ),
+
+      muted:
+        designColor(
+          paletteInput.muted,
+          "Design muted text",
+          issues,
+        ),
+
+      border:
+        designColor(
+          paletteInput.border,
+          "Design border",
+          issues,
+        ),
+
+      accent:
+        designColor(
+          paletteInput.accent,
+          "Design accent",
+          issues,
+        ),
+
+      accentContrast:
+        designColor(
+          paletteInput.accentContrast,
+          "Design accent contrast",
+          issues,
+        ),
+
+      artStart:
+        designColor(
+          paletteInput.artStart,
+          "Design art start",
+          issues,
+        ),
+
+      artEnd:
+        designColor(
+          paletteInput.artEnd,
+          "Design art end",
+          issues,
+        ),
+    };
+
+  const layoutInput =
+    designRecord(
+      input.layout,
+      "Design layout",
+      issues,
+    );
+
+  const layout:
+    BuildDesignLayout = {
+      hero:
+        designEnum(
+          layoutInput.hero,
+          BUILD_DESIGN_HERO_LAYOUTS,
+          "Design hero layout",
+          issues,
+        ),
+
+      productDensity:
+        designEnum(
+          layoutInput.productDensity,
+          BUILD_DESIGN_PRODUCT_DENSITIES,
+          "Design product density",
+          issues,
+        ),
+
+      cardTreatment:
+        designEnum(
+          layoutInput.cardTreatment,
+          BUILD_DESIGN_CARD_TREATMENTS,
+          "Design card treatment",
+          issues,
+        ),
+    };
+
+  const contentInput =
+    designRecord(
+      input.content,
+      "Design content",
+      issues,
+    );
+
+  const content:
+    BuildDesignContent = {
+      brandName:
+        normalizedBoundedString(
+          contentInput.brandName,
+          "Design brand name",
+          80,
+          issues,
+        ),
+
+      eyebrow:
+        normalizedBoundedString(
+          contentInput.eyebrow,
+          "Design eyebrow",
+          80,
+          issues,
+        ),
+
+      heroTitle:
+        normalizedBoundedString(
+          contentInput.heroTitle,
+          "Design hero title",
+          160,
+          issues,
+        ),
+
+      heroBody:
+        normalizedBoundedString(
+          contentInput.heroBody,
+          "Design hero body",
+          320,
+          issues,
+        ),
+
+      heroCta:
+        normalizedBoundedString(
+          contentInput.heroCta,
+          "Design hero CTA",
+          60,
+          issues,
+        ),
+
+      featuredHeading:
+        normalizedBoundedString(
+          contentInput.featuredHeading,
+          "Design featured heading",
+          120,
+          issues,
+        ),
+
+      storyHeading:
+        normalizedBoundedString(
+          contentInput.storyHeading,
+          "Design story heading",
+          160,
+          issues,
+        ),
+
+      storyBody:
+        normalizedBoundedString(
+          contentInput.storyBody,
+          "Design story body",
+          420,
+          issues,
+        ),
+    };
+
+  if (issues.length) {
+    throw new BuildDesignSpecificationError(
+      issues,
+    );
+  }
+
+  return {
+    version: 1,
+    style,
+    palette,
+    layout,
+    content,
   };
 }

@@ -14,6 +14,7 @@ import {
 import type { FullIDEServices } from "@zoeskoul/learner-workspace/ide/fullide/services";
 import type { FileNode, WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import type { EditorSplitPlacement } from "@zoeskoul/learner-workspace/runner/types";
+import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { resolveWorkspaceEditorLanguage } from "@zoeskoul/code-contracts";
 import { isBinaryFileNode } from "@zoeskoul/learner-workspace/lib/ide/workspaceFileContent";
@@ -66,6 +67,7 @@ type Props = {
     onChangeSqlDialect: (dialect: any) => void;
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: any; runArgs: any }) => void;
+    remoteWebPreview?: RemoteWebPreviewDescriptor;
     onRun: (args: any) => Promise<any>;
     setActiveFileId: (id: string | null) => void;
     workspaceFileSelectionVersion: number;
@@ -122,6 +124,7 @@ export default function IdeEditorPane({
     onChangeSqlDialect,
     onBeforeRun,
     onRunResult,
+    remoteWebPreview,
     onRun,
     setActiveFileId,
     workspaceFileSelectionVersion,
@@ -323,6 +326,7 @@ export default function IdeEditorPane({
                             sqlResultShape={sqlResultShape}
                             sqlPaneOptions={sqlPaneOptions}
                             runnerPaneOptions={runnerPaneOptions}
+                            initialTerminalDock={services.runner.initialTerminalDock}
                             defaultSurface={defaultSurface}
                             sqlSchemaSql={schemaSql}
                             sqlSeedSql={seedSql}
@@ -385,6 +389,7 @@ export default function IdeEditorPane({
                             }
                             isAuthenticated={isAuthenticated}
                             webPreviewEntries={workspaceEntries}
+                            remoteWebPreview={remoteWebPreview}
                             workspaceTerminal={
                                 !isSql && !isWeb
                                     ? {

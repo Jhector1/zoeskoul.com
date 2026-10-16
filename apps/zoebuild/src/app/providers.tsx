@@ -1,10 +1,22 @@
 "use client";
 
-import type { ReactNode } from "react";
-import type { AppPreferences } from "@zoeskoul/preferences";
-import { AppPreferencesProvider } from "@zoeskoul/preferences/react";
-import { AppThemeProvider } from "@zoeskoul/platform-ui";
-import { SessionProvider } from "next-auth/react";
+import type {
+  ReactNode,
+} from "react";
+
+import type {
+  AppPreferences,
+} from "@zoeskoul/preferences";
+import {
+  AppPreferencesProvider,
+} from "@zoeskoul/preferences/react";
+import {
+  AppThemeProvider,
+} from "@zoeskoul/platform-ui";
+
+import {
+  ZoeBuildLearnerWorkspaceRuntimeProvider,
+} from "@/components/learner-workspace/ZoeBuildLearnerWorkspaceRuntime";
 
 export default function Providers(props: {
   children: ReactNode;
@@ -12,15 +24,19 @@ export default function Providers(props: {
   initialPreferences: AppPreferences;
 }) {
   return (
-    <SessionProvider>
-      <AppPreferencesProvider
-        apiOrigin={props.apiOrigin}
-        initialPreferences={props.initialPreferences}
-      >
-        <AppThemeProvider>
+    <AppPreferencesProvider
+      apiOrigin={props.apiOrigin}
+      initialPreferences={
+        props.initialPreferences
+      }
+    >
+      <AppThemeProvider>
+        <ZoeBuildLearnerWorkspaceRuntimeProvider
+          apiOrigin={props.apiOrigin}
+        >
           {props.children}
-        </AppThemeProvider>
-      </AppPreferencesProvider>
-    </SessionProvider>
+        </ZoeBuildLearnerWorkspaceRuntimeProvider>
+      </AppThemeProvider>
+    </AppPreferencesProvider>
   );
 }

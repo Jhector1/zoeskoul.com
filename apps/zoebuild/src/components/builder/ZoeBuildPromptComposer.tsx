@@ -12,6 +12,7 @@ import {
   parseShopifyStoreUrl,
   type ShopifyImportDraft,
 } from "@/lib/import/shopify";
+import Tooltip from "@zoeskoul/learner-workspace/ui/Tooltip";
 
 export const ZOEBUILD_COMPOSER_MAX_MEDIA_FILES = 4;
 
@@ -266,7 +267,7 @@ export function ZoeBuildPromptComposer(props: {
         className="zb-prompt-composer"
         onSubmit={submitPrompt}
       >
-        <textarea
+        <textarea className="zb-prompt-textarea"
           value={value}
           onChange={(event) => setValue(event.target.value)}
           placeholder={
@@ -319,7 +320,7 @@ export function ZoeBuildPromptComposer(props: {
           </div>
         ) : null}
 
-        <div className="zb-composer-actions">
+        <div className="zb-composer-actions zb-prompt-actions">
           <input
             ref={mediaInputRef}
             className="zb-media-input"
@@ -330,23 +331,72 @@ export function ZoeBuildPromptComposer(props: {
             aria-label="Upload image, video, or audio"
           />
 
-          <button
+
+<Tooltip
+  tip="Add media"
+  side="top"
+>
+  <button
             type="button"
             className="zb-media-button"
             onClick={() => mediaInputRef.current?.click()}
             disabled={busy}
-          >
-            Add media
-          </button>
+           aria-label="Add media">
 
-          <button
+<svg
+  className="zb-composer-action-icon"
+  viewBox="0 0 24 24"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path
+    d="M12 5v14M5 12h14"
+    stroke="currentColor"
+    strokeWidth="1.9"
+    strokeLinecap="round"
+  />
+</svg>
+  </button>
+</Tooltip>
+
+
+<Tooltip
+  tip="Record voice"
+  side="top"
+>
+  <button
             type="button"
             className="zb-media-button"
             onClick={toggleVoiceRecording}
             disabled={busy}
-          >
-            {recording ? "Stop voice" : "Record voice"}
-          </button>
+           aria-label="Record voice">
+
+<svg
+  className="zb-composer-action-icon"
+  viewBox="0 0 24 24"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <rect
+    x="9"
+    y="3"
+    width="6"
+    height="11"
+    rx="3"
+    stroke="currentColor"
+    strokeWidth="1.8"
+  />
+  <path
+    d="M6.5 11.5v.5a5.5 5.5 0 0 0 11 0v-.5M12 17.5V21M9 21h6"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+  />
+</svg>
+  </button>
+</Tooltip>
 
           <button
             type="button"

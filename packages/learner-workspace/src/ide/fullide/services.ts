@@ -3,6 +3,7 @@ import type {
     WorkspaceTerminalBootstrap,
 } from "@zoeskoul/learner-workspace/runner/runtime";
 import {DEFAULT_IDE_FILE_ACTIONS, ResolvedIdeFileActions} from "@zoeskoul/learner-workspace/lib/ide/workspacePolicy";
+import type { TerminalDock } from "@zoeskoul/learner-workspace/runner/types";
 
 export type FullIDEExplorerServices = {
     enabled: boolean;
@@ -24,6 +25,7 @@ export type FullIDERunnerServices = {
     allowRun: boolean;
     showTerminal: boolean;
     showTerminalDockToggle: boolean;
+    initialTerminalDock?: TerminalDock;
     showOpenTerminalButton: boolean;
     showRestartTerminalButton: boolean;
     showThemeToggle: boolean;

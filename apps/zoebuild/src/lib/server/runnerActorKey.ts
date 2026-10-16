@@ -1,26 +1,31 @@
-import { createHash } from "node:crypto";
+import "server-only";
 
-import { auth } from "@/lib/auth";
+import {
+  createHash,
+} from "node:crypto";
 
-function sha(s: string) {
-  return createHash("sha256").update(s).digest("hex");
+function sha(value: string): string {
+  return createHash("sha256")
+    .update(value)
+    .digest("hex");
 }
 
-export async function requireRunnerActorKey(): Promise<string> {
-  const session = await auth();
-  const userId = (session?.user as any)?.id ?? null;
+/**
+ * Derive the trusted runner actor key from the canonical ZoeBuild user id.
+ *
+ * Authentication is Web-owned and has already been resolved by the calling
+ * Build route before this helper runs. This helper must never open a second
+ * Auth.js/session boundary.
+ */
+export async function requireRunnerActorKey(
+  userId: string,
+): Promise<string> {
+  const normalizedUserId =
+    userId.trim();
 
-  if (userId) {
-    return `u:${sha(userId)}`;
+  if (!normalizedUserId) {
+    throw new Error("Unauthorized");
   }
 
-  if (
-    process.env.E2E_ALLOW_DEV_ROUTES === "1" ||
-    process.env.PLAYWRIGHT === "1" ||
-    process.env.PLAYWRIGHT_TEST === "1"
-  ) {
-    return `e2e:${sha("playwright")}`;
-  }
-
-  throw new Error("Unauthorized");
+  return `u:${sha(normalizedUserId)}`;
 }

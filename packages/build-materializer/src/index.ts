@@ -1,3 +1,4 @@
+import { applyBuildDesignToTemplate } from "./commerceDesign";
 import type {
   BuildStackDefinition,
   ProjectSpecification,
@@ -253,13 +254,36 @@ export function materializeRegisteredBuildProject(args: {
   specification: ProjectSpecification;
   createdAt: number;
 }): MaterializedBuildProject {
-  const stack = requireBuildStack(args.specification.stackId);
-  const template = requireBuildTemplate(stack.templateId);
+  const stack =
+    requireBuildStack(
+      args.specification.stackId,
+    );
+
+  const registeredTemplate =
+    requireBuildTemplate(
+      stack.templateId,
+    );
+
+  const template =
+    applyBuildDesignToTemplate(
+      args.specification,
+      registeredTemplate,
+    );
 
   return materializeBuildProject({
-    specification: args.specification,
+    specification:
+      args.specification,
+
     stack,
     template,
-    createdAt: args.createdAt,
+
+    createdAt:
+      args.createdAt,
   });
 }
+
+export {
+  COMMERCE_STOREFRONT_DESIGN_PATHS,
+  applyBuildDesignToTemplate,
+  renderCommerceStorefrontDesignFiles,
+} from "./commerceDesign";

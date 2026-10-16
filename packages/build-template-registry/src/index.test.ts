@@ -6,12 +6,22 @@ import {
 } from "./index";
 
 describe("build template registry", () => {
-  it("registers the two controlled initial templates", () => {
-    expect(BUILD_TEMPLATES_V1.map((template) => template.id)).toEqual([
-      "static-html-v1",
-      "react-vite-v1",
-    ]);
-  });
+  it(
+    "registers the controlled deterministic templates",
+    () => {
+      expect(
+        BUILD_TEMPLATES_V1.map(
+          (template) =>
+            template.id,
+        ),
+      ).toEqual([
+        "commerce-storefront-v1",
+        "static-html-v1",
+        "react-vite-v1",
+      ]);
+    },
+  );
+
 
   it("keeps static projects dependency-free and React dependency locking explicit", () => {
     expect(getBuildTemplate("static-html-v1")?.dependencyLock).toBeNull();

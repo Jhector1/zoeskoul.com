@@ -1,3 +1,4 @@
+import { buildZoeBuildWebAuthenticateUrl } from "@/lib/webAuthHandoff";
 import {
   notFound,
   redirect,
@@ -13,6 +14,9 @@ import {
 import {
   createPrismaBuildProjectReader,
 } from "@/lib/build/readBuildProjects";
+import {
+  readLatestOwnedPublishedDeployment,
+} from "@/lib/build/publishedDeploymentStatus";
 import {
   prisma,
 } from "@zoeskoul/platform-server/prisma";
@@ -43,7 +47,10 @@ export default async function ZoeBuildWorkspacePage({
       `/${locale}/projects/${encodeURIComponent(buildProjectId)}`;
 
     redirect(
-      `/api/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`,
+      buildZoeBuildWebAuthenticateUrl({
+          callbackUrl,
+          locale,
+        }),
     );
   }
 
@@ -58,6 +65,18 @@ export default async function ZoeBuildWorkspacePage({
     });
 
   if (!project) notFound();
+
+  const initialDeployment =
+    await readLatestOwnedPublishedDeployment(
+      prisma,
+      {
+        ownerId:
+          access.userId,
+
+        buildProjectId:
+          project.buildProjectId,
+      },
+    );
 
   return (
     <ProjectBuilderShell
@@ -76,6 +95,7 @@ export default async function ZoeBuildWorkspacePage({
         language: project.language,
         workspace: project.workspace,
       }}
+      initialDeployment={initialDeployment}
     />
   );
 }

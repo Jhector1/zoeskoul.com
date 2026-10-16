@@ -26,6 +26,7 @@ import BinaryFileViewer from "@zoeskoul/learner-workspace/fullide/panes/BinaryFi
 import OutputSurface, {
     type OutputSurfaceModel,
 } from "@zoeskoul/learner-workspace/runner/components/OutputSurface";
+import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import { useSplitSizing } from "@zoeskoul/learner-workspace/runner/hooks/useSplitSizing";
 import ResizeSeparator from "../ui/ResizeSeparator";
 import { beginViewportResizeDrag } from "../ui/resizeDrag";
@@ -351,6 +352,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     stdinPlaceholder?: string;
     workspaceTerminal?: WorkspaceTerminalConfig;
     webPreviewEntries?: WorkspaceSyncEntry[];
+    remoteWebPreview?: RemoteWebPreviewDescriptor;
 
     /**
      * Stable selectors for browser tests.
@@ -656,6 +658,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showOpenTerminalButton = true,
         showRestartTerminalButton = true,
         fixedTerminalDock,
+        initialTerminalDock,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -681,6 +684,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         onChangeStdin,
         showStdinEditor = false,
         webPreviewEntries = [],
+        remoteWebPreview,
         sqlInitialTableSnapshots,
         sqlPaneOptions,
         runnerPaneOptions,
@@ -1376,7 +1380,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     };
 
     const [uDock, setUDock] = useState<TerminalDock>(
-        (props as any).initialTerminalDock ?? "bottom",
+        initialTerminalDock ?? "bottom",
     );
 
     const requestedDock: TerminalDock =
@@ -2632,6 +2636,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const outputModel: OutputSurfaceModel = useMemo(() => {
         if (isWeb) {
+            if (remoteWebPreview) {
+                return {
+                    kind: "remote-web-preview",
+                    preview: remoteWebPreview,
+                };
+            }
+
             return {
                 kind: "web-preview",
                 entries: webPreviewEntries,
@@ -2663,6 +2674,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [
         isWeb,
         webPreviewEntries,
+        remoteWebPreview,
         lang,
         term,
         sqlSchemaSql,

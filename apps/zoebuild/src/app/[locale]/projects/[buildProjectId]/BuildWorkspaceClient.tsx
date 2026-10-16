@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 
 import FullIDE from "@zoeskoul/learner-workspace/fullide/FullIDE";
 
@@ -26,8 +27,16 @@ type SaveState =
 
 export default function BuildWorkspaceClient({
   project,
+  onWorkspaceSnapshot,
+  onSourceVersionChange,
+  onDirtyChange,
+  remoteWebPreview,
 }: {
   project: BuildWorkspaceShellProject;
+  onWorkspaceSnapshot?: (workspace: WorkspaceStateV2) => void;
+  onSourceVersionChange?: (sourceVersion: number) => void;
+  onDirtyChange?: (dirty: boolean) => void;
+  remoteWebPreview?: RemoteWebPreviewDescriptor | null;
 }) {
   const latestWorkspaceRef = useRef<WorkspaceStateV2>(project.workspace);
   const editRevisionRef = useRef(0);
@@ -40,6 +49,14 @@ export default function BuildWorkspaceClient({
     message: null,
   });
 
+  useEffect(() => {
+    onSourceVersionChange?.(sourceVersion);
+  }, [onSourceVersionChange, sourceVersion]);
+
+  useEffect(() => {
+    onDirtyChange?.(dirty);
+  }, [dirty, onDirtyChange]);
+
   const handleWorkspaceChange = useCallback(
     (
       workspace: WorkspaceStateV2 | null,
@@ -48,11 +65,12 @@ export default function BuildWorkspaceClient({
       if (!workspace || meta?.origin !== "user") return;
 
       latestWorkspaceRef.current = workspace;
+      onWorkspaceSnapshot?.(workspace);
       editRevisionRef.current += 1;
       setDirty(true);
       setSaveState({ kind: "idle", message: null });
     },
-    [],
+    [onWorkspaceSnapshot],
   );
 
   const saveSource = useCallback(async () => {
@@ -66,7 +84,7 @@ export default function BuildWorkspaceClient({
 
     try {
       const response = await fetch(
-        `/api/projects/${encodeURIComponent(project.buildProjectId)}/source`,
+        `/api/build/projects/${encodeURIComponent(project.buildProjectId)}/source`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -140,100 +158,101 @@ export default function BuildWorkspaceClient({
   }, [dirty, project.buildProjectId, saveState.kind, sourceVersion]);
 
   return (
-    <div className="space-y-4">
-      <div className="ui-page-surface flex flex-wrap items-center justify-between gap-3 px-4 py-3">
-        <div>
-          <div className="text-sm font-semibold">{project.title}</div>
-          <div className="mt-0.5 text-xs text-[rgb(var(--ui-text-muted)/0.85)]">
-            {project.stackId ?? "Stack pending"} - source v{sourceVersion}
-          </div>
-        </div>
+    <div className="zb-code-workspace">
+      <div className="zb-code-savebar">
+        <span className="zb-code-savebar-status">
+          {dirty
+            ? `Unsaved changes · source v${sourceVersion}`
+            : `Source v${sourceVersion}`}
+        </span>
 
-        <div className="flex items-center gap-3">
-          <div className="rounded-full border border-[rgb(var(--ui-border)/0.8)] px-3 py-1 text-xs font-semibold capitalize">
-            {project.status.replaceAll("_", " ")}
-          </div>
-          <button
-            type="button"
-            onClick={() => void saveSource()}
-            disabled={!dirty || saveState.kind === "saving"}
-            className="rounded-lg border border-[rgb(var(--ui-border)/0.9)] px-3 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {saveState.kind === "saving" ? "Saving..." : dirty ? "Save source" : "Saved"}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => void saveSource()}
+          disabled={!dirty || saveState.kind === "saving"}
+          className="zb-code-savebar-button"
+        >
+          {saveState.kind === "saving"
+            ? "Saving..."
+            : dirty
+              ? "Save"
+              : "Saved"}
+        </button>
       </div>
 
-      <div className="rounded-xl border border-amber-300/70 bg-amber-50 px-4 py-3 text-sm text-amber-950 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-100">
-        Source editing and versioned saves are enabled. Run, terminal, AI
-        generation, package installation, and publishing remain disabled until
-        their dedicated Build boundaries are added.
-      </div>
 
       {saveState.message ? (
         <div
           role={saveState.kind === "error" ? "alert" : "status"}
-          className="ui-page-surface px-4 py-3 text-sm"
+          className="zb-code-save-message"
         >
           {saveState.message}
         </div>
       ) : null}
 
-      <FullIDE
-        title={project.title}
-        language={project.language}
-        access={{
-          hasUser: true,
-          canUseMultiFile: true,
-          canSaveCloud: false,
-          canCreateProjects: false,
-        }}
-        initialProjectId={null}
-        projectTitle={project.title}
-        projectDescription={project.description}
-        initialWorkspace={project.workspace}
-        onWorkspaceChange={handleWorkspaceChange}
-        draftStorageMode="off"
-        showTopLanguageButtons={false}
-        storageKey={`zoeskoul.build.${project.buildProjectId}.workspace`}
-        servicePreset="workspace"
-        services={{
-          chrome: {
-            showBackButton: false,
-            showLessonLink: false,
-            showTopLanguageButtons: false,
-          },
-          explorer: {
-            showActions: true,
-            showHistoryControls: false,
-            showFooter: false,
-            showStdin: false,
-            fileActions: {
-              enabled: true,
-              createFile: true,
-              createFolder: true,
-              rename: true,
-              delete: true,
-              dragDrop: true,
-            },
-          },
-          runner: {
-            allowRun: false,
-            showTerminal: false,
-            showTerminalDockToggle: false,
-            showOpenTerminalButton: false,
-            showRestartTerminalButton: false,
-            showSqlDialectPicker: false,
-            enableWorkspaceTerminal: false,
-          },
-          projects: {
-            showProjectSwitcher: false,
-            showCloudProjects: false,
-            showSaveControls: false,
-            showSaveAs: false,
-          },
-        }}
-      />
+      <div className="zb-code-fullide">
+        <FullIDE
+                title={project.title}
+                language={project.language}
+                access={{
+                  hasUser: true,
+                  canUseMultiFile: true,
+                  canSaveCloud: false,
+                  canCreateProjects: false,
+                }}
+                initialProjectId={null}
+                projectTitle={project.title}
+                projectDescription={project.description}
+                initialWorkspace={project.workspace}
+                onWorkspaceChange={handleWorkspaceChange}
+                remoteWebPreview={remoteWebPreview ?? undefined}
+                draftStorageMode="off"
+                fullHeight
+                showTopLanguageButtons={false}
+                storageKey={`zoeskoul.build.${project.buildProjectId}.workspace`}
+                servicePreset="workspace"
+                services={{
+                  chrome: {
+                    showHeader: false,
+                    showBackButton: false,
+                    showLessonLink: false,
+                    showActivePath: false,
+                    showStatus: false,
+                    showTopLanguageButtons: false
+                  },
+                  explorer: {
+                    showActions: true,
+                    showHistoryControls: false,
+                    showFooter: false,
+                    showStdin: false,
+                    fileActions: {
+                      enabled: true,
+                      createFile: true,
+                      createFolder: true,
+                      rename: true,
+                      delete: true,
+                      dragDrop: true,
+                    },
+                  },
+                  runner: {
+                    allowRun: false,
+                    showTerminal: true,
+                    showTerminalDockToggle: true,
+                    initialTerminalDock: "right",
+                    showOpenTerminalButton: false,
+                    showRestartTerminalButton: false,
+                    showSqlDialectPicker: false,
+                    enableWorkspaceTerminal: false,
+                  },
+                  projects: {
+                    showProjectSwitcher: false,
+                    showCloudProjects: false,
+                    showSaveControls: false,
+                    showSaveAs: false,
+                  },
+                }}
+              />
+      </div>
     </div>
   );
 }

@@ -49,6 +49,31 @@ function buildBootstrapProfile(): SandboxProfile {
   };
 }
 
+function productionBuildProfile(): SandboxProfile {
+  const base =
+    learningProfile();
+
+  return {
+    ...base,
+    id:
+      "build-production-react-vite-v1",
+
+    // Dependency installation needs registry access. The request cannot select
+    // or override this policy.
+    networkMode:
+      "bridge",
+
+    memoryBytes:
+      env.buildMemoryLimitBytes,
+
+    cpuQuota:
+      env.buildCpuQuota,
+
+    pidsLimit:
+      env.buildPidsLimit,
+  };
+}
+
 /**
  * Central runtime-policy boundary. Build execution intentionally fails closed
  * until a dedicated build profile is configured and validated; it must never
@@ -57,5 +82,9 @@ function buildBootstrapProfile(): SandboxProfile {
 export function resolveSandboxProfile(purpose: SandboxPurpose): SandboxProfile {
   if (purpose === "learn") return learningProfile();
   if (purpose === "build-bootstrap") return buildBootstrapProfile();
-  throw new Error("Build sandbox profile is not configured.");
+  if (purpose === "build") return productionBuildProfile();
+
+  throw new Error(
+    "Sandbox profile is not configured.",
+  );
 }

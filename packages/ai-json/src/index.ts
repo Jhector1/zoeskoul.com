@@ -30,6 +30,9 @@ export type AiJsonRequest = Readonly<{
   system: string;
   user: string;
   schemaName: string;
+  responseJsonSchema?: Readonly<
+    Record<string, unknown>
+  >;
   media?: readonly AiJsonMediaInput[];
 }>;
 
@@ -151,3 +154,8 @@ export {
   createDeepSeekAiJsonTransport,
   type DeepSeekAiJsonTransportOptions,
 } from "./deepseek";
+
+export {
+  createOpenAiJsonTransport,
+  type OpenAiAiJsonTransportOptions,
+} from "./openai";

@@ -7,6 +7,7 @@ import {
   BUILD_EXECUTOR_PROTOCOL_VERSION,
   type DependencyLockBootstrapJobRequestV1,
   type DependencyLockBootstrapExecutionResponseV1,
+  type ProductionBuildJobRequestV1,
 } from "@zoeskoul/build-executor-contracts";
 import { requireBuildStack } from "@zoeskoul/build-registry";
 import {
@@ -548,6 +549,235 @@ export function createRegisteredDependencyLockBootstrapJob(
   };
 }
 
+export type CreateProductionBuildJobInput = Readonly<{
+  buildProjectId: string;
+  specification: ProjectSpecification;
+  workspace: WorkspaceStateV2;
+  sourceVersion: number;
+}>;
+
+export function createRegisteredProductionBuildJob(
+  input: CreateProductionBuildJobInput,
+): ProductionBuildJobRequestV1 {
+  const buildProjectId =
+    typeof input.buildProjectId === "string"
+      ? input.buildProjectId.trim()
+      : "";
+
+  if (!buildProjectId) {
+    throw new BuildPreparationError(
+      "BUILD_PREPARATION_INVALID",
+      "ZoeBuild production build requires a BuildProject id.",
+    );
+  }
+
+  const plan =
+    prepareRegisteredBuildArtifactPlan({
+      specification:
+        input.specification,
+      workspace:
+        input.workspace,
+      sourceVersion:
+        input.sourceVersion,
+    });
+
+  if (
+    !plan.buildReady ||
+    plan.stackId !==
+      "react-vite-v1" ||
+    plan.templateId !==
+      "react-vite-v1" ||
+    plan.dependencyLock.state !==
+      "present" ||
+    plan.dependencyLock.manager !==
+      "pnpm" ||
+    plan.dependencyLock.path !==
+      "pnpm-lock.yaml" ||
+    !plan.dependencyLock
+      .installCommand ||
+    plan.dependencyLock
+      .installCommand.length !==
+      3 ||
+    plan.dependencyLock
+      .installCommand[0] !==
+      "pnpm" ||
+    plan.dependencyLock
+      .installCommand[1] !==
+      "install" ||
+    plan.dependencyLock
+      .installCommand[2] !==
+      "--frozen-lockfile" ||
+    plan.buildCommand.length !==
+      2 ||
+    plan.buildCommand[0] !==
+      "pnpm" ||
+    plan.buildCommand[1] !==
+      "build" ||
+    plan.artifact.type !==
+      "static-directory" ||
+    plan.artifact.outputPath !==
+      "dist"
+  ) {
+    throw new BuildPreparationError(
+      "BUILD_PREPARATION_INVALID",
+      "This source version is not registered for trusted React production build execution.",
+    );
+  }
+
+  const files = [
+    ...workspaceTextFiles(
+      input.workspace,
+    ),
+  ]
+    .map(
+      ([path, content]) => ({
+        path,
+        content,
+      }),
+    )
+    .sort(
+      (a, b) =>
+        a.path.localeCompare(
+          b.path,
+        ),
+    );
+
+  return {
+    protocolVersion:
+      BUILD_EXECUTOR_PROTOCOL_VERSION,
+    operation:
+      "production-build",
+    buildProjectId,
+    sourceVersion:
+      plan.sourceVersion,
+    stackId:
+      plan.stackId,
+    templateId:
+      plan.templateId,
+    files,
+  };
+}
+
+export type ProductionBuildFile = Readonly<{
+  path: string;
+  content: string;
+}>;
+
+/**
+ * Runner-side defense-in-depth policy.
+ *
+ * The runner receives source files but does not trust the caller to choose
+ * dependency behavior, commands, output directories, or stack bindings.
+ */
+export function assertRegisteredProductionBuildFiles(
+  input: Readonly<{
+    stackId: string;
+    templateId: string;
+    files:
+      readonly ProductionBuildFile[];
+  }>,
+): void {
+  const stack =
+    requireBuildStack(
+      input.stackId,
+    );
+
+  const template =
+    requireBuildTemplate(
+      input.templateId,
+    );
+
+  if (
+    stack.id !==
+      "react-vite-v1" ||
+    template.id !==
+      "react-vite-v1" ||
+    stack.templateId !==
+      template.id ||
+    !template.stackIds.includes(
+      stack.id,
+    )
+  ) {
+    throw new BuildPreparationError(
+      "BUILD_PREPARATION_INVALID",
+      "Trusted production build is not registered for this stack/template.",
+    );
+  }
+
+  if (
+    stack.commands.install
+      ?.length !== 3 ||
+    stack.commands.install[0] !==
+      "pnpm" ||
+    stack.commands.install[1] !==
+      "install" ||
+    stack.commands.install[2] !==
+      "--frozen-lockfile" ||
+    stack.commands.build.length !==
+      2 ||
+    stack.commands.build[0] !==
+      "pnpm" ||
+    stack.commands.build[1] !==
+      "build" ||
+    stack.artifact?.type !==
+      "static-directory" ||
+    stack.artifact.outputPath !==
+      "dist"
+  ) {
+    throw new BuildPreparationError(
+      "BUILD_PREPARATION_INVALID",
+      "Registered React production build contract is invalid.",
+    );
+  }
+
+  const files =
+    new Map<
+      string,
+      string
+    >();
+
+  for (
+    const file of
+    input.files
+  ) {
+    if (
+      files.has(
+        file.path,
+      )
+    ) {
+      throw new BuildPreparationError(
+        "BUILD_PREPARATION_INVALID",
+        `Duplicate production-build file path: ${file.path}.`,
+      );
+    }
+
+    files.set(
+      file.path,
+      file.content,
+    );
+  }
+
+  const lockfile =
+    files.get(
+      "pnpm-lock.yaml",
+    );
+
+  if (
+    !lockfile ||
+    !lockfile.trim()
+  ) {
+    throw new BuildPreparationError(
+      "BUILD_DEPENDENCY_LOCK_INVALID",
+      "Trusted production build requires a non-empty pnpm-lock.yaml.",
+    );
+  }
+
+  assertTrustedDependencyManifest({
+    template,
+    files,
+  });
+}
+
 export type DependencyBootstrapFile = Readonly<{
   path: string;
   content: string;
@@ -705,5 +935,110 @@ export function applyDependencyLockBootstrapExecution(input: Readonly<{
         updatedAt: input.now,
       },
     ],
+  };
+}
+
+
+export type RegisteredReactPreviewServerPlan =
+  Readonly<{
+    stackId: "react-vite-v1";
+    templateId: "react-vite-v1";
+    installCommand:
+      readonly [
+        "pnpm",
+        "install",
+        "--frozen-lockfile",
+      ];
+    devCommand:
+      readonly string[];
+    port: 5173;
+  }>;
+
+/**
+ * Deterministic React/Vite development-preview contract.
+ * Commands and port are registry-owned; callers provide identity only.
+ */
+export function resolveRegisteredReactPreviewServerPlan(
+  input: Readonly<{
+    stackId: string;
+    templateId: string;
+  }>,
+): RegisteredReactPreviewServerPlan {
+  const stack =
+    requireBuildStack(
+      input.stackId,
+    );
+
+  const template =
+    requireBuildTemplate(
+      stack.templateId,
+    );
+
+  if (
+    stack.id !==
+      "react-vite-v1" ||
+    input.templateId !==
+      "react-vite-v1" ||
+    stack.templateId !==
+      "react-vite-v1" ||
+    !template.stackIds.includes(
+      "react-vite-v1",
+    ) ||
+    stack.preview.type !==
+      "server" ||
+    stack.preview.port !==
+      5173
+  ) {
+    throw new BuildPreparationError(
+      "BUILD_PREPARATION_INVALID",
+      "Trusted live preview is only registered for react-vite-v1.",
+    );
+  }
+
+  const install =
+    stack.commands.install;
+
+  const dev =
+    stack.commands.dev;
+
+  if (
+    !install ||
+    install.length !== 3 ||
+    install[0] !== "pnpm" ||
+    install[1] !== "install" ||
+    install[2] !==
+      "--frozen-lockfile" ||
+    !dev ||
+    dev.length !== 4 ||
+    dev[0] !== "pnpm" ||
+    dev[1] !== "dev" ||
+    dev[2] !== "--host" ||
+    dev[3] !== "0.0.0.0"
+  ) {
+    throw new BuildPreparationError(
+      "BUILD_PREPARATION_INVALID",
+      "Registered React preview commands are not trusted.",
+    );
+  }
+
+  return {
+    stackId:
+      "react-vite-v1",
+
+    templateId:
+      "react-vite-v1",
+
+    installCommand: [
+      "pnpm",
+      "install",
+      "--frozen-lockfile",
+    ],
+
+    devCommand: [
+      ...dev,
+    ],
+
+    port:
+      5173,
   };
 }

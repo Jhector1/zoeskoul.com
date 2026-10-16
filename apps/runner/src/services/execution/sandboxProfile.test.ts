@@ -24,9 +24,54 @@ describe("sandbox profile", () => {
     expect(profile.pidsLimit).toBeLessThanOrEqual(96);
   });
 
-  it("fails closed for build execution until its profile exists", () => {
-    expect(() => resolveSandboxProfile("build")).toThrow(
-      "Build sandbox profile is not configured.",
+  it("provides a dedicated hardened production-build profile", () => {
+    const profile =
+      resolveSandboxProfile("build");
+
+    expect(
+      profile.id,
+    ).toBe(
+      "build-production-react-vite-v1",
     );
+
+    expect(
+      profile.networkMode,
+    ).toBe(
+      "bridge",
+    );
+
+    expect(
+      profile.readonlyRootfs,
+    ).toBe(true);
+
+    expect(
+      profile.capDrop,
+    ).toEqual([
+      "ALL",
+    ]);
+
+    expect(
+      profile.securityOpt,
+    ).toEqual([
+      "no-new-privileges:true",
+    ]);
+
+    expect(
+      profile.user,
+    ).not.toBe(
+      "0:0",
+    );
+
+    expect(
+      profile.memoryBytes,
+    ).toBeGreaterThan(0);
+
+    expect(
+      profile.cpuQuota,
+    ).toBeGreaterThan(0);
+
+    expect(
+      profile.pidsLimit,
+    ).toBeGreaterThan(0);
   });
 });

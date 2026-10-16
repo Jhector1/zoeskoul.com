@@ -60,6 +60,12 @@ const envSchema = z.object({
   RUNNER_CPU_QUOTA: intEnv(50000),
   RUNNER_PIDS_LIMIT: intEnv(128),
 
+  // Trusted non-interactive production-build sandbox.
+  RUNNER_BUILD_MEMORY_LIMIT_MB: intEnv(384),
+  RUNNER_BUILD_CPU_QUOTA: intEnv(100000),
+  RUNNER_BUILD_PIDS_LIMIT: intEnv(96),
+  RUNNER_BUILD_STEP_TIMEOUT_MS: intEnv(180000),
+
   // Keep enough host headroom for Docker/containerd metadata, logs, and a
   // production deploy. The percentage guard prevents a larger disk from
   // silently using nearly all of its capacity before the byte floor trips.
@@ -123,6 +129,15 @@ export const env = {
   memoryLimitBytes: parsed.RUNNER_MEMORY_LIMIT_MB * 1024 * 1024,
   cpuQuota: parsed.RUNNER_CPU_QUOTA,
   pidsLimit: parsed.RUNNER_PIDS_LIMIT,
+
+  buildMemoryLimitBytes:
+    parsed.RUNNER_BUILD_MEMORY_LIMIT_MB * 1024 * 1024,
+  buildCpuQuota:
+    parsed.RUNNER_BUILD_CPU_QUOTA,
+  buildPidsLimit:
+    parsed.RUNNER_BUILD_PIDS_LIMIT,
+  buildStepTimeoutMs:
+    parsed.RUNNER_BUILD_STEP_TIMEOUT_MS,
 
   minFreeBytes: parsed.RUNNER_MIN_FREE_BYTES,
   minFreePercent: parsed.RUNNER_MIN_FREE_PERCENT,

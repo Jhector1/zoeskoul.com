@@ -77,6 +77,7 @@ type FullIDEInnerProps = {
     services: FullIDEServices;
     onBeforeRun?: FullIDEProps["onBeforeRun"];
     onRunResult?: FullIDEProps["onRunResult"];
+    remoteWebPreview?: FullIDEProps["remoteWebPreview"];
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;
     workspaceReplacementRevision?: string | number;
@@ -197,6 +198,7 @@ function FullIDEInner({
                           services,
                           onBeforeRun,
                           onRunResult,
+                          remoteWebPreview,
                           forceDesktopLayout,
                           sqlDatasetId,
                           sqlResultShape,
@@ -729,6 +731,7 @@ function FullIDEInner({
             onChangeSqlDialect={setSqlDialect}
             onBeforeRun={onBeforeRun}
             onRunResult={onRunResult}
+            remoteWebPreview={remoteWebPreview}
             onRun={runner.onRunProject}
             setActiveFileId={handleSelectWorkspaceTab}
             workspaceFileSelectionVersion={workspaceFileSelectionVersion}
@@ -1028,6 +1031,7 @@ export default function FullIDE(props: FullIDEProps) {
         onTerminalSyncReady,
         onBeforeRun,
         onRunResult,
+        remoteWebPreview,
         initialSqlDialect = DEFAULT_SQL_DIALECT,
         forceDesktopLayout = false,
         sqlDatasetId,
@@ -1459,6 +1463,7 @@ export default function FullIDE(props: FullIDEProps) {
                 services={services}
                 onBeforeRun={onBeforeRun}
                 onRunResult={onRunResult}
+                remoteWebPreview={remoteWebPreview}
                 forceDesktopLayout={forceDesktopLayout}
                 sqlDatasetId={sqlDatasetId}
                 sqlResultShape={sqlResultShape}

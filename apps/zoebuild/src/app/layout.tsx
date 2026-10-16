@@ -52,6 +52,7 @@ export default async function RootLayout({
 
   const {
     websiteOrigin,
+    zoebuildOrigin,
   } = resolveZoeBuildOrigins();
 
   return (
@@ -66,7 +67,10 @@ export default async function RootLayout({
             initialPreferences
           }
         >
-          <ZoeBuildHeader />
+          <ZoeBuildHeader
+            websiteOrigin={websiteOrigin}
+            zoebuildOrigin={zoebuildOrigin}
+          />
           {children}
         </Providers>
       </body>

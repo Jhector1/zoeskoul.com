@@ -486,3 +486,128 @@ export async function saveBuildProjectSourceCommand(input: Readonly<{
     clientDraftUpdatedAt: input.clientDraftUpdatedAt?.trim() || null,
   });
 }
+
+/**
+ * Explicit application of an already-created ZoeBuild plan.
+ *
+ * Planning remains read-only. Applying is a separate owner-authorized mutation
+ * with optimistic concurrency.
+ */
+export type BuildPlanApplyPersistenceInput = Readonly<{
+  ownerId: string;
+  buildProjectId: string;
+  baseVersion: number;
+  specification: BuildProjectSpecification;
+  workspace: WorkspaceStateV2;
+  entryPath: string;
+  activePath: string;
+  stackId: string;
+  templateId: string;
+  dependencyLock: BuildDependencyLockPolicy | null;
+}>;
+
+export type BuildPlanApplyPersistenceResult = Readonly<{
+  sourceVersion: number;
+  changed: boolean;
+  workspaceChanged: boolean;
+  updatedAt: string;
+}>;
+
+export interface BuildPlanApplyWritePort {
+  applyOwnedBuildProjectPlan(
+    input: BuildPlanApplyPersistenceInput,
+  ): Promise<BuildPlanApplyPersistenceResult | null>;
+}
+
+export async function applyBuildProjectPlanCommand(
+  input: Readonly<{
+    access: BuildAccessSnapshot;
+    buildProjectId: string;
+    baseVersion: number;
+    specification: BuildProjectSpecification;
+    writer: BuildPlanApplyWritePort;
+    createdAt: number;
+  }>,
+): Promise<BuildPlanApplyPersistenceResult | null> {
+  const ownerId =
+    assertAuthenticatedBuildUser(
+      input.access,
+    );
+
+  const buildProjectId =
+    typeof input.buildProjectId === "string"
+      ? input.buildProjectId.trim()
+      : "";
+
+  if (!buildProjectId) {
+    throw new BuildSourceInputError(
+      "ZoeBuild project id is required.",
+    );
+  }
+
+  if (
+    !Number.isInteger(
+      input.baseVersion,
+    ) ||
+    input.baseVersion < 1
+  ) {
+    throw new BuildSourceInputError(
+      "ZoeBuild plan baseVersion must be a positive integer.",
+    );
+  }
+
+  let materialized:
+    ReturnType<
+      typeof materializeRegisteredBuildProject
+    >;
+
+  try {
+    materialized =
+      materializeRegisteredBuildProject({
+        specification:
+          input.specification,
+
+        createdAt:
+          input.createdAt,
+      });
+  } catch (error) {
+    const detail =
+      error instanceof Error
+        ? error.message
+        : "Unknown project definition error.";
+
+    throw new BuildProjectDefinitionError(
+      `Unsupported ZoeBuild project definition: ${detail}`,
+    );
+  }
+
+  return input.writer
+    .applyOwnedBuildProjectPlan({
+      ownerId,
+      buildProjectId,
+
+      baseVersion:
+        input.baseVersion,
+
+      specification:
+        input.specification,
+
+      workspace:
+        materialized.workspace,
+
+      entryPath:
+        materialized.entryPath,
+
+      activePath:
+        materialized.activePath,
+
+      stackId:
+        materialized.stackId,
+
+      templateId:
+        materialized.templateId,
+
+      dependencyLock:
+        materialized.dependencyLock,
+    });
+}

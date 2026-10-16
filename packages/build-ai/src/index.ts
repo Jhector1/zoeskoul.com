@@ -1,12 +1,15 @@
 import {
+  BUILD_DESIGN_JSON_SCHEMA,
   BuildSpecificationError,
   parseProjectSpecification,
+  PROJECT_SPECIFICATION_JSON_SCHEMA,
   type ProjectSpecification,
 } from "@zoeskoul/build-contracts";
 import {
   evaluateProjectStack,
 } from "@zoeskoul/build-core";
 import {
+  listBuildStacks,
   requireBuildStack,
 } from "@zoeskoul/build-registry";
 
@@ -190,6 +193,63 @@ import {
 export const BUILD_PROJECT_SPECIFICATION_SCHEMA_NAME =
   "ProjectSpecification" as const;
 
+const BUILD_AI_REGISTERED_STACKS =
+  listBuildStacks();
+
+export const BUILD_AI_REGISTERED_STACK_IDS =
+  BUILD_AI_REGISTERED_STACKS.map(
+    (stack) => stack.id,
+  );
+
+export const BUILD_AI_PROJECT_SPECIFICATION_JSON_SCHEMA = {
+  ...PROJECT_SPECIFICATION_JSON_SCHEMA,
+
+  properties: {
+    ...PROJECT_SPECIFICATION_JSON_SCHEMA.properties,
+
+    stackId: {
+      ...PROJECT_SPECIFICATION_JSON_SCHEMA.properties.stackId,
+
+      enum: [
+        ...BUILD_AI_REGISTERED_STACK_IDS,
+      ],
+    },
+
+    design: {
+      anyOf: [
+        BUILD_DESIGN_JSON_SCHEMA,
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+
+  // Structured-output providers require object properties to be explicit.
+  // Trusted non-AI callers may continue omitting design.
+  required: [
+    ...PROJECT_SPECIFICATION_JSON_SCHEMA.required,
+    "design",
+  ],
+} as const;
+
+const BUILD_AI_REGISTERED_STACK_GUIDANCE =
+  BUILD_AI_REGISTERED_STACKS
+    .map((stack) => {
+      const capabilities =
+        stack.supportedCapabilities.length > 0
+          ? stack.supportedCapabilities.join(",")
+          : "none";
+
+      return [
+        stack.id,
+        `projectTypes=${stack.projectTypes.join(",")}`,
+        `targets=${stack.targets.join(",")}`,
+        `capabilities=${capabilities}`,
+      ].join(" ");
+    })
+    .join(" | ");
+
 export const BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT = [
   "You are the planning engine for ZoeBuild.",
   "Return exactly one JSON object and no prose.",
@@ -198,11 +258,14 @@ export const BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT = [
   'Allowed targets: "web", "ios", "android".',
   "requirements must contain booleans for backend, database, auth, storage, payments, email, and commerce.",
   "pages must be an array of concise page names.",
-  'Use stackId "static-html-v1" for simple static sites.',
-  'Use stackId "react-vite-v1" for interactive frontend web apps.',
+  `Registered stacks: ${BUILD_AI_REGISTERED_STACK_GUIDANCE}.`,
+  "Select stackId only from the registered stacks above.",
   'Allowed deployment.preference values: "static", "managed-runtime", "mobile-cloud".',
   "Do not invent stack identifiers.",
   "Uploaded images, video, and voice/audio are context for understanding what the user wants to build.",
+  "design is presentation-only structured data: palette, layout choices, and bounded user-facing copy.",
+  "Never put HTML, CSS, JavaScript, executable code, commerce mechanics, authentication logic, provider configuration, or credentials inside design.",
+  "For user-facing sites, provide a compact design object when the user supplied enough visual or brand direction; otherwise use design: null.",
   "Do not include source code, secrets, access tokens, provider credentials, or deployment credentials.",
 ].join("\n");
 
@@ -220,6 +283,8 @@ export function createBuildAiPlannerFromJsonTransport(
           user: input.prompt,
           schemaName:
             BUILD_PROJECT_SPECIFICATION_SCHEMA_NAME,
+            responseJsonSchema:
+              BUILD_AI_PROJECT_SPECIFICATION_JSON_SCHEMA,
           media:
             input.media,
         });
