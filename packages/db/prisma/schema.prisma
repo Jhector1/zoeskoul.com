@@ -161,6 +161,8 @@ model CommerceStore {
   orders          CommerceOrder[]
 
   @@index([status, updatedAt])
+  providerConnections CommerceProviderConnection[]
+  providerRoutes      CommerceProviderRoute[]
 }
 
 model CommerceProduct {
@@ -309,6 +311,43 @@ model CommerceOrderItem {
 
   @@index([orderId])
   @@index([variantId])
+}
+
+model CommerceProviderConnection {
+  id                   String                           @id @default(cuid())
+  storeId              String
+  provider             String
+  environment          CommerceProviderEnvironment
+  status               CommerceProviderConnectionStatus @default(disconnected)
+  externalAccountRef   String?
+  credentialsSecretRef String?
+  webhookSecretRef     String?
+  config               Json?
+  createdAt            DateTime                         @default(now())
+  updatedAt            DateTime                         @updatedAt
+  store                CommerceStore                    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  routes               CommerceProviderRoute[]
+
+  @@unique([storeId, provider, environment])
+  @@index([storeId, environment, status])
+  @@index([provider, environment, externalAccountRef])
+}
+
+model CommerceProviderRoute {
+  id           String                     @id @default(cuid())
+  storeId      String
+  environment  CommerceProviderEnvironment
+  capability   CommerceProviderCapability
+  provider     String
+  connectionId String?
+  createdAt    DateTime                   @default(now())
+  updatedAt    DateTime                   @updatedAt
+  store        CommerceStore              @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  connection   CommerceProviderConnection? @relation(fields: [connectionId], references: [id], onDelete: SetNull)
+
+  @@unique([storeId, environment, capability])
+  @@index([provider, environment, capability])
+  @@index([connectionId])
 }
 
 model BuildRun {
@@ -1895,6 +1934,27 @@ enum CommercePaymentStatus {
   partially_refunded
   refunded
 }
+
+enum CommerceProviderEnvironment {
+  test
+  live
+}
+
+enum CommerceProviderConnectionStatus {
+  disconnected
+  active
+  error
+}
+
+enum CommerceProviderCapability {
+  catalog
+  inventory
+  cart
+  orders
+  checkout
+  payments
+}
+
 
 enum BuildProjectStatus {
   draft
