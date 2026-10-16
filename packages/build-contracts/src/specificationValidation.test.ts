@@ -41,6 +41,54 @@ describe("ProjectSpecification runtime validation", () => {
     });
   });
 
+  it("requires a commerce plan for commerce projects", () => {
+    expect(() =>
+      parseProjectSpecification({
+        ...validSpecification(),
+        requirements: {
+          ...requirements,
+          payments: true,
+          commerce: true,
+        },
+        projectType: "frontend-app",
+        stackId: "commerce-storefront-v1",
+      }),
+    ).toThrow(BuildSpecificationError);
+
+    const parsed =
+      parseProjectSpecification({
+        ...validSpecification(),
+        requirements: {
+          ...requirements,
+          payments: true,
+          commerce: true,
+        },
+        projectType: "frontend-app",
+        stackId: "commerce-storefront-v1",
+        commerce: {
+          provider: "zoebuild-native",
+          storefrontRuntime: "static",
+        },
+      });
+
+    expect(parsed.commerce).toEqual({
+      provider: "zoebuild-native",
+      storefrontRuntime: "static",
+    });
+  });
+
+  it("rejects commerce plans on non-commerce projects", () => {
+    expect(() =>
+      parseProjectSpecification({
+        ...validSpecification(),
+        commerce: {
+          provider: "shopify",
+          storefrontRuntime: "static",
+        },
+      }),
+    ).toThrow(BuildSpecificationError);
+  });
+
   it("rejects unknown versions, targets, and non-boolean requirements", () => {
     expect(() =>
       parseProjectSpecification({

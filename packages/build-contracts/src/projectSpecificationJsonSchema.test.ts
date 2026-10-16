@@ -6,8 +6,11 @@ import {
 
 import {
   BUILD_CAPABILITIES,
+  BUILD_COMMERCE_JSON_SCHEMA,
+  BUILD_COMMERCE_PROVIDERS,
   BUILD_DEPLOYMENT_PREFERENCES,
   BUILD_PROJECT_TYPES,
+  BUILD_STOREFRONT_RUNTIMES,
   BUILD_SPEC_LIMITS,
   BUILD_SPEC_VERSION,
   BUILD_TARGETS,
@@ -60,6 +63,31 @@ describe("ProjectSpecification JSON Schema ownership", () => {
       schema.properties.deployment.properties
         .preference.enum,
     ).toEqual([...BUILD_DEPLOYMENT_PREFERENCES]);
+
+    expect(
+      schema.properties.commerce,
+    ).toEqual({
+      anyOf: [
+        BUILD_COMMERCE_JSON_SCHEMA,
+        {
+          type: "null",
+        },
+      ],
+    });
+
+    expect(
+      BUILD_COMMERCE_JSON_SCHEMA
+        .properties.provider.enum,
+    ).toEqual([
+      ...BUILD_COMMERCE_PROVIDERS,
+    ]);
+
+    expect(
+      BUILD_COMMERCE_JSON_SCHEMA
+        .properties.storefrontRuntime.enum,
+    ).toEqual([
+      ...BUILD_STOREFRONT_RUNTIMES,
+    ]);
 
     expect(schema.required).toEqual([
       "version",

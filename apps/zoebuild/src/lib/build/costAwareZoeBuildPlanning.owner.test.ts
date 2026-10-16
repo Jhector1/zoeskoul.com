@@ -56,6 +56,12 @@ describe(
         expect(
           owner,
         ).toContain(
+          "profile.commerce",
+        );
+
+        expect(
+          owner,
+        ).toContain(
           "profile.stackId",
         );
 

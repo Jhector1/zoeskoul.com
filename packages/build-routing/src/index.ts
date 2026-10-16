@@ -1,4 +1,5 @@
 import type {
+  BuildCommerceSpecification,
   BuildDeploymentPreference,
   BuildProjectType,
   BuildRequirements,
@@ -59,6 +60,7 @@ export type BuildRequestProfile =
     industry: string | null;
     complexity: BuildComplexity;
     commerceMode: BuildCommerceMode;
+    commerce: BuildCommerceSpecification | null;
 
     projectType: BuildProjectType;
     targets: readonly BuildTarget[];
@@ -328,13 +330,22 @@ function industryFor(
 }
 
 function profile(
-  input: Omit<
-    BuildRequestProfile,
-    "targets"
-  >,
+  input:
+    Omit<
+      BuildRequestProfile,
+      "targets" | "commerce"
+    > &
+    Readonly<{
+      commerce?:
+        BuildCommerceSpecification |
+        null;
+    }>,
 ): BuildRequestProfile {
   return {
     ...input,
+    commerce:
+      input.commerce ??
+      null,
     targets: ["web"],
   };
 }
@@ -359,6 +370,12 @@ export function classifyBuildRequest(
       complexity: "complex",
       commerceMode:
         "marketplace",
+      commerce: {
+        provider:
+          "zoebuild-native",
+        storefrontRuntime:
+          "react-vite",
+      },
       projectType:
         "fullstack-app",
       requirements:
@@ -435,6 +452,13 @@ export function classifyBuildRequest(
         commerceMode:
           "cart-checkout",
 
+        commerce: {
+          provider:
+            "zoebuild-native",
+          storefrontRuntime:
+            "react-vite",
+        },
+
         projectType:
           "frontend-app",
 
@@ -488,6 +512,13 @@ export function classifyBuildRequest(
 
       commerceMode:
         "cart-checkout",
+
+      commerce: {
+        provider:
+          "zoebuild-native",
+        storefrontRuntime:
+          "static",
+      },
 
       projectType:
         "frontend-app",

@@ -1,4 +1,5 @@
 import {
+  BUILD_COMMERCE_JSON_SCHEMA,
   BUILD_DESIGN_JSON_SCHEMA,
   BuildSpecificationError,
   parseProjectSpecification,
@@ -215,6 +216,15 @@ export const BUILD_AI_PROJECT_SPECIFICATION_JSON_SCHEMA = {
       ],
     },
 
+    commerce: {
+      anyOf: [
+        BUILD_COMMERCE_JSON_SCHEMA,
+        {
+          type: "null",
+        },
+      ],
+    },
+
     design: {
       anyOf: [
         BUILD_DESIGN_JSON_SCHEMA,
@@ -229,6 +239,7 @@ export const BUILD_AI_PROJECT_SPECIFICATION_JSON_SCHEMA = {
   // Trusted non-AI callers may continue omitting design.
   required: [
     ...PROJECT_SPECIFICATION_JSON_SCHEMA.required,
+    "commerce",
     "design",
   ],
 } as const;
@@ -257,6 +268,8 @@ export const BUILD_AI_PROJECT_SPECIFICATION_SYSTEM_PROMPT = [
   'Allowed projectType values: "static-site", "frontend-app", "fullstack-app", "mobile-app".',
   'Allowed targets: "web", "ios", "android".',
   "requirements must contain booleans for backend, database, auth, storage, payments, email, and commerce.",
+  'commerce must be null for non-commerce work or a bounded object with provider "zoebuild-native" or "shopify" and storefrontRuntime "static" or "react-vite".',
+  "Commerce provider/runtime are architecture metadata and deterministic ZoeBuild planning owns the final values.",
   "pages must be an array of concise page names.",
   `Registered stacks: ${BUILD_AI_REGISTERED_STACK_GUIDANCE}.`,
   "Select stackId only from the registered stacks above.",

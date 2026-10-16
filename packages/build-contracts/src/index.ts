@@ -49,6 +49,46 @@ export const BUILD_DEPLOYMENT_PREFERENCES = [
 export type BuildDeploymentPreference =
   (typeof BUILD_DEPLOYMENT_PREFERENCES)[number];
 
+export const BUILD_COMMERCE_PROVIDERS = [
+  "zoebuild-native",
+  "shopify",
+] as const;
+
+export type BuildCommerceProvider =
+  (typeof BUILD_COMMERCE_PROVIDERS)[number];
+
+export const BUILD_STOREFRONT_RUNTIMES = [
+  "static",
+  "react-vite",
+] as const;
+
+export type BuildStorefrontRuntime =
+  (typeof BUILD_STOREFRONT_RUNTIMES)[number];
+
+export type BuildCommerceSpecification = Readonly<{
+  provider: BuildCommerceProvider;
+  storefrontRuntime: BuildStorefrontRuntime;
+}>;
+
+export const BUILD_COMMERCE_JSON_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    provider: {
+      type: "string",
+      enum: [...BUILD_COMMERCE_PROVIDERS],
+    },
+    storefrontRuntime: {
+      type: "string",
+      enum: [...BUILD_STOREFRONT_RUNTIMES],
+    },
+  },
+  required: [
+    "provider",
+    "storefrontRuntime",
+  ],
+} as const;
+
 
 /**
  * Presentation-only design contract for ZoeBuild.
@@ -345,6 +385,13 @@ export type ProjectSpecificationV1 = Readonly<{
   requirements: BuildRequirements;
   pages: readonly string[];
   stackId: string;
+
+  /**
+   * Required whenever requirements.commerce is true.
+   * Non-commerce projects may omit it or use null.
+   */
+  commerce?: BuildCommerceSpecification | null;
+
   design?: BuildDesignSpecification | null;
 
   deployment: Readonly<{
@@ -478,6 +525,14 @@ const PROJECT_SPECIFICATION_BASE_JSON_SCHEMA = {
     },
     stackId: {
       type: "string",
+    },
+    commerce: {
+      anyOf: [
+        BUILD_COMMERCE_JSON_SCHEMA,
+        {
+          type: "null",
+        },
+      ],
     },
     deployment: {
       type: "object",
@@ -659,6 +714,94 @@ export function parseProjectSpecification(value: unknown): ProjectSpecification 
     issues,
   );
 
+  const commerceProvided =
+    Object.prototype.hasOwnProperty.call(
+      input,
+      "commerce",
+    );
+
+  let commerce:
+    BuildCommerceSpecification |
+    null |
+    undefined;
+
+  if (commerceProvided) {
+    if (input.commerce === null) {
+      commerce = null;
+    } else {
+      const commerceInput =
+        asBuildRecord(
+          input.commerce,
+        );
+
+      if (!commerceInput) {
+        issues.push(
+          "Commerce specification must be an object or null.",
+        );
+      } else {
+        const provider =
+          typeof commerceInput.provider === "string" &&
+          (
+            BUILD_COMMERCE_PROVIDERS as readonly string[]
+          ).includes(
+            commerceInput.provider,
+          )
+            ? commerceInput.provider as BuildCommerceProvider
+            : null;
+
+        const storefrontRuntime =
+          typeof commerceInput.storefrontRuntime === "string" &&
+          (
+            BUILD_STOREFRONT_RUNTIMES as readonly string[]
+          ).includes(
+            commerceInput.storefrontRuntime,
+          )
+            ? commerceInput.storefrontRuntime as BuildStorefrontRuntime
+            : null;
+
+        if (!provider) {
+          issues.push(
+            "Commerce provider is not supported.",
+          );
+        }
+
+        if (!storefrontRuntime) {
+          issues.push(
+            "Storefront runtime is not supported.",
+          );
+        }
+
+        if (
+          provider &&
+          storefrontRuntime
+        ) {
+          commerce = {
+            provider,
+            storefrontRuntime,
+          };
+        }
+      }
+    }
+  }
+
+  if (
+    requirementValues.commerce &&
+    !commerce
+  ) {
+    issues.push(
+      "Commerce projects require a commerce provider and storefront runtime.",
+    );
+  }
+
+  if (
+    !requirementValues.commerce &&
+    commerce
+  ) {
+    issues.push(
+      "Non-commerce projects cannot declare a commerce plan.",
+    );
+  }
+
   const designProvided =
     Object.prototype.hasOwnProperty.call(
       input,
@@ -719,6 +862,13 @@ export function parseProjectSpecification(value: unknown): ProjectSpecification 
     requirements: requirementValues,
     pages,
     stackId,
+
+    ...(commerceProvided || commerce
+      ? {
+          commerce:
+            commerce ?? null,
+        }
+      : {}),
 
     ...(designProvided
       ? {

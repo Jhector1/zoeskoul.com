@@ -31,6 +31,12 @@ describe(
             "standard",
           commerceMode:
             "cart-checkout",
+          commerce: {
+            provider:
+              "zoebuild-native",
+            storefrontRuntime:
+              "static",
+          },
           projectType:
             "frontend-app",
           deploymentPreference:
@@ -215,6 +221,15 @@ describe(
         expect(
           profile.requirements.auth,
         ).toBe(true);
+
+        expect(
+          profile.commerce,
+        ).toEqual({
+          provider:
+            "zoebuild-native",
+          storefrontRuntime:
+            "react-vite",
+        });
 
         expect(
           profile.stackId,

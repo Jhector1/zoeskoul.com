@@ -238,6 +238,9 @@ function lockArchitecture(
             ...profile.requirements,
           },
 
+          commerce:
+            profile.commerce,
+
           stackId:
             profile.stackId,
 

@@ -110,6 +110,16 @@ describe(
         expect(
           storefront.requirements.commerce,
         ).toBe(true);
+
+
+        expect(
+          storefront.commerce,
+        ).toEqual({
+          provider:
+            "zoebuild-native",
+          storefrontRuntime:
+            "static",
+        });
       },
     );
 

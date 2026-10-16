@@ -45,6 +45,13 @@ const specification:
     stackId:
       "commerce-storefront-v1",
 
+    commerce: {
+      provider:
+        "zoebuild-native",
+      storefrontRuntime:
+        "static",
+    },
+
     deployment: {
       preference:
         "static",
