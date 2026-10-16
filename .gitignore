@@ -24,6 +24,12 @@ dist/
 **/dist
 build/
 **/build
+
+# ZoeBuild uses "build" as a source-domain name, not generated output.
+!apps/zoebuild/src/lib/build/
+!apps/zoebuild/src/lib/build/**
+!apps/zoebuild/src/app/api/build/
+!apps/zoebuild/src/app/api/build/**
 coverage/
 **/coverage
 *.tsbuildinfo
