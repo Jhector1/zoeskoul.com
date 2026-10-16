@@ -13,6 +13,8 @@ type ApiPayload = {
 };
 
 const SYNC_DEBOUNCE_MS = 650;
+const PREVIEW_START_SLOW_NOTICE_MS = 15_000;
+const PREVIEW_START_TIMEOUT_MS = 120_000;
 
 async function payload(response: Response): Promise<ApiPayload | null> {
   return (await response.json().catch(() => null)) as ApiPayload | null;
@@ -126,18 +128,52 @@ export function useReactVitePreview(input: Readonly<{
         }));
       }
 
-      const response = await fetch(
-        `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/start`,
-        {
-          method: "POST",
-          credentials: "same-origin",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            sourceVersion: sourceVersionRef.current,
-            workspace: workspaceRef.current,
-          }),
-        },
-      );
+      const startController = new AbortController();
+
+      const slowNoticeTimer = setTimeout(() => {
+        if (!mountedRef.current) return;
+
+        setPreview((current) =>
+          current && current.state === "starting"
+            ? {
+                ...current,
+                message:
+                  "Still starting preview… the first React launch can take up to 2 minutes.",
+              }
+            : current,
+        );
+      }, PREVIEW_START_SLOW_NOTICE_MS);
+
+      const startTimeoutTimer = setTimeout(() => {
+        startController.abort();
+      }, PREVIEW_START_TIMEOUT_MS);
+
+      let response: Response;
+      try {
+        response = await fetch(
+          `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/start`,
+          {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sourceVersion: sourceVersionRef.current,
+              workspace: workspaceRef.current,
+            }),
+            signal: startController.signal,
+          },
+        );
+      } catch (error) {
+        if (startController.signal.aborted) {
+          throw new Error(
+            "React preview startup timed out after 2 minutes. Retry preview.",
+          );
+        }
+        throw error;
+      } finally {
+        clearTimeout(slowNoticeTimer);
+        clearTimeout(startTimeoutTimer);
+      }
       const data = await payload(response);
 
       const dependencyLockRequired =
