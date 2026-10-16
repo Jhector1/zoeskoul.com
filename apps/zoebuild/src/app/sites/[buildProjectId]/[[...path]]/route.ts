@@ -7,6 +7,11 @@ import {
   listNativeCommerceProducts,
   NativeCommerceCatalogInputError,
 } from "@/lib/commerce/nativeCommerceCatalog";
+import {
+  executeNativeCommerceCartCommand,
+  NativeCommerceCartError,
+  parseNativeCommerceCartCommand,
+} from "@/lib/commerce/nativeCommerceCart";
 
 import {
   buildPublishedStaticFileMap,
@@ -143,6 +148,232 @@ function responseForPublishedFile(
       headers,
     },
   );
+}
+
+
+async function readPublishedCommerceJson(
+  request: Request,
+) {
+  const contentType =
+    request.headers.get(
+      "content-type",
+    ) ?? "";
+
+  if (
+    !contentType
+      .toLowerCase()
+      .startsWith(
+        "application/json",
+      )
+  ) {
+    throw new NativeCommerceCartError(
+      "COMMERCE_CONTENT_TYPE_INVALID",
+      "Commerce requests require application/json.",
+      415,
+    );
+  }
+
+  const raw =
+    await request.text();
+
+  if (
+    raw.length >
+    16_384
+  ) {
+    throw new NativeCommerceCartError(
+      "COMMERCE_REQUEST_TOO_LARGE",
+      "Commerce request body is too large.",
+      413,
+    );
+  }
+
+  try {
+    return JSON.parse(
+      raw,
+    ) as unknown;
+  } catch {
+    throw new NativeCommerceCartError(
+      "COMMERCE_REQUEST_INVALID",
+      "Invalid commerce request.",
+      400,
+    );
+  }
+}
+
+export async function POST(
+  request: Request,
+  ctx: {
+    params:
+      Promise<{
+        buildProjectId:
+          string;
+        path?:
+          string[];
+      }>;
+  },
+) {
+  if (
+    !isPublishedSiteOriginRequest(
+      request,
+    )
+  ) {
+    return notFound();
+  }
+
+  const {
+    buildProjectId,
+    path = [],
+  } = await ctx.params;
+
+  const normalizedProjectId =
+    buildProjectId.trim();
+
+  if (
+    !normalizedProjectId ||
+    path.join("/") !==
+      "__zoebuild/commerce/cart"
+  ) {
+    return notFound();
+  }
+
+  const deployment =
+    await prisma
+      .buildDeployment
+      .findFirst({
+        where: {
+          buildProjectId:
+            normalizedProjectId,
+          environment:
+            "production",
+          kind:
+            ZOEBUILD_STATIC_ASSETS_KIND,
+          provider:
+            ZOEBUILD_SELF_HOSTED_PROVIDER,
+          status:
+            "ready",
+          buildProject: {
+            status: {
+              not:
+                "archived",
+            },
+            codeProject: {
+              archivedAt:
+                null,
+            },
+          },
+        },
+        orderBy: [
+          {
+            deployedAt:
+              "desc",
+          },
+          {
+            createdAt:
+              "desc",
+          },
+        ],
+        select: {
+          id: true,
+          sourceVersion:
+            true,
+        },
+      });
+
+  if (!deployment) {
+    return notFound();
+  }
+
+  try {
+    const command =
+      parseNativeCommerceCartCommand(
+        await readPublishedCommerceJson(
+          request,
+        ),
+      );
+
+    const cart =
+      await executeNativeCommerceCartCommand(
+        prisma,
+        {
+          buildProjectId:
+            normalizedProjectId,
+          surface:
+            "published",
+          command,
+        },
+      );
+
+    return new Response(
+      JSON.stringify({
+        ok: true,
+        cart,
+      }),
+      {
+        status: 200,
+        headers: {
+          "Cache-Control":
+            "no-store, max-age=0",
+          "Content-Type":
+            "application/json; charset=utf-8",
+          "X-Content-Type-Options":
+            "nosniff",
+          "Referrer-Policy":
+            "strict-origin-when-cross-origin",
+          "X-ZoeBuild-Deployment":
+            deployment.id,
+          "X-ZoeBuild-Source-Version":
+            String(
+              deployment.sourceVersion,
+            ),
+        },
+      },
+    );
+  } catch (error) {
+    if (
+      error instanceof
+      NativeCommerceCartError
+    ) {
+      return new Response(
+        error.message,
+        {
+          status:
+            error.status,
+          headers: {
+            "Cache-Control":
+              "no-store",
+            "Content-Type":
+              "text/plain; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+          },
+        },
+      );
+    }
+
+    console.error(
+      "[ZoeBuild published commerce cart] failed",
+      {
+        buildProjectId:
+          normalizedProjectId,
+        error,
+      },
+    );
+
+    return new Response(
+      "Commerce service unavailable.",
+      {
+        status: 503,
+        headers: {
+          "Cache-Control":
+            "no-store",
+          "Content-Type":
+            "text/plain; charset=utf-8",
+          "X-Content-Type-Options":
+            "nosniff",
+        },
+      },
+    );
+  }
 }
 
 export async function GET(
