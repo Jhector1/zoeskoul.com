@@ -231,18 +231,19 @@ model CommerceCustomer {
 }
 
 model CommerceCart {
-  id         String             @id @default(cuid())
-  storeId    String
-  customerId String?
-  status     CommerceCartStatus @default(active)
-  currency   String             @db.VarChar(3)
-  expiresAt  DateTime?
-  createdAt  DateTime           @default(now())
-  updatedAt  DateTime           @updatedAt
-  store      CommerceStore      @relation(fields: [storeId], references: [id], onDelete: Cascade)
-  customer   CommerceCustomer?  @relation(fields: [customerId], references: [id], onDelete: SetNull)
-  items      CommerceCartItem[]
-  order      CommerceOrder?
+  id              String             @id @default(cuid())
+  publicTokenHash String             @unique @db.VarChar(64)
+  storeId         String
+  customerId      String?
+  status          CommerceCartStatus @default(active)
+  currency        String             @db.VarChar(3)
+  expiresAt       DateTime?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  store           CommerceStore      @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  customer        CommerceCustomer?  @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  items           CommerceCartItem[]
+  order           CommerceOrder?
 
   @@index([storeId, status, updatedAt])
   @@index([customerId, updatedAt])
