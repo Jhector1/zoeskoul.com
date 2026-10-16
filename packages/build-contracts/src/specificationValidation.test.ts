@@ -51,7 +51,7 @@ describe("ProjectSpecification runtime validation", () => {
           commerce: true,
         },
         projectType: "frontend-app",
-        stackId: "commerce-storefront-v1",
+        stackId: "commerce-static-v1",
       }),
     ).toThrow(BuildSpecificationError);
 
@@ -64,7 +64,7 @@ describe("ProjectSpecification runtime validation", () => {
           commerce: true,
         },
         projectType: "frontend-app",
-        stackId: "commerce-storefront-v1",
+        stackId: "commerce-static-v1",
         commerce: {
           provider: "zoebuild-native",
           storefrontRuntime: "static",

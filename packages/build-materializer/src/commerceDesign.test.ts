@@ -122,7 +122,7 @@ const specification:
     ],
 
     stackId:
-      "commerce-storefront-v1",
+      "commerce-static-v1",
 
     commerce: {
       provider:
@@ -147,7 +147,7 @@ describe(
       () => {
         const original =
           requireBuildTemplate(
-            "commerce-storefront-v1",
+            "commerce-static-v1",
           );
 
         const customized =
@@ -205,7 +205,7 @@ describe(
             "src/app.js",
             "src/commerce/config.js",
             "src/commerce/provider.js",
-            "src/commerce/shopifyStorefront.js",
+            "src/commerce/provider.js",
             "COMMERCE.md",
           ]
         ) {
@@ -257,7 +257,19 @@ describe(
         expect(
           serialized,
         ).toContain(
-          "checkoutUrl",
+          "commerce.checkout.begin",
+        );
+
+        expect(
+          serialized,
+        ).toContain(
+          "__ZOEBUILD_COMMERCE__",
+        );
+
+        expect(
+          serialized.toLowerCase(),
+        ).not.toContain(
+          "myshopify.com",
         );
       },
     );

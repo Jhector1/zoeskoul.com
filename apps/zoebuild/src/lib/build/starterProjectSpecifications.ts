@@ -84,7 +84,7 @@ const STARTER_SPECIFICATIONS = {
     "pages": [
       "Home"
     ],
-    "stackId": "commerce-storefront-v1",
+    "stackId": "commerce-static-v1",
     "commerce": {
       "provider": "zoebuild-native",
       "storefrontRuntime": "static"

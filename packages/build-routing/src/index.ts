@@ -252,6 +252,16 @@ const COMPLEX_TERMS = [
   "complex workflow",
 ];
 
+const RICH_STOREFRONT_TERMS = [
+  "product filters",
+  "filter products",
+  "product search",
+  "client-side search",
+  "interactive catalog",
+  "interactive storefront",
+  "animated storefront",
+] as const;
+
 const FASHION_TERMS = [
   "clothes",
   "clothing",
@@ -426,6 +436,12 @@ export function classifyBuildRequest(
         COMPLEX_TERMS,
       );
 
+    const richStorefront =
+      includesAny(
+        prompt,
+        RICH_STOREFRONT_TERMS,
+      );
+
     const buyerAccounts =
       /\b(customer account|customer accounts|buyer account|buyer accounts|order history|saved addresses|customer login|customer sign in)\b/.test(
         prompt,
@@ -517,7 +533,9 @@ export function classifyBuildRequest(
         provider:
           "zoebuild-native",
         storefrontRuntime:
-          "static",
+          richStorefront
+            ? "react-vite"
+            : "static",
       },
 
       projectType:
@@ -535,7 +553,9 @@ export function classifyBuildRequest(
         "static",
 
       stackId:
-        "commerce-storefront-v1",
+        richStorefront
+          ? "commerce-react-vite-v1"
+          : "commerce-static-v1",
 
       supported: true,
       unsupportedReason:

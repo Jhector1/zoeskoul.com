@@ -272,11 +272,11 @@ export const REACT_VITE_TEMPLATE_V1 = {
   },
 } as const satisfies BuildTemplateDefinition;
 
-export const COMMERCE_STOREFRONT_TEMPLATE_V1 = {
-  id: "commerce-storefront-v1",
+export const COMMERCE_STATIC_TEMPLATE_V1 = {
+  id: "commerce-static-v1",
 
   stackIds: [
-    "commerce-storefront-v1",
+    "commerce-static-v1",
   ],
 
   workspaceLanguage: "web",
@@ -303,24 +303,16 @@ export const COMMERCE_STOREFRONT_TEMPLATE_V1 = {
       content: "/*\n * DESIGN-AWARE REGION.\n *\n * Zoe may alter these presentation choices.\n * Application and commerce behavior must stay outside\n * this module.\n */\nexport const storefrontLayout = {\n  heroAlignment: \"split\",\n  productDensity: \"comfortable\",\n  cardTreatment: \"soft\",\n};\n",
     },
     {
-      path: "src/commerce/config.js",
-      content: "/*\n * MERCHANT-MANAGED CONFIGURATION.\n *\n * This file is NOT an AI design surface.\n *\n * Enter the permanent *.myshopify.com hostname for the\n * connected store. Do not put Admin API tokens, private\n * access tokens, card credentials, or OAuth secrets here.\n */\nexport const commerceConfig = {\n  adapter: \"shopify-storefront\",\n  shopDomain: \"\",\n  apiVersion: \"2026-10\",\n};\n",
-    },
-    {
-      path: "src/commerce/shopifyStorefront.js",
-      content: "/*\n * TRUSTED COMMERCE ADAPTER.\n *\n * Zoe must not rewrite this module when changing design.\n *\n * This adapter intentionally uses the Storefront API's\n * tokenless product/cart surface. Checkout is completed by\n * the managed commerce provider through checkoutUrl.\n */\n\nfunction normalizeShopDomain(\n  value,\n) {\n  const candidate =\n    String(value ?? \"\")\n      .trim()\n      .toLowerCase()\n      .replace(/^https?:\\/\\//, \"\")\n      .replace(/\\/.*$/, \"\");\n\n  if (\n    !candidate ||\n    !candidate.endsWith(\n      \".myshopify.com\",\n    )\n  ) {\n    return null;\n  }\n\n  return candidate;\n}\n\nfunction endpoint(\n  config,\n) {\n  const shopDomain =\n    normalizeShopDomain(\n      config.shopDomain,\n    );\n\n  if (!shopDomain) {\n    throw new Error(\n      \"Commerce is not connected. Configure a permanent .myshopify.com domain.\",\n    );\n  }\n\n  return (\n    `https://${shopDomain}` +\n    `/api/${config.apiVersion}` +\n    \"/graphql.json\"\n  );\n}\n\nasync function graphql(\n  config,\n  query,\n  variables = {},\n) {\n  const response =\n    await fetch(\n      endpoint(config),\n      {\n        method: \"POST\",\n\n        headers: {\n          \"Content-Type\":\n            \"application/json\",\n        },\n\n        body:\n          JSON.stringify({\n            query,\n            variables,\n          }),\n      },\n    );\n\n  const payload =\n    await response.json();\n\n  if (\n    !response.ok ||\n    payload.errors\n  ) {\n    const detail =\n      Array.isArray(\n        payload.errors,\n      )\n        ? payload.errors\n            .map(\n              (item) =>\n                item?.message,\n            )\n            .filter(Boolean)\n            .join(\" \")\n        : \"\";\n\n    throw new Error(\n      detail ||\n      \"The commerce provider rejected the storefront request.\",\n    );\n  }\n\n  return payload.data;\n}\n\nconst PRODUCT_FIELDS = `\n  id\n  title\n  handle\n  availableForSale\n\n  featuredImage {\n    url\n    altText\n  }\n\n  variants(first: 1) {\n    nodes {\n      id\n      title\n      availableForSale\n\n      price {\n        amount\n        currencyCode\n      }\n    }\n  }\n`;\n\nexport function createShopifyStorefrontAdapter(\n  config,\n) {\n  return {\n    id:\n      \"shopify-storefront\",\n\n    isConfigured() {\n      return Boolean(\n        normalizeShopDomain(\n          config.shopDomain,\n        ),\n      );\n    },\n\n    async listProducts(\n      first = 12,\n    ) {\n      const data =\n        await graphql(\n          config,\n          `\n            query ZoeBuildProducts(\n              $first: Int!\n            ) {\n              products(\n                first: $first\n              ) {\n                nodes {\n                  ${PRODUCT_FIELDS}\n                }\n              }\n            }\n          `,\n          {\n            first,\n          },\n        );\n\n      return (\n        data?.products?.nodes ??\n        []\n      );\n    },\n\n    async createCart(\n      merchandiseId,\n      quantity = 1,\n    ) {\n      const data =\n        await graphql(\n          config,\n          `\n            mutation ZoeBuildCartCreate(\n              $input: CartInput\n            ) {\n              cartCreate(\n                input: $input\n              ) {\n                cart {\n                  id\n                  totalQuantity\n                  checkoutUrl\n                }\n\n                userErrors {\n                  field\n                  message\n                }\n              }\n            }\n          `,\n          {\n            input: {\n              lines: [\n                {\n                  merchandiseId,\n                  quantity,\n                },\n              ],\n            },\n          },\n        );\n\n      const result =\n        data?.cartCreate;\n\n      if (\n        result?.userErrors\n          ?.length\n      ) {\n        throw new Error(\n          result.userErrors\n            .map(\n              (item) =>\n                item.message,\n            )\n            .join(\" \"),\n        );\n      }\n\n      return result?.cart;\n    },\n\n    async addCartLine(\n      cartId,\n      merchandiseId,\n      quantity = 1,\n    ) {\n      const data =\n        await graphql(\n          config,\n          `\n            mutation ZoeBuildCartLinesAdd(\n              $cartId: ID!\n              $lines: [CartLineInput!]!\n            ) {\n              cartLinesAdd(\n                cartId: $cartId\n                lines: $lines\n              ) {\n                cart {\n                  id\n                  totalQuantity\n                  checkoutUrl\n                }\n\n                userErrors {\n                  field\n                  message\n                }\n              }\n            }\n          `,\n          {\n            cartId,\n\n            lines: [\n              {\n                merchandiseId,\n                quantity,\n              },\n            ],\n          },\n        );\n\n      const result =\n        data?.cartLinesAdd;\n\n      if (\n        result?.userErrors\n          ?.length\n      ) {\n        throw new Error(\n          result.userErrors\n            .map(\n              (item) =>\n                item.message,\n            )\n            .join(\" \"),\n        );\n      }\n\n      return result?.cart;\n    },\n\n    async getCart(\n      cartId,\n    ) {\n      const data =\n        await graphql(\n          config,\n          `\n            query ZoeBuildCart(\n              $id: ID!\n            ) {\n              cart(id: $id) {\n                id\n                totalQuantity\n                checkoutUrl\n\n                cost {\n                  subtotalAmount {\n                    amount\n                    currencyCode\n                  }\n\n                  totalAmount {\n                    amount\n                    currencyCode\n                  }\n                }\n              }\n            }\n          `,\n          {\n            id:\n              cartId,\n          },\n        );\n\n      return (\n        data?.cart ??\n        null\n      );\n    },\n  };\n}\n",
-    },
-    {
       path: "src/commerce/provider.js",
-      content: "/*\n * TRUSTED PROVIDER BOUNDARY.\n *\n * Application code depends on this provider-neutral facade.\n * A future commerce provider can replace the adapter without\n * changing Zoe's design surfaces.\n */\nimport {\n  commerceConfig,\n} from \"./config.js\";\n\nimport {\n  createShopifyStorefrontAdapter,\n} from \"./shopifyStorefront.js\";\n\nexport const commerce =\n  createShopifyStorefrontAdapter(\n    commerceConfig,\n  );\n",
+      content: "/* TRUSTED COMMERCE FACADE. */\n\nfunction binding() {\n  const candidate =\n    globalThis.__ZOEBUILD_COMMERCE__;\n\n  if (\n    !candidate ||\n    candidate.version !== 1 ||\n    !candidate.products ||\n    !candidate.cart ||\n    !candidate.checkout\n  ) {\n    return null;\n  }\n\n  return candidate;\n}\n\nfunction requiredBinding() {\n  const value = binding();\n\n  if (!value) {\n    throw new Error(\n      \"Commerce is not connected to a trusted ZoeBuild resource.\",\n    );\n  }\n\n  return value;\n}\n\nexport const commerce = {\n  isConfigured() {\n    return Boolean(binding());\n  },\n\n  products: {\n    list(input = {}) {\n      return requiredBinding().products.list(input);\n    },\n    get(input) {\n      return requiredBinding().products.get(input);\n    },\n  },\n\n  cart: {\n    get(input) {\n      return requiredBinding().cart.get(input);\n    },\n    add(input) {\n      return requiredBinding().cart.add(input);\n    },\n    update(input) {\n      return requiredBinding().cart.update(input);\n    },\n    remove(input) {\n      return requiredBinding().cart.remove(input);\n    },\n  },\n\n  checkout: {\n    begin(input) {\n      return requiredBinding().checkout.begin(input);\n    },\n  },\n};\n",
     },
     {
       path: "src/app.js",
-      content: "/*\n * TRUSTED STOREFRONT APPLICATION SHELL.\n *\n * Zoe changes design/content modules, not cart or checkout\n * mechanics in this file.\n */\nimport {\n  storefrontContent,\n} from \"./design/content.js\";\n\nimport {\n  storefrontLayout,\n} from \"./design/layout.js\";\n\nimport {\n  commerce,\n} from \"./commerce/provider.js\";\n\nconst CART_STORAGE_KEY =\n  \"zoebuild-commerce-cart-id\";\n\nconst elements = {\n  brand:\n    document.querySelector(\n      \"#brand-name\",\n    ),\n\n  eyebrow:\n    document.querySelector(\n      \"#hero-eyebrow\",\n    ),\n\n  heroTitle:\n    document.querySelector(\n      \"#hero-title\",\n    ),\n\n  heroBody:\n    document.querySelector(\n      \"#hero-body\",\n    ),\n\n  heroCta:\n    document.querySelector(\n      \"#hero-cta\",\n    ),\n\n  featuredHeading:\n    document.querySelector(\n      \"#featured-heading\",\n    ),\n\n  storyHeading:\n    document.querySelector(\n      \"#story-heading\",\n    ),\n\n  storyBody:\n    document.querySelector(\n      \"#story-body\",\n    ),\n\n  productGrid:\n    document.querySelector(\n      \"#product-grid\",\n    ),\n\n  status:\n    document.querySelector(\n      \"#commerce-status\",\n    ),\n\n  cartButton:\n    document.querySelector(\n      \"#cart-button\",\n    ),\n\n  cartCount:\n    document.querySelector(\n      \"#cart-count\",\n    ),\n\n  cartPanel:\n    document.querySelector(\n      \"#cart-panel\",\n    ),\n\n  cartClose:\n    document.querySelector(\n      \"#cart-close\",\n    ),\n\n  cartSummary:\n    document.querySelector(\n      \"#cart-summary\",\n    ),\n\n  checkout:\n    document.querySelector(\n      \"#checkout-button\",\n    ),\n};\n\nlet cart = null;\n\nfunction applyDesign() {\n  document.body.dataset\n    .heroAlignment =\n      storefrontLayout\n        .heroAlignment;\n\n  document.body.dataset\n    .productDensity =\n      storefrontLayout\n        .productDensity;\n\n  document.body.dataset\n    .cardTreatment =\n      storefrontLayout\n        .cardTreatment;\n\n  elements.brand.textContent =\n    storefrontContent\n      .brandName;\n\n  elements.eyebrow.textContent =\n    storefrontContent\n      .eyebrow;\n\n  elements.heroTitle.textContent =\n    storefrontContent\n      .heroTitle;\n\n  elements.heroBody.textContent =\n    storefrontContent\n      .heroBody;\n\n  elements.heroCta.textContent =\n    storefrontContent\n      .heroCta;\n\n  elements.featuredHeading\n    .textContent =\n      storefrontContent\n        .featuredHeading;\n\n  elements.storyHeading\n    .textContent =\n      storefrontContent\n        .storyHeading;\n\n  elements.storyBody.textContent =\n    storefrontContent\n      .storyBody;\n\n  document.title =\n    storefrontContent\n      .brandName;\n}\n\nfunction money(\n  price,\n) {\n  if (!price) {\n    return \"\";\n  }\n\n  try {\n    return new Intl\n      .NumberFormat(\n        undefined,\n        {\n          style: \"currency\",\n          currency:\n            price.currencyCode,\n        },\n      )\n      .format(\n        Number(\n          price.amount,\n        ),\n      );\n  } catch {\n    return (\n      `${price.amount} ` +\n      `${price.currencyCode}`\n    );\n  }\n}\n\nfunction demoProducts() {\n  return [\n    {\n      id: \"preview-1\",\n      title:\n        \"Signature piece\",\n      preview: true,\n    },\n\n    {\n      id: \"preview-2\",\n      title:\n        \"Everyday essential\",\n      preview: true,\n    },\n\n    {\n      id: \"preview-3\",\n      title:\n        \"New arrival\",\n      preview: true,\n    },\n\n    {\n      id: \"preview-4\",\n      title:\n        \"Limited edit\",\n      preview: true,\n    },\n  ];\n}\n\nfunction productCard(\n  product,\n) {\n  const variant =\n    product\n      .variants\n      ?.nodes?.[0];\n\n  const article =\n    document.createElement(\n      \"article\",\n    );\n\n  article.className =\n    \"product-card\";\n\n  const media =\n    document.createElement(\n      \"div\",\n    );\n\n  media.className =\n    \"product-media\";\n\n  if (\n    product.featuredImage\n      ?.url\n  ) {\n    const image =\n      document.createElement(\n        \"img\",\n      );\n\n    image.src =\n      product\n        .featuredImage\n        .url;\n\n    image.alt =\n      product\n        .featuredImage\n        .altText ||\n      product.title;\n\n    media.append(\n      image,\n    );\n  } else {\n    const placeholder =\n      document.createElement(\n        \"div\",\n      );\n\n    placeholder.className =\n      \"product-media-placeholder\";\n\n    placeholder.textContent =\n      product.preview\n        ? \"Preview product\"\n        : product.title;\n\n    media.append(\n      placeholder,\n    );\n  }\n\n  const meta =\n    document.createElement(\n      \"div\",\n    );\n\n  meta.className =\n    \"product-meta\";\n\n  const title =\n    document.createElement(\n      \"h3\",\n    );\n\n  title.className =\n    \"product-title\";\n\n  title.textContent =\n    product.title;\n\n  meta.append(title);\n\n  if (variant?.price) {\n    const price =\n      document.createElement(\n        \"p\",\n      );\n\n    price.className =\n      \"product-price\";\n\n    price.textContent =\n      money(\n        variant.price,\n      );\n\n    meta.append(\n      price,\n    );\n  }\n\n  const add =\n    document.createElement(\n      \"button\",\n    );\n\n  add.type =\n    \"button\";\n\n  add.textContent =\n    product.preview\n      ? \"Connect store\"\n      : \"Add to cart\";\n\n  add.disabled =\n    Boolean(\n      product.preview,\n    ) ||\n    !variant\n      ?.availableForSale;\n\n  if (\n    variant?.id &&\n    !product.preview\n  ) {\n    add.addEventListener(\n      \"click\",\n      () =>\n        addToCart(\n          variant.id,\n        ),\n    );\n  }\n\n  article.append(\n    media,\n    meta,\n    add,\n  );\n\n  return article;\n}\n\nfunction renderProducts(\n  products,\n) {\n  elements.productGrid\n    .replaceChildren(\n      ...products.map(\n        productCard,\n      ),\n    );\n}\n\nfunction updateCartUi() {\n  const quantity =\n    cart\n      ?.totalQuantity ??\n    0;\n\n  elements.cartCount\n    .textContent =\n      String(quantity);\n\n  elements.cartSummary\n    .textContent =\n      quantity > 0\n        ? `${quantity} item${\n            quantity === 1\n              ? \"\"\n              : \"s\"\n          } ready for checkout.`\n        : \"Your cart is empty.\";\n\n  elements.checkout.disabled =\n    !cart?.checkoutUrl;\n}\n\nasync function addToCart(\n  merchandiseId,\n) {\n  const storedCartId =\n    localStorage.getItem(\n      CART_STORAGE_KEY,\n    );\n\n  try {\n    if (storedCartId) {\n      cart =\n        await commerce\n          .addCartLine(\n            storedCartId,\n            merchandiseId,\n          );\n    } else {\n      cart =\n        await commerce\n          .createCart(\n            merchandiseId,\n          );\n    }\n\n    if (!cart?.id) {\n      throw new Error(\n        \"The commerce provider did not return a cart.\",\n      );\n    }\n\n    localStorage.setItem(\n      CART_STORAGE_KEY,\n      cart.id,\n    );\n\n    updateCartUi();\n\n    elements.cartPanel.hidden =\n      false;\n  } catch (error) {\n    elements.status\n      .textContent =\n        error instanceof Error\n          ? error.message\n          : \"Unable to update cart.\";\n  }\n}\n\nasync function restoreCart() {\n  const storedCartId =\n    localStorage.getItem(\n      CART_STORAGE_KEY,\n    );\n\n  if (!storedCartId) {\n    return;\n  }\n\n  try {\n    cart =\n      await commerce\n        .getCart(\n          storedCartId,\n        );\n\n    if (!cart) {\n      localStorage.removeItem(\n        CART_STORAGE_KEY,\n      );\n    }\n\n    updateCartUi();\n  } catch {\n    localStorage.removeItem(\n      CART_STORAGE_KEY,\n    );\n  }\n}\n\nasync function start() {\n  applyDesign();\n\n  elements.cartButton\n    .addEventListener(\n      \"click\",\n      () => {\n        elements.cartPanel.hidden =\n          false;\n      },\n    );\n\n  elements.cartClose\n    .addEventListener(\n      \"click\",\n      () => {\n        elements.cartPanel.hidden =\n          true;\n      },\n    );\n\n  elements.checkout\n    .addEventListener(\n      \"click\",\n      () => {\n        if (\n          cart?.checkoutUrl\n        ) {\n          window.location.assign(\n            cart.checkoutUrl,\n          );\n        }\n      },\n    );\n\n  if (\n    !commerce.isConfigured()\n  ) {\n    elements.status\n      .textContent =\n        \"Design preview — connect a Shopify store to load live products, cart, and checkout.\";\n\n    renderProducts(\n      demoProducts(),\n    );\n\n    return;\n  }\n\n  elements.status\n    .textContent =\n      \"Connected storefront\";\n\n  try {\n    const products =\n      await commerce\n        .listProducts();\n\n    renderProducts(\n      products,\n    );\n\n    await restoreCart();\n  } catch (error) {\n    elements.status\n      .textContent =\n        error instanceof Error\n          ? error.message\n          : \"Unable to load storefront.\";\n\n    renderProducts(\n      [],\n    );\n  }\n}\n\nstart();\n",
+      content: "import {\n  storefrontContent,\n} from \"./design/content.js\";\n\nimport {\n  storefrontLayout,\n} from \"./design/layout.js\";\n\nimport {\n  commerce,\n} from \"./commerce/provider.js\";\n\nconst CART_STORAGE_KEY =\n  \"zoebuild-commerce-cart-id\";\n\nconst elements = {\n  brand: document.querySelector(\"#brand-name\"),\n  eyebrow: document.querySelector(\"#hero-eyebrow\"),\n  heroTitle: document.querySelector(\"#hero-title\"),\n  heroBody: document.querySelector(\"#hero-body\"),\n  heroCta: document.querySelector(\"#hero-cta\"),\n  featuredHeading: document.querySelector(\"#featured-heading\"),\n  storyHeading: document.querySelector(\"#story-heading\"),\n  storyBody: document.querySelector(\"#story-body\"),\n  productGrid: document.querySelector(\"#product-grid\"),\n  status: document.querySelector(\"#commerce-status\"),\n  cartButton: document.querySelector(\"#cart-button\"),\n  cartCount: document.querySelector(\"#cart-count\"),\n  cartPanel: document.querySelector(\"#cart-panel\"),\n  cartClose: document.querySelector(\"#cart-close\"),\n  cartSummary: document.querySelector(\"#cart-summary\"),\n  checkout: document.querySelector(\"#checkout-button\"),\n};\n\nlet cart = null;\n\nfunction applyDesign() {\n  document.body.dataset.heroAlignment =\n    storefrontLayout.heroAlignment;\n  document.body.dataset.productDensity =\n    storefrontLayout.productDensity;\n  document.body.dataset.cardTreatment =\n    storefrontLayout.cardTreatment;\n\n  elements.brand.textContent = storefrontContent.brandName;\n  elements.eyebrow.textContent = storefrontContent.eyebrow;\n  elements.heroTitle.textContent = storefrontContent.heroTitle;\n  elements.heroBody.textContent = storefrontContent.heroBody;\n  elements.heroCta.textContent = storefrontContent.heroCta;\n  elements.featuredHeading.textContent = storefrontContent.featuredHeading;\n  elements.storyHeading.textContent = storefrontContent.storyHeading;\n  elements.storyBody.textContent = storefrontContent.storyBody;\n  document.title = storefrontContent.brandName;\n}\n\nfunction previewProducts() {\n  return [\n    { id: \"preview-1\", title: \"Signature piece\", preview: true },\n    { id: \"preview-2\", title: \"Everyday essential\", preview: true },\n    { id: \"preview-3\", title: \"New arrival\", preview: true },\n    { id: \"preview-4\", title: \"Limited edit\", preview: true },\n  ];\n}\n\nfunction productCard(product) {\n  const article = document.createElement(\"article\");\n  article.className = \"product-card\";\n\n  const media = document.createElement(\"div\");\n  media.className = \"product-media\";\n\n  const placeholder = document.createElement(\"div\");\n  placeholder.className = \"product-media-placeholder\";\n  placeholder.textContent = product.title;\n  media.append(placeholder);\n\n  const meta = document.createElement(\"div\");\n  meta.className = \"product-meta\";\n\n  const title = document.createElement(\"h3\");\n  title.className = \"product-title\";\n  title.textContent = product.title;\n  meta.append(title);\n\n  const add = document.createElement(\"button\");\n  add.type = \"button\";\n  add.textContent = product.preview ? \"Commerce preview\" : \"Add to cart\";\n  add.disabled = Boolean(product.preview) || !product.defaultMerchandiseId;\n\n  if (product.defaultMerchandiseId && !product.preview) {\n    add.addEventListener(\"click\", () => {\n      void addToCart(product.defaultMerchandiseId);\n    });\n  }\n\n  article.append(media, meta, add);\n  return article;\n}\n\nfunction renderProducts(products) {\n  elements.productGrid.replaceChildren(\n    ...products.map(productCard),\n  );\n}\n\nfunction updateCartUi() {\n  const quantity = cart?.totalQuantity ?? 0;\n  elements.cartCount.textContent = String(quantity);\n  elements.cartSummary.textContent =\n    quantity > 0\n      ? `${quantity} item${quantity === 1 ? \"\" : \"s\"} ready for checkout.`\n      : \"Your cart is empty.\";\n  elements.checkout.disabled = !cart?.id;\n}\n\nasync function addToCart(merchandiseId) {\n  try {\n    cart = await commerce.cart.add({\n      cartId: localStorage.getItem(CART_STORAGE_KEY),\n      merchandiseId,\n      quantity: 1,\n    });\n\n    if (!cart?.id) {\n      throw new Error(\"The trusted commerce binding did not return a cart.\");\n    }\n\n    localStorage.setItem(CART_STORAGE_KEY, cart.id);\n    updateCartUi();\n    elements.cartPanel.hidden = false;\n  } catch (error) {\n    elements.status.textContent =\n      error instanceof Error\n        ? error.message\n        : \"Unable to update cart.\";\n  }\n}\n\nasync function restoreCart() {\n  const cartId = localStorage.getItem(CART_STORAGE_KEY);\n  if (!cartId) return;\n\n  try {\n    cart = await commerce.cart.get({ cartId });\n    if (!cart) localStorage.removeItem(CART_STORAGE_KEY);\n    updateCartUi();\n  } catch {\n    localStorage.removeItem(CART_STORAGE_KEY);\n  }\n}\n\nasync function beginCheckout() {\n  if (!cart?.id) return;\n\n  try {\n    const checkout = await commerce.checkout.begin({ cartId: cart.id });\n    if (!checkout?.url) {\n      throw new Error(\"The trusted commerce binding did not return a checkout URL.\");\n    }\n    window.location.assign(checkout.url);\n  } catch (error) {\n    elements.status.textContent =\n      error instanceof Error\n        ? error.message\n        : \"Unable to begin checkout.\";\n  }\n}\n\nasync function start() {\n  applyDesign();\n\n  elements.cartButton.addEventListener(\"click\", () => {\n    elements.cartPanel.hidden = false;\n  });\n  elements.cartClose.addEventListener(\"click\", () => {\n    elements.cartPanel.hidden = true;\n  });\n  elements.checkout.addEventListener(\"click\", () => {\n    void beginCheckout();\n  });\n\n  if (!commerce.isConfigured()) {\n    elements.status.textContent =\n      \"Commerce preview \u2014 connect a trusted store resource to load live products, cart, and checkout.\";\n    renderProducts(previewProducts());\n    return;\n  }\n\n  elements.status.textContent = \"Connected storefront\";\n\n  try {\n    const products = await commerce.products.list({ first: 12 });\n    renderProducts(products);\n    await restoreCart();\n  } catch (error) {\n    elements.status.textContent =\n      error instanceof Error\n        ? error.message\n        : \"Unable to load storefront.\";\n    renderProducts([]);\n  }\n}\n\nstart();\n",
     },
     {
       path: "COMMERCE.md",
-      content: "# ZoeBuild commerce storefront\n\nThis template separates **design** from **commerce mechanics**.\n\n## Zoe may change\n\n- `src/design/theme.css`\n- `src/design/content.js`\n- `src/design/layout.js`\n- presentation-oriented regions in `index.html`\n\n## Zoe must not replace\n\n- Storefront API request mechanics\n- cart creation / cart mutations\n- checkout handoff\n- payment handling\n- credentials\n- merchant product/order data\n\nThose responsibilities belong to the trusted commerce foundation and the connected commerce provider.\n\n## Connect a store\n\nSet the permanent `*.myshopify.com` domain in:\n\n`src/commerce/config.js`\n\nDo not put Admin API tokens, private access tokens, card data, or OAuth secrets in generated source.\n\nThe baseline storefront uses the tokenless Storefront API surface for products and cart. Checkout is completed through the checkout URL returned by the commerce provider.\n\nCustomer Account API support is intentionally separate and is not enabled by this baseline template.\n",
+      content: "# ZoeBuild commerce storefront\n\nGenerated presentation code depends on a trusted provider-neutral commerce binding.\n\nThe project commerce plan selects ZoeBuild Native or an external provider and selects the storefront runtime. Generated source does not select Shopify, Stripe, payment providers, tax engines, credentials, or secret keys.\n\nAt runtime ZoeBuild supplies an authorized __ZOEBUILD_COMMERCE__ binding. If it is absent, the storefront remains a design preview and live commerce actions fail closed.\n\nNever put API tokens, private credentials, secret keys, or raw card data in generated source.\n",
     },
   ],
 
@@ -332,8 +324,133 @@ export const COMMERCE_STOREFRONT_TEMPLATE_V1 = {
 } as const satisfies BuildTemplateDefinition;
 
 
+function commerceStaticFile(path: string): string {
+  const file =
+    COMMERCE_STATIC_TEMPLATE_V1.files.find(
+      (candidate) => candidate.path === path,
+    );
+
+  if (!file) {
+    throw new Error(
+      `Commerce static template is missing ${path}.`,
+    );
+  }
+
+  return file.content;
+}
+
+const COMMERCE_REACT_TSCONFIG =
+  REACT_TSCONFIG.replace(
+    '"allowJs": false',
+    '"allowJs": true',
+  );
+
+const COMMERCE_REACT_APP = String.raw`import { useEffect, useState } from "react";
+import { storefrontContent } from "./design/content.js";
+import { commerce } from "./commerce/provider.js";
+
+type Product = {
+  id: string;
+  title: string;
+  preview?: boolean;
+};
+
+const previewProducts: Product[] = [
+  { id: "preview-1", title: "Signature piece", preview: true },
+  { id: "preview-2", title: "Everyday essential", preview: true },
+  { id: "preview-3", title: "New arrival", preview: true },
+];
+
+export default function App() {
+  const [products, setProducts] = useState<Product[]>(previewProducts);
+  const [status, setStatus] = useState(
+    commerce.isConfigured()
+      ? "Connected storefront"
+      : "Commerce preview — connect a trusted store resource.",
+  );
+
+  useEffect(() => {
+    if (!commerce.isConfigured()) return;
+
+    void commerce.products.list({ first: 24 })
+      .then((items: Product[]) => setProducts(items))
+      .catch((error: unknown) => {
+        setStatus(
+          error instanceof Error
+            ? error.message
+            : "Unable to load storefront.",
+        );
+      });
+  }, []);
+
+  return (
+    <main className="commerce-app">
+      <p className="commerce-status">{status}</p>
+      <p className="eyebrow">{storefrontContent.eyebrow}</p>
+      <h1>{storefrontContent.heroTitle}</h1>
+      <p>{storefrontContent.heroBody}</p>
+      <section className="product-grid">
+        {products.map((product) => (
+          <article key={product.id} className="product-card">
+            <div className="product-media" />
+            <h2>{product.title}</h2>
+            <button type="button" disabled={Boolean(product.preview)}>
+              {product.preview ? "Commerce preview" : "Add to cart"}
+            </button>
+          </article>
+        ))}
+      </section>
+    </main>
+  );
+}
+`;
+
+const COMMERCE_REACT_CSS = String.raw`@import "./design/theme.css";
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: var(--surface); color: var(--text); }
+.commerce-app { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 48px 0 96px; }
+.commerce-status { color: var(--muted); }
+.eyebrow { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+h1 { max-width: 900px; font-size: clamp(3rem, 8vw, 7rem); line-height: .94; letter-spacing: -.06em; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--grid-gap); margin-top: 56px; }
+.product-card { min-width: 0; }
+.product-media { aspect-ratio: 4 / 5; border-radius: var(--radius-card); background: linear-gradient(145deg, var(--art-start), var(--art-end)); }
+.product-card button { width: 100%; min-height: 42px; border: 1px solid var(--border); border-radius: var(--radius-button); background: transparent; color: inherit; }
+`;
+
+export const COMMERCE_REACT_VITE_TEMPLATE_V1 = {
+  id: "commerce-react-vite-v1",
+  stackIds: ["commerce-react-vite-v1"],
+  workspaceLanguage: "web",
+  files: [
+    { path: "package.json", content: REACT_PACKAGE_JSON },
+    { path: "index.html", content: REACT_INDEX_HTML },
+    { path: "src/main.tsx", content: REACT_MAIN },
+    { path: "src/App.tsx", content: COMMERCE_REACT_APP },
+    { path: "src/styles.css", content: COMMERCE_REACT_CSS },
+    { path: "src/design/theme.css", content: commerceStaticFile("src/design/theme.css") },
+    { path: "src/design/content.js", content: commerceStaticFile("src/design/content.js") },
+    { path: "src/design/layout.js", content: commerceStaticFile("src/design/layout.js") },
+    { path: "src/commerce/provider.js", content: commerceStaticFile("src/commerce/provider.js") },
+    { path: "COMMERCE.md", content: commerceStaticFile("COMMERCE.md") },
+    { path: "tsconfig.json", content: COMMERCE_REACT_TSCONFIG },
+    { path: "vite.config.ts", content: REACT_VITE_CONFIG },
+  ],
+  entryPath: "src/main.tsx",
+  activePath: "src/App.tsx",
+  openPaths: ["src/App.tsx", "src/styles.css", "src/design/theme.css"],
+  leftPct: 26,
+  dependencyLock: {
+    manager: "pnpm",
+    policy: "generate-once",
+    lockfilePath: "pnpm-lock.yaml",
+  },
+} as const satisfies BuildTemplateDefinition;
+
 export const BUILD_TEMPLATES_V1 = [
-  COMMERCE_STOREFRONT_TEMPLATE_V1,
+  COMMERCE_STATIC_TEMPLATE_V1,
+  COMMERCE_REACT_VITE_TEMPLATE_V1,
   STATIC_HTML_TEMPLATE_V1,
   REACT_VITE_TEMPLATE_V1,
 ] as const satisfies readonly BuildTemplateDefinition[];

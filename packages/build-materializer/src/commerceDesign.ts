@@ -203,8 +203,12 @@ export function applyBuildDesignToTemplate(
     BuildTemplateDefinition,
 ): BuildTemplateDefinition {
   if (
-    specification.stackId !==
-      "commerce-storefront-v1" ||
+    (
+      specification.stackId !==
+        "commerce-static-v1" &&
+      specification.stackId !==
+        "commerce-react-vite-v1"
+    ) ||
     !specification.design
   ) {
     return template;

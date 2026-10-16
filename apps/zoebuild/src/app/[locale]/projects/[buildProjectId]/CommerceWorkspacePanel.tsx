@@ -11,7 +11,9 @@ export default function CommerceWorkspacePanel(props: {
 }) {
   if (
     props.project.stackId !==
-    "commerce-storefront-v1"
+      "commerce-static-v1" &&
+    props.project.stackId !==
+      "commerce-react-vite-v1"
   ) {
     return null;
   }

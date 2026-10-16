@@ -14,7 +14,8 @@ describe("build registry", () => {
           (stack) => stack.id,
         ),
       ).toEqual([
-        "commerce-storefront-v1",
+        "commerce-static-v1",
+        "commerce-react-vite-v1",
         "static-html-v1",
         "react-vite-v1",
       ]);
@@ -47,7 +48,7 @@ describe("build registry", () => {
 
       const commerce =
         byId.get(
-          "commerce-storefront-v1",
+          "commerce-static-v1",
         );
 
       expect(

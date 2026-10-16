@@ -412,6 +412,7 @@ export type BuildStackDefinition = Readonly<{
   targets: readonly BuildTarget[];
   runtimeProfileId: string;
   templateId: string;
+  commerceRuntime?: BuildStorefrontRuntime | null;
   commands: Readonly<{
     install?: readonly string[];
     dev?: readonly string[];

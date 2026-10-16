@@ -42,7 +42,7 @@ describe(
           deploymentPreference:
             "static",
           stackId:
-            "commerce-storefront-v1",
+            "commerce-static-v1",
           supported:
             true,
         });
@@ -204,6 +204,25 @@ describe(
         });
       },
     );
+    it(
+      "routes presentation-rich standard commerce to the React/Vite commerce stack",
+      () => {
+        const profile =
+          classifyBuildRequest(
+            "Build a fashion ecommerce store with product filters, product search, cart and checkout.",
+          );
+
+        expect(profile.supported).toBe(true);
+        expect(profile.stackId).toBe(
+          "commerce-react-vite-v1",
+        );
+        expect(profile.commerce).toEqual({
+          provider: "zoebuild-native",
+          storefrontRuntime: "react-vite",
+        });
+      },
+    );
+
     it(
       "fails closed when the ecommerce request explicitly requires buyer accounts",
       () => {

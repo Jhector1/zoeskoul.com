@@ -15,7 +15,8 @@ describe("build template registry", () => {
             template.id,
         ),
       ).toEqual([
-        "commerce-storefront-v1",
+        "commerce-static-v1",
+        "commerce-react-vite-v1",
         "static-html-v1",
         "react-vite-v1",
       ]);

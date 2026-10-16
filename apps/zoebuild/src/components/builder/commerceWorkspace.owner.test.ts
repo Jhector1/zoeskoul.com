@@ -50,7 +50,7 @@ describe(
         expect(
           shell,
         ).toContain(
-          '"commerce-storefront-v1"',
+          '"commerce-static-v1"',
         );
 
         expect(

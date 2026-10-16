@@ -113,8 +113,12 @@ export default function ProjectBuilderShell(props: {
     );
 
   const commerceEnabled =
+    (
     props.project.stackId ===
-    "commerce-storefront-v1";
+      "commerce-static-v1" ||
+    props.project.stackId ===
+      "commerce-react-vite-v1"
+  );
 
   function addMessage(
     message: string,

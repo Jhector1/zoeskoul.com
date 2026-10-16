@@ -48,8 +48,8 @@ export const REACT_VITE_STACK_V1 = {
   deploymentAdapterId: "static-assets-v1",
 } as const satisfies BuildStackDefinition;
 
-export const COMMERCE_STOREFRONT_STACK_V1 = {
-  id: "commerce-storefront-v1",
+export const COMMERCE_STATIC_STACK_V1 = {
+  id: "commerce-static-v1",
   projectTypes: ["frontend-app"],
   targets: ["web"],
 
@@ -59,7 +59,8 @@ export const COMMERCE_STOREFRONT_STACK_V1 = {
   // operate a customer database or payment backend.
   runtimeProfileId: "build-static-v1",
 
-  templateId: "commerce-storefront-v1",
+  templateId: "commerce-static-v1",
+  commerceRuntime: "static",
 
   commands: {
     build: [],
@@ -84,8 +85,49 @@ export const COMMERCE_STOREFRONT_STACK_V1 = {
 } as const satisfies BuildStackDefinition;
 
 
+export const COMMERCE_REACT_VITE_STACK_V1 = {
+  id: "commerce-react-vite-v1",
+  projectTypes: ["frontend-app"],
+  targets: ["web"],
+  runtimeProfileId: "build-node-v1",
+  templateId: "commerce-react-vite-v1",
+  commerceRuntime: "react-vite",
+  commands: {
+    install: ["pnpm", "install", "--frozen-lockfile"],
+    dev: ["pnpm", "dev", "--host", "0.0.0.0"],
+    build: ["pnpm", "build"],
+  },
+  preview: { type: "server", port: 5173 },
+  artifact: {
+    type: "static-directory",
+    outputPath: "dist",
+  },
+  supportedCapabilities: [
+    "payments",
+    "commerce",
+  ],
+  deploymentAdapterId: "static-assets-v1",
+} as const satisfies BuildStackDefinition;
+
+export const COMMERCE_STACK_IDS_V1 = [
+  "commerce-static-v1",
+  "commerce-react-vite-v1",
+] as const;
+
+export function isCommerceStackId(
+  value: string | null | undefined,
+): boolean {
+  return (
+    typeof value === "string" &&
+    (
+      COMMERCE_STACK_IDS_V1 as readonly string[]
+    ).includes(value)
+  );
+}
+
 export const BUILD_STACKS_V1 = [
-  COMMERCE_STOREFRONT_STACK_V1,
+  COMMERCE_STATIC_STACK_V1,
+  COMMERCE_REACT_VITE_STACK_V1,
   STATIC_HTML_STACK_V1,
   REACT_VITE_STACK_V1,
 ] as const satisfies readonly BuildStackDefinition[];

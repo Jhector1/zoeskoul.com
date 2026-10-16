@@ -1,97 +1,37 @@
-import {
-  describe,
-  expect,
-  it,
-} from "vitest";
+import { describe, expect, it } from "vitest";
 
 import {
   BUILD_STACKS_V1,
+  COMMERCE_STACK_IDS_V1,
+  isCommerceStackId,
 } from "./index";
 
-describe(
-  "commerce-storefront-v1 stack",
-  () => {
-    it(
-      "registers a provider-neutral static commerce storefront",
-      () => {
-        const stack =
-          BUILD_STACKS_V1.find(
-            (candidate) =>
-              candidate.id ===
-              "commerce-storefront-v1",
-          );
+describe("commerce runtime stacks", () => {
+  it("registers static and React/Vite commerce stacks", () => {
+    expect(COMMERCE_STACK_IDS_V1).toEqual([
+      "commerce-static-v1",
+      "commerce-react-vite-v1",
+    ]);
 
-        expect(
-          stack,
-        ).toBeDefined();
+    const staticStack = BUILD_STACKS_V1.find((stack) => stack.id === "commerce-static-v1");
+    const reactStack = BUILD_STACKS_V1.find((stack) => stack.id === "commerce-react-vite-v1");
 
-        expect(
-          stack,
-        ).toMatchObject({
-          id:
-            "commerce-storefront-v1",
+    expect(staticStack).toMatchObject({
+      runtimeProfileId: "build-static-v1",
+      templateId: "commerce-static-v1",
+      commerceRuntime: "static",
+      preview: { type: "static" },
+    });
 
-          projectTypes: [
-            "frontend-app",
-          ],
+    expect(reactStack).toMatchObject({
+      runtimeProfileId: "build-node-v1",
+      templateId: "commerce-react-vite-v1",
+      commerceRuntime: "react-vite",
+      preview: { type: "server", port: 5173 },
+    });
 
-          targets: [
-            "web",
-          ],
-
-          runtimeProfileId:
-            "build-static-v1",
-
-          templateId:
-            "commerce-storefront-v1",
-
-          commands: {
-            build: [],
-          },
-
-          preview: {
-            type:
-              "static",
-          },
-
-          artifact: {
-            type:
-              "static-directory",
-            outputPath: ".",
-          },
-
-          deploymentAdapterId:
-            "static-assets-v1",
-        });
-
-        expect(
-          stack
-            ?.supportedCapabilities,
-        ).toEqual([
-          "payments",
-          "commerce",
-        ]);
-
-        const serialized =
-          JSON.stringify(
-            stack,
-          ).toLowerCase();
-
-        for (
-          const provider of [
-            "shopify",
-            "stripe",
-            "square",
-            "paypal",
-          ]
-        ) {
-          expect(
-            serialized,
-          ).not.toContain(
-            provider,
-          );
-        }
-      },
-    );
-  },
-);
+    expect(isCommerceStackId("commerce-static-v1")).toBe(true);
+    expect(isCommerceStackId("commerce-react-vite-v1")).toBe(true);
+    expect(isCommerceStackId("react-vite-v1")).toBe(false);
+  });
+});

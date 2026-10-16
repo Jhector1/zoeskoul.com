@@ -21,6 +21,7 @@ export const STACK_COMPATIBILITY_ISSUE_CODES = [
   "project-type-unsupported",
   "target-unsupported",
   "capability-unsupported",
+  "commerce-runtime-mismatch",
 ] as const;
 
 export type StackCompatibilityIssueCode =
@@ -99,6 +100,27 @@ export function evaluateProjectStack(
           code: "stack-id-mismatch",
           message: `Specification selects ${specification.stackId}, not ${stack.id}.`,
           value: specification.stackId,
+        },
+      ],
+    };
+  }
+
+  const specificationCommerceRuntime =
+    specification.commerce?.storefrontRuntime ?? null;
+  const stackCommerceRuntime =
+    stack.commerceRuntime ?? null;
+
+  if (
+    specificationCommerceRuntime !==
+    stackCommerceRuntime
+  ) {
+    return {
+      compatible: false,
+      issues: [
+        {
+          code: "commerce-runtime-mismatch",
+          message: `Specification commerce runtime ${specificationCommerceRuntime ?? "none"} does not match stack ${stack.id} commerce runtime ${stackCommerceRuntime ?? "none"}.`,
+          value: specificationCommerceRuntime ?? "none",
         },
       ],
     };
