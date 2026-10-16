@@ -12,10 +12,10 @@ import {
     subtreeIds,
 } from "@zoeskoul/learner-workspace/fullide/ExplorerTreeHelpers";
 import NodeMenu, { type MenuAction } from "@zoeskoul/learner-workspace/fullide/NodeMenu";
+import WorkspaceFileIcon from "./WorkspaceFileIcon";
 import {
     IconChevronDown,
     IconChevronRight,
-    IconFile,
     IconFolder,
     IconPlay,
     IconPlus,
@@ -56,13 +56,32 @@ function explorerPathAttr(path: string) {
 
 function IndentGuides({ depth }: { depth: number }) {
     if (depth <= 0) return null;
+
     return (
-        <div className="flex">
-            {Array.from({ length: depth }).map((_, i) => (
-                <div key={i} className="relative h-8 w-[14px]">
-                    <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-neutral-200 dark:bg-white/10" />
-                </div>
-            ))}
+        <div
+            aria-hidden="true"
+            data-tree-indent-guides="true"
+            className="flex self-stretch"
+        >
+            {Array.from({ length: depth }).map((_, i) => {
+                const isBranch = i === depth - 1;
+
+                return (
+                    <div
+                        key={i}
+                        data-tree-indent-lane="true"
+                        className="relative min-h-[36px] w-7 shrink-0 self-stretch"
+                    >
+                        <div className="absolute -inset-y-[2px] left-1/2 w-px -translate-x-1/2 bg-neutral-200/90 dark:bg-white/10" />
+                        {isBranch ? (
+                            <div
+                                data-tree-branch-guide="true"
+                                className="absolute left-1/2 right-0 top-1/2 h-px -translate-y-1/2 bg-neutral-200/90 dark:bg-white/10"
+                            />
+                        ) : null}
+                    </div>
+                );
+            })}
         </div>
     );
 }
@@ -103,7 +122,7 @@ function InlineNameRow(props: {
                     {kind === "folder" ? (
                         <IconFolder className="h-3.5 w-3.5" />
                     ) : (
-                        <IconFile className="h-3.5 w-3.5" />
+                        <WorkspaceFileIcon fileName={value} className="h-3.5 w-3.5" />
                     )}
                 </div>
 
@@ -340,12 +359,12 @@ function Tree(props: TreeProps) {
                               {
                                   label: layoutT("openToLeft"),
                                   onClick: () => openFileInSplit(n.id, "left"),
-                                  icon: <IconFile className="h-4 w-4" />,
+                                  icon: <WorkspaceFileIcon fileName={n.name} className="h-4 w-4" />,
                               },
                               {
                                   label: layoutT("openToRight"),
                                   onClick: () => openFileInSplit(n.id, "right"),
-                                  icon: <IconFile className="h-4 w-4" />,
+                                  icon: <WorkspaceFileIcon fileName={n.name} className="h-4 w-4" />,
                               },
                           ]
                         : []),
@@ -639,7 +658,7 @@ function Tree(props: TreeProps) {
                                 {isFolder ? (
                                     <IconFolder className="h-4 w-4" />
                                 ) : (
-                                    <IconFile className="h-4 w-4" />
+                                    <WorkspaceFileIcon fileName={n.name} className="h-4 w-4" />
                                 )}
                             </div>
 
