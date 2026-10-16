@@ -52,4 +52,12 @@ describe("ZoeBuild React/Vite live preview ownership", () => {
     expect(content).not.toContain("loadCurrentBuildAccessSnapshot");
     expect(remote).not.toContain("allow-same-origin");
   });
+  it("keeps the last loaded frame while an expired preview restarts", () => {
+    const hook = source("./useReactVitePreview.ts");
+    expect(hook).toContain("src: current?.src ?? null");
+    expect(hook).toContain("revision: current?.revision ?? 0");
+    expect(hook).toContain('error.message === "PREVIEW_EXPIRED"');
+    expect(hook).toContain("restart();");
+  });
+
 });

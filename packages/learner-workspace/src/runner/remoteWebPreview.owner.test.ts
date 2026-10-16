@@ -29,4 +29,29 @@ describe("generic remote web preview seam", () => {
     expect(remote).toContain('sandbox="allow-scripts allow-forms allow-modals"');
     expect(remote).not.toContain("allow-same-origin");
   });
+
+  it("keeps the opaque transport URL out of browser chrome", () => {
+    const remote = source("./components/RemoteWebPreview.tsx");
+    expect(remote).toContain('const displayUrl = preview.src ? "/" : statusLabel;');
+    expect(remote).toContain("value={displayUrl}");
+    expect(remote).not.toContain("value={preview.src");
+  });
+
+  it("double-buffers remote revisions so the last loaded frame stays visible", () => {
+    const remote = source("./components/RemoteWebPreview.tsx");
+    expect(remote).toContain("frameSources");
+    expect(remote).toContain("activeFrame");
+    expect(remote).toContain("otherFrame(activeFrame)");
+    expect(remote).toContain("onLoad={() => activateFrame(index, src)}");
+    expect(remote).toContain("data-preview-frame-active");
+    expect(remote).toContain('"pointer-events-none z-0 opacity-0"');
+  });
+
+  it("restarts an expired preview before exposing the proxy error document", () => {
+    const remote = source("./components/RemoteWebPreview.tsx");
+    expect(remote).toContain('response.status === 404');
+    expect(remote).toContain("expiredCandidateRef");
+    expect(remote).toContain("preview.onRetry?.()");
+    expect(remote).toContain('cache: "no-store"');
+  });
 });

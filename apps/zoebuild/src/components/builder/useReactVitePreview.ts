@@ -118,12 +118,12 @@ export function useReactVitePreview(input: Readonly<{
     const startingWorkspaceRevision = workspaceRevisionRef.current;
     const task = (async () => {
       if (mountedRef.current) {
-        setPreview({
-          src: null,
+        setPreview((current) => ({
+          src: current?.src ?? null,
           state: "starting",
           message: "Starting the trusted React/Vite preview…",
-          revision: 0,
-        });
+          revision: current?.revision ?? 0,
+        }));
       }
 
       const response = await fetch(
@@ -153,12 +153,12 @@ export function useReactVitePreview(input: Readonly<{
         }
 
         if (mountedRef.current) {
-          setPreview({
-            src: null,
+          setPreview((current) => ({
+            src: current?.src ?? null,
             state: "starting",
             message: "Preparing the one-time React dependency lock…",
-            revision: 0,
-          });
+            revision: current?.revision ?? 0,
+          }));
         }
 
         const bootstrap = await fetch(
@@ -212,12 +212,12 @@ export function useReactVitePreview(input: Readonly<{
       await task;
     } catch (error) {
       if (mountedRef.current) {
-        setPreview({
-          src: sessionRef.current?.basePath ?? null,
+        setPreview((current) => ({
+          src: current?.src ?? sessionRef.current?.basePath ?? null,
           state: "error",
           message: error instanceof Error ? error.message : "React preview is unavailable.",
-          revision: 0,
-        });
+          revision: current?.revision ?? 0,
+        }));
       }
     } finally {
       startPromiseRef.current = null;
