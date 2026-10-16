@@ -43,6 +43,7 @@ import {
 import {
   resolveTrustedBuildOperation,
 } from "./trustedBuildOperations.js";
+import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
 
 type ProductionBuildStep =
   | "install"
@@ -98,6 +99,7 @@ export function buildProductionBuildContainerOptions(
     },
 
     Env: [
+      trustedRuntimeCommandEnv(args.command),
       "HOME=/tmp",
       "CI=1",
       "NPM_CONFIG_REGISTRY=https://registry.npmjs.org/",

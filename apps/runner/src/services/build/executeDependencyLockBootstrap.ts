@@ -12,6 +12,7 @@ import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { createWorkspace } from "../workspace/createWorkspace.js";
 import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
 import { resolveTrustedBuildOperation } from "./trustedBuildOperations.js";
+import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
 
 const MAX_LOCKFILE_BYTES = 2 * 1024 * 1024;
 const BOOTSTRAP_TIMEOUT_MS = 120_000;
@@ -43,6 +44,7 @@ export function buildDependencyLockBootstrapContainerOptions(args: Readonly<{
       "com.zoeskoul.runner.profile": sandboxProfile.id,
     },
     Env: [
+      trustedRuntimeCommandEnv(args.command),
       "HOME=/tmp",
       "CI=1",
       "NPM_CONFIG_REGISTRY=https://registry.npmjs.org/",
