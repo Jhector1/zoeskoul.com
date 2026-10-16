@@ -1483,6 +1483,20 @@ export async function startReactPreview(
           "build",
       });
 
+    const viteTmpfsUser =
+      /^(\d+):(\d+)$/.exec(
+        options.User,
+      );
+
+    if (!viteTmpfsUser) {
+      throw new Error(
+        "Trusted React preview runtime user must be numeric UID:GID.",
+      );
+    }
+
+    const viteTmpfsOwnership =
+      `uid=${viteTmpfsUser[1]},gid=${viteTmpfsUser[2]},mode=0700`;
+
     const container =
       await docker.createContainer({
         ...options,
@@ -1507,9 +1521,9 @@ export async function startReactPreview(
             ...options.HostConfig
               .Tmpfs,
             [`${REACT_VITE_V1_PREBUILT_ROOT}/node_modules/.vite`]:
-              "rw,noexec,nosuid,size=64m",
+              `rw,noexec,nosuid,size=64m,${viteTmpfsOwnership}`,
             [`${REACT_VITE_V1_PREBUILT_ROOT}/node_modules/.vite-temp`]:
-              "rw,noexec,nosuid,size=32m",
+              `rw,noexec,nosuid,size=32m,${viteTmpfsOwnership}`,
           },
 
           // No public preview port. The runner reaches Vite only through a
