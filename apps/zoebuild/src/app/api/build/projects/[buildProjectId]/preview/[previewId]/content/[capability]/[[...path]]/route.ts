@@ -13,6 +13,9 @@ import {
   NativeCommerceCartError,
   parseNativeCommerceCartCommand,
 } from "@/lib/commerce/nativeCommerceCart";
+import {
+  enforceNativeCommerceCartRateLimit,
+} from "@/lib/commerce/nativeCommerceCartRateLimit";
 import { prisma } from "@zoeskoul/platform-server/prisma";
 import { parseReactPreviewId, ReactPreviewRequestError } from "@/lib/build/reactPreviewServer";
 import { normalizeReactPreviewProxyPath } from "@/lib/build/reactPreviewProxyPath";
@@ -366,6 +369,47 @@ export async function POST(
       return errorResponse(
         "Preview capability does not match this project.",
         404,
+      );
+    }
+
+    const cartRateLimit =
+      await enforceNativeCommerceCartRateLimit(
+        req,
+        {
+          buildProjectId:
+            context.buildProjectId,
+          scope:
+            `preview:${previewId}`,
+        },
+      );
+
+    if (
+      !cartRateLimit.ok
+    ) {
+      if (
+        cartRateLimit.kind ===
+        "limited"
+      ) {
+        const response =
+          errorResponse(
+            "Too many cart requests.",
+            429,
+          );
+
+        response.headers.set(
+          "Retry-After",
+          String(
+            cartRateLimit.retryAfterSeconds ??
+              60,
+          ),
+        );
+
+        return response;
+      }
+
+      return errorResponse(
+        "Commerce service unavailable.",
+        503,
       );
     }
 

@@ -12,6 +12,9 @@ import {
   NativeCommerceCartError,
   parseNativeCommerceCartCommand,
 } from "@/lib/commerce/nativeCommerceCart";
+import {
+  enforceNativeCommerceCartRateLimit,
+} from "@/lib/commerce/nativeCommerceCartRateLimit";
 
 import {
   buildPublishedStaticFileMap,
@@ -281,6 +284,61 @@ export async function POST(
 
   if (!deployment) {
     return notFound();
+  }
+
+  const cartRateLimit =
+    await enforceNativeCommerceCartRateLimit(
+      request,
+      {
+        buildProjectId:
+          normalizedProjectId,
+        scope:
+          "published",
+      },
+    );
+
+  if (
+    !cartRateLimit.ok
+  ) {
+    if (
+      cartRateLimit.kind ===
+      "limited"
+    ) {
+      return new Response(
+        "Too many cart requests.",
+        {
+          status: 429,
+          headers: {
+            "Cache-Control":
+              "no-store",
+            "Content-Type":
+              "text/plain; charset=utf-8",
+            "Retry-After":
+              String(
+                cartRateLimit.retryAfterSeconds ??
+                  60,
+              ),
+            "X-Content-Type-Options":
+              "nosniff",
+          },
+        },
+      );
+    }
+
+    return new Response(
+      "Commerce service unavailable.",
+      {
+        status: 503,
+        headers: {
+          "Cache-Control":
+            "no-store",
+          "Content-Type":
+            "text/plain; charset=utf-8",
+          "X-Content-Type-Options":
+            "nosniff",
+        },
+      },
+    );
   }
 
   try {
