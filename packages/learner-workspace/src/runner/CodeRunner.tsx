@@ -3124,6 +3124,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         <EditorPane
                             frame={frame}
                             lang={args.editorLanguage}
+                            fileName={args.fileName}
                             mobileEditMode="auto"
                             code={args.code}
                             onChange={args.onChangeCode}

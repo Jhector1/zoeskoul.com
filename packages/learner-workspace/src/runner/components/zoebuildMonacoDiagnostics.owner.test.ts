@@ -9,9 +9,7 @@ const editor = readFileSync(
 
 describe("ZoeBuild Monaco diagnostics policy", () => {
   it("enables React JSX parsing while preserving syntax diagnostics", () => {
-    expect(editor).toContain(
-      "monaco.typescript.JsxEmit.ReactJSX",
-    );
+    expect(editor).toContain("jsx: jsxEmit");
     expect(editor).toContain("allowNonTsExtensions: true");
     expect(editor).toContain("noSyntaxValidation: false");
   });
@@ -30,4 +28,20 @@ describe("ZoeBuild Monaco diagnostics policy", () => {
     expect(editor).not.toContain('renderValidationDecorations: "off"');
     expect(editor).not.toContain("setModelMarkers(");
   });
+  it("configures the Monaco instance owned by the mounted editor", () => {
+    expect(editor).toContain("beforeMount={(monaco: any) => {");
+    expect(editor).toContain("applyZoeBuildMonacoDiagnostics(monaco);");
+    expect(editor).not.toContain('void import("monaco-editor")');
+    expect(editor).not.toContain("useZoeBuildMonacoDiagnostics();");
+  });
+
+  it("resolves Monaco TypeScript defaults across current and legacy namespace layouts", () => {
+    expect(editor).toContain("monaco?.typescript ??");
+    expect(editor).toContain("monaco?.languages?.typescript");
+    expect(editor).toContain("typescript.typescriptDefaults");
+    expect(editor).toContain("typescript.javascriptDefaults");
+    expect(editor).toContain("typescript.JsxEmit?.ReactJSX");
+    expect(editor).toContain("typescript.JsxEmit?.React");
+  });
+
 });

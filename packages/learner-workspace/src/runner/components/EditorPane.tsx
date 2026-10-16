@@ -111,11 +111,20 @@ function sanitizePathPart(x: string) {
     );
 }
 
+function extForFileName(fileName?: string): string | null {
+    const normalized = sanitizePathPart(fileName ?? "");
+    const leaf = normalized.split("/").pop() ?? "";
+    const match = leaf.match(/\.([a-zA-Z0-9]+)$/);
+
+    return match?.[1] ?? null;
+}
+
 export function buildModelPath(args: {
     modelKey?: string;
     exerciseStateKey?: string;
     instanceKey: string;
     lang: string;
+    fileName?: string;
 }) {
     const modelPart = sanitizePathPart(args.modelKey || args.instanceKey);
     const scopePart = sanitizePathPart(
@@ -123,7 +132,9 @@ export function buildModelPath(args: {
     );
 
     const base = scopePart ? `${scopePart}/${modelPart}` : modelPart;
-    return `inmemory://zoeskoul-runner/${base}.${extForLang(args.lang)}`;
+    const extension = extForFileName(args.fileName) ?? extForLang(args.lang);
+
+    return `inmemory://zoeskoul-runner/${base}.${extension}`;
 }
 
 export function buildWorkspaceModelReplacements(args: {
@@ -145,6 +156,7 @@ export function buildWorkspaceModelReplacements(args: {
                     node.name,
                     String(workspace.language),
                 ),
+                fileName: node.name,
             }),
             content: node.content ?? "",
         }];
@@ -324,6 +336,7 @@ export default function EditorPane(props: {
     disabled?: boolean;
     readOnly?: boolean;
     onMount?: (ed: any) => void;
+    fileName?: string;
     modelKey?: string;
     exerciseStateKey?: string;
     workspace?: WorkspaceStateV2 | null;
@@ -334,7 +347,6 @@ export default function EditorPane(props: {
     frame?: RunnerFrame;
     mobileEditMode?: MobileEditMode;
 }) {
-    useZoeBuildMonacoDiagnostics();
     const {
         lang,
         code,
@@ -344,6 +356,7 @@ export default function EditorPane(props: {
         disabled = false,
         readOnly = false,
         onMount,
+        fileName,
         modelKey,
         exerciseStateKey,
         workspace,
@@ -431,6 +444,7 @@ export default function EditorPane(props: {
             exerciseStateKey: effectiveExerciseStateKey,
             instanceKey: instanceKeyRef.current,
             lang: normalizedLang,
+            fileName,
         });
 
         const debugReview =
@@ -458,6 +472,7 @@ export default function EditorPane(props: {
         modelKey,
         normalizedLang,
         lang,
+        fileName,
     ]);
 
     const refreshMobileEditNeed = useCallback(() => {
@@ -831,6 +846,9 @@ export default function EditorPane(props: {
                     })()}
                     theme={theme}
                     saveViewState
+                    beforeMount={(monaco: any) => {
+                        applyZoeBuildMonacoDiagnostics(monaco);
+                    }}
                     onMount={(ed: any, monaco: any) => {
                         disposeEditorListeners();
 
@@ -1017,52 +1035,52 @@ export default function EditorPane(props: {
  * browser-side semantic/suggestion diagnostics in ZoeBuild. Trusted runner
  * build/preview validation remains authoritative for package/type resolution.
  */
-function useZoeBuildMonacoDiagnostics() {
-    useEffect(() => {
-        if (typeof window === "undefined") return;
+function applyZoeBuildMonacoDiagnostics(monaco: any) {
+    if (typeof window === "undefined") return;
 
-        const appName = String(
-            getLearnerWorkspaceStaticConfig().appName ?? "",
-        )
-            .trim()
-            .toLowerCase()
-            .replace(/[^a-z0-9]/g, "");
+    const appName = String(
+        getLearnerWorkspaceStaticConfig().appName ?? "",
+    )
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
 
-        const isZoeBuild =
-            appName === "zoebuild" ||
-            window.location.port === "3004" ||
-            window.location.hostname.toLowerCase() === "build.zoeskoul.com";
+    const isZoeBuild =
+        appName === "zoebuild" ||
+        window.location.port === "3004" ||
+        window.location.hostname.toLowerCase() === "build.zoeskoul.com";
 
-        if (!isZoeBuild) return;
+    if (!isZoeBuild) return;
 
-        let active = true;
+    const typescript =
+        monaco?.typescript ??
+        monaco?.languages?.typescript;
 
-        void import("monaco-editor").then((monaco) => {
-            if (!active) return;
+    if (!typescript) return;
 
-            const defaults = [
-                monaco.typescript.typescriptDefaults,
-                monaco.typescript.javascriptDefaults,
-            ];
+    const jsxEmit =
+        typescript.JsxEmit?.ReactJSX ??
+        typescript.JsxEmit?.React;
 
-            for (const languageDefaults of defaults) {
-                languageDefaults.setCompilerOptions({
-                    ...languageDefaults.getCompilerOptions(),
-                    jsx: monaco.typescript.JsxEmit.ReactJSX,
-                    allowJs: true,
-                    allowNonTsExtensions: true,
-                });
+    if (typeof jsxEmit === "undefined") return;
 
-                languageDefaults.setDiagnosticsOptions({
-                    noSyntaxValidation: false,
-                    noSemanticValidation: true,
-                    noSuggestionDiagnostics: true,
-                });
-            }
+    const defaults = [
+        typescript.typescriptDefaults,
+        typescript.javascriptDefaults,
+    ].filter(Boolean);
+
+    for (const languageDefaults of defaults) {
+        languageDefaults.setCompilerOptions({
+            ...languageDefaults.getCompilerOptions(),
+            jsx: jsxEmit,
+            allowJs: true,
+            allowNonTsExtensions: true,
         });
 
-        return () => {
-            active = false;
-        };
-    }, []);
+        languageDefaults.setDiagnosticsOptions({
+            noSyntaxValidation: false,
+            noSemanticValidation: true,
+            noSuggestionDiagnostics: true,
+        });
+    }
 }
