@@ -15,7 +15,7 @@ import type {
 
 import type {
   CommerceProviderConnectionSnapshot,
-} from "./commerceProviderResolver";
+} from "./commerceProviderConnectionContract";
 import type {
   CommerceProviderEnvironment,
 } from "./nativeCommerceProvider";

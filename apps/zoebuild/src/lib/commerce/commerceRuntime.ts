@@ -22,8 +22,10 @@ import type {
 import {
   CommerceProviderResolutionError,
   resolveCommerceProvider,
-  type CommerceProviderConnectionSnapshot,
 } from "./commerceProviderResolver";
+import type {
+  CommerceProviderConnectionSnapshot,
+} from "./commerceProviderConnectionContract";
 import type {
   CommerceProviderCapability,
   CommerceProviderEnvironment,
@@ -58,6 +60,29 @@ const PERSISTED_CAPABILITY_BY_RUNTIME:
       "payments",
   };
 
+function requireCommerceProviderExecutionEnvironment(
+  provider: string,
+  capability: RuntimeCommerceCapability,
+  environment: CommerceProviderEnvironment,
+  unavailableMessage: string,
+): void {
+  if (
+    COMMERCE_RUNTIME_REGISTRY
+      .supportsInEnvironment(
+        provider,
+        capability,
+        environment,
+      )
+  ) {
+    return;
+  }
+
+  throw new CommerceProviderResolutionError(
+    "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+    unavailableMessage,
+  );
+}
+
 async function resolveHandler<
   TCapability extends RuntimeCommerceCapability,
 >(
@@ -81,6 +106,13 @@ async function resolveHandler<
     );
 
   try {
+    requireCommerceProviderExecutionEnvironment(
+      resolved.provider,
+      capability,
+      resolved.environment,
+      "Configured commerce provider is not available on this execution path.",
+    );
+
     const handler =
       COMMERCE_RUNTIME_REGISTRY
         .getHandler(
@@ -135,6 +167,13 @@ export async function prepareCommercePaymentReconciliation(
     CommerceRuntimeHandler;
 
   try {
+    requireCommerceProviderExecutionEnvironment(
+      input.provider,
+      "commerce.payments",
+      input.environment,
+      "Historical payment provider is not available on this execution path.",
+    );
+
     handler =
       COMMERCE_RUNTIME_REGISTRY
         .getHandler(
@@ -180,6 +219,8 @@ export async function prepareCommercePaymentReconciliation(
     await handler.prepareReconciliation({
       buildProjectId:
         input.buildProjectId,
+      provider:
+        input.provider,
       environment:
         input.environment,
       connection:
@@ -265,6 +306,8 @@ export async function prepareCommercePaymentCheckout(
     await handler.prepare({
       buildProjectId:
         input.buildProjectId,
+      provider:
+        resolved.provider,
       environment:
         resolved.environment,
       connection:

@@ -34,7 +34,7 @@ import type {
 } from "./commerceRuntimeContracts";
 import type {
   CommerceProviderConnectionSnapshot,
-} from "./commerceProviderResolver";
+} from "./commerceProviderConnectionContract";
 import {
   COMMERCE_PROVIDER_ENVIRONMENTS,
   ZOESTORE_COMMERCE_DISPLAY_NAME,
@@ -168,6 +168,7 @@ export type PreparedCommercePaymentReconciliation =
 export type CommerceProviderExecutionContext =
   Readonly<{
     buildProjectId: string;
+    provider: string;
     environment:
       CommerceProviderEnvironment;
     connection:

@@ -10,15 +10,9 @@ import {
   type CommerceProviderEnvironment,
   type CommerceStorefrontSurface,
 } from "./nativeCommerceProvider";
-
-export type CommerceProviderConnectionSnapshot =
-  Readonly<{
-    id: string;
-    externalAccountRef: string | null;
-    credentialsSecretRef: string | null;
-    webhookSecretRef: string | null;
-    config: unknown;
-  }>;
+import type {
+  CommerceProviderConnectionSnapshot,
+} from "./commerceProviderConnectionContract";
 
 export type ResolvedCommerceProvider =
   Readonly<{

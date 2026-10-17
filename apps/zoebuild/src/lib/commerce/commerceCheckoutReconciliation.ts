@@ -4,7 +4,7 @@ import type { PrismaClient } from "@zoeskoul/db";
 
 import type {
   CommerceProviderConnectionSnapshot,
-} from "./commerceProviderResolver";
+} from "./commerceProviderConnectionContract";
 
 import type {
   CommerceProviderEnvironment,
