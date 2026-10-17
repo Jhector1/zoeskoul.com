@@ -14,6 +14,11 @@ import {
 } from "./stripeCommerceCheckout";
 
 import {
+  adoptCommercePaymentProviderRef,
+  CommercePaymentProviderRefError,
+} from "./commercePaymentProviderRef";
+
+import {
   hashNativeCommerceCartToken,
   NativeCommerceCartError,
   parseNativeCommerceCartToken,
@@ -1261,6 +1266,13 @@ export async function beginNativeCommerceCheckout(
       },
     );
 
+  /*
+   * Re-entering checkout for the same non-expired trusted order deliberately
+   * replays this exact provider request with order.id as the idempotency key.
+   * For Stripe this recovers a Session that may have been created remotely
+   * before the local provider reference was persisted. publicOrder() bounds
+   * this recovery path to the trusted checkout reservation lifetime.
+   */
   const started =
     await executor.begin({
       environment:
@@ -1284,41 +1296,35 @@ export async function beginNativeCommerceCheckout(
       started.providerRef,
     );
 
-  const persisted =
-    await client
-      .commerceOrder
-      .updateMany({
-        where: {
-          id:
-            order.id,
-          paymentProvider:
-            payment.provider,
-          OR: [
-            {
-              paymentProviderRef:
-                null,
-            },
-            {
-              paymentProviderRef:
-                providerRef,
-            },
-          ],
-        },
-        data: {
-          paymentProviderRef:
-            providerRef,
-        },
-      });
-
-  if (
-    persisted.count !==
-      1
-  ) {
-    throw new NativeCommerceCheckoutError(
-      "COMMERCE_CHECKOUT_STATE_CONFLICT",
-      "Checkout state changed while the payment session was being created.",
-      409,
+  try {
+    await adoptCommercePaymentProviderRef(
+      client,
+      {
+        buildProjectId,
+        orderId:
+          order.id,
+        provider:
+          payment.provider,
+        environment:
+          payment.environment,
+        providerRef,
+      },
     );
+  } catch (
+    error
+  ) {
+    if (
+      error instanceof
+      CommercePaymentProviderRefError
+    ) {
+      throw new NativeCommerceCheckoutError(
+        "COMMERCE_CHECKOUT_STATE_CONFLICT",
+        "Checkout state changed while the payment session was being created.",
+        409,
+      );
+    }
+
+    throw error;
   }
 
   return {

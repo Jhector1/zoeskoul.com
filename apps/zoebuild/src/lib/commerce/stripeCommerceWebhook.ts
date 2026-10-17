@@ -1,5 +1,10 @@
 import "server-only";
 
+import {
+  adoptCommercePaymentProviderRef,
+  CommercePaymentProviderRefError,
+} from "./commercePaymentProviderRef";
+
 import type Stripe from "stripe";
 
 import type {
@@ -575,9 +580,14 @@ function assertSessionOrder(
     input.order
       .paymentProvider !==
       "stripe" ||
-    input.order
-      .paymentProviderRef !==
-      session.id
+    (
+      input.order
+        .paymentProviderRef !==
+        null &&
+      input.order
+        .paymentProviderRef !==
+        session.id
+    )
   ) {
     throw new StripeCommerceWebhookError(
       "STRIPE_WEBHOOK_PROVIDER_REFERENCE_MISMATCH",
@@ -1477,6 +1487,44 @@ export async function reconcileStripeCommerceWebhookEvent(
     order,
     session,
   });
+
+  /*
+   * The signed provider event is allowed to repair the narrow failure window
+   * where Stripe created the Session but the local provider reference was not
+   * persisted. All remote identity, project, environment, amount, currency,
+   * and expiry checks above must pass first.
+   */
+  try {
+    await adoptCommercePaymentProviderRef(
+      client,
+      {
+        buildProjectId:
+          input.buildProjectId,
+        orderId,
+        provider:
+          "stripe",
+        environment:
+          input.environment,
+        providerRef:
+          session.id,
+      },
+    );
+  } catch (
+    error
+  ) {
+    if (
+      error instanceof
+      CommercePaymentProviderRefError
+    ) {
+      throw new StripeCommerceWebhookError(
+        "STRIPE_WEBHOOK_PROVIDER_REFERENCE_MISMATCH",
+        "Stripe Checkout session does not match the stored order.",
+        409,
+      );
+    }
+
+    throw error;
+  }
 
   if (
     input.event.type ===

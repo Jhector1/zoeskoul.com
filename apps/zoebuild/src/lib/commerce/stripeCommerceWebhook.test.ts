@@ -79,7 +79,15 @@ function event(
     Stripe.Event;
 }
 
-function reconciliationClient() {
+function reconciliationClient(
+  initialProviderRef:
+    string |
+    null =
+      "cs_test_123",
+) {
+  let providerRef =
+    initialProviderRef;
+
   let paymentStatus =
     "pending";
 
@@ -109,8 +117,10 @@ function reconciliationClient() {
         1800,
       paymentProvider:
         "stripe",
+      paymentEnvironment:
+        "test",
       paymentProviderRef:
-        "cs_test_123",
+        providerRef,
       placedAt,
       items: [
         {
@@ -148,6 +158,48 @@ function reconciliationClient() {
           input:
             any,
         ) => {
+          if (
+            typeof input
+              .data
+              .paymentProviderRef ===
+            "string"
+          ) {
+            const requestedRef =
+              input
+                .data
+                .paymentProviderRef;
+
+            if (
+              orderStatus !==
+                "pending" ||
+              (
+                paymentStatus !==
+                  "pending" &&
+                paymentStatus !==
+                  "authorized"
+              ) ||
+              (
+                providerRef !==
+                  null &&
+                providerRef !==
+                  requestedRef
+              )
+            ) {
+              return {
+                count:
+                  0,
+              };
+            }
+
+            providerRef =
+              requestedRef;
+
+            return {
+              count:
+                1,
+            };
+          }
+
           if (
             input
               .data
@@ -275,6 +327,9 @@ function reconciliationClient() {
     },
     get quantity() {
       return quantity;
+    },
+    get providerRef() {
+      return providerRef;
     },
   };
 }
@@ -408,6 +463,68 @@ describe(
           fake.quantity,
         ).toBe(
           10,
+        );
+      },
+    );
+
+    it(
+      "adopts a missing trusted provider reference before webhook reconciliation",
+      async () => {
+        const fake =
+          reconciliationClient(
+            null,
+          );
+
+        expect(
+          fake.providerRef,
+        ).toBeNull();
+
+        const result =
+          await reconcileStripeCommerceWebhookEvent(
+            fake.client,
+            {
+              buildProjectId:
+                "build_1",
+              environment:
+                "test",
+              event:
+                event(
+                  "checkout.session.completed",
+                ),
+            },
+          );
+
+        expect(
+          result,
+        ).toEqual({
+          status:
+            "paid",
+          orderId:
+            "order_1",
+        });
+
+        expect(
+          fake.providerRef,
+        ).toBe(
+          "cs_test_123",
+        );
+
+        expect(
+          fake.paymentStatus,
+        ).toBe(
+          "paid",
+        );
+
+        expect(
+          fake.orderStatus,
+        ).toBe(
+          "confirmed",
+        );
+
+        expect(
+          fake.quantity,
+        ).toBe(
+          8,
         );
       },
     );

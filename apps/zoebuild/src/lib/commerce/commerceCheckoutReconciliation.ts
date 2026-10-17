@@ -117,7 +117,7 @@ export type CommerceStaleCheckoutReconciliationResult =
     provider: string;
     environment:
       CommerceProviderEnvironment | null;
-    providerRef: string;
+    providerRef: string | null;
     remoteState:
       CommerceCheckoutRemoteState | null;
     action:
@@ -131,6 +131,7 @@ export type CommerceStaleCheckoutReconciliationResult =
       | "connection-unavailable"
       | "provider-expiration-unavailable"
       | "provider-expiration-unconfirmed"
+      | "provider-ref-missing"
       | "error";
     errorCode?: string;
   }>;
@@ -274,9 +275,6 @@ export async function reconcileStaleCommerceCheckouts(
         paymentProvider: {
           not: null,
         },
-        paymentProviderRef: {
-          not: null,
-        },
       },
       orderBy: [
         {
@@ -337,10 +335,31 @@ export async function reconcileStaleCommerceCheckouts(
         row.paymentProviderRef,
       );
 
-    if (
-      !provider ||
-      !providerRef
-    ) {
+    if (!provider) {
+      continue;
+    }
+
+    if (!providerRef) {
+      /*
+       * Never release a stale reservation merely because the local provider
+       * reference is missing. A remote Session may exist. Surface the row so
+       * recovery/operations can act on it while remaining fail closed.
+       */
+      results.push({
+        orderId:
+          row.id,
+        provider,
+        environment:
+          row.paymentEnvironment,
+        providerRef:
+          null,
+        remoteState:
+          null,
+        action:
+          "provider-ref-missing",
+        errorCode:
+          "COMMERCE_RECONCILIATION_PROVIDER_REF_MISSING",
+      });
       continue;
     }
 
