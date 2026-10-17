@@ -13,6 +13,11 @@ import {
   parseNativeCommerceCartCommand,
 } from "@/lib/commerce/nativeCommerceCart";
 import {
+  beginNativeCommerceCheckout,
+  NativeCommerceCheckoutError,
+  parseCommerceCheckoutRequest,
+} from "@/lib/commerce/nativeCommerceCheckout";
+import {
   enforceNativeCommerceCartRateLimit,
 } from "@/lib/commerce/nativeCommerceCartRateLimit";
 
@@ -259,10 +264,23 @@ export async function POST(
   const normalizedProjectId =
     buildProjectId.trim();
 
+  const commercePath =
+    path.join("/");
+
+  const isCartPath =
+    commercePath ===
+      "__zoebuild/commerce/cart";
+
+  const isCheckoutPath =
+    commercePath ===
+      "__zoebuild/commerce/checkout";
+
   if (
     !normalizedProjectId ||
-    path.join("/") !==
-      "__zoebuild/commerce/cart"
+    (
+      !isCartPath &&
+      !isCheckoutPath
+    )
   ) {
     return notFound();
   }
@@ -370,6 +388,55 @@ export async function POST(
   }
 
   try {
+    if (
+      isCheckoutPath
+    ) {
+      const checkout =
+        await beginNativeCommerceCheckout(
+          prisma,
+          {
+            buildProjectId:
+              normalizedProjectId,
+            surface:
+              "published",
+            request:
+              parseCommerceCheckoutRequest(
+                await readPublishedCommerceJson(
+                  request,
+                ),
+              ),
+          },
+        );
+
+      return new Response(
+        JSON.stringify({
+          ok:
+            true,
+          checkout,
+        }),
+        {
+          status:
+            200,
+          headers: {
+            "Cache-Control":
+              "no-store, max-age=0",
+            "Content-Type":
+              "application/json; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+            "Referrer-Policy":
+              "strict-origin-when-cross-origin",
+            "X-ZoeBuild-Deployment":
+              deployment.id,
+            "X-ZoeBuild-Source-Version":
+              String(
+                deployment.sourceVersion,
+              ),
+          },
+        },
+      );
+    }
+
     await requireNativeCommerceCapability({
       buildProjectId:
         normalizedProjectId,
@@ -424,6 +491,27 @@ export async function POST(
       },
     );
   } catch (error) {
+    if (
+      error instanceof
+      NativeCommerceCheckoutError
+    ) {
+      return new Response(
+        error.message,
+        {
+          status:
+            error.status,
+          headers: {
+            "Cache-Control":
+              "no-store",
+            "Content-Type":
+              "text/plain; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+          },
+        },
+      );
+    }
+
     if (
       error instanceof
       CommerceProviderResolutionError

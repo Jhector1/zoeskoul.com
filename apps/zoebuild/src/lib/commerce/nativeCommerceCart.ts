@@ -208,6 +208,14 @@ function token(
   return value;
 }
 
+export function parseNativeCommerceCartToken(
+  value: unknown,
+) {
+  return token(
+    value,
+  );
+}
+
 function optionalToken(
   value: unknown,
 ) {
@@ -236,6 +244,14 @@ function hashToken(
     .digest(
       "hex",
     );
+}
+
+export function hashNativeCommerceCartToken(
+  value: string,
+) {
+  return hashToken(
+    value,
+  );
 }
 
 function newToken() {

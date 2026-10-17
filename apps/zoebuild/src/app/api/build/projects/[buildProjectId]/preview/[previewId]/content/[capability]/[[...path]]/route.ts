@@ -14,6 +14,11 @@ import {
   parseNativeCommerceCartCommand,
 } from "@/lib/commerce/nativeCommerceCart";
 import {
+  beginNativeCommerceCheckout,
+  NativeCommerceCheckoutError,
+  parseCommerceCheckoutRequest,
+} from "@/lib/commerce/nativeCommerceCheckout";
+import {
   enforceNativeCommerceCartRateLimit,
 } from "@/lib/commerce/nativeCommerceCartRateLimit";
 import {
@@ -391,9 +396,17 @@ export async function POST(
         basePath.length,
       );
 
+    const isCartPath =
+      relativePath ===
+        "__zoebuild/commerce/cart";
+
+    const isCheckoutPath =
+      relativePath ===
+        "__zoebuild/commerce/checkout";
+
     if (
-      relativePath !==
-      "__zoebuild/commerce/cart"
+      !isCartPath &&
+      !isCheckoutPath
     ) {
       return errorResponse(
         "Not found.",
@@ -459,6 +472,53 @@ export async function POST(
       );
     }
 
+    if (
+      isCheckoutPath
+    ) {
+      const checkout =
+        await beginNativeCommerceCheckout(
+          prisma,
+          {
+            buildProjectId:
+              context.buildProjectId,
+            surface:
+              "preview",
+            request:
+              parseCommerceCheckoutRequest(
+                await readCommerceJson(
+                  req,
+                ),
+              ),
+          },
+        );
+
+      return new Response(
+        JSON.stringify({
+          ok:
+            true,
+          checkout,
+        }),
+        {
+          status:
+            200,
+          headers: {
+            "Access-Control-Allow-Origin":
+              "*",
+            "Cross-Origin-Resource-Policy":
+              "cross-origin",
+            "Cache-Control":
+              "no-store, max-age=0",
+            "Content-Type":
+              "application/json; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+            "Referrer-Policy":
+              "no-referrer",
+          },
+        },
+      );
+    }
+
     await requireNativeCommerceCapability({
       buildProjectId:
         context.buildProjectId,
@@ -511,6 +571,16 @@ export async function POST(
       },
     );
   } catch (error) {
+    if (
+      error instanceof
+      NativeCommerceCheckoutError
+    ) {
+      return errorResponse(
+        error.message,
+        error.status,
+      );
+    }
+
     if (
       error instanceof
       CommerceProviderResolutionError
@@ -590,8 +660,12 @@ export async function OPTIONS(
     !validCapability(
       capability,
     ) ||
-    path.join("/") !==
-      "__zoebuild/commerce/cart"
+    ![
+      "__zoebuild/commerce/cart",
+      "__zoebuild/commerce/checkout",
+    ].includes(
+      path.join("/"),
+    )
   ) {
     return errorResponse(
       "Not found.",
