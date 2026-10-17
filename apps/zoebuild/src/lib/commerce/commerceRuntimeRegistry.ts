@@ -8,6 +8,7 @@ import type {
 } from "@zoeskoul/provider-contracts";
 import {
   ProviderRegistry,
+  type ProviderRegistration,
 } from "@zoeskoul/provider-platform";
 import type {
   BuildSecretStore,
@@ -35,6 +36,7 @@ import type {
   CommerceProviderConnectionSnapshot,
 } from "./commerceProviderResolver";
 import {
+  COMMERCE_PROVIDER_ENVIRONMENTS,
   ZOESTORE_COMMERCE_DISPLAY_NAME,
   ZOESTORE_COMMERCE_PROVIDER,
   type CommerceProviderCapability,
@@ -204,6 +206,12 @@ export type CommerceRuntimeHandler =
   | CheckoutHandler
   | PaymentHandler;
 
+export type CommerceProviderAdapterRegistration =
+  ProviderRegistration<
+    RuntimeCommerceCapability,
+    CommerceRuntimeHandler
+  >;
+
 export const COMMERCE_RUNTIME_REGISTRY =
   new ProviderRegistry<
     RuntimeCommerceCapability,
@@ -237,17 +245,49 @@ export function supportsCommerceProviderExecution(
   provider: string,
   capability:
     CommerceProviderCapability,
+  environment:
+    CommerceProviderEnvironment,
 ): boolean {
   return COMMERCE_RUNTIME_REGISTRY
-    .supports(
+    .supportsInEnvironment(
       provider,
       runtimeCommerceCapabilityForProviderCapability(
         capability,
       ),
+      environment,
     );
 }
 
-COMMERCE_RUNTIME_REGISTRY.register({
+export function supportsCommerceProviderExecutionForEnvironments(
+  provider: string,
+  capability:
+    CommerceProviderCapability,
+  environments:
+    readonly CommerceProviderEnvironment[],
+): boolean {
+  return (
+    environments.length > 0 &&
+    environments.every(
+      (environment) =>
+        supportsCommerceProviderExecution(
+          provider,
+          capability,
+          environment,
+        ),
+    )
+  );
+}
+
+export function registerCommerceProviderAdapter(
+  registration:
+    CommerceProviderAdapterRegistration,
+): void {
+  COMMERCE_RUNTIME_REGISTRY.register(
+    registration,
+  );
+}
+
+registerCommerceProviderAdapter({
   manifest: {
     key:
       ZOESTORE_COMMERCE_PROVIDER,
@@ -256,6 +296,8 @@ COMMERCE_RUNTIME_REGISTRY.register({
     connectionKinds: [
       "internal",
     ],
+    environments:
+      COMMERCE_PROVIDER_ENVIRONMENTS,
   },
   handlers: {
     "commerce.catalog": {
@@ -303,7 +345,7 @@ COMMERCE_RUNTIME_REGISTRY.register({
   },
 });
 
-COMMERCE_RUNTIME_REGISTRY.register({
+registerCommerceProviderAdapter({
   manifest: {
     key:
       STRIPE_COMMERCE_PROVIDER,
@@ -312,6 +354,8 @@ COMMERCE_RUNTIME_REGISTRY.register({
     connectionKinds: [
       "credentials",
     ],
+    environments:
+      COMMERCE_PROVIDER_ENVIRONMENTS,
   },
   handlers: {
     "commerce.payments": {

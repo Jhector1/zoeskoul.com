@@ -22,6 +22,7 @@ describe("provider platform", () => {
         key: "merchant-custom-provider",
         displayName: "Merchant Custom Provider",
         connectionKinds: ["endpoint"],
+        environments: ["test", "live"],
       },
       handlers: {
         "demo.alpha": "alpha-handler",

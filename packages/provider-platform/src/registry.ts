@@ -1,5 +1,6 @@
 import type {
   CapabilityKey,
+  ProviderEnvironment,
   ProviderKey,
   ProviderManifest,
   ProviderRegistration,
@@ -33,6 +34,21 @@ export class ProviderRegistry<
     if (this.registrations.has(key)) {
       throw new ProviderRegistryError(
         `Provider "${key}" is already registered.`,
+      );
+    }
+
+    if (registration.manifest.environments.length === 0) {
+      throw new ProviderRegistryError(
+        `Provider "${key}" must declare at least one execution environment.`,
+      );
+    }
+
+    if (
+      new Set(registration.manifest.environments).size !==
+      registration.manifest.environments.length
+    ) {
+      throw new ProviderRegistryError(
+        `Provider "${key}" contains duplicate execution environments.`,
       );
     }
 
@@ -80,6 +96,21 @@ export class ProviderRegistry<
   ): boolean {
     return Boolean(
       this.registrations.get(providerKey)?.handlers[capability],
+    );
+  }
+
+  supportsInEnvironment(
+    providerKey: ProviderKey,
+    capability: TCapability,
+    environment: ProviderEnvironment,
+  ): boolean {
+    const registration =
+      this.registrations.get(providerKey);
+
+    return Boolean(
+      registration &&
+        registration.manifest.environments.includes(environment) &&
+        registration.handlers[capability],
     );
   }
 

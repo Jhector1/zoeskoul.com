@@ -31,7 +31,7 @@ import {
   getCommerceProviderDefinition,
 } from "@/lib/commerce/commerceProviderCatalog";
 import {
-  supportsCommerceProviderExecution,
+  supportsCommerceProviderExecutionForEnvironments,
 } from "@/lib/commerce/commerceRuntimeRegistry";
 import {
   COMMERCE_PROVIDER_CAPABILITIES,
@@ -299,10 +299,11 @@ function publicProviderDirectory() {
           COMMERCE_PROVIDER_CAPABILITIES.map(
             (capability) => [
               capability,
-              supportsCommerceProviderExecution(
-                definition.id,
-                capability,
-              ),
+              supportsCommerceProviderExecutionForEnvironments(
+            definition.id,
+            capability,
+            definition.environments,
+          ),
             ],
           ),
         ),
@@ -774,10 +775,11 @@ export async function PATCH(
       capabilities
     ) {
       if (
-        !supportsCommerceProviderExecution(
-          definition.id,
-          capability,
-        )
+        !supportsCommerceProviderExecutionForEnvironments(
+            definition.id,
+            capability,
+            targetEnvironments,
+          )
       ) {
         return json(
           requestId,

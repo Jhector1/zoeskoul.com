@@ -37,6 +37,13 @@ export interface ProviderManifest {
   readonly key: ProviderKey;
   readonly displayName: string;
   readonly connectionKinds: readonly ProviderConnectionKind[];
+  /**
+   * Environments in which this provider registration may execute.
+   *
+   * Capability support alone is insufficient: callers must also verify the
+   * exact routed environment. There is never implicit test/live fallback.
+   */
+  readonly environments: readonly ProviderEnvironment[];
 }
 
 export interface ProviderRegistration<

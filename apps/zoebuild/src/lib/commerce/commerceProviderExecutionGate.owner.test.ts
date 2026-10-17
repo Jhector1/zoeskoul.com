@@ -126,7 +126,7 @@ describe(
       () => {
         const gate =
           route.indexOf(
-            "!supportsCommerceProviderExecution(",
+            "!supportsCommerceProviderExecutionForEnvironments(",
           );
         const connectionLookup =
           route.indexOf(
@@ -172,7 +172,7 @@ describe(
         expect(
           route,
         ).toContain(
-          "supportsCommerceProviderExecution(",
+          "supportsCommerceProviderExecutionForEnvironments(",
         );
         expect(
           route,
@@ -181,5 +181,46 @@ describe(
         );
       },
     );
+    it(
+      "binds executable provider support to explicit test/live environments",
+      () => {
+        expect(
+          registry,
+        ).toContain(
+          "export type CommerceProviderAdapterRegistration",
+        );
+        expect(
+          registry,
+        ).toContain(
+          "registerCommerceProviderAdapter",
+        );
+        expect(
+          registry,
+        ).toContain(
+          ".supportsInEnvironment(",
+        );
+        expect(
+          registry,
+        ).toContain(
+          "supportsCommerceProviderExecutionForEnvironments",
+        );
+        expect(
+          route,
+        ).toContain(
+          "definition.environments",
+        );
+        expect(
+          route,
+        ).toContain(
+          "targetEnvironments",
+        );
+        expect(
+          route,
+        ).not.toContain(
+          "supportsCommerceProviderExecution(",
+        );
+      },
+    );
+
   },
 );
