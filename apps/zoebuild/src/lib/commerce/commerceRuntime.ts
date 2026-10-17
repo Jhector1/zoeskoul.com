@@ -46,6 +46,8 @@ const PERSISTED_CAPABILITY_BY_RUNTIME:
   > = {
     "commerce.catalog":
       "catalog",
+    "commerce.inventory":
+      "inventory",
     "commerce.cart":
       "cart",
     "commerce.orders":

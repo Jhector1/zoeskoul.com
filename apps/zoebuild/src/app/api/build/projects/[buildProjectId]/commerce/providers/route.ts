@@ -31,6 +31,9 @@ import {
   getCommerceProviderDefinition,
 } from "@/lib/commerce/commerceProviderCatalog";
 import {
+  supportsCommerceProviderExecution,
+} from "@/lib/commerce/commerceRuntimeRegistry";
+import {
   COMMERCE_PROVIDER_CAPABILITIES,
   COMMERCE_PROVIDER_ENVIRONMENTS,
   type CommerceProviderCapability,
@@ -291,6 +294,18 @@ function publicProviderDirectory() {
         definition.recommendedPayment,
       capabilities:
         definition.capabilities,
+      executableCapabilities:
+        Object.fromEntries(
+          COMMERCE_PROVIDER_CAPABILITIES.map(
+            (capability) => [
+              capability,
+              supportsCommerceProviderExecution(
+                definition.id,
+                capability,
+              ),
+            ],
+          ),
+        ),
     }),
   );
 }
@@ -750,6 +765,31 @@ export async function PATCH(
               `${definition.displayName} does not support ${capability}.`,
           },
           400,
+        );
+      }
+    }
+
+    for (
+      const capability of
+      capabilities
+    ) {
+      if (
+        !supportsCommerceProviderExecution(
+          definition.id,
+          capability,
+        )
+      ) {
+        return json(
+          requestId,
+          {
+            ok:
+              false,
+            code:
+              "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+            message:
+              `${definition.displayName} is not executable for ${capability} on this ZoeBuild runtime.`,
+          },
+          409,
         );
       }
     }

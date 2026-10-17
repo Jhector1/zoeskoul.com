@@ -37,6 +37,7 @@ import type {
 import {
   ZOESTORE_COMMERCE_DISPLAY_NAME,
   ZOESTORE_COMMERCE_PROVIDER,
+  type CommerceProviderCapability,
   type CommerceProviderEnvironment,
 } from "./nativeCommerceProvider";
 import {
@@ -52,6 +53,7 @@ import type {
 
 export type RuntimeCommerceCapability =
   | "commerce.catalog"
+  | "commerce.inventory"
   | "commerce.cart"
   | "commerce.orders"
   | "commerce.checkout"
@@ -77,7 +79,20 @@ type CartHandler = Readonly<{
   ): Promise<CommerceCart>;
 }>;
 
+type InventoryHandler = Readonly<{
+  /**
+   * Inventory currently has no direct public command surface, but provider
+   * ownership is explicit and must still be represented by a registered
+   * runtime handler before the admin route may persist it.
+   */
+  capability: "commerce.inventory";
+}>;
+
 type OrdersHandler = Readonly<{
+  /**
+   * Orders are currently owned by checkout/reconciliation orchestration rather
+   * than a standalone public command surface.
+   */
   capability: "commerce.orders";
 }>;
 
@@ -143,7 +158,12 @@ export type PreparedCommercePaymentReconciliation =
     ): Promise<unknown>;
   }>;
 
-type PaymentProviderContext =
+/**
+ * Trusted server-side context available to executable commerce provider
+ * adapters. Secret material is never stored in the connection snapshot; a
+ * secret store is supplied only when the execution path explicitly needs it.
+ */
+export type CommerceProviderExecutionContext =
   Readonly<{
     buildProjectId: string;
     environment:
@@ -161,7 +181,7 @@ type PaymentHandler = Readonly<{
 
   prepare(
     input:
-      PaymentProviderContext,
+      CommerceProviderExecutionContext,
   ):
     Promise<
       PreparedCommercePayments
@@ -169,7 +189,7 @@ type PaymentHandler = Readonly<{
 
   prepareReconciliation?(
     input:
-      PaymentProviderContext,
+      CommerceProviderExecutionContext,
   ):
     Promise<
       PreparedCommercePaymentReconciliation
@@ -178,6 +198,7 @@ type PaymentHandler = Readonly<{
 
 export type CommerceRuntimeHandler =
   | CatalogHandler
+  | InventoryHandler
   | CartHandler
   | OrdersHandler
   | CheckoutHandler
@@ -188,6 +209,43 @@ export const COMMERCE_RUNTIME_REGISTRY =
     RuntimeCommerceCapability,
     CommerceRuntimeHandler
   >();
+
+const RUNTIME_CAPABILITY_BY_PERSISTED = {
+  catalog: "commerce.catalog",
+  inventory: "commerce.inventory",
+  cart: "commerce.cart",
+  orders: "commerce.orders",
+  checkout: "commerce.checkout",
+  payments: "commerce.payments",
+} as const satisfies Readonly<
+  Record<
+    CommerceProviderCapability,
+    RuntimeCommerceCapability
+  >
+>;
+
+export function runtimeCommerceCapabilityForProviderCapability(
+  capability:
+    CommerceProviderCapability,
+): RuntimeCommerceCapability {
+  return RUNTIME_CAPABILITY_BY_PERSISTED[
+    capability
+  ];
+}
+
+export function supportsCommerceProviderExecution(
+  provider: string,
+  capability:
+    CommerceProviderCapability,
+): boolean {
+  return COMMERCE_RUNTIME_REGISTRY
+    .supports(
+      provider,
+      runtimeCommerceCapabilityForProviderCapability(
+        capability,
+      ),
+    );
+}
 
 COMMERCE_RUNTIME_REGISTRY.register({
   manifest: {
@@ -207,6 +265,10 @@ COMMERCE_RUNTIME_REGISTRY.register({
         listNativeCommerceProducts,
       getProduct:
         getNativeCommerceProduct,
+    },
+    "commerce.inventory": {
+      capability:
+        "commerce.inventory",
     },
     "commerce.cart": {
       capability:
