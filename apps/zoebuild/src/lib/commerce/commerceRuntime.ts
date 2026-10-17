@@ -32,6 +32,7 @@ import type {
 } from "./nativeCommerceProvider";
 import {
   COMMERCE_RUNTIME_REGISTRY,
+  type CommerceProviderExecutionContext,
   type CommerceRuntimeHandler,
   type RuntimeCommerceCapability,
 } from "./commerceRuntimeRegistry";
@@ -81,6 +82,42 @@ function requireCommerceProviderExecutionEnvironment(
     "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
     unavailableMessage,
   );
+}
+
+function createCommerceProviderExecutionContext(
+  client:
+    PrismaClient,
+  input:
+    Readonly<{
+      buildProjectId:
+        string;
+      provider:
+        string;
+      environment:
+        CommerceProviderEnvironment;
+      connection:
+        CommerceProviderConnectionSnapshot;
+    }>,
+  requiresSecretStore:
+    boolean,
+): CommerceProviderExecutionContext {
+  return {
+    buildProjectId:
+      input.buildProjectId,
+    provider:
+      input.provider,
+    environment:
+      input.environment,
+    connection:
+      input.connection,
+    secretStore:
+      requiresSecretStore
+        ? createBuildSecretStore({
+            prisma:
+              client,
+          })
+        : undefined,
+  };
 }
 
 async function resolveHandler<
@@ -207,26 +244,26 @@ export async function prepareCommercePaymentReconciliation(
     );
   }
 
-  const secretStore =
-    handler.requiresSecretStore
-      ? createBuildSecretStore({
-          prisma:
-            client,
-        })
-      : undefined;
+  const executionContext =
+    createCommerceProviderExecutionContext(
+      client,
+      {
+        buildProjectId:
+          input.buildProjectId,
+        provider:
+          input.provider,
+        environment:
+          input.environment,
+        connection:
+          input.connection,
+      },
+      handler.requiresSecretStore,
+    );
 
   const prepared =
-    await handler.prepareReconciliation({
-      buildProjectId:
-        input.buildProjectId,
-      provider:
-        input.provider,
-      environment:
-        input.environment,
-      connection:
-        input.connection,
-      secretStore,
-    });
+    await handler.prepareReconciliation(
+      executionContext,
+    );
 
   if (
     prepared.provider !==
@@ -294,26 +331,26 @@ export async function prepareCommercePaymentCheckout(
     );
   }
 
-  const secretStore =
-    handler.requiresSecretStore
-      ? createBuildSecretStore({
-          prisma:
-            client,
-        })
-      : undefined;
+  const executionContext =
+    createCommerceProviderExecutionContext(
+      client,
+      {
+        buildProjectId:
+          input.buildProjectId,
+        provider:
+          resolved.provider,
+        environment:
+          resolved.environment,
+        connection:
+          resolved.connection,
+      },
+      handler.requiresSecretStore,
+    );
 
   const prepared =
-    await handler.prepare({
-      buildProjectId:
-        input.buildProjectId,
-      provider:
-        resolved.provider,
-      environment:
-        resolved.environment,
-      connection:
-        resolved.connection,
-      secretStore,
-    });
+    await handler.prepare(
+      executionContext,
+    );
 
   if (
     prepared.provider !==
@@ -390,7 +427,10 @@ export async function listCommerceProducts(
     >["listProducts"]
   >[1],
 ) {
-  const { handler } =
+  const {
+    resolved,
+    handler,
+  } =
     await resolveHandler(
       client,
       input,
@@ -407,9 +447,26 @@ export async function listCommerceProducts(
     );
   }
 
+  const context =
+    createCommerceProviderExecutionContext(
+      client,
+      {
+        buildProjectId:
+          input.buildProjectId,
+        provider:
+          resolved.provider,
+        environment:
+          resolved.environment,
+        connection:
+          resolved.connection,
+      },
+      handler.requiresSecretStore,
+    );
+
   return handler.listProducts(
     client,
     input,
+    context,
   );
 }
 
@@ -425,7 +482,10 @@ export async function getCommerceProduct(
     >["getProduct"]
   >[1],
 ) {
-  const { handler } =
+  const {
+    resolved,
+    handler,
+  } =
     await resolveHandler(
       client,
       input,
@@ -442,9 +502,26 @@ export async function getCommerceProduct(
     );
   }
 
+  const context =
+    createCommerceProviderExecutionContext(
+      client,
+      {
+        buildProjectId:
+          input.buildProjectId,
+        provider:
+          resolved.provider,
+        environment:
+          resolved.environment,
+        connection:
+          resolved.connection,
+      },
+      handler.requiresSecretStore,
+    );
+
   return handler.getProduct(
     client,
     input,
+    context,
   );
 }
 
@@ -456,7 +533,10 @@ export async function executeCommerceCartCommand(
     command: CommerceCartCommand;
   }>,
 ) {
-  const { handler } =
+  const {
+    resolved,
+    handler,
+  } =
     await resolveHandler(
       client,
       input,
@@ -473,9 +553,26 @@ export async function executeCommerceCartCommand(
     );
   }
 
+  const context =
+    createCommerceProviderExecutionContext(
+      client,
+      {
+        buildProjectId:
+          input.buildProjectId,
+        provider:
+          resolved.provider,
+        environment:
+          resolved.environment,
+        connection:
+          resolved.connection,
+      },
+      handler.requiresSecretStore,
+    );
+
   return handler.executeCommand(
     client,
     input,
+    context,
   );
 }
 
@@ -487,7 +584,10 @@ export async function beginCommerceCheckout(
     request: CommerceCheckoutRequest;
   }>,
 ) {
-  const { handler } =
+  const {
+    resolved,
+    handler,
+  } =
     await resolveHandler(
       client,
       input,
@@ -504,9 +604,26 @@ export async function beginCommerceCheckout(
     );
   }
 
+  const context =
+    createCommerceProviderExecutionContext(
+      client,
+      {
+        buildProjectId:
+          input.buildProjectId,
+        provider:
+          resolved.provider,
+        environment:
+          resolved.environment,
+        connection:
+          resolved.connection,
+      },
+      handler.requiresSecretStore,
+    );
+
   return handler.beginCheckout(
     client,
     input,
+    context,
   );
 }
 

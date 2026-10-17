@@ -63,21 +63,31 @@ export type RuntimeCommerceCapability =
 
 type CatalogHandler = Readonly<{
   capability: "commerce.catalog";
+  requiresSecretStore:
+    boolean;
   listProducts(
     client: PrismaClient,
     input: CommerceCatalogListInput,
+    context:
+      CommerceProviderExecutionContext,
   ): Promise<readonly CommerceCatalogProduct[]>;
   getProduct(
     client: PrismaClient,
     input: CommerceCatalogGetInput,
+    context:
+      CommerceProviderExecutionContext,
   ): Promise<CommerceCatalogProduct | null>;
 }>;
 
 type CartHandler = Readonly<{
   capability: "commerce.cart";
+  requiresSecretStore:
+    boolean;
   executeCommand(
     client: PrismaClient,
     input: CommerceCartRuntimeInput,
+    context:
+      CommerceProviderExecutionContext,
   ): Promise<CommerceCart>;
 }>;
 
@@ -100,6 +110,8 @@ type OrdersHandler = Readonly<{
 
 type CheckoutHandler = Readonly<{
   capability: "commerce.checkout";
+  requiresSecretStore:
+    boolean;
   beginCheckout(
     client: PrismaClient,
     input: Readonly<{
@@ -109,6 +121,8 @@ type CheckoutHandler = Readonly<{
       request:
         CommerceCheckoutRequest;
     }>,
+    context:
+      CommerceProviderExecutionContext,
   ): Promise<CommerceCheckoutResult>;
 }>;
 
@@ -295,6 +309,8 @@ registerCommerceProviderAdapter({
     "commerce.catalog": {
       capability:
         "commerce.catalog",
+      requiresSecretStore:
+        false,
       listProducts:
         listNativeCommerceProducts,
       getProduct:
@@ -307,6 +323,8 @@ registerCommerceProviderAdapter({
     "commerce.cart": {
       capability:
         "commerce.cart",
+      requiresSecretStore:
+        false,
       executeCommand:
         executeNativeCommerceCartCommand,
     },
@@ -317,6 +335,8 @@ registerCommerceProviderAdapter({
     "commerce.checkout": {
       capability:
         "commerce.checkout",
+      requiresSecretStore:
+        false,
       async beginCheckout(
         client,
         input,
