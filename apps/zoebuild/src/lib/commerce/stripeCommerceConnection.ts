@@ -13,6 +13,10 @@ import type {
 import type {
   CommerceProviderEnvironment,
 } from "./nativeCommerceProvider";
+import {
+  activateCommerceProviderCredentialConnection,
+  CommerceProviderConnectionLifecycleError,
+} from "./commerceProviderConnectionLifecycle";
 
 export const STRIPE_COMMERCE_PROVIDER =
   "stripe" as const;
@@ -233,117 +237,57 @@ export async function connectStripeCommerceEnvironment(
       defaultProbeClient,
   });
 
-  const existing =
-    await client
-      .commerceProviderConnection
-      .findUnique({
-        where: {
-          storeId_provider_environment: {
-            storeId,
-            provider:
-              STRIPE_COMMERCE_PROVIDER,
-            environment:
-              input.environment,
-          },
-        },
-        select: {
-          id:
-            true,
-          credentialsSecretRef:
-            true,
-        },
-      });
-
-  const stored =
-    await input.secretStore
-      .put({
-        buildProjectId,
-        value: {
-          secretKey:
-            apiKey,
-        },
-      });
-
   try {
-    await client
-      .commerceProviderConnection
-      .upsert({
-        where: {
-          storeId_provider_environment: {
-            storeId,
-            provider:
-              STRIPE_COMMERCE_PROVIDER,
-            environment:
-              input.environment,
-          },
-        },
-        create: {
+    const connected =
+      await activateCommerceProviderCredentialConnection(
+        client,
+        {
+          buildProjectId,
           storeId,
           provider:
             STRIPE_COMMERCE_PROVIDER,
           environment:
             input.environment,
-          status:
-            "active",
-          credentialsSecretRef:
-            stored.secretRef,
+          credentials: {
+            secretKey:
+              apiKey,
+          },
+          secretStore:
+            input.secretStore,
         },
-        update: {
-          status:
-            "active",
-          credentialsSecretRef:
-            stored.secretRef,
-        },
-        select: {
-          id:
-            true,
-        },
-      });
-  } catch {
-    await input.secretStore
-      .delete({
-        buildProjectId,
-        secretRef:
-          stored.secretRef,
-      })
-      .catch(
-        () => undefined,
       );
 
-    throw new StripeCommerceConnectionError(
-      "STRIPE_CONNECTION_SAVE_FAILED",
-      "Stripe connection could not be saved.",
-      500,
-    );
-  }
-
-  const previousRef =
-    existing
-      ?.credentialsSecretRef
-      ?.trim();
-
-  if (
-    previousRef &&
-    previousRef !==
-      stored.secretRef
+    return {
+      provider:
+        STRIPE_COMMERCE_PROVIDER,
+      environment:
+        connected.environment,
+      status:
+        "active",
+    };
+  } catch (
+    error
   ) {
-    await input.secretStore
-      .delete({
-        buildProjectId,
-        secretRef:
-          previousRef,
-      })
-      .catch(
-        () => undefined,
+    if (
+      error instanceof
+        CommerceProviderConnectionLifecycleError
+    ) {
+      throw new StripeCommerceConnectionError(
+        error.code ===
+          "COMMERCE_PROVIDER_CONNECTION_SCOPE_INVALID"
+          ? "STRIPE_CONNECTION_SCOPE_INVALID"
+          : "STRIPE_CONNECTION_SAVE_FAILED",
+        error.code ===
+          "COMMERCE_PROVIDER_CONNECTION_SCOPE_INVALID"
+          ? "Stripe connection scope is invalid."
+          : "Stripe connection could not be saved.",
+        error.code ===
+          "COMMERCE_PROVIDER_CONNECTION_SCOPE_INVALID"
+          ? 400
+          : 500,
       );
-  }
+    }
 
-  return {
-    provider:
-      STRIPE_COMMERCE_PROVIDER,
-    environment:
-      input.environment,
-    status:
-      "active",
-  };
+    throw error;
+  }
 }
