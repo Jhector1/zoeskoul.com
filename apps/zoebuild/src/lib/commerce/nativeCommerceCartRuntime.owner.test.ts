@@ -174,7 +174,7 @@ describe(
 
         const parserEnd =
           cart.indexOf(
-            "export async function executeNativeCommerceCartCommand(",
+            "export async function executeCommerceCartCommand(",
             parserStart,
           );
 
@@ -292,7 +292,7 @@ describe(
 
         const cartExecution =
           route.indexOf(
-            "executeNativeCommerceCartCommand",
+            "executeCommerceCartCommand",
             projectComparison,
           );
 
@@ -361,7 +361,7 @@ describe(
 
         const cartExecution =
           route.indexOf(
-            "executeNativeCommerceCartCommand",
+            "executeCommerceCartCommand",
             ready,
           );
 

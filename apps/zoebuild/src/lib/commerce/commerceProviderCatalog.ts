@@ -1,15 +1,15 @@
 import {
   COMMERCE_PROVIDER_CAPABILITIES,
   COMMERCE_PROVIDER_ENVIRONMENTS,
-  ZOEBUILD_NATIVE_COMMERCE_PROVIDER,
-  ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES,
+  ZOESTORE_COMMERCE_PROVIDER,
+  ZOESTORE_DEFAULT_CAPABILITIES,
   type CommerceProviderCapabilities,
   type CommerceProviderCapability,
   type CommerceProviderEnvironment,
 } from "./nativeCommerceProvider";
 
 export const COMMERCE_PROVIDER_IDS = [
-  ZOEBUILD_NATIVE_COMMERCE_PROVIDER,
+  ZOESTORE_COMMERCE_PROVIDER,
   "shopify",
   "square",
   "stripe",
@@ -20,16 +20,23 @@ export type CommerceProviderId =
   (typeof COMMERCE_PROVIDER_IDS)[number];
 
 export const DEFAULT_COMMERCE_STORE_PROVIDER =
-  ZOEBUILD_NATIVE_COMMERCE_PROVIDER;
+  ZOESTORE_COMMERCE_PROVIDER;
 
+/**
+ * Product recommendation only. Runtime resolution never falls back to it.
+ */
 export const DEFAULT_COMMERCE_PAYMENT_PROVIDER:
-  CommerceProviderId | null = null;
+  CommerceProviderId = "stripe";
 
 export type CommerceProviderDefinition =
   Readonly<{
     id: CommerceProviderId;
     displayName: string;
     description: string;
+    /**
+     * Whether the user must connect an external account.
+     * Every runtime route still has an explicit connection, including ZoeStore.
+     */
     connectionRequired: boolean;
     recommendedStore: boolean;
     recommendedPayment: boolean;
@@ -62,11 +69,11 @@ export const COMMERCE_PROVIDER_DEFINITIONS =
   [
     {
       id:
-        ZOEBUILD_NATIVE_COMMERCE_PROVIDER,
+        ZOESTORE_COMMERCE_PROVIDER,
       displayName:
         "Zoé Store",
       description:
-        "Built into ZoeBuild. Products, inventory, cart, orders, and checkout orchestration work without connecting an external store.",
+        "Built into ZoeBuild. Its internal test/live connections are provisioned automatically and remain replaceable capability by capability.",
       connectionRequired:
         false,
       recommendedStore:
@@ -77,7 +84,7 @@ export const COMMERCE_PROVIDER_DEFINITIONS =
         COMMERCE_PROVIDER_ENVIRONMENTS,
       capabilities:
         capabilityRecord(
-          ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES,
+          ZOESTORE_DEFAULT_CAPABILITIES,
         ),
     },
     {
@@ -106,7 +113,7 @@ export const COMMERCE_PROVIDER_DEFINITIONS =
       displayName:
         "Square",
       description:
-        "Use Square for catalog, inventory, orders, hosted checkout, and payments while ZoeBuild can retain its native cart.",
+        "Use Square for supported commerce capabilities when its adapter is connected.",
       connectionRequired:
         true,
       recommendedStore:
@@ -130,7 +137,7 @@ export const COMMERCE_PROVIDER_DEFINITIONS =
       displayName:
         "Stripe",
       description:
-        "Use Stripe for hosted checkout and payments while Zoé Store continues to own products, inventory, cart, and orders.",
+        "Use Stripe as a replaceable payment provider while another provider owns full-commerce checkout.",
       connectionRequired:
         true,
       recommendedStore:
@@ -141,7 +148,6 @@ export const COMMERCE_PROVIDER_DEFINITIONS =
         COMMERCE_PROVIDER_ENVIRONMENTS,
       capabilities:
         capabilityRecord([
-          "checkout",
           "payments",
         ]),
     },
@@ -151,7 +157,7 @@ export const COMMERCE_PROVIDER_DEFINITIONS =
       displayName:
         "PayPal",
       description:
-        "Use PayPal for hosted checkout and payments while Zoé Store continues to own the rest of the store.",
+        "Use PayPal as a replaceable payment provider while another provider owns full-commerce checkout.",
       connectionRequired:
         true,
       recommendedStore:
@@ -162,7 +168,6 @@ export const COMMERCE_PROVIDER_DEFINITIONS =
         COMMERCE_PROVIDER_ENVIRONMENTS,
       capabilities:
         capabilityRecord([
-          "checkout",
           "payments",
         ]),
     },
@@ -183,8 +188,7 @@ const PROVIDERS_BY_ID =
   );
 
 export function getCommerceProviderDefinition(
-  provider:
-    string,
+  provider: string,
 ): CommerceProviderDefinition | null {
   return (
     PROVIDERS_BY_ID.get(

@@ -131,13 +131,13 @@ describe(
         expect(
           route,
         ).toContain(
-          "listNativeCommerceProducts",
+          "listCommerceProducts",
         );
 
         expect(
           route,
         ).toContain(
-          "getNativeCommerceProduct",
+          "getCommerceProduct",
         );
 
         expect(
@@ -149,7 +149,7 @@ describe(
         expect(
           route,
         ).toContain(
-          "executeNativeCommerceCartCommand",
+          "executeCommerceCartCommand",
         );
 
         expect(
@@ -161,7 +161,7 @@ describe(
         expect(
           route,
         ).toContain(
-          "beginNativeCommerceCheckout",
+          "beginCommerceCheckout",
         );
 
         expect(

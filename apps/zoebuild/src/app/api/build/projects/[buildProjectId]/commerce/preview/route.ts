@@ -30,29 +30,28 @@ import {
 } from "@/lib/build/readBuildProjects";
 
 import {
-  getNativeCommerceProduct,
-  listNativeCommerceProducts,
   NativeCommerceCatalogInputError,
 } from "@/lib/commerce/nativeCommerceCatalog";
 
 import {
-  executeNativeCommerceCartCommand,
   NativeCommerceCartError,
   parseNativeCommerceCartCommand,
 } from "@/lib/commerce/nativeCommerceCart";
 
 import {
-  beginNativeCommerceCheckout,
   NativeCommerceCheckoutError,
   parseCommerceCheckoutRequest,
 } from "@/lib/commerce/nativeCommerceCheckout";
-
 import {
   CommerceProviderResolutionError,
-  ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  requireCommerceProviderAdapter,
-  resolveCommerceProvider,
 } from "@/lib/commerce/commerceProviderResolver";
+import {
+  beginCommerceCheckout,
+  executeCommerceCartCommand,
+  getCommerceProduct,
+  listCommerceProducts,
+} from "@/lib/commerce/commerceRuntime";
+
 
 export const runtime =
   "nodejs";
@@ -202,30 +201,6 @@ async function authorizeProject(
   };
 }
 
-async function requireNativeCapability(
-  buildProjectId:
-    string,
-  capability:
-    "catalog" |
-    "cart",
-) {
-  const resolved =
-    await resolveCommerceProvider(
-      prisma,
-      {
-        buildProjectId,
-        surface:
-          "preview",
-        capability,
-      },
-    );
-
-  requireCommerceProviderAdapter(
-    resolved,
-    ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  );
-}
-
 function firstValue(
   value:
     unknown,
@@ -273,12 +248,8 @@ async function executePreviewCommerce(
     method ===
     "products.list"
   ) {
-    await requireNativeCapability(
-      buildProjectId,
-      "catalog",
-    );
 
-    return listNativeCommerceProducts(
+    return listCommerceProducts(
       prisma,
       {
         buildProjectId,
@@ -296,12 +267,8 @@ async function executePreviewCommerce(
     method ===
     "products.get"
   ) {
-    await requireNativeCapability(
-      buildProjectId,
-      "catalog",
-    );
 
-    return getNativeCommerceProduct(
+    return getCommerceProduct(
       prisma,
       {
         buildProjectId,
@@ -325,7 +292,7 @@ async function executePreviewCommerce(
     method ===
     "checkout.begin"
   ) {
-    return beginNativeCommerceCheckout(
+    return beginCommerceCheckout(
       prisma,
       {
         buildProjectId,
@@ -339,10 +306,6 @@ async function executePreviewCommerce(
     );
   }
 
-  await requireNativeCapability(
-    buildProjectId,
-    "cart",
-  );
 
   const operation =
     method.slice(
@@ -355,7 +318,7 @@ async function executePreviewCommerce(
       operation,
     });
 
-  return executeNativeCommerceCartCommand(
+  return executeCommerceCartCommand(
     prisma,
     {
       buildProjectId,

@@ -7,6 +7,7 @@ import {
   type CreateBuildProjectResult,
   type InitialBuildProjectPersistenceInput,
 } from "@zoeskoul/build-application";
+
 import {
   CodeProjectScopeKind,
   CodeProjectVisibility,
@@ -18,7 +19,9 @@ import { prisma } from "@zoeskoul/platform-server/prisma";
 import { saveCodeProjectInTransaction } from "@zoeskoul/platform-server/projects/saveCodeProject";
 
 import {
-  defaultZoeStoreCommerceProviderRoutes,
+  COMMERCE_PROVIDER_ENVIRONMENTS,
+  ZOESTORE_COMMERCE_PROVIDER,
+  zoeStoreCommerceProviderRoutes,
 } from "../commerce/nativeCommerceProvider";
 
 function toPrismaJson(value: unknown): Prisma.InputJsonValue {
@@ -94,19 +97,59 @@ export function createPrismaBuildProjectPersistence(
         if (
           input.specification.requirements.commerce
         ) {
-          await tx.commerceStore.create({
-            data: {
-              buildProjectId: buildProject.id,
-              status: "draft",
-              name: input.title,
-              defaultCurrency: "USD",
-              providerRoutes: {
-                create:
-                  defaultZoeStoreCommerceProviderRoutes(),
+          const store =
+            await tx.commerceStore.create({
+              data: {
+                buildProjectId: buildProject.id,
+                status: "draft",
+                name: input.title,
+                defaultCurrency: "USD",
               },
-            },
-            select: { id: true },
-          });
+              select: {
+                id: true,
+              },
+            });
+
+          for (
+            const environment of
+            COMMERCE_PROVIDER_ENVIRONMENTS
+          ) {
+            const connection =
+              await tx
+                .commerceProviderConnection
+                .create({
+                  data: {
+                    storeId:
+                      store.id,
+                    provider:
+                      ZOESTORE_COMMERCE_PROVIDER,
+                    environment,
+                    status:
+                      "active",
+                    config:
+                      toPrismaJson({
+                        kind:
+                          "internal",
+                      }),
+                  },
+                  select: {
+                    id: true,
+                  },
+                });
+
+            await tx
+              .commerceProviderRoute
+              .createMany({
+                data:
+                  zoeStoreCommerceProviderRoutes({
+                    storeId:
+                      store.id,
+                    environment,
+                    connectionId:
+                      connection.id,
+                  }),
+              });
+          }
         }
 
         return {

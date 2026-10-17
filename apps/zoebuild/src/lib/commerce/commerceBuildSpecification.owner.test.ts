@@ -123,7 +123,7 @@ describe(
         expect(
           create,
         ).toContain(
-          "defaultZoeStoreCommerceProviderRoutes",
+          "zoeStoreCommerceProviderRoutes",
         );
 
         expect(

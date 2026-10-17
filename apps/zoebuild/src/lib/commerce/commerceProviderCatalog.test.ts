@@ -8,144 +8,99 @@ import {
   COMMERCE_PROVIDER_DEFINITIONS,
   DEFAULT_COMMERCE_PAYMENT_PROVIDER,
   DEFAULT_COMMERCE_STORE_PROVIDER,
-  getCommerceProviderDefinition,
 } from "./commerceProviderCatalog";
 
 describe(
   "ZoeBuild commerce provider directory",
   () => {
     it(
-      "uses Zoé Store by default without silently choosing payments",
+      "uses ZoeStore as the recommended store owner",
       () => {
         expect(
           DEFAULT_COMMERCE_STORE_PROVIDER,
         ).toBe(
-          "zoebuild-native",
+          "zoestore",
         );
 
-        expect(
-          DEFAULT_COMMERCE_PAYMENT_PROVIDER,
-        ).toBeNull();
-
-        const native =
-          getCommerceProviderDefinition(
-            DEFAULT_COMMERCE_STORE_PROVIDER,
+        const zoestore =
+          COMMERCE_PROVIDER_DEFINITIONS.find(
+            (provider) =>
+              provider.id ===
+              "zoestore",
           );
 
         expect(
-          native?.displayName,
-        ).toBe(
-          "Zoé Store",
-        );
+          zoestore,
+        ).toMatchObject({
+          recommendedStore:
+            true,
+          recommendedPayment:
+            false,
+          connectionRequired:
+            false,
+        });
 
         expect(
-          native?.connectionRequired,
+          zoestore?.capabilities,
+        ).toMatchObject({
+          catalog:
+            true,
+          inventory:
+            true,
+          cart:
+            true,
+          orders:
+            true,
+          checkout:
+            true,
+          payments:
+            false,
+        });
+      },
+    );
+
+    it(
+      "recommends Stripe for payments as product policy rather than runtime fallback",
+      () => {
+        expect(
+          DEFAULT_COMMERCE_PAYMENT_PROVIDER,
+        ).toBe(
+          "stripe",
+        );
+
+        const stripe =
+          COMMERCE_PROVIDER_DEFINITIONS.find(
+            (provider) =>
+              provider.id ===
+              "stripe",
+          );
+
+        expect(
+          stripe,
+        ).toMatchObject({
+          recommendedStore:
+            false,
+          recommendedPayment:
+            true,
+          connectionRequired:
+            true,
+        });
+
+        expect(
+          stripe?.capabilities.checkout,
         ).toBe(
           false,
         );
-
         expect(
-          native?.capabilities,
-        ).toEqual({
-          catalog:
-            true,
-          inventory:
-            true,
-          cart:
-            true,
-          orders:
-            true,
-          checkout:
-            true,
-          payments:
-            false,
-        });
+          stripe?.capabilities.payments,
+        ).toBe(
+          true,
+        );
       },
     );
 
     it(
-      "publishes the supported provider capability matrix",
-      () => {
-        const byId =
-          new Map(
-            COMMERCE_PROVIDER_DEFINITIONS.map(
-              (
-                provider,
-              ) => [
-                provider.id,
-                provider,
-              ],
-            ),
-          );
-
-        expect(
-          byId.get(
-            "shopify",
-          )?.capabilities,
-        ).toEqual({
-          catalog:
-            true,
-          inventory:
-            true,
-          cart:
-            true,
-          orders:
-            true,
-          checkout:
-            true,
-          payments:
-            true,
-        });
-
-        expect(
-          byId.get(
-            "square",
-          )?.capabilities,
-        ).toEqual({
-          catalog:
-            true,
-          inventory:
-            true,
-          cart:
-            false,
-          orders:
-            true,
-          checkout:
-            true,
-          payments:
-            true,
-        });
-
-        for (
-          const provider of [
-            "stripe",
-            "paypal",
-          ] as const
-        ) {
-          expect(
-            byId.get(
-              provider,
-            )?.capabilities,
-          ).toEqual({
-            catalog:
-              false,
-            inventory:
-              false,
-            cart:
-              false,
-            orders:
-              false,
-            checkout:
-              true,
-            payments:
-              true,
-          });
-        }
-      },
-    );
-
-    it(
-      "requires connections for every external provider",
+      "requires external provider connections while ZoeStore uses provisioned internal connections",
       () => {
         for (
           const provider of
@@ -155,33 +110,39 @@ describe(
             provider.connectionRequired,
           ).toBe(
             provider.id !==
-              "zoebuild-native",
+              "zoestore",
           );
-
-          expect(
-            provider.environments,
-          ).toEqual([
-            "test",
-            "live",
-          ]);
         }
       },
     );
 
     it(
-      "recommends Stripe for payments without auto-selecting it",
+      "keeps payment-only providers separate from full-commerce checkout ownership",
       () => {
-        expect(
-          getCommerceProviderDefinition(
+        for (
+          const id of [
             "stripe",
-          )?.recommendedPayment,
-        ).toBe(
-          true,
-        );
+            "paypal",
+          ] as const
+        ) {
+          const provider =
+            COMMERCE_PROVIDER_DEFINITIONS.find(
+              (candidate) =>
+                candidate.id ===
+                id,
+            );
 
-        expect(
-          DEFAULT_COMMERCE_PAYMENT_PROVIDER,
-        ).toBeNull();
+          expect(
+            provider?.capabilities.payments,
+          ).toBe(
+            true,
+          );
+          expect(
+            provider?.capabilities.checkout,
+          ).toBe(
+            false,
+          );
+        }
       },
     );
   },

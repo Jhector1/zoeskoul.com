@@ -4,17 +4,13 @@ import {
   resolveTrustedReactPreviewCapabilityAtRunner,
 } from "@/lib/build/reactPreviewRunnerClient";
 import {
-  getNativeCommerceProduct,
-  listNativeCommerceProducts,
   NativeCommerceCatalogInputError,
 } from "@/lib/commerce/nativeCommerceCatalog";
 import {
-  executeNativeCommerceCartCommand,
   NativeCommerceCartError,
   parseNativeCommerceCartCommand,
 } from "@/lib/commerce/nativeCommerceCart";
 import {
-  beginNativeCommerceCheckout,
   NativeCommerceCheckoutError,
   parseCommerceCheckoutRequest,
 } from "@/lib/commerce/nativeCommerceCheckout";
@@ -23,13 +19,21 @@ import {
 } from "@/lib/commerce/nativeCommerceCartRateLimit";
 import {
   CommerceProviderResolutionError,
-  ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  requireCommerceProviderAdapter,
-  resolveCommerceProvider,
 } from "@/lib/commerce/commerceProviderResolver";
+import {
+  beginCommerceCheckout,
+  executeCommerceCartCommand,
+  getCommerceProduct,
+  listCommerceProducts,
+} from "@/lib/commerce/commerceRuntime";
 import { prisma } from "@zoeskoul/platform-server/prisma";
-import { parseReactPreviewId, ReactPreviewRequestError } from "@/lib/build/reactPreviewServer";
-import { normalizeReactPreviewProxyPath } from "@/lib/build/reactPreviewProxyPath";
+import {
+  parseReactPreviewId,
+  ReactPreviewRequestError,
+} from "@/lib/build/reactPreviewServer";
+import {
+  normalizeReactPreviewProxyPath,
+} from "@/lib/build/reactPreviewProxyPath";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -50,27 +54,6 @@ function errorResponse(message: string, status: number) {
 
 function validCapability(value: string) {
   return /^[A-Za-z0-9_-]{32}$/.test(value);
-}
-
-async function requireNativeCommerceCapability(
-  input: Readonly<{
-    buildProjectId: string;
-    surface: "preview" | "published";
-    capability: "catalog" | "cart";
-  }>,
-) {
-  const resolved =
-    await resolveCommerceProvider(
-      prisma,
-      input,
-    );
-
-  requireCommerceProviderAdapter(
-    resolved,
-    ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  );
-
-  return resolved;
 }
 
 async function proxy(
@@ -135,14 +118,6 @@ async function proxy(
       }
 
       try {
-        await requireNativeCommerceCapability({
-          buildProjectId:
-            context.buildProjectId,
-          surface:
-            "preview",
-          capability:
-            "catalog",
-        });
 
         const id =
           url.searchParams.get(
@@ -158,7 +133,7 @@ async function proxy(
             ? {
                 ok: true,
                 product:
-                  await getNativeCommerceProduct(
+                  await getCommerceProduct(
                     prisma,
                     {
                       buildProjectId:
@@ -173,7 +148,7 @@ async function proxy(
             : {
                 ok: true,
                 products:
-                  await listNativeCommerceProducts(
+                  await listCommerceProducts(
                     prisma,
                     {
                       buildProjectId:
@@ -476,7 +451,7 @@ export async function POST(
       isCheckoutPath
     ) {
       const checkout =
-        await beginNativeCommerceCheckout(
+        await beginCommerceCheckout(
           prisma,
           {
             buildProjectId:
@@ -519,14 +494,6 @@ export async function POST(
       );
     }
 
-    await requireNativeCommerceCapability({
-      buildProjectId:
-        context.buildProjectId,
-      surface:
-        "preview",
-      capability:
-        "cart",
-    });
 
     const command =
       parseNativeCommerceCartCommand(
@@ -536,7 +503,7 @@ export async function POST(
       );
 
     const cart =
-      await executeNativeCommerceCartCommand(
+      await executeCommerceCartCommand(
         prisma,
         {
           buildProjectId:

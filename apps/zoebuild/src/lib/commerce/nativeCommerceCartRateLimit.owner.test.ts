@@ -129,7 +129,7 @@ describe(
 
         const execution =
           route.indexOf(
-            "executeNativeCommerceCartCommand",
+            "executeCommerceCartCommand",
             limiter,
           );
 
@@ -179,7 +179,7 @@ describe(
 
         const execution =
           route.indexOf(
-            "executeNativeCommerceCartCommand",
+            "executeCommerceCartCommand",
             limiter,
           );
 

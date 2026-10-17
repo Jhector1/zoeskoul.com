@@ -1,0 +1,16 @@
+{
+  "name": "@zoeskoul/provider-contracts",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@zoeskoul/provider-platform": "workspace:*"
+  },
+  "scripts": {
+    "test": "vitest run src",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

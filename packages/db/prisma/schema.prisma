@@ -362,11 +362,11 @@ model CommerceProviderRoute {
   environment  CommerceProviderEnvironment
   capability   CommerceProviderCapability
   provider     String
-  connectionId String?
+  connectionId String
   createdAt    DateTime                    @default(now())
   updatedAt    DateTime                    @updatedAt
   store        CommerceStore               @relation(fields: [storeId], references: [id], onDelete: Cascade)
-  connection   CommerceProviderConnection? @relation(fields: [connectionId], references: [id], onDelete: SetNull)
+  connection   CommerceProviderConnection @relation(fields: [connectionId], references: [id], onDelete: Restrict)
 
   @@unique([storeId, environment, capability])
   @@index([provider, environment, capability])

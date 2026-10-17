@@ -3,30 +3,28 @@ import {
 } from "@zoeskoul/platform-server/prisma";
 
 import {
-  getNativeCommerceProduct,
-  listNativeCommerceProducts,
   NativeCommerceCatalogInputError,
 } from "@/lib/commerce/nativeCommerceCatalog";
 import {
-  executeNativeCommerceCartCommand,
   NativeCommerceCartError,
   parseNativeCommerceCartCommand,
 } from "@/lib/commerce/nativeCommerceCart";
 import {
-  beginNativeCommerceCheckout,
   NativeCommerceCheckoutError,
   parseCommerceCheckoutRequest,
 } from "@/lib/commerce/nativeCommerceCheckout";
 import {
   enforceNativeCommerceCartRateLimit,
 } from "@/lib/commerce/nativeCommerceCartRateLimit";
-
 import {
   CommerceProviderResolutionError,
-  ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  requireCommerceProviderAdapter,
-  resolveCommerceProvider,
 } from "@/lib/commerce/commerceProviderResolver";
+import {
+  beginCommerceCheckout,
+  executeCommerceCartCommand,
+  getCommerceProduct,
+  listCommerceProducts,
+} from "@/lib/commerce/commerceRuntime";
 
 import {
   buildPublishedStaticFileMap,
@@ -85,27 +83,6 @@ function unavailable() {
       },
     },
   );
-}
-
-async function requireNativeCommerceCapability(
-  input: Readonly<{
-    buildProjectId: string;
-    surface: "preview" | "published";
-    capability: "catalog" | "cart";
-  }>,
-) {
-  const resolved =
-    await resolveCommerceProvider(
-      prisma,
-      input,
-    );
-
-  requireCommerceProviderAdapter(
-    resolved,
-    ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  );
-
-  return resolved;
 }
 
 function responseForPublishedFile(
@@ -392,7 +369,7 @@ export async function POST(
       isCheckoutPath
     ) {
       const checkout =
-        await beginNativeCommerceCheckout(
+        await beginCommerceCheckout(
           prisma,
           {
             buildProjectId:
@@ -437,14 +414,6 @@ export async function POST(
       );
     }
 
-    await requireNativeCommerceCapability({
-      buildProjectId:
-        normalizedProjectId,
-      surface:
-        "published",
-      capability:
-        "cart",
-    });
 
     const command =
       parseNativeCommerceCartCommand(
@@ -454,7 +423,7 @@ export async function POST(
       );
 
     const cart =
-      await executeNativeCommerceCartCommand(
+      await executeCommerceCartCommand(
         prisma,
         {
           buildProjectId:
@@ -713,14 +682,6 @@ export async function GET(
       );
 
     try {
-      await requireNativeCommerceCapability({
-        buildProjectId:
-          normalizedProjectId,
-        surface:
-          "published",
-        capability:
-          "catalog",
-      });
 
       const id =
         url.searchParams.get(
@@ -736,7 +697,7 @@ export async function GET(
           ? {
               ok: true,
               product:
-                await getNativeCommerceProduct(
+                await getCommerceProduct(
                   prisma,
                   {
                     buildProjectId:
@@ -751,7 +712,7 @@ export async function GET(
           : {
               ok: true,
               products:
-                await listNativeCommerceProducts(
+                await listCommerceProducts(
                   prisma,
                   {
                     buildProjectId:

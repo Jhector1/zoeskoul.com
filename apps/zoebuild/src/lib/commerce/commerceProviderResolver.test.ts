@@ -1,7 +1,3 @@
-import type {
-  PrismaClient,
-} from "@zoeskoul/db";
-
 import {
   describe,
   expect,
@@ -9,190 +5,75 @@ import {
   vi,
 } from "vitest";
 
+import type {
+  PrismaClient,
+} from "@zoeskoul/db";
+
 import {
-  CommerceProviderResolutionError,
-  ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  createCommerceProviderRegistry,
-  requireCommerceProviderAdapter,
   resolveCommerceProvider,
-  type CommerceProviderRegistration,
 } from "./commerceProviderResolver";
 
-import {
-  COMMERCE_PROVIDER_CAPABILITIES,
-  type CommerceProviderAdapter,
-  type CommerceProviderCapability,
-} from "./nativeCommerceProvider";
-
-function capabilities(
-  enabled:
-    readonly CommerceProviderCapability[],
-) {
-  const set =
-    new Set(
-      enabled,
-    );
-
-  return Object.fromEntries(
-    COMMERCE_PROVIDER_CAPABILITIES.map(
-      (capability) => [
-        capability,
-        set.has(
-          capability,
-        ),
-      ],
-    ),
-  ) as CommerceProviderAdapter["capabilities"];
-}
-
-function externalRegistration(
-  overrides:
-    Partial<
-      CommerceProviderRegistration
-    > = {},
-): CommerceProviderRegistration {
-  return {
-    adapter: {
-      provider:
-        "external-commerce",
-      capabilities:
-        capabilities([
-          "catalog",
-          "cart",
-          "checkout",
-          "payments",
-        ]),
-      supportsEnvironment:
-        () => true,
-    },
-    connectionRequired:
-      true,
-    ...overrides,
-  };
-}
-
-function fakeClient(input: {
-  store?:
-    | {
-        id: string;
-        status: string;
-      }
-    | null;
-  route?:
-    | {
-        provider: string;
-        connectionId:
-          string | null;
-        connection:
-          | {
-              id: string;
-              storeId: string;
-              provider: string;
-              environment:
-                "test" | "live";
-              status:
-                "disconnected" |
-                "active" |
-                "error";
-              externalAccountRef:
-                string | null;
-              credentialsSecretRef:
-                string | null;
-              webhookSecretRef:
-                string | null;
-              config:
-                unknown;
-            }
-          | null;
-      }
-    | null;
+function fakeClient(input?: {
+  storeStatus?: "draft" | "active";
+  route?: unknown;
 }) {
-  const commerceStore = {
-    findUnique:
-      vi.fn(
-        async () =>
-          input.store ??
-          null,
-      ),
-  };
-
-  const commerceProviderRoute = {
-    findUnique:
-      vi.fn(
-        async () =>
-          input.route ??
-          null,
-      ),
-  };
-
   return {
-    client: {
-      commerceStore,
-      commerceProviderRoute,
-    } as unknown as PrismaClient,
-    commerceStore,
-    commerceProviderRoute,
-  };
-}
-
-function nativeRoute() {
-  return {
-    provider:
-      "zoebuild-native",
-    connectionId:
-      null,
-    connection:
-      null,
-  } as const;
-}
-
-async function errorCode(
-  promise:
-    Promise<unknown>,
-) {
-  try {
-    await promise;
-  } catch (error) {
-    expect(
-      error,
-    ).toBeInstanceOf(
-      CommerceProviderResolutionError,
-    );
-
-    return (
-      error as
-        CommerceProviderResolutionError
-    ).code;
-  }
-
-  throw new Error(
-    "Expected resolver to fail.",
-  );
+    commerceStore: {
+      findUnique:
+        vi.fn(async () => ({
+          id: "store_1",
+          status:
+            input?.storeStatus ??
+            "draft",
+        })),
+    },
+    commerceProviderRoute: {
+      findUnique:
+        vi.fn(async () =>
+          input?.route ?? {
+            provider:
+              "zoestore",
+            connectionId:
+              "connection_test",
+            connection: {
+              id:
+                "connection_test",
+              storeId:
+                "store_1",
+              provider:
+                "zoestore",
+              environment:
+                "test",
+              status:
+                "active",
+              externalAccountRef:
+                null,
+              credentialsSecretRef:
+                null,
+              webhookSecretRef:
+                null,
+              config: {
+                kind:
+                  "internal",
+              },
+            },
+          }),
+    },
+  } as unknown as PrismaClient;
 }
 
 describe(
-  "ZoeBuild commerce provider resolver",
+  "ZoeBuild commerce provider persistence resolver",
   () => {
     it(
-      "maps preview to test and resolves native catalog without a connection",
+      "maps preview to an explicit active test connection",
       async () => {
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "draft",
-            },
-            route:
-              nativeRoute(),
-          });
-
         const resolved =
           await resolveCommerceProvider(
-            fake.client,
+            fakeClient(),
             {
               buildProjectId:
-                "build_1",
+                "project_1",
               surface:
                 "preview",
               capability:
@@ -200,536 +81,265 @@ describe(
             },
           );
 
-        expect(
-          resolved.environment,
-        ).toBe(
-          "test",
-        );
-
-        expect(
-          resolved.provider,
-        ).toBe(
-          "zoebuild-native",
-        );
-
-        expect(
-          resolved.connection,
-        ).toBeNull();
-
-        expect(
-          resolved.adapter,
-        ).toBe(
-          ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-        );
-
-        expect(
-          fake.commerceProviderRoute
-            .findUnique,
-        ).toHaveBeenCalledWith(
-          expect.objectContaining({
-            where: {
-              storeId_environment_capability: {
-                storeId:
-                  "store_1",
-                environment:
-                  "test",
-                capability:
-                  "catalog",
-              },
-            },
-          }),
+        expect(resolved.environment).toBe("test");
+        expect(resolved.provider).toBe("zoestore");
+        expect(resolved.connection.id).toBe(
+          "connection_test",
         );
       },
     );
 
     it(
-      "maps published to live",
+      "maps published to an explicit active live connection",
       async () => {
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "active",
-            },
-            route:
-              nativeRoute(),
-          });
-
         const resolved =
           await resolveCommerceProvider(
-            fake.client,
+            fakeClient({
+              storeStatus:
+                "active",
+              route: {
+                provider:
+                  "zoestore",
+                connectionId:
+                  "connection_live",
+                connection: {
+                  id:
+                    "connection_live",
+                  storeId:
+                    "store_1",
+                  provider:
+                    "zoestore",
+                  environment:
+                    "live",
+                  status:
+                    "active",
+                  externalAccountRef:
+                    null,
+                  credentialsSecretRef:
+                    null,
+                  webhookSecretRef:
+                    null,
+                  config: {
+                    kind:
+                      "internal",
+                  },
+                },
+              },
+            }),
             {
               buildProjectId:
-                "build_1",
+                "project_1",
               surface:
                 "published",
               capability:
-                "cart",
+                "orders",
             },
           );
 
-        expect(
-          resolved.environment,
-        ).toBe(
-          "live",
+        expect(resolved.environment).toBe("live");
+        expect(resolved.connection.id).toBe(
+          "connection_live",
         );
       },
     );
 
     it(
-      "fails closed when the surface cannot use the store",
+      "fails closed when the capability route has no explicit connection",
       async () => {
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "draft",
-            },
-            route:
-              nativeRoute(),
-          });
-
-        expect(
-          await errorCode(
-            resolveCommerceProvider(
-              fake.client,
-              {
-                buildProjectId:
-                  "build_1",
-                surface:
-                  "published",
-                capability:
-                  "catalog",
-              },
-            ),
-          ),
-        ).toBe(
-          "COMMERCE_STORE_NOT_FOUND",
-        );
-      },
-    );
-
-    it(
-      "fails closed when no capability route exists",
-      async () => {
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "active",
-            },
-            route:
-              null,
-          });
-
-        expect(
-          await errorCode(
-            resolveCommerceProvider(
-              fake.client,
-              {
-                buildProjectId:
-                  "build_1",
-                surface:
-                  "published",
-                capability:
-                  "payments",
-              },
-            ),
-          ),
-        ).toBe(
-          "COMMERCE_PROVIDER_ROUTE_NOT_FOUND",
-        );
-      },
-    );
-
-    it(
-      "fails closed for an unregistered provider",
-      async () => {
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "active",
-            },
-            route: {
-              provider:
-                "unknown-provider",
-              connectionId:
-                null,
-              connection:
-                null,
-            },
-          });
-
-        expect(
-          await errorCode(
-            resolveCommerceProvider(
-              fake.client,
-              {
-                buildProjectId:
-                  "build_1",
-                surface:
-                  "published",
-                capability:
-                  "catalog",
-              },
-            ),
-          ),
-        ).toBe(
-          "COMMERCE_PROVIDER_NOT_REGISTERED",
-        );
-      },
-    );
-
-    it(
-      "fails closed when the registered adapter does not own the route capability",
-      async () => {
-        const registration =
-          externalRegistration({
-            adapter: {
-              provider:
-                "external-commerce",
-              capabilities:
-                capabilities([
-                  "payments",
-                ]),
-              supportsEnvironment:
-                () => true,
-            },
-          });
-
-        const registry =
-          createCommerceProviderRegistry([
-            registration,
-          ]);
-
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "active",
-            },
-            route: {
-              provider:
-                "external-commerce",
-              connectionId:
-                null,
-              connection:
-                null,
-            },
-          });
-
-        expect(
-          await errorCode(
-            resolveCommerceProvider(
-              fake.client,
-              {
-                buildProjectId:
-                  "build_1",
-                surface:
-                  "published",
-                capability:
-                  "catalog",
-              },
-              registry,
-            ),
-          ),
-        ).toBe(
-          "COMMERCE_PROVIDER_CAPABILITY_UNSUPPORTED",
-        );
-      },
-    );
-
-    it(
-      "requires a connection only when the provider registration requires one",
-      async () => {
-        const registry =
-          createCommerceProviderRegistry([
-            externalRegistration(),
-          ]);
-
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "active",
-            },
-            route: {
-              provider:
-                "external-commerce",
-              connectionId:
-                null,
-              connection:
-                null,
-            },
-          });
-
-        expect(
-          await errorCode(
-            resolveCommerceProvider(
-              fake.client,
-              {
-                buildProjectId:
-                  "build_1",
-                surface:
-                  "published",
-                capability:
-                  "catalog",
-              },
-              registry,
-            ),
-          ),
-        ).toBe(
-          "COMMERCE_PROVIDER_CONNECTION_REQUIRED",
-        );
-      },
-    );
-
-    it(
-      "rejects mismatched or inactive connections",
-      async () => {
-        const registry =
-          createCommerceProviderRegistry([
-            externalRegistration(),
-          ]);
-
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "active",
-            },
-            route: {
-              provider:
-                "external-commerce",
-              connectionId:
-                "connection_1",
-              connection: {
-                id:
-                  "connection_1",
-                storeId:
-                  "store_1",
+        await expect(
+          resolveCommerceProvider(
+            fakeClient({
+              route: {
                 provider:
-                  "external-commerce",
-                environment:
-                  "live",
-                status:
-                  "error",
-                externalAccountRef:
-                  "acct_1",
-                credentialsSecretRef:
-                  "secret://commerce/live",
-                webhookSecretRef:
-                  "secret://commerce/webhook",
-                config:
+                  "zoestore",
+                connectionId:
+                  "missing",
+                connection:
                   null,
               },
+            }),
+            {
+              buildProjectId:
+                "project_1",
+              surface:
+                "preview",
+              capability:
+                "cart",
             },
-          });
-
-        expect(
-          await errorCode(
-            resolveCommerceProvider(
-              fake.client,
-              {
-                buildProjectId:
-                  "build_1",
-                surface:
-                  "published",
-                capability:
-                  "catalog",
-              },
-              registry,
-            ),
           ),
-        ).toBe(
-          "COMMERCE_PROVIDER_CONNECTION_INVALID",
-        );
+        ).rejects.toMatchObject({
+          code:
+            "COMMERCE_PROVIDER_CONNECTION_INVALID",
+        });
       },
     );
 
-    it(
-      "returns only server-side connection references for a valid external route",
-      async () => {
-        const registry =
-          createCommerceProviderRegistry([
-            externalRegistration(),
-          ]);
-
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "active",
-            },
-            route: {
-              provider:
-                "external-commerce",
-              connectionId:
-                "connection_1",
-              connection: {
-                id:
-                  "connection_1",
-                storeId:
-                  "store_1",
+    it.each([
+      {
+        label:
+          "provider mismatch",
+        connection: {
+          id:
+            "connection_test",
+          storeId:
+            "store_1",
+          provider:
+            "stripe",
+          environment:
+            "test",
+          status:
+            "active",
+          externalAccountRef:
+            null,
+          credentialsSecretRef:
+            null,
+          webhookSecretRef:
+            null,
+          config:
+            null,
+        },
+      },
+      {
+        label:
+          "environment mismatch",
+        connection: {
+          id:
+            "connection_test",
+          storeId:
+            "store_1",
+          provider:
+            "zoestore",
+          environment:
+            "live",
+          status:
+            "active",
+          externalAccountRef:
+            null,
+          credentialsSecretRef:
+            null,
+          webhookSecretRef:
+            null,
+          config:
+            null,
+        },
+      },
+      {
+        label:
+          "inactive connection",
+        connection: {
+          id:
+            "connection_test",
+          storeId:
+            "store_1",
+          provider:
+            "zoestore",
+          environment:
+            "test",
+          status:
+            "disabled",
+          externalAccountRef:
+            null,
+          credentialsSecretRef:
+            null,
+          webhookSecretRef:
+            null,
+          config:
+            null,
+        },
+      },
+    ])(
+      "rejects $label",
+      async ({
+        connection,
+      }) => {
+        await expect(
+          resolveCommerceProvider(
+            fakeClient({
+              route: {
                 provider:
-                  "external-commerce",
-                environment:
-                  "live",
-                status:
-                  "active",
-                externalAccountRef:
-                  "acct_1",
-                credentialsSecretRef:
-                  "secret://commerce/live",
-                webhookSecretRef:
-                  "secret://commerce/webhook",
-                config: {
-                  location:
-                    "primary",
-                },
+                  "zoestore",
+                connectionId:
+                  "connection_test",
+                connection,
               },
-            },
-          });
-
-        const resolved =
-          await resolveCommerceProvider(
-            fake.client,
+            }),
             {
               buildProjectId:
-                "build_1",
+                "project_1",
               surface:
-                "published",
+                "preview",
               capability:
                 "catalog",
             },
-            registry,
+          ),
+        ).rejects.toMatchObject({
+          code:
+            "COMMERCE_PROVIDER_CONNECTION_INVALID",
+        });
+      },
+    );
+
+    it(
+      "returns only server-side connection references for an external payment route",
+      async () => {
+        const resolved =
+          await resolveCommerceProvider(
+            fakeClient({
+              route: {
+                provider:
+                  "stripe",
+                connectionId:
+                  "stripe_test",
+                connection: {
+                  id:
+                    "stripe_test",
+                  storeId:
+                    "store_1",
+                  provider:
+                    "stripe",
+                  environment:
+                    "test",
+                  status:
+                    "active",
+                  externalAccountRef:
+                    "acct_ref",
+                  credentialsSecretRef:
+                    "secret/ref",
+                  webhookSecretRef:
+                    "webhook/ref",
+                  config: {
+                    accountLabel:
+                      "test",
+                  },
+                },
+              },
+            }),
+            {
+              buildProjectId:
+                "project_1",
+              surface:
+                "preview",
+              capability:
+                "payments",
+            },
           );
 
         expect(
           resolved.connection,
         ).toEqual({
           id:
-            "connection_1",
+            "stripe_test",
           externalAccountRef:
-            "acct_1",
+            "acct_ref",
           credentialsSecretRef:
-            "secret://commerce/live",
+            "secret/ref",
           webhookSecretRef:
-            "secret://commerce/webhook",
+            "webhook/ref",
           config: {
-            location:
-              "primary",
+            accountLabel:
+              "test",
           },
         });
-      },
-    );
-
-    it(
-      "prevents a resolved external provider from entering the native execution path",
-      async () => {
-        const registry =
-          createCommerceProviderRegistry([
-            externalRegistration(),
-          ]);
-
-        const fake =
-          fakeClient({
-            store: {
-              id: "store_1",
-              status:
-                "active",
-            },
-            route: {
-              provider:
-                "external-commerce",
-              connectionId:
-                "connection_1",
-              connection: {
-                id:
-                  "connection_1",
-                storeId:
-                  "store_1",
-                provider:
-                  "external-commerce",
-                environment:
-                  "live",
-                status:
-                  "active",
-                externalAccountRef:
-                  "acct_1",
-                credentialsSecretRef:
-                  "secret://commerce/live",
-                webhookSecretRef:
-                  null,
-                config:
-                  null,
-              },
-            },
-          });
-
-        const resolved =
-          await resolveCommerceProvider(
-            fake.client,
-            {
-              buildProjectId:
-                "build_1",
-              surface:
-                "published",
-              capability:
-                "catalog",
-            },
-            registry,
-          );
-
-        expect(
-          () =>
-            requireCommerceProviderAdapter(
-              resolved,
-              ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-            ),
-        ).toThrow(
-          CommerceProviderResolutionError,
-        );
-
-        try {
-          requireCommerceProviderAdapter(
-            resolved,
-            ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-          );
-        } catch (error) {
-          expect(
-            (
-              error as
-                CommerceProviderResolutionError
-            ).code,
-          ).toBe(
-            "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
-          );
-        }
-      },
-    );
-
-    it(
-      "rejects duplicate provider registrations",
-      () => {
-        expect(
-          () =>
-            createCommerceProviderRegistry([
-              externalRegistration(),
-              externalRegistration(),
-            ]),
-        ).toThrow(
-          "Duplicate commerce provider registration",
-        );
       },
     );
   },

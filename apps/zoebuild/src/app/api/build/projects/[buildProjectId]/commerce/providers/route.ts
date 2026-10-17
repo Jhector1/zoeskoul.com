@@ -322,12 +322,8 @@ function publicStoreSnapshot(
           provider:
             route.provider,
           connected:
-            route.connectionId ===
-              null
-              ? route.provider ===
-                  DEFAULT_COMMERCE_STORE_PROVIDER
-              : route.connection?.status ===
-                  "active",
+            route.connection?.status ===
+              "active",
         }),
       ),
     connections:
@@ -792,67 +788,64 @@ export async function PATCH(
         string
       >();
 
-    if (
-      definition
-        .connectionRequired
+    const connections =
+      await prisma
+        .commerceProviderConnection
+        .findMany({
+          where: {
+            storeId:
+              store.id,
+            provider:
+              definition.id,
+            status:
+              "active",
+            environment: {
+              in: [
+                ...targetEnvironments,
+              ],
+            },
+          },
+          select: {
+            id:
+              true,
+            environment:
+              true,
+          },
+        });
+
+    for (
+      const connection of
+      connections
     ) {
-      const connections =
-        await prisma
-          .commerceProviderConnection
-          .findMany({
-            where: {
-              storeId:
-                store.id,
-              provider:
-                definition.id,
-              status:
-                "active",
-              environment: {
-                in: [
-                  ...targetEnvironments,
-                ],
-              },
-            },
-            select: {
-              id:
-                true,
-              environment:
-                true,
-            },
-          });
+      connectionByEnvironment.set(
+        connection.environment,
+        connection.id,
+      );
+    }
 
-      for (
-        const connection of
-        connections
+    for (
+      const environment of
+      targetEnvironments
+    ) {
+      if (
+        !connectionByEnvironment.has(
+          environment,
+        )
       ) {
-        connectionByEnvironment.set(
-          connection.environment,
-          connection.id,
+        return json(
+          requestId,
+          {
+            ok:
+              false,
+            code:
+              "COMMERCE_PROVIDER_CONNECTION_REQUIRED",
+            message:
+              definition.connectionRequired
+                ? `${definition.displayName} needs an active ${environment} connection before it can own commerce capabilities in that environment.`
+                : `${definition.displayName} internal ${environment} connection is unavailable.`,
+          },
+          409,
         );
-      }
-
-      for (
-        const environment of
-        targetEnvironments
-      ) {
-        if (
-          !connectionByEnvironment.has(
-            environment,
-          )
-        ) {
-          return json(
-            requestId,
-            {
-              ok:
-                false,
-              code:
-                "COMMERCE_PROVIDER_CONNECTION_REQUIRED",
-              message:
-                `${definition.displayName} needs an active ${environment} connection before it can own commerce capabilities in that environment.`,
-            },
-            409,
-          );
-        }
       }
     }
 
@@ -866,13 +859,15 @@ export async function PATCH(
             targetEnvironments
           ) {
             const connectionId =
-              definition
-                .connectionRequired
-                ? connectionByEnvironment.get(
-                    environment,
-                  ) ??
-                  null
-                : null;
+              connectionByEnvironment.get(
+                environment,
+              );
+
+            if (!connectionId) {
+              throw new Error(
+                `Missing explicit ${environment} provider connection for ${definition.id}.`,
+              );
+            }
 
             for (
               const capability of

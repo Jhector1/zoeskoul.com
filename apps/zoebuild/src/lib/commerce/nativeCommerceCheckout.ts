@@ -26,15 +26,14 @@ import {
 
 import {
   CommerceProviderResolutionError,
-  ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  requireCommerceProviderAdapter,
   resolveCommerceProvider,
   type CommerceProviderConnectionSnapshot,
 } from "./commerceProviderResolver";
 
-import type {
-  CommerceProviderEnvironment,
-  CommerceStorefrontSurface,
+import {
+  ZOESTORE_COMMERCE_PROVIDER,
+  type CommerceProviderEnvironment,
+  type CommerceStorefrontSurface,
 } from "./nativeCommerceProvider";
 
 export type CommerceCheckoutRequest =
@@ -1127,7 +1126,7 @@ async function resolvePaymentProvider(
         error.code ===
           "COMMERCE_PROVIDER_ROUTE_NOT_FOUND" ||
         error.code ===
-          "COMMERCE_PROVIDER_CONNECTION_REQUIRED"
+          "COMMERCE_PROVIDER_CONNECTION_INVALID"
       )
     ) {
       throw new NativeCommerceCheckoutError(
@@ -1163,23 +1162,6 @@ export async function beginNativeCommerceCheckout(
       input.buildProjectId,
     );
 
-  const checkoutOwner =
-    await resolveCommerceProvider(
-      client,
-      {
-        buildProjectId,
-        surface:
-          input.surface,
-        capability:
-          "checkout",
-      },
-    );
-
-  requireCommerceProviderAdapter(
-    checkoutOwner,
-    ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  );
-
   const orderOwner =
     await resolveCommerceProvider(
       client,
@@ -1192,10 +1174,16 @@ export async function beginNativeCommerceCheckout(
       },
     );
 
-  requireCommerceProviderAdapter(
-    orderOwner,
-    ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-  );
+  if (
+    orderOwner.provider !==
+      ZOESTORE_COMMERCE_PROVIDER
+  ) {
+    throw new NativeCommerceCheckoutError(
+      "COMMERCE_ORDER_EXECUTION_UNAVAILABLE",
+      "Zoé Store checkout requires an order provider compatible with Zoé Store.",
+      503,
+    );
+  }
 
   const payment =
     await resolvePaymentProvider(
@@ -1206,14 +1194,6 @@ export async function beginNativeCommerceCheckout(
           input.surface,
       },
     );
-
-  if (!payment.connection) {
-    throw new NativeCommerceCheckoutError(
-      "COMMERCE_PAYMENT_PROVIDER_REQUIRED",
-      "Choose and connect a payment provider before checkout.",
-      409,
-    );
-  }
 
   const executor =
     executorForProvider(
