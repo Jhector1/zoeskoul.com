@@ -1335,6 +1335,54 @@ async function markPaidAndCommitInventory(
     );
 }
 
+export async function reconcileStripeCommercePaidSession(
+  client:
+    PrismaClient,
+  input:
+    Readonly<{
+      buildProjectId:
+        string;
+      orderId:
+        string;
+      sessionId:
+        string;
+    }>,
+): Promise<
+  StripeCommerceWebhookResult
+> {
+  return markPaidAndCommitInventory(
+    client,
+    input,
+  );
+}
+
+export async function reconcileStripeCommerceExpiredSession(
+  client:
+    PrismaClient,
+  input:
+    Readonly<{
+      buildProjectId:
+        string;
+      orderId:
+        string;
+      sessionId:
+        string;
+    }>,
+): Promise<
+  StripeCommerceWebhookResult
+> {
+  return markTerminalAndReleaseReservations(
+    client,
+    {
+      ...input,
+      cartStatus:
+        "expired",
+      resultStatus:
+        "expired",
+    },
+  );
+}
+
 export async function reconcileStripeCommerceWebhookEvent(
   client:
     PrismaClient,

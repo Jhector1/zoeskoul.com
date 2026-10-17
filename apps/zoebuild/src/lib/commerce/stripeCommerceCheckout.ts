@@ -407,7 +407,7 @@ function stripeCheckoutExpiresAt(
   );
 }
 
-async function readStripeSecretKey(
+export async function readStripeSecretKey(
   input:
     Readonly<{
       buildProjectId: string;
