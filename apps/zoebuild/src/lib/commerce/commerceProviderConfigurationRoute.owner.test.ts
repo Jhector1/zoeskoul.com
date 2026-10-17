@@ -54,7 +54,7 @@ describe(
     );
 
     it(
-      "requires separate active test and live connections for external providers",
+      "requires an active connection for every targeted environment without fallback",
       () => {
         expect(route).toContain(
           "COMMERCE_PROVIDER_ENVIRONMENTS",
@@ -64,6 +64,15 @@ describe(
         );
         expect(route).toContain(
           "COMMERCE_PROVIDER_CONNECTION_REQUIRED",
+        );
+        expect(route).toContain(
+          "targetEnvironments",
+        );
+        expect(route).toContain(
+          "body?.environment",
+        );
+        expect(route).toContain(
+          "COMMERCE_PROVIDER_ENVIRONMENT_INVALID",
         );
         expect(route).not.toContain(
           "fallback",
@@ -87,7 +96,7 @@ describe(
     );
 
     it(
-      "updates capability ownership for both environments atomically",
+      "keeps the original atomic both-environment mode when no environment is supplied",
       () => {
         expect(route).toContain(
           ".$transaction",

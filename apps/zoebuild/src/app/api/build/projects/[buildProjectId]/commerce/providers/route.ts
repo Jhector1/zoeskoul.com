@@ -34,6 +34,7 @@ import {
   COMMERCE_PROVIDER_CAPABILITIES,
   COMMERCE_PROVIDER_ENVIRONMENTS,
   type CommerceProviderCapability,
+  type CommerceProviderEnvironment,
 } from "@/lib/commerce/nativeCommerceProvider";
 
 export const runtime =
@@ -147,6 +148,20 @@ function parseCapabilities(
   return [
     ...unique,
   ];
+}
+
+function parseEnvironment(
+  value:
+    unknown,
+):
+  CommerceProviderEnvironment |
+  null {
+  return value ===
+    "test" ||
+    value ===
+      "live"
+    ? value
+    : null;
 }
 
 async function authorizeProject(
@@ -655,6 +670,46 @@ export async function PATCH(
         body?.capabilities,
       );
 
+    const environmentInput =
+      body?.environment;
+
+    const environment =
+      environmentInput ===
+        undefined
+        ? null
+        : parseEnvironment(
+            environmentInput,
+          );
+
+    if (
+      environmentInput !==
+        undefined &&
+      !environment
+    ) {
+      return json(
+        requestId,
+        {
+          ok:
+            false,
+          code:
+            "COMMERCE_PROVIDER_ENVIRONMENT_INVALID",
+          message:
+            "Invalid commerce provider environment.",
+        },
+        400,
+      );
+    }
+
+    const targetEnvironments:
+      readonly CommerceProviderEnvironment[] =
+        environment
+          ? [
+              environment,
+            ]
+          : [
+              ...COMMERCE_PROVIDER_ENVIRONMENTS,
+            ];
+
     const definition =
       getCommerceProviderDefinition(
         provider,
@@ -754,7 +809,7 @@ export async function PATCH(
                 "active",
               environment: {
                 in: [
-                  ...COMMERCE_PROVIDER_ENVIRONMENTS,
+                  ...targetEnvironments,
                 ],
               },
             },
@@ -778,7 +833,7 @@ export async function PATCH(
 
       for (
         const environment of
-        COMMERCE_PROVIDER_ENVIRONMENTS
+        targetEnvironments
       ) {
         if (
           !connectionByEnvironment.has(
@@ -793,7 +848,7 @@ export async function PATCH(
               code:
                 "COMMERCE_PROVIDER_CONNECTION_REQUIRED",
               message:
-                `${definition.displayName} needs separate test and live connections before it can own commerce capabilities.`,
+                `${definition.displayName} needs an active ${environment} connection before it can own commerce capabilities in that environment.`,
             },
             409,
           );
@@ -808,7 +863,7 @@ export async function PATCH(
         ) => {
           for (
             const environment of
-            COMMERCE_PROVIDER_ENVIRONMENTS
+            targetEnvironments
           ) {
             const connectionId =
               definition
@@ -882,6 +937,8 @@ export async function PATCH(
         provider:
           definition.id,
         capabilities,
+        environments:
+          targetEnvironments,
         store:
           publicStoreSnapshot(
             updated,

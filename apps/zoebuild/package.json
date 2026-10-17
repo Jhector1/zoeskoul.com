@@ -19,6 +19,7 @@
     "@zoeskoul/build-executor-contracts": "workspace:*",
     "@zoeskoul/build-imports": "workspace:*",
     "@zoeskoul/build-preparation": "workspace:*",
+    "@zoeskoul/build-routing": "workspace:*",
     "@zoeskoul/code-contracts": "workspace:*",
     "@zoeskoul/db": "workspace:*",
     "@zoeskoul/learner-workspace": "workspace:*",
@@ -31,7 +32,7 @@
     "next-themes": "^0.4.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "@zoeskoul/build-routing": "workspace:*"
+    "stripe": "^20.4.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

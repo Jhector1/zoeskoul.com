@@ -28,6 +28,9 @@ import {
 } from "@/lib/build/requestZoeBuildPlan";
 
 import WebPreview from "@zoeskoul/learner-workspace/runner/components/WebPreview";
+import type {
+  WebPreviewCommerceRequest,
+} from "@zoeskoul/learner-workspace/runner/components/WebPreview";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
@@ -122,6 +125,156 @@ export default function ProjectBuilderShell(props: {
     props.project.stackId ===
       "commerce-react-vite-v1"
   );
+
+  function hostedCheckoutRedirectUrl(
+    value:
+      unknown,
+  ) {
+    if (
+      !value ||
+      typeof value !==
+        "object" ||
+      Array.isArray(
+        value,
+      )
+    ) {
+      throw new Error(
+        "The trusted commerce binding did not return a checkout result.",
+      );
+    }
+
+    const raw =
+      (
+        value as
+          Record<
+            string,
+            unknown
+          >
+      ).url;
+
+    if (
+      typeof raw !==
+        "string" ||
+      !raw.trim()
+    ) {
+      throw new Error(
+        "The trusted commerce binding did not return a checkout URL.",
+      );
+    }
+
+    let checkout:
+      URL;
+
+    try {
+      checkout =
+        new URL(
+          raw,
+        );
+    } catch {
+      throw new Error(
+        "The trusted commerce binding returned an invalid checkout URL.",
+      );
+    }
+
+    if (
+      checkout.protocol !==
+        "https:"
+    ) {
+      throw new Error(
+        "Hosted checkout must use HTTPS.",
+      );
+    }
+
+    return checkout.toString();
+  }
+
+  async function requestStaticPreviewCommerce(
+    request:
+      WebPreviewCommerceRequest,
+  ) {
+    const response =
+      await fetch(
+        `/api/build/projects/${encodeURIComponent(
+          props.project.buildProjectId,
+        )}/commerce/preview`,
+        {
+          method:
+            "POST",
+
+          credentials:
+            "same-origin",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body:
+            JSON.stringify({
+              method:
+                request.method,
+              input:
+                request.input,
+            }),
+        },
+      );
+
+    const payload =
+      await response
+        .json()
+        .catch(
+          () =>
+            null,
+        ) as
+          | {
+              ok?:
+                boolean;
+              result?:
+                unknown;
+              message?:
+                string;
+            }
+          | null;
+
+    if (
+      !response.ok ||
+      !payload?.ok
+    ) {
+      throw new Error(
+        payload?.message ??
+          "Commerce preview request failed.",
+      );
+    }
+
+    if (
+      request.method ===
+        "checkout.begin"
+    ) {
+      const checkoutUrl =
+        hostedCheckoutRedirectUrl(
+          payload.result,
+        );
+
+      /*
+       * Static Preview stays opaque and never receives top-navigation
+       * permission. The authenticated parent owns the provider-neutral
+       * hosted-checkout redirect.
+       *
+       * Do not resolve this RPC after navigation begins. Generated storefront
+       * source keeps its normal published-site location.assign behavior, but
+       * Preview never reaches that line inside the iframe.
+       */
+      window.location.assign(
+        checkoutUrl,
+      );
+
+      return await new Promise<never>(
+        () => {},
+      );
+    }
+
+    return payload.result;
+  }
 
   function addMessage(
     message: string,
@@ -511,6 +664,11 @@ export default function ProjectBuilderShell(props: {
                 entries={previewEntries}
                 title={`${props.project.title} preview`}
                 sessionKey={props.project.buildProjectId}
+                onCommerceRequest={
+                  commerceEnabled
+                    ? requestStaticPreviewCommerce
+                    : undefined
+                }
               />
             )}
         </div>

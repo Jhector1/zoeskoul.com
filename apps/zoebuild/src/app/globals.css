@@ -2014,3 +2014,492 @@ a {
   min-height: 11px !important;
   flex: 0 0 11px !important;
 }
+
+/* ZOEBUILD_COMMERCE_FLAT_UI_V1
+ * Commerce is a first-class workspace surface. Keep the project shell fixed,
+ * let Commerce own its vertical scroll, and inherit ZoeBuild's active theme.
+ */
+.zb-project-stage-body {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.zb-project-stage-body > .zb-builder-shell,
+.zb-project-stage-body .zb-builder-stage {
+  min-height: 0;
+  height: 100%;
+}
+
+.zb-project-stage-body .zb-builder-stage {
+  overflow: hidden;
+}
+
+.zb-commerce-workspace {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: clamp(1.25rem, 2.5vw, 2.5rem);
+  color: inherit;
+  background: transparent;
+}
+
+.zb-commerce-heading {
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.zb-commerce-heading h2 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: clamp(1.85rem, 3vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.zb-commerce-heading p {
+  max-width: 52rem;
+  margin: 0;
+  line-height: 1.55;
+  opacity: 0.72;
+}
+
+.zb-commerce-kicker,
+.zb-commerce-card > span:first-child {
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  opacity: 0.58;
+}
+
+.zb-commerce-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, Canvas 96%, currentColor 4%);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.zb-commerce-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-left: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.zb-commerce-card {
+  min-width: 0;
+  min-height: 0;
+  padding: 1.15rem 1.25rem;
+  border: 0;
+  border-right: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 0;
+  background: color-mix(in srgb, Canvas 98%, currentColor 2%);
+  box-shadow: none;
+}
+
+.zb-commerce-card strong {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.zb-commerce-card p,
+.zb-commerce-card small {
+  display: block;
+  margin: 0.55rem 0 0;
+  line-height: 1.5;
+  opacity: 0.68;
+}
+
+.zb-commerce-security,
+.zb-commerce-candidate {
+  display: grid;
+  gap: 0.4rem;
+  margin: 1.25rem 0;
+  padding: 0.95rem 1rem;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, Canvas 98%, currentColor 2%);
+  box-shadow: none;
+}
+
+.zb-commerce-security span,
+.zb-commerce-candidate div {
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+/* Stripe connection currently renders inside Commerce without its own visual
+ * system. Normalize its native controls here so it stays DRY with ZoeBuild.
+ */
+.zb-stripe-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.7rem;
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, Canvas 98%, currentColor 2%);
+  box-shadow: none;
+}
+
+.zb-stripe-panel h3,
+.zb-stripe-panel h4,
+.zb-stripe-panel p {
+  margin: 0;
+}
+
+.zb-stripe-panel p,
+.zb-stripe-panel small {
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+.zb-stripe-panel label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.zb-commerce-workspace input[type="password"],
+.zb-commerce-workspace input[type="text"] {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.5rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  border-radius: 0.6rem;
+  outline: none;
+  color: inherit;
+  background: Canvas;
+  font: inherit;
+}
+
+.zb-commerce-workspace input:focus-visible {
+  border-color: currentColor;
+  box-shadow: 0 0 0 2px color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.zb-commerce-workspace button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-height: 2.35rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  border-radius: 0.6rem;
+  color: inherit;
+  background: color-mix(in srgb, Canvas 94%, currentColor 6%);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.zb-commerce-workspace button:hover:not(:disabled) {
+  background: color-mix(in srgb, Canvas 88%, currentColor 12%);
+}
+
+.zb-commerce-workspace button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.zb-commerce-workspace button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.zb-stripe-panel > span,
+.zb-stripe-panel > div[role="status"],
+.zb-stripe-panel > div[role="alert"] {
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  .zb-commerce-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .zb-commerce-workspace {
+    padding: 1rem;
+  }
+
+  .zb-commerce-heading {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .zb-commerce-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .zb-commerce-status {
+    justify-self: start;
+  }
+}
+
+/* ZOEBUILD_STRIPE_PANEL_POLISH_V2
+ * Explicit Stripe connection layout. Visual only: connection, vault,
+ * provider routing, and checkout behavior remain owned by server contracts.
+ */
+.zb-stripe-panel {
+  position: static;
+  width: 100%;
+  min-width: 0;
+  margin: 1.5rem 0;
+  padding: 0;
+  gap: 0;
+  overflow: visible;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, Canvas 99%, currentColor 1%);
+  box-shadow: none;
+}
+
+.zb-stripe-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.15rem 1.2rem;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.zb-stripe-heading h3 {
+  margin: 0.3rem 0 0.4rem;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.zb-stripe-heading p {
+  max-width: 54rem;
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  opacity: 0.66;
+}
+
+.zb-stripe-kicker {
+  display: block;
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.zb-stripe-mode-note {
+  flex: none;
+  display: inline-flex;
+  min-height: 1.9rem;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0.7;
+}
+
+.zb-stripe-environments {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.zb-stripe-environment {
+  position: static;
+  display: grid;
+  min-width: 0;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 1.2rem;
+  border: 0;
+  background: transparent;
+}
+
+.zb-stripe-environment + .zb-stripe-environment {
+  border-left: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.zb-stripe-environment-heading {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.zb-stripe-environment-heading > div {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.zb-stripe-environment-heading strong {
+  font-size: 0.9rem;
+}
+
+.zb-stripe-environment-heading > div > span {
+  font-size: 0.75rem;
+  opacity: 0.58;
+}
+
+.zb-stripe-status {
+  flex: none;
+  display: inline-flex;
+  min-height: 1.75rem;
+  align-items: center;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 750;
+  white-space: nowrap;
+  opacity: 0.62;
+}
+
+.zb-stripe-status[data-active="true"] {
+  opacity: 1;
+  background: color-mix(in srgb, Canvas 90%, currentColor 10%);
+}
+
+.zb-stripe-field {
+  display: grid;
+  min-width: 0;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.zb-stripe-field > span {
+  margin: 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.72;
+}
+
+.zb-stripe-field input {
+  position: static;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.55rem;
+  margin: 0;
+}
+
+.zb-stripe-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.zb-stripe-actions button {
+  align-self: auto;
+  margin: 0;
+}
+
+.zb-stripe-routing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 1.2rem;
+  border-top: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.zb-stripe-routing > div:first-child {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.zb-stripe-routing strong {
+  font-size: 0.84rem;
+}
+
+.zb-stripe-routing span {
+  font-size: 0.76rem;
+  line-height: 1.45;
+  opacity: 0.62;
+}
+
+.zb-stripe-message {
+  margin: 0 1.2rem 1rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 0.55rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  background: color-mix(in srgb, Canvas 97%, currentColor 3%);
+}
+
+.zb-stripe-panel + .zb-commerce-security {
+  margin-top: 0;
+}
+
+@media (max-width: 820px) {
+  .zb-stripe-environments {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .zb-stripe-environment + .zb-stripe-environment {
+    border-left: 0;
+    border-top: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+  }
+
+  .zb-stripe-routing {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .zb-stripe-heading {
+    flex-direction: column;
+  }
+
+  .zb-stripe-mode-note {
+    align-self: flex-start;
+  }
+
+  .zb-stripe-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .zb-stripe-actions button {
+    width: 100%;
+  }
+}

@@ -5,6 +5,15 @@ import type {
 } from "@zoeskoul/db";
 
 import {
+  createBuildSecretStore,
+  type BuildSecretStore,
+} from "@zoeskoul/platform-server/security/buildSecretStore";
+
+import {
+  STRIPE_COMMERCE_CHECKOUT_EXECUTOR,
+} from "./stripeCommerceCheckout";
+
+import {
   hashNativeCommerceCartToken,
   NativeCommerceCartError,
   parseNativeCommerceCartToken,
@@ -65,6 +74,22 @@ export type TrustedCommerceOrderSnapshot =
 export type CommercePaymentCheckoutExecutor =
   Readonly<{
     provider: string;
+    requiresSecretStore?:
+      boolean;
+    preflight?(
+      input:
+        Readonly<{
+          buildProjectId:
+            string;
+          environment:
+            CommerceProviderEnvironment;
+          connection:
+            CommerceProviderConnectionSnapshot;
+          secretStore:
+            BuildSecretStore;
+        }>,
+    ):
+      Promise<void>;
     begin(
       input:
         Readonly<{
@@ -76,6 +101,10 @@ export type CommercePaymentCheckoutExecutor =
             TrustedCommerceOrderSnapshot;
           idempotencyKey:
             string;
+          buildProjectId?:
+            string;
+          secretStore?:
+            BuildSecretStore;
         }>,
     ):
       Promise<
@@ -94,7 +123,12 @@ export type CommercePaymentCheckoutRegistry =
 
 export const COMMERCE_PAYMENT_CHECKOUT_EXECUTORS:
   CommercePaymentCheckoutRegistry =
-    new Map();
+    new Map([
+      [
+        STRIPE_COMMERCE_CHECKOUT_EXECUTOR.provider,
+        STRIPE_COMMERCE_CHECKOUT_EXECUTOR,
+      ],
+    ]);
 
 export class NativeCommerceCheckoutError
   extends Error {
@@ -983,6 +1017,35 @@ export async function beginNativeCommerceCheckout(
       payment.provider,
     );
 
+  const secretStore =
+    executor.requiresSecretStore
+      ? createBuildSecretStore({
+          prisma:
+            client,
+        })
+      : undefined;
+
+  if (
+    executor.preflight
+  ) {
+    if (!secretStore) {
+      throw new NativeCommerceCheckoutError(
+        "COMMERCE_PAYMENT_SECRET_STORE_REQUIRED",
+        "The selected payment provider requires secure server credentials.",
+        503,
+      );
+    }
+
+    await executor.preflight({
+      buildProjectId,
+      environment:
+        payment.environment,
+      connection:
+        payment.connection,
+      secretStore,
+    });
+  }
+
   const order =
     await createOrReuseOrderSnapshot(
       client,
@@ -1006,6 +1069,8 @@ export async function beginNativeCommerceCheckout(
       order,
       idempotencyKey:
         order.id,
+      buildProjectId,
+      secretStore,
     });
 
   const url =

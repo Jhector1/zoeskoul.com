@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 
+import StripeConnectionPanel from "./StripeConnectionPanel";
+
 type CommerceProject =
   Readonly<{
     buildProjectId: string;
@@ -54,6 +56,14 @@ type CommerceConfiguration =
           string;
         routes:
           readonly ProviderRouteSnapshot[];
+        connections:
+          readonly Readonly<{
+            provider: string;
+            environment:
+              "test" |
+              "live";
+            status: string;
+          }>[];
       }>;
   }>;
 
@@ -110,6 +120,14 @@ export default function CommerceWorkspacePanel(
       string |
       null
     >(null);
+
+  const [
+    configurationRevision,
+    setConfigurationRevision,
+  ] =
+    useState(
+      0,
+    );
 
   useEffect(
     () => {
@@ -203,6 +221,7 @@ export default function CommerceWorkspacePanel(
     [
       props.project
         .buildProjectId,
+      configurationRevision,
     ],
   );
 
@@ -436,6 +455,28 @@ export default function CommerceWorkspacePanel(
           </p>
         </section>
       </div>
+
+      <StripeConnectionPanel
+        buildProjectId={
+          props.project.buildProjectId
+        }
+        connections={
+          configuration
+            ?.store
+            .connections ??
+          []
+        }
+        onChanged={
+          () =>
+            setConfigurationRevision(
+              (
+                current,
+              ) =>
+                current +
+                1,
+            )
+        }
+      />
 
       <div className="zb-commerce-security">
         <strong>

@@ -16,6 +16,16 @@ import {
     buildWebPreviewBridgeScript,
     webPreviewConsoleReducer,
 } from "./webPreviewBridge";
+import {
+    acceptWebPreviewCommerceRequest,
+    buildWebPreviewCommerceBridgeScript,
+    WEB_PREVIEW_COMMERCE_MESSAGE,
+    type WebPreviewCommerceRequest,
+} from "./webPreviewCommerceBridge";
+
+export type {
+    WebPreviewCommerceRequest,
+};
 
 function normalizePath(input: string) {
     return String(input ?? "")
@@ -127,6 +137,203 @@ function rewriteCssAssets(args: {
             return dataUrl ? `url("${dataUrl}")` : full;
         },
     );
+}
+
+/**
+ * ZOEBUILD_WEB_PREVIEW_LOCAL_ESM_V1
+ *
+ * srcDoc previews inline workspace scripts so the iframe never receives a
+ * filesystem/server origin. ES modules need one extra step: relative import
+ * specifiers must resolve against the virtual workspace rather than srcDoc.
+ *
+ * Import maps give every local JS/MJS file a stable virtual specifier while
+ * preserving native browser module semantics (including circular graphs).
+ */
+const WEB_PREVIEW_MODULE_PREFIX =
+    "zoebuild-workspace/";
+
+function webPreviewModuleSpecifier(path: string) {
+    return `${WEB_PREVIEW_MODULE_PREFIX}${normalizePath(path)}`;
+}
+
+function isWebPreviewLocalModuleTarget(target: string) {
+    const value = String(target ?? "").trim();
+
+    return (
+        value.startsWith("./") ||
+        value.startsWith("../") ||
+        value.startsWith("/")
+    );
+}
+
+function resolveWebPreviewModulePath(args: {
+    fileMap: Map<string, string>;
+    fromFile: string;
+    target: string;
+}) {
+    if (!isWebPreviewLocalModuleTarget(args.target)) {
+        return null;
+    }
+
+    const resolved =
+        resolveRelativePath(
+            args.fromFile,
+            args.target,
+        );
+
+    if (!resolved) return null;
+
+    const candidates = [
+        resolved,
+        `${resolved}.js`,
+        `${resolved}.mjs`,
+        `${resolved}/index.js`,
+        `${resolved}/index.mjs`,
+    ];
+
+    for (const candidate of candidates) {
+        const lower =
+            candidate.toLowerCase();
+
+        if (
+            (lower.endsWith(".js") ||
+                lower.endsWith(".mjs")) &&
+            args.fileMap.has(candidate)
+        ) {
+            return candidate;
+        }
+    }
+
+    return null;
+}
+
+function rewriteWebPreviewModuleSpecifiers(args: {
+    source: string;
+    modulePath: string;
+    fileMap: Map<string, string>;
+}) {
+    const rewrite =
+        (target: string) => {
+            const resolved =
+                resolveWebPreviewModulePath({
+                    fileMap:
+                        args.fileMap,
+                    fromFile:
+                        args.modulePath,
+                    target,
+                });
+
+            return resolved
+                ? webPreviewModuleSpecifier(
+                      resolved,
+                  )
+                : target;
+        };
+
+    let output =
+        args.source.replace(
+            /(\b(?:import|export)\s+(?:[^"'`]*?\s+from\s*)?)(["'])([^"']+)\2/g,
+            (
+                full,
+                prefix,
+                quote,
+                target,
+            ) => {
+                const next =
+                    rewrite(
+                        String(target),
+                    );
+
+                if (
+                    next === target
+                ) {
+                    return full;
+                }
+
+                return `${prefix}${quote}${next}${quote}`;
+            },
+        );
+
+    output =
+        output.replace(
+            /(\bimport\s*\(\s*)(["'])([^"']+)\2(\s*\))/g,
+            (
+                full,
+                prefix,
+                quote,
+                target,
+                suffix,
+            ) => {
+                const next =
+                    rewrite(
+                        String(target),
+                    );
+
+                if (
+                    next === target
+                ) {
+                    return full;
+                }
+
+                return `${prefix}${quote}${next}${quote}${suffix}`;
+            },
+        );
+
+    return output;
+}
+
+function buildWebPreviewModuleImportMap(
+    fileMap: Map<string, string>,
+) {
+    const imports:
+        Record<string, string> =
+        {};
+
+    for (
+        const [
+            path,
+            source,
+        ] of fileMap
+    ) {
+        const lower =
+            path.toLowerCase();
+
+        if (
+            !lower.endsWith(".js") &&
+            !lower.endsWith(".mjs")
+        ) {
+            continue;
+        }
+
+        const rewritten =
+            rewriteWebPreviewModuleSpecifiers({
+                source,
+                modulePath:
+                    path,
+                fileMap,
+            });
+
+        imports[
+            webPreviewModuleSpecifier(
+                path,
+            )
+        ] =
+            `data:text/javascript;charset=utf-8,${encodeURIComponent(
+                `${rewritten}\n//# sourceURL=${webPreviewModuleSpecifier(path)}`,
+            )}`;
+    }
+
+    if (
+        Object.keys(imports)
+            .length ===
+        0
+    ) {
+        return "";
+    }
+
+    return `<script type="importmap">${JSON.stringify({
+        imports,
+    }).replace(/</g, "\\u003c")}<\/script>`;
 }
 
 function webPreviewVirtualContentType(path: string) {
@@ -294,7 +501,10 @@ export function listWebPreviewHtmlPaths(entries: WorkspaceSyncEntry[]) {
 export function buildWebPreviewSrcDoc(
     entries: WorkspaceSyncEntry[],
     requestedPath = "index.html",
-    options?: { bridgeId?: string },
+    options?: {
+        bridgeId?: string;
+        commerceBridge?: boolean;
+    },
 ) {
     const fileMap = new Map<string, string>();
     const assetMap = new Map<string, string>();
@@ -370,13 +580,43 @@ ${rewrittenCss}
         /<script\b([^>]*?)src=["']([^"']+)["']([^>]*)>\s*<\/script>/gi,
         (full, before, src, after) => {
             const resolved = resolveRelativePath(htmlPath || "index.html", src);
-            if (!resolved || !resolved.endsWith(".js")) return full;
+            const lower =
+                resolved.toLowerCase();
+
+            if (
+                !resolved ||
+                (
+                    !lower.endsWith(".js") &&
+                    !lower.endsWith(".mjs")
+                )
+            ) {
+                return full;
+            }
 
             const js = fileMap.get(resolved);
             if (typeof js !== "string") return full;
 
+            const attributes =
+                `${before ?? ""}${after ?? ""}`;
+
+            const isModule =
+                /\btype\s*=\s*(["'])module\1/i.test(
+                    attributes,
+                );
+
+            const executable =
+                isModule
+                    ? rewriteWebPreviewModuleSpecifiers({
+                          source:
+                              js,
+                          modulePath:
+                              resolved,
+                          fileMap,
+                      })
+                    : js;
+
             return `<script${before ?? ""}${after ?? ""} data-inline-src="${resolved}">
-${js}
+${executable}
 </script>`;
         },
     );
@@ -408,17 +648,33 @@ ${js}
         },
     );
 
-    const bridge = buildWebPreviewBridgeScript(options?.bridgeId ?? "standalone");
+    const bridgeId =
+        options?.bridgeId ??
+        "standalone";
+    const bridge =
+        buildWebPreviewBridgeScript(
+            bridgeId,
+        );
+    const commerceBridge =
+        options?.commerceBridge
+            ? buildWebPreviewCommerceBridgeScript(
+                  bridgeId,
+              )
+            : "";
     const virtualFetchBridge = buildWebPreviewVirtualFetchScript(
         fileMap,
         htmlPath || "index.html",
     );
+    const moduleImportMap =
+        buildWebPreviewModuleImportMap(
+            fileMap,
+        );
     const headMatch = /<head(?:\s[^>]*)?>/i.exec(out);
     if (headMatch) {
         const insertionPoint = (headMatch.index ?? 0) + headMatch[0].length;
-        out = `${out.slice(0, insertionPoint)}${bridge}${virtualFetchBridge}${out.slice(insertionPoint)}`;
+        out = `${out.slice(0, insertionPoint)}${bridge}${commerceBridge}${virtualFetchBridge}${moduleImportMap}${out.slice(insertionPoint)}`;
     } else {
-        out = `${bridge}${virtualFetchBridge}${out}`;
+        out = `${bridge}${commerceBridge}${virtualFetchBridge}${moduleImportMap}${out}`;
     }
 
     return out;
@@ -485,9 +741,33 @@ export default function WebPreview(props: {
     consoleInitiallyOpen?: boolean;
     /** Resets iframe diagnostics when the owning workspace/exercise changes. */
     sessionKey?: string;
+    /**
+     * Optional host-owned commerce transport. The opaque iframe receives only
+     * the provider-neutral __ZOEBUILD_COMMERCE__ facade; this callback remains
+     * in the authenticated parent.
+     */
+    onCommerceRequest?: (
+        request: WebPreviewCommerceRequest,
+    ) => Promise<unknown>;
 }) {
     const iframeRef = useRef<HTMLIFrameElement | null>(null);
     const componentId = useId();
+    const [
+        clientHydrated,
+        setClientHydrated,
+    ] = useState(false);
+    const commerceBridgeEnabled =
+        typeof props.onCommerceRequest ===
+        "function";
+
+    useEffect(
+        () => {
+            setClientHydrated(
+                true,
+            );
+        },
+        [],
+    );
     const preferredEntryPath = normalizePath(props.entryPath ?? "");
     const [virtualPath, setVirtualPath] = useState(
         preferredEntryPath || DEFAULT_WEB_PREVIEW_URL.slice(1),
@@ -550,6 +830,107 @@ export default function WebPreview(props: {
 
     useEffect(() => {
         const onMessage = (event: MessageEvent) => {
+            const commerceRequest =
+                acceptWebPreviewCommerceRequest({
+                    eventSource:
+                        event.source,
+                    activeIframeWindow:
+                        iframeRef.current
+                            ?.contentWindow,
+                    data:
+                        event.data,
+                    bridgeId,
+                });
+
+            if (commerceRequest) {
+                const source =
+                    iframeRef.current
+                        ?.contentWindow;
+                const handler =
+                    props.onCommerceRequest;
+
+                if (
+                    !source ||
+                    !handler
+                ) {
+                    return;
+                }
+
+                void Promise.resolve(
+                    handler(
+                        commerceRequest,
+                    ),
+                )
+                    .then(
+                        (
+                            value,
+                        ) => {
+                            if (
+                                iframeRef.current
+                                    ?.contentWindow !==
+                                source
+                            ) {
+                                return;
+                            }
+
+                            source.postMessage(
+                                {
+                                    type:
+                                        WEB_PREVIEW_COMMERCE_MESSAGE,
+                                    bridgeId,
+                                    kind:
+                                        "response",
+                                    requestId:
+                                        commerceRequest.requestId,
+                                    ok:
+                                        true,
+                                    value,
+                                },
+                                "*",
+                            );
+                        },
+                    )
+                    .catch(
+                        (
+                            error:
+                                unknown,
+                        ) => {
+                            if (
+                                iframeRef.current
+                                    ?.contentWindow !==
+                                source
+                            ) {
+                                return;
+                            }
+
+                            source.postMessage(
+                                {
+                                    type:
+                                        WEB_PREVIEW_COMMERCE_MESSAGE,
+                                    bridgeId,
+                                    kind:
+                                        "response",
+                                    requestId:
+                                        commerceRequest.requestId,
+                                    ok:
+                                        false,
+                                    message:
+                                        error instanceof
+                                        Error
+                                            ? error.message.slice(
+                                                  0,
+                                                  1_000,
+                                              )
+                                            : "Commerce preview request failed.",
+                                },
+                                "*",
+                            );
+                        },
+                    );
+
+                return;
+            }
+
             const message = acceptWebPreviewBridgeMessage({
                 eventSource: event.source,
                 activeIframeWindow: iframeRef.current?.contentWindow,
@@ -587,16 +968,60 @@ export default function WebPreview(props: {
             }
         };
 
-        window.addEventListener("message", onMessage);
-        return () => window.removeEventListener("message", onMessage);
-    }, [bridgeId, htmlPaths]);
+        const notifyCommerceReady =
+            () => {
+                if (
+                    !commerceBridgeEnabled
+                ) {
+                    return;
+                }
+
+                iframeRef.current
+                    ?.contentWindow
+                    ?.postMessage(
+                        {
+                            type:
+                                WEB_PREVIEW_COMMERCE_MESSAGE,
+                            bridgeId,
+                            kind:
+                                "ready",
+                        },
+                        "*",
+                    );
+            };
+
+        window.addEventListener(
+            "message",
+            onMessage,
+        );
+
+        notifyCommerceReady();
+
+        return () =>
+            window.removeEventListener(
+                "message",
+                onMessage,
+            );
+    }, [
+        bridgeId,
+        commerceBridgeEnabled,
+        htmlPaths,
+        props.onCommerceRequest,
+    ]);
 
     const srcDoc = useMemo(
         () =>
             buildWebPreviewSrcDoc(props.entries, virtualPath, {
                 bridgeId,
+                commerceBridge:
+                    commerceBridgeEnabled,
             }),
-        [bridgeId, props.entries, virtualPath],
+        [
+            bridgeId,
+            commerceBridgeEnabled,
+            props.entries,
+            virtualPath,
+        ],
     );
 
     return (
@@ -626,7 +1051,11 @@ export default function WebPreview(props: {
                     ref={iframeRef}
                     key={refreshRevision}
                     title={props.title ?? "Web preview"}
-                    srcDoc={srcDoc}
+                    srcDoc={
+                            clientHydrated
+                                ? srcDoc
+                                : ""
+                        }
                     sandbox="allow-scripts allow-forms allow-modals"
                     onLoad={(event) => {
                         event.currentTarget.contentWindow?.postMessage(
@@ -637,6 +1066,21 @@ export default function WebPreview(props: {
                             },
                             "*",
                         );
+
+                        if (
+                            commerceBridgeEnabled
+                        ) {
+                            event.currentTarget.contentWindow?.postMessage(
+                                {
+                                    type:
+                                        WEB_PREVIEW_COMMERCE_MESSAGE,
+                                    bridgeId,
+                                    kind:
+                                        "ready",
+                                },
+                                "*",
+                            );
+                        }
                     }}
                     data-web-preview-frame
                     className="h-full w-full border-0 bg-white"
