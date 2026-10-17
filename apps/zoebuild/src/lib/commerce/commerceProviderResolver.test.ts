@@ -236,7 +236,7 @@ describe(
           environment:
             "test",
           status:
-            "disabled",
+            "disconnected",
           externalAccountRef:
             null,
           credentialsSecretRef:

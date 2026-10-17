@@ -10,10 +10,16 @@ export type ProviderConnectionKind =
   | "oauth"
   | "endpoint";
 
+/**
+ * Persisted provider-connection lifecycle.
+ *
+ * `disconnected` means the provider/environment pair exists but is not
+ * executable. Only `active` may satisfy capability routing. `error` records a
+ * failed or unhealthy connection without introducing an implicit fallback.
+ */
 export type ProviderConnectionStatus =
-  | "pending"
+  | "disconnected"
   | "active"
-  | "disabled"
   | "error";
 
 export interface ProviderConnectionSnapshot {
