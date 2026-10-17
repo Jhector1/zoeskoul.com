@@ -2235,3 +2235,33 @@ enum XpSourceType {
   assignment_complete
   project_step
 }
+
+// Single-use Shopify OAuth nonce state. Only hashes are persisted; raw state
+// and browser-binding tokens are returned to the caller for a secure cookie.
+model CommerceProviderOAuthState {
+  stateHash          String                      @id @db.VarChar(64)
+  browserBindingHash String                      @db.VarChar(64)
+  buildProjectId     String
+  storeId            String
+  provider           String
+  environment        CommerceProviderEnvironment
+  shopHostname       String
+  redirectUri        String
+  expiresAt          DateTime
+  consumedAt         DateTime?
+  createdAt          DateTime                    @default(now())
+
+  @@index([expiresAt])
+  @@index([buildProjectId, storeId, provider, environment], map: "CommerceOAuthState_scope_idx")
+}
+
+// Provider-specific refresh lease; enforces cross-worker, single-flight
+// rotation before a refresh token can be used remotely.
+model CommerceProviderOAuthRefreshLease {
+  connectionId String   @id
+  owner        String   @db.VarChar(48)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([expiresAt])
+}
