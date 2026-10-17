@@ -348,6 +348,7 @@ model CommerceProviderConnection {
   status               CommerceProviderConnectionStatus @default(disconnected)
   externalAccountRef   String?
   credentialsSecretRef String?
+  storefrontSecretRef     String?
   webhookSecretRef     String?
   config               Json?
   createdAt            DateTime                         @default(now())

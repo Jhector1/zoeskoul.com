@@ -288,6 +288,7 @@ export async function disconnectCommerceProviderEnvironment(
             true,
           webhookSecretRef:
             true,
+            storefrontSecretRef: true,
         },
       });
 
@@ -318,6 +319,7 @@ export async function disconnectCommerceProviderEnvironment(
             null,
           webhookSecretRef:
             null,
+            storefrontSecretRef: null,
         },
         select: {
           id:
@@ -340,6 +342,7 @@ export async function disconnectCommerceProviderEnvironment(
         existing
           .webhookSecretRef
           ?.trim(),
+          existing.storefrontSecretRef?.trim(),
       ].filter(
         (
           secretRef,

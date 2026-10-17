@@ -68,6 +68,7 @@ function fakePrisma(
           webhookSecretRef?:
             string |
             null;
+          storefrontSecretRef?: string | null;
         }> |
         null;
       failUpsert?:
@@ -300,6 +301,7 @@ describe(
 
         const webhookRef =
           "zoebuild-secret:v1:55555555-5555-4555-8555-555555555555";
+        const storefrontRef = "zoebuild-secret:v1:77777777-7777-4777-8777-777777777777";
 
         const prisma =
           fakePrisma({
@@ -310,6 +312,7 @@ describe(
                 credentialRef,
               webhookSecretRef:
                 webhookRef,
+              storefrontSecretRef: storefrontRef,
             },
           });
 
@@ -360,6 +363,7 @@ describe(
               null,
             webhookSecretRef:
               null,
+            storefrontSecretRef: null,
           },
           select: {
             id:
@@ -370,7 +374,7 @@ describe(
         expect(
           secrets.deleteSecret,
         ).toHaveBeenCalledTimes(
-          2,
+          3,
         );
         expect(
           secrets.deleteSecret,
@@ -387,6 +391,10 @@ describe(
             "project_1",
           secretRef:
             webhookRef,
+        });
+        expect(secrets.deleteSecret).toHaveBeenCalledWith({
+          buildProjectId: "project_1",
+          secretRef: storefrontRef,
         });
       },
     );
