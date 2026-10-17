@@ -197,6 +197,16 @@ describe(
         expect(
           registry,
         ).toContain(
+          "ZOESTORE_COMMERCE_PROVIDER_MANIFEST",
+        );
+        expect(
+          registry,
+        ).toContain(
+          "STRIPE_COMMERCE_PROVIDER_MANIFEST",
+        );
+        expect(
+          registry,
+        ).toContain(
           ".supportsInEnvironment(",
         );
         expect(

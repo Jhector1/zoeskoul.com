@@ -36,15 +36,15 @@ import type {
   CommerceProviderConnectionSnapshot,
 } from "./commerceProviderConnectionContract";
 import {
-  COMMERCE_PROVIDER_ENVIRONMENTS,
-  ZOESTORE_COMMERCE_DISPLAY_NAME,
-  ZOESTORE_COMMERCE_PROVIDER,
   type CommerceProviderCapability,
   type CommerceProviderEnvironment,
 } from "./nativeCommerceProvider";
 import {
+  STRIPE_COMMERCE_PROVIDER_MANIFEST,
+  ZOESTORE_COMMERCE_PROVIDER_MANIFEST,
+} from "./commerceProviderExecutableManifests";
+import {
   prepareStripeCommercePayments,
-  STRIPE_COMMERCE_PROVIDER,
 } from "./stripeCommerceCheckout";
 import {
   prepareStripeCommercePaymentReconciliation,
@@ -289,17 +289,8 @@ export function registerCommerceProviderAdapter(
 }
 
 registerCommerceProviderAdapter({
-  manifest: {
-    key:
-      ZOESTORE_COMMERCE_PROVIDER,
-    displayName:
-      ZOESTORE_COMMERCE_DISPLAY_NAME,
-    connectionKinds: [
-      "internal",
-    ],
-    environments:
-      COMMERCE_PROVIDER_ENVIRONMENTS,
-  },
+  manifest:
+    ZOESTORE_COMMERCE_PROVIDER_MANIFEST,
   handlers: {
     "commerce.catalog": {
       capability:
@@ -347,17 +338,8 @@ registerCommerceProviderAdapter({
 });
 
 registerCommerceProviderAdapter({
-  manifest: {
-    key:
-      STRIPE_COMMERCE_PROVIDER,
-    displayName:
-      "Stripe",
-    connectionKinds: [
-      "credentials",
-    ],
-    environments:
-      COMMERCE_PROVIDER_ENVIRONMENTS,
-  },
+  manifest:
+    STRIPE_COMMERCE_PROVIDER_MANIFEST,
   handlers: {
     "commerce.payments": {
       capability:

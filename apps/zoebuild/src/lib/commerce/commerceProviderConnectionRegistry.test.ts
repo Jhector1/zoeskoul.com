@@ -8,6 +8,9 @@ import {
   getCommerceProviderConnectionAdapter,
   supportsCommerceProviderConnectionEnvironment,
 } from "./commerceProviderConnectionRegistry";
+import {
+  STRIPE_COMMERCE_PROVIDER_MANIFEST,
+} from "./commerceProviderExecutableManifests";
 
 describe(
   "commerce provider connection registry",
@@ -27,21 +30,20 @@ describe(
         expect(
           adapter?.provider,
         ).toBe(
-          "stripe",
+          STRIPE_COMMERCE_PROVIDER_MANIFEST.key,
         );
 
         expect(
           adapter?.connectionKind,
         ).toBe(
-          "credentials",
+          STRIPE_COMMERCE_PROVIDER_MANIFEST.connectionKinds[0],
         );
 
         expect(
           adapter?.environments,
-        ).toEqual([
-          "test",
-          "live",
-        ]);
+        ).toEqual(
+          STRIPE_COMMERCE_PROVIDER_MANIFEST.environments,
+        );
       },
     );
 

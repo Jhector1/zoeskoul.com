@@ -16,13 +16,14 @@ import {
   disconnectCommerceProviderEnvironment,
   type CommerceProviderConnectionLifecycleResult,
 } from "./commerceProviderConnectionLifecycle";
-import {
-  COMMERCE_PROVIDER_ENVIRONMENTS,
-  type CommerceProviderEnvironment,
+import type {
+  CommerceProviderEnvironment,
 } from "./nativeCommerceProvider";
 import {
+  STRIPE_COMMERCE_PROVIDER_MANIFEST,
+} from "./commerceProviderExecutableManifests";
+import {
   connectStripeCommerceEnvironment,
-  STRIPE_COMMERCE_PROVIDER,
   StripeCommerceConnectionError,
 } from "./stripeCommerceConnection";
 
@@ -186,11 +187,11 @@ export function supportsCommerceProviderConnectionEnvironment(
 
 registerCommerceProviderConnectionAdapter({
   provider:
-    STRIPE_COMMERCE_PROVIDER,
+    STRIPE_COMMERCE_PROVIDER_MANIFEST.key,
   connectionKind:
-    "credentials",
+    STRIPE_COMMERCE_PROVIDER_MANIFEST.connectionKinds[0],
   environments:
-    COMMERCE_PROVIDER_ENVIRONMENTS,
+    STRIPE_COMMERCE_PROVIDER_MANIFEST.environments,
 
   async connect(
     client,
@@ -259,7 +260,7 @@ registerCommerceProviderConnectionAdapter({
         storeId:
           input.storeId,
         provider:
-          STRIPE_COMMERCE_PROVIDER,
+          STRIPE_COMMERCE_PROVIDER_MANIFEST.key,
         environment:
           input.environment,
         secretStore:
