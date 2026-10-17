@@ -3,70 +3,41 @@ import "server-only";
 import type {
   PrismaClient,
 } from "@zoeskoul/db";
+import {
+  createBuildSecretStore,
+} from "@zoeskoul/platform-server/security/buildSecretStore";
 import type {
   CommerceCapability,
 } from "@zoeskoul/provider-contracts";
 import {
-  ProviderRegistry,
   ProviderRegistryError,
 } from "@zoeskoul/provider-platform";
 
-import {
-  getNativeCommerceProduct,
-  listNativeCommerceProducts,
-} from "./nativeCommerceCatalog";
-import {
-  executeNativeCommerceCartCommand,
-  type NativeCommerceCartCommand,
+import type {
+  NativeCommerceCartCommand,
 } from "./nativeCommerceCart";
-import {
-  beginNativeCommerceCheckout,
-  type CommerceCheckoutRequest,
+import type {
+  CommerceCheckoutRequest,
+  TrustedCommerceOrderSnapshot,
 } from "./nativeCommerceCheckout";
 import {
   CommerceProviderResolutionError,
   resolveCommerceProvider,
+  type CommerceProviderConnectionSnapshot,
 } from "./commerceProviderResolver";
-import {
-  ZOESTORE_COMMERCE_DISPLAY_NAME,
-  ZOESTORE_COMMERCE_PROVIDER,
-  type CommerceProviderCapability,
-  type CommerceStorefrontSurface,
+import type {
+  CommerceProviderCapability,
+  CommerceProviderEnvironment,
+  CommerceStorefrontSurface,
 } from "./nativeCommerceProvider";
-
-type RuntimeCommerceCapability =
-  | "commerce.catalog"
-  | "commerce.cart"
-  | "commerce.orders"
-  | "commerce.checkout";
-
-type CatalogHandler = Readonly<{
-  capability: "commerce.catalog";
-  listProducts: typeof listNativeCommerceProducts;
-  getProduct: typeof getNativeCommerceProduct;
-}>;
-
-type CartHandler = Readonly<{
-  capability: "commerce.cart";
-  executeCommand:
-    typeof executeNativeCommerceCartCommand;
-}>;
-
-type OrdersHandler = Readonly<{
-  capability: "commerce.orders";
-}>;
-
-type CheckoutHandler = Readonly<{
-  capability: "commerce.checkout";
-  beginCheckout:
-    typeof beginNativeCommerceCheckout;
-}>;
-
-type CommerceRuntimeHandler =
-  | CatalogHandler
-  | CartHandler
-  | OrdersHandler
-  | CheckoutHandler;
+import {
+  COMMERCE_RUNTIME_REGISTRY,
+  type CommerceRuntimeHandler,
+  type RuntimeCommerceCapability,
+} from "./commerceRuntimeRegistry";
+import type {
+  CommerceCheckoutReconciliationOrder,
+} from "./commerceCheckoutReconciliation";
 
 const PERSISTED_CAPABILITY_BY_RUNTIME:
   Readonly<
@@ -83,51 +54,9 @@ const PERSISTED_CAPABILITY_BY_RUNTIME:
       "orders",
     "commerce.checkout":
       "checkout",
+    "commerce.payments":
+      "payments",
   };
-
-export const COMMERCE_RUNTIME_REGISTRY =
-  new ProviderRegistry<
-    RuntimeCommerceCapability,
-    CommerceRuntimeHandler
-  >();
-
-COMMERCE_RUNTIME_REGISTRY.register({
-  manifest: {
-    key:
-      ZOESTORE_COMMERCE_PROVIDER,
-    displayName:
-      ZOESTORE_COMMERCE_DISPLAY_NAME,
-    connectionKinds: [
-      "internal",
-    ],
-  },
-  handlers: {
-    "commerce.catalog": {
-      capability:
-        "commerce.catalog",
-      listProducts:
-        listNativeCommerceProducts,
-      getProduct:
-        getNativeCommerceProduct,
-    },
-    "commerce.cart": {
-      capability:
-        "commerce.cart",
-      executeCommand:
-        executeNativeCommerceCartCommand,
-    },
-    "commerce.orders": {
-      capability:
-        "commerce.orders",
-    },
-    "commerce.checkout": {
-      capability:
-        "commerce.checkout",
-      beginCheckout:
-        beginNativeCommerceCheckout,
-    },
-  },
-});
 
 async function resolveHandler<
   TCapability extends RuntimeCommerceCapability,
@@ -189,10 +118,233 @@ async function resolveHandler<
   }
 }
 
+export async function prepareCommercePaymentReconciliation(
+  client: PrismaClient,
+  input: Readonly<{
+    buildProjectId: string;
+    provider: string;
+    environment:
+      CommerceProviderEnvironment;
+    connection:
+      CommerceProviderConnectionSnapshot;
+    order:
+      CommerceCheckoutReconciliationOrder;
+  }>,
+) {
+  let handler:
+    CommerceRuntimeHandler;
+
+  try {
+    handler =
+      COMMERCE_RUNTIME_REGISTRY
+        .getHandler(
+          input.provider,
+          "commerce.payments",
+        );
+  } catch (
+    error
+  ) {
+    if (
+      error instanceof
+        ProviderRegistryError
+    ) {
+      throw new CommerceProviderResolutionError(
+        "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+        "Historical payment provider is not available on this execution path.",
+      );
+    }
+
+    throw error;
+  }
+
+  if (
+    handler.capability !==
+      "commerce.payments" ||
+    !handler.prepareReconciliation
+  ) {
+    throw new CommerceProviderResolutionError(
+      "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+      "Historical payment provider does not support payment inspection.",
+    );
+  }
+
+  const secretStore =
+    handler.requiresSecretStore
+      ? createBuildSecretStore({
+          prisma:
+            client,
+        })
+      : undefined;
+
+  const prepared =
+    await handler.prepareReconciliation({
+      buildProjectId:
+        input.buildProjectId,
+      environment:
+        input.environment,
+      connection:
+        input.connection,
+      secretStore,
+    });
+
+  if (
+    prepared.provider !==
+      input.provider
+  ) {
+    throw new CommerceProviderResolutionError(
+      "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+      "Historical payment provider returned a mismatched inspection handler.",
+    );
+  }
+
+  const payments =
+    prepared.forOrder(
+      input.order,
+    );
+
+  if (!payments.inspectPayment) {
+    throw new CommerceProviderResolutionError(
+      "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+      "Historical payment provider does not implement payment inspection.",
+    );
+  }
+
+  return {
+    provider:
+      input.provider,
+    environment:
+      input.environment,
+    inspectPayment:
+      payments.inspectPayment,
+    cancelPayment:
+      payments.cancelPayment,
+    reconcilePaid:
+      prepared.reconcilePaid,
+    reconcileExpired:
+      prepared.reconcileExpired,
+  } as const;
+}
+
+export async function prepareCommercePaymentCheckout(
+  client: PrismaClient,
+  input: Readonly<{
+    buildProjectId: string;
+    surface:
+      CommerceStorefrontSurface;
+  }>,
+) {
+  const {
+    resolved,
+    handler,
+  } =
+    await resolveHandler(
+      client,
+      input,
+      "commerce.payments",
+    );
+
+  if (
+    handler.capability !==
+      "commerce.payments"
+  ) {
+    throw new CommerceProviderResolutionError(
+      "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+      "Configured commerce payment provider returned a mismatched execution handler.",
+    );
+  }
+
+  const secretStore =
+    handler.requiresSecretStore
+      ? createBuildSecretStore({
+          prisma:
+            client,
+        })
+      : undefined;
+
+  const prepared =
+    await handler.prepare({
+      buildProjectId:
+        input.buildProjectId,
+      environment:
+        resolved.environment,
+      connection:
+        resolved.connection,
+      secretStore,
+    });
+
+  if (
+    prepared.provider !==
+      resolved.provider
+  ) {
+    throw new CommerceProviderResolutionError(
+      "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+      "Configured commerce payment provider returned a mismatched prepared handler.",
+    );
+  }
+
+  return {
+    provider:
+      resolved.provider,
+    environment:
+      resolved.environment,
+
+    async begin(
+      paymentInput:
+        Readonly<{
+          order:
+            TrustedCommerceOrderSnapshot;
+          idempotencyKey:
+            string;
+        }>,
+    ) {
+      const payments =
+        prepared.forOrder(
+          paymentInput.order,
+        );
+
+      const session =
+        await payments
+          .createPaymentSession({
+            orderId:
+              paymentInput.order.id,
+            amountMinor:
+              paymentInput.order.totalMinor,
+            currency:
+              paymentInput.order.currency,
+            idempotencyKey:
+              paymentInput.idempotencyKey,
+          });
+
+      const redirectUrl =
+        session.redirectUrl?.trim();
+
+      if (!redirectUrl) {
+        throw new CommerceProviderResolutionError(
+          "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
+          "Configured commerce payment provider did not return a hosted checkout URL.",
+        );
+      }
+
+      return {
+        url:
+          redirectUrl,
+        providerRef:
+          session.remoteResourceId,
+      };
+    },
+  } as const;
+}
+
 export async function listCommerceProducts(
   client: PrismaClient,
   input: Parameters<
-    typeof listNativeCommerceProducts
+    Extract<
+      CommerceRuntimeHandler,
+      {
+        capability:
+          "commerce.catalog";
+      }
+    >["listProducts"]
   >[1],
 ) {
   const { handler } =
@@ -221,7 +373,13 @@ export async function listCommerceProducts(
 export async function getCommerceProduct(
   client: PrismaClient,
   input: Parameters<
-    typeof getNativeCommerceProduct
+    Extract<
+      CommerceRuntimeHandler,
+      {
+        capability:
+          "commerce.catalog";
+      }
+    >["getProduct"]
   >[1],
 ) {
   const { handler } =

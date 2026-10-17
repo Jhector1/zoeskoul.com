@@ -1,40 +1,125 @@
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
-import { describe, expect, it } from "vitest";
+import {
+  readFileSync,
+} from "node:fs";
 
-const repo = resolve(process.cwd(), "../..");
-const read = (p: string) =>
-  readFileSync(resolve(repo, p), "utf8");
+import {
+  describe,
+  expect,
+  it,
+} from "vitest";
 
-describe("provider-neutral checkout ownership", () => {
-  const runtime = read(
-    "apps/zoebuild/src/lib/commerce/commerceRuntime.ts",
+function source(
+  path: string,
+) {
+  return readFileSync(
+    path,
+    "utf8",
   );
-  const checkout = read(
-    "apps/zoebuild/src/lib/commerce/nativeCommerceCheckout.ts",
-  );
+}
 
-  it("selects full checkout through the shared runtime", () => {
-    expect(runtime).toContain('"commerce.checkout"');
-    expect(runtime).toContain("beginCommerceCheckout");
-    expect(checkout).not.toContain(
-      'capability:\n          "checkout"',
-    );
-  });
+describe(
+  "provider-neutral checkout ownership",
+  () => {
+    const checkout =
+      source(
+        "src/lib/commerce/nativeCommerceCheckout.ts",
+      );
 
-  it("keeps ZoeStore order ownership explicit", () => {
-    expect(checkout).toContain(
-      'capability:\n          "orders"',
-    );
-    expect(checkout).toContain("ZOESTORE_COMMERCE_PROVIDER");
-  });
+    const runtime =
+      source(
+        "src/lib/commerce/commerceRuntime.ts",
+      );
 
-  it("keeps payment execution separate", () => {
-    expect(checkout).toContain(
-      'capability:\n          "payments"',
+    const registry =
+      source(
+        "src/lib/commerce/commerceRuntimeRegistry.ts",
+      );
+
+    it(
+      "keeps Zoé Store checkout orchestration separate from payment ownership",
+      () => {
+        expect(
+          checkout,
+        ).toContain(
+          "ZOESTORE_COMMERCE_PROVIDER",
+        );
+
+        expect(
+          checkout,
+        ).toContain(
+          "prepareCommercePaymentCheckout",
+        );
+      },
     );
-    expect(checkout).toContain(
-      "COMMERCE_PAYMENT_CHECKOUT_EXECUTORS",
+
+    it(
+      "routes payments through the provider composition registry and shared contract",
+      () => {
+        expect(
+          registry,
+        ).toContain(
+          '"commerce.payments"',
+        );
+
+        expect(
+          registry,
+        ).toContain(
+          "prepareStripeCommercePayments",
+        );
+
+        expect(
+          registry,
+        ).toContain(
+          "CommercePaymentsCapabilityHandler",
+        );
+
+        expect(
+          runtime,
+        ).toContain(
+          "prepareCommercePaymentCheckout",
+        );
+
+        expect(
+          runtime,
+        ).not.toContain(
+          "prepareStripeCommercePayments",
+        );
+
+        expect(
+          runtime,
+        ).not.toContain(
+          'session.redirectUrl ??',
+        );
+
+        expect(
+          runtime,
+        ).toContain(
+          "Configured commerce payment provider did not return a hosted checkout URL.",
+        );
+      },
     );
-  });
-});
+
+    it(
+      "keeps provider secrets and provider executors out of Zoé Store checkout",
+      () => {
+        expect(
+          checkout,
+        ).not.toContain(
+          "createBuildSecretStore",
+        );
+
+        expect(
+          checkout,
+        ).not.toContain(
+          "STRIPE_COMMERCE_CHECKOUT_EXECUTOR",
+        );
+
+        expect(
+          checkout,
+        ).not.toContain(
+          "COMMERCE_PAYMENT_CHECKOUT_EXECUTORS",
+        );
+      },
+    );
+  },
+);

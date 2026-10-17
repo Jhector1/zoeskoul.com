@@ -2,8 +2,6 @@ export interface CommercePaymentSessionRequest {
   readonly orderId: string;
   readonly amountMinor: number;
   readonly currency: string;
-  readonly successUrl: string;
-  readonly cancelUrl: string;
   readonly idempotencyKey: string;
 }
 
@@ -18,7 +16,8 @@ export type CommercePaymentState =
   | "paid"
   | "failed"
   | "canceled"
-  | "expired";
+  | "expired"
+  | "unknown";
 
 export interface CommercePaymentInspection {
   readonly remoteResourceId: string;
@@ -41,7 +40,7 @@ export interface CommercePaymentsCapabilityHandler {
     request: CommercePaymentSessionRequest,
   ): Promise<CommercePaymentSession>;
 
-  inspectPayment(
+  inspectPayment?(
     remoteResourceId: string,
   ): Promise<CommercePaymentInspection>;
 

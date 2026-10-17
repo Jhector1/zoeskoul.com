@@ -5,15 +5,6 @@ import type {
 } from "@zoeskoul/db";
 
 import {
-  createBuildSecretStore,
-  type BuildSecretStore,
-} from "@zoeskoul/platform-server/security/buildSecretStore";
-
-import {
-  STRIPE_COMMERCE_CHECKOUT_EXECUTOR,
-} from "./stripeCommerceCheckout";
-
-import {
   adoptCommercePaymentProviderRef,
   CommercePaymentProviderRefError,
 } from "./commercePaymentProviderRef";
@@ -25,9 +16,11 @@ import {
 } from "./nativeCommerceCart";
 
 import {
+  prepareCommercePaymentCheckout,
+} from "./commerceRuntime";
+import {
   CommerceProviderResolutionError,
   resolveCommerceProvider,
-  type CommerceProviderConnectionSnapshot,
 } from "./commerceProviderResolver";
 
 import {
@@ -77,65 +70,6 @@ export type TrustedCommerceOrderSnapshot =
     items:
       readonly TrustedCommerceOrderLine[];
   }>;
-
-export type CommercePaymentCheckoutExecutor =
-  Readonly<{
-    provider: string;
-    requiresSecretStore?:
-      boolean;
-    preflight?(
-      input:
-        Readonly<{
-          buildProjectId:
-            string;
-          environment:
-            CommerceProviderEnvironment;
-          connection:
-            CommerceProviderConnectionSnapshot;
-          secretStore:
-            BuildSecretStore;
-        }>,
-    ):
-      Promise<void>;
-    begin(
-      input:
-        Readonly<{
-          environment:
-            CommerceProviderEnvironment;
-          connection:
-            CommerceProviderConnectionSnapshot;
-          order:
-            TrustedCommerceOrderSnapshot;
-          idempotencyKey:
-            string;
-          buildProjectId?:
-            string;
-          secretStore?:
-            BuildSecretStore;
-        }>,
-    ):
-      Promise<
-        Readonly<{
-          url: string;
-          providerRef: string;
-        }>
-      >;
-  }>;
-
-export type CommercePaymentCheckoutRegistry =
-  ReadonlyMap<
-    string,
-    CommercePaymentCheckoutExecutor
-  >;
-
-export const COMMERCE_PAYMENT_CHECKOUT_EXECUTORS:
-  CommercePaymentCheckoutRegistry =
-    new Map([
-      [
-        STRIPE_COMMERCE_CHECKOUT_EXECUTOR.provider,
-        STRIPE_COMMERCE_CHECKOUT_EXECUTOR,
-      ],
-    ]);
 
 export class NativeCommerceCheckoutError
   extends Error {
@@ -1071,33 +1005,7 @@ async function createOrReuseOrderSnapshot(
   );
 }
 
-function executorForProvider(
-  registry:
-    CommercePaymentCheckoutRegistry,
-  provider:
-    string,
-) {
-  const executor =
-    registry.get(
-      provider,
-    );
-
-  if (
-    !executor ||
-    executor.provider !==
-      provider
-  ) {
-    throw new NativeCommerceCheckoutError(
-      "COMMERCE_PAYMENT_EXECUTION_UNAVAILABLE",
-      "The selected payment provider is not available for checkout yet.",
-      503,
-    );
-  }
-
-  return executor;
-}
-
-async function resolvePaymentProvider(
+async function preparePaymentProvider(
   client:
     PrismaClient,
   input:
@@ -1108,32 +1016,40 @@ async function resolvePaymentProvider(
     }>,
 ) {
   try {
-    return await resolveCommerceProvider(
+    return await prepareCommercePaymentCheckout(
       client,
-      {
-        ...input,
-        capability:
-          "payments",
-      },
+      input,
     );
   } catch (
     error
   ) {
     if (
       error instanceof
-        CommerceProviderResolutionError &&
-      (
+        CommerceProviderResolutionError
+    ) {
+      if (
         error.code ===
           "COMMERCE_PROVIDER_ROUTE_NOT_FOUND" ||
         error.code ===
           "COMMERCE_PROVIDER_CONNECTION_INVALID"
-      )
-    ) {
-      throw new NativeCommerceCheckoutError(
-        "COMMERCE_PAYMENT_PROVIDER_REQUIRED",
-        "Choose and connect a payment provider before checkout.",
-        409,
-      );
+      ) {
+        throw new NativeCommerceCheckoutError(
+          "COMMERCE_PAYMENT_PROVIDER_REQUIRED",
+          "Choose and connect a payment provider before checkout.",
+          409,
+        );
+      }
+
+      if (
+        error.code ===
+          "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE"
+      ) {
+        throw new NativeCommerceCheckoutError(
+          "COMMERCE_PAYMENT_EXECUTION_UNAVAILABLE",
+          "The selected payment provider is not available for checkout yet.",
+          503,
+        );
+      }
     }
 
     throw error;
@@ -1151,9 +1067,6 @@ export async function beginNativeCommerceCheckout(
       request:
         CommerceCheckoutRequest;
     }>,
-  executors:
-    CommercePaymentCheckoutRegistry =
-      COMMERCE_PAYMENT_CHECKOUT_EXECUTORS,
 ): Promise<
   CommerceCheckoutResult
 > {
@@ -1186,7 +1099,7 @@ export async function beginNativeCommerceCheckout(
   }
 
   const payment =
-    await resolvePaymentProvider(
+    await preparePaymentProvider(
       client,
       {
         buildProjectId,
@@ -1194,41 +1107,6 @@ export async function beginNativeCommerceCheckout(
           input.surface,
       },
     );
-
-  const executor =
-    executorForProvider(
-      executors,
-      payment.provider,
-    );
-
-  const secretStore =
-    executor.requiresSecretStore
-      ? createBuildSecretStore({
-          prisma:
-            client,
-        })
-      : undefined;
-
-  if (
-    executor.preflight
-  ) {
-    if (!secretStore) {
-      throw new NativeCommerceCheckoutError(
-        "COMMERCE_PAYMENT_SECRET_STORE_REQUIRED",
-        "The selected payment provider requires secure server credentials.",
-        503,
-      );
-    }
-
-    await executor.preflight({
-      buildProjectId,
-      environment:
-        payment.environment,
-      connection:
-        payment.connection,
-      secretStore,
-    });
-  }
 
   const order =
     await createOrReuseOrderSnapshot(
@@ -1249,21 +1127,16 @@ export async function beginNativeCommerceCheckout(
   /*
    * Re-entering checkout for the same non-expired trusted order deliberately
    * replays this exact provider request with order.id as the idempotency key.
-   * For Stripe this recovers a Session that may have been created remotely
-   * before the local provider reference was persisted. publicOrder() bounds
+   * For a remote provider this can recover a payment session that may have
+   * been created remotely before the local provider reference was persisted.
+   * publicOrder() bounds
    * this recovery path to the trusted checkout reservation lifetime.
    */
   const started =
-    await executor.begin({
-      environment:
-        payment.environment,
-      connection:
-        payment.connection,
+    await payment.begin({
       order,
       idempotencyKey:
         order.id,
-      buildProjectId,
-      secretStore,
     });
 
   const url =

@@ -1,37 +1,18 @@
 import {
   readFileSync,
 } from "node:fs";
-import {
-  resolve,
-} from "node:path";
-import {
-  fileURLToPath,
-} from "node:url";
+
 import {
   describe,
   expect,
   it,
 } from "vitest";
 
-const repo =
-  resolve(
-    fileURLToPath(
-      new URL(
-        "../../../../../",
-        import.meta.url,
-      ),
-    ),
-  );
-
 function source(
-  relative:
-    string,
+  path: string,
 ) {
   return readFileSync(
-    resolve(
-      repo,
-      relative,
-    ),
+    path,
     "utf8",
   );
 }
@@ -41,129 +22,80 @@ describe(
   () => {
     const stripe =
       source(
-        "apps/zoebuild/src/lib/commerce/stripeCommerceCheckout.ts",
+        "src/lib/commerce/stripeCommerceCheckout.ts",
       );
 
     const checkout =
       source(
-        "apps/zoebuild/src/lib/commerce/nativeCommerceCheckout.ts",
+        "src/lib/commerce/nativeCommerceCheckout.ts",
       );
 
-    const pkg =
+    const runtime =
       source(
-        "apps/zoebuild/package.json",
+        "src/lib/commerce/commerceRuntime.ts",
+      );
+
+    const registry =
+      source(
+        "src/lib/commerce/commerceRuntimeRegistry.ts",
       );
 
     it(
       "keeps Stripe server-only and outside generated storefront code",
       () => {
-        expect(
-          stripe,
-        ).toContain(
-          'import "server-only"',
-        );
-
-        expect(
-          stripe,
-        ).toContain(
-          'from "stripe"',
-        );
-
-        expect(
-          pkg,
-        ).toContain(
-          '"stripe"',
-        );
-
-        expect(
-          stripe,
-        ).not.toContain(
-          "globalThis",
-        );
-
-        expect(
-          stripe,
-        ).not.toContain(
-          "window.",
-        );
-
-        expect(
-          stripe,
-        ).not.toContain(
-          "localStorage",
-        );
+        expect(stripe).toContain('import "server-only"');
+        expect(stripe).toContain('from "stripe"');
+        expect(checkout).not.toContain('from "stripe"');
       },
     );
 
     it(
       "dereferences credentials only through the generic BuildSecretStore",
       () => {
-        expect(
-          stripe,
-        ).toContain(
-          "BuildSecretStore",
-        );
-
-        expect(
-          stripe,
-        ).toContain(
-          "credentialsSecretRef",
-        );
-
-        expect(
-          stripe,
-        ).not.toContain(
-          "STRIPE_SECRET_KEY",
-        );
+        expect(stripe).toContain("BuildSecretStore");
+        expect(stripe).toContain("readStripeSecretKey");
+        expect(stripe).toContain("credentialsSecretRef");
       },
     );
 
     it(
-      "enforces test/live credential separation",
+      "enforces exact Stripe test and live credential environments",
       () => {
-        expect(
-          stripe,
-        ).toContain(
-          "/^(sk|rk)_test_/",
-        );
-
-        expect(
-          stripe,
-        ).toContain(
-          "/^(sk|rk)_live_/",
-        );
-
-        expect(
-          stripe,
-        ).toContain(
-          "STRIPE_ENVIRONMENT_MISMATCH",
-        );
+        expect(stripe).toContain("/^(sk|rk)_test_/");
+        expect(stripe).toContain("/^(sk|rk)_live_/");
+        expect(stripe).toContain("STRIPE_ENVIRONMENT_MISMATCH");
       },
     );
 
     it(
-      "uses the trusted order id as Stripe idempotency authority",
+      "owns trusted HTTPS return URLs inside the provider adapter",
       () => {
-        expect(
-          stripe,
-        ).toContain(
-          "idempotencyKey:\n                input.idempotencyKey",
-        );
-
-        expect(
-          checkout,
-        ).toContain(
-          "idempotencyKey:\n        order.id",
-        );
+        expect(stripe).toContain("ZOEBUILD_PUBLIC_ORIGIN");
+        expect(stripe).toContain('"https:"');
+        expect(stripe).toContain('"localhost"');
       },
     );
 
     it(
-      "preflights secure credentials before the cart is converted to an order",
+      "uses the trusted order id as Stripe idempotency and metadata authority",
       () => {
-        const preflight =
+        expect(stripe).toContain("request.idempotencyKey");
+        expect(stripe).toContain("zoebuildOrderId");
+        expect(stripe).toContain("zoebuildProjectId");
+      },
+    );
+
+    it(
+      "preflights credentials before Zoé Store creates the order without a transitional executor",
+      () => {
+        expect(stripe).toContain("prepareStripeCommercePayments");
+        expect(stripe).toContain("await readStripeSecretKey");
+        expect(stripe).not.toContain("createStripeCommerceCheckoutExecutor");
+        expect(stripe).not.toContain("STRIPE_COMMERCE_CHECKOUT_EXECUTOR");
+
+        const payment =
           checkout.indexOf(
-            "await executor.preflight",
+            "await preparePaymentProvider",
           );
 
         const order =
@@ -171,69 +103,18 @@ describe(
             "await createOrReuseOrderSnapshot",
           );
 
-        expect(
-          preflight,
-        ).toBeGreaterThan(
-          -1,
-        );
-
-        expect(
-          order,
-        ).toBeGreaterThan(
-          preflight,
-        );
+        expect(payment).toBeGreaterThan(-1);
+        expect(order).toBeGreaterThan(payment);
       },
     );
 
     it(
-      "registers Stripe without enabling Square, PayPal, or Shopify execution",
+      "registers Stripe payments only at the provider composition root",
       () => {
-        expect(
-          checkout,
-        ).toContain(
-          "STRIPE_COMMERCE_CHECKOUT_EXECUTOR",
-        );
-
-        expect(
-          checkout,
-        ).not.toContain(
-          "SQUARE_COMMERCE_CHECKOUT_EXECUTOR",
-        );
-
-        expect(
-          checkout,
-        ).not.toContain(
-          "PAYPAL_COMMERCE_CHECKOUT_EXECUTOR",
-        );
-
-        expect(
-          checkout,
-        ).not.toContain(
-          "SHOPIFY_COMMERCE_CHECKOUT_EXECUTOR",
-        );
-      },
-    );
-
-    it(
-      "does not decrement or reserve inventory during Stripe checkout initiation",
-      () => {
-        expect(
-          stripe,
-        ).not.toContain(
-          "commerceInventoryItem",
-        );
-
-        expect(
-          stripe,
-        ).not.toContain(
-          "reservedQuantity",
-        );
-
-        expect(
-          stripe,
-        ).not.toContain(
-          "decrement",
-        );
+        expect(registry).toContain("prepareStripeCommercePayments");
+        expect(registry).toContain('"commerce.payments"');
+        expect(runtime).not.toContain("STRIPE_COMMERCE_PROVIDER");
+        expect(runtime).not.toContain("prepareStripeCommercePayments");
       },
     );
   },

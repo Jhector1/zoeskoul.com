@@ -3,12 +3,14 @@ import "server-only";
 import Stripe from "stripe";
 
 import type {
+  CommercePaymentsCapabilityHandler,
+} from "@zoeskoul/provider-contracts";
+import type {
   BuildSecretJsonValue,
   BuildSecretStore,
 } from "@zoeskoul/platform-server/security/buildSecretStore";
 
 import type {
-  CommercePaymentCheckoutExecutor,
   TrustedCommerceOrderSnapshot,
 } from "./nativeCommerceCheckout";
 
@@ -451,7 +453,29 @@ function defaultStripeClient(
   );
 }
 
-export function createStripeCommerceCheckoutExecutor(
+export type PreparedStripeCommercePayments =
+  Readonly<{
+    provider:
+      typeof STRIPE_COMMERCE_PROVIDER;
+
+    forOrder(
+      order:
+        TrustedCommerceOrderSnapshot,
+    ):
+      CommercePaymentsCapabilityHandler;
+  }>;
+
+export async function prepareStripeCommercePayments(
+  input:
+    Readonly<{
+      buildProjectId: string;
+      environment:
+        CommerceProviderEnvironment;
+      connection:
+        CommerceProviderConnectionSnapshot;
+      secretStore?:
+        BuildSecretStore;
+    }>,
   dependencies:
     Readonly<{
       createClient?:
@@ -460,7 +484,16 @@ export function createStripeCommerceCheckoutExecutor(
         () => string;
     }> =
       {},
-): CommercePaymentCheckoutExecutor {
+): Promise<
+  PreparedStripeCommercePayments
+> {
+  if (!input.secretStore) {
+    throw new StripeCommerceCheckoutError(
+      "STRIPE_SERVER_CONTEXT_REQUIRED",
+      "Stripe payment execution requires secure server credentials.",
+    );
+  }
+
   const createClient =
     dependencies.createClient ??
     defaultStripeClient;
@@ -469,178 +502,176 @@ export function createStripeCommerceCheckoutExecutor(
     dependencies.resolvePublicOrigin ??
     defaultPublicOrigin;
 
+  const secretKey =
+    await readStripeSecretKey({
+      buildProjectId:
+        input.buildProjectId,
+      environment:
+        input.environment,
+      connection:
+        input.connection,
+      secretStore:
+        input.secretStore,
+    });
+
+  const origin =
+    resolvePublicOrigin();
+
   return {
     provider:
       STRIPE_COMMERCE_PROVIDER,
 
-    requiresSecretStore:
-      true,
-
-    async preflight(
-      input,
+    forOrder(
+      order,
     ) {
-      await readStripeSecretKey({
-        buildProjectId:
-          input.buildProjectId,
-        environment:
-          input.environment,
-        connection:
-          input.connection,
-        secretStore:
-          input.secretStore,
-      });
+      return {
+        async createPaymentSession(
+          request,
+        ) {
+          if (
+            request.orderId !==
+              order.id ||
+            request.amountMinor !==
+              order.totalMinor ||
+            request.currency
+              .trim()
+              .toUpperCase() !==
+              order.currency
+                .trim()
+                .toUpperCase() ||
+            request.idempotencyKey
+              .trim() !==
+              order.id
+          ) {
+            throw new StripeCommerceCheckoutError(
+              "STRIPE_PAYMENT_REQUEST_MISMATCH",
+              "Payment request does not match the trusted commerce order.",
+            );
+          }
 
-      resolvePublicOrigin();
-    },
-
-    async begin(
-      input,
-    ) {
-      if (
-        !input.buildProjectId ||
-        !input.secretStore
-      ) {
-        throw new StripeCommerceCheckoutError(
-          "STRIPE_SERVER_CONTEXT_REQUIRED",
-          "Stripe Checkout server context is unavailable.",
-        );
-      }
-
-      assertTrustedStripeTotal(
-        input.order,
-      );
-
-      const expiresAt =
-        stripeCheckoutExpiresAt(
-          input.order,
-          input.environment,
-        );
-      const secretKey =
-        await readStripeSecretKey({
-          buildProjectId:
-            input.buildProjectId,
-          environment:
-            input.environment,
-          connection:
-            input.connection,
-          secretStore:
-            input.secretStore,
-        });
-
-      const origin =
-        resolvePublicOrigin();
-
-      const urls =
-        returnUrls({
-          origin,
-          buildProjectId:
-            input.buildProjectId,
-          environment:
-            input.environment,
-          orderId:
-            input.order.id,
-        });
-
-      const stripe =
-        createClient(
-          secretKey,
-        );
-
-      const session =
-        await stripe
-          .checkout
-          .sessions
-          .create(
-            {
-              mode:
-                "payment",
-              success_url:
-                urls.successUrl,
-              cancel_url:
-                urls.cancelUrl,
-              expires_at:
-                expiresAt,
-              client_reference_id:
-                input.order.id,
-              metadata: {
-                zoebuildOrderId:
-                  input.order.id,
-                zoebuildProjectId:
-                  input.buildProjectId,
-              },
-              payment_intent_data: {
-                metadata: {
-                  zoebuildOrderId:
-                    input.order.id,
-                  zoebuildProjectId:
-                    input.buildProjectId,
-                },
-              },
-              line_items:
-                input.order.items.map(
-                  (
-                    item,
-                  ) => ({
-                    quantity:
-                      item.quantity,
-                    price_data: {
-                      currency:
-                        input.order.currency
-                          .toLowerCase(),
-                      unit_amount:
-                        item.unitPriceMinor,
-                      product_data: {
-                        name:
-                          stripeLineName(
-                            item,
-                          ),
-                        metadata: {
-                          zoebuildMerchandiseId:
-                            item.merchandiseId,
-                        },
-                      },
-                    },
-                  }),
-                ),
-            },
-            {
-              idempotencyKey:
-                input.idempotencyKey,
-            },
+          assertTrustedStripeTotal(
+            order,
           );
 
-      const url =
-        session.url?.trim();
+          const expiresAt =
+            stripeCheckoutExpiresAt(
+              order,
+              input.environment,
+            );
 
-      if (
-        !url ||
-        !/^https:\/\//i.test(
-          url,
-        )
-      ) {
-        throw new StripeCommerceCheckoutError(
-          "STRIPE_CHECKOUT_URL_INVALID",
-          "Stripe did not return a valid hosted checkout URL.",
-        );
-      }
+          const urls =
+            returnUrls({
+              origin,
+              buildProjectId:
+                input.buildProjectId,
+              environment:
+                input.environment,
+              orderId:
+                order.id,
+            });
 
-      const providerRef =
-        session.id.trim();
+          const stripe =
+            createClient(
+              secretKey,
+            );
 
-      if (!providerRef) {
-        throw new StripeCommerceCheckoutError(
-          "STRIPE_SESSION_ID_INVALID",
-          "Stripe did not return a checkout session id.",
-        );
-      }
+          const session =
+            await stripe
+              .checkout
+              .sessions
+              .create(
+                {
+                  mode:
+                    "payment",
+                  success_url:
+                    urls.successUrl,
+                  cancel_url:
+                    urls.cancelUrl,
+                  expires_at:
+                    expiresAt,
+                  client_reference_id:
+                    order.id,
+                  metadata: {
+                    zoebuildOrderId:
+                      order.id,
+                    zoebuildProjectId:
+                      input.buildProjectId,
+                  },
+                  payment_intent_data: {
+                    metadata: {
+                      zoebuildOrderId:
+                        order.id,
+                      zoebuildProjectId:
+                        input.buildProjectId,
+                    },
+                  },
+                  line_items:
+                    order.items.map(
+                      (
+                        item,
+                      ) => ({
+                        quantity:
+                          item.quantity,
+                        price_data: {
+                          currency:
+                            order.currency
+                              .toLowerCase(),
+                          unit_amount:
+                            item.unitPriceMinor,
+                          product_data: {
+                            name:
+                              stripeLineName(
+                                item,
+                              ),
+                            metadata: {
+                              zoebuildMerchandiseId:
+                                item.merchandiseId,
+                            },
+                          },
+                        },
+                      }),
+                    ),
+                },
+                {
+                  idempotencyKey:
+                    request.idempotencyKey,
+                },
+              );
 
-      return {
-        url,
-        providerRef,
+          const url =
+            session.url?.trim();
+
+          if (
+            !url ||
+            !/^https:\/\//i.test(
+              url,
+            )
+          ) {
+            throw new StripeCommerceCheckoutError(
+              "STRIPE_CHECKOUT_URL_INVALID",
+              "Stripe did not return a valid hosted checkout URL.",
+            );
+          }
+
+          const remoteResourceId =
+            session.id.trim();
+
+          if (!remoteResourceId) {
+            throw new StripeCommerceCheckoutError(
+              "STRIPE_SESSION_ID_INVALID",
+              "Stripe did not return a checkout session id.",
+            );
+          }
+
+          return {
+            remoteResourceId,
+            redirectUrl:
+              url,
+            expiresAt:
+              order.checkoutExpiresAt,
+          };
+        },
       };
     },
   };
 }
-
-export const STRIPE_COMMERCE_CHECKOUT_EXECUTOR =
-  createStripeCommerceCheckoutExecutor();

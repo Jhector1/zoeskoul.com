@@ -11,7 +11,6 @@ import type {
 
 import {
   reconcileStaleCommerceCheckouts,
-  type CommerceCheckoutReconciliationExecutor,
 } from "./commerceCheckoutReconciliation";
 
 function client(
@@ -57,7 +56,7 @@ function client(
             externalAccountRef:
               null,
             credentialsSecretRef:
-              null,
+              "secret_ref_1",
             webhookSecretRef:
               null,
             config:
@@ -105,9 +104,9 @@ function order(
   };
 }
 
-function executor(
+function paymentRuntime(
   remote:
-    "open" |
+    "pending" |
     "paid" |
     "expired",
 ) {
@@ -125,48 +124,46 @@ function executor(
       }),
     );
 
-  const expire =
+  const cancelPayment =
     vi.fn(
       async () => ({
-        providerRef:
+        remoteResourceId:
           "provider_ref_1",
         state:
           "expired" as const,
       }),
     );
 
-  const value:
-    CommerceCheckoutReconciliationExecutor =
-      {
+  const inspectPayment =
+    vi.fn(
+      async () => ({
+        remoteResourceId:
+          "provider_ref_1",
+        state:
+          remote,
+      }),
+    );
+
+  const prepare =
+    vi.fn(
+      async () => ({
         provider:
           "test-provider",
-
-        inferEnvironmentFromProviderRef:
-          () =>
-            "test",
-
-        inspect:
-          vi.fn(
-            async () => ({
-              providerRef:
-                "provider_ref_1",
-              state:
-                remote,
-            }),
-          ),
-
-        expire,
-
+        environment:
+          "test" as const,
+        inspectPayment,
+        cancelPayment,
         reconcilePaid,
-
         reconcileExpired,
-      };
+      }),
+    );
 
   return {
-    value,
+    prepare,
+    inspectPayment,
+    cancelPayment,
     reconcilePaid,
     reconcileExpired,
-    expire,
   };
 }
 
@@ -174,14 +171,18 @@ describe(
   "provider-neutral stale commerce checkout reconciliation",
   () => {
     it(
-      "reconciles provider-authoritative paid state",
+      "reconciles provider-authoritative paid state through the shared payment runtime",
       async () => {
-        const provider =
-          executor("paid");
+        const payment =
+          paymentRuntime(
+            "paid",
+          );
 
         const results =
           await reconcileStaleCommerceCheckouts(
-            client(order()),
+            client(
+              order(),
+            ),
             {
               buildProjectId:
                 "project_1",
@@ -191,13 +192,8 @@ describe(
                 ),
             },
             {
-              executors:
-                new Map([
-                  [
-                    provider.value.provider,
-                    provider.value,
-                  ],
-                ]),
+              preparePaymentReconciliation:
+                payment.prepare as never,
             },
           );
 
@@ -213,26 +209,32 @@ describe(
         ]);
 
         expect(
-          provider.reconcilePaid,
-        ).toHaveBeenCalledTimes(
-          1,
+          payment.inspectPayment,
+        ).toHaveBeenCalledWith(
+          "provider_ref_1",
         );
 
         expect(
-          provider.reconcileExpired,
-        ).not.toHaveBeenCalled();
+          payment.reconcilePaid,
+        ).toHaveBeenCalledTimes(
+          1,
+        );
       },
     );
 
     it(
-      "expires a stale open provider checkout before reconciling terminal state",
+      "cancels a stale pending remote payment before reconciling terminal state",
       async () => {
-        const provider =
-          executor("open");
+        const payment =
+          paymentRuntime(
+            "pending",
+          );
 
         const results =
           await reconcileStaleCommerceCheckouts(
-            client(order()),
+            client(
+              order(),
+            ),
             {
               buildProjectId:
                 "project_1",
@@ -244,13 +246,8 @@ describe(
                 true,
             },
             {
-              executors:
-                new Map([
-                  [
-                    provider.value.provider,
-                    provider.value,
-                  ],
-                ]),
+              preparePaymentReconciliation:
+                payment.prepare as never,
             },
           );
 
@@ -266,13 +263,13 @@ describe(
         ]);
 
         expect(
-          provider.expire,
-        ).toHaveBeenCalledTimes(
-          1,
+          payment.cancelPayment,
+        ).toHaveBeenCalledWith(
+          "provider_ref_1",
         );
 
         expect(
-          provider.reconcileExpired,
+          payment.reconcileExpired,
         ).toHaveBeenCalledTimes(
           1,
         );
@@ -280,10 +277,12 @@ describe(
     );
 
     it(
-      "supports legacy rows only through provider-owned environment inference",
+      "fails closed when a historical order has no explicit payment environment",
       async () => {
-        const provider =
-          executor("expired");
+        const payment =
+          paymentRuntime(
+            "expired",
+          );
 
         const results =
           await reconcileStaleCommerceCheckouts(
@@ -291,12 +290,6 @@ describe(
               order({
                 paymentEnvironment:
                   null,
-                checkoutExpiresAt:
-                  null,
-                createdAt:
-                  new Date(
-                    "2026-10-17T10:00:00.000Z",
-                  ),
               }),
             ),
             {
@@ -308,13 +301,8 @@ describe(
                 ),
             },
             {
-              executors:
-                new Map([
-                  [
-                    provider.value.provider,
-                    provider.value,
-                  ],
-                ]),
+              preparePaymentReconciliation:
+                payment.prepare as never,
             },
           );
 
@@ -322,11 +310,16 @@ describe(
           results,
         ).toEqual([
           expect.objectContaining({
-            environment: "test",
+            environment:
+              null,
             action:
-              "expired-reconciled",
+              "environment-unresolved",
           }),
         ]);
+
+        expect(
+          payment.prepare,
+        ).not.toHaveBeenCalled();
       },
     );
   },

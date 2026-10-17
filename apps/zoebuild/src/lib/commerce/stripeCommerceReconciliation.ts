@@ -5,7 +5,10 @@ import Stripe from "stripe";
 import type {
   PrismaClient,
 } from "@zoeskoul/db";
-
+import type {
+  CommercePaymentInspection,
+  CommercePaymentsCapabilityHandler,
+} from "@zoeskoul/provider-contracts";
 import type {
   BuildSecretStore,
 } from "@zoeskoul/platform-server/security/buildSecretStore";
@@ -13,25 +16,19 @@ import type {
 import type {
   CommerceProviderConnectionSnapshot,
 } from "./commerceProviderResolver";
-
 import type {
   CommerceProviderEnvironment,
 } from "./nativeCommerceProvider";
-
 import {
   readStripeSecretKey,
   STRIPE_COMMERCE_PROVIDER,
 } from "./stripeCommerceCheckout";
-
 import {
   reconcileStripeCommerceExpiredSession,
   reconcileStripeCommercePaidSession,
 } from "./stripeCommerceWebhook";
-
 import type {
-  CommerceCheckoutReconciliationExecutor,
   CommerceCheckoutReconciliationOrder,
-  CommerceCheckoutRemoteSnapshot,
 } from "./commerceCheckoutReconciliation";
 
 type StripeReconciliationClient =
@@ -72,10 +69,8 @@ export class StripeCommerceReconciliationError
     message: string,
   ) {
     super(message);
-
     this.name =
       "StripeCommerceReconciliationError";
-
     this.code = code;
   }
 }
@@ -90,30 +85,6 @@ function defaultStripeClient(
       timeout: 15_000,
     },
   );
-}
-
-function inferEnvironmentFromProviderRef(
-  providerRef: string,
-):
-  | CommerceProviderEnvironment
-  | null {
-  if (
-    providerRef.startsWith(
-      "cs_test_",
-    )
-  ) {
-    return "test";
-  }
-
-  if (
-    providerRef.startsWith(
-      "cs_live_",
-    )
-  ) {
-    return "live";
-  }
-
-  return null;
 }
 
 function assertTrustedRemoteSession(
@@ -189,9 +160,10 @@ function assertTrustedRemoteSession(
   }
 }
 
-function remoteState(
-  session: Stripe.Checkout.Session,
-): CommerceCheckoutRemoteSnapshot {
+function paymentInspection(
+  session:
+    Stripe.Checkout.Session,
+): CommercePaymentInspection {
   if (
     session.status ===
       "complete" &&
@@ -199,8 +171,10 @@ function remoteState(
       "paid"
   ) {
     return {
-      providerRef: session.id,
-      state: "paid",
+      remoteResourceId:
+        session.id,
+      state:
+        "paid",
     };
   }
 
@@ -209,8 +183,10 @@ function remoteState(
       "expired"
   ) {
     return {
-      providerRef: session.id,
-      state: "expired",
+      remoteResourceId:
+        session.id,
+      state:
+        "expired",
     };
   }
 
@@ -219,14 +195,18 @@ function remoteState(
       "open"
   ) {
     return {
-      providerRef: session.id,
-      state: "open",
+      remoteResourceId:
+        session.id,
+      state:
+        "pending",
     };
   }
 
   return {
-    providerRef: session.id,
-    state: "unknown",
+    remoteResourceId:
+      session.id,
+    state:
+      "unknown",
   };
 }
 
@@ -267,116 +247,187 @@ async function stripeClientFor(
   );
 }
 
-export function createStripeCommerceReconciliationExecutor(
-  dependencies: Readonly<{
-    createClient?:
-      StripeReconciliationClientFactory;
-  }> = {},
-): CommerceCheckoutReconciliationExecutor {
+type StripeInspectionHandler =
+  Pick<
+    CommercePaymentsCapabilityHandler,
+    "inspectPayment" |
+    "cancelPayment"
+  >;
+
+export type PreparedStripeCommercePaymentReconciliation =
+  Readonly<{
+    provider:
+      typeof STRIPE_COMMERCE_PROVIDER;
+
+    forOrder(
+      order:
+        CommerceCheckoutReconciliationOrder,
+    ):
+      StripeInspectionHandler;
+
+    reconcilePaid(
+      client: PrismaClient,
+      input:
+        Readonly<{
+          buildProjectId: string;
+          orderId: string;
+          providerRef: string;
+        }>,
+    ): Promise<unknown>;
+
+    reconcileExpired(
+      client: PrismaClient,
+      input:
+        Readonly<{
+          buildProjectId: string;
+          orderId: string;
+          providerRef: string;
+        }>,
+    ): Promise<unknown>;
+  }>;
+
+export async function prepareStripeCommercePaymentReconciliation(
+  input:
+    Readonly<{
+      buildProjectId: string;
+      environment:
+        CommerceProviderEnvironment;
+      connection:
+        CommerceProviderConnectionSnapshot;
+      secretStore?:
+        BuildSecretStore;
+    }>,
+  dependencies:
+    Readonly<{
+      createClient?:
+        StripeReconciliationClientFactory;
+    }> =
+      {},
+): Promise<
+  PreparedStripeCommercePaymentReconciliation
+> {
   const createClient =
     dependencies.createClient ??
     defaultStripeClient;
+
+  const stripe =
+    await stripeClientFor(
+      input,
+      createClient,
+    );
 
   return {
     provider:
       STRIPE_COMMERCE_PROVIDER,
 
-    requiresSecretStore:
-      true,
+    forOrder(
+      order,
+    ) {
+      return {
+        async inspectPayment(
+          remoteResourceId,
+        ) {
+          if (
+            remoteResourceId.trim() !==
+            order.paymentProviderRef
+          ) {
+            throw new StripeCommerceReconciliationError(
+              "STRIPE_RECONCILIATION_PROVIDER_REF_MISMATCH",
+              "Stripe reconciliation reference does not match the trusted order.",
+            );
+          }
 
-    inferEnvironmentFromProviderRef,
+          const session =
+            await stripe
+              .checkout
+              .sessions
+              .retrieve(
+                remoteResourceId,
+              );
 
-    async inspect(input) {
-      const stripe =
-        await stripeClientFor(
-          input,
-          createClient,
-        );
+          assertTrustedRemoteSession({
+            buildProjectId:
+              input.buildProjectId,
+            environment:
+              input.environment,
+            order,
+            session,
+          });
 
-      const session =
-        await stripe.checkout.sessions
-          .retrieve(
-            input.order
-              .paymentProviderRef,
+          return paymentInspection(
+            session,
           );
+        },
 
-      assertTrustedRemoteSession({
-        buildProjectId:
-          input.buildProjectId,
-        environment:
-          input.environment,
-        order: input.order,
-        session,
-      });
+        async cancelPayment(
+          remoteResourceId,
+        ) {
+          if (
+            remoteResourceId.trim() !==
+            order.paymentProviderRef
+          ) {
+            throw new StripeCommerceReconciliationError(
+              "STRIPE_RECONCILIATION_PROVIDER_REF_MISMATCH",
+              "Stripe cancellation reference does not match the trusted order.",
+            );
+          }
 
-      return remoteState(
-        session,
-      );
-    },
+          const session =
+            await stripe
+              .checkout
+              .sessions
+              .expire(
+                remoteResourceId,
+              );
 
-    async expire(input) {
-      const stripe =
-        await stripeClientFor(
-          input,
-          createClient,
-        );
+          assertTrustedRemoteSession({
+            buildProjectId:
+              input.buildProjectId,
+            environment:
+              input.environment,
+            order,
+            session,
+          });
 
-      const session =
-        await stripe.checkout.sessions
-          .expire(
-            input.order
-              .paymentProviderRef,
+          return paymentInspection(
+            session,
           );
-
-      assertTrustedRemoteSession({
-        buildProjectId:
-          input.buildProjectId,
-        environment:
-          input.environment,
-        order: input.order,
-        session,
-      });
-
-      return remoteState(
-        session,
-      );
+        },
+      };
     },
 
     async reconcilePaid(
-      client: PrismaClient,
-      input,
+      client,
+      lifecycleInput,
     ) {
       return reconcileStripeCommercePaidSession(
         client,
         {
           buildProjectId:
-            input.buildProjectId,
+            lifecycleInput.buildProjectId,
           orderId:
-            input.orderId,
+            lifecycleInput.orderId,
           sessionId:
-            input.providerRef,
+            lifecycleInput.providerRef,
         },
       );
     },
 
     async reconcileExpired(
-      client: PrismaClient,
-      input,
+      client,
+      lifecycleInput,
     ) {
       return reconcileStripeCommerceExpiredSession(
         client,
         {
           buildProjectId:
-            input.buildProjectId,
+            lifecycleInput.buildProjectId,
           orderId:
-            input.orderId,
+            lifecycleInput.orderId,
           sessionId:
-            input.providerRef,
+            lifecycleInput.providerRef,
         },
       );
     },
   };
 }
-
-export const STRIPE_COMMERCE_RECONCILIATION_EXECUTOR =
-  createStripeCommerceReconciliationExecutor();

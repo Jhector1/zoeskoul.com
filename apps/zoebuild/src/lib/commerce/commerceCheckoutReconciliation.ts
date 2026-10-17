@@ -2,11 +2,6 @@ import "server-only";
 
 import type { PrismaClient } from "@zoeskoul/db";
 
-import {
-  createBuildSecretStore,
-  type BuildSecretStore,
-} from "@zoeskoul/platform-server/security/buildSecretStore";
-
 import type {
   CommerceProviderConnectionSnapshot,
 } from "./commerceProviderResolver";
@@ -16,8 +11,8 @@ import type {
 } from "./nativeCommerceProvider";
 
 import {
-  STRIPE_COMMERCE_RECONCILIATION_EXECUTOR,
-} from "./stripeCommerceReconciliation";
+  prepareCommercePaymentReconciliation,
+} from "./commerceRuntime";
 
 export const COMMERCE_STALE_CHECKOUT_LEGACY_AGE_MS =
   60 * 60 * 1000;
@@ -47,69 +42,6 @@ export type CommerceCheckoutReconciliationOrder =
     currency: string;
     totalMinor: number;
   }>;
-
-export type CommerceCheckoutReconciliationExecutor =
-  Readonly<{
-    provider: string;
-    requiresSecretStore?: boolean;
-
-    inferEnvironmentFromProviderRef?(
-      providerRef: string,
-    ): CommerceProviderEnvironment | null;
-
-    inspect(
-      input: Readonly<{
-        buildProjectId: string;
-        environment: CommerceProviderEnvironment;
-        connection: CommerceProviderConnectionSnapshot;
-        order: CommerceCheckoutReconciliationOrder;
-        secretStore?: BuildSecretStore;
-      }>,
-    ): Promise<CommerceCheckoutRemoteSnapshot>;
-
-    expire?(
-      input: Readonly<{
-        buildProjectId: string;
-        environment: CommerceProviderEnvironment;
-        connection: CommerceProviderConnectionSnapshot;
-        order: CommerceCheckoutReconciliationOrder;
-        secretStore?: BuildSecretStore;
-      }>,
-    ): Promise<CommerceCheckoutRemoteSnapshot>;
-
-    reconcilePaid(
-      client: PrismaClient,
-      input: Readonly<{
-        buildProjectId: string;
-        orderId: string;
-        providerRef: string;
-      }>,
-    ): Promise<unknown>;
-
-    reconcileExpired(
-      client: PrismaClient,
-      input: Readonly<{
-        buildProjectId: string;
-        orderId: string;
-        providerRef: string;
-      }>,
-    ): Promise<unknown>;
-  }>;
-
-export type CommerceCheckoutReconciliationRegistry =
-  ReadonlyMap<
-    string,
-    CommerceCheckoutReconciliationExecutor
-  >;
-
-export const COMMERCE_CHECKOUT_RECONCILIATION_EXECUTORS:
-  CommerceCheckoutReconciliationRegistry =
-    new Map([
-      [
-        STRIPE_COMMERCE_RECONCILIATION_EXECUTOR.provider,
-        STRIPE_COMMERCE_RECONCILIATION_EXECUTOR,
-      ],
-    ]);
 
 export type CommerceStaleCheckoutReconciliationResult =
   Readonly<{
@@ -171,17 +103,8 @@ function isStaleCandidate(
 
 function environmentForOrder(
   order: CommerceCheckoutReconciliationOrder,
-  executor: CommerceCheckoutReconciliationExecutor,
 ) {
-  if (order.paymentEnvironment) {
-    return order.paymentEnvironment;
-  }
-
-  return (
-    executor.inferEnvironmentFromProviderRef?.(
-      order.paymentProviderRef,
-    ) ?? null
-  );
+  return order.paymentEnvironment;
 }
 
 function reconciliationErrorCode(
@@ -214,11 +137,8 @@ export async function reconcileStaleCommerceCheckouts(
     expireOpen?: boolean;
   }>,
   options: Readonly<{
-    executors?:
-      CommerceCheckoutReconciliationRegistry;
-    createSecretStore?: (
-      client: PrismaClient,
-    ) => BuildSecretStore;
+    preparePaymentReconciliation?:
+      typeof prepareCommercePaymentReconciliation;
   }> = {},
 ): Promise<
   readonly CommerceStaleCheckoutReconciliationResult[]
@@ -296,19 +216,9 @@ export async function reconcileStaleCommerceCheckouts(
       },
     });
 
-  const executors =
-    options.executors ??
-    COMMERCE_CHECKOUT_RECONCILIATION_EXECUTORS;
-
-  const createSecretStore =
-    options.createSecretStore ??
-    ((prisma: PrismaClient) =>
-      createBuildSecretStore({
-        prisma,
-      }));
-
-  let secretStore:
-    BuildSecretStore | undefined;
+  const preparePaymentReconciliation =
+    options.preparePaymentReconciliation ??
+    prepareCommercePaymentReconciliation;
 
   const results:
     CommerceStaleCheckoutReconciliationResult[] =
@@ -363,23 +273,6 @@ export async function reconcileStaleCommerceCheckouts(
       continue;
     }
 
-    const executor =
-      executors.get(provider);
-
-    if (!executor) {
-      results.push({
-        orderId: row.id,
-        provider,
-        environment:
-          row.paymentEnvironment,
-        providerRef,
-        remoteState: null,
-        action:
-          "unsupported-provider",
-      });
-      continue;
-    }
-
     const order:
       CommerceCheckoutReconciliationOrder =
         {
@@ -393,7 +286,6 @@ export async function reconcileStaleCommerceCheckouts(
     const environment =
       environmentForOrder(
         order,
-        executor,
       );
 
     if (!environment) {
@@ -460,24 +352,35 @@ export async function reconcileStaleCommerceCheckouts(
             connection.config,
         };
 
-    if (
-      executor.requiresSecretStore &&
-      !secretStore
-    ) {
-      secretStore =
-        createSecretStore(client);
-    }
-
     try {
-      const remote =
-        await executor.inspect({
-          buildProjectId,
-          environment,
-          connection:
-            connectionSnapshot,
-          order,
-          secretStore,
-        });
+      const payment =
+        await preparePaymentReconciliation(
+          client,
+          {
+            buildProjectId,
+            provider,
+            environment,
+            connection:
+              connectionSnapshot,
+            order,
+          },
+        );
+
+      const inspection =
+        await payment.inspectPayment(
+          providerRef,
+        );
+
+      const remote = {
+        providerRef:
+          inspection.remoteResourceId,
+        state:
+          inspection.state === "pending"
+            ? "open" as const
+            : inspection.state === "canceled"
+              ? "expired" as const
+              : inspection.state,
+      };
 
       if (
         remote.providerRef !==
@@ -497,7 +400,7 @@ export async function reconcileStaleCommerceCheckouts(
       if (
         remote.state === "paid"
       ) {
-        await executor.reconcilePaid(
+        await payment.reconcilePaid(
           client,
           {
             buildProjectId,
@@ -525,7 +428,7 @@ export async function reconcileStaleCommerceCheckouts(
         remote.state ===
           "failed"
       ) {
-        await executor.reconcileExpired(
+        await payment.reconcileExpired(
           client,
           {
             buildProjectId,
@@ -577,7 +480,7 @@ export async function reconcileStaleCommerceCheckouts(
         continue;
       }
 
-      if (!executor.expire) {
+      if (!payment.cancelPayment) {
         results.push({
           orderId: order.id,
           provider,
@@ -591,15 +494,21 @@ export async function reconcileStaleCommerceCheckouts(
         continue;
       }
 
-      const expired =
-        await executor.expire({
-          buildProjectId,
-          environment,
-          connection:
-            connectionSnapshot,
-          order,
-          secretStore,
-        });
+      const canceled =
+        await payment.cancelPayment(
+          providerRef,
+        );
+
+      const expired = {
+        providerRef:
+          canceled.remoteResourceId,
+        state:
+          canceled.state === "canceled"
+            ? "expired" as const
+            : canceled.state === "pending"
+              ? "open" as const
+              : canceled.state,
+      };
 
       if (
         expired.providerRef !==
@@ -620,7 +529,7 @@ export async function reconcileStaleCommerceCheckouts(
         continue;
       }
 
-      await executor.reconcileExpired(
+      await payment.reconcileExpired(
         client,
         {
           buildProjectId,
