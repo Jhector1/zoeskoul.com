@@ -15,6 +15,19 @@ export type ShopifyImportScopeProfile =
 export type ShopifyImportScope =
   (typeof SHOPIFY_IMPORT_SCOPE_PROFILES)[ShopifyImportScopeProfile][number];
 
+export const SHOPIFY_COMMERCE_ACCESS_SCOPES = [
+  "unauthenticated_read_product_listings",
+  "unauthenticated_read_checkouts",
+  "unauthenticated_write_checkouts",
+] as const;
+
+export type ShopifyCommerceAccessScope =
+  (typeof SHOPIFY_COMMERCE_ACCESS_SCOPES)[number];
+
+export type ShopifyAuthorizationScope =
+  | ShopifyImportScope
+  | ShopifyCommerceAccessScope;
+
 export const DEFAULT_SHOPIFY_IMPORT_SCOPE_PROFILE:
   ShopifyImportScopeProfile =
     "storefront";
@@ -35,7 +48,7 @@ export type ShopifyAuthorizationRequest = Readonly<{
   store: ShopifyStoreIdentity;
   redirectUri: string;
   state: string;
-  scopes: readonly ShopifyImportScope[];
+  scopes: readonly ShopifyAuthorizationScope[];
 }>;
 
 export type ShopifyAuthorizationRedirect = Readonly<{
@@ -55,8 +68,15 @@ export type ShopifyAuthorizationCode = Readonly<{
  */
 export type ShopifyAuthorizationCredential = Readonly<{
   accessToken: string;
+  refreshToken: string | null;
   scopes: readonly string[];
-  expiresAt: string | null;
+  accessTokenExpiresAt: string | null;
+  refreshTokenExpiresAt: string | null;
+}>;
+
+export type ShopifyAuthorizationRefreshRequest = Readonly<{
+  store: ShopifyStoreIdentity;
+  refreshToken: string;
 }>;
 
 export interface ShopifyAuthorizationPort {
@@ -66,6 +86,10 @@ export interface ShopifyAuthorizationPort {
 
   exchangeAuthorizationCode(
     request: ShopifyAuthorizationCode,
+  ): Promise<ShopifyAuthorizationCredential>;
+
+  refreshAuthorizationCredential(
+    request: ShopifyAuthorizationRefreshRequest,
   ): Promise<ShopifyAuthorizationCredential>;
 }
 
@@ -207,5 +231,13 @@ export function getShopifyImportScopes(
     ...SHOPIFY_IMPORT_SCOPE_PROFILES[
       profile
     ],
+  ];
+}
+
+
+export function getShopifyCommerceAccessScopes():
+  readonly ShopifyCommerceAccessScope[] {
+  return [
+    ...SHOPIFY_COMMERCE_ACCESS_SCOPES,
   ];
 }
