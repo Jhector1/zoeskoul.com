@@ -138,6 +138,7 @@ model BuildProject {
   codeProject   CodeProject        @relation(fields: [codeProjectId], references: [id], onDelete: Cascade)
   runs          BuildRun[]
   resources     BuildResource[]
+  secrets       BuildSecret[]
   deployments   BuildDeployment[]
   artifacts     BuildArtifact[]
   commerceStore CommerceStore?
@@ -147,22 +148,22 @@ model BuildProject {
 }
 
 model CommerceStore {
-  id              String              @id @default(cuid())
-  buildProjectId  String              @unique
-  status          CommerceStoreStatus @default(draft)
-  name            String?
-  defaultCurrency String              @default("USD") @db.VarChar(3)
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
-  buildProject    BuildProject        @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
-  products        CommerceProduct[]
-  customers       CommerceCustomer[]
-  carts           CommerceCart[]
-  orders          CommerceOrder[]
-
-  @@index([status, updatedAt])
+  id                  String                       @id @default(cuid())
+  buildProjectId      String                       @unique
+  status              CommerceStoreStatus          @default(draft)
+  name                String?
+  defaultCurrency     String                       @default("USD") @db.VarChar(3)
+  createdAt           DateTime                     @default(now())
+  updatedAt           DateTime                     @updatedAt
+  buildProject        BuildProject                 @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+  products            CommerceProduct[]
+  customers           CommerceCustomer[]
+  carts               CommerceCart[]
+  orders              CommerceOrder[]
   providerConnections CommerceProviderConnection[]
   providerRoutes      CommerceProviderRoute[]
+
+  @@index([status, updatedAt])
 }
 
 model CommerceProduct {
@@ -334,15 +335,15 @@ model CommerceProviderConnection {
 }
 
 model CommerceProviderRoute {
-  id           String                     @id @default(cuid())
+  id           String                      @id @default(cuid())
   storeId      String
   environment  CommerceProviderEnvironment
   capability   CommerceProviderCapability
   provider     String
   connectionId String?
-  createdAt    DateTime                   @default(now())
-  updatedAt    DateTime                   @updatedAt
-  store        CommerceStore              @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  createdAt    DateTime                    @default(now())
+  updatedAt    DateTime                    @updatedAt
+  store        CommerceStore               @relation(fields: [storeId], references: [id], onDelete: Cascade)
   connection   CommerceProviderConnection? @relation(fields: [connectionId], references: [id], onDelete: SetNull)
 
   @@unique([storeId, environment, capability])
@@ -389,6 +390,22 @@ model BuildResource {
   @@index([buildProjectId, type])
   @@index([provider, providerRef])
   @@index([status, updatedAt])
+}
+
+model BuildSecret {
+  id             String       @id
+  buildProjectId String
+  algorithm      String       @db.VarChar(32)
+  keyVersion     Int          @default(1)
+  iv             Bytes
+  authTag        Bytes
+  ciphertext     Bytes
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  buildProject   BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+
+  @@index([buildProjectId, createdAt])
+  @@index([keyVersion, createdAt])
 }
 
 model BuildDeployment {
@@ -1954,7 +1971,6 @@ enum CommerceProviderCapability {
   checkout
   payments
 }
-
 
 enum BuildProjectStatus {
   draft

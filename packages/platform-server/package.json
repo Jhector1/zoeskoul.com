@@ -8,6 +8,7 @@
     "./access/reconcileFeatureGrant": "./src/access/reconcileFeatureGrant.ts",
     "./prisma": "./src/prisma.ts",
     "./projects/saveCodeProject": "./src/projects/saveCodeProject.ts",
+    "./security/buildSecretStore": "./src/security/buildSecretStore.ts",
     "./security/inMemoryRateLimit": "./src/security/inMemoryRateLimit.ts",
     "./security/ratelimit": "./src/security/ratelimit.ts",
     "./server/runnerClient": "./src/server/runnerClient.ts"
