@@ -18,6 +18,9 @@ import {
   ZoeBuildHeader,
 } from "@/components/chrome/ZoeBuildHeader";
 import {
+  ZoeBuildAuthenticatedPreviewShell,
+} from "@/components/builder/ZoeBuildAuthenticatedPreviewShell";
+import {
   resolveZoeBuildOrigins,
 } from "@/lib/appOrigins";
 
@@ -71,7 +74,11 @@ export default async function RootLayout({
             websiteOrigin={websiteOrigin}
             zoebuildOrigin={zoebuildOrigin}
           />
-          {children}
+          <ZoeBuildAuthenticatedPreviewShell
+            apiOrigin={websiteOrigin}
+          >
+            {children}
+          </ZoeBuildAuthenticatedPreviewShell>
         </Providers>
       </body>
     </html>

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import {
   ProjectCodeIcon,
   ProjectPreviewIcon,
@@ -26,13 +28,13 @@ import {
 } from "@/lib/build/requestZoeBuildPlan";
 
 import WebPreview from "@zoeskoul/learner-workspace/runner/components/WebPreview";
-import RemoteWebPreview from "@zoeskoul/learner-workspace/runner/components/RemoteWebPreview";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
 import CommerceWorkspacePanel from "./CommerceWorkspacePanel";
 import { PublishProjectButton } from "@/components/builder/PublishProjectButton";
 import { useReactVitePreview } from "@/components/builder/useReactVitePreview";
+import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
 
 type BuildWorkspaceProps =
   Parameters<
@@ -40,6 +42,7 @@ type BuildWorkspaceProps =
   >[0];
 
 export default function ProjectBuilderShell(props: {
+  locale: string;
   project:
     BuildWorkspaceProps["project"];
 
@@ -277,9 +280,9 @@ export default function ProjectBuilderShell(props: {
         aria-label="Zoé project assistant"
       >
         <header className="zb-project-assistant-header">
-        <a
+        <Link
           className="zb-project-rail-projects"
-          href=".."
+          href={`/${encodeURIComponent(props.locale)}/projects`}
           aria-label="Back to projects"
           title="Projects"
         >
@@ -297,7 +300,7 @@ export default function ProjectBuilderShell(props: {
               strokeLinejoin="round"
             />
           </svg>
-        </a>
+        </Link>
 
           <div
             className="zb-project-assistant-avatar"
@@ -486,11 +489,23 @@ export default function ProjectBuilderShell(props: {
     <main className="zb-builder-shell">
 
       <section className="zb-builder-stage">
-        {!commerceOpen &&
-        mode === "preview" ? (
-          <div className="zb-project-preview-stage">
+        <div
+          className="zb-project-preview-stage"
+          hidden={commerceOpen || mode !== "preview"}
+          aria-hidden={commerceOpen || mode !== "preview"}
+        >
             {reactPreviewEnabled && reactPreview ? (
-              <RemoteWebPreview preview={reactPreview} />
+              <PersistentReactPreviewSlot
+                buildProjectId={
+                  props.project.buildProjectId
+                }
+                slotId="project-preview"
+                preview={reactPreview}
+                active={
+                  !commerceOpen &&
+                  mode === "preview"
+                }
+              />
             ) : (
               <WebPreview
                 entries={previewEntries}
@@ -498,8 +513,7 @@ export default function ProjectBuilderShell(props: {
                 sessionKey={props.project.buildProjectId}
               />
             )}
-          </div>
-        ) : null}
+        </div>
 
         <div
           className="zb-code-stage"
@@ -512,6 +526,9 @@ export default function ProjectBuilderShell(props: {
             onSourceVersionChange={setPreviewSourceVersion}
             onDirtyChange={setCodeDirty}
             remoteWebPreview={reactPreviewEnabled ? reactPreview : null}
+            remotePreviewActive={
+              !commerceOpen && mode === "code"
+            }
           />
         </div>
 

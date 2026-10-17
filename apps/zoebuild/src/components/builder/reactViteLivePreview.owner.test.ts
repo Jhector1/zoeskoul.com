@@ -10,7 +10,7 @@ describe("ZoeBuild React/Vite live preview ownership", () => {
   it("uses one controller for Preview mode and the Code dock", () => {
     const shell = source("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx");
     expect(shell).toContain("useReactVitePreview");
-    expect(shell).toContain("<RemoteWebPreview");
+    expect(shell).toContain("<PersistentReactPreviewSlot");
     expect(shell).toContain("remoteWebPreview={reactPreviewEnabled ? reactPreview : null}");
     expect(shell).toContain("<WebPreview");
   });

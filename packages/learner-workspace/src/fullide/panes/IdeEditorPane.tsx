@@ -68,6 +68,7 @@ type Props = {
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: any; runArgs: any }) => void;
     remoteWebPreview?: RemoteWebPreviewDescriptor;
+    remoteWebPreviewSurface?: React.ReactNode;
     onRun: (args: any) => Promise<any>;
     setActiveFileId: (id: string | null) => void;
     workspaceFileSelectionVersion: number;
@@ -125,6 +126,7 @@ export default function IdeEditorPane({
     onBeforeRun,
     onRunResult,
     remoteWebPreview,
+    remoteWebPreviewSurface,
     onRun,
     setActiveFileId,
     workspaceFileSelectionVersion,
@@ -390,6 +392,7 @@ export default function IdeEditorPane({
                             isAuthenticated={isAuthenticated}
                             webPreviewEntries={workspaceEntries}
                             remoteWebPreview={remoteWebPreview}
+                            remoteWebPreviewSurface={remoteWebPreviewSurface}
                             workspaceTerminal={
                                 !isSql && !isWeb
                                     ? {

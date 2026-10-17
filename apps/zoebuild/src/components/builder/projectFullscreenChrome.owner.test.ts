@@ -94,6 +94,12 @@ describe(
         expect(
           shell,
         ).toContain(
+          'href={`/${encodeURIComponent(props.locale)}/projects`}',
+        );
+
+        expect(
+          shell,
+        ).not.toContain(
           'href=".."',
         );
 

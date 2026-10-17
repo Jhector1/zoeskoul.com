@@ -80,6 +80,7 @@ export default async function ZoeBuildWorkspacePage({
 
   return (
     <ProjectBuilderShell
+      locale={locale}
       project={{
         buildProjectId:
           project.buildProjectId,

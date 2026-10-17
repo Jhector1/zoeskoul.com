@@ -39,6 +39,7 @@ export type OutputSurfaceModel =
     | {
     kind: "remote-web-preview";
     preview: RemoteWebPreviewDescriptor;
+    surface?: React.ReactNode;
 };
 
 export default function OutputSurface(props: {
@@ -75,7 +76,9 @@ export default function OutputSurface(props: {
         case "remote-web-preview":
             return (
                 <div className="h-full min-h-0">
-                    <RemoteWebPreview preview={model.preview} />
+                    {model.surface ?? (
+                        <RemoteWebPreview preview={model.preview} />
+                    )}
                 </div>
             );
 

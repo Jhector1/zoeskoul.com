@@ -6,6 +6,7 @@ import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 
 import FullIDE from "@zoeskoul/learner-workspace/fullide/FullIDE";
+import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
 
 export type BuildWorkspaceShellProject = Readonly<{
   buildProjectId: string;
@@ -31,12 +32,14 @@ export default function BuildWorkspaceClient({
   onSourceVersionChange,
   onDirtyChange,
   remoteWebPreview,
+  remotePreviewActive,
 }: {
   project: BuildWorkspaceShellProject;
   onWorkspaceSnapshot?: (workspace: WorkspaceStateV2) => void;
   onSourceVersionChange?: (sourceVersion: number) => void;
   onDirtyChange?: (dirty: boolean) => void;
   remoteWebPreview?: RemoteWebPreviewDescriptor | null;
+  remotePreviewActive: boolean;
 }) {
   const latestWorkspaceRef = useRef<WorkspaceStateV2>(project.workspace);
   const editRevisionRef = useRef(0);
@@ -206,6 +209,16 @@ export default function BuildWorkspaceClient({
                 initialWorkspace={project.workspace}
                 onWorkspaceChange={handleWorkspaceChange}
                 remoteWebPreview={remoteWebPreview ?? undefined}
+                remoteWebPreviewSurface={
+                  remoteWebPreview ? (
+                    <PersistentReactPreviewSlot
+                      buildProjectId={project.buildProjectId}
+                      slotId="code-preview"
+                      preview={remoteWebPreview}
+                      active={remotePreviewActive}
+                    />
+                  ) : undefined
+                }
                 draftStorageMode="off"
                 fullHeight
                 showTopLanguageButtons={false}

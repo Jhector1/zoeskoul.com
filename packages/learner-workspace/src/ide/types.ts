@@ -114,6 +114,7 @@ export type FullIDEProps = {
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
     remoteWebPreview?: RemoteWebPreviewDescriptor;
+    remoteWebPreviewSurface?: import("react").ReactNode;
     initialSqlDialect?: SqlDialect;
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;

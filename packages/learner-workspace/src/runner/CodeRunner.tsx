@@ -353,6 +353,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     workspaceTerminal?: WorkspaceTerminalConfig;
     webPreviewEntries?: WorkspaceSyncEntry[];
     remoteWebPreview?: RemoteWebPreviewDescriptor;
+    remoteWebPreviewSurface?: React.ReactNode;
 
     /**
      * Stable selectors for browser tests.
@@ -685,6 +686,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showStdinEditor = false,
         webPreviewEntries = [],
         remoteWebPreview,
+        remoteWebPreviewSurface,
         sqlInitialTableSnapshots,
         sqlPaneOptions,
         runnerPaneOptions,
@@ -2640,6 +2642,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 return {
                     kind: "remote-web-preview",
                     preview: remoteWebPreview,
+                    surface: remoteWebPreviewSurface,
                 };
             }
 
@@ -2675,6 +2678,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         isWeb,
         webPreviewEntries,
         remoteWebPreview,
+        remoteWebPreviewSurface,
         lang,
         term,
         sqlSchemaSql,

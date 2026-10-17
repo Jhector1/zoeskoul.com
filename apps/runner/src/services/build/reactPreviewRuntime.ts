@@ -470,6 +470,12 @@ async function syncPreviewSourceFiles(
         file.path,
       );
 
+    const nextBytes = sourceFileBytes(file);
+    const currentBytes = await fs.readFile(absolute).catch(() => null);
+    if (currentBytes && currentBytes.equals(nextBytes)) {
+      continue;
+    }
+
     await fs.mkdir(
       path.dirname(
         absolute,
