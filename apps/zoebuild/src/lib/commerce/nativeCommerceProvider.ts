@@ -21,6 +21,9 @@ export type CommerceProviderCapability =
 export const ZOEBUILD_NATIVE_COMMERCE_PROVIDER =
   "zoebuild-native" as const;
 
+export const ZOEBUILD_NATIVE_COMMERCE_DISPLAY_NAME =
+  "Zoé Store" as const;
+
 export const ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES = [
   "catalog",
   "inventory",
@@ -29,7 +32,7 @@ export const ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES = [
   "checkout",
 ] as const satisfies readonly CommerceProviderCapability[];
 
-export function defaultNativeCommerceProviderRoutes() {
+export function defaultZoeStoreCommerceProviderRoutes() {
   return COMMERCE_PROVIDER_ENVIRONMENTS.flatMap(
     (environment) =>
       ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES.map(

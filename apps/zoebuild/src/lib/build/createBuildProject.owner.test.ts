@@ -43,7 +43,7 @@ describe("ZoeBuild persistence ownership", () => {
       ].join(""),
     );
     expect(source).toContain(
-      "defaultNativeCommerceProviderRoutes",
+      "defaultZoeStoreCommerceProviderRoutes",
     );
     expect(source).toContain(
       "providerRoutes",

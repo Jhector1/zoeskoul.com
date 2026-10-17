@@ -128,6 +128,45 @@ describe(
     );
 
     it(
+      "names the built-in default Zoé Store without making it a payment processor",
+      () => {
+        const contract =
+          read(
+            "apps/zoebuild/src/lib/commerce/nativeCommerceProvider.ts",
+          );
+
+        expect(
+          contract,
+        ).toContain(
+          "ZOEBUILD_NATIVE_COMMERCE_DISPLAY_NAME",
+        );
+
+        expect(
+          contract,
+        ).toContain(
+          '"Zoé Store"',
+        );
+
+        expect(
+          contract,
+        ).toContain(
+          "defaultZoeStoreCommerceProviderRoutes",
+        );
+
+        const defaultCapabilities =
+          contract.match(
+            /export const ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES\s*=\s*\[([\s\S]*?)\]\s*as const satisfies readonly CommerceProviderCapability\[\];/,
+          )?.[1] ?? "";
+
+        expect(
+          defaultCapabilities,
+        ).not.toContain(
+          '"payments"',
+        );
+      },
+    );
+
+    it(
       "keeps the provider contract vendor-neutral",
       () => {
         const contract =

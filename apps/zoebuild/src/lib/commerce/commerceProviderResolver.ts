@@ -5,9 +5,7 @@ import type {
 } from "@zoeskoul/db";
 
 import {
-  COMMERCE_PROVIDER_CAPABILITIES,
   ZOEBUILD_NATIVE_COMMERCE_PROVIDER,
-  ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES,
   resolveCommerceProviderEnvironment,
   type CommerceProviderAdapter,
   type CommerceProviderCapabilities,
@@ -15,6 +13,10 @@ import {
   type CommerceProviderEnvironment,
   type CommerceStorefrontSurface,
 } from "./nativeCommerceProvider";
+
+import {
+  COMMERCE_PROVIDER_DEFINITIONS,
+} from "./commerceProviderCatalog";
 
 export type CommerceProviderConnectionSnapshot =
   Readonly<{
@@ -77,50 +79,58 @@ export class CommerceProviderResolutionError
   }
 }
 
-function capabilityRecord(
-  enabled:
-    readonly CommerceProviderCapability[],
-): CommerceProviderCapabilities {
-  const enabledSet =
-    new Set<
-      CommerceProviderCapability
-    >(
-      enabled,
-    );
-
-  return Object.fromEntries(
-    COMMERCE_PROVIDER_CAPABILITIES.map(
-      (capability) => [
-        capability,
-        enabledSet.has(
-          capability,
-        ),
-      ],
-    ),
-  ) as CommerceProviderCapabilities;
-}
-
-export const ZOEBUILD_NATIVE_COMMERCE_ADAPTER:
-  CommerceProviderAdapter = {
+function adapterForDefinition(
+  definition:
+    (typeof COMMERCE_PROVIDER_DEFINITIONS)[number],
+): CommerceProviderAdapter {
+  return {
     provider:
-      ZOEBUILD_NATIVE_COMMERCE_PROVIDER,
+      definition.id,
 
     capabilities:
-      capabilityRecord(
-        ZOEBUILD_NATIVE_DEFAULT_CAPABILITIES,
-      ),
+      definition.capabilities,
 
     supportsEnvironment(
       environment,
     ) {
-      return (
-        environment ===
-          "test" ||
-        environment ===
-          "live"
+      return definition.environments.some(
+        (candidate) =>
+          candidate ===
+          environment,
       );
     },
   };
+}
+
+const COMMERCE_PROVIDER_ADAPTERS =
+  new Map<
+    string,
+    CommerceProviderAdapter
+  >(
+    COMMERCE_PROVIDER_DEFINITIONS.map(
+      (definition) => [
+        definition.id,
+        adapterForDefinition(
+          definition,
+        ),
+      ] as const,
+    ),
+  );
+
+const nativeAdapter =
+  COMMERCE_PROVIDER_ADAPTERS.get(
+    ZOEBUILD_NATIVE_COMMERCE_PROVIDER,
+  );
+
+if (!nativeAdapter) {
+  throw new Error(
+    "Zoé Store commerce adapter is not registered.",
+  );
+}
+
+export const ZOEBUILD_NATIVE_COMMERCE_ADAPTER:
+  CommerceProviderAdapter =
+    nativeAdapter;
 
 export function createCommerceProviderRegistry(
   registrations:
@@ -174,14 +184,28 @@ export function createCommerceProviderRegistry(
 }
 
 export const COMMERCE_PROVIDER_REGISTRY =
-  createCommerceProviderRegistry([
-    {
-      adapter:
-        ZOEBUILD_NATIVE_COMMERCE_ADAPTER,
-      connectionRequired:
-        false,
-    },
-  ]);
+  createCommerceProviderRegistry(
+    COMMERCE_PROVIDER_DEFINITIONS.map(
+      (definition) => {
+        const adapter =
+          COMMERCE_PROVIDER_ADAPTERS.get(
+            definition.id,
+          );
+
+        if (!adapter) {
+          throw new Error(
+            `Commerce adapter is not registered: ${definition.id}.`,
+          );
+        }
+
+        return {
+          adapter,
+          connectionRequired:
+            definition.connectionRequired,
+        };
+      },
+    ),
+  );
 
 function normalizedProjectId(
   value:

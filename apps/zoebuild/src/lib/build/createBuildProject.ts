@@ -18,7 +18,7 @@ import { prisma } from "@zoeskoul/platform-server/prisma";
 import { saveCodeProjectInTransaction } from "@zoeskoul/platform-server/projects/saveCodeProject";
 
 import {
-  defaultNativeCommerceProviderRoutes,
+  defaultZoeStoreCommerceProviderRoutes,
 } from "../commerce/nativeCommerceProvider";
 
 function toPrismaJson(value: unknown): Prisma.InputJsonValue {
@@ -102,7 +102,7 @@ export function createPrismaBuildProjectPersistence(
               defaultCurrency: "USD",
               providerRoutes: {
                 create:
-                  defaultNativeCommerceProviderRoutes(),
+                  defaultZoeStoreCommerceProviderRoutes(),
               },
             },
             select: { id: true },

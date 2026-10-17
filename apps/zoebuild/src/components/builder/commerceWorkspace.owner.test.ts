@@ -106,25 +106,43 @@ describe(
         expect(
           panel,
         ).toContain(
-          "Not connected",
+          "Zoé Store",
         );
 
         expect(
           panel,
         ).toContain(
-          "Provider-hosted",
+          "Choose a payment provider",
         );
 
         expect(
           panel,
         ).toContain(
-          "Not enabled",
+          "Test + Live separated",
         );
 
         expect(
           panel,
         ).toContain(
-          "No fake order totals",
+          "Stripe",
+        );
+
+        expect(
+          panel,
+        ).toContain(
+          "Shopify",
+        );
+
+        expect(
+          panel,
+        ).toContain(
+          "Square",
+        );
+
+        expect(
+          panel,
+        ).toContain(
+          "PayPal",
         );
 
         expect(
