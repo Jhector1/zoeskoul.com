@@ -164,24 +164,36 @@ describe(
     );
 
     it(
-      "does not reserve or decrement inventory merely for checkout initiation",
+      "reserves tracked inventory for checkout without selling it early",
       () => {
         expect(
           checkout,
-        ).not.toContain(
+        ).toContain(
+          ".commerceInventoryReservation",
+        );
+
+        expect(
+          checkout,
+        ).toContain(
+          "reservedQuantity: {",
+        );
+
+        expect(
+          checkout,
+        ).toContain(
           "increment:",
         );
 
         expect(
           checkout,
-        ).not.toContain(
-          "decrement:",
+        ).toContain(
+          "checkoutExpiresAt",
         );
 
         expect(
           checkout,
-        ).not.toContain(
-          "reservedQuantity: {",
+        ).toContain(
+          "paymentEnvironment",
         );
       },
     );

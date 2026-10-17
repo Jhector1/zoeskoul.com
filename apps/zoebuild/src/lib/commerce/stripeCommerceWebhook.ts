@@ -20,6 +20,7 @@ export const STRIPE_COMMERCE_WEBHOOK_EVENTS =
     "checkout.session.completed",
     "checkout.session.async_payment_succeeded",
     "checkout.session.async_payment_failed",
+    "checkout.session.expired",
   ] as const;
 
 export type StripeCommerceWebhookEventType =
@@ -44,6 +45,7 @@ export type StripeCommerceWebhookResult =
       | "pending"
       | "paid"
       | "failed"
+      | "expired"
       | "already-processed";
     orderId:
       string | null;
@@ -515,6 +517,8 @@ function assertSessionOrder(
     Readonly<{
       buildProjectId:
         string;
+      environment:
+        CommerceProviderEnvironment;
       order:
         Readonly<{
           id:
@@ -525,8 +529,12 @@ function assertSessionOrder(
             number;
           paymentProvider:
             string | null;
+          paymentEnvironment:
+            CommerceProviderEnvironment | null;
           paymentProviderRef:
             string | null;
+          checkoutExpiresAt:
+            Date | null;
         }>;
       session:
         Stripe.Checkout.Session;
@@ -545,6 +553,20 @@ function assertSessionOrder(
     throw new StripeCommerceWebhookError(
       "STRIPE_WEBHOOK_PROJECT_MISMATCH",
       "Stripe Checkout project metadata does not match the order.",
+      409,
+    );
+  }
+
+  if (
+    input.order
+      .paymentEnvironment &&
+    input.order
+      .paymentEnvironment !==
+      input.environment
+  ) {
+    throw new StripeCommerceWebhookError(
+      "STRIPE_WEBHOOK_ORDER_ENVIRONMENT_MISMATCH",
+      "Stripe Checkout environment does not match the trusted order environment.",
       409,
     );
   }
@@ -590,6 +612,33 @@ function assertSessionOrder(
       409,
     );
   }
+
+  if (
+    input.order
+      .checkoutExpiresAt
+  ) {
+    const trustedExpiry =
+      Math.floor(
+        input.order
+          .checkoutExpiresAt
+          .getTime() /
+          1000,
+      );
+
+    if (
+      Math.abs(
+        trustedExpiry -
+          session.expires_at,
+      ) >
+      1
+    ) {
+      throw new StripeCommerceWebhookError(
+        "STRIPE_WEBHOOK_EXPIRY_MISMATCH",
+        "Stripe Checkout expiry does not match the trusted reservation expiry.",
+        409,
+      );
+    }
+  }
 }
 
 const reconciliationOrderSelect =
@@ -608,7 +657,11 @@ const reconciliationOrderSelect =
       true,
     paymentProvider:
       true,
+    paymentEnvironment:
+      true,
     paymentProviderRef:
+      true,
+    checkoutExpiresAt:
       true,
     placedAt:
       true,
@@ -626,6 +679,24 @@ const reconciliationOrderSelect =
                   true,
               },
             },
+          },
+        },
+      },
+    },
+    inventoryReservations: {
+      select: {
+        id:
+          true,
+        inventoryItemId:
+          true,
+        quantity:
+          true,
+        status:
+          true,
+        inventoryItem: {
+          select: {
+            trackQuantity:
+              true,
           },
         },
       },
@@ -669,7 +740,7 @@ async function loadOrder(
     });
 }
 
-async function markFailed(
+async function markTerminalAndReleaseReservations(
   client:
     PrismaClient,
   input:
@@ -680,48 +751,285 @@ async function markFailed(
         string;
       sessionId:
         string;
+      cartStatus:
+        "abandoned" |
+        "expired";
+      resultStatus:
+        "failed" |
+        "expired";
     }>,
 ): Promise<
   StripeCommerceWebhookResult
 > {
-  const changed =
-    await client
-      .commerceOrder
-      .updateMany({
-        where: {
-          id:
-            input.orderId,
-          store: {
-            buildProjectId:
-              input.buildProjectId,
-          },
-          paymentProvider:
-            "stripe",
-          paymentProviderRef:
-            input.sessionId,
-          paymentStatus: {
-            in: [
-              "pending",
-              "authorized",
-              "failed",
-            ],
-          },
-        },
-        data: {
-          paymentStatus:
-            "failed",
-        },
-      });
+  return client
+    .$transaction(
+      async (
+        tx,
+      ) => {
+        const current =
+          await tx
+            .commerceOrder
+            .findFirst({
+              where: {
+                id:
+                  input.orderId,
+                store: {
+                  buildProjectId:
+                    input.buildProjectId,
+                },
+                paymentProvider:
+                  "stripe",
+                paymentProviderRef:
+                  input.sessionId,
+              },
+              select:
+                reconciliationOrderSelect,
+            });
 
-  return {
-    status:
-      changed.count ===
-        1
-        ? "failed"
-        : "already-processed",
-    orderId:
-      input.orderId,
-  };
+        if (!current) {
+          throw new StripeCommerceWebhookError(
+            "STRIPE_WEBHOOK_ORDER_NOT_FOUND",
+            "Stripe Checkout order could not be found.",
+            404,
+          );
+        }
+
+        if (
+          alreadyCaptured(
+            current
+              .paymentStatus,
+          )
+        ) {
+          return {
+            status:
+              "already-processed" as const,
+            orderId:
+              current.id,
+          };
+        }
+
+        if (
+          current.status ===
+            "canceled" &&
+          current.paymentStatus ===
+            "failed"
+        ) {
+          return {
+            status:
+              "already-processed" as const,
+            orderId:
+              current.id,
+          };
+        }
+
+        if (
+          current.status ===
+            "fulfilled"
+        ) {
+          throw new StripeCommerceWebhookError(
+            "STRIPE_WEBHOOK_ORDER_STATE_INVALID",
+            "Stripe failure cannot reconcile into a fulfilled order.",
+            409,
+          );
+        }
+
+        const transitioned =
+          await tx
+            .commerceOrder
+            .updateMany({
+              where: {
+                id:
+                  current.id,
+                paymentProvider:
+                  "stripe",
+                paymentProviderRef:
+                  input.sessionId,
+                status:
+                  "pending",
+                paymentStatus: {
+                  in: [
+                    "pending",
+                    "authorized",
+                  ],
+                },
+              },
+              data: {
+                status:
+                  "canceled",
+                paymentStatus:
+                  "failed",
+              },
+            });
+
+        if (
+          transitioned.count !==
+          1
+        ) {
+          const latest =
+            await tx
+              .commerceOrder
+              .findUnique({
+                where: {
+                  id:
+                    current.id,
+                },
+                select: {
+                  status:
+                    true,
+                  paymentStatus:
+                    true,
+                },
+              });
+
+          if (
+            latest &&
+            (
+              alreadyCaptured(
+                latest
+                  .paymentStatus,
+              ) ||
+              (
+                latest.status ===
+                  "canceled" &&
+                latest.paymentStatus ===
+                  "failed"
+              )
+            )
+          ) {
+            return {
+              status:
+                "already-processed" as const,
+              orderId:
+                current.id,
+            };
+          }
+
+          throw new StripeCommerceWebhookError(
+            "STRIPE_WEBHOOK_RECONCILIATION_CONFLICT",
+            "Stripe failure state changed during reconciliation.",
+            409,
+          );
+        }
+
+        for (
+          const reservation of
+          current.inventoryReservations ??
+          []
+        ) {
+          if (
+            reservation.status ===
+              "committed"
+          ) {
+            throw new StripeCommerceWebhookError(
+              "STRIPE_WEBHOOK_RESERVATION_STATE_INVALID",
+              "Committed inventory cannot be released from a failed checkout.",
+              409,
+            );
+          }
+
+          if (
+            reservation.status !==
+              "reserved"
+          ) {
+            continue;
+          }
+
+          const released =
+            await tx
+              .commerceInventoryReservation
+              .updateMany({
+                where: {
+                  id:
+                    reservation.id,
+                  status:
+                    "reserved",
+                },
+                data: {
+                  status:
+                    "released",
+                },
+              });
+
+          if (
+            released.count !==
+            1
+          ) {
+            throw new StripeCommerceWebhookError(
+              "STRIPE_WEBHOOK_RESERVATION_RELEASE_CONFLICT",
+              "Checkout inventory reservation changed during release.",
+              409,
+            );
+          }
+
+          if (
+            !reservation
+              .inventoryItem
+              .trackQuantity
+          ) {
+            continue;
+          }
+
+          const inventory =
+            await tx
+              .commerceInventoryItem
+              .updateMany({
+                where: {
+                  id:
+                    reservation.inventoryItemId,
+                  trackQuantity:
+                    true,
+                  reservedQuantity: {
+                    gte:
+                      reservation.quantity,
+                  },
+                },
+                data: {
+                  reservedQuantity: {
+                    decrement:
+                      reservation.quantity,
+                  },
+                },
+              });
+
+          if (
+            inventory.count !==
+            1
+          ) {
+            throw new StripeCommerceWebhookError(
+              "STRIPE_WEBHOOK_RESERVATION_RELEASE_FAILED",
+              "Reserved inventory could not be released.",
+              409,
+            );
+          }
+        }
+
+        if (
+          current.cartId
+        ) {
+          await tx
+            .commerceCart
+            .updateMany({
+              where: {
+                id:
+                  current.cartId,
+                status:
+                  "converted",
+              },
+              data: {
+                status:
+                  input.cartStatus,
+              },
+            });
+        }
+
+        return {
+          status:
+            input.resultStatus,
+          orderId:
+            current.id,
+        };
+      },
+    );
 }
 
 async function markPaidAndCommitInventory(
@@ -810,6 +1118,8 @@ async function markPaidAndCommitInventory(
                   "stripe",
                 paymentProviderRef:
                   input.sessionId,
+                status:
+                  "pending",
                 paymentStatus: {
                   in: [
                     "pending",
@@ -869,46 +1179,149 @@ async function markPaidAndCommitInventory(
           );
         }
 
-        for (
-          const item of
-          current.items
+        const reservations =
+          current.inventoryReservations ??
+          [];
+
+        if (
+          reservations.length >
+          0
         ) {
-          if (
-            !item.variantId ||
-            !item.variant
-              ?.inventory
-              ?.trackQuantity
+          for (
+            const reservation of
+            reservations
           ) {
-            continue;
-          }
+            if (
+              reservation.status !==
+                "reserved"
+            ) {
+              throw new StripeCommerceWebhookError(
+                "STRIPE_WEBHOOK_RESERVATION_STATE_INVALID",
+                "Paid checkout inventory reservation is not available to commit.",
+                409,
+              );
+            }
 
-          const committed =
-            await tx
-              .commerceInventoryItem
-              .updateMany({
-                where: {
-                  variantId:
-                    item.variantId,
-                  trackQuantity:
-                    true,
-                },
-                data: {
-                  quantity: {
-                    decrement:
-                      item.quantity,
+            if (
+              reservation
+                .inventoryItem
+                .trackQuantity
+            ) {
+              const committed =
+                await tx
+                  .commerceInventoryItem
+                  .updateMany({
+                    where: {
+                      id:
+                        reservation.inventoryItemId,
+                      trackQuantity:
+                        true,
+                      quantity: {
+                        gte:
+                          reservation.quantity,
+                      },
+                      reservedQuantity: {
+                        gte:
+                          reservation.quantity,
+                      },
+                    },
+                    data: {
+                      quantity: {
+                        decrement:
+                          reservation.quantity,
+                      },
+                      reservedQuantity: {
+                        decrement:
+                          reservation.quantity,
+                      },
+                    },
+                  });
+
+              if (
+                committed.count !==
+                1
+              ) {
+                throw new StripeCommerceWebhookError(
+                  "STRIPE_WEBHOOK_INVENTORY_COMMIT_FAILED",
+                  "Paid order reserved inventory could not be committed.",
+                  409,
+                );
+              }
+            }
+
+            const committedReservation =
+              await tx
+                .commerceInventoryReservation
+                .updateMany({
+                  where: {
+                    id:
+                      reservation.id,
+                    status:
+                      "reserved",
                   },
-                },
-              });
+                  data: {
+                    status:
+                      "committed",
+                  },
+                });
 
-          if (
-            committed.count !==
-            1
+            if (
+              committedReservation.count !==
+              1
+            ) {
+              throw new StripeCommerceWebhookError(
+                "STRIPE_WEBHOOK_RESERVATION_COMMIT_CONFLICT",
+                "Paid order reservation changed during inventory commit.",
+                409,
+              );
+            }
+          }
+        } else {
+          for (
+            const item of
+            current.items
           ) {
-            throw new StripeCommerceWebhookError(
-              "STRIPE_WEBHOOK_INVENTORY_COMMIT_FAILED",
-              "Paid order inventory could not be committed.",
-              409,
-            );
+            if (
+              !item.variantId ||
+              !item.variant
+                ?.inventory
+                ?.trackQuantity
+            ) {
+              continue;
+            }
+
+            const committed =
+              await tx
+                .commerceInventoryItem
+                .updateMany({
+                  where: {
+                    variantId:
+                      item.variantId,
+                    trackQuantity:
+                      true,
+                    quantity: {
+                      gte:
+                        item.quantity,
+                    },
+                  },
+                  data: {
+                    quantity: {
+                      decrement:
+                        item.quantity,
+                    },
+                  },
+                });
+
+            if (
+              committed.count !==
+              1
+            ) {
+              throw new StripeCommerceWebhookError(
+                "STRIPE_WEBHOOK_INVENTORY_COMMIT_FAILED",
+                "Paid legacy order inventory could not be committed.",
+                409,
+              );
+            }
           }
         }
 
@@ -1011,15 +1424,17 @@ export async function reconcileStripeCommerceWebhookEvent(
   assertSessionOrder({
     buildProjectId:
       input.buildProjectId,
+    environment:
+      input.environment,
     order,
     session,
   });
 
   if (
     input.event.type ===
-    "checkout.session.async_payment_failed"
+    "checkout.session.expired"
   ) {
-    return markFailed(
+    return markTerminalAndReleaseReservations(
       client,
       {
         buildProjectId:
@@ -1027,6 +1442,30 @@ export async function reconcileStripeCommerceWebhookEvent(
         orderId,
         sessionId:
           session.id,
+        cartStatus:
+          "expired",
+        resultStatus:
+          "expired",
+      },
+    );
+  }
+
+  if (
+    input.event.type ===
+    "checkout.session.async_payment_failed"
+  ) {
+    return markTerminalAndReleaseReservations(
+      client,
+      {
+        buildProjectId:
+          input.buildProjectId,
+        orderId,
+        sessionId:
+          session.id,
+        cartStatus:
+          "abandoned",
+        resultStatus:
+          "failed",
       },
     );
   }

@@ -155,7 +155,25 @@ describe(
         expect(
           webhook,
         ).toContain(
-          'decrement:\n                      item.quantity',
+          "inventoryReservations",
+        );
+
+        expect(
+          webhook,
+        ).toContain(
+          'status:\n                      "reserved"',
+        );
+
+        expect(
+          webhook,
+        ).toContain(
+          'decrement:\n                          reservation.quantity',
+        );
+
+        expect(
+          webhook,
+        ).toContain(
+          'status:\n                      "committed"',
         );
 
         expect(

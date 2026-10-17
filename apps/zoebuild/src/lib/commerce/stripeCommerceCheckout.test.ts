@@ -38,8 +38,14 @@ const order:
         3500,
       paymentProvider:
         "stripe",
+      paymentEnvironment:
+        "test",
       paymentProviderRef:
         null,
+      checkoutExpiresAt:
+        new Date(
+          "2100-01-01T00:00:00.000Z",
+        ),
       items: [
         {
           merchandiseId:
@@ -238,6 +244,16 @@ describe(
           creates[0].params.client_reference_id,
         ).toBe(
           "order_123",
+        );
+
+        expect(
+          creates[0].params.expires_at,
+        ).toBe(
+          Math.floor(
+            order.checkoutExpiresAt
+              .getTime() /
+              1000,
+          ),
         );
 
         expect(

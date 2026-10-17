@@ -66,7 +66,10 @@ export type TrustedCommerceOrderSnapshot =
     shippingMinor: number;
     totalMinor: number;
     paymentProvider: string;
+    paymentEnvironment:
+      CommerceProviderEnvironment;
     paymentProviderRef: string | null;
+    checkoutExpiresAt: Date;
     items:
       readonly TrustedCommerceOrderLine[];
   }>;
@@ -317,6 +320,11 @@ export function parseCommerceCheckoutRequest(
   }
 }
 
+export const COMMERCE_CHECKOUT_RESERVATION_TTL_MS =
+  35 *
+  60 *
+  1000;
+
 type CheckoutCartRow =
   Readonly<{
     id: string;
@@ -341,6 +349,7 @@ type CheckoutCartRow =
               }>;
             inventory:
               | Readonly<{
+                  id: string;
                   quantity: number;
                   reservedQuantity: number;
                   trackQuantity: boolean;
@@ -436,6 +445,8 @@ function publicOrder(
     Readonly<{
       id: string;
       cartId: string | null;
+      status: string;
+      paymentStatus: string;
       currency: string;
       subtotalMinor: number;
       discountMinor: number;
@@ -443,7 +454,10 @@ function publicOrder(
       shippingMinor: number;
       totalMinor: number;
       paymentProvider: string | null;
+      paymentEnvironment:
+        CommerceProviderEnvironment | null;
       paymentProviderRef: string | null;
+      checkoutExpiresAt: Date | null;
       items:
         readonly Readonly<{
           variantId: string | null;
@@ -457,15 +471,40 @@ function publicOrder(
     }>,
   expectedProvider:
     string,
+  expectedEnvironment:
+    CommerceProviderEnvironment,
 ): TrustedCommerceOrderSnapshot {
   if (
     !order.cartId ||
+    order.status !==
+      "pending" ||
+    (
+      order.paymentStatus !==
+        "pending" &&
+      order.paymentStatus !==
+        "authorized"
+    ) ||
     order.paymentProvider !==
-      expectedProvider
+      expectedProvider ||
+    order.paymentEnvironment !==
+      expectedEnvironment ||
+    !order.checkoutExpiresAt
   ) {
     throw new NativeCommerceCheckoutError(
       "COMMERCE_CHECKOUT_ALREADY_STARTED",
-      "Checkout has already started with another payment provider.",
+      "Checkout has already entered a terminal or incompatible payment state.",
+      409,
+    );
+  }
+
+  if (
+    order.checkoutExpiresAt
+      .getTime() <=
+    Date.now()
+  ) {
+    throw new NativeCommerceCheckoutError(
+      "COMMERCE_CHECKOUT_EXPIRED",
+      "Checkout reservation has expired.",
       409,
     );
   }
@@ -489,8 +528,12 @@ function publicOrder(
       order.totalMinor,
     paymentProvider:
       expectedProvider,
+    paymentEnvironment:
+      expectedEnvironment,
     paymentProviderRef:
       order.paymentProviderRef,
+    checkoutExpiresAt:
+      order.checkoutExpiresAt,
     items:
       order.items.map(
         (
@@ -533,6 +576,10 @@ const orderSelect = {
     true,
   cartId:
     true,
+  status:
+    true,
+  paymentStatus:
+    true,
   currency:
     true,
   subtotalMinor:
@@ -547,7 +594,11 @@ const orderSelect = {
     true,
   paymentProvider:
     true,
+  paymentEnvironment:
+    true,
   paymentProviderRef:
+    true,
+  checkoutExpiresAt:
     true,
   items: {
     orderBy:
@@ -581,6 +632,8 @@ async function createOrReuseOrderSnapshot(
         CommerceStorefrontSurface;
       cartToken: string;
       paymentProvider: string;
+      paymentEnvironment:
+        CommerceProviderEnvironment;
     }>,
 ): Promise<
   TrustedCommerceOrderSnapshot
@@ -686,6 +739,8 @@ async function createOrReuseOrderSnapshot(
                       },
                       inventory: {
                         select: {
+                          id:
+                            true,
                           quantity:
                             true,
                           reservedQuantity:
@@ -715,6 +770,7 @@ async function createOrReuseOrderSnapshot(
         return publicOrder(
           cart.order,
           input.paymentProvider,
+          input.paymentEnvironment,
         );
       }
 
@@ -746,6 +802,33 @@ async function createOrReuseOrderSnapshot(
           cart as CheckoutCartRow,
         );
 
+      const reservationLines =
+        cart.items.flatMap(
+          (
+            item,
+          ) => {
+            const inventory =
+              item.variant
+                .inventory;
+
+            return inventory
+              ?.trackQuantity
+              ? [
+                  {
+                    inventoryItemId:
+                      inventory.id,
+                    quantity:
+                      item.quantity,
+                    expectedQuantity:
+                      inventory.quantity,
+                    expectedReservedQuantity:
+                      inventory.reservedQuantity,
+                  },
+                ]
+              : [];
+          },
+        );
+
       const subtotalMinor =
         lines.reduce(
           (
@@ -755,6 +838,12 @@ async function createOrReuseOrderSnapshot(
             total +
             line.lineTotalMinor,
           0,
+        );
+
+      const requestedExpiry =
+        new Date(
+          Date.now() +
+            COMMERCE_CHECKOUT_RESERVATION_TTL_MS,
         );
 
       const order =
@@ -789,8 +878,12 @@ async function createOrReuseOrderSnapshot(
                 subtotalMinor,
               paymentProvider:
                 input.paymentProvider,
+              paymentEnvironment:
+                input.paymentEnvironment,
               paymentProviderRef:
                 null,
+              checkoutExpiresAt:
+                requestedExpiry,
               placedAt:
                 null,
               items: {
@@ -822,15 +915,97 @@ async function createOrReuseOrderSnapshot(
               orderSelect,
           });
 
-      if (
-        order.paymentProvider !==
-          input.paymentProvider
-      ) {
-        throw new NativeCommerceCheckoutError(
-          "COMMERCE_CHECKOUT_ALREADY_STARTED",
-          "Checkout has already started with another payment provider.",
-          409,
+      const snapshot =
+        publicOrder(
+          order,
+          input.paymentProvider,
+          input.paymentEnvironment,
         );
+
+      if (
+        reservationLines.length >
+        0
+      ) {
+        const inserted =
+          await tx
+            .commerceInventoryReservation
+            .createMany({
+              data:
+                reservationLines.map(
+                  (
+                    line,
+                  ) => ({
+                    orderId:
+                      order.id,
+                    inventoryItemId:
+                      line.inventoryItemId,
+                    quantity:
+                      line.quantity,
+                    status:
+                      "reserved",
+                    expiresAt:
+                      snapshot.checkoutExpiresAt,
+                  }),
+                ),
+              skipDuplicates:
+                true,
+            });
+
+        if (
+          inserted.count !==
+            0 &&
+          inserted.count !==
+            reservationLines.length
+        ) {
+          throw new NativeCommerceCheckoutError(
+            "COMMERCE_CHECKOUT_STATE_CONFLICT",
+            "Checkout inventory reservation state is inconsistent.",
+            409,
+          );
+        }
+
+        if (
+          inserted.count ===
+          reservationLines.length
+        ) {
+          for (
+            const line of
+            reservationLines
+          ) {
+            const held =
+              await tx
+                .commerceInventoryItem
+                .updateMany({
+                  where: {
+                    id:
+                      line.inventoryItemId,
+                    trackQuantity:
+                      true,
+                    quantity:
+                      line.expectedQuantity,
+                    reservedQuantity:
+                      line.expectedReservedQuantity,
+                  },
+                  data: {
+                    reservedQuantity: {
+                      increment:
+                        line.quantity,
+                    },
+                  },
+                });
+
+            if (
+              held.count !==
+              1
+            ) {
+              throw new NativeCommerceCheckoutError(
+                "COMMERCE_INVENTORY_UNAVAILABLE",
+                "Inventory changed while checkout was reserving the cart.",
+                409,
+              );
+            }
+          }
+        }
       }
 
       const frozen =
@@ -846,24 +1021,48 @@ async function createOrReuseOrderSnapshot(
             data: {
               status:
                 "converted",
+              expiresAt:
+                snapshot.checkoutExpiresAt,
             },
           });
 
       if (
         frozen.count !==
-          1
+        1
       ) {
-        throw new NativeCommerceCheckoutError(
-          "COMMERCE_CART_NOT_ACTIVE",
-          "Cart is no longer active.",
-          409,
-        );
+        const latest =
+          await tx
+            .commerceCart
+            .findUnique({
+              where: {
+                id:
+                  cart.id,
+              },
+              select: {
+                status:
+                  true,
+                expiresAt:
+                  true,
+              },
+            });
+
+        if (
+          latest?.status !==
+            "converted" ||
+          latest.expiresAt
+            ?.getTime() !==
+            snapshot.checkoutExpiresAt
+              .getTime()
+        ) {
+          throw new NativeCommerceCheckoutError(
+            "COMMERCE_CART_NOT_ACTIVE",
+            "Cart is no longer active.",
+            409,
+          );
+        }
       }
 
-      return publicOrder(
-        order,
-        input.paymentProvider,
-      );
+      return snapshot;
     },
   );
 }
@@ -1057,6 +1256,8 @@ export async function beginNativeCommerceCheckout(
           input.request.cartId,
         paymentProvider:
           payment.provider,
+        paymentEnvironment:
+          payment.environment,
       },
     );
 

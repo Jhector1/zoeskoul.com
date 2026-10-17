@@ -368,6 +368,45 @@ function assertTrustedStripeTotal(
   }
 }
 
+function stripeCheckoutExpiresAt(
+  order:
+    TrustedCommerceOrderSnapshot,
+  environment:
+    CommerceProviderEnvironment,
+) {
+  if (
+    order.paymentEnvironment !==
+    environment
+  ) {
+    throw new StripeCommerceCheckoutError(
+      "STRIPE_ORDER_ENVIRONMENT_MISMATCH",
+      "Trusted order environment does not match the Stripe route.",
+    );
+  }
+
+  const milliseconds =
+    order.checkoutExpiresAt
+      .getTime();
+
+  if (
+    !Number.isFinite(
+      milliseconds,
+    ) ||
+    milliseconds <=
+      Date.now()
+  ) {
+    throw new StripeCommerceCheckoutError(
+      "STRIPE_CHECKOUT_EXPIRED",
+      "Trusted checkout reservation has expired.",
+    );
+  }
+
+  return Math.floor(
+    milliseconds /
+      1000,
+  );
+}
+
 async function readStripeSecretKey(
   input:
     Readonly<{
@@ -471,6 +510,11 @@ export function createStripeCommerceCheckoutExecutor(
         input.order,
       );
 
+      const expiresAt =
+        stripeCheckoutExpiresAt(
+          input.order,
+          input.environment,
+        );
       const secretKey =
         await readStripeSecretKey({
           buildProjectId:
@@ -514,6 +558,8 @@ export function createStripeCommerceCheckoutExecutor(
                 urls.successUrl,
               cancel_url:
                 urls.cancelUrl,
+              expires_at:
+                expiresAt,
               client_reference_id:
                 input.order.id,
               metadata: {
