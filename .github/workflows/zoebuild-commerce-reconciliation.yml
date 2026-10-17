@@ -1,0 +1,84 @@
+name: ZoeBuild Commerce Reconciliation
+
+on:
+  schedule:
+    - cron: "11,26,41,56 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: zoebuild-commerce-reconciliation
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  tick:
+    name: Reconcile stale ZoeBuild checkouts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      COMMERCE_TICK_URL: ${{ vars.ZOEBUILD_COMMERCE_RECONCILIATION_TICK_URL || 'https://build.zoeskoul.com/api/internal/commerce/reconciliation/tick' }}
+      SCHEDULER_SECRET: ${{ secrets.ZOEBUILD_COMMERCE_SCHEDULER_SECRET }}
+
+    steps:
+      - name: Scheduler not activated
+        if: ${{ env.SCHEDULER_SECRET == '' }}
+        shell: bash
+        run: |
+          echo "::notice::ZOEBUILD_COMMERCE_SCHEDULER_SECRET is not configured yet; commerce reconciliation tick skipped."
+
+      - name: Validate scheduler configuration
+        if: ${{ env.SCHEDULER_SECRET != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "${COMMERCE_TICK_URL}" in
+            https://*/api/internal/commerce/reconciliation/tick) ;;
+            *)
+              echo "::error::ZOEBUILD_COMMERCE_RECONCILIATION_TICK_URL must be HTTPS and end in /api/internal/commerce/reconciliation/tick."
+              exit 1
+              ;;
+          esac
+
+      - name: Trigger commerce reconciliation tick
+        if: ${{ env.SCHEDULER_SECRET != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          response_file="$(mktemp)"
+          trap 'rm -f "${response_file}"' EXIT
+
+          http_code="$(
+            curl \
+              --silent \
+              --show-error \
+              --request POST \
+              --connect-timeout 10 \
+              --max-time 180 \
+              --retry 3 \
+              --retry-delay 5 \
+              --retry-all-errors \
+              --output "${response_file}" \
+              --write-out "%{http_code}" \
+              --header "Authorization: Bearer ${SCHEDULER_SECRET}" \
+              "${COMMERCE_TICK_URL}"
+          )"
+
+          echo "commerce_reconciliation_http=${http_code}"
+
+          if [ -s "${response_file}" ]; then
+            cat "${response_file}"
+            echo
+          fi
+
+          case "${http_code}" in
+            2??) echo "commerce_reconciliation=PASS" ;;
+            *)
+              echo "::error::Commerce reconciliation tick returned HTTP ${http_code}."
+              exit 1
+              ;;
+          esac
