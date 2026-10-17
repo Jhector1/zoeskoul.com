@@ -4,30 +4,10 @@ import type {
   PrismaClient,
 } from "@zoeskoul/db";
 
-export type NativeCommerceCatalogSurface =
-  | "preview"
-  | "published";
-
-export type NativeCommerceVariant = Readonly<{
-  id: string;
-  title: string;
-  sku: string | null;
-  priceMinor: number;
-  compareAtPriceMinor: number | null;
-  availableForSale: boolean;
-}>;
-
-export type NativeCommerceProduct = Readonly<{
-  id: string;
-  slug: string;
-  title: string;
-  description: string | null;
-  imageUrl: string | null;
-  imageAltText: string | null;
-  currency: string;
-  defaultMerchandiseId: string | null;
-  variants: readonly NativeCommerceVariant[];
-}>;
+import type {
+  CommerceCatalogProduct,
+  CommerceRuntimeSurface,
+} from "./commerceRuntimeContracts";
 
 export class NativeCommerceCatalogInputError extends Error {
   constructor(
@@ -167,7 +147,7 @@ function mapProduct(
           | null;
       }>;
   },
-): NativeCommerceProduct {
+): CommerceCatalogProduct {
   const variants =
     row.variants.map(
       (variant) => ({
@@ -215,7 +195,7 @@ function mapProduct(
 
 function storeStatusFilter(
   surface:
-    NativeCommerceCatalogSurface,
+    CommerceRuntimeSurface,
 ) {
   return surface ===
     "published"
@@ -289,13 +269,13 @@ export async function listNativeCommerceProducts(
       buildProjectId:
         string;
       surface:
-        NativeCommerceCatalogSurface;
+        CommerceRuntimeSurface;
       first?:
         string |
         null;
     }>,
 ): Promise<
-  readonly NativeCommerceProduct[]
+  readonly CommerceCatalogProduct[]
 > {
   const buildProjectId =
     normalizedProjectId(
@@ -354,7 +334,7 @@ export async function getNativeCommerceProduct(
       buildProjectId:
         string;
       surface:
-        NativeCommerceCatalogSurface;
+        CommerceRuntimeSurface;
       id?:
         string |
         null;
@@ -363,7 +343,7 @@ export async function getNativeCommerceProduct(
         null;
     }>,
 ): Promise<
-  NativeCommerceProduct |
+  CommerceCatalogProduct |
   null
 > {
   const buildProjectId =

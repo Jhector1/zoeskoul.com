@@ -12,7 +12,7 @@ import type {
 
 import type {
   TrustedCommerceOrderSnapshot,
-} from "./nativeCommerceCheckout";
+} from "./commerceRuntimeContracts";
 
 import type {
   CommerceProviderConnectionSnapshot,

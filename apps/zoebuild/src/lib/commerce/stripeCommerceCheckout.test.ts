@@ -16,7 +16,7 @@ import {
 } from "./stripeCommerceCheckout";
 import type {
   TrustedCommerceOrderSnapshot,
-} from "./nativeCommerceCheckout";
+} from "./commerceRuntimeContracts";
 
 function connection() {
   return {

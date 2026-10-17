@@ -19,13 +19,18 @@ import {
 } from "./nativeCommerceCatalog";
 import {
   executeNativeCommerceCartCommand,
-  type NativeCommerceCartCommand,
 } from "./nativeCommerceCart";
 import type {
+  CommerceCart,
+  CommerceCartRuntimeInput,
+  CommerceCatalogGetInput,
+  CommerceCatalogListInput,
+  CommerceCatalogProduct,
   CommerceCheckoutRequest,
   CommerceCheckoutResult,
+  CommerceRuntimeSurface,
   TrustedCommerceOrderSnapshot,
-} from "./nativeCommerceCheckout";
+} from "./commerceRuntimeContracts";
 import type {
   CommerceProviderConnectionSnapshot,
 } from "./commerceProviderResolver";
@@ -33,7 +38,6 @@ import {
   ZOESTORE_COMMERCE_DISPLAY_NAME,
   ZOESTORE_COMMERCE_PROVIDER,
   type CommerceProviderEnvironment,
-  type CommerceStorefrontSurface,
 } from "./nativeCommerceProvider";
 import {
   prepareStripeCommercePayments,
@@ -55,16 +59,22 @@ export type RuntimeCommerceCapability =
 
 type CatalogHandler = Readonly<{
   capability: "commerce.catalog";
-  listProducts:
-    typeof listNativeCommerceProducts;
-  getProduct:
-    typeof getNativeCommerceProduct;
+  listProducts(
+    client: PrismaClient,
+    input: CommerceCatalogListInput,
+  ): Promise<readonly CommerceCatalogProduct[]>;
+  getProduct(
+    client: PrismaClient,
+    input: CommerceCatalogGetInput,
+  ): Promise<CommerceCatalogProduct | null>;
 }>;
 
 type CartHandler = Readonly<{
   capability: "commerce.cart";
-  executeCommand:
-    typeof executeNativeCommerceCartCommand;
+  executeCommand(
+    client: PrismaClient,
+    input: CommerceCartRuntimeInput,
+  ): Promise<CommerceCart>;
 }>;
 
 type OrdersHandler = Readonly<{
@@ -78,7 +88,7 @@ type CheckoutHandler = Readonly<{
     input: Readonly<{
       buildProjectId: string;
       surface:
-        CommerceStorefrontSurface;
+        CommerceRuntimeSurface;
       request:
         CommerceCheckoutRequest;
     }>,
@@ -254,9 +264,3 @@ COMMERCE_RUNTIME_REGISTRY.register({
     },
   },
 });
-
-const _cartCommandContract:
-  NativeCommerceCartCommand | null =
-    null;
-
-void _cartCommandContract;

@@ -14,12 +14,11 @@ import {
 } from "@zoeskoul/provider-platform";
 
 import type {
-  NativeCommerceCartCommand,
-} from "./nativeCommerceCart";
-import type {
+  CommerceCartCommand,
   CommerceCheckoutRequest,
+  CommerceRuntimeSurface,
   TrustedCommerceOrderSnapshot,
-} from "./nativeCommerceCheckout";
+} from "./commerceRuntimeContracts";
 import {
   CommerceProviderResolutionError,
   resolveCommerceProvider,
@@ -28,7 +27,6 @@ import {
 import type {
   CommerceProviderCapability,
   CommerceProviderEnvironment,
-  CommerceStorefrontSurface,
 } from "./nativeCommerceProvider";
 import {
   COMMERCE_RUNTIME_REGISTRY,
@@ -64,7 +62,7 @@ async function resolveHandler<
   client: PrismaClient,
   input: Readonly<{
     buildProjectId: string;
-    surface: CommerceStorefrontSurface;
+    surface: CommerceRuntimeSurface;
   }>,
   capability: TCapability,
 ) {
@@ -230,7 +228,7 @@ export async function prepareCommercePaymentCheckout(
   input: Readonly<{
     buildProjectId: string;
     surface:
-      CommerceStorefrontSurface;
+      CommerceRuntimeSurface;
   }>,
 ) {
   const {
@@ -409,8 +407,8 @@ export async function executeCommerceCartCommand(
   client: PrismaClient,
   input: Readonly<{
     buildProjectId: string;
-    surface: CommerceStorefrontSurface;
-    command: NativeCommerceCartCommand;
+    surface: CommerceRuntimeSurface;
+    command: CommerceCartCommand;
   }>,
 ) {
   const { handler } =
@@ -440,7 +438,7 @@ export async function beginCommerceCheckout(
   client: PrismaClient,
   input: Readonly<{
     buildProjectId: string;
-    surface: CommerceStorefrontSurface;
+    surface: CommerceRuntimeSurface;
     request: CommerceCheckoutRequest;
   }>,
 ) {

@@ -9,27 +9,11 @@ import type {
   PrismaClient,
 } from "@zoeskoul/db";
 
-export type NativeCommerceCartSurface =
-  | "preview"
-  | "published";
-
-export type NativeCommerceCartItem = Readonly<{
-  merchandiseId: string;
-  quantity: number;
-  title: string;
-  variantTitle: string;
-  sku: string | null;
-  unitPriceMinor: number;
-  lineTotalMinor: number;
-}>;
-
-export type NativeCommerceCart = Readonly<{
-  id: string;
-  currency: string;
-  totalQuantity: number;
-  subtotalMinor: number;
-  items: readonly NativeCommerceCartItem[];
-}>;
+import type {
+  CommerceCart,
+  CommerceCartCommand,
+  CommerceRuntimeSurface,
+} from "./commerceRuntimeContracts";
 
 export class NativeCommerceCartError extends Error {
   readonly status: number;
@@ -264,7 +248,7 @@ function newToken() {
 
 function allowedStoreStatus(
   surface:
-    NativeCommerceCartSurface,
+    CommerceRuntimeSurface,
   status:
     string,
 ) {
@@ -281,7 +265,7 @@ function allowedStoreStatus(
 function publicCart(
   row: CartRow,
   cartToken: string,
-): NativeCommerceCart {
+): CommerceCart {
   const items =
     row.items.map(
       (item) => ({
@@ -342,7 +326,7 @@ async function resolveStore(
       buildProjectId:
         string;
       surface:
-        NativeCommerceCartSurface;
+        CommerceRuntimeSurface;
     }>,
 ) {
   const store =
@@ -497,12 +481,12 @@ export async function getNativeCommerceCart(
       buildProjectId:
         string;
       surface:
-        NativeCommerceCartSurface;
+        CommerceRuntimeSurface;
       cartToken:
         unknown;
     }>,
 ): Promise<
-  NativeCommerceCart
+  CommerceCart
 > {
   const store =
     await resolveStore(
@@ -539,7 +523,7 @@ export async function addNativeCommerceCartItem(
       buildProjectId:
         string;
       surface:
-        NativeCommerceCartSurface;
+        CommerceRuntimeSurface;
       cartToken?:
         unknown;
       merchandiseId:
@@ -548,7 +532,7 @@ export async function addNativeCommerceCartItem(
         unknown;
     }>,
 ): Promise<
-  NativeCommerceCart
+  CommerceCart
 > {
   const store =
     await resolveStore(
@@ -772,7 +756,7 @@ export async function updateNativeCommerceCartItem(
       buildProjectId:
         string;
       surface:
-        NativeCommerceCartSurface;
+        CommerceRuntimeSurface;
       cartToken:
         unknown;
       merchandiseId:
@@ -781,7 +765,7 @@ export async function updateNativeCommerceCartItem(
         unknown;
     }>,
 ): Promise<
-  NativeCommerceCart
+  CommerceCart
 > {
   const store =
     await resolveStore(
@@ -932,14 +916,14 @@ export async function removeNativeCommerceCartItem(
       buildProjectId:
         string;
       surface:
-        NativeCommerceCartSurface;
+        CommerceRuntimeSurface;
       cartToken:
         unknown;
       merchandiseId:
         unknown;
     }>,
 ): Promise<
-  NativeCommerceCart
+  CommerceCart
 > {
   const store =
     await resolveStore(
@@ -1025,45 +1009,9 @@ export async function removeNativeCommerceCartItem(
   );
 }
 
-export type NativeCommerceCartCommand =
-  | Readonly<{
-      operation:
-        "get";
-      cartId:
-        unknown;
-    }>
-  | Readonly<{
-      operation:
-        "add";
-      cartId?:
-        unknown;
-      merchandiseId:
-        unknown;
-      quantity:
-        unknown;
-    }>
-  | Readonly<{
-      operation:
-        "update";
-      cartId:
-        unknown;
-      merchandiseId:
-        unknown;
-      quantity:
-        unknown;
-    }>
-  | Readonly<{
-      operation:
-        "remove";
-      cartId:
-        unknown;
-      merchandiseId:
-        unknown;
-    }>;
-
 export function parseNativeCommerceCartCommand(
   value: unknown,
-): NativeCommerceCartCommand {
+): CommerceCartCommand {
   if (
     !value ||
     typeof value !==
@@ -1147,9 +1095,9 @@ export async function executeNativeCommerceCartCommand(
       buildProjectId:
         string;
       surface:
-        NativeCommerceCartSurface;
+        CommerceRuntimeSurface;
       command:
-        NativeCommerceCartCommand;
+        CommerceCartCommand;
     }>,
 ) {
   switch (

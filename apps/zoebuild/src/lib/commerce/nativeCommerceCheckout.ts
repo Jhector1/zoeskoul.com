@@ -4,6 +4,14 @@ import type {
   PrismaClient,
 } from "@zoeskoul/db";
 
+import type {
+  CommerceCheckoutRequest,
+  CommerceCheckoutResult,
+  CommerceRuntimeSurface,
+  TrustedCommerceOrderLine,
+  TrustedCommerceOrderSnapshot,
+} from "./commerceRuntimeContracts";
+
 import {
   adoptCommercePaymentProviderRef,
   CommercePaymentProviderRefError,
@@ -26,50 +34,7 @@ import {
 import {
   ZOESTORE_COMMERCE_PROVIDER,
   type CommerceProviderEnvironment,
-  type CommerceStorefrontSurface,
 } from "./nativeCommerceProvider";
-
-export type CommerceCheckoutRequest =
-  Readonly<{
-    cartId: string;
-  }>;
-
-export type CommerceCheckoutResult =
-  Readonly<{
-    orderId: string;
-    provider: string;
-    url: string;
-  }>;
-
-export type TrustedCommerceOrderLine =
-  Readonly<{
-    merchandiseId: string;
-    title: string;
-    variantTitle: string;
-    sku: string | null;
-    quantity: number;
-    unitPriceMinor: number;
-    lineTotalMinor: number;
-  }>;
-
-export type TrustedCommerceOrderSnapshot =
-  Readonly<{
-    id: string;
-    cartId: string;
-    currency: string;
-    subtotalMinor: number;
-    discountMinor: number;
-    taxMinor: number;
-    shippingMinor: number;
-    totalMinor: number;
-    paymentProvider: string;
-    paymentEnvironment:
-      CommerceProviderEnvironment;
-    paymentProviderRef: string | null;
-    checkoutExpiresAt: Date;
-    items:
-      readonly TrustedCommerceOrderLine[];
-  }>;
 
 export class NativeCommerceCheckoutError
   extends Error {
@@ -131,7 +96,7 @@ function projectId(
 
 function allowedStoreStatus(
   surface:
-    CommerceStorefrontSurface,
+    CommerceRuntimeSurface,
   status:
     string,
 ) {
@@ -567,7 +532,7 @@ async function createOrReuseOrderSnapshot(
     Readonly<{
       buildProjectId: string;
       surface:
-        CommerceStorefrontSurface;
+        CommerceRuntimeSurface;
       cartToken: string;
       paymentProvider: string;
       paymentEnvironment:
@@ -1012,7 +977,7 @@ async function preparePaymentProvider(
     Readonly<{
       buildProjectId: string;
       surface:
-        CommerceStorefrontSurface;
+        CommerceRuntimeSurface;
     }>,
 ) {
   try {
@@ -1063,7 +1028,7 @@ export async function beginNativeCommerceCheckout(
     Readonly<{
       buildProjectId: string;
       surface:
-        CommerceStorefrontSurface;
+        CommerceRuntimeSurface;
       request:
         CommerceCheckoutRequest;
     }>,
