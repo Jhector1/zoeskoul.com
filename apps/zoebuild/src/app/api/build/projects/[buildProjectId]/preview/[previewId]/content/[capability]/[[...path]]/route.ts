@@ -26,6 +26,7 @@ import {
   getCommerceProduct,
   listCommerceProducts,
 } from "@/lib/commerce/commerceRuntime";
+import { trustedCommerceBuyerIpFromRequest } from "@/lib/commerce/trustedCommerceBuyerIp";
 import { prisma } from "@zoeskoul/platform-server/prisma";
 import {
   parseReactPreviewId,
@@ -512,6 +513,7 @@ export async function POST(
             "preview",
           command,
         },
+        trustedCommerceBuyerIpFromRequest(req) ?? undefined,
       );
 
     return new Response(

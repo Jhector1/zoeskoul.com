@@ -51,6 +51,7 @@ import {
   getCommerceProduct,
   listCommerceProducts,
 } from "@/lib/commerce/commerceRuntime";
+import { trustedCommerceBuyerIpFromRequest, type VerifiedCommerceBuyerIp } from "@/lib/commerce/trustedCommerceBuyerIp";
 
 
 export const runtime =
@@ -243,6 +244,7 @@ async function executePreviewCommerce(
       string,
       unknown
     >,
+  verifiedBuyerIp: VerifiedCommerceBuyerIp | null,
 ) {
   if (
     method ===
@@ -326,6 +328,7 @@ async function executePreviewCommerce(
         "preview",
       command,
     },
+    verifiedBuyerIp ?? undefined,
   );
 }
 
@@ -608,6 +611,7 @@ export async function POST(
         buildProjectId,
         method,
         input,
+        trustedCommerceBuyerIpFromRequest(request),
       );
 
     return json(

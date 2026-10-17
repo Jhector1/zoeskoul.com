@@ -25,6 +25,7 @@ import {
   getCommerceProduct,
   listCommerceProducts,
 } from "@/lib/commerce/commerceRuntime";
+import { trustedCommerceBuyerIpFromRequest } from "@/lib/commerce/trustedCommerceBuyerIp";
 
 import {
   buildPublishedStaticFileMap,
@@ -432,6 +433,7 @@ export async function POST(
             "published",
           command,
         },
+        trustedCommerceBuyerIpFromRequest(request) ?? undefined,
       );
 
     return new Response(

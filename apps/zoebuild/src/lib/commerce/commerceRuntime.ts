@@ -1,4 +1,5 @@
 import "server-only";
+import type { VerifiedCommerceBuyerIp } from "./trustedCommerceBuyerIp";
 
 import type {
   PrismaClient,
@@ -97,6 +98,7 @@ function createCommerceProviderExecutionContext(
         CommerceProviderEnvironment;
       connection:
         CommerceProviderConnectionSnapshot;
+      verifiedBuyerIp?: VerifiedCommerceBuyerIp;
     }>,
   requiresSecretStore:
     boolean,
@@ -110,6 +112,7 @@ function createCommerceProviderExecutionContext(
       input.environment,
     connection:
       input.connection,
+    verifiedBuyerIp: input.verifiedBuyerIp,
     secretStore:
       requiresSecretStore
         ? createBuildSecretStore({
@@ -532,6 +535,7 @@ export async function executeCommerceCartCommand(
     surface: CommerceRuntimeSurface;
     command: CommerceCartCommand;
   }>,
+  verifiedBuyerIp?: VerifiedCommerceBuyerIp | null,
 ) {
   const {
     resolved,
@@ -565,6 +569,7 @@ export async function executeCommerceCartCommand(
           resolved.environment,
         connection:
           resolved.connection,
+        verifiedBuyerIp: verifiedBuyerIp ?? undefined,
       },
       handler.requiresSecretStore,
     );

@@ -1,4 +1,5 @@
 import "server-only";
+import type { VerifiedCommerceBuyerIp } from "./trustedCommerceBuyerIp";
 
 import type {
   PrismaClient,
@@ -189,6 +190,7 @@ export type CommerceProviderExecutionContext =
       CommerceProviderConnectionSnapshot;
     secretStore?:
       BuildSecretStore;
+    verifiedBuyerIp?: VerifiedCommerceBuyerIp;
   }>;
 
 type PaymentHandler = Readonly<{
