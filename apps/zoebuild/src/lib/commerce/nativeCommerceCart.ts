@@ -1,9 +1,10 @@
 import "server-only";
 
 import {
-  createHash,
-  randomBytes,
-} from "node:crypto";
+  createCommerceCartPublicToken,
+  hashCommerceCartPublicToken,
+  isCommerceCartPublicToken,
+} from "./commerceCartToken";
 
 import type {
   PrismaClient,
@@ -33,12 +34,6 @@ export class NativeCommerceCartError extends Error {
       status;
   }
 }
-
-const TOKEN_BYTES =
-  32;
-
-const TOKEN_PATTERN =
-  /^[A-Za-z0-9_-]{43}$/;
 
 const MAX_LINE_QUANTITY =
   99;
@@ -176,9 +171,7 @@ function token(
   value: unknown,
 ) {
   if (
-    typeof value !==
-      "string" ||
-    !TOKEN_PATTERN.test(
+    !isCommerceCartPublicToken(
       value,
     )
   ) {
@@ -218,16 +211,9 @@ function optionalToken(
 function hashToken(
   value: string,
 ) {
-  return createHash(
-    "sha256",
-  )
-    .update(
-      value,
-      "utf8",
-    )
-    .digest(
-      "hex",
-    );
+  return hashCommerceCartPublicToken(
+    value,
+  );
 }
 
 export function hashNativeCommerceCartToken(
@@ -239,11 +225,7 @@ export function hashNativeCommerceCartToken(
 }
 
 function newToken() {
-  return randomBytes(
-    TOKEN_BYTES,
-  ).toString(
-    "base64url",
-  );
+  return createCommerceCartPublicToken();
 }
 
 function allowedStoreStatus(

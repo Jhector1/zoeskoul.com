@@ -31,113 +31,88 @@ describe(
     it(
       "keeps raw CommerceCart primary keys server-only and hashes a 256-bit browser token",
       () => {
-        const cart =
-          source(
-            "./nativeCommerceCart.ts",
+        const nativeSource =
+          readFileSync(
+            new URL(
+              "./nativeCommerceCart.ts",
+              import.meta.url,
+            ),
+            "utf8",
           );
 
-        const tokenBytesDefinition =
-          cart.indexOf(
-            "const TOKEN_BYTES",
-          );
-
-        const tokenBytesValue =
-          cart.indexOf(
-            "32;",
-            tokenBytesDefinition,
-          );
-
-        const randomBytesCall =
-          cart.indexOf(
-            "randomBytes(",
-          );
-
-        const tokenBytesUse =
-          cart.indexOf(
-            "TOKEN_BYTES",
-            randomBytesCall,
-          );
-
-        const sha256Call =
-          cart.indexOf(
-            'createHash(',
-          );
-
-        const sha256Value =
-          cart.indexOf(
-            '"sha256"',
-            sha256Call,
+        const tokenSource =
+          readFileSync(
+            new URL(
+              "./commerceCartToken.ts",
+              import.meta.url,
+            ),
+            "utf8",
           );
 
         expect(
-          tokenBytesDefinition,
-        ).toBeGreaterThan(
-          -1,
-        );
-
-        expect(
-          tokenBytesValue,
-        ).toBeGreaterThan(
-          tokenBytesDefinition,
-        );
-
-        expect(
-          randomBytesCall,
-        ).toBeGreaterThan(
-          -1,
-        );
-
-        expect(
-          tokenBytesUse,
-        ).toBeGreaterThan(
-          randomBytesCall,
-        );
-
-        expect(
-          sha256Call,
-        ).toBeGreaterThan(
-          -1,
-        );
-
-        expect(
-          sha256Value,
-        ).toBeGreaterThan(
-          sha256Call,
-        );
-
-        expect(
-          cart,
+          tokenSource,
         ).toContain(
-          "publicTokenHash:",
+          "export const COMMERCE_CART_TOKEN_BYTES =",
         );
 
-        const publicCartStart =
-          cart.indexOf(
-            "function publicCart(",
-          );
-
-        const publicCartEnd =
-          cart.indexOf(
-            "async function resolveStore(",
-            publicCartStart,
-          );
-
-        const publicCartSource =
-          cart.slice(
-            publicCartStart,
-            publicCartEnd,
-          );
-
         expect(
-          publicCartSource,
+          tokenSource,
         ).toContain(
-          "cartToken",
+          "  32;",
         );
 
         expect(
-          publicCartSource,
+          tokenSource,
+        ).toContain(
+          "randomBytes(",
+        );
+
+        expect(
+          tokenSource,
+        ).toContain(
+          'createHash(\n    "sha256",',
+        );
+
+        expect(
+          nativeSource,
+        ).toContain(
+          "createCommerceCartPublicToken",
+        );
+
+        expect(
+          nativeSource,
+        ).toContain(
+          "hashCommerceCartPublicToken",
+        );
+
+        expect(
+          nativeSource,
+        ).toContain(
+          "isCommerceCartPublicToken",
+        );
+
+        expect(
+          nativeSource,
+        ).toContain(
+          "// browser token, never the CommerceCart primary key.",
+        );
+
+        expect(
+          nativeSource,
+        ).toContain(
+          "id:\n      cartToken",
+        );
+
+        expect(
+          nativeSource,
         ).not.toContain(
-          "row.id",
+          "randomBytes(",
+        );
+
+        expect(
+          nativeSource,
+        ).not.toContain(
+          "createHash(",
         );
       },
     );

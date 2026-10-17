@@ -239,6 +239,9 @@ model CommerceCart {
   publicTokenHash String             @unique @db.VarChar(64)
   storeId         String
   customerId      String?
+  provider          String?
+  providerEnvironment CommerceProviderEnvironment?
+  providerCartSecretRef String?
   status          CommerceCartStatus @default(active)
   currency        String             @db.VarChar(3)
   expiresAt       DateTime?
@@ -252,6 +255,7 @@ model CommerceCart {
   @@index([storeId, status, updatedAt])
   @@index([customerId, updatedAt])
   @@index([expiresAt])
+  @@index([storeId, provider, providerEnvironment, updatedAt])
 }
 
 model CommerceCartItem {
