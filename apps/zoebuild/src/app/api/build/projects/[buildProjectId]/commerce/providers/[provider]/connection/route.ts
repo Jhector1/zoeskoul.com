@@ -34,9 +34,10 @@ import {
 } from "@/lib/build/readBuildProjects";
 
 import {
-  connectStripeCommerceEnvironment,
-  StripeCommerceConnectionError,
-} from "@/lib/commerce/stripeCommerceConnection";
+  CommerceProviderConnectionAdapterError,
+  getCommerceProviderConnectionAdapter,
+  supportsCommerceProviderConnectionEnvironment,
+} from "@/lib/commerce/commerceProviderConnectionRegistry";
 
 import type {
   CommerceProviderEnvironment,
@@ -161,16 +162,25 @@ async function authorizeProject(
   };
 }
 
-export async function POST(
-  request:
-    Request,
-  ctx: {
+type RouteContext =
+  Readonly<{
     params:
       Promise<{
         buildProjectId:
           string;
+        provider:
+          string;
       }>;
-  },
+  }>;
+
+async function mutateConnection(
+  action:
+    "connect" |
+    "disconnect",
+  request:
+    Request,
+  ctx:
+    RouteContext,
 ) {
   const requestId =
     crypto.randomUUID();
@@ -196,8 +206,13 @@ export async function POST(
 
   const {
     buildProjectId,
+    provider: rawProvider,
   } =
     await ctx.params;
+
+  const provider =
+    rawProvider
+      .trim();
 
   try {
     const authorization =
@@ -249,12 +264,32 @@ export async function POST(
       );
     }
 
+    const adapter =
+      getCommerceProviderConnectionAdapter(
+        provider,
+      );
+
+    if (!adapter) {
+      return json(
+        requestId,
+        {
+          ok:
+            false,
+          code:
+            "COMMERCE_PROVIDER_CONNECTION_ADAPTER_UNAVAILABLE",
+          message:
+            "This commerce provider does not have an executable connection adapter.",
+        },
+        409,
+      );
+    }
+
     const limited =
       await rateLimit(
-        `zoebuild-stripe-connection:${userId}:${buildProjectId}`,
+        `zoebuild-commerce-provider-connection:${userId}:${buildProjectId}:${provider}`,
         {
           bucket:
-            "zoebuild-stripe-connection",
+            "zoebuild-commerce-provider-connection",
           limit:
             20,
           window:
@@ -290,7 +325,7 @@ export async function POST(
             code:
               "BUILD_RATE_LIMITED",
             message:
-              "Too many Stripe connection requests.",
+              "Too many commerce provider connection requests.",
           },
           429,
         );
@@ -305,7 +340,7 @@ export async function POST(
                 limited.resetMs -
                 Date.now()
               ) /
-              1000,
+                1000,
             ),
           ),
         ),
@@ -319,22 +354,34 @@ export async function POST(
         await readJsonSafe(
           request,
         ),
-      );
+      ) ??
+      {};
 
     const environment =
       environmentValue(
-        body?.environment,
+        body.environment,
       );
 
-    const apiKey =
-      typeof body?.apiKey ===
-        "string"
-        ? body.apiKey
-        : "";
+    if (!environment) {
+      return json(
+        requestId,
+        {
+          ok:
+            false,
+          code:
+            "COMMERCE_PROVIDER_CONNECTION_ENVIRONMENT_INVALID",
+          message:
+            "A valid commerce provider environment is required.",
+        },
+        400,
+      );
+    }
 
     if (
-      !environment ||
-      !apiKey
+      !supportsCommerceProviderConnectionEnvironment(
+        provider,
+        environment,
+      )
     ) {
       return json(
         requestId,
@@ -342,11 +389,11 @@ export async function POST(
           ok:
             false,
           code:
-            "STRIPE_CONNECTION_INPUT_INVALID",
+            "COMMERCE_PROVIDER_CONNECTION_ENVIRONMENT_UNSUPPORTED",
           message:
-            "Stripe environment and API key are required.",
+            "This commerce provider connection adapter does not support the selected environment.",
         },
-        400,
+        409,
       );
     }
 
@@ -383,26 +430,36 @@ export async function POST(
         prisma,
       });
 
-    const connected =
-      await connectStripeCommerceEnvironment(
-        prisma,
-        {
-          buildProjectId,
-          storeId:
-            store.id,
-          environment,
-          apiKey,
-          secretStore,
-        },
-      );
+    const baseInput = {
+      buildProjectId,
+      storeId:
+        store.id,
+      environment,
+      secretStore,
+    } as const;
+
+    const connection =
+      action ===
+        "connect"
+        ? await adapter.connect(
+            prisma,
+            {
+              ...baseInput,
+              payload:
+                body,
+            },
+          )
+        : await adapter.disconnect(
+            prisma,
+            baseInput,
+          );
 
     return json(
       requestId,
       {
         ok:
           true,
-        connection:
-          connected,
+        connection,
       },
     );
   } catch (
@@ -410,7 +467,7 @@ export async function POST(
   ) {
     if (
       error instanceof
-        StripeCommerceConnectionError
+        CommerceProviderConnectionAdapterError
     ) {
       return json(
         requestId,
@@ -466,10 +523,12 @@ export async function POST(
     }
 
     console.error(
-      "[ZoeBuild Stripe connection] failed",
+      "[ZoeBuild commerce provider connection] failed",
       {
         requestId,
         buildProjectId,
+        provider,
+        action,
         error,
       },
     );
@@ -480,11 +539,37 @@ export async function POST(
         ok:
           false,
         code:
-          "STRIPE_CONNECTION_FAILED",
+          "COMMERCE_PROVIDER_CONNECTION_FAILED",
         message:
-          "Stripe connection could not be completed.",
+          "Commerce provider connection could not be completed.",
       },
       500,
     );
   }
+}
+
+export async function POST(
+  request:
+    Request,
+  ctx:
+    RouteContext,
+) {
+  return mutateConnection(
+    "connect",
+    request,
+    ctx,
+  );
+}
+
+export async function DELETE(
+  request:
+    Request,
+  ctx:
+    RouteContext,
+) {
+  return mutateConnection(
+    "disconnect",
+    request,
+    ctx,
+  );
 }
