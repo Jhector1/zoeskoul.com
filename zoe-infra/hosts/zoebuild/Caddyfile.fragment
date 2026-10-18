@@ -1,0 +1,22 @@
+# NOT INSTALLED. Import into the existing runner-host Caddy config only after
+# verifying the true listener, Cloudflare trust chain, public network and secrets.
+# Caddy's {client_ip} must be proven to be the REAL visitor (not the CF edge).
+# Never route directly to zoebuild:3004; only to the authenticated signer.
+{$ZOEBUILD_DOMAIN} {
+    encode zstd gzip
+    @signer_health path /_zoebuild_internal/health
+    respond @signer_health 404
+    reverse_proxy zoebuild-ingress-signer:8090 {
+        # Incoming spoofed proof and edge-auth headers never reach the signer.
+        header_up -X-ZoeBuild-Buyer-IP
+        header_up -X-ZoeBuild-Buyer-IP-Timestamp
+        header_up -X-ZoeBuild-Buyer-IP-Signature
+        header_up -X-ZoeBuild-Edge-Auth
+        header_up -X-ZoeBuild-Edge-IP
+        # This credential is different from the HMAC key, which Caddy NEVER sees.
+        header_up X-ZoeBuild-Edge-Auth {$ZOEBUILD_EDGE_SHARED_SECRET}
+        header_up X-ZoeBuild-Edge-IP {client_ip}
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-Host {host}
+    }
+}

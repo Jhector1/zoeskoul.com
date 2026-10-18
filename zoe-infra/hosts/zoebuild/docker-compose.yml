@@ -1,0 +1,71 @@
+# Shared physical runner host, separate application and ingress containers.
+# Not enabled by the existing runner's Compose stack until separately deployed.
+# IMAGE_TAG must be a pinned Git SHA, never a mutable latest/prod alias.
+services:
+  zoebuild:
+    image: ghcr.io/${GHCR_OWNER:?required}/zoeskoul-zoebuild:${IMAGE_TAG:?required}
+    restart: unless-stopped
+    env_file:
+      - .env.app
+    environment:
+      NODE_ENV: production
+      ZOEBUILD_BUYER_IP_SIGNING_KEY: ${ZOEBUILD_BUYER_IP_SIGNING_KEY:?required}
+      ZOEBUILD_SHOPIFY_OAUTH_ROUTES_ENABLED: "false"
+      ZOEBUILD_SHOPIFY_ACCEPTANCE_RUNTIME_GATE: ""
+      ZOEBUILD_PUBLISH_ENABLED: "false"
+    expose:
+      - "3004"
+    networks:
+      - app_private
+      - app_outbound
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 384
+    mem_limit: ${ZOEBUILD_APP_MEM_LIMIT:-1536m}
+    cpus: ${ZOEBUILD_APP_CPUS:-1.0}
+    logging: &log_limits
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  zoebuild-ingress-signer:
+    image: ghcr.io/${GHCR_OWNER:?required}/zoeskoul-zoebuild-ingress-signer:${IMAGE_TAG:?required}
+    restart: unless-stopped
+    environment:
+      ZOEBUILD_EDGE_SHARED_SECRET: ${ZOEBUILD_EDGE_SHARED_SECRET:?required}
+      ZOEBUILD_BUYER_IP_SIGNING_KEY: ${ZOEBUILD_BUYER_IP_SIGNING_KEY:?required}
+    expose:
+      - "8090"
+    networks:
+      - app_private
+      - public
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 64
+    mem_limit: 128m
+    cpus: 0.20
+    logging: *log_limits
+    depends_on:
+      - zoebuild
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:8090/_zoebuild_internal/health',r=>process.exit(r.statusCode===204?0:1)).on('error',()=>process.exit(1))"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+
+networks:
+  app_private:
+    internal: true
+  app_outbound:
+    driver: bridge
+  public:
+    external: true
+    name: public

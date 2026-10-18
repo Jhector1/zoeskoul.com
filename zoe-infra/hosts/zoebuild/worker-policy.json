@@ -1,0 +1,19 @@
+{
+  "policyVersion": 1,
+  "mode": "disabled-until-isolation-audited",
+  "targetHost": "existing-zoeskoul-runner-server",
+  "independentFromLearningRunner": true,
+  "physicalServerCountAdded": 0,
+  "maxConcurrentBuilds": 1,
+  "maxConcurrentPreviews": 1,
+  "buildCpuLimit": 0.5,
+  "buildMemoryLimitMiB": 512,
+  "previewIdleSeconds": 600,
+  "privileged": false,
+  "hostDockerSocket": false,
+  "paymentCredentials": false,
+  "databaseCredentials": false,
+  "hostFilesystemMounts": false,
+  "defaultEgress": "deny",
+  "executionEnabled": false
+}
