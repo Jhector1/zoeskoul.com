@@ -1,0 +1,3 @@
+# ZoeBuild Web-host runtime credentials (NEVER COMMIT)
+/.env.zoebuild
+/.env.zoebuild.app

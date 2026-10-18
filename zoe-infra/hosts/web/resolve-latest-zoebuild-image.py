@@ -68,7 +68,7 @@ def resolve(owner, repo, explicit):
            "build-zoebuild-image.yml/runs?branch=main&status=success&per_page=100")
     headers = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "zoebuild-vm-stage-deploy/1",
+        "User-Agent": "zoebuild-web-host-deploy/1",
         "X-GitHub-Api-Version": "2022-11-28",
     }
     token = os.environ.get("GH_TOKEN", "").strip()
@@ -87,7 +87,7 @@ def resolve(owner, repo, explicit):
 
 def main(args):
     if len(args) != 2:
-        raise ValueError("usage: resolve-latest-image.py path/to/.env [40-char-sha-or-empty]")
+        raise ValueError("usage: resolve-latest-zoebuild-image.py path/to/.env.zoebuild [40-char-sha-or-empty]")
     path, explicit = args
     cfg = read_env(Path(path))
     owner = cfg.get("GHCR_OWNER", "")

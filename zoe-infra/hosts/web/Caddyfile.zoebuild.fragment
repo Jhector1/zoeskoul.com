@@ -1,4 +1,6 @@
-# NOT INSTALLED. Import into the existing runner-host Caddy config only after
+# WEB HOST EDGE CADDY ONLY: NEVER import into runner-host Caddy.
+# Requires trusted client-IP chain and edge-only access, verified before use.
+# NOT INSTALLED. Import into the VERIFIED WEB-HOST Caddy config only after
 # verifying the true listener, Cloudflare trust chain, public network and secrets.
 # Caddy's {client_ip} must be proven to be the REAL visitor (not the CF edge).
 # Never route directly to zoebuild:3004; only to the authenticated signer.
