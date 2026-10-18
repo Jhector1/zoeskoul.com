@@ -3,6 +3,10 @@
 @source "../../../../packages/learner-ui/src";
 @source "../../../../packages/learner-workspace/src";
 
+/* ZoeBuild E4: shared IDE's dark: utilities follow the actual app theme
+   instead of the operating system's prefers-color-scheme setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --zb-bg: #f7f8fb;
   --zb-surface: rgba(255, 255, 255, 0.92);
@@ -631,6 +635,10 @@ a {
       27vw,
       390px
     );
+
+  /* One host-side backdrop for assistant, toolbar and code workspace.
+     The sandboxed storefront iframe keeps its own independent theme. */
+  --background: var(--zb-bg);
 
   display: grid;
   grid-template-columns:
@@ -2502,4 +2510,37 @@ a {
   .zb-stripe-actions button {
     width: 100%;
   }
+}
+
+/* ZOEBUILD_SITE_SETTINGS_E2: sidebar and content styling are component-scoped
+ * in SiteSettingsWorkspacePanel.module.css; only shared Stripe form rules remain here.
+ */
+/* Webhook paths must not force test/live form columns beyond their grid bounds. */
+.zb-stripe-panel, .zb-stripe-environments, .zb-stripe-environment, .zb-stripe-webhook-url { min-width: 0; max-width: 100%; }
+.zb-stripe-webhook-url { display: grid; justify-items: start; gap: 0.6rem; }
+.zb-stripe-webhook-url > span { font-size: 0.76rem; font-weight: 700; }
+.zb-stripe-webhook-url code {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.65rem;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 0.5rem;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+  user-select: all;
+}
+.zb-stripe-webhook-url small { overflow-wrap: anywhere; line-height: 1.5; }
+.zb-stripe-environment input { box-sizing: border-box; max-width: 100%; }
+@media (max-width: 820px) {
+  .zb-site-settings { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .zb-site-settings-nav { display: flex; gap: 0.3rem; padding: 0.5rem; overflow-x: auto; overflow-y: hidden; border-right: 0; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); }
+  .zb-site-settings-nav-title { display: none; }
+  .zb-site-settings-nav-item { width: auto; flex: 0 0 auto; margin: 0; white-space: nowrap; }
+  .zb-site-settings-nav-item small { display: none; }
 }

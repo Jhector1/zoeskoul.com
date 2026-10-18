@@ -12,8 +12,8 @@ import {
 
 const repo =
   resolve(
-    process.cwd(),
-    "../..",
+    __dirname,
+    "../../../../..",
   );
 
 function source(

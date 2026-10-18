@@ -115,6 +115,12 @@ export type FullIDEProps = {
     onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
     remoteWebPreview?: RemoteWebPreviewDescriptor;
     remoteWebPreviewSurface?: import("react").ReactNode;
+    /** Host-owned static web preview commerce bridge; never exposed to guest/student IDEs by default. */
+    webPreviewCommerceRequest?: (
+        request: import("@zoeskoul/learner-workspace/runner/components/WebPreview").WebPreviewCommerceRequest,
+    ) => Promise<unknown>;
+    /** Stable source identity, shared by builder Preview and Code tabs. */
+    webPreviewSessionKey?: string;
     initialSqlDialect?: SqlDialect;
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;

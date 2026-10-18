@@ -12,7 +12,7 @@ import {
 
 function source(relative: string) {
   return readFileSync(
-    resolve(process.cwd(), relative),
+    resolve(__dirname, "../../..", relative),
     "utf8",
   );
 }
@@ -25,19 +25,19 @@ describe(
     );
 
     it(
-      "keeps the project Preview surface mounted while Code or Commerce is active",
+      "keeps the project Preview surface mounted while Code or Site Settings is active",
       () => {
         expect(shell).toContain(
           'className="zb-project-preview-stage"',
         );
         expect(shell).toContain(
-          'hidden={commerceOpen || mode !== "preview"}',
+          'hidden={settingsOpen || mode !== "preview"}',
         );
         expect(shell).toContain(
-          'aria-hidden={commerceOpen || mode !== "preview"}',
+          'aria-hidden={settingsOpen || mode !== "preview"}',
         );
         expect(shell).not.toContain(
-          '{!commerceOpen &&\n        mode === "preview" ? (',
+          '{!settingsOpen &&\n        mode === "preview" ? (',
         );
         expect(shell).toContain(
           "enabled: reactPreviewEnabled,",
@@ -52,7 +52,7 @@ describe(
       "keeps the existing Code workspace mounted too",
       () => {
         expect(shell).toContain(
-          'hidden={commerceOpen || mode !== "code"}',
+          'hidden={settingsOpen || mode !== "code"}',
         );
       },
     );

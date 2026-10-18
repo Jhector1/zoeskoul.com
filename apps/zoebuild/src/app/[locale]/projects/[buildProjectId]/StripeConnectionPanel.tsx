@@ -90,6 +90,28 @@ export default function StripeConnectionPanel(
       null
     >(null);
 
+  const [copiedWebhook, setCopiedWebhook] = useState<"test" | "live" | null>(null);
+
+  function webhookPath(environment: "test" | "live") {
+    return `/api/build/projects/${encodeURIComponent(props.buildProjectId)}/commerce/providers/stripe/webhook/${environment}`;
+  }
+
+  async function copyWebhookPath(environment: "test" | "live") {
+    if (window.location.protocol !== "https:") {
+      setMessage("Connect a public HTTPS domain before registering this webhook in Stripe.");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(
+        new URL(webhookPath(environment), window.location.origin).toString(),
+      );
+      setCopiedWebhook(environment);
+    } catch {
+      setCopiedWebhook(null);
+      setMessage("Could not copy the webhook URL. Copy the displayed path manually.");
+    }
+  }
+
   const testStatus =
     useMemo(
       () =>
@@ -680,12 +702,14 @@ export default function StripeConnectionPanel(
             </button>
           </div>
 
-          <small>
-            Webhook path:{" "}
-            <code>
-              /api/build/projects/{props.buildProjectId}/commerce/providers/stripe/webhook/test
-            </code>
-          </small>
+          <div className="zb-stripe-webhook-url">
+            <span>Webhook endpoint path</span>
+            <code title={webhookPath("test")}>{webhookPath("test")}</code>
+            <button type="button" onClick={() => void copyWebhookPath("test")}>
+              {copiedWebhook === "test" ? "Copied URL" : "Copy URL"}
+            </button>
+            <small>Use the public HTTPS address for this endpoint in Stripe. Localhost is only for development.</small>
+          </div>
         </section>
 
         <section className="zb-stripe-environment">
@@ -740,12 +764,14 @@ export default function StripeConnectionPanel(
             </button>
           </div>
 
-          <small>
-            Webhook path:{" "}
-            <code>
-              /api/build/projects/{props.buildProjectId}/commerce/providers/stripe/webhook/live
-            </code>
-          </small>
+          <div className="zb-stripe-webhook-url">
+            <span>Webhook endpoint path</span>
+            <code title={webhookPath("live")}>{webhookPath("live")}</code>
+            <button type="button" onClick={() => void copyWebhookPath("live")}>
+              {copiedWebhook === "live" ? "Copied URL" : "Copy URL"}
+            </button>
+            <small>Use the public HTTPS address for this endpoint in Stripe. Localhost is only for development.</small>
+          </div>
         </section>
       </div>
 

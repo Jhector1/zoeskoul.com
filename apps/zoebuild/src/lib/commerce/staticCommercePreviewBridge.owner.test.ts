@@ -12,11 +12,9 @@ import {
   it,
 } from "vitest";
 
-const repo =
-  resolve(
-    process.cwd(),
-    "../..",
-  );
+// Resolve from this test file, not Vitest's working directory.
+// Vitest config already sets the working root to the monorepo root.
+const repo = resolve(__dirname, "../../../../..");
 
 function source(
   relative:

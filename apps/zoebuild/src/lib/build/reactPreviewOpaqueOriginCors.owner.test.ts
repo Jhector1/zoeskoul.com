@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
-const repo = process.cwd();
+const repo = resolve(__dirname, "../../..");
 
 function read(relative: string) {
   return readFileSync(resolve(repo, relative), "utf8");

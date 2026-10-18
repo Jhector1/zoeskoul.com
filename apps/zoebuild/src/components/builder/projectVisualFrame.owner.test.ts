@@ -50,7 +50,7 @@ describe(
         expect(
           shell,
         ).toContain(
-          'hidden={commerceOpen || mode !== "code"}',
+          'hidden={settingsOpen || mode !== "code"}',
         );
 
         expect(

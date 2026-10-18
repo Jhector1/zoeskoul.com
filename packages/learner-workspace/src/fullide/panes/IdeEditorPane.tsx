@@ -69,6 +69,8 @@ type Props = {
     onRunResult?: (args: { result: any; runArgs: any }) => void;
     remoteWebPreview?: RemoteWebPreviewDescriptor;
     remoteWebPreviewSurface?: React.ReactNode;
+    webPreviewCommerceRequest?: import("@zoeskoul/learner-workspace/ide/types").FullIDEProps["webPreviewCommerceRequest"];
+    webPreviewSessionKey?: string;
     onRun: (args: any) => Promise<any>;
     setActiveFileId: (id: string | null) => void;
     workspaceFileSelectionVersion: number;
@@ -127,6 +129,8 @@ export default function IdeEditorPane({
     onRunResult,
     remoteWebPreview,
     remoteWebPreviewSurface,
+    webPreviewCommerceRequest,
+    webPreviewSessionKey,
     onRun,
     setActiveFileId,
     workspaceFileSelectionVersion,
@@ -393,6 +397,8 @@ export default function IdeEditorPane({
                             webPreviewEntries={workspaceEntries}
                             remoteWebPreview={remoteWebPreview}
                             remoteWebPreviewSurface={remoteWebPreviewSurface}
+                            webPreviewCommerceRequest={webPreviewCommerceRequest}
+                            webPreviewSessionKey={webPreviewSessionKey}
                             workspaceTerminal={
                                 !isSql && !isWeb
                                     ? {

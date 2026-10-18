@@ -70,7 +70,7 @@ describe(
         expect(
           projectShell,
         ).toContain(
-          'hidden={commerceOpen || mode !== "code"}',
+          'hidden={settingsOpen || mode !== "code"}',
         );
 
         expect(

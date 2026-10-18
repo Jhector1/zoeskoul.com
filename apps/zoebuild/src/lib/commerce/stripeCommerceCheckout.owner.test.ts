@@ -2,6 +2,8 @@ import {
   readFileSync,
 } from "node:fs";
 
+import { resolve } from "node:path";
+
 import {
   describe,
   expect,
@@ -12,7 +14,7 @@ function source(
   path: string,
 ) {
   return readFileSync(
-    path,
+    resolve(__dirname, "../../..", path),
     "utf8",
   );
 }

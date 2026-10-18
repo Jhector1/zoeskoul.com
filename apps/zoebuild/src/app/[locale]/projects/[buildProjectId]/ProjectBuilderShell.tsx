@@ -34,7 +34,7 @@ import type {
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
-import CommerceWorkspacePanel from "./CommerceWorkspacePanel";
+import SiteSettingsWorkspacePanel from "./SiteSettingsWorkspacePanel";
 import { PublishProjectButton } from "@/components/builder/PublishProjectButton";
 import { useReactVitePreview } from "@/components/builder/useReactVitePreview";
 import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
@@ -57,7 +57,7 @@ export default function ProjectBuilderShell(props: {
   const [mode, setMode] =
     useState<ZoeBuildMode>("preview");
 
-  const [commerceOpen, setCommerceOpen] =
+  const [settingsOpen, setSettingsOpen] =
     useState(false);
 
   const [previewWorkspace, setPreviewWorkspace] =
@@ -286,7 +286,7 @@ export default function ProjectBuilderShell(props: {
       ],
     );
 
-    setCommerceOpen(false);
+    setSettingsOpen(false);
   }
 
   async function planChange(
@@ -422,7 +422,7 @@ export default function ProjectBuilderShell(props: {
     );
 
     if (commerceEnabled) {
-      setCommerceOpen(true);
+      setSettingsOpen(true);
     }
   }
 
@@ -573,17 +573,17 @@ export default function ProjectBuilderShell(props: {
               type="button"
               className="zb-project-mode-tab"
               data-active={
-                !commerceOpen &&
+                !settingsOpen &&
                 mode === "preview"
                   ? "true"
                   : "false"
               }
               aria-pressed={
-                !commerceOpen &&
+                !settingsOpen &&
                 mode === "preview"
               }
               onClick={() => {
-                setCommerceOpen(false);
+                setSettingsOpen(false);
                 setMode("preview");
               }}
             >
@@ -595,17 +595,17 @@ export default function ProjectBuilderShell(props: {
               type="button"
               className="zb-project-mode-tab"
               data-active={
-                !commerceOpen &&
+                !settingsOpen &&
                 mode === "code"
                   ? "true"
                   : "false"
               }
               aria-pressed={
-                !commerceOpen &&
+                !settingsOpen &&
                 mode === "code"
               }
               onClick={() => {
-                setCommerceOpen(false);
+                setSettingsOpen(false);
                 setMode("code");
               }}
             >
@@ -613,23 +613,15 @@ export default function ProjectBuilderShell(props: {
               Code
             </button>
 
-            {commerceEnabled ? (
-              <button
-                type="button"
-                className="zb-project-mode-tab"
-                data-active={
-                  commerceOpen
-                    ? "true"
-                    : "false"
-                }
-                aria-pressed={commerceOpen}
-                onClick={() => {
-                  setCommerceOpen(true);
-                }}
-              >
-                Commerce
-              </button>
-            ) : null}
+            <button
+              type="button"
+              className="zb-project-mode-tab"
+              data-active={settingsOpen ? "true" : "false"}
+              aria-pressed={settingsOpen}
+              onClick={() => setSettingsOpen(true)}
+            >
+              Site Settings
+            </button>
           </div>
 
           <PublishProjectButton
@@ -644,8 +636,8 @@ export default function ProjectBuilderShell(props: {
       <section className="zb-builder-stage">
         <div
           className="zb-project-preview-stage"
-          hidden={commerceOpen || mode !== "preview"}
-          aria-hidden={commerceOpen || mode !== "preview"}
+          hidden={settingsOpen || mode !== "preview"}
+          aria-hidden={settingsOpen || mode !== "preview"}
         >
             {reactPreviewEnabled && reactPreview ? (
               <PersistentReactPreviewSlot
@@ -655,7 +647,7 @@ export default function ProjectBuilderShell(props: {
                 slotId="project-preview"
                 preview={reactPreview}
                 active={
-                  !commerceOpen &&
+                  !settingsOpen &&
                   mode === "preview"
                 }
               />
@@ -675,8 +667,8 @@ export default function ProjectBuilderShell(props: {
 
         <div
           className="zb-code-stage"
-          hidden={commerceOpen || mode !== "code"}
-          aria-hidden={commerceOpen || mode !== "code"}
+          hidden={settingsOpen || mode !== "code"}
+          aria-hidden={settingsOpen || mode !== "code"}
         >
           <BuildWorkspaceClient
             project={props.project}
@@ -685,21 +677,22 @@ export default function ProjectBuilderShell(props: {
             onDirtyChange={setCodeDirty}
             remoteWebPreview={reactPreviewEnabled ? reactPreview : null}
             remotePreviewActive={
-              !commerceOpen && mode === "code"
+              !settingsOpen && mode === "code"
+            }
+            webPreviewCommerceRequest={
+              commerceEnabled && !reactPreviewEnabled
+                ? requestStaticPreviewCommerce
+                : undefined
             }
           />
         </div>
 
 
-        {commerceOpen &&
-        commerceEnabled ? (
-          <CommerceWorkspacePanel
-            project={
-              props.project
-            }
-            candidateHostname={
-              commerceCandidate
-            }
+        {settingsOpen ? (
+          <SiteSettingsWorkspacePanel
+            project={props.project}
+            candidateHostname={commerceCandidate}
+            commerceEnabled={commerceEnabled}
           />
         ) : null}
       </section>

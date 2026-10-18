@@ -354,6 +354,8 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     webPreviewEntries?: WorkspaceSyncEntry[];
     remoteWebPreview?: RemoteWebPreviewDescriptor;
     remoteWebPreviewSurface?: React.ReactNode;
+    webPreviewCommerceRequest?: import("@zoeskoul/learner-workspace/ide/types").FullIDEProps["webPreviewCommerceRequest"];
+    webPreviewSessionKey?: string;
 
     /**
      * Stable selectors for browser tests.
@@ -687,6 +689,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         webPreviewEntries = [],
         remoteWebPreview,
         remoteWebPreviewSurface,
+        webPreviewCommerceRequest,
+        webPreviewSessionKey,
         sqlInitialTableSnapshots,
         sqlPaneOptions,
         runnerPaneOptions,
@@ -2650,7 +2654,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 kind: "web-preview",
                 entries: webPreviewEntries,
                 title: t("previewTab"),
-                sessionKey: effectiveExerciseStateKey,
+                sessionKey: webPreviewSessionKey ?? effectiveExerciseStateKey,
+                onCommerceRequest: webPreviewCommerceRequest,
             };
         }
 
@@ -2679,6 +2684,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         webPreviewEntries,
         remoteWebPreview,
         remoteWebPreviewSurface,
+        webPreviewCommerceRequest,
+        webPreviewSessionKey,
         lang,
         term,
         sqlSchemaSql,

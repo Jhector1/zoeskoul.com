@@ -13,8 +13,8 @@ import {
 
 const repo =
   resolve(
-    process.cwd(),
-    "../..",
+    __dirname,
+    "../../../../..",
   );
 
 const route =

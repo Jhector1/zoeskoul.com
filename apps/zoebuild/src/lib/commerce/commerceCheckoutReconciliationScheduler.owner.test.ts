@@ -14,8 +14,8 @@ import {
 
 const repoRoot =
   resolve(
-    process.cwd(),
-    "../..",
+    __dirname,
+    "../../../../..",
   );
 
 function source(

@@ -33,6 +33,7 @@ export default function BuildWorkspaceClient({
   onDirtyChange,
   remoteWebPreview,
   remotePreviewActive,
+  webPreviewCommerceRequest,
 }: {
   project: BuildWorkspaceShellProject;
   onWorkspaceSnapshot?: (workspace: WorkspaceStateV2) => void;
@@ -40,6 +41,7 @@ export default function BuildWorkspaceClient({
   onDirtyChange?: (dirty: boolean) => void;
   remoteWebPreview?: RemoteWebPreviewDescriptor | null;
   remotePreviewActive: boolean;
+  webPreviewCommerceRequest?: import("@zoeskoul/learner-workspace/ide/types").FullIDEProps["webPreviewCommerceRequest"];
 }) {
   const latestWorkspaceRef = useRef<WorkspaceStateV2>(project.workspace);
   const editRevisionRef = useRef(0);
@@ -209,6 +211,8 @@ export default function BuildWorkspaceClient({
                 initialWorkspace={project.workspace}
                 onWorkspaceChange={handleWorkspaceChange}
                 remoteWebPreview={remoteWebPreview ?? undefined}
+                webPreviewCommerceRequest={webPreviewCommerceRequest}
+                webPreviewSessionKey={project.buildProjectId}
                 remoteWebPreviewSurface={
                   remoteWebPreview ? (
                     <PersistentReactPreviewSlot

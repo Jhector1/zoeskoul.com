@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
 const base = "src/app/api/build/projects/[buildProjectId]/commerce/providers/shopify/oauth/[environment]";
-function source(path: string) { return readFileSync(resolve(process.cwd(), path), "utf8"); }
+function source(path: string) { return readFileSync(resolve(__dirname, "../../..", path), "utf8"); }
 
 describe("Shopify OAuth HTTP route boundaries", () => {
   it("uses canonical Zoéskoul Web auth and requires an owned Build project for both steps", () => {

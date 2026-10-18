@@ -6,6 +6,7 @@ import RunnerOutputSurface from "@zoeskoul/learner-workspace/runner/components/R
 import SqlOutputSurface from "@zoeskoul/learner-workspace/runner/components/SqlOutputSurface";
 import type { SqlPaneOptions } from "@zoeskoul/learner-workspace/runner/components/sql/results-pane/index";
 import WebPreview from "@zoeskoul/learner-workspace/runner/components/WebPreview";
+import type { WebPreviewCommerceRequest } from "@zoeskoul/learner-workspace/runner/components/WebPreview";
 import RemoteWebPreview from "@zoeskoul/learner-workspace/runner/components/RemoteWebPreview";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 
@@ -35,6 +36,7 @@ export type OutputSurfaceModel =
     entries: WorkspaceSyncEntry[];
     title?: string;
     sessionKey?: string;
+    onCommerceRequest?: (request: WebPreviewCommerceRequest) => Promise<unknown>;
 }
     | {
     kind: "remote-web-preview";
@@ -69,6 +71,7 @@ export default function OutputSurface(props: {
                         entries={model.entries}
                         title={model.title}
                         sessionKey={model.sessionKey}
+                        onCommerceRequest={model.onCommerceRequest}
                     />
                 </div>
             );

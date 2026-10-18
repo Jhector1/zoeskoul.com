@@ -79,6 +79,8 @@ type FullIDEInnerProps = {
     onRunResult?: FullIDEProps["onRunResult"];
     remoteWebPreview?: FullIDEProps["remoteWebPreview"];
     remoteWebPreviewSurface?: FullIDEProps["remoteWebPreviewSurface"];
+    webPreviewCommerceRequest?: FullIDEProps["webPreviewCommerceRequest"];
+    webPreviewSessionKey?: FullIDEProps["webPreviewSessionKey"];
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;
     workspaceReplacementRevision?: string | number;
@@ -201,6 +203,8 @@ function FullIDEInner({
                           onRunResult,
                           remoteWebPreview,
                           remoteWebPreviewSurface,
+                          webPreviewCommerceRequest,
+                          webPreviewSessionKey,
                           forceDesktopLayout,
                           sqlDatasetId,
                           sqlResultShape,
@@ -735,6 +739,8 @@ function FullIDEInner({
             onRunResult={onRunResult}
             remoteWebPreview={remoteWebPreview}
             remoteWebPreviewSurface={remoteWebPreviewSurface}
+            webPreviewCommerceRequest={webPreviewCommerceRequest}
+            webPreviewSessionKey={webPreviewSessionKey}
             onRun={runner.onRunProject}
             setActiveFileId={handleSelectWorkspaceTab}
             workspaceFileSelectionVersion={workspaceFileSelectionVersion}
@@ -1036,6 +1042,8 @@ export default function FullIDE(props: FullIDEProps) {
         onRunResult,
         remoteWebPreview,
         remoteWebPreviewSurface,
+        webPreviewCommerceRequest,
+        webPreviewSessionKey,
         initialSqlDialect = DEFAULT_SQL_DIALECT,
         forceDesktopLayout = false,
         sqlDatasetId,
@@ -1469,6 +1477,8 @@ export default function FullIDE(props: FullIDEProps) {
                 onRunResult={onRunResult}
                 remoteWebPreview={remoteWebPreview}
             remoteWebPreviewSurface={remoteWebPreviewSurface}
+            webPreviewCommerceRequest={webPreviewCommerceRequest}
+            webPreviewSessionKey={webPreviewSessionKey}
                 forceDesktopLayout={forceDesktopLayout}
                 sqlDatasetId={sqlDatasetId}
                 sqlResultShape={sqlResultShape}

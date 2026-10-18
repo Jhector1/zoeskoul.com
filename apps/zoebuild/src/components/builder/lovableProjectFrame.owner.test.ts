@@ -79,7 +79,7 @@ describe(
     );
 
     it(
-      "switches the right workspace among Preview Code and Commerce without navigation",
+      "switches the right workspace among Preview, Code, and Site Settings without navigation",
       () => {
         const source =
           readFileSync(
@@ -108,13 +108,13 @@ describe(
         expect(
           source,
         ).toContain(
-          "Commerce",
+          "Site Settings",
         );
 
         expect(
           source,
         ).toContain(
-          "setCommerceOpen(false)",
+          "setSettingsOpen(false)",
         );
 
         expect(

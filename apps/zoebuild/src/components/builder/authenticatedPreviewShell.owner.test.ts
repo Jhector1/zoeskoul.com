@@ -11,7 +11,7 @@ import {
   it,
 } from "vitest";
 
-const read=(p:string)=>readFileSync(resolve(process.cwd(),p),"utf8");
+const read=(p:string)=>readFileSync(resolve(__dirname, "../../..",p),"utf8");
 
 describe("ZoeBuild authenticated preview shell",()=>{
  const root=read("src/app/layout.tsx");
@@ -24,7 +24,7 @@ describe("ZoeBuild authenticated preview shell",()=>{
   expect(
     existsSync(
       resolve(
-        process.cwd(),
+        __dirname, "../../..",
         "src/app/[locale]/projects/layout.tsx",
       ),
     ),

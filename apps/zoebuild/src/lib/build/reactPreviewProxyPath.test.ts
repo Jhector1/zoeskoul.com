@@ -71,7 +71,7 @@ describe("React preview browser capability path", () => {
   it("wires the normalized pathname into the capability proxy route", () => {
     const routeSource = readFileSync(
       resolve(
-        process.cwd(),
+        __dirname, "../../..",
         "src/app/api/build/projects/[buildProjectId]/preview/" +
           "[previewId]/content/[capability]/[[...path]]/route.ts",
       ),

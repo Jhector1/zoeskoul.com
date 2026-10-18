@@ -101,6 +101,7 @@ export default function CommerceWorkspacePanel(
     candidateHostname?:
       string |
       null;
+    section?: "commerce" | "payments";
   },
 ) {
   const [
@@ -293,12 +294,14 @@ export default function CommerceWorkspacePanel(
       "payments",
     );
 
+  const paymentsOnly = props.section === "payments";
+
   return (
     <div className="zb-commerce-workspace">
       <div className="zb-commerce-heading">
         <div>
           <div className="zb-commerce-kicker">
-            Commerce
+            {paymentsOnly ? "Payments" : "Store & commerce"}
           </div>
 
           <h2>
@@ -306,10 +309,9 @@ export default function CommerceWorkspacePanel(
           </h2>
 
           <p>
-            Zoé Store is the default commerce foundation.
-            You can keep it or connect another supported
-            provider later without rewriting generated
-            storefront code.
+            {paymentsOnly
+              ? "Connect and manage payments independently for test and live environments."
+              : "Zoé Store is the default commerce foundation. You can connect another supported provider without rewriting generated storefront code."}
           </p>
         </div>
 
@@ -349,6 +351,7 @@ export default function CommerceWorkspacePanel(
         </div>
       ) : null}
 
+      {!paymentsOnly ? (
       <div className="zb-commerce-grid">
         <section className="zb-commerce-card">
           <span>
@@ -455,7 +458,9 @@ export default function CommerceWorkspacePanel(
           </p>
         </section>
       </div>
+      ) : null}
 
+      {paymentsOnly ? (
       <StripeConnectionPanel
         buildProjectId={
           props.project.buildProjectId
@@ -477,7 +482,9 @@ export default function CommerceWorkspacePanel(
             )
         }
       />
+      ) : null}
 
+      {!paymentsOnly ? (
       <div className="zb-commerce-security">
         <strong>
           Provider options
@@ -490,8 +497,9 @@ export default function CommerceWorkspacePanel(
           Stripe and PayPal can own checkout and payments.
         </span>
       </div>
+      ) : null}
 
-      {providers.length > 0 ? (
+      {!paymentsOnly && providers.length > 0 ? (
         <div className="zb-commerce-grid">
           {providers.map(
             (

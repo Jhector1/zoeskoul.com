@@ -34,7 +34,7 @@ describe(
   "ZoeBuild commerce workspace ownership",
   () => {
     it(
-      "shows Commerce only for the registered commerce stack",
+      "shows Site Settings for every project and gates commerce integrations by stack",
       () => {
         const shell =
           source(
@@ -56,13 +56,13 @@ describe(
         expect(
           shell,
         ).toContain(
-          "<CommerceWorkspacePanel",
+          "<SiteSettingsWorkspacePanel",
         );
 
         expect(
           shell,
         ).toContain(
-          "Commerce",
+          "Site Settings",
         );
       },
     );

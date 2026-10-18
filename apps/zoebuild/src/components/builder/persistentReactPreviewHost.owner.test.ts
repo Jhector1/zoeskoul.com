@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
-const read=(p:string)=>readFileSync(resolve(process.cwd(),p),"utf8");
+const read=(p:string)=>readFileSync(resolve(__dirname, "../../..",p),"utf8");
 
 describe("ZoeBuild persistent React preview host",()=>{
  const host=read("src/components/builder/PersistentReactPreviewHost.tsx");
