@@ -15,6 +15,11 @@ import {
   executeProductionBuild,
 } from "../services/build/executeProductionBuild.js";
 
+import {
+  withZoeBuildBuildSlot,
+  ZoeBuildBuildCapacityError,
+} from "../services/build/zoeBuildBuildCapacity.js";
+
 export const executeBuildProductionRoute:
   RequestHandler =
     async (
@@ -42,9 +47,7 @@ export const executeBuildProductionRoute:
         }
 
         const result =
-          await executeProductionBuild(
-            request,
-          );
+          await withZoeBuildBuildSlot(() => executeProductionBuild(request));
 
         return res
           .status(200)
@@ -52,6 +55,13 @@ export const executeBuildProductionRoute:
             result,
           );
       } catch (error) {
+        if (error instanceof ZoeBuildBuildCapacityError) {
+          return res.status(429).json({
+            ok: false,
+            error: error.message,
+          });
+        }
+
         const message =
           error instanceof Error
             ? error.message

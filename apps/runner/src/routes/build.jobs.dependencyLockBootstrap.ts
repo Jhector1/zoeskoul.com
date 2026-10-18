@@ -6,6 +6,10 @@ import {
 import { BuildPreparationError } from "@zoeskoul/build-preparation";
 
 import { executeDependencyLockBootstrap } from "../services/build/executeDependencyLockBootstrap.js";
+import {
+  withZoeBuildBuildSlot,
+  ZoeBuildBuildCapacityError,
+} from "../services/build/zoeBuildBuildCapacity.js";
 
 export const executeBuildDependencyLockBootstrapRoute: RequestHandler = async (
   req,
@@ -21,9 +25,16 @@ export const executeBuildDependencyLockBootstrapRoute: RequestHandler = async (
       });
     }
 
-    const result = await executeDependencyLockBootstrap(request);
+    const result = await withZoeBuildBuildSlot(() => executeDependencyLockBootstrap(request));
     return res.status(200).json(result);
   } catch (error) {
+    if (error instanceof ZoeBuildBuildCapacityError) {
+      return res.status(429).json({
+        ok: false,
+        error: error.message,
+      });
+    }
+
     const message =
       error instanceof Error
         ? error.message
