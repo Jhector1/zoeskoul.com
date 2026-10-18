@@ -36,6 +36,9 @@ import {
 import type {
   CommerceProviderEnvironment,
 } from "@/lib/commerce/nativeCommerceProvider";
+import {
+  readBoundedRequestBody,
+} from "@/lib/commerce/readBoundedRequestBody";
 
 export const runtime =
   "nodejs";
@@ -391,16 +394,10 @@ export async function PUT(
       buildProjectId,
     );
 
-    const raw =
-      await request.text();
+    const rawBytes =
+      await readBoundedRequestBody(request, MAX_CONFIG_BYTES);
 
-    if (
-      Buffer.byteLength(
-        raw,
-        "utf8",
-      ) >
-      MAX_CONFIG_BYTES
-    ) {
+    if (rawBytes === null) {
       return json(
         {
           ok:
@@ -420,7 +417,7 @@ export async function PUT(
     try {
       body =
         JSON.parse(
-          raw,
+          Buffer.from(rawBytes).toString("utf8"),
         );
     } catch {
       return json(
@@ -546,16 +543,10 @@ export async function POST(
       );
     }
 
-    const rawBody =
-      await request.text();
+    const rawBytes =
+      await readBoundedRequestBody(request, MAX_WEBHOOK_BYTES);
 
-    if (
-      Buffer.byteLength(
-        rawBody,
-        "utf8",
-      ) >
-      MAX_WEBHOOK_BYTES
-    ) {
+    if (rawBytes === null) {
       return json(
         {
           received:
@@ -610,7 +601,7 @@ export async function POST(
         stripe
           .webhooks
           .constructEvent(
-            rawBody,
+            Buffer.from(rawBytes),
             signature,
             webhookSecret,
           );

@@ -27,7 +27,7 @@ function connection() {
     credentialsSecretRef:
       "secret_ref_1",
     webhookSecretRef:
-      null,
+      "webhook_ref_1",
     config:
       null,
   };
@@ -272,6 +272,27 @@ describe(
           code:
             "STRIPE_ENVIRONMENT_MISMATCH",
         });
+      },
+    );
+
+    it(
+      "rejects checkout when the selected environment has no webhook signing secret",
+      async () => {
+        const secrets = secretStore();
+        await expect(
+          prepareStripeCommercePayments({
+            buildProjectId: "project_1",
+            environment: "test",
+            connection: {
+              ...connection(),
+              webhookSecretRef: null,
+            },
+            secretStore: secrets.value,
+          }),
+        ).rejects.toMatchObject({
+          code: "STRIPE_WEBHOOK_CONFIGURATION_REQUIRED",
+        });
+        expect(secrets.read).not.toHaveBeenCalled();
       },
     );
 

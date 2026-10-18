@@ -494,6 +494,15 @@ export async function prepareStripeCommercePayments(
     );
   }
 
+  // Do not create payment sessions when the selected environment cannot
+  // receive signed reconciliation events, even for previously saved routes.
+  if (!input.connection.webhookSecretRef?.trim()) {
+    throw new StripeCommerceCheckoutError(
+      "STRIPE_WEBHOOK_CONFIGURATION_REQUIRED",
+      `Configure the Stripe ${input.environment} webhook signing secret before starting Checkout.`,
+    );
+  }
+
   const createClient =
     dependencies.createClient ??
     defaultStripeClient;

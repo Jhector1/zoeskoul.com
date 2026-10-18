@@ -1,0 +1,83 @@
+/* Checkout verification is a lightweight overlay in the modebar; it never
+   creates a third grid row or changes the preview/editor dimensions. */
+.notice {
+  position: absolute;
+  z-index: 15;
+  top: calc(100% + 12px);
+  right: 16px;
+  width: min(440px, calc(100vw - 32px));
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 28px;
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid var(--zb-border);
+  border-radius: 14px;
+  background: var(--zb-surface);
+  color: var(--zb-text);
+  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.23);
+  backdrop-filter: blur(18px);
+}
+.notice[data-status="verified"] {
+  border-color: color-mix(in srgb, #22c55e 38%, var(--zb-border));
+}
+.statusIcon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  color: #f0fdf4;
+  background: #15803d;
+  font-size: 20px;
+  font-weight: 750;
+}
+.notice[data-status="pending"] .statusIcon {
+  color: #dbeafe;
+  background: #1d4ed8;
+}
+.notice[data-status="canceled"] .statusIcon,
+.notice[data-status="unconfirmed"] .statusIcon {
+  color: #fef3c7;
+  background: #92400e;
+}
+.content { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.title { margin-top: 1px; font-size: 0.87rem; font-weight: 750; letter-spacing: -0.01em; }
+.description { color: var(--zb-muted); font-size: 0.77rem; line-height: 1.48; margin: 0; overflow-wrap: anywhere; }
+.orderReference { color: var(--zb-muted); font-size: 0.72rem; font-variant-numeric: tabular-nums; }
+.dismiss {
+  appearance: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--zb-muted);
+  cursor: pointer;
+}
+.dismiss:hover { background: color-mix(in srgb, var(--zb-text) 9%, transparent); color: var(--zb-text); }
+.dismiss:focus-visible, .action:focus-visible { outline: 2px solid var(--zb-accent); outline-offset: 2px; }
+.action {
+  align-self: flex-start;
+  margin-top: 5px;
+  padding: 6px 11px;
+  border: 1px solid var(--zb-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--zb-text) 7%, transparent);
+  color: var(--zb-text);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+.action:hover { background: color-mix(in srgb, var(--zb-text) 12%, transparent); }
+@media (max-width: 620px) {
+  .notice { right: 8px; width: min(420px, calc(100vw - 16px)); padding: 12px; gap: 9px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .notice { animation: receiptEnter 160ms ease-out both; }
+  @keyframes receiptEnter { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+}

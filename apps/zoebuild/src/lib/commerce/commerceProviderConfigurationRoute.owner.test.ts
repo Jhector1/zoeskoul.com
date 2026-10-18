@@ -125,10 +125,30 @@ describe(
         ).not.toContain(
           "credentialsSecretRef",
         );
+        // Public JSON may expose a derived readiness boolean, never the
+        // underlying webhook signing-secret vault reference.
         expect(
           publicSnapshot,
+        ).toContain(
+          "webhookConfigured:",
+        );
+        expect(
+          publicSnapshot,
+        ).toContain(
+          "Boolean(connection.webhookSecretRef)",
+        );
+        expect(
+          publicSnapshot.replaceAll(
+            "Boolean(connection.webhookSecretRef)",
+            "",
+          ),
         ).not.toContain(
           "webhookSecretRef",
+        );
+        expect(
+          publicSnapshot,
+        ).not.toMatch(
+          /\.\.\.\s*connection\b/,
         );
       },
     );

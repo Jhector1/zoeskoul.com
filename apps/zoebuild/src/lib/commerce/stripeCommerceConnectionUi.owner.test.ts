@@ -176,7 +176,7 @@ describe(
         expect(
           stripe,
         ).toContain(
-          'className="zb-stripe-panel"',
+          'zb-stripe-panel',
         );
 
         expect(
@@ -188,7 +188,12 @@ describe(
         expect(
           stripe,
         ).toContain(
-          'className="zb-stripe-status"',
+          'className={styles.environmentTab}',
+        );
+        expect(
+          stripe,
+        ).toContain(
+          '<ReadyCheck />',
         );
 
         expect(

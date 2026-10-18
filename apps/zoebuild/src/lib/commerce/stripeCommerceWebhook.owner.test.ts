@@ -67,6 +67,18 @@ describe(
         expect(
           postSource,
         ).toContain(
+          "readBoundedRequestBody(request, MAX_WEBHOOK_BYTES)",
+        );
+
+        expect(
+          postSource,
+        ).toContain(
+          "Buffer.from(rawBytes)",
+        );
+
+        expect(
+          postSource,
+        ).not.toContain(
           "await request.text()",
         );
 

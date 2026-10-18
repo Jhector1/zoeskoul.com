@@ -35,6 +35,7 @@ import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
 import SiteSettingsWorkspacePanel from "./SiteSettingsWorkspacePanel";
+import StripeCheckoutReturnNotice from "./StripeCheckoutReturnNotice";
 import { PublishProjectButton } from "@/components/builder/PublishProjectButton";
 import { useReactVitePreview } from "@/components/builder/useReactVitePreview";
 import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
@@ -628,6 +629,9 @@ export default function ProjectBuilderShell(props: {
             buildProjectId={props.project.buildProjectId}
             initialDeployment={props.initialDeployment}
           />
+          {commerceEnabled && !settingsOpen && mode === "preview" ? (
+            <StripeCheckoutReturnNotice buildProjectId={props.project.buildProjectId} />
+          ) : null}
         </div>
 
         <div className="zb-project-stage-body">

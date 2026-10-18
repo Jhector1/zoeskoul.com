@@ -271,6 +271,8 @@ async function readStoreSnapshot(
               true,
             status:
               true,
+            webhookSecretRef:
+              true,
           },
         },
       },
@@ -351,6 +353,13 @@ function publicStoreSnapshot(
             connection.environment,
           status:
             connection.status,
+          // This is a derived readiness boolean, never a secret or vault ref.
+          webhookConfigured:
+            connection.provider ===
+              "stripe" &&
+            connection.status ===
+              "active" &&
+            Boolean(connection.webhookSecretRef),
         }),
       ),
   };
@@ -852,6 +861,8 @@ export async function PATCH(
               true,
             environment:
               true,
+            webhookSecretRef:
+              true,
           },
         });
 
@@ -888,6 +899,32 @@ export async function PATCH(
           },
           409,
         );
+      }
+    }
+
+    const stripePaymentRouting =
+      definition.id === "stripe" &&
+      capabilities.includes("payments");
+
+    if (stripePaymentRouting) {
+      for (const targetEnvironment of targetEnvironments) {
+        const ready = connections.some(
+          (connection) =>
+            connection.environment === targetEnvironment &&
+            Boolean(connection.webhookSecretRef),
+        );
+
+        if (!ready) {
+          return json(
+            requestId,
+            {
+              ok: false,
+              code: "STRIPE_WEBHOOK_CONFIGURATION_REQUIRED",
+              message: `Configure the Stripe ${targetEnvironment} webhook signing secret before activating payments.`,
+            },
+            409,
+          );
+        }
       }
     }
 

@@ -63,6 +63,7 @@ type CommerceConfiguration =
               "test" |
               "live";
             status: string;
+            webhookConfigured?: boolean;
           }>[];
       }>;
   }>;
@@ -471,6 +472,7 @@ export default function CommerceWorkspacePanel(
             .connections ??
           []
         }
+        routes={configuration?.store.routes ?? []}
         onChanged={
           () =>
             setConfigurationRevision(

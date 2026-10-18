@@ -4,6 +4,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import styles from "./StripeConnectionPanel.module.css";
 
 type ConnectionSnapshot =
   Readonly<{
@@ -14,7 +15,32 @@ type ConnectionSnapshot =
       "live";
     status:
       string;
+    webhookConfigured?: boolean;
   }>;
+
+type RouteSnapshot = Readonly<{
+  environment: "test" | "live";
+  capability: string;
+  provider: string;
+  connected: boolean;
+}>;
+
+// Display a single configuration indicator only when the server reports
+// an active connection, signing secret, and payments route for this environment.
+function ReadyCheck() {
+  return (
+    <span
+      className={styles.readyCheck}
+      role="img"
+      aria-label="API key, webhook and payment routing configured"
+      title="API key, webhook and payment routing configured"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
+    </span>
+  );
+}
 
 function connectionStatus(
   connections:
@@ -39,6 +65,7 @@ export default function StripeConnectionPanel(
       string;
     connections:
       readonly ConnectionSnapshot[];
+    routes: readonly RouteSnapshot[];
     onChanged:
       () => void;
   },
@@ -91,6 +118,9 @@ export default function StripeConnectionPanel(
     >(null);
 
   const [copiedWebhook, setCopiedWebhook] = useState<"test" | "live" | null>(null);
+  // The tabs change only which configuration controls are visible.
+  // Existing per-environment server connections and routing remain authoritative.
+  const [visibleEnvironment, setVisibleEnvironment] = useState<"test" | "live">("test");
 
   function webhookPath(environment: "test" | "live") {
     return `/api/build/projects/${encodeURIComponent(props.buildProjectId)}/commerce/providers/stripe/webhook/${environment}`;
@@ -135,6 +165,32 @@ export default function StripeConnectionPanel(
         props.connections,
       ],
     );
+
+  function webhookConfigured(environment: "test" | "live") {
+    return props.connections.some(
+      (connection) =>
+        connection.provider === "stripe" &&
+        connection.environment === environment &&
+        connection.status === "active" &&
+        connection.webhookConfigured === true,
+    );
+  }
+
+  const testWebhookReady = webhookConfigured("test");
+  const liveWebhookReady = webhookConfigured("live");
+
+  function paymentRouteActive(environment: "test" | "live") {
+    return props.routes.some(
+      (route) =>
+        route.environment === environment &&
+        route.capability === "payments" &&
+        route.provider === "stripe" &&
+        route.connected === true,
+    );
+  }
+
+  const previewPaymentsActive = paymentRouteActive("test");
+  const publishedPaymentsActive = paymentRouteActive("live");
 
   async function connect(
     environment:
@@ -354,6 +410,7 @@ export default function StripeConnectionPanel(
       setMessage(
         `Stripe ${environment} webhook signing secret saved securely.`,
       );
+      props.onChanged();
     } catch (
       error
     ) {
@@ -388,6 +445,13 @@ export default function StripeConnectionPanel(
         `Connect the Stripe ${environment} environment before activation.`,
       );
 
+      return;
+    }
+
+    if (!webhookConfigured(environment)) {
+      setMessage(
+        `Configure the Stripe ${environment} webhook signing secret before activating payments.`,
+      );
       return;
     }
 
@@ -479,7 +543,7 @@ export default function StripeConnectionPanel(
   }
 
   return (
-    <section className="zb-stripe-panel">
+    <section className={`zb-stripe-panel ${styles.panel}`}>
       <div className="zb-stripe-heading">
         <div>
           <span className="zb-stripe-kicker">
@@ -503,9 +567,37 @@ export default function StripeConnectionPanel(
         </span>
       </div>
 
+      <div className={styles.environmentTabs} role="group" aria-label="Stripe environment">
+        <button
+          type="button"
+          className={styles.environmentTab}
+          data-active={visibleEnvironment === "test" ? "true" : "false"}
+          aria-pressed={visibleEnvironment === "test"}
+          onClick={() => setVisibleEnvironment("test")}
+        >
+          <span className={styles.tabTitle}>
+            Test environment
+            {testStatus === "active" && testWebhookReady && previewPaymentsActive ? <ReadyCheck /> : null}
+          </span>
+        </button>
+        <button
+          type="button"
+          className={styles.environmentTab}
+          data-active={visibleEnvironment === "live" ? "true" : "false"}
+          aria-pressed={visibleEnvironment === "live"}
+          onClick={() => setVisibleEnvironment("live")}
+        >
+          <span className={styles.tabTitle}>
+            Live environment
+            {liveStatus === "active" && liveWebhookReady && publishedPaymentsActive ? <ReadyCheck /> : null}
+          </span>
+        </button>
+      </div>
+
       <div className="zb-stripe-environments">
         <form
           className="zb-stripe-environment"
+          hidden={visibleEnvironment !== "test"}
           onSubmit={(
             event,
           ) => {
@@ -525,20 +617,6 @@ export default function StripeConnectionPanel(
               </span>
             </div>
 
-            <span
-              className="zb-stripe-status"
-              data-active={
-                testStatus ===
-                  "active"
-                  ? "true"
-                  : "false"
-              }
-            >
-              {testStatus ===
-                "active"
-                ? "Connected"
-                : "Not connected"}
-            </span>
           </div>
 
           <label className="zb-stripe-field">
@@ -560,6 +638,7 @@ export default function StripeConnectionPanel(
             />
           </label>
 
+
           <div className="zb-stripe-actions">
             <button
               type="submit"
@@ -578,6 +657,7 @@ export default function StripeConnectionPanel(
 
         <form
           className="zb-stripe-environment"
+          hidden={visibleEnvironment !== "live"}
           onSubmit={(
             event,
           ) => {
@@ -597,20 +677,6 @@ export default function StripeConnectionPanel(
               </span>
             </div>
 
-            <span
-              className="zb-stripe-status"
-              data-active={
-                liveStatus ===
-                  "active"
-                  ? "true"
-                  : "false"
-              }
-            >
-              {liveStatus ===
-                "active"
-                ? "Connected"
-                : "Not connected"}
-            </span>
           </div>
 
           <label className="zb-stripe-field">
@@ -632,6 +698,7 @@ export default function StripeConnectionPanel(
             />
           </label>
 
+
           <div className="zb-stripe-actions">
             <button
               type="submit"
@@ -650,17 +717,16 @@ export default function StripeConnectionPanel(
       </div>
 
       <div className="zb-stripe-environments">
-        <section className="zb-stripe-environment">
+        <section className="zb-stripe-environment" hidden={visibleEnvironment !== "test"}>
           <div className="zb-stripe-environment-heading">
             <div>
               <strong>
                 Test webhook
               </strong>
-              <span>
-                Preview payment reconciliation
-              </span>
+              <span>Preview payment reconciliation</span>
             </div>
           </div>
+
 
           <label className="zb-stripe-field">
             <span>
@@ -712,17 +778,16 @@ export default function StripeConnectionPanel(
           </div>
         </section>
 
-        <section className="zb-stripe-environment">
+        <section className="zb-stripe-environment" hidden={visibleEnvironment !== "live"}>
           <div className="zb-stripe-environment-heading">
             <div>
               <strong>
                 Live webhook
               </strong>
-              <span>
-                Published payment reconciliation
-              </span>
+              <span>Published payment reconciliation</span>
             </div>
           </div>
+
 
           <label className="zb-stripe-field">
             <span>
@@ -782,16 +847,20 @@ export default function StripeConnectionPanel(
           </strong>
           <span>
             Activate each environment independently. Zoé Store
-            continues to own checkout orchestration.
+            continues to own checkout orchestration. A saved signing
+            secret is required; actual Stripe webhook delivery must
+            still be tested before accepting payments.
           </span>
         </div>
 
         <div className="zb-stripe-actions">
+          {visibleEnvironment === "test" && !previewPaymentsActive ? (
           <button
             type="button"
             disabled={
               testStatus !==
                 "active" ||
+              !testWebhookReady ||
               pending !==
                 null
             }
@@ -805,12 +874,15 @@ export default function StripeConnectionPanel(
           >
             Activate preview payments
           </button>
+          ) : null}
 
+          {visibleEnvironment === "live" && !publishedPaymentsActive ? (
           <button
             type="button"
             disabled={
               liveStatus !==
                 "active" ||
+              !liveWebhookReady ||
               pending !==
                 null
             }
@@ -824,6 +896,7 @@ export default function StripeConnectionPanel(
           >
             Activate live payments
           </button>
+          ) : null}
         </div>
       </div>
 
