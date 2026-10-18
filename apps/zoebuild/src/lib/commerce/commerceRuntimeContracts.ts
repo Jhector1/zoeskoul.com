@@ -97,11 +97,19 @@ export type CommerceCheckoutRequest = Readonly<{
   cartId: string;
 }>;
 
-export type CommerceCheckoutResult = Readonly<{
-  orderId: string;
-  provider: string;
-  url: string;
-}>;
+/** A native order is persisted first; a provider-owned hosted checkout is not. */
+export type CommerceCheckoutResult =
+  | Readonly<{
+      kind: "order";
+      orderId: string;
+      provider: string;
+      url: string;
+    }>
+  | Readonly<{
+      kind: "hosted";
+      provider: string;
+      url: string;
+    }>;
 
 export type CommerceCheckoutRuntimeInput = Readonly<{
   buildProjectId: string;

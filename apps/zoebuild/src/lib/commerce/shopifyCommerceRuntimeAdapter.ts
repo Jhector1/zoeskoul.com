@@ -9,6 +9,8 @@ import type {
   CommerceCatalogGetInput,
   CommerceCatalogListInput,
   CommerceCatalogProduct,
+  CommerceCheckoutRuntimeInput,
+  CommerceCheckoutResult,
 } from "./commerceRuntimeContracts";
 import type { CommerceProviderExecutionContext } from "./commerceRuntimeRegistry";
 import { createShopifyOpaqueCartBridge, type ShopifyOpaqueCartSnapshot } from "./shopifyOpaqueCartBridge";
@@ -16,6 +18,9 @@ import { createShopifyStorefrontCart } from "./shopifyStorefrontCart";
 import { createShopifyStorefrontCatalog } from "./shopifyStorefrontCatalog";
 import { resolveShopifyStorefrontGraphqlConnection } from "./shopifyStorefrontCredentialVault";
 import { positiveInt, shopifyGid } from "./shopifyStorefrontDomain";
+import { resolveCommerceProvider } from "./commerceProviderResolver";
+import { resolveExternalCommerceCartHandle } from "./externalCommerceCartHandle";
+import { shopifyHostedCheckoutResult } from "./shopifyHostedCheckout";
 
 const SHOP_HOST = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.myshopify\.com$/;
 
@@ -89,19 +94,23 @@ async function ports(client: PrismaClient, context: Execution, surface: "preview
     shopHostname: admin.shopHostname,
     secretStore: context.secretStore,
   });
+  const cartPort = createShopifyStorefrontCart(graphql);
   return {
     catalog: createShopifyStorefrontCatalog(graphql),
+    graphql,
+    cartPort,
+    shopHostname: admin.shopHostname,
     bridge: createShopifyOpaqueCartBridge(client, {
       buildProjectId: context.buildProjectId,
       environment: context.environment,
       secretStore: context.secretStore,
-      cartPort: createShopifyStorefrontCart(graphql),
+      cartPort,
     }),
   };
 }
 
 function assertSurface(
-  input: CommerceCatalogListInput | CommerceCatalogGetInput | CommerceCartRuntimeInput,
+  input: CommerceCatalogListInput | CommerceCatalogGetInput | CommerceCartRuntimeInput | CommerceCheckoutRuntimeInput,
   context: Execution,
 ): void {
   if (input.buildProjectId !== context.buildProjectId ||
@@ -193,4 +202,74 @@ export async function executeShopifyCommerceCartCommand(
       return reject();
   }
   return commerceCart(snapshot);
+}
+
+/**
+ * Detached hosted-checkout executor. Shopify hosts its own checkout and owns
+ * the eventual order; creating a ZoeBuild order here would be fictitious.
+ * A separate provider registration/merchant enablement phase is required.
+ * The resolved cart, orders and payments owners MUST also be Shopify for this
+ * exact project, store, environment and connection: never silently use Stripe
+ * (or any other ZoeBuild-configured payment processor) with Shopify checkout.
+ */
+export async function beginShopifyCommerceHostedCheckout(
+  client: PrismaClient,
+  input: CommerceCheckoutRuntimeInput,
+  context: Execution,
+): Promise<CommerceCheckoutResult> {
+  assertSurface(input, context);
+  const buyerIp = context.verifiedBuyerIp;
+  if (!buyerIp || isIP(buyerIp) === 0) reject();
+
+  // Checkout currently reaches this detached adapter only by explicit trusted
+  // caller invocation. Verify all other capability ownership before loading
+  // secrets or making a remote request.
+  try {
+    const owners = await Promise.all(
+      (["cart", "orders", "checkout", "payments"] as const).map((capability) =>
+        resolveCommerceProvider(client, {
+          buildProjectId: input.buildProjectId,
+          surface: input.surface,
+          capability,
+        }),
+      ),
+    );
+    if (owners.some((owner) => owner.provider !== "shopify" ||
+        owner.environment !== context.environment ||
+        owner.connection.id !== context.connection.id ||
+        owner.storeId !== owners[0]!.storeId)) reject();
+  } catch { return reject(); }
+
+  const connection = await ports(client, context, input.surface);
+  if (!context.secretStore) reject();
+  const stored = await resolveExternalCommerceCartHandle(client, {
+    buildProjectId: context.buildProjectId,
+    provider: "shopify",
+    environment: context.environment,
+    cartToken: input.request.cartId,
+    secretStore: context.secretStore,
+  });
+
+  // Shopify recommends fetching checkoutUrl at the moment of navigation.
+  // The buyer-IP proof is passed to BOTH Storefront queries.
+  const cart = await connection.cartPort.getCart({
+    remoteCartId: stored.remoteCartId,
+    buyerIp,
+  });
+  if (cart.remoteCartId !== stored.remoteCartId || cart.currency !== stored.currency ||
+      cart.totalQuantity < 1 || cart.items.length < 1) reject();
+
+  const shop = await connection.graphql.execute<{
+    shop: { primaryDomain: { host: string; sslEnabled: boolean } };
+  }>({
+    document: "query ZoeBuildHostedCheckoutDomain { shop { primaryDomain { host sslEnabled } } }",
+    audience: { kind: "buyer", ip: buyerIp },
+  });
+
+  if (!shop?.shop?.primaryDomain) reject();
+  return shopifyHostedCheckoutResult({
+    url: cart.checkoutUrl,
+    shopHostname: connection.shopHostname,
+    primaryDomain: shop.shop.primaryDomain,
+  });
 }

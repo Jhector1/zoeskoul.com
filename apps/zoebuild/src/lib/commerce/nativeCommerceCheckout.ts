@@ -1146,6 +1146,7 @@ export async function beginNativeCommerceCheckout(
   }
 
   return {
+    kind: "order",
     orderId:
       order.id,
     provider:
