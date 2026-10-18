@@ -305,6 +305,7 @@ async function executePreviewCommerce(
             input,
           ),
       },
+      verifiedBuyerIp,
     );
   }
 

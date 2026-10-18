@@ -384,6 +384,7 @@ export async function POST(
                 ),
               ),
           },
+          trustedCommerceBuyerIpFromRequest(request),
         );
 
       return new Response(

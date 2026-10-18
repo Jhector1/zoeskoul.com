@@ -136,13 +136,12 @@ describe(
     );
 
     it(
-      "does not register Shopify before its adapter exists",
+      "keeps Shopify runtime behind a test-only acceptance gate",
       () => {
-        expect(
-          registry.toLowerCase(),
-        ).not.toContain(
-          '"shopify"',
-        );
+        expect(registry).toContain("shopifyAcceptanceRuntimeAllowed({");
+        expect(registry).toContain("SHOPIFY_ACCEPTANCE_RUNTIME_REGISTRATION");
+        expect(registry).toContain("process.env.ZOEBUILD_SHOPIFY_ACCEPTANCE_RUNTIME_GATE");
+        expect(registry).not.toContain('manifest: { key: "shopify"');
       },
     );
   },

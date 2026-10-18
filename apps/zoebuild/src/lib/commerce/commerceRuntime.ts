@@ -239,6 +239,7 @@ export async function prepareCommercePaymentReconciliation(
   if (
     handler.capability !==
       "commerce.payments" ||
+    !("prepareReconciliation" in handler) ||
     !handler.prepareReconciliation
   ) {
     throw new CommerceProviderResolutionError(
@@ -326,7 +327,8 @@ export async function prepareCommercePaymentCheckout(
 
   if (
     handler.capability !==
-      "commerce.payments"
+      "commerce.payments" ||
+    !("prepare" in handler)
   ) {
     throw new CommerceProviderResolutionError(
       "COMMERCE_PROVIDER_EXECUTION_UNAVAILABLE",
@@ -588,6 +590,7 @@ export async function beginCommerceCheckout(
     surface: CommerceRuntimeSurface;
     request: CommerceCheckoutRequest;
   }>,
+  verifiedBuyerIp?: VerifiedCommerceBuyerIp | null,
 ) {
   const {
     resolved,
@@ -621,6 +624,7 @@ export async function beginCommerceCheckout(
           resolved.environment,
         connection:
           resolved.connection,
+        verifiedBuyerIp: verifiedBuyerIp ?? undefined,
       },
       handler.requiresSecretStore,
     );

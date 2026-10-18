@@ -53,6 +53,10 @@ import {
 import type {
   CommerceCheckoutReconciliationOrder,
 } from "./commerceCheckoutReconciliation";
+import {
+  shopifyAcceptanceRuntimeAllowed,
+  SHOPIFY_ACCEPTANCE_RUNTIME_REGISTRATION,
+} from "./shopifyRuntimeAcceptanceRegistration";
 
 export type RuntimeCommerceCapability =
   | "commerce.catalog"
@@ -215,13 +219,24 @@ type PaymentHandler = Readonly<{
     >;
 }>;
 
+/**
+ * Hosted commerce owns payment within its own checkout. It does not offer
+ * ZoeStore-style payment sessions or post-order reconciliation.
+ */
+type HostedPaymentsOwnerHandler = Readonly<{
+  capability: "commerce.payments";
+  requiresSecretStore: false;
+  executionMode: "provider-hosted";
+}>;
+
 export type CommerceRuntimeHandler =
   | CatalogHandler
   | InventoryHandler
   | CartHandler
   | OrdersHandler
   | CheckoutHandler
-  | PaymentHandler;
+  | PaymentHandler
+  | HostedPaymentsOwnerHandler;
 
 export type CommerceProviderAdapterRegistration =
   ProviderRegistration<
@@ -375,3 +390,16 @@ registerCommerceProviderAdapter({
     },
   },
 });
+
+/**
+ * TEST-ONLY acceptance registration. Public provider manifests still exclude
+ * Shopify; deployment and migration readiness are NOT asserted here.
+ * Production cannot enter this branch even if its environment is mis-set.
+ */
+if (shopifyAcceptanceRuntimeAllowed({
+  nodeEnv: process.env.NODE_ENV,
+  activationToken: process.env.ZOEBUILD_SHOPIFY_ACCEPTANCE_RUNTIME_GATE,
+  signingKey: process.env.ZOEBUILD_BUYER_IP_SIGNING_KEY,
+})) {
+  registerCommerceProviderAdapter(SHOPIFY_ACCEPTANCE_RUNTIME_REGISTRATION);
+}
