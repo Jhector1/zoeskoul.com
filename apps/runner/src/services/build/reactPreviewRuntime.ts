@@ -48,6 +48,9 @@ import {
 import {
   buildProductionBuildContainerOptions,
 } from "./executeProductionBuild.js";
+import {
+  assertZoeBuildPreviewCapacity,
+} from "./zoeBuildPreviewCapacity.js";
 
 import {
   REACT_VITE_V1_PREBUILT_LOCK_SHA256,
@@ -105,6 +108,10 @@ const previews =
 
 const pendingPreviewStartsByActor =
   new Map<string, number>();
+
+// Coalesce cancellation and idle cleanup; capacity remains held until removal.
+const pendingPreviewDestructions =
+  new Map<string, Promise<void>>();
 
 let pendingPreviewStartsGlobal =
   0;
@@ -169,6 +176,13 @@ function reservePreviewCapacity(
       `Runner is busy. Global active session limit is ${env.maxConcurrentGlobal}.`,
     );
   }
+
+  // Reserve no more than one ZoeBuild preview across pending and live states.
+  // Each existing preview remains counted until its Docker cleanup finishes.
+  assertZoeBuildPreviewCapacity(
+    previews.size,
+    pendingPreviewStartsGlobal,
+  );
 
   pendingPreviewStartsByActor.set(
     ownerKey,
@@ -1321,31 +1335,38 @@ async function waitForPreviewReady(
 }
 
 async function destroyPreview(
-  record:
-    MutablePreviewRecord,
-) {
-  previews.delete(
-    record.id,
-  );
+  record: MutablePreviewRecord,
+): Promise<void> {
+  const existing = pendingPreviewDestructions.get(record.id);
+  if (existing) {
+    await existing;
+    return;
+  }
 
-  await docker
-    .getContainer(
-      record.containerId,
-    )
-    .remove({
-      force: true,
-    })
-    .catch(
-      () => undefined,
-    );
+  // Do not drop the live-preview count before Docker removal: another start
+  // must not overcommit CPU/memory while the previous container is stopping.
+  const cleanup = (async () => {
+    try {
+      await docker
+        .getContainer(record.containerId)
+        .remove({ force: true })
+        .catch(() => undefined);
+      await cleanupWorkspaceNow(record.workspaceDir)
+        .catch(() => undefined);
+    } finally {
+      previews.delete(record.id);
+    }
+  })();
 
-  await cleanupWorkspaceNow(
-    record.workspaceDir,
-  ).catch(
-    () => undefined,
-  );
+  pendingPreviewDestructions.set(record.id, cleanup);
+  try {
+    await cleanup;
+  } finally {
+    if (pendingPreviewDestructions.get(record.id) === cleanup) {
+      pendingPreviewDestructions.delete(record.id);
+    }
+  }
 }
-
 async function reuseExistingProjectPreview(
   ownerKey: string,
   request:
