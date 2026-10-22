@@ -2,6 +2,7 @@ import type { RequestHandler } from "express";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import { getSession } from "../services/sessions/sessionStore.js";
 import { replaceWorkspaceFiles } from "../services/workspace/replaceWorkspaceFiles.js";
+import { repairSandboxWorkspaceOwnership } from "../services/workspace/workspaceOwnershipRepair.js";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 
 type ReplaceWorkspaceBody = {
@@ -40,6 +41,8 @@ export const sessionsReplaceWorkspaceRoute: RequestHandler = async (req, res) =>
         const files = Array.isArray(body.files) ? body.files : [];
 
         const result = await replaceWorkspaceFiles(session.workspaceDir, files);
+        // Fail this synchronization if the learner would not own imported files.
+        await repairSandboxWorkspaceOwnership(session.workspaceDir);
 
         return res.status(200).json({
             ok: true,
@@ -47,7 +50,7 @@ export const sessionsReplaceWorkspaceRoute: RequestHandler = async (req, res) =>
         });
     } catch (e: any) {
         const message = e?.message ?? "Failed to replace workspace.";
-        const status = message.includes("disk is low") ? 503 : 400;
+        const status = message.includes("disk is low") || message.includes("Workspace ownership repair") ? 503 : 400;
         return res.status(status).json({
             ok: false,
             error: message,

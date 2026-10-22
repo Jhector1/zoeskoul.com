@@ -42,6 +42,7 @@ import { docker } from "./dockerClient.js";
 import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
 import { killSession } from "./killSession.js";
 import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
+import { repairSandboxWorkspaceOwnership } from "../workspace/workspaceOwnershipRepair.js";
 import {
   acquireSharedShellWorkspace,
   releaseSharedShellWorkspaceReservation,
@@ -329,6 +330,8 @@ async function startDockerSessionUncoordinated(
 
     await ensureWorkspaceRuntimeFiles(resolvedWorkspaceDir, plan.prepareDirs ?? []);
     await ensureWorkspaceWritableForShellUser(resolvedWorkspaceDir);
+    // Before exposing the PTY, imported and reused files must be owned by the learner.
+    await repairSandboxWorkspaceOwnership(resolvedWorkspaceDir);
 
     const sandboxProfile = resolveSandboxProfile("learn");
 

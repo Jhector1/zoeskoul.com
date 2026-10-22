@@ -33,6 +33,8 @@ const envSchema = z.object({
 
   RUNNER_EXEC_UID: z.coerce.number().int().nonnegative().default(1000),
   RUNNER_EXEC_GID: z.coerce.number().int().nonnegative().default(1000),
+  // Rootless Docker ownership-repair canary: activate only after a live probe.
+  RUNNER_WORKSPACE_OWNERSHIP_REPAIR_ENABLED: boolFlag(false),
 
   RUNNER_MAX_FILES: intEnv(32),
   RUNNER_MAX_TOTAL_BYTES: intEnv(262144),
@@ -102,6 +104,7 @@ export const env = {
 
   execUid: parsed.RUNNER_EXEC_UID,
   execGid: parsed.RUNNER_EXEC_GID,
+  workspaceOwnershipRepairEnabled: parsed.RUNNER_WORKSPACE_OWNERSHIP_REPAIR_ENABLED,
 
   maxFiles: parsed.RUNNER_MAX_FILES,
   maxTotalBytes: parsed.RUNNER_MAX_TOTAL_BYTES,

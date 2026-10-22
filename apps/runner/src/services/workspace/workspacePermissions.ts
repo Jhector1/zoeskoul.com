@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
-import fs from "node:fs/promises";
 import { promisify } from "node:util";
+import fs from "node:fs/promises";
 import { env } from "../../lib/env.js";
 
 const execFileAsync = promisify(execFile);
@@ -24,23 +24,23 @@ async function runBestEffort(command: string, args: string[]) {
  * runner writes so ordinary learner commands can overwrite/copy/move files.
  */
 export async function ensureWorkspaceWritableForShellUser(workspaceDir: string) {
-  const uid = String(process.env.RUNNER_WORKSPACE_UID ?? env.execUid);
-  const gid = String(process.env.RUNNER_WORKSPACE_GID ?? env.execGid);
-
-  const ownershipNormalized = await runBestEffort("chown", ["-R", `${uid}:${gid}`, workspaceDir]);
-  if (!ownershipNormalized) {
-    // Host-side UID can differ from container UID under rootless Docker and
-    // user namespaces. This is diagnostic only: do not change container
-    // privileges or silently treat a mode-666 file as user-owned.
-    const st = await fs.stat(workspaceDir);
-    console.warn("workspace ownership normalization failed", {
-      expectedContainerUid: uid,
-      expectedContainerGid: gid,
-      hostWorkspaceUid: st.uid,
-      hostWorkspaceGid: st.gid,
-      guidance: "Check host/container UID mapping and bind-mounted file ownership before relying on chmod inside the sandbox.",
-    });
+  if (!env.workspaceOwnershipRepairEnabled) {
+    // Legacy behavior for runners that have not yet passed rootless canary.
+    const uid = String(process.env.RUNNER_WORKSPACE_UID ?? env.execUid);
+    const gid = String(process.env.RUNNER_WORKSPACE_GID ?? env.execGid);
+    const ok = await runBestEffort("chown", ["-R", `${uid}:${gid}`, workspaceDir]);
+    if (!ok) {
+      const st = await fs.stat(workspaceDir);
+      console.warn("workspace ownership normalization failed", {
+        expectedContainerUid: uid,
+        expectedContainerGid: gid,
+        hostWorkspaceUid: st.uid,
+        hostWorkspaceGid: st.gid,
+      });
+    }
   }
+  // With repair enabled, never chown to an assumed host UID. The controlled
+  // namespace-local helper owns this operation at session/sync boundaries.
 
   /**
    * Keep group/other write as well because Docker Desktop/rootless bind mounts
