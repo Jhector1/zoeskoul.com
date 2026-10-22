@@ -131,12 +131,18 @@ export async function replaceWorkspaceFiles(
     }
 
     await fs.mkdir(path.dirname(abs), { recursive: true });
+    // Preserve the execute bit on files that the learner already chmod'd.
+    // A workspace/editor resync must not silently turn a runnable script into
+    // a non-executable file. New files retain the existing default 0666 mode.
+    const existingMode = currentFiles.has(relPath)
+      ? (await fs.stat(abs)).mode & 0o777
+      : null;
     if (file.storage === "binary") {
       await fs.writeFile(abs, file.bytes);
     } else {
       await fs.writeFile(abs, file.content, "utf8");
     }
-    await fs.chmod(abs, 0o666).catch(() => {});
+    await fs.chmod(abs, existingMode ?? 0o666).catch(() => {});
     currentFiles.add(relPath);
   }
 

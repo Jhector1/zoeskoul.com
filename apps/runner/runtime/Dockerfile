@@ -47,6 +47,8 @@ RUN set -eux; \
     git \
     libc6-dev \
     make \
+    gdb \
+    valgrind \
     nodejs \
     sqlite3 \
     openjdk-21-jdk-headless \

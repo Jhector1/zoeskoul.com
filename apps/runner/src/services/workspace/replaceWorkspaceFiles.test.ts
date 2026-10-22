@@ -181,6 +181,46 @@ describe("replaceWorkspaceFiles", () => {
     });
 
 
+
+    it("preserves executable scripts across workspace replacement", async () => {
+        const script = path.join(root, "test_script.sh");
+        await fs.writeFile(script, "#!/usr/bin/env bash\necho old\n");
+        await fs.chmod(script, 0o755);
+
+        await replaceWorkspaceFiles(root, [
+            {
+                kind: "file",
+                path: "test_script.sh",
+                content: "#!/usr/bin/env bash\necho new\n",
+            },
+        ]);
+
+        // The runner's existing `chmod -R a+rwX` can broaden 0755 to 0777
+        // when host/container ownership differs. The invariant under test is
+        // that a previously executable script stays executable after sync.
+        expect((await fs.stat(script)).mode & 0o111).toBe(0o111);
+        await expect(fs.readFile(script, "utf8")).resolves.toBe(
+            "#!/usr/bin/env bash\necho new\n",
+        );
+    });
+
+    it("does not add executable bits to ordinary files across workspace replacement", async () => {
+        const regular = path.join(root, "notes.txt");
+        await fs.writeFile(regular, "old\n");
+        await fs.chmod(regular, 0o644);
+
+        await replaceWorkspaceFiles(root, [
+            {
+                kind: "file",
+                path: "notes.txt",
+                content: "new\n",
+            },
+        ]);
+
+        expect((await fs.stat(regular)).mode & 0o111).toBe(0);
+        await expect(fs.readFile(regular, "utf8")).resolves.toBe("new\n");
+    });
+
     it("replaces binary files with exact bytes", async () => {
         const before = Buffer.from([1, 2, 3]);
         const after = Buffer.from([0, 255, 9, 8, 7]);
