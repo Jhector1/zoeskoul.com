@@ -48,7 +48,13 @@ async function writeWorkspaceBinaryFile(abs: string, bytes: Buffer) {
 
 async function ensureBashHistory(workspaceDir: string) {
   const historyPath = path.join(workspaceDir, ".bash_history");
-
+  const existing = await fs.lstat(historyPath).catch((error: any) => {
+    if (error?.code === "ENOENT") return null;
+    throw error;
+  });
+  if (existing && (!existing.isFile() || existing.isSymbolicLink())) {
+    throw new Error("Unsafe workspace history entry.");
+  }
   const handle = await fs.open(historyPath, "a");
   await handle.close();
 
@@ -64,6 +70,17 @@ export async function ensureWorkspaceRuntimeFiles(
 
   for (const dir of prepareDirs) {
     const safe = assertSafeWorkspacePath(dir);
+    let parent = workspaceDir;
+    for (const part of safe.split("/")) {
+      parent = path.join(parent, part);
+      const current = await fs.lstat(parent).catch((error: any) => {
+        if (error?.code === "ENOENT") return null;
+        throw error;
+      });
+      if (current && (!current.isDirectory() || current.isSymbolicLink())) {
+        throw new Error(`Unsafe workspace runtime directory: ${safe}`);
+      }
+    }
     await ensureWorkspaceDir(path.join(workspaceDir, safe));
   }
 }

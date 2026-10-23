@@ -42,6 +42,7 @@ import { docker } from "./dockerClient.js";
 import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
 import { killSession } from "./killSession.js";
 import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
+import { withWorkspaceSyncLock } from "../workspace/workspaceSyncLock.js";
 import { repairSandboxWorkspaceOwnership } from "../workspace/workspaceOwnershipRepair.js";
 import {
   acquireSharedShellWorkspace,
@@ -328,10 +329,14 @@ async function startDockerSessionUncoordinated(
     sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
 
-    await ensureWorkspaceRuntimeFiles(resolvedWorkspaceDir, plan.prepareDirs ?? []);
-    await ensureWorkspaceWritableForShellUser(resolvedWorkspaceDir);
-    // Before exposing the PTY, imported and reused files must be owned by the learner.
-    await repairSandboxWorkspaceOwnership(resolvedWorkspaceDir);
+    // Shared sessions may be reused while the IDE is saving. Coordinate the
+    // startup normalization and ownership repair with replacement/snapshots.
+    await withWorkspaceSyncLock(resolvedWorkspaceDir, async () => {
+      await ensureWorkspaceRuntimeFiles(resolvedWorkspaceDir, plan.prepareDirs ?? []);
+      await ensureWorkspaceWritableForShellUser(resolvedWorkspaceDir);
+      // Never expose a PTY before the repaired UID mapping is validated.
+      await repairSandboxWorkspaceOwnership(resolvedWorkspaceDir);
+    });
 
     const sandboxProfile = resolveSandboxProfile("learn");
 

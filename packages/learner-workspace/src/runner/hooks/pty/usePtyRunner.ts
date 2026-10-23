@@ -578,7 +578,12 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 );
             } finally {
                 snapshotInFlightSessionIdsRef.current.delete(sessionId);
-                runBaselineBySessionIdRef.current.delete(sessionId);
+                // Preserve the last known baseline after transient snapshot
+                // failures so a later retry can still merge safely. A failed
+                // snapshot must never be mistaken for an empty workspace.
+                if (snapshottedSessionIdsRef.current.has(sessionId)) {
+                    runBaselineBySessionIdRef.current.delete(sessionId);
+                }
             }
         },
         [getCurrentWorkspaceEntries, pushChunk],

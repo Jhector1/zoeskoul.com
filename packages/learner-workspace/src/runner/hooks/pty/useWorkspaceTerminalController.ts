@@ -977,6 +977,8 @@ export function useWorkspaceTerminalController(
     const quietTimerRef = React.useRef<number | null>(null);
     const awaitingPostEnterSnapshotRef = React.useRef(false);
     const snapshotInFlightRef = React.useRef<Promise<boolean> | null>(null);
+    const pushInFlightRef = React.useRef<Promise<boolean> | null>(null);
+    const lastWorkspaceSyncErrorRef = React.useRef<string | null>(null);
     const openInFlightRef = React.useRef<Promise<void> | null>(null);
     const workspaceReadyRef = React.useRef(true);
     const openedLeaseKeyRef = React.useRef<string | null>(null);
@@ -1579,17 +1581,29 @@ export function useWorkspaceTerminalController(
                 const historyContent = await ensureHistoryLoaded();
                 const payload = augmentEntriesWithHistory(visible, historyContent);
 
+                // Send the last acknowledged browser/terminal baseline. The
+                // runner applies only edits made since this baseline, and
+                // rejects conflicting terminal changes with HTTP 409.
+                const baselineFiles = augmentEntriesWithHistory(
+                    lastPushedEntriesRef.current,
+                    historyContent,
+                );
                 await postJson<ReplaceResponse>(
                     `/api/run/pty/sessions/${encodeURIComponent(sessionId)}/workspace/replace`,
-                    { files: payload },
+                    { files: payload, baselineFiles },
                 );
 
                 lastPushedEntriesRef.current = visible;
+                lastWorkspaceSyncErrorRef.current = null;
                 setSyncStatus("idle");
                 return true;
             } catch (e: any) {
                 setSyncStatus("error");
-                pushChunk("err", `\r\n${e?.message ?? "Failed to sync workspace to terminal."}\r\n`);
+                const message = e?.message ?? "Failed to sync workspace to terminal.";
+                if (lastWorkspaceSyncErrorRef.current !== message) {
+                    pushChunk("err", `\r\n${message}\r\n`);
+                    lastWorkspaceSyncErrorRef.current = message;
+                }
                 return false;
             }
         },
@@ -1613,24 +1627,38 @@ export function useWorkspaceTerminalController(
                 void persistHistoryContent(historyContent);
             }
 
+            lastWorkspaceSyncErrorRef.current = null;
             setSyncStatus("idle");
             return sortEntries(visible);
         } catch (e: any) {
             setSyncStatus("error");
-            pushChunk("err", `\r\n${e?.message ?? "Failed to pull terminal workspace."}\r\n`);
-            return [];
+            const message = e?.message ?? "Failed to pull terminal workspace.";
+            if (lastWorkspaceSyncErrorRef.current !== message) {
+                pushChunk("err", `\r\n${message}\r\n`);
+                lastWorkspaceSyncErrorRef.current = message;
+            }
+            throw e; // Never mistake a failed snapshot for an empty workspace.
         }
     }, [sessionId, persistHistoryContent, pushChunk]);
 
     const pushWorkspaceFromSource = React.useCallback(
         async (force = false): Promise<boolean> => {
+            // Do not let two Enter/save handlers race and both send an obsolete
+            // baseline. Read fresh editor entries after the earlier push settles.
+            if (pushInFlightRef.current) {
+                const priorOk = await pushInFlightRef.current;
+                if (!priorOk) return false;
+            }
             const entries = getWorkspaceEntries();
-
             if (!force && entriesEqual(entries, lastPushedEntriesRef.current)) {
                 return true;
             }
-
-            return await replaceFiles(entries);
+            const run = replaceFiles(entries);
+            pushInFlightRef.current = run;
+            try { return await run; }
+            finally {
+                if (pushInFlightRef.current === run) pushInFlightRef.current = null;
+            }
         },
         [getWorkspaceEntries, replaceFiles],
     );
@@ -1656,17 +1684,14 @@ export function useWorkspaceTerminalController(
 
             awaitingPostEnterSnapshotRef.current = false;
 
-            try {
-                await args.onTerminalSnapshotFiles?.(snapshot, {
-                    dirtyUiPaths,
-                    baselinePaths: new Set(
-                        terminalBaselineEntries.map((entry) => entry.path),
-                    ),
-                });
-            } finally {
-                lastPushedEntriesRef.current = nextBaseline;
-            }
-
+            await args.onTerminalSnapshotFiles?.(snapshot, {
+                dirtyUiPaths,
+                baselinePaths: new Set(
+                    terminalBaselineEntries.map((entry) => entry.path),
+                ),
+            });
+            // Advance the baseline only after the IDE accepts the snapshot.
+            lastPushedEntriesRef.current = nextBaseline;
             return true;
         })();
 
@@ -1674,6 +1699,9 @@ export function useWorkspaceTerminalController(
 
         try {
             return await run;
+        } catch {
+            // Keep the last acknowledged baseline and retry on a later pull.
+            return false;
         } finally {
             snapshotInFlightRef.current = null;
         }

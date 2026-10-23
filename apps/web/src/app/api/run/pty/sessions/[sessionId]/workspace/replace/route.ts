@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 type ReplaceWorkspaceRequest = {
     files: WorkspaceSyncEntry[];
+    baselineFiles: WorkspaceSyncEntry[];
 };
 
 type ReplaceWorkspaceResponse =
@@ -37,12 +38,19 @@ export async function POST(
         const body = (await req.json()) as Partial<ReplaceWorkspaceRequest>;
 
         const files = Array.isArray(body.files) ? body.files : [];
+        if (!Array.isArray(body.baselineFiles)) {
+            return jsonNoStore({
+                ok: false,
+                error: "Workspace sync requires a baseline. Reload the IDE.",
+            }, 428);
+        }
+        const baselineFiles = body.baselineFiles;
         const actorKey = await requireRunnerActorKey();
 
         const out = await runnerPost<ReplaceWorkspaceResponse>(
             `/sessions/${encodeURIComponent(sessionId)}/replace-workspace`,
             actorKey,
-            { files },
+            { files, baselineFiles },
         );
 
         return jsonNoStore(out, out.ok ? 200 : 400);

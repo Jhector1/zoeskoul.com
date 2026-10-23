@@ -3,6 +3,7 @@ import type { RequestHandler } from "express";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import { getSession } from "../services/sessions/sessionStore.js";
 import { snapshotWorkspaceFiles } from "../services/workspace/snapshotWorkspaceFiles.js";
+import { withWorkspaceSyncLock } from "../services/workspace/workspaceSyncLock.js";
 
 async function pathExists(path: string) {
     try {
@@ -49,7 +50,9 @@ export const snapshotWorkspaceRoute: RequestHandler = async (req, res) => {
             });
         }
 
-        const files = await snapshotWorkspaceFiles(session.workspaceDir);
+        const files = await withWorkspaceSyncLock(session.workspaceDir, () =>
+            snapshotWorkspaceFiles(session.workspaceDir!),
+        );
 
         return res.status(200).json({
             ok: true,

@@ -245,3 +245,86 @@ describe("replaceWorkspaceFiles", () => {
     });
 
 });
+
+describe("V5 change-aware workspace sync", () => {
+  let root: string;
+  beforeEach(async () => { root = await fs.mkdtemp(path.join(os.tmpdir(), "zoe-v5-sync-test-")); });
+  afterEach(async () => { await fs.rm(root, { recursive: true, force: true }); });
+
+  const f = (path: string, content: string) => ({ kind: "file" as const, path, content });
+
+  it("does not rewrite an unchanged chmod 755 script when editing only main.c", async () => {
+    const script = path.join(root, "test_script.sh");
+    const main = path.join(root, "main.c");
+    await fs.writeFile(script, "#!/bin/sh\necho ok\n");
+    await fs.chmod(script, 0o755);
+    await fs.writeFile(main, "old\n");
+    const inode = (await fs.stat(script)).ino;
+    const result = await replaceWorkspaceFiles(root,
+      [f("test_script.sh", "#!/bin/sh\necho ok\n"), f("main.c", "new\n")],
+      { baselineFiles: [f("test_script.sh", "#!/bin/sh\necho ok\n"), f("main.c", "old\n")] },
+    );
+    expect(result.fileCount).toBe(2);
+    expect((await fs.stat(script)).ino).toBe(inode);
+    expect((await fs.stat(script)).mode & 0o111).toBe(0o111);
+    await expect(fs.readFile(main, "utf8")).resolves.toBe("new\n");
+  });
+
+  it("preserves terminal-only files not in the browser's baseline", async () => {
+    await fs.writeFile(path.join(root, "main.c"), "old\n");
+    await fs.writeFile(path.join(root, "terminal.log"), "terminal output\n");
+    await replaceWorkspaceFiles(root, [f("main.c", "new\n")], {
+      baselineFiles: [f("main.c", "old\n")],
+    });
+    await expect(fs.readFile(path.join(root, "terminal.log"), "utf8"))
+      .resolves.toBe("terminal output\n");
+  });
+
+  it("returns a conflict before changing other files if terminal edited the same path", async () => {
+    await fs.writeFile(path.join(root, "main.c"), "terminal edit\n");
+    await fs.writeFile(path.join(root, "other.c"), "original\n");
+    await expect(replaceWorkspaceFiles(root,
+      [f("main.c", "browser edit\n"), f("other.c", "new\n")],
+      { baselineFiles: [f("main.c", "old\n"), f("other.c", "original\n")] },
+    )).rejects.toThrow(/Workspace changed since last synchronization: main.c/);
+    await expect(fs.readFile(path.join(root, "main.c"), "utf8"))
+      .resolves.toBe("terminal edit\n");
+    await expect(fs.readFile(path.join(root, "other.c"), "utf8"))
+      .resolves.toBe("original\n");
+  });
+
+  it("preserves restrictive permissions on a genuinely changed executable", async () => {
+    const script = path.join(root, "run.sh");
+    await fs.writeFile(script, "#!/bin/sh\necho old\n");
+    await fs.chmod(script, 0o755);
+    await replaceWorkspaceFiles(root, [f("run.sh", "#!/bin/sh\necho new\n")], {
+      baselineFiles: [f("run.sh", "#!/bin/sh\necho old\n")],
+    });
+    expect((await fs.stat(script)).mode & 0o111).toBe(0o111);
+    await expect(fs.readFile(script, "utf8")).resolves.toMatch(/echo new/);
+  });
+
+  it("rejects a symlink parent and leaves the outside file untouched", async () => {
+    const outside = await fs.mkdtemp(path.join(os.tmpdir(), "zoe-v5-outside-"));
+    try {
+      await fs.writeFile(path.join(outside, "data.txt"), "outside\n");
+      await fs.symlink(outside, path.join(root, "linked"));
+      await expect(replaceWorkspaceFiles(root, [f("linked/data.txt", "attack\n")], {
+        baselineFiles: [],
+      })).rejects.toThrow(/Unsafe workspace path/);
+      await expect(fs.readFile(path.join(outside, "data.txt"), "utf8"))
+        .resolves.toBe("outside\n");
+    } finally {
+      await fs.rm(outside, { recursive: true, force: true });
+    }
+  });
+
+  it("does not delete a terminal-modified file on a stale browser deletion", async () => {
+    await fs.writeFile(path.join(root, "notes.txt"), "terminal revised\n");
+    await expect(replaceWorkspaceFiles(root, [], {
+      baselineFiles: [f("notes.txt", "original\n")],
+    })).rejects.toThrow(/Workspace changed since last synchronization: notes.txt/);
+    await expect(fs.readFile(path.join(root, "notes.txt"), "utf8"))
+      .resolves.toBe("terminal revised\n");
+  });
+});
