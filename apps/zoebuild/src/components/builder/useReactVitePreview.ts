@@ -6,6 +6,7 @@ import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 import { workspaceSyncEntriesEqual } from "@zoeskoul/learner-workspace/lib/projects/workspaceSyncEntries";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
+import { registeredReactPreviewRoutes } from "@/lib/build/reactPreviewPageCatalog";
 
 type PreviewSession = Readonly<{
   previewId: string;
@@ -631,5 +632,5 @@ export function useReactVitePreview(input: Readonly<{
     };
   }, [input.enabled, restart, syncCurrent, workspaceContentRevision]);
 
-  return preview ? { ...preview, onRetry: restart } : null;
+  return preview ? { ...preview, routes: registeredReactPreviewRoutes(initialWorkspaceEntries), onRetry: restart } : null;
 }

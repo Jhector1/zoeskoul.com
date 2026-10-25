@@ -1,4 +1,5 @@
 import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
+import { injectReactPreviewNavigationBridge } from "@/lib/build/reactPreviewNavigationBridge";
 import {
   proxyFetchTrustedReactPreviewAtRunner,
   resolveTrustedReactPreviewCapabilityAtRunner,
@@ -216,6 +217,7 @@ async function proxy(
       }
     }
 
+    const upstreamStartedAt = Date.now();
     const result = await proxyFetchTrustedReactPreviewAtRunner({
       previewId,
       path: `${normalizedPathname}${url.search}`,
@@ -232,13 +234,36 @@ async function proxy(
     headers.set("Access-Control-Allow-Origin", "*");
     headers.set("Cross-Origin-Resource-Policy", "cross-origin");
     headers.set("Cache-Control", "no-store, max-age=0");
+    // Dependency URLs include Vite's version key; cached responses cannot be
+    // used for another project or capability. HTML and authored source remain uncached.
+    const versionedDependency = method === "GET" && result.status === 200 &&
+      /^node_modules\/\.vite\/deps\/[A-Za-z0-9_.-]+\.(?:js|css)$/.test(relativePath) &&
+      /^[A-Za-z0-9_-]{6,64}$/.test(url.searchParams.get("v") ?? "") &&
+      /^(?:application\/javascript|text\/javascript|text\/css)(?:\s*;|$)/i.test(contentType ?? "");
+    if (versionedDependency) headers.set("Cache-Control", "private, max-age=300");
+    // Expose latency of the authenticated runner bridge in DevTools without
+    // disclosing the runner URL, capability token, file data or credentials.
+    headers.set("Server-Timing", `runner;dur=${Math.max(0, Date.now() - upstreamStartedAt)}`);
     headers.set("X-Content-Type-Options", "nosniff");
     headers.set("Referrer-Policy", "no-referrer");
 
-    const body =
+    let body =
       method === "HEAD"
         ? null
         : new Uint8Array(Buffer.from(result.bodyBase64, "base64"));
+
+    // Only HTML documents receive the unprivileged navigation bridge. Never
+    // rewrite Vite modules, API responses, or large/untrusted binary assets.
+    if (method === "GET" && result.status === 200 && body &&
+        /^text\/html(?:;|$)/i.test(contentType ?? "") &&
+        body.byteLength <= 2_000_000) {
+      const originalHtml = new TextDecoder().decode(body);
+      const augmentedHtml = injectReactPreviewNavigationBridge(originalHtml, basePath);
+      if (augmentedHtml !== originalHtml) {
+        body = new TextEncoder().encode(augmentedHtml);
+        headers.delete("ETag"); // The modified document is not the runner ETag.
+      }
+    }
 
     return new Response(body, { status: result.status, headers });
   } catch (error) {

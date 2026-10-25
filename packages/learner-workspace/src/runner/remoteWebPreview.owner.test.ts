@@ -27,14 +27,34 @@ describe("generic remote web preview seam", () => {
   it("keeps the remote iframe opaque", () => {
     const remote = source("./components/RemoteWebPreview.tsx");
     expect(remote).toContain('sandbox="allow-scripts allow-forms allow-modals"');
-    expect(remote).not.toContain("allow-same-origin");
+    expect(remote).not.toMatch(/sandbox=["'][^"']*\ballow-same-origin\b/);
   });
 
   it("keeps the opaque transport URL out of browser chrome", () => {
     const remote = source("./components/RemoteWebPreview.tsx");
-    expect(remote).toContain('const displayUrl = preview.src ? "/" : statusLabel;');
-    expect(remote).toContain("value={displayUrl}");
+    expect(remote).toContain('const displayUrl = preview.src ? displayPath : statusLabel;');
+    expect(remote).toContain("value={pickerOpen ? pageSearch : visibleUrl}");
+    expect(remote).toContain('const [routeSynced, setRouteSynced] = useState(false)');
+    expect(remote).toContain('setPendingRoute(route)');
+    expect(remote).toContain('role="combobox"');
     expect(remote).not.toContain("value={preview.src");
+  });
+
+  it("tracks in-frame routes and navigation without granting same-origin access", () => {
+    const remote = source("./components/RemoteWebPreview.tsx");
+    expect(remote).toContain('aria-label="Preview back"');
+    expect(remote).toContain('aria-label="Preview forward"');
+    expect(remote).toContain('aria-label="Preview URL"');
+    expect(remote).toContain('aria-label="Available project pages"');
+    expect(remote).toContain('role="combobox"');
+    expect(remote).toContain('action:"navigate",route');
+    expect(remote).toContain('frame?.contentWindow === event.source');
+    expect(remote).toContain('value.rendered !== "boolean"');
+    expect(remote).toContain('value.revision !== expectedRevision');
+    expect(remote).toContain('event.origin !== "null"');
+    expect(remote).toContain('value.basePath !== preview.src');
+    expect(remote).toContain('"Cancel preview refresh"');
+    expect(remote).toContain('controller.abort()');
   });
 
   it("double-buffers remote revisions so the last loaded frame stays visible", () => {
@@ -42,7 +62,8 @@ describe("generic remote web preview seam", () => {
     expect(remote).toContain("frameSources");
     expect(remote).toContain("activeFrame");
     expect(remote).toContain("otherFrame(activeFrame)");
-    expect(remote).toContain("onLoad={() => activateFrame(index, src)}");
+    expect(remote).toContain("frameIndex !== activeFrame && candidate");
+    expect(remote).toContain('action: "probe"');
     expect(remote).toContain("data-preview-frame-active");
     expect(remote).toContain('"pointer-events-none z-0 opacity-0"');
   });

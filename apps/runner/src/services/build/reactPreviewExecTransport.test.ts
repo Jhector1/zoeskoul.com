@@ -1,142 +1,73 @@
-import {
-  readFileSync,
-} from "node:fs";
-import {
-  resolve,
-} from "node:path";
-import {
-  describe,
-  expect,
-  it,
-} from "vitest";
+import { Duplex } from "node:stream";
+import { describe, expect, it, vi } from "vitest";
 
-import {
-  decodeDockerExecMultiplexedOutput,
-} from "./reactPreviewRuntime.js";
+vi.mock("../docker/dockerClient.js", () => ({docker: {getContainer: vi.fn()}}));
+import { ReactPreviewPersistentHttpChannel, PERSISTENT_PREVIEW_HTTP_WORKER } from "./reactPreviewPersistentHttp.js";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
-function frame(
-  streamType: 1 | 2,
-  text: string,
-) {
-  const payload =
-    Buffer.from(
-      text,
-      "utf8",
-    );
-  const header =
-    Buffer.alloc(8);
-
-  header[0] =
-    streamType;
-  header.writeUInt32BE(
-    payload.length,
-    4,
-  );
-
-  return Buffer.concat([
-    header,
-    payload,
-  ]);
+class MockAttachedDockerExec extends Duplex {
+  written: string[] = [];
+  _read() {}
+  _write(chunk: Buffer, _encoding: BufferEncoding, cb: (error?: Error | null) => void) {
+    this.written.push(chunk.toString("utf8"));
+    cb();
+  }
+  reply(data: Record<string, unknown>) {
+    const body = Buffer.from(JSON.stringify(data) + "\n");
+    const head = Buffer.alloc(8);
+    head[0] = 1;
+    head.writeUInt32BE(body.length, 4);
+    const framed = Buffer.concat([head, body]);
+    // Docker may split header and payload across arbitrary TCP chunks.
+    this.push(framed.subarray(0, 3));
+    this.push(framed.subarray(3, 11));
+    this.push(framed.subarray(11));
+  }
 }
 
-describe(
-  "React preview Docker exec transport",
-  () => {
-    it(
-      "demultiplexes stdout JSON without Docker frame bytes",
-      () => {
-        const raw =
-          Buffer.concat([
-            frame(
-              2,
-              "diagnostic\n",
-            ),
-            frame(
-              1,
-              '{"status":200,',
-            ),
-            frame(
-              1,
-              '"headers":{},',
-            ),
-            frame(
-              1,
-              '"bodyBase64":""}\n',
-            ),
-          ]);
-
-        const decoded =
-          decodeDockerExecMultiplexedOutput(
-            raw,
-          );
-
-        expect(
-          decoded.stdout.toString(
-            "utf8",
-          ),
-        ).toBe(
-          '{"status":200,"headers":{},"bodyBase64":""}\n',
-        );
-        expect(
-          decoded.stderr.toString(
-            "utf8",
-          ),
-        ).toBe(
-          "diagnostic\n",
-        );
-
-        expect(() =>
-          JSON.parse(
-            decoded.stdout
-              .toString(
-                "utf8",
-              )
-              .trim(),
-          ),
-        ).not.toThrow();
-      },
-    );
-
-    it(
-      "fails closed on truncated Docker multiplex frames",
-      () => {
-        expect(() =>
-          decodeDockerExecMultiplexedOutput(
-            Buffer.from([
-              1, 0, 0, 0,
-              0, 0, 0, 4,
-              123, 125,
-            ]),
-          ),
-        ).toThrow(
-          "invalid Docker stream",
-        );
-      },
-    );
-
-    it(
-      "keeps machine-readable exec transport non-TTY",
-      () => {
-        const source =
-          readFileSync(
-            resolve(
-              process.cwd(),
-              "src/services/build/reactPreviewRuntime.ts",
-            ),
-            "utf8",
-          );
-
-        expect(
-          source,
-        ).toContain(
-          "Tty: false",
-        );
-        expect(
-          source,
-        ).not.toContain(
-          "Tty: true",
-        );
-      },
-    );
-  },
-);
+describe("persistent isolated Vite transport", () => {
+  it("serves multiple concurrent assets on one attached exec without mixing replies", async () => {
+    const stream = new MockAttachedDockerExec();
+    const close = vi.fn();
+    const channel = new ReactPreviewPersistentHttpChannel(stream, close);
+    const first = channel.request("/src/App.tsx", "GET");
+    const second = channel.request("/node_modules/.vite/deps/react.js", "GET");
+    expect(stream.written).toHaveLength(2);
+    const ids = stream.written.map(text => JSON.parse(text).id as number);
+    stream.reply({id: ids[1], status: 200, headers: {"content-type": "text/javascript"}, bodyBase64: "Yg=="});
+    stream.reply({id: ids[0], status: 200, headers: {"content-type": "text/javascript"}, bodyBase64: "YQ=="});
+    expect((await first).bodyBase64).toBe("YQ==");
+    expect((await second).bodyBase64).toBe("Yg==");
+    channel.close();
+    expect(close).toHaveBeenCalledTimes(1);
+  });
+  it("preserves HTTP failure statuses and rejects unsafe request paths", async () => {
+    const stream = new MockAttachedDockerExec();
+    const channel = new ReactPreviewPersistentHttpChannel(stream, () => {});
+    const pending = channel.request("/missing", "HEAD");
+    stream.reply({id: JSON.parse(stream.written[0]!).id, status: 404, headers: {"content-type": "text/html"}, bodyBase64: ""});
+    expect((await pending).status).toBe(404);
+    await expect(channel.request("//evil.com/", "GET")).rejects.toThrow("Unsafe preview transport path");
+    channel.close();
+  });
+  it("fails closed on broken Docker multiplexed responses", async () => {
+    const stream = new MockAttachedDockerExec();
+    const channel = new ReactPreviewPersistentHttpChannel(stream, () => {});
+    const waiting = channel.request("/", "GET");
+    stream.push(Buffer.from([3, 0, 0, 0, 0, 0, 0, 0]));
+    await expect(waiting).rejects.toThrow("Malformed preview Docker frame");
+    await expect(channel.request("/", "GET")).rejects.toThrow("unavailable");
+  });
+  it("maintains network isolation and bounded concurrency", () => {
+    const runtime = readFileSync(resolve(process.cwd(), "src/services/build/reactPreviewRuntime.ts"), "utf8");
+    const channel = readFileSync(resolve(process.cwd(), "src/services/build/reactPreviewPersistentHttp.ts"), "utf8");
+    expect(runtime).toContain('NetworkMode:\n            "none"');
+    expect(runtime).toContain('fetchPersistentPreviewHttp(record.containerId, safePath, input.method)');
+    expect(runtime).toContain('stopPersistentPreviewHttp(record.containerId)');
+    expect(channel).toContain("AttachStdin: true, Tty: false");
+    expect(channel).toContain("MAX_IN_FLIGHT = 16");
+    expect(PERSISTENT_PREVIEW_HTTP_WORKER).toContain("ThreadPoolExecutor(max_workers=8)");
+    expect(runtime).not.toContain("ExposedPorts");
+  });
+});

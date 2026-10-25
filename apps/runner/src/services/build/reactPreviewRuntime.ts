@@ -20,6 +20,7 @@ import {
   env,
 } from "../../lib/env.js";
 import { isValidReactPreviewReadyDocument } from "./reactPreviewReadiness.js";
+import { fetchPersistentPreviewHttp, stopPersistentPreviewHttp } from "./reactPreviewPersistentHttp.js";
 
 import {
   docker,
@@ -804,173 +805,6 @@ async function runInstall(
   }
 }
 
-export function decodeDockerExecMultiplexedOutput(
-  raw: Buffer,
-): Readonly<{
-  stdout: Buffer;
-  stderr: Buffer;
-}> {
-  const stdout: Buffer[] = [];
-  const stderr: Buffer[] = [];
-
-  let offset = 0;
-
-  while (offset < raw.length) {
-    if (raw.length - offset < 8) {
-      throw new Error(
-        "Trusted preview HTTP bridge returned an invalid Docker stream.",
-      );
-    }
-
-    const streamType = raw[offset];
-    const frameLength =
-      raw.readUInt32BE(offset + 4);
-    const frameStart =
-      offset + 8;
-    const frameEnd =
-      frameStart + frameLength;
-
-    if (
-      frameEnd >
-      raw.length
-    ) {
-      throw new Error(
-        "Trusted preview HTTP bridge returned an invalid Docker stream.",
-      );
-    }
-
-    const payload =
-      raw.subarray(
-        frameStart,
-        frameEnd,
-      );
-
-    if (streamType === 1) {
-      stdout.push(payload);
-    } else if (streamType === 2) {
-      stderr.push(payload);
-    } else {
-      throw new Error(
-        "Trusted preview HTTP bridge returned an invalid Docker stream.",
-      );
-    }
-
-    offset =
-      frameEnd;
-  }
-
-  return {
-    stdout:
-      Buffer.concat(stdout),
-    stderr:
-      Buffer.concat(stderr),
-  };
-}
-
-async function captureExec(
-  containerId: string,
-  command:
-    readonly string[],
-): Promise<string> {
-  const container =
-    docker.getContainer(
-      containerId,
-    );
-
-  const exec =
-    await container.exec({
-      Cmd: [
-        ...command,
-      ],
-      AttachStdout: true,
-      AttachStderr: true,
-      AttachStdin: false,
-      Tty: false,
-    });
-
-  const stream =
-    await exec.start({
-      hijack: true,
-      stdin: false,
-    });
-
-  const chunks:
-    Buffer[] =
-      [];
-
-  await new Promise<void>((resolve, reject) => {
-    let completed = false;
-    let receivedBytes = 0;
-    // Includes Docker framing + base64; a hung exec must not hold a
-    // preview startup/read forever. Cap memory even for malformed output.
-    const timeout = setTimeout(() => {
-      finish(new Error("Trusted preview HTTP bridge deadline exceeded."));
-      if ("destroy" in stream && typeof stream.destroy === "function") stream.destroy();
-    }, 12_000);
-    const finish = (error?: Error) => {
-      if (completed) return;
-      completed = true;
-      clearTimeout(timeout);
-      if (error) reject(error);
-      else resolve();
-    };
-    stream.on("data", (chunk: Buffer) => {
-      if (completed) return;
-      const data = Buffer.from(chunk);
-      receivedBytes += data.length;
-      if (receivedBytes > 8 * 1024 * 1024) {
-        finish(new Error("Trusted preview HTTP bridge response too large."));
-        if ("destroy" in stream && typeof stream.destroy === "function") stream.destroy();
-        return;
-      }
-      chunks.push(data);
-    });
-    stream.on("end", () => finish());
-    stream.on("error", (error: Error) => finish(error));
-    stream.on("close", () => {
-      if (!completed) finish(new Error("Trusted preview HTTP bridge closed prematurely."));
-    });
-  });
-
-  const inspection =
-    await exec.inspect();
-
-  const decoded =
-    decodeDockerExecMultiplexedOutput(
-      Buffer.concat(
-        chunks,
-      ),
-    );
-
-  if (
-    inspection.ExitCode !==
-    0
-  ) {
-    const detail =
-      decoded.stderr
-        .toString(
-          "utf8",
-        )
-        .trim()
-        .slice(
-          0,
-          2048,
-        );
-
-    throw new Error(
-      detail
-        ? `Trusted preview HTTP bridge failed: ${detail}`
-        : "Trusted preview HTTP bridge failed.",
-    );
-  }
-
-  return decoded.stdout
-    .toString(
-      "utf8",
-    )
-    .trim();
-}
-
 function normalizePreviewRequestPath(
   record:
     MutablePreviewRecord,
@@ -1001,57 +835,6 @@ function normalizePreviewRequestPath(
   return raw;
 }
 
-const PYTHON_FETCH_SCRIPT = String.raw`
-import base64
-import json
-import sys
-import urllib.error
-import urllib.request
-
-path = sys.argv[1]
-method = sys.argv[2]
-limit = int(sys.argv[3])
-url = "http://127.0.0.1:5173" + path
-
-request = urllib.request.Request(
-    url,
-    method=method,
-)
-
-try:
-    response = urllib.request.urlopen(
-        request,
-        timeout=5,
-    )
-except urllib.error.HTTPError as error:
-    response = error
-
-body = response.read(limit + 1)
-
-if len(body) > limit:
-    raise RuntimeError(
-        "Preview response exceeds limit."
-    )
-
-headers = {}
-
-for name in [
-    "Content-Type",
-    "Cache-Control",
-    "ETag",
-    "Location",
-]:
-    value = response.headers.get(name)
-    if value:
-        headers[name.lower()] = value
-
-print(json.dumps({
-    "status": int(response.status),
-    "headers": headers,
-    "bodyBase64": base64.b64encode(body).decode("ascii"),
-}))
-`;
-
 export async function fetchReactPreviewHttp(
   input: Readonly<{
     previewId: string;
@@ -1074,52 +857,7 @@ export async function fetchReactPreviewHttp(
       input.path,
     );
 
-  const raw =
-    await captureExec(
-      record.containerId,
-      [
-        "/usr/bin/python3",
-        "-c",
-        PYTHON_FETCH_SCRIPT,
-        safePath,
-        input.method,
-        String(
-          PREVIEW_RESPONSE_MAX_BYTES,
-        ),
-      ],
-    );
-
-  const parsed =
-    JSON.parse(
-      raw,
-    ) as {
-      status: number;
-      headers:
-        Record<
-          string,
-          string
-        >;
-      bodyBase64: string;
-    };
-
-  if (
-    !Number.isInteger(
-      parsed.status,
-    ) ||
-    parsed.status < 100 ||
-    parsed.status > 599 ||
-    typeof parsed.bodyBase64 !==
-      "string" ||
-    !parsed.headers ||
-    typeof parsed.headers !==
-      "object"
-  ) {
-    throw new Error(
-      "Trusted preview HTTP response is invalid.",
-    );
-  }
-
-  return parsed;
+  return fetchPersistentPreviewHttp(record.containerId, safePath, input.method);
 }
 
 /**
@@ -1355,6 +1093,7 @@ async function destroyPreview(
     return;
   }
 
+  stopPersistentPreviewHttp(record.containerId);
   // Do not drop the live-preview count before Docker removal: another start
   // must not overcommit CPU/memory while the previous container is stopping.
   const cleanup = (async () => {
@@ -1553,6 +1292,8 @@ export async function startReactPreview(
       null;
 
   const startTime = currentTime();
+  const previewTimings = { workspaceMs: 0, dependenciesMs: 0, containerMs: 0, readinessMs: 0 };
+  let phaseBeganAt = startTime;
   let startupStage = "workspace";
   try {
     workspaceDir =
@@ -1564,6 +1305,8 @@ export async function startReactPreview(
       workspaceDir,
     );
 
+    previewTimings.workspaceMs = currentTime() - phaseBeganAt;
+    phaseBeganAt = currentTime();
     startupStage = "dependencies";
     const usingPrebuiltDependencies =
       await preparePrebuiltReactViteDependencies(
@@ -1641,6 +1384,8 @@ export async function startReactPreview(
     const viteTmpfsOwnership =
       `uid=${viteTmpfsUser[1]},gid=${viteTmpfsUser[2]},mode=0700`;
 
+    previewTimings.dependenciesMs = currentTime() - phaseBeganAt;
+    phaseBeganAt = currentTime();
     startupStage = "container";
     const container =
       await docker.createContainer({
@@ -1724,6 +1469,8 @@ export async function startReactPreview(
 
     releaseCapacity();
 
+    previewTimings.containerMs = currentTime() - phaseBeganAt;
+    phaseBeganAt = currentTime();
     startupStage = "readiness";
     try {
       await waitForPreviewReady(
@@ -1737,6 +1484,12 @@ export async function startReactPreview(
       throw error;
     }
 
+    previewTimings.readinessMs = currentTime() - phaseBeganAt;
+    console.info("RUNNER React preview start timings", {
+      ...previewTimings,
+      totalMs: currentTime() - startTime,
+      dependencyMode: usingPrebuiltDependencies ? "prebuilt" : "frozen-install",
+    });
     return {
       previewId,
       buildProjectId:
