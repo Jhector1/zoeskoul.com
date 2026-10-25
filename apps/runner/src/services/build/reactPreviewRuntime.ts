@@ -19,6 +19,7 @@ import {
 import {
   env,
 } from "../../lib/env.js";
+import { isValidReactPreviewReadyDocument } from "./reactPreviewReadiness.js";
 
 import {
   docker,
@@ -897,30 +898,39 @@ async function captureExec(
     Buffer[] =
       [];
 
-  await new Promise<void>(
-    (resolve, reject) => {
-      stream.on(
-        "data",
-        (chunk) => {
-          chunks.push(
-            Buffer.from(
-              chunk,
-            ),
-          );
-        },
-      );
-
-      stream.on(
-        "end",
-        resolve,
-      );
-
-      stream.on(
-        "error",
-        reject,
-      );
-    },
-  );
+  await new Promise<void>((resolve, reject) => {
+    let completed = false;
+    let receivedBytes = 0;
+    // Includes Docker framing + base64; a hung exec must not hold a
+    // preview startup/read forever. Cap memory even for malformed output.
+    const timeout = setTimeout(() => {
+      finish(new Error("Trusted preview HTTP bridge deadline exceeded."));
+      if ("destroy" in stream && typeof stream.destroy === "function") stream.destroy();
+    }, 12_000);
+    const finish = (error?: Error) => {
+      if (completed) return;
+      completed = true;
+      clearTimeout(timeout);
+      if (error) reject(error);
+      else resolve();
+    };
+    stream.on("data", (chunk: Buffer) => {
+      if (completed) return;
+      const data = Buffer.from(chunk);
+      receivedBytes += data.length;
+      if (receivedBytes > 8 * 1024 * 1024) {
+        finish(new Error("Trusted preview HTTP bridge response too large."));
+        if ("destroy" in stream && typeof stream.destroy === "function") stream.destroy();
+        return;
+      }
+      chunks.push(data);
+    });
+    stream.on("end", () => finish());
+    stream.on("error", (error: Error) => finish(error));
+    stream.on("close", () => {
+      if (!completed) finish(new Error("Trusted preview HTTP bridge closed prematurely."));
+    });
+  });
 
   const inspection =
     await exec.inspect();
@@ -1286,17 +1296,19 @@ async function waitForPreviewReady(
             "GET",
         });
 
-      if (
-        response.status >= 200 &&
-        response.status < 500
-      ) {
+      if (isValidReactPreviewReadyDocument(response)) {
+        console.info("RUNNER React preview readiness verified", {
+          elapsedMs: currentTime() - startedAt,
+          status: response.status,
+        });
         return;
       }
 
-      lastError =
-        new Error(
-          `Preview readiness HTTP ${response.status}.`,
-        );
+      // Do not treat a 404, redirect or HTML error document as ready.
+      // The editor and browser depend on this being a real Vite document.
+      lastError = new Error(
+        `Preview readiness invalid response (HTTP ${response.status}).`,
+      );
     } catch (error) {
       lastError =
         error;
@@ -1434,10 +1446,7 @@ async function reuseExistingProjectPreview(
             "GET",
         });
 
-      if (
-        response.status < 200 ||
-        response.status >= 500
-      ) {
+      if (!isValidReactPreviewReadyDocument(response)) {
         await destroyPreview(
           preview,
         );
@@ -1543,6 +1552,8 @@ export async function startReactPreview(
     null =
       null;
 
+  const startTime = currentTime();
+  let startupStage = "workspace";
   try {
     workspaceDir =
       await createWorkspace(
@@ -1553,6 +1564,7 @@ export async function startReactPreview(
       workspaceDir,
     );
 
+    startupStage = "dependencies";
     const usingPrebuiltDependencies =
       await preparePrebuiltReactViteDependencies(
         workspaceDir,
@@ -1629,6 +1641,7 @@ export async function startReactPreview(
     const viteTmpfsOwnership =
       `uid=${viteTmpfsUser[1]},gid=${viteTmpfsUser[2]},mode=0700`;
 
+    startupStage = "container";
     const container =
       await docker.createContainer({
         ...options,
@@ -1711,6 +1724,7 @@ export async function startReactPreview(
 
     releaseCapacity();
 
+    startupStage = "readiness";
     try {
       await waitForPreviewReady(
         record,
@@ -1734,6 +1748,15 @@ export async function startReactPreview(
         5173 as const,
     };
   } catch (error) {
+    // Diagnostic metadata only: no source, workspace paths, Docker logs,
+    // capability tokens or secrets in structured startup events.
+    console.warn("RUNNER React preview startup failed", {
+      stage: startupStage,
+      elapsedMs: currentTime() - startTime,
+      category: startupStage === "readiness" ? "readiness" :
+        startupStage === "dependencies" ? "dependencies" :
+        startupStage === "container" ? "container" : "workspace",
+    });
     releaseCapacity();
 
     if (

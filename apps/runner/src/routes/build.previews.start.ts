@@ -42,6 +42,10 @@ function statusForPreviewStartError(
     return 503;
   }
 
+  if (message.includes("did not become ready") ||
+      message.includes("exited before becoming ready") ||
+      message.includes("HTTP bridge")) return 503;
+
   return 400;
 }
 

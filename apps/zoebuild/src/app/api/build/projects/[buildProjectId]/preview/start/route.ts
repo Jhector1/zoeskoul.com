@@ -69,7 +69,16 @@ export async function POST(
       return json(requestId, { ok: false, code: error.code, message: error.message }, error.status);
     }
     if (error instanceof RunnerHttpError) {
-      return json(requestId, { ok: false, code: "BUILD_PREVIEW_RUNNER_FAILED", message: error.message }, error.status === 429 ? 429 : 502);
+      // No runner path, arbitrary error body, actor token or project source
+      // crosses this browser-facing boundary. Correlate via requestId.
+      console.warn("[ZoeBuild preview/start] runner unavailable", {
+        requestId, upstreamStatus: error.status,
+      });
+      const status = error.status === 429 ? 429 : error.status === 503 ? 503 : 502;
+      return json(requestId, { ok: false, code: status === 429 ? "BUILD_PREVIEW_CAPACITY" :
+        "BUILD_PREVIEW_RUNNER_UNAVAILABLE",
+        message: status === 429 ? "Preview capacity reached; retry when a session is free." :
+          "Preview runner is unavailable. Retry after checking the runner service." }, status);
     }
     console.error("[/api/build/projects/:buildProjectId/preview/start] failed", { requestId, buildProjectId, userId, error });
     return json(requestId, { ok: false, code: "BUILD_PREVIEW_START_FAILED", message: "React preview could not be started." }, 500);

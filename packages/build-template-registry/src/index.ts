@@ -139,7 +139,7 @@ const REACT_INDEX_HTML = String.raw`<!doctype html>
 
 const REACT_MAIN = String.raw`import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App";
+import ZoePages from "./ZoePages";
 import "./styles.css";
 
 const root = document.getElementById("root");
@@ -150,9 +150,93 @@ if (!root) {
 
 createRoot(root).render(
   <StrictMode>
-    <App />
+    <ZoePages />
   </StrictMode>,
 );
+`;
+
+const REACT_PAGES = String.raw`// @zoebuild-pages-v1
+/// <reference types="vite/client" />
+import {useEffect,useLayoutEffect,useState,type MouseEvent} from "react";
+import App from "./App";
+
+const pages: {slug:string;label:string;Component:typeof App}[] = [];
+function rootPath():string {
+  const published = /^\/sites\/[^/]+(?=\/|$)/.exec(window.location.pathname)?.[0];
+  return (published ?? import.meta.env.BASE_URL).replace(/\/+$/, "");
+}
+export default function ZoePages(){
+  const [pathname,setPathname]=useState(()=>window.location.pathname);
+  useEffect(()=>{
+    const listener=()=>setPathname(window.location.pathname);
+    window.addEventListener("popstate",listener);
+    return ()=>window.removeEventListener("popstate",listener);
+  },[]);
+  // Relativize route URLs before paint: navigation must work even for middle-click,
+  // new-tab, reload, and generated anchors that are inserted after hydration.
+  const routeTarget=(href:string):string|null=>{
+    if(!href.startsWith("/")||href.startsWith("//"))return null;
+    const url=new URL(href,window.location.href);
+    if(url.origin!==window.location.origin)return null;
+    const root=rootPath();
+    const relative=url.pathname===root?"":url.pathname.startsWith(root+"/")
+      ?url.pathname.slice(root.length+1):url.pathname.slice(1);
+    const slug=relative.replace(/\/+$/,"");
+    if(slug!==""&&!pages.some(page=>page.slug===slug))return null;
+    return root+"/"+slug+url.search+url.hash;
+  };
+  useLayoutEffect(()=>{
+    const repairLinks=()=>{
+      for(const link of document.querySelectorAll<HTMLAnchorElement>("a[href]")){
+        if(link.hasAttribute("download"))continue;
+        const original=link.getAttribute("href");
+        if(!original)continue;
+        const routed=routeTarget(original);
+        if(routed && original!==routed)link.setAttribute("href",routed);
+      }
+    };
+    repairLinks();
+    const observer=new MutationObserver(repairLinks);
+    observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["href"]});
+    return ()=>observer.disconnect();
+  },[]);
+  useEffect(()=>{
+    const onInternalLink=(event:globalThis.MouseEvent)=>{
+      if(event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+      const target=event.target;
+      if(!(target instanceof Element))return;
+      const link=target.closest("a[href]");
+      if(!link||link.hasAttribute("download")||
+          (link.getAttribute("target")&&link.getAttribute("target")!=="_self"))return;
+      const original=link.getAttribute("href");
+      if(!original)return;
+      const next=routeTarget(original);
+      if(!next)return;
+      event.preventDefault();
+      if(window.location.pathname+window.location.search+window.location.hash!==next){
+        window.history.pushState({},"",next);
+        setPathname(window.location.pathname);
+      }
+    };
+    document.addEventListener("click",onInternalLink,true);
+    return ()=>document.removeEventListener("click",onInternalLink,true);
+  },[]);
+  const base=rootPath();
+  const relative=pathname.startsWith(base+"/")
+    ? pathname.slice(base.length+1).replace(/\/+$/,"")
+    : pathname === base ? "" : null;
+  const current=pages.find(item=>item.slug===relative);
+  const destination=(slug:string)=>base+"/"+(slug||"");
+  const visit=(event:MouseEvent<HTMLAnchorElement>,slug:string)=>{
+    if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+    event.preventDefault();
+    const next=destination(slug);
+    if(window.location.pathname!==next){window.history.pushState({},"",next);setPathname(next);}
+  };
+  return <>
+    {relative===""?<App/>:current?<current.Component/>:<main><h1>Page not found</h1><a href={destination("")}>Home</a></main>}
+  </>;
+}
 `;
 
 const REACT_APP = String.raw`export default function App() {
@@ -229,6 +313,9 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  // ZoeBuild preview uses capability-scoped HTTP and an explicit refresh.
+  // Do not create an inaccessible HMR WebSocket from sandboxed previews.
+  server: { hmr: false },
 });
 `;
 
@@ -256,6 +343,7 @@ export const REACT_VITE_TEMPLATE_V1 = {
     { path: "package.json", content: REACT_PACKAGE_JSON },
     { path: "index.html", content: REACT_INDEX_HTML },
     { path: "src/main.tsx", content: REACT_MAIN },
+    { path: "src/ZoePages.tsx", content: REACT_PAGES },
     { path: "src/App.tsx", content: REACT_APP },
     { path: "src/styles.css", content: REACT_CSS },
     { path: "tsconfig.json", content: REACT_TSCONFIG },
@@ -427,6 +515,7 @@ export const COMMERCE_REACT_VITE_TEMPLATE_V1 = {
     { path: "package.json", content: REACT_PACKAGE_JSON },
     { path: "index.html", content: REACT_INDEX_HTML },
     { path: "src/main.tsx", content: REACT_MAIN },
+    { path: "src/ZoePages.tsx", content: REACT_PAGES },
     { path: "src/App.tsx", content: COMMERCE_REACT_APP },
     { path: "src/styles.css", content: COMMERCE_REACT_CSS },
     { path: "src/design/theme.css", content: commerceStaticFile("src/design/theme.css") },
