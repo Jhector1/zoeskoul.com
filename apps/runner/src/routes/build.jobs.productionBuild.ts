@@ -15,6 +15,8 @@ import {
   executeProductionBuild,
 } from "../services/build/executeProductionBuild.js";
 
+import { classifyProductionBuildStepFailure } from "../services/build/productionBuildStepFailure.js";
+
 import {
   withZoeBuildBuildSlot,
   ZoeBuildBuildCapacityError,
@@ -62,6 +64,18 @@ export const executeBuildProductionRoute:
           });
         }
 
+        const stepFailure = classifyProductionBuildStepFailure(error);
+        if (stepFailure) {
+          // Only bounded classification fields. Never log container stderr,
+          // source, URLs or thrown exception details.
+          console.warn("[build/jobs/production-build] isolated step rejected", {
+            stage: stepFailure.stage, kind: stepFailure.failure, code: stepFailure.code,
+          });
+          return res.status(stepFailure.status).json({
+            ok: false, code: stepFailure.code, error: stepFailure.message,
+          });
+        }
+
         const message =
           error instanceof Error
             ? error.message
@@ -96,7 +110,7 @@ export const executeBuildProductionRoute:
         console.error(
           "[build/jobs/production-build] failed",
           {
-            error,
+            kind: error instanceof Error ? error.name : "unknown",
           },
         );
 

@@ -44,10 +44,7 @@ import {
   resolveTrustedBuildOperation,
 } from "./trustedBuildOperations.js";
 import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
-
-type ProductionBuildStep =
-  | "install"
-  | "build";
+import { TrustedProductionBuildStepFailure, type ProductionBuildStep } from "./productionBuildStepFailure.js";
 
 export function buildProductionBuildContainerOptions(
   args: Readonly<{
@@ -184,11 +181,7 @@ async function waitForBuildContainer(
           timer =
             setTimeout(
               () => {
-                reject(
-                  new Error(
-                    `Trusted production-build ${step} step exceeded ${env.buildStepTimeoutMs}ms.`,
-                  ),
-                );
+                reject(new TrustedProductionBuildStepFailure(step, "timeout"));
               },
 
               env.buildStepTimeoutMs,
@@ -241,9 +234,7 @@ async function executeBuildStep(
     if (
       statusCode !== 0
     ) {
-      throw new Error(
-        `Trusted production-build ${args.step} step failed with exit status ${statusCode}.`,
-      );
+      throw new TrustedProductionBuildStepFailure(args.step, "nonzero-exit");
     }
   } finally {
     await container
