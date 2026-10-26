@@ -142,6 +142,7 @@ model BuildProject {
   deployments   BuildDeployment[]
   artifacts     BuildArtifact[]
   commerceStore CommerceStore?
+  chatMessages  ZoeBuildChatMessage[]
 
   @@index([status, updatedAt])
   @@index([stackId])
@@ -815,6 +816,7 @@ model User {
   tutoringSessionsOwned               TutoringSession[]             @relation("TutoringSessionOwner")
   tutoringSessionMemberships          TutoringSessionUser[]
   tutoringTeacherPoolMember           TutoringTeacherPoolMember?    @relation("TutoringTeacherPoolUser")
+  zoeBuildAiCreditCheckoutAttempts    ZoeBuildAiCreditCheckoutAttempt[]
   tutoringCreditPurchases             TutoringCreditPurchase[]      @relation("TutoringCreditPurchaseUser")
   tutoringCreditLedgerEntries         TutoringCreditLedgerEntry[]   @relation("TutoringCreditLedgerUser")
   tutoringRequestsMade                TutoringRequest[]             @relation("TutoringRequestLearner")
@@ -916,6 +918,7 @@ model Subscription {
   stripeSubscriptionId String                   @unique
   status               StripeSubscriptionStatus
   priceId              String?
+  billingProduct       String?
   currentPeriodEnd     DateTime?
   cancelAtPeriodEnd    Boolean                  @default(false)
   trialEnd             DateTime?
@@ -925,6 +928,7 @@ model Subscription {
 
   @@index([userId])
   @@index([stripeCustomerId])
+  @@index([userId, billingProduct])
   @@index([status])
 }
 
@@ -1941,6 +1945,7 @@ enum FeatureKey {
   ide_project_share
   ide_project_unlimited
   build_ai_generate
+  build_ai_edit
 }
 
 enum CommerceStoreStatus {
@@ -2265,4 +2270,288 @@ model CommerceProviderOAuthRefreshLease {
   createdAt    DateTime @default(now())
 
   @@index([expiresAt])
+}
+
+// E16C3: AI credit accounting is deliberately separate from tutoring credits.
+// Wallet rows serialize per-user transactions. Lots hold distinct expiring
+// subscription allocations and purchased credits; the ledger is append-only.
+// E16C5A2B: durable test Checkout attempt, created before any Stripe session.
+// This is NOT a charge record or a grant authorization.
+model ZoeBuildAiCreditCheckoutAttempt {
+  attemptId       String   @id @db.VarChar(64)
+  userId          String
+  priceId         String   @db.VarChar(160)
+  // Immutable custom-amount purchase snapshot; null for existing fixed-price attempts.
+  amountUsdMinor  Int?
+  creditUnits     BigInt?
+  pricingVersion  String?  @db.VarChar(100)
+  customerId      String   @db.VarChar(160)
+  stripeSessionId String?  @unique @db.VarChar(160)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([userId, createdAt])
+}
+
+model AiCreditWallet {
+  userId       String                  @id
+  createdAt    DateTime                @default(now())
+  lots         AiCreditLot[]
+  reservations AiCreditReservation[]
+  entries      AiCreditLedgerEntry[]
+  riskFrozenAt DateTime?
+}
+
+model AiCreditLot {
+  id             String                          @id @default(cuid())
+  userId         String
+  sourceKey      String                          @unique @db.VarChar(160)
+  kind           AiCreditLotKind
+  grantedUnits   BigInt
+  availableUnits BigInt
+  reservedUnits  BigInt                          @default(0)
+  consumedUnits  BigInt                          @default(0)
+  expiredUnits   BigInt                          @default(0)
+  // Cumulative verified Stripe refund target; consumed/reserved units are never rewritten.
+  reversedUnits          BigInt @default(0)
+  reversalTargetUnits    BigInt @default(0)
+  reversalShortfallUnits BigInt @default(0)
+  expiresAt      DateTime?
+  createdAt      DateTime                        @default(now())
+  wallet         AiCreditWallet                  @relation(fields: [userId], references: [userId], onDelete: Restrict)
+  allocations    AiCreditReservationAllocation[]
+  entries        AiCreditLedgerEntry[]
+  paymentRiskEvents AiCreditPaymentRiskEvent[]
+  paymentReversalSnapshots AiCreditPaymentReversalSnapshot[]
+
+  @@index([userId, kind, expiresAt, createdAt])
+}
+
+model AiCreditReservation {
+  id                   String                          @id @default(cuid())
+  userId               String
+  idempotencyKey       String                          @unique @db.VarChar(160)
+  status               AiCreditReservationStatus       @default(reserved)
+  maximumUnits         BigInt
+  settledUnits         BigInt                          @default(0)
+  pricingVersionId     String                          @db.VarChar(160)
+  conversionVersionId  String                          @db.VarChar(160)
+  creditUnitsPerCredit BigInt
+  creditValueUsdNano   BigInt
+  markupNumerator      BigInt
+  markupDenominator    BigInt
+  actualCostUsdNano    String?                         @db.VarChar(80)
+  createdAt            DateTime                        @default(now())
+  settledAt            DateTime?
+  wallet               AiCreditWallet                  @relation(fields: [userId], references: [userId], onDelete: Restrict)
+  allocations          AiCreditReservationAllocation[]
+  entries              AiCreditLedgerEntry[]
+  reconciliationCase   AiCreditReconciliationCase?
+  providerRequest      AiCreditProviderRequest?
+  recoverableResult    AiCreditResultJournal?
+
+  @@index([userId, status, createdAt])
+}
+
+// V12J.10A: encrypted, time-bounded provider RESULT journal. Its contents are
+// not financial evidence and never authorize a credit settlement independently.
+model AiCreditResultJournal {
+  idempotencyKey   String   @id @db.VarChar(160)
+  reservationId    String   @unique
+  userId           String
+  requestSha256    String   @db.VarChar(64)
+  providerResponseId String @db.VarChar(160)
+  clientRequestId  String   @db.VarChar(160)
+  pricingVersionId String   @db.VarChar(160)
+  keyId            String   @db.VarChar(32)
+  nonce            String   @db.VarChar(24)
+  tag              String   @db.VarChar(32)
+  ciphertext       String   @db.Text
+  contentSha256    String   @db.VarChar(64)
+  expiresAt        DateTime
+  createdAt        DateTime @default(now())
+  reservation      AiCreditReservation @relation(fields: [reservationId], references: [id], onDelete: Restrict)
+
+  @@index([userId, createdAt])
+  @@index([expiresAt])
+}
+
+model AiCreditReservationAllocation {
+  reservationId String
+  lotId         String
+  reservedUnits BigInt
+  consumedUnits BigInt               @default(0)
+  releasedUnits BigInt               @default(0)
+  reservation   AiCreditReservation @relation(fields: [reservationId], references: [id], onDelete: Restrict)
+  lot           AiCreditLot         @relation(fields: [lotId], references: [id], onDelete: Restrict)
+
+  @@id([reservationId, lotId])
+}
+
+model AiCreditLedgerEntry {
+  id                String               @id @default(cuid())
+  userId            String
+  lotId             String
+  reservationId     String?
+  eventKey          String               @unique @db.VarChar(256)
+  kind              AiCreditLedgerKind
+  availableDelta    BigInt               @default(0)
+  reservedDelta     BigInt               @default(0)
+  consumedDelta     BigInt               @default(0)
+  expiredDelta      BigInt               @default(0)
+  reversedDelta     BigInt               @default(0)
+  costUsdNano       String?              @db.VarChar(80)
+  pricingVersionId  String?              @db.VarChar(160)
+  createdAt         DateTime             @default(now())
+  wallet            AiCreditWallet       @relation(fields: [userId], references: [userId], onDelete: Restrict)
+  lot               AiCreditLot          @relation(fields: [lotId], references: [id], onDelete: Restrict)
+  reservation       AiCreditReservation? @relation(fields: [reservationId], references: [id], onDelete: Restrict)
+
+  @@index([userId, createdAt])
+  @@index([lotId, createdAt])
+  @@index([reservationId])
+}
+
+// E16C5B1: verified Stripe payment-risk quarantine. Neither a freeze nor an
+// audit row reduces a grant; reversals and shortfalls require the next phase.
+model AiCreditPaymentRiskEvent {
+  id                       String   @id @default(cuid())
+  eventKey                 String   @unique @db.VarChar(256)
+  lotId                    String
+  userId                   String
+  kind                     String   @db.VarChar(16)
+  providerObjectId         String   @db.VarChar(160)
+  paymentIntentId          String   @db.VarChar(160)
+  chargeId                 String   @db.VarChar(160)
+  refundedAmountUsdMinor   BigInt
+  observedAt               DateTime @default(now())
+  lot                      AiCreditLot @relation(fields: [lotId], references: [id], onDelete: Restrict)
+
+  @@index([userId, observedAt])
+  @@index([paymentIntentId, observedAt])
+}
+
+// E16C5B2A: one immutable accounting snapshot for each observed cumulative
+// Stripe-refunded amount. All fields are read-only after creation.
+model AiCreditPaymentReversalSnapshot {
+  id                     String   @id @default(cuid())
+  lotId                  String
+  chargedAmountUsdMinor  BigInt
+  refundedAmountUsdMinor BigInt
+  targetUnits            BigInt
+  appliedUnits           BigInt
+  shortfallUnits         BigInt
+  observedAt             DateTime @default(now())
+  lot                    AiCreditLot @relation(fields: [lotId], references: [id], onDelete: Restrict)
+
+  @@unique([lotId, refundedAmountUsdMinor])
+  @@index([lotId, observedAt])
+}
+
+// E16C4E1A: append-only, non-financial audit of uncertain model charges.
+// The reservation ledger remains the financial source of truth. No case entry
+// permits funds to be released or settled without separately verified evidence.
+model AiCreditReconciliationCase {
+  id            String                         @id @default(cuid())
+  reservationId String                         @unique
+  userId        String
+  openedAt      DateTime                       @default(now())
+  reservation   AiCreditReservation            @relation(fields: [reservationId], references: [id], onDelete: Restrict)
+  events        AiCreditReconciliationEvent[]
+  evidence      AiCreditReconciliationEvidence[]
+
+  @@index([userId, openedAt])
+}
+
+model AiCreditReconciliationEvent {
+  id             String                     @id @default(cuid())
+  caseId         String
+  eventKey       String                     @unique @db.VarChar(256)
+  reasonCode     String                     @db.VarChar(64)
+  recordedAt     DateTime                   @default(now())
+  reconciliation AiCreditReconciliationCase @relation(fields: [caseId], references: [id], onDelete: Restrict)
+
+  @@index([caseId, recordedAt])
+}
+
+// E16C4E1B1: immutable operator-submitted evidence metadata. Hash + reference
+// alone do NOT prove provider authenticity; do not authorize monetary changes.
+model AiCreditReconciliationEvidence {
+  id                  String                       @id @default(cuid())
+  caseId              String
+  evidenceKey         String                       @unique @db.VarChar(160)
+  provider            String                       @db.VarChar(32)
+  sourceType          String                       @db.VarChar(48)
+  referenceId         String                       @db.VarChar(160)
+  statementSha256     String                       @db.VarChar(64)
+  outcome             String                       @db.VarChar(24)
+  reportedCostUsdNano String?                      @db.VarChar(80)
+  reviewerId          String                       @db.VarChar(160)
+  observedAt          DateTime
+  recordedAt          DateTime                     @default(now())
+  reconciliation      AiCreditReconciliationCase   @relation(fields: [caseId], references: [id], onDelete: Restrict)
+
+  @@index([caseId, recordedAt])
+  @@index([provider, referenceId])
+}
+
+// E16C4E1B2B1: one durable outbound provider request per held reservation.
+// A client-request ID assists support verification, NOT monetary authorization.
+model AiCreditProviderRequest {
+  id                    String              @id @default(cuid())
+  reservationId         String              @unique
+  provider              String              @db.VarChar(32)
+  model                 String              @db.VarChar(160)
+  clientRequestId       String              @unique @db.VarChar(160)
+  requestSha256         String              @db.VarChar(64)
+  providerResponseId    String?             @db.VarChar(160)
+  providerHttpRequestId String?             @db.VarChar(160)
+  // Trusted original HTTPS response receipt, written only AFTER server pricing checks.
+  // Digest is an integrity identifier, not an externally signed provider invoice.
+  receiptPricingVersionId String?           @db.VarChar(160)
+  receiptCostUsdNano    String?             @db.VarChar(80)
+  receiptUsageSha256    String?             @db.VarChar(64)
+  receiptRecordedAt     DateTime?
+  createdAt             DateTime            @default(now())
+  observedAt            DateTime?
+  reservation           AiCreditReservation @relation(fields: [reservationId], references: [id], onDelete: Restrict)
+
+  @@index([provider, providerResponseId])
+  @@index([provider, providerHttpRequestId])
+}
+
+enum AiCreditLotKind {
+  subscription
+  purchased
+}
+
+enum AiCreditReservationStatus {
+  reserved
+  settled
+  released
+}
+
+enum AiCreditLedgerKind {
+  grant
+  reserve
+  consume
+  release
+  expire
+  reverse
+}
+
+// Canonical ZoeBuild control-plane transcript, not customer storefront data.
+// Message bodies are never used to store private model reasoning or billing attempts.
+model ZoeBuildChatMessage {
+  id            String       @id @default(cuid())
+  buildProjectId String
+  clientTurnId  String       @db.VarChar(64)
+  role          String       @db.VarChar(12)
+  text          String       @db.Text
+  createdAt     DateTime     @default(now())
+  buildProject  BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
+
+  @@unique([buildProjectId, clientTurnId])
+  @@index([buildProjectId, createdAt, id])
 }

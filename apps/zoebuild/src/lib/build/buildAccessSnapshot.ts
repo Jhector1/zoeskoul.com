@@ -44,24 +44,32 @@ export async function loadBuildAccessSnapshot(
   }
 
   const now = new Date();
+  // Generation and editing remain separate entitlements. Reading grants never
+  // creates privileges, and revoked/future/expired grants still fail closed.
+  const eligibleFeatures = [
+    FeatureKey.build_ai_generate,
+    FeatureKey.build_ai_edit,
+  ] as const;
   const grants = await prisma.featureGrant.findMany({
     where: {
       userId: normalizedUserId,
-      feature: FeatureKey.build_ai_generate,
+      feature: { in: [...eligibleFeatures] },
       revokedAt: null,
     },
     select: {
+      feature: true,
       startsAt: true,
       endsAt: true,
     },
   });
 
-  if (
-    grants.some((grant) =>
+  for (const feature of eligibleFeatures) {
+    if (grants.some((grant) =>
+      grant.feature === feature &&
       isWithinGrantWindow(now, grant.startsAt, grant.endsAt),
-    )
-  ) {
-    entitlements.push("build_ai_generate");
+    )) {
+      entitlements.push(feature);
+    }
   }
 
   return {

@@ -1,5 +1,7 @@
 import { buildZoeBuildWebAuthenticateUrl } from "@/lib/webAuthHandoff";
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { SESSION_COOKIE } from "@/lib/auth/buildHandoff";
 import { redirect } from "next/navigation";
 
 import CreateBuildProjectClient from "@/components/builder/CreateBuildProjectClient";
@@ -26,6 +28,11 @@ export default async function ZoeBuildProjectsPage({
   const access = await loadCurrentBuildAccessSnapshot();
 
   if (!access.userId) {
+    // An existing but unverifiable builder session must not trigger endless
+    // automatic sign-in retries. The user can explicitly retry from a public page.
+    if ((await cookies()).has(SESSION_COOKIE)) {
+      redirect("/auth/handoff/error?reason=session_unavailable");
+    }
     const callbackUrl = `/${locale}/projects`;
     redirect(
       buildZoeBuildWebAuthenticateUrl({

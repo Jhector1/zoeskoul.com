@@ -7,10 +7,10 @@ import {
 import {
   canResumeScheduledSubscription,
   futureBillingPeriodIsoOrNull,
-  hasCurrentSubscriptionAccess,
   scheduledCancellationEndIso,
   shouldShowRenewalDate,
 } from "./period";
+import { hasCurrentSubscriptionAccess } from "@zoeskoul/platform-server/billing/subscriptionEligibility";
 
 const NOW = Date.parse("2026-08-07T08:00:00.000Z");
 

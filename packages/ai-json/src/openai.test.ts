@@ -2,6 +2,7 @@ import {
   describe,
   expect,
   it,
+  vi,
 } from "vitest";
 
 import {
@@ -267,6 +268,62 @@ describe(
       },
     );
 
+    it("counts the identical model, system, input and JSON schema before generation", async () => {
+      const bodies: Record<string, unknown>[] = [];
+      const paths: string[] = [];
+      const transport = createOpenAiJsonTransport({
+        model: "gpt-6.1-sol", apiKey: "test-key",
+        fetchImpl: async (url, init) => {
+          paths.push(url);
+          bodies.push(JSON.parse(init?.body ?? "{}") as Record<string, unknown>);
+          return {ok: true, status: 200, text: async () => JSON.stringify(
+            url.endsWith("/input_tokens")
+              ? {object: "response.input_tokens", input_tokens: 777}
+              : {output_text: '{"ok":true}', service_tier: "default",
+                 usage: {input_tokens: 777, output_tokens: 40}},
+          )};
+        },
+      });
+      const request = { system: "System instructions", user: "Make a site",
+        schemaName: "Project Spec", responseJsonSchema: schema,
+        maxOutputTokens: 1024, serviceTier: "default" as const };
+      expect(await transport.countInputTokens?.(request)).toBe(777);
+      const result = await transport.generateJsonText(request);
+      expect(result.metadata.serviceTier).toBe("default");
+      expect(paths).toEqual([
+        "https://api.openai.com/v1/responses/input_tokens",
+        "https://api.openai.com/v1/responses",
+      ]);
+      for (const key of ["model", "instructions", "input", "text"]) {
+        expect(bodies[0]?.[key]).toEqual(bodies[1]?.[key]);
+      }
+      expect(bodies[1]).toMatchObject({max_output_tokens: 1024, store: false,
+        service_tier: "default", truncation: "disabled"});
+      expect(bodies[0]).not.toHaveProperty("max_output_tokens");
+      expect(bodies[0]).not.toHaveProperty("service_tier");
+      expect(bodies[0]).not.toHaveProperty("truncation");
+    });
+
+    it("rejects an unsupported premium-tier request before HTTP dispatch", async () => {
+      const fetchImpl = vi.fn();
+      const transport = createOpenAiJsonTransport({
+        model: "gpt-6-luna", apiKey: "unit", fetchImpl,
+      });
+      await expect(transport.generateJsonText({
+        system: "s", user: "u", schemaName: "test",
+        serviceTier: "fast" as never,
+      })).rejects.toThrow("AI_JSON_SERVICE_TIER_UNSUPPORTED");
+      expect(fetchImpl).not.toHaveBeenCalled();
+    });
+
+    it("rejects invalid or incomplete provider input-count responses", async () => {
+      const transport = createOpenAiJsonTransport({model: "gpt-6.1-sol", apiKey: "test-key",
+        fetchImpl: async () => ({ok: true, status: 200,
+          text: async () => JSON.stringify({object: "response.input_tokens", input_tokens: "100"})})});
+      await expect(transport.countInputTokens?.({system: "s", user: "u", schemaName: "x"}))
+        .rejects.toThrow("AI_INPUT_COUNT_INVALID_RESPONSE");
+    });
+
     it(
       "maps base64 images to Responses input_image data URLs",
       async () => {
@@ -392,5 +449,33 @@ describe(
         );
       },
     );
+    it("captures the actual API base once for both counting and generation", async () => {
+      const calls: string[] = [];
+      const options = {
+        model: "gpt-6-luna", apiKey: "fixture-key",
+        baseURL: "https://eu.api.openai.com/v1/",
+        fetchImpl: async (url: string) => {
+          calls.push(url);
+          return {ok: true, status: 200, text: async () => JSON.stringify(
+            url.endsWith("/input_tokens")
+              ? {object: "response.input_tokens", input_tokens: 10}
+              : {output_text: '{"ok":true}', service_tier: "default",
+                  usage: {input_tokens: 10, output_tokens: 2}},
+          )};
+        },
+      };
+      const transport = createOpenAiJsonTransport(options);
+      expect(transport.billingEndpointBaseUrl).toBe("https://eu.api.openai.com/v1");
+      // Mutating the original options cannot redirect just the generation call.
+      options.baseURL = "https://api.openai.com/v1";
+      const request = {system: "s", user: "u", schemaName: "x",
+        maxOutputTokens: 64, serviceTier: "default" as const};
+      expect(await transport.countInputTokens?.(request)).toBe(10);
+      await transport.generateJsonText(request);
+      expect(calls).toEqual([
+        "https://eu.api.openai.com/v1/responses/input_tokens",
+        "https://eu.api.openai.com/v1/responses",
+      ]);
+    });
   },
 );

@@ -7,7 +7,11 @@ import { getStripe } from "@/lib/stripe";
 import { upsertFromStripeSubscription } from "@/lib/billing/stripeService";
 import { isCheckoutAttemptId } from "@/lib/billing/checkoutAttempt";
 import { releaseBillingCheckoutReservation } from "@/lib/billing/billingCheckoutReservation";
-import { reconcileBuildAiSubscriptionGrantForUser } from "@/lib/billing/buildAiFeatureGrant";
+import { reconcileBuilderAiBillingForUser } from "@/lib/billing/reconcileBuilderAiBillingForUser";
+import { isZoeBuildAiCreditCheckoutEvent } from "@/lib/billing/zoeBuildAiCreditStripeFunding";
+import { reconcileZoeBuildAiCreditCheckoutEvent } from "@/lib/billing/zoeBuildAiCreditStripeFunding.server";
+import { isZoeBuildStripeRiskEvent } from "@/lib/billing/zoeBuildAiCreditStripeRisk";
+import { reconcileZoeBuildStripeRiskWebhook } from "@/lib/billing/zoeBuildAiCreditStripeRisk.server";
 import {
   isTutoringCreditCheckoutEvent,
   isTutoringCreditPaymentIntentEvent,
@@ -30,6 +34,12 @@ export const RELEVANT_STRIPE_BILLING_EVENT_TYPES = [
   "refund.created",
   "refund.updated",
   "refund.failed",
+  "charge.refunded",
+  "charge.dispute.created",
+  "charge.dispute.updated",
+  "charge.dispute.closed",
+  "charge.dispute.funds_withdrawn",
+  "charge.dispute.funds_reinstated",
   "customer.subscription.created",
   "customer.subscription.updated",
   "customer.subscription.deleted",
@@ -69,7 +79,9 @@ export type StripeWebhookReconciliationResult =
         | "checkout_released"
         | "tutoring_credit_reconciled"
         | "tutoring_credit_terminal_updated"
-        | "tutoring_credit_refund_reconciled";
+        | "tutoring_credit_refund_reconciled"
+        | "zoebuild_ai_credit_funded"
+        | "zoebuild_ai_credit_risk_frozen";
     }
   | { kind: "ignored"; reason: string };
 
@@ -239,7 +251,7 @@ async function defaultCancelDeletedCustomer(customerId: string) {
   ]);
 
   for (const user of affectedUsers) {
-    await reconcileBuildAiSubscriptionGrantForUser(user.id);
+    await reconcileBuilderAiBillingForUser(user.id);
   }
 
   return { users: users.count, subscriptions: subscriptions.count };
@@ -305,6 +317,28 @@ export async function reconcileStripeBillingEvent(
     return canceled.users > 0 || canceled.subscriptions > 0
       ? { kind: "processed", action: "customer_deleted" }
       : { kind: "ignored", reason: "unmapped_customer" };
+  }
+
+  // Dedicated ZoeBuild purchases must never fall through to generic checkout,
+  // tutoring credits or subscription entitlement logic.
+  if (isZoeBuildAiCreditCheckoutEvent(event)) {
+    const result = await reconcileZoeBuildAiCreditCheckoutEvent(event);
+    return result.kind === "funded"
+      ? { kind: "processed", action: "zoebuild_ai_credit_funded" }
+      : { kind: "ignored", reason: "zoebuild_ai_credit_payment_pending" };
+  }
+
+  // A signed Stripe event is only a lookup hint: retrieve authoritative refund,
+  // dispute, and charge records before quarantining a funded ZoeBuild wallet.
+  // Other products continue to their existing refund flow unchanged.
+  if (isZoeBuildStripeRiskEvent(event)) {
+    const outcome = await reconcileZoeBuildStripeRiskWebhook(event);
+    if (outcome.kind === "frozen")
+      return {kind: "processed", action: "zoebuild_ai_credit_risk_frozen"};
+    if (outcome.kind === "no_current_risk" && !event.type.startsWith("refund."))
+      return {kind: "ignored", reason: "zoebuild_risk_not_current"};
+    if (event.type.startsWith("charge."))
+      return {kind: "ignored", reason: "no_zoebuild_credit_lot"};
   }
 
   if (

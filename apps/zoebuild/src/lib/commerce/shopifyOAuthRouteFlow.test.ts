@@ -15,7 +15,7 @@ const shop = "demo.myshopify.com";
 const secret = "shopify_test_app_secret";
 const origin = "https://build.example.com";
 const redirectUri = shopifyOAuthCallbackUri({
-  zoebuildOrigin: origin, buildProjectId: project, environment: "test",
+  zoebuildOrigin: origin,
 });
 
 function fakeDatabase() {
@@ -97,14 +97,12 @@ const tokens = () => ({
 describe("Shopify OAuth route composition", () => {
   it("constructs an exact HTTPS callback independent of request Host headers", () => {
     expect(redirectUri).toBe(
-      "https://build.example.com/api/build/projects/project_123/commerce/providers/shopify/oauth/test/callback",
+      "https://build.example.com/api/build/commerce/providers/shopify/oauth/callback",
     );
     expect(() => trustedShopifyOAuthOrigin("http://build.example.com/")).toThrow();
     expect(() => trustedShopifyOAuthOrigin("https://build.example.com.evil.test/")).not.toThrow();
     expect(() => trustedShopifyOAuthOrigin("https://build.example.com/path")).toThrow();
-    expect(() => shopifyOAuthCallbackUri({
-      zoebuildOrigin: origin, buildProjectId: "../unsafe", environment: "live",
-    })).toThrow();
+    expect(shopifyOAuthCallbackUri({ zoebuildOrigin: origin })).toBe(redirectUri);
   });
 
   it("fails closed until explicitly enabled with both server-side app credentials", () => {

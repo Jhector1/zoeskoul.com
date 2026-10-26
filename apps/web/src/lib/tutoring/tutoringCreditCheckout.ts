@@ -3,7 +3,7 @@ import "server-only";
 import type Stripe from "stripe";
 
 import { isCheckoutAttemptId } from "@/lib/billing/checkoutAttempt";
-import { ensureStripeCustomer } from "@/lib/billing/stripeService";
+import { getOrCreateStripeCustomerId } from "@/lib/billing/stripeService";
 import { prisma } from "@/lib/prisma";
 import { getStripe } from "@/lib/stripe";
 import {
@@ -117,7 +117,7 @@ function defaultDeps(): TutoringCreditCheckoutDeps {
         },
       });
     },
-    ensureCustomer: ensureStripeCustomer,
+    ensureCustomer: getOrCreateStripeCustomerId,
     createCheckoutSession:
       async (params, idempotencyKey) =>
         getStripe().checkout.sessions.create(

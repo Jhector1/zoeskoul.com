@@ -6,34 +6,31 @@ const base = "src/app/api/build/projects/[buildProjectId]/commerce/providers/sho
 function source(path: string) { return readFileSync(resolve(__dirname, "../../..", path), "utf8"); }
 
 describe("Shopify OAuth HTTP route boundaries", () => {
-  it("uses canonical Zoéskoul Web auth and requires an owned Build project for both steps", () => {
+  it("reuses Zoéskoul authentication and project ownership", () => {
     const access = source("src/lib/commerce/shopifyOAuthRouteAccess.ts");
     expect(access).toContain("loadCurrentBuildAccessSnapshot(request)");
     expect(access).toContain("getBuildProjectCommand({");
-    expect(access).toContain("createPrismaBuildProjectReader(client)");
     expect(access).toContain("commerceStore.findUnique");
   });
-  it("requires same-origin POST, trusted callback origin, rate limits, and a secure binding cookie", () => {
+  it("requires same-origin POST, rate limits, and a secure nonce binding cookie", () => {
     const route = source(`${base}/start/route.ts`);
     expect(route).toContain("enforceSameOriginPost(request)");
     expect(route).toContain("trustedShopifyOAuthOrigin(resolveZoeBuildOrigins().zoebuildOrigin)");
     expect(route).toContain("rateLimit(");
     expect(route).toContain("shopifyOAuthBrowserCookie(flow.browserBinding)");
     expect(route).toContain("response.cookies.set(cookie.name, cookie.value, cookie.options)");
-    expect(route).toContain("shopifyOAuthRoutesConfigured");
   });
-  it("never follows a Shopify callback redirect target and clears browser nonce cookie", () => {
-    const route = source(`${base}/callback/route.ts`);
+  it("uses one stable callback and resolves the project from a pending hashed state", () => {
+    const route = source("src/app/api/build/commerce/providers/shopify/oauth/callback/route.ts");
+    expect(route).toContain('createHash("sha256").update(stateValues[0])');
+    expect(route).toContain("requireShopifyOAuthOwnedStore(prisma, request, pending.buildProjectId)");
     expect(route).toContain("completeShopifyOAuthFlow({");
     expect(route).toContain("request.cookies.get(SHOPIFY_OAUTH_BINDING_COOKIE)");
-    expect(route).toContain("new URL(");
-    expect(route).toContain("SHOPIFY_OAUTH_BINDING_COOKIE, \"\"");
-    expect(route).not.toContain("searchParams.get(\"redirect\")");
+    expect(route).toContain('SHOPIFY_OAUTH_BINDING_COOKIE, ""');
+    expect(route).not.toContain('searchParams.get("redirect")');
   });
-  it("leaves Shopify non-executable and does not register a checkout runtime", () => {
-    const manifests = source("src/lib/commerce/commerceProviderExecutableManifests.ts");
+  it("does not expose Shopify runtime without the acceptance gate", () => {
     const runtime = source("src/lib/commerce/commerceRuntimeRegistry.ts");
-    expect(manifests).not.toContain("SHOPIFY_COMMERCE_PROVIDER_MANIFEST");
-    expect(runtime).not.toContain("registerShopifyCommerceRuntime");
+    expect(runtime).toContain("shopifyAcceptanceRuntimeAllowed({");
   });
 });

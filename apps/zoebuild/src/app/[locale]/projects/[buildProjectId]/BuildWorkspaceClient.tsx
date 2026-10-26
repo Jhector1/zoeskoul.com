@@ -7,6 +7,8 @@ import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/run
 
 import FullIDE from "@zoeskoul/learner-workspace/fullide/FullIDE";
 import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
+import { hasUnsavedZoeWorkspaceSource } from "@/lib/build/zoeWorkspaceSourceDirty";
+import actionStyles from "./ZoeAssistantActions.module.css";
 
 export type BuildWorkspaceShellProject = Readonly<{
   buildProjectId: string;
@@ -44,6 +46,7 @@ export default function BuildWorkspaceClient({
   webPreviewCommerceRequest?: import("@zoeskoul/learner-workspace/ide/types").FullIDEProps["webPreviewCommerceRequest"];
 }) {
   const latestWorkspaceRef = useRef<WorkspaceStateV2>(project.workspace);
+  const savedWorkspaceRef = useRef<WorkspaceStateV2>(project.workspace);
   const editRevisionRef = useRef(0);
   const clientInstanceIdRef = useRef<string | null>(null);
 
@@ -69,10 +72,14 @@ export default function BuildWorkspaceClient({
     ) => {
       if (!workspace || meta?.origin !== "user") return;
 
+      const previous = latestWorkspaceRef.current;
       latestWorkspaceRef.current = workspace;
+      // FullIDE emits user-origin metadata events too. Only source differences
+      // count as unsaved edits or require a live-preview synchronization.
+      if (!hasUnsavedZoeWorkspaceSource(previous, workspace)) return;
       onWorkspaceSnapshot?.(workspace);
       editRevisionRef.current += 1;
-      setDirty(true);
+      setDirty(hasUnsavedZoeWorkspaceSource(savedWorkspaceRef.current, workspace));
       setSaveState({ kind: "idle", message: null });
     },
     [onWorkspaceSnapshot],
@@ -139,6 +146,9 @@ export default function BuildWorkspaceClient({
         throw new Error("The server returned an invalid source version.");
       }
 
+      // Advance the saved-source baseline to the exact workspace submitted,
+      // not to a later user edit that arrived while PATCH was in flight.
+      savedWorkspaceRef.current = workspace;
       setSourceVersion(nextVersion);
 
       if (editRevisionRef.current === savingRevision) {
@@ -148,10 +158,13 @@ export default function BuildWorkspaceClient({
           message: `Saved as source v${nextVersion}.`,
         });
       } else {
-        setSaveState({
-          kind: "idle",
-          message: `Source v${nextVersion} saved. Newer local edits remain unsaved.`,
-        });
+        const newerChangesRemain = hasUnsavedZoeWorkspaceSource(
+          workspace, latestWorkspaceRef.current,
+        );
+        setDirty(newerChangesRemain);
+        setSaveState(newerChangesRemain
+          ? { kind: "idle", message: `Source v${nextVersion} saved. Newer local edits remain unsaved.` }
+          : { kind: "saved", message: `Saved as source v${nextVersion}.` });
       }
     } catch (error) {
       setSaveState({
@@ -175,7 +188,7 @@ export default function BuildWorkspaceClient({
           type="button"
           onClick={() => void saveSource()}
           disabled={!dirty || saveState.kind === "saving"}
-          className="zb-code-savebar-button"
+          className={`zb-code-savebar-button ${actionStyles.primary}`}
         >
           {saveState.kind === "saving"
             ? "Saving..."

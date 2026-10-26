@@ -217,11 +217,23 @@ export async function resolveShopifyStorefrontGraphqlConnection(
   const connection = await activeConnection(client, scope);
   await validatedAdminIdentity(connection, scope);
   if (!connection.storefrontSecretRef) reject();
-  const privateCredential = validStorefrontVault(await scope.secretStore.read({
+  const raw = await scope.secretStore.read({
     buildProjectId: scope.buildProjectId,
     secretRef: connection.storefrontSecretRef,
-  }), scope);
+  });
   try {
+    if (isRecord(raw) && raw.kind === "shopify-storefront-public" && raw.version === 1 &&
+        raw.buildProjectId === scope.buildProjectId && raw.storeId === scope.storeId &&
+        raw.environment === scope.environment && raw.shopHostname === scope.shopHostname &&
+        typeof raw.publicToken === "string") {
+      return createShopifyStorefrontGraphql({
+        shopHostname: scope.shopHostname,
+        environment: scope.environment,
+        publicToken: raw.publicToken,
+        fetchImpl: input.fetchImpl,
+      });
+    }
+    const privateCredential = validStorefrontVault(raw, scope);
     return createShopifyStorefrontGraphql({
       shopHostname: scope.shopHostname,
       environment: scope.environment,

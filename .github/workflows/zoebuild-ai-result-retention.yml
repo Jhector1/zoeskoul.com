@@ -1,0 +1,48 @@
+# V12J.11D: reuse GitHub Actions as the trusted maintenance scheduler.
+# Opt-in ONLY after production journal migration, route auth and host readiness.
+# The workflow is inert without repository variable ENABLED=true and dedicated secret.
+name: ZoeBuild encrypted AI result retention
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: zoebuild-ai-result-retention
+  cancel-in-progress: false
+
+jobs:
+  retention:
+    if: ${{ vars.ZOEBUILD_AI_RESULT_RETENTION_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check dedicated maintenance credential
+        id: guard
+        env:
+          RETENTION_SECRET: ${{ secrets.ZOEBUILD_AI_RESULT_RETENTION_SECRET }}
+        shell: bash
+        run: |
+          if (( ${#RETENTION_SECRET} < 32 || ${#RETENTION_SECRET} > 256 )); then
+            echo "Maintenance skipped: missing or invalid dedicated credential."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Run one bounded expired-result cleanup
+        if: ${{ steps.guard.outputs.ready == 'true' }}
+        env:
+          RETENTION_SECRET: ${{ secrets.ZOEBUILD_AI_RESULT_RETENTION_SECRET }}
+        shell: bash
+        run: |
+          # Fixed first-party destination: never send the bearer to a dynamic URL.
+          curl --fail-with-body --silent --show-error \
+            --connect-timeout 10 --max-time 60 \
+            --request POST \
+            --header "Authorization: Bearer ${RETENTION_SECRET}" \
+            --header "Accept: application/json" \
+            "https://build.zoeskoul.com/api/internal/ai-result-retention"

@@ -1,5 +1,6 @@
 import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
-import { injectReactPreviewNavigationBridge } from "@/lib/build/reactPreviewNavigationBridge";
+import { parseReactPreviewDocumentRequest } from "@/lib/build/reactPreviewDocumentGateway";
+import { injectReactPreviewNavigationBridge, PREVIEW_NAV_SCRIPT } from "@/lib/build/reactPreviewNavigationBridge";
 import {
   proxyFetchTrustedReactPreviewAtRunner,
   resolveTrustedReactPreviewCapabilityAtRunner,
@@ -97,6 +98,30 @@ async function proxy(
       normalizedPathname.slice(
         basePath.length,
       );
+
+    // The sandbox navigation protocol is an external classic script so the
+    // site's CSP need not allow inline JavaScript. This is a capability-scoped
+    // read-only asset; no project source or session credentials are exposed.
+    if (relativePath === "__zoebuild/navigation.js") {
+      if (method !== "GET" && method !== "HEAD") return errorResponse("Method not allowed.", 405);
+      const context = await resolveTrustedReactPreviewCapabilityAtRunner({
+        previewId, path: normalizedPathname,
+      });
+      if (context.buildProjectId !== buildProjectId) {
+        return errorResponse("Preview capability does not match this project.", 404);
+      }
+      const headers = new Headers({
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "private, no-store, max-age=0",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "no-referrer",
+        "Cross-Origin-Resource-Policy": "cross-origin",
+        "Access-Control-Allow-Origin": "*",
+      });
+      return new Response(method === "HEAD" ? null : PREVIEW_NAV_SCRIPT, {
+        status: 200, headers,
+      });
+    }
 
     if (
       relativePath ===
@@ -217,10 +242,18 @@ async function proxy(
       }
     }
 
+    // The document gateway is a real catch-all route, not the Next.js optional
+    // capability root or Vite /index.html. The runner has already verified its
+    // basePath GET as a valid HTML document during startup. Fetch that same
+    // document and let the sandboxed bridge apply the requested React route.
+    const documentGateway = relativePath === "__zoebuild/document";
+    if (documentGateway && method !== "GET") return errorResponse("Method not allowed.", 405);
+    if (documentGateway && parseReactPreviewDocumentRequest(url) === null)
+      return errorResponse("Invalid preview document route.", 400);
     const upstreamStartedAt = Date.now();
     const result = await proxyFetchTrustedReactPreviewAtRunner({
       previewId,
-      path: `${normalizedPathname}${url.search}`,
+      path: documentGateway ? basePath : `${normalizedPathname}${url.search}`,
       method,
     });
 

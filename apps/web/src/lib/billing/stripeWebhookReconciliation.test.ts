@@ -184,6 +184,79 @@ describe("Stripe current-state reconciliation", () => {
     expect(upsertSubscription).toHaveBeenCalledWith(deleted, null);
   });
 
+  it("projects a scheduled cancellation from Stripe current status rather than a stale event", async () => {
+    const current = {
+      ...subscription("active"), cancel_at_period_end: true,
+    } as Stripe.Subscription;
+    const retrieveSubscription = vi.fn(async () => current);
+    const upsertSubscription = vi.fn(async () => ({ subscriptionId: current.id }));
+
+    await expect(reconcileStripeBillingEvent(
+      event("customer.subscription.updated", {
+        ...subscription("active"), cancel_at_period_end: false,
+      }), deps({ retrieveSubscription, upsertSubscription }),
+    )).resolves.toEqual({ kind: "processed", action: "subscription_reconciled" });
+
+    expect(upsertSubscription).toHaveBeenCalledExactlyOnceWith(current, "user_1");
+  });
+
+  it("projects immediate cancellation using the current canceled provider state", async () => {
+    const current = subscription("canceled");
+    const upsertSubscription = vi.fn(async () => ({ subscriptionId: current.id }));
+
+    await expect(reconcileStripeBillingEvent(
+      event("customer.subscription.deleted", subscription("active") as unknown as Record<string, unknown>),
+      deps({ retrieveSubscription: vi.fn(async () => current), upsertSubscription }),
+    )).resolves.toEqual({ kind: "processed", action: "subscription_reconciled" });
+
+    expect(upsertSubscription).toHaveBeenCalledExactlyOnceWith(current, "user_1");
+  });
+
+  it("does not roll back a newer resumption on a delayed deletion event", async () => {
+    const resumed = { ...subscription("active"), cancel_at_period_end: false } as Stripe.Subscription;
+    const upsertSubscription = vi.fn(async () => ({ subscriptionId: resumed.id }));
+
+    await reconcileStripeBillingEvent(
+      event("customer.subscription.deleted", subscription("canceled") as unknown as Record<string, unknown>),
+      deps({ retrieveSubscription: vi.fn(async () => resumed), upsertSubscription }),
+    );
+
+    expect(upsertSubscription).toHaveBeenCalledExactlyOnceWith(resumed, "user_1");
+  });
+
+  it("projects a renewed billing period from Stripe after invoice.paid", async () => {
+    const renewed = {
+      ...subscription("active"),
+      items: {data: [{current_period_end: 4_105_123_200}]},
+      cancel_at_period_end: false,
+    } as unknown as Stripe.Subscription;
+    const retrieveSubscription = vi.fn(async () => renewed);
+    const upsertSubscription = vi.fn(async () => ({ subscriptionId: renewed.id }));
+
+    await expect(reconcileStripeBillingEvent(
+      event("invoice.paid", {
+        id: "in_1", customer: "cus_1",
+        parent: { subscription_details: { subscription: "sub_1" } },
+      }),
+      deps({ retrieveSubscription, upsertSubscription }),
+    )).resolves.toEqual({ kind: "processed", action: "subscription_reconciled" });
+
+    expect(retrieveSubscription).toHaveBeenCalledExactlyOnceWith("sub_1");
+    expect(upsertSubscription).toHaveBeenCalledExactlyOnceWith(renewed, "user_1");
+  });
+
+  it("fails closed on a transient Stripe subscription lookup instead of using event status", async () => {
+    const upsertSubscription = vi.fn(async () => null);
+    await expect(reconcileStripeBillingEvent(
+      event("customer.subscription.deleted", subscription("canceled") as unknown as Record<string, unknown>),
+      deps({
+        retrieveSubscription: vi.fn(async () => { throw new Error("Stripe temporarily unavailable"); }),
+        upsertSubscription,
+      }),
+    )).rejects.toThrow("Stripe temporarily unavailable");
+    expect(upsertSubscription).not.toHaveBeenCalled();
+  });
+
   it("marks subscription events without a local user as ignored", async () => {
     const services = deps({ upsertSubscription: vi.fn(async () => null) });
 

@@ -1,6 +1,7 @@
 import "server-only";
 
 import type Stripe from "stripe";
+import { getStripe } from "@/lib/stripe";
 
 import {
   settleSucceededTutoringCreditRefund,
@@ -26,6 +27,8 @@ export type TutoringCreditRefundWebhookResult =
     };
 
 export type TutoringCreditRefundWebhookDeps = {
+  retrieveRefund(id: string): Promise<Stripe.Refund>;
+  retrievePaymentIntent(id: string): Promise<Pick<Stripe.PaymentIntent, "id" | "livemode" | "currency">>;
   settleSucceeded:
     typeof settleSucceededTutoringCreditRefund;
   updateStatus:
@@ -35,6 +38,8 @@ export type TutoringCreditRefundWebhookDeps = {
 function defaultDeps():
   TutoringCreditRefundWebhookDeps {
   return {
+    retrieveRefund: (id) => getStripe().refunds.retrieve(id),
+    retrievePaymentIntent: (id) => getStripe().paymentIntents.retrieve(id),
     settleSucceeded:
       settleSucceededTutoringCreditRefund,
     updateStatus:
@@ -148,26 +153,23 @@ export async function reconcileTutoringCreditRefundEvent(
       TutoringCreditRefundWebhookDeps;
   } = {},
 ): Promise<TutoringCreditRefundWebhookResult> {
-  const refund =
-    refundFromEvent(
-      event,
-    );
-
-  if (
-    !refund ||
-    refund.metadata
-      ?.refundKind !==
-      "tutoring_credit"
-  ) {
-    return {
-      kind:
-        "not_tutoring_credit_refund",
-    };
+  const eventRefund = refundFromEvent(event);
+  if (eventRefund?.metadata?.refundKind !== "tutoring_credit") {
+    return { kind: "not_tutoring_credit_refund" };
   }
 
-  const deps =
-    options.deps ??
-    defaultDeps();
+  const deps = options.deps ?? defaultDeps();
+  // The signed event is only a lookup hint. Provider status may already have
+  // changed (succeeded, failed, or canceled) when an older event arrives.
+  const refund = await deps.retrieveRefund(eventRefund.id);
+  if (
+    refund?.id !== eventRefund.id ||
+    refund.object !== "refund" ||
+    refund.metadata?.refundKind !== "tutoring_credit" ||
+    !["pending", "requires_action", "succeeded", "failed", "canceled"].includes(refund.status ?? "")
+  ) {
+    throw new Error("TUTORING_STRIPE_REFUND_NOT_VERIFIED");
+  }
 
   const refundId =
     requiredMetadata(
@@ -226,6 +228,18 @@ export async function reconcileTutoringCreditRefundEvent(
     throw new Error(
       "Tutoring Stripe Refund is missing PaymentIntent identity.",
     );
+  }
+
+  // Stripe Refund does not expose livemode in this API version. Verify
+  // environment through the canonical PaymentIntent instead of trusting
+  // a made-up Refund field or omitting the test/live boundary check.
+  const paymentIntent = await deps.retrievePaymentIntent(paymentIntentId);
+  if (
+    paymentIntent?.id !== paymentIntentId ||
+    paymentIntent.livemode !== event.livemode ||
+    paymentIntent.currency.toLowerCase() !== currency
+  ) {
+    throw new Error("TUTORING_STRIPE_REFUND_PAYMENT_NOT_VERIFIED");
   }
 
   const occurredAt =

@@ -34,7 +34,29 @@ export type TutoringCreditWebhookResult =
       kind: "not_tutoring_credit";
     };
 
+/** Fresh Stripe provider evidence, never the webhook's historical payment snapshot. */
+export type TutoringPaidPaymentEvidence = Readonly<{
+  id: string;
+  livemode: boolean;
+  status: string;
+  amount: number;
+  amountReceived: number;
+  currency: string;
+  latestCharge: null | Readonly<{
+    paymentIntentId: string | null;
+    livemode: boolean;
+    paid: boolean;
+    captured: boolean;
+    refunded: boolean;
+    disputed: boolean;
+    amount: number;
+    amountRefunded: number;
+    currency: string;
+  }>;
+}>;
+
 export type TutoringCreditWebhookDeps = {
+  retrievePaymentIntent(id: string): Promise<TutoringPaidPaymentEvidence>;
   listCheckoutLineItems(
     sessionId: string,
   ): Promise<CheckoutLineItemEvidence[]>;
@@ -48,6 +70,33 @@ export type TutoringCreditWebhookDeps = {
 
 function defaultDeps(): TutoringCreditWebhookDeps {
   return {
+    retrievePaymentIntent: async (id) => {
+      const payment = await getStripe().paymentIntents.retrieve(id, {
+        expand: ["latest_charge"],
+      });
+      const charge = typeof payment.latest_charge === "object"
+        ? payment.latest_charge
+        : null;
+      return {
+        id: payment.id,
+        livemode: payment.livemode,
+        status: payment.status,
+        amount: payment.amount,
+        amountReceived: payment.amount_received,
+        currency: payment.currency,
+        latestCharge: charge ? {
+          paymentIntentId: stripeId(charge.payment_intent),
+          livemode: charge.livemode,
+          paid: charge.paid,
+          captured: charge.captured,
+          refunded: charge.refunded,
+          disputed: charge.disputed,
+          amount: charge.amount,
+          amountRefunded: charge.amount_refunded,
+          currency: charge.currency,
+        } : null,
+      };
+    },
     listCheckoutLineItems: async (sessionId) => {
       const rows = await getStripe().checkout.sessions.listLineItems(
         sessionId,
@@ -70,6 +119,42 @@ function stripeId(
   if (typeof value === "string") return value;
   if (value && typeof value.id === "string") return value.id;
   return null;
+}
+
+/**
+ * Verify a payment against CURRENT provider evidence before financial credit.
+ * The signed webhook is an event trigger, not proof that funds remain clear.
+ * A later refund/dispute is still handled by the canonical refund/risk flow.
+ */
+export async function requireCurrentTutoringPaidPayment(input: Readonly<{
+  deps: TutoringCreditWebhookDeps;
+  paymentIntentId: string;
+  amountMinor: number;
+  currency: string;
+  livemode: boolean;
+}>): Promise<void> {
+  const payment = await input.deps.retrievePaymentIntent(input.paymentIntentId);
+  const charge = payment.latestCharge;
+  if (
+    payment.id !== input.paymentIntentId ||
+    payment.livemode !== input.livemode ||
+    payment.status !== "succeeded" ||
+    payment.amount !== input.amountMinor ||
+    payment.amountReceived !== input.amountMinor ||
+    payment.currency !== input.currency ||
+    !charge ||
+    charge.paymentIntentId !== input.paymentIntentId ||
+    charge.livemode !== input.livemode ||
+    !charge.paid ||
+    !charge.captured ||
+    charge.refunded ||
+    charge.disputed ||
+    charge.amountRefunded !== 0 ||
+    charge.amount !== input.amountMinor ||
+    charge.currency !== input.currency
+  ) {
+    throw new Error("TUTORING_STRIPE_PAYMENT_NOT_CLEAR");
+  }
 }
 
 function checkoutSessionFromEvent(
@@ -316,6 +401,14 @@ export async function reconcileTutoringCreditPaymentIntentEvent(
     );
   }
 
+  await requireCurrentTutoringPaidPayment({
+    deps,
+    paymentIntentId: intent.id,
+    amountMinor,
+    currency,
+    livemode: event.livemode,
+  });
+
   const settlement =
     await deps.settlePaid({
       purchaseId,
@@ -534,6 +627,16 @@ export async function reconcileTutoringCreditCheckoutEvent(
   }
 
   const evidence = await paidEvidence(session, deps);
+  if (session.livemode !== event.livemode) {
+    throw new Error("TUTORING_STRIPE_CHECKOUT_MODE_MISMATCH");
+  }
+  await requireCurrentTutoringPaidPayment({
+    deps,
+    paymentIntentId: evidence.paymentIntentId,
+    amountMinor: evidence.amountMinor,
+    currency: evidence.currency,
+    livemode: event.livemode,
+  });
   const settlement = await deps.settlePaid({
     ...identity,
     checkoutSessionId: session.id,

@@ -55,6 +55,9 @@ export function getConfiguredBrowserOrigins(): Set<string> {
       process.env.NEXT_PUBLIC_STUDENT_APP_ORIGIN,
       process.env
         .NEXT_PUBLIC_ZOESKOUL_ADDITIONAL_TRUSTED_BROWSER_ORIGINS,
+      // Server-owned allow-list for external auth return origins.
+      // No public client-side env variable is required for this flow.
+      process.env.ZOESKOUL_TRUSTED_BROWSER_ORIGINS,
     ]
       .filter(Boolean)
       .join(","),

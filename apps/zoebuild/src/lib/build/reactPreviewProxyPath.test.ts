@@ -81,8 +81,19 @@ describe("React preview browser capability path", () => {
     expect(routeSource).toContain(
       "normalizeReactPreviewProxyPath({",
     );
+    // The validated Vite HTML root is used only for the canonical document
+    // gateway. JS, CSS and other assets retain their normalized, scoped path.
     expect(routeSource).toContain(
-      'path: `${normalizedPathname}${url.search}`',
+      'const documentGateway = relativePath === "__zoebuild/document";',
+    );
+    expect(routeSource).toContain(
+      'if (documentGateway && method !== "GET") return errorResponse("Method not allowed.", 405);',
+    );
+    expect(routeSource).toContain(
+      'if (documentGateway && parseReactPreviewDocumentRequest(url) === null)',
+    );
+    expect(routeSource).toContain(
+      'path: documentGateway ? basePath : `${normalizedPathname}${url.search}`',
     );
     expect(routeSource).not.toContain(
       'path: `${url.pathname}${url.search}`',

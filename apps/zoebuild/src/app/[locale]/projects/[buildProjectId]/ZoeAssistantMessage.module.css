@@ -1,0 +1,207 @@
+/* Role-scoped chat alignment. Never affect the generated preview iframe. */
+.bubble.userBubble {
+  box-sizing: border-box;
+  display: block;
+  width: fit-content;
+  min-width: 0;
+  max-width: min(86%, 32rem);
+  margin: 9px 0 14px auto;
+  padding: 12px 14px;
+  text-align: left;
+  color: inherit;
+  background: color-mix(in srgb, Canvas 94%, currentColor 6%);
+  border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  border-radius: 19px 19px 6px 19px;
+  box-shadow: 0 3px 12px color-mix(in srgb, currentColor 7%, transparent);
+  overflow-wrap: anywhere;
+}
+.userText {
+  display: block;
+  font-size: 0.94em;
+  line-height: 1.58;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bubble.assistantBubble {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 9px auto 14px 0;
+  padding: 5px 2px 7px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  color: inherit;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bubble { transition: none; }
+}
+
+/* Chat-only presentation; Markdown parsing and link security live in packages.
+ * No selectors here reach into the project preview or generated storefront. */
+.content { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.markdown { color: inherit; line-height: 1.65; min-width: 0; }
+.markdown :global(p) { margin: 0 0 0.65em; }
+.markdown :global(p:last-child) { margin-bottom: 0; }
+.markdown :global(ul), .markdown :global(ol) { margin: 0.45em 0 0.7em; padding-inline-start: 1.4em; }
+.markdown :global(li) { margin: 0.22em 0; }
+.markdown :global(h1), .markdown :global(h2), .markdown :global(h3), .markdown :global(h4) {
+  font-weight: 650; line-height: 1.35; margin: 0.8em 0 0.4em;
+}
+.markdown :global(h1) { font-size: 1.22em; }
+.markdown :global(h2) { font-size: 1.12em; }
+.markdown :global(h3) { font-size: 1.05em; }
+.markdown :global(a) { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.markdown :global(a:focus-visible) { outline: 2px solid currentColor; outline-offset: 2px; }
+.markdown :global(blockquote) { margin: 0.7em 0; padding-left: 0.9em; border-left: 2px solid currentColor; opacity: 0.85; }
+.markdown :global(.zoe-code-frame) { max-width: 100%; overflow-x: auto; }
+.markdown :global(pre) { max-width: 100%; overflow-x: auto; white-space: pre; }
+.markdown :global(table) { width: 100%; display: block; overflow-x: auto; border-collapse: collapse; margin: 0.7em 0; }
+.markdown :global(th), .markdown :global(td) { border: 1px solid color-mix(in srgb, currentColor 22%, transparent); padding: 0.3em 0.55em; text-align: left; }
+.markdown :global(code) { overflow-wrap: anywhere; }
+/* In simple paragraphs the cursor follows the last glyph, not a new empty line. */
+.typing .markdown { display: inline; }
+.typing .markdown :global(p:last-child) { display: inline; }
+.cursor { display: inline-block; width: 1px; height: 1em; margin-inline-start: 2px;
+  vertical-align: -0.15em; background: currentColor; opacity: .45;
+  animation: zoeCursorPulse 1.15s ease-in-out infinite alternate;
+}
+@keyframes zoeCursorPulse { from { opacity: .15; } to { opacity: .55; } }
+@media (prefers-reduced-motion: reduce) { .cursor { display: none; animation: none; } }
+
+/* Chat-scoped code block layout. The canonical Markdown renderer remains in
+ * packages/lesson-renderer. Do not apply these rules to the preview iframe. */
+.markdown :global(.zoe-code-frame) {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0.65em 0 0.85em;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, currentColor 17%, transparent);
+  background: color-mix(in srgb, Canvas 92%, currentColor 8%);
+}
+.markdown :global(.zoe-code-toolbar) {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 37px;
+  min-width: 0;
+  padding: 7px 10px;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+.markdown :global(.zoe-code-language) {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75em;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  opacity: 0.7;
+}
+.markdown :global(.zoe-code-copy) {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 29px;
+  border-radius: 7px;
+  padding: 4px 8px;
+  font: inherit;
+  font-size: 0.76em;
+  color: inherit;
+  cursor: pointer;
+  background: color-mix(in srgb, Canvas 95%, currentColor 5%);
+  border: 1px solid color-mix(in srgb, currentColor 13%, transparent);
+}
+.markdown :global(.zoe-code-copy:hover) { background: color-mix(in srgb, Canvas 84%, currentColor 16%); }
+.markdown :global(.zoe-code-copy:focus-visible) { outline: 2px solid currentColor; outline-offset: 2px; }
+.markdown :global(.zoe-code-copy svg) { display: inline-block; flex: 0 0 auto; width: 15px; height: 15px; }
+.markdown :global(.zoe-code-frame pre) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 12px 13px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: pre;
+  tab-size: 2;
+  font-size: 0.82em;
+  line-height: 1.55;
+}
+.markdown :global(.zoe-code-frame pre code) {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  white-space: inherit;
+  font: inherit;
+}
+.markdown :global(.zoe-inline-code) {
+  font-size: 0.88em;
+  padding: 0.12em 0.25em;
+  border-radius: 4px;
+  background: color-mix(in srgb, Canvas 88%, currentColor 12%);
+}
+
+/* E17L.2: highlight colors for rehype-highlight's EXISTING hljs spans.
+ * ZoeBuild does not import the lesson app's syntax theme; these selectors apply
+ * only under this component's .markdown, never generated preview content.
+ * This is color styling, NOT another tokenizer or Markdown renderer. */
+.markdown :global(.zoe-code-frame) {
+  background: #050d1c;
+  color: #dbe6f5;
+  border-color: #29374c;
+}
+.markdown :global(.zoe-code-toolbar) {
+  background: #091324;
+  border-bottom-color: #25354a;
+  color: #cbd5e1;
+}
+.markdown :global(.zoe-code-copy) {
+  color: #e2e8f0;
+  border-color: #344256;
+  background: #172235;
+}
+.markdown :global(.zoe-code-copy:hover) { background: #27384f; }
+.markdown :global(.zoe-code-frame pre) { color: #dbe6f5; }
+.markdown :global(.zoe-code-frame .hljs) { color: #dbe6f5; background: transparent; }
+.markdown :global(.zoe-code-frame .hljs-keyword),
+.markdown :global(.zoe-code-frame .hljs-built_in),
+.markdown :global(.zoe-code-frame .hljs-literal) { color: #ffb15e; }
+.markdown :global(.zoe-code-frame .hljs-string),
+.markdown :global(.zoe-code-frame .hljs-attr),
+.markdown :global(.zoe-code-frame .hljs-template-variable) { color: #9bd4ff; }
+.markdown :global(.zoe-code-frame .hljs-number),
+.markdown :global(.zoe-code-frame .hljs-symbol) { color: #77baff; }
+.markdown :global(.zoe-code-frame .hljs-title),
+.markdown :global(.zoe-code-frame .hljs-title.function_),
+.markdown :global(.zoe-code-frame .hljs-function),
+.markdown :global(.zoe-code-frame .hljs-class .hljs-title) { color: #ffe0a1; }
+.markdown :global(.zoe-code-frame .hljs-type),
+.markdown :global(.zoe-code-frame .hljs-variable),
+.markdown :global(.zoe-code-frame .hljs-property),
+.markdown :global(.zoe-code-frame .hljs-attribute) { color: #b3d4ff; }
+.markdown :global(.zoe-code-frame .hljs-comment),
+.markdown :global(.zoe-code-frame .hljs-quote) { color: #94a3b8; font-style: italic; }
+.markdown :global(.zoe-code-frame .hljs-meta),
+.markdown :global(.zoe-code-frame .hljs-tag),
+.markdown :global(.zoe-code-frame .hljs-selector-tag) { color: #f3bd77; }
+.markdown :global(.zoe-code-frame .hljs-regexp),
+.markdown :global(.zoe-code-frame .hljs-link) { color: #a7e3b0; }
+.markdown :global(.zoe-code-frame .hljs-addition) { color: #a7e3b0; }
+.markdown :global(.zoe-code-frame .hljs-deletion) { color: #ffa6a6; }

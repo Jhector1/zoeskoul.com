@@ -66,6 +66,7 @@ export default async function RootLayout({
       <body>
         <Providers
           apiOrigin={websiteOrigin}
+          authApiOrigin={zoebuildOrigin}
           initialPreferences={
             initialPreferences
           }
@@ -75,7 +76,7 @@ export default async function RootLayout({
             zoebuildOrigin={zoebuildOrigin}
           />
           <ZoeBuildAuthenticatedPreviewShell
-            apiOrigin={websiteOrigin}
+            apiOrigin={zoebuildOrigin}
           >
             {children}
           </ZoeBuildAuthenticatedPreviewShell>

@@ -21,7 +21,9 @@ export type ShopifyStorefrontGraphqlOptions = Readonly<{
   environment: "test" | "live";
   // This is a server-side, scoped private credential resolved from the vault.
   // Never provide the token from a request body or generated storefront code.
-  privateToken: string;
+  privateToken?: string;
+  /** Provisioned server-side from the merchant-authorized Shopify app. */
+  publicToken?: string;
   fetchImpl?: FetchPort;
 }>;
 
@@ -54,14 +56,16 @@ function fail(code: ShopifyStorefrontGraphqlError["code"]): never {
 
 function validConfig(input: ShopifyStorefrontGraphqlOptions) {
   const hostname = input.shopHostname;
+  const token = input.publicToken ?? input.privateToken;
   if (!CANONICAL_SHOP.test(hostname) || hostname.length > 253 ||
       (input.environment !== "test" && input.environment !== "live") ||
-      !input.privateToken || input.privateToken !== input.privateToken.trim() ||
-      input.privateToken.length > MAX_TOKEN_LENGTH ||
-      /[\r\n\x00-\x1f\x7f]/.test(input.privateToken)) {
+      Boolean(input.publicToken) === Boolean(input.privateToken) ||
+      !token || token !== token.trim() ||
+      token.length > MAX_TOKEN_LENGTH ||
+      /[\r\n\x00-\x1f\x7f]/.test(token)) {
     fail("SHOPIFY_STOREFRONT_CONFIG_INVALID");
   }
-  return { hostname, token: input.privateToken };
+  return { hostname, token, isPublic: Boolean(input.publicToken) };
 }
 
 function graphqlInput(input: ShopifyStorefrontGraphqlRequest) {
@@ -98,7 +102,7 @@ function graphqlInput(input: ShopifyStorefrontGraphqlRequest) {
  * Only trusted server-authored GraphQL documents may be passed to execute().
  */
 export function createShopifyStorefrontGraphql(options: ShopifyStorefrontGraphqlOptions) {
-  const { hostname, token } = validConfig(options);
+  const { hostname, token, isPublic } = validConfig(options);
   const fetchImpl = options.fetchImpl ?? fetch;
   const endpoint = `https://${hostname}/api/${SHOPIFY_STOREFRONT_GRAPHQL_VERSION}/graphql.json`;
 
@@ -110,8 +114,11 @@ export function createShopifyStorefrontGraphql(options: ShopifyStorefrontGraphql
       const headers = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Shopify-Storefront-Private-Token": token,
       });
+      headers.set(
+        isPublic ? "X-Shopify-Storefront-Access-Token" : "Shopify-Storefront-Private-Token",
+        token,
+      );
       if (input.audience.kind === "buyer") {
         headers.set("Shopify-Storefront-Buyer-IP", input.audience.ip);
       }

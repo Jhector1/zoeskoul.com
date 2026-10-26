@@ -9,9 +9,15 @@ const mocks = vi.hoisted(() => ({
   subscriptionRetrieve: vi.fn(),
   subscriptionUpdate: vi.fn(),
   releaseBillingCheckoutReservation: vi.fn(),
+  reconcileBuilderAiBilling: vi.fn(),
 }));
 
 vi.mock("server-only", () => ({}));
+// The resume test owns subscription state transitions. Builder grant projection
+// has its own tests and must not require an unrelated grant DB fixture here.
+vi.mock("@/lib/billing/reconcileBuilderAiBillingForUser", () => ({
+  reconcileBuilderAiBillingForUser: mocks.reconcileBuilderAiBilling,
+}));
 vi.mock("@/lib/billing/billingCheckoutReservation", () => ({
   releaseBillingCheckoutReservation:
     mocks.releaseBillingCheckoutReservation,
@@ -78,6 +84,7 @@ describe("resumeScheduledSubscriptionForUser", () => {
     });
     mocks.subscriptionUpsert.mockResolvedValue({});
     mocks.releaseBillingCheckoutReservation.mockResolvedValue(true);
+    mocks.reconcileBuilderAiBilling.mockResolvedValue([]);
   });
 
   it("clears a pending cancellation on the existing Stripe subscription", async () => {
@@ -96,6 +103,7 @@ describe("resumeScheduledSubscriptionForUser", () => {
       { cancel_at_period_end: false },
     );
     expect(mocks.subscriptionUpsert).toHaveBeenCalledTimes(1);
+    expect(mocks.reconcileBuilderAiBilling).toHaveBeenCalledExactlyOnceWith("user_1");
     expect(out).toMatchObject({
       subscriptionId: "sub_1",
       status: "trialing",
@@ -119,6 +127,89 @@ describe("resumeScheduledSubscriptionForUser", () => {
 
     expect(mocks.subscriptionRetrieve).not.toHaveBeenCalled();
     expect(mocks.subscriptionUpdate).not.toHaveBeenCalled();
+    expect(mocks.reconcileBuilderAiBilling).not.toHaveBeenCalled();
+  });
+
+  it("never calls Stripe when the local subscription has lost customer ownership", async () => {
+    mocks.subscriptionFindFirst.mockResolvedValue({
+      stripeCustomerId: "cus_old",
+      status: "active",
+      cancelAtPeriodEnd: true,
+    });
+    mocks.userFindUnique.mockResolvedValue({
+      id: "user_1", stripeCustomerId: "cus_new",
+    });
+
+    await expect(resumeScheduledSubscriptionForUser({
+      userId: "user_1", subscriptionId: "sub_1",
+    })).resolves.toBeNull();
+
+    expect(mocks.subscriptionRetrieve).not.toHaveBeenCalled();
+    expect(mocks.subscriptionUpdate).not.toHaveBeenCalled();
+    expect(mocks.subscriptionUpsert).not.toHaveBeenCalled();
+  });
+
+  it("refuses to modify Stripe when the user has no canonical customer binding", async () => {
+    mocks.userFindUnique.mockResolvedValue({ id: "user_1", stripeCustomerId: null });
+
+    await expect(resumeScheduledSubscriptionForUser({
+      userId: "user_1", subscriptionId: "sub_1",
+    })).resolves.toBeNull();
+
+    expect(mocks.subscriptionRetrieve).not.toHaveBeenCalled();
+    expect(mocks.subscriptionUpdate).not.toHaveBeenCalled();
+    expect(mocks.subscriptionUpsert).not.toHaveBeenCalled();
+  });
+
+  it("refuses to modify Stripe when a local row has no customer binding", async () => {
+    mocks.subscriptionFindFirst.mockResolvedValue({
+      stripeCustomerId: null, status: "active", cancelAtPeriodEnd: true,
+    });
+
+    await expect(resumeScheduledSubscriptionForUser({
+      userId: "user_1", subscriptionId: "sub_1",
+    })).resolves.toBeNull();
+
+    expect(mocks.subscriptionRetrieve).not.toHaveBeenCalled();
+    expect(mocks.subscriptionUpdate).not.toHaveBeenCalled();
+  });
+
+  it("refuses a Stripe subscription with another user's ownership metadata", async () => {
+    mocks.subscriptionRetrieve.mockResolvedValue(
+      subscription({ metadata: { userId: "user_foreign" } }),
+    );
+
+    await expect(resumeScheduledSubscriptionForUser({
+      userId: "user_1", subscriptionId: "sub_1",
+    })).rejects.toThrow("Subscription ownership mismatch");
+
+    expect(mocks.subscriptionUpdate).not.toHaveBeenCalled();
+    expect(mocks.subscriptionUpsert).not.toHaveBeenCalled();
+  });
+
+  it("reconciles Stripe's ended subscription instead of resuming stale local state", async () => {
+    mocks.subscriptionRetrieve.mockResolvedValue(subscription({ status: "canceled" }));
+
+    await expect(resumeScheduledSubscriptionForUser({
+      userId: "user_1", subscriptionId: "sub_1",
+    })).resolves.toBeNull();
+
+    expect(mocks.subscriptionUpdate).not.toHaveBeenCalled();
+    expect(mocks.subscriptionUpsert).toHaveBeenCalledTimes(1);
+    expect(mocks.reconcileBuilderAiBilling).toHaveBeenCalledWith("user_1");
+  });
+
+  it("does not issue an unnecessary resume update once Stripe has already resumed", async () => {
+    mocks.subscriptionRetrieve.mockResolvedValue(subscription({
+      status: "active", cancel_at_period_end: false,
+    }));
+
+    const result = await resumeScheduledSubscriptionForUser({
+      userId: "user_1", subscriptionId: "sub_1",
+    });
+    expect(result).toMatchObject({status:"active",cancelAtPeriodEnd:false});
+    expect(mocks.subscriptionUpdate).not.toHaveBeenCalled();
+    expect(mocks.subscriptionUpsert).toHaveBeenCalledTimes(1);
   });
 
   it("refuses a Stripe customer mismatch", async () => {

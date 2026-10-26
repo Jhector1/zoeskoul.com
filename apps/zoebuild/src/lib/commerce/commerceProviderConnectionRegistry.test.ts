@@ -65,7 +65,6 @@ describe(
     );
 
     it.each([
-      "shopify",
       "square",
       "paypal",
       "unknown-provider",
@@ -79,5 +78,12 @@ describe(
         ).toBeNull();
       },
     );
+    it("registers Shopify only for OAuth-backed disconnect, not manual token POST", async () => {
+      const adapter = getCommerceProviderConnectionAdapter("shopify");
+      expect(adapter).not.toBeNull();
+      await expect(adapter!.connect({} as never, {} as never)).rejects.toMatchObject({
+        code: "SHOPIFY_OAUTH_REQUIRED", status: 409,
+      });
+    });
   },
 );

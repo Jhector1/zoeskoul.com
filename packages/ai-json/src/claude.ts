@@ -1,6 +1,8 @@
+import { normalizeAiJsonUsage } from "./usage";
 import {
   AI_JSON_DEFAULT_TEMPERATURE,
   assertAiJsonMediaSupported,
+  boundedAiJsonOutputTokens,
   type AiJsonMediaInput,
   type AiJsonRequest,
   type AiJsonTextResult,
@@ -159,6 +161,7 @@ export function createClaudeAiJsonTransport(
         transport,
         request.media,
       );
+      const maxOutputTokens = boundedAiJsonOutputTokens(request);
 
       const content = [
         ...(
@@ -176,7 +179,7 @@ export function createClaudeAiJsonTransport(
       const response =
         await client.messages.create({
           model,
-          max_tokens: 8192,
+          max_tokens: maxOutputTokens ?? 8192,
           temperature:
             AI_JSON_DEFAULT_TEMPERATURE,
           system: request.system,
@@ -189,6 +192,7 @@ export function createClaudeAiJsonTransport(
         });
 
       return {
+        usage: normalizeAiJsonUsage("claude", response),
         text:
           getResponseText(response),
         metadata: {

@@ -1,8 +1,10 @@
+import { normalizeAiJsonUsage } from "./usage";
 import OpenAI from "openai";
 
 import {
   AI_JSON_DEFAULT_TEMPERATURE,
   assertAiJsonMediaSupported,
+  boundedAiJsonOutputTokens,
   type AiJsonMediaInput,
   type AiJsonRequest,
   type AiJsonTextResult,
@@ -188,6 +190,7 @@ export function createDeepSeekAiJsonTransport(
         transport,
         request.media,
       );
+      const maxOutputTokens = boundedAiJsonOutputTokens(request);
 
       const userContent =
         request.media?.length
@@ -221,11 +224,13 @@ export function createDeepSeekAiJsonTransport(
           response_format: {
             type: "json_object",
           },
+          ...(maxOutputTokens === undefined ? {} : { max_tokens: maxOutputTokens }),
           temperature:
             AI_JSON_DEFAULT_TEMPERATURE,
         });
 
       return {
+        usage: normalizeAiJsonUsage("deepseek", response),
         text:
           getResponseText(response),
         metadata: {

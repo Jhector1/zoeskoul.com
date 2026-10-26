@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
+import { processPlatformBillingWebhook } from "@zoeskoul/platform-server/billing/platformWebhookDelivery";
+import { checkPlatformStripeEventEnvironment } from "@zoeskoul/platform-server/billing/platformStripeEventEnvironment";
 
 import {
   claimStripeEvent,
@@ -48,85 +50,38 @@ export async function POST(req: Request) {
     );
   }
 
-  if (!isRelevantStripeBillingEventType(event.type)) {
-    return NextResponse.json({ received: true, outcome: "unrelated" });
-  }
-
-  const references = extractStripeBillingEventReferences(event);
-  let claimAttemptCount: number | null = null;
-
-  try {
-    const claim = await claimStripeEvent({
-      id: event.id,
-      type: event.type,
-      livemode: event.livemode,
-      created: event.created,
-      ...references,
-    });
-
-    if (claim.kind === "duplicate") {
-      return NextResponse.json({
-        received: true,
-        duplicate: true,
-        outcome: claim.status,
-      });
-    }
-
-    if (claim.kind === "in_progress") {
-      return NextResponse.json(
-        { received: false, outcome: "processing" },
-        { status: 409 },
-      );
-    }
-
-    claimAttemptCount = claim.attemptCount;
-    const result = await reconcileStripeBillingEvent(event);
-
-    if (result.kind === "ignored") {
-      const marked = await markStripeEventIgnored(
-        event.id,
-        claim.attemptCount,
-        result.reason,
-      );
-      if (!marked) {
-        throw new Error("Stripe event could not be marked ignored");
-      }
-      return NextResponse.json({ received: true, outcome: "ignored" });
-    }
-
-    const marked = await markStripeEventProcessed(
-      event.id,
-      claim.attemptCount,
-    );
-    if (!marked) {
-      throw new Error("Stripe event could not be marked processed");
-    }
-
-    return NextResponse.json({ received: true, outcome: "processed" });
-  } catch (error: unknown) {
-    if (claimAttemptCount !== null) {
-      try {
-        await markStripeEventFailed(
-          event.id,
-          claimAttemptCount,
-          error,
-        );
-      } catch (markError: unknown) {
-        console.error(
-          "[stripe-webhook] failed to record event failure",
-          stripeEventErrorText(markError),
-        );
-      }
-    }
-
-    console.error(
-      "[stripe-webhook] event processing failed",
-      stripeEventErrorText(error),
-    );
-
+  // Signature-valid events must also belong to this platform Stripe mode.
+  // Reject BEFORE ledger claims or any grant/subscription mutations.
+  const mode = checkPlatformStripeEventEnvironment({
+    secretKey: process.env.LEARNOIR_STRIPE_SECRET_KEY,
+    event,
+  });
+  if (mode !== "accepted") {
     return NextResponse.json(
-      { message: "Webhook handler failed", outcome: "failed" },
-      { status: 500 },
+      { message: mode === "unconfigured"
+        ? "Platform Stripe mode unavailable"
+        : "Stripe event is not valid for this platform billing environment" },
+      { status: mode === "unconfigured" ? 503 : 400 },
     );
   }
+
+  const result = await processPlatformBillingWebhook({
+    event,
+    relevant: isRelevantStripeBillingEventType,
+    references: extractStripeBillingEventReferences,
+    claim: claimStripeEvent,
+    reconcile: reconcileStripeBillingEvent,
+    markIgnored: markStripeEventIgnored,
+    markProcessed: markStripeEventProcessed,
+    markFailed: markStripeEventFailed,
+    reportError: (stage, error) => {
+      console.error(
+        stage === "mark_failed"
+          ? "[stripe-webhook] failed to record event failure"
+          : "[stripe-webhook] event processing failed",
+        stripeEventErrorText(error),
+      );
+    },
+  });
+  return NextResponse.json(result.body, { status: result.status });
 }

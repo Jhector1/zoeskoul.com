@@ -48,16 +48,13 @@ export function trustedShopifyOAuthOrigin(value: string): string {
   return url.origin;
 }
 
+/** One fixed HTTPS callback for every merchant, project and environment. */
 export function shopifyOAuthCallbackUri(input: Readonly<{
   zoebuildOrigin: string;
-  buildProjectId: string;
-  environment: "test" | "live";
 }>): string {
   const origin = trustedShopifyOAuthOrigin(input.zoebuildOrigin);
-  if (!/^[a-zA-Z0-9_-]{1,128}$/.test(input.buildProjectId) ||
-      (input.environment !== "test" && input.environment !== "live")) reject();
   return new URL(
-    `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/commerce/providers/shopify/oauth/${input.environment}/callback`,
+    "/api/build/commerce/providers/shopify/oauth/callback",
     `${origin}/`,
   ).toString();
 }

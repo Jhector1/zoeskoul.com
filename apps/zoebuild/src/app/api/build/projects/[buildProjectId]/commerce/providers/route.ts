@@ -21,6 +21,7 @@ import {
 import {
   loadCurrentBuildAccessSnapshot,
 } from "@/lib/build/currentBuildAccess";
+import { shopifyOAuthRoutesConfigured } from "@/lib/commerce/shopifyOAuthRouteFlow";
 import {
   createPrismaBuildProjectReader,
 } from "@/lib/build/readBuildProjects";
@@ -273,6 +274,7 @@ async function readStoreSnapshot(
               true,
             webhookSecretRef:
               true,
+            storefrontSecretRef: true,
           },
         },
       },
@@ -354,6 +356,9 @@ function publicStoreSnapshot(
           status:
             connection.status,
           // This is a derived readiness boolean, never a secret or vault ref.
+          storefrontConfigured:
+            connection.provider === "shopify" && connection.status === "active" &&
+            Boolean(connection.storefrontSecretRef),
           webhookConfigured:
             connection.provider ===
               "stripe" &&
@@ -457,6 +462,11 @@ export async function GET(
           DEFAULT_COMMERCE_PAYMENT_PROVIDER,
         providers:
           publicProviderDirectory(),
+        shopifyOAuthConfigured: shopifyOAuthRoutesConfigured({
+          enabled: process.env.ZOEBUILD_SHOPIFY_OAUTH_ROUTES_ENABLED,
+          clientId: process.env.ZOEBUILD_SHOPIFY_CLIENT_ID,
+          clientSecret: process.env.ZOEBUILD_SHOPIFY_CLIENT_SECRET,
+        }),
         store:
           publicStoreSnapshot(
             store,

@@ -1,13 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useBuilderSessionContinuity } from "@/lib/auth/useBuilderSessionContinuity";
 import {
   usePathname,
 } from "next/navigation";
-import {
-  buildAuthenticateUrl,
-  buildLogoutUrl,
-} from "@zoeskoul/auth-client";
 import {
   useAppSession,
 } from "@zoeskoul/auth-client/react";
@@ -29,6 +26,7 @@ import {
 const COPY = {
   en: {
     projects: "Projects",
+    billing: "Billing",
     signIn: "Sign in",
     profile: "Profile",
     logout: "Sign out",
@@ -36,6 +34,7 @@ const COPY = {
   },
   fr: {
     projects: "Projets",
+    billing: "Facturation",
     signIn: "Se connecter",
     profile: "Profil",
     logout: "Se déconnecter",
@@ -43,6 +42,7 @@ const COPY = {
   },
   ht: {
     projects: "Pwojè",
+    billing: "Faktirasyon",
     signIn: "Konekte",
     profile: "Pwofil",
     logout: "Dekonekte",
@@ -57,9 +57,10 @@ export function ZoeBuildHeader(props: {
   const pathname = usePathname() || "/";
   const { preferences } =
     useAppPreferences();
+  const verifiedSession = useBuilderSessionContinuity();
   const sessionState =
     useAppSession({
-      apiOrigin: props.websiteOrigin,
+      apiOrigin: props.zoebuildOrigin,
     });
 
   const locale =
@@ -71,23 +72,15 @@ export function ZoeBuildHeader(props: {
 
   const projectsHref =
     `/${locale}/projects`;
-  const user =
-    sessionState.status === "authenticated"
-      ? sessionState.session.user
-      : null;
+  const billingHref = `/${locale}/billing`;
+  const user = verifiedSession
+    ? verifiedSession.authenticated ? verifiedSession.user : null
+    : sessionState.status === "authenticated" ? sessionState.session.user : null;
 
-  const callbackUrl =
-    new URL(
-      pathname,
-      props.zoebuildOrigin,
-    ).toString();
-
-  const signInHref =
-    buildAuthenticateUrl({
-      websiteOrigin: props.websiteOrigin,
-      callbackUrl,
-      locale,
-    });
+  const signInUrl = new URL("/api/auth/handoff/start", props.zoebuildOrigin);
+  signInUrl.searchParams.set("returnTo", pathname);
+  signInUrl.searchParams.set("locale", locale);
+  const signInHref = signInUrl.toString();
 
   const profileHref =
     new URL(
@@ -95,11 +88,9 @@ export function ZoeBuildHeader(props: {
       props.websiteOrigin,
     ).toString();
 
-  const logoutHref =
-    buildLogoutUrl({
-      websiteOrigin: props.websiteOrigin,
-      locale,
-    });
+  const logoutUrl = new URL("/api/auth/handoff/logout", props.zoebuildOrigin);
+  logoutUrl.searchParams.set("locale", locale);
+  const logoutHref = logoutUrl.toString();
 
   const brandGroup = (
     <Link
@@ -159,12 +150,12 @@ export function ZoeBuildHeader(props: {
           />
         )
         : (
-          <Link
+          <a
             className="ui-btn-secondary h-8"
             href={signInHref}
           >
             {t.signIn}
-          </Link>
+          </a>
         );
 
   const topRowActions = (
@@ -175,6 +166,8 @@ export function ZoeBuildHeader(props: {
       >
         {t.projects}
       </Link>
+
+      {user && <Link href={billingHref} className="ui-btn-ide-ghost h-8">{t.billing}</Link>}
 
       <ZoeBuildLocaleSwitcher compact />
 

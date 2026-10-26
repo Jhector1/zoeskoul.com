@@ -1,0 +1,18 @@
+import {test} from "node:test";import assert from "node:assert/strict";import {readFileSync} from "node:fs";
+const read=p=>readFileSync(new URL(`../../../${p}`,import.meta.url),"utf8");
+const web=read("apps/web/src/app/api/billing/zoebuild-ai-credits/route.ts");
+const build=read("apps/zoebuild/src/app/api/billing/credit-packs/checkout/route.ts");
+const list=read("apps/zoebuild/src/app/api/billing/credit-packs/route.ts");
+const gateway=read("apps/zoebuild/src/lib/auth/buildHandoff.ts");
+const ui=read("apps/zoebuild/src/app/[locale]/billing/AiCreditPacksPanel.tsx");
+const fund=read("apps/web/src/lib/billing/zoeBuildAiCreditStripeFunding.ts");
+const fundTest=read("apps/web/src/lib/billing/zoeBuildAiCreditStripeFunding.test.ts");
+test("provenance test fixture accepts a record with omitted metadata keys",()=>assert.match(fundTest,/metadata as Record<string,string>/));
+test("customer identity is read from revocable Web session, never request-provided user",()=>{assert.match(web,/readBuildHandoffSession\(body.sessionHash\)/);assert.match(web,/authenticatedUserId:session.user.id/);assert.doesNotMatch(web,/authenticatedUserId:body.userId/);});
+test("only service-authenticated Web server can start credit payments",()=>{assert.match(web,/isServiceAuthorized/);assert.match(web,/readLimitedHandoffJson\(request,1024\)/);assert.match(web,/createZoeBuildAiCreditCheckoutForAuthenticatedUser/);});
+test("catalog and purchases are disabled while approved packs are empty",()=>{assert.match(fund,/APPROVED_ZOEBUILD_AI_CREDIT_PACKS[^\n]*= \[\]/);assert.match(web,/mode!=="sandbox-only"/);assert.match(web,/verifiedZoeBuildAiSandboxCatalog/);assert.match(web,/CREDIT_PACKS_UNAVAILABLE/);});
+test("ZoeBuild origin protected and sends no asserted user ID",()=>{assert.match(build,/isTrustedBillingMutation/);assert.match(build,/requestBuilderAiCreditService\(token/);assert.doesNotMatch(build,/userId:data.userId/);});
+test("Web authority uses host-only hashed session and dedicated fixed endpoint",()=>{assert.match(gateway,/sessionHash: sha256\(sessionToken\)/);assert.match(gateway,/\/api\/billing\/zoebuild-ai-credits/);});
+test("UI remains disabled without reviewed Stripe packs and does not grant credits",()=>{assert.match(ui,/catalog&&!catalog.available/);assert.match(ui,/Stripe test mode/);assert.doesNotMatch(ui,/grantAiCreditLot|process\.env\.NODE_ENV/);});
+test("redirect returns to ZoeBuild billing page, not nonexistent source route",()=>{const checkout=read("apps/web/src/lib/billing/zoeBuildAiCreditStripeCheckout.ts");assert.match(checkout,/\/en\/billing\?credits=success/);});
+test("AI billing activation remains separate and no new tables or migrations",()=>{assert.doesNotMatch(web+build+list,/prisma\.|\.createMany\(|ALTER TABLE|STRIPE_SECRET_KEY/);});

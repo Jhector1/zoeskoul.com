@@ -1,0 +1,101 @@
+/* E13C: theme-neutral provider surfaces — inherit from the active ZoeBuild theme. */
+.directory {
+  display: grid;
+  grid-template-rows: max-content max-content;
+  align-content: start;
+  align-self: start;
+  height: fit-content;
+  width: 100%;
+  min-width: 0;
+  gap: 20px;
+  color: inherit;
+}
+.heading { display: grid; gap: 6px; align-content: start; }
+.heading h2 { margin: 0; font-size: clamp(21px, 2vw, 28px); line-height: 1.2; font-weight: 700; color: inherit; }
+.heading p { margin: 0; max-width: 68ch; opacity: .78; line-height: 1.5; color: inherit; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 228px), 1fr)); gap: 14px; align-items: stretch; }
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-height: 180px;
+  height: 100%;
+  padding: 18px;
+  text-align: left;
+  /* Every provider uses the same card geometry and neutral theme-aware surface. */
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, currentColor 23%, transparent);
+  background: color-mix(in srgb, currentColor 4%, transparent);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color .12s, background .12s, transform .12s;
+}
+.card:focus-visible { outline: 2px solid #3189e8; outline-offset: 3px; }
+.card:hover:not(:disabled) {
+  border-color: color-mix(in srgb, currentColor 48%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  transform: translateY(-1px);
+}
+/* A single reusable card component owns every capability directory.
+ * Availability determines treatment, not a different card implementation:
+ * actionable / unverified = solid; unavailable = dashed + subtle dimming.
+ */
+.card:disabled { cursor: not-allowed; }
+.card[data-status="unavailable"] {
+  border-style: dashed;
+  opacity: .80;
+  background: color-mix(in srgb, currentColor 2%, transparent);
+}
+.card[data-status="checking"] {
+  border-style: solid;
+  opacity: .90;
+}
+.cardTop { display: flex; gap: 12px; align-items: center; }
+.brand { position: relative; display: grid; width: 42px; height: 42px; flex: 0 0 42px; border-radius: 10px; place-items: center; overflow: hidden; background: #e7ebf4; color: #151b28; }
+.fallback { font-size: 16px; font-weight: 800; letter-spacing: -.04em; }
+.logo { position: absolute; inset: 7px; width: calc(100% - 14px); height: calc(100% - 14px); object-fit: contain; }
+.identity { display: grid; gap: 4px; min-width: 0; }
+.identity strong { font-size: 15px; line-height: 1.25; color: inherit; }
+.state { font-size: 12px; opacity: .8; color: inherit; }
+.state[data-status="active"], .state[data-status="built-in"], .state[data-status="connected"] { opacity: 1; color: #0b9663; font-weight: 700; }
+.state[data-status="attention"], .state[data-status="unverified"] { opacity: 1; color: #ad7412; font-weight: 700; }
+.description { opacity: .82; line-height: 1.45; font-size: 13px; color: inherit; }
+.bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 10px; margin-top: auto; }
+.note { opacity: .72; font-size: 12px; line-height: 1.35; color: inherit; max-width: 195px; }
+.action { margin-left: auto; font-size: 12px; color: #2872b5; font-weight: 700; white-space: nowrap; }
+.card[data-status="unavailable"] .state,
+.card[data-status="unavailable"] .description,
+.card[data-status="unavailable"] .note { opacity: .78; }
+.card:disabled .action { color: inherit; opacity: .78; }
+.overview { align-self: start; justify-self: stretch; align-content: start; min-height: 0; width: 100%; }
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 9px 13px;
+  margin: 0 0 18px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  border: 1px solid color-mix(in srgb, currentColor 27%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, currentColor 4%, transparent);
+  color: inherit;
+  cursor: pointer;
+}
+.backButton:hover { background: color-mix(in srgb, currentColor 9%, transparent); }
+.backButton:focus-visible { outline: 2px solid #3189e8; outline-offset: 2px; }
+@media (prefers-color-scheme: dark) {
+  .state[data-status="active"], .state[data-status="built-in"], .state[data-status="connected"] { color: #5ee5ad; }
+  .state[data-status="attention"], .state[data-status="unverified"] { color: #fac773; }
+  .action { color: #a5c4ff; }
+}
+@media (max-width: 540px) {
+  .grid { grid-template-columns: 1fr; }
+  .card { min-height: 150px; }
+}
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover:not(:disabled) { transform: none; } }

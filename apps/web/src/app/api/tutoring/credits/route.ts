@@ -7,6 +7,7 @@ import {
 import { getTutoringCreditBalance } from "@/lib/tutoring/tutoringCommercial";
 import { launchTutoringCreditPackagePresentation } from "@/lib/tutoring/tutoringCreditPackages";
 import { tutoringPricingPresentation } from "@/lib/tutoring/tutoringPricing";
+import {CREDIT_DOMAINS} from "@zoeskoul/platform-server/credits/core";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -32,6 +33,7 @@ export async function GET(request: Request) {
   const balance = await getTutoringCreditBalance(access.user.id);
 
   return appCorsJson(request, {
+    creditDomain: CREDIT_DOMAINS.tutoring,
     balance,
     purchasePackages: launchTutoringCreditPackagePresentation(),
     sessionDurations: [30, 60],

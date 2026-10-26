@@ -34,6 +34,7 @@ function event(
         object: "checkout.session",
         mode: "payment",
         status: "complete",
+        livemode: false,
         payment_status: "paid",
         amount_total: 6123,
         currency: "usd",
@@ -58,6 +59,15 @@ function deps(
   overrides: Partial<TutoringCreditWebhookDeps> = {},
 ): TutoringCreditWebhookDeps {
   return {
+    retrievePaymentIntent: vi.fn(async () => ({
+      id: "pi_tutor_1", livemode: false, status: "succeeded",
+      amount: 6123, amountReceived: 6123, currency: "usd",
+      latestCharge: {
+        paymentIntentId: "pi_tutor_1", livemode: false,
+        paid: true, captured: true, refunded: false, disputed: false,
+        amount: 6123, amountRefunded: 0, currency: "usd",
+      },
+    })),
     listCheckoutLineItems: vi.fn(async () => [
       { priceId: "price_tutor_60", quantity: 1 },
     ]),
@@ -178,6 +188,61 @@ describe("tutoring Stripe webhook evidence", () => {
       "Tutoring Stripe Checkout line item identity is invalid.",
     );
 
+    expect(d.settlePaid).not.toHaveBeenCalled();
+  });
+
+  it("refuses a delayed paid Checkout after a full refund or dispute", async () => {
+    for (const chargePatch of [
+      { refunded: true },
+      { disputed: true },
+      { amountRefunded: 500 },
+      { captured: false },
+      { paymentIntentId: "pi_other" },
+    ]) {
+      const d = deps({
+        retrievePaymentIntent: vi.fn(async () => ({
+          id: "pi_tutor_1", livemode: false, status: "succeeded",
+          amount: 6123, amountReceived: 6123, currency: "usd",
+          latestCharge: {
+            paymentIntentId: "pi_tutor_1", livemode: false,
+            paid: true, captured: true, refunded: false, disputed: false,
+            amount: 6123, amountRefunded: 0, currency: "usd", ...chargePatch,
+          },
+        })),
+      });
+      await expect(reconcileTutoringCreditCheckoutEvent(
+        event("checkout.session.completed"), { deps: d },
+      )).rejects.toThrow("TUTORING_STRIPE_PAYMENT_NOT_CLEAR");
+      expect(d.settlePaid).not.toHaveBeenCalled();
+    }
+  });
+
+  it("refuses a Checkout with mismatched Stripe modes or current payment amount", async () => {
+    const d = deps();
+    await expect(reconcileTutoringCreditCheckoutEvent(
+      event("checkout.session.completed", { livemode: true }), { deps: d },
+    )).rejects.toThrow("TUTORING_STRIPE_CHECKOUT_MODE_MISMATCH");
+    const changed = deps({
+      retrievePaymentIntent: vi.fn(async () => ({
+        id: "pi_tutor_1", livemode: false, status: "succeeded",
+        amount: 6123, amountReceived: 100, currency: "usd",
+        latestCharge: null,
+      })),
+    });
+    await expect(reconcileTutoringCreditCheckoutEvent(
+      event("checkout.session.completed"), { deps: changed },
+    )).rejects.toThrow("TUTORING_STRIPE_PAYMENT_NOT_CLEAR");
+    expect(d.settlePaid).not.toHaveBeenCalled();
+    expect(changed.settlePaid).not.toHaveBeenCalled();
+  });
+
+  it("keeps paid settlement pending when current Stripe lookup fails, never trusting the old event", async () => {
+    const d = deps({ retrievePaymentIntent: vi.fn(async () => {
+      throw new Error("Provider temporarily unavailable");
+    }) });
+    await expect(reconcileTutoringCreditCheckoutEvent(
+      event("checkout.session.completed"), { deps: d },
+    )).rejects.toThrow("Provider temporarily unavailable");
     expect(d.settlePaid).not.toHaveBeenCalled();
   });
 

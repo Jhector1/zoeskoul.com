@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import { shouldShowRenewalDate } from "@/lib/billing/period";
+import {formatMoneyMinor} from "@/i18n/money";
 
 export type StripeSubscriptionStatus =
     | "trialing"
@@ -57,6 +57,9 @@ export function StripeStatusPanel(props: {
   trialEnd?: string | null;
   currentPeriodEnd?: string | null;
   cancelAtPeriodEnd?: boolean | null;
+  nextBillingDate?: string | null;
+  nextBillingAmountMinor?: number | null;
+  nextBillingCurrency?: string | null;
 
   priceId?: string | null;
   subscriptionId?: string | null;
@@ -93,22 +96,12 @@ export function StripeStatusPanel(props: {
       });
     }
 
-    if (
-      shouldShowRenewalDate({
-        status: s,
-        currentPeriodEnd: props.currentPeriodEnd,
-        cancelAtPeriodEnd: props.cancelAtPeriodEnd,
-      })
-    ) {
-      out.push({
-        k: "renews",
-        text: t("renews", {
-          when: formatWhen(
-            props.currentPeriodEnd,
-            locale,
-          ),
-        }),
-      });
+    // Never turn a local period end into a guessed renewal date. Stripe's upcoming
+    // invoice preview is the only basis for a displayed next billing estimate.
+    if (props.nextBillingDate && !props.cancelAtPeriodEnd) {
+      const money = typeof props.nextBillingAmountMinor === "number" && props.nextBillingCurrency
+        ? ` · ${formatMoneyMinor(props.nextBillingAmountMinor, props.nextBillingCurrency, locale)}` : "";
+      out.push({ k: "renews", text: t("renews", { when: formatWhen(props.nextBillingDate, locale) }) + money });
     }
 
     if (props.cancelAtPeriodEnd) {
@@ -125,6 +118,9 @@ export function StripeStatusPanel(props: {
     planLabel,
     props.trialEnd,
     props.currentPeriodEnd,
+    props.nextBillingDate,
+    props.nextBillingAmountMinor,
+    props.nextBillingCurrency,
     props.cancelAtPeriodEnd,
   ]);
 

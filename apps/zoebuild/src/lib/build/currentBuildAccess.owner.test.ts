@@ -25,15 +25,15 @@ describe("ZoeBuild shared Web session owner", () => {
       read("./currentBuildAccess.ts");
 
     expect(source).toContain(
-      "createAuthClient",
+      "readBuilderSession",
     );
 
     expect(source).toContain(
-      "apiOrigin: websiteOrigin",
+      "SESSION_COOKIE",
     );
 
     expect(source).toContain(
-      "client.fetchSession()",
+      "session.authenticated",
     );
 
     expect(source).toContain(

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@zoeskoul/ai-json": "workspace:*",
+    "@zoeskoul/api-contracts": "workspace:*",
     "@zoeskoul/app-config": "workspace:*",
     "@zoeskoul/auth-client": "workspace:*",
     "@zoeskoul/build-ai": "workspace:*",

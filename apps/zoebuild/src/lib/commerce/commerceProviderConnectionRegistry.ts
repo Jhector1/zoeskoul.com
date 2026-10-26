@@ -269,3 +269,26 @@ registerCommerceProviderConnectionAdapter({
     );
   },
 });
+
+
+// Shopify merchants authorize through OAuth, never by POSTing tokens to this API.
+// The standard connection route remains available for authenticated disconnect.
+registerCommerceProviderConnectionAdapter({
+  provider: "shopify",
+  connectionKind: "credentials",
+  environments: ["test", "live"],
+  async connect() {
+    throw new CommerceProviderConnectionAdapterError(
+      "SHOPIFY_OAUTH_REQUIRED", "Connect Shopify through merchant authorization.", 409,
+    );
+  },
+  async disconnect(client, input) {
+    return disconnectCommerceProviderEnvironment(client, {
+      buildProjectId: input.buildProjectId,
+      storeId: input.storeId,
+      provider: "shopify",
+      environment: input.environment,
+      secretStore: input.secretStore,
+    });
+  },
+});

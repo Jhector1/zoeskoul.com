@@ -14,6 +14,8 @@ import {
   type BuildRoutingMediaKind,
 } from "@zoeskoul/build-routing";
 
+import type { ZoeBuildMeteredPlanningContext } from "./meteredZoeBuildPlanning";
+
 import {
   ZoeBuildAiConfigurationError,
   createZoeBuildAiPlannerFromConfig,
@@ -363,14 +365,23 @@ function manualCandidate():
 }
 
 function createCandidatePlanner(
-  candidate:
-    BuildModelCandidate,
+  candidate: BuildModelCandidate,
+  index: number,
+  metering?: ZoeBuildMeteredPlanningContext,
 ): BuildAiPlanner {
+  if (metering) {
+    return {
+      async generateProjectSpecification(input) {
+        const {createMeteredZoeBuildAttemptPlanner} = await import("./meteredZoeBuildPlanning");
+        return createMeteredZoeBuildAttemptPlanner({
+          candidate, attemptIndex: index, metering,
+        }).generateProjectSpecification(input);
+      },
+    };
+  }
   return createZoeBuildAiPlannerFromConfig({
-    provider:
-      candidate.provider as ZoeBuildAiProviderId,
-    model:
-      candidate.model,
+    provider: candidate.provider as ZoeBuildAiProviderId,
+    model: candidate.model,
   });
 }
 
@@ -379,8 +390,15 @@ export async function planCostAwareZoeBuildProject(
     prompt: string;
     media?:
       readonly BuildPromptMedia[];
+    /** Server-only, verified per-attempt spend policy. Never browser-sourced. */
+    metering?: ZoeBuildMeteredPlanningContext;
   }>,
 ): Promise<CostAwareBuildPlanResult> {
+  // Required-mode gate prevents unmetered provider calls during rollout.
+  // The API route must inject verified pricing before switching this on.
+  if (process.env.ZOEBUILD_AI_CREDITS_ENFORCEMENT === "required" && !input.metering) {
+    throw new Error("BUILD_AI_CREDITS_METERING_REQUIRED");
+  }
   const profile =
     classifyBuildRequest(
       input.prompt,
@@ -443,6 +461,8 @@ export async function planCostAwareZoeBuildProject(
       lockArchitecture(
         createCandidatePlanner(
           candidate,
+          index,
+          input.metering,
         ),
         profile,
       );

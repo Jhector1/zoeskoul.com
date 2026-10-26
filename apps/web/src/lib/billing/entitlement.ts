@@ -1,6 +1,8 @@
 // src/lib/billing/entitlement.ts
 import { prisma } from "@/lib/prisma";
-import { hasCurrentSubscriptionAccess } from "@/lib/billing/period";
+import { hasCurrentSubscriptionAccess } from "@zoeskoul/platform-server/billing/subscriptionEligibility";
+import { resolvePlatformBillingCatalog } from "@zoeskoul/platform-server/billing/productCatalog";
+import { verifiedPlatformSubscriptionRows } from "@zoeskoul/platform-server/billing/platformSubscriptionOwnership";
 import type { StripeSubscriptionStatus } from "@zoeskoul/db";
 
 type DenyReason =
@@ -40,12 +42,19 @@ function isFuture(d?: Date | null) {
 }
 
 export async function getEntitlementForUser(userId: string): Promise<Entitlement> {
-  const subs = await prisma.subscription.findMany({
-    where: { userId },
+  const learningPriceIds = resolvePlatformBillingCatalog(process.env).filter((p) => p.product === "learning").map((p) => p.priceId);
+  if (learningPriceIds.length === 0) return { ok: false, reason: "none" };
+  const user = await prisma.user.findUnique({where:{id:userId},select:{stripeCustomerId:true}});
+  // Apply verified customer ownership in SQL BEFORE the 10-row limit. Otherwise
+  // foreign/stale customer rows could crowd out the user's valid subscription.
+  if (!user?.stripeCustomerId) return {ok:false,reason:"none"};
+  const candidateSubscriptions = await prisma.subscription.findMany({
+    where: { userId, stripeCustomerId:user.stripeCustomerId, billingProduct:"learning",priceId: { in: learningPriceIds } },
     orderBy: { updatedAt: "desc" },
     take: 10,
     select: {
       stripeSubscriptionId: true,
+      stripeCustomerId: true,
       status: true,
       priceId: true,
       currentPeriodEnd: true,
@@ -53,6 +62,9 @@ export async function getEntitlementForUser(userId: string): Promise<Entitlement
       trialEnd: true,
       updatedAt: true,
     },
+  });
+  const subs = verifiedPlatformSubscriptionRows({
+    storedStripeCustomerId:user?.stripeCustomerId, rows:candidateSubscriptions,
   });
 
   if (!subs.length) return { ok: false, reason: "none" };
@@ -105,10 +117,7 @@ export async function getEntitlementForUser(userId: string): Promise<Entitlement
     return withinPeriod ? { ok: true, reason: "active", ...base } : { ok: false, reason: "past_due", ...base };
   }
 
-  if (sub.status === "canceled") {
-    // allow until period end
-    return withinPeriod ? { ok: true, reason: "active", ...base } : { ok: false, reason: "canceled", ...base };
-  }
+  if (sub.status === "canceled") return { ok: false, reason: "canceled", ...base };
 
   // Unknown Stripe states must fail closed.
   return { ok: false, reason: "expired", ...base };

@@ -1,0 +1,21 @@
+.card{width:100%;border:1px solid var(--zb-border,rgba(128,128,128,.22));border-radius:16px;background:var(--zb-panel, var(--background));overflow:clip;color:var(--zb-text,inherit)}
+.topline{padding:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;border-bottom:1px solid var(--zb-border,rgba(128,128,128,.18))}
+.topline h3{margin:5px 0 8px;font-size:20px;font-weight:700;letter-spacing:-.035em}
+.topline p{margin:0;max-width:570px;line-height:1.6;color:var(--zb-muted, #7c8394);font-size:13px}
+.eyebrow{color:var(--zb-muted,#7c8394);font-size:10px;letter-spacing:.15em;font-weight:750}
+.ready,.inactive{white-space:nowrap;border:1px solid var(--zb-border,rgba(128,128,128,.2));border-radius:999px;padding:6px 11px;font-size:11px;font-weight:700}
+.ready{color:#16a34a;border-color:rgba(22,163,74,.35);background:rgba(22,163,74,.08)}
+.inactive{color:var(--zb-muted,#7c8394)}
+.content{padding:24px}
+.label{display:block;font-size:12px;font-weight:650;margin:0 0 9px}
+.controls{display:flex;gap:10px;align-items:stretch}
+.controls input{min-width:0;flex:1;border:1px solid var(--zb-border,rgba(128,128,128,.25));background:var(--zb-surface,var(--background));color:inherit;border-radius:10px;padding:12px 13px;font-size:13px}
+.controls input:focus-visible,.controls button:focus-visible{outline:2px solid #7c67f5;outline-offset:2px}
+.controls button{flex-shrink:0;border:0;border-radius:10px;background:#16a34a;color:white;font-size:12px;font-weight:750;padding:11px 17px;cursor:pointer}
+.controls button:disabled{opacity:.55;cursor:not-allowed}
+.help{font-size:12px;line-height:1.6;color:var(--zb-muted,#7c8394);margin:12px 0 0}
+.warning{color:#d97706;font-size:12px;line-height:1.6;margin:13px 0 0}
+@media(max-width:700px){.topline{padding:18px;flex-direction:column}.content{padding:18px}.controls{flex-direction:column}.controls button{width:100%}}
+
+.disconnect{display:inline-block;margin-top:12px;background:transparent;border:1px solid var(--zb-border,rgba(128,128,128,.3));color:inherit;padding:9px 12px;border-radius:9px;font-size:12px;cursor:pointer}
+.disconnect:disabled{opacity:.55;cursor:not-allowed}

@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
+import { withPreviewDocumentRevision } from "../previewDocumentUrl";
 
 type FrameIndex = 0 | 1;
 const NAV_CHANNEL = "zoebuild.preview.navigation.v1";
@@ -24,18 +25,6 @@ function safePreviewRoute(input: unknown): string | null {
     }
 }
 
-function withRevision(src: string, revision: number, routePath: string) {
-    const base = new URL(src, LOCAL_ORIGIN);
-    const route = new URL(safePreviewRoute(routePath) ?? "/", LOCAL_ORIGIN);
-    const root = base.pathname.endsWith("/") ? base.pathname : `${base.pathname}/`;
-    // The router is sandboxed: no bare /approach host navigation or runner origin.
-    base.pathname = `${root}${route.pathname.slice(1)}`;
-    base.search = route.search;
-    base.searchParams.set("__zb_preview_revision", String(revision));
-    base.hash = route.hash;
-    return `${base.pathname}${base.search}${base.hash}`;
-}
-
 function otherFrame(index: FrameIndex): FrameIndex {
     return index === 0 ? 1 : 0;
 }
@@ -45,8 +34,11 @@ export default function RemoteWebPreview(props: {
 }) {
     const { preview } = props;
     const [localRefresh, setLocalRefresh] = useState(0);
+    // Changes the protected iframe document route without restarting Vite.
+    const [directNavigationRevision, setDirectNavigationRevision] = useState(0);
     const [refreshPending, setRefreshPending] = useState(false);
     const [renderProblem, setRenderProblem] = useState<string | null>(null);
+    const [navigationWarning, setNavigationWarning] = useState<string | null>(null);
     const [displayPath, setDisplayPath] = useState("/");
     const [routeSynced, setRouteSynced] = useState(false);
     const [pendingRoute, setPendingRoute] = useState<string | null>(null);
@@ -56,19 +48,23 @@ export default function RemoteWebPreview(props: {
     const [pickerOpen, setPickerOpen] = useState(false);
     const [pageSearch, setPageSearch] = useState("");
     const currentRouteRef = useRef("/");
+    // Parent-owned route history is usable even if an injected bridge is absent.
+    const routeHistoryRef = useRef<{routes: string[]; index: number}>({routes:["/"],index:0});
     const lastBaseRef = useRef(preview.src);
     const frameRefs = useRef<[HTMLIFrameElement | null, HTMLIFrameElement | null]>([null, null]);
 
     const iframeSrc = useMemo(() => {
         if (!preview.src) return null;
         const sameSession = lastBaseRef.current === preview.src;
-        return withRevision(preview.src, preview.revision + localRefresh,
+        return withPreviewDocumentRevision(preview.src, preview.revision + localRefresh + directNavigationRevision,
             sameSession ? currentRouteRef.current : "/");
-    }, [localRefresh, preview.revision, preview.src]);
+    }, [localRefresh, directNavigationRevision, preview.revision, preview.src]);
 
     useEffect(() => {
         lastBaseRef.current = preview.src;
         currentRouteRef.current = "/";
+        routeHistoryRef.current = {routes:["/"],index:0};
+        setDirectNavigationRevision(0);
         setDisplayPath("/");
         setRouteSynced(false);
         routeSyncedRef.current = false;
@@ -77,64 +73,36 @@ export default function RemoteWebPreview(props: {
         setCanGoForward(false);
         setRefreshPending(false);
         setRenderProblem(null);
+        setNavigationWarning(null);
     }, [preview.src]);
 
     const [frameSources, setFrameSources] = useState<
         [string | null, string | null]
     >([null, null]);
     const [activeFrame, setActiveFrame] = useState<FrameIndex | null>(null);
-    const expiredCandidateRef = useRef<string | null>(null);
 
     const activeSrc = activeFrame === null ? null : frameSources[activeFrame];
 
+    // The runner validates Vite's HTML root during preview/start. Do not issue a
+    // second HEAD/GET to the browser proxy as a preflight: the dynamic Next.js
+    // path and method can 404 even while the runner's Vite session is healthy.
+    // Mount the protected document once; only a matching rendered bridge state
+    // may promote the frame. A document failure remains local to this session.
     useEffect(() => {
         if (!iframeSrc) {
             if (activeFrame === null) setFrameSources([null, null]);
             return;
         }
         if (activeSrc === iframeSrc) return;
-        const controller = new AbortController();
-        let cancelled = false;
-        void (async () => {
-            try {
-                // Probe without downloading the HTML twice. The iframe loads it once.
-                // An older proxy that does not support HEAD can still use GET.
-                const request = (method: "HEAD" | "GET") => fetch(iframeSrc, {
-                    method, credentials: "same-origin", cache: "no-store",
-                    signal: controller.signal,
-                });
-                let response = await request("HEAD");
-                if (response.status === 405 || response.status === 501) response = await request("GET");
-                if (cancelled) return;
-                if (!response.ok) {
-                    if (response.status === 404 &&
-                        expiredCandidateRef.current !== iframeSrc) {
-                        expiredCandidateRef.current = iframeSrc;
-                        preview.onRetry?.();
-                    }
-                    setRefreshPending(false);
-                    return;
-                }
-                const contentType = response.headers.get("content-type") ?? "";
-                if (!/^text\/html(?:\s*;|$)/i.test(contentType)) {
-                    setRefreshPending(false);
-                    return;
-                }
-                expiredCandidateRef.current = null;
-                setFrameSources((current) => {
-                    const target: FrameIndex = activeFrame === null ? 0 : otherFrame(activeFrame);
-                    if (current[target] === iframeSrc) return current;
-                    const next: [string | null, string | null] = [...current];
-                    next[target] = iframeSrc;
-                    return next;
-                });
-            } catch (error) {
-                if (cancelled || (error instanceof DOMException && error.name === "AbortError")) return;
-                setRefreshPending(false);
-            }
-        })();
-        return () => { cancelled = true; controller.abort(); };
-    }, [activeFrame, activeSrc, iframeSrc, preview.onRetry]);
+        setRenderProblem(null);
+        setFrameSources(current => {
+            const target: FrameIndex = activeFrame === null ? 0 : otherFrame(activeFrame);
+            if (current[target] === iframeSrc) return current;
+            const next: [string | null, string | null] = [...current];
+            next[target] = iframeSrc;
+            return next;
+        });
+    }, [activeFrame, activeSrc, iframeSrc]);
 
     // A sandboxed iframe is never granted same-origin access. Frame promotion
     // requires a live DOM-ready attestation from the exact active revision.
@@ -149,24 +117,45 @@ export default function RemoteWebPreview(props: {
             const data: unknown = event.data;
             if (!data || typeof data !== "object" || Array.isArray(data)) return;
             const value = data as Record<string, unknown>;
-            if (value.channel !== NAV_CHANNEL || value.type !== "state" ||
-                value.basePath !== preview.src || typeof value.rendered !== "boolean" ||
-                typeof value.canGoBack !== "boolean" || typeof value.canGoForward !== "boolean") return;
+            if (value.channel !== NAV_CHANNEL) return;
             const expectedRevision = new URL(source, LOCAL_ORIGIN).searchParams.get("__zb_preview_revision");
             if (value.revision !== expectedRevision) return;
+            if (value.type === "bootstrap") {
+                // A bootstrap failure comes from the exact frame/revision but is
+                // diagnostic only: it cannot promote a frame or assert a route.
+                if (value.status === "failed" && typeof value.reason === "string" &&
+                    ["script-missing", "configuration-missing", "script-address-invalid",
+                     "document-root-invalid", "document-route-invalid"].includes(value.reason) && source === iframeSrc) {
+                    setNavigationWarning(`Preview navigation unavailable (${value.reason}).`);
+                }
+                if (value.status === "installed" && value.basePath === preview.src && source === iframeSrc) {
+                    setNavigationWarning(null);
+                }
+                return;
+            }
+            if (value.type !== "state" || value.basePath !== preview.src ||
+                typeof value.rendered !== "boolean" || typeof value.canGoBack !== "boolean" ||
+                typeof value.canGoForward !== "boolean") return;
             const route = safePreviewRoute(value.route);
             if (!route) return;
             const candidate = source === iframeSrc;
-            if (frameIndex !== activeFrame && (!candidate || !value.rendered)) return;
-            if (frameIndex !== activeFrame && candidate) activateFrame(frameIndex as FrameIndex, source);
+            // An old, still-visible frame must never overwrite a newer route request.
+            if (!candidate) return;
+            // Only a rendered React root can confirm the active document.
+            if (!value.rendered) return;
+            if (frameIndex !== activeFrame) activateFrame(frameIndex as FrameIndex, source);
             setRenderProblem(null);
+            setNavigationWarning(null);
+            rememberRoute(route);
             currentRouteRef.current = route;
             setDisplayPath(route);
             setRouteSynced(true);
             routeSyncedRef.current = true;
             setPendingRoute(current => current && current !== route ? current : null);
-            setCanGoBack(value.canGoBack);
-            setCanGoForward(value.canGoForward);
+            // Parent route history includes picker navigation, which a newly
+            // loaded iframe's own history cannot know about.
+            setCanGoBack(routeHistoryRef.current.index > 0);
+            setCanGoForward(routeHistoryRef.current.index < routeHistoryRef.current.routes.length - 1);
         }
         window.addEventListener("message", onMessage);
         return () => window.removeEventListener("message", onMessage);
@@ -198,16 +187,44 @@ export default function RemoteWebPreview(props: {
         if (!iframeSrc || activeSrc === iframeSrc || !frameSources.includes(iframeSrc)) return;
         setRenderProblem(null);
         const timer = window.setTimeout(() => {
-            setRenderProblem("Preview loaded HTML but React did not render. Check the project console.");
+            setRenderProblem("Preview document did not confirm a rendered React page. Check Network and Console.");
             setRefreshPending(false);
         }, 15_000);
         return () => window.clearTimeout(timer);
     }, [activeSrc, frameSources, iframeSrc]);
 
+    function rememberRoute(route: string) {
+        const history = routeHistoryRef.current;
+        if (history.routes[history.index] !== route) {
+            history.routes = [...history.routes.slice(0, history.index + 1), route].slice(-40);
+            history.index = history.routes.length - 1;
+        }
+        setCanGoBack(history.index > 0);
+        setCanGoForward(history.index < history.routes.length - 1);
+    }
+
+    function navigateDocument(route: string, historyAction: "push" | "back" | "forward" = "push") {
+        if (!preview.src || !projectRoutes.some(item => item.path === route)) return;
+        if (historyAction === "push") rememberRoute(route);
+        currentRouteRef.current = route;
+        setPendingRoute(route);
+        setDisplayPath(route); // known requested URL, not an iframe-render attestation
+        routeSyncedRef.current = false;
+        setRouteSynced(false);
+        setNavigationWarning(null);
+        setRenderProblem(null);
+        setDirectNavigationRevision(value => value + 1);
+    }
+
     function sendNavigation(action: "back" | "forward") {
-        if (activeFrame === null || (action === "back" ? !canGoBack : !canGoForward)) return;
-        frameRefs.current[activeFrame]?.contentWindow?.postMessage(
-            {channel: NAV_CHANNEL, type: "command", action}, "*");
+        const history = routeHistoryRef.current;
+        const nextIndex = history.index + (action === "back" ? -1 : 1);
+        if (nextIndex < 0 || nextIndex >= history.routes.length) return;
+        history.index = nextIndex;
+        setCanGoBack(history.index > 0);
+        setCanGoForward(history.index < history.routes.length - 1);
+        // Navigate within the same isolated Vite session; no bridge ack required.
+        navigateDocument(history.routes[nextIndex]!, action);
     }
 
     const projectRoutes = (preview.routes?.length ? preview.routes : [{path:"/",label:"Home"}])
@@ -217,12 +234,8 @@ export default function RemoteWebPreview(props: {
         item.label.toLowerCase().includes(pageSearch.trim().toLowerCase()));
 
     function openRoute(route: string) {
-        if (!projectRoutes.some(item => item.path === route) || activeFrame === null || preview.state !== "ready") return;
-        routeSyncedRef.current = false;
-        setRouteSynced(false);
-        setPendingRoute(route);
-        frameRefs.current[activeFrame]?.contentWindow?.postMessage(
-            {channel:NAV_CHANNEL,type:"command",action:"navigate",route}, "*");
+        if (!projectRoutes.some(item => item.path === route) || !preview.src || preview.state !== "ready") return;
+        if (route !== currentRouteRef.current || activeFrame === null) navigateDocument(route);
         setPickerOpen(false);
         setPageSearch("");
     }
@@ -252,8 +265,12 @@ export default function RemoteWebPreview(props: {
             setRefreshPending(false);
             return;
         }
-        if (preview.state === "error" || (renderProblem && activeFrame === null)) {
+        if (renderProblem && activeFrame === null) {
             setRenderProblem(null);
+            setLocalRefresh(value => value + 1); // same Vite session
+            return;
+        }
+        if (preview.state === "error") {
             preview.onRetry?.();
             return;
         }
@@ -263,21 +280,31 @@ export default function RemoteWebPreview(props: {
     }
 
     const statusLabel =
+        navigationWarning ? "Route not verified" :
         renderProblem ? "Preview not rendered" :
         preview.state === "starting" ? "Starting preview…" :
         preview.state === "syncing" ? "Updating preview…" :
         preview.state === "error" ? "Preview unavailable" : "Live preview";
     const displayUrl = preview.src ? displayPath : statusLabel;
     const visibleUrl = preview.src
-        ? pendingRoute ? `${pendingRoute} (opening…)` : routeSynced ? displayUrl : "Checking page…"
+        ? pendingRoute ? `${pendingRoute} (opening…)` :
+          (routeSynced || activeFrame !== null ? displayUrl : "Checking page…")
         : displayUrl;
+
+    function onDocumentLoad(index: FrameIndex, src: string) {
+        if (src !== iframeSrc) return;
+        // An iframe load event also fires for HTTP error pages. It must never
+        // promote a frame or claim React rendered; request a route attestation.
+        frameRefs.current[index]?.contentWindow?.postMessage(
+            {channel: NAV_CHANNEL, type: "command", action: "probe"}, "*");
+    }
 
     function activateFrame(index: FrameIndex, src: string) {
         if (src !== iframeSrc) return;
         setActiveFrame(index);
         setRefreshPending(false);
-        setCanGoBack(false);
-        setCanGoForward(false);
+        setCanGoBack(routeHistoryRef.current.index > 0);
+        setCanGoForward(routeHistoryRef.current.index < routeHistoryRef.current.routes.length - 1);
         setFrameSources((current) => {
             if (current[index] !== src) return current;
             const previous = otherFrame(index);
@@ -361,7 +388,7 @@ export default function RemoteWebPreview(props: {
                             data-remote-web-preview-frame
                             data-preview-frame-active={isActive ? "true" : "false"}
                             aria-hidden={!isActive}
-                            onLoad={() => activateFrame(index, src)}
+                            onLoad={() => onDocumentLoad(index, src)}
                             className={["absolute inset-0 h-full w-full border-0 bg-white",
                                 isActive ? "z-10 opacity-100" : "pointer-events-none z-0 opacity-0"].join(" ")}
                             style={{colorScheme:"light",backgroundColor:"#ffffff"}} />
@@ -373,9 +400,9 @@ export default function RemoteWebPreview(props: {
                         <div className="max-w-md">
                             <strong className="block text-sm text-neutral-800 dark:text-white/85">{statusLabel}</strong>
                             {(renderProblem || preview.message) ? <p className="mt-2 text-xs leading-5 text-neutral-500 dark:text-white/55">{renderProblem || preview.message}</p> : null}
-                            {(preview.state === "error" || renderProblem) && preview.onRetry ? (
+                            {(renderProblem || (preview.state === "error" && preview.onRetry)) ? (
                                 <button type="button" className="mt-3 rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 dark:text-white/75"
-                                    onClick={() => preview.onRetry?.()}>Retry preview</button>
+                                    onClick={refreshOrCancel}>{renderProblem ? "Retry document" : "Retry preview"}</button>
                             ) : null}
                         </div>
                     </div>

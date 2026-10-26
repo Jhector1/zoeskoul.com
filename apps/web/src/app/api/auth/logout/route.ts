@@ -1,6 +1,7 @@
 import {
   signOut,
 } from "@/lib/auth";
+import { revokeUserBuildSessions } from "@/lib/auth/buildHandoffStore";
 import { resolveLogoutWebsiteOrigin } from "./logoutWebsiteOrigin";
 import {
   buildKeycloakEndSessionUrl,
@@ -56,6 +57,16 @@ export async function GET(req: NextRequest) {
     resolveLogoutProvider(token);
   const idToken =
     readKeycloakIdToken(token);
+
+  // Logout must revoke all outstanding builder sessions before clearing the Web cookie.
+  const userId = token && typeof token === "object"
+    ? ("uid" in token && typeof token.uid === "string" ? token.uid
+      : "sub" in token && typeof token.sub === "string" ? token.sub : null)
+    : null;
+  if (userId && process.env.ZOESKOUL_BUILD_HANDOFF_SECRET) {
+    try { await revokeUserBuildSessions(userId); }
+    catch { return new Response("Session revocation unavailable", { status: 503 }); }
+  }
 
   // Auth.js owns its cookie names and attributes. Its server action expires
   // the exact session cookie before any optional provider redirect occurs.

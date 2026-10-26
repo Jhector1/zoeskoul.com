@@ -21,6 +21,7 @@ import {
 export default function Providers(props: {
   children: ReactNode;
   apiOrigin: string;
+  authApiOrigin: string;
   initialPreferences: AppPreferences;
 }) {
   return (
@@ -32,7 +33,7 @@ export default function Providers(props: {
     >
       <AppThemeProvider>
         <ZoeBuildLearnerWorkspaceRuntimeProvider
-          apiOrigin={props.apiOrigin}
+          apiOrigin={props.authApiOrigin}
         >
           {props.children}
         </ZoeBuildLearnerWorkspaceRuntimeProvider>

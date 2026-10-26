@@ -10,6 +10,7 @@ const mocks = vi.hoisted(() => ({
   reconcileTutoringCreditPaymentIntentEvent: vi.fn(),
   isTutoringCreditRefundEvent: vi.fn(),
   reconcileTutoringCreditRefundEvent: vi.fn(),
+  reconcileZoeBuildStripeRiskWebhook: vi.fn(),
 }));
 
 vi.mock("@/lib/tutoring/tutoringCreditWebhook", () => ({
@@ -27,6 +28,14 @@ vi.mock("@/lib/tutoring/tutoringCreditRefundWebhook", () => ({
     mocks.isTutoringCreditRefundEvent,
   reconcileTutoringCreditRefundEvent:
     mocks.reconcileTutoringCreditRefundEvent,
+}));
+
+// This dispatch test must not contact Stripe: risk verification is covered
+// independently in zoeBuildAiCreditStripeRisk.test.ts. Keep the real
+// risk-event classifier so refund routing is still exercised.
+vi.mock("@/lib/billing/zoeBuildAiCreditStripeRisk.server", () => ({
+  reconcileZoeBuildStripeRiskWebhook:
+    mocks.reconcileZoeBuildStripeRiskWebhook,
 }));
 
 import { reconcileStripeBillingEvent } from "./stripeWebhookReconciliation";
@@ -56,6 +65,10 @@ describe("Stripe billing reconciliation tutoring dispatch", () => {
     mocks.reconcileTutoringCreditPaymentIntentEvent.mockReset();
     mocks.isTutoringCreditRefundEvent.mockReset();
     mocks.reconcileTutoringCreditRefundEvent.mockReset();
+    mocks.reconcileZoeBuildStripeRiskWebhook.mockReset();
+    mocks.reconcileZoeBuildStripeRiskWebhook.mockResolvedValue({
+      kind: "not_zoebuild",
+    });
   });
 
   it("dispatches tutoring payment Checkout through the tutoring reconciler", async () => {
@@ -176,6 +189,50 @@ describe("Stripe billing reconciliation tutoring dispatch", () => {
     expect(
       mocks.reconcileTutoringCreditRefundEvent,
     ).toHaveBeenCalledWith(evt);
+    expect(mocks.reconcileZoeBuildStripeRiskWebhook).toHaveBeenCalledWith(evt);
+  });
+
+  it("does not route a funded ZoeBuild refund to tutoring", async () => {
+    const evt = event("refund.updated", {
+      id: "re_zoebuild_1",
+      object: "refund",
+      status: "succeeded",
+    });
+    mocks.isTutoringCreditRefundEvent.mockReturnValue(true);
+    mocks.reconcileZoeBuildStripeRiskWebhook.mockResolvedValue({
+      kind: "frozen",
+      created: true,
+    });
+
+    await expect(reconcileStripeBillingEvent(evt)).resolves.toEqual({
+      kind: "processed",
+      action: "zoebuild_ai_credit_risk_frozen",
+    });
+    expect(mocks.reconcileZoeBuildStripeRiskWebhook).toHaveBeenCalledWith(evt);
+    expect(mocks.reconcileTutoringCreditRefundEvent).not.toHaveBeenCalled();
+  });
+
+  it("continues tutoring refund dispatch when ZoeBuild has no current risk", async () => {
+    const evt = event("refund.failed", {
+      id: "re_tutor_failed_1",
+      object: "refund",
+      status: "failed",
+    });
+    mocks.isTutoringCreditRefundEvent.mockReturnValue(true);
+    mocks.reconcileZoeBuildStripeRiskWebhook.mockResolvedValue({
+      kind: "no_current_risk",
+    });
+    mocks.reconcileTutoringCreditRefundEvent.mockResolvedValue({
+      kind: "status_updated",
+      refundId: "refund-failed-1",
+    });
+
+    await expect(reconcileStripeBillingEvent(evt)).resolves.toEqual({
+      kind: "processed",
+      action: "tutoring_credit_refund_reconciled",
+    });
+    expect(mocks.reconcileZoeBuildStripeRiskWebhook).toHaveBeenCalledWith(evt);
+    expect(mocks.reconcileTutoringCreditRefundEvent).toHaveBeenCalledWith(evt);
   });
 
   it("leaves subscription Checkout on the existing billing path", async () => {

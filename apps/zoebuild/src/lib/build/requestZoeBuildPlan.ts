@@ -5,6 +5,7 @@ import type {
 import type {
   ZoeBuildPromptSubmission,
 } from "@/components/builder/ZoeBuildPromptComposer";
+import { ZOE_AI_OPERATION_HEADER } from "./aiBillingOperationIdentity";
 
 type BuildPlanApiSuccess = Readonly<{
   ok: true;
@@ -31,6 +32,7 @@ export class ZoeBuildPlanRequestError extends Error {
 
 export async function requestZoeBuildPlan(
   submission: ZoeBuildPromptSubmission,
+  operationId: string = crypto.randomUUID(),
 ): Promise<PlanBuildProjectFromPromptResult> {
   const form = new FormData();
   form.set("prompt", submission.prompt);
@@ -43,6 +45,7 @@ export async function requestZoeBuildPlan(
     method: "POST",
     body: form,
     credentials: "same-origin",
+    headers: { [ZOE_AI_OPERATION_HEADER]: operationId },
   });
 
   let payload: BuildPlanApiSuccess | BuildPlanApiFailure;

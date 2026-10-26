@@ -371,6 +371,9 @@ export default function BillingPageClient({
                                     trialEnd={status.trialEndsAt}
                                     currentPeriodEnd={status.currentPeriodEnd}
                                     cancelAtPeriodEnd={status.cancelAtPeriodEnd}
+                                    nextBillingDate={status.nextBillingDate}
+                                    nextBillingAmountMinor={status.nextBillingAmountMinor}
+                                    nextBillingCurrency={status.nextBillingCurrency}
                                     priceId={status.priceId}
                                     subscriptionId={status.subscriptionId}
                                     showIds={false}

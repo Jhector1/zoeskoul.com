@@ -8,14 +8,58 @@ export const PREVIEW_NAV_CHANNEL = "zoebuild.preview.navigation.v1";
 export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
   "use strict";
   var channel = "zoebuild.preview.navigation.v1";
-  var base = __PREVIEW_ROOT__;
-  if (!base.endsWith("/") || !location.pathname.startsWith(base)) return;
+  // Observe a stable, server-authored script element rather than assuming
+  // document.currentScript survives a browser's execution/CSP timing. A known
+  // initialization failure is reported once; never silently abandon the toolbar.
+  var documentRevision = new URLSearchParams(location.search).get("__zb_preview_revision");
+  function bootstrapFailure(reason) {
+    window.parent.postMessage({ channel: channel, type: "bootstrap",
+      status: "failed", reason: reason, revision: documentRevision }, "*");
+  }
+  var script = document.currentScript || document.querySelector("script[data-zoebuild-navigation-bridge]");
+  if (!script) { bootstrapFailure("script-missing"); return; }
+  var suppliedRoot = script.getAttribute("data-zoebuild-preview-root");
+  var source = script.getAttribute("src");
+  if (!source || !suppliedRoot) { bootstrapFailure("configuration-missing"); return; }
+  var currentAddress = new URL(location.href);
+  var scriptAddress = new URL(source, location.href);
+  var scriptSuffix = "__zoebuild/navigation.js";
+  if (scriptAddress.origin !== currentAddress.origin ||
+      !/^\/api\/build\/projects\/[^/]+\/preview\/preview_[a-f\d-]+\/content\/[A-Za-z0-9_-]{32}\/__zoebuild\/navigation\.js$/.test(scriptAddress.pathname)) {
+    bootstrapFailure("script-address-invalid"); return;
+  }
+  var base = scriptAddress.pathname.slice(0, -scriptSuffix.length);
+  if (suppliedRoot !== base || !location.pathname.startsWith(base)) {
+    bootstrapFailure("document-root-invalid"); return;
+  }
+  // The authenticated document gateway serves the exact runner-verified
+  // Vite root. The browser-selected route is inert query data until this bridge
+  // restores the canonical SPA URL BEFORE React's module script executes.
+  if (location.pathname === base + "__zoebuild/document") {
+    var params = new URLSearchParams(location.search);
+    var routesRequested = params.getAll("__zb_preview_route");
+    var revisionRequested = params.getAll("__zb_preview_revision");
+    var requested = routesRequested[0];
+    if (routesRequested.length !== 1 || revisionRequested.length !== 1 ||
+        !requested || requested.length > 2048 || !requested.startsWith("/") ||
+        requested.startsWith("//") || /%(?:2e|2f|5c)/i.test(requested) ||
+        /[\\\u0000-\u001f\u007f]/.test(requested)) {
+      bootstrapFailure("document-route-invalid"); return;
+    }
+    var target = new URL(requested, "https://preview.invalid");
+    if (target.origin !== "https://preview.invalid" ||
+        target.searchParams.has("__zb_preview_revision") ||
+        target.searchParams.has("__zb_preview_route")) {
+      bootstrapFailure("document-route-invalid"); return;
+    }
+    target.searchParams.set("__zb_preview_revision", revisionRequested[0]);
+    history.replaceState(history.state, "", base + target.pathname.slice(1) + target.search + target.hash);
+  }
   var routes = [];
   var index = 0;
   var pending = null;
   // A React route change can remove the revision query parameter. It identifies
   // this HTML document, not the current route, so capture it once at boot.
-  var documentRevision = new URLSearchParams(location.search).get("__zb_preview_revision");
   function route() {
     if (!location.pathname.startsWith(base)) return null;
     var params = new URLSearchParams(location.search);
@@ -92,7 +136,9 @@ export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
         data.route.length < 1024 && /^\/(?!\/)[a-zA-Z0-9\-/]*(?:\?[^#]*)?(?:#.*)?$/.test(data.route) &&
         !/%(?:2e|2f|5c)/i.test(data.route)) {
       var destination = new URL(data.route, location.href);
-      if (destination.origin === location.origin) {
+      // A sandboxed document can serialize location.origin as "null".
+      // Compare the *URL addresses*, never the opaque security origin.
+      if (destination.origin === new URL(location.href).origin) {
         var next = base + destination.pathname.slice(1) + destination.search + destination.hash;
         if (location.pathname + location.search + location.hash !== next) {
           history.pushState({}, "", next);
@@ -110,7 +156,11 @@ export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
       history.forward();
     }
   });
-  report();
+  // Explicit acknowledgement even if the first route report precedes the
+  // parent listener. The parent can also ask for a new report using "probe".
+  window.parent.postMessage({ channel: channel, type: "bootstrap", status: "installed",
+    basePath: base, revision: documentRevision }, "*");
+  report(true);
 })();`;
 
 const TAG = "data-zoebuild-navigation-bridge";
@@ -125,6 +175,6 @@ export function injectReactPreviewNavigationBridge(html: string, basePath: strin
   const openingHead = /<head(?:\s[^>]*)?>/i.exec(html);
   if (!openingHead || openingHead.index === undefined) return html;
   const insertAt = openingHead.index + openingHead[0].length;
-  const script = `<script ${TAG}>${PREVIEW_NAV_SCRIPT.replace("__PREVIEW_ROOT__", JSON.stringify(basePath))}</script>`;
+  const script = `<script ${TAG} data-zoebuild-preview-root="${basePath}" src="${basePath}__zoebuild/navigation.js"></script>`;
   return html.slice(0, insertAt) + script + html.slice(insertAt);
 }

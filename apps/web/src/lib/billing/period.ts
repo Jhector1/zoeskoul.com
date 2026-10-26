@@ -28,36 +28,6 @@ export function futureBillingPeriodIsoOrNull(
 }
 
 
-export function hasCurrentSubscriptionAccess(args: {
-  status?: string | null;
-  trialEnd?: BillingPeriodValue;
-  currentPeriodEnd?: BillingPeriodValue;
-  nowMs?: number;
-}): boolean {
-  const nowMs = args.nowMs ?? Date.now();
-
-  if (args.status === "trialing") {
-    return Boolean(
-      futureBillingPeriodIsoOrNull(args.trialEnd, nowMs),
-    );
-  }
-
-  if (
-    args.status === "active" ||
-    args.status === "past_due" ||
-    args.status === "canceled"
-  ) {
-    return Boolean(
-      futureBillingPeriodIsoOrNull(
-        args.currentPeriodEnd,
-        nowMs,
-      ),
-    );
-  }
-
-  return false;
-}
-
 export function scheduledCancellationEndIso(args: {
   status?: string | null;
   trialEnd?: BillingPeriodValue;

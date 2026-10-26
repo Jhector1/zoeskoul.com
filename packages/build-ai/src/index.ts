@@ -35,6 +35,7 @@ export interface BuildAiPlanner {
   generateProjectSpecification(input: Readonly<{
     prompt: string;
     media?: readonly BuildPromptMedia[];
+    maxOutputTokens?: number;
   }>): Promise<BuildAiPlannerResult>;
 }
 
@@ -147,6 +148,7 @@ export async function planBuildProjectFromPrompt(
     prompt: unknown;
     media?: readonly BuildPromptMedia[];
     planner: BuildAiPlanner;
+    maxOutputTokens?: number;
   }>,
 ): Promise<PlanBuildProjectFromPromptResult> {
   const media =
@@ -160,6 +162,7 @@ export async function planBuildProjectFromPrompt(
     await input.planner.generateProjectSpecification({
       prompt,
       media,
+      maxOutputTokens: input.maxOutputTokens,
     });
 
   const provider =
@@ -300,6 +303,8 @@ export function createBuildAiPlannerFromJsonTransport(
               BUILD_AI_PROJECT_SPECIFICATION_JSON_SCHEMA,
           media:
             input.media,
+          maxOutputTokens:
+            input.maxOutputTokens,
         });
 
       let specification: unknown;

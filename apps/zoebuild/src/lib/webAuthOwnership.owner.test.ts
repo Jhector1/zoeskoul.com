@@ -53,7 +53,7 @@ describe("ZoeBuild Web-owned authentication boundary", () => {
       );
 
     expect(access).toContain(
-      "createAuthClient",
+      "readBuilderSession",
     );
 
     expect(header).toContain(
@@ -61,11 +61,11 @@ describe("ZoeBuild Web-owned authentication boundary", () => {
     );
 
     expect(header).toContain(
-      "buildAuthenticateUrl",
+      "/api/auth/handoff/start",
     );
 
     expect(header).toContain(
-      "buildLogoutUrl",
+      "/api/auth/handoff/logout",
     );
   });
 

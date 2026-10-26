@@ -47,6 +47,19 @@ describe("Shopify Storefront GraphQL private transport", () => {
     expect(JSON.parse(String(init?.body))).toEqual({ query: document, variables: {} });
   });
 
+  it("uses the public Storefront access header for automatically provisioned merchant credentials", async () => {
+    const mocked = vi.fn(async (_url: RequestInfo | URL, _init?: RequestInit) => response({ data: { shop: { id: "gid://shopify/Shop/1" } } }));
+    await createShopifyStorefrontGraphql({
+      shopHostname: SHOP, environment: "test", publicToken: "merchant-public-token", fetchImpl: mocked,
+    }).execute({ document: "query { shop { id } }", audience: { kind: "system" } });
+    const headers = new Headers(mocked.mock.calls[0]?.[1]?.headers);
+    expect(headers.get("X-Shopify-Storefront-Access-Token")).toBe("merchant-public-token");
+    expect(headers.get("Shopify-Storefront-Private-Token")).toBeNull();
+    expect(() => createShopifyStorefrontGraphql({
+      shopHostname: SHOP, environment: "test", publicToken: "public", privateToken: "private",
+    })).toThrow(expectCode("SHOPIFY_STOREFRONT_CONFIG_INVALID"));
+  });
+
   it("passes validated IPv4/IPv6 buyer IP for buyer operations", async () => {
     const mocked = vi.fn(async (_url: RequestInfo | URL, _init?: RequestInit) => response({ data: { cartCreate: {} } }));
     for (const ip of ["198.51.100.20", "2001:db8::1234"]) {

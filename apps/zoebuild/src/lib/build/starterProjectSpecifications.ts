@@ -20,7 +20,7 @@ const STARTER_SPECIFICATIONS = {
   "website": {
     "version": 1,
     "name": "V302B Website",
-    "projectType": "static-site",
+    "projectType": "frontend-app",
     "targets": [
       "web"
     ],
@@ -36,7 +36,7 @@ const STARTER_SPECIFICATIONS = {
     "pages": [
       "Home"
     ],
-    "stackId": "static-html-v1",
+    "stackId": "react-vite-v1",
     "deployment": {
       "preference": "static"
     }

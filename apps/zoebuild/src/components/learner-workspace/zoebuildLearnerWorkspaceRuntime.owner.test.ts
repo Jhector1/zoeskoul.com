@@ -50,7 +50,7 @@ describe(
           "<ZoeBuildLearnerWorkspaceRuntimeProvider",
         );
         expect(providers).toContain(
-          "apiOrigin={props.apiOrigin}",
+          "apiOrigin={props.authApiOrigin}",
         );
 
         expect(workspace).toContain(

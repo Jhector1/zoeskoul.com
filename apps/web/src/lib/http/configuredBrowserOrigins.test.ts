@@ -52,6 +52,17 @@ describe("configured browser origins", () => {
     ).toEqual([]);
   });
 
+  it("trusts an exact server-configured ZoeBuild return origin", () => {
+    vi.stubEnv(
+      "ZOESKOUL_TRUSTED_BROWSER_ORIGINS",
+      "https://dev-build.zoeskoul.com",
+    );
+
+    expect(Array.from(getConfiguredBrowserOrigins())).toContain(
+      "https://dev-build.zoeskoul.com",
+    );
+  });
+
   it("trusts the configured Student preview origin without another variable", () => {
     vi.stubEnv(
       "NEXT_PUBLIC_STUDENT_APP_ORIGIN",

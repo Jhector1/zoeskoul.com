@@ -13,6 +13,8 @@ import {
   type ShopifyImportDraft,
 } from "@/lib/import/shopify";
 import Tooltip from "@zoeskoul/learner-workspace/ui/Tooltip";
+import {usePathname} from "next/navigation";
+import {isAiCreditShortage} from "@/lib/billing/creditShortage";
 
 export const ZOEBUILD_COMPOSER_MAX_MEDIA_FILES = 4;
 
@@ -47,6 +49,31 @@ export function ZoeBuildPromptComposer(props: {
   const [value, setValue] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [busy, setBusy] = useState(false);
+  // React state updates are asynchronous. Ref blocks same-tick duplicate submits.
+  const submitInFlightRef = useRef(false);
+  // Do not erase a newer draft if the user edits while the prior request resolves.
+  const draftRevisionRef = useRef(0);
+  const [outOfCredits,setOutOfCredits]=useState(false);
+  const pathname=usePathname();
+  const segment=pathname?.split("/")[1];
+  const billingLocale=segment==="fr"||segment==="ht"?segment:"en";
+  const [creditStatus,setCreditStatus]=useState<string|null>(null);
+  useEffect(()=>{
+    let active=true;
+    const reload=async()=>{
+      try{
+        const response=await fetch("/api/billing/credits",{credentials:"same-origin",cache:"no-store"});
+        if(!response.ok)return;
+        const data=await response.json() as {subscriptionAvailableUnits:string;purchasedAvailableUnits:string;meteringStatus:string;unit:string};
+        if(!active||data.unit!=="ledger_unit")return;
+        const units=(BigInt(data.subscriptionAvailableUnits)+BigInt(data.purchasedAvailableUnits)).toLocaleString("en-US");
+        setCreditStatus(data.meteringStatus==="not_activated"?`AI ledger: ${units} units · metering not active`:`AI ledger: ${units} units`);
+      }catch{/* No balance claim if unavailable. */}
+    };
+    void reload();const onFocus=()=>{if(document.visibilityState==="visible")void reload();};
+    window.addEventListener("focus",onFocus);
+    return ()=>{active=false;window.removeEventListener("focus",onFocus);};
+  },[]);
   const [recording, setRecording] = useState(false);
   const [promptError, setPromptError] =
     useState<string | null>(null);
@@ -73,6 +100,7 @@ export function ZoeBuildPromptComposer(props: {
   }, []);
 
   function addFiles(incoming: readonly File[]) {
+    draftRevisionRef.current += 1;
     const supported = incoming.filter(isSupportedPromptFile);
 
     if (supported.length !== incoming.length) {
@@ -102,6 +130,7 @@ export function ZoeBuildPromptComposer(props: {
   }
 
   function removeFile(index: number) {
+    draftRevisionRef.current += 1;
     setFiles((current) =>
       current.filter((_file, fileIndex) => fileIndex !== index),
     );
@@ -185,24 +214,40 @@ export function ZoeBuildPromptComposer(props: {
   async function submitPrompt(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (submitInFlightRef.current) return;
     const prompt = value.trim();
     if (!prompt && files.length === 0) return;
-
+    const submittedRevision = draftRevisionRef.current;
+    submitInFlightRef.current = true;
     setBusy(true);
     setPromptError(null);
+    setOutOfCredits(false);
 
     try {
       await props.onPrompt({
         prompt,
         files,
       });
+      // The parent has accepted the submission (including an explicitly
+      // deferred Save → Continue request). Preserve any newer unsent draft.
+      // Rejected credit/authorization requests take the catch path unchanged.
+      if (draftRevisionRef.current === submittedRevision) {
+        setValue("");
+        setFiles([]);
+        draftRevisionRef.current += 1;
+      }
     } catch (error) {
+      if(isAiCreditShortage(error)) {
+        setOutOfCredits(true);
+        return;
+      }
       setPromptError(
         error instanceof Error
           ? error.message
           : "Zoé could not process this request.",
       );
     } finally {
+      submitInFlightRef.current = false;
       setBusy(false);
     }
   }
@@ -267,9 +312,13 @@ export function ZoeBuildPromptComposer(props: {
         className="zb-prompt-composer"
         onSubmit={submitPrompt}
       >
+        {creditStatus?<p className="px-3 text-xs opacity-60" aria-live="polite">{creditStatus}</p>:null}
         <textarea className="zb-prompt-textarea"
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={(event) => {
+            draftRevisionRef.current += 1;
+            setValue(event.target.value);
+          }}
           placeholder={
             props.placeholder ??
             "Tell Zoé what you want to build..."
@@ -311,6 +360,14 @@ export function ZoeBuildPromptComposer(props: {
           </div>
         ) : null}
 
+        {outOfCredits ? (
+          <aside role="alert" className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 text-sm space-y-3">
+            <div className="font-semibold">Zoé needs more AI credits for this request</div>
+            <p>Nothing was changed or charged by this attempt. Your prompt and attachments remain in the composer; the editor and preview are still available.</p>
+            <p>Billing and available credits can be reviewed in a separate tab. Return here to submit again when the server confirms enough credits.</p>
+            <a href={`/${billingLocale}/billing`} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-lg border border-current/20 px-3 py-2 font-semibold">Review billing and credits ↗</a>
+          </aside>
+        ) : null}
         {promptError ? (
           <div
             className="zb-composer-error"

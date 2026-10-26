@@ -1,6 +1,8 @@
+import { normalizeAiJsonUsage } from "./usage";
 import {
   AI_JSON_DEFAULT_TEMPERATURE,
   assertAiJsonMediaSupported,
+  boundedAiJsonOutputTokens,
   type AiJsonMediaInput,
   type AiJsonRequest,
   type AiJsonTextResult,
@@ -168,6 +170,7 @@ export function createGeminiAiJsonTransport(
         transport,
         request.media,
       );
+      const maxOutputTokens = boundedAiJsonOutputTokens(request);
 
       const client =
         await createClient(options);
@@ -195,6 +198,7 @@ export function createGeminiAiJsonTransport(
           config: {
             responseMimeType:
               "application/json",
+            ...(maxOutputTokens === undefined ? {} : { maxOutputTokens }),
             ...(request.responseJsonSchema
               ? {
                   responseJsonSchema:
@@ -207,6 +211,7 @@ export function createGeminiAiJsonTransport(
         });
 
       return {
+        usage: normalizeAiJsonUsage("gemini", response),
         text:
           getResponseText(response),
         metadata: {

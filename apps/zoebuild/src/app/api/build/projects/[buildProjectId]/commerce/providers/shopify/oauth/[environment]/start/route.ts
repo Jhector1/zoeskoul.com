@@ -37,6 +37,9 @@ export async function POST(request: Request, context: Context) {
   if (environment !== "test" && environment !== "live") {
     return json("SHOPIFY_OAUTH_ENVIRONMENT_INVALID", 400);
   }
+  if (environment === "live" && process.env.ZOEBUILD_SHOPIFY_LIVE_CONNECT_ENABLED !== "true") {
+    return json("SHOPIFY_OAUTH_LIVE_DISABLED", 403);
+  }
   try {
     const origin = trustedShopifyOAuthOrigin(resolveZoeBuildOrigins().zoebuildOrigin);
     if (new URL(request.url).origin !== origin) return json("BUILD_FORBIDDEN", 403);
@@ -55,7 +58,7 @@ export async function POST(request: Request, context: Context) {
     if (typeof shop !== "string" || !/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(shop)) {
       return json("SHOPIFY_OAUTH_INPUT_INVALID", 400);
     }
-    const redirectUri = shopifyOAuthCallbackUri({ zoebuildOrigin: origin, buildProjectId, environment });
+    const redirectUri = shopifyOAuthCallbackUri({ zoebuildOrigin: origin });
     const flow = await startShopifyOAuthFlow({
       client: prisma,
       secretStore: createBuildSecretStore({ prisma }),

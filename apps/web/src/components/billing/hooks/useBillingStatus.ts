@@ -59,6 +59,15 @@ export function useBillingStatus() {
         return () => window.removeEventListener("pageshow", onPageShow);
     }, [load]);
 
+    // A Stripe Dashboard / Portal update is mirrored by the canonical Web sync-on-read
+    // even when a customer keeps this browser tab open. No subscription writes in UI.
+    useEffect(() => {
+        const update=()=>{if(document.visibilityState==="visible")void load();};
+        const ticker=window.setInterval(update,30000);
+        window.addEventListener("focus",update);
+        return ()=>{window.clearInterval(ticker);window.removeEventListener("focus",update);};
+    },[load]);
+
     // ✅ Reformat plan labels instantly when locale changes (no refetch)
     const derivedStatus = useMemo(() => {
         if (!status) return null;

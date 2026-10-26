@@ -1,4 +1,5 @@
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import { invalidZoeReactPageSource } from "./zoeReactPageGraphValidation";
 import {
   type IdeWorkspacePolicy,
   validateWorkspaceState,
@@ -232,6 +233,16 @@ export function parseBuildWorkspaceMutation(
   const pathIssues = validateFullPaths(nodes);
   if (pathIssues.length) {
     throw new BuildWorkspaceMutationError(pathIssues);
+  }
+
+  // Manual source saves and AI-approved edits share the same route graph guard.
+  // Reject a page importing itself or accidentally containing the generated router.
+  const mappedPaths = buildNodePaths(nodes);
+  for (const node of nodes) {
+    if (node.kind !== "file" || typeof node.content !== "string") continue;
+    const filePath = mappedPaths.get(String(node.id)) ?? "";
+    const issue = invalidZoeReactPageSource(filePath,node.content);
+    if (issue) throw new BuildWorkspaceMutationError([issue]);
   }
 
   const sharedIssues = validateWorkspaceState(

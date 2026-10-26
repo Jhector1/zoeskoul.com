@@ -47,14 +47,15 @@ describe("generic remote web preview seam", () => {
     expect(remote).toContain('aria-label="Preview URL"');
     expect(remote).toContain('aria-label="Available project pages"');
     expect(remote).toContain('role="combobox"');
-    expect(remote).toContain('action:"navigate",route');
+    expect(remote).toContain('setDirectNavigationRevision(value => value + 1)');
     expect(remote).toContain('frame?.contentWindow === event.source');
     expect(remote).toContain('value.rendered !== "boolean"');
     expect(remote).toContain('value.revision !== expectedRevision');
+    expect(remote).toContain('value.type === "bootstrap"');
+    expect(remote).toContain('document-root-invalid');
     expect(remote).toContain('event.origin !== "null"');
     expect(remote).toContain('value.basePath !== preview.src');
     expect(remote).toContain('"Cancel preview refresh"');
-    expect(remote).toContain('controller.abort()');
   });
 
   it("double-buffers remote revisions so the last loaded frame stays visible", () => {
@@ -62,28 +63,30 @@ describe("generic remote web preview seam", () => {
     expect(remote).toContain("frameSources");
     expect(remote).toContain("activeFrame");
     expect(remote).toContain("otherFrame(activeFrame)");
-    expect(remote).toContain("frameIndex !== activeFrame && candidate");
+    // The candidate guard was split from the frame-promotion condition.
+    expect(remote).toContain('if (!candidate) return;');
+    expect(remote).toContain('if (frameIndex !== activeFrame) activateFrame(');
     expect(remote).toContain('action: "probe"');
     expect(remote).toContain("data-preview-frame-active");
     expect(remote).toContain('"pointer-events-none z-0 opacity-0"');
   });
 
-  it("restarts an expired preview before exposing the proxy error document", () => {
+  it("mounts the protected document without a preflight or unnecessary runner restart", () => {
     const remote = source("./components/RemoteWebPreview.tsx");
-    expect(remote).toContain('response.status === 404');
-    expect(remote).toContain("expiredCandidateRef");
-    expect(remote).toContain("preview.onRetry?.()");
-    expect(remote).toContain('cache: "no-store"');
+    expect(remote).not.toContain('request("HEAD")');
+    expect(remote).toContain('setFrameSources(current => {');
+    expect(remote).not.toContain('expiredCandidateRef');
+    expect(remote).toContain('action: "probe"');
+    expect(remote).toContain('only a matching rendered bridge state');
   });
-    it("never promotes a non-success proxy response into the preview frame buffer", () => {
-        const remote = source("./components/RemoteWebPreview.tsx");
-        expect(remote).toContain("if (!response.ok) {");
-        expect(remote).toContain("response.status === 404");
-        expect(remote).toContain("preview.onRetry?.();");
-        const failureGate = remote.indexOf("if (!response.ok) {");
-        const framePromotion = remote.indexOf("setFrameSources((current)");
-        expect(failureGate).toBeGreaterThan(-1);
-        expect(framePromotion).toBeGreaterThan(failureGate);
-    });
+  it("never promotes an iframe on load or mistakes an HTML error for React rendering", () => {
+    const remote = source("./components/RemoteWebPreview.tsx");
+    const onLoad = remote.slice(remote.indexOf("function onDocumentLoad("),remote.indexOf("function activateFrame("));
+    expect(onLoad).toContain('action: "probe"');
+    expect(onLoad).not.toContain('activateFrame(');
+    expect(remote).toContain('if (!value.rendered) return;');
+    expect(remote).toContain('Retry document');
+    expect(remote).toContain('setLocalRefresh(value => value + 1)');
+  });
 
 });

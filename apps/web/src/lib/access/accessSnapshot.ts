@@ -3,7 +3,8 @@ import type { PrismaClient } from "@/lib/prisma";
 import { Actor, actorKeyOf } from "@/lib/practice/actor";
 import { getAssignedSubjectIdsForUser } from "@/lib/learningAssignments/assignmentAccessServer";
 import { resolveActorRoleCapabilities } from "@/lib/access/roleCapabilitiesServer";
-import { hasCurrentSubscriptionAccess } from "@/lib/billing/period";
+import { hasCurrentSubscriptionAccess } from "@zoeskoul/platform-server/billing/subscriptionEligibility";
+import { resolvePlatformBillingCatalog } from "@zoeskoul/platform-server/billing/productCatalog";
 
 function isWithinWindow(now: Date, startsAt?: Date | null, endsAt?: Date | null) {
     if (startsAt && startsAt > now) return false;
@@ -37,10 +38,17 @@ export async function getAccessSnapshot(
     let canUnlockAll = false;
 
     if (actor.userId) {
-        const [sub, capabilities] = await Promise.all([
-            prisma.subscription.findFirst({
+        const learningPriceIds = resolvePlatformBillingCatalog(process.env).filter(p => p.product === "learning").map(p => p.priceId);
+        const [user, capabilities] = await Promise.all([
+            prisma.user.findUnique({where:{id:actor.userId},select:{stripeCustomerId:true}}),
+            resolveActorRoleCapabilities(prisma, actor),
+        ]);
+        const sub = learningPriceIds.length && user?.stripeCustomerId
+            ? await prisma.subscription.findFirst({
                 where: {
                     userId: actor.userId,
+                    stripeCustomerId: user.stripeCustomerId,
+                    priceId: { in: learningPriceIds },
                     status: { in: ["active", "trialing"] },
                 },
                 select: {
@@ -51,9 +59,7 @@ export async function getAccessSnapshot(
                 orderBy: {
                     updatedAt: "desc",
                 },
-            }),
-            resolveActorRoleCapabilities(prisma, actor),
-        ]);
+            }) : null;
 
         canUnlockAll = capabilities.canUnlockAll;
         isSubscribed = capabilities.canBypassBilling;

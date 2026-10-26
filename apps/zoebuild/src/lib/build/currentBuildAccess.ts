@@ -1,104 +1,34 @@
 import "server-only";
 
-import {
-  cookies,
-} from "next/headers";
+import { cookies } from "next/headers";
+import type { BuildAccessSnapshot } from "@zoeskoul/build-application";
+import { EMPTY_SESSION, readBuilderSession, readBuilderSessionStatus, SESSION_COOKIE } from "@/lib/auth/buildHandoff";
+import { loadBuildAccessSnapshot } from "@/lib/build/buildAccessSnapshot";
 
-import {
-  createAuthClient,
-} from "@zoeskoul/auth-client";
-import type {
-  BuildAccessSnapshot,
-} from "@zoeskoul/build-application";
-
-import {
-  resolveZoeBuildOrigins,
-} from "@/lib/appOrigins";
-import {
-  loadBuildAccessSnapshot,
-} from "@/lib/build/buildAccessSnapshot";
-
-async function requestCookieHeader(
-  request?: Request,
-): Promise<string> {
-  if (request) {
-    return (
-      request.headers.get("cookie") ??
-      ""
-    );
-  }
-
-  const cookieStore =
-    await cookies();
-
-  return cookieStore.toString();
-}
-
-/**
- * Resolve ZoeBuild identity from the Web-owned canonical app-session endpoint.
- *
- * ZoeBuild does not own Auth.js providers, OAuth credentials, session signing,
- * or a second login flow. Web authenticates the browser and returns only the
- * browser-safe canonical account snapshot.
- *
- * Build authorization remains ZoeBuild-owned after identity resolution.
- */
+/** ZoeBuild consumes a Web-validated, revocable identity; it never reads Web Auth.js cookies. */
 export async function loadCurrentBuildAccessSnapshot(
   request?: Request,
+  options?: Readonly<{ requireAuthority?: boolean }>,
 ): Promise<BuildAccessSnapshot> {
-  const {
-    websiteOrigin,
-    zoebuildOrigin,
-  } = resolveZoeBuildOrigins();
-
-  const cookieHeader =
-    await requestCookieHeader(request);
-
-  const client =
-    createAuthClient({
-      apiOrigin: websiteOrigin,
-
-      fetchImpl: async (
-        input,
-        init,
-      ) => {
-        const headers =
-          new Headers(init?.headers);
-
-        if (cookieHeader) {
-          headers.set(
-            "Cookie",
-            cookieHeader,
-          );
-        }
-
-        headers.set(
-          "Origin",
-          zoebuildOrigin,
-        );
-
-        return fetch(input, {
-          ...init,
-          headers,
-          cache: "no-store",
-        });
-      },
-    });
-
-  try {
-    const session =
-      await client.fetchSession();
-
-    if (!session.authenticated) {
-      return loadBuildAccessSnapshot("");
-    }
-
-    return loadBuildAccessSnapshot(
-      session.user.id,
-    );
-  } catch {
-    // The Web-owned session authority is unavailable or returned an invalid
-    // response. Authorization must fail closed.
-    return loadBuildAccessSnapshot("");
+  const cookieHeader = request?.headers.get("cookie");
+  let token: string | undefined;
+  if (request) {
+    // Use the server cookie parser rather than substring matching.
+    const { NextRequest } = await import("next/server");
+    token = new NextRequest("https://zoebuild.invalid/", {
+      headers: { cookie: cookieHeader || "" },
+    }).cookies.get(SESSION_COOKIE)?.value;
+  } else {
+    token = (await cookies()).get(SESSION_COOKIE)?.value;
   }
+  // Financial read routes must not report 401 when central auth is actually 503.
+  // They also must never trust a cached/stale identity during an outage.
+  if (options?.requireAuthority) {
+    const checked = await readBuilderSessionStatus(token);
+    if (checked.kind === "unavailable") throw new Error("BUILDER_SESSION_AUTHORITY_UNAVAILABLE");
+    const session = checked.kind === "authenticated" ? checked.session : EMPTY_SESSION;
+    return loadBuildAccessSnapshot(session.authenticated ? session.user.id : "");
+  }
+  const session = await readBuilderSession(token);
+  return loadBuildAccessSnapshot(session.authenticated ? session.user.id : "");
 }

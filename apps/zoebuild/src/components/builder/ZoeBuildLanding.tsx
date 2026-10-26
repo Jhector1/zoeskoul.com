@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import {isAiCreditShortage} from "@/lib/billing/creditShortage";
 
 import {
   ZoeBuildModeTabs,
@@ -32,6 +33,7 @@ export function ZoeBuildLanding() {
       const plan = await requestZoeBuildPlan(submission);
       setAiText(formatZoeBuildPlan(plan));
     } catch (error) {
+      if(isAiCreditShortage(error)){setAiText(null);throw error;}
       setAiText(
         error instanceof Error
           ? error.message

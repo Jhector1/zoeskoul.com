@@ -33,8 +33,8 @@ vi.mock("@/lib/prisma", () => ({
     },
   },
 }));
-vi.mock("@/lib/billing/buildAiFeatureGrant", () => ({
-  reconcileBuildAiSubscriptionGrantForUser: vi.fn(async () => ({
+vi.mock("@/lib/billing/reconcileBuilderAiBillingForUser", () => ({
+  reconcileBuilderAiBillingForUser: vi.fn(async () => ({
     id: "fg_test",
     active: true,
     changed: true,
@@ -89,6 +89,22 @@ describe("createCheckoutSession", () => {
       id: "cs_test_abc123",
       url: "https://checkout.stripe.test/cs_test_abc123",
     });
+  });
+
+  it("refuses a Builder platform price in the learning Checkout", async () => {
+    const old = process.env.ZOEBUILD_AI_STRIPE_PRICE_IDS;
+    try {
+      process.env.ZOEBUILD_AI_STRIPE_PRICE_IDS = "price_builder";
+      await expect(createCheckoutSession({
+        userId: "user_1", priceId: "price_builder", useTrial: false,
+        callbackUrl: "/en/billing", checkoutAttemptId: ATTEMPT_ID,
+      })).rejects.toThrow("BILLING_PRODUCT_PRICE_NOT_ALLOWED");
+      expect(mocks.checkoutCreate).not.toHaveBeenCalled();
+      expect(mocks.customerCreate).not.toHaveBeenCalled();
+    } finally {
+      if (old === undefined) delete process.env.ZOEBUILD_AI_STRIPE_PRICE_IDS;
+      else process.env.ZOEBUILD_AI_STRIPE_PRICE_IDS = old;
+    }
   });
 
   it("uses the per-attempt UUID as Stripe POST idempotency and metadata", async () => {
@@ -153,6 +169,38 @@ describe("createCheckoutSession", () => {
     const [params] = mocks.checkoutCreate.mock.calls[0];
     expect(params.allow_promotion_codes).toBe(true);
     expect(params.discounts).toBeUndefined();
+  });
+
+  it("rejects hinted subscription mapping when the Stripe customer belongs elsewhere", async () => {
+    mocks.userFindUnique.mockResolvedValue({id:"user_1",trialUsedAt:null,stripeCustomerId:"cus_owner"});
+    const candidate = {id:"sub_foreign",status:"active",customer:"cus_foreign",
+      cancel_at_period_end:false,trial_end:null,metadata:{userId:"user_1"},
+      items:{data:[{price:{id:"price_monthly"}}]}} as unknown as Stripe.Subscription;
+    await expect(upsertFromStripeSubscription(candidate,"user_1")).resolves.toBeNull();
+    expect(mocks.subscriptionUpsert).not.toHaveBeenCalled();
+    expect(mocks.userUpdate).not.toHaveBeenCalled();
+    expect(mocks.releaseBillingCheckoutReservation).not.toHaveBeenCalled();
+  });
+  it("does not consume a Zoéskoul learning trial for a Builder AI subscription", async () => {
+    const previous = process.env.ZOEBUILD_AI_STRIPE_PRICE_IDS;
+    try {
+      process.env.ZOEBUILD_AI_STRIPE_PRICE_IDS = "price_builder";
+      mocks.userFindUnique.mockResolvedValue({ id: "user_1", trialUsedAt: null, stripeCustomerId: "cus_1" });
+      const remote = {
+        id: "sub_builder_trial", status: "trialing", customer: "cus_1",
+        cancel_at_period_end: false, trial_end: 1800000000,
+        metadata: { userId: "user_1" },
+        items: { data: [{ price: { id: "price_builder" }, current_period_end: 1800000000 }] },
+      } as unknown as Stripe.Subscription;
+      await upsertFromStripeSubscription(remote, "user_1");
+      expect(mocks.subscriptionUpsert).toHaveBeenCalledWith(expect.objectContaining({
+        create: expect.objectContaining({billingProduct: "builder_ai"}),
+      }));
+      expect(mocks.userUpdate).not.toHaveBeenCalled();
+    } finally {
+      if (previous === undefined) delete process.env.ZOEBUILD_AI_STRIPE_PRICE_IDS;
+      else process.env.ZOEBUILD_AI_STRIPE_PRICE_IDS = previous;
+    }
   });
 
   it("releases the matching durable Checkout reservation when a subscription is reconciled", async () => {

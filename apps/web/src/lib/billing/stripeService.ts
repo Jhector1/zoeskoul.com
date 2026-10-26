@@ -2,6 +2,23 @@
 import "server-only";
 import {prisma} from "@/lib/prisma";
 import { getStripe } from "@/lib/stripe";
+import { resolvePlatformBillingCatalog, requirePlatformPriceForProduct } from "@zoeskoul/platform-server/billing/productCatalog";
+import { isVerifiedPlatformSubscriptionOwner } from "@zoeskoul/platform-server/billing/customerOwnership";
+import { synchronizePlatformCustomerSubscriptions, collectPlatformSubscriptionPages } from "@zoeskoul/platform-server/billing/platformSubscriptionLifecycle";
+import { createPlatformBillingPortalSession } from "@zoeskoul/platform-server/billing/platformPortalLifecycle";
+import {
+    classifyPlatformCheckoutIntent,
+    createOrRecoverPlatformSubscriptionCheckout,
+    expirePlatformCheckoutSession,
+    findPlatformCheckoutAttemptSession,
+} from "@zoeskoul/platform-server/billing/platformCheckoutLifecycle";
+
+import {
+    getOrCreatePlatformStripeCustomerId,
+    withValidPlatformStripeCustomer,
+    isMissingPlatformStripeCustomerError as isMissingCustomerError,
+    type PlatformStripeCustomerDeps,
+} from "@zoeskoul/platform-server/billing/platformStripeCustomer";
 import type Stripe from "stripe";
 import type { StripeSubscriptionStatus } from "@zoeskoul/db";
 import { formatMoneyMinor } from "@/i18n/money";
@@ -10,7 +27,8 @@ import {
   isCheckoutAttemptId,
 } from "@/lib/billing/checkoutAttempt";
 import { releaseBillingCheckoutReservation } from "@/lib/billing/billingCheckoutReservation";
-import { reconcileBuildAiSubscriptionGrantForUser } from "@/lib/billing/buildAiFeatureGrant";
+import { reconcileBuilderAiBillingForUser } from "@/lib/billing/reconcileBuilderAiBillingForUser";
+import {registeredBuilderStripeProducts,stripePriceProductId,verifiedStripePlatformProduct} from "@zoeskoul/platform-server/billing/platformStripeProductIdentity";
 
 function priceUnitAmountMinor(p: Stripe.Price): number | null {
     if (typeof p.unit_amount === "number") return p.unit_amount;
@@ -21,11 +39,6 @@ function priceUnitAmountMinor(p: Stripe.Price): number | null {
     return null;
 }
 
-function isMissingCustomerError(e: any) {
-    const code = e?.code;
-    const msg = String(e?.message ?? "");
-    return code === "resource_missing" || msg.includes("No such customer");
-}
 
 function safeInternalPathOrNull(path?: string | null) {
     const raw = String(path ?? "").trim();
@@ -37,8 +50,9 @@ function safeInternalPathOrNull(path?: string | null) {
 
 
 export function billingConfig() {
-    const monthlyPriceId = process.env.STRIPE_PRICE_MONTHLY_ID!;
-    const yearlyPriceId = process.env.STRIPE_PRICE_YEARLY_ID!;
+    const catalog = resolvePlatformBillingCatalog(process.env);
+    const monthlyPriceId = catalog.find(p => p.product === "learning" && p.tier === "monthly")?.priceId;
+    const yearlyPriceId = catalog.find(p => p.product === "learning" && p.tier === "yearly")?.priceId;
     const trialDays = Number(process.env.TRIAL_DAYS ?? 7);
     const appUrl = process.env.AUTH_URL!;
     if (!monthlyPriceId || !yearlyPriceId || !appUrl) {
@@ -159,57 +173,6 @@ export async function getPricePresentation(intlLocale = "en-US", desiredCurrency
         yearlySavingsLabel,
     };
 }// src/lib/billing/stripeService.ts
-export async function ensureStripeCustomer(userId: string) {
-    const u = await prisma.user.findUnique({
-        where: {id: userId},
-        select: {email: true, stripeCustomerId: true},
-    });
-    if (!u) throw new Error("User not found");
-
-    // If we have an id, verify it exists in Stripe (and isn’t deleted)
-    if (u.stripeCustomerId) {
-        try {
-            const got = await getStripe().customers.retrieve(u.stripeCustomerId);
-
-            // Stripe can return a DeletedCustomer object
-            if ((got as any)?.deleted) {
-                throw Object.assign(new Error("Stripe customer deleted"), {code: "resource_missing"});
-            }
-
-            return u.stripeCustomerId;
-        } catch (e: any) {
-            const code = e?.code;
-            const msg = String(e?.message ?? "");
-
-            // ✅ Repair only on “customer missing”
-            if (code === "resource_missing" || msg.includes("No such customer")) {
-                await prisma.user.update({
-                    where: {id: userId},
-                    data: {stripeCustomerId: null},
-                });
-            } else {
-                // real error (bad key, network, etc.)
-                throw e;
-            }
-        }
-    }
-
-    // Create a new Stripe customer + persist
-    const customer = await getStripe().customers.create({
-        email: u.email ?? undefined,
-        metadata: {userId},
-    });
-
-    await prisma.user.update({
-        where: {id: userId},
-        data: {stripeCustomerId: customer.id},
-    });
-
-    return customer.id;
-}
-
-
-
 function stripeCheckoutLocaleFromAppLocale(appLocale?: string | null): Stripe.Checkout.SessionCreateParams.Locale {
     const l = String(appLocale ?? "").toLowerCase();
     if (l === "fr"||l=="ht") return "fr";
@@ -220,45 +183,21 @@ function stripeCheckoutLocaleFromAppLocale(appLocale?: string | null): Stripe.Ch
 
 export type CheckoutSessionIntentMatch = "match" | "mismatch" | "unknown";
 
-function checkoutSessionPriceId(session: Stripe.Checkout.Session): string | null {
-    const metadataPriceId = session.metadata?.priceId?.trim();
-    if (metadataPriceId) return metadataPriceId;
-
-    // Sessions created before V76C32 did not have priceId in Checkout metadata.
-    // Expanded line_items is the compatibility proof for Monthly vs Yearly.
-    return session.line_items?.data?.[0]?.price?.id ?? null;
-}
-
 export function classifyCheckoutSessionIntent(args: {
     session: Stripe.Checkout.Session;
     priceId: string;
     useTrial: boolean;
 }): CheckoutSessionIntentMatch {
-    const priceId = checkoutSessionPriceId(args.session);
-    const rawUseTrial = args.session.metadata?.useTrial;
-    if (!priceId || (rawUseTrial !== "true" && rawUseTrial !== "false")) {
-        return "unknown";
-    }
-    return priceId === args.priceId && (rawUseTrial === "true") === args.useTrial
-        ? "match"
-        : "mismatch";
+    return classifyPlatformCheckoutIntent(args);
 }
 
 export async function expireOpenCheckoutSession(sessionId: string): Promise<Stripe.Checkout.Session> {
     const stripe = getStripe();
-    try {
-        return await stripe.checkout.sessions.expire(sessionId);
-    } catch (expireError) {
-        // A signed expiration webhook or another request may win this race.
-        // Only treat it as success if a Stripe re-read proves terminal expired.
-        try {
-            const latest = await stripe.checkout.sessions.retrieve(sessionId);
-            if (latest.status === "expired") return latest;
-        } catch {
-            // Preserve the original error: terminal state is not proven.
-        }
-        throw expireError;
-    }
+    return expirePlatformCheckoutSession({
+        sessionId,
+        expire: (id) => stripe.checkout.sessions.expire(id),
+        retrieve: (id) => stripe.checkout.sessions.retrieve(id),
+    });
 }
 
 export async function findExistingCheckoutSessionForAttempt(args: {
@@ -280,12 +219,11 @@ export async function findExistingCheckoutSessionForAttempt(args: {
             limit: 100,
             expand: ["data.line_items"],
         });
-        return sessions.data.find(
-            (session) =>
-                session.mode === "subscription" &&
-                session.metadata?.checkoutAttemptId === args.checkoutAttemptId &&
-                (session.status === "open" || session.status === "complete" || session.status === "expired"),
-        ) ?? null;
+        return findPlatformCheckoutAttemptSession({
+            sessions: sessions.data,
+            checkoutAttemptId: args.checkoutAttemptId,
+            statuses: ["open", "complete", "expired"],
+        });
     } catch (error) {
         if (isMissingCustomerError(error)) return null;
         throw error;
@@ -308,6 +246,12 @@ export async function createCheckoutSession(args: {
     } | null;
 }) {
     const { appUrl, trialDays } = billingConfig();
+    // This learning Checkout may never charge a Builder plan or merchant-store price.
+    requirePlatformPriceForProduct({
+        catalog: resolvePlatformBillingCatalog(process.env),
+        product: "learning",
+        priceId: args.priceId,
+    });
 
     const cb = safeInternalPathOrNull(args.callbackUrl) ?? "/billing";
 
@@ -343,42 +287,17 @@ export async function createCheckoutSession(args: {
     const checkout = await withValidCustomer(args.userId, async (customerId) => {
         const stripe = getStripe();
 
-        // Recover a Session that Stripe may already have created when the
-        // previous response was lost or indeterminate. This lookup is safe to
-        // repeat and keeps retries on the original logical Checkout attempt.
-        const recent = await stripe.checkout.sessions.list({
-            customer: customerId,
-            limit: 10,
-            expand: ["data.line_items"],
-        });
-        const recovered = recent.data.find(
-            (session) =>
-                session.mode === "subscription" &&
-                session.metadata?.checkoutAttemptId === args.checkoutAttemptId &&
-                (session.status === "open" || session.status === "complete"),
-        );
-
-        if (recovered) {
-            const recoveredIntent = classifyCheckoutSessionIntent({
-                session: recovered,
-                priceId: args.priceId,
-                useTrial: args.useTrial,
-            });
-            if (recoveredIntent !== "match") {
-                throw new Error("Existing Stripe Checkout intent does not match this attempt.");
-            }
-            return {
-                id: recovered.id,
-                url:
-                    recovered.url ??
-                    success_url.replace(
-                        "{CHECKOUT_SESSION_ID}",
-                        recovered.id,
-                    ),
-            };
-        }
-
-        return stripe.checkout.sessions.create(
+        return createOrRecoverPlatformSubscriptionCheckout({
+            checkoutAttemptId: args.checkoutAttemptId,
+            priceId: args.priceId,
+            useTrial: args.useTrial,
+            successUrl: success_url,
+            listSessions: async () => (await stripe.checkout.sessions.list({
+                customer: customerId,
+                limit: 10,
+                expand: ["data.line_items"],
+            })).data,
+            createSession: () => stripe.checkout.sessions.create(
             {
                 mode: "subscription",
                 customer: customerId,
@@ -431,7 +350,8 @@ export async function createCheckoutSession(args: {
                     args.checkoutAttemptId,
                 ),
             },
-        );
+        ),
+        });
     });
 
     return { id: checkout.id, url: checkout.url };
@@ -472,15 +392,14 @@ export function isDeterministicStripeCheckoutRequestError(error: unknown) {
 
 export async function createBillingPortalSession(userId: string) {
     const { appUrl } = billingConfig();
-
-    const portal = await withValidCustomer(userId, (customerId) =>
-        getStripe().billingPortal.sessions.create({
-            customer: customerId,
-            return_url: `${appUrl}/billing`,
+    return createPlatformBillingPortalSession({
+        userId,
+        returnUrl: `${appUrl}/billing`,
+        customerDeps: platformStripeCustomerDeps,
+        createSession: (customerId, returnUrl) => getStripe().billingPortal.sessions.create({
+            customer: customerId, return_url: returnUrl,
         }),
-    );
-
-    return { url: portal.url };
+    });
 }
 
 export async function resumeScheduledSubscriptionForUser(args: {
@@ -507,6 +426,21 @@ export async function resumeScheduledSubscriptionForUser(args: {
         return null;
     }
 
+    // The subscription row alone cannot authorize a Stripe mutation. Confirm
+    // that the caller still owns the canonical platform Stripe customer before
+    // clearing a scheduled cancellation on the provider.
+    const owner = await prisma.user.findUnique({
+        where: { id: args.userId },
+        select: { stripeCustomerId: true },
+    });
+    if (
+        !owner?.stripeCustomerId ||
+        !local.stripeCustomerId ||
+        owner.stripeCustomerId !== local.stripeCustomerId
+    ) {
+        return null;
+    }
+
     const stripe = getStripe();
     const remote = await stripe.subscriptions.retrieve(
         args.subscriptionId,
@@ -516,10 +450,7 @@ export async function resumeScheduledSubscriptionForUser(args: {
             ? remote.customer
             : remote.customer.id;
 
-    if (
-        local.stripeCustomerId &&
-        remoteCustomerId !== local.stripeCustomerId
-    ) {
+    if (remoteCustomerId !== owner.stripeCustomerId) {
         throw new Error("Subscription customer mismatch.");
     }
 
@@ -572,14 +503,20 @@ export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hin
             select: {id: true, trialUsedAt: true, stripeCustomerId: true}
         }));
 
-    if (!user) return null;
-
-    // keep stripeCustomerId aligned
-    if (!user.stripeCustomerId) {
-        await prisma.user.update({where: {id: user.id}, data: {stripeCustomerId: customerId}});
-    }
+    if (!user || !isVerifiedPlatformSubscriptionOwner({
+        userId: user.id,
+        storedStripeCustomerId: user.stripeCustomerId,
+        subscriptionCustomerId: customerId,
+        subscriptionMetadataUserId: sub.metadata?.userId,
+    })) return null;
 
     const priceId = sub.items.data[0]?.price?.id ?? null;
+    const catalog = resolvePlatformBillingCatalog(process.env);
+    const billingProduct = sub.items.data.length === 1 ? verifiedStripePlatformProduct({
+        priceId, catalog, builderProductIds:registeredBuilderStripeProducts(process.env),
+        stripeProductId:stripePriceProductId(sub.items.data[0]?.price?.product),
+        subscriptionProductHint:sub.metadata?.billingProduct ?? null,
+    }) : null;
     const currentPeriodEnd = toDate(subscriptionPeriodEndSec(sub));
     const trialEnd = toDate(sub.trial_end);
 
@@ -591,6 +528,7 @@ export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hin
             stripeSubscriptionId: sub.id,
             status: mapStatus(sub.status),
             priceId,
+            billingProduct,
             currentPeriodEnd,
             cancelAtPeriodEnd: Boolean(sub.cancel_at_period_end),
             trialEnd,
@@ -600,13 +538,14 @@ export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hin
             stripeCustomerId: customerId,
             status: mapStatus(sub.status),
             priceId,
+            billingProduct,
             currentPeriodEnd,
             cancelAtPeriodEnd: Boolean(sub.cancel_at_period_end),
             trialEnd,
         },
     });
 
-    await reconcileBuildAiSubscriptionGrantForUser(user.id);
+    await reconcileBuilderAiBillingForUser(user.id);
 
     const checkoutAttemptId = sub.metadata?.checkoutAttemptId;
     if (isCheckoutAttemptId(checkoutAttemptId)) {
@@ -616,7 +555,7 @@ export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hin
         );
     }
 
-    if (!user.trialUsedAt && sub.status === "trialing") {
+    if (billingProduct === "learning" && !user.trialUsedAt && sub.status === "trialing") {
         await prisma.user.update({
             where: {id: user.id},
             data: {trialUsedAt: new Date()},
@@ -651,7 +590,7 @@ async function expireLocalSubscriptionsMissingFromStripe(
         },
     });
 
-    await reconcileBuildAiSubscriptionGrantForUser(userId);
+    await reconcileBuilderAiBillingForUser(userId);
 }
 
 /**
@@ -660,133 +599,62 @@ async function expireLocalSubscriptionsMissingFromStripe(
  * even if webhook is delayed.
  */
 export async function syncSubscriptionsForUser(userId: string) {
-    // ✅ do NOT create a Stripe customer here
-    const u = await prisma.user.findUnique({
-        where: {id: userId},
-        select: {stripeCustomerId: true},
-    });
-
-    const customerId = u?.stripeCustomerId ?? null;
-    if (!customerId) {
-        await expireLocalSubscriptionsMissingFromStripe(userId, []);
-        return;
-    }
-
-    // ✅ if stale/missing, clear and stop (prevents 500s in /status)
-    try {
-        const got = await getStripe().customers.retrieve(customerId);
-        if ((got as any)?.deleted) {
-            await prisma.user.update({
-                where: {id: userId},
-                data: {stripeCustomerId: null},
-            });
-            await expireLocalSubscriptionsMissingFromStripe(userId, []);
-            return;
-        }
-    } catch (e: any) {
-        if (isMissingCustomerError(e)) {
-            await prisma.user.update({
-                where: {id: userId},
-                data: {stripeCustomerId: null},
-            });
-            await expireLocalSubscriptionsMissingFromStripe(userId, []);
-            return;
-        }
-        throw e;
-    }
-
-    const list = await getStripe().subscriptions.list({
-        customer: customerId,
-        status: "all",
-        limit: 10,
-        expand: ["data.items.data.price"],
-    });
-
-    for (const sub of list.data) {
-        await upsertFromStripeSubscription(sub, userId);
-    }
-
-    await expireLocalSubscriptionsMissingFromStripe(
+    return synchronizePlatformCustomerSubscriptions({
         userId,
-        list.data.map((sub) => sub.id),
-    );
-}
-
-
-// src/lib/billing/stripeService.ts (top)
-
-// function isMissingCustomerError(e: any) {
-//   const code = e?.code;
-//   const msg = String(e?.message ?? "");
-//   return code === "resource_missing" || msg.includes("No such customer");
-// }
-//
-// function safeInternalPathOrNull(path?: string | null) {
-//   const raw = String(path ?? "").trim();
-//   if (!raw) return null;
-//   if (raw.startsWith("//")) return null;
-//   if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw)) return null;
-//   return raw.startsWith("/") ? raw : `/${raw}`;
-// }
-
-async function clearStripeCustomerId(userId: string) {
-    await prisma.user.update({
-        where: {id: userId},
-        data: {stripeCustomerId: null},
+        deps: {
+            readCustomerId: async (id) => (await prisma.user.findUnique({
+                where: {id}, select: {stripeCustomerId: true},
+            }))?.stripeCustomerId ?? null,
+            // Normalize Stripe's Customer.deleted (void) / DeletedCustomer.deleted (true)
+            // into the shared platform billing contract without changing provider behavior.
+            verifyCustomer: async (id) => {
+                const customer = await getStripe().customers.retrieve(id);
+                return { deleted: customer.deleted === true };
+            },
+            clearCustomerId: (id) => prisma.user.update({
+                where: {id}, data: {stripeCustomerId: null},
+            }),
+            fetchAllSubscriptions: (customerId) => collectPlatformSubscriptionPages({
+                listPage: async (cursor) => getStripe().subscriptions.list({
+                    customer: customerId,
+                    status: "all",
+                    limit: 100,
+                    expand: ["data.items.data.price"],
+                    ...(cursor ? {starting_after: cursor} : {}),
+                }),
+            }),
+            persistSubscription: (sub, id) => upsertFromStripeSubscription(sub, id),
+            expireMissing: (id, ids) => expireLocalSubscriptionsMissingFromStripe(id, [...ids]),
+            isMissingCustomerError,
+        },
     });
 }
 
-export async function getOrCreateStripeCustomerId(userId: string) {
-    const u = await prisma.user.findUnique({
-        where: {id: userId},
-        select: {email: true, stripeCustomerId: true},
-    });
-    if (!u) throw new Error("User not found");
+/** Web-specific adapter only: reusable customer lifecycle lives in platform-server. */
+const platformStripeCustomerDeps: PlatformStripeCustomerDeps = {
+    findUser: (userId) => prisma.user.findUnique({
+        where: { id: userId }, select: { email: true, stripeCustomerId: true },
+    }),
+    setCustomerId: (userId, customerId) => prisma.user.update({
+        where: { id: userId }, data: { stripeCustomerId: customerId },
+    }),
+    retrieveCustomer: (customerId) => getStripe().customers.retrieve(customerId),
+    createCustomer: (userId, email) => getStripe().customers.create({
+        email: email ?? undefined, metadata: { userId },
+    }),
+};
 
-    if (u.stripeCustomerId) {
-        try {
-            const got = await getStripe().customers.retrieve(u.stripeCustomerId);
-            if ((got as any)?.deleted) throw Object.assign(new Error("deleted"), {code: "resource_missing"});
-            return u.stripeCustomerId;
-        } catch (e: any) {
-            if (isMissingCustomerError(e)) {
-                await clearStripeCustomerId(userId);
-            } else {
-                throw e;
-            }
-        }
-    }
-
-    const created = await getStripe().customers.create({
-        email: u.email ?? undefined,
-        metadata: {userId},
-    });
-
-    await prisma.user.update({
-        where: {id: userId},
-        data: {stripeCustomerId: created.id},
-    });
-
-    return created.id;
+/** Shared platform billing customer, not a generated merchant storefront customer. */
+export async function getOrCreateStripeCustomerId(userId: string): Promise<string> {
+    return getOrCreatePlatformStripeCustomerId({ userId, deps: platformStripeCustomerDeps });
 }
-
 
 async function withValidCustomer<T>(
-    userId: string,
-    fn: (customerId: string) => Promise<T>,
+    userId: string, fn: (customerId: string) => Promise<T>,
 ): Promise<T> {
-    try {
-        const customerId = await getOrCreateStripeCustomerId(userId);
-        return await fn(customerId);
-    } catch (e: any) {
-        if (isMissingCustomerError(e) && e?.param === "customer") {
-            // clear + retry once
-            await clearStripeCustomerId(userId);
-            const customerId = await getOrCreateStripeCustomerId(userId);
-            return await fn(customerId);
-        }
-        throw e;
-    }
+    return withValidPlatformStripeCustomer({
+        userId, deps: platformStripeCustomerDeps, operate: fn,
+    });
 }
 
 function minItemPeriodEndSec(sub: Stripe.Subscription): number | null {

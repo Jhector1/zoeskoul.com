@@ -7,6 +7,10 @@ import {
 } from "react";
 
 import StripeConnectionPanel from "./StripeConnectionPanel";
+import directoryStyles from "@/components/builder/ProviderDirectory.module.css";
+import ShopifyConnectionPanel from "./ShopifyConnectionPanel";
+import ProviderDirectory, { type ProviderDirectoryEntry, type ProviderDirectoryStatus } from "@/components/builder/ProviderDirectory";
+import { PROVIDER_PRESENTATIONS } from "@/lib/integrations/providerDirectoryCatalog";
 
 type CommerceProject =
   Readonly<{
@@ -23,6 +27,7 @@ type ProviderSnapshot =
     connectionRequired: boolean;
     recommendedStore: boolean;
     recommendedPayment: boolean;
+    executableCapabilities?: Readonly<Record<string, boolean>>;
     capabilities:
       Readonly<
         Record<
@@ -49,6 +54,7 @@ type CommerceConfiguration =
   Readonly<{
     providers:
       readonly ProviderSnapshot[];
+    shopifyOAuthConfigured?: boolean;
     store:
       Readonly<{
         status: string;
@@ -64,9 +70,23 @@ type CommerceConfiguration =
               "live";
             status: string;
             webhookConfigured?: boolean;
+            storefrontConfigured?: boolean;
           }>[];
       }>;
   }>;
+
+type CommerceFetchFailure = Readonly<{
+  status: number;
+  code: string;
+  requestId: string | null;
+}>;
+
+class CommerceConfigurationError extends Error {
+  constructor(message: string, readonly details: CommerceFetchFailure) {
+    super(message);
+    this.name = "CommerceConfigurationError";
+  }
+}
 
 function providerLabel(
   providers:
@@ -103,6 +123,7 @@ export default function CommerceWorkspacePanel(
       string |
       null;
     section?: "commerce" | "payments";
+    onNavigate?: () => void;
   },
 ) {
   const [
@@ -113,6 +134,10 @@ export default function CommerceWorkspacePanel(
       CommerceConfiguration |
       null
     >(null);
+
+  const [configurationFailure, setConfigurationFailure] = useState<CommerceFetchFailure | null>(null);
+  const [loadedProjectId, setLoadedProjectId] = useState<string | null>(null);
+  const [openedProvider, setOpenedProvider] = useState<string | null>(null);
 
   const [
     configurationError,
@@ -163,8 +188,11 @@ export default function CommerceWorkspacePanel(
                         boolean;
                       message?:
                         string;
+                      code?: string;
+                      requestId?: string;
                       providers?:
                         readonly ProviderSnapshot[];
+                      shopifyOAuthConfigured?: boolean;
                       store?:
                         CommerceConfiguration["store"];
                     }
@@ -176,9 +204,13 @@ export default function CommerceWorkspacePanel(
               !payload.providers ||
               !payload.store
             ) {
-              throw new Error(
-                payload?.message ??
-                  "Commerce configuration could not be loaded.",
+              throw new CommerceConfigurationError(
+                payload?.message ?? "Commerce configuration could not be loaded.",
+                {
+                  status: response.status,
+                  code: payload?.code ?? "COMMERCE_STATUS_READ_FAILED",
+                  requestId: response.headers.get("X-Request-Id") ?? payload?.requestId ?? null,
+                },
               );
             }
 
@@ -186,16 +218,17 @@ export default function CommerceWorkspacePanel(
               return;
             }
 
+            setLoadedProjectId(props.project.buildProjectId);
             setConfiguration({
               providers:
                 payload.providers,
+              shopifyOAuthConfigured: payload.shopifyOAuthConfigured === true,
               store:
                 payload.store,
             });
 
-            setConfigurationError(
-              null,
-            );
+            setConfigurationError(null);
+            setConfigurationFailure(null);
           },
         )
         .catch(
@@ -206,6 +239,9 @@ export default function CommerceWorkspacePanel(
               return;
             }
 
+            setLoadedProjectId(null);
+            setConfiguration(null);
+            setConfigurationFailure(error instanceof CommerceConfigurationError ? error.details : null);
             setConfigurationError(
               error instanceof
                 Error
@@ -296,9 +332,110 @@ export default function CommerceWorkspacePanel(
     );
 
   const paymentsOnly = props.section === "payments";
+  const currentConfiguration = loadedProjectId === props.project.buildProjectId ? configuration : null;
+  const availableProviders = currentConfiguration?.providers ?? [];
+  const connections = currentConfiguration?.store.connections ?? [];
+  const retryConfiguration = () => {
+    setLoadedProjectId(null);
+    setConfiguration(null);
+    setConfigurationError(null);
+    setConfigurationFailure(null);
+    setConfigurationRevision((value) => value + 1);
+  };
+  const configurationErrorPanel = configurationError ? (
+    <div className="zb-commerce-candidate" role="alert">
+      <strong>Commerce status unavailable</strong>
+      <p>{configurationError}</p>
+      {configurationFailure ? (
+        <p>HTTP {configurationFailure.status} · {configurationFailure.code}
+          {configurationFailure.requestId ? ` · Request ${configurationFailure.requestId}` : ""}
+        </p>
+      ) : null}
+      <button type="button" onClick={retryConfiguration}>Retry status</button>
+    </div>
+  ) : null;
+  const providerCards: readonly ProviderDirectoryEntry[] =
+    PROVIDER_PRESENTATIONS[paymentsOnly ? "payments" : "commerce"].map((provider): ProviderDirectoryEntry => {
+      let status: ProviderDirectoryStatus = "unavailable";
+      let note = "Connector not implemented in ZoeBuild yet.";
+      if (!currentConfiguration) {
+        if (provider.id === "zoebuild-native" && !paymentsOnly) {
+          // The native capability is part of the registered commerce stack;
+          // do not confuse a failed status read with missing implementation.
+          status = "built-in";
+          note = "Native capability included; live configuration not yet verified.";
+        } else if ((provider.id === "shopify" && !paymentsOnly) || (provider.id === "stripe" && paymentsOnly)) {
+          status = configurationError ? "unverified" : "checking";
+          note = configurationError
+            ? "Connection could not be verified. Inspect the error and retry safely."
+            : "Checking this project's connection and runtime capability…";
+        } else {
+          note = "Connector not implemented in ZoeBuild yet.";
+        }
+      } else if (provider.id === "zoebuild-native" && !paymentsOnly) {
+        status = "built-in";
+        note = "Built in · No external credentials required";
+      } else if (provider.id === "shopify" && !paymentsOnly) {
+        const active = connections.filter((item) => item.provider === "shopify" && item.status === "active");
+        if (active.length > 0) {
+          const testReady = active.some((item) => item.environment === "test" && item.storefrontConfigured === true);
+          status = testReady ? "connected" : "attention";
+          note = active.map((item) => `${item.environment}: ${item.storefrontConfigured ? "ready" : "setup incomplete"}`).join(" · ");
+        } else if (currentConfiguration.shopifyOAuthConfigured === true) {
+          status = "available";
+          note = "Authorize your shop in the existing Shopify setup.";
+        } else {
+          note = "Shopify app setup required on the ZoeBuild server.";
+        }
+      } else if (provider.id === "stripe" && paymentsOnly) {
+        const active = connections.filter((item) => item.provider === "stripe" && item.status === "active");
+        const supported = availableProviders.some((item) =>
+          item.id === "stripe" && item.executableCapabilities?.payments === true,
+        );
+        if (active.length) {
+          status = "connected";
+          note = active.map((item) => `${item.environment}: connected`).join(" · ");
+        } else if (supported) {
+          status = "available";
+          note = "Manage test and live credentials separately.";
+        } else {
+          note = "Stripe provider not executable on this server.";
+        }
+      }
+      return { provider, status, note };
+    });
+
+  if (openedProvider === null) {
+    return (
+      <div className={`zb-commerce-workspace ${directoryStyles.overview}`}>
+        {configurationErrorPanel}
+        {props.candidateHostname && !paymentsOnly ? (
+          <div className="zb-commerce-candidate" role="status">
+            <strong>Shopify store detected: </strong>{props.candidateHostname}
+            <div>This detected hostname is not proof of a connected store. Open Shopify when its connector is available.</div>
+          </div>
+        ) : null}
+        <ProviderDirectory
+          title={paymentsOnly ? "Payments" : "Store & commerce"}
+          description={paymentsOnly
+            ? "Choose payment connections for this project. Test and live credentials are kept separate."
+            : "Select a provider to open its own settings. Connecting a provider never changes active routes automatically."}
+          entries={providerCards}
+          onOpen={(id) => { setOpenedProvider(id); props.onNavigate?.(); }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="zb-commerce-workspace">
+      <button
+        type="button"
+        className={directoryStyles.backButton}
+        onClick={() => { setOpenedProvider(null); props.onNavigate?.(); }}
+      >
+        ← All {paymentsOnly ? "payment" : "commerce"} providers
+      </button>
       <div className="zb-commerce-heading">
         <div>
           <div className="zb-commerce-kicker">
@@ -306,37 +443,38 @@ export default function CommerceWorkspacePanel(
           </div>
 
           <h2>
-            {props.project.title}
+            {openedProvider === "zoebuild-native" ? "Zoé Store" : openedProvider === "shopify" ? "Shopify" : "Stripe"}
           </h2>
 
           <p>
             {paymentsOnly
-              ? "Connect and manage payments independently for test and live environments."
-              : "Zoé Store is the default commerce foundation. You can connect another supported provider without rewriting generated storefront code."}
+              ? "Connect and manage Stripe payments independently for test and live environments."
+              : openedProvider === "shopify"
+                ? "Authorize Shopify and manage this project's external commerce connection."
+                : "Zoé Store is the default commerce foundation. You can connect another supported provider without rewriting generated storefront code."}
           </p>
         </div>
 
         <span className="zb-commerce-status">
-          Zoé Store
+          {(() => {
+            const status = providerCards.find((item) => item.provider.id === openedProvider)?.status;
+            if (status === "connected") return "Connected";
+            if (status === "active") return "Active";
+            if (status === "built-in") return "Built in";
+            if (status === "available") return "Available to connect";
+            if (status === "attention") return "Needs attention";
+            if (status === "unverified" || status === "checking") return "Status unverified";
+            return "Unavailable";
+          })()}
         </span>
       </div>
 
-      {configurationError ? (
-        <div
-          className="zb-commerce-candidate"
-          role="status"
-        >
-          <strong>
-            Commerce status unavailable
-          </strong>
-
-          <div>
-            {configurationError}
-          </div>
-        </div>
+      {configurationErrorPanel}
+      {!currentConfiguration ? (
+        <p role="status">Provider connection and routing details are not verified. Retry the status check before making configuration changes.</p>
       ) : null}
 
-      {props.candidateHostname ? (
+      {props.candidateHostname && openedProvider === "shopify" ? (
         <div className="zb-commerce-candidate">
           <strong>
             Shopify store detected:
@@ -352,7 +490,17 @@ export default function CommerceWorkspacePanel(
         </div>
       ) : null}
 
-      {!paymentsOnly ? (
+      {!paymentsOnly && openedProvider === "shopify" && currentConfiguration ? (
+        <ShopifyConnectionPanel
+          buildProjectId={props.project.buildProjectId}
+          candidateHostname={props.candidateHostname}
+          available={currentConfiguration?.shopifyOAuthConfigured === true}
+          connections={currentConfiguration?.store.connections ?? []}
+          onChanged={() => setConfigurationRevision((current) => current + 1)}
+        />
+      ) : null}
+
+      {!paymentsOnly && openedProvider === "zoebuild-native" && currentConfiguration ? (
       <div className="zb-commerce-grid">
         <section className="zb-commerce-card">
           <span>
@@ -461,18 +609,18 @@ export default function CommerceWorkspacePanel(
       </div>
       ) : null}
 
-      {paymentsOnly ? (
+      {paymentsOnly && openedProvider === "stripe" && currentConfiguration ? (
       <StripeConnectionPanel
         buildProjectId={
           props.project.buildProjectId
         }
         connections={
-          configuration
+          currentConfiguration
             ?.store
             .connections ??
           []
         }
-        routes={configuration?.store.routes ?? []}
+        routes={currentConfiguration?.store.routes ?? []}
         onChanged={
           () =>
             setConfigurationRevision(
@@ -486,7 +634,7 @@ export default function CommerceWorkspacePanel(
       />
       ) : null}
 
-      {!paymentsOnly ? (
+      {!paymentsOnly && openedProvider === "zoebuild-native" ? (
       <div className="zb-commerce-security">
         <strong>
           Provider options
@@ -499,45 +647,6 @@ export default function CommerceWorkspacePanel(
           Stripe and PayPal can own checkout and payments.
         </span>
       </div>
-      ) : null}
-
-      {!paymentsOnly && providers.length > 0 ? (
-        <div className="zb-commerce-grid">
-          {providers.map(
-            (
-              provider,
-            ) => (
-              <section
-                className="zb-commerce-card"
-                key={
-                  provider.id
-                }
-              >
-                <span>
-                  {provider.recommendedStore
-                    ? "Recommended store"
-                    : provider.recommendedPayment
-                      ? "Recommended payments"
-                      : "Available provider"}
-                </span>
-
-                <strong>
-                  {provider.displayName}
-                </strong>
-
-                <p>
-                  {provider.description}
-                </p>
-
-                <small>
-                  {provider.connectionRequired
-                    ? "Requires separate test and live connections."
-                    : "Built in — no external store connection required."}
-                </small>
-              </section>
-            ),
-          )}
-        </div>
       ) : null}
 
       <div className="zb-commerce-security">

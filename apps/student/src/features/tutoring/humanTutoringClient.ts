@@ -20,6 +20,8 @@ export type TutoringPricingPresentation = {
 };
 
 export type TutoringCreditsPayload = {
+  /** Unit identity from canonical Web credits API; legacy responses may omit it. */
+  creditDomain?: "tutoring_minutes";
   balance: TutoringCreditBalance;
   purchasePackages: TutoringCreditPackage[];
   sessionDurations: number[];

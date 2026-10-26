@@ -25,6 +25,8 @@ import {
 import {
   loadCurrentBuildAccessSnapshot,
 } from "@/lib/build/currentBuildAccess";
+import { createRequiredZoeBuildPlanningMetering } from "@/lib/build/serverOwnedZoeBuildMetering";
+import { requireZoeAiBillingOperationId, ZOE_AI_OPERATION_HEADER, ZoeAiOperationIdentityError } from "@/lib/build/aiBillingOperationIdentity";
 import {
   enforceSameOriginPost,
   exceedsContentLength,
@@ -166,6 +168,11 @@ export async function POST(req: Request) {
   }
 
   try {
+    const meteringOperationId = process.env.ZOEBUILD_AI_CREDITS_ENFORCEMENT === "required"
+      ? requireZoeAiBillingOperationId({
+          supplied: req.headers.get(ZOE_AI_OPERATION_HEADER), purpose: "plan",
+        })
+      : requestId;
     let form: FormData;
 
     try {
@@ -190,6 +197,11 @@ export async function POST(req: Request) {
     } = await planCostAwareZoeBuildProject({
       prompt: input.prompt,
       media: input.media,
+      ...(process.env.ZOEBUILD_AI_CREDITS_ENFORCEMENT === "required" ? {
+        metering: createRequiredZoeBuildPlanningMetering({
+          userId, operationId: meteringOperationId,
+        }),
+      } : {}),
     });
 
     return json(requestId, {
@@ -198,6 +210,9 @@ export async function POST(req: Request) {
       routing,
     });
   } catch (error) {
+    if (error instanceof ZoeAiOperationIdentityError) {
+      return json(requestId, {ok:false, code:error.code, message:"A new AI attempt identifier is required."}, 400);
+    }
     if (error instanceof BuildArchitectureUnsupportedError) {
       return json(
         requestId,

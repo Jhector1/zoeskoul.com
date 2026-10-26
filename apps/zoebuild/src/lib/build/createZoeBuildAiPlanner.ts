@@ -62,7 +62,7 @@ export function resolveZoeBuildAiConfig(
   };
 }
 
-function createTransport(
+export function createZoeBuildAiJsonTransport(
   config: ReturnType<typeof resolveZoeBuildAiConfig>,
 ): AiJsonTransport {
   if (config.provider === "openai") {
@@ -98,7 +98,7 @@ export function createZoeBuildAiPlannerFromConfig(
   >,
 ): BuildAiPlanner {
   return createBuildAiPlannerFromJsonTransport(
-    createTransport(config),
+    createZoeBuildAiJsonTransport(config),
   );
 }
 

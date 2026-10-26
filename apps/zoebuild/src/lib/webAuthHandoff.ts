@@ -1,57 +1,21 @@
 import "server-only";
-
-import {
-  buildAuthenticateUrl,
-} from "@zoeskoul/auth-client";
-
-import {
-  resolveZoeBuildOrigins,
-} from "./appOrigins";
-
-function safeZoeBuildCallbackUrl(
-  value: string | null | undefined,
-  zoebuildOrigin: string,
-): string {
-  const origin =
-    new URL(zoebuildOrigin).origin;
-
-  const fallback =
-    new URL("/", origin).toString();
-
-  if (!value?.trim()) {
-    return fallback;
-  }
-
-  try {
-    const resolved =
-      new URL(value, origin);
-
-    if (resolved.origin !== origin) {
-      return fallback;
-    }
-
-    return resolved.toString();
-  } catch {
-    return fallback;
-  }
-}
+import { resolveZoeBuildOrigins } from "./appOrigins";
+import { safeReturnPath } from "@/lib/auth/buildHandoff";
 
 export function buildZoeBuildWebAuthenticateUrl(args: {
   callbackUrl?: string | null;
   locale?: string;
 }): string {
-  const {
-    websiteOrigin,
-    zoebuildOrigin,
-  } = resolveZoeBuildOrigins();
-
-  return buildAuthenticateUrl({
-    websiteOrigin,
-    callbackUrl:
-      safeZoeBuildCallbackUrl(
-        args.callbackUrl,
-        zoebuildOrigin,
-      ),
-    locale: args.locale,
-  });
+  const { zoebuildOrigin } = resolveZoeBuildOrigins();
+  let returnPath = args.callbackUrl || "/en/projects";
+  try {
+    if (/^https?:/i.test(returnPath)) {
+      const url = new URL(returnPath);
+      returnPath = url.origin === new URL(zoebuildOrigin).origin ? url.pathname + url.search : "/en/projects";
+    }
+  } catch { returnPath = "/en/projects"; }
+  const target = new URL("/api/auth/handoff/start", zoebuildOrigin);
+  target.searchParams.set("returnTo", safeReturnPath(returnPath));
+  target.searchParams.set("locale", args.locale || "en");
+  return target.toString();
 }

@@ -12,6 +12,9 @@ export type BillingStatus = {
 
     currentPeriodEnd: string | null;
     cancelAtPeriodEnd: boolean;
+    nextBillingDate?: string | null;
+    nextBillingAmountMinor?: number | null;
+    nextBillingCurrency?: string | null;
 
     // ✅ NEW: raw pricing data (Stripe minor units) for locale reformatting client-side
     currency: string;               // e.g. "usd"

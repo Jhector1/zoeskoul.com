@@ -18,6 +18,8 @@ import {resolveBillingCurrency} from "@/lib/billing/currency";
 import { futureBillingPeriodIsoOrNull } from "@/lib/billing/period";
 import { resolveRoleCapabilities } from "@/lib/access/roleCapabilities";
 import { isCheckoutAttemptId } from "@/lib/billing/checkoutAttempt";
+import {getStripe} from "@/lib/stripe";
+import {projectStripeNextInvoice} from "@zoeskoul/platform-server/billing/platformNextInvoice";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -135,6 +137,18 @@ export async function GET() {
     }
   }
 
+  let nextBillingDate:string|null=null,nextBillingAmountMinor:number|null=null,nextBillingCurrency:string|null=null;
+  if(ent.ok && ent.subscriptionId && !ent.cancelAtPeriodEnd && !billingExempt){
+    // Stripe's invoice preview is the only source for the next charge amount/date.
+    try{
+      const invoice=await getStripe().invoices.createPreview({subscription:ent.subscriptionId});
+      const projected=projectStripeNextInvoice(invoice);
+      nextBillingDate=projected.nextBillingDate;
+      nextBillingAmountMinor=projected.nextBillingAmountMinor;
+      nextBillingCurrency=projected.nextBillingCurrency;
+    }catch{ /* Stripe may have no upcoming invoice. Do not guess. */ }
+  }
+
   return NextResponse.json({
     isAuthenticated: true,
     isSubscribed,
@@ -151,6 +165,7 @@ export async function GET() {
     trialEndsAt: ent.trialEnd ? ent.trialEnd.toISOString() : null,
     currentPeriodEnd: futureBillingPeriodIsoOrNull(ent.currentPeriodEnd),
     cancelAtPeriodEnd: Boolean(ent.cancelAtPeriodEnd),
+    nextBillingDate,nextBillingAmountMinor,nextBillingCurrency,
     activePromotions,
 
     appLocale,

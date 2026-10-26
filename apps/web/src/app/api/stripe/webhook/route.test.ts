@@ -67,6 +67,7 @@ describe("Stripe webhook route", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     process.env.STRIPE_WEBHOOK_SECRET = "whsec_test";
+    process.env.LEARNOIR_STRIPE_SECRET_KEY = "sk_test_sample";
     mocks.constructEvent.mockReturnValue(stripeEvent());
     mocks.claimStripeEvent.mockResolvedValue({
       kind: "claimed",
@@ -80,6 +81,35 @@ describe("Stripe webhook route", () => {
       kind: "processed",
       action: "subscription_reconciled",
     });
+  });
+
+  it("blocks a validly signed live event at the test-mode platform endpoint", async () => {
+    mocks.constructEvent.mockReturnValue({...stripeEvent(),livemode:true});
+    const response = await POST(request());
+    expect(response.status).toBe(400);
+    expect(mocks.claimStripeEvent).not.toHaveBeenCalled();
+    expect(mocks.reconcile).not.toHaveBeenCalled();
+  });
+
+  it("blocks a test event when the configured platform key is live", async () => {
+    process.env.LEARNOIR_STRIPE_SECRET_KEY = "sk_live_sample";
+    const response = await POST(request());
+    expect(response.status).toBe(400);
+    expect(mocks.claimStripeEvent).not.toHaveBeenCalled();
+  });
+
+  it("blocks connected-account events from merchant storefront payment systems", async () => {
+    mocks.constructEvent.mockReturnValue({...stripeEvent(),account:"acct_merchant"});
+    const response = await POST(request());
+    expect(response.status).toBe(400);
+    expect(mocks.claimStripeEvent).not.toHaveBeenCalled();
+  });
+
+  it("fails closed when the platform key is absent after signature verification", async () => {
+    delete process.env.LEARNOIR_STRIPE_SECRET_KEY;
+    const response = await POST(request());
+    expect(response.status).toBe(503);
+    expect(mocks.claimStripeEvent).not.toHaveBeenCalled();
   });
 
   it("returns 200 for a terminal duplicate without reconciling again", async () => {

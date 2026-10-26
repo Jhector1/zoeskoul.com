@@ -2,6 +2,8 @@ import "server-only";
 
 import { prisma } from "@/lib/prisma";
 import { isValidTutoringMinutes } from "@/lib/tutoring/tutoringPricing";
+import {projectTutoringMinuteBalance,sameCreditEventFields} from "@zoeskoul/platform-server/credits/core";
+import {runSerializableCreditTransaction,classifyCreditReservation} from "@zoeskoul/platform-server/credits/transactions";
 
 export type TutoringCreditGrantKind =
   | "purchase_grant"
@@ -218,30 +220,12 @@ function assertBookingMinutes(
   }
 }
 
-function isSerializableRetry(error: unknown): boolean {
-  if (!error || typeof error !== "object") return false;
-  const code = "code" in error ? String(error.code) : "";
-  return code === "P2034";
-}
-
+/** Preserve tutoring's existing SERIALIZABLE/Prisma retry policy via the shared core. */
 async function serializable<T>(
   db: TutoringCommercialDb,
   operation: (tx: TutoringCommercialTx) => Promise<T>,
 ): Promise<T> {
-  let lastError: unknown;
-
-  for (let attempt = 0; attempt < 3; attempt += 1) {
-    try {
-      return await db.$transaction(operation, {
-        isolationLevel: "Serializable",
-      });
-    } catch (error) {
-      lastError = error;
-      if (!isSerializableRetry(error) || attempt === 2) throw error;
-    }
-  }
-
-  throw lastError;
+  return runSerializableCreditTransaction<TutoringCommercialTx,T>(db,operation);
 }
 
 async function balanceWith(
@@ -281,29 +265,18 @@ async function balanceWith(
         }),
   ]);
 
-  const heldRefundMinutes =
-    pendingRefunds._sum.minutes ??
-    0;
-  const availableMinutes =
-    (result._sum.availableMinutesDelta ?? 0) -
-    heldRefundMinutes;
-  const reservedMinutes =
-    result._sum.reservedMinutesDelta ??
-    0;
-
-  if (availableMinutes < 0) {
+  try {
+    return projectTutoringMinuteBalance({
+      availableMinutesDelta: result._sum.availableMinutesDelta,
+      reservedMinutesDelta: result._sum.reservedMinutesDelta,
+      heldRefundMinutes: pendingRefunds._sum.minutes,
+    });
+  } catch {
+    // Preserve this domain's existing error type for application callers.
     throw new TutoringCommercialInvariantError(
-      "Pending tutoring refunds exceed available tutoring credit.",
+      "Invalid tutoring credit balance or pending tutoring refunds.",
     );
   }
-
-  return {
-    availableMinutes,
-    reservedMinutes,
-    totalMinutes:
-      availableMinutes +
-      reservedMinutes,
-  };
 }
 
 export async function getTutoringCreditBalance(
@@ -325,15 +298,9 @@ function assertIdempotencyMatch(
     bookingId?: string | null;
   },
 ): void {
-  if (
-    existing.userId !== expected.userId ||
-    existing.kind !== expected.kind ||
-    existing.availableMinutesDelta !== expected.availableMinutesDelta ||
-    existing.reservedMinutesDelta !== expected.reservedMinutesDelta ||
-    existing.purchaseId !== (expected.purchaseId ?? null) ||
-    existing.requestId !== (expected.requestId ?? null) ||
-    existing.bookingId !== (expected.bookingId ?? null)
-  ) {
+  const keys = ["userId", "kind", "availableMinutesDelta", "reservedMinutesDelta",
+    "purchaseId", "requestId", "bookingId"] as const;
+  if (!sameCreditEventFields(existing, expected, keys)) {
     throw new TutoringCommercialInvariantError(
       `Tutoring ledger idempotency key ${existing.idempotencyKey} was reused for a different operation.`,
     );
@@ -614,11 +581,12 @@ export async function ensureTutoringRequestCreditsReserved(
     // Legacy requests may already own the correct reservation through a
     // booking-level ledger entry. Reuse that reservation instead of charging
     // the learner twice.
-    if (reserved === request.requestedMinutes) {
+    const reservationState=classifyCreditReservation(reserved,request.requestedMinutes);
+    if (reservationState === "reserved") {
       return balanceWith(tx, request.learnerId);
     }
 
-    if (reserved !== 0) {
+    if (reservationState === "inconsistent") {
       throw new TutoringCommercialInvariantError(
         `Tutoring request ${request.id} has ${reserved} reserved minutes; expected 0 or ${request.requestedMinutes}.`,
       );
@@ -704,14 +672,15 @@ export async function releaseTutoringRequestCredits(
       request.id,
     );
 
-    if (reserved === 0) {
+    const reservationState=classifyCreditReservation(reserved,request.requestedMinutes);
+    if (reservationState === "unreserved") {
       return {
         balance: await balanceWith(tx, request.learnerId),
         releasedReservedMinutes: false,
       };
     }
 
-    if (reserved !== request.requestedMinutes) {
+    if (reservationState !== "reserved") {
       throw new TutoringCommercialInvariantError(
         `Tutoring request ${request.id} has ${reserved} reserved minutes; expected ${request.requestedMinutes}.`,
       );
@@ -809,10 +778,7 @@ export async function createTutoringBookingForRequest(
         request.id,
       );
 
-    if (
-      reservedBeforeScheduling !== 0 &&
-      reservedBeforeScheduling !== durationMinutes
-    ) {
+    if (classifyCreditReservation(reservedBeforeScheduling,durationMinutes)==="inconsistent") {
       throw new TutoringCommercialInvariantError(
         `Tutoring request ${request.id} has ${reservedBeforeScheduling} reserved minutes; expected ${durationMinutes}.`,
       );
@@ -1022,7 +988,7 @@ export async function consumeTutoringBookingCredits(
     }
 
     const reserved = await bookingReservedMinutes(tx, booking);
-    if (reserved !== booking.durationMinutes) {
+    if (classifyCreditReservation(reserved,booking.durationMinutes)!=="reserved") {
       throw new TutoringCommercialInvariantError(
         `Tutoring booking ${booking.id} has ${reserved} reserved minutes; expected ${booking.durationMinutes}.`,
       );
@@ -1116,7 +1082,7 @@ export async function releaseTutoringBookingCreditsDetailed(
     assertScheduledBooking(booking);
 
     const reserved = await bookingReservedMinutes(tx, booking);
-    if (reserved !== booking.durationMinutes) {
+    if (classifyCreditReservation(reserved,booking.durationMinutes)!=="reserved") {
       throw new TutoringCommercialInvariantError(
         `Tutoring booking ${booking.id} has ${reserved} reserved minutes; expected ${booking.durationMinutes}.`,
       );

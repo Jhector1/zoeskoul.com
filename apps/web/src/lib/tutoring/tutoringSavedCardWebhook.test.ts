@@ -20,6 +20,7 @@ function event(
     id: "evt_1",
     type,
     created: 1_800_000_000,
+    livemode: false,
     data: {
       object: {
         id: "pi_1",
@@ -61,6 +62,16 @@ function event(
 function deps():
   TutoringCreditWebhookDeps {
   return {
+    retrievePaymentIntent:
+      vi.fn(async () => ({
+        id: "pi_1", livemode: false, status: "succeeded",
+        amount: 3300, amountReceived: 3300, currency: "usd",
+        latestCharge: {
+          paymentIntentId: "pi_1", livemode: false,
+          paid: true, captured: true, refunded: false, disputed: false,
+          amount: 3300, amountRefunded: 0, currency: "usd",
+        },
+      })),
     listCheckoutLineItems:
       vi.fn(
         async () => [],
@@ -140,6 +151,39 @@ describe(
         );
       },
     );
+
+    it("denies refunded, disputed and mismatched current saved-card payments", async () => {
+      for (const patch of [
+        { refunded: true },
+        { disputed: true },
+        { amountRefunded: 1 },
+        { paymentIntentId: "pi_foreign" },
+      ]) {
+        const d = deps();
+        d.retrievePaymentIntent = vi.fn(async () => ({
+          id: "pi_1", livemode: false, status: "succeeded",
+          amount: 3300, amountReceived: 3300, currency: "usd",
+          latestCharge: {
+            paymentIntentId: "pi_1", livemode: false,
+            paid: true, captured: true, refunded: false, disputed: false,
+            amount: 3300, amountRefunded: 0, currency: "usd", ...patch,
+          },
+        }));
+        await expect(reconcileTutoringCreditPaymentIntentEvent(
+          event("payment_intent.succeeded"), { deps: d },
+        )).rejects.toThrow("TUTORING_STRIPE_PAYMENT_NOT_CLEAR");
+        expect(d.settlePaid).not.toHaveBeenCalled();
+      }
+    });
+
+    it("retries on Stripe provider lookup failures without creating minutes", async () => {
+      const d = deps();
+      d.retrievePaymentIntent = vi.fn(async () => { throw new Error("Stripe unavailable"); });
+      await expect(reconcileTutoringCreditPaymentIntentEvent(
+        event("payment_intent.succeeded"), { deps: d },
+      )).rejects.toThrow("Stripe unavailable");
+      expect(d.settlePaid).not.toHaveBeenCalled();
+    });
 
     it(
       "marks a direct saved-card failure without granting credit",

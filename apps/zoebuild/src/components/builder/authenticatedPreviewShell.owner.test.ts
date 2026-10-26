@@ -19,7 +19,7 @@ describe("ZoeBuild authenticated preview shell",()=>{
 
  it("owns preview persistence above Home, Projects, and Builder",()=>{
   expect(root).toContain("ZoeBuildAuthenticatedPreviewShell");
-  expect(root).toContain("apiOrigin={websiteOrigin}");
+  expect(root).toContain("apiOrigin={zoebuildOrigin}");
   expect(root).toContain("{children}");
   expect(
     existsSync(
