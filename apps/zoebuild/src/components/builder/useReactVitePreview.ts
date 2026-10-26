@@ -223,6 +223,7 @@ export function useReactVitePreview(input: Readonly<{
   const workspaceRevisionRef = useRef(0);
   const [workspaceContentRevision, setWorkspaceContentRevision] = useState(0);
   const startPromiseRef = useRef<Promise<void> | null>(null);
+  const syncPromiseRef = useRef<Promise<void> | null>(null);
   const syncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -266,65 +267,99 @@ export function useReactVitePreview(input: Readonly<{
     );
   }, [input.buildProjectId]);
 
+  // Only one source sync may mutate a preview session at a time. Otherwise
+  // an older in-flight request can overwrite the newer acknowledged source.
   const syncCurrent = useCallback(async () => {
-    const session = sessionRef.current;
-    if (!session) return;
-    const nextEntries = [...workspaceEntriesRef.current];
-    if (
-      workspaceSyncEntriesEqual([...session.workspaceEntries], nextEntries)
-    ) return;
-
-    if (mountedRef.current) {
-      setPreview((current) =>
-        current ? { ...current, state: "syncing", message: "Updating preview…" } : current,
-      );
+    // A previous sync (possibly for a retired session) must settle before
+    // this caller checks which source the active session still needs.
+    while (syncPromiseRef.current) {
+      await syncPromiseRef.current;
     }
 
-    const response = await fetch(
-      `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/${encodeURIComponent(session.previewId)}/sync`,
-      {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sourceVersion: sourceVersionRef.current,
-          workspace: workspaceRef.current,
-        }),
-      },
-    );
+    const task = (async () => {
+      while (true) {
+        const session = sessionRef.current;
+        if (!session) return;
 
-    const data = await payload(response);
-    if (response.status === 404) {
-      throw new Error("PREVIEW_EXPIRED");
-    }
-    if (!response.ok || !data?.ok) {
-      const errorMessage = message(data, "React preview could not be updated.");
-      if (/dependencies changed/i.test(errorMessage)) {
-        throw new Error("PREVIEW_RESTART_REQUIRED");
+        // Capture exactly what this request will send. Never acknowledge
+        // source that arrived while a runner request was in flight.
+        const sendingWorkspace = workspaceRef.current;
+        const sendingEntries = exportWorkspaceEntries(sendingWorkspace.nodes);
+        const sendingVersion = sourceVersionRef.current;
+        if (
+          workspaceSyncEntriesEqual([...session.workspaceEntries], sendingEntries)
+        ) return;
+
+        if (mountedRef.current) {
+          setPreview((current) =>
+            current ? { ...current, state: "syncing", message: "Updating preview…" } : current,
+          );
+        }
+
+        const response = await fetch(
+          `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/${encodeURIComponent(session.previewId)}/sync`,
+          {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sourceVersion: sendingVersion,
+              workspace: sendingWorkspace,
+            }),
+          },
+        );
+
+        const data = await payload(response);
+        if (response.status === 404) throw new Error("PREVIEW_EXPIRED");
+        if (!response.ok || !data?.ok) {
+          const errorMessage = message(data, "React preview could not be updated.");
+          if (/dependencies changed/i.test(errorMessage)) {
+            throw new Error("PREVIEW_RESTART_REQUIRED");
+          }
+          throw new Error(errorMessage);
+        }
+
+        // A restart/cancel can happen while the request is running.
+        // Do not mutate the state or cache of a replacement session.
+        if (sessionRef.current?.previewId !== session.previewId) return;
+
+        const nextSession: PreviewSession = {
+          ...session,
+          workspaceEntries: sendingEntries,
+        };
+        sessionRef.current = nextSession;
+        rememberPreviewSession(input.buildProjectId, nextSession);
+
+        // A newer source arrived during sync: send it through the SAME
+        // session before refreshing the HTTP-only document. No restart.
+        if (
+          !workspaceSyncEntriesEqual(
+            sendingEntries,
+            exportWorkspaceEntries(workspaceRef.current.nodes),
+          )
+        ) continue;
+
+        if (mountedRef.current) {
+          setPreview((current) =>
+            current
+              ? {
+                  ...current,
+                  state: "ready",
+                  message: null,
+                  revision: current.revision + 1,
+                }
+              : current,
+          );
+        }
+        return;
       }
-      throw new Error(errorMessage);
-    }
+    })();
 
-    const nextSession: PreviewSession = {
-      ...session,
-      workspaceEntries: nextEntries,
-    };
-    sessionRef.current = nextSession;
-    rememberPreviewSession(input.buildProjectId, nextSession);
-
-    if (mountedRef.current) {
-      setPreview((current) =>
-        current
-          ? {
-              ...current,
-              state: "ready",
-              message: null,
-              // Current preview transport is HTTP-only; refresh the browser
-              // document only after a real semantic source sync.
-              revision: current.revision + 1,
-            }
-          : current,
-      );
+    syncPromiseRef.current = task;
+    try {
+      await task;
+    } finally {
+      if (syncPromiseRef.current === task) syncPromiseRef.current = null;
     }
   }, [input.buildProjectId]);
 
@@ -366,6 +401,12 @@ export function useReactVitePreview(input: Readonly<{
         startController.abort();
       }, PREVIEW_START_TIMEOUT_MS);
 
+      // Snapshot source at request creation, not when the START response
+      // returns. This is the only source the runner can have received.
+      const startingWorkspace = workspaceRef.current;
+      const startingEntries = exportWorkspaceEntries(startingWorkspace.nodes);
+      const startingVersion = sourceVersionRef.current;
+
       let response: Response;
       try {
         response = await fetch(
@@ -375,8 +416,8 @@ export function useReactVitePreview(input: Readonly<{
             credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              sourceVersion: sourceVersionRef.current,
-              workspace: workspaceRef.current,
+              sourceVersion: startingVersion,
+              workspace: startingWorkspace,
             }),
             signal: startController.signal,
           },
@@ -454,7 +495,7 @@ export function useReactVitePreview(input: Readonly<{
       const nextSession: PreviewSession = {
         previewId,
         basePath,
-        workspaceEntries: [...workspaceEntriesRef.current],
+        workspaceEntries: startingEntries,
       };
 
       sessionRef.current =
@@ -475,7 +516,10 @@ export function useReactVitePreview(input: Readonly<{
         setPreview({ src: basePath, state: "ready", message: null, revision: 0 });
       }
 
-      if (workspaceRevisionRef.current !== startingWorkspaceRevision) {
+      if (
+        workspaceRevisionRef.current !== startingWorkspaceRevision ||
+        !workspaceSyncEntriesEqual(startingEntries, [...workspaceEntriesRef.current])
+      ) {
         await syncCurrent();
       }
     })();
