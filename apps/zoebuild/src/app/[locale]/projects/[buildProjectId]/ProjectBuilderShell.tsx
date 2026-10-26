@@ -36,6 +36,7 @@ import type {
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
+import ProjectRevisionHistory from "./ProjectRevisionHistory";
 import SiteSettingsWorkspacePanel, { type Section as SiteSettingsSection } from "./SiteSettingsWorkspacePanel";
 import { resolveZoeSelectedProvider } from "@/lib/build/zoeAssistantServiceIntent";
 import type { ZoeSourceEditProposal } from "@/lib/build/zoeTargetedSourceEdit";
@@ -1126,6 +1127,17 @@ export default function ProjectBuilderShell(props: {
             </a>
           ) : null}
 
+          {props.project.stackId === "react-vite-v1" ? (
+            <ProjectRevisionHistory
+              buildProjectId={props.project.buildProjectId}
+              currentVersion={previewSourceVersion}
+              disabled={codeDirty || assistantChecking || applyingFileEdit || applyingPlan || Boolean(pendingFileEdit) || Boolean(pendingPlan)}
+              onRestored={async (savedVersion, fromVersion) => {
+                await refreshAfterSuccessfulApply(savedVersion);
+                addMessage(`Restored source v${fromVersion} as new source v${savedVersion}. The prior versions remain in history. Preview received the restored source; check its appearance before publishing.`);
+              }}
+            />
+          ) : null}
           {props.project.stackId === "react-vite-v1" && !pendingFileEdit ? (
             <section className="zb-project-assistant-plan" aria-label="Verify saved React build">
               <span className="zb-project-assistant-plan-status">Saved React source · v{previewSourceVersion}</span>
