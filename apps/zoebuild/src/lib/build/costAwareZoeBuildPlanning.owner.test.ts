@@ -41,35 +41,23 @@ describe(
           "lockArchitecture",
         );
 
-        expect(
-          owner,
-        ).toContain(
-          "profile.projectType",
-        );
-
-        expect(
-          owner,
-        ).toContain(
-          "profile.requirements",
-        );
-
-        expect(
-          owner,
-        ).toContain(
-          "profile.commerce",
-        );
-
-        expect(
-          owner,
-        ).toContain(
-          "profile.stackId",
-        );
-
-        expect(
-          owner,
-        ).toContain(
-          "profile.deploymentPreference",
-        );
+        for (const contract of [
+          'projectType:',
+          '"frontend-app"',
+          'targets:',
+          '"web"',
+          'requirements:',
+          'profile.requirements',
+          'commerce:',
+          'profile.requirements.commerce',
+          'storefrontRuntime: "react-vite"',
+          'stackId:',
+          '"react-vite-v1"',
+          'deployment:',
+          'preference:',
+        ]) {
+          expect(owner).toContain(contract);
+        }
       },
     );
 

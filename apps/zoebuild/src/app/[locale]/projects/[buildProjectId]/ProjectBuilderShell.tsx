@@ -71,6 +71,7 @@ type BuildWorkspaceProps =
 
 export default function ProjectBuilderShell(props: {
   locale: string;
+  commerceEnabled: boolean;
   project:
     BuildWorkspaceProps["project"];
 
@@ -341,13 +342,7 @@ export default function ProjectBuilderShell(props: {
       null,
     );
 
-  const commerceEnabled =
-    (
-    props.project.stackId ===
-      "commerce-static-v1" ||
-    props.project.stackId ===
-      "commerce-react-vite-v1"
-  );
+  const commerceEnabled = props.commerceEnabled;
 
   function hostedCheckoutRedirectUrl(
     value:
@@ -783,6 +778,13 @@ export default function ProjectBuilderShell(props: {
           "User instruction:", submission.prompt,
         ].join("\n"),
       }, billingOperationId);
+      // A paid model may still propose a legacy/static runtime. Do not offer
+      // an apply action that would destroy the existing React project.
+      if (current.stackId && plan.specification.stackId !== current.stackId) {
+        commitCompletedAttempt();
+        addMessage(`The generated plan tried to switch this project from ${current.stackId} to ${plan.specification.stackId}. ZoeBuild kept your saved project unchanged. Ask Zoé to update the existing React components instead.`);
+        return;
+      }
       pendingPlanBaseVersion.current = current.sourceVersion;
       setPendingPlan(plan);
       commitCompletedAttempt();

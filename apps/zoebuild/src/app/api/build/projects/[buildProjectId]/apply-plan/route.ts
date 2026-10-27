@@ -18,6 +18,7 @@ import {
 
 import {
   createPrismaBuildProjectPlanWriter,
+  BuildStackReplacementForbiddenError,
 } from "@/lib/build/applyBuildProjectPlan";
 
 import {
@@ -329,6 +330,13 @@ export async function POST(
       },
     );
   } catch (error) {
+    if (error instanceof BuildStackReplacementForbiddenError) {
+      return json(requestId, {
+        ok: false,
+        code: error.code,
+        message: error.message,
+      }, 409);
+    }
     if (
       error instanceof
       BuildSpecificationError

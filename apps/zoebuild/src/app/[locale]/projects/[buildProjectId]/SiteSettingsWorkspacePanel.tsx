@@ -88,6 +88,7 @@ export default function SiteSettingsWorkspacePanel(props: {
             <CommerceWorkspacePanel
               key={`${section}:${props.project.buildProjectId}`}
               project={props.project}
+              commerceEnabled={props.commerceEnabled}
               candidateHostname={props.candidateHostname}
               section={section}
               onNavigate={resetContentScroll}
@@ -96,7 +97,7 @@ export default function SiteSettingsWorkspacePanel(props: {
             <section className={styles.page}>
               <div className="zb-commerce-candidate" role="status">
                 <strong>Commerce is not enabled</strong>
-                <p>This project has no registered commerce stack. No store or payment connection has been created.</p>
+                <p>Commerce is available when enabled in this React project's specification. No store or payment connection has been created for this project.</p>
               </div>
               <ProviderDirectory
                 title={selected.title}

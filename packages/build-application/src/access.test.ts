@@ -17,11 +17,11 @@ const requirements = {
   commerce: false,
 } as const;
 
-function specification(stackId = "static-html-v1") {
+function specification(stackId = "react-vite-v1") {
   return {
     version: 1 as const,
     name: "My Site",
-    projectType: "static-site" as const,
+    projectType: "frontend-app" as const,
     targets: ["web"] as const,
     requirements,
     pages: ["home"] as const,
@@ -97,6 +97,19 @@ describe("ZoeBuild access and create command", () => {
       createBuildProjectCommand({
         access: { userId: "user_1", entitlements: [] },
         specification: specification("unknown-stack-v1"),
+        createdAt: 1,
+        persistence: store,
+      }),
+    ).rejects.toBeInstanceOf(BuildProjectDefinitionError);
+    expect(store.createInitialBuildProject).not.toHaveBeenCalled();
+  });
+
+  it("rejects obsolete static-site projects before persistence", async () => {
+    const store = persistence();
+    await expect(
+      createBuildProjectCommand({
+        access: { userId: "user_1", entitlements: [] },
+        specification: { ...specification("static-html-v1"), projectType: "static-site" as const },
         createdAt: 1,
         persistence: store,
       }),

@@ -116,7 +116,7 @@ describe(
           storefront.commerce,
         ).toEqual({
           storefrontRuntime:
-            "static",
+            "react-vite",
         });
       },
     );

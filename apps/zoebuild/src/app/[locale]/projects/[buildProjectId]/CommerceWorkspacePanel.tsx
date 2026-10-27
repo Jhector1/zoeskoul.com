@@ -119,6 +119,7 @@ export default function CommerceWorkspacePanel(
   props: {
     project:
       CommerceProject;
+    commerceEnabled: boolean;
     candidateHostname?:
       string |
       null;
@@ -290,12 +291,9 @@ export default function CommerceWorkspacePanel(
       ],
     );
 
-  if (
+  if (!props.commerceEnabled ||
     props.project.stackId !==
-      "commerce-static-v1" &&
-    props.project.stackId !==
-      "commerce-react-vite-v1"
-  ) {
+    "react-vite-v1") {
     return null;
   }
 

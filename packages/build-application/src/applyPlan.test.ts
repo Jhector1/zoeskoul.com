@@ -19,7 +19,7 @@ import {
 } from "./index";
 
 function specification(
-  stackId = "static-html-v1",
+  stackId = "react-vite-v1",
 ): ProjectSpecification {
   return {
     version: 1,
@@ -28,7 +28,7 @@ function specification(
       "Applied project",
 
     projectType:
-      "static-site",
+      "frontend-app",
 
     targets: [
       "web",
@@ -147,10 +147,10 @@ describe(
           baseVersion: 4,
 
           stackId:
-            "static-html-v1",
+            "react-vite-v1",
 
           templateId:
-            "static-html-v1",
+            "react-vite-v1",
         });
 
         expect(
@@ -230,6 +230,24 @@ describe(
         expect(
           store.applyOwnedBuildProjectPlan,
         ).not.toHaveBeenCalled();
+      },
+    );
+
+    it(
+      "rejects the retired static stack rather than recreating vanilla JS",
+      async () => {
+        const store = writer();
+        await expect(
+          applyBuildProjectPlanCommand({
+            access: { userId: "user_1", entitlements: [] },
+            buildProjectId: "build_1",
+            baseVersion: 1,
+            specification: specification("static-html-v1"),
+            writer: store.port,
+            createdAt: 1,
+          }),
+        ).rejects.toBeInstanceOf(BuildProjectDefinitionError);
+        expect(store.applyOwnedBuildProjectPlan).not.toHaveBeenCalled();
       },
     );
 

@@ -84,9 +84,9 @@ const STARTER_SPECIFICATIONS = {
     "pages": [
       "Home"
     ],
-    "stackId": "commerce-static-v1",
+    "stackId": "react-vite-v1",
     "commerce": {
-      "storefrontRuntime": "static"
+      "storefrontRuntime": "react-vite"
     },
     "deployment": {
       "preference": "static"

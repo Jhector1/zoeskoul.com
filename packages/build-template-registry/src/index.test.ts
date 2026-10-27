@@ -14,18 +14,15 @@ describe("build template registry", () => {
           (template) =>
             template.id,
         ),
-      ).toEqual([
-        "commerce-static-v1",
-        "commerce-react-vite-v1",
-        "static-html-v1",
-        "react-vite-v1",
-      ]);
+      ).toEqual(["react-vite-v1"]);
     },
   );
 
 
-  it("keeps static projects dependency-free and React dependency locking explicit", () => {
-    expect(getBuildTemplate("static-html-v1")?.dependencyLock).toBeNull();
+  it("rejects obsolete static and duplicate commerce templates", () => {
+    expect(getBuildTemplate("static-html-v1")).toBeUndefined();
+    expect(getBuildTemplate("commerce-static-v1")).toBeUndefined();
+    expect(getBuildTemplate("commerce-react-vite-v1")).toBeUndefined();
     expect(getBuildTemplate("react-vite-v1")?.dependencyLock).toEqual({
       manager: "pnpm",
       policy: "generate-once",
@@ -41,8 +38,8 @@ describe("build template registry", () => {
 });
 
 describe("V12K11P modern React/Vite starter", () => {
-  it("uses React Router, not hand-written history listeners, in both templates", () => {
-    for (const templateId of ["react-vite-v1", "commerce-react-vite-v1"]) {
+  it("uses React Router, not hand-written history listeners", () => {
+    for (const templateId of ["react-vite-v1"]) {
       const template = requireBuildTemplate(templateId);
       const byPath = new Map(template.files.map(file => [file.path, file.content]));
       const pkg = JSON.parse(byPath.get("package.json") ?? "{}");
@@ -65,8 +62,5 @@ describe("V12K11P modern React/Vite starter", () => {
     expect(byPath.get("src/components/SiteHeader.tsx")).toContain("NavLink");
     expect(byPath.get("src/layouts/SiteLayout.tsx")).toContain("<Outlet />");
   });
-  it("keeps commerce provider ownership in its existing App without double page chrome", () => {
-    const routes = requireBuildTemplate("commerce-react-vite-v1").files.find(f => f.path === "src/routes/AppRoutes.tsx")?.content ?? "";
-    expect(routes).not.toContain("SiteLayout");
-  });
+
 });

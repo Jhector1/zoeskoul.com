@@ -16,6 +16,15 @@ import {
   saveCodeProjectInTransaction,
 } from "@zoeskoul/platform-server/projects/saveCodeProject";
 
+/** Changing stacks would discard the existing source architecture and break history. */
+export class BuildStackReplacementForbiddenError extends Error {
+  readonly code = "BUILD_STACK_REPLACEMENT_FORBIDDEN" as const;
+  constructor() {
+    super("Existing project architecture cannot be replaced by a different stack. Ask Zoé to edit this project's existing files instead.");
+    this.name = "BuildStackReplacementForbiddenError";
+  }
+}
+
 function toPrismaJson(
   value: unknown,
 ): Prisma.InputJsonValue {
@@ -118,6 +127,7 @@ export function createPrismaBuildProjectPlanWriter(
 
                   select: {
                     id: true,
+                    stackId: true,
 
                     codeProject: {
                       select: {
@@ -161,6 +171,13 @@ export function createPrismaBuildProjectPlanWriter(
                 input.ownerId
             ) {
               return null;
+            }
+
+            // A model-generated plan cannot silently swap an existing React
+            // project for commerce-static-v1 or any other runtime. Check in
+            // the same transaction as the versioned workspace save.
+            if (buildProject.stackId && buildProject.stackId !== input.stackId) {
+              throw new BuildStackReplacementForbiddenError();
             }
 
             const codeProject =

@@ -103,6 +103,19 @@ export async function createBuildProject(
   const title = requireNonEmpty(input.specification.name, "project name");
   requireNonEmpty(input.specification.stackId, "stack id");
 
+  // V1 has exactly one executable project architecture. Other stacks can be
+  // introduced through a future explicitly versioned registry migration.
+  if (input.specification.stackId !== "react-vite-v1" ||
+      input.specification.projectType !== "frontend-app" ||
+      input.specification.targets.length !== 1 ||
+      input.specification.targets[0] !== "web" ||
+      (input.specification.requirements.commerce &&
+        input.specification.commerce?.storefrontRuntime !== "react-vite")) {
+    throw new BuildProjectDefinitionError(
+      "ZoeBuild currently creates React + Vite web projects only.",
+    );
+  }
+
   if (input.specification.version !== BUILD_PROJECT_BOOTSTRAP_VERSION) {
     throw new Error(
       `Unsupported ZoeBuild specification version: ${input.specification.version}.`,

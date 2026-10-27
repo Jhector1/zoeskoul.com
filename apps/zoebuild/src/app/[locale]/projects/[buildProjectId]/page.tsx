@@ -22,6 +22,7 @@ import {
 } from "@zoeskoul/platform-server/prisma";
 
 import ProjectBuilderShell from "./ProjectBuilderShell";
+import { hasReactCommerceCapability } from "@/lib/build/reactCommerceCapability";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -96,6 +97,7 @@ export default async function ZoeBuildWorkspacePage({
         language: project.language,
         workspace: project.workspace,
       }}
+      commerceEnabled={hasReactCommerceCapability(project)}
       initialDeployment={initialDeployment}
     />
   );

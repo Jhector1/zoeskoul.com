@@ -5,6 +5,7 @@ import { SESSION_COOKIE } from "@/lib/auth/buildHandoff";
 import { redirect } from "next/navigation";
 
 import CreateBuildProjectClient from "@/components/builder/CreateBuildProjectClient";
+import { DeleteBuildProjectButton } from "@/components/builder/DeleteBuildProjectButton";
 
 import { listBuildProjectsCommand } from "@zoeskoul/build-application";
 
@@ -90,10 +91,10 @@ export default async function ZoeBuildProjectsPage({
       ) : (
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
+            <article key={project.buildProjectId} className="ui-page-surface p-5">
             <Link
-              key={project.buildProjectId}
               href={`/${locale}/projects/${encodeURIComponent(project.buildProjectId)}`}
-              className="ui-page-surface block p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+              className="block transition hover:-translate-y-0.5"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
@@ -114,6 +115,8 @@ export default async function ZoeBuildProjectsPage({
                 <span>{new Date(project.updatedAt).toLocaleDateString()}</span>
               </div>
             </Link>
+            <DeleteBuildProjectButton buildProjectId={project.buildProjectId} title={project.title} />
+            </article>
           ))}
         </section>
       )}

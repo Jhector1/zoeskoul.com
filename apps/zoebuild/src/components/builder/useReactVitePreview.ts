@@ -8,6 +8,7 @@ import { workspaceSyncEntriesEqual } from "@zoeskoul/learner-workspace/lib/proje
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import { registeredReactPreviewRoutes } from "@/lib/build/reactPreviewPageCatalog";
 import { classifyCachedPreviewDocument } from "@/lib/build/reactPreviewSessionRecovery";
+import { mayAutoRecoverReactPreviewDependencies } from "@/lib/build/reactPreviewDependencyRecovery";
 
 type PreviewSession = Readonly<{
   previewId: string;
@@ -436,12 +437,19 @@ export function useReactVitePreview(input: Readonly<{
       }
       const data = await payload(response);
 
-      const dependencyLockRequired =
-        response.status === 409 &&
-        typeof data?.code === "string" &&
-        data.code.startsWith("BUILD_DEPENDENCY_LOCK");
+      const dependencyLockRequired = mayAutoRecoverReactPreviewDependencies({
+        status: response.status,
+        code: data?.code,
+        message: data?.message,
+      });
 
       if (dependencyLockRequired) {
+        const recoveryKey = `zoebuild:dependency-recovery:${input.buildProjectId}`;
+        let recoveredAlready = false;
+        try { recoveredAlready = window.sessionStorage.getItem(recoveryKey) === "completed"; } catch { /* optional */ }
+        if (recoveredAlready) {
+          throw new Error("Automatic dependency recovery was attempted. The project still needs attention; no additional source revisions were created.");
+        }
         if (!bootstrapAllowedRef.current) {
           throw new Error(
             "Save your changes before ZoeBuild prepares the React dependency lock.",
@@ -452,26 +460,38 @@ export function useReactVitePreview(input: Readonly<{
           setPreview((current) => ({
             src: current?.src ?? null,
             state: "starting",
-            message: "Preparing the one-time React dependency lock…",
+            message: "Securely preparing project dependencies…",
             revision: current?.revision ?? 0,
           }));
         }
 
         const bootstrap = await fetch(
           `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/dependency-lock/bootstrap`,
-          { method: "POST", credentials: "same-origin" },
+          {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              reconcileExisting: true,
+              baseVersion: startingVersion,
+            }),
+          },
         );
         const bootstrapData = await payload(bootstrap);
         if (!bootstrap.ok || !bootstrapData?.ok) {
           throw new Error(message(bootstrapData, "React dependency preparation failed."));
         }
 
-        if (!bootstrapAllowedRef.current) {
+        if (
+          !bootstrapAllowedRef.current ||
+          workspaceRevisionRef.current !== startingWorkspaceRevision ||
+          sourceVersionRef.current !== startingVersion
+        ) {
           throw new Error(
-            "React dependencies were prepared, but local edits appeared before reload. Save and reload the project.",
+            "Dependencies were prepared, but this tab has newer local edits. Save them before reloading the project.",
           );
         }
-
+        try { window.sessionStorage.setItem(recoveryKey, "completed"); } catch { /* optional */ }
         window.location.reload();
         return;
       }
@@ -514,6 +534,7 @@ export function useReactVitePreview(input: Readonly<{
         );
       }
       if (mountedRef.current) {
+        try { window.sessionStorage.removeItem(`zoebuild:dependency-recovery:${input.buildProjectId}`); } catch { /* optional */ }
         setPreview({ src: basePath, state: "ready", message: null, revision: 0 });
       }
 

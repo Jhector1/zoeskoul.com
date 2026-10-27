@@ -52,6 +52,7 @@ import {
   listCommerceProducts,
 } from "@/lib/commerce/commerceRuntime";
 import { trustedCommerceBuyerIpFromRequest, type VerifiedCommerceBuyerIp } from "@/lib/commerce/trustedCommerceBuyerIp";
+import { hasReactCommerceCapability } from "@/lib/build/reactCommerceCapability";
 
 
 export const runtime =
@@ -62,12 +63,6 @@ export const dynamic =
 
 const MAX_BODY_BYTES =
   16_384;
-
-const COMMERCE_PREVIEW_STACKS =
-  new Set([
-    "commerce-static-v1",
-    "commerce-react-vite-v1",
-  ]);
 
 type PreviewCommerceMethod =
   | "products.list"
@@ -468,16 +463,7 @@ export async function POST(
       );
     }
 
-    if (
-      !authorization
-        .project
-        .stackId ||
-      !COMMERCE_PREVIEW_STACKS.has(
-        authorization
-          .project
-          .stackId,
-      )
-    ) {
+    if (!hasReactCommerceCapability(authorization.project)) {
       return json(
         requestId,
         {

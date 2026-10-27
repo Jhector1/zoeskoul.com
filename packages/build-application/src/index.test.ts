@@ -15,15 +15,15 @@ const noManagedCapabilities = {
   commerce: false,
 } as const;
 
-function staticSpecification() {
+function reactSpecification() {
   return {
     version: 1 as const,
     name: "  My Zoe Site  ",
-    projectType: "static-site" as const,
+    projectType: "frontend-app" as const,
     targets: ["web"] as const,
     requirements: noManagedCapabilities,
     pages: ["home"] as const,
-    stackId: "static-html-v1",
+    stackId: "react-vite-v1",
     deployment: { preference: "static" as const },
   };
 }
@@ -46,7 +46,7 @@ describe("build application service", () => {
 
     const result = await createBuildProject({
       ownerId: " user_1 ",
-      specification: staticSpecification(),
+      specification: reactSpecification(),
       createdAt: 123,
       persistence,
     });
@@ -61,24 +61,24 @@ describe("build application service", () => {
       ownerId: "user_1",
       title: "My Zoe Site",
       language: "web",
-      entryPath: "index.html",
-      activePath: "index.html",
-      stackId: "static-html-v1",
-      templateId: "static-html-v1",
-      dependencyLock: null,
+      entryPath: "src/main.tsx",
+      activePath: "src/App.tsx",
+      stackId: "react-vite-v1",
+      templateId: "react-vite-v1",
+      dependencyLock: { manager: "pnpm", policy: "generate-once", lockfilePath: "pnpm-lock.yaml" },
     });
     expect(persistedInput.workspace).toMatchObject({
       version: 2,
-      entryFileId: "index.html",
-      activeFileId: "index.html",
+      entryFileId: "src/main.tsx",
+      activeFileId: "src/App.tsx",
     });
     expect(result).toEqual({
       codeProjectId: "code_1",
       buildProjectId: "build_1",
       sourceVersion: 1,
-      stackId: "static-html-v1",
-      templateId: "static-html-v1",
-      dependencyLock: null,
+      stackId: "react-vite-v1",
+      templateId: "react-vite-v1",
+      dependencyLock: { manager: "pnpm", policy: "generate-once", lockfilePath: "pnpm-lock.yaml" },
     });
   });
 
@@ -94,7 +94,7 @@ describe("build application service", () => {
     await expect(
       createBuildProject({
         ownerId: "   ",
-        specification: staticSpecification(),
+        specification: reactSpecification(),
         createdAt: 123,
         persistence,
       }),
@@ -114,7 +114,7 @@ describe("build application service", () => {
     await expect(
       createBuildProject({
         ownerId: "user_2",
-        specification: staticSpecification(),
+        specification: reactSpecification(),
         createdAt: 123,
         persistence,
       }),
