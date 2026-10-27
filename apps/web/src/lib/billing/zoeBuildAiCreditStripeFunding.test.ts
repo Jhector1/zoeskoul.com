@@ -185,6 +185,22 @@ describe("E16C5A sandbox-only Stripe credit fulfillment", () => {
       sourceKey:"stripe:zoebuild:pi:pi_12345",
     }));
   });
+  it("recognizes a duplicate successful payment without creating a second grant", async () => {
+    const x=setup();
+    vi.mocked(x.deps.grantPurchasedCredits).mockResolvedValue({created:false});
+    await expect(reconcileZoeBuildAiCreditCheckout(x.input))
+      .resolves.toEqual({kind:"funded",created:false});
+    expect(x.grantPurchasedCredits).toHaveBeenCalledTimes(1);
+    expect(x.grantPurchasedCredits).toHaveBeenCalledWith({
+      userId:"server-owner",sourceKey:"stripe:zoebuild:pi:pi_12345",units:"1200000",
+    });
+  });
+  it("refuses refunded payment evidence before invoking the grant writer", async () => {
+    const x=setup({payment:{latestCharge:{...payment.latestCharge,amount_refunded:1}}});
+    await expect(reconcileZoeBuildAiCreditCheckout(x.input))
+      .rejects.toThrow("AI_CREDIT_PAYMENT_NOT_CLEAR");
+    expect(x.grantPurchasedCredits).not.toHaveBeenCalled();
+  });
   it("propagates ledger failure for webhook retries instead of hiding a missed grant", async () => {
     const x=setup();
     vi.mocked(x.deps.grantPurchasedCredits).mockRejectedValueOnce(new Error("DB unavailable"));

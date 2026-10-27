@@ -40,22 +40,33 @@ describe("build template registry", () => {
   });
 });
 
-describe("V12K3 React route bootstrap", () => {
-  it("includes a route entry in both React templates without adding dependencies", () => {
+describe("V12K11P modern React/Vite starter", () => {
+  it("uses React Router, not hand-written history listeners, in both templates", () => {
     for (const templateId of ["react-vite-v1", "commerce-react-vite-v1"]) {
       const template = requireBuildTemplate(templateId);
-      const main = template.files.find(file => file.path === "src/main.tsx")?.content ?? "";
-      const router = template.files.find(file => file.path === "src/ZoePages.tsx")?.content ?? "";
-      expect(main).toContain('import ZoePages from "./ZoePages"');
-      expect(main).toContain("<ZoePages />");
-      expect(router).toContain("// @zoebuild-pages-v1");
-      expect(router).toContain('window.addEventListener("popstate"');
-      expect(router).toContain('document.addEventListener("click",onInternalLink,true)');
-      expect(router).toContain('useLayoutEffect(()=>{');
-      expect(router).toContain('link.setAttribute("href",routed)');
-      expect(router).toContain('new MutationObserver(repairLinks)');
-      expect(router).not.toContain('aria-label="Pages"');
+      const byPath = new Map(template.files.map(file => [file.path, file.content]));
+      const pkg = JSON.parse(byPath.get("package.json") ?? "{}");
+      expect(pkg.dependencies["react-router"]).toBe("7.18.4");
+      expect(byPath.has("src/ZoePages.tsx")).toBe(false);
+      expect(byPath.get("src/main.tsx")).toContain("<BrowserRouter basename={getRouterBasename()}>");
+      expect(byPath.get("src/routes/AppRoutes.tsx")).toContain("// @zoebuild-react-router-v1");
+      expect(byPath.get("src/lib/routerBasename.ts")).toContain("/sites/");
+      expect(byPath.get("src/pages/NotFound.tsx")).toContain('<Link to="/">');
       expect(template.dependencyLock?.policy).toBe("generate-once");
     }
+  });
+  it("gives normal websites real shared layout, typed content and custom-hook folders", () => {
+    const paths = new Set(requireBuildTemplate("react-vite-v1").files.map(file => file.path));
+    for (const path of ["src/layouts/SiteLayout.tsx", "src/components/SiteHeader.tsx",
+      "src/components/SiteFooter.tsx", "src/hooks/useDocumentTitle.ts", "src/data/site.ts", "src/pages/about.tsx"]) {
+      expect(paths.has(path)).toBe(true);
+    }
+    const byPath = new Map(requireBuildTemplate("react-vite-v1").files.map(file => [file.path, file.content]));
+    expect(byPath.get("src/components/SiteHeader.tsx")).toContain("NavLink");
+    expect(byPath.get("src/layouts/SiteLayout.tsx")).toContain("<Outlet />");
+  });
+  it("keeps commerce provider ownership in its existing App without double page chrome", () => {
+    const routes = requireBuildTemplate("commerce-react-vite-v1").files.find(f => f.path === "src/routes/AppRoutes.tsx")?.content ?? "";
+    expect(routes).not.toContain("SiteLayout");
   });
 });

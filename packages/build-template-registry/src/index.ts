@@ -111,7 +111,8 @@ const REACT_PACKAGE_JSON = `{
   },
   "dependencies": {
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-router": "7.18.4"
   },
   "devDependencies": {
     "@types/react": "19.2.14",
@@ -139,116 +140,179 @@ const REACT_INDEX_HTML = String.raw`<!doctype html>
 
 const REACT_MAIN = String.raw`import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import ZoePages from "./ZoePages";
+import { BrowserRouter } from "react-router";
+import { AppRoutes } from "./routes/AppRoutes";
+import { getRouterBasename } from "./lib/routerBasename";
 import "./styles.css";
 
 const root = document.getElementById("root");
-
-if (!root) {
-  throw new Error("Missing #root element");
-}
+if (!root) throw new Error("Missing #root element");
 
 createRoot(root).render(
   <StrictMode>
-    <ZoePages />
+    <BrowserRouter basename={getRouterBasename()}>
+      <AppRoutes />
+    </BrowserRouter>
   </StrictMode>,
 );
 `;
 
-const REACT_PAGES = String.raw`// @zoebuild-pages-v1
-/// <reference types="vite/client" />
-import {useEffect,useLayoutEffect,useState,type MouseEvent} from "react";
-import App from "./App";
-
-const pages: {slug:string;label:string;Component:typeof App}[] = [];
-function rootPath():string {
-  const published = /^\/sites\/[^/]+(?=\/|$)/.exec(window.location.pathname)?.[0];
-  return (published ?? import.meta.env.BASE_URL).replace(/\/+$/, "");
-}
-export default function ZoePages(){
-  const [pathname,setPathname]=useState(()=>window.location.pathname);
-  useEffect(()=>{
-    const listener=()=>setPathname(window.location.pathname);
-    window.addEventListener("popstate",listener);
-    return ()=>window.removeEventListener("popstate",listener);
-  },[]);
-  // Relativize route URLs before paint: navigation must work even for middle-click,
-  // new-tab, reload, and generated anchors that are inserted after hydration.
-  const routeTarget=(href:string):string|null=>{
-    if(!href.startsWith("/")||href.startsWith("//"))return null;
-    const url=new URL(href,window.location.href);
-    if(url.origin!==window.location.origin)return null;
-    const root=rootPath();
-    const relative=url.pathname===root?"":url.pathname.startsWith(root+"/")
-      ?url.pathname.slice(root.length+1):url.pathname.slice(1);
-    const slug=relative.replace(/\/+$/,"");
-    if(slug!==""&&!pages.some(page=>page.slug===slug))return null;
-    return root+"/"+slug+url.search+url.hash;
-  };
-  useLayoutEffect(()=>{
-    const repairLinks=()=>{
-      for(const link of document.querySelectorAll<HTMLAnchorElement>("a[href]")){
-        if(link.hasAttribute("download"))continue;
-        const original=link.getAttribute("href");
-        if(!original)continue;
-        const routed=routeTarget(original);
-        if(routed && original!==routed)link.setAttribute("href",routed);
-      }
-    };
-    repairLinks();
-    const observer=new MutationObserver(repairLinks);
-    observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["href"]});
-    return ()=>observer.disconnect();
-  },[]);
-  useEffect(()=>{
-    const onInternalLink=(event:globalThis.MouseEvent)=>{
-      if(event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
-      const target=event.target;
-      if(!(target instanceof Element))return;
-      const link=target.closest("a[href]");
-      if(!link||link.hasAttribute("download")||
-          (link.getAttribute("target")&&link.getAttribute("target")!=="_self"))return;
-      const original=link.getAttribute("href");
-      if(!original)return;
-      const next=routeTarget(original);
-      if(!next)return;
-      event.preventDefault();
-      if(window.location.pathname+window.location.search+window.location.hash!==next){
-        window.history.pushState({},"",next);
-        setPathname(window.location.pathname);
-      }
-    };
-    document.addEventListener("click",onInternalLink,true);
-    return ()=>document.removeEventListener("click",onInternalLink,true);
-  },[]);
-  const base=rootPath();
-  const relative=pathname.startsWith(base+"/")
-    ? pathname.slice(base.length+1).replace(/\/+$/,"")
-    : pathname === base ? "" : null;
-  const current=pages.find(item=>item.slug===relative);
-  const destination=(slug:string)=>base+"/"+(slug||"");
-  const visit=(event:MouseEvent<HTMLAnchorElement>,slug:string)=>{
-    if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
-    event.preventDefault();
-    const next=destination(slug);
-    if(window.location.pathname!==next){window.history.pushState({},"",next);setPathname(next);}
-  };
-  return <>
-    {relative===""?<App/>:current?<current.Component/>:<main><h1>Page not found</h1><a href={destination("")}>Home</a></main>}
-  </>;
+// One SPA router, used by both the preview gateway and published project URLs.
+const REACT_ROUTER_BASENAME = String.raw`/**
+ * In Preview, the navigation bridge restores a capability-scoped URL before
+ * the app mounts. Published sites use /sites/:projectId; local Vite uses /.
+ * This function does not grant access or rewrite arbitrary URLs.
+ */
+export function getRouterBasename(pathname = window.location.pathname): string {
+  const preview = /^(\/api\/build\/projects\/[^/]+\/preview\/preview_[a-f\d-]+\/content\/[A-Za-z0-9_-]{32})(?:\/|$)/.exec(pathname);
+  if (preview) return preview[1]!;
+  const published = /^(\/sites\/[^/]+)(?:\/|$)/.exec(pathname);
+  return published?.[1] ?? "/";
 }
 `;
 
-const REACT_APP = String.raw`export default function App() {
+const REACT_SITE_DATA = String.raw`export const site = {
+  name: "Zoé Build",
+  tagline: "Build something worth sharing.",
+  description: "A modern React + Vite starter with room for your ideas.",
+  navigation: [
+    { to: "/", label: "Home", end: true },
+    { to: "/about", label: "About", end: true },
+  ],
+} as const;
+`;
+
+const REACT_SITE_HEADER = String.raw`import { Link, NavLink } from "react-router";
+import { site } from "../data/site";
+
+export function SiteHeader() {
   return (
-    <main className="page-shell">
+    <header className="site-header">
+      <Link className="site-brand" to="/">{site.name}</Link>
+      <nav className="site-nav" aria-label="Main navigation">
+        {site.navigation.map((item) => (
+          <NavLink key={item.to} to={item.to} end={item.end}
+            className={({ isActive }) => isActive ? "site-link active" : "site-link"}>
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
+    </header>
+  );
+}
+`;
+
+const REACT_SITE_FOOTER = String.raw`import { Link } from "react-router";
+import { site } from "../data/site";
+
+export function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <span>© {new Date().getFullYear()} {site.name}</span>
+      <Link to="/">Home</Link>
+    </footer>
+  );
+}
+`;
+
+const REACT_TITLE_HOOK = String.raw`import { useEffect } from "react";
+import { site } from "../data/site";
+
+/** Keep reusable custom hooks here; built-in React hooks stay in components. */
+export function useDocumentTitle(title?: string) {
+  useEffect(() => {
+    document.title = title ? title + " | " + site.name : site.name;
+  }, [title]);
+}
+`;
+
+const REACT_SITE_LAYOUT = String.raw`import { Outlet, useLocation } from "react-router";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+
+export default function SiteLayout() {
+  const { pathname } = useLocation();
+  useDocumentTitle(pathname === "/" ? undefined :
+    pathname === "/about" ? "About" : undefined);
+  return (
+    <div className="site-shell">
+      <SiteHeader />
+      <main id="content"><Outlet /></main>
+      <SiteFooter />
+    </div>
+  );
+}
+`;
+
+// Stable edit point for the page generator and Zoé's project-wide refactors.
+const REACT_ROUTES = String.raw`// @zoebuild-react-router-v1
+import { Route, Routes } from "react-router";
+import App from "../App";
+import About from "../pages/about";
+import NotFound from "../pages/NotFound";
+import SiteLayout from "../layouts/SiteLayout";
+
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route element={<SiteLayout />}>
+        <Route index element={<App />} />
+        <Route path="about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  );
+}
+`;
+
+const REACT_COMMERCE_ROUTES = String.raw`// @zoebuild-react-router-v1
+import { Route, Routes } from "react-router";
+import App from "../App";
+import NotFound from "../pages/NotFound";
+
+// Provider-neutral commerce App owns the storefront shell and bindings.
+export function AppRoutes() {
+  return <Routes>
+    <Route index element={<App />} />
+    <Route path="*" element={<NotFound />} />
+  </Routes>;
+}
+`;
+
+const REACT_ABOUT = String.raw`import { site } from "../data/site";
+
+export default function About() {
+  return <section className="page-shell">
+    <p className="eyebrow">About</p>
+    <h1>A good foundation for what comes next.</h1>
+    <p>{site.description}</p>
+  </section>;
+}
+`;
+
+const REACT_NOT_FOUND = String.raw`import { Link } from "react-router";
+
+export default function NotFound() {
+  return <section className="page-shell">
+    <h1>Page not found</h1>
+    <p>The page you requested is not available.</p>
+    <Link to="/">Return home</Link>
+  </section>;
+}
+`;
+
+const REACT_APP = String.raw`import { Link } from "react-router";
+import { site } from "./data/site";
+
+export default function App() {
+  return (
+    <section className="page-shell" id="top">
       <p className="eyebrow">Built with Zoé</p>
-      <h1>Your app is ready to customize.</h1>
-      <p>
-        This is the controlled React + Vite starter. Ask Zoé to build on top
-        of it or edit the frontend directly.
-      </p>
-    </main>
+      <h1>{site.tagline}</h1>
+      <p>{site.description}</p>
+      <Link className="button-link" to="/about">Explore the starter</Link>
+    </section>
   );
 }
 `;
@@ -284,6 +348,17 @@ h1 {
   line-height: 0.98;
   margin: 16px 0 24px;
 }
+
+.site-shell { min-height: 100vh; display: flex; flex-direction: column; }
+.site-shell main { flex: 1; }
+.site-header, .site-footer { width: min(1160px, calc(100% - 32px)); margin-inline: auto; padding-block: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.site-header { border-bottom: 1px solid #dce2ea; }
+.site-footer { border-top: 1px solid #dce2ea; font-size: 0.85rem; }
+.site-brand { font-weight: 800; }
+.site-nav { display: flex; gap: 20px; }
+.site-link.active { text-decoration: underline; text-underline-offset: 5px; }
+a { color: inherit; }
+.button-link { display: inline-block; margin-top: 20px; padding: 12px 20px; border: 1px solid #111827; border-radius: 999px; text-decoration: none; }
 `;
 
 const REACT_TSCONFIG = `{
@@ -343,7 +418,15 @@ export const REACT_VITE_TEMPLATE_V1 = {
     { path: "package.json", content: REACT_PACKAGE_JSON },
     { path: "index.html", content: REACT_INDEX_HTML },
     { path: "src/main.tsx", content: REACT_MAIN },
-    { path: "src/ZoePages.tsx", content: REACT_PAGES },
+    { path: "src/lib/routerBasename.ts", content: REACT_ROUTER_BASENAME },
+    { path: "src/routes/AppRoutes.tsx", content: REACT_ROUTES },
+    { path: "src/data/site.ts", content: REACT_SITE_DATA },
+    { path: "src/hooks/useDocumentTitle.ts", content: REACT_TITLE_HOOK },
+    { path: "src/layouts/SiteLayout.tsx", content: REACT_SITE_LAYOUT },
+    { path: "src/components/SiteHeader.tsx", content: REACT_SITE_HEADER },
+    { path: "src/components/SiteFooter.tsx", content: REACT_SITE_FOOTER },
+    { path: "src/pages/about.tsx", content: REACT_ABOUT },
+    { path: "src/pages/NotFound.tsx", content: REACT_NOT_FOUND },
     { path: "src/App.tsx", content: REACT_APP },
     { path: "src/styles.css", content: REACT_CSS },
     { path: "tsconfig.json", content: REACT_TSCONFIG },
@@ -515,7 +598,9 @@ export const COMMERCE_REACT_VITE_TEMPLATE_V1 = {
     { path: "package.json", content: REACT_PACKAGE_JSON },
     { path: "index.html", content: REACT_INDEX_HTML },
     { path: "src/main.tsx", content: REACT_MAIN },
-    { path: "src/ZoePages.tsx", content: REACT_PAGES },
+    { path: "src/lib/routerBasename.ts", content: REACT_ROUTER_BASENAME },
+    { path: "src/routes/AppRoutes.tsx", content: REACT_COMMERCE_ROUTES },
+    { path: "src/pages/NotFound.tsx", content: REACT_NOT_FOUND },
     { path: "src/App.tsx", content: COMMERCE_REACT_APP },
     { path: "src/styles.css", content: COMMERCE_REACT_CSS },
     { path: "src/design/theme.css", content: commerceStaticFile("src/design/theme.css") },

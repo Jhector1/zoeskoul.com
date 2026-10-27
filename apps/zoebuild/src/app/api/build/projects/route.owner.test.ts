@@ -45,7 +45,10 @@ describe("ZoeBuild create-project command boundary", () => {
     expect(source).toContain("revokedAt: null");
     expect(source).toContain("startsAt: true");
     expect(source).toContain("endsAt: true");
-    expect(source).toContain('entitlements.push("build_ai_generate")');
+    expect(source).toContain("FeatureKey.build_ai_edit");
+    expect(source).toContain("for (const feature of eligibleFeatures)");
+    expect(source).toContain("entitlements.push(feature)");
+    expect(source).toContain("isWithinGrantWindow(now, grant.startsAt, grant.endsAt)");
     expect(source).not.toContain("stripe");
     expect(source).not.toContain("ZOEBUILD_DEV");
   });

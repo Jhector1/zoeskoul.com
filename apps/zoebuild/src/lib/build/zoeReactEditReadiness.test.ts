@@ -35,7 +35,7 @@ describe("Zoé React edit readiness is not a fabricated build",()=>{
     const plan=planZoeReactPageEdit('/approach',["src/App.tsx","src/styles.css"],["src/big.css"]);
     expect(plan.requiredPageFile).toBe("src/pages/approach.tsx");
     expect(plan.optionalHomepageFile).toBe("src/App.tsx");
-    expect(plan.serverOwnedFiles).toContain("src/ZoePages.tsx");
+    expect(plan.serverOwnedFiles).toContain("src/routes/AppRoutes.tsx");
     expect(plan.missingDesignReferences).toContain("src/big.css");
     expect(()=>planZoeReactPageEdit('https://attacker.test/',[],[])).toThrow();
   });
@@ -65,19 +65,40 @@ describe("Zoé React edit readiness is not a fabricated build",()=>{
       'import React from "react"; export default function P(){return null}',true)],requestedPage:"src/pages/approach.tsx",sourceVersion:2});
     expect(valid.checkedLocalImports).toBe(0);
   });
-  it("does not expand the edit allowlist or claim source validity is Vite validation",()=>{
+  it("checks readiness before proposing, and compiles exactly once at Apply before saving",()=>{
     const route=readFileSync(new URL("../../app/api/build/projects/[buildProjectId]/assistant/edit/route.ts",import.meta.url),"utf8");
-    expect(route).toContain('const edits = validateZoeEdits(project.workspace, reactProposed ?? proposed)');
-    expect(route).toContain('verifyZoeReactEditSources({');
-    expect(route.indexOf('validateZoeEdits(project.workspace, reactProposed ?? proposed)'))
-      .toBeLessThan(route.indexOf('verifyZoeReactEditSources({'));
-    expect(route).toContain('sourceVersion: project.sourceVersion');
-    expect(route).toContain('verifyZoeReactCandidateAtRunner({');
-    expect(route).toContain('Isolated Vite build passed; browser rendering not verified.');
-    expect(route).toContain('Isolated build failed; browser rendering not verified.');
-    expect(route).toContain('isolated build not verified. Browser rendering not verified.');
-    expect(route).toContain('...(buildVerification ? {buildVerification} : {})');
-    expect(route).toContain('requireZoeAiBillingOperationId');
-    expect(route).toContain('applyZoeEditsToWorkspace(project.workspace, edits)');
+    const postStart=route.indexOf('export async function POST(');
+    const patchStart=route.indexOf('export async function PATCH(');
+    expect(postStart).toBeGreaterThan(-1);
+    expect(patchStart).toBeGreaterThan(postStart);
+    const propose=route.slice(postStart,patchStart);
+    const apply=route.slice(patchStart);
+
+    // Proposal is validated in memory, with no runner invocation or source save.
+    expect(propose).toContain('const edits = validateZoeEdits(project.workspace, reactProposed ?? proposed)');
+    expect(propose).toContain('verifyZoeReactEditSources({');
+    expect(propose.indexOf('validateZoeEdits(project.workspace, reactProposed ?? proposed)'))
+      .toBeLessThan(propose.indexOf('verifyZoeReactEditSources({'));
+    expect(propose).toContain('sourceVersion: project.sourceVersion');
+    expect(propose).toContain('applyZoeEditsToWorkspace(project.workspace, edits)');
+    expect(propose).toContain('previewZoeEdits(');
+    expect(propose).toContain('Isolated build will run before saving; browser rendering not verified.');
+    expect(propose).not.toContain('await verifyZoeReactCandidateAtRunner(');
+    expect(propose).not.toContain('saveBuildProjectSourceCommand({');
+    expect(propose).toContain('requireZoeAiBillingOperationId');
+
+    // Apply is an authorized, versioned, fail-closed mutation, without another AI call.
+    expect(apply).toContain('if (project.sourceVersion !== body.baseVersion)');
+    expect(apply).toContain('const validatedEdits = validateZoeEdits(project.workspace, body.edits)');
+    expect(apply).toContain('const workspace = applyZoeEditsToWorkspace(project.workspace, validatedEdits)');
+    expect(apply.match(/await verifyZoeReactCandidateAtRunner\(\{/g)).toHaveLength(1);
+    expect(apply).toContain('if (verification.state !== "passed") return result(');
+    expect(apply).toContain('No source was saved.');
+    expect(apply).toContain('const saved = await saveBuildProjectSourceCommand({');
+    expect(apply.indexOf('await verifyZoeReactCandidateAtRunner({'))
+      .toBeLessThan(apply.indexOf('if (verification.state !== "passed") return result('));
+    expect(apply.indexOf('if (verification.state !== "passed") return result('))
+      .toBeLessThan(apply.indexOf('const saved = await saveBuildProjectSourceCommand({'));
+    expect(apply).not.toContain('generateJsonText(');
   });
 });

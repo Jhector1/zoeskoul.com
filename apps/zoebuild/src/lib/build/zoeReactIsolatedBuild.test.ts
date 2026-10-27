@@ -82,7 +82,7 @@ describe("V12K5C isolated candidate verification",()=>{
   it("does not execute when capacity is reached",async()=>{
     const deps=dependencies({allowed:false});
     const evidence=await verifyZoeReactCandidateAtRunner({...input(),dependencies:deps});
-    expect(evidence).toMatchObject({state:"not-run",reason:"capacity"});
+    expect(evidence).toMatchObject({state:"not-run",reason:"capacity",capacitySource:"local-hourly-limit"});
     expect(deps.actorKey).not.toHaveBeenCalled();
     expect(deps.build).not.toHaveBeenCalled();
   });
@@ -100,7 +100,7 @@ describe("V12K5C isolated candidate verification",()=>{
     const deps=dependencies();
     await expect(verifyZoeReactCandidateAtRunner({
       ...input(),edits:[],sourceKind:"candidate",dependencies:deps,
-    })).rejects.toThrow("Expected one to five approved file changes.");
+    })).rejects.toThrow("Expected at least one approved file change.");
     expect(deps.build).not.toHaveBeenCalled();
   });
   it("rejects edits smuggled into saved-build mode before calling the runner", async()=>{
@@ -130,8 +130,16 @@ describe("V12K5C isolated candidate verification",()=>{
       [404,"runner-not-found"],[429,"capacity"],[504,"runner-timeout"],[502,"runner-service-error"]] as const) {
       const evidence=await verifyZoeReactCandidateAtRunner({...input(),dependencies:dependencies({failure:new RunnerHttpError(status,"private-token-secret")})});
       expect(evidence.reason).toBe(reason);
+      if (status === 429) expect(evidence.capacitySource).toBe("runner-busy");
+      else expect(evidence.capacitySource).toBeNull();
       expect(JSON.stringify(evidence)).not.toContain("private-token-secret");
     }
+  });
+  it("distinguishes a runner 503 from local rate-limit without exposing details", async()=>{
+    const {RunnerHttpError}=await import("@zoeskoul/platform-server/server/runnerClient");
+    const result=await verifyZoeReactCandidateAtRunner({...input(),dependencies:dependencies({failure:new RunnerHttpError(503,"secret private endpoint")})});
+    expect(result).toMatchObject({state:"not-run",reason:"capacity",capacitySource:"runner-unavailable"});
+    expect(JSON.stringify(result)).not.toContain("secret private endpoint");
   });
   it("does not disclose transport exceptions; diagnoses trusted configuration and timeouts",async()=>{
     const unavailable=await verifyZoeReactCandidateAtRunner({...input(),dependencies:dependencies({failure:new Error("private runner URL")})});

@@ -106,7 +106,32 @@ export async function POST(
   try {
     const actorKey = await requireRunnerActorKey(userId);
 
+    const body: unknown = await req.json().catch(() => ({}));
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return json(requestId, { ok: false, code: "BUILD_PREPARATION_INVALID", message: "Invalid dependency request." }, 400);
+    }
+    const options = body as Record<string, unknown>;
+    const reconcileExisting = options.reconcileExisting === true;
+    if (options.reconcileExisting !== undefined && typeof options.reconcileExisting !== "boolean") {
+      return json(requestId, { ok: false, code: "BUILD_PREPARATION_INVALID", message: "Invalid dependency action." }, 400);
+    }
+    const expectedSourceVersion = options.baseVersion;
+    const desired = options.desiredDependencies;
+    if (desired !== undefined && (!desired || typeof desired !== "object" || Array.isArray(desired))) {
+      return json(requestId, { ok: false, code: "BUILD_PREPARATION_INVALID", message: "Invalid dependency selection." }, 400);
+    }
+    const chosen = desired as Record<string, unknown> | undefined;
+    if (chosen && (!chosen.dependencies || typeof chosen.dependencies !== "object" || Array.isArray(chosen.dependencies) ||
+      !chosen.devDependencies || typeof chosen.devDependencies !== "object" || Array.isArray(chosen.devDependencies))) {
+      return json(requestId, { ok: false, code: "BUILD_PREPARATION_INVALID", message: "Expected complete pinned dependency groups." }, 400);
+    }
     const result = await bootstrapOwnedBuildProjectDependencyLock({
+      reconcileExisting,
+      expectedSourceVersion: typeof expectedSourceVersion === "number" ? expectedSourceVersion : undefined,
+      desiredDependencies: chosen ? {
+        dependencies: chosen.dependencies as Record<string, string>,
+        devDependencies: chosen.devDependencies as Record<string, string>,
+      } : undefined,
       access,
       buildProjectId,
       actorKey,

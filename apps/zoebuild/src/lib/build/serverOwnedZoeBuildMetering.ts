@@ -93,10 +93,20 @@ export function createRequiredZoeBuildAssistantTransport(input: Readonly<{
   userId: string;
   operationId: string;
   purpose: "intent" | "edit" | "answer";
+  /** Stable ordinal of a tool-driven model request within one logical edit. */
+  stepIndex?: number;
 }>): AiJsonTransport {
   identity(input.userId, input.operationId);
   const candidate = candidateFor(input.transport);
-  const idempotencyKey = `${input.operationId}:${input.purpose}`;
+  if (input.stepIndex !== undefined &&
+      (!Number.isSafeInteger(input.stepIndex) || input.stepIndex < 0 || input.stepIndex >= 12 ||
+       input.purpose !== "edit")) {
+    throw new ZoeBuildRequiredMeteringError("AI_METERING_ROUTE_STEP_INVALID");
+  }
+  // The original single-call identity is preserved for intent, answer and
+  // page creation. Each agent step has its own durable retry-stable ledger key.
+  const idempotencyKey = `${input.operationId}:${input.purpose}` +
+    (input.stepIndex === undefined ? "" : `:step:${input.stepIndex}`);
   return {
     providerId: input.transport.providerId,
     model: input.transport.model,

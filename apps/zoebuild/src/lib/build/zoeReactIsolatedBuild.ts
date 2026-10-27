@@ -28,6 +28,8 @@ export type ZoeReactIsolatedBuildVerification = Readonly<{
     | "runner-transport" | "runner-response-mismatch" | "runner-configuration";
   message: string;
   browser: "not-run";
+  /** Sanitized provenance for capacity failures; never a runner URL or exception. */
+  capacitySource: "local-hourly-limit" | "runner-busy" | "runner-unavailable" | null;
 }>;
 
 type Specification = Parameters<typeof createRegisteredProductionBuildJob>[0]["specification"];
@@ -105,16 +107,17 @@ export async function verifyZoeReactCandidateAtRunner(input: Readonly<{
   const response = (state: ZoeReactIsolatedBuildVerification["state"],
     reason: ZoeReactIsolatedBuildVerification["reason"],
     snapshotSha256: string | null = null,
-    artifactSha256: string | null = null): ZoeReactIsolatedBuildVerification => {
+    artifactSha256: string | null = null,
+    capacitySource: ZoeReactIsolatedBuildVerification["capacitySource"] = null): ZoeReactIsolatedBuildVerification => {
       const durationMs = Math.max(0, Date.now() - startedAt);
       // A request identifier, bounded reason code, and duration only. Never log
       // workspace contents, runner stderr, actor key, source text, or response body.
       console.info("[ZoeBuild isolated build verification]", {
-        verificationId, sourceKind, reason, state, sourceVersion, durationMs,
+        verificationId, sourceKind, reason, state, sourceVersion, durationMs, capacitySource,
       });
       return {
         state, reason, sourceVersion, sourceKind, verificationId, durationMs,
-        snapshotSha256, artifactSha256, browser: "not-run",
+        snapshotSha256, artifactSha256, browser: "not-run", capacitySource,
         message: reasonMessages[reason] + ` Reference: ${verificationId}.`,
       };
     };
@@ -135,7 +138,7 @@ export async function verifyZoeReactCandidateAtRunner(input: Readonly<{
     { bucket: "zoebuild-react-edit-build", limit: 8, window: "1 h" },
   ).catch(() => null);
   if (!limited) return response("not-run", "unavailable", snapshotSha256);
-  if (!limited.ok) return response("not-run", "capacity", snapshotSha256);
+  if (!limited.ok) return response("not-run", "capacity", snapshotSha256, null, "local-hourly-limit");
   try {
     const actorKey = await deps.actorKey(input.userId);
     const execution: ProductionBuildExecutionResponseV1 = await deps.build({actorKey, request});
@@ -162,7 +165,8 @@ export async function verifyZoeReactCandidateAtRunner(input: Readonly<{
       if (status === 401 || status === 403) return response("not-run", "runner-unauthorized", snapshotSha256);
       if (status === 404 || status === 405) return response("not-run", "runner-not-found", snapshotSha256);
       if (status === 408 || status === 504) return response("not-run", "runner-timeout", snapshotSha256);
-      if (status === 429 || status === 503) return response("not-run", "capacity", snapshotSha256);
+      if (status === 429) return response("not-run", "capacity", snapshotSha256, null, "runner-busy");
+      if (status === 503) return response("not-run", "capacity", snapshotSha256, null, "runner-unavailable");
       if (status >= 500 && status <= 599) return response("not-run", "runner-service-error", snapshotSha256);
       return response("not-run", "unavailable", snapshotSha256);
     }

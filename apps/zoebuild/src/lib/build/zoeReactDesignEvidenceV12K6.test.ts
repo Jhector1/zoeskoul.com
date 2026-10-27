@@ -42,7 +42,7 @@ describe("V12K6 read-only React sibling design references",()=>{
     const pages=Object.fromEntries(["one","two","three","four","five"].map(v=>
       [`src/pages/${v}.tsx`,`export default function Page(){return <main>${v}</main>}`]));
     const evidence=selectZoeReactDesignEvidence(workspace({"src/App.tsx":"export default function App(){return null}",...pages}),"src/pages/new.tsx");
-    expect(evidence.files.filter(f=>f.path.startsWith("src/pages/")).length).toBe(3);
-    expect(evidence.omittedPaths).toEqual(expect.arrayContaining(["src/pages/three.tsx","src/pages/two.tsx"]));
+    expect(evidence.files.filter(f=>f.path.startsWith("src/pages/")).length).toBe(5);
+    expect(evidence.sourceInventory.map(f=>f.path)).toEqual(expect.arrayContaining(["src/pages/three.tsx","src/pages/two.tsx"]));
   });
 });

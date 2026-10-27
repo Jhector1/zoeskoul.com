@@ -16,6 +16,11 @@ describe("V12J.25 owner-approved target, not live activation",()=>{
   });
   it("rounds the 2x provider cost up, using canonical precision",()=>{
     expect(providerNanoUsdToCreditUnits("10000000",target.conversion)).toBe(2000n);
+    // Previously observed provider receipt: $0.000526 (526000 USD nanos).
+    // At 2x provider cost / $0.01 per displayed credit / 1000 ledger
+    // units per credit: ceil(105.2) = 106, NOT the synthetic 52600 units.
+    expect(providerNanoUsdToCreditUnits("526000",target.conversion)).toBe(106n);
+    expect(providerNanoUsdToCreditUnits("525000",target.conversion)).toBe(105n);
     expect(providerNanoUsdToCreditUnits("1",target.conversion)).toBe(1n);
     expect(providerNanoUsdToCreditUnits("0",target.conversion)).toBe(0n);
   });

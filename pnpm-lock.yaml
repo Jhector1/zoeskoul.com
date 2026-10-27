@@ -920,6 +920,9 @@ importers:
         specifier: workspace:*
         version: link:../workspace-contracts
     devDependencies:
+      '@types/node':
+        specifier: ^25.6.0
+        version: 25.6.0
       '@zoeskoul/build-materializer':
         specifier: workspace:*
         version: link:../build-materializer

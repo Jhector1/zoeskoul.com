@@ -37,6 +37,9 @@ export type OpenAiAiJsonTransportOptions =
 type OpenAiResponsePayload =
   Readonly<{
     id?: unknown;
+    /** Responses API status is authoritative: partial outputs are not valid JSON. */
+    status?: unknown;
+    incomplete_details?: unknown;
     output_text?: unknown;
     output?: readonly Readonly<{
       type?: unknown;
@@ -495,6 +498,16 @@ export function createOpenAiJsonTransport(
         }
         const streamed = streaming ? await consumeOpenAiStream(response, request.onReasoningSummaryDelta) : null;
         const payload = streamed?.payload ?? parsePayload(await response.text());
+        // HTTP 200 does not imply generation completed. In particular,
+        // max_output_tokens includes reasoning tokens, so Structured Outputs
+        // may be cut off mid-object despite a successful HTTP response.
+        // Do not parse, repair, or automatically re-dispatch incomplete output:
+        // this request may already have consumed billable tokens.
+        if (payload.status !== undefined && payload.status !== "completed") {
+          throw new Error(payload.status === "incomplete"
+            ? "AI_JSON_RESPONSE_INCOMPLETE"
+            : "AI_JSON_RESPONSE_NOT_COMPLETED");
+        }
 
         return {
           usage: normalizeAiJsonUsage("openai", payload),

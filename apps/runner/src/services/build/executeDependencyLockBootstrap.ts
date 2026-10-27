@@ -129,6 +129,7 @@ export async function executeDependencyLockBootstrap(
   assertRegisteredDependencyBootstrapFiles({
     stackId: request.stackId,
     templateId: request.templateId,
+    buildProjectId: request.buildProjectId,
     files: request.files,
   });
 

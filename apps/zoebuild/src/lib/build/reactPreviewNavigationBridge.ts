@@ -53,7 +53,15 @@ export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
       bootstrapFailure("document-route-invalid"); return;
     }
     target.searchParams.set("__zb_preview_revision", revisionRequested[0]);
-    history.replaceState(history.state, "", base + target.pathname.slice(1) + target.search + target.hash);
+    // A sandbox can deny history URL rewrites. A thrown SecurityError would
+    // otherwise abort the bridge before it installs the render observer, leaving
+    // the host with a misleading generic "React did not render" timeout.
+    try {
+      history.replaceState(history.state, "", base + target.pathname.slice(1) + target.search + target.hash);
+    } catch (_error) {
+      bootstrapFailure("document-route-restore-failed");
+      return;
+    }
   }
   var routes = [];
   var index = 0;

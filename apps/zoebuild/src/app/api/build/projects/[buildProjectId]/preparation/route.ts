@@ -73,6 +73,7 @@ export async function GET(
     }
 
     const preparation = prepareRegisteredBuildArtifactPlan({
+      buildProjectId: project.buildProjectId,
       specification: project.specification,
       workspace: project.workspace,
       sourceVersion: project.sourceVersion,

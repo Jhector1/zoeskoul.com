@@ -16,6 +16,13 @@ import {
   type BuildTemplateDefinition,
 } from "@zoeskoul/build-template-registry";
 import type { WorkspaceStateV2 } from "@zoeskoul/workspace-contracts";
+import {
+  PROJECT_DEPENDENCY_APPROVAL_PATH,
+  assertNoUntrustedInstallControls,
+  canonicalProjectDependencyManifest,
+  verifyProjectDependencies,
+} from "./projectDependencyApproval";
+export { sealProjectDependencies, canonicalProjectDependencyManifest, PROJECT_DEPENDENCY_APPROVAL_PATH } from "./projectDependencyApproval";
 
 export const BUILD_PREPARATION_VERSION = 1 as const;
 
@@ -56,6 +63,7 @@ export type PrepareBuildArtifactInput = Readonly<{
   specification: ProjectSpecification;
   workspace: WorkspaceStateV2;
   sourceVersion: number;
+  buildProjectId?: string;
 }>;
 
 export type BuildPreparationErrorCode =
@@ -322,25 +330,46 @@ function templateDependencyManifest(
 function assertTrustedDependencyManifest(args: {
   template: BuildTemplateDefinition;
   files: ReadonlyMap<string, string>;
+  buildProjectId?: string;
 }): void {
   const packageJson = args.files.get("package.json");
   if (packageJson == null) {
+    throw new BuildPreparationError("BUILD_DEPENDENCY_MANIFEST_UNSUPPORTED", "Dependency projects require package.json.");
+  }
+
+  try {
+    assertNoUntrustedInstallControls(args.files);
+    canonicalProjectDependencyManifest(packageJson);
+    const approval = args.files.get(PROJECT_DEPENDENCY_APPROVAL_PATH);
+    if (approval !== undefined) {
+      if (!args.buildProjectId) {
+        throw new Error("A sealed project dependency approval requires a project identity.");
+      }
+      verifyProjectDependencies({
+        projectId: args.buildProjectId,
+        packageJson,
+        lockfile: args.files.get("pnpm-lock.yaml"),
+        approval,
+        secret: process.env.ZOEBUILD_DEPENDENCY_APPROVAL_SECRET,
+      });
+      return;
+    }
+  } catch (error) {
     throw new BuildPreparationError(
       "BUILD_DEPENDENCY_MANIFEST_UNSUPPORTED",
-      "ZoeBuild dependency projects require package.json.",
+      error instanceof Error ? error.message : "Project dependency authorization failed.",
     );
   }
 
+  // Transitional bootstrap for fresh registered starter projects only.
+  // Existing saved projects with another manifest must explicitly authorize
+  // their *own* manifest; never compare them to a moving template forever.
   const expected = templateDependencyManifest(args.template);
-  const actual = dependencyManifest(
-    packageJson,
-    "Workspace package.json",
-  );
-
+  const actual = dependencyManifest(packageJson, "Workspace package.json");
   if (stableManifest(actual) !== stableManifest(expected)) {
     throw new BuildPreparationError(
       "BUILD_DEPENDENCY_MANIFEST_UNSUPPORTED",
-      "This source changes the registered dependency manifest. Dependency changes are not enabled yet.",
+      "Project dependencies require owner-approved, versioned resolution.",
     );
   }
 }
@@ -364,13 +393,15 @@ function requireFrozenInstallCommand(
     );
   }
 
-  return [...command];
+  // Third-party lifecycle scripts are not authorized by a dependency approval.
+  return [...command, "--ignore-scripts"];
 }
 
 function dependencyPlan(args: {
   stack: BuildStackDefinition;
   template: BuildTemplateDefinition;
   files: ReadonlyMap<string, string>;
+  buildProjectId?: string;
 }): BuildArtifactPreparationPlan["dependencyLock"] {
   const policy = args.template.dependencyLock;
 
@@ -395,6 +426,7 @@ function dependencyPlan(args: {
   assertTrustedDependencyManifest({
     template: args.template,
     files: args.files,
+    buildProjectId: args.buildProjectId,
   });
 
   const installCommand = requireFrozenInstallCommand(args.stack, policy);
@@ -468,6 +500,7 @@ export function prepareBuildArtifactPlan(
     stack: input.stack,
     template: input.template,
     files,
+    buildProjectId: input.buildProjectId,
   });
   const artifact = requireSafeArtifactDefinition(input.stack.artifact);
 
@@ -521,6 +554,7 @@ export function createRegisteredDependencyLockBootstrapJob(
     specification: input.specification,
     workspace: input.workspace,
     sourceVersion: input.sourceVersion,
+    buildProjectId,
   });
 
   if (
@@ -579,6 +613,7 @@ export function createRegisteredProductionBuildJob(
         input.workspace,
       sourceVersion:
         input.sourceVersion,
+      buildProjectId,
     });
 
   if (
@@ -597,7 +632,7 @@ export function createRegisteredProductionBuildJob(
       .installCommand ||
     plan.dependencyLock
       .installCommand.length !==
-      3 ||
+      4 ||
     plan.dependencyLock
       .installCommand[0] !==
       "pnpm" ||
@@ -607,6 +642,9 @@ export function createRegisteredProductionBuildJob(
     plan.dependencyLock
       .installCommand[2] !==
       "--frozen-lockfile" ||
+    plan.dependencyLock
+      .installCommand[3] !==
+      "--ignore-scripts" ||
     plan.buildCommand.length !==
       2 ||
     plan.buildCommand[0] !==
@@ -673,6 +711,7 @@ export function assertRegisteredProductionBuildFiles(
   input: Readonly<{
     stackId: string;
     templateId: string;
+    buildProjectId?: string;
     files:
       readonly ProductionBuildFile[];
   }>,
@@ -775,6 +814,7 @@ export function assertRegisteredProductionBuildFiles(
   assertTrustedDependencyManifest({
     template,
     files,
+    buildProjectId: input.buildProjectId,
   });
 }
 
@@ -793,6 +833,7 @@ export type DependencyBootstrapFile = Readonly<{
 export function assertRegisteredDependencyBootstrapFiles(input: Readonly<{
   stackId: string;
   templateId: string;
+  buildProjectId?: string;
   files: readonly DependencyBootstrapFile[];
 }>): void {
   const stack = requireBuildStack(input.stackId);
@@ -831,6 +872,7 @@ export function assertRegisteredDependencyBootstrapFiles(input: Readonly<{
   assertTrustedDependencyManifest({
     template,
     files,
+    buildProjectId: input.buildProjectId,
   });
 }
 
@@ -948,6 +990,7 @@ export type RegisteredReactPreviewServerPlan =
         "pnpm",
         "install",
         "--frozen-lockfile",
+        "--ignore-scripts",
       ];
     devCommand:
       readonly string[];
@@ -1032,6 +1075,7 @@ export function resolveRegisteredReactPreviewServerPlan(
       "pnpm",
       "install",
       "--frozen-lockfile",
+      "--ignore-scripts",
     ],
 
     devCommand: [

@@ -109,7 +109,7 @@ describe("ZoeBuild artifact preparation", () => {
             "--ignore-scripts",
           ],
         },
-        installCommand: ["pnpm", "install", "--frozen-lockfile"],
+        installCommand: ["pnpm", "install", "--frozen-lockfile", "--ignore-scripts"],
       },
       buildCommand: ["pnpm", "build"],
       artifact: {

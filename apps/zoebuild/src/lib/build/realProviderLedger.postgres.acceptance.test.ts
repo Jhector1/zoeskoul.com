@@ -43,23 +43,26 @@ describe.runIf(enabled)("V12J.11B real provider -> canonical development ledger 
  let countCalls=0,paidCalls=0;
  let accepted=false;
  let pricing:AiPricingVersion;
+ let acceptedWriterId:"v1"|"v2"|"v3"|undefined;
  beforeAll(async()=>{
   if(process.env.NODE_ENV==="production" || process.env.ZOEBUILD_AI_CREDITS_ENFORCEMENT==="required" ||
     process.env.ZOEBUILD_AI_PROVIDER!=="openai" || process.env.ZOEBUILD_AI_MODEL!==model ||
     process.env.ZOEBUILD_REAL_LEDGER_ACCEPTANCE_MODEL!==model ||
     !process.env.OPENAI_API_KEY?.trim())throw Error("V12J11B_PROVIDER_OR_ENV_NOT_VERIFIED");
-  // The real provider acceptance uses exactly the SAME actively configured V3
-  // result-writer identity as the ZoeBuild application. No ephemeral V1 key,
-  // re-tagged legacy ciphertext, fallback, or plaintext result retention.
-  if(process.env.ZOEBUILD_AI_RESULT_ACTIVE_KEY_ID!=="v3")
-    throw Error("V12J23_ACTIVE_V3_WRITER_REQUIRED");
+  // Use exactly the server-configured active result writer. The operator has
+  // explicitly retired all historical disposable ciphertext before first-v1
+  // setup. Never substitute an ephemeral test key or silently change key tags.
+  const activeId=process.env.ZOEBUILD_AI_RESULT_ACTIVE_KEY_ID;
+  if(activeId!=="v1" && activeId!=="v2" && activeId!=="v3")
+    throw Error("V12K11B_ACTIVE_WRITER_REQUIRED");
+  acceptedWriterId=activeId;
   const keyring=aiCreditResultKeyring({
     v1:process.env.ZOEBUILD_AI_RESULT_KEY_V1,
     v2:process.env.ZOEBUILD_AI_RESULT_KEY_V2,
     v3:process.env.ZOEBUILD_AI_RESULT_KEY_V3,
     activeKeyId:process.env.ZOEBUILD_AI_RESULT_ACTIVE_KEY_ID,
   });
-  if(keyring.activeKeyId!=="v3") throw Error("V12J23_RESULT_WRITER_MISMATCH");
+  if(keyring.activeKeyId!==acceptedWriterId) throw Error("V12K11B_RESULT_WRITER_MISMATCH");
   const review=ZOEBUILD_PUBLISHED_STANDARD_PRICE_REVIEWS.find(r=>r.model===model);
   if(!review || review.processingTier!=="default" || review.region!=="global" ||
     now().getTime()-Date.parse(review.observedAt)>7*24*3600*1000 ||
@@ -98,13 +101,25 @@ describe.runIf(enabled)("V12J.11B real provider -> canonical development ledger 
    await db.$disconnect();}
  },30000);
  it("binds real response usage to one settled credit reservation and replays with zero extra generations",async()=>{
-  if(!accepted||!db||!pricing)throw Error("V12J11B_PREFLIGHT_NOT_COMPLETED");
+  if(!accepted||!db||!pricing||!acceptedWriterId)throw Error("V12J11B_PREFLIGHT_NOT_COMPLETED");
   // Test-only source key and isolated user. This is NOT an actual Stripe payment.
   await db.user.create({data:{id:testUserId}});
-  const {grantAiCreditLot}=await import("@zoeskoul/platform-server/ai-credits/ledger");
-  await grantAiCreditLot({client:db,userId:testUserId,
-   sourceKey:`v12j11b:synthetic-only:${randomUUID()}`,kind:"purchased",
-   origin:"verified-stripe-payment",units:"1000000",expiresAt:null});
+  // Synthetic wallet seed ONLY. Avoid calling grantAiCreditLot with a false
+  // "verified-stripe-payment" assertion: there is no Stripe payment here.
+  // This fixture exercises the canonical reservation/settlement paths without
+  // fabricating a verified-funding event. It must never enter production routes.
+  const syntheticSourceKey=`v12j11b:synthetic-only:${randomUUID()}`;
+  await db.$transaction(async tx=>{
+   await tx.aiCreditWallet.create({data:{userId:testUserId}});
+   const lot=await tx.aiCreditLot.create({data:{
+    userId:testUserId,sourceKey:syntheticSourceKey,kind:"purchased",
+    grantedUnits:1000000n,availableUnits:1000000n,expiresAt:null,
+   }});
+   await tx.aiCreditLedgerEntry.create({data:{
+    userId:testUserId,lotId:lot.id,
+    eventKey:`grant:${syntheticSourceKey}`,kind:"grant",availableDelta:1000000n,
+   }});
+  });
   const ceiling=calculateAiTextTokenCeiling({provider:"openai",model,
    catalog:[pricing],occurredAt:now().toISOString(),
    maxCombinedInputTokens:CAP_INPUT,maxBillableOutputTokens:CAP_OUTPUT});
@@ -136,7 +151,7 @@ describe.runIf(enabled)("V12J.11B real provider -> canonical development ledger 
     encryptionKey:process.env.ZOEBUILD_AI_RESULT_KEY_V1,
     encryptionKeyV2:process.env.ZOEBUILD_AI_RESULT_KEY_V2,
     encryptionKeyV3:process.env.ZOEBUILD_AI_RESULT_KEY_V3,
-    activeKeyId:"v3",
+    activeKeyId:acceptedWriterId,
   });
   const input={transport,request,client:db,userId:testUserId,idempotencyKey,
    pricingCatalog:[pricing],pricingVersionId:pricing.id,conversion,
@@ -162,7 +177,7 @@ describe.runIf(enabled)("V12J.11B real provider -> canonical development ledger 
   const journalRows=await db.$queryRaw<Array<{ciphertext:string;keyId:string}>>`
     SELECT "ciphertext","keyId" FROM "AiCreditResultJournal" WHERE "idempotencyKey"=${idempotencyKey}`;
   expect(journalRows).toHaveLength(1);
-  expect(journalRows[0]!.keyId).toBe("v3");
+  expect(journalRows[0]!.keyId).toBe(acceptedWriterId);
   expect(journalRows[0]!.ciphertext).not.toContain("zoebuild-v12j11b");
   const balanceLedgerBefore=await db.aiCreditLedgerEntry.count({where:{userId:testUserId}});
   const resultAgain=await executeMeteredAiJsonRequest(input);

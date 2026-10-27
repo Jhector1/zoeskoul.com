@@ -95,7 +95,7 @@ describe(
         );
 
         expect(runtime).toContain(
-          '"http://127.0.0.1:5173"',
+          "port:\n          5173,",
         );
       },
     );

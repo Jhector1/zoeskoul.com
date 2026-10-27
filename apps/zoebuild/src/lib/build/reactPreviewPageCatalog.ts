@@ -11,6 +11,22 @@ export function registeredReactPreviewRoutes(entries: readonly WorkspaceSyncEntr
     files.set(entry.path, entry.content);
   }
   const result: RemoteWebPreviewRoute[] = [{path:"/", label:"Home"}];
+  const modern = files.get("src/routes/AppRoutes.tsx");
+  if (modern?.startsWith("// @zoebuild-react-router-v1")) {
+    const imports = new Map<string,string>();
+    for (const match of modern.matchAll(/import\s+([A-Za-z][A-Za-z0-9]*)\s+from\s+["']\.\.\/pages\/([a-z][a-z0-9-]{0,47})["']/g)) {
+      imports.set(match[1]!, match[2]!);
+    }
+    const seen = new Set<string>();
+    for (const match of modern.matchAll(/<Route\s+path=["']([a-z][a-z0-9-]{0,47})["']\s+element=\{<([A-Za-z][A-Za-z0-9]*)\s*\/>\}/g)) {
+      const slug = match[1]!;
+      if (seen.has(slug) || imports.get(match[2]!) !== slug || !files.has(`src/pages/${slug}.tsx`)) continue;
+      seen.add(slug);
+      const label = slug.split("-").map(part => part[0]!.toUpperCase() + part.slice(1)).join(" ");
+      result.push({path:`/${slug}`,label});
+    }
+    return result;
+  }
   const registry = files.get("src/ZoePages.tsx");
   if (!registry || !registry.includes("// @zoebuild-pages-v1")) return result;
   const imported = new Map<string,string>();

@@ -7,7 +7,7 @@ const source = (path: string) => readFileSync(path, "utf8");
 describe("E15A authorized contextual assistant foundation", () => {
   it("uses canonical owner-scoped project access with no writes", () => {
     const route = source(contextRoute);
-    expect(route).toContain("loadCurrentBuildAccessSnapshot(req)");
+    expect(route).toContain("loadCurrentBuildAccessSnapshot(req, {requireAuthority:true})");
     expect(route).toContain("getBuildProjectCommand");
     expect(route).toContain("createPrismaBuildProjectReader");
     expect(route).toContain('"no-store"');

@@ -8,7 +8,7 @@ const ws=(page:string)=>({...base,nodes:[folder("src","src",null),folder("pages"
  file("page","approach.tsx","pages",page)]});
 describe("React route import graph safeguards",()=>{
  it("rejects router pasted into a page through the manual source-save parser",()=>{
-   expect(()=>parseBuildWorkspaceMutation(ws('// @zoebuild-pages-v1\nexport default function Approach(){return null}')))
+   expect(()=>parseBuildWorkspaceMutation(ws('// @zoebuild-react-router-v1\nexport default function Approach(){return null}')))
      .toThrow(BuildWorkspaceMutationError);
  });
  it("rejects self-imports and route registry imports",()=>{

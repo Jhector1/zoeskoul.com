@@ -24,3 +24,18 @@ describe("saved React preview page catalog",()=>{
    .toEqual([{path:"/",label:"Home"}]);
  });
 });
+
+describe("modern React Router preview catalog", () => {
+  it("lists registered pages from AppRoutes rather than a hand-written history shim", () => {
+    const routes = `// @zoebuild-react-router-v1
+import About from "../pages/about";
+import Page0 from "../pages/studio";
+<Route path="about" element={<About />} />
+<Route path="studio" element={<Page0 />} />`;
+    expect(registeredReactPreviewRoutes([
+      file("src/routes/AppRoutes.tsx",routes),
+      file("src/pages/about.tsx","export default function About(){}"),
+      file("src/pages/studio.tsx","export default function Studio(){}"),
+    ])).toEqual([{path:"/",label:"Home"},{path:"/about",label:"About"},{path:"/studio",label:"Studio"}]);
+  });
+});

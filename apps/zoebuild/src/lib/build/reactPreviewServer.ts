@@ -131,6 +131,7 @@ export async function createOwnedReactPreviewBuildRequest(args: Readonly<{
   let previewPlan;
   try {
     previewPlan = prepareRegisteredBuildArtifactPlan({
+      buildProjectId: project.buildProjectId,
       specification: project.specification,
       workspace,
       sourceVersion: project.sourceVersion,

@@ -31,6 +31,7 @@ describe(
             "pnpm",
             "install",
             "--frozen-lockfile",
+            "--ignore-scripts",
           ],
           devCommand: [
             "pnpm",

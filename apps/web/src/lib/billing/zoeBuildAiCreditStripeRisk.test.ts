@@ -124,6 +124,20 @@ describe("E16C5B1 verified Stripe risk quarantine",()=>{
       .resolves.toEqual({kind:"no_current_risk"});
     expect(failed.freezeRisk).not.toHaveBeenCalled();
   });
+  it("uses current cumulative refunds even when a repeated event ID is delivered",async()=>{
+    const first=scenario({type:"charge.refunded",charge:{amountRefunded:300}});
+    const second=scenario({type:"charge.refunded",charge:{amountRefunded:900}});
+    await reconcileZoeBuildStripeRiskEvent({event:first.event,deps:first.deps});
+    await reconcileZoeBuildStripeRiskEvent({event:second.event,deps:second.deps});
+    expect(first.freezeRisk).toHaveBeenCalledWith(expect.objectContaining({
+      sourceKey:"stripe:zoebuild:pi:pi_test",refundedAmountUsdMinor:300,
+      chargedAmountUsdMinor:1200,
+    }));
+    expect(second.freezeRisk).toHaveBeenCalledWith(expect.objectContaining({
+      sourceKey:"stripe:zoebuild:pi:pi_test",refundedAmountUsdMinor:900,
+      chargedAmountUsdMinor:1200,
+    }));
+  });
   it("does not quarantine on forged malformed event identity",async()=>{
     const x=scenario();
     const event={...x.event,id:"forged"} as Stripe.Event;

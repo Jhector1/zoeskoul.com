@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   BuildSourceConflictError,
   type BuildProjectReadPort,
@@ -121,6 +121,8 @@ function executor(): BuildDependencyLockExecutor {
 }
 
 describe("owner-authorized dependency-lock bootstrap orchestration", () => {
+  beforeEach(() => { vi.stubEnv("ZOEBUILD_DEPENDENCY_APPROVAL_SECRET", "local-test-key-for-project-approval-123456789"); });
+  afterEach(() => { vi.unstubAllEnvs(); });
   it("executes the owner source version then persists through the canonical Build writer", async () => {
     const store = reader();
     const run = executor();
@@ -168,6 +170,8 @@ describe("owner-authorized dependency-lock bootstrap orchestration", () => {
       ),
     ).toBe(true);
 
+    expect(savedNodes.some(node => node.name === "zoebuild-dependency-approval.json" &&
+      node.content?.includes('"lockSha256"') === true)).toBe(true);
     expect(result).toMatchObject({
       bootstrappedFromVersion: 4,
       outputPath: "pnpm-lock.yaml",
@@ -177,6 +181,68 @@ describe("owner-authorized dependency-lock bootstrap orchestration", () => {
         workspaceChanged: true,
       },
     });
+  });
+
+  it("reconciles existing saved dependencies and a new package in one versioned write", async () => {
+    const savedProject = {
+      ...project,
+      workspace: {
+        ...workspace,
+        openTabs: ["package.json", "old-lock"],
+        activeFileId: "old-lock",
+        nodes: [
+          ...workspace.nodes,
+          { id: "old-lock", kind: "file", name: "pnpm-lock.yaml", parentId: null,
+            content: "lockfileVersion: '9.0'\nold-lock\n", createdAt: 1, updatedAt: 1 },
+        ],
+      },
+    } as unknown as OwnedBuildProject;
+    const sourceWrites: SourceWriteInput[] = [];
+    const writer: BuildProjectSourceWritePort = {
+      saveOwnedBuildProjectSource: vi.fn(async (input) => {
+        sourceWrites.push(input);
+        return { sourceVersion: 5, changed: true, workspaceChanged: true, updatedAt: "2026-10-14T00:00:01.000Z" };
+      }),
+    };
+    await bootstrapOwnedBuildProjectDependencyLock({
+      access: { userId: "user_1", entitlements: [] },
+      buildProjectId: "build_1",
+      actorKey: "u:actor",
+      reader: reader(savedProject),
+      writer,
+      execute: executor(),
+      nodeId: "new-lock",
+      now: 10,
+      reconcileExisting: true,
+      expectedSourceVersion: 4,
+      desiredDependencies: {
+        dependencies: { react: "19.2.3", "react-dom": "19.2.3", "react-router": "7.18.4" },
+        devDependencies: { "@types/react": "19.2.14", "@types/react-dom": "19.2.3", "@vitejs/plugin-react": "6.0.4", typescript: "6.0.3", vite: "8.1.5" },
+      },
+    });
+    expect(sourceWrites).toHaveLength(1);
+    expect(sourceWrites[0]?.baseVersion).toBe(4);
+    const nodes = sourceWrites[0]?.workspace.nodes ?? [];
+    expect(nodes.filter(n => n.kind === "file" && n.name === "pnpm-lock.yaml")).toHaveLength(1);
+    expect(sourceWrites[0]?.workspace.activeFileId).toBe("new-lock");
+    expect(sourceWrites[0]?.workspace.openTabs).toContain("new-lock");
+    expect(sourceWrites[0]?.workspace.openTabs).not.toContain("old-lock");
+    const pkg = nodes.find(n => n.kind === "file" && n.name === "package.json");
+    expect(pkg?.kind === "file" && pkg.content.includes("react-router")).toBe(true);
+    const approval = nodes.find(n => n.kind === "file" && n.name === "zoebuild-dependency-approval.json");
+    expect(approval?.kind === "file" && approval.content.includes('"lockSha256"')).toBe(true);
+  });
+
+  it("rejects stale owner approval before contacting the runner", async () => {
+    const run = executor();
+    const writer: BuildProjectSourceWritePort = { saveOwnedBuildProjectSource: vi.fn() };
+    await expect(bootstrapOwnedBuildProjectDependencyLock({
+      access: { userId: "user_1", entitlements: [] },
+      buildProjectId: "build_1", actorKey: "u:actor",
+      reader: reader(), writer, execute: run, nodeId: "lock_node", now: 10,
+      reconcileExisting: true, expectedSourceVersion: 3,
+    })).rejects.toThrow(/current saved source version/);
+    expect(run).not.toHaveBeenCalled();
   });
 
   it("never executes the runner for a missing or foreign project", async () => {

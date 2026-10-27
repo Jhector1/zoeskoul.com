@@ -99,7 +99,7 @@ describe("Zoé React design-grounded page context", () => {
   });
   it("the authorized edit route passes real design references without expanding file permissions", () => {
     const source = readFileSync(new URL("../../app/api/build/projects/[buildProjectId]/assistant/edit/route.ts", import.meta.url), "utf8");
-    expect(source).toContain("selectZoeReactDesignEvidence(project.workspace, targetPageSource!)");
+    expect(source).toContain("selectZoeReactDesignEvidence(project.workspace, targetPageSource ?? project.activePath ?? \"src/App.tsx\")");
     expect(source).toContain("files: staticPageContext, editPlan: reactEditPlan, designEvidence: reactDesignEvidence");
     expect(source).toContain("const reactEditPlan = reactPage ? planZoeReactPageEdit(");
     expect(source).toContain("The server wires route dispatch and existing source entry, NOT the visible header link");

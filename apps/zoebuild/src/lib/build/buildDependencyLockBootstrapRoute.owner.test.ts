@@ -45,10 +45,22 @@ describe("owner-authorized dependency-lock bootstrap HTTP boundary", () => {
       "body.image",
       "body.env",
       "body.network",
-      "readjsonsafe",
-      "req.json",
     ]) {
       expect(source).not.toContain(forbidden);
+    }
+
+    // The endpoint may accept a reviewed dependency manifest, but execution
+    // remains server-selected. Browser data cannot provide runtime commands.
+    for (const expected of [
+      "req.json()",
+      "options.reconcileexisting",
+      "options.baseversion",
+      "options.desireddependencies",
+      "bootstrapownedbuildprojectdependencylock({",
+      "execute: executetrusteddependencylockbootstrapatrunner",
+      "actorkey = await requirerunneractorkey(userid)",
+    ]) {
+      expect(source).toContain(expected);
     }
   });
 });

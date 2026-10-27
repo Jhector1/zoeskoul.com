@@ -1,5 +1,6 @@
 import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
 import { parseReactPreviewDocumentRequest } from "@/lib/build/reactPreviewDocumentGateway";
+import { previewDocumentProxyTarget, resolvePreviewDocumentProxyPath } from "@/lib/build/reactPreviewDocumentProxyTarget";
 import { injectReactPreviewNavigationBridge, PREVIEW_NAV_SCRIPT } from "@/lib/build/reactPreviewNavigationBridge";
 import {
   proxyFetchTrustedReactPreviewAtRunner,
@@ -85,19 +86,33 @@ async function proxy(
       `/preview/${encodeURIComponent(previewId)}` +
       `/content/${encodeURIComponent(capability)}/`;
 
-    const normalizedPathname = normalizeReactPreviewProxyPath({
-      pathname: url.pathname,
+    // The document gateway is a synthetic browser-only URL, not a runner
+    // source path. Normalize the authenticated capability ROOT, which the
+    // runner verified on preview/start, before dispatching the document.
+    // Every other path continues through the original strict normalizer.
+    const documentTarget = previewDocumentProxyTarget(url.pathname, basePath);
+    // The exact synthetic document is already constrained to this single
+    // capability path. Do not feed its runner-verified root through the
+    // asset-path normalizer: that normalizer may reject an empty asset suffix.
+    // Ordinary assets and every synthetic lookalike still use strict checks.
+    const normalizedPathname = resolvePreviewDocumentProxyPath({
+      target: documentTarget,
       basePath,
+      normalize: normalizeReactPreviewProxyPath,
     });
 
     if (!normalizedPathname) {
-      return errorResponse("Invalid preview path.", 404);
+      const response = errorResponse("Invalid preview path.", 404);
+      if (documentTarget.isDocumentGateway) {
+        console.warn("[ZoeBuild preview document]", {failure: "proxy-path", status: 404});
+        response.headers.set("X-ZoeBuild-Preview-Failure", "proxy-path");
+      }
+      return response;
     }
 
-    const relativePath =
-      normalizedPathname.slice(
-        basePath.length,
-      );
+    const relativePath = documentTarget.isDocumentGateway
+      ? "__zoebuild/document"
+      : normalizedPathname.slice(basePath.length);
 
     // The sandbox navigation protocol is an external classic script so the
     // site's CSP need not allow inline JavaScript. This is a capability-scoped
@@ -246,7 +261,7 @@ async function proxy(
     // capability root or Vite /index.html. The runner has already verified its
     // basePath GET as a valid HTML document during startup. Fetch that same
     // document and let the sandboxed bridge apply the requested React route.
-    const documentGateway = relativePath === "__zoebuild/document";
+    const documentGateway = documentTarget.isDocumentGateway;
     if (documentGateway && method !== "GET") return errorResponse("Method not allowed.", 405);
     if (documentGateway && parseReactPreviewDocumentRequest(url) === null)
       return errorResponse("Invalid preview document route.", 400);
@@ -258,6 +273,12 @@ async function proxy(
     });
 
     const headers = new Headers();
+    if (documentGateway && result.status === 404) {
+      // The runner accepted the capability lookup but its own HTML root
+      // returned 404. Log only the bounded failure category and HTTP status.
+      console.warn("[ZoeBuild preview document]", {failure: "runner-root-404", status: 404});
+      headers.set("X-ZoeBuild-Preview-Failure", "runner-root-404");
+    }
     const contentType = result.headers["content-type"];
     if (contentType) headers.set("Content-Type", contentType);
     const etag = result.headers.etag;
@@ -304,10 +325,17 @@ async function proxy(
       return errorResponse(error.message, error.status);
     }
     if (error instanceof RunnerHttpError) {
-      return errorResponse(
+      const response = errorResponse(
         error.status === 404 ? "Preview expired." : "Preview service unavailable.",
         error.status === 404 ? 404 : 502,
       );
+      // A runner-client 404 is different from a runner HTML 404 or a rejected
+      // local proxy path. Classify the boundary without leaking its URL/token.
+      if (error.status === 404) {
+        console.warn("[ZoeBuild preview capability]", {failure: "runner-http-404", status: 404});
+        response.headers.set("X-ZoeBuild-Preview-Failure", "runner-http-404");
+      }
+      return response;
     }
     console.error("[ZoeBuild preview content proxy] failed", { buildProjectId, error });
     return errorResponse("Preview service unavailable.", 502);

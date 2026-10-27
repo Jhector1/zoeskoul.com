@@ -58,6 +58,7 @@ import ZoeAssistantMessage from "./ZoeAssistantMessage";
 import { makeZoeChatTurn, type ZoeChatTurn } from "@/lib/build/zoeChatTurns";
 import { serializeZoeConversationHistory } from "@/lib/build/zoeConversationContext";
 import { mergeZoeChatHistory, readZoeChatHistoryPayload } from "@/lib/build/zoeChatHistoryClient";
+import {keepReviewedProposal, recoverReviewedProposal, clearReviewedProposal} from "@/lib/build/zoeReviewedProposalSessionV12K11N";
 import { readZoeAnswerEventStream } from "@/lib/build/zoeAnswerEventStream";
 import { resolveZoeChatFollowState } from "@/lib/build/zoeChatAutoFollow";
 
@@ -285,6 +286,38 @@ export default function ProjectBuilderShell(props: {
   // Bind every full-source replacement proposal to the version it was planned for.
   const pendingPlanBaseVersion = useRef<number | null>(null);
   const [pendingFileEdit, setPendingFileEdit] = useState<ZoeSourceEditProposal | null>(null);
+  const [reviewRecoveryNotice, setReviewRecoveryNotice] = useState<string | null>(null);
+  // Review proposals are browser drafts until an authenticated, verified PATCH
+  // has committed. Restore them after a Next.js dev restart or same-tab reload.
+  function proposalStorage() {
+    try { return window.sessionStorage; } catch { return null; }
+  }
+  useEffect(() => {
+    const storage = proposalStorage();
+    if (!storage) return;
+    const restored = recoverReviewedProposal(storage,
+      props.project.buildProjectId, props.project.sourceVersion);
+    if (restored) {
+      setPendingFileEdit(restored);
+      setReviewRecoveryNotice("Recovered your unapplied proposal from this browser tab. Review it again before applying; no build has been verified yet.");
+    }
+  }, [props.project.buildProjectId, props.project.sourceVersion]);
+
+  function discardReviewedProposal() {
+    const storage = proposalStorage();
+    if (storage) clearReviewedProposal(storage, props.project.buildProjectId);
+    setPendingFileEdit(null);
+    setReviewRecoveryNotice(null);
+  }
+
+  function acceptReviewedProposal(proposal: ZoeSourceEditProposal) {
+    const storage = proposalStorage();
+    const kept = storage ? keepReviewedProposal(storage,
+      props.project.buildProjectId, proposal) : false;
+    setPendingFileEdit(proposal);
+    setReviewRecoveryNotice(kept ? null :
+      "This proposal is only in memory: browser storage is unavailable or the edit is too large. Keep this tab open; restarting may lose it.");
+  }
   const [applyingFileEdit, setApplyingFileEdit] = useState(false);
   const [verifyingSavedBuild, setVerifyingSavedBuild] = useState(false);
   const [savedBuildResult, setSavedBuildResult] = useState<{
@@ -496,7 +529,7 @@ export default function ProjectBuilderShell(props: {
       setHasDeferredAssistantSubmission(true);
       setPendingPlan(null);
       pendingPlanBaseVersion.current = null;
-      setPendingFileEdit(null);
+      discardReviewedProposal();
       setApplyPlanError(null);
       setAssistantChecking(false);
       setThinkingSummary("");
@@ -515,7 +548,7 @@ export default function ProjectBuilderShell(props: {
     setAssistantAuthNeeded(false);
     setPendingPlan(null);
     pendingPlanBaseVersion.current = null;
-    setPendingFileEdit(null);
+    discardReviewedProposal();
     setApplyPlanError(null);
 
     try {
@@ -730,7 +763,7 @@ export default function ProjectBuilderShell(props: {
         if (!editResponse.ok || !editResult?.ok || !editResult.proposal) {
           throw new Error(editResult?.message ?? editResult?.code ?? "Zoé could not propose a targeted edit.");
         }
-        setPendingFileEdit(editResult.proposal);
+        acceptReviewedProposal(editResult.proposal);
         commitCompletedAttempt();
         addMessage(`Zoé proposed ${editResult.proposal.edits.length} targeted file change(s): ${editResult.proposal.summary}. Review each file before applying. Nothing has been changed.`);
         return;
@@ -846,7 +879,7 @@ export default function ProjectBuilderShell(props: {
         throw new Error("The edit was accepted but its saved source version could not be verified. Reload to inspect the server source before editing again.");
       }
       const approvedEdits = pendingFileEdit.edits;
-      setPendingFileEdit(null);
+      discardReviewedProposal();
       addMessage(`Approved edits saved as source v${savedVersion}. Checking the saved files before updating Preview.`);
       try {
         const verifiedPaths = await refreshAfterSuccessfulApply(savedVersion, approvedEdits);
@@ -1160,6 +1193,7 @@ export default function ProjectBuilderShell(props: {
             <section className="zb-project-assistant-plan" aria-label="Pending targeted source edits">
               <span className="zb-project-assistant-plan-status">Review targeted edits · source v{pendingFileEdit.baseVersion}</span>
               <strong>{pendingFileEdit.summary}</strong>
+              {reviewRecoveryNotice ? <p role="status">{reviewRecoveryNotice}</p> : null}
               <p>Review all proposed file changes, including new pages. Nothing is saved until you approve. React changes are verified again before saving, without another AI request.</p>
               {pendingFileEdit.buildVerification ? (
                 <p role="status" data-testid="zoe-isolated-build-verification">
@@ -1188,7 +1222,7 @@ export default function ProjectBuilderShell(props: {
                 onClick={() => void applyPendingFileEdit()}>
                 {applyingFileEdit ? "Applying..." : "Apply reviewed file edits"}
               </button>
-              <button type="button" onClick={() => { setPendingFileEdit(null); setApplyPlanError(null); }}>Discard proposal</button>
+              <button type="button" onClick={() => { discardReviewedProposal(); setApplyPlanError(null); }}>Discard proposal</button>
             </section>
           ) : null}
 

@@ -7,6 +7,7 @@ import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 import { workspaceSyncEntriesEqual } from "@zoeskoul/learner-workspace/lib/projects/workspaceSyncEntries";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import { registeredReactPreviewRoutes } from "@/lib/build/reactPreviewPageCatalog";
+import { classifyCachedPreviewDocument } from "@/lib/build/reactPreviewSessionRecovery";
 
 type PreviewSession = Readonly<{
   previewId: string;
@@ -577,8 +578,32 @@ export function useReactVitePreview(input: Readonly<{
         revision: 0,
       });
 
-      void syncCurrent().catch(
+      // A cached client-side session may have expired on the runner while the
+      // browser was on another route. An unchanged workspace is NOT evidence
+      // that the capability document is still alive. Probe it once, read-only,
+      // before reusing it. Auth failures and malformed responses fail visibly;
+      // only an explicit expired response starts a replacement session.
+      void (async () => {
+        const response = await fetch(cachedSession.basePath, {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "no-store",
+          headers: { Accept: "text/html" },
+        });
+        if (!mountedRef.current || sessionRef.current?.previewId !== cachedSession.previewId) return;
+        const health = classifyCachedPreviewDocument(
+          response.status, response.headers.get("content-type"),
+        );
+        if (health === "expired") throw new Error("PREVIEW_EXPIRED");
+        if (health === "unavailable") {
+          throw new Error(`Cached React preview document is unavailable (HTTP ${response.status}). Use Retry to restart the preview.`);
+        }
+        await syncCurrent();
+      })().catch(
         (error) => {
+          // Ignore a stale health check after a route change/restart.
+          if (!mountedRef.current ||
+              sessionRef.current?.previewId !== cachedSession.previewId) return;
           if (
             error instanceof Error &&
             (error.message ===

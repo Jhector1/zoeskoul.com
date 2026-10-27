@@ -6,6 +6,7 @@ import {
 } from "react";
 import RemoteWebPreview from "@zoeskoul/learner-workspace/runner/components/RemoteWebPreview";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
+import { previewViewerIdentity } from "@/lib/build/reactPreviewSessionRecovery";
 
 const HOST_RELEASE_GRACE_MS = 10 * 60_000;
 
@@ -141,7 +142,7 @@ export function PersistentReactPreviewProvider(props:Readonly<{children:ReactNod
         visibility:shown?"visible":"hidden",pointerEvents:shown?"auto":"none",
         overflow:"hidden"}}
     >
-      <RemoteWebPreview key={entry.buildProjectId} preview={entry.preview}/>
+      <RemoteWebPreview key={previewViewerIdentity(entry.buildProjectId, entry.preview.src)} preview={entry.preview}/>
     </div>:null}
   </PreviewHostContext.Provider>;
 }

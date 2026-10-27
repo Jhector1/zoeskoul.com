@@ -125,8 +125,12 @@ export default function RemoteWebPreview(props: {
                 // diagnostic only: it cannot promote a frame or assert a route.
                 if (value.status === "failed" && typeof value.reason === "string" &&
                     ["script-missing", "configuration-missing", "script-address-invalid",
-                     "document-root-invalid", "document-route-invalid"].includes(value.reason) && source === iframeSrc) {
+                     "document-root-invalid", "document-route-invalid", "document-route-restore-failed"].includes(value.reason) && source === iframeSrc) {
                     setNavigationWarning(`Preview navigation unavailable (${value.reason}).`);
+                    if (value.reason === "document-route-restore-failed") {
+                        // Diagnostic only; never treat a failed bridge as proof of a rendered page.
+                        setRenderProblem("Browser refused to restore the sandboxed preview route. Check the browser Console.");
+                    }
                 }
                 if (value.status === "installed" && value.basePath === preview.src && source === iframeSrc) {
                     setNavigationWarning(null);

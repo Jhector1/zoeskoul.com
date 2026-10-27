@@ -1242,6 +1242,7 @@ export async function startReactPreview(
     });
 
   assertRegisteredProductionBuildFiles({
+    buildProjectId: request.buildProjectId,
     stackId:
       request.stackId,
     templateId:
@@ -1573,6 +1574,7 @@ export async function syncReactPreview(
   }
 
   assertRegisteredProductionBuildFiles({
+    buildProjectId: input.request.buildProjectId,
     stackId:
       input.request.stackId,
     templateId:

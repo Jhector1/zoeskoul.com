@@ -17,12 +17,15 @@ export type ZoeReactDesignEvidence = Readonly<{
   sourceCoverage: "bounded-partial-evidence";
   omittedPaths: readonly string[];
   designPrinciples: readonly string[];
+  // Path/import metadata covers all safe source files, independent of focused tab.
+  // This is an advisory map for semantic reasoning, NOT an edit allowlist.
+  sourceInventory: readonly Readonly<{path: string; imports: readonly string[]}>[];
 }>;
 
 const MAX_TOTAL_CHARS = 48_000;
 const MAX_REFERENCE_SOURCE_CHARS = 160_000;
 const SENSITIVE_TEXT = /-----BEGIN [A-Z ]*PRIVATE KEY-----|(?:sk-proj-|sk_live_|ghp_|xox[baprs]-)[A-Za-z0-9_-]{12,}/;
-const SOURCE_ROOT = /^src\/(?:App\.tsx|main\.tsx|(?:App|index|styles|globals)\.css|components\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_-]+\.(?:tsx|jsx|css)|pages\/[a-z0-9-]+\.tsx)$/;
+const SOURCE_ROOT = /^src\/(?:App\.tsx|main\.tsx|(?:App|index|styles|globals)\.css|(?:components|layouts|routes|hooks|data|lib|utils|context|providers|services)\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_-]+\.(?:ts|tsx|jsx|css|json)|pages\/[A-Za-z0-9-]+\.tsx)$/;
 const EXTRA_ROOT = /^(?:index\.html|styles\.css)$/;
 
 function allowedReferencePath(path: string): boolean {
@@ -51,7 +54,7 @@ function localImportPaths(importer: string, source: string): string[] {
     }
     if (!valid) continue;
     const path = parts.join("/");
-    for (const candidate of [path, `${path}.tsx`, `${path}.jsx`, `${path}.css`, `${path}/index.tsx`]) {
+    for (const candidate of [path, `${path}.ts`, `${path}.tsx`, `${path}.jsx`, `${path}.css`, `${path}.json`, `${path}/index.ts`, `${path}/index.tsx`]) {
       if (allowedReferencePath(candidate) && !results.includes(candidate)) results.push(candidate);
     }
   }
@@ -113,8 +116,21 @@ export function selectZoeReactDesignEvidence(
   const siblingPages = [...sources.keys()]
     .filter(path => /^src\/pages\/[a-z0-9-]+\.tsx$/.test(path) && path !== targetPage)
     .sort();
-  for (const page of siblingPages.slice(0, 3)) add(page, "existing-page", 2_400);
-  omittedPaths.push(...siblingPages.slice(3));
+  // The model can see how pages compose site-level chrome, not just three samples.
+  // Source text stays under the existing total character budget.
+  for (const page of siblingPages.slice(0, 10)) add(page, "existing-page", 3_500);
+  omittedPaths.push(...siblingPages.slice(10));
+  // Include existing shared components even if the homepage does not import them.
+  for (const component of [...sources.keys()].filter(path =>
+    path.startsWith("src/components/") && /\.(?:tsx|jsx)$/.test(path)).sort().slice(0, 10)) {
+    add(component, "shared-component", 3_000);
+  }
+  // Ground decisions in actual modern architecture modules, not just page bodies.
+  for (const p of [...sources.keys()].filter(path =>
+    /^src\/(?:routes|layouts|data|hooks|lib|context|providers|utils|services)\//.test(path)
+  ).sort().slice(0, 24)) {
+    add(p, "shared-component", 3_000);
+  }
   add("src/main.tsx", "entry", 1_500);
   add("index.html", "entry", 1_200);
   if (/^src\/pages\/[a-z0-9-]+\.tsx$/.test(targetPage)) add(targetPage, "existing-page", 8_000);
@@ -129,15 +145,25 @@ export function selectZoeReactDesignEvidence(
     files.push({path: item.path, role: item.role, content: selected, truncated: selected.length < content.length});
     remaining -= selected.length;
   }
+  const sourceInventory = [...sources.keys()].sort().slice(0, 120).map(path => ({
+    path,
+    imports: localImportPaths(path, sources.get(path)!).filter(dependency => sources.has(dependency)).slice(0, 16),
+  }));
   return {
     files,
+    sourceInventory,
     sourceCoverage: "bounded-partial-evidence",
     omittedPaths: [...new Set(omittedPaths)].sort(),
     designPrinciples: [
       "Reuse the actual site's typography, spacing, colors, CSS classes and existing components wherever source evidence supports them.",
+      "Prefer installed, established React/Vite APIs. For new sites use React Router, shared Outlet layouts, Link and NavLink rather than custom history interception; never install a competing router alongside an existing one.",
+      "Use src/hooks for reusable custom hooks, src/data for structured content, src/layouts for shared composition, and src/routes for declarative route configuration when warranted. Do not split every literal into a pointless abstraction.",
+      "Zoé should autonomously choose reversible architecture and component changes that serve the user's request; server-side authorization, secret restrictions, dependency integrity and mandatory verification remain binding.",
       "Treat the existing site-wide header, navigation and footer as shared structure. Do not duplicate them in newly generated page components.",
       "Compare sibling page composition and existing imports before writing a new page. Reuse real shared components rather than generating lookalike replacements.",
-      "Do not invent a new brand design or unverified integration; if canonical shared layout is absent, report the need for a separate approved refactor.",
+      "If no shared layout exists, you may propose extracting one into a new src/components file and updating existing pages together, without changing the visual design.",
+      "Use sourceInventory for project-wide dependency awareness. Files whose bodies are omitted must not be edited without additional evidence.",
+      "Avoid copying site-wide markup across routes; site layout reuse is an architecture decision, not a keyword-triggered template.",
       "Retain the user's requested content and the existing homepage; if something cannot be preserved from available evidence, report that limitation rather than claiming design parity.",
     ],
   };

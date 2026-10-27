@@ -348,6 +348,7 @@ export async function POST(
 
     const preparation =
       prepareRegisteredBuildArtifactPlan({
+      buildProjectId: project.buildProjectId,
         specification:
           project.specification,
 

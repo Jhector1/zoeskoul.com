@@ -57,7 +57,7 @@ function responsibility(path: string, requestedPage: string): string {
   if (path === requestedPage) return "React page content";
   if (path === "src/App.tsx") return "Existing homepage and visible navigation";
   if (path === "src/main.tsx") return "Deterministic React entry wiring";
-  if (path === "src/ZoePages.tsx") return "Deterministic route registry";
+  if (path === "src/routes/AppRoutes.tsx") return "React Router route registry";
   return "Reviewed existing source";
 }
 
@@ -115,7 +115,7 @@ export function planZoeReactPageEdit(requestedPage: string, referencePaths: read
     destination:requestedPage,
     requiredPageFile:target,
     optionalHomepageFile:"src/App.tsx",
-    serverOwnedFiles:["src/main.tsx","src/ZoePages.tsx"],
+    serverOwnedFiles:["src/main.tsx","src/routes/AppRoutes.tsx"],
     designReferencePaths:referencePaths,
     missingDesignReferences:incomplete,
     constraints:[

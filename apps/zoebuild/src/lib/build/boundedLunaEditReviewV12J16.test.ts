@@ -4,6 +4,7 @@ import { BOUNDED_LUNA_EDIT_CANDIDATE, BOUNDED_LUNA_EDIT_PROPOSAL,
 import { resolveProductionZoeBuildBillingProfile } from "./reviewedAiBillingRegistry";
 import { ZOEBUILD_VERIFIED_AI_BILLING_PROFILES } from "./verifiedAiCreditReservationPolicy";
 import { ZOEBUILD_APPROVED_BILLING_OPERATIONS } from "./productionAiBillingReadiness";
+import { deriveZoeBuildAttemptReservation } from "./verifiedAiCreditReservationPolicy";
 
 const at = new Date("2026-10-23T20:00:00.000Z");
 describe("V12J.16A read-only bounded Luna editing economics", () => {
@@ -16,13 +17,21 @@ describe("V12J.16A read-only bounded Luna editing economics", () => {
     ]);
   });
   it("computes worst-case input cache-write cost and hidden-output inclusive cap", () => {
-    const p = reviewBoundedLunaEditEconomics(at);
-    expect(p.authorizedForSpending).toBe(false);
-    expect(p.maximumCombinedInputTokens).toBe(20_000);
-    expect(p.maximumBillableOutputTokens).toBe(4_096);
-    expect(p.maximumProviderCostUsdNano).toBe("4548000");
+    // Published prices were observed on October 24, so they cannot attest
+    // a historical request on October 23. Preserve the fail-closed review.
+    expect(() => reviewBoundedLunaEditEconomics(at)).toThrow("AI_BILLING_REVIEW_EXPIRED");
+    // Separately exercise the historical, NONSPENDING cost calculator.
+    // This does not establish a current price review or spending approval.
+    const p = deriveZoeBuildAttemptReservation({
+      candidate: BOUNDED_LUNA_EDIT_CANDIDATE,
+      policy: BOUNDED_LUNA_EDIT_PROPOSAL,
+      occurredAt: at,
+    });
+    expect(BOUNDED_LUNA_EDIT_PROPOSAL.maxCombinedInputTokens).toBe(20_000);
+    expect(BOUNDED_LUNA_EDIT_PROPOSAL.maxBillableOutputTokens).toBe(4_096);
+    expect(p.maximumCostUsdNano).toBe("4548000");
     // $0.004548 provider max, hypothetical 2x / 1 cent per credit -> 910 units ceiling.
-    expect(p.proposedReservationUnits).toBe("910");
+    expect(p.maximumUnits).toBe("910");
   });
   it("blocks stale price and evidence instead of extending source attestations", () => {
     expect(() => reviewBoundedLunaEditEconomics(new Date("2026-10-27T00:00:01Z"))).toThrow();

@@ -535,6 +535,8 @@ export async function executeProductionBuild(
     );
 
   assertRegisteredProductionBuildFiles({
+    buildProjectId:
+      request.buildProjectId,
     stackId:
       request.stackId,
 

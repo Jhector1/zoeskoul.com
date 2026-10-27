@@ -67,7 +67,12 @@ export function ZoeBuildPromptComposer(props: {
         const data=await response.json() as {subscriptionAvailableUnits:string;purchasedAvailableUnits:string;meteringStatus:string;unit:string};
         if(!active||data.unit!=="ledger_unit")return;
         const units=(BigInt(data.subscriptionAvailableUnits)+BigInt(data.purchasedAvailableUnits)).toLocaleString("en-US");
-        setCreditStatus(data.meteringStatus==="not_activated"?`AI ledger: ${units} units · metering not active`:`AI ledger: ${units} units`);
+        const meteringLabel = data.meteringStatus === "not_activated"
+          ? "metering not active"
+          : data.meteringStatus === "activation_incomplete"
+            ? "metering setup incomplete"
+            : "metering status unverified";
+        setCreditStatus(`AI ledger: ${units} units · ${meteringLabel}`);
       }catch{/* No balance claim if unavailable. */}
     };
     void reload();const onFocus=()=>{if(document.visibilityState==="visible")void reload();};

@@ -41,6 +41,7 @@ export type ProductionBuildOperationPlan =
         "pnpm",
         "install",
         "--frozen-lockfile",
+        "--ignore-scripts",
       ];
     buildCommand:
       readonly [
@@ -140,6 +141,7 @@ export function resolveTrustedBuildOperation(
       "pnpm",
       "install",
       "--frozen-lockfile",
+      "--ignore-scripts",
     ],
     buildCommand: [
       "pnpm",
