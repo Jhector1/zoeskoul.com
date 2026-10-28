@@ -8,6 +8,7 @@ import { workspaceSyncEntriesEqual } from "@zoeskoul/learner-workspace/lib/proje
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 import { registeredReactPreviewRoutes } from "@/lib/build/reactPreviewPageCatalog";
 import { mayAutoRecoverReactPreviewDependencies } from "@/lib/build/reactPreviewDependencyRecovery";
+import { previewDependencySnapshotChanged } from "@/lib/build/reactPreviewDependencySession";
 import { previewCapacityRetryDelayMs } from "@/lib/build/previewCapacityRecovery";
 import { previewDocumentGatewayUrl, classifyPreviewDocumentHealth } from "@/lib/build/previewDocumentIntegrity";
 import { claimSavedDependencyFollowUp, clearSavedDependencyRecoveryGuards } from "@/lib/build/savedDependencyRecoveryContinuation";
@@ -241,6 +242,7 @@ export function useReactVitePreview(input: Readonly<{
   const workspaceRevisionRef = useRef(0);
   const [workspaceContentRevision, setWorkspaceContentRevision] = useState(0);
   const startPromiseRef = useRef<Promise<void> | null>(null);
+  const restartPromiseRef = useRef<Promise<void> | null>(null);
   const syncPromiseRef = useRef<Promise<void> | null>(null);
   const syncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -343,6 +345,15 @@ export function useReactVitePreview(input: Readonly<{
           return;
         }
 
+        // Vite HMR cannot install a different dependency graph. A saved-history
+        // selection may change package.json, its lock, or its server approval.
+        // Stop before sending /sync, release the old capability, and prepare
+        // the EXACT selected revision through the normal /preview/start flow.
+        // A genuine invalid approval will still be rejected by that server flow.
+        if (previewDependencySnapshotChanged(session.workspaceEntries, sendingEntries)) {
+          throw new Error("PREVIEW_RESTART_REQUIRED");
+        }
+
         if (mountedRef.current) {
           setPreview((current) =>
             current ? { ...current, state: "syncing", message: "Updating preview…" } : current,
@@ -374,7 +385,12 @@ export function useReactVitePreview(input: Readonly<{
         }
         if (!response.ok || !data?.ok) {
           const errorMessage = message(data, "React preview could not be updated.");
-          if (/dependencies changed/i.test(errorMessage)) {
+          // A previously cached session can also carry the same dependency
+          // bytes but lack approval in the restored server snapshot. Sync has
+          // no bootstrap step: hand this specific recoverable 409 to /start.
+          if ((response.status === 409 && mayAutoRecoverReactPreviewDependencies({
+            status: response.status, code: data?.code, message: data?.message,
+          })) || /dependencies changed/i.test(errorMessage)) {
             throw new Error("PREVIEW_RESTART_REQUIRED");
           }
           throw new Error(errorMessage);
@@ -438,7 +454,7 @@ export function useReactVitePreview(input: Readonly<{
         setPreview((current) => ({
           src: current?.src ?? null,
           state: "starting",
-          message: "Preparing your website…",
+          message: "Starting or reusing a preview worker…",
           revision: current?.revision ?? 0,
         }));
       }
@@ -453,7 +469,7 @@ export function useReactVitePreview(input: Readonly<{
             ? {
                 ...current,
                 message:
-                  "Still starting preview… the first React launch can take up to 2 minutes.",
+                  "Preview worker is still preparing this website…",
               }
             : current,
         );
@@ -537,7 +553,7 @@ export function useReactVitePreview(input: Readonly<{
           setPreview((current) => ({
             src: current?.src ?? null,
             state: "starting",
-            message: "Getting this saved version ready…",
+            message: "Verifying the saved version dependency lock…",
             revision: current?.revision ?? 0,
           }));
         }
@@ -652,6 +668,10 @@ export function useReactVitePreview(input: Readonly<{
         throw new Error(message(data, "React preview could not be started."));
       }
 
+      if (mountedRef.current) setPreview(current=>({
+        src:null,state:"starting",message:"Verifying the website document…",
+        revision:current?.revision??0,
+      }));
       const previewId = data.preview.previewId;
       const basePath = data.preview.basePath;
       if (
@@ -685,12 +705,9 @@ export function useReactVitePreview(input: Readonly<{
           ? "Preview service lost this session. Retry to start a fresh preview; if this repeats, check runner routing."
           : "The preview document is not available yet. Try again after the runner is healthy.");
       }
-      if (sourceVersionRef.current !== startingVersion ||
-          !workspaceSyncEntriesEqual(startingEntries, exportWorkspaceEntries(workspaceRef.current.nodes))) {
-        // Do not acknowledge a document belonging to an obsolete selection.
-        // The normal source sync below will bring the live preview forward.
-        setConfirmedSourceVersion(null);
-      }
+      const changedDuringStart=sourceVersionRef.current !== startingVersion ||
+        !workspaceSyncEntriesEqual(startingEntries,exportWorkspaceEntries(workspaceRef.current.nodes));
+      if (changedDuringStart) setConfirmedSourceVersion(null);
 
       const nextSession: PreviewSession = {
         previewId,
@@ -720,13 +737,14 @@ export function useReactVitePreview(input: Readonly<{
           triedResyncVersionsRef.current.delete(startingVersion);
         }
         else setConfirmedSourceVersion(null);
-        setPreview({ src: basePath, state: "ready", message: null, revision: 0 });
+        setPreview(changedDuringStart
+          ? {src:null,state:"syncing",message:"Synchronizing the newly selected version…",revision:0}
+          : {src:basePath,state:"ready",message:null,revision:0});
       }
 
-      if (
-        workspaceRevisionRef.current !== startingWorkspaceRevision ||
-        !workspaceSyncEntriesEqual(startingEntries, [...workspaceEntriesRef.current])
-      ) {
+      if (changedDuringStart || workspaceRevisionRef.current !== startingWorkspaceRevision) {
+        // Old start responses never become visible while a newer source is selected.
+        // The synchronized acknowledgement below must match exact source bytes.
         await syncCurrent();
       }
     })();
@@ -769,16 +787,21 @@ export function useReactVitePreview(input: Readonly<{
   }, [resyncFromVersion, input.sourceVersion, input.enabled, start]);
 
   const restart = useCallback(() => {
-    // An explicit retry may attempt the same trusted recovery once more. Never
-    // silently loop or remove the source-version CAS / package safety checks.
+    // Prevent retry clicks from racing with a not-yet-completed cold start.
+    if (restartPromiseRef.current) return;
     try {
       clearSavedDependencyRecoveryGuards(window.sessionStorage,
         `zoebuild:dependency-recovery:${input.buildProjectId}:${sourceVersionRef.current}`);
     } catch { /* optional */ }
-    void (async () => {
+    const task=(async()=>{
+      await startPromiseRef.current?.catch(()=>{});
+      await syncPromiseRef.current?.catch(()=>{});
+      if(!mountedRef.current)return;
       await cancelCurrent();
-      await start();
+      if(mountedRef.current)await start();
     })();
+    restartPromiseRef.current=task;
+    void task.finally(()=>{if(restartPromiseRef.current===task)restartPromiseRef.current=null;}).catch(()=>{});
   }, [cancelCurrent, start, input.buildProjectId]);
 
   useEffect(() => {

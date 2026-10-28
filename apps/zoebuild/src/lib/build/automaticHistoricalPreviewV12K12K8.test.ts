@@ -18,7 +18,12 @@ describe("V12K12K8 automatic historical preview",()=>{
     const hook=read("../../components/builder/useReactVitePreview.ts");
     const route=read("../../app/api/build/projects/[buildProjectId]/dependency-lock/bootstrap/route.ts");
     expect(hook).toContain("autoRestoreDependencies: restoredDependencyPinnedRef.current");
-    expect(hook).toContain('message: "Getting this saved version ready…"');
+    // K20C reports concrete preparation phases instead of the old generic label.
+    // The capability to auto-recover and to reconcile a new saved source is the contract.
+    expect(hook).toContain('message: "Verifying the saved version dependency lock…"');
+    expect(hook).toContain('message:"Verifying the website document…"');
+    expect(hook).toContain('const preparedVersion = bootstrapData.bootstrap?.source?.sourceVersion');
+    expect(hook).toContain('await reconcileConflict(startingVersion)');
     expect(hook).toContain("window.location.reload()");
     expect(route).toContain("adoptRestoredReactDependencyLock(prisma");
     expect(route).toContain("createPrismaBuildProjectSourceWriter(prisma, {createRevision:false})");

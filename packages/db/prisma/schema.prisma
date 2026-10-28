@@ -2546,6 +2546,7 @@ enum AiCreditLedgerKind {
 model ZoeBuildChatMessage {
   id            String       @id @default(cuid())
   buildProjectId String
+  savedVersion  Int
   clientTurnId  String       @db.VarChar(64)
   role          String       @db.VarChar(12)
   text          String       @db.Text
@@ -2553,5 +2554,5 @@ model ZoeBuildChatMessage {
   buildProject  BuildProject @relation(fields: [buildProjectId], references: [id], onDelete: Cascade)
 
   @@unique([buildProjectId, clientTurnId])
-  @@index([buildProjectId, createdAt, id])
+  @@index([buildProjectId, savedVersion, createdAt, id])
 }

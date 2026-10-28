@@ -13,6 +13,7 @@ import { verifyZoeReactCandidateAtRunner } from "@/lib/build/zoeReactIsolatedBui
 import { buildRevisionFilePreview, parseRevisionRestoreRequest } from "@/lib/build/sourceRevisionPolicy";
 import { restoreSavedReactVersion, SavedReactRestoreError } from "@/lib/build/restoreSavedReactVersion";
 import { activeSavedHistoryVersion } from "@/lib/build/activeSavedHistoryVersion";
+import { compareSavedVersionSnapshots } from "@/lib/build/compareSavedVersions";
 import { historicalReactSourceMetadata, historicReactRecoverySpecification,
   restoreHistoricalReactRevision, HistoricalReactRestoreError } from "@/lib/build/restoreHistoricalReactRevision";
 
@@ -55,6 +56,31 @@ export async function GET(req: Request, ctx: Context) {
     const activeVersion = activeSavedHistoryVersion(currentSource.currentVersion, currentSource.meta);
     const url = new URL(req.url);
     const rawVersion = url.searchParams.get("version");
+    // Server-side, complete, read-only snapshot comparison. Never return source
+    // content; the owner-scoped lookup above is required for both revisions.
+    const compareFrom = url.searchParams.get("compareFrom");
+    const compareTo = url.searchParams.get("compareTo");
+    if (compareFrom !== null || compareTo !== null) {
+      const valid=(v:string|null)=>v!==null && /^[1-9]\d{0,8}$/.test(v);
+      const baseToken=url.searchParams.get("expectedSourceVersion");
+      if (!valid(compareFrom)||!valid(compareTo)||!valid(baseToken)||url.searchParams.size!==3)
+        return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);
+      if (Number(baseToken)!==currentSource.currentVersion)
+        return reply(requestId,{ok:false,code:"BUILD_HISTORY_STALE",message:"The selected source changed. Refresh History."},409);
+      const versions=[Number(compareFrom),Number(compareTo)];
+      const snapshots=await prisma.codeProjectRevision.findMany({
+        where:{projectId:project.codeProjectId,version:{in:versions}},select:{version:true,snapshot:true},
+      });
+      const byVersion=new Map(snapshots.map(x=>[x.version,x.snapshot]));
+      if (!byVersion.has(versions[0])||!byVersion.has(versions[1]))
+        return reply(requestId,{ok:false,code:"BUILD_REVISION_NOT_FOUND"},404);
+      const comparison=compareSavedVersionSnapshots(
+        parseBuildWorkspaceMutation(byVersion.get(versions[0])),
+        parseBuildWorkspaceMutation(byVersion.get(versions[1])),
+      );
+      return reply(requestId,{ok:true,fromVersion:versions[0],toVersion:versions[1],
+        currentVersion:currentSource.currentVersion,comparison});
+    }
     if (rawVersion !== null) {
       if (!/^[1-9]\d{0,8}$/.test(rawVersion) || url.searchParams.size !== 1)
         return reply(requestId, {ok:false, code:"BUILD_HISTORY_INPUT_INVALID"}, 400);

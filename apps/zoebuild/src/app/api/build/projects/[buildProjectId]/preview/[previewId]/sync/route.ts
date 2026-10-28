@@ -9,6 +9,7 @@ import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import {
   createOwnedReactPreviewBuildRequest,
+  requireOwnedReactPreviewProject,
   parseReactPreviewId,
   ReactPreviewRequestError,
 } from "@/lib/build/reactPreviewServer";
@@ -65,6 +66,10 @@ export async function POST(
     });
     const actorKey = await requireRunnerActorKey(userId);
     await syncTrustedReactPreviewAtRunner({ actorKey, previewId, request });
+    const afterSync = await requireOwnedReactPreviewProject({access,buildProjectId});
+    if (afterSync.sourceVersion !== body.sourceVersion)
+      return json(requestId,{ok:false,code:"BUILD_PREVIEW_SOURCE_CONFLICT",
+        message:"The project changed while preview was updating."},409);
     return json(requestId, { ok: true, previewId });
   } catch (error) {
     if (error instanceof ReactPreviewRequestError) {
@@ -73,8 +78,8 @@ export async function POST(
     if (error instanceof RunnerHttpError) {
       return json(
         requestId,
-        { ok: false, code: error.status === 404 ? "BUILD_PREVIEW_NOT_FOUND" : "BUILD_PREVIEW_RUNNER_FAILED", message: error.message },
-        error.status === 404 ? 404 : error.status === 429 ? 429 : 502,
+        { ok: false, code: error.status === 409 ? "BUILD_PREVIEW_SOURCE_CONFLICT" : error.status === 404 ? "BUILD_PREVIEW_NOT_FOUND" : "BUILD_PREVIEW_RUNNER_FAILED", message: error.status === 409 ? "A newer source revision is active. Refresh the project." : error.message },
+        error.status === 409 ? 409 : error.status === 404 ? 404 : error.status === 429 ? 429 : 502,
       );
     }
     console.error("[/api/build/projects/:buildProjectId/preview/:previewId/sync] failed", { requestId, buildProjectId, userId, error });

@@ -1,0 +1,11 @@
+.overlay{position:absolute;inset:0;z-index:35;display:grid;place-items:center;padding:24px;overflow-y:auto;background:var(--zb-surface,var(--background,#fff));color:inherit}
+.content{width:min(100%,440px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.content h3{font-size:17px;font-weight:700;line-height:1.4;margin:0}
+.content p{font-size:13px;line-height:1.65;color:var(--zb-muted,#64748b);margin:0}
+.spinner{width:28px;height:28px;border-radius:50%;border:3px solid var(--zb-border,#dfe3e8);border-top-color:#597ca5;animation:previewTransitionSpin 1s linear infinite}
+.actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:8px}
+.actions button{border:1px solid var(--zb-border,#cbd5e1);border-radius:9px;padding:10px 14px;background:transparent;color:inherit;font-size:13px;font-weight:650;cursor:pointer}
+.actions .primary{background:#243247;color:white;border-color:#243247}
+.actions button:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
+@keyframes previewTransitionSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.spinner{animation:none}}

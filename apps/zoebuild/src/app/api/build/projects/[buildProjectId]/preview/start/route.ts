@@ -9,6 +9,7 @@ import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import {
   createOwnedReactPreviewBuildRequest,
+  requireOwnedReactPreviewProject,
   ReactPreviewRequestError,
 } from "@/lib/build/reactPreviewServer";
 import { startTrustedReactPreviewAtRunner, proxyFetchTrustedReactPreviewAtRunner, cancelTrustedReactPreviewAtRunner } from "@/lib/build/reactPreviewRunnerClient";
@@ -63,6 +64,16 @@ export async function POST(
     });
     const actorKey = await requireRunnerActorKey(userId);
     const preview = await startTrustedReactPreviewAtRunner({ actorKey, request });
+    // The runner may have waited for resources after initial CAS verification.
+    // A different browser tab can select a newer version while it starts.
+    // Fence the response to the same saved source token; never advertise the
+    // older preview as current. Do not cancel here: the runner may have reused
+    // a session which another tab is currently synchronizing.
+    const afterStart = await requireOwnedReactPreviewProject({access,buildProjectId});
+    if (afterStart.sourceVersion !== body.sourceVersion) return json(requestId,{
+      ok:false,code:"BUILD_PREVIEW_SOURCE_CONFLICT",
+      message:"The saved version changed while its preview was starting. Refresh the selected source.",
+    },409);
     // A runner start verifies Vite inside the process that created the preview.
     // Verify a *separate* capability fetch too: process-local preview registries
     // behind a non-sticky runner load balancer can otherwise return 201, then
@@ -100,6 +111,12 @@ export async function POST(
         message: "The preview started but its website document is not ready. Retry the preview.",
       }, 503);
     }
+    // A source switch may also occur during the final document check.
+    const afterDocument = await requireOwnedReactPreviewProject({access,buildProjectId});
+    if (afterDocument.sourceVersion !== body.sourceVersion) return json(requestId,{
+      ok:false,code:"BUILD_PREVIEW_SOURCE_CONFLICT",
+      message:"The saved version changed during preview verification.",
+    },409);
     return json(requestId, { ok: true, preview }, 201);
   } catch (error) {
     if (error instanceof ReactPreviewRequestError) {
@@ -111,10 +128,10 @@ export async function POST(
       console.warn("[ZoeBuild preview/start] runner unavailable", {
         requestId, upstreamStatus: error.status,
       });
-      const status = error.status === 429 ? 429 : error.status === 503 ? 503 : 502;
-      return json(requestId, { ok: false, code: status === 429 ? "BUILD_PREVIEW_CAPACITY" :
+      const status = error.status === 409 ? 409 : error.status === 429 ? 429 : error.status === 503 ? 503 : 502;
+      return json(requestId, { ok: false, code: status === 409 ? "BUILD_PREVIEW_SOURCE_CONFLICT" : status === 429 ? "BUILD_PREVIEW_CAPACITY" :
         "BUILD_PREVIEW_RUNNER_UNAVAILABLE",
-        message: status === 429 ? "Preview capacity reached; retry when a session is free." :
+        message: status === 409 ? "A newer preview source is selected. Refresh the project." : status === 429 ? "Preview capacity reached; retry when a session is free." :
           "Preview runner is unavailable. Retry after checking the runner service." }, status);
     }
     console.error("[/api/build/projects/:buildProjectId/preview/start] failed", { requestId, buildProjectId, userId, error });

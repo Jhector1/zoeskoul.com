@@ -17,6 +17,7 @@ import {
 function statusForPreviewStartError(
   message: string,
 ) {
+  if (message === "Preview source is stale.") return 409;
   if (
     message.includes(
       "Too many active sessions",

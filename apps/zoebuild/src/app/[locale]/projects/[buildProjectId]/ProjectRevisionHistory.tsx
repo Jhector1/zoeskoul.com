@@ -3,6 +3,7 @@
 import {useEffect, useMemo, useRef, useState} from "react";
 import styles from "./ProjectRevisionHistory.module.css";
 import {groupRevisionsByDate} from "@/lib/build/historyDateGroups";
+import type {VersionFileChange} from "@/lib/build/compareSavedVersions";
 
 type Revision = Readonly<{version:number; createdAt:string; note:string|null; workspaceHash:string|null}>;
 type FilePreview = Readonly<{path:string; content:string; truncated:boolean}>;
@@ -13,6 +14,7 @@ export default function ProjectRevisionHistory(props: Readonly<{
   currentVersion: number;
   disabled: boolean;
   onRestored: (savedVersion:number, fromVersion:number) => Promise<void>;
+  onBeforeSwitch?: () => Promise<void>;
   onSwitchStart?: (version:number) => void;
   onSwitchFailure?: (version:number, persisted:boolean) => void;
   onStaleSource?: (attemptedSourceVersion:number) => Promise<boolean>;
@@ -26,10 +28,31 @@ export default function ProjectRevisionHistory(props: Readonly<{
   const [loading,setLoading] = useState(false);
   const [busy,setBusy] = useState(false);
   const restoringRef = useRef(false);
+  const [pendingAction,setPendingAction] = useState<{kind:"switch"|"delete";version:number}|null>(null);
+  const [deleteConfirmation,setDeleteConfirmation] = useState("");
+  const confirmationDialogRef = useRef<HTMLDialogElement|null>(null);
   const [selected,setSelected] = useState<number|null>(null);
   const [preview,setPreview] = useState<Preview|null>(null);
+  const [comparison,setComparison] = useState<{version:number;changes:VersionFileChange[];counts:Record<VersionFileChange["group"],number>;scannedFiles:number}|null>(null);
   const groups = useMemo(()=>groupRevisionsByDate(revisions),[revisions]);
   const baseUrl = `/api/build/projects/${encodeURIComponent(props.buildProjectId)}/source-history`;
+
+  // Native dialog top-layer handles focus containment and avoids clipping inside
+  // the narrow, scrollable version-history sidebar. No browser confirm/prompt.
+  useEffect(() => {
+    const dialog = confirmationDialogRef.current;
+    if (!dialog) return;
+    if (pendingAction && !dialog.open) dialog.showModal();
+    if (!pendingAction && dialog.open) dialog.close();
+    return () => { if (dialog.open) dialog.close(); };
+  }, [pendingAction]);
+
+  function requestAction(kind:"switch"|"delete", version:number) {
+    if (busy || restoringRef.current || props.disabled || version === activeVersion) return;
+    setDeleteConfirmation("");
+    setPendingAction({kind,version});
+  }
+
 
   useEffect(() => {
     if (!expanded) return;
@@ -87,7 +110,7 @@ export default function ProjectRevisionHistory(props: Readonly<{
 
   async function viewVersion(version:number) {
     if (busy) return;
-    setBusy(true);setHistoryError(null);setPreview(null);setSelected(version);
+    setBusy(true);setHistoryError(null);setPreview(null);setComparison(null);setSelected(version);
     try {
       const response = await fetch(`${baseUrl}?version=${version}`,{credentials:"same-origin",cache:"no-store"});
       const body: unknown = await response.json().catch(() => null);
@@ -99,14 +122,32 @@ export default function ProjectRevisionHistory(props: Readonly<{
     finally {setBusy(false);}
   }
 
+  async function compareVersion(version:number) {
+    if (busy || activeVersion===null || version===activeVersion) return;
+    const from=activeVersion, token=props.currentVersion;
+    setBusy(true);setHistoryError(null);setComparison(null);setPreview(null);setSelected(version);
+    try {
+      const query=new URLSearchParams({compareFrom:String(from),compareTo:String(version),expectedSourceVersion:String(token)});
+      const response=await fetch(`${baseUrl}?${query}`,{credentials:"same-origin",cache:"no-store"});
+      const body=await response.json().catch(()=>null) as {ok?:boolean;comparison?:{
+        changes:VersionFileChange[];counts:Record<VersionFileChange["group"],number>;scannedFiles:number;
+      };currentVersion?:number;message?:string}|null;
+      if(!response.ok||!body?.ok||body.currentVersion!==token||!body.comparison||!Array.isArray(body.comparison.changes))
+        throw new Error(body?.message??"Version comparison could not be verified. Refresh History.");
+      setComparison({version,...body.comparison});
+    }catch(error){setHistoryError(error instanceof Error?error.message:"Comparison unavailable.");}
+    finally{setBusy(false);}
+  }
+
   async function restoreVersion(version:number) {
     if (busy || restoringRef.current || props.disabled || version === activeVersion || version > props.currentVersion) return;
-    if (!window.confirm(`Switch to Version ${version}? Its saved files and dependencies will become active. Switching does not create another saved version; published sites, orders, and provider connections stay unchanged.`)) return;
+
     restoringRef.current = true;
     setBusy(true);setSelected(version);setHistoryError(null);
-    props.onSwitchStart?.(version);
     let savedVersion: number|null = null;
     try {
+      await props.onBeforeSwitch?.();
+      props.onSwitchStart?.(version);
       const response = await fetch(baseUrl,{
         method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},
         body:JSON.stringify({baseVersion:props.currentVersion,restoreVersion:version}),
@@ -130,7 +171,7 @@ export default function ProjectRevisionHistory(props: Readonly<{
       savedVersion = data.sourceVersion!;
       setActiveVersion(data.activeVersion === version ? data.activeVersion : version);
       await props.onRestored(savedVersion,version);
-      setSelected(null);setPreview(null);setExpanded(false);
+      setSelected(null);setPreview(null);setComparison(null); // Keep History expanded and its date groups open.
     } catch (error) {
       props.onSwitchFailure?.(version, savedVersion !== null);
       setHistoryError(savedVersion !== null
@@ -141,8 +182,7 @@ export default function ProjectRevisionHistory(props: Readonly<{
 
   async function deleteVersion(version:number) {
     if (busy || restoringRef.current || props.disabled || version === activeVersion) return;
-    const phrase = window.prompt(`Permanently delete saved Version ${version}? This cannot be undone. Type DELETE V${version} to confirm.`);
-    if (phrase !== `DELETE V${version}`) return;
+
     setBusy(true);setHistoryError(null);
     try {
       const response = await fetch(`${baseUrl}?version=${version}`, {
@@ -153,7 +193,7 @@ export default function ProjectRevisionHistory(props: Readonly<{
       const result = body && typeof body === "object" ? body as {ok?:boolean;deleted?:boolean;message?:string;code?:string} : null;
       if (!response.ok || !result?.ok || !result.deleted) throw new Error(result?.message ?? result?.code ?? "Could not delete this version.");
       setRevisions(current=>current.filter(item=>item.version!==version));
-      if (selected===version) {setSelected(null);setPreview(null);}
+      if (selected===version) {setSelected(null);setPreview(null);setComparison(null);}
     } catch(error) {
       setHistoryError(error instanceof Error ? error.message : "Unable to delete this version.");
     } finally {setBusy(false);}
@@ -161,7 +201,7 @@ export default function ProjectRevisionHistory(props: Readonly<{
 
   return <section className={styles.history} aria-label="Saved project versions" data-testid="zoebuild-revision-history">
     <button type="button" className={styles.headingButton} aria-expanded={expanded}
-      onClick={()=>{setExpanded(!expanded);setSelected(null);setPreview(null);}}>
+      onClick={()=>{setExpanded(!expanded);setSelected(null);setPreview(null);setComparison(null);}}>
       <span className={styles.headingText}><span aria-hidden="true">◷</span> Version history
         <span className={styles.headingSubtitle}>Saved snapshots{activeVersion === null ? "" : ` · Current V${activeVersion}`}</span>
       </span>
@@ -196,12 +236,14 @@ export default function ProjectRevisionHistory(props: Readonly<{
                   onClick={()=>void viewVersion(revision.version)}>View files</button>
                 {revision.version !== activeVersion ? <>
                   <button type="button" className={styles.restoreButton}
-                    disabled={busy||props.disabled} onClick={()=>void restoreVersion(revision.version)}>
+                    disabled={busy||props.disabled} onClick={()=>requestAction("switch",revision.version)}>
                     {busy&&selected===revision.version?"Switching…":"Switch to version"}
                   </button>
+                  <button type="button" className={styles.viewButton} disabled={busy}
+                    onClick={()=>void compareVersion(revision.version)}>Compare</button>
                   <button type="button" className={styles.deleteButton}
                     aria-label={`Delete saved Version ${revision.version}`}
-                    disabled={busy||props.disabled} onClick={()=>void deleteVersion(revision.version)}>Delete</button>
+                    disabled={busy||props.disabled} onClick={()=>requestAction("delete",revision.version)}>Delete</button>
                 </> : null}
               </div>
             </div>)}
@@ -210,6 +252,17 @@ export default function ProjectRevisionHistory(props: Readonly<{
       </div>
       {hasMore ? <button type="button" className={styles.moreButton} disabled={loading||busy}
         onClick={()=>void loadOlderVersions()}>{loading?"Loading…":"Load older versions"}</button> : null}
+      {selected!==null&&comparison ? <section className={styles.preview} aria-label={`Version ${selected} comparison`}>
+        <div className={styles.previewHeading}><strong>Current vs Version {selected}</strong>
+          <button type="button" onClick={()=>{setComparison(null);setSelected(null);}}>Close</button></div>
+        <p className={styles.muted}>Compared complete saved file contents, including dependencies. Source contents are not returned.</p>
+        <p className={styles.muted}>{comparison.changes.length} changed file(s) · {comparison.scannedFiles} inspected ·
+          {` Pages ${comparison.counts.pages}, Components ${comparison.counts.components}, Dependencies ${comparison.counts.dependencies}, Other ${comparison.counts.other}`}</p>
+        {comparison.changes.length===0 ? <p className={styles.muted}>No tracked file differences.</p> :
+          <ul className={styles.comparisonList}>{comparison.changes.map(change=><li key={change.path}>
+            <strong>{change.kind}</strong> · {change.path} <span>({change.group})</span>
+          </li>)}</ul>}
+      </section> : null}
       {selected!==null&&preview ? <div className={styles.preview} aria-label={`Source version ${selected} file preview`}>
         <div className={styles.previewHeading}><strong>Version {selected} · Saved files</strong>
           <button type="button" onClick={()=>{setPreview(null);setSelected(null);}}>Close</button></div>
@@ -221,5 +274,47 @@ export default function ProjectRevisionHistory(props: Readonly<{
         {preview.omitted>0 ? <p className={styles.muted}>{preview.omitted} file(s) omitted.</p> : null}
       </div> : null}
     </div> : null}
+    <dialog ref={confirmationDialogRef} className={styles.confirmDialog}
+      aria-labelledby="zoebuild-version-dialog-heading"
+      aria-describedby="zoebuild-version-dialog-description"
+      onCancel={event => {
+        event.preventDefault();
+        if (!busy) setPendingAction(null);
+      }}>
+      {pendingAction ? <div className={styles.confirmContent}>
+        <span className={styles.confirmEyebrow}>Version history</span>
+        <h3 id="zoebuild-version-dialog-heading">
+          {pendingAction.kind === "switch"
+            ? `Switch to Version ${pendingAction.version}?`
+            : `Delete Version ${pendingAction.version}?`}
+        </h3>
+        <p id="zoebuild-version-dialog-description">
+          {pendingAction.kind === "switch"
+            ? "Its saved files and dependencies will become current. Your published website, orders, and connections will not change. No new version will be created."
+            : "This permanently deletes the selected saved version. Your current website is unchanged. This cannot be undone."}
+        </p>
+        {pendingAction.kind === "delete" ? <label className={styles.confirmLabel}>
+          Type <strong>DELETE V{pendingAction.version}</strong> to confirm
+          <input className={styles.confirmInput} value={deleteConfirmation}
+            onChange={event=>setDeleteConfirmation(event.target.value)}
+            autoComplete="off" spellCheck={false}/>
+        </label> : null}
+        <div className={styles.confirmActions}>
+          <button type="button" className={styles.confirmCancel}
+            onClick={()=>setPendingAction(null)} autoFocus>Cancel</button>
+          <button type="button"
+            className={pendingAction.kind === "delete" ? styles.confirmDanger : styles.confirmPrimary}
+            disabled={pendingAction.kind === "delete" && deleteConfirmation !== `DELETE V${pendingAction.version}`}
+            onClick={()=>{
+              const {kind,version}=pendingAction;
+              setPendingAction(null);
+              if (kind === "switch") void restoreVersion(version);
+              else void deleteVersion(version);
+            }}>
+            {pendingAction.kind === "switch" ? "Switch version" : "Delete version"}
+          </button>
+        </div>
+      </div> : null}
+    </dialog>
   </section>;
 }

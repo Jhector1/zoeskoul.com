@@ -14,9 +14,11 @@ describe("saved version selection is idempotent and hides stale previews",()=>{
   const shell=read("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx");
   expect(shell).toContain("sourceVersion === null ? 45_000 : 145_000");
   expect(shell).toContain("current.sourceVersion === sourceVersion && !current.failed");
-  expect(shell).toContain('>Retry preview</button>');
-  expect(shell).toContain('>Reload saved project</button>');
-  expect(shell).toContain("The previous preview remains hidden");
+  const overlay=read("../../app/[locale]/projects/[buildProjectId]/HistoryPreviewTransition.tsx");
+  const copy=read("./historyPreviewTransitionCopy.ts");
+  expect(overlay).toContain('>Retry preview</button>');
+  expect(overlay).toContain('>Reload saved project</button>');
+  expect(copy).toContain("The previous preview remains hidden");
  });
  it("switches exact snapshots without appending duplicate revisions",()=>{
   const source=read("./restoreSavedReactVersion.ts");
@@ -29,7 +31,9 @@ describe("saved version selection is idempotent and hides stale previews",()=>{
  it("blocks stale editor and runner content during switch",()=>{
   const shell=read("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx");
   const hook=read("../../components/builder/useReactVitePreview.ts");
-  expect(shell).toContain('data-testid="zoebuild-history-switch-overlay"');
+  expect(shell).toContain("<HistoryPreviewTransition");
+  expect(read("../../app/[locale]/projects/[buildProjectId]/HistoryPreviewTransition.tsx"))
+    .toContain('data-testid="zoebuild-history-switch-overlay"');
   expect(shell).toContain("confirmedSourceVersion !== previewSourceVersion");
   expect(shell).toContain("onSwitchStart=");
   expect(shell).toContain("onSwitchFailure=");

@@ -31,6 +31,7 @@ type SaveState =
 export default function BuildWorkspaceClient({
   project,
   onWorkspaceSnapshot,
+  onWorkspaceViewChange,
   onSourceVersionChange,
   onDirtyChange,
   remoteWebPreview,
@@ -39,6 +40,7 @@ export default function BuildWorkspaceClient({
 }: {
   project: BuildWorkspaceShellProject;
   onWorkspaceSnapshot?: (workspace: WorkspaceStateV2) => void;
+  onWorkspaceViewChange?: (workspace: WorkspaceStateV2) => void;
   onSourceVersionChange?: (sourceVersion: number) => void;
   onDirtyChange?: (dirty: boolean) => void;
   remoteWebPreview?: RemoteWebPreviewDescriptor | null;
@@ -70,7 +72,9 @@ export default function BuildWorkspaceClient({
       workspace: WorkspaceStateV2 | null,
       meta?: { origin?: "user" | "sync" | "programmatic" },
     ) => {
-      if (!workspace || meta?.origin !== "user") return;
+      if (!workspace) return;
+      onWorkspaceViewChange?.(workspace);
+      if (meta?.origin !== "user") return;
 
       const previous = latestWorkspaceRef.current;
       latestWorkspaceRef.current = workspace;
@@ -82,7 +86,7 @@ export default function BuildWorkspaceClient({
       setDirty(hasUnsavedZoeWorkspaceSource(savedWorkspaceRef.current, workspace));
       setSaveState({ kind: "idle", message: null });
     },
-    [onWorkspaceSnapshot],
+    [onWorkspaceSnapshot, onWorkspaceViewChange],
   );
 
   const saveSource = useCallback(async () => {

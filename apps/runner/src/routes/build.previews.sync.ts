@@ -65,6 +65,7 @@ export const syncBuildPreviewRoute:
           : "Could not sync React preview.";
 
       const status =
+        message === "Preview source is stale." ? 409 :
         message ===
           "Preview not found."
           ? 404

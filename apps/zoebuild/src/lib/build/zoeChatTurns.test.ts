@@ -18,7 +18,8 @@ describe("E17J real chat roles and readable right-side user bubbles", () => {
     // obsolete direct factory call that no longer appears in this component.
     expect(source).toContain('recordChatTurn("user",');
     expect(source).toContain('recordChatTurn("assistant",');
-    expect(source).toContain('makeZoeChatTurn(role, text)');
+    expect(source).toMatch(/makeZoeChatTurn\(\s*role\s*,\s*text\s*\)/);
+    expect(source).toMatch(/clientTurnId\s*:\s*crypto\.randomUUID\(\)/);
     expect(source).toContain('role={message.role}');
     expect(source).not.toContain('`You: ${submission.prompt');
     expect(source).not.toContain("isZoeUserTurn");

@@ -13,7 +13,12 @@ describe("V12K12K7 version selection, dependency review, and delete policy",()=>
   const view=read("../../app/[locale]/projects/[buildProjectId]/ProjectRevisionHistory.tsx");
   expect(view).toContain("Switch to version");
   expect(view).toContain("deleteVersion(version:number)");
-  expect(view).toContain("DELETE V${version}");
+  // K19 moved the typed deletion confirmation into a React dialog. Assert both
+  // the visible prompt and the exact-match gate, not the retired prompt string.
+  expect(view).toContain('Type <strong>DELETE V{pendingAction.version}</strong> to confirm');
+  expect(view).toContain('deleteConfirmation !== `DELETE V${pendingAction.version}`');
+  expect(view).toContain('onClick={()=>requestAction("delete",revision.version)}');
+  expect(view).toContain('else void deleteVersion(version)');
   const restore=read("./restoreSavedReactVersion.ts");
   expect(restore).toContain("createRevision: false");
  });

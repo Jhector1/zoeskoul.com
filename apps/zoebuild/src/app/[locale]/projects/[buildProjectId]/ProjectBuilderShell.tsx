@@ -37,7 +37,9 @@ import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
 import ProjectRevisionHistory from "./ProjectRevisionHistory";
+import HistoryPreviewTransition from "./HistoryPreviewTransition";
 import { historySwitchHasSettled } from "@/lib/build/historySwitchReadiness";
+import { preserveVersionWorkspaceView } from "@/lib/build/preserveVersionWorkspaceView";
 import { needsDependencyRecoveryAssistance } from "@/lib/build/historyDependencyReview";
 import SiteSettingsWorkspacePanel, { type Section as SiteSettingsSection } from "./SiteSettingsWorkspacePanel";
 import { resolveZoeSelectedProvider } from "@/lib/build/zoeAssistantServiceIntent";
@@ -60,6 +62,7 @@ import ZoeAssistantMessage from "./ZoeAssistantMessage";
 import { makeZoeChatTurn, type ZoeChatTurn } from "@/lib/build/zoeChatTurns";
 import { serializeZoeConversationHistory } from "@/lib/build/zoeConversationContext";
 import { mergeZoeChatHistory, readZoeChatHistoryPayload } from "@/lib/build/zoeChatHistoryClient";
+import {matchingZoeVersionScope,decodeZoeVersionChatScope,type ZoeVersionChatScope} from "@/lib/build/zoeVersionChatScope";
 import {keepReviewedProposal, recoverReviewedProposal, clearReviewedProposal} from "@/lib/build/zoeReviewedProposalSessionV12K11N";
 import { readZoeAnswerEventStream } from "@/lib/build/zoeAnswerEventStream";
 import { resolveZoeChatFollowState } from "@/lib/build/zoeChatAutoFollow";
@@ -113,9 +116,12 @@ export default function ProjectBuilderShell(props: {
   // Keep the editor and preview in sync with the canonical saved source after
   // an AI apply, without remounting the Zoé conversation or entire page.
   const [editorProject, setEditorProject] = useState(props.project);
+  // Editor path/tabs/splitter are UI state, never part of version source fidelity.
+  const editorViewRef = useRef(props.project.workspace);
   const [editorHydrationEpoch, setEditorHydrationEpoch] = useState(0);
-  // Keep the old editor and preview hidden until this exact saved selection
-  // has been hydrated AND acknowledged by the runner preview.
+  // The preview transition is independent of editor hydration. Only the preview
+  // pane waits for runner acknowledgement; the editor/chat stay usable once
+  // the saved files are hydrated.
   const [historySwitch, setHistorySwitch] = useState<{target:number;sourceVersion:number|null;failed:boolean}|null>(null);
   // The server's monotonic concurrency token is distinct from the selected
   // saved-history version. Never trust an old editor callback after hydration.
@@ -147,7 +153,7 @@ export default function ProjectBuilderShell(props: {
         if (latest.sourceVersion === attemptedSourceVersion) return false;
         // A new server source is already saved; rehydrate, never PATCH and never
         // append to user-visible history. Remount the editor from that baseline.
-        setEditorProject(latest);
+        setEditorProject({...latest, workspace:preserveVersionWorkspaceView(latest.workspace,editorViewRef.current)});
         setPreviewWorkspace(latest.workspace);
         setPreviewSourceVersion(latest.sourceVersion);
         previewSourceTokenRef.current = latest.sourceVersion;
@@ -162,6 +168,15 @@ export default function ProjectBuilderShell(props: {
         codeDirtyRef.current = false;
         setCodeDirty(false);
         setEditorHydrationEpoch(current => current + 1);
+        try {
+          if (await resolveChatScope(latest.sourceVersion)) await ensureChatHistoryLoaded();
+        } catch {
+          chatScopeRef.current = null;
+          historyLoadRef.current = null;
+          chatHistoryRef.current = [];
+          setMessages([]);
+          setChatHistoryError("Zoé couldn't restore this version's conversation. AI is paused.");
+        }
         return true;
       } catch {
         return false;
@@ -285,46 +300,111 @@ export default function ProjectBuilderShell(props: {
     };
   }, [props.project.buildProjectId]);
 
-  // Keep a synchronous, project-component-scoped history for exact AI attempts.
-  // React state changes are asynchronous; a follow-up can arrive before re-render.
+  // Version-scoped chat is separate from the runner preview session. Chat only
+  // changes when the server confirms a new active saved snapshot or source head.
   const chatHistoryRef = useRef<ZoeChatTurn[]>([]);
-  const historyLoadRef = useRef<Promise<void> | null>(null);
+  const chatScopeRef = useRef<ZoeVersionChatScope|null>(null);
+  const [chatSavedVersion,setChatSavedVersion] = useState<number|null>(null);
+  const historyLoadRef = useRef<Promise<void>|null>(null);
   const historyWritesRef = useRef<Promise<void>>(Promise.resolve());
-  const [chatHistoryError, setChatHistoryError] = useState<string | null>(null);
+  const [chatHistoryError, setChatHistoryError] = useState<string|null>(null);
   const historyUrl = `/api/build/projects/${encodeURIComponent(props.project.buildProjectId)}/assistant/history`;
+  const sourceHistoryUrl = `/api/build/projects/${encodeURIComponent(props.project.buildProjectId)}/source-history`;
 
-  function ensureChatHistoryLoaded(): Promise<void> {
+  function activateChatScope(scope:ZoeVersionChatScope) {
+    if (matchingZoeVersionScope(chatScopeRef.current,scope)) return;
+    chatScopeRef.current = scope;
+    setChatSavedVersion(scope.savedVersion);
+    historyLoadRef.current = null;
+    chatHistoryRef.current = [];
+    setMessages([]);
+    setChatHistoryError(null);
+  }
+
+  async function resolveChatScope(expectedSourceVersion:number):Promise<boolean> {
+    const response = await fetch(sourceHistoryUrl,{credentials:"same-origin",cache:"no-store"});
+    const body:unknown = await response.json().catch(()=>null);
+    const payload = body && typeof body === "object" ? body as Record<string,unknown> : null;
+    if (!response.ok || payload?.ok !== true ||
+        payload.currentVersion !== expectedSourceVersion) return false;
+    const scope = decodeZoeVersionChatScope({
+      sourceVersion:payload.currentVersion,savedVersion:payload.activeVersion,
+    });
+    if (!scope || previewSourceTokenRef.current !== expectedSourceVersion) return false;
+    activateChatScope(scope);
+    return true;
+  }
+
+  function ensureChatHistoryLoaded():Promise<void> {
     if (historyLoadRef.current) return historyLoadRef.current;
-    historyLoadRef.current = (async () => {
-      const response = await fetch(historyUrl, {credentials:"same-origin",cache:"no-store"});
-      const payload: unknown = await response.json().catch(() => null);
+    const task = (async () => {
+      if (!chatScopeRef.current) {
+        const ready = await resolveChatScope(previewSourceTokenRef.current);
+        if (!ready) throw new Error("Chat version is changing.");
+      }
+      const scope = chatScopeRef.current;
+      if (!scope) throw new Error("Chat version unavailable.");
+      const url = `${historyUrl}?savedVersion=${scope.savedVersion}&sourceVersion=${scope.sourceVersion}`;
+      const response = await fetch(url,{credentials:"same-origin",cache:"no-store"});
+      const payload:unknown = await response.json().catch(()=>null);
       const restored = readZoeChatHistoryPayload(payload);
-      if (!response.ok || !restored) throw new Error("Chat history could not be restored.");
+      const responseScope = decodeZoeVersionChatScope(payload);
+      if (!response.ok || !restored || !matchingZoeVersionScope(responseScope,scope))
+        throw new Error("Chat history could not be restored.");
+      // A late response from V1 must never replace the visible V2 conversation.
+      if (!matchingZoeVersionScope(chatScopeRef.current,scope)) return;
       chatHistoryRef.current = mergeZoeChatHistory(restored,chatHistoryRef.current);
       setMessages(chatHistoryRef.current);
-    })().catch(error => {
-      setChatHistoryError("Chat history is unavailable. Reload after confirming the chat migration is deployed. No AI request was sent.");
+    })();
+    const guarded = task.catch(error => {
+      if (historyLoadRef.current === guarded) {
+        historyLoadRef.current = null; // allow a safe retry on the same version
+        if (chatScopeRef.current)
+          setChatHistoryError("Zoé couldn't verify this version's conversation. No AI request was sent.");
+      }
       throw error;
     });
-    return historyLoadRef.current;
+    historyLoadRef.current = guarded;
+    return guarded;
   }
-  useEffect(() => { void ensureChatHistoryLoaded().catch(() => {}); }, [props.project.buildProjectId]);
 
-  function recordChatTurn(role: ZoeChatTurn["role"], text: string) {
-    // A new user submission returns the viewport to the live conversation.
-    if (role === "user") { chatFollowRef.current = true; chatScrollIntentRef.current = null; }
-    const turn: ZoeChatTurn = {...makeZoeChatTurn(role, text), clientTurnId:crypto.randomUUID()};
-    chatHistoryRef.current = [...chatHistoryRef.current, turn];
+  // The source-history endpoint is authoritative for the selected saved version.
+  // Dependency repairs may advance the CAS token without switching versions.
+  useEffect(() => {
+    void (async () => {
+      const ready = await resolveChatScope(previewSourceVersion);
+      if (ready) await ensureChatHistoryLoaded();
+    })().catch(() => {
+      // Never show the previous saved version's chat on a failed scope read.
+      if (previewSourceTokenRef.current === previewSourceVersion) {
+        chatScopeRef.current = null;
+        setChatSavedVersion(null);
+        historyLoadRef.current = null;
+        chatHistoryRef.current = [];
+        setMessages([]);
+        setChatHistoryError("Zoé's conversation is unavailable for this version. No AI request was sent.");
+      }
+    });
+  },[props.project.buildProjectId,previewSourceVersion]);
+
+  function recordChatTurn(role:ZoeChatTurn["role"],text:string) {
+    const scope = chatScopeRef.current;
+    if (!scope || previewSourceTokenRef.current !== scope.sourceVersion) {
+      setChatHistoryError("Zoé is loading this version's conversation. Try again after it appears.");
+      return;
+    }
+    if (role === "user") {chatFollowRef.current = true;chatScrollIntentRef.current = null;}
+    const turn:ZoeChatTurn = {...makeZoeChatTurn(role,text),clientTurnId:crypto.randomUUID()};
+    chatHistoryRef.current = [...chatHistoryRef.current,turn];
     setMessages(chatHistoryRef.current);
-    // Preserve user/assistant ordering within the open session. Failed storage
-    // is visible; never pretend chat is durable or retry a billable operation.
-    historyWritesRef.current = historyWritesRef.current.catch(() => {}).then(async () => {
-      const response = await fetch(historyUrl, {method:"POST",credentials:"same-origin",
-        headers:{"Content-Type":"application/json"},body:JSON.stringify(turn)});
+    historyWritesRef.current = historyWritesRef.current.catch(()=>{}).then(async () => {
+      const response = await fetch(historyUrl,{method:"POST",credentials:"same-origin",
+        headers:{"Content-Type":"application/json"},body:JSON.stringify({...scope,...turn})});
       if (!response.ok) throw new Error("Chat turn could not be saved");
     });
     void historyWritesRef.current.catch(() => {
-      setChatHistoryError("Zoé answered, but part of this conversation was not saved. Keep this tab open until storage is available.");
+      if (matchingZoeVersionScope(chatScopeRef.current,scope))
+        setChatHistoryError("Part of this version's conversation wasn't saved. Keep this tab open.");
     });
   }
   // When a request is paused for unsaved source, preserve its preceding context.
@@ -611,6 +691,13 @@ export default function ProjectBuilderShell(props: {
     // user turn, create an AI attempt or send it to a provider while code is dirty.
     if (!resumed) {
       recordChatTurn("user", `${submission.prompt.trim() || "(media attached)"}${submission.files.length ? ` · ${submission.files.length} attachment(s)` : ""}`);
+    }
+    // Persist the user's turn before any billable provider call or source save.
+    // A stale-version write must never be silently treated as a successful chat.
+    try {await historyWritesRef.current;} catch {
+      assistantRequestInFlight.current = false;
+      setChatHistoryError("This version's message wasn't saved. No AI request was sent.");
+      return;
     }
     if (codeDirty) {
       deferredHistoryRef.current = precedingHistory;
@@ -909,14 +996,30 @@ export default function ProjectBuilderShell(props: {
     const verifiedPaths = approvedEdits ? verifyAppliedZoeSource(latest.workspace, approvedEdits) : [];
     // Do not overwrite manual edits that appeared while a server apply was running.
     if (codeDirtyRef.current) throw new Error("APPLIED_EDITOR_BECAME_DIRTY");
-    setEditorProject(latest);
+    setEditorProject({...latest, workspace:preserveVersionWorkspaceView(latest.workspace,editorViewRef.current)});
     setPreviewWorkspace(latest.workspace);
     setPreviewSourceVersion(latest.sourceVersion);
+    previewSourceTokenRef.current = latest.sourceVersion;
     setSavedBuildResult(null);
     setSavedBuildError(null);
     codeDirtyRef.current = false;
     setCodeDirty(false);
     setEditorHydrationEpoch(current => current + 1);
+    // A successful save starts a new saved-version conversation. History
+    // reconciliation is not allowed to undo the server-authoritative source.
+    try {
+      if (await resolveChatScope(expectedVersion)) await ensureChatHistoryLoaded();
+      else throw new Error("Chat source mismatch");
+    } catch {
+      if (previewSourceTokenRef.current === expectedVersion) {
+        chatScopeRef.current = null;
+        setChatSavedVersion(null);
+        historyLoadRef.current = null;
+        chatHistoryRef.current = [];
+        setMessages([]);
+        setChatHistoryError("The saved files are current, but their conversation couldn't load. AI is paused.");
+      }
+    }
     return verifiedPaths;
   }
 
@@ -1154,7 +1257,9 @@ export default function ProjectBuilderShell(props: {
             </strong>
 
             <p>
-              Design, build, and refine this project.
+              {chatSavedVersion === null
+                ? "Loading this version's conversation…"
+                : `Version ${chatSavedVersion} conversation · design, build, and refine.`}
             </p>
           </div>
         </header>
@@ -1267,7 +1372,11 @@ export default function ProjectBuilderShell(props: {
             <ProjectRevisionHistory
               buildProjectId={props.project.buildProjectId}
               currentVersion={previewSourceVersion}
-              disabled={Boolean(historySwitch) || codeDirty || assistantChecking || applyingFileEdit || applyingPlan || Boolean(pendingFileEdit) || Boolean(pendingPlan)}
+              disabled={historySwitch?.sourceVersion === null || codeDirty || assistantChecking || applyingFileEdit || applyingPlan || Boolean(pendingFileEdit) || Boolean(pendingPlan)}
+              onBeforeSwitch={async () => {
+                if (assistantRequestInFlight.current) throw new Error("Finish Zoé's current request before switching versions.");
+                await historyWritesRef.current;
+              }}
               onSwitchStart={(version) => {
                 setHistorySwitch({target:version,sourceVersion:null,failed:false});
               }}
@@ -1280,7 +1389,6 @@ export default function ProjectBuilderShell(props: {
                 setRestoredVersionPinned(savedVersion);
                 await refreshAfterSuccessfulApply(savedVersion);
                 setHistorySwitch({target:fromVersion,sourceVersion:savedVersion,failed:false});
-                addMessage(`Version V${fromVersion} is now selected. Your saved versions remain available. ZoeBuild is preparing the preview; verify before publishing.`);
               }}
             />
           ) : null}
@@ -1473,42 +1581,6 @@ export default function ProjectBuilderShell(props: {
         </div>
 
         <div className="zb-project-stage-body">
-        {historySwitch ? (
-          <div role="status" aria-live="polite" aria-busy={!historySwitch.failed}
-            data-testid="zoebuild-history-switch-overlay"
-            style={{position:"fixed",inset:0,zIndex:10000,background:"var(--background, #fff)",
-              display:"grid",placeItems:"center",padding:24}}>
-            <div style={{textAlign:"center",maxWidth:440}}>
-              <div style={{fontWeight:650,fontSize:17}}>
-                {historySwitch.failed
-                  ? historySwitch.sourceVersion === null
-                    ? `Version ${historySwitch.target} could not be confirmed`
-                    : `Version ${historySwitch.target} preview is taking longer than expected`
-                  : `Switching to Version ${historySwitch.target}…`}
-              </div>
-              <p style={{fontSize:13,opacity:.72,marginTop:10}}>
-                {historySwitch.failed
-                  ? historySwitch.sourceVersion === null
-                    ? "The selection response was not confirmed. Reload to inspect the currently saved version."
-                    : "The selected files were saved, but the preview has not acknowledged them. The previous preview remains hidden. You can retry or reload."
-                  : historySwitch.sourceVersion === null
-                    ? "Loading saved files and dependency settings…"
-                    : "Preparing the selected preview and workspace…"}
-              </p>
-              {historySwitch.failed ? (
-                <div style={{display:"flex",justifyContent:"center",gap:8,flexWrap:"wrap"}}>
-                  {historySwitch.sourceVersion !== null && reactPreview?.onRetry ? (
-                    <button type="button" onClick={() => {
-                      setHistorySwitch(current => current?.failed ? {...current,failed:false}:current);
-                      reactPreview.onRetry?.();
-                    }}>Retry preview</button>
-                  ) : null}
-                  <button type="button" onClick={()=>window.location.reload()}>Reload saved project</button>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        ) : null}
     <main className="zb-builder-shell">
 
       <section className="zb-builder-stage">
@@ -1518,7 +1590,21 @@ export default function ProjectBuilderShell(props: {
           aria-hidden={settingsOpen || mode !== "preview"}
           style={{position:"relative"}}
         >
-            {dependencyRecoveryNeedsAttention ? (
+            {historySwitch ? <HistoryPreviewTransition
+              target={historySwitch.target}
+              sourceVersion={historySwitch.sourceVersion}
+              failed={historySwitch.failed}
+              previewMessage={reactPreview?.message ?? null}
+              previewState={reactPreview?.state ?? "starting"}
+              onRetry={historySwitch.sourceVersion !== null && reactPreview?.onRetry
+                ? () => {
+                    setHistorySwitch(current => current?.failed ? {...current,failed:false} : current);
+                    reactPreview.onRetry?.();
+                  }
+                : undefined}
+              onReload={() => window.location.reload()}
+            /> : null}
+            {dependencyRecoveryNeedsAttention && !historySwitch ? (
               <div data-testid="zoebuild-dependency-recovery-help" role="status"
                 aria-label="Saved version preview needs attention"
                 style={{position:"absolute",inset:0,zIndex:25,background:"var(--background,#fff)",display:"grid",placeItems:"center",padding:20,overflowY:"auto"}}>
@@ -1566,12 +1652,21 @@ export default function ProjectBuilderShell(props: {
 
         <div
           className="zb-code-stage"
+          style={{position:"relative"}}
           hidden={settingsOpen || mode !== "code"}
           aria-hidden={settingsOpen || mode !== "code"}
         >
+          {historySwitch?.sourceVersion === null ? <div role="status"
+            style={{position:"absolute",inset:0,zIndex:30,display:"grid",placeItems:"center",
+              padding:24,background:"var(--zb-surface,var(--background,#fff))"}}>
+            <p>Opening Version {historySwitch.target} files…</p>
+          </div> : null}
           <BuildWorkspaceClient
             key={`${props.project.buildProjectId}:applied:${editorHydrationEpoch}`}
             project={editorProject}
+            onWorkspaceViewChange={(workspace) => {
+              if (activeEditorEpochRef.current === editorHydrationEpoch) editorViewRef.current=workspace;
+            }}
             onWorkspaceSnapshot={(workspace) => {
               if (activeEditorEpochRef.current === editorHydrationEpoch) setPreviewWorkspace(workspace);
             }}

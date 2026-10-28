@@ -40,7 +40,7 @@ describe("E17L.3 chat scroll gestures and continuous typed-follow",()=>{
     expect(shell).toContain('onKeyDown={(event) =>');
     expect(shell).toContain('observer.observe(thread, {childList: true, subtree: true, characterData: true})');
     expect(shell).toContain('thread.scrollTop = thread.scrollHeight');
-    expect(shell).toContain('if (role === "user") { chatFollowRef.current = true; chatScrollIntentRef.current = null; }');
+    expect(shell).toMatch(/if\s*\(\s*role\s*===\s*"user"\s*\)\s*\{\s*chatFollowRef\.current\s*=\s*true\s*;\s*chatScrollIntentRef\.current\s*=\s*null\s*;\s*\}/);
     expect(shell).not.toContain('window.scrollTo(');
   });
   it("retains shared Markdown tokens and no duplicate syntax renderer",()=>{

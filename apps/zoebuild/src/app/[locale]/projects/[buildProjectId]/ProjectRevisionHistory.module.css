@@ -41,3 +41,26 @@
 .actions{grid-template-columns:repeat(2,minmax(0,1fr))}
 .deleteButton{grid-column:1/-1;border:1px solid rgba(185,55,55,.4);background:transparent;color:#b54747;padding:3px;font-size:9px}
 .deleteButton:hover:not(:disabled){background:rgba(185,55,55,.09)}
+
+/* Accessible, shared confirmation surface. Native <dialog> uses the top layer
+   so the scrollable history sidebar cannot clip it. */
+.confirmDialog{box-sizing:border-box;width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;border:1px solid var(--zb-border,#dfe3e8);border-radius:16px;background:var(--zb-surface,#fff);color:inherit;padding:0;box-shadow:0 24px 72px rgba(8,19,36,.24)}
+.confirmDialog::backdrop{background:rgba(15,23,42,.52);backdrop-filter:blur(3px)}
+.confirmContent{padding:24px;display:flex;flex-direction:column;gap:12px}
+.confirmEyebrow{color:var(--zb-muted,#64748b);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.confirmContent h3{font-size:20px;line-height:1.3;margin:0;font-weight:700}
+.confirmContent p{font-size:13px;line-height:1.6;color:var(--zb-muted,#64748b);margin:0}
+.confirmLabel{display:flex;flex-direction:column;gap:8px;font-size:13px}
+.confirmInput{border:1px solid var(--zb-border,#cbd5e1);border-radius:9px;padding:10px 12px;background:var(--zb-surface,#fff);color:inherit;font:inherit;font-size:13px}
+.confirmActions{display:flex;justify-content:flex-end;gap:9px;margin-top:8px;flex-wrap:wrap}
+.confirmActions button{border-radius:9px;padding:10px 16px;font-size:13px;font-weight:650;cursor:pointer}
+.confirmCancel{border:1px solid var(--zb-border,#cbd5e1);color:inherit;background:transparent}
+.confirmPrimary{background:#243247;color:white;border:1px solid #243247}
+.confirmDanger{background:#b42332;color:white;border:1px solid #b42332}
+.confirmActions button:disabled{opacity:.45;cursor:not-allowed}
+.confirmActions button:focus-visible,.confirmInput:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
+@media(prefers-reduced-motion:no-preference){.confirmDialog[open]{animation:versionDialogAppear .16s ease-out}@keyframes versionDialogAppear{from{opacity:.55;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}
+
+.comparisonList{list-style:none;margin:8px 0;padding:0;display:grid;gap:5px;max-height:220px;overflow:auto}
+.comparisonList li{font-size:10px;overflow-wrap:anywhere;background:rgba(125,137,150,.06);border-radius:6px;padding:6px}
+.comparisonList span{opacity:.65}

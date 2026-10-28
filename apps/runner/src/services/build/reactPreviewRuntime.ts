@@ -21,6 +21,7 @@ import {
 } from "../../lib/env.js";
 import { isValidReactPreviewReadyDocument } from "./reactPreviewReadiness.js";
 import { PreviewProjectDrainRegistry } from "./reactPreviewProjectDrainPolicy.js";
+import { ReactPreviewMutationCoordinator, assertNotStaleReactPreviewSource } from "./reactPreviewMutationCoordinator.js";
 import { fetchPersistentPreviewHttp, stopPersistentPreviewHttp } from "./reactPreviewPersistentHttp.js";
 
 import {
@@ -115,6 +116,8 @@ const projectDrains = new PreviewProjectDrainRegistry();
 // Admission is bounded; this never raises Docker limits or changes auth.
 const previewStartCoordinator = new PreviewStartCoordinator(8, 75_000);
 const inFlightPreviewStarts = new Map<string, Promise<Awaited<ReturnType<typeof startReactPreviewInternal>>>>();
+
+const previewMutationCoordinator = new ReactPreviewMutationCoordinator();
 
 const previews =
   new Map<
@@ -1178,6 +1181,7 @@ async function reuseExistingProjectPreview(
       continue;
     }
 
+    assertNotStaleReactPreviewSource(preview.sourceVersion, request.sourceVersion);
     if (
       preview.dependencyFingerprint !==
         requestedFingerprint
@@ -1230,22 +1234,18 @@ async function reuseExistingProjectPreview(
         continue;
       }
 
-      await syncPreviewSourceFiles(
-        preview,
-        request.files,
-      );
-
-      preview.sourceVersion =
-        request.sourceVersion;
-
-      preview.lastActivityAt =
-        currentTime();
+      await previewMutationCoordinator.run(preview.id, async () => {
+        if (previews.get(preview.id) !== preview) throw new Error("Preview not found.");
+        assertNotStaleReactPreviewSource(preview.sourceVersion, request.sourceVersion);
+        await syncPreviewSourceFiles(preview,request.files);
+        preview.sourceVersion=request.sourceVersion;
+        preview.lastActivityAt=currentTime();
+      });
 
       return preview;
-    } catch {
-      await destroyPreview(
-        preview,
-      );
+    } catch (error) {
+      if (error instanceof Error && error.message === "Preview source is stale.") throw error;
+      await destroyPreview(preview);
     }
   }
 
@@ -1669,57 +1669,23 @@ export async function syncReactPreview(
   input: Readonly<{
     previewId: string;
     ownerKey: string;
-    request:
-      ProductionBuildJobRequestV1;
+    request: ProductionBuildJobRequestV1;
   }>,
 ) {
-  const record =
-    requireOwnedPreview(
-      input.previewId,
-      input.ownerKey,
-    );
-  projectDrains.assertNotDraining(input.ownerKey, input.request.buildProjectId);
-
-  if (
-    record.buildProjectId !==
-      input.request.buildProjectId ||
-    input.request.stackId !==
-      "react-vite-v1" ||
-    input.request.templateId !==
-      "react-vite-v1"
-  ) {
-    throw new Error(
-      "Preview source identity does not match.",
-    );
-  }
-
-  assertRegisteredProductionBuildFiles({
-    buildProjectId: input.request.buildProjectId,
-    stackId:
-      input.request.stackId,
-    templateId:
-      input.request.templateId,
-    files:
-      input.request.files,
+  return previewMutationCoordinator.run(input.previewId,async()=>{
+    const record=requireOwnedPreview(input.previewId,input.ownerKey);
+    projectDrains.assertNotDraining(input.ownerKey,input.request.buildProjectId);
+    if(record.buildProjectId!==input.request.buildProjectId ||
+       input.request.stackId!=="react-vite-v1" || input.request.templateId!=="react-vite-v1")
+      throw new Error("Preview source identity does not match.");
+    assertNotStaleReactPreviewSource(record.sourceVersion,input.request.sourceVersion);
+    assertRegisteredProductionBuildFiles({buildProjectId:input.request.buildProjectId,
+      stackId:input.request.stackId,templateId:input.request.templateId,files:input.request.files});
+    await syncPreviewSourceFiles(record,input.request.files);
+    record.sourceVersion=input.request.sourceVersion;
+    record.lastActivityAt=currentTime();
+    return {ok:true as const,previewId:record.id};
   });
-
-  await syncPreviewSourceFiles(
-    record,
-    input.request.files,
-  );
-
-  record.sourceVersion =
-    input.request.sourceVersion;
-
-  record.lastActivityAt =
-    currentTime();
-
-  return {
-    ok:
-      true as const,
-    previewId:
-      record.id,
-  };
 }
 
 export async function stopReactPreview(
