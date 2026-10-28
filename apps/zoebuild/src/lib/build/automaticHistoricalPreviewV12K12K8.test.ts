@@ -30,7 +30,7 @@ describe("V12K12K8 automatic historical preview",()=>{
     expect(shell).not.toContain("Approve and prepare dependencies");
     expect(shell).not.toContain("Review saved package.json");
     expect(shell).toContain('data-testid="zoebuild-dependency-recovery-help"');
-    expect(shell).toContain("Your version and files are unchanged.");
+    expect(shell).toContain("Its files are unchanged.");
     expect(hook).toContain("if (!bootstrapAllowedRef.current)");
     expect(hook).toContain("baseVersion: startingVersion");
     expect(hook).toContain("workspaceRevisionRef.current !== startingWorkspaceRevision");

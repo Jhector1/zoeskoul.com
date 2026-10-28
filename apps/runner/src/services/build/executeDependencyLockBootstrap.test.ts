@@ -67,6 +67,9 @@ describe("restricted Build dependency-lock bootstrap container", () => {
     expect(source).toContain("fs.rm(workspaceDir");
     expect(source).toContain("finally {");
     expect(source).toContain("ensureWorkspaceWritableForShellUser(workspaceDir)");
+    expect(source.indexOf("ensureWorkspaceWritableForShellUser(workspaceDir)")).toBeGreaterThan(
+      source.indexOf("  try {", source.indexOf("const workspaceDir =")),
+    );
 
     expect(source).not.toContain("/docker.sock");
     expect(source).not.toContain("exec(");

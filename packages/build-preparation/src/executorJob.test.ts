@@ -50,12 +50,17 @@ describe("dependency-lock bootstrap job creation", () => {
     }
   });
 
-  it("refuses dependency-free static source", () => {
-    expect(() => createRegisteredDependencyLockBootstrapJob({
+  it("rejects a retired stack before dependency bootstrap begins", () => {
+    // The retired template cannot be materialized. Use an otherwise valid
+    // workspace to test the bootstrap API's own unsupported-stack guard.
+    const run = () => createRegisteredDependencyLockBootstrapJob({
       buildProjectId: "build_static",
       specification: spec("static-html-v1"),
-      workspace: workspace("static-html-v1"),
+      workspace: workspace("react-vite-v1"),
       sourceVersion: 1,
-    })).toThrow(BuildPreparationError);
+    });
+
+    expect(run).toThrow(BuildPreparationError);
+    expect(run).toThrow(/Unsupported ZoeBuild (stack|template): static-html-v1/);
   });
 });

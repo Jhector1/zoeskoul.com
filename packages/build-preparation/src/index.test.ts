@@ -66,26 +66,19 @@ function addTextFile(
 }
 
 describe("ZoeBuild artifact preparation", () => {
-  it("prepares static HTML directly as a publishable source artifact", () => {
-    const plan = prepareRegisteredBuildArtifactPlan({
+  it("rejects the retired static HTML template without reviving legacy publishing", () => {
+    // The removed template cannot be materialized. Supply a valid React
+    // workspace so the preparation API must itself refuse the old stack.
+    expect(() => prepareRegisteredBuildArtifactPlan({
       specification: specification("static-html-v1"),
-      workspace: materialized("static-html-v1"),
+      workspace: materialized("react-vite-v1"),
       sourceVersion: 3,
-    });
-
-    expect(plan).toMatchObject({
-      stackId: "static-html-v1",
+    })).toThrow(BuildPreparationError);
+    expect(() => prepareRegisteredBuildArtifactPlan({
+      specification: specification("static-html-v1"),
+      workspace: materialized("react-vite-v1"),
       sourceVersion: 3,
-      dependencyLock: {
-        state: "not-required",
-      },
-      buildCommand: [],
-      artifact: {
-        type: "static-directory",
-        outputPath: ".",
-      },
-      buildReady: true,
-    });
+    })).toThrow(/Unsupported ZoeBuild template: static-html-v1/);
   });
 
   it("allows lock bootstrap only for the registered React dependency manifest", () => {

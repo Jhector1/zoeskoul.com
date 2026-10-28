@@ -9,6 +9,7 @@ import {
   type PrismaClient,
 } from "@zoeskoul/db";
 import { pathOf } from "@zoeskoul/learner-workspace/ide/fsTree";
+import { invalidateManagedDependenciesOnManifestEdit } from "./invalidateManagedDependenciesOnManifestEdit";
 
 import {
   ProjectVersionConflictError,
@@ -60,6 +61,7 @@ export function createPrismaBuildProjectSourceWriter(
                 scopeKey: true,
                 settings: true,
                 meta: true,
+                workspace: true,
               },
             },
           },
@@ -67,7 +69,14 @@ export function createPrismaBuildProjectSourceWriter(
 
         if (!buildProject) return null;
 
-        const workspace = parseBuildWorkspaceMutation(input.workspace);
+        const parsed = parseBuildWorkspaceMutation(input.workspace);
+        // User-authored package changes must not keep the OLD signed lock.
+        // Automatic bootstrap writes and historical restore are independent.
+        const workspace = options.createRevision !== false &&
+          input.clientInstanceId !== "zoebuild-lock-bootstrap"
+          ? invalidateManagedDependenciesOnManifestEdit(
+              parseBuildWorkspaceMutation(buildProject.codeProject.workspace), parsed)
+          : parsed;
         if (workspace.language !== buildProject.codeProject.language) {
           throw new BuildWorkspaceMutationError([
             "Workspace language cannot change during a ZoeBuild source save.",

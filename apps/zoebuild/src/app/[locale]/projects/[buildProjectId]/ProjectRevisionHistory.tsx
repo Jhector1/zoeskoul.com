@@ -15,6 +15,7 @@ export default function ProjectRevisionHistory(props: Readonly<{
   onRestored: (savedVersion:number, fromVersion:number) => Promise<void>;
   onSwitchStart?: (version:number) => void;
   onSwitchFailure?: (version:number, persisted:boolean) => void;
+  onStaleSource?: (attemptedSourceVersion:number) => Promise<boolean>;
 }>) {
   const [expanded,setExpanded] = useState(false);
   const [revisions,setRevisions] = useState<Revision[]>([]);
@@ -50,6 +51,21 @@ export default function ProjectRevisionHistory(props: Readonly<{
       .finally(() => {if (active) setLoading(false);});
     return () => {active=false;};
   },[expanded,baseUrl,props.currentVersion]);
+
+  async function refreshHistoryAfterConflict() {
+    // A dependency bootstrap can advance the internal source token without
+    // adding a saved version. Re-read the owner-scoped current history instead
+    // of leaving a stale "Current" badge or replaying a restore automatically.
+    const response = await fetch(baseUrl,{credentials:"same-origin",cache:"no-store"});
+    const payload = await response.json().catch(()=>null) as {
+      ok?:boolean;revisions?:Revision[];hasMore?:boolean;activeVersion?:number;
+    }|null;
+    if (!response.ok || !payload?.ok || !Array.isArray(payload.revisions)) return false;
+    setRevisions(payload.revisions);
+    setHasMore(Boolean(payload.hasMore));
+    setActiveVersion(Number.isSafeInteger(payload.activeVersion) ? payload.activeVersion! : null);
+    return true;
+  }
 
   async function loadOlderVersions() {
     if (loading || busy || !hasMore || !revisions.length) return;
@@ -99,6 +115,16 @@ export default function ProjectRevisionHistory(props: Readonly<{
       const data = body && typeof body === "object" ? body as {
         ok?:boolean;sourceVersion?:number;activeVersion?:number;message?:string;code?:string
       } : null;
+      if (response.status === 409 && data?.code === "BUILD_HISTORY_STALE") {
+        // Don't blindly replay a version switch against a newly saved head.
+        // It may contain newer real edits. Refresh the source and list; the
+        // user can confirm the selected historical version again.
+        await props.onStaleSource?.(props.currentVersion).catch(()=>false);
+        const refreshed = await refreshHistoryAfterConflict().catch(()=>false);
+        throw new Error(refreshed
+          ? "Saved versions were refreshed after the project changed. Check Current and select the version again."
+          : "The saved project changed. Reload it before selecting another version.");
+      }
       if (!response.ok || !data?.ok || !Number.isSafeInteger(data.sourceVersion))
         throw new Error(data?.message ?? data?.code ?? "Restore could not be verified. Source was not changed.");
       savedVersion = data.sourceVersion!;

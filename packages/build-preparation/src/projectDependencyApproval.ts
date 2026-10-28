@@ -139,3 +139,42 @@ export function assertNoUntrustedInstallControls(files: ReadonlyMap<string, stri
     }
   }
 }
+
+
+/**
+ * A persisted owner's own pinned manifest may be resolved by the trusted runner
+ * even when it differs from today's starter template. This classification does
+ * NOT authorize an existing unsigned lock: the bootstrap must regenerate that
+ * lock scriptlessly from registry-only pinned packages. An existing approval is
+ * always verified; a mismatch or forged signature is never silently repaired.
+ *
+ * The caller must independently enforce authenticated ownership, an exact
+ * saved-source CAS version and the canonical runner/install policy.
+ */
+export function inspectProjectOwnedDependencyPreparation(args: Readonly<{
+  projectId: string;
+  files: ReadonlyMap<string, string>;
+  secret: string | undefined;
+}>): "resolve-lock" | "already-approved" {
+  assertNoUntrustedInstallControls(args.files);
+  const packageJson = args.files.get("package.json");
+  if (packageJson === undefined) {
+    throw new ProjectDependencyApprovalError("Project requires a root package.json.");
+  }
+  canonicalProjectDependencyManifest(packageJson);
+  const existingLock = args.files.get("pnpm-lock.yaml");
+  const approval = args.files.get(PROJECT_DEPENDENCY_APPROVAL_PATH);
+  if (approval !== undefined) {
+    verifyProjectDependencies({
+      projectId: args.projectId,
+      packageJson,
+      lockfile: existingLock,
+      approval,
+      secret: args.secret,
+    });
+    if (existingLock !== undefined) return "already-approved";
+  }
+  // An unsigned lock is NOT considered authorized, even if its text looks
+  // valid. Always resolve in the runner and seal the resulting exact bytes.
+  return "resolve-lock";
+}

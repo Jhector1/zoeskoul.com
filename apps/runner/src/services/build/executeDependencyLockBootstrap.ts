@@ -140,12 +140,11 @@ export async function executeDependencyLockBootstrap(
     })),
   );
 
-  await ensureWorkspaceWritableForShellUser(workspaceDir);
-
   let container: Awaited<ReturnType<typeof docker.createContainer>> | null =
     null;
 
   try {
+    await ensureWorkspaceWritableForShellUser(workspaceDir);
     container = await docker.createContainer(
       buildDependencyLockBootstrapContainerOptions({
         workspaceDir,

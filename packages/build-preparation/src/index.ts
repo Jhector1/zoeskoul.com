@@ -9,9 +9,9 @@ import {
   type DependencyLockBootstrapExecutionResponseV1,
   type ProductionBuildJobRequestV1,
 } from "@zoeskoul/build-executor-contracts";
-import { requireBuildStack } from "@zoeskoul/build-registry";
+import { requireBuildStack as lookupRegisteredStack } from "@zoeskoul/build-registry";
 import {
-  requireBuildTemplate,
+  requireBuildTemplate as lookupRegisteredTemplate,
   type BuildDependencyLockPolicy,
   type BuildTemplateDefinition,
 } from "@zoeskoul/build-template-registry";
@@ -22,7 +22,41 @@ import {
   canonicalProjectDependencyManifest,
   verifyProjectDependencies,
 } from "./projectDependencyApproval";
-export { sealProjectDependencies, canonicalProjectDependencyManifest, PROJECT_DEPENDENCY_APPROVAL_PATH } from "./projectDependencyApproval";
+export {
+  sealProjectDependencies,
+  canonicalProjectDependencyManifest,
+  PROJECT_DEPENDENCY_APPROVAL_PATH,
+  inspectProjectOwnedDependencyPreparation,
+  ProjectDependencyApprovalError,
+} from "./projectDependencyApproval";
+
+/**
+ * The registry can reject retired templates before preparation checks run.
+ * Normalize that rejection so API and runner callers always receive the
+ * stable preparation error contract instead of a generic registry Error.
+ * Do not register or emulate removed legacy stacks.
+ */
+function requireBuildStack(stackId: string): BuildStackDefinition {
+  try {
+    return lookupRegisteredStack(stackId);
+  } catch {
+    throw new BuildPreparationError(
+      "BUILD_PREPARATION_INVALID",
+      `Unsupported ZoeBuild stack: ${stackId}.`,
+    );
+  }
+}
+
+function requireBuildTemplate(templateId: string): BuildTemplateDefinition {
+  try {
+    return lookupRegisteredTemplate(templateId);
+  } catch {
+    throw new BuildPreparationError(
+      "BUILD_PREPARATION_INVALID",
+      `Unsupported ZoeBuild template: ${templateId}.`,
+    );
+  }
+}
 
 export const BUILD_PREPARATION_VERSION = 1 as const;
 

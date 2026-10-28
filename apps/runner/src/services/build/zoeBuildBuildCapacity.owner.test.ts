@@ -14,7 +14,9 @@ const sessions = readFileSync(
 describe("ZoeBuild shared-runner build admission ownership", () => {
   it("covers both one-shot operations through the same slot owner", () => {
     expect(production).toContain("withZoeBuildBuildSlot(() => executeProductionBuild(request))");
-    expect(bootstrap).toContain("withZoeBuildBuildSlot(() => executeDependencyLockBootstrap(request))");
+    expect(bootstrap).toContain("withZoeBuildQueuedBootstrapSlot(");
+    expect(bootstrap).toContain("requestKey, () => executeDependencyLockBootstrap(request)");
+    expect(bootstrap).toContain("getRequiredActorKey(req)");
   });
 
   it("translates capacity refusal to 429 at both trusted routes", () => {

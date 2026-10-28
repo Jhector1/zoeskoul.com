@@ -10,6 +10,7 @@ import { registeredReactPreviewRoutes } from "@/lib/build/reactPreviewPageCatalo
 import { mayAutoRecoverReactPreviewDependencies } from "@/lib/build/reactPreviewDependencyRecovery";
 import { previewCapacityRetryDelayMs } from "@/lib/build/previewCapacityRecovery";
 import { previewDocumentGatewayUrl, classifyPreviewDocumentHealth } from "@/lib/build/previewDocumentIntegrity";
+import { claimSavedDependencyFollowUp, clearSavedDependencyRecoveryGuards } from "@/lib/build/savedDependencyRecoveryContinuation";
 
 type PreviewSession = Readonly<{
   previewId: string;
@@ -20,7 +21,9 @@ type ApiPayload = {
   ok?: boolean;
   code?: string;
   message?: string;
+  requestId?: string;
   preview?: { previewId?: string; basePath?: string };
+  bootstrap?: { source?: { sourceVersion?: number } };
 };
 
 const SYNC_DEBOUNCE_MS = 650;
@@ -246,9 +249,13 @@ export function useReactVitePreview(input: Readonly<{
   // stale source token; never replace local unsaved code or invent a version.
   const reconcileConflict = useCallback(async (attemptedVersion: number) => {
     if (triedResyncVersionsRef.current.has(attemptedVersion)) return false;
-    triedResyncVersionsRef.current.add(attemptedVersion);
     const refresh = sourceConflictCallbackRef.current;
+    // A non-advanced authoritative head is not proof that a future
+    // recheck must fail. Only consume this token after a SUCCESSFUL rehydrate.
+    // Otherwise a preview 409 may arrive just before bootstrap commits and
+    // permanently block synchronization after that commit.
     if (!refresh || !(await refresh(attemptedVersion))) return false;
+    triedResyncVersionsRef.current.add(attemptedVersion);
     if (mountedRef.current) {
       setConfirmedSourceVersion(null);
       setPreview(current => ({
@@ -503,10 +510,22 @@ export function useReactVitePreview(input: Readonly<{
 
       if (dependencyLockRequired) {
         const recoveryKey = `zoebuild:dependency-recovery:${input.buildProjectId}:${startingVersion}`;
-        let recoveredAlready = false;
-        try { recoveredAlready = window.sessionStorage.getItem(recoveryKey) === "completed"; } catch { /* optional */ }
-        if (recoveredAlready) {
-          throw new Error("ZoeBuild couldn't safely prepare this saved version. Your saved files are unchanged.");
+        // The first successful bootstrap can finish before the restored source
+        // has been rehydrated. A completed marker is not proof of an unsafe
+        // package. Allow ONE more trusted CAS-bound attempt automatically.
+        // Real safety denials still come from the backend and are never bypassed.
+        const recoveryPermission = claimSavedDependencyFollowUp(window.sessionStorage, recoveryKey);
+        if (recoveryPermission === "exhausted") {
+          // Never turn a stale internal source token into a dependency denial.
+          // The server remains authoritative and may have advanced the head
+          // during the preceding verified bootstrap.
+          if (await reconcileConflict(startingVersion)) return;
+          console.warn("[ZoeBuild preview] bounded dependency recovery exhausted", {
+            phase: "bootstrap-guard", sourceVersion: startingVersion,
+          });
+          // This is a CLIENT retry budget, not a verdict on the saved packages.
+          // The previous bootstrap operations may have completed successfully.
+          throw new Error("Automatic preview preparation did not finish after bounded retries. Your saved files are safe. Retry after the source finishes synchronizing.");
         }
         if (!bootstrapAllowedRef.current) {
           throw new Error(restoredDependencyPinnedRef.current
@@ -523,9 +542,9 @@ export function useReactVitePreview(input: Readonly<{
           }));
         }
 
-        const capacityKey = `zoebuild:capacity-retry:${input.buildProjectId}:${startingVersion}`;
-        // Keep exactly the same source version and authorized request on retry.
-        // Never issue new builds for a source that changed while the runner was busy.
+        // Runner backpressure is not a dependency-integrity denial. Retain the
+        // exact saved-source CAS and wait only within a finite wall-clock
+        // budget. Do not persist a one-retry token across page reloads.
         const requestBootstrap = () => fetch(
           `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/dependency-lock/bootstrap`,
           {
@@ -536,37 +555,56 @@ export function useReactVitePreview(input: Readonly<{
               reconcileExisting: true,
               baseVersion: startingVersion,
               autoRestoreDependencies: restoredDependencyPinnedRef.current,
+              autoPrepareProjectDependencies: !restoredDependencyPinnedRef.current,
             }),
           },
         );
+        const capacityStartedAt = Date.now();
+        let capacityRetries = 0;
         let bootstrap = await requestBootstrap();
-        if (bootstrap.status === 429) {
-          let alreadyWaited = false;
-          try { alreadyWaited = window.sessionStorage.getItem(capacityKey) === "waited"; }
-          catch { alreadyWaited = true; /* no persistent guard: fail closed */ }
-          if (!alreadyWaited) {
-            try { window.sessionStorage.setItem(capacityKey, "waited"); }
-            catch { alreadyWaited = true; }
-          }
-          if (!alreadyWaited) {
-            if (mountedRef.current) setPreview(current => ({
-              src: null, state: "starting",
-              message: "Preview servers are busy. Retrying automatically…",
-              revision: current?.revision ?? 0,
-            }));
-            await new Promise<void>(resolve => window.setTimeout(resolve,
-              previewCapacityRetryDelayMs(bootstrap.headers.get("Retry-After"))));
-            if (!mountedRef.current || !bootstrapAllowedRef.current ||
-                workspaceRevisionRef.current !== startingWorkspaceRevision ||
-                sourceVersionRef.current !== startingVersion) return;
-            bootstrap = await requestBootstrap();
-          }
+        let bootstrapData = await payload(bootstrap);
+        while (bootstrap.status === 429 &&
+            bootstrapData?.code === "BUILD_RUNNER_CAPACITY_REACHED" &&
+            capacityRetries < 4) {
+          const waitMs = previewCapacityRetryDelayMs(bootstrap.headers.get("Retry-After"));
+          if (Date.now() - capacityStartedAt + waitMs > 240_000) break;
+          if (mountedRef.current) setPreview(current => ({
+            src: null, state: "starting",
+            message: "Preparing your website when a preview worker is available…",
+            revision: current?.revision ?? 0,
+          }));
+          await new Promise<void>(resolve => window.setTimeout(resolve, waitMs));
+          if (!mountedRef.current || !bootstrapAllowedRef.current ||
+              workspaceRevisionRef.current !== startingWorkspaceRevision ||
+              sourceVersionRef.current !== startingVersion) return;
+          capacityRetries += 1;
+          bootstrap = await requestBootstrap();
+          bootstrapData = await payload(bootstrap);
         }
-        if (bootstrap.status === 429) {
-          throw new Error("Preview servers are currently busy. Your saved version is safe. Try again when capacity is available.");
+        if (bootstrap.status === 429 &&
+            bootstrapData?.code === "BUILD_RUNNER_CAPACITY_REACHED") {
+          throw new Error("Preview preparation is temporarily at capacity. Your saved version is safe; retry when a worker is free.");
         }
-        const bootstrapData = await payload(bootstrap);
+        // A prior successful preparation may have advanced the authoritative
+        // saved-source token. Follow it rather than repeating package work or
+        // mislabeling a harmless stale request as an unsafe dependency.
+        if (bootstrap.status === 409 && (
+            bootstrapData?.code === "BUILD_SOURCE_CONFLICT" ||
+            bootstrapData?.code === "BUILD_HISTORY_STALE")) {
+          if (await reconcileConflict(startingVersion)) return;
+          console.warn("[ZoeBuild preview] dependency preparation source conflict", {
+            phase: "bootstrap", status: bootstrap.status, code: bootstrapData?.code,
+            requestId: bootstrapData?.requestId, sourceVersion: startingVersion,
+          });
+          throw new Error("This tab has an outdated saved version. Reload the project to synchronize before previewing.");
+        }
         if (!bootstrap.ok || !bootstrapData?.ok) {
+          // Only report bounded failure metadata. Never log workspace source,
+          // package contents, environment values, or runner credentials.
+          console.warn("[ZoeBuild preview] dependency preparation rejected", {
+            phase: "bootstrap", status: bootstrap.status, code: bootstrapData?.code,
+            requestId: bootstrapData?.requestId, sourceVersion: startingVersion,
+          });
           // A trusted auto-recovery denial is a safety decision, not a prompt
           // for nontechnical users to approve arbitrary package installation.
           if ([
@@ -577,7 +615,10 @@ export function useReactVitePreview(input: Readonly<{
             "BUILD_DEPENDENCY_MANIFEST_UNSUPPORTED",
             "BUILD_DEPENDENCY_LOCK_INVALID",
           ].includes(bootstrapData?.code ?? "")) {
-            throw new Error("ZoeBuild couldn't safely prepare this saved version. Your saved files are unchanged.");
+            const reason = typeof bootstrapData?.code === "string" &&
+              /^BUILD_[A-Z0-9_]{3,96}$/.test(bootstrapData.code)
+              ? bootstrapData.code : "BUILD_DEPENDENCIES_UNVERIFIED";
+            throw new Error(`ZoeBuild couldn't safely prepare this saved version. Your saved files are unchanged. Reason: ${reason}`);
           }
           throw new Error(message(bootstrapData, "React dependency preparation failed."));
         }
@@ -593,8 +634,16 @@ export function useReactVitePreview(input: Readonly<{
         }
         try {
           window.sessionStorage.setItem(recoveryKey, "completed");
-          window.sessionStorage.removeItem(capacityKey);
         } catch { /* optional */ }
+        const preparedVersion = bootstrapData.bootstrap?.source?.sourceVersion;
+        if (typeof preparedVersion === "number" &&
+            Number.isSafeInteger(preparedVersion) && preparedVersion > startingVersion) {
+          // Rehydrate from the authenticated source reader, preserving Zoé's
+          // conversation and avoiding a full page reload when possible.
+          if (await reconcileConflict(startingVersion)) return;
+        }
+        // Exact-lock adoption can leave the concurrency token unchanged.
+        // In that case a reload refreshes workspace files without a new save.
         window.location.reload();
         return;
       }
@@ -664,7 +713,8 @@ export function useReactVitePreview(input: Readonly<{
         );
       }
       if (mountedRef.current) {
-        try { window.sessionStorage.removeItem(`zoebuild:dependency-recovery:${input.buildProjectId}:${startingVersion}`); } catch { /* optional */ }
+        clearSavedDependencyRecoveryGuards(window.sessionStorage,
+          `zoebuild:dependency-recovery:${input.buildProjectId}:${startingVersion}`);
         if (workspaceSyncEntriesEqual(startingEntries, exportWorkspaceEntries(workspaceRef.current.nodes))) {
           setConfirmedSourceVersion(sourceVersionRef.current);
           triedResyncVersionsRef.current.delete(startingVersion);
@@ -722,12 +772,8 @@ export function useReactVitePreview(input: Readonly<{
     // An explicit retry may attempt the same trusted recovery once more. Never
     // silently loop or remove the source-version CAS / package safety checks.
     try {
-      window.sessionStorage.removeItem(
-        `zoebuild:dependency-recovery:${input.buildProjectId}:${sourceVersionRef.current}`,
-      );
-      window.sessionStorage.removeItem(
-        `zoebuild:capacity-retry:${input.buildProjectId}:${sourceVersionRef.current}`,
-      );
+      clearSavedDependencyRecoveryGuards(window.sessionStorage,
+        `zoebuild:dependency-recovery:${input.buildProjectId}:${sourceVersionRef.current}`);
     } catch { /* optional */ }
     void (async () => {
       await cancelCurrent();

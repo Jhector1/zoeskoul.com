@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import {
   BuildAccessError,
   BuildSourceConflictError,
+  getBuildProjectCommand,
 } from "@zoeskoul/build-application";
 
 import {
@@ -21,6 +22,11 @@ import { rateLimit } from "@zoeskoul/platform-server/security/ratelimit";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { adoptRestoredReactDependencyLock, AutoRestoreDependenciesError } from "@/lib/build/adoptRestoredReactDependencyLock";
 import { Prisma } from "@zoeskoul/db";
+import {
+  inspectProjectOwnedDependencyPreparation,
+  ProjectDependencyApprovalError,
+} from "@zoeskoul/build-preparation";
+import { pathOf } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 /** Runner capacity is transient, not an invalid artifact or a failed executor.
  * Only recognize an actual HTTP status carried by the trusted runner client.
@@ -124,6 +130,11 @@ export async function POST(
     const reconcileExisting = options.reconcileExisting === true;
     const approveRestoredDependencyRepair = options.approveRestoredDependencyRepair === true;
     const autoRestoreRequested = options.autoRestoreDependencies === true;
+    const autoPrepareRequested = options.autoPrepareProjectDependencies === true;
+    if (options.autoPrepareProjectDependencies !== undefined &&
+        typeof options.autoPrepareProjectDependencies !== "boolean") {
+      return json(requestId, {ok:false,code:"BUILD_PREPARATION_INVALID"},400);
+    }
     if (options.autoRestoreDependencies !== undefined &&
         typeof options.autoRestoreDependencies !== "boolean") {
       return json(requestId, {ok:false, code:"BUILD_PREPARATION_INVALID"}, 400);
@@ -188,6 +199,68 @@ export async function POST(
         });
       }
       return json(requestId,{ok:true,bootstrap:{...resolved,restoredExactLock:false}},200);
+    }
+    // Every project owns its pinned manifest. Saved, owner-authenticated source
+    // can be prepared automatically without matching the current starter.
+    // This is a CAS-bound internal preparation, not a user-visible source save.
+    if (autoPrepareRequested) {
+      if (!reconcileExisting || !Number.isSafeInteger(options.baseVersion) ||
+          approveRestoredDependencyRepair || options.desiredDependencies !== undefined) {
+        return json(requestId, {ok:false,code:"BUILD_PREPARATION_INVALID"},400);
+      }
+      const baseVersion = options.baseVersion as number;
+      const saved = await getBuildProjectCommand({
+        access, buildProjectId, reader: createPrismaBuildProjectReader(prisma),
+      });
+      if (!saved) return json(requestId,{ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
+      if (saved.sourceVersion !== baseVersion) {
+        return json(requestId,{ok:false,code:"BUILD_HISTORY_STALE",
+          message:"The saved source changed during preview preparation."},409);
+      }
+      if (saved.stackId !== "react-vite-v1") {
+        return json(requestId,{ok:false,code:"BUILD_PREPARATION_INVALID",
+          message:"Automatic dependency preparation requires React + Vite."},409);
+      }
+      // Construct complete paths so nested workspace install controls cannot
+      // bypass the canonical dependency policy.
+      const files = new Map<string,string>();
+      for (const node of saved.workspace.nodes) {
+        if (node.kind !== "file") continue;
+        const filePath = pathOf(saved.workspace.nodes, node.id);
+        if (files.has(filePath)) {
+          return json(requestId,{ok:false,code:"BUILD_PREPARATION_INVALID",
+            message:"Duplicate workspace path."},409);
+        }
+        files.set(filePath,node.content);
+      }
+      try {
+        const decision = inspectProjectOwnedDependencyPreparation({
+          projectId: buildProjectId, files,
+          secret: process.env.ZOEBUILD_DEPENDENCY_APPROVAL_SECRET,
+        });
+        if (decision === "already-approved") {
+          // Do not rewrite a verified lock just because a client asked again.
+          return json(requestId,{ok:false,code:"BUILD_DEPENDENCY_ALREADY_APPROVED",
+            message:"Dependencies are already approved; no repair was made."},409);
+        }
+      } catch (error) {
+        if (!(error instanceof ProjectDependencyApprovalError)) throw error;
+        return json(requestId,{ok:false,code:"BUILD_DEPENDENCY_MANIFEST_UNSUPPORTED",
+          message:error.message},409);
+      }
+      // A signed manifest with no lock, an unsigned pinned manifest, or an
+      // unsigned old lock is resolved through the SAME scriptless runner job.
+      // Untrusted old lock bytes are discarded, not signed in place.
+      const prepared = await bootstrapOwnedBuildProjectDependencyLock({
+        reconcileExisting: true, expectedSourceVersion: baseVersion,
+        access, buildProjectId, actorKey,
+        reader: createPrismaBuildProjectReader(prisma),
+        writer: createPrismaBuildProjectSourceWriter(prisma, {createRevision:false}),
+        execute: executeTrustedDependencyLockBootstrapAtRunner,
+        nodeId: crypto.randomUUID(), now: Date.now(),
+      });
+      if (!prepared) return json(requestId,{ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
+      return json(requestId,{ok:true,bootstrap:{...prepared,projectOwnedDependencies:true}},200);
     }
     if (options.approveRestoredDependencyRepair !== undefined &&
         typeof options.approveRestoredDependencyRepair !== "boolean") {

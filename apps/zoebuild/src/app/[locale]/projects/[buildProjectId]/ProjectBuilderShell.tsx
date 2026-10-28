@@ -151,6 +151,12 @@ export default function ProjectBuilderShell(props: {
         setPreviewWorkspace(latest.workspace);
         setPreviewSourceVersion(latest.sourceVersion);
         previewSourceTokenRef.current = latest.sourceVersion;
+        // When dependency preparation advances the concurrency token, keep
+        // the selected historical version's preview transition aligned with it.
+        setHistorySwitch(current => current?.sourceVersion === attemptedSourceVersion
+          ? {...current, sourceVersion: latest.sourceVersion, failed: false} : current);
+        setRestoredVersionPinned(current => current === attemptedSourceVersion
+          ? latest.sourceVersion : current);
         setSavedBuildResult(null);
         setSavedBuildError(null);
         codeDirtyRef.current = false;
@@ -1269,6 +1275,7 @@ export default function ProjectBuilderShell(props: {
                 setHistorySwitch(current => current?.target === version
                   ? (persisted ? {...current,failed:true} : null) : current);
               }}
+              onStaleSource={reconcileStalePreview}
               onRestored={async (savedVersion, fromVersion) => {
                 setRestoredVersionPinned(savedVersion);
                 await refreshAfterSuccessfulApply(savedVersion);
@@ -1517,7 +1524,11 @@ export default function ProjectBuilderShell(props: {
                 style={{position:"absolute",inset:0,zIndex:25,background:"var(--background,#fff)",display:"grid",placeItems:"center",padding:20,overflowY:"auto"}}>
                 <div style={{maxWidth:400,width:"100%",textAlign:"center",fontSize:13}}>
                   <strong style={{fontSize:16}}>We couldn't prepare this preview</strong>
-                  <p style={{opacity:.75}}>ZoeBuild tried to use this version's saved dependencies. It couldn't safely finish. Your version and files are unchanged.</p>
+                    <p style={{opacity:.75}}>ZoeBuild couldn't verify the dependencies required by this saved version. Its files are unchanged.</p>
+                    {reactPreview?.message ? <details style={{marginTop:10,textAlign:"left"}}>
+                      <summary>Technical details</summary>
+                      <p style={{overflowWrap:"anywhere",fontSize:12,opacity:.8}}>{reactPreview.message}</p>
+                    </details> : null}
                   <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap",marginTop:12}}>
                     <button type="button" onClick={()=>reactPreview?.onRetry?.()}
                       disabled={codeDirty || !reactPreview?.onRetry}>Try again</button>

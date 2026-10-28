@@ -14,6 +14,10 @@ describe("restricted Build bootstrap route ownership", () => {
 
     expect(source).toContain("parseTrustedBuildJobRequest(req.body)");
     expect(source).toContain("executeDependencyLockBootstrap(request)");
+    expect(source).toContain('createHash("sha256")');
+    expect(source).toContain('getRequiredActorKey(req)');
+    expect(source).toContain('withZoeBuildQueuedBootstrapSlot(');
+    expect(source).toContain('res.setHeader("Retry-After", "30")');
     expect(source).not.toContain("createContainer(");
   });
 

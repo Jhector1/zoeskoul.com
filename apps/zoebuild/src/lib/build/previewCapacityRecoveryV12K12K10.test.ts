@@ -18,14 +18,16 @@ describe("V12K12K10 preview capacity backpressure",()=>{
     expect(route).toContain("requireRunnerActorKey(userId)");
     expect(route).toContain("executeTrustedDependencyLockBootstrapAtRunner");
   });
-  it("makes at most one automatic retry for a saved source and refuses stale retries",()=>{
+  it("waits within a bounded capacity budget while preserving source ownership",()=>{
     const hook=read("components/builder/useReactVitePreview.ts");
-    expect(hook).toContain('window.sessionStorage.getItem(capacityKey) === "waited"');
-    expect(hook).toContain('window.sessionStorage.setItem(capacityKey, "waited")');
+    expect(hook).toContain('bootstrapData?.code === "BUILD_RUNNER_CAPACITY_REACHED"');
+    expect(hook).toContain("capacityRetries < 4");
+    expect(hook).toContain("Date.now() - capacityStartedAt + waitMs > 240_000");
     expect(hook).toContain("if (!mountedRef.current || !bootstrapAllowedRef.current ||");
     expect(hook).toContain("sourceVersionRef.current !== startingVersion) return;");
     expect(hook).toContain("bootstrap = await requestBootstrap()");
-    expect(hook).toContain('window.sessionStorage.removeItem(capacityKey)');
+    expect(hook).not.toContain("window.sessionStorage.setItem(capacityKey");
+    expect(hook).not.toContain("window.sessionStorage.getItem(capacityKey");
     expect(hook).not.toContain("ZoeBuild build capacity reached. Try again later.");
   });
 });
