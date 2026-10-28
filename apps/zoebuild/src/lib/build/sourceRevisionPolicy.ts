@@ -8,7 +8,7 @@ export function parseRevisionRestoreRequest(value: unknown): RevisionRestoreRequ
   if (!Number.isSafeInteger(record.baseVersion) || !Number.isSafeInteger(record.restoreVersion)) return null;
   const baseVersion = record.baseVersion as number;
   const restoreVersion = record.restoreVersion as number;
-  if (baseVersion < 1 || restoreVersion < 1 || restoreVersion >= baseVersion) return null;
+  if (baseVersion < 1 || restoreVersion < 1 || restoreVersion > baseVersion) return null;
   return {baseVersion, restoreVersion};
 }
 

@@ -1,0 +1,43 @@
+.history{border:1px solid var(--zb-border,#dfe3e8);background:var(--zb-surface,#fff);border-radius:12px;overflow:hidden;margin:8px 0;min-width:0;}
+.headingButton{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;border:0;background:transparent;color:inherit;padding:8px 9px;text-align:left;cursor:pointer;font:inherit;line-height:1.25;}
+.headingButton:hover{background:rgba(120,130,150,.07)}
+.headingText{display:flex;flex-wrap:wrap;align-items:center;column-gap:8px;row-gap:3px;font-size:11px;font-weight:650;}
+.headingSubtitle{flex-basis:100%;padding-left:16px;color:var(--zb-muted,#78818d);font-size:9px;font-weight:450;}
+.chevron{color:var(--zb-muted,#64748b);font-size:13px}
+.body{border-top:1px solid var(--zb-border,#e5e7eb);padding:7px;max-height:min(55vh,440px);min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#8793a5 transparent;}
+.description{font-size:10px;line-height:1.35;color:var(--zb-muted,#64748b);margin:0 0 8px;}
+.notice,.error{font-size:10px;border-radius:7px;padding:6px;margin:5px 0;}
+.notice{background:rgba(239,186,73,.12)}.error{background:rgba(210,63,63,.12);color:#bd4141}
+.dateList{display:flex;flex-direction:column;gap:5px;overflow:visible;min-height:0;padding-right:2px;}
+.dateGroup{border:1px solid var(--zb-border,#e3e7eb);border-radius:7px;overflow:hidden;background:var(--zb-surface,#fff)}
+.dateSummary{display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;padding:7px 6px;font-size:10px;font-weight:650;background:rgba(125,137,150,.055)}
+.dateSummary::-webkit-details-marker{display:none}
+.dateSummary:before{content:"▸";font-size:11px;opacity:.65;transition:transform .15s ease}
+.dateGroup[open] .dateSummary:before{transform:rotate(90deg)}
+.dateTitle{flex:1;min-width:0}.dateCount{font-size:9px;font-weight:500;opacity:.65;white-space:nowrap}
+ .versionList{padding:2px 5px}.versionRow{display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:6px 1px;border-bottom:1px solid var(--zb-border,#e8ebed)}
+.versionRow:last-child{border-bottom:0}
+.versionInfo{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.versionHeading{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:10px}
+ .currentBadge{font-size:9px;font-weight:650;background:rgba(36,160,90,.12);color:#228a57;padding:1px 4px;border-radius:999px}
+ .time,.note,.muted{font-size:9px;color:var(--zb-muted,#78818d);line-height:1.4}
+.note{overflow-wrap:anywhere}.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;min-width:0}
+.actions button,.moreButton,.previewHeading button{font:inherit;font-size:9px;font-weight:600;line-height:1.15;border-radius:5px;padding:4px 3px;cursor:pointer;white-space:normal;min-width:0}
+.actions button:disabled,.moreButton:disabled{cursor:not-allowed;opacity:.45}
+.viewButton,.moreButton,.previewHeading button{border:1px solid var(--zb-border,#dbe0e5);background:transparent;color:inherit}
+.restoreButton{border:1px solid #202b37;background:#202b37;color:#fff}
+.restoreButton:hover:not(:disabled){background:#344252}
+.moreButton{width:100%;margin-top:6px}
+.preview{border-top:1px solid var(--zb-border,#ddd);margin-top:7px;padding-top:7px}
+.previewHeading{display:flex;justify-content:space-between;align-items:center;gap:4px;font-size:10px}
+.file{border:1px solid var(--zb-border,#ddd);border-radius:5px;margin:4px 0;padding:4px;font-size:9px}
+.file summary{cursor:pointer;overflow-wrap:anywhere}
+.file pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:240px;overflow:auto;font-size:9px;padding:5px;margin:4px 0 0;background:rgba(115,125,140,.07);border-radius:5px}
+@media(prefers-color-scheme:dark){.restoreButton{background:#e0e7ef;color:#111827;border-color:#e0e7ef}.restoreButton:hover:not(:disabled){background:#c9d4e1}.currentBadge{color:#64d89c}}
+
+.body::-webkit-scrollbar{width:5px}.body::-webkit-scrollbar-thumb{background:rgba(125,137,150,.5);border-radius:4px}
+.actions button:focus-visible,.headingButton:focus-visible,.dateSummary:focus-visible{outline:2px solid #2563eb;outline-offset:1px}
+
+.actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+.deleteButton{grid-column:1/-1;border:1px solid rgba(185,55,55,.4);background:transparent;color:#b54747;padding:3px;font-size:9px}
+.deleteButton:hover:not(:disabled){background:rgba(185,55,55,.09)}

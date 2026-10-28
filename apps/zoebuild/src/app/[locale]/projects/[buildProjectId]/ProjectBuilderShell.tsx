@@ -37,6 +37,8 @@ import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
 import ProjectRevisionHistory from "./ProjectRevisionHistory";
+import { historySwitchHasSettled } from "@/lib/build/historySwitchReadiness";
+import { needsDependencyRecoveryAssistance } from "@/lib/build/historyDependencyReview";
 import SiteSettingsWorkspacePanel, { type Section as SiteSettingsSection } from "./SiteSettingsWorkspacePanel";
 import { resolveZoeSelectedProvider } from "@/lib/build/zoeAssistantServiceIntent";
 import type { ZoeSourceEditProposal } from "@/lib/build/zoeTargetedSourceEdit";
@@ -51,7 +53,7 @@ import type { ZoeSemanticIntent } from "@/lib/build/zoeSemanticIntent";
 import { PublishProjectButton } from "@/components/builder/PublishProjectButton";
 import { useReactVitePreview } from "@/components/builder/useReactVitePreview";
 import { PersistentReactPreviewSlot } from "@/components/builder/PersistentReactPreviewHost";
-import { fetchAuthoritativeAppliedProject } from "@/lib/build/fetchAuthoritativeAppliedProject";
+import { fetchAuthoritativeAppliedProject, fetchAuthoritativeCurrentBuildProject } from "@/lib/build/fetchAuthoritativeAppliedProject";
 import { verifyAppliedZoeSource } from "@/lib/build/verifyAppliedZoeSource";
 import actionStyles from "./ZoeAssistantActions.module.css";
 import ZoeAssistantMessage from "./ZoeAssistantMessage";
@@ -99,6 +101,9 @@ export default function ProjectBuilderShell(props: {
     useState(props.project.workspace);
   const [previewSourceVersion, setPreviewSourceVersion] =
     useState(props.project.sourceVersion);
+  // Keep a freshly restored snapshot exact while the user reviews it. An
+  // automatic dependency repair could otherwise create another source revision.
+  const [restoredVersionPinned, setRestoredVersionPinned] = useState<number | null>(null);
   const [codeDirty, setCodeDirty] =
     useState(false);
   // This ref is updated synchronously from editor events so in-flight AI saves
@@ -109,6 +114,57 @@ export default function ProjectBuilderShell(props: {
   // an AI apply, without remounting the Zoé conversation or entire page.
   const [editorProject, setEditorProject] = useState(props.project);
   const [editorHydrationEpoch, setEditorHydrationEpoch] = useState(0);
+  // Keep the old editor and preview hidden until this exact saved selection
+  // has been hydrated AND acknowledged by the runner preview.
+  const [historySwitch, setHistorySwitch] = useState<{target:number;sourceVersion:number|null;failed:boolean}|null>(null);
+  // The server's monotonic concurrency token is distinct from the selected
+  // saved-history version. Never trust an old editor callback after hydration.
+  const activeEditorEpochRef = useRef(editorHydrationEpoch);
+  activeEditorEpochRef.current = editorHydrationEpoch;
+  const previewSourceTokenRef = useRef(previewSourceVersion);
+  previewSourceTokenRef.current = previewSourceVersion;
+  const authoritativeRefreshInFlightRef = useRef<Promise<boolean> | null>(null);
+
+  async function reconcileStalePreview(attemptedSourceVersion: number): Promise<boolean> {
+    if (authoritativeRefreshInFlightRef.current) return authoritativeRefreshInFlightRef.current;
+    // Do not throw away unsaved files, pending AI proposals, or a concurrent
+    // selection while a stale preview is being reconciled.
+    if (codeDirtyRef.current || assistantRequestInFlight.current || applyingFileEdit || applyingPlan ||
+        pendingFileEdit || pendingPlan) return false;
+    // The editor may already have received a newer authoritative revision
+    // from a concurrent restore/save. In that case just restart its preview.
+    if (previewSourceTokenRef.current !== attemptedSourceVersion)
+      return previewSourceTokenRef.current > attemptedSourceVersion;
+    const task = (async () => {
+      try {
+        const latest = await fetchAuthoritativeCurrentBuildProject({
+          buildProjectId: props.project.buildProjectId,
+        });
+        if (codeDirtyRef.current || assistantRequestInFlight.current || applyingFileEdit || applyingPlan ||
+            pendingFileEdit || pendingPlan) return false;
+        if (previewSourceTokenRef.current !== attemptedSourceVersion)
+          return previewSourceTokenRef.current > attemptedSourceVersion;
+        if (latest.sourceVersion === attemptedSourceVersion) return false;
+        // A new server source is already saved; rehydrate, never PATCH and never
+        // append to user-visible history. Remount the editor from that baseline.
+        setEditorProject(latest);
+        setPreviewWorkspace(latest.workspace);
+        setPreviewSourceVersion(latest.sourceVersion);
+        previewSourceTokenRef.current = latest.sourceVersion;
+        setSavedBuildResult(null);
+        setSavedBuildError(null);
+        codeDirtyRef.current = false;
+        setCodeDirty(false);
+        setEditorHydrationEpoch(current => current + 1);
+        return true;
+      } catch {
+        return false;
+      }
+    })();
+    authoritativeRefreshInFlightRef.current = task;
+    try { return await task; }
+    finally { if (authoritativeRefreshInFlightRef.current === task) authoritativeRefreshInFlightRef.current = null; }
+  }
 
 
   const reactPreviewEnabled =
@@ -120,9 +176,41 @@ export default function ProjectBuilderShell(props: {
     sourceVersion: previewSourceVersion,
     workspace: previewWorkspace,
     allowDependencyBootstrap: !codeDirty,
+    restoredDependencyPinned: restoredVersionPinned === previewSourceVersion,
+    onSourceConflict: reconcileStalePreview,
   });
 
   const previewEntries = exportWorkspaceEntries(previewWorkspace.nodes);
+  // Never render a stale runner frame for a different selected source.
+  const visibleReactPreview = reactPreview && reactPreview.confirmedSourceVersion !== previewSourceVersion
+    ? {...reactPreview, src:null, state:reactPreview.state === "error" ? "error" as const : "starting" as const}
+    : reactPreview;
+
+  useEffect(() => {
+    if (!historySwitch || historySwitch.failed || historySwitch.sourceVersion === null) return;
+    if (historySwitchHasSettled({
+      expectedSourceVersion: historySwitch.sourceVersion,
+      hydratedSourceVersion: previewSourceVersion,
+      acknowledgedSourceVersion: reactPreview?.confirmedSourceVersion ?? null,
+      attemptedSourceVersion: reactPreview?.attemptedSourceVersion ?? null,
+      previewState: reactPreview?.state ?? "starting",
+    })) setHistorySwitch(null);
+  }, [historySwitch, previewSourceVersion, reactPreview?.confirmedSourceVersion, reactPreview?.attemptedSourceVersion, reactPreview?.state]);
+
+  // Never leave the selected version behind an unbounded transition mask.
+  // The runner already owns preview-start retries/timeouts; this is only a
+  // user-visible escape hatch after the exact selected source remains unready.
+  useEffect(() => {
+    if (!historySwitch || historySwitch.failed) return;
+    const target = historySwitch.target;
+    const sourceVersion = historySwitch.sourceVersion;
+    const watchdog = window.setTimeout(() => {
+      setHistorySwitch(current => current && current.target === target &&
+        current.sourceVersion === sourceVersion && !current.failed
+        ? {...current, failed: true} : current);
+    }, sourceVersion === null ? 45_000 : 145_000);
+    return () => window.clearTimeout(watchdog);
+  }, [historySwitch?.target, historySwitch?.sourceVersion, historySwitch?.failed]);
 
   const [
     commerceCandidate,
@@ -826,6 +914,13 @@ export default function ProjectBuilderShell(props: {
     return verifiedPaths;
   }
 
+  // Trusted preview preparation is automatic. A blocked historical dependency
+  // never becomes an implicit owner approval or another saved history entry.
+  // Explain failures in product language without asking users to inspect JSON.
+  const dependencyRecoveryNeedsAttention = needsDependencyRecoveryAssistance(
+    reactPreview?.state, reactPreview?.message,
+  );
+
   async function verifySavedReactBuild() {
     // A manual, non-AI action. Never replace working preview or send unsaved source.
     if (verifyingSavedBuild) return;
@@ -1166,10 +1261,19 @@ export default function ProjectBuilderShell(props: {
             <ProjectRevisionHistory
               buildProjectId={props.project.buildProjectId}
               currentVersion={previewSourceVersion}
-              disabled={codeDirty || assistantChecking || applyingFileEdit || applyingPlan || Boolean(pendingFileEdit) || Boolean(pendingPlan)}
+              disabled={Boolean(historySwitch) || codeDirty || assistantChecking || applyingFileEdit || applyingPlan || Boolean(pendingFileEdit) || Boolean(pendingPlan)}
+              onSwitchStart={(version) => {
+                setHistorySwitch({target:version,sourceVersion:null,failed:false});
+              }}
+              onSwitchFailure={(version, persisted) => {
+                setHistorySwitch(current => current?.target === version
+                  ? (persisted ? {...current,failed:true} : null) : current);
+              }}
               onRestored={async (savedVersion, fromVersion) => {
+                setRestoredVersionPinned(savedVersion);
                 await refreshAfterSuccessfulApply(savedVersion);
-                addMessage(`Restored source v${fromVersion} as new source v${savedVersion}. The prior versions remain in history. Preview received the restored source; check its appearance before publishing.`);
+                setHistorySwitch({target:fromVersion,sourceVersion:savedVersion,failed:false});
+                addMessage(`Version V${fromVersion} is now selected. Your saved versions remain available. ZoeBuild is preparing the preview; verify before publishing.`);
               }}
             />
           ) : null}
@@ -1362,6 +1466,42 @@ export default function ProjectBuilderShell(props: {
         </div>
 
         <div className="zb-project-stage-body">
+        {historySwitch ? (
+          <div role="status" aria-live="polite" aria-busy={!historySwitch.failed}
+            data-testid="zoebuild-history-switch-overlay"
+            style={{position:"fixed",inset:0,zIndex:10000,background:"var(--background, #fff)",
+              display:"grid",placeItems:"center",padding:24}}>
+            <div style={{textAlign:"center",maxWidth:440}}>
+              <div style={{fontWeight:650,fontSize:17}}>
+                {historySwitch.failed
+                  ? historySwitch.sourceVersion === null
+                    ? `Version ${historySwitch.target} could not be confirmed`
+                    : `Version ${historySwitch.target} preview is taking longer than expected`
+                  : `Switching to Version ${historySwitch.target}…`}
+              </div>
+              <p style={{fontSize:13,opacity:.72,marginTop:10}}>
+                {historySwitch.failed
+                  ? historySwitch.sourceVersion === null
+                    ? "The selection response was not confirmed. Reload to inspect the currently saved version."
+                    : "The selected files were saved, but the preview has not acknowledged them. The previous preview remains hidden. You can retry or reload."
+                  : historySwitch.sourceVersion === null
+                    ? "Loading saved files and dependency settings…"
+                    : "Preparing the selected preview and workspace…"}
+              </p>
+              {historySwitch.failed ? (
+                <div style={{display:"flex",justifyContent:"center",gap:8,flexWrap:"wrap"}}>
+                  {historySwitch.sourceVersion !== null && reactPreview?.onRetry ? (
+                    <button type="button" onClick={() => {
+                      setHistorySwitch(current => current?.failed ? {...current,failed:false}:current);
+                      reactPreview.onRetry?.();
+                    }}>Retry preview</button>
+                  ) : null}
+                  <button type="button" onClick={()=>window.location.reload()}>Reload saved project</button>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
     <main className="zb-builder-shell">
 
       <section className="zb-builder-stage">
@@ -1369,17 +1509,34 @@ export default function ProjectBuilderShell(props: {
           className="zb-project-preview-stage"
           hidden={settingsOpen || mode !== "preview"}
           aria-hidden={settingsOpen || mode !== "preview"}
+          style={{position:"relative"}}
         >
+            {dependencyRecoveryNeedsAttention ? (
+              <div data-testid="zoebuild-dependency-recovery-help" role="status"
+                aria-label="Saved version preview needs attention"
+                style={{position:"absolute",inset:0,zIndex:25,background:"var(--background,#fff)",display:"grid",placeItems:"center",padding:20,overflowY:"auto"}}>
+                <div style={{maxWidth:400,width:"100%",textAlign:"center",fontSize:13}}>
+                  <strong style={{fontSize:16}}>We couldn't prepare this preview</strong>
+                  <p style={{opacity:.75}}>ZoeBuild tried to use this version's saved dependencies. It couldn't safely finish. Your version and files are unchanged.</p>
+                  <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap",marginTop:12}}>
+                    <button type="button" onClick={()=>reactPreview?.onRetry?.()}
+                      disabled={codeDirty || !reactPreview?.onRetry}>Try again</button>
+                    <button type="button" onClick={()=>setMode("code")}>View saved files</button>
+                  </div>
+                </div>
+              </div>
+            ) : null}
             {reactPreviewEnabled && reactPreview ? (
               <PersistentReactPreviewSlot
                 buildProjectId={
                   props.project.buildProjectId
                 }
                 slotId="project-preview"
-                preview={reactPreview}
+                preview={visibleReactPreview!}
                 active={
                   !settingsOpen &&
-                  mode === "preview"
+                  mode === "preview" &&
+                  !dependencyRecoveryNeedsAttention
                 }
               />
             ) : (
@@ -1404,13 +1561,21 @@ export default function ProjectBuilderShell(props: {
           <BuildWorkspaceClient
             key={`${props.project.buildProjectId}:applied:${editorHydrationEpoch}`}
             project={editorProject}
-            onWorkspaceSnapshot={setPreviewWorkspace}
-            onSourceVersionChange={setPreviewSourceVersion}
+            onWorkspaceSnapshot={(workspace) => {
+              if (activeEditorEpochRef.current === editorHydrationEpoch) setPreviewWorkspace(workspace);
+            }}
+            onSourceVersionChange={(sourceVersion) => {
+              if (activeEditorEpochRef.current !== editorHydrationEpoch) return;
+              // CodeProject concurrency revisions are monotonically increasing.
+              // An old editor mount must never lower the preview's source token.
+              setPreviewSourceVersion(current => Math.max(current, sourceVersion));
+            }}
             onDirtyChange={(dirty) => {
+              if (activeEditorEpochRef.current !== editorHydrationEpoch) return;
               codeDirtyRef.current = dirty;
               setCodeDirty(dirty);
             }}
-            remoteWebPreview={reactPreviewEnabled ? reactPreview : null}
+            remoteWebPreview={reactPreviewEnabled ? visibleReactPreview : null}
             remotePreviewActive={
               !settingsOpen && mode === "code"
             }

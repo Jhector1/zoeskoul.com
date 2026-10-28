@@ -15,7 +15,10 @@ describe("ZoeBuild source-write persistence ownership", () => {
     expect(source).toContain("ownerId: userId");
     expect(source).toContain("archivedAt: null");
     expect(source).toContain("saveCodeProjectInTransaction(tx");
-    expect(source).toContain("createRevision: true");
+    // Ordinary manual source saves retain canonical history by default.
+    // Only the narrowly scoped history switch/auto-recovery callers opt out.
+    expect(source).toContain("options: Readonly<{createRevision?:boolean}> = {}");
+    expect(source).toContain("createRevision: options.createRevision ?? true");
     expect(source).toContain("baseVersion: input.baseVersion");
 
     expect(source).not.toContain("tx.codeProject.update");

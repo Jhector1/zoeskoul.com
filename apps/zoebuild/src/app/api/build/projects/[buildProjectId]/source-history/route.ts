@@ -1,17 +1,18 @@
 import { NextResponse } from "next/server";
+import { Prisma } from "@zoeskoul/db";
 import {
   BuildAccessError, BuildSourceConflictError, getBuildProjectCommand,
-  saveBuildProjectSourceCommand,
 } from "@zoeskoul/build-application";
 import { prisma } from "@zoeskoul/platform-server/prisma";
 import { enforceSameOriginPost } from "@zoeskoul/platform-server/http";
 import { rateLimit } from "@zoeskoul/platform-server/security/ratelimit";
 import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { createPrismaBuildProjectReader } from "@/lib/build/readBuildProjects";
-import { createPrismaBuildProjectSourceWriter } from "@/lib/build/saveBuildProjectSource";
 import { BuildWorkspaceMutationError, parseBuildWorkspaceMutation } from "@/lib/build/buildWorkspaceMutation";
 import { verifyZoeReactCandidateAtRunner } from "@/lib/build/zoeReactIsolatedBuild";
 import { buildRevisionFilePreview, parseRevisionRestoreRequest } from "@/lib/build/sourceRevisionPolicy";
+import { restoreSavedReactVersion, SavedReactRestoreError } from "@/lib/build/restoreSavedReactVersion";
+import { activeSavedHistoryVersion } from "@/lib/build/activeSavedHistoryVersion";
 import { historicalReactSourceMetadata, historicReactRecoverySpecification,
   restoreHistoricalReactRevision, HistoricalReactRestoreError } from "@/lib/build/restoreHistoricalReactRevision";
 
@@ -44,6 +45,14 @@ export async function GET(req: Request, ctx: Context) {
     if (!access.userId) return reply(requestId, {ok:false, code:"BUILD_AUTH_REQUIRED"}, 401);
     if (!project) return reply(requestId, {ok:false, code:"BUILD_PROJECT_NOT_FOUND"}, 404);
     if (project.status === "archived") return reply(requestId, {ok:false, code:"BUILD_PROJECT_ARCHIVED"}, 409);
+    // Read the owner-scoped source head and its active-history marker. The
+    // sourceVersion remains the internal CAS token used for save/restore.
+    const currentSource = await prisma.codeProject.findFirst({
+      where: {id: project.codeProjectId, ownerId: access.userId, archivedAt: null},
+      select: {currentVersion: true, meta: true},
+    });
+    if (!currentSource) return reply(requestId, {ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
+    const activeVersion = activeSavedHistoryVersion(currentSource.currentVersion, currentSource.meta);
     const url = new URL(req.url);
     const rawVersion = url.searchParams.get("version");
     if (rawVersion !== null) {
@@ -58,13 +67,20 @@ export async function GET(req: Request, ctx: Context) {
       const workspace = parseBuildWorkspaceMutation(revision.snapshot);
       const preview = buildRevisionFilePreview(workspace);
       return reply(requestId, {ok:true, version:revision.version, createdAt:revision.createdAt.toISOString(),
-        note:revision.note, preview, currentVersion:project.sourceVersion});
+        note:revision.note, preview, currentVersion:currentSource.currentVersion, activeVersion});
     }
+    const before = url.searchParams.get("beforeVersion");
+    if ((before !== null && (!/^[1-9]\d{0,8}$/.test(before) || url.searchParams.size !== 1)) ||
+        (before === null && url.searchParams.size !== 0))
+      return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);
     const records = await prisma.codeProjectRevision.findMany({
-      where: {projectId:project.codeProjectId}, orderBy:{version:"desc"}, take:51,
+      where: {projectId:project.codeProjectId,
+        ...(before === null ? {} : {version: {lt: Number(before)}})},
+      orderBy:{version:"desc"}, take:51,
       select:{version:true, note:true, createdAt:true, workspaceHash:true},
     });
-    return reply(requestId,{ok:true, currentVersion:project.sourceVersion, hasMore:records.length > 50,
+    return reply(requestId,{ok:true, currentVersion:currentSource.currentVersion, activeVersion,
+      hasMore:records.length > 50,
       revisions:records.slice(0,50).map(r => ({version:r.version, note:r.note, createdAt:r.createdAt.toISOString(),
         workspaceHash:r.workspaceHash?.slice(0,12) ?? null}))});
   } catch (error) {
@@ -75,7 +91,7 @@ export async function GET(req: Request, ctx: Context) {
   }
 }
 
-/** Restore creates a NEW revision. It never overwrites or deletes history. */
+/** Switch to an existing saved snapshot without appending a duplicate history row. */
 export async function POST(req: Request, ctx: Context) {
   const requestId = crypto.randomUUID();
   if (!enforceSameOriginPost(req)) return reply(requestId,{ok:false,code:"BUILD_FORBIDDEN"},403);
@@ -126,29 +142,30 @@ export async function POST(req: Request, ctx: Context) {
       });
       if (!saved) return reply(requestId,{ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
       return reply(requestId,{ok:true,sourceVersion:saved.sourceVersion,
-        restoredFromVersion:restore.restoreVersion,changed:saved.changed});
+        restoredFromVersion:restore.restoreVersion,activeVersion:restore.restoreVersion,changed:saved.changed});
     }
-    // No model request, no Preview restart and no publish. A historical build
-    // is compiled using the current canonical project specification.
-    // Historical source is a persisted, complete snapshot, not a proposed edit.
-    // Candidate mode rejects an empty edit list before contacting the runner.
-    const verification = await verifyZoeReactCandidateAtRunner({
-      userId:access.userId,buildProjectId:project.buildProjectId,
-      workspace,edits:[],specification:project.specification,
-      sourceVersion:project.sourceVersion,sourceKind:"saved",correlationId:requestId,
-    });
-    if (verification.state !== "passed")
-      return reply(requestId,{ok:false,code:"BUILD_RESTORE_BUILD_NOT_VERIFIED",
-        message:"The historical version could not be compiled. Nothing was restored.",verification},409);
-    const saved = await saveBuildProjectSourceCommand({
-      access,buildProjectId:project.buildProjectId,baseVersion:project.sourceVersion,
-      workspace,writer:createPrismaBuildProjectSourceWriter(prisma),
+    // V1 through the latest React version: activate the exact persisted source
+    // and dependency settings as NEW current revision. Do not gate user-owned
+    // history on today's runner/dependencies; verification is a separate action.
+    const saved = await restoreSavedReactVersion(prisma, {
+      ownerId: access.userId, buildProjectId: project.buildProjectId,
+      expectedVersion: project.sourceVersion, restoreVersion: restore.restoreVersion,
     });
     if (!saved) return reply(requestId,{ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
-    if (!saved.changed) return reply(requestId,{ok:false,code:"BUILD_RESTORE_NO_CHANGE",message:"The selected version already matches the current source."},409);
     return reply(requestId,{ok:true,sourceVersion:saved.sourceVersion,
-      restoredFromVersion:restore.restoreVersion,changed:saved.changed});
+      restoredFromVersion:restore.restoreVersion,activeVersion:restore.restoreVersion,changed:saved.changed,
+      buildVerified:false,specificationRestored:saved.specificationRestored});
   } catch (error) {
+    if (error instanceof SavedReactRestoreError) {
+      const messages = {
+        BUILD_HISTORY_STALE: "A newer source version or active operation exists. Reload and retry.",
+        BUILD_HISTORY_STACK_UNSUPPORTED: "The saved version is not a verified React/Vite snapshot. It cannot be restored exactly under the React-only project stack.",
+        BUILD_RESTORE_NO_CHANGE: "The selected version already matches the currently saved source and settings.",
+        BUILD_HISTORY_SPEC_UNAVAILABLE: "This revision requires a different project capability configuration. Its runtime settings cannot be safely restored.",
+      } as const;
+      return reply(requestId,{ok:false,code:error.code,message:messages[error.code]},
+        error.code === "BUILD_HISTORY_STACK_UNSUPPORTED" ? 422 : 409);
+    }
     if (error instanceof HistoricalReactRestoreError)
       return reply(requestId,{ok:false,code:error.code,
         message:"This historical revision cannot be safely restored without further cleanup."},
@@ -160,5 +177,68 @@ export async function POST(req: Request, ctx: Context) {
       return reply(requestId,{ok:false,code:"BUILD_REVISION_INVALID",message:"This revision cannot be safely restored."},422);
     console.error("[ZoeBuild source history] restore unavailable",{requestId,kind:error instanceof Error?error.name:"unknown"});
     return reply(requestId,{ok:false,code:"BUILD_HISTORY_UNAVAILABLE"},503);
+  }
+}
+
+/** Delete one non-active, unreferenced snapshot. Never renumber the remaining versions. */
+export async function DELETE(req: Request, ctx: Context) {
+  const requestId = crypto.randomUUID();
+  if (!enforceSameOriginPost(req)) return reply(requestId,{ok:false,code:"BUILD_FORBIDDEN"},403);
+  const url = new URL(req.url);
+  const rawVersion = url.searchParams.get("version");
+  if (!rawVersion || !/^[1-9]\d{0,8}$/.test(rawVersion) || url.searchParams.size !== 1)
+    return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);
+  if (Number(req.headers.get("content-length") || "0") > 256)
+    return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);
+  const raw = await req.text();
+  if (Buffer.byteLength(raw,"utf8") > 256) return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);
+  let payload: unknown;
+  try {payload=JSON.parse(raw);} catch {return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);}
+  const version = Number(rawVersion);
+  if (!payload || typeof payload!=="object" || Array.isArray(payload) ||
+      Object.keys(payload).length!==2 ||
+      (payload as {confirmVersion?:unknown}).confirmVersion!==version ||
+      !Number.isSafeInteger((payload as {expectedSourceVersion?:unknown}).expectedSourceVersion))
+    return reply(requestId,{ok:false,code:"BUILD_HISTORY_INPUT_INVALID"},400);
+  const expectedVersion = (payload as {expectedSourceVersion:number}).expectedSourceVersion;
+  try {
+    const {access,project} = await owner(req,ctx);
+    if (!access.userId) return reply(requestId,{ok:false,code:"BUILD_AUTH_REQUIRED"},401);
+    if (!project) return reply(requestId,{ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
+    if (project.status==="archived") return reply(requestId,{ok:false,code:"BUILD_PROJECT_ARCHIVED"},409);
+    const limited=await rateLimit(`zoebuild-history-delete:${access.userId}:${project.buildProjectId}`,
+      {bucket:"zoebuild-history-delete",limit:8,window:"1 h"}).catch(()=>null);
+    if (!limited) return reply(requestId,{ok:false,code:"BUILD_HISTORY_UNAVAILABLE"},503);
+    if (!limited.ok) return reply(requestId,{ok:false,code:"BUILD_HISTORY_RATE_LIMITED"},429);
+    const result=await prisma.$transaction(async tx => {
+      const owned=await tx.buildProject.findFirst({
+        where:{id:project.buildProjectId,status:{not:"archived"},codeProject:{ownerId:access.userId!,archivedAt:null}},
+        select:{codeProjectId:true,codeProject:{select:{currentVersion:true,meta:true}}},
+      });
+      if (!owned) return "missing" as const;
+      if (owned.codeProject.currentVersion!==expectedVersion) return "stale" as const;
+      // Active or source-head versions must remain recoverable.
+      if (version===activeSavedHistoryVersion(expectedVersion,owned.codeProject.meta) || version===expectedVersion)
+        return "protected" as const;
+      const revisions=await tx.codeProjectRevision.count({where:{projectId:owned.codeProjectId}});
+      if (revisions<=1) return "protected" as const;
+      // Builds, deployments and compiled artifacts are audit/publishing references.
+      const [run,deployment,artifact]=await Promise.all([
+        tx.buildRun.findFirst({where:{buildProjectId:project.buildProjectId,sourceVersion:version},select:{id:true}}),
+        tx.buildDeployment.findFirst({where:{buildProjectId:project.buildProjectId,sourceVersion:version},select:{id:true}}),
+        tx.buildArtifact.findFirst({where:{buildProjectId:project.buildProjectId,sourceVersion:version},select:{id:true}}),
+      ]);
+      if (run || deployment || artifact) return "protected" as const;
+      const deleted=await tx.codeProjectRevision.deleteMany({where:{projectId:owned.codeProjectId,version}});
+      return deleted.count===1 ? "deleted" as const : "missing" as const;
+    },{isolationLevel:Prisma.TransactionIsolationLevel.Serializable});
+    if (result==="deleted") return reply(requestId,{ok:true,deleted:true,version});
+    if (result==="missing") return reply(requestId,{ok:false,code:"BUILD_REVISION_NOT_FOUND",message:"Version not found."},404);
+    if (result==="stale") return reply(requestId,{ok:false,code:"BUILD_HISTORY_STALE",message:"The project changed. Reload History before deleting a version."},409);
+    return reply(requestId,{ok:false,code:"BUILD_HISTORY_DELETE_PROTECTED",message:"This version is current, the last recovery snapshot, or referenced by a build or deployment. It cannot be deleted."},409);
+  } catch (error) {
+    if (error instanceof BuildAccessError) return reply(requestId,{ok:false,code:error.code},403);
+    console.error("[ZoeBuild source history] delete unavailable",{requestId,kind:error instanceof Error?error.name:"unknown"});
+    return reply(requestId,{ok:false,code:"BUILD_HISTORY_UNAVAILABLE",message:"Version deletion could not be verified. No deletion was confirmed."},503);
   }
 }

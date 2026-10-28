@@ -71,6 +71,8 @@ function sourceSettings(
 
       dependencyLock:
         input.dependencyLock,
+      projectSpecification:
+        input.specification,
     },
   };
 }

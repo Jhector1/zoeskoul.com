@@ -23,7 +23,10 @@ describe("owner-authorized dependency-lock bootstrap HTTP boundary", () => {
     expect(source).toContain("executeTrustedDependencyLockBootstrapAtRunner");
 
     expect(source).not.toContain("createContainer(");
-    expect(source).not.toContain("prisma.codeProject.update");
+    // A CAS-scoped metadata-only updateMany is permitted for restore provenance.
+    // Direct source mutation and revision insertion remain forbidden.
+    expect(source).not.toContain("prisma.codeProject.update(");
+    expect(source).toContain("currentVersion:sourceVersion");
     expect(source).not.toContain("prisma.codeProjectRevision.create");
   });
 

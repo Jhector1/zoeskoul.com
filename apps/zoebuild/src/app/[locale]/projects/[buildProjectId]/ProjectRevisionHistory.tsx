@@ -1,6 +1,8 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
+import styles from "./ProjectRevisionHistory.module.css";
+import {groupRevisionsByDate} from "@/lib/build/historyDateGroups";
 
 type Revision = Readonly<{version:number; createdAt:string; note:string|null; workspaceHash:string|null}>;
 type FilePreview = Readonly<{path:string; content:string; truncated:boolean}>;
@@ -11,100 +13,187 @@ export default function ProjectRevisionHistory(props: Readonly<{
   currentVersion: number;
   disabled: boolean;
   onRestored: (savedVersion:number, fromVersion:number) => Promise<void>;
+  onSwitchStart?: (version:number) => void;
+  onSwitchFailure?: (version:number, persisted:boolean) => void;
 }>) {
   const [expanded,setExpanded] = useState(false);
   const [revisions,setRevisions] = useState<Revision[]>([]);
+  const [hasMore,setHasMore] = useState(false);
+  // This is the active saved snapshot, distinct from the monotonic source CAS version.
+  const [activeVersion,setActiveVersion] = useState<number|null>(null);
   const [historyError,setHistoryError] = useState<string|null>(null);
+  const [loading,setLoading] = useState(false);
   const [busy,setBusy] = useState(false);
+  const restoringRef = useRef(false);
   const [selected,setSelected] = useState<number|null>(null);
   const [preview,setPreview] = useState<Preview|null>(null);
+  const groups = useMemo(()=>groupRevisionsByDate(revisions),[revisions]);
   const baseUrl = `/api/build/projects/${encodeURIComponent(props.buildProjectId)}/source-history`;
 
   useEffect(() => {
     if (!expanded) return;
     let active = true;
-    setHistoryError(null);
+    setHistoryError(null);setLoading(true);
     void fetch(baseUrl,{credentials:"same-origin",cache:"no-store"})
       .then(async response => {
         const data: unknown = await response.json().catch(() => null);
         if (!response.ok || !data || typeof data !== "object") throw new Error("Version history is unavailable.");
-        const payload = data as {ok?:boolean;revisions?:Revision[]};
+        const payload = data as {ok?:boolean;revisions?:Revision[];hasMore?:boolean;activeVersion?:number};
         if (!payload.ok || !Array.isArray(payload.revisions)) throw new Error("Version history is unavailable.");
-        if (active) setRevisions(payload.revisions);
+        if (active) {
+          setRevisions(payload.revisions);
+          setHasMore(Boolean(payload.hasMore));
+          setActiveVersion(Number.isSafeInteger(payload.activeVersion) ? payload.activeVersion! : null);
+        }
       })
-      .catch(() => {if (active) setHistoryError("Couldn't load saved versions. Retry by reopening History.");});
+      .catch(() => {if (active) setHistoryError("Couldn't load saved versions. Close and reopen History to retry.");})
+      .finally(() => {if (active) setLoading(false);});
     return () => {active=false;};
   },[expanded,baseUrl,props.currentVersion]);
 
+  async function loadOlderVersions() {
+    if (loading || busy || !hasMore || !revisions.length) return;
+    setLoading(true);setHistoryError(null);
+    try {
+      const oldest = Math.min(...revisions.map(revision=>revision.version));
+      const response = await fetch(`${baseUrl}?beforeVersion=${oldest}`,{credentials:"same-origin",cache:"no-store"});
+      const payload = await response.json().catch(()=>null) as {ok?:boolean;revisions?:Revision[];hasMore?:boolean}|null;
+      if (!response.ok || !payload?.ok || !Array.isArray(payload.revisions)) throw new Error();
+      setRevisions(existing=>{
+        const byVersion = new Map(existing.map(r=>[r.version,r]));
+        payload.revisions!.forEach(r=>byVersion.set(r.version,r));
+        return [...byVersion.values()];
+      });
+      setHasMore(Boolean(payload.hasMore));
+    } catch {setHistoryError("Older versions could not be loaded. Retry.");}
+    finally {setLoading(false);}
+  }
+
   async function viewVersion(version:number) {
     if (busy) return;
-    setBusy(true); setHistoryError(null); setPreview(null); setSelected(version);
+    setBusy(true);setHistoryError(null);setPreview(null);setSelected(version);
     try {
       const response = await fetch(`${baseUrl}?version=${version}`,{credentials:"same-origin",cache:"no-store"});
       const body: unknown = await response.json().catch(() => null);
-      if (!response.ok || !body || typeof body !== "object") throw new Error("Version could not be inspected.");
-      const data = body as {ok?:boolean; preview?:Preview};
-      if (!data.ok || !data.preview || !Array.isArray(data.preview.files)) throw new Error("Version could not be inspected.");
+      if (!response.ok || !body || typeof body !== "object") throw new Error();
+      const data = body as {ok?:boolean;preview?:Preview};
+      if (!data.ok || !data.preview || !Array.isArray(data.preview.files)) throw new Error();
       setPreview(data.preview);
-    } catch {setHistoryError("This version could not be inspected; no source was changed.");}
+    } catch {setHistoryError("This version could not be inspected. No source changed.");}
     finally {setBusy(false);}
   }
 
   async function restoreVersion(version:number) {
-    if (busy || props.disabled || version >= props.currentVersion) return;
-    if (!window.confirm(`Restore source v${version} as a NEW saved version? The current version will remain in History. This does not publish the website.`)) return;
-    setBusy(true); setHistoryError(null);
+    if (busy || restoringRef.current || props.disabled || version === activeVersion || version > props.currentVersion) return;
+    if (!window.confirm(`Switch to Version ${version}? Its saved files and dependencies will become active. Switching does not create another saved version; published sites, orders, and provider connections stay unchanged.`)) return;
+    restoringRef.current = true;
+    setBusy(true);setSelected(version);setHistoryError(null);
+    props.onSwitchStart?.(version);
     let savedVersion: number|null = null;
     try {
       const response = await fetch(baseUrl,{
         method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},
         body:JSON.stringify({baseVersion:props.currentVersion,restoreVersion:version}),
       });
-      const body: unknown = await response.json().catch(() => null);
-      const data = body && typeof body === "object" ? body as {ok?:boolean; sourceVersion?:number; message?:string; code?:string} : null;
+      const body: unknown = await response.json().catch(()=>null);
+      const data = body && typeof body === "object" ? body as {
+        ok?:boolean;sourceVersion?:number;activeVersion?:number;message?:string;code?:string
+      } : null;
       if (!response.ok || !data?.ok || !Number.isSafeInteger(data.sourceVersion))
-        throw new Error(data?.message ?? data?.code ?? "Restore could not be verified. No source was changed.");
+        throw new Error(data?.message ?? data?.code ?? "Restore could not be verified. Source was not changed.");
       savedVersion = data.sourceVersion!;
+      setActiveVersion(data.activeVersion === version ? data.activeVersion : version);
       await props.onRestored(savedVersion,version);
-      setSelected(null); setPreview(null);
-      setExpanded(false);
+      setSelected(null);setPreview(null);setExpanded(false);
     } catch (error) {
+      props.onSwitchFailure?.(version, savedVersion !== null);
       setHistoryError(savedVersion !== null
-        ? `Restored source v${savedVersion}, but the editor could not reload it. Do not restore again; reload the project after preserving any unsaved work.`
-        : error instanceof Error ? error.message : "Restore unavailable. No source was changed.");
+        ? `Version ${version} was selected as current, but the editor could not refresh. Reload the project; don't repeat the restore.`
+        : error instanceof Error ? error.message : "Restore unavailable. No source changed.");
+    } finally {restoringRef.current=false;setBusy(false);}
+  }
+
+  async function deleteVersion(version:number) {
+    if (busy || restoringRef.current || props.disabled || version === activeVersion) return;
+    const phrase = window.prompt(`Permanently delete saved Version ${version}? This cannot be undone. Type DELETE V${version} to confirm.`);
+    if (phrase !== `DELETE V${version}`) return;
+    setBusy(true);setHistoryError(null);
+    try {
+      const response = await fetch(`${baseUrl}?version=${version}`, {
+        method:"DELETE", credentials:"same-origin", headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({expectedSourceVersion:props.currentVersion,confirmVersion:version}),
+      });
+      const body: unknown = await response.json().catch(()=>null);
+      const result = body && typeof body === "object" ? body as {ok?:boolean;deleted?:boolean;message?:string;code?:string} : null;
+      if (!response.ok || !result?.ok || !result.deleted) throw new Error(result?.message ?? result?.code ?? "Could not delete this version.");
+      setRevisions(current=>current.filter(item=>item.version!==version));
+      if (selected===version) {setSelected(null);setPreview(null);}
+    } catch(error) {
+      setHistoryError(error instanceof Error ? error.message : "Unable to delete this version.");
     } finally {setBusy(false);}
   }
 
-  return (
-    <section className="zb-project-assistant-plan" aria-label="Saved project versions" data-testid="zoebuild-revision-history">
-      <button type="button" aria-expanded={expanded} onClick={() => {setExpanded(!expanded);setSelected(null);setPreview(null);}}>
-        {expanded ? "Hide saved versions" : "Version history"}
-      </button>
-      {expanded ? <>
-        <p>Current source: v{props.currentVersion}. Restore creates a new version; it never deletes earlier versions, publishes, or uses AI.</p>
-        {props.disabled ? <p>Finish any current edits or save code before restoring an earlier version.</p> : null}
-        {historyError ? <p role="alert">{historyError}</p> : null}
-        <div style={{maxHeight:300,overflowY:"auto"}}>
-          {revisions.length === 0 && !historyError ? <p>Loading saved versions…</p> : null}
-          {revisions.map(r => <div key={r.version} style={{borderTop:"1px solid var(--zb-border, #ddd)",padding:"0.65rem 0"}}>
-            <strong>Source v{r.version}{r.version === props.currentVersion ? " · Current" : ""}</strong>
-            <div style={{fontSize:"0.85em",opacity:0.8}}>{new Date(r.createdAt).toLocaleString()}</div>
-            {r.note ? <p style={{margin:"0.2rem 0"}}>{r.note}</p> : null}
-            <button type="button" disabled={busy} onClick={() => void viewVersion(r.version)}>View files</button>{" "}
-            {r.version < props.currentVersion ? <button type="button" disabled={busy || props.disabled}
-              onClick={() => void restoreVersion(r.version)}>Restore v{r.version}</button> : null}
-          </div>)}
-        </div>
-        {selected !== null && preview ? <div aria-label={`Source version ${selected} file preview`}>
-          <strong>Files in v{selected}</strong>
-          <p>Read-only excerpts. Truncated files and omitted assets are not shown in full.</p>
-          {preview.files.map(file => <details key={file.path}>
-            <summary>{file.path}{file.truncated ? " · excerpt" : ""}</summary>
-            <pre style={{whiteSpace:"pre-wrap",overflowWrap:"anywhere",maxHeight:240,overflow:"auto"}}>{file.content}</pre>
-          </details>)}
-          {preview.omitted > 0 ? <p>{preview.omitted} file(s) omitted from preview.</p> : null}
-        </div> : null}
-      </> : null}
-    </section>
-  );
+  return <section className={styles.history} aria-label="Saved project versions" data-testid="zoebuild-revision-history">
+    <button type="button" className={styles.headingButton} aria-expanded={expanded}
+      onClick={()=>{setExpanded(!expanded);setSelected(null);setPreview(null);}}>
+      <span className={styles.headingText}><span aria-hidden="true">◷</span> Version history
+        <span className={styles.headingSubtitle}>Saved snapshots{activeVersion === null ? "" : ` · Current V${activeVersion}`}</span>
+      </span>
+      <span className={styles.chevron} aria-hidden="true">{expanded?"⌃":"⌄"}</span>
+    </button>
+    {expanded ? <div className={styles.body}>
+      <p className={styles.description}>Switch versions without adding saves. The selected version becomes Current; your live site remains unchanged.</p>
+      {props.disabled ? <p className={styles.notice}>Save unsaved code and finish the current action before restoring.</p> : null}
+      {historyError ? <p role="alert" className={styles.error}>{historyError}</p> : null}
+      {loading && !revisions.length ? <p role="status" className={styles.muted}>Loading versions…</p> : null}
+      {!loading && !revisions.length && !historyError ? <p className={styles.muted}>No saved versions yet.</p> : null}
+      <div className={styles.dateList}>
+        {groups.map(group=><details key={group.key} className={styles.dateGroup}>
+          <summary className={styles.dateSummary}>
+            <span className={styles.dateTitle}>{group.label}</span>
+            <span className={styles.dateCount}>{group.revisions.length} {group.revisions.length===1?"version":"versions"}</span>
+          </summary>
+          <div className={styles.versionList}>
+            {group.revisions.map(revision => <div className={styles.versionRow} key={revision.version}>
+              <div className={styles.versionInfo}>
+                <div className={styles.versionHeading}>
+                  <strong>Version {revision.version}</strong>
+                  {revision.version===activeVersion ? <span className={styles.currentBadge}>Current</span> : null}
+                </div>
+                <span className={styles.time}>
+                  {new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit"}).format(new Date(revision.createdAt))}
+                </span>
+                {revision.note ? <span className={styles.note}>{revision.note}</span> : null}
+              </div>
+              <div className={styles.actions}>
+                <button type="button" className={styles.viewButton} disabled={busy}
+                  onClick={()=>void viewVersion(revision.version)}>View files</button>
+                {revision.version !== activeVersion ? <>
+                  <button type="button" className={styles.restoreButton}
+                    disabled={busy||props.disabled} onClick={()=>void restoreVersion(revision.version)}>
+                    {busy&&selected===revision.version?"Switching…":"Switch to version"}
+                  </button>
+                  <button type="button" className={styles.deleteButton}
+                    aria-label={`Delete saved Version ${revision.version}`}
+                    disabled={busy||props.disabled} onClick={()=>void deleteVersion(revision.version)}>Delete</button>
+                </> : null}
+              </div>
+            </div>)}
+          </div>
+        </details>)}
+      </div>
+      {hasMore ? <button type="button" className={styles.moreButton} disabled={loading||busy}
+        onClick={()=>void loadOlderVersions()}>{loading?"Loading…":"Load older versions"}</button> : null}
+      {selected!==null&&preview ? <div className={styles.preview} aria-label={`Source version ${selected} file preview`}>
+        <div className={styles.previewHeading}><strong>Version {selected} · Saved files</strong>
+          <button type="button" onClick={()=>{setPreview(null);setSelected(null);}}>Close</button></div>
+        <p className={styles.muted}>Read-only excerpts; binary assets, secret files and large content are not displayed.</p>
+        {preview.files.map(file=><details key={file.path} className={styles.file}>
+          <summary>{file.path}{file.truncated?" · excerpt":""}</summary>
+          <pre>{file.content}</pre>
+        </details>)}
+        {preview.omitted>0 ? <p className={styles.muted}>{preview.omitted} file(s) omitted.</p> : null}
+      </div> : null}
+    </div> : null}
+  </section>;
 }

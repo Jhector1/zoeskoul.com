@@ -11,7 +11,7 @@ import {
   createOwnedReactPreviewBuildRequest,
   ReactPreviewRequestError,
 } from "@/lib/build/reactPreviewServer";
-import { startTrustedReactPreviewAtRunner } from "@/lib/build/reactPreviewRunnerClient";
+import { startTrustedReactPreviewAtRunner, proxyFetchTrustedReactPreviewAtRunner, cancelTrustedReactPreviewAtRunner } from "@/lib/build/reactPreviewRunnerClient";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -63,6 +63,43 @@ export async function POST(
     });
     const actorKey = await requireRunnerActorKey(userId);
     const preview = await startTrustedReactPreviewAtRunner({ actorKey, request });
+    // A runner start verifies Vite inside the process that created the preview.
+    // Verify a *separate* capability fetch too: process-local preview registries
+    // behind a non-sticky runner load balancer can otherwise return 201, then
+    // 404 for every browser document. Do not claim this session is ready.
+    let documentResponse;
+    try {
+      documentResponse = await proxyFetchTrustedReactPreviewAtRunner({
+        previewId: preview.previewId,
+        path: preview.basePath,
+        method: "GET",
+      });
+    } catch (error) {
+      if (error instanceof RunnerHttpError && error.status === 404) {
+        void cancelTrustedReactPreviewAtRunner({ actorKey, previewId: preview.previewId }).catch(() => undefined);
+        console.warn("[ZoeBuild preview/start] runner session not available to document fetch", {
+          requestId, category: "runner-registry-miss", upstreamStatus: 404,
+        });
+        return json(requestId, {
+          ok: false,
+          code: "BUILD_PREVIEW_RUNNER_ROUTING",
+          message: "The preview runner could not retrieve the session it just created. Check runner routing and restart the preview.",
+        }, 503);
+      }
+      throw error;
+    }
+    const documentType = documentResponse.headers["content-type"] ?? "";
+    if (documentResponse.status !== 200 || !/^text\/html(?:\s*;|\s*$)/i.test(documentType)) {
+      void cancelTrustedReactPreviewAtRunner({ actorKey, previewId: preview.previewId }).catch(() => undefined);
+      console.warn("[ZoeBuild preview/start] runner document not ready", {
+        requestId, category: "invalid-preview-document", upstreamStatus: documentResponse.status,
+      });
+      return json(requestId, {
+        ok: false,
+        code: "BUILD_PREVIEW_DOCUMENT_NOT_READY",
+        message: "The preview started but its website document is not ready. Retry the preview.",
+      }, 503);
+    }
     return json(requestId, { ok: true, preview }, 201);
   } catch (error) {
     if (error instanceof ReactPreviewRequestError) {

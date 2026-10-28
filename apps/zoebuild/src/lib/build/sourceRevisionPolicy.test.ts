@@ -2,9 +2,10 @@ import {describe,expect,it} from "vitest";
 import {buildRevisionFilePreview,parseRevisionRestoreRequest} from "./sourceRevisionPolicy";
 
 describe("source revision restore contract", () => {
-  it("requires exactly two safe integer versions with a prior target", () => {
+  it("requires two safe integer versions and permits selecting the latest saved snapshot", () => {
     expect(parseRevisionRestoreRequest({baseVersion:4,restoreVersion:2})).toEqual({baseVersion:4,restoreVersion:2});
-    for (const invalid of [null,[],{}, {baseVersion:4,restoreVersion:4},
+    expect(parseRevisionRestoreRequest({baseVersion:4,restoreVersion:4})).toEqual({baseVersion:4,restoreVersion:4});
+    for (const invalid of [null,[],{},
       {baseVersion:3,restoreVersion:5},{baseVersion:3.3,restoreVersion:1},
       {baseVersion:3,restoreVersion:"1"},{baseVersion:3,restoreVersion:1,workspace:{}}])
       expect(parseRevisionRestoreRequest(invalid)).toBeNull();

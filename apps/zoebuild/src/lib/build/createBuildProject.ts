@@ -35,6 +35,7 @@ function buildSourceSettings(input: InitialBuildProjectPersistenceInput) {
       stackId: input.stackId,
       templateId: input.templateId,
       dependencyLock: input.dependencyLock,
+      projectSpecification: input.specification,
     },
   };
 }

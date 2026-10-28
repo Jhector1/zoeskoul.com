@@ -53,7 +53,12 @@ import {
 } from "./executeProductionBuild.js";
 import {
   assertZoeBuildPreviewCapacity,
+  ZOEBUILD_MAX_CONCURRENT_PREVIEWS,
 } from "./zoeBuildPreviewCapacity.js";
+import {
+  PreviewStartCoordinator,
+  choosePreviewsToReclaim,
+} from "./reactPreviewResourceAdmission.js";
 
 import {
   REACT_VITE_V1_PREBUILT_LOCK_SHA256,
@@ -104,6 +109,12 @@ type MutablePreviewRecord = {
 };
 
 const projectDrains = new PreviewProjectDrainRegistry();
+
+// Serialize preview cold starts to prevent competing requests from consuming
+// the sole preview slot before an earlier request has finished creating it.
+// Admission is bounded; this never raises Docker limits or changes auth.
+const previewStartCoordinator = new PreviewStartCoordinator(8, 75_000);
+const inFlightPreviewStarts = new Map<string, Promise<Awaited<ReturnType<typeof startReactPreviewInternal>>>>();
 
 const previews =
   new Map<
@@ -236,6 +247,27 @@ function reservePreviewCapacity(
         pendingPreviewStartsGlobal - 1,
       );
   };
+}
+
+/** Reclaim warm previews when another project actually needs the scarce slot.
+ * Same-owner other-project previews can yield immediately. Other users'
+ * recently accessed previews are protected from eviction.
+ * Deletion remains owner-scoped and each Docker removal is verified.
+ */
+async function reclaimPreviewCapacity(ownerKey: string, buildProjectId: string): Promise<void> {
+  await runReactPreviewCleanupSweep();
+  const needsSlot = () =>
+    previews.size + pendingPreviewStartsGlobal >= ZOEBUILD_MAX_CONCURRENT_PREVIEWS ||
+    countActiveSessionsGlobal() + previews.size + pendingPreviewStartsGlobal >= env.maxConcurrentGlobal ||
+    countActiveSessionsForActor(ownerKey) + activePreviewCountForActor(ownerKey) >= env.maxConcurrentPerActor;
+
+  if (!needsSlot()) return;
+  for (const record of choosePreviewsToReclaim(
+    [...previews.values()], ownerKey, buildProjectId, currentTime(), 45_000,
+  )) {
+    if (!needsSlot()) break;
+    await destroyPreview(record);
+  }
 }
 
 function safePreviewBasePath(
@@ -1101,15 +1133,17 @@ async function destroyPreview(
   // must not overcommit CPU/memory while the previous container is stopping.
   const cleanup = (async () => {
     try {
-      await docker
-        .getContainer(record.containerId)
-        .remove({ force: true })
-        .catch(() => undefined);
-      await cleanupWorkspaceNow(record.workspaceDir)
-        .catch(() => undefined);
-    } finally {
-      previews.delete(record.id);
+      await docker.getContainer(record.containerId).remove({force: true});
+    } catch (error) {
+      // An already-removed container is safe, but a Docker outage must not
+      // silently release the resource reservation and permit overcommit.
+      if (!(typeof error === "object" && error !== null &&
+            "statusCode" in error && error.statusCode === 404)) throw error;
     }
+    await cleanupWorkspaceNow(record.workspaceDir);
+    // The slot becomes free only after both operations succeed. On failure,
+    // keep the record for the next cleanup sweep and refuse unsafe admission.
+    previews.delete(record.id);
   })();
 
   pendingPreviewDestructions.set(record.id, cleanup);
@@ -1280,6 +1314,9 @@ async function startReactPreviewInternal(
     };
   }
 
+  // Reuse first; if still full, retire warm previews for a different
+  // project before admission. Serial startup ensures no parallel eviction races.
+  await reclaimPreviewCapacity(ownerKey, request.buildProjectId);
   const releaseCapacity =
     reservePreviewCapacity(
       ownerKey,
@@ -1549,15 +1586,45 @@ async function startReactPreviewInternal(
   }
 }
 
-/** Reserve a per-project startup lease before the first async boundary. */
+/** Deduplicate identical source starts and serialize all other cold starts.
+ * Never reuse a response for a different actor, project, revision, or source.
+ */
 export async function startReactPreview(
   input: Readonly<{ ownerKey: string; request: ProductionBuildJobRequestV1 }>,
 ) {
-  const finish = projectDrains.beginStart(input.ownerKey, input.request.buildProjectId);
+  const digest = createHash("sha256");
+  digest.update(input.ownerKey);
+  digest.update("\0");
+  digest.update(input.request.buildProjectId);
+  digest.update("\0");
+  digest.update(String(input.request.sourceVersion));
+  digest.update("\0");
+  digest.update(String(input.request.stackId));
+  digest.update("\0");
+  digest.update(String(input.request.templateId));
+  for (const file of input.request.files) {
+    digest.update("\0");
+    digest.update(file.path);
+    digest.update("\0");
+    digest.update(sourceFileBytes(file));
+  }
+  const key = digest.digest("hex");
+  const existing = inFlightPreviewStarts.get(key);
+  if (existing) return await existing;
+
+  const task = previewStartCoordinator.run(async () => {
+    const finish = projectDrains.beginStart(input.ownerKey, input.request.buildProjectId);
+    try {
+      return await startReactPreviewInternal(input);
+    } finally {
+      finish();
+    }
+  });
+  inFlightPreviewStarts.set(key, task);
   try {
-    return await startReactPreviewInternal(input);
+    return await task;
   } finally {
-    finish();
+    if (inFlightPreviewStarts.get(key) === task) inFlightPreviewStarts.delete(key);
   }
 }
 
@@ -1738,6 +1805,8 @@ if (
 
 export function __resetReactPreviewsForTests() {
   previews.clear();
+  inFlightPreviewStarts.clear();
+  previewStartCoordinator.resetForTests();
   pendingPreviewStartsByActor.clear();
   projectDrains.reset();
   pendingPreviewStartsGlobal =

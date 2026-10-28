@@ -25,6 +25,7 @@ function toPrismaJson(value: unknown): Prisma.InputJsonValue {
 
 export function createPrismaBuildProjectSourceWriter(
   client: PrismaClient,
+  options: Readonly<{createRevision?:boolean}> = {},
 ): BuildProjectSourceWritePort {
   return {
     async saveOwnedBuildProjectSource(input) {
@@ -101,7 +102,7 @@ export function createPrismaBuildProjectSourceWriter(
               assignmentId: buildProject.codeProject.assignmentId,
               scopeKey: buildProject.codeProject.scopeKey,
             },
-            createRevision: true,
+            createRevision: options.createRevision ?? true,
             revisionNote: "ZoeBuild source save",
             createdById: userId,
             baseVersion: input.baseVersion,
