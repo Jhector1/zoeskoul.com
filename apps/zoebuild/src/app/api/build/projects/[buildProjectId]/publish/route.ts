@@ -35,11 +35,9 @@ import {
 } from "@/lib/build/readBuildProjects";
 
 import {
-  BuildPublishPersistenceError,
-  createPrismaSelfHostedStaticPublisher,
   ZOEBUILD_SELF_HOSTED_PROVIDER,
   ZOEBUILD_STATIC_ASSETS_KIND,
-} from "@/lib/build/publishBuildProject";
+} from "@/lib/build/publishedArtifactIdentity";
 
 import {
   CompiledBuildPublishError,
@@ -377,22 +375,6 @@ export async function POST(
       );
     }
 
-    const directStatic =
-      preparation
-        .buildCommand
-        .length === 0 &&
-      preparation
-        .artifact
-        .type ===
-        "static-directory" &&
-      preparation
-        .artifact
-        .outputPath ===
-        "." &&
-      preparation
-        .deploymentAdapterId ===
-        ZOEBUILD_STATIC_ASSETS_KIND;
-
     const trustedReact =
       preparation.stackId ===
         "react-vite-v1" &&
@@ -420,7 +402,6 @@ export async function POST(
         ZOEBUILD_STATIC_ASSETS_KIND;
 
     if (
-      !directStatic &&
       !trustedReact
     ) {
       return json(
@@ -462,39 +443,6 @@ export async function POST(
           string;
       }>;
 
-    if (
-      directStatic
-    ) {
-      const publisher =
-        createPrismaSelfHostedStaticPublisher(
-          prisma,
-        );
-
-      deployment =
-        await publisher
-          .publishOwnedProject({
-            ownerId:
-              userId,
-
-            buildProjectId:
-              project
-                .buildProjectId,
-
-            expectedSourceVersion:
-              project
-                .sourceVersion,
-
-            stackId:
-              preparation
-                .stackId,
-
-            templateId:
-              preparation
-                .templateId,
-
-            publicOrigin,
-          });
-    } else {
       /**
        * Cost guard:
        * Re-publishing the exact same source version must not pay for another
@@ -805,7 +753,6 @@ export async function POST(
               execution,
             });
       }
-    }
 
     return json(
       requestId,
@@ -827,8 +774,6 @@ export async function POST(
     );
   } catch (error) {
     if (
-      error instanceof
-      BuildPublishPersistenceError ||
       error instanceof
       CompiledBuildPublishError
     ) {

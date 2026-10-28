@@ -20,6 +20,7 @@ import {
   env,
 } from "../../lib/env.js";
 import { isValidReactPreviewReadyDocument } from "./reactPreviewReadiness.js";
+import { PreviewProjectDrainRegistry } from "./reactPreviewProjectDrainPolicy.js";
 import { fetchPersistentPreviewHttp, stopPersistentPreviewHttp } from "./reactPreviewPersistentHttp.js";
 
 import {
@@ -101,6 +102,8 @@ type MutablePreviewRecord = {
   createdAt: number;
   lastActivityAt: number;
 };
+
+const projectDrains = new PreviewProjectDrainRegistry();
 
 const previews =
   new Map<
@@ -1215,7 +1218,7 @@ async function reuseExistingProjectPreview(
   return null;
 }
 
-export async function startReactPreview(
+async function startReactPreviewInternal(
   input: Readonly<{
     ownerKey: string;
     request:
@@ -1546,6 +1549,55 @@ export async function startReactPreview(
   }
 }
 
+/** Reserve a per-project startup lease before the first async boundary. */
+export async function startReactPreview(
+  input: Readonly<{ ownerKey: string; request: ProductionBuildJobRequestV1 }>,
+) {
+  const finish = projectDrains.beginStart(input.ownerKey, input.request.buildProjectId);
+  try {
+    return await startReactPreviewInternal(input);
+  } finally {
+    finish();
+  }
+}
+
+/** Stop exactly this actor's previews and verify cleanup before allowing DB deletion. */
+export async function drainReactPreviewsForProject(
+  input: Readonly<{ ownerKey: string; buildProjectId: string }>,
+) {
+  const drainId = projectDrains.beginDrain(input.ownerKey, input.buildProjectId);
+  let stoppedCount = 0;
+  // On cleanup errors, leave the project blocked until the bounded lease expires.
+  for (const preview of [...previews.values()]) {
+    if (preview.ownerKey !== input.ownerKey || preview.buildProjectId !== input.buildProjectId) continue;
+    await destroyPreview(preview);
+    const isStillPresent = await docker.getContainer(preview.containerId)
+      .inspect()
+      .then(() => true, (error: unknown) => {
+        if (typeof error === "object" && error !== null &&
+            "statusCode" in error && error.statusCode === 404) return false;
+        throw new Error("Preview container removal could not be verified.");
+      });
+    if (isStillPresent) throw new Error("Preview container removal could not be verified.");
+    await fs.stat(preview.workspaceDir).then(
+      () => { throw new Error("Preview workspace cleanup could not be verified."); },
+      (error: unknown) => {
+        if (typeof error === "object" && error !== null &&
+            "code" in error && error.code === "ENOENT") return;
+        throw new Error("Preview workspace cleanup could not be verified.");
+      },
+    );
+    stoppedCount += 1;
+  }
+  return { ok: true as const, drainId, stoppedCount };
+}
+
+export function releaseReactPreviewProjectDrain(
+  input: Readonly<{ ownerKey: string; buildProjectId: string; drainId: string }>,
+) {
+  return projectDrains.releaseDrain(input.ownerKey, input.buildProjectId, input.drainId);
+}
+
 export async function syncReactPreview(
   input: Readonly<{
     previewId: string;
@@ -1559,6 +1611,7 @@ export async function syncReactPreview(
       input.previewId,
       input.ownerKey,
     );
+  projectDrains.assertNotDraining(input.ownerKey, input.request.buildProjectId);
 
   if (
     record.buildProjectId !==
@@ -1686,6 +1739,7 @@ if (
 export function __resetReactPreviewsForTests() {
   previews.clear();
   pendingPreviewStartsByActor.clear();
+  projectDrains.reset();
   pendingPreviewStartsGlobal =
     0;
 }

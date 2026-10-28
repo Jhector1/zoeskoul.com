@@ -18,6 +18,7 @@ import { fetchBuildPreviewRoute } from "./routes/build.previews.fetch.js";
 import { proxyFetchBuildPreviewRoute } from "./routes/build.previews.proxyFetch.js";
 import { resolveBuildPreviewCapabilityRoute } from "./routes/build.previews.resolveCapability.js";
 import { cancelBuildPreviewRoute } from "./routes/build.previews.cancel.js";
+import { drainBuildProjectPreviewsRoute, releaseBuildProjectPreviewDrainRoute } from "./routes/build.previews.projectDrain.js";
 import { getSessionStats } from "./services/sessions/sessionStore.js";
 import { env } from "./lib/env.js";
 import {
@@ -85,6 +86,8 @@ app.post("/build/previews/:previewId/fetch", fetchBuildPreviewRoute);
 app.post("/build/previews/:previewId/proxy-fetch", proxyFetchBuildPreviewRoute);
 app.post("/build/previews/:previewId/resolve-capability", resolveBuildPreviewCapabilityRoute);
 app.post("/build/previews/:previewId/cancel", cancelBuildPreviewRoute);
+app.post("/build/previews/project/drain", drainBuildProjectPreviewsRoute);
+app.post("/build/previews/project/release", releaseBuildProjectPreviewDrainRoute);
 app.post("/sessions/start", startSessionRoute);
 app.post("/sessions/active", activeSessionsRoute);
 app.post("/sessions/:sessionId/input", inputSessionRoute);

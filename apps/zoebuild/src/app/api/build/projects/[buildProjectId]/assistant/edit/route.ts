@@ -131,6 +131,9 @@ export async function POST(req: Request, ctx: { params: Promise<{buildProjectId:
     if (!project) return result(requestId, { ok: false, code: "BUILD_PROJECT_NOT_FOUND" }, 404);
     if (project.sourceVersion !== baseVersion) return result(requestId, { ok: false, code: "BUILD_EDIT_STALE", message: "Source version changed. Reload before requesting an edit." }, 409);
     if (project.status === "archived") return result(requestId, { ok: false, code: "BUILD_PROJECT_ARCHIVED" }, 409);
+    if (project.stackId !== "react-vite-v1") return result(requestId, { ok:false,
+      code:"BUILD_EDIT_PAGE_STACK_UNSUPPORTED",
+      message:"This project must first recover its React/Vite source history; no AI edit was charged or applied." }, 422);
     // Model-interpreted intent selects a registered page. Treat this field as untrusted
     // routing input; independent entitlement, ownership and source validation remain.
     if (body?.pagePath !== null && body?.pagePath !== undefined &&
@@ -480,6 +483,9 @@ export async function PATCH(req: Request, ctx: { params: Promise<{buildProjectId
     const project = await getBuildProjectCommand({ access, buildProjectId, reader: createPrismaBuildProjectReader(prisma) });
     if (!project) return result(requestId, { ok: false, code: "BUILD_PROJECT_NOT_FOUND" }, 404);
     if (project.status === "archived") return result(requestId, { ok: false, code: "BUILD_PROJECT_ARCHIVED" }, 409);
+    if (project.stackId !== "react-vite-v1") return result(requestId, { ok:false,
+      code:"BUILD_EDIT_PAGE_STACK_UNSUPPORTED",
+      message:"This project must first recover its React/Vite source history; no AI edit was charged or applied." }, 422);
     if (project.sourceVersion !== body.baseVersion) return result(requestId, { ok: false, code: "BUILD_EDIT_STALE", message: "A newer source exists. Reload and replan." }, 409);
     if (Array.isArray(body.edits) && body.edits.some((item: unknown) =>
       item && typeof item === "object" && !Array.isArray(item) && (item as Record<string, unknown>).create === true) &&

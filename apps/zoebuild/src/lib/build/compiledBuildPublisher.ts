@@ -18,7 +18,7 @@ import {
 import {
   ZOEBUILD_SELF_HOSTED_PROVIDER,
   ZOEBUILD_STATIC_ASSETS_KIND,
-} from "./publishBuildProject";
+} from "./publishedArtifactIdentity";
 
 export const ZOEBUILD_COMPILED_ARTIFACT_PROVIDER =
   "zoebuild-postgres-bytes-v1";

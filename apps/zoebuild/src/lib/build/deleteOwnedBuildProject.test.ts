@@ -8,7 +8,7 @@ const client = readFileSync(new URL("../../components/builder/DeleteBuildProject
 
 describe("V12K12G owned project deletion", () => {
   it("requires verified identity, same origin, title confirmation and rate limiting", () => {
-    for (const rule of ["enforceSameOriginPost(req)", "requireAuthority: true", "rateLimit(", "confirmTitle", "deleteOwnedBuildProject(prisma"]) {
+    for (const rule of ["drainTrustedReactProjectPreviewsAtRunner", "releaseTrustedReactProjectPreviewDrainAtRunner", "requireRunnerActorKey(access.userId)", "enforceSameOriginPost(req)", "requireAuthority: true", "rateLimit(", "confirmTitle", "deleteOwnedBuildProject(prisma"]) {
       expect(api).toContain(rule);
     }
   });

@@ -12,6 +12,8 @@ import { createPrismaBuildProjectSourceWriter } from "@/lib/build/saveBuildProje
 import { BuildWorkspaceMutationError, parseBuildWorkspaceMutation } from "@/lib/build/buildWorkspaceMutation";
 import { verifyZoeReactCandidateAtRunner } from "@/lib/build/zoeReactIsolatedBuild";
 import { buildRevisionFilePreview, parseRevisionRestoreRequest } from "@/lib/build/sourceRevisionPolicy";
+import { historicalReactSourceMetadata, historicReactRecoverySpecification,
+  restoreHistoricalReactRevision, HistoricalReactRestoreError } from "@/lib/build/restoreHistoricalReactRevision";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -90,7 +92,7 @@ export async function POST(req: Request, ctx: Context) {
     if (!access.userId) return reply(requestId,{ok:false,code:"BUILD_AUTH_REQUIRED"},401);
     if (!project) return reply(requestId,{ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
     if (project.status === "archived") return reply(requestId,{ok:false,code:"BUILD_PROJECT_ARCHIVED"},409);
-    if (project.stackId !== "react-vite-v1" || !project.specification)
+    if (!project.specification)
       return reply(requestId,{ok:false,code:"BUILD_HISTORY_STACK_UNSUPPORTED"},422);
     if (project.sourceVersion !== restore.baseVersion)
       return reply(requestId,{ok:false,code:"BUILD_HISTORY_STALE",message:"A newer version exists. Reload history before restoring."},409);
@@ -99,10 +101,33 @@ export async function POST(req: Request, ctx: Context) {
     if (!limited) return reply(requestId,{ok:false,code:"BUILD_HISTORY_UNAVAILABLE"},503);
     if (!limited.ok) return reply(requestId,{ok:false,code:"BUILD_HISTORY_RATE_LIMITED"},429);
     const revision = await prisma.codeProjectRevision.findFirst({
-      where:{projectId:project.codeProjectId,version:restore.restoreVersion}, select:{snapshot:true},
+      where:{projectId:project.codeProjectId,version:restore.restoreVersion},
+      select:{snapshot:true,settings:true,meta:true},
     });
     if (!revision) return reply(requestId,{ok:false,code:"BUILD_REVISION_NOT_FOUND"},404);
     const workspace = parseBuildWorkspaceMutation(revision.snapshot);
+    if (project.stackId !== "react-vite-v1") {
+      if (!historicalReactSourceMetadata(revision.settings, revision.meta))
+        return reply(requestId,{ok:false,code:"BUILD_HISTORY_STACK_UNSUPPORTED",
+          message:"This revision does not contain a registered React/Vite source manifest."},422);
+      const specification = historicReactRecoverySpecification(project.title);
+      const verification = await verifyZoeReactCandidateAtRunner({
+        userId:access.userId,buildProjectId:project.buildProjectId,
+        workspace,edits:[],specification,sourceVersion:project.sourceVersion,
+        sourceKind:"saved",correlationId:requestId,
+      });
+      if (verification.state !== "passed")
+        return reply(requestId,{ok:false,code:"BUILD_RESTORE_BUILD_NOT_VERIFIED",
+          message:"The historical React revision did not compile. Nothing was restored.",verification},409);
+      const saved = await restoreHistoricalReactRevision(prisma, {
+        ownerId: access.userId, buildProjectId: project.buildProjectId,
+        expectedVersion: project.sourceVersion, restoreVersion: restore.restoreVersion,
+        snapshot: revision.snapshot, revisionSettings: revision.settings, revisionMeta: revision.meta,
+      });
+      if (!saved) return reply(requestId,{ok:false,code:"BUILD_PROJECT_NOT_FOUND"},404);
+      return reply(requestId,{ok:true,sourceVersion:saved.sourceVersion,
+        restoredFromVersion:restore.restoreVersion,changed:saved.changed});
+    }
     // No model request, no Preview restart and no publish. A historical build
     // is compiled using the current canonical project specification.
     // Historical source is a persisted, complete snapshot, not a proposed edit.
@@ -124,6 +149,10 @@ export async function POST(req: Request, ctx: Context) {
     return reply(requestId,{ok:true,sourceVersion:saved.sourceVersion,
       restoredFromVersion:restore.restoreVersion,changed:saved.changed});
   } catch (error) {
+    if (error instanceof HistoricalReactRestoreError)
+      return reply(requestId,{ok:false,code:error.code,
+        message:"This historical revision cannot be safely restored without further cleanup."},
+        error.code === "BUILD_HISTORY_STACK_UNSUPPORTED" ? 422 : 409);
     if (error instanceof BuildSourceConflictError)
       return reply(requestId,{ok:false,code:error.code,message:"A newer version exists. Reload before restoring."},409);
     if (error instanceof BuildAccessError) return reply(requestId,{ok:false,code:error.code},403);

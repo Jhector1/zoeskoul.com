@@ -89,3 +89,21 @@ export async function proxyFetchTrustedReactPreviewAtRunner(args: Readonly<{
   );
   return result.response;
 }
+
+/** Runner-only two-phase preview quiescence during a verified project deletion. */
+export async function drainTrustedReactProjectPreviewsAtRunner(args: Readonly<{
+  actorKey: string; buildProjectId: string;
+}>) {
+  return runnerPost<{ ok: true; drainId: string; stoppedCount: number }>(
+    "/build/previews/project/drain", args.actorKey, { buildProjectId: args.buildProjectId },
+  );
+}
+
+export async function releaseTrustedReactProjectPreviewDrainAtRunner(args: Readonly<{
+  actorKey: string; buildProjectId: string; drainId: string;
+}>) {
+  return runnerPost<{ ok: true }>(
+    "/build/previews/project/release", args.actorKey,
+    { buildProjectId: args.buildProjectId, drainId: args.drainId },
+  );
+}

@@ -31,6 +31,67 @@ export function checkBuildProjectDeletion(safety: DeletionSafety): DeletionBlock
   return null;
 }
 
+
+/**
+ * Shared, fail-closed eligibility evaluation for preflight and the final write.
+ * The final Serializable transaction ALWAYS reevaluates all blockers.
+ */
+async function assessOwnedBuildProjectDeletion(
+  tx: Prisma.TransactionClient,
+  input: Readonly<{ ownerId: string; buildProjectId: string; expectedTitle: string }>,
+) {
+    const project = await tx.buildProject.findFirst({
+      where: { id: input.buildProjectId, codeProject: { ownerId: input.ownerId } },
+      select: {
+        id: true, codeProjectId: true, codeProject: { select: { title: true } },
+        commerceStore: { select: {
+          id: true, _count: { select: { orders: true } },
+          providerConnections: { select: { provider: true, externalAccountRef: true,
+            credentialsSecretRef: true, storefrontSecretRef: true, webhookSecretRef: true } },
+        } },
+        runs: { where: { status: { in: ["queued", "running"] } }, select: { id: true }, take: 1 },
+        resources: { select: { providerRef: true, secretRef: true, status: true } },
+        deployments: { select: { providerRef: true, status: true } },
+      },
+    });
+    if (!project) return { status: "not-found" as const };
+    if (project.codeProject.title !== input.expectedTitle) return { status: "title-mismatch" as const };
+
+    const blocked = checkBuildProjectDeletion({
+      orderCount: project.commerceStore?._count.orders ?? 0,
+      hasExternalConnections: (project.commerceStore?.providerConnections ?? []).some(conn =>
+        conn.provider !== "zoestore" || Boolean(conn.externalAccountRef || conn.credentialsSecretRef ||
+          conn.storefrontSecretRef || conn.webhookSecretRef)),
+      hasExternalResources: project.resources.some(resource =>
+        resource.status !== "deleted" && (Boolean(resource.providerRef || resource.secretRef) ||
+          ["requested", "provisioning", "ready", "deleting"].includes(resource.status))) ||
+        project.deployments.some(deployment => Boolean(deployment.providerRef)),
+      hasActiveWork: project.runs.length > 0 || project.deployments.some(deployment =>
+        ["queued", "building", "deploying"].includes(deployment.status)),
+    });
+    if (blocked) throw new BuildProjectDeleteBlockedError(blocked);
+
+    return { status: "safe" as const, project };
+}
+
+
+/**
+ * Read-only eligibility check BEFORE stopping a preview.
+ * Never constitutes authorization to delete: the final transaction rechecks.
+ */
+export async function preflightOwnedBuildProjectDeletion(
+  client: PrismaClient,
+  input: Readonly<{ ownerId: string; buildProjectId: string; expectedTitle: string }>,
+): Promise<"safe" | "not-found" | "title-mismatch"> {
+  if (!input.ownerId.trim() || !input.buildProjectId.trim() || !input.expectedTitle.trim()) {
+    return "not-found";
+  }
+  return client.$transaction(async (tx) => {
+    const assessed = await assessOwnedBuildProjectDeletion(tx, input);
+    return assessed.status;
+  }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+}
+
 /**
  * Delete the canonical CodeProject and its BuildProject in one transaction.
  * Cascading FKs remove revisions, grants, runs, artifacts, chats, native carts
@@ -49,36 +110,10 @@ export async function deleteOwnedBuildProject(
   }
 
   return client.$transaction(async (tx) => {
-    const project = await tx.buildProject.findFirst({
-      where: { id: input.buildProjectId, codeProject: { ownerId: input.ownerId } },
-      select: {
-        id: true, codeProjectId: true, codeProject: { select: { title: true } },
-        commerceStore: { select: {
-          id: true, _count: { select: { orders: true } },
-          providerConnections: { select: { provider: true, externalAccountRef: true,
-            credentialsSecretRef: true, storefrontSecretRef: true, webhookSecretRef: true } },
-        } },
-        runs: { where: { status: { in: ["queued", "running"] } }, select: { id: true }, take: 1 },
-        resources: { select: { providerRef: true, secretRef: true, status: true } },
-        deployments: { select: { providerRef: true, status: true } },
-      },
-    });
-    if (!project) return "not-found";
-    if (project.codeProject.title !== input.expectedTitle) return "title-mismatch";
-
-    const blocked = checkBuildProjectDeletion({
-      orderCount: project.commerceStore?._count.orders ?? 0,
-      hasExternalConnections: (project.commerceStore?.providerConnections ?? []).some(conn =>
-        conn.provider !== "zoestore" || Boolean(conn.externalAccountRef || conn.credentialsSecretRef ||
-          conn.storefrontSecretRef || conn.webhookSecretRef)),
-      hasExternalResources: project.resources.some(resource =>
-        resource.status !== "deleted" && (Boolean(resource.providerRef || resource.secretRef) ||
-          ["requested", "provisioning", "ready", "deleting"].includes(resource.status))) ||
-        project.deployments.some(deployment => Boolean(deployment.providerRef)),
-      hasActiveWork: project.runs.length > 0 || project.deployments.some(deployment =>
-        ["queued", "building", "deploying"].includes(deployment.status)),
-    });
-    if (blocked) throw new BuildProjectDeleteBlockedError(blocked);
+    // Recheck after runner drain; new orders/connections/work block deletion.
+    const assessed = await assessOwnedBuildProjectDeletion(tx, input);
+    if (assessed.status !== "safe") return assessed.status;
+    const project = assessed.project;
 
     // Provider-route FK references connection with RESTRICT: delete routes
     // before cascading the native store/connection rows.

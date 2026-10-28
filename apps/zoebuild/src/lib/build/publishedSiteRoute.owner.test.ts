@@ -58,34 +58,12 @@ describe(
       },
     );
 
-    it(
-      "preserves direct-static immutable CodeProjectRevision serving",
-      () => {
-        expect(
-          source,
-        ).toContain(
-          ".codeProjectRevision",
-        );
-
-        expect(
-          source,
-        ).toContain(
-          "projectId_version",
-        );
-
-        expect(
-          source,
-        ).toContain(
-          "revision.snapshot",
-        );
-
-        expect(
-          source,
-        ).not.toContain(
-          "codeProject.workspace",
-        );
-      },
-    );
+    it("does not serve a legacy CodeProjectRevision HTML/JS snapshot", () => {
+      expect(source).not.toContain(".codeProjectRevision");
+      expect(source).not.toContain("revision.snapshot");
+      expect(source).not.toContain("buildPublishedStaticFileMap");
+      expect(source).toContain("compiledFile");
+    });
 
     it(
       "serves compiled deployments from immutable BuildArtifact bytes",

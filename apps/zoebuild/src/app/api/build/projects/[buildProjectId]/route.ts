@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { enforceSameOriginPost } from "@zoeskoul/platform-server/http";
 import { rateLimit } from "@zoeskoul/platform-server/security/ratelimit";
-import { deleteOwnedBuildProject, BuildProjectDeleteBlockedError } from "@/lib/build/deleteOwnedBuildProject";
+import { deleteOwnedBuildProject, preflightOwnedBuildProjectDeletion, BuildProjectDeleteBlockedError } from "@/lib/build/deleteOwnedBuildProject";
+import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
+import { drainTrustedReactProjectPreviewsAtRunner, releaseTrustedReactProjectPreviewDrainAtRunner } from "@/lib/build/reactPreviewRunnerClient";
 
 import {
   BuildAccessError,
@@ -127,21 +129,69 @@ export async function DELETE(
       typeof (payload as { confirmTitle?: unknown }).confirmTitle !== "string") {
     return json(requestId, { ok: false, code: "BUILD_DELETE_INVALID" }, 400);
   }
+  let drained: { drainId: string } | null = null;
+  let actorKey: string | null = null;
+  let deleted = false;
+  let stage: "preflight" | "runner" | "database" = "preflight";
   try {
-    const status = await deleteOwnedBuildProject(prisma, {
+    // Verify project ownership AND confirmation before touching runner resources.
+    const owned = await getBuildProjectCommand({
+      access, buildProjectId, reader: createPrismaBuildProjectReader(prisma),
+    });
+    if (!owned) return json(requestId, { ok: false, code: "BUILD_PROJECT_NOT_FOUND" }, 404);
+    if (owned.title !== (payload as { confirmTitle: string }).confirmTitle)
+      return json(requestId, { ok: false, code: "BUILD_DELETE_TITLE_MISMATCH" }, 409);
+
+    const deletionInput = {
       ownerId: access.userId, buildProjectId,
       expectedTitle: (payload as { confirmTitle: string }).confirmTitle,
-    });
+    };
+    // Blocked/connected projects must keep their currently usable previews.
+    // This is advisory: the final Serializable transaction repeats the check.
+    const preflight = await preflightOwnedBuildProjectDeletion(prisma, deletionInput);
+    if (preflight === "not-found") return json(requestId, { ok: false, code: "BUILD_PROJECT_NOT_FOUND" }, 404);
+    if (preflight === "title-mismatch") return json(requestId, { ok: false, code: "BUILD_DELETE_TITLE_MISMATCH" }, 409);
+
+    stage = "runner";
+    actorKey = await requireRunnerActorKey(access.userId);
+    drained = await drainTrustedReactProjectPreviewsAtRunner({ actorKey, buildProjectId });
+    stage = "database";
+    const status = await deleteOwnedBuildProject(prisma, deletionInput);
     if (status === "not-found") return json(requestId, { ok: false, code: "BUILD_PROJECT_NOT_FOUND" }, 404);
     if (status === "title-mismatch") return json(requestId, { ok: false, code: "BUILD_DELETE_TITLE_MISMATCH" }, 409);
+    deleted = true;
     return json(requestId, { ok: true, deleted: true });
   } catch (error) {
     if (error instanceof BuildProjectDeleteBlockedError) {
-      return json(requestId, { ok: false, code: error.code,
-        message: "This project has transactions or external/active resources that require cleanup before permanent deletion." }, 409);
+      const messages = {
+        BUILD_DELETE_ORDERS_PRESENT: "This store has recorded orders. Project deletion requires a separate financial-record retention process.",
+        BUILD_DELETE_EXTERNAL_CONNECTIONS: "Disconnect and reconcile external commerce providers before deleting this project.",
+        BUILD_DELETE_EXTERNAL_RESOURCES: "External resources or published deployments require verified cleanup before project deletion.",
+        BUILD_DELETE_ACTIVE_WORK: "This project has an active build or deployment. Retry after it completes.",
+      } as const;
+      return json(requestId, { ok: false, code: error.code, message: messages[error.code] }, 409);
     }
-    console.error("[ZoeBuild project deletion] failed", { requestId, buildProjectId, kind: error instanceof Error ? error.name : "unknown" });
-    return json(requestId, { ok: false, code: "BUILD_DELETE_UNAVAILABLE",
-      message: "Project was not deleted. Try again later." }, 503);
+    // Keep low-level transport, Prisma, secret and database details in server logs only.
+    console.error("[ZoeBuild project deletion] failed", { requestId, buildProjectId,
+      stage, kind: error instanceof Error ? error.name : "unknown", error });
+    const failure = stage === "runner"
+      ? { code: "BUILD_DELETE_RUNNER_UNAVAILABLE",
+          message: "Project deletion could not verify runner preview cleanup. Make sure the V12K12J3 runner service is deployed and reachable; no project was deleted." }
+      : stage === "database"
+      ? { code: "BUILD_DELETE_DATABASE_UNAVAILABLE",
+          message: "Project deletion was blocked by a database error after preview cleanup. Your project remains; check the server logs using the request ID." }
+      : { code: "BUILD_DELETE_PREFLIGHT_UNAVAILABLE",
+          message: "Project deletion could not verify database eligibility. Your project and its previews were left unchanged." };
+    return json(requestId, { ok: false, ...failure }, 503);
+  } finally {
+    // Keep the runner tombstone on success to stop in-flight stale preview requests.
+    // On a failed transaction, allow retries after releasing this exact drain lease.
+    if (!deleted && drained && actorKey) {
+      await releaseTrustedReactProjectPreviewDrainAtRunner({
+        actorKey, buildProjectId, drainId: drained.drainId,
+      }).catch(() => {
+        console.error("[ZoeBuild project deletion] preview drain release failed", { requestId, buildProjectId });
+      });
+    }
   }
 }

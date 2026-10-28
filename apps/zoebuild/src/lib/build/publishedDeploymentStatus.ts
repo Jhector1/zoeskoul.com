@@ -11,7 +11,7 @@ import {
 import {
   ZOEBUILD_SELF_HOSTED_PROVIDER,
   ZOEBUILD_STATIC_ASSETS_KIND,
-} from "@/lib/build/publishBuildProject";
+} from "@/lib/build/publishedArtifactIdentity";
 
 export type ZoeBuildPublishedDeploymentSnapshot =
   Readonly<{
@@ -85,6 +85,9 @@ export async function readLatestOwnedPublishedDeployment(
 
           status:
             "ready",
+
+          // No legacy raw-source deployments are publishable.
+          buildArtifactId: { not: null },
 
           buildProject: {
             status: {

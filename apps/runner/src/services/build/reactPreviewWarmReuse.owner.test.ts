@@ -35,29 +35,43 @@ describe(
           "await syncPreviewSourceFiles(",
         );
 
+        // startReactPreview is now the drain-safe lease wrapper.
+        // Cold-start capacity remains inside the internal implementation.
+        const startIndex =
+          source.indexOf(
+            "async function startReactPreviewInternal(",
+          );
         const reuseCall =
           source.indexOf(
             "await reuseExistingProjectPreview(",
+            startIndex,
           );
-
-        const startIndex =
-          source.indexOf(
-            "export async function startReactPreview(",
-          );
-
         const reserveCall =
           source.indexOf(
             "reservePreviewCapacity(",
             startIndex,
           );
+        const wrapperIndex =
+          source.indexOf(
+            "export async function startReactPreview(",
+          );
 
-        expect(reuseCall).toBeGreaterThan(
-          -1,
-        );
+        expect(startIndex).toBeGreaterThan(-1);
+        expect(reuseCall).toBeGreaterThan(startIndex);
+        expect(reserveCall).toBeGreaterThan(reuseCall);
+        expect(wrapperIndex).toBeGreaterThan(reserveCall);
 
-        expect(reserveCall).toBeGreaterThan(
-          reuseCall,
+        const wrapper = source.slice(
+          wrapperIndex,
+          source.indexOf(
+            "export async function drainReactPreviewsForProject(",
+            wrapperIndex,
+          ),
         );
+        expect(wrapper).toContain("projectDrains.beginStart(");
+        expect(wrapper).toContain("await startReactPreviewInternal(input)");
+        expect(wrapper).toContain("finally {");
+        expect(wrapper).toContain("finish();");
       },
     );
 

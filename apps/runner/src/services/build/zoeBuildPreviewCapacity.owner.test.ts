@@ -29,7 +29,15 @@ describe("ZoeBuild single-preview admission ownership", () => {
   });
   it("preserves preview reuse and existing idle/hard-lifetime cleanup", () => {
     const source = read("src/services/build/reactPreviewRuntime.ts");
-    expect(source.indexOf("await reuseExistingProjectPreview(")).toBeLessThan(source.indexOf("reservePreviewCapacity(" , source.indexOf("export async function startReactPreview(")));
+    const startIndex = source.indexOf("async function startReactPreviewInternal(");
+    const reuseIndex = source.indexOf("await reuseExistingProjectPreview(", startIndex);
+    const reservationIndex = source.indexOf("reservePreviewCapacity(", startIndex);
+    const wrapperIndex = source.indexOf("export async function startReactPreview(");
+    expect(startIndex).toBeGreaterThan(-1);
+    expect(reuseIndex).toBeGreaterThan(startIndex);
+    expect(reservationIndex).toBeGreaterThan(reuseIndex);
+    expect(wrapperIndex).toBeGreaterThan(reservationIndex);
+    expect(source.slice(wrapperIndex)).toContain("projectDrains.beginStart(");
     expect(source).toContain("PREVIEW_IDLE_MS");
     expect(source).toContain("PREVIEW_HARD_LIFETIME_MS");
     expect(source).toContain("runReactPreviewCleanupSweep(");

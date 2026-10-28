@@ -28,7 +28,6 @@ import {
 import { trustedCommerceBuyerIpFromRequest } from "@/lib/commerce/trustedCommerceBuyerIp";
 
 import {
-  buildPublishedStaticFileMap,
   publishedStaticContentType,
   resolvePublishedStaticFile,
 } from "@/lib/build/staticPublishedArtifact";
@@ -40,7 +39,7 @@ import {
 import {
   ZOEBUILD_SELF_HOSTED_PROVIDER,
   ZOEBUILD_STATIC_ASSETS_KIND,
-} from "@/lib/build/publishBuildProject";
+} from "@/lib/build/publishedArtifactIdentity";
 
 import {
   ZOEBUILD_COMPILED_ARTIFACT_PROVIDER,
@@ -278,6 +277,7 @@ export async function POST(
             ZOEBUILD_SELF_HOSTED_PROVIDER,
           status:
             "ready",
+          buildArtifactId: { not: null },
           buildProject: {
             status: {
               not:
@@ -606,6 +606,8 @@ export async function GET(
 
           status:
             "ready",
+
+          buildArtifactId: { not: null },
 
           buildProject: {
             status: {
@@ -963,109 +965,6 @@ export async function GET(
     });
   }
 
-  /**
-   * Direct-static deployment:
-   *
-   * Preserve the existing immutable CodeProjectRevision source path.
-   */
-  const revision =
-    await prisma
-      .codeProjectRevision
-      .findUnique({
-        where: {
-          projectId_version: {
-            projectId:
-              deployment
-                .buildProject
-                .codeProjectId,
-
-            version:
-              deployment
-                .sourceVersion,
-          },
-        },
-
-        select: {
-          snapshot:
-            true,
-        },
-      });
-
-  if (!revision) {
-    console.error(
-      "[ZoeBuild published site] immutable revision missing",
-      {
-        deploymentId:
-          deployment.id,
-
-        buildProjectId:
-          normalizedProjectId,
-
-        sourceVersion:
-          deployment
-            .sourceVersion,
-      },
-    );
-
-    return unavailable();
-  }
-
-  let files;
-
-  try {
-    files =
-      buildPublishedStaticFileMap(
-        revision.snapshot,
-      );
-  } catch (error) {
-    console.error(
-      "[ZoeBuild published site] invalid immutable workspace",
-      {
-        deploymentId:
-          deployment.id,
-
-        error,
-      },
-    );
-
-    return unavailable();
-  }
-
-  let file;
-
-  try {
-    file =
-      resolvePublishedStaticFile(
-        files,
-        requestedPath,
-        acceptsHtml,
-      );
-  } catch {
-    return notFound();
-  }
-
-  if (!file) {
-    return notFound();
-  }
-
-  return responseForPublishedFile({
-    request,
-
-    deploymentId:
-      deployment.id,
-
-    sourceVersion:
-      deployment
-        .sourceVersion,
-
-    artifactHash:
-      deployment
-        .artifactHash,
-
-    body:
-      file.body,
-
-    contentType:
-      file.contentType,
-  });
+  // No legacy CodeProjectRevision HTML/JS fallback. Only compiled dist artifacts are public.
+  return notFound();
 }

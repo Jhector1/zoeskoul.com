@@ -35,7 +35,10 @@ describe("ZoeBuild project-detail HTTP boundary", () => {
     expect(source).toContain("loadCurrentBuildAccessSnapshot(req, { requireAuthority: true })");
     expect(source).toContain("rateLimit(");
     expect(source).toContain("confirmTitle");
-    expect(source).toContain("deleteOwnedBuildProject(prisma, {");
+    // The final owner-scoped delete now consumes the same validated input
+    // that passed read-only preflight; it is not an inline object literal.
+    expect(source).toContain("await preflightOwnedBuildProjectDeletion(prisma, deletionInput)");
+    expect(source).toContain("await deleteOwnedBuildProject(prisma, deletionInput)");
     expect(source).toContain("BuildProjectDeleteBlockedError");
     expect(source).not.toContain("prisma.buildProject.delete({");
   });

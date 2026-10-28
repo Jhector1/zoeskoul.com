@@ -64,28 +64,12 @@ describe(
       },
     );
 
-    it(
-      "preserves the direct-static immutable publisher",
-      () => {
-        expect(
-          source,
-        ).toContain(
-          "directStatic",
-        );
-
-        expect(
-          source,
-        ).toContain(
-          "createPrismaSelfHostedStaticPublisher",
-        );
-
-        expect(
-          source,
-        ).toContain(
-          "ZOEBUILD_STATIC_ASSETS_KIND",
-        );
-      },
-    );
+    it("does not publish direct-static source or retain its publisher", () => {
+      expect(source).not.toContain("directStatic");
+      expect(source).not.toContain("createPrismaSelfHostedStaticPublisher");
+      expect(source).toContain("trustedReact");
+      expect(source).toContain("ZOEBUILD_STATIC_ASSETS_KIND");
+    });
 
     it(
       "routes React through only the registered trusted production executor",
