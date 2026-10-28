@@ -3,6 +3,7 @@ import { app } from "./app.js";
 import { env } from "./lib/env.js";
 import { attachSessionWsServer } from "./ws/sessionWsServer.js";
 import { cleanupRunnerOrphansOnStartup } from "./services/docker/runnerReaper.js";
+import { pruneBuildPreviewOperationJournals } from "./routes/build.previews.operations.js";
 import { pruneStartRateLimitBuckets } from "./services/sessions/startRateLimit.js";
 import { startSessionCleanupLoop } from "./services/sessions/timeoutManager.js";
 
@@ -27,6 +28,12 @@ async function main() {
   if (typeof rateLimitPruneTimer.unref === "function") {
     rateLimitPruneTimer.unref();
   }
+
+  await pruneBuildPreviewOperationJournals().catch(error => {
+    console.error("RUNNER preview operation journal cleanup failed", {message: error instanceof Error ? error.message : "unknown"});
+  });
+  const previewJournalTimer = setInterval(() => { void pruneBuildPreviewOperationJournals().catch(() => undefined); }, 60_000);
+  previewJournalTimer.unref?.();
 
   startSessionCleanupLoop();
 

@@ -24,12 +24,23 @@ type ApiPayload = {
   message?: string;
   requestId?: string;
   preview?: { previewId?: string; basePath?: string };
+  operation?: {
+    operationId?: string; sourceVersion?: number;
+    state?: "preparing" | "ready" | "failed" | "cancelled";
+    stage?: "queued" | "workspace" | "dependencies" | "container" | "readiness";
+    code?: string;
+    preview?: { previewId?: string; basePath?: string };
+  };
   bootstrap?: { source?: { sourceVersion?: number } };
 };
 
 const SYNC_DEBOUNCE_MS = 650;
 const PREVIEW_START_SLOW_NOTICE_MS = 15_000;
-const PREVIEW_START_TIMEOUT_MS = 120_000;
+// This timeout covers only the acknowledgement of a server-owned operation.
+// The runner may legitimately need minutes for an approved frozen install.
+const PREVIEW_START_TIMEOUT_MS = 30_000;
+const PREVIEW_OPERATION_TIMEOUT_MS = 6 * 60_000;
+const PREVIEW_OPERATION_POLL_INTERVAL_MS = 2_000;
 
 const PREVIEW_ROUTE_REUSE_GRACE_MS =
   10 * 60_000;
@@ -449,6 +460,7 @@ export function useReactVitePreview(input: Readonly<{
     ) return;
 
     const startingWorkspaceRevision = workspaceRevisionRef.current;
+    let supersededDuringStart = false;
     const task = (async () => {
       if (mountedRef.current) {
         setPreview((current) => ({
@@ -504,7 +516,7 @@ export function useReactVitePreview(input: Readonly<{
       } catch (error) {
         if (startController.signal.aborted) {
           throw new Error(
-            "React preview startup timed out after 2 minutes. Retry preview.",
+            "The preview server did not acknowledge the start request. Retry preview.",
           );
         }
         throw error;
@@ -512,7 +524,7 @@ export function useReactVitePreview(input: Readonly<{
         clearTimeout(slowNoticeTimer);
         clearTimeout(startTimeoutTimer);
       }
-      const data = await payload(response);
+      let data = await payload(response);
       if (response.status === 409 && data?.code === "BUILD_PREVIEW_SOURCE_CONFLICT") {
         if (await reconcileConflict(startingVersion)) return;
         throw new Error("The saved project changed. Keep any unsaved edits before reloading the project.");
@@ -664,6 +676,80 @@ export function useReactVitePreview(input: Readonly<{
         return;
       }
 
+      // The runner owns startup beyond the HTTP request. Follow its journaled
+      // operation state; never infer success from an elapsed browser timeout.
+      if (response.ok && data?.ok && data.operation?.operationId) {
+        const operationId = data.operation.operationId;
+        if (!/^preview_op_[0-9a-f-]{36}$/i.test(operationId) ||
+            data.operation.sourceVersion !== startingVersion) {
+          throw new Error("The preview operation returned an invalid source identity.");
+        }
+        const operationDeadline = Date.now() + PREVIEW_OPERATION_TIMEOUT_MS;
+        let current = data.operation;
+        while (true) {
+          // A browser tab may select a different saved revision while the
+          // runner continues. Do not publish an obsolete preview document.
+          if (!mountedRef.current) return;
+          if (sourceVersionRef.current !== startingVersion ||
+              workspaceRevisionRef.current !== startingWorkspaceRevision) {
+            supersededDuringStart = true;
+            return;
+          }
+          if (current.state === "ready" && current.preview) {
+            data = { ok: true, preview: current.preview };
+            break;
+          }
+          if (current.state === "failed" || current.state === "cancelled") {
+            const failure = current.code === "PREVIEW_RUNNER_RESTARTED"
+              ? "The preview worker restarted. Retry to start a new preview."
+              : current.code === "PREVIEW_CAPACITY"
+                ? "Preview capacity is busy. Retry when the worker is available."
+                : current.code === "PREVIEW_SOURCE_CONFLICT"
+                  ? "The saved version changed while its preview was preparing."
+                  : current.state === "cancelled"
+                    ? "The preview startup was cancelled. Retry preview."
+                    : "The preview worker could not prepare this website. Retry preview.";
+            throw new Error(failure);
+          }
+          if (Date.now() >= operationDeadline) {
+            throw new Error("Preview preparation exceeded the bounded startup budget. Retry preview.");
+          }
+          const stageMessage = current.stage === "dependencies"
+            ? "Preparing approved website dependencies…"
+            : current.stage === "container" || current.stage === "readiness"
+              ? "Starting and verifying the website…"
+              : "Your website is queued for the preview worker…";
+          if (mountedRef.current) setPreview(previous => ({
+            src: null, state: "starting", message: stageMessage,
+            revision: previous?.revision ?? 0,
+          }));
+          await new Promise<void>(resolve => window.setTimeout(resolve, PREVIEW_OPERATION_POLL_INTERVAL_MS));
+          if (!mountedRef.current) return;
+          if (sourceVersionRef.current !== startingVersion ||
+              workspaceRevisionRef.current !== startingWorkspaceRevision) {
+            supersededDuringStart = true;
+            return;
+          }
+          const statusResponse = await fetch(
+            `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/operations/${encodeURIComponent(operationId)}`,
+            { method: "GET", credentials: "same-origin", cache: "no-store" },
+          );
+          const statusPayload = await payload(statusResponse);
+          if (statusResponse.status === 409 && statusPayload?.code === "BUILD_PREVIEW_SOURCE_CONFLICT") {
+            if (await reconcileConflict(startingVersion)) return;
+            throw new Error("A newer saved source is active. Refresh the selected version.");
+          }
+          if (!statusResponse.ok || !statusPayload?.ok || !statusPayload.operation) {
+            throw new Error(message(statusPayload, "Preview operation status is unavailable. Retry preview."));
+          }
+          if (statusPayload.operation.operationId !== operationId ||
+              statusPayload.operation.sourceVersion !== startingVersion) {
+            throw new Error("The preview worker returned a different saved source.");
+          }
+          current = statusPayload.operation;
+        }
+      }
+
       if (!response.ok || !data?.ok || !data.preview) {
         throw new Error(message(data, "React preview could not be started."));
       }
@@ -763,6 +849,12 @@ export function useReactVitePreview(input: Readonly<{
       }
     } finally {
       startPromiseRef.current = null;
+      // An earlier history version can retire while its cold start is queued.
+      // Start the now-selected source after the old operation is detached;
+      // never automatically loop on a genuine startup error.
+      if (supersededDuringStart && mountedRef.current && !sessionRef.current) {
+        void Promise.resolve().then(() => start());
+      }
     }
   }, [input.buildProjectId, input.enabled, syncCurrent, reconcileConflict]);
 

@@ -107,3 +107,33 @@ export async function releaseTrustedReactProjectPreviewDrainAtRunner(args: Reado
     { buildProjectId: args.buildProjectId, drainId: args.drainId },
   );
 }
+
+
+export type ReactPreviewOperationResult = Readonly<{
+  operationId: string;
+  sourceVersion: number;
+  state: "preparing" | "ready" | "failed" | "cancelled";
+  stage: "queued" | "workspace" | "dependencies" | "container" | "readiness";
+  code?: "PREVIEW_CAPACITY" | "PREVIEW_SOURCE_CONFLICT" | "PREVIEW_START_FAILED" | "PREVIEW_CANCELLED" | "PREVIEW_RUNNER_RESTARTED";
+  preview?: ReactPreviewStartResult;
+}>;
+export async function submitTrustedReactPreviewOperationAtRunner(args: Readonly<{
+  actorKey: string; request: ProductionBuildJobRequestV1;
+}>): Promise<ReactPreviewOperationResult> {
+  const result = await runnerPost<{ ok:true; operation:ReactPreviewOperationResult }>(
+    "/build/previews/operations/start", args.actorKey, args.request);
+  return result.operation;
+}
+export async function getTrustedReactPreviewOperationAtRunner(args: Readonly<{
+  actorKey: string; operationId: string; buildProjectId: string;
+}>): Promise<ReactPreviewOperationResult> {
+  const result = await runnerPost<{ ok:true; operation:ReactPreviewOperationResult }>(
+    `/build/previews/operations/${encodeURIComponent(args.operationId)}/status`, args.actorKey, {buildProjectId:args.buildProjectId});
+  return result.operation;
+}
+export async function cancelTrustedReactPreviewOperationAtRunner(args: Readonly<{
+  actorKey: string; operationId: string; buildProjectId: string;
+}>) {
+  return runnerPost<{ ok:true }>(
+    `/build/previews/operations/${encodeURIComponent(args.operationId)}/cancel`, args.actorKey, {buildProjectId:args.buildProjectId});
+}

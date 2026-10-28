@@ -561,15 +561,24 @@ async function waitForContainer(
       typeof docker.getContainer
     >,
   timeoutMs: number,
+  signal?: AbortSignal,
 ) {
   let timer:
     NodeJS.Timeout |
     null =
       null;
 
+  let rejectAbort: ((reason: Error) => void) | null = null;
+  const aborted = new Promise<never>((_resolve, reject) => {
+    rejectAbort = reject;
+    if (signal?.aborted) reject(new Error("Preview start cancelled."));
+  });
+  const onAbort = () => rejectAbort?.(new Error("Preview start cancelled."));
+  signal?.addEventListener("abort", onAbort, { once: true });
   try {
     return await Promise.race([
       container.wait(),
+      aborted,
 
       new Promise<never>(
         (_resolve, reject) => {
@@ -588,6 +597,7 @@ async function waitForContainer(
       ),
     ]);
   } finally {
+    signal?.removeEventListener("abort", onAbort);
     if (timer) {
       clearTimeout(
         timer,
@@ -804,6 +814,7 @@ async function runInstall(
   workspaceDir: string,
   command:
     readonly string[],
+  signal?: AbortSignal,
 ) {
   const container =
     await docker.createContainer(
@@ -822,6 +833,7 @@ async function runInstall(
       await waitForContainer(
         container,
         INSTALL_TIMEOUT_MS,
+        signal,
       );
 
     if (
@@ -1004,6 +1016,7 @@ function isTransientPreviewStartupError(
 async function waitForPreviewReady(
   record:
     MutablePreviewRecord,
+  signal?: AbortSignal,
 ) {
   const startedAt =
     currentTime();
@@ -1021,6 +1034,7 @@ async function waitForPreviewReady(
       null;
 
   while (true) {
+    if (signal?.aborted) throw new Error("Preview start cancelled.");
     const now =
       currentTime();
 
@@ -1257,6 +1271,8 @@ async function startReactPreviewInternal(
     ownerKey: string;
     request:
       ProductionBuildJobRequestV1;
+    signal?: AbortSignal;
+    onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void;
   }>,
 ) {
   const {
@@ -1288,17 +1304,20 @@ async function startReactPreviewInternal(
       request.files,
   });
 
+  if (input.signal?.aborted) throw new Error("Preview start cancelled.");
   consumeStartToken(
     ownerKey,
     "code",
   );
 
+  input.onPhase?.("workspace");
   const reusedPreview =
     await reuseExistingProjectPreview(
       ownerKey,
       request,
     );
 
+  if (input.signal?.aborted) throw new Error("Preview start cancelled.");
   if (reusedPreview) {
     return {
       previewId:
@@ -1317,6 +1336,7 @@ async function startReactPreviewInternal(
   // Reuse first; if still full, retire warm previews for a different
   // project before admission. Serial startup ensures no parallel eviction races.
   await reclaimPreviewCapacity(ownerKey, request.buildProjectId);
+  if (input.signal?.aborted) throw new Error("Preview start cancelled.");
   const releaseCapacity =
     reservePreviewCapacity(
       ownerKey,
@@ -1337,6 +1357,7 @@ async function startReactPreviewInternal(
   let phaseBeganAt = startTime;
   let startupStage = "workspace";
   try {
+    input.onPhase?.("workspace");
     workspaceDir =
       await createWorkspace(
         [...request.files],
@@ -1349,6 +1370,8 @@ async function startReactPreviewInternal(
     previewTimings.workspaceMs = currentTime() - phaseBeganAt;
     phaseBeganAt = currentTime();
     startupStage = "dependencies";
+    input.onPhase?.("dependencies");
+    if (input.signal?.aborted) throw new Error("Preview start cancelled.");
     const usingPrebuiltDependencies =
       await preparePrebuiltReactViteDependencies(
         workspaceDir,
@@ -1359,6 +1382,7 @@ async function startReactPreviewInternal(
       await runInstall(
         workspaceDir,
         plan.installCommand,
+        input.signal,
       );
     }
 
@@ -1428,6 +1452,8 @@ async function startReactPreviewInternal(
     previewTimings.dependenciesMs = currentTime() - phaseBeganAt;
     phaseBeganAt = currentTime();
     startupStage = "container";
+    input.onPhase?.("container");
+    if (input.signal?.aborted) throw new Error("Preview start cancelled.");
     const container =
       await docker.createContainer({
         ...options,
@@ -1468,6 +1494,7 @@ async function startReactPreviewInternal(
       container.id;
 
     await container.start();
+    if (input.signal?.aborted) throw new Error("Preview start cancelled.");
 
     const createdAt =
       currentTime();
@@ -1513,9 +1540,11 @@ async function startReactPreviewInternal(
     previewTimings.containerMs = currentTime() - phaseBeganAt;
     phaseBeganAt = currentTime();
     startupStage = "readiness";
+    input.onPhase?.("readiness");
     try {
       await waitForPreviewReady(
         record,
+        input.signal,
       );
     } catch (error) {
       await destroyPreview(
@@ -1590,7 +1619,8 @@ async function startReactPreviewInternal(
  * Never reuse a response for a different actor, project, revision, or source.
  */
 export async function startReactPreview(
-  input: Readonly<{ ownerKey: string; request: ProductionBuildJobRequestV1 }>,
+  input: Readonly<{ ownerKey: string; request: ProductionBuildJobRequestV1; signal?: AbortSignal;
+    onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void }>,
 ) {
   const digest = createHash("sha256");
   digest.update(input.ownerKey);
@@ -1612,7 +1642,9 @@ export async function startReactPreview(
   const existing = inFlightPreviewStarts.get(key);
   if (existing) return await existing;
 
+  input.onPhase?.("queued");
   const task = previewStartCoordinator.run(async () => {
+    if (input.signal?.aborted) throw new Error("Preview start cancelled.");
     const finish = projectDrains.beginStart(input.ownerKey, input.request.buildProjectId);
     try {
       return await startReactPreviewInternal(input);

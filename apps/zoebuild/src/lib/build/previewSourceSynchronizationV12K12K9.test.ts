@@ -29,7 +29,11 @@ describe("V12K12K9 authoritative preview sync",()=>{
     expect(shell).not.toContain("internal saved-source revision");
     expect(shell).toContain("setEditorHydrationEpoch(current => current + 1)");
     expect(shell).toContain("activeEditorEpochRef.current !== editorHydrationEpoch");
-    expect(hook.match(/BUILD_PREVIEW_SOURCE_CONFLICT/g)).toHaveLength(2);
+    // Sync, start, and asynchronous operation-status polling each fence the
+    // saved revision. All three must recognize authoritative 409 conflicts.
+    expect(hook.match(/BUILD_PREVIEW_SOURCE_CONFLICT/g)).toHaveLength(3);
+    expect(hook).toContain('response.status === 409 && data?.code === "BUILD_PREVIEW_SOURCE_CONFLICT"');
+    expect(hook).toContain('statusResponse.status === 409 && statusPayload?.code === "BUILD_PREVIEW_SOURCE_CONFLICT"');
     expect(hook).toContain("setResyncFromVersion(attemptedVersion)");
     expect(hook).toContain("triedResyncVersionsRef.current.has(attemptedVersion)");
     expect(hook).not.toContain("Reload source v");

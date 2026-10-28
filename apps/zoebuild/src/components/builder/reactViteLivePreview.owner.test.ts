@@ -60,18 +60,15 @@ describe("ZoeBuild React/Vite live preview ownership", () => {
     expect(hook).toContain("restart();");
   });
 
-  it("bounds preview startup instead of spinning forever", () => {
+  it("uses bounded server-owned preview operations without blocking the browser for package installation", () => {
     const hook = source("./useReactVitePreview.ts");
     expect(hook).toContain("PREVIEW_START_SLOW_NOTICE_MS = 15_000");
-    expect(hook).toContain("PREVIEW_START_TIMEOUT_MS = 120_000");
+    expect(hook).toContain("PREVIEW_START_TIMEOUT_MS = 30_000");
+    expect(hook).toContain("PREVIEW_OPERATION_TIMEOUT_MS = 6 * 60_000");
     expect(hook).toContain("new AbortController()");
     expect(hook).toContain("signal: startController.signal");
-    expect(hook).toContain(
-      "Still starting preview… the first React launch can take up to 2 minutes.",
-    );
-    expect(hook).toContain(
-      "React preview startup timed out after 2 minutes. Retry preview.",
-    );
+    expect(hook).toContain("preview/operations/${encodeURIComponent(operationId)}");
+    expect(hook).toContain('current.state === "ready"');
   });
 
 });

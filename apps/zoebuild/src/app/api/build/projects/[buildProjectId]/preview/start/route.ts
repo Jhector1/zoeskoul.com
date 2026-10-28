@@ -9,10 +9,9 @@ import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import {
   createOwnedReactPreviewBuildRequest,
-  requireOwnedReactPreviewProject,
   ReactPreviewRequestError,
 } from "@/lib/build/reactPreviewServer";
-import { startTrustedReactPreviewAtRunner, proxyFetchTrustedReactPreviewAtRunner, cancelTrustedReactPreviewAtRunner } from "@/lib/build/reactPreviewRunnerClient";
+import { submitTrustedReactPreviewOperationAtRunner } from "@/lib/build/reactPreviewRunnerClient";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -63,61 +62,10 @@ export async function POST(
       workspace: body.workspace,
     });
     const actorKey = await requireRunnerActorKey(userId);
-    const preview = await startTrustedReactPreviewAtRunner({ actorKey, request });
-    // The runner may have waited for resources after initial CAS verification.
-    // A different browser tab can select a newer version while it starts.
-    // Fence the response to the same saved source token; never advertise the
-    // older preview as current. Do not cancel here: the runner may have reused
-    // a session which another tab is currently synchronizing.
-    const afterStart = await requireOwnedReactPreviewProject({access,buildProjectId});
-    if (afterStart.sourceVersion !== body.sourceVersion) return json(requestId,{
-      ok:false,code:"BUILD_PREVIEW_SOURCE_CONFLICT",
-      message:"The saved version changed while its preview was starting. Refresh the selected source.",
-    },409);
-    // A runner start verifies Vite inside the process that created the preview.
-    // Verify a *separate* capability fetch too: process-local preview registries
-    // behind a non-sticky runner load balancer can otherwise return 201, then
-    // 404 for every browser document. Do not claim this session is ready.
-    let documentResponse;
-    try {
-      documentResponse = await proxyFetchTrustedReactPreviewAtRunner({
-        previewId: preview.previewId,
-        path: preview.basePath,
-        method: "GET",
-      });
-    } catch (error) {
-      if (error instanceof RunnerHttpError && error.status === 404) {
-        void cancelTrustedReactPreviewAtRunner({ actorKey, previewId: preview.previewId }).catch(() => undefined);
-        console.warn("[ZoeBuild preview/start] runner session not available to document fetch", {
-          requestId, category: "runner-registry-miss", upstreamStatus: 404,
-        });
-        return json(requestId, {
-          ok: false,
-          code: "BUILD_PREVIEW_RUNNER_ROUTING",
-          message: "The preview runner could not retrieve the session it just created. Check runner routing and restart the preview.",
-        }, 503);
-      }
-      throw error;
-    }
-    const documentType = documentResponse.headers["content-type"] ?? "";
-    if (documentResponse.status !== 200 || !/^text\/html(?:\s*;|\s*$)/i.test(documentType)) {
-      void cancelTrustedReactPreviewAtRunner({ actorKey, previewId: preview.previewId }).catch(() => undefined);
-      console.warn("[ZoeBuild preview/start] runner document not ready", {
-        requestId, category: "invalid-preview-document", upstreamStatus: documentResponse.status,
-      });
-      return json(requestId, {
-        ok: false,
-        code: "BUILD_PREVIEW_DOCUMENT_NOT_READY",
-        message: "The preview started but its website document is not ready. Retry the preview.",
-      }, 503);
-    }
-    // A source switch may also occur during the final document check.
-    const afterDocument = await requireOwnedReactPreviewProject({access,buildProjectId});
-    if (afterDocument.sourceVersion !== body.sourceVersion) return json(requestId,{
-      ok:false,code:"BUILD_PREVIEW_SOURCE_CONFLICT",
-      message:"The saved version changed during preview verification.",
-    },409);
-    return json(requestId, { ok: true, preview }, 201);
+    // K20D: acknowledge a runner-owned operation without keeping the Next.js
+    // request or browser connection open during a multi-minute install.
+    const operation = await submitTrustedReactPreviewOperationAtRunner({ actorKey, request });
+    return json(requestId, { ok: true, operation }, operation.state === "ready" ? 200 : 202);
   } catch (error) {
     if (error instanceof ReactPreviewRequestError) {
       return json(requestId, { ok: false, code: error.code, message: error.message }, error.status);

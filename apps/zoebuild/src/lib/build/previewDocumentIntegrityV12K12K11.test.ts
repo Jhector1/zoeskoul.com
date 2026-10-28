@@ -18,11 +18,23 @@ describe("K11 preview document integrity", () => {
     expect(classifyPreviewDocumentHealth(200,"application/json",null)).toBe("unavailable");
     expect(classifyPreviewDocumentHealth(302,"text/html",null)).toBe("unavailable");
   });
-  it("verifies a separate runner capability read before returning 201", () => {
-    const source = read("src/app/api/build/projects/[buildProjectId]/preview/start/route.ts");
-    expect(source).toContain("proxyFetchTrustedReactPreviewAtRunner");
-    expect(source.indexOf("proxyFetchTrustedReactPreviewAtRunner({")).toBeLessThan(source.indexOf("return json(requestId, { ok: true, preview }, 201)"));
-    expect(source).toContain("BUILD_PREVIEW_RUNNER_ROUTING");
+  it("verifies the runner capability before reporting a ready operation", () => {
+    const start = read("src/app/api/build/projects/[buildProjectId]/preview/start/route.ts");
+    const status = read("src/app/api/build/projects/[buildProjectId]/preview/operations/[operationId]/route.ts");
+    expect(start).toContain("submitTrustedReactPreviewOperationAtRunner");
+    expect(status).toContain("proxyFetchTrustedReactPreviewAtRunner");
+    // Preparing operations return 200 without a document fetch. Only the
+    // final READY branch must verify the capability and saved-source fence.
+    expect(status).toContain('if (operation.state !== "ready" || !operation.preview)');
+    expect(status).toContain("const afterDocument = await requireOwnedReactPreviewProject");
+    expect(status).toContain("return json(requestId, {ok:true, operation}, 200)");
+    const proxy = status.indexOf("proxyFetchTrustedReactPreviewAtRunner({");
+    const sourceFence = status.indexOf("const afterDocument = await requireOwnedReactPreviewProject");
+    const readyReturn = status.lastIndexOf("return json(requestId, {ok:true, operation}, 200)");
+    expect(proxy).toBeGreaterThan(status.indexOf('if (operation.state !== "ready" || !operation.preview)'));
+    expect(proxy).toBeLessThan(sourceFence);
+    expect(sourceFence).toBeLessThan(readyReturn);
+    expect(status).toContain("BUILD_PREVIEW_RUNNER_ROUTING");
   });
   it("hides cached preview until the document gateway is verified", () => {
     const hook = read("src/components/builder/useReactVitePreview.ts");
