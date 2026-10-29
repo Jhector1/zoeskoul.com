@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { Buffer } from "node:buffer";
 import path from "node:path";
 
 import type {
@@ -13,6 +14,7 @@ import { createWorkspace } from "../workspace/createWorkspace.js";
 import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
 import { resolveTrustedBuildOperation } from "./trustedBuildOperations.js";
 import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
+import { bootstrapLockCacheKey, resolveBootstrapLockOnce } from "./dependencyLockBootstrapCache.js";
 
 const MAX_LOCKFILE_BYTES = 2 * 1024 * 1024;
 const BOOTSTRAP_TIMEOUT_MS = 120_000;
@@ -90,6 +92,67 @@ async function waitForBootstrapContainer(
   }
 }
 
+/**
+ * Container failures used to disappear behind an HTTP 500 after up to two minutes.
+ * Classify only known error tokens, never print arbitrary pnpm output: package
+ * manager output can include source-controlled URLs or other untrusted text.
+ */
+export function classifyDependencyBootstrapFailure(args: Readonly<{
+  timedOut: boolean;
+  oomKilled: boolean;
+  exitCode: number | null;
+  output: string;
+}>): "timeout" | "out-of-memory" | "registry-network" |
+  "package-resolution" | "nonzero-exit" | "container-error" {
+  if (args.oomKilled || args.exitCode === 137) return "out-of-memory";
+  if (/\b(?:EAI_AGAIN|ENOTFOUND|ECONNRESET|ECONNREFUSED|ETIMEDOUT|ERR_PNPM_FETCH|ERR_PNPM_META_FETCH_FAIL)\b/i.test(args.output))
+    return "registry-network";
+  if (/\b(?:ERR_PNPM_NO_MATCHING_VERSION|ERR_PNPM_UNSUPPORTED_ENGINE|ERR_PNPM_NO_MATCHING_VERSION_INSIDE_WORKSPACE)\b/i.test(args.output))
+    return "package-resolution";
+  if (args.timedOut) return "timeout";
+  return args.exitCode !== null ? "nonzero-exit" : "container-error";
+}
+
+async function logBootstrapFailure(
+  container: Awaited<ReturnType<typeof docker.createContainer>> | null,
+  error: unknown,
+  elapsedMs: number,
+): Promise<void> {
+  // Capture only short, bounded diagnostics. Never persist or return raw logs.
+  const probe = async <T>(load: Promise<T>, fallback: T): Promise<T> => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    try {
+      return await Promise.race([load.catch(() => fallback), new Promise<T>(resolve => {
+        timer = setTimeout(() => resolve(fallback), 1_500);
+      })]);
+    } finally { if (timer) clearTimeout(timer); }
+  };
+  const state = container
+    ? await probe(container.inspect(), null)
+    : null;
+  const raw = container
+    ? await probe(container.logs({ follow: false, stdout: true, stderr: true, tail: 64 }), null)
+    : null;
+  const output = Buffer.isBuffer(raw) ? raw.toString("utf8")
+    : typeof raw === "string" ? raw : "";
+  const exitCode = typeof state?.State?.ExitCode === "number" &&
+    !state.State.Running ? state.State.ExitCode : null;
+  const timedOut = error instanceof Error &&
+    error.message.includes("bootstrap exceeded");
+  console.error("RUNNER trusted dependency bootstrap failed", {
+    category: classifyDependencyBootstrapFailure({
+      timedOut,
+      oomKilled: state?.State?.OOMKilled === true,
+      exitCode,
+      output,
+    }),
+    elapsedMs,
+    exitCode,
+    timedOut,
+    oomKilled: state?.State?.OOMKilled === true,
+  });
+}
+
 async function readLockfile(workspaceDir: string): Promise<string> {
   const lockfilePath = path.join(workspaceDir, "pnpm-lock.yaml");
   const stat = await fs.lstat(lockfilePath);
@@ -133,61 +196,82 @@ export async function executeDependencyLockBootstrap(
     files: request.files,
   });
 
-  const workspaceDir = await createWorkspace(
-    request.files.map((file) => ({
-      path: file.path,
-      content: file.content,
-    })),
-  );
-
-  let container: Awaited<ReturnType<typeof docker.createContainer>> | null =
-    null;
-
-  try {
-    await ensureWorkspaceWritableForShellUser(workspaceDir);
-    container = await docker.createContainer(
-      buildDependencyLockBootstrapContainerOptions({
-        workspaceDir,
-        command: plan.command,
-      }),
+  // Cache only verified successful lockfile outputs and only for the SAME
+  // owned project + exact file bytes + trusted command + runtime image.
+  // No request sourceVersion in the key: history restores advance the CAS
+  // token without changing the package inputs. The caller still revalidates
+  // ownership and the source-version fence on every request.
+  const sandboxImage = resolveSandboxProfile("build-bootstrap").image;
+  const cacheKey = bootstrapLockCacheKey({
+    projectId: request.buildProjectId,
+    files: request.files,
+    command: plan.command,
+    image: sandboxImage,
+  });
+  const resolved = await resolveBootstrapLockOnce(cacheKey, async () => {
+    const startedAt = Date.now();
+    const workspaceDir = await createWorkspace(
+      request.files.map((file) => ({
+        path: file.path,
+        content: file.content,
+      })),
     );
 
-    await container.start();
-    const waitResult = await waitForBootstrapContainer(container);
-    const statusCode =
-      typeof waitResult.StatusCode === "number"
-        ? waitResult.StatusCode
-        : -1;
+    let container: Awaited<ReturnType<typeof docker.createContainer>> | null =
+      null;
 
-    if (statusCode !== 0) {
-      throw new Error(
-        `Trusted Build dependency-lock bootstrap failed with exit status ${statusCode}.`,
+    try {
+      await ensureWorkspaceWritableForShellUser(workspaceDir);
+      container = await docker.createContainer(
+        buildDependencyLockBootstrapContainerOptions({
+          workspaceDir,
+          command: plan.command,
+        }),
       );
+
+      await container.start();
+      const waitResult = await waitForBootstrapContainer(container);
+      const statusCode =
+        typeof waitResult.StatusCode === "number"
+          ? waitResult.StatusCode
+          : -1;
+
+      if (statusCode !== 0) {
+        throw new Error(
+          `Trusted Build dependency-lock bootstrap failed with exit status ${statusCode}.`,
+        );
+      }
+
+      const content = await readLockfile(workspaceDir);
+      console.info("RUNNER trusted dependency bootstrap completed", {
+        elapsedMs: Date.now() - startedAt,
+        lockBytes: Buffer.byteLength(content, "utf8"),
+      });
+
+      return content;
+    } catch (error) {
+      await logBootstrapFailure(container, error, Date.now() - startedAt).catch(() => undefined);
+      throw error;
+    } finally {
+      if (container) {
+        await container.remove({ force: true }).catch(() => undefined);
+      }
+
+      await fs.rm(workspaceDir, {
+        recursive: true,
+        force: true,
+      });
     }
-
-    const content = await readLockfile(workspaceDir);
-
-    return {
-      ok: true,
-      result: {
-        protocolVersion: request.protocolVersion,
-        operation: "dependency-lock-bootstrap",
-        buildProjectId: request.buildProjectId,
-        sourceVersion: request.sourceVersion,
-        output: {
-          path: "pnpm-lock.yaml",
-          content,
-        },
-      },
-    };
-  } finally {
-    if (container) {
-      await container.remove({ force: true }).catch(() => undefined);
-    }
-
-    await fs.rm(workspaceDir, {
-      recursive: true,
-      force: true,
-    });
-  }
+  });
+  console.info("RUNNER trusted dependency bootstrap cache", { mode: resolved.mode });
+  return {
+    ok: true,
+    result: {
+      protocolVersion: request.protocolVersion,
+      operation: "dependency-lock-bootstrap",
+      buildProjectId: request.buildProjectId,
+      sourceVersion: request.sourceVersion,
+      output: { path: "pnpm-lock.yaml", content: resolved.lock },
+    },
+  };
 }

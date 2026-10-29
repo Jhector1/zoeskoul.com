@@ -40,7 +40,7 @@ def respond(request):
         url = "http://127.0.0.1:5173" + path
         request_obj = urllib.request.Request(url, method=method)
         try:
-            response = opener.open(request_obj, timeout=5)
+            response = opener.open(request_obj, timeout=20)
         except urllib.error.HTTPError as error:
             response = error
         with response:
@@ -75,7 +75,11 @@ for line in sys.stdin:
 executor.shutdown(wait=False, cancel_futures=True)
 `;
 
-const REQUEST_TIMEOUT_MS = 12_000;
+// One slow Vite transform must not invalidate concurrent, healthy assets.
+// The Python worker processes at most 8 requests concurrently; up to 16
+// requests can be queued. Bound both worker I/O (20s each) and the second
+// batch's total wait, without coupling independent request lifetimes.
+export const PREVIEW_HTTP_REQUEST_DEADLINE_MS = 46_000;
 const MAX_DOCKER_FRAME = 9 * 1024 * 1024;
 const MAX_LINE = 9 * 1024 * 1024;
 const MAX_IN_FLIGHT = 16;
@@ -92,6 +96,7 @@ export class ReactPreviewPersistentHttpChannel {
   private pending = new Map<number, Pending>();
   private nextId = 0;
   private closed = false;
+  private consecutiveDeadlines = 0;
 
   constructor(private readonly stream: Duplex, private readonly onClose: () => void) {
     stream.on("data", (data: Buffer) => this.accept(Buffer.from(data)));
@@ -107,7 +112,20 @@ export class ReactPreviewPersistentHttpChannel {
       throw new Error("Unsafe preview transport path.");
     const id = ++this.nextId;
     return new Promise<PreviewHttpResponse>((resolve, reject) => {
-      const timer = setTimeout(() => this.abort(new Error("Preview transport response deadline exceeded.")), REQUEST_TIMEOUT_MS);
+      const timer = setTimeout(() => {
+        // A single slow or stuck optimization request is not evidence that
+        // the shared Docker exec connection has failed. Isolate this request.
+        const entry = this.pending.get(id);
+        if (!entry) return;
+        this.pending.delete(id);
+        entry.reject(new Error("Preview HTTP asset response deadline exceeded."));
+        this.consecutiveDeadlines += 1;
+        // Discard a transport that no longer makes progress, but only after
+        // already-pending requests have had their own chance to complete.
+        if (this.consecutiveDeadlines >= 3 && this.pending.size === 0) {
+          this.abort(new Error("Preview transport stalled."));
+        }
+      }, PREVIEW_HTTP_REQUEST_DEADLINE_MS);
       this.pending.set(id, { resolve, reject, timer });
       try {
         this.stream.write(JSON.stringify({ id, path, method }) + "\n", (error?: Error | null) => {
@@ -159,6 +177,9 @@ export class ReactPreviewPersistentHttpChannel {
       if (!pending) continue; // A timed-out or already resolved response cannot be applied twice.
       clearTimeout(pending.timer);
       this.pending.delete(id);
+      // Any protocol reply proves the exec channel is alive, even if Vite
+      // explicitly rejected this individual URL.
+      this.consecutiveDeadlines = 0;
       if (reply.error) { pending.reject(new Error(reply.error === "Connection refused" ? "Preview HTTP connection refused." : "Preview HTTP request failed.")); continue; }
       if (!Number.isInteger(reply.status) || (reply.status as number) < 100 || (reply.status as number) > 599 ||
           !reply.headers || typeof reply.headers !== "object" || Array.isArray(reply.headers) ||

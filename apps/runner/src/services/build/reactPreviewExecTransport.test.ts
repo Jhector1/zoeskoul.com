@@ -2,7 +2,7 @@ import { Duplex } from "node:stream";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("../docker/dockerClient.js", () => ({docker: {getContainer: vi.fn()}}));
-import { ReactPreviewPersistentHttpChannel, PERSISTENT_PREVIEW_HTTP_WORKER } from "./reactPreviewPersistentHttp.js";
+import { ReactPreviewPersistentHttpChannel, PERSISTENT_PREVIEW_HTTP_WORKER, PREVIEW_HTTP_REQUEST_DEADLINE_MS } from "./reactPreviewPersistentHttp.js";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -59,6 +59,52 @@ describe("persistent isolated Vite transport", () => {
     await expect(waiting).rejects.toThrow("Malformed preview Docker frame");
     await expect(channel.request("/", "GET")).rejects.toThrow("unavailable");
   });
+  it("isolates an asset deadline without aborting an unrelated healthy fetch", async () => {
+    vi.useFakeTimers();
+    try {
+      const stream = new MockAttachedDockerExec();
+      const closed = vi.fn();
+      const channel = new ReactPreviewPersistentHttpChannel(stream, closed);
+      const slow = channel.request("/src/slow.tsx", "GET");
+      const fast = channel.request("/src/fast.tsx", "GET");
+      const firstId = JSON.parse(stream.written[0]!).id as number;
+      const secondId = JSON.parse(stream.written[1]!).id as number;
+      const slowRejection = expect(slow).rejects.toThrow("asset response deadline exceeded");
+      stream.reply({id: secondId, status: 200, headers: {"content-type": "text/javascript"}, bodyBase64: "Zg=="});
+      expect((await fast).bodyBase64).toBe("Zg==");
+      await vi.advanceTimersByTimeAsync(PREVIEW_HTTP_REQUEST_DEADLINE_MS + 1);
+      await slowRejection;
+      expect(closed).not.toHaveBeenCalled();
+      // Late replies from expired operations must never affect a subsequent asset.
+      stream.reply({id: firstId, status: 200, headers: {}, bodyBase64: "b2xk"});
+      const next = channel.request("/src/next.tsx", "GET");
+      const nextId = JSON.parse(stream.written[2]!).id as number;
+      stream.reply({id: nextId, status: 200, headers: {"content-type": "text/javascript"}, bodyBase64: "bg=="});
+      expect((await next).bodyBase64).toBe("bg==");
+      channel.close();
+      expect(closed).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+  it("reopens a persistently stalled worker after three isolated deadlines", async () => {
+    vi.useFakeTimers();
+    try {
+      const stream = new MockAttachedDockerExec();
+      const closed = vi.fn();
+      const channel = new ReactPreviewPersistentHttpChannel(stream, closed);
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        const failure = channel.request(`/stalled-${attempt}`, "GET");
+        const rejection = expect(failure).rejects.toThrow("asset response deadline exceeded");
+        await vi.advanceTimersByTimeAsync(PREVIEW_HTTP_REQUEST_DEADLINE_MS + 1);
+        await rejection;
+        expect(closed).toHaveBeenCalledTimes(attempt === 2 ? 1 : 0);
+      }
+      await expect(channel.request("/after-stall", "GET")).rejects.toThrow("unavailable");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
   it("maintains network isolation and bounded concurrency", () => {
     const runtime = readFileSync(resolve(process.cwd(), "src/services/build/reactPreviewRuntime.ts"), "utf8");
     const channel = readFileSync(resolve(process.cwd(), "src/services/build/reactPreviewPersistentHttp.ts"), "utf8");
@@ -68,6 +114,8 @@ describe("persistent isolated Vite transport", () => {
     expect(channel).toContain("AttachStdin: true, Tty: false");
     expect(channel).toContain("MAX_IN_FLIGHT = 16");
     expect(PERSISTENT_PREVIEW_HTTP_WORKER).toContain("ThreadPoolExecutor(max_workers=8)");
+    expect(PERSISTENT_PREVIEW_HTTP_WORKER).toContain("opener.open(request_obj, timeout=20)");
+    expect(PREVIEW_HTTP_REQUEST_DEADLINE_MS).toBeGreaterThan(40_000);
     expect(runtime).not.toContain("ExposedPorts");
   });
 });
