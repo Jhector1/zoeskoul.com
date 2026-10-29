@@ -23,7 +23,7 @@ import { isValidReactPreviewReadyDocument } from "./reactPreviewReadiness.js";
 import { PreviewProjectDrainRegistry } from "./reactPreviewProjectDrainPolicy.js";
 import { ReactPreviewMutationCoordinator, assertNotStaleReactPreviewSource } from "./reactPreviewMutationCoordinator.js";
 import { fetchPersistentPreviewHttp, stopPersistentPreviewHttp } from "./reactPreviewPersistentHttp.js";
-import { previewInstalledDependencyCache, previewInstalledDependencyKey } from "./previewInstalledDependencyCache.js";
+import { previewDependencyLayerStore, previewDependencyLayerKey, PreviewDependencyLayerStore, type DependencyLayerLease } from "./previewDependencyLayerStore.js";
 
 import {
   docker,
@@ -100,6 +100,7 @@ type MutablePreviewRecord = {
   sourceVersion: number;
   containerId: string;
   workspaceDir: string;
+  dependencyLayerLease: DependencyLayerLease | null;
   port: 5173;
   basePath: string;
   sourcePaths:
@@ -828,7 +829,7 @@ async function installedDependencyCacheKey(input: Readonly<{
     // insufficient proof that cached native dependencies are compatible.
     const image = await docker.getImage(options.Image).inspect();
     if (!image.Id || !/^sha256:[a-f0-9]{64}$/.test(image.Id)) return null;
-    return previewInstalledDependencyKey({
+    return previewDependencyLayerKey({
       actorKey: input.ownerKey,
       projectId: input.projectId,
       dependencyFingerprint: dependencyFingerprint(input.files),
@@ -1189,6 +1190,7 @@ async function destroyPreview(
             "statusCode" in error && error.statusCode === 404)) throw error;
     }
     await cleanupWorkspaceNow(record.workspaceDir);
+    record.dependencyLayerLease?.release();
     // The slot becomes free only after both operations succeed. On failure,
     // keep the record for the next cleanup sweep and refuse unsafe admission.
     previews.delete(record.id);
@@ -1297,29 +1299,6 @@ async function reuseExistingProjectPreview(
   return null;
 }
 
-async function prepareWritablePreviewViteCache(workspaceDir: string): Promise<void> {
-  const modules = path.join(workspaceDir, "node_modules");
-  const root = await fs.lstat(modules);
-  if (!root.isDirectory() || root.isSymbolicLink()) {
-    throw new Error("Invalid installed preview dependency root.");
-  }
-  // GNU cp preserves the original package modes, but not the owner. The
-  // unprivileged Vite container writes into only its transient cache paths.
-  await fs.chmod(modules, 0o777);
-  for (const name of [".vite", ".vite-temp"]) {
-    const dir = path.join(modules, name);
-    const existing = await fs.lstat(dir).catch((error: NodeJS.ErrnoException) => {
-      if (error.code === "ENOENT") return null;
-      throw error;
-    });
-    if (existing && (!existing.isDirectory() || existing.isSymbolicLink())) {
-      throw new Error("Invalid installed preview optimizer directory.");
-    }
-    if (!existing) await fs.mkdir(dir, { mode: 0o777 });
-    await fs.chmod(dir, 0o777);
-  }
-}
-
 async function startReactPreviewInternal(
   input: Readonly<{
     ownerKey: string;
@@ -1406,6 +1385,8 @@ async function startReactPreviewInternal(
     null =
       null;
 
+  let dependencyLayerLease: DependencyLayerLease | null = null;
+
   const startTime = currentTime();
   const previewTimings = { workspaceMs: 0, dependenciesMs: 0, containerMs: 0, readinessMs: 0 };
   let phaseBeganAt = startTime;
@@ -1430,44 +1411,30 @@ async function startReactPreviewInternal(
         request.files,
       );
 
-    let dependencyMode: "prebuilt" | "installed-cache" | "frozen-install" = "prebuilt";
+    let dependencyMode: "prebuilt" | "dependency-layer" | "frozen-install" = "prebuilt";
     if (!usingPrebuiltDependencies) {
-      // Reuse only a successful, identical project-owned install performed
-      // using the same trusted command and *actual* runtime image ID.
-      const cacheKey = await installedDependencyCacheKey({
+      // A fingerprint is meaningful only alongside actor, project, frozen
+      // command and the *actual* immutable Docker image ID.
+      const layerKey = await installedDependencyCacheKey({
         workspaceDir, ownerKey, projectId: request.buildProjectId,
         files: request.files, command: plan.installCommand,
       });
-      const cacheCopyBeganAt = currentTime();
-      const cacheHit = cacheKey
-        ? await previewInstalledDependencyCache.restore(cacheKey, workspaceDir)
-        : false;
-      const cacheCopyMs = currentTime() - cacheCopyBeganAt;
-      if (!cacheHit) {
-        await runInstall(
-          workspaceDir,
-          plan.installCommand,
-          input.signal,
-        );
-        if (cacheKey) {
-          const stored = await previewInstalledDependencyCache.remember(cacheKey, workspaceDir);
-          console.info("RUNNER React preview installed dependency cache", {
-            result: stored ? "stored" : "skipped",
+      if (layerKey) dependencyLayerLease = await previewDependencyLayerStore.acquire(layerKey);
+      if (!dependencyLayerLease) {
+        await runInstall(workspaceDir, plan.installCommand, input.signal);
+        if (layerKey) {
+          dependencyLayerLease = await previewDependencyLayerStore.publish(layerKey, workspaceDir);
+          console.info("RUNNER React preview dependency layer", {
+            result: dependencyLayerLease ? "published" : "skipped",
           });
         }
       }
-      if (cacheHit) {
-        // The private copy is readable without recursively changing tens of
-        // thousands of package files. Vite needs writable optimizer directories
-        // only. Validate them against symlinks and grant local workspace writes.
-        const writableBeganAt = currentTime();
-        await prepareWritablePreviewViteCache(workspaceDir);
-        console.info("RUNNER React preview installed cache timings", {
-          cacheCopyMs,
-          viteWritableMs: currentTime() - writableBeganAt,
-        });
+      if (dependencyLayerLease) {
+        // Docker's nested read-only bind requires the workspace mount point.
+        // It is empty: package files remain only in the trusted layer.
+        await fs.mkdir(path.join(workspaceDir, "node_modules"), { recursive: true, mode: 0o755 });
       }
-      dependencyMode = cacheHit ? "installed-cache" : "frozen-install";
+      dependencyMode = dependencyLayerLease ? "dependency-layer" : "frozen-install";
     }
 
     console.log(
@@ -1562,8 +1529,21 @@ async function startReactPreviewInternal(
               `rw,noexec,nosuid,size=64m,${viteTmpfsOwnership}`,
             [`${REACT_VITE_V1_PREBUILT_ROOT}/node_modules/.vite-temp`]:
               `rw,noexec,nosuid,size=32m,${viteTmpfsOwnership}`,
+            ...(dependencyLayerLease ? {
+              "/workspace/node_modules/.vite": `rw,noexec,nosuid,size=64m,${viteTmpfsOwnership}`,
+              "/workspace/node_modules/.vite-temp": `rw,noexec,nosuid,size=32m,${viteTmpfsOwnership}`,
+            } : {}),
           },
 
+          // A verified dependency layer is visible ONLY at this preview's
+          // read-only node_modules mount. The writable source workspace stays
+          // private; no shared writable package tree or public port exists.
+          Binds: [
+            ...options.HostConfig.Binds,
+            ...(dependencyLayerLease ? [PreviewDependencyLayerStore.bind(dependencyLayerLease)] : []),
+          ],
+          // Per-preview optimizer caches live on tmpfs, even with an
+          // immutable/read-only dependency tree.
           // No public preview port. The runner reaches Vite only through a
           // Docker exec inside this container and proxies bounded HTTP bytes.
           NetworkMode:
@@ -1592,6 +1572,7 @@ async function startReactPreviewInternal(
         containerId:
           container.id,
         workspaceDir,
+        dependencyLayerLease,
         port:
           5173,
         basePath,
@@ -1615,6 +1596,7 @@ async function startReactPreviewInternal(
       previewId,
       record,
     );
+    dependencyLayerLease = null;
 
     releaseCapacity();
 
@@ -1684,6 +1666,9 @@ async function startReactPreviewInternal(
         );
     }
 
+    // If startup failed before the preview record took ownership, release the
+    // layer lease; active records release after Docker teardown instead.
+    dependencyLayerLease?.release();
     if (workspaceDir) {
       await cleanupWorkspaceNow(
         workspaceDir,
