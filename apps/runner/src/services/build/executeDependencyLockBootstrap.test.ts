@@ -66,10 +66,9 @@ describe("restricted Build dependency-lock bootstrap container", () => {
     expect(source).toContain("container.remove({ force: true })");
     expect(source).toContain("fs.rm(workspaceDir");
     expect(source).toContain("finally {");
-    expect(source).toContain("ensureWorkspaceWritableForShellUser(workspaceDir)");
-    expect(source.indexOf("ensureWorkspaceWritableForShellUser(workspaceDir)")).toBeGreaterThan(
-      source.indexOf("  try {", source.indexOf("const workspaceDir =")),
-    );
+    expect(source).not.toContain("ensureWorkspaceWritableForShellUser(workspaceDir)");
+    expect(source).toContain("createWorkspace(");
+    expect(source).toContain("container.remove({ force: true })");
 
     expect(source).not.toContain("/docker.sock");
     expect(source).not.toContain("exec(");
@@ -102,8 +101,11 @@ describe("restricted Build dependency-lock bootstrap container", () => {
       "utf8",
     );
 
-    expect(source).toContain("const BOOTSTRAP_TIMEOUT_MS = 120_000");
+    expect(source).toContain("const BOOTSTRAP_TIMEOUT_MS = 240_000");
     expect(source).toContain("Promise.race");
     expect(source).toContain("setTimeout");
+    expect(source).toContain("imageId ?? sandboxImage");
+    expect(source).toContain("readPersistedBootstrapLock(env.workspaceRoot, cacheKey)");
+    expect(source).toContain("persistBootstrapLock(env.workspaceRoot, cacheKey, content)");
   });
 });

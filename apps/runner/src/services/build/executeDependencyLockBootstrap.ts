@@ -9,15 +9,16 @@ import type {
 import { assertRegisteredDependencyBootstrapFiles } from "@zoeskoul/build-preparation";
 
 import { docker } from "../docker/dockerClient.js";
+import { env } from "../../lib/env.js";
+import { readPersistedBootstrapLock, persistBootstrapLock } from "./bootstrapPersistentLockCache.js";
 import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { createWorkspace } from "../workspace/createWorkspace.js";
-import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
 import { resolveTrustedBuildOperation } from "./trustedBuildOperations.js";
 import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
 import { bootstrapLockCacheKey, resolveBootstrapLockOnce } from "./dependencyLockBootstrapCache.js";
 
 const MAX_LOCKFILE_BYTES = 2 * 1024 * 1024;
-const BOOTSTRAP_TIMEOUT_MS = 120_000;
+const BOOTSTRAP_TIMEOUT_MS = 240_000; // bounded cold fallback; measured healthy runs exceed 100 seconds
 
 export type DependencyLockBootstrapContainerOptions = ReturnType<
   typeof buildDependencyLockBootstrapContainerOptions
@@ -202,13 +203,29 @@ export async function executeDependencyLockBootstrap(
   // token without changing the package inputs. The caller still revalidates
   // ownership and the source-version fence on every request.
   const sandboxImage = resolveSandboxProfile("build-bootstrap").image;
+  // A moving :prod image tag cannot validate a persistent result. Query the
+  // actual immutable image ID, as the preview installed-dependency cache does.
+  // If Docker inspection fails, retain safe in-process coalescing but NEVER
+  // use the on-disk cache for that request.
+  const imageId = await docker.getImage(sandboxImage).inspect()
+    .then(image => typeof image.Id === "string" && /^sha256:[a-f0-9]{64}$/.test(image.Id)
+      ? image.Id : null)
+    .catch(() => null);
   const cacheKey = bootstrapLockCacheKey({
     projectId: request.buildProjectId,
     files: request.files,
     command: plan.command,
-    image: sandboxImage,
+    image: imageId ?? sandboxImage,
   });
+  let persistentHit = false;
   const resolved = await resolveBootstrapLockOnce(cacheKey, async () => {
+    if (imageId) {
+      const persisted = await readPersistedBootstrapLock(env.workspaceRoot, cacheKey);
+      if (persisted !== null) {
+        persistentHit = true;
+        return persisted;
+      }
+    }
     const startedAt = Date.now();
     const workspaceDir = await createWorkspace(
       request.files.map((file) => ({
@@ -221,7 +238,8 @@ export async function executeDependencyLockBootstrap(
       null;
 
     try {
-      await ensureWorkspaceWritableForShellUser(workspaceDir);
+      // createWorkspace already normalized the initial, dependency-free tree.
+      // No duplicate recursive chmod before a trusted one-shot container.
       container = await docker.createContainer(
         buildDependencyLockBootstrapContainerOptions({
           workspaceDir,
@@ -247,7 +265,12 @@ export async function executeDependencyLockBootstrap(
         elapsedMs: Date.now() - startedAt,
         lockBytes: Buffer.byteLength(content, "utf8"),
       });
-
+      if (imageId) {
+        const stored = await persistBootstrapLock(env.workspaceRoot, cacheKey, content);
+        console.info("RUNNER trusted dependency bootstrap persistent cache", {
+          mode: stored ? "stored" : "skipped",
+        });
+      }
       return content;
     } catch (error) {
       await logBootstrapFailure(container, error, Date.now() - startedAt).catch(() => undefined);
@@ -263,7 +286,9 @@ export async function executeDependencyLockBootstrap(
       });
     }
   });
-  console.info("RUNNER trusted dependency bootstrap cache", { mode: resolved.mode });
+  console.info("RUNNER trusted dependency bootstrap cache", {
+    mode: resolved.mode === "resolved" && persistentHit ? "persistent-hit" : resolved.mode,
+  });
   return {
     ok: true,
     result: {
