@@ -68,6 +68,18 @@ describe("K20D2D installed dependency cache", () => {
     expect(await cache.restore(key(), second)).toBe(false);
   });
 
+  it("restores a separate independent tree after another restore", async () => {
+    const { first, second, root, cache } = await fixture();
+    const third = path.join(root, "third");
+    await fs.mkdir(third);
+    expect(await cache.remember(key(), first)).toBe(true);
+    expect(await cache.restore(key(), second)).toBe(true);
+    expect(await cache.restore(key(), third)).toBe(true);
+    await fs.writeFile(path.join(second, "node_modules", ".pnpm", "foo", "node_modules", "foo", "index.js"), "edited");
+    expect(await fs.readFile(path.join(third, "node_modules", "foo", "index.js"), "utf8"))
+      .toBe("export default 123");
+  });
+
   it("cannot match another actor, project, dependency fingerprint, command or image", () => {
     const original = { actorKey: "user-a", projectId: "project-a", dependencyFingerprint: "digest-a", command: ["pnpm", "install"], imageId: `sha256:${"a".repeat(64)}` };
     const encode = (next: typeof original) => previewInstalledDependencyKey(next);

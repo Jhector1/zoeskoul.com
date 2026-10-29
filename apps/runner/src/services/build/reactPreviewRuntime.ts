@@ -1297,6 +1297,29 @@ async function reuseExistingProjectPreview(
   return null;
 }
 
+async function prepareWritablePreviewViteCache(workspaceDir: string): Promise<void> {
+  const modules = path.join(workspaceDir, "node_modules");
+  const root = await fs.lstat(modules);
+  if (!root.isDirectory() || root.isSymbolicLink()) {
+    throw new Error("Invalid installed preview dependency root.");
+  }
+  // GNU cp preserves the original package modes, but not the owner. The
+  // unprivileged Vite container writes into only its transient cache paths.
+  await fs.chmod(modules, 0o777);
+  for (const name of [".vite", ".vite-temp"]) {
+    const dir = path.join(modules, name);
+    const existing = await fs.lstat(dir).catch((error: NodeJS.ErrnoException) => {
+      if (error.code === "ENOENT") return null;
+      throw error;
+    });
+    if (existing && (!existing.isDirectory() || existing.isSymbolicLink())) {
+      throw new Error("Invalid installed preview optimizer directory.");
+    }
+    if (!existing) await fs.mkdir(dir, { mode: 0o777 });
+    await fs.chmod(dir, 0o777);
+  }
+}
+
 async function startReactPreviewInternal(
   input: Readonly<{
     ownerKey: string;
@@ -1389,14 +1412,12 @@ async function startReactPreviewInternal(
   let startupStage = "workspace";
   try {
     input.onPhase?.("workspace");
+    // createWorkspace already enforces the isolated workspace's write policy.
+    // Do not recursively chmod it a second time before dependency preparation.
     workspaceDir =
       await createWorkspace(
         [...request.files],
       );
-
-    await ensureWorkspaceWritableForShellUser(
-      workspaceDir,
-    );
 
     previewTimings.workspaceMs = currentTime() - phaseBeganAt;
     phaseBeganAt = currentTime();
@@ -1417,9 +1438,11 @@ async function startReactPreviewInternal(
         workspaceDir, ownerKey, projectId: request.buildProjectId,
         files: request.files, command: plan.installCommand,
       });
+      const cacheCopyBeganAt = currentTime();
       const cacheHit = cacheKey
         ? await previewInstalledDependencyCache.restore(cacheKey, workspaceDir)
         : false;
+      const cacheCopyMs = currentTime() - cacheCopyBeganAt;
       if (!cacheHit) {
         await runInstall(
           workspaceDir,
@@ -1434,9 +1457,15 @@ async function startReactPreviewInternal(
         }
       }
       if (cacheHit) {
-        // The runner copied a private snapshot into a new writable workspace;
-        // restore the container UID/write policy before Vite accesses it.
-        await ensureWorkspaceWritableForShellUser(workspaceDir);
+        // The private copy is readable without recursively changing tens of
+        // thousands of package files. Vite needs writable optimizer directories
+        // only. Validate them against symlinks and grant local workspace writes.
+        const writableBeganAt = currentTime();
+        await prepareWritablePreviewViteCache(workspaceDir);
+        console.info("RUNNER React preview installed cache timings", {
+          cacheCopyMs,
+          viteWritableMs: currentTime() - writableBeganAt,
+        });
       }
       dependencyMode = cacheHit ? "installed-cache" : "frozen-install";
     }

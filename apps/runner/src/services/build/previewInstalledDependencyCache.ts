@@ -1,5 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { constants } from "node:fs";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -26,6 +28,31 @@ export function previewInstalledDependencyKey(input: Readonly<{
       input.dependencyFingerprint, input.command, input.imageId,
     ]))
     .digest("hex");
+}
+
+// Node's fs.cp recursively walks large pnpm trees with many per-file async
+// operations. On Linux, GNU cp performs the same isolated tree copy much more
+// efficiently and uses a copy-on-write reflink when the filesystem supports it.
+// Always keep a fail-safe Node copy for environments without the GNU options.
+// Never hardlink: a sandbox must not share writable inodes with this cache.
+const execFileAsync = promisify(execFile);
+
+async function copyIndependentTree(source: string, destination: string): Promise<void> {
+  if (process.platform === "linux") {
+    try {
+      await execFileAsync("cp", [
+        "-a", "--no-preserve=ownership", "--reflink=auto", "--", source, destination,
+      ]);
+      return;
+    } catch {
+      // A partially copied tree must never be used as a fallback destination.
+      await fs.rm(destination, { recursive: true, force: true });
+    }
+  }
+  await fs.cp(source, destination, {
+    recursive: true, force: false, errorOnExist: true,
+    verbatimSymlinks: true, mode: constants.COPYFILE_FICLONE,
+  });
 }
 
 type Snapshot = { dir: string; bytes: number; expiresAt: number };
@@ -99,11 +126,9 @@ export class PreviewInstalledDependencyCache {
     const destination = path.join(workspaceDir, "node_modules");
     if (await fs.lstat(destination).catch(() => null)) return false;
     try {
-      // Preserve pnpm's relative symlinks; never follow links into the cache.
-      await fs.cp(entry.dir, destination, {
-        recursive: true, force: false, errorOnExist: true,
-        verbatimSymlinks: true, mode: constants.COPYFILE_FICLONE,
-      });
+      // The cache is runner-private and previously checked for escaping links.
+      // Always create an independent destination; never mount or hardlink it.
+      await copyIndependentTree(entry.dir, destination);
       this.entries.delete(key);
       this.entries.set(key, entry);
       entry.expiresAt = Date.now() + TTL_MS;
@@ -133,10 +158,7 @@ export class PreviewInstalledDependencyCache {
       }
       const destination = path.join(this.root, `${key}-${randomUUID()}`);
       try {
-        await fs.cp(source, destination, {
-          recursive: true, force: false, errorOnExist: true,
-          verbatimSymlinks: true, mode: constants.COPYFILE_FICLONE,
-        });
+        await copyIndependentTree(source, destination);
         this.entries.set(key, { dir: destination, bytes, expiresAt: Date.now() + TTL_MS });
         this.totalBytes += bytes;
         return true;
