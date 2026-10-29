@@ -23,6 +23,7 @@ import { isValidReactPreviewReadyDocument } from "./reactPreviewReadiness.js";
 import { PreviewProjectDrainRegistry } from "./reactPreviewProjectDrainPolicy.js";
 import { ReactPreviewMutationCoordinator, assertNotStaleReactPreviewSource } from "./reactPreviewMutationCoordinator.js";
 import { fetchPersistentPreviewHttp, stopPersistentPreviewHttp } from "./reactPreviewPersistentHttp.js";
+import { previewInstalledDependencyCache, previewInstalledDependencyKey } from "./previewInstalledDependencyCache.js";
 
 import {
   docker,
@@ -810,6 +811,36 @@ async function preparePrebuiltReactViteDependencies(
   return true;
 }
 
+async function installedDependencyCacheKey(input: Readonly<{
+  workspaceDir: string;
+  ownerKey: string;
+  projectId: string;
+  files: readonly PreviewSourceFile[];
+  command: readonly string[];
+}>): Promise<string | null> {
+  try {
+    const options = buildProductionBuildContainerOptions({
+      workspaceDir: input.workspaceDir,
+      command: input.command,
+      step: "install",
+    });
+    // The actual immutable Docker image ID matters: a moving :prod tag is
+    // insufficient proof that cached native dependencies are compatible.
+    const image = await docker.getImage(options.Image).inspect();
+    if (!image.Id || !/^sha256:[a-f0-9]{64}$/.test(image.Id)) return null;
+    return previewInstalledDependencyKey({
+      actorKey: input.ownerKey,
+      projectId: input.projectId,
+      dependencyFingerprint: dependencyFingerprint(input.files),
+      command: input.command,
+      imageId: image.Id,
+    });
+  } catch {
+    // Cache failure is never an install or authorization failure.
+    return null;
+  }
+}
+
 async function runInstall(
   workspaceDir: string,
   command:
@@ -1378,12 +1409,36 @@ async function startReactPreviewInternal(
         request.files,
       );
 
+    let dependencyMode: "prebuilt" | "installed-cache" | "frozen-install" = "prebuilt";
     if (!usingPrebuiltDependencies) {
-      await runInstall(
-        workspaceDir,
-        plan.installCommand,
-        input.signal,
-      );
+      // Reuse only a successful, identical project-owned install performed
+      // using the same trusted command and *actual* runtime image ID.
+      const cacheKey = await installedDependencyCacheKey({
+        workspaceDir, ownerKey, projectId: request.buildProjectId,
+        files: request.files, command: plan.installCommand,
+      });
+      const cacheHit = cacheKey
+        ? await previewInstalledDependencyCache.restore(cacheKey, workspaceDir)
+        : false;
+      if (!cacheHit) {
+        await runInstall(
+          workspaceDir,
+          plan.installCommand,
+          input.signal,
+        );
+        if (cacheKey) {
+          const stored = await previewInstalledDependencyCache.remember(cacheKey, workspaceDir);
+          console.info("RUNNER React preview installed dependency cache", {
+            result: stored ? "stored" : "skipped",
+          });
+        }
+      }
+      if (cacheHit) {
+        // The runner copied a private snapshot into a new writable workspace;
+        // restore the container UID/write policy before Vite accesses it.
+        await ensureWorkspaceWritableForShellUser(workspaceDir);
+      }
+      dependencyMode = cacheHit ? "installed-cache" : "frozen-install";
     }
 
     console.log(
@@ -1391,10 +1446,7 @@ async function startReactPreviewInternal(
       {
         buildProjectId:
           request.buildProjectId,
-        mode:
-          usingPrebuiltDependencies
-            ? "prebuilt"
-            : "frozen-install",
+        mode: dependencyMode,
       },
     );
 
@@ -1558,7 +1610,7 @@ async function startReactPreviewInternal(
     console.info("RUNNER React preview start timings", {
       ...previewTimings,
       totalMs: currentTime() - startTime,
-      dependencyMode: usingPrebuiltDependencies ? "prebuilt" : "frozen-install",
+      dependencyMode,
     });
     return {
       previewId,
