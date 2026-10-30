@@ -1405,34 +1405,62 @@ async function startReactPreviewInternal(
     startupStage = "dependencies";
     input.onPhase?.("dependencies");
     if (input.signal?.aborted) throw new Error("Preview start cancelled.");
+    // Break down the formerly opaque dependenciesMs span. A cached layer
+    // still verifies package contents; Docker image inspection/prebuilt probing
+    // and cold publication can be much slower than that filesystem hash.
+    const dependencySteps = {
+      prebuiltCheckMs: 0,
+      imageIdentityMs: 0,
+      layerAcquireMs: 0,
+      frozenInstallMs: 0,
+      layerPublicationMs: 0,
+      mountpointMs: 0,
+    };
+    let dependencyStepStarted = currentTime();
     const usingPrebuiltDependencies =
       await preparePrebuiltReactViteDependencies(
         workspaceDir,
         request.files,
       );
+    dependencySteps.prebuiltCheckMs = currentTime() - dependencyStepStarted;
 
+    let layerResult: "prebuilt" | "acquired" | "published" | "skipped" = "prebuilt";
     let dependencyMode: "prebuilt" | "dependency-layer" | "frozen-install" = "prebuilt";
     if (!usingPrebuiltDependencies) {
       // A fingerprint is meaningful only alongside actor, project, frozen
       // command and the *actual* immutable Docker image ID.
+      dependencyStepStarted = currentTime();
       const layerKey = await installedDependencyCacheKey({
         workspaceDir, ownerKey, projectId: request.buildProjectId,
         files: request.files, command: plan.installCommand,
       });
+      dependencySteps.imageIdentityMs = currentTime() - dependencyStepStarted;
+      dependencyStepStarted = currentTime();
       if (layerKey) dependencyLayerLease = await previewDependencyLayerStore.acquire(layerKey);
+      dependencySteps.layerAcquireMs = currentTime() - dependencyStepStarted;
+      if (dependencyLayerLease) layerResult = "acquired";
       if (!dependencyLayerLease) {
+        dependencyStepStarted = currentTime();
         await runInstall(workspaceDir, plan.installCommand, input.signal);
+        dependencySteps.frozenInstallMs = currentTime() - dependencyStepStarted;
         if (layerKey) {
+          dependencyStepStarted = currentTime();
           dependencyLayerLease = await previewDependencyLayerStore.publish(layerKey, workspaceDir);
+          dependencySteps.layerPublicationMs = currentTime() - dependencyStepStarted;
+          layerResult = dependencyLayerLease ? "published" : "skipped";
           console.info("RUNNER React preview dependency layer", {
-            result: dependencyLayerLease ? "published" : "skipped",
+            result: layerResult,
           });
+        } else {
+          layerResult = "skipped";
         }
       }
       if (dependencyLayerLease) {
         // Docker's nested read-only bind requires the workspace mount point.
         // It is empty: package files remain only in the trusted layer.
+        dependencyStepStarted = currentTime();
         await fs.mkdir(path.join(workspaceDir, "node_modules"), { recursive: true, mode: 0o755 });
+        dependencySteps.mountpointMs = currentTime() - dependencyStepStarted;
       }
       dependencyMode = dependencyLayerLease ? "dependency-layer" : "frozen-install";
     }
@@ -1498,6 +1526,11 @@ async function startReactPreviewInternal(
       `uid=${viteTmpfsUser[1]},gid=${viteTmpfsUser[2]},mode=0700`;
 
     previewTimings.dependenciesMs = currentTime() - phaseBeganAt;
+    console.info("RUNNER React preview dependency preparation timings", {
+      ...dependencySteps,
+      layerResult,
+      totalMs: previewTimings.dependenciesMs,
+    });
     phaseBeganAt = currentTime();
     startupStage = "container";
     input.onPhase?.("container");

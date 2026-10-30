@@ -108,22 +108,67 @@ async function writeInitialEntries(
 export async function createWorkspace(files: WorkspaceSyncEntry[]) {
   const rootBase = env.workspaceRoot;
 
+  // Observability only: no changes to workspace authorization, file writes,
+  // ownership, capacity enforcement, or cleanup. No source names or contents.
+  const started = Date.now();
+  let checkpoint = started;
+  const timings = {
+    rootReadyMs: 0,
+    quotaMs: 0,
+    normalizeMs: 0,
+    workspaceDirMs: 0,
+    writeEntriesMs: 0,
+    runtimeFilesMs: 0,
+    permissionsMs: 0,
+  };
+  let stage = "root-ready";
   await ensureWorkspaceRoot(rootBase);
+  timings.rootReadyMs = Date.now() - checkpoint;
+  checkpoint = Date.now();
+  stage = "quota";
   await assertWorkspaceRootHasCapacity(rootBase);
+  timings.quotaMs = Date.now() - checkpoint;
+  checkpoint = Date.now();
 
+  stage = "normalize";
   const normalized = normalizeWorkspaceEntries(files ?? [], {
     dropRunnerManaged: true,
   });
+  timings.normalizeMs = Date.now() - checkpoint;
+  checkpoint = Date.now();
 
   const root = path.join(rootBase, `zoeskoul-run-${crypto.randomUUID()}`);
+  stage = "workspace-directory";
   await ensureWorkspaceDir(root);
+  timings.workspaceDirMs = Date.now() - checkpoint;
+  checkpoint = Date.now();
 
   try {
+    stage = "write-entries";
     await writeInitialEntries(root, normalized);
+    timings.writeEntriesMs = Date.now() - checkpoint;
+    checkpoint = Date.now();
+    stage = "runtime-files";
     await ensureWorkspaceRuntimeFiles(root);
+    timings.runtimeFilesMs = Date.now() - checkpoint;
+    checkpoint = Date.now();
+    stage = "permissions";
     await ensureWorkspaceWritableForShellUser(root);
+    timings.permissionsMs = Date.now() - checkpoint;
+    const totalMs = Date.now() - started;
+    if (totalMs >= 1000) {
+      console.info("RUNNER workspace creation timings", {
+        ...timings,
+        entries: normalized.length,
+        totalMs,
+      });
+    }
     return root;
   } catch (err) {
+    console.warn("RUNNER workspace creation failed", {
+      stage,
+      elapsedMs: Date.now() - started,
+    });
     await fs.rm(root, { recursive: true, force: true }).catch(() => {});
     throw err;
   }
