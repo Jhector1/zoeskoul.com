@@ -25,11 +25,11 @@ const keyInput = {
 const key = () => previewDependencyLayerKey(keyInput);
 
 describe("K20D3F persistent verified dependency layers", () => {
-  it("publishes by moving rather than copying and survives a store restart", async () => {
+  it("publishes a verified detached layer and survives a store restart", async () => {
     const { root, first, store } = await fixture();
     const lease = await store.publish(key(), first);
     expect(lease).not.toBeNull();
-    expect(await fs.lstat(path.join(first, "node_modules")).catch(() => null)).toBeNull();
+    expect((await fs.lstat(path.join(first, "node_modules"))).isDirectory()).toBe(true);
     expect(await fs.readFile(path.join(lease!.nodeModulesDir, "foo", "index.js"), "utf8"))
       .toBe("export default 123");
     expect(PreviewDependencyLayerStore.bind(lease!)).toBe(`${lease!.nodeModulesDir}:/workspace/node_modules:ro`);
@@ -92,12 +92,52 @@ describe("K20D3F persistent verified dependency layers", () => {
     lease!.release();
   });
 
-  it("rejects hardlinks to writable files outside the layer", async () => {
+  it("detaches pnpm-style external hardlinks once and never shares their inode", async () => {
     const { root, first, store } = await fixture();
     const outside = path.join(root, "shared.js");
-    await fs.writeFile(outside, "external writable content");
+    await fs.writeFile(outside, "original external content");
     await fs.link(outside, path.join(first, "node_modules", "hardlink.js"));
-    expect(await store.publish(key(), first)).toBeNull();
+    const lease = await store.publish(key(), first);
+    expect(lease).not.toBeNull();
+    const detached = path.join(lease!.nodeModulesDir, "hardlink.js");
+    expect((await fs.stat(detached)).ino).not.toBe((await fs.stat(outside)).ino);
+    await fs.writeFile(outside, "externally mutated");
+    expect(await fs.readFile(detached, "utf8")).toBe("original external content");
+    lease!.release();
+    const restarted = new PreviewDependencyLayerStore(root);
+    const again = await restarted.acquire(key());
+    expect(again).not.toBeNull();
+    again!.release();
+  });
+
+  it("does not modify the rootless-installed source or require mkdir permission inside it", async () => {
+    const { first, store } = await fixture();
+    const original = path.join(first, "node_modules");
+    await fs.chmod(original, 0o555);
+    let lease: Awaited<ReturnType<PreviewDependencyLayerStore["publish"]>> = null;
+    try {
+      lease = await store.publish(key(), first);
+      expect(lease).not.toBeNull();
+      // Publication may change modes on its PRIVATE detached copy only.
+      expect((await fs.stat(original)).mode & 0o777).toBe(0o555);
+      expect(await fs.lstat(path.join(original, ".vite")).catch(() => null)).toBeNull();
+      expect((await fs.lstat(path.join(lease!.nodeModulesDir, ".vite"))).isDirectory()).toBe(true);
+      expect((await fs.stat(lease!.nodeModulesDir)).mode & 0o200).toBe(0o200);
+    } finally {
+      lease?.release();
+      // Test teardown must not leave a 0555 source directory on macOS.
+      await fs.chmod(original, 0o755);
+    }
+  });
+
+  it("keeps private source intact and reports bounded skip reasons on invalid trees", async () => {
+    const { root, first, store } = await fixture();
+    await fs.symlink("/etc/passwd", path.join(first, "node_modules", "escape"));
+    const lease = await store.publish(key(), first);
+    expect(lease).toBeNull();
+    expect((await fs.lstat(path.join(first, "node_modules"))).isDirectory()).toBe(true);
+    expect(await fs.readdir(path.join(root, ".zoebuild-preview-dependency-layers-v1")))
+      .not.toContain(key());
   });
 
   it("rejects a symlink workspace dependency root", async () => {

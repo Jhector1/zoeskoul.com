@@ -12,7 +12,9 @@ async function runBestEffort(command: string, args: string[]) {
   } catch (err) {
     console.warn("workspace permission normalization skipped", {
       command,
-      message: err instanceof Error ? err.message : String(err),
+      // An accidental recursive chmod on pnpm's large rootless-owned tree can
+      // generate hundreds of KiB of stderr and slow unrelated requests.
+      message: (err instanceof Error ? err.message : String(err)).slice(0, 350),
     });
     return false;
   }
@@ -48,5 +50,11 @@ export async function ensureWorkspaceWritableForShellUser(workspaceDir: string) 
    * isolated with no network, read-only rootfs, dropped caps, pids/mem/cpu
    * limits, and per-session workspace directories.
    */
-  await runBestEffort("chmod", ["-R", "a+rwX", workspaceDir]);
+  // Source files remain writable but node_modules is owned by the trusted
+  // rootless installer or an immutable read-only layer. Never recurse into it.
+  // GNU/BSD find both support pruning and batched -exec ... {} +.
+  await runBestEffort("find", [
+    workspaceDir, "-name", "node_modules", "-prune", "-o",
+    "-exec", "chmod", "a+rwX", "{}", "+",
+  ]);
 }

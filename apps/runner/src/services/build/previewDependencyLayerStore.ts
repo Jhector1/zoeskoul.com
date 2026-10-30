@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
+import { constants } from "node:fs";
 import fs from "node:fs/promises";
 import { createReadStream } from "node:fs";
 import path from "node:path";
@@ -47,7 +48,10 @@ function within(root: string, absolute: string) {
 }
 
 /** Verify file content, symlink containment, and bounded disk footprint. */
-async function attestTree(root: string): Promise<Omit<Manifest, "schema" | "key" | "createdAt"> | null> {
+async function attestTree(root: string, options: Readonly<{
+  allowExternalHardlinks?: boolean;
+  metadataOnly?: boolean;
+}> = {}): Promise<Omit<Manifest, "schema" | "key" | "createdAt"> | null> {
   const st = await fs.lstat(root).catch(() => null);
   if (!st?.isDirectory() || st.isSymbolicLink()) return null;
   const canonical = await fs.realpath(root);
@@ -73,13 +77,15 @@ async function attestTree(root: string): Promise<Omit<Manifest, "schema" | "key"
       } else if (info.isFile()) {
         // Do not accept an inode also reachable through a writable external
         // path. A read-only Docker mount does not make its other hardlinks RO.
-        if (info.nlink > 1) return false;
+        if (!options.allowExternalHardlinks && info.nlink > 1) return false;
         bytes += info.size;
         if (bytes > MAX_ITEM_BYTES) return false;
         digest.update(`F\0${relative}\0${info.mode & 0o111}\0${info.size}\0`);
         // Stream large files so a cache check cannot allocate hundreds of MiB
         // inside the runner's 512 MiB service memory allowance.
-        for await (const chunk of createReadStream(filename)) digest.update(chunk as Buffer);
+        if (!options.metadataOnly) {
+          for await (const chunk of createReadStream(filename)) digest.update(chunk as Buffer);
+        }
       } else return false;
     }
     return true;
@@ -208,56 +214,93 @@ export class PreviewDependencyLayerStore {
   }
 
   /**
-   * Publish only a successful trusted install. Atomic rename on the same
-   * workspace volume is O(1), not a package-tree copy. If anything fails,
-   * restore node_modules to its original workspace before returning null.
+   * A cold sandbox install may be owned by a rootless user namespace and use
+   * hardlinks into its private pnpm store. Do NOT chmod or mutate that tree.
+   * Copy ONCE to a runner-owned staging dir (CoW when supported), verify all
+   * bytes/links again, then publish atomically. Warm previews only verify and
+   * mount the shared tree RO; they never copy it into the workspace.
+   *
+   * The original install remains private to the first preview and is cleaned
+   * up with that workspace. Failed publication must never break that preview.
    */
   async publish(key: string, workspaceDir: string): Promise<DependencyLayerLease | null> {
-    if (!KEY.test(key) || !await this.rootReady()) return null;
+    const skip = (reason: string) => {
+      console.info("RUNNER React preview dependency layer publication", { result: "skipped", reason });
+      return null;
+    };
+    if (!KEY.test(key)) return skip("invalid-key");
+    if (!await this.rootReady()) return skip("cache-root-unavailable");
     const source = path.join(workspaceDir, "node_modules");
-    // Create mount targets before attestation. A trusted successful install is
-    // no longer running, so moving its directory preserves the verified bytes.
-    try {
-      for (const part of [".vite", ".vite-temp"]) {
-        const dir = path.join(source, part);
-        const state = await fs.lstat(dir).catch(() => null);
-        if (state && (!state.isDirectory() || state.isSymbolicLink())) return null;
-        if (!state) await fs.mkdir(dir, { mode: 0o755 });
+    // Safety and capacity validation BEFORE using additional storage. This
+    // input is private and no longer modified by the trusted install container.
+    // External hardlinks are allowed only here, before detachment.
+    const inspected = await attestTree(source, {
+      allowExternalHardlinks: true, metadataOnly: true,
+    });
+    if (!inspected) return skip("source-tree-unavailable-or-limit");
+    for (const name of [".vite", ".vite-temp"]) {
+      const entry = await fs.lstat(path.join(source, name)).catch(() => null);
+      if (entry && (!entry.isDirectory() || entry.isSymbolicLink())) {
+        return skip("vite-mount-target-conflict");
       }
-    } catch { return null; }
-    const tree = await attestTree(source);
-    if (!tree) return null;
+    }
     const existing = await this.acquire(key);
-    if (existing) return existing; // caller must discard its redundant installation
+    if (existing) return existing;
     await this.sweep(key).catch(() => undefined);
-    // Never evict a newly mounted layer just to make room. If storage is full,
-    // fall back to this preview's trusted private installation.
     const published = (await Promise.all((await fs.readdir(this.root))
       .filter(name => KEY.test(name)).map(name => this.manifest(name)))).filter((m): m is Manifest => m !== null);
     if (published.length >= MAX_ENTRIES ||
-        published.reduce((sum, m) => sum + m.bytes, 0) + tree.bytes > MAX_TOTAL_BYTES) return null;
+        published.reduce((sum, m) => sum + m.bytes, 0) + inspected.bytes > MAX_TOTAL_BYTES) {
+      return skip("cache-capacity");
+    }
+
     const staged = path.join(this.root, `.pending-${randomUUID()}`);
     const dest = this.entry(key);
-    let moved = false;
     try {
       await fs.mkdir(staged, { mode: 0o755 });
-      await fs.rename(source, path.join(staged, "node_modules"));
-      moved = true;
+      const cloned = path.join(staged, "node_modules");
+      // Explicitly detach pnpm's content-addressed hardlinks. Never mount a
+      // writable hardlink outside this layer into another preview.
+      await fs.cp(source, cloned, {
+        recursive: true, force: false, errorOnExist: true,
+        verbatimSymlinks: true, mode: constants.COPYFILE_FICLONE,
+      });
+      // Node fs.cp preserves the source directory mode. A rootless install
+      // may have a read-only (0555) node_modules root, so writing .vite
+      // mount points into the DETACHED copy would fail with EACCES.
+      // Make only our private copy owner-writable; never chmod the source.
+      const clonedRoot = await fs.lstat(cloned);
+      if (!clonedRoot.isDirectory() || clonedRoot.isSymbolicLink()) {
+        return skip("detached-tree-invalid");
+      }
+      await fs.chmod(cloned, (clonedRoot.mode & 0o777) | 0o700);
+      for (const name of [".vite", ".vite-temp"]) {
+        await fs.mkdir(path.join(cloned, name), { recursive: true, mode: 0o755 });
+      }
+      // This scan rejects any hardlink that survived the copy and symlinks
+      // that now escape the copied tree. A digest covers *actual* bytes.
+      const tree = await attestTree(cloned);
+      if (!tree) return skip("detached-tree-invalid");
       const manifest: Manifest = { schema: SCHEMA, key, createdAt: Date.now(), ...tree };
-      await fs.writeFile(path.join(staged, "manifest.json"), JSON.stringify(manifest), { mode: 0o644, flag: "wx" });
-      await fs.chmod(staged, 0o755);
-      // A stale/invalid previous entry can only be replaced if it isn't leased.
+      await fs.writeFile(path.join(staged, "manifest.json"), JSON.stringify(manifest), {
+        mode: 0o644, flag: "wx",
+      });
       if (await fs.lstat(dest).catch(() => null)) {
-        if (this.leases.get(key)) throw new Error("Layer is in use.");
+        // An old writer can finish the same content concurrently. Only
+        // replace an unleased invalid entry; never alter a mounted layer.
+        const winner = await this.acquire(key);
+        if (winner) return winner;
+        if (this.leases.get(key)) return skip("layer-in-use");
         await this.remove(key);
       }
       await fs.rename(staged, dest);
-      moved = false;
       return this.lease(key);
-    } catch {
-      if (moved) {
-        await fs.rename(path.join(staged, "node_modules"), source).catch(() => undefined);
-      }
+    } catch (error: unknown) {
+      const code = typeof error === "object" && error !== null && "code" in error &&
+        typeof error.code === "string" ? error.code : "unclassified";
+      console.info("RUNNER React preview dependency layer publication", {
+        result: "skipped", reason: "staging-failed", code,
+      });
       return null;
     } finally {
       await fs.rm(staged, { force: true, recursive: true }).catch(() => undefined);
