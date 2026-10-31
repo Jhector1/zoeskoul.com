@@ -60,7 +60,30 @@ async function attestTree(root: string, options: Readonly<{
   let files = 0;
   const walk = async (dir: string, prefix: string): Promise<boolean> => {
     const children = (await fs.readdir(dir, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name));
-    for (const child of children) {
+    // The layer is verified against its exact byte digest on EVERY acquire.
+    // Prefetch only a small bounded window of regular files: this overlaps
+    // slow filesystem reads without changing hash order or trusting mtimes.
+    // Never buffer large packages; keep the runner's 512 MiB memory limit safe.
+    const PREFETCH_FILES = 6;
+    const PREFETCH_FILE_BYTES = 256 * 1024;
+    const prefetched = new Map<number, Promise<Buffer | null>>();
+    const fillPrefetch = (from: number) => {
+      if (options.metadataOnly) return;
+      let active = prefetched.size;
+      for (let i = from; i < children.length && active < PREFETCH_FILES; i++) {
+        if (!children[i]!.isFile() || prefetched.has(i)) continue;
+        const filename = path.join(dir, children[i]!.name);
+        // Read failures are handled as verification failures, not an
+        // unhandled rejected promise while another file is being checked.
+        prefetched.set(i, fs.lstat(filename).then((st) =>
+          st.isFile() && st.size <= PREFETCH_FILE_BYTES
+            ? fs.readFile(filename) : null,
+        ).catch(() => null));
+        active++;
+      }
+    };
+    for (const [i, child] of children.entries()) {
+      fillPrefetch(i);
       if (++files > MAX_FILES) return false;
       const filename = path.join(dir, child.name);
       const relative = prefix ? `${prefix}/${child.name}` : child.name;
@@ -84,7 +107,21 @@ async function attestTree(root: string, options: Readonly<{
         // Stream large files so a cache check cannot allocate hundreds of MiB
         // inside the runner's 512 MiB service memory allowance.
         if (!options.metadataOnly) {
-          for await (const chunk of createReadStream(filename)) digest.update(chunk as Buffer);
+          const prefetchedRead = prefetched.get(i);
+          const smallFile = prefetchedRead ? await prefetchedRead : null;
+          prefetched.delete(i);
+          if (smallFile && smallFile.length === info.size) {
+            digest.update(smallFile);
+          } else {
+            // Large files remain streamed; a disappeared/changed small file
+            // must never pass merely because its prefetch was unsuccessful.
+            let streamed = 0;
+            for await (const chunk of createReadStream(filename)) {
+              streamed += (chunk as Buffer).byteLength;
+              digest.update(chunk as Buffer);
+            }
+            if (streamed !== info.size) return false;
+          }
         }
       } else return false;
     }

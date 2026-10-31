@@ -8,6 +8,12 @@ import { withPreviewDocumentRevision } from "../previewDocumentUrl";
 type FrameIndex = 0 | 1;
 const NAV_CHANNEL = "zoebuild.preview.navigation.v1";
 const LOCAL_ORIGIN = "https://preview.invalid";
+// The document route and Vite modules may take longer than fifteen seconds to
+// load on a cold runner. Only begin the render-confirmation budget after the
+// exact iframe document finishes loading; an HTTP error page still cannot
+// attest that React rendered.
+const PREVIEW_DOCUMENT_SLOW_NOTICE_MS = 20_000;
+const PREVIEW_RENDER_CONFIRMATION_MS = 60_000;
 
 /** Only accept routes relative to this preview's own opaque content root. */
 function safePreviewRoute(input: unknown): string | null {
@@ -38,6 +44,8 @@ export default function RemoteWebPreview(props: {
     const [directNavigationRevision, setDirectNavigationRevision] = useState(0);
     const [refreshPending, setRefreshPending] = useState(false);
     const [renderProblem, setRenderProblem] = useState<string | null>(null);
+    const [loadedDocumentSrc, setLoadedDocumentSrc] = useState<string | null>(null);
+    const [slowDocumentSrc, setSlowDocumentSrc] = useState<string | null>(null);
     const [navigationWarning, setNavigationWarning] = useState<string | null>(null);
     const [displayPath, setDisplayPath] = useState("/");
     const [routeSynced, setRouteSynced] = useState(false);
@@ -52,6 +60,9 @@ export default function RemoteWebPreview(props: {
     const routeHistoryRef = useRef<{routes: string[]; index: number}>({routes:["/"],index:0});
     const lastBaseRef = useRef(preview.src);
     const frameRefs = useRef<[HTMLIFrameElement | null, HTMLIFrameElement | null]>([null, null]);
+    // One automatic recovery per confirmed-live preview lifecycle. A broken
+    // runner must never trigger an unbounded cancel/start/retry loop.
+    const automaticExpiryRecoveryRef = useRef(0);
 
     const iframeSrc = useMemo(() => {
         if (!preview.src) return null;
@@ -73,6 +84,8 @@ export default function RemoteWebPreview(props: {
         setCanGoForward(false);
         setRefreshPending(false);
         setRenderProblem(null);
+        setLoadedDocumentSrc(null);
+        setSlowDocumentSrc(null);
         setNavigationWarning(null);
     }, [preview.src]);
 
@@ -147,6 +160,7 @@ export default function RemoteWebPreview(props: {
             if (!candidate) return;
             // Only a rendered React root can confirm the active document.
             if (!value.rendered) return;
+            automaticExpiryRecoveryRef.current = 0;
             if (frameIndex !== activeFrame) activateFrame(frameIndex as FrameIndex, source);
             setRenderProblem(null);
             setNavigationWarning(null);
@@ -172,7 +186,9 @@ export default function RemoteWebPreview(props: {
         const candidates = frameSources.map((source, index) =>
             source === iframeSrc ? index as FrameIndex : null).filter((value): value is FrameIndex => value !== null);
         if (!candidates.length) return;
-        let remaining = 25;
+        // Keep probing during a cold asset load and its subsequent render
+        // confirmation. The bridge also reports on mutations when available.
+        let remaining = 180;
         const probe = () => {
             for (const index of candidates) frameRefs.current[index]?.contentWindow?.postMessage(
                 {channel: NAV_CHANNEL, type: "command", action: "probe"}, "*");
@@ -185,17 +201,63 @@ export default function RemoteWebPreview(props: {
         return () => window.clearInterval(timer);
     }, [activeSrc, frameSources, iframeSrc]);
 
-    // An HTML load event alone is not evidence that React rendered. Avoid a
-    // permanently blank preview or silently promoting an error page.
+    // A sandboxed iframe also emits onLoad for a 404 HTML page. After that
+    // load, verify ONLY the document's status via the authenticated same-origin
+    // HEAD gateway (no second HTML transfer). A confirmed runner-missing
+    // session can recover immediately; slow React modules or missing render
+    // attestation must NOT be mistaken for an expired runner.
+    useEffect(() => {
+        if (!iframeSrc || activeSrc === iframeSrc ||
+            loadedDocumentSrc !== iframeSrc || !preview.onRetry ||
+            preview.state !== "ready") return;
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => {
+            void fetch(iframeSrc, {
+                method: "HEAD", cache: "no-store", credentials: "same-origin",
+                signal: controller.signal,
+            }).then(response => {
+                if (controller.signal.aborted) return;
+                if (![404, 410].includes(response.status) ||
+                    response.headers.get("x-zoebuild-preview-failure") !== "runner-http-404") return;
+                if (automaticExpiryRecoveryRef.current >= 1) {
+                    setRenderProblem("The preview worker became unavailable again. Retry to start a new preview.");
+                    return;
+                }
+                automaticExpiryRecoveryRef.current += 1;
+                preview.onRetry?.();
+            }).catch(() => {
+                // An unreachable HEAD is not proof of expiry. Preserve the
+                // current frame and let normal render confirmation finish.
+            });
+        }, 500);
+        return () => { window.clearTimeout(timer); controller.abort(); };
+    }, [iframeSrc, activeSrc, loadedDocumentSrc, preview.onRetry, preview.state]);
+
+    // A slow *network/document load* is not a failed React render. The old
+    // mount-based 15s timer routinely fired before the document and Vite
+    // modules finished loading, then showed a false "Preview not rendered".
+    // Keep the late rendered acknowledgement authoritative at all times.
     useEffect(() => {
         if (!iframeSrc || activeSrc === iframeSrc || !frameSources.includes(iframeSrc)) return;
-        setRenderProblem(null);
-        const timer = window.setTimeout(() => {
-            setRenderProblem("Preview document did not confirm a rendered React page. Check Network and Console.");
-            setRefreshPending(false);
-        }, 15_000);
+        const timer = window.setTimeout(() => setSlowDocumentSrc(iframeSrc),
+            PREVIEW_DOCUMENT_SLOW_NOTICE_MS);
         return () => window.clearTimeout(timer);
     }, [activeSrc, frameSources, iframeSrc]);
+
+    // An iframe load event also fires for HTTP error pages. A loaded document
+    // still must supply the exact revision's rendered React-root attestation.
+    // Give the loaded document a separate bounded render budget; NEVER infer
+    // readiness from onLoad, a successful HTTP response, or a time budget.
+    useEffect(() => {
+        if (!iframeSrc || activeSrc === iframeSrc ||
+            loadedDocumentSrc !== iframeSrc || !frameSources.includes(iframeSrc)) return;
+        const timer = window.setTimeout(() => {
+            setRenderProblem(current => current ??
+                "Preview document loaded but did not confirm a rendered React page. Check Network and Console.");
+            setRefreshPending(false);
+        }, PREVIEW_RENDER_CONFIRMATION_MS);
+        return () => window.clearTimeout(timer);
+    }, [activeSrc, frameSources, iframeSrc, loadedDocumentSrc]);
 
     function rememberRoute(route: string) {
         const history = routeHistoryRef.current;
@@ -251,6 +313,12 @@ export default function RemoteWebPreview(props: {
     }, [pendingRoute]);
 
     function refreshOrCancel() {
+        // A real runner/auth error must use the controller's retry path, not a
+        // document-only reload, even when a stale iframe warning also exists.
+        if (preview.state === "error") {
+            preview.onRetry?.();
+            return;
+        }
         if (refreshPending) {
             // Restoring the prior revision aborts the pending preflight and
             // keeps the last visible iframe intact. It does NOT stop Vite.
@@ -269,13 +337,12 @@ export default function RemoteWebPreview(props: {
             setRefreshPending(false);
             return;
         }
-        if (renderProblem && activeFrame === null) {
+        if ((renderProblem || (slowDocumentSrc === iframeSrc && activeFrame === null)) &&
+            activeFrame === null) {
             setRenderProblem(null);
+            setSlowDocumentSrc(null);
+            setLoadedDocumentSrc(null);
             setLocalRefresh(value => value + 1); // same Vite session
-            return;
-        }
-        if (preview.state === "error") {
-            preview.onRetry?.();
             return;
         }
         if (!iframeSrc || activeFrame === null) return;
@@ -283,12 +350,24 @@ export default function RemoteWebPreview(props: {
         setLocalRefresh((value) => value + 1);
     }
 
+    const documentIsSlow = Boolean(iframeSrc && activeSrc !== iframeSrc &&
+        frameSources.includes(iframeSrc) && slowDocumentSrc === iframeSrc);
     const statusLabel =
-        navigationWarning ? "Route not verified" :
+        preview.state === "error" ? "Preview unavailable" :
         renderProblem ? "Preview not rendered" :
+        navigationWarning ? "Route not verified" :
         preview.state === "starting" ? "Starting preview…" :
         preview.state === "syncing" ? "Updating preview…" :
-        preview.state === "error" ? "Preview unavailable" : "Live preview";
+        activeFrame === null && documentIsSlow ? "Still loading preview…" :
+        activeFrame === null ? "Loading preview…" : "Live preview";
+    // Server/runner errors take precedence over any stale document warning.
+    // In particular, never hide a genuine Unauthorized response behind a
+    // local render timeout or "still loading" notice.
+    const statusMessage = preview.state === "error"
+        ? preview.message ?? renderProblem
+        : renderProblem ?? (documentIsSlow
+            ? "The preview document is still loading; its React page has not yet been confirmed."
+            : preview.message);
     const displayUrl = preview.src ? displayPath : statusLabel;
     const visibleUrl = preview.src
         ? pendingRoute ? `${pendingRoute} (opening…)` :
@@ -296,7 +375,8 @@ export default function RemoteWebPreview(props: {
         : displayUrl;
 
     function onDocumentLoad(index: FrameIndex, src: string) {
-        if (src !== iframeSrc) return;
+        if (src !== iframeSrc || frameSources[index] !== src) return;
+        setLoadedDocumentSrc(src);
         // An iframe load event also fires for HTTP error pages. It must never
         // promote a frame or claim React rendered; request a route attestation.
         frameRefs.current[index]?.contentWindow?.postMessage(
@@ -339,7 +419,7 @@ export default function RemoteWebPreview(props: {
                         preview.state === "error" ? "Retry browser preview" : "Refresh browser preview"}
                     title={refreshPending ? "Cancel refresh" : preview.state === "error" ? "Retry" : "Refresh"}
                     onClick={refreshOrCancel}
-                    disabled={!refreshPending && !iframeSrc && preview.state !== "error" && !renderProblem}
+                    disabled={!refreshPending && !iframeSrc && preview.state !== "error" && !renderProblem && !documentIsSlow}
                     className={buttonClass}>
                     {refreshPending ? "×" : "↻"}
                 </button>
@@ -403,10 +483,10 @@ export default function RemoteWebPreview(props: {
                         role={preview.state === "error" ? "alert" : "status"}>
                         <div className="max-w-md">
                             <strong className="block text-sm text-neutral-800 dark:text-white/85">{statusLabel}</strong>
-                            {(renderProblem || preview.message) ? <p className="mt-2 text-xs leading-5 text-neutral-500 dark:text-white/55">{renderProblem || preview.message}</p> : null}
-                            {(renderProblem || (preview.state === "error" && preview.onRetry)) ? (
+                            {statusMessage ? <p className="mt-2 text-xs leading-5 text-neutral-500 dark:text-white/55">{statusMessage}</p> : null}
+                            {(renderProblem || documentIsSlow || (preview.state === "error" && preview.onRetry)) ? (
                                 <button type="button" className="mt-3 rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 dark:text-white/75"
-                                    onClick={refreshOrCancel}>{renderProblem ? "Retry document" : "Retry preview"}</button>
+                                    onClick={refreshOrCancel}>{preview.state === "error" ? "Retry preview" : "Retry document"}</button>
                             ) : null}
                         </div>
                     </div>
