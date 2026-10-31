@@ -138,10 +138,32 @@ export async function POST(req: Request, ctx: Context) {
       return reply(requestId,{ok:false,code:"BUILD_HISTORY_STACK_UNSUPPORTED"},422);
     if (project.sourceVersion !== restore.baseVersion)
       return reply(requestId,{ok:false,code:"BUILD_HISTORY_STALE",message:"A newer version exists. Reload history before restoring."},409);
-    const limited = await rateLimit(`zoebuild-source-restore:${access.userId}:${project.buildProjectId}`,
-      {bucket:"zoebuild-source-restore",limit:6,window:"1 h"}).catch(() => null);
-    if (!limited) return reply(requestId,{ok:false,code:"BUILD_HISTORY_UNAVAILABLE"},503);
-    if (!limited.ok) return reply(requestId,{ok:false,code:"BUILD_HISTORY_RATE_LIMITED"},429);
+    // React/Vite history selection is an owner-authorized CAS mutation, not an AI
+    // build or dependency installation. Give normal review workflows a usable
+    // hourly budget while retaining a short-window burst guard against abuse.
+    // Historical non-React recovery can invoke a build and retains its stricter cap.
+    const hourlyLimit = project.stackId === "react-vite-v1" ? 120 : 6;
+    const limits = [
+      {key:`zoebuild-source-restore:${access.userId}:${project.buildProjectId}`,
+        bucket:"zoebuild-source-restore",limit:hourlyLimit,window:"1 h"},
+      {key:`zoebuild-source-restore-burst:${access.userId}:${project.buildProjectId}`,
+        bucket:"zoebuild-source-restore-burst",limit:12,window:"1 m"},
+    ] as const;
+    for (const guard of limits) {
+      const limited = await rateLimit(guard.key,
+        {bucket:guard.bucket,limit:guard.limit,window:guard.window}).catch(() => null);
+      if (!limited) return reply(requestId,{ok:false,code:"BUILD_HISTORY_UNAVAILABLE"},503);
+      if (!limited.ok) {
+        const retryAfterSeconds = Math.max(1,Math.ceil((limited.resetMs - Date.now()) / 1000));
+        const minutes = Math.max(1,Math.ceil(retryAfterSeconds / 60));
+        const response = reply(requestId,{
+          ok:false,code:"BUILD_HISTORY_RATE_LIMITED",retryAfterSeconds,
+          message:`Too many version switches. Try again in about ${minutes} minute${minutes === 1 ? "" : "s"}. No source changed.`,
+        },429);
+        response.headers.set("Retry-After",String(retryAfterSeconds));
+        return response;
+      }
+    }
     const revision = await prisma.codeProjectRevision.findFirst({
       where:{projectId:project.codeProjectId,version:restore.restoreVersion},
       select:{snapshot:true,settings:true,meta:true},
