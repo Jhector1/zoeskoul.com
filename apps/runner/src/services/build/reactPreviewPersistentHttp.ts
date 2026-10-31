@@ -91,15 +91,23 @@ type Pending = {
 };
 
 export class ReactPreviewPersistentHttpChannel {
-  private raw = Buffer.alloc(0);
-  private text = Buffer.alloc(0);
+  // Docker's 8-byte frame header is assembled once. Payload fragments are
+  // forwarded directly, avoiding quadratic Buffer.concat copies for large modules.
+  private readonly frameHeader = Buffer.alloc(8);
+  private frameHeaderBytes = 0;
+  private framePayloadRemaining = 0;
+  private frameKind = 0;
+  // A single JSON reply may exceed 3 MiB after base64 encoding. Retain slices
+  // until its newline, then concatenate exactly once, within MAX_LINE.
+  private textChunks: Buffer[] = [];
+  private textBytes = 0;
   private pending = new Map<number, Pending>();
   private nextId = 0;
   private closed = false;
   private consecutiveDeadlines = 0;
 
   constructor(private readonly stream: Duplex, private readonly onClose: () => void) {
-    stream.on("data", (data: Buffer) => this.accept(Buffer.from(data)));
+    stream.on("data", (data: Buffer) => this.accept(data));
     stream.on("error", () => this.abort(new Error("Preview transport connection failed.")));
     stream.on("close", () => this.abort(new Error("Preview transport connection closed.")));
     stream.on("end", () => this.abort(new Error("Preview transport connection ended.")));
@@ -137,59 +145,90 @@ export class ReactPreviewPersistentHttpChannel {
     });
   }
 
-  /** Docker exec with Tty=false sends 8-byte multiplex headers around stdout. */
+  /** Docker multiplexing: process incremental frame payloads without copying
+   * every preceding chunk. Each frame is validated before reading its payload.
+   */
   private accept(chunk: Buffer) {
     if (this.closed) return;
-    this.raw = Buffer.concat([this.raw, chunk]);
-    while (this.raw.length >= 8) {
-      const kind = this.raw[0];
-      const len = this.raw.readUInt32BE(4);
-      if (len > MAX_DOCKER_FRAME || (kind !== 1 && kind !== 2)) {
-        this.abort(new Error("Malformed preview Docker frame."));
-        return;
+    let offset = 0;
+    while (offset < chunk.length && !this.closed) {
+      if (this.framePayloadRemaining === 0) {
+        const headerBytes = Math.min(8 - this.frameHeaderBytes, chunk.length - offset);
+        chunk.copy(this.frameHeader, this.frameHeaderBytes, offset, offset + headerBytes);
+        this.frameHeaderBytes += headerBytes;
+        offset += headerBytes;
+        if (this.frameHeaderBytes < 8) return;
+
+        const kind = this.frameHeader[0];
+        const length = this.frameHeader.readUInt32BE(4);
+        if (length > MAX_DOCKER_FRAME || (kind !== 1 && kind !== 2)) {
+          this.abort(new Error("Malformed preview Docker frame."));
+          return;
+        }
+        this.frameKind = kind;
+        this.framePayloadRemaining = length;
+        if (length === 0) {
+          this.frameHeaderBytes = 0;
+          continue;
+        }
       }
-      if (this.raw.length < 8 + len) break;
-      const data = this.raw.subarray(8, 8 + len);
-      this.raw = this.raw.subarray(8 + len);
-      if (kind === 1) this.acceptStdout(data);
-      if (this.closed) return;
+
+      const count = Math.min(this.framePayloadRemaining, chunk.length - offset);
+      if (count === 0) return;
+      if (this.frameKind === 1) this.acceptStdout(chunk.subarray(offset, offset + count));
+      offset += count;
+      this.framePayloadRemaining -= count;
+      if (this.framePayloadRemaining === 0) this.frameHeaderBytes = 0;
     }
-    if (this.raw.length > MAX_DOCKER_FRAME + 8) this.abort(new Error("Preview Docker frame overflow."));
   }
 
+  /** Collect at most MAX_LINE bytes, joining once per complete response. */
   private acceptStdout(chunk: Buffer) {
-    this.text = Buffer.concat([this.text, chunk]);
-    if (this.text.length > MAX_LINE) {
-      this.abort(new Error("Preview transport response overflow."));
+    let offset = 0;
+    while (offset < chunk.length && !this.closed) {
+      const newline = chunk.indexOf(10, offset);
+      const end = newline === -1 ? chunk.length : newline;
+      const part = chunk.subarray(offset, end);
+      if (this.textBytes + part.length > MAX_LINE) {
+        this.abort(new Error("Preview transport response overflow."));
+        return;
+      }
+      if (part.length) {
+        this.textChunks.push(part);
+        this.textBytes += part.length;
+      }
+      if (newline === -1) return;
+
+      const line = Buffer.concat(this.textChunks, this.textBytes);
+      this.textChunks = [];
+      this.textBytes = 0;
+      this.acceptLine(line);
+      offset = end + 1;
+    }
+  }
+
+  private acceptLine(line: Buffer) {
+    let reply: Record<string, unknown>;
+    try { reply = JSON.parse(line.toString("utf8")) as Record<string, unknown>; }
+    catch { this.abort(new Error("Invalid preview transport response.")); return; }
+    const id = reply.id;
+    if (typeof id !== "number") { this.abort(new Error("Invalid preview transport identity.")); return; }
+    const pending = this.pending.get(id);
+    if (!pending) return; // A timed-out or already resolved response cannot be applied twice.
+    clearTimeout(pending.timer);
+    this.pending.delete(id);
+    // Any protocol reply proves the exec channel is alive, even if Vite
+    // explicitly rejected this individual URL.
+    this.consecutiveDeadlines = 0;
+    if (reply.error) { pending.reject(new Error(reply.error === "Connection refused" ? "Preview HTTP connection refused." : "Preview HTTP request failed.")); return; }
+    if (!Number.isInteger(reply.status) || (reply.status as number) < 100 || (reply.status as number) > 599 ||
+        !reply.headers || typeof reply.headers !== "object" || Array.isArray(reply.headers) ||
+        typeof reply.bodyBase64 !== "string" || reply.bodyBase64.length > MAX_LINE) {
+      pending.reject(new Error("Invalid preview HTTP response."));
       return;
     }
-    while (true) {
-      const end = this.text.indexOf(10);
-      if (end === -1) break;
-      const line = this.text.subarray(0, end);
-      this.text = this.text.subarray(end + 1);
-      let reply: Record<string, unknown>;
-      try { reply = JSON.parse(line.toString("utf8")) as Record<string, unknown>; }
-      catch { this.abort(new Error("Invalid preview transport response.")); return; }
-      const id = reply.id;
-      if (typeof id !== "number") { this.abort(new Error("Invalid preview transport identity.")); return; }
-      const pending = this.pending.get(id);
-      if (!pending) continue; // A timed-out or already resolved response cannot be applied twice.
-      clearTimeout(pending.timer);
-      this.pending.delete(id);
-      // Any protocol reply proves the exec channel is alive, even if Vite
-      // explicitly rejected this individual URL.
-      this.consecutiveDeadlines = 0;
-      if (reply.error) { pending.reject(new Error(reply.error === "Connection refused" ? "Preview HTTP connection refused." : "Preview HTTP request failed.")); continue; }
-      if (!Number.isInteger(reply.status) || (reply.status as number) < 100 || (reply.status as number) > 599 ||
-          !reply.headers || typeof reply.headers !== "object" || Array.isArray(reply.headers) ||
-          typeof reply.bodyBase64 !== "string" || reply.bodyBase64.length > MAX_LINE) {
-        pending.reject(new Error("Invalid preview HTTP response."));
-        continue;
-      }
-      pending.resolve({ status: reply.status as number,
-        headers: reply.headers as Record<string, string>, bodyBase64: reply.bodyBase64 });
-    }
+    pending.resolve({ status: reply.status as number,
+      headers: reply.headers as Record<string, string>, bodyBase64: reply.bodyBase64 });
   }
 
   close() { this.abort(new Error("Preview transport stopped.")); }
