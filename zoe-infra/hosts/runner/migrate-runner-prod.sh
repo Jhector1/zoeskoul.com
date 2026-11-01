@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Zoéskoul Runner: single-entrypoint, resumable production cutover.
+# V4: never pull mutable :prod during cutover; all Runner/runtime refs are @sha256-pinned.
 # Requires bash, systemd, Docker Compose v2, Python 3, git and sudo.
 set -Eeuo pipefail
 umask 077
@@ -105,6 +106,8 @@ check_base() {
   fi
   # Never run a dev-only env generator with production placeholders undetected.
   [[ -f "$RUNNER_DIR/zoebuild/.env.example" && -f "$RUNNER_DIR/gateway/.env.example" ]] || fail 'Missing environment templates'
+  grep -Fq 'RUNNER_SERVICE_IMAGE_REF' "$RUNNER_DIR/shared/runner-service.yml" || fail 'Runner Compose lacks immutable image support'
+  grep -Fq 'RUNNER_IMAGE_REF' "$RUNNER_DIR/shared/deploy-pool.sh" || fail 'Pool deployment lacks immutable runtime support'
 }
 
 check_private_input() {
@@ -240,7 +243,7 @@ write_env_once() {
     log 'Existing private pool envs retained'
   fi
   # Production-only necessary overrides and secret file, no values printed.
-  GHCR_OWNER="$GHCR_OWNER" IMAGE_TAG="${IMAGE_TAG:-prod}" python3 - "$d" "$JUDGE0_IMAGE" "$PROD_DEPENDENCY_SECRET_FILE" "$LEARNING_EXECUTOR_USER" "$ZOEBUILD_EXECUTOR_USER" "$ZOEBUILD_ENABLED" <<'PY'
+  GHCR_OWNER="$GHCR_OWNER" IMAGE_TAG="${IMAGE_TAG:-prod}" python3 - "$d" "$JUDGE0_IMAGE" "$PROD_DEPENDENCY_SECRET_FILE" "$LEARNING_EXECUTOR_USER" "$ZOEBUILD_EXECUTOR_USER" "$ZOEBUILD_ENABLED" "$EXPECTED_RUNNER_DIGEST" "$EXPECTED_RUNTIME_DIGEST" <<'PY'
 from pathlib import Path
 import os,pwd,re,sys
 root=Path(sys.argv[1]); image=sys.argv[2]; learn=sys.argv[4]; zoe=sys.argv[5]; zoe_enabled=(sys.argv[6]=='yes')
@@ -256,8 +259,10 @@ def update(path,changes):
 lu=pwd.getpwnam(learn).pw_uid; zu=pwd.getpwnam(zoe).pw_uid
 if lu==zu: raise SystemExit('Shared executor UID')
 owner=os.environ['GHCR_OWNER']; tag=os.environ.get('IMAGE_TAG','prod')
-update(root/'zoeskoul-learning/.env',{'RUNNER_DOCKER_SOCKET_HOST':f'/run/user/{lu}/docker.sock','RUNNER_CONTAINER_USER':f'{lu}:{lu}','RUNNER_EXECUTION_POOL':'zoeskoul-learning','JUDGE0_IMAGE':image,'GHCR_OWNER':owner,'IMAGE_TAG':tag})
-b={'RUNNER_DOCKER_SOCKET_HOST':f'/run/user/{zu}/docker.sock','RUNNER_CONTAINER_USER':f'{zu}:{zu}','RUNNER_EXECUTION_POOL':'zoebuild','GHCR_OWNER':owner,'IMAGE_TAG':tag}
+runner_ref=f'ghcr.io/{owner}/zoeskoul-runner@{sys.argv[7]}'
+runtime_ref=f'ghcr.io/{owner}/zoeskoul-runtime@{sys.argv[8]}'
+update(root/'zoeskoul-learning/.env',{'RUNNER_DOCKER_SOCKET_HOST':f'/run/user/{lu}/docker.sock','RUNNER_CONTAINER_USER':f'{lu}:{lu}','RUNNER_EXECUTION_POOL':'zoeskoul-learning','JUDGE0_IMAGE':image,'GHCR_OWNER':owner,'IMAGE_TAG':tag,'RUNNER_SERVICE_IMAGE_REF':runner_ref,'RUNNER_IMAGE_REF':runtime_ref})
+b={'RUNNER_DOCKER_SOCKET_HOST':f'/run/user/{zu}/docker.sock','RUNNER_CONTAINER_USER':f'{zu}:{zu}','RUNNER_EXECUTION_POOL':'zoebuild','GHCR_OWNER':owner,'IMAGE_TAG':tag,'RUNNER_SERVICE_IMAGE_REF':runner_ref,'RUNNER_IMAGE_REF':runtime_ref}
 if zoe_enabled: b['ZOEBUILD_DEPENDENCY_APPROVAL_SECRET']=secret
 update(root/'zoebuild/.env',b)
 route='routes/zoebuild-enabled.caddy' if zoe_enabled else 'routes/zoebuild-disabled.caddy'
@@ -272,10 +277,12 @@ validate_pool_envs() {
     [[ -f "$d/$p/.env" ]] || fail "Missing $p/.env"
     [[ "$(stat -c %a "$d/$p/.env")" = 600 ]] || fail "$p/.env must be mode 0600"
   done
-  python3 - "$d" "$JUDGE0_IMAGE" "$ZOEBUILD_ENABLED" <<'PY'
+  python3 - "$d" "$JUDGE0_IMAGE" "$ZOEBUILD_ENABLED" "$EXPECTED_RUNNER_DIGEST" "$EXPECTED_RUNTIME_DIGEST" "$GHCR_OWNER" <<'PY'
 from pathlib import Path
 import sys,re
 root=Path(sys.argv[1]); judge=sys.argv[2]; zoe_enabled=(sys.argv[3]=='yes')
+runner_ref=f'ghcr.io/{sys.argv[6]}/zoeskoul-runner@{sys.argv[4]}'
+runtime_ref=f'ghcr.io/{sys.argv[6]}/zoeskoul-runtime@{sys.argv[5]}'
 def env(s):
  d={}
  for line in (root/s/'.env').read_text().splitlines():
@@ -291,6 +298,9 @@ for n,d,keys in [('Learning',l,required_l),('ZoeBuild',b,required_b),('Gateway',
   if not v or 'CHANGE_ME' in v or 'REPLACE_WITH' in v:
    raise SystemExit(f'Invalid/missing {n} setting: {k}')
 if l['JUDGE0_IMAGE']!=judge: raise SystemExit('Judge0 immutable digest mismatch')
+for pool,d in [('Learning',l),('ZoeBuild',b)]:
+ if d.get('RUNNER_SERVICE_IMAGE_REF')!=runner_ref or d.get('RUNNER_IMAGE_REF')!=runtime_ref:
+  raise SystemExit(f'{pool}: image refs not pinned to approved digests')
 if g.get('JUDGE0_AUTHN_TOKEN')!=l['JUDGE0_AUTHN_TOKEN']: raise SystemExit('Judge0 gateway token mismatch')
 if g.get('GATEWAY_SCHEME')!='https': raise SystemExit('Production must use HTTPS')
 expected_route='routes/zoebuild-enabled.caddy' if zoe_enabled else 'routes/zoebuild-disabled.caddy'
@@ -310,6 +320,11 @@ PY
     local p
     for p in zoeskoul-learning zoebuild gateway; do
       (cd "$d/$p" && docker compose --env-file .env -f compose.yml config --quiet) || fail "Invalid $p production Compose contract"
+      if [[ "$p" != gateway ]]; then
+        (cd "$d/$p" && docker compose --env-file .env -f compose.yml config --format json) | \
+          python3 -c 'import json,sys; s=json.load(sys.stdin)["services"]["runner"]; assert s["image"]==sys.argv[1],"Runner Compose image not digest pinned";assert s["environment"]["RUNNER_IMAGE"]==sys.argv[2],"Execution runtime image not digest pinned"' \
+          "ghcr.io/${GHCR_OWNER}/zoeskoul-runner@${EXPECTED_RUNNER_DIGEST}" "ghcr.io/${GHCR_OWNER}/zoeskoul-runtime@${EXPECTED_RUNTIME_DIGEST}" || fail "Unpinned $p Compose image ref"
+      fi
     done
     (cd "$d/zoeskoul-learning" && docker compose --env-file .env -f compose.yml config --format json) | \
       python3 -c 'import json,sys; s=json.load(sys.stdin)["services"];assert s["judge0"]["image"]==s["judge0-worker"]["image"];assert s["judge0-worker"].get("cgroup")=="host";print("PREBOOT_JUDGE0_CGROUP_CONFIG_PASS")' || fail 'Preboot Judge0 Compose contract failed'
@@ -329,15 +344,14 @@ assert_digest() {
 }
 
 pull_verify_release() {
-  local d="$RUNNER_DIR" img tag
-  tag="${IMAGE_TAG:-prod}"
-  img="ghcr.io/${GHCR_OWNER}/zoeskoul-runner:$tag"
+  local img
+  img="ghcr.io/${GHCR_OWNER}/zoeskoul-runner@${EXPECTED_RUNNER_DIGEST}"
   log 'Pulling and verifying approved Runner image BEFORE stopping legacy'
   docker pull "$img" >/dev/null
   assert_digest "$img" "$EXPECTED_RUNNER_DIGEST"
   log 'Pulling approved Judge0 cgroup v2 immutable image'
   docker pull "$JUDGE0_IMAGE" >/dev/null
-  local i rimg="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime:$tag"
+  local i rimg="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime@${EXPECTED_RUNTIME_DIGEST}"
   local users=("$LEARNING_EXECUTOR_USER")
   [[ "$ZOEBUILD_ENABLED" = yes ]] && users+=("$ZOEBUILD_EXECUTOR_USER")
   for i in "${users[@]}"; do
@@ -347,15 +361,15 @@ pull_verify_release() {
     actual="$(rootless "$i" image inspect "$rimg" --format '{{range .RepoDigests}}{{println .}}{{end}}')"
     grep -Fq -- "@$EXPECTED_RUNTIME_DIGEST" <<< "$actual" || fail "Runtime digest mismatch in $i executor"
   done
-  log 'APPROVED_IMAGE_DIGESTS_PASS'
+  log 'IMMUTABLE_IMAGE_DIGESTS_PASS'
 }
 
 # Before changing the host to cgroup v2, prove that the approved Learning
 # artifacts can be pulled using the EXISTING production credentials.
 preboot_release_readiness() {
-  local tag="${IMAGE_TAG:-prod}" runner_ref runtime_ref actual
-  runner_ref="ghcr.io/${GHCR_OWNER}/zoeskoul-runner:$tag"
-  runtime_ref="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime:$tag"
+  local runner_ref runtime_ref actual
+  runner_ref="ghcr.io/${GHCR_OWNER}/zoeskoul-runner@${EXPECTED_RUNNER_DIGEST}"
+  runtime_ref="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime@${EXPECTED_RUNTIME_DIGEST}"
   rootless "$LEARNING_EXECUTOR_USER" info --format '{{json .SecurityOptions}}' | grep -qi rootless || fail 'Existing Learning executor not rootless; abort BEFORE reboot'
   log 'Verifying image accessibility BEFORE changing cgroup boot mode'
   docker pull "$runner_ref" >/dev/null || fail 'Runner image pull failed before reboot'
@@ -364,7 +378,7 @@ preboot_release_readiness() {
   rootless "$LEARNING_EXECUTOR_USER" pull "$runtime_ref" >/dev/null || fail 'Learning runtime pull failed before reboot'
   actual="$(rootless "$LEARNING_EXECUTOR_USER" image inspect "$runtime_ref" --format '{{range .RepoDigests}}{{println .}}{{end}}')"
   grep -Fq -- "@$EXPECTED_RUNTIME_DIGEST" <<< "$actual" || fail 'Learning runtime digest mismatch before reboot'
-  log 'PREBOOT_APPROVED_IMAGE_ACCESS_PASS'
+  log 'PREBOOT_IMMUTABLE_IMAGE_ACCESS_PASS'
 }
 
 # This stage is deliberately run while the legacy production containers still
@@ -383,9 +397,9 @@ prepare_before_reboot() {
 }
 
 verify_deployed_image_pins() {
-  local tag="${IMAGE_TAG:-prod}" runner_ref runtime_ref runner_id cid container_id u actual
-  runner_ref="ghcr.io/${GHCR_OWNER}/zoeskoul-runner:$tag"
-  runtime_ref="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime:$tag"
+  local runner_ref runtime_ref runner_id cid container_id u actual
+  runner_ref="ghcr.io/${GHCR_OWNER}/zoeskoul-runner@${EXPECTED_RUNNER_DIGEST}"
+  runtime_ref="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime@${EXPECTED_RUNTIME_DIGEST}"
   assert_digest "$runner_ref" "$EXPECTED_RUNNER_DIGEST"
   runner_id="$(docker image inspect "$runner_ref" --format '{{.Id}}')"
   local pools=(zoeskoul-learning)
@@ -402,7 +416,7 @@ verify_deployed_image_pins() {
     actual="$(rootless "$u" image inspect "$runtime_ref" --format '{{range .RepoDigests}}{{println .}}{{end}}')"
     grep -Fq -- "@$EXPECTED_RUNTIME_DIGEST" <<< "$actual" || fail "Runtime image changed during deployment in $u executor"
   done
-  log 'DEPLOYED_IMAGE_DIGESTS_PASS'
+  log 'DEPLOYED_IMMUTABLE_IMAGES_PASS'
 }
 
 resource_test() {

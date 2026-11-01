@@ -36,7 +36,7 @@ pool_check_headroom "$pool_docker_root" "$POOL-executor"
 docker network inspect "${RUNNER_INGRESS_NETWORK:-zoeskoul-runner-ingress}" >/dev/null 2>&1 || {
   echo 'ERROR: shared ingress network missing; run hosts/runner/setup.sh first' >&2;exit 1;
 }
-RUNTIME_IMAGE="ghcr.io/${GHCR_OWNER}/zoeskoul-runtime:${IMAGE_TAG:-prod}"
+RUNTIME_IMAGE="${RUNNER_IMAGE_REF:-ghcr.io/${GHCR_OWNER}/zoeskoul-runtime:${IMAGE_TAG:-prod}}"
 echo "Pulling runtime into dedicated ${POOL} executor..."
 pool_docker pull "$RUNTIME_IMAGE"
 echo "Pulling ${POOL} service images..."
