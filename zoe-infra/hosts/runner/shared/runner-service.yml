@@ -1,0 +1,48 @@
+# Single runner service definition; extended by both execution pools.
+# No host port binding and no fallback to system Docker.
+services:
+  runner-base:
+    image: ghcr.io/${GHCR_OWNER:?required}/zoeskoul-runner:${IMAGE_TAG:-prod}
+    restart: unless-stopped
+    user: ${RUNNER_CONTAINER_USER:-1000:1000}
+    expose:
+    - '4001'
+    environment:
+      NODE_ENV: production
+      PORT: 4001
+      DOCKER_HOST: unix://${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/docker.sock}
+      DOCKER_SOCKET: ${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/docker.sock}
+      RUNNER_WORKSPACE_ROOT: ${RUNNER_WORKSPACE_HOST_ROOT:-/var/lib/zoeskoul-runner/workspaces}
+      RUNNER_IMAGE: ghcr.io/${GHCR_OWNER:?required}/zoeskoul-runtime:${IMAGE_TAG:-prod}
+      COREPACK_HOME: /tmp/corepack
+      XDG_CACHE_HOME: /tmp/.cache
+      HOME: /tmp
+      RUNNER_EXECUTION_POOL: ${RUNNER_EXECUTION_POOL:?required}
+    volumes:
+    - ${RUNNER_DOCKER_SOCKET_HOST:?required}:${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/docker.sock}
+    - ${RUNNER_WORKSPACE_HOST_ROOT:?required}:${RUNNER_WORKSPACE_HOST_ROOT:?required}
+    read_only: true
+    tmpfs:
+    - /tmp:rw,nosuid,size=128m
+    - /run:rw,noexec,nosuid,size=16m
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 256
+    mem_limit: ${RUNNER_SERVICE_MEM_LIMIT:-512m}
+    cpus: ${RUNNER_SERVICE_CPUS:-1.0}
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '5'
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - node -e "const http=require('http'); const req=http.get('http://127.0.0.1:4001/healthz',res=>process.exit(res.statusCode===200?0:1));
+        req.on('error',()=>process.exit(1)); req.setTimeout(3000,()=>{req.destroy();process.exit(1)});"
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s

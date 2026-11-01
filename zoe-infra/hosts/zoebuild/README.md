@@ -1,19 +1,8 @@
-# ZoeBuild: runner-side execution policy and ingress-signer source
+# ZoeBuild application vs. ZoeBuild runner
 
-The **ZoeBuild App** is now an opt-in service on the **Zoéskoul Web host**, via
-`zoe-infra/hosts/web/docker-compose.zoebuild.yml` and `deploy-zoebuild.sh`.
-The old application Compose/deployment here is retired; `deploy.sh` is an intentional
-fail-closed guard to prevent incorrect app deployment on the Learning Runner VM.
+- The **ZoeBuild application** is hosted with Zoéskoul Web under `hosts/web/`.
+- The **ZoeBuild execution runner** is independently deployed from `hosts/runner/zoebuild/`, using the same runner application image as Learning but a separate rootless Docker executor and workspace.
+- Runner-agnostic deployment/cleanup helpers are in `hosts/runner/shared/`.
+- `hosts/runner/gateway/` routes the existing Runner domain's `/build/*` endpoints only to the ZoeBuild pool, and `/sessions/*` to Learning.
 
-This directory retains:
-- Ingress-signer **source code/Dockerfile** used by the existing GH Actions image-build workflow.
-- Disabled future independent runner worker policy (`worker-policy.json`).
-- `validate-scaffold.sh` to test signer logic without deployment.
-
-**Learning Runner**, Judge0, and ZoeBuild preview/build code execution remain on the
-existing runner host. Existing runner route-level build and preview capacity limits
-are separate from the disabled independent-worker policy; they are not proof of
-physical CPU/RAM isolation.
-
-No migration, Shopify activation, independent worker, new VPS, or production
-rollout is performed by the relocation patch.
+This directory retains the ZoeBuild ingress-signer source and the intentionally disabled application deployment guard. Pool execution policy is configured by the ZoeBuild runner's `.env` and enforced in the runner backend. There is **no separate worker-policy.json** or duplicate runner implementation.

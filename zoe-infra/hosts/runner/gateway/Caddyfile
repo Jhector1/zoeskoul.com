@@ -20,10 +20,20 @@
     # Intentionally no access log on this site.
     # PTY websocket URLs can contain short-lived ?token=... attach tokens.
 
-    reverse_proxy runner:4001 {
-        header_up X-Forwarded-Proto {scheme}
-        header_up X-Forwarded-Host {host}
-        header_up X-Real-IP {remote_host}
+    @zoebuild path /build /build/*
+    handle @zoebuild {
+        reverse_proxy zoebuild-runner:4001 {
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Host {host}
+            header_up X-Real-IP {remote_host}
+        }
+    }
+    handle {
+        reverse_proxy learning-runner:4001 {
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Host {host}
+            header_up X-Real-IP {remote_host}
+        }
     }
 }
 
@@ -35,7 +45,7 @@
     # Vercel/server-side web code must send this header.
     @authorized header X-Judge0-Token {$JUDGE0_AUTHN_TOKEN}
     handle @authorized {
-        reverse_proxy judge0:2358 {
+        reverse_proxy learning-judge0:2358 {
             header_up X-Forwarded-Proto {scheme}
             header_up X-Forwarded-Host {host}
             header_up X-Real-IP {remote_host}

@@ -1,0 +1,32 @@
+name: ${COMPOSE_PROJECT_NAME:-zoeskoul-runner-gateway}
+services:
+  caddy:
+    image: ${CADDY_IMAGE:-caddy:2-alpine}
+    restart: unless-stopped
+    depends_on: {}
+    ports:
+    - 80:80
+    - 443:443
+    environment:
+      CADDY_EMAIL: ${CADDY_EMAIL:?required}
+      RUNNER_DOMAIN: ${RUNNER_DOMAIN:?required}
+      JUDGE0_DOMAIN: ${JUDGE0_DOMAIN:?required}
+      JUDGE0_AUTHN_TOKEN: ${JUDGE0_AUTHN_TOKEN:?required}
+    volumes:
+    - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    - caddy_data:/data
+    - caddy_config:/config
+    networks:
+    - ingress
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '5'
+networks:
+  ingress:
+    external: true
+    name: ${RUNNER_INGRESS_NETWORK:-zoeskoul-runner-ingress}
+volumes:
+  caddy_data: null
+  caddy_config: null

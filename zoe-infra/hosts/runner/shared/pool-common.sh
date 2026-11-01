@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+pool_load_env() {
+  local pool_dir="$1"
+  if [ ! -f "$pool_dir/.env" ]; then
+    echo "ERROR: missing $pool_dir/.env (start with .env.example)" >&2
+    return 1
+  fi
+  set -a
+  # shellcheck disable=SC1090
+  . "$pool_dir/.env"
+  set +a
+  : "${GHCR_OWNER:?required}"
+  : "${RUNNER_WORKSPACE_HOST_ROOT:?required}"
+  : "${RUNNER_DOCKER_SOCKET_HOST:?required}"
+  : "${RUNNER_CONTAINER_USER:?required}"
+  : "${RUNNER_EXECUTION_POOL:?required}"
+  case "$RUNNER_EXECUTION_POOL" in zoebuild|zoeskoul-learning) ;; *) echo 'Invalid runner pool' >&2; return 1;; esac
+  if [ "$RUNNER_DOCKER_SOCKET_HOST" = '/var/run/docker.sock' ] || [ "$RUNNER_DOCKER_SOCKET_HOST" = '/run/docker.sock' ]; then
+    echo 'ERROR: system Docker socket cannot be an executor' >&2; return 1
+  fi
+  if ! [[ "$RUNNER_WORKSPACE_HOST_ROOT" = /* && "$RUNNER_DOCKER_SOCKET_HOST" = /* ]]; then
+    echo 'ERROR: executor paths must be absolute' >&2; return 1
+  fi
+  if [[ "$RUNNER_WORKSPACE_HOST_ROOT" = /var/lib/zoeskoul-runner/workspaces && "$RUNNER_EXECUTION_POOL" = zoebuild ]] || [[ "$RUNNER_WORKSPACE_HOST_ROOT" = /var/lib/zoebuild-runner/workspaces && "$RUNNER_EXECUTION_POOL" = zoeskoul-learning ]]; then
+    echo 'ERROR: cross-pool workspace root' >&2; return 1
+  fi
+  case "$RUNNER_CONTAINER_USER" in *:*) ;; *) echo 'ERROR: runner uid:gid required' >&2;return 1;; esac
+}
+
+pool_require_isolated_executor() {
+  local socket="$RUNNER_DOCKER_SOCKET_HOST"
+  [ -S "$socket" ] || { echo "ERROR: rootless executor socket is missing: $socket" >&2; return 1; }
+  local uid
+  uid="$(stat -c %u "$socket")"
+  case "$socket" in "/run/user/$uid/docker.sock") ;; *) echo "ERROR: expected dedicated rootless socket path for uid $uid" >&2;return 1;; esac
+  local user_id="${RUNNER_CONTAINER_USER%%:*}"
+  if [ "$uid" != "$user_id" ]; then
+    echo "ERROR: container uid ${user_id} must match executor socket owner $uid" >&2
+    return 1
+  fi
+  pool_docker info --format '{{json .SecurityOptions}}' | grep -qi rootless || {
+    echo 'ERROR: executor Docker is not rootless; refusing system Docker fallback' >&2
+    return 1
+  }
+}
+
+pool_docker() {
+  local uid
+  uid="$(stat -c %u "$RUNNER_DOCKER_SOCKET_HOST")"
+  if [ "$(id -u)" = "$uid" ]; then
+    DOCKER_HOST="unix://${RUNNER_DOCKER_SOCKET_HOST}" docker "$@"
+  else
+    sudo -u "#$uid" env DOCKER_HOST="unix://${RUNNER_DOCKER_SOCKET_HOST}" \
+      XDG_RUNTIME_DIR="/run/user/$uid" docker "$@"
+  fi
+}
+
+pool_check_not_shared() {
+  local other_env="$1" key other
+  [ -f "$other_env" ] || return 0
+  for key in RUNNER_DOCKER_SOCKET_HOST RUNNER_WORKSPACE_HOST_ROOT; do
+    other="$(sed -n "s/^${key}=//p" "$other_env" | tail -1)"
+    if [ -n "$other" ] && [ "${!key}" = "$other" ]; then
+      echo "ERROR: ${key} is shared across pools; isolation required" >&2
+      return 1
+    fi
+  done
+}
+
+pool_check_headroom() {
+  local path="$1" label="$2" bytes="${RUNNER_DEPLOY_MIN_FREE_BYTES:-12884901888}" pct="${RUNNER_DEPLOY_MIN_FREE_PERCENT:-15}"
+  local total free required fraction
+  read -r total free < <(df -PB1 "$path" | awk 'NR==2{print $2,$4}')
+  [[ "$total" =~ ^[0-9]+$ && "$free" =~ ^[0-9]+$ ]] || return 1
+  fraction=$((total*pct/100)); required="$bytes"
+  if (( fraction > required )); then required="$fraction";fi
+  printf '%s free=%s required=%s\n' "$label" "$free" "$required"
+  if (( free < required )); then echo "ERROR: $label below safe headroom" >&2;return 1;fi
+}

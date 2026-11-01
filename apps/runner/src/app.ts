@@ -1,5 +1,6 @@
 import express from "express";
 import { requireServiceAuth } from "./middleware/serviceAuth.js";
+import { executionPoolGuard } from "./middleware/executionPoolGuard.js";
 import { startSessionRoute } from "./routes/sessions.start.js";
 import { inputSessionRoute } from "./routes/sessions.input.js";
 import { cancelSessionRoute } from "./routes/sessions.cancel.js";
@@ -40,6 +41,7 @@ app.get("/healthz", (_req, res) => {
   res.status(200).json({ ok: true });
 });
 
+app.use(executionPoolGuard);
 app.use(requireServiceAuth);
 
 // Authenticated healthcheck for Caddy/smoke tests.

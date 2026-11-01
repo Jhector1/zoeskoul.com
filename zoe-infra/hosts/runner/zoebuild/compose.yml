@@ -1,0 +1,19 @@
+# ZoeBuild isolated runner; no Judge0, no external ports, dedicated rootless Docker socket.
+name: ${COMPOSE_PROJECT_NAME:-zoebuild-runner}
+services:
+  runner:
+    extends:
+      file: ../shared/runner-service.yml
+      service: runner-base
+    env_file:
+    - .env
+    environment:
+      JUDGE0_URL: http://127.0.0.1:9
+    networks:
+      ingress:
+        aliases:
+        - zoebuild-runner
+networks:
+  ingress:
+    external: true
+    name: ${RUNNER_INGRESS_NETWORK:-zoeskoul-runner-ingress}
