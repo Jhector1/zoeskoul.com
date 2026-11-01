@@ -8,28 +8,56 @@ if [[ "${1:-}" != "" && "${1:-}" != "--exercise-cleanup" ]]; then
 fi
 
 "$ROOT/deploy.sh" --check
-LEARNING_UID="$(id -u jean)"
-ZOE_UID="$(id -u zoebuild-exec)"
-[[ "$LEARNING_UID" != "$ZOE_UID" ]] || { echo 'ISOLATION_FAIL: same executor UID' >&2; exit 1; }
+
+fail() { echo "ISOLATION_FAIL: $*" >&2; exit 1; }
+
+# Private per-pool environment files are the source of truth on both dev and
+# production. Do not assume developer-specific Linux accounts (e.g. "jean").
+pool_uid() {
+  local pool="$1" env_file spec socket uid
+  env_file="$ROOT/$pool/.env"
+  [[ -r "$env_file" ]] || fail "cannot read private $pool/.env (run with sudo)"
+  spec="$(awk -F= '$1 == "RUNNER_CONTAINER_USER" {print $2; exit}' "$env_file")"
+  [[ "$spec" =~ ^([0-9]+):([0-9]+)$ ]] || fail "invalid RUNNER_CONTAINER_USER in $pool/.env"
+  uid="${BASH_REMATCH[1]}"
+  socket="$(awk -F= '$1 == "RUNNER_DOCKER_SOCKET_HOST" {print $2; exit}' "$env_file")"
+  [[ "$socket" == "/run/user/$uid/docker.sock" ]] || fail "socket/UID mismatch in $pool/.env"
+  printf '%s\n' "$uid"
+}
+
+pool_user() {
+  local uid="$1" entry
+  entry="$(getent passwd "$uid")" || fail "no Linux account for UID $uid"
+  [[ -n "$entry" ]] || fail "no Linux account for UID $uid"
+  printf '%s\n' "${entry%%:*}"
+}
+
+LEARNING_UID="$(pool_uid zoeskoul-learning)"
+ZOE_UID="$(pool_uid zoebuild)"
+[[ "$LEARNING_UID" != "$ZOE_UID" ]] || fail 'same executor UID'
+LEARNING_USER="$(pool_user "$LEARNING_UID")"
+ZOE_USER="$(pool_user "$ZOE_UID")"
 
 learning_docker() {
-  sudo -u jean env XDG_RUNTIME_DIR="/run/user/$LEARNING_UID" \
+  sudo -u "$LEARNING_USER" env XDG_RUNTIME_DIR="/run/user/$LEARNING_UID" \
     DOCKER_HOST="unix:///run/user/$LEARNING_UID/docker.sock" docker "$@"
 }
 zoebuild_docker() {
-  sudo -u zoebuild-exec env XDG_RUNTIME_DIR="/run/user/$ZOE_UID" \
+  sudo -u "$ZOE_USER" env XDG_RUNTIME_DIR="/run/user/$ZOE_UID" \
     DOCKER_HOST="unix:///run/user/$ZOE_UID/docker.sock" docker "$@"
 }
 
 learning_root="$(learning_docker info --format '{{.DockerRootDir}}')"
 zoebuild_root="$(zoebuild_docker info --format '{{.DockerRootDir}}')"
-[[ "$learning_root" != "$zoebuild_root" ]] || { echo 'ISOLATION_FAIL: same Docker data root' >&2; exit 1; }
+[[ "$learning_root" != "$zoebuild_root" ]] || fail 'same Docker data root'
 for ctl in learning_docker zoebuild_docker; do
   [[ "$("$ctl" info --format '{{.CgroupVersion}}')" == 2 ]] || {
-    echo 'ISOLATION_FAIL: cgroup v2 not active' >&2; exit 1;
+    fail 'cgroup v2 not active';
   }
 done
 
+printf 'Learning executor: %s (UID %s)\n' "$LEARNING_USER" "$LEARNING_UID"
+printf 'ZoeBuild executor: %s (UID %s)\n' "$ZOE_USER" "$ZOE_UID"
 printf 'Learning Docker root: %s\n' "$learning_root"
 printf 'ZoeBuild Docker root: %s\n' "$zoebuild_root"
 echo 'TWO_POOL_EXECUTOR_ISOLATION_PASS'
