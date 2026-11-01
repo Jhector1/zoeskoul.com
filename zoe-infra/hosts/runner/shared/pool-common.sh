@@ -34,33 +34,38 @@ pool_load_env() {
 pool_require_isolated_executor() {
   local socket="$RUNNER_DOCKER_SOCKET_HOST"
   local uid="${RUNNER_CONTAINER_USER%%:*}"
-  [[ "$uid" =~ ^[0-9]+$ ]] || { echo 'ERROR: invalid executor UID' >&2; return 1; }
+  [[ "$uid" =~ ^[0-9]+$ ]] || { echo 'ERROR: executor UID must be numeric' >&2; return 1; }
   [ "$socket" = "/run/user/$uid/docker.sock" ] || {
-    echo 'ERROR: executor socket path must match the dedicated UID' >&2; return 1;
+    echo 'ERROR: executor socket must match dedicated rootless UID path' >&2; return 1;
   }
-  local owner
-  if [ "$(id -u)" = "$uid" ]; then
-    [ -S "$socket" ] || { echo 'ERROR: executor socket missing' >&2; return 1; }
-    owner="$(stat -c %u "$socket")" || return 1
-  else
-    sudo -u "#$uid" test -S "$socket" || {
-      echo 'ERROR: executor socket missing or inaccessible to owner' >&2; return 1;
-    }
-    owner="$(sudo -u "#$uid" stat -c %u "$socket")" || return 1
+  # V4: inspect the rootless socket as its owning execution account.
+  # Other users cannot traverse /run/user/<uid> (0700); do not relax permissions.
+  if ! sudo -u "#$uid" test -S "$socket"; then
+    echo 'ERROR: dedicated executor socket is missing or inaccessible to its owner' >&2
+    return 1
   fi
-  [ "$owner" = "$uid" ] || { echo 'ERROR: executor socket ownership mismatch' >&2; return 1; }
+  local owner
+  owner="$(sudo -u "#$uid" stat -c %u "$socket")" || return 1
+  [ "$owner" = "$uid" ] || {
+    echo 'ERROR: executor socket owner does not match configured UID' >&2; return 1;
+  }
   pool_docker info --format '{{json .SecurityOptions}}' | grep -qi rootless || {
     echo 'ERROR: executor Docker is not rootless; refusing system Docker fallback' >&2
     return 1
   }
 }
 pool_docker() {
+  # Use the explicit, validated pool UID. `jean` cannot stat ZoeBuild's socket
+  # because /run/user/<uid> is intentionally private to that Linux user.
   local uid="${RUNNER_CONTAINER_USER%%:*}"
+  [[ "$uid" =~ ^[0-9]+$ ]] || { echo 'ERROR: executor UID must be numeric' >&2; return 1; }
+  [ "$RUNNER_DOCKER_SOCKET_HOST" = "/run/user/$uid/docker.sock" ] || {
+    echo 'ERROR: invalid executor socket path' >&2; return 1;
+  }
   if [ "$(id -u)" = "$uid" ]; then
     DOCKER_HOST="unix://${RUNNER_DOCKER_SOCKET_HOST}" docker "$@"
   else
-    sudo -u "#$uid" env DOCKER_HOST="unix://${RUNNER_DOCKER_SOCKET_HOST}" \
-      XDG_RUNTIME_DIR="/run/user/$uid" docker "$@"
+    sudo -u "#$uid" env       DOCKER_HOST="unix://${RUNNER_DOCKER_SOCKET_HOST}"       XDG_RUNTIME_DIR="/run/user/$uid" docker "$@"
   fi
 }
 pool_check_not_shared() {
@@ -77,8 +82,16 @@ pool_check_not_shared() {
 
 pool_check_headroom() {
   local path="$1" label="$2" bytes="${RUNNER_DEPLOY_MIN_FREE_BYTES:-12884901888}" pct="${RUNNER_DEPLOY_MIN_FREE_PERCENT:-15}"
-  local total free required fraction
-  read -r total free < <(df -PB1 "$path" | awk 'NR==2{print $2,$4}')
+  local total free required fraction uid raw
+  uid="${RUNNER_CONTAINER_USER%%:*}"
+  [[ "$uid" =~ ^[0-9]+$ ]] || { echo 'ERROR: executor UID must be numeric' >&2; return 1; }
+  # Private rootless Docker data roots cannot be traversed by other users.
+  if [ "$(id -u)" = "$uid" ]; then
+    raw="$(df -PB1 "$path")" || return 1
+  else
+    raw="$(sudo -u "#$uid" df -PB1 "$path")" || return 1
+  fi
+  read -r total free < <(printf '%s\n' "$raw" | awk 'NR==2{print $2,$4}')
   [[ "$total" =~ ^[0-9]+$ && "$free" =~ ^[0-9]+$ ]] || return 1
   fraction=$((total*pct/100)); required="$bytes"
   if (( fraction > required )); then required="$fraction";fi
