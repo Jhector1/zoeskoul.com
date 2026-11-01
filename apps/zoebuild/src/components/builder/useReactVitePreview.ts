@@ -10,8 +10,10 @@ import { registeredReactPreviewRoutes } from "@/lib/build/reactPreviewPageCatalo
 import { mayAutoRecoverReactPreviewDependencies } from "@/lib/build/reactPreviewDependencyRecovery";
 import { previewDependencySnapshotChanged } from "@/lib/build/reactPreviewDependencySession";
 import { previewCapacityRetryDelayMs } from "@/lib/build/previewCapacityRecovery";
+import { previewOperationStageMessage, previewStartOutcomeIsCurrent } from "@/lib/build/previewTransitionPolicy";
 import { previewDocumentGatewayUrl, classifyPreviewDocumentHealth } from "@/lib/build/previewDocumentIntegrity";
 import { claimSavedDependencyFollowUp, clearSavedDependencyRecoveryGuards } from "@/lib/build/savedDependencyRecoveryContinuation";
+import { readPreviewOperationStatus } from "@/lib/build/previewOperationHttp";
 
 type PreviewSession = Readonly<{
   previewId: string;
@@ -38,8 +40,9 @@ const SYNC_DEBOUNCE_MS = 650;
 const PREVIEW_START_SLOW_NOTICE_MS = 15_000;
 // This timeout covers only the acknowledgement of a server-owned operation.
 // The runner may legitimately need minutes for an approved frozen install.
-const PREVIEW_START_TIMEOUT_MS = 30_000;
-const PREVIEW_OPERATION_TIMEOUT_MS = 6 * 60_000;
+// This guards the HTTP acknowledgment only, including cold Next.js route
+// compilation. After acknowledgment the runner journal owns the lifecycle.
+const PREVIEW_START_TIMEOUT_MS = 120_000;
 const PREVIEW_OPERATION_POLL_INTERVAL_MS = 2_000;
 
 const PREVIEW_ROUTE_REUSE_GRACE_MS =
@@ -199,6 +202,8 @@ export function useReactVitePreview(input: Readonly<{
   allowDependencyBootstrap: boolean;
   restoredDependencyPinned?: boolean;
   onSourceConflict?: (attemptedSourceVersion: number) => Promise<boolean>;
+  /** Called ONLY after a verified server dependency-bootstrap success. */
+  onDependencyPrepared?: (attemptedSourceVersion: number) => Promise<boolean>;
 }>): (RemoteWebPreviewDescriptor & {confirmedSourceVersion:number|null;attemptedSourceVersion:number|null}) | null {
   const initialWorkspaceEntries =
     exportWorkspaceEntries(input.workspace.nodes);
@@ -248,6 +253,9 @@ export function useReactVitePreview(input: Readonly<{
   const restoredDependencyPinnedRef = useRef(input.restoredDependencyPinned === true);
   const sourceConflictCallbackRef = useRef(input.onSourceConflict);
   sourceConflictCallbackRef.current = input.onSourceConflict;
+  const dependencyPreparedCallbackRef = useRef(input.onDependencyPrepared);
+  dependencyPreparedCallbackRef.current = input.onDependencyPrepared;
+  const [preparedReplaySerial, setPreparedReplaySerial] = useState(0);
   const [resyncFromVersion, setResyncFromVersion] = useState<number | null>(null);
   const triedResyncVersionsRef = useRef(new Set<number>());
   const workspaceRevisionRef = useRef(0);
@@ -276,6 +284,24 @@ export function useReactVitePreview(input: Readonly<{
         revision:current?.revision ?? 0,
       }));
       setResyncFromVersion(attemptedVersion);
+    }
+    return true;
+  }, []);
+
+  // One bounded in-page continuation follows an authenticated dependency
+  // preparation. This path deliberately does not use the generic 409 token
+  // fence: exact-lock adoption can keep the same source CAS. The browser's
+  // persisted dependency guard still limits repeated bootstraps.
+  const reconcilePreparedDependencies = useCallback(async (attemptedVersion: number) => {
+    const refresh = dependencyPreparedCallbackRef.current;
+    if (!refresh || !(await refresh(attemptedVersion))) return false;
+    if (mountedRef.current) {
+      setConfirmedSourceVersion(null);
+      setPreview(current => ({
+        src: null, state: "starting", message: "Continuing the prepared website…",
+        revision: current?.revision ?? 0,
+      }));
+      setPreparedReplaySerial(serial => serial + 1);
     }
     return true;
   }, []);
@@ -460,6 +486,7 @@ export function useReactVitePreview(input: Readonly<{
     ) return;
 
     const startingWorkspaceRevision = workspaceRevisionRef.current;
+    const startingSourceVersion = sourceVersionRef.current;
     let supersededDuringStart = false;
     const task = (async () => {
       if (mountedRef.current) {
@@ -670,10 +697,13 @@ export function useReactVitePreview(input: Readonly<{
           // conversation and avoiding a full page reload when possible.
           if (await reconcileConflict(startingVersion)) return;
         }
-        // Exact-lock adoption can leave the concurrency token unchanged.
-        // In that case a reload refreshes workspace files without a new save.
-        window.location.reload();
-        return;
+        // Even an exact-lock adoption with an unchanged CAS can be refreshed
+        // via the owner-authenticated project reader. A complete page reload
+        // discards the preview transition and recompiles the entire UI.
+        if (await reconcilePreparedDependencies(startingVersion)) return;
+        // Never destroy newly typed edits or the version-specific Zoé chat
+        // because an authoritative in-page refresh could not be verified.
+        throw new Error("Dependency preparation succeeded, but the saved source could not be synchronized. Reload the saved project when your edits are safe.");
       }
 
       // The runner owns startup beyond the HTTP request. Follow its journaled
@@ -684,7 +714,9 @@ export function useReactVitePreview(input: Readonly<{
             data.operation.sourceVersion !== startingVersion) {
           throw new Error("The preview operation returned an invalid source identity.");
         }
-        const operationDeadline = Date.now() + PREVIEW_OPERATION_TIMEOUT_MS;
+        // The runner owns the operation deadline. A separate browser deadline
+        // could falsely fail a still-active install while the browser's API
+        // route is blocked by development compilation.
         let current = data.operation;
         while (true) {
           // A browser tab may select a different saved revision while the
@@ -711,14 +743,7 @@ export function useReactVitePreview(input: Readonly<{
                     : "The preview worker could not prepare this website. Retry preview.";
             throw new Error(failure);
           }
-          if (Date.now() >= operationDeadline) {
-            throw new Error("Preview preparation exceeded the bounded startup budget. Retry preview.");
-          }
-          const stageMessage = current.stage === "dependencies"
-            ? "Preparing approved website dependencies…"
-            : current.stage === "container" || current.stage === "readiness"
-              ? "Starting and verifying the website…"
-              : "Your website is queued for the preview worker…";
+          const stageMessage = previewOperationStageMessage(current.stage);
           if (mountedRef.current) setPreview(previous => ({
             src: null, state: "starting", message: stageMessage,
             revision: previous?.revision ?? 0,
@@ -730,14 +755,16 @@ export function useReactVitePreview(input: Readonly<{
             supersededDuringStart = true;
             return;
           }
-          const statusResponse = await fetch(
+          const statusResponse = await readPreviewOperationStatus(
             `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/operations/${encodeURIComponent(operationId)}`,
-            { method: "GET", credentials: "same-origin", cache: "no-store" },
           );
           const statusPayload = await payload(statusResponse);
           if (statusResponse.status === 409 && statusPayload?.code === "BUILD_PREVIEW_SOURCE_CONFLICT") {
             if (await reconcileConflict(startingVersion)) return;
             throw new Error("A newer saved source is active. Refresh the selected version.");
+          }
+          if (statusResponse.status === 401) {
+            throw new Error("Your Zoéskoul session could not be renewed. Reconnect your account, then retry preview. The saved source is unchanged.");
           }
           if (!statusResponse.ok || !statusPayload?.ok || !statusPayload.operation) {
             throw new Error(message(statusPayload, "Preview operation status is unavailable. Retry preview."));
@@ -771,26 +798,11 @@ export function useReactVitePreview(input: Readonly<{
         throw new Error("React preview returned an invalid session.");
       }
 
-      // The actual browser document gateway may fail even when Vite itself
-      // reports ready. Never show a white 404 frame as a successful preview.
-      const documentCheck = await fetch(previewDocumentGatewayUrl(basePath), {
-        method: "GET", credentials: "same-origin", cache: "no-store",
-        headers: { Accept: "text/html" },
-      });
-      const documentHealth = classifyPreviewDocumentHealth(
-        documentCheck.status,
-        documentCheck.headers.get("content-type"),
-        documentCheck.headers.get("X-ZoeBuild-Preview-Failure"),
-      );
-      if (documentHealth !== "ready") {
-        // The runner may have dropped the preview or its routing is unstable.
-        // Do not retain an unusable capability in the client session cache.
-        const unusable: PreviewSession = { previewId, basePath, workspaceEntries: startingEntries };
-        await cancelPreviewSession(input.buildProjectId, unusable);
-        throw new Error(documentHealth === "expired"
-          ? "Preview service lost this session. Retry to start a fresh preview; if this repeats, check runner routing."
-          : "The preview document is not available yet. Try again after the runner is healthy.");
-      }
+      // The owner-authenticated operation status has already verified this
+      // preview capability and its source fence at the runner. Do not issue a
+      // second serial browser document GET here: the sandboxed iframe owns
+      // loading and validates its exact revision's rendered React root. A
+      // browser 404 or auth error must not be misreported as a runner timeout.
       const changedDuringStart=sourceVersionRef.current !== startingVersion ||
         !workspaceSyncEntriesEqual(startingEntries,exportWorkspaceEntries(workspaceRef.current.nodes));
       if (changedDuringStart) setConfirmedSourceVersion(null);
@@ -839,7 +851,16 @@ export function useReactVitePreview(input: Readonly<{
     try {
       await task;
     } catch (error) {
-      if (mountedRef.current) {
+      // A failed operation from an older selection must not replace the current
+      // version's preview state. A newer request starts after this retires.
+      const stillCurrent = previewStartOutcomeIsCurrent({
+        startedSourceVersion: startingSourceVersion,
+        selectedSourceVersion: sourceVersionRef.current,
+        startedWorkspaceRevision: startingWorkspaceRevision,
+        selectedWorkspaceRevision: workspaceRevisionRef.current,
+      });
+      if (!stillCurrent) supersededDuringStart = true;
+      if (mountedRef.current && stillCurrent) {
         setPreview((current) => ({
           src: current?.src ?? sessionRef.current?.basePath ?? null,
           state: "error",
@@ -856,7 +877,7 @@ export function useReactVitePreview(input: Readonly<{
         void Promise.resolve().then(() => start());
       }
     }
-  }, [input.buildProjectId, input.enabled, syncCurrent, reconcileConflict]);
+  }, [input.buildProjectId, input.enabled, syncCurrent, reconcileConflict, reconcilePreparedDependencies]);
 
   // An authoritative rehydrate completes on the next React render, not inside
   // the original 409 request. Start only from the NEW source token; never
@@ -877,6 +898,30 @@ export function useReactVitePreview(input: Readonly<{
     })();
     return () => { cancelled = true; };
   }, [resyncFromVersion, input.sourceVersion, input.enabled, start]);
+
+  // A successful bootstrap may have adopted the exact dependency lock
+  // without incrementing the source token. Do not require a CAS change to
+  // continue the same selected version. Wait for the old start to settle,
+  // then use the freshly hydrated workspace from React's committed render.
+  useEffect(() => {
+    if (!input.enabled || preparedReplaySerial === 0) return;
+    let cancelled = false;
+    void (async () => {
+      await startPromiseRef.current?.catch(() => undefined);
+      if (cancelled || !mountedRef.current || !input.enabled ||
+          sourceVersionRef.current !== input.sourceVersion) return;
+      setPreparedReplaySerial(0);
+      if (!sessionRef.current) await start();
+      else await syncCurrent();
+    })().catch(() => {
+      if (mountedRef.current) setPreview(current => ({
+        src: null, state: "error",
+        message: "The prepared preview could not resume. Retry the saved version.",
+        revision: current?.revision ?? 0,
+      }));
+    });
+    return () => { cancelled = true; };
+  }, [preparedReplaySerial, input.enabled, input.sourceVersion, input.workspace, start, syncCurrent]);
 
   const restart = useCallback(() => {
     // Prevent retry clicks from racing with a not-yet-completed cold start.

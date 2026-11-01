@@ -39,6 +39,9 @@ export function PersistentReactPreviewProvider(props:Readonly<{children:ReactNod
   const [entry,setEntry]=useState<HostEntry|null>(null);
   const [rect,setRect]=useState<HostRect|null>(null);
   const releaseRef=useRef<ReturnType<typeof setTimeout>|null>(null);
+  // Keep the last rendered page mounted as a labelled, disabled backdrop
+  // until its replacement is prepared. Never mark it as the new version.
+  const lastReadyPreviewRef=useRef<{projectId:string;preview:RemoteWebPreviewDescriptor}|null>(null);
 
   const clearRelease=useCallback(()=>{
     if (!releaseRef.current) return;
@@ -128,6 +131,16 @@ export function PersistentReactPreviewProvider(props:Readonly<{children:ReactNod
 
   const api=useMemo<PreviewHostApi>(()=>({attachTarget,updatePreview,setActive}),
     [attachTarget,updatePreview,setActive]);
+  useEffect(()=>{
+    if (enabled && entry?.preview?.state === "ready" && entry.preview.src) {
+      lastReadyPreviewRef.current = {projectId:entry.buildProjectId,preview:entry.preview};
+    }
+  },[enabled,entry?.buildProjectId,entry?.preview]);
+  const isPreparing=entry?.preview?.state === "starting" || entry?.preview?.state === "syncing";
+  const previousPreview=enabled&&isPreparing&&
+    lastReadyPreviewRef.current?.projectId===entry?.buildProjectId
+      ? lastReadyPreviewRef.current.preview : null;
+  const renderedPreview=previousPreview??entry?.preview??null;
   const shown=Boolean(enabled&&entry?.preview&&activeTarget&&rect&&rect.width>0&&rect.height>0);
 
   return <PreviewHostContext.Provider value={api}>
@@ -142,7 +155,20 @@ export function PersistentReactPreviewProvider(props:Readonly<{children:ReactNod
         visibility:shown?"visible":"hidden",pointerEvents:shown?"auto":"none",
         overflow:"hidden"}}
     >
-      <RemoteWebPreview key={previewViewerIdentity(entry.buildProjectId, entry.preview.src)} preview={entry.preview}/>
+       <div inert={Boolean(previousPreview)} style={{height:"100%",pointerEvents:previousPreview?"none":"auto"}}>
+         {renderedPreview ? <RemoteWebPreview
+           key={previewViewerIdentity(entry.buildProjectId, renderedPreview.src)}
+           preview={renderedPreview}/> : null}
+       </div>
+       {previousPreview ? <div data-preview-previous-version role="status" aria-live="polite"
+         style={{position:"absolute",inset:0,zIndex:30,display:"grid",placeItems:"center",
+           pointerEvents:"auto",background:"rgba(16,24,40,.2)",padding:16}}>
+         <span style={{maxWidth:420,background:"rgba(15,23,42,.94)",color:"white",
+           borderRadius:12,padding:"12px 16px",textAlign:"center",fontSize:12,
+           boxShadow:"0 8px 32px rgba(0,0,0,.2)"}}>
+           Preparing the selected version… Previous preview shown as a non-interactive reference.
+         </span>
+       </div> : null}
     </div>:null}
   </PreviewHostContext.Provider>;
 }
