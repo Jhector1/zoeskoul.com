@@ -18,10 +18,16 @@ describe("Zoé semantic intent validation", () => {
     expect(parseZoeSemanticIntent({action:"answer",pagePath:"none",provider:"",reply:"An answer generated in the router"}).reply).toBe("");
     expect(() => parseZoeSemanticIntent(null)).toThrow("BUILD_INTENT_INVALID");
   });
+  it("prevents the model from silently translating an unsupported runtime into an edit", () => {
+    expect(parseZoeSemanticIntent({...edit, pagePath:"none", runtimeSupport:"unsupported"}))
+      .toEqual({action:"answer",pagePath:"none",provider:"",reply:""});
+    expect(parseZoeSemanticIntent({...edit, pagePath:"none", runtimeSupport:"supported"}).action).toBe("edit");
+    expect(() => parseZoeSemanticIntent({...edit,runtimeSupport:"pretend-supported"})).toThrow("BUILD_INTENT_INVALID");
+  });
   it("publishes a closed structured-output schema", () => {
     const schema = zoeSemanticIntentSchema();
     expect(schema.additionalProperties).toBe(false);
-    expect(schema.required).toEqual(["action","pagePath","provider","reply"]);
+    expect(schema.required).toEqual(["action","pagePath","provider","reply","runtimeSupport"]);
     expect(schema.properties.action.enum).toContain("clarify");
   });
 });

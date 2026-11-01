@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import {resolveZoeCapabilityReality} from "@/lib/build/zoeCapabilityReality";
+import {ZOE_CAPABILITY_CONVERSATION_POLICY} from "@/lib/build/zoeCapabilityEvidence";
 import { BuildAccessError, getBuildProjectCommand, resolveBuildAccess, saveBuildProjectSourceCommand, BuildSourceConflictError } from "@zoeskoul/build-application";
 import { parseAiJsonText } from "@zoeskoul/ai-json";
 import { makeZoeEditClarification } from "@/lib/build/zoeEditClarification";
@@ -224,12 +226,16 @@ export async function POST(req: Request, ctx: { params: Promise<{buildProjectId:
           purpose: "edit",
         })
       : selectedTransport;
+    const capabilityEvidence = await resolveZoeCapabilityReality({buildProjectId,project,
+      aiEditAllowed:!requiredMetering||resolveBuildAccess(access).canEditWithAi});
     const makeProposal = async (onSummary?: (delta: string) => void) => {
       const editRequest = {
         schemaName: "ZoeTargetedSourceEditV2", responseJsonSchema: editSchema(),
         requestReasoningSummary: Boolean(onSummary), onReasoningSummaryDelta: onSummary,
         system: [
           "You are editing an EXISTING ZoeBuild project. Produce a JSON object with summary and edits.",
+          ZOE_CAPABILITY_CONVERSATION_POLICY,
+          "Never replace an explicitly demanded unsupported runtime with React/Vite without consent. If the task is impossible within executable stack capabilities, return edits:[] and describe that limitation in summary; do not fabricate a backend or claim a deploy.",
           reactPage ? `Create an actual React page for ${pagePath} at ${targetPageSource}. Return exactly one TSX page edit and optionally an updated src/App.tsx to add the requested header link or to remove the moved homepage section. The server wires route dispatch and existing source entry, NOT the visible header link. Preserve the existing homepage, nav, and styling; do not change main.tsx or ZoePages.tsx.` :
           pagePath ? `Return exactly ONE edit: the complete standalone HTML document ${pagePath}. Do NOT return index.html, other files or a homepage section. The server will safely add navigation and footer links after generation.` :
             (isReactProject
@@ -250,7 +256,7 @@ export async function POST(req: Request, ctx: { params: Promise<{buildProjectId:
           "When changing buttons or controls, keep readable foreground/background contrast, including hover, disabled and focus states; do not create white-on-white controls. Respect the existing design unless the user requests a new one.",
           "Summarize precisely what source changed and any remaining limitation. Do not claim the rendered preview was inspected or that all requested behavior is verified.",
         ].filter(Boolean).join("\n"),
-        user: JSON.stringify({ project: { title: project.title, stackId: project.stackId, sourceVersion: project.sourceVersion, activePath: project.activePath }, conversation, instruction: prompt, requestedPage: pagePath, pageExists: pageAlreadyExists, files: staticPageContext, editPlan: reactEditPlan, designEvidence: reactDesignEvidence ? {sourceCoverage:reactDesignEvidence.sourceCoverage, omittedPaths:reactDesignEvidence.omittedPaths, sourceInventory:reactDesignEvidence.sourceInventory, designPrinciples:reactDesignEvidence.designPrinciples} : null }),
+        user: JSON.stringify({ project: { title: project.title, stackId: project.stackId, sourceVersion: project.sourceVersion, activePath: project.activePath }, conversation, capabilityEvidence, instruction: prompt, requestedPage: pagePath, pageExists: pageAlreadyExists, files: staticPageContext, editPlan: reactEditPlan, designEvidence: reactDesignEvidence ? {sourceCoverage:reactDesignEvidence.sourceCoverage, omittedPaths:reactDesignEvidence.omittedPaths, sourceInventory:reactDesignEvidence.sourceInventory, designPrinciples:reactDesignEvidence.designPrinciples} : null }),
       };
       // Every React edit, including page creation, can discover and read the
       // entire eligible project; server-owned route wiring remains deterministic.
