@@ -7,12 +7,12 @@ umask 077
 MODE=""; CONFIG="/etc/zoeskoul/runner-prod-migration.conf"
 for arg in "$@"; do
   case "$arg" in
-    --check|--apply|--resume|--rollback) [[ -z "$MODE" ]] || { echo 'Select one mode' >&2; exit 2; }; MODE="$arg" ;;
+    --check|--prepare|--apply|--resume|--rollback) [[ -z "$MODE" ]] || { echo 'Select one mode' >&2; exit 2; }; MODE="$arg" ;;
     --config=*) CONFIG="${arg#--config=}" ;;
     *) echo "Unknown option: $arg" >&2; exit 2 ;;
   esac
 done
-[[ -n "$MODE" ]] || { echo "Usage: sudo bash $0 {--check|--apply|--rollback} [--config=/etc/zoeskoul/runner-prod-migration.conf]" >&2; exit 2; }
+[[ -n "$MODE" ]] || { echo "Usage: sudo bash $0 {--check|--prepare|--apply|--rollback} [--config=/etc/zoeskoul/runner-prod-migration.conf]" >&2; exit 2; }
 [[ "$(id -u)" = 0 ]] || { echo 'Run as root (sudo bash ...)' >&2; exit 1; }
 [[ -f "$CONFIG" && ! -L "$CONFIG" ]] || { echo "Missing private config: $CONFIG" >&2; exit 1; }
 [[ "$(stat -c %u "$CONFIG")" = 0 ]] || { echo 'Config must be owned by root' >&2; exit 1; }
@@ -95,7 +95,7 @@ check_base() {
   [[ -n "${GHCR_OWNER:-}" ]] || fail 'Set GHCR_OWNER (GitHub registry account)'
   [[ "${IMAGE_TAG:-prod}" = prod || "${IMAGE_TAG:-}" =~ ^[a-zA-Z0-9._-]+$ ]] || fail 'Invalid IMAGE_TAG'
   # Only the legacy project will be stopped: no generic Docker down/prune.
-  if [[ "$MODE" = --check || "$MODE" = --apply ]]; then
+  if [[ "$MODE" = --check || "$MODE" = --prepare || "$MODE" = --apply ]]; then
     local old
     old="$(docker ps -a --filter "label=com.docker.compose.project=$LEGACY_PROJECT" --format '{{.Names}}')"
     [[ -n "$old" ]] || fail "No legacy Compose containers for project '$LEGACY_PROJECT' (or already cut over)"
@@ -213,6 +213,19 @@ ensure_rootless() {
   log "$user rootless Docker verified (cgroup v2/systemd)"
 }
 
+# Only create the dormant ZoeBuild OS account before reboot, because the legacy
+# env converter needs its UID. No rootless daemon is started and no public route
+# is exposed during preboot preparation.
+ensure_zoebuild_account_for_env() {
+  [[ "$ZOEBUILD_EXECUTOR_USER" = zoebuild-exec ]] || fail 'Unexpected ZoeBuild executor account'
+  if ! id "$ZOEBUILD_EXECUTOR_USER" >/dev/null 2>&1; then
+    need useradd
+    useradd --create-home --shell /bin/bash "$ZOEBUILD_EXECUTOR_USER" || fail 'Unable to provision dormant ZoeBuild account'
+    log 'Dormant ZoeBuild account created for private env generation'
+  fi
+  [[ "$(id -u "$LEARNING_EXECUTOR_USER")" != "$(id -u "$ZOEBUILD_EXECUTOR_USER")" ]] || fail 'Executor UIDs must differ'
+}
+
 write_env_once() {
   local d="$RUNNER_DIR"
   local count=0 p
@@ -291,6 +304,18 @@ for k in ('RUNNER_DOMAIN','JUDGE0_DOMAIN'):
  if 'localhost' in g[k] or '.' not in g[k] or '/' in g[k]: raise SystemExit('Invalid production hostname')
 print('PRODUCTION_ENV_CONTRACT_PASS')
 PY
+  if [[ "${1:-}" = --contracts-only ]]; then
+    # Docker Compose resolves the exact private prod manifests and mounts, but
+    # does not contact daemons or start/stop containers before a reboot.
+    local p
+    for p in zoeskoul-learning zoebuild gateway; do
+      (cd "$d/$p" && docker compose --env-file .env -f compose.yml config --quiet) || fail "Invalid $p production Compose contract"
+    done
+    (cd "$d/zoeskoul-learning" && docker compose --env-file .env -f compose.yml config --format json) | \
+      python3 -c 'import json,sys; s=json.load(sys.stdin)["services"];assert s["judge0"]["image"]==s["judge0-worker"]["image"];assert s["judge0-worker"].get("cgroup")=="host";print("PREBOOT_JUDGE0_CGROUP_CONFIG_PASS")' || fail 'Preboot Judge0 Compose contract failed'
+    log 'PREBOOT_PRODUCTION_ENV_CONTRACTS_PASS'
+    return 0
+  fi
   (cd "$d" && ./deploy.sh --check)
   # Check resolved image identity and cgroup namespace, without exposing config.
   (cd "$d/zoeskoul-learning" && docker compose --env-file .env -f compose.yml config --format json) | \
@@ -340,6 +365,21 @@ preboot_release_readiness() {
   actual="$(rootless "$LEARNING_EXECUTOR_USER" image inspect "$runtime_ref" --format '{{range .RepoDigests}}{{println .}}{{end}}')"
   grep -Fq -- "@$EXPECTED_RUNTIME_DIGEST" <<< "$actual" || fail 'Learning runtime digest mismatch before reboot'
   log 'PREBOOT_APPROVED_IMAGE_ACCESS_PASS'
+}
+
+# This stage is deliberately run while the legacy production containers still
+# serve traffic. On cgroup v1, the old Judge0 can answer the language-ID query;
+# after reboot it may not be able to execute jobs. Fail before reboot instead.
+prepare_before_reboot() {
+  log 'Preparing Learning-first production migration without stopping legacy'
+  ensure_zoebuild_account_for_env
+  write_env_once
+  resolve_r_language_id
+  validate_pool_envs --contracts-only
+  preboot_release_readiness
+  backup_legacy_database
+  touch "$STATE_DIR/preboot-ready"
+  log 'PREBOOT_PRODUCTION_PREPARATION_PASS'
 }
 
 verify_deployed_image_pins() {
@@ -426,6 +466,7 @@ backup_legacy_database() {
     mv -f "$tmpfile" "$outfile"
   fi
   [[ $(stat -c %s "$outfile") -gt 100 ]] || fail 'Judge0 PostgreSQL backup invalid/empty'
+  docker exec -i "$dbid" pg_restore --list < "$outfile" >/dev/null || fail 'PostgreSQL dump integrity verification failed'
   log 'JUDGE0_DATABASE_BACKUP_PASS'
 }
 
@@ -564,6 +605,11 @@ if [[ "$MODE" = --check ]]; then
 fi
 [[ "$MODE" != --resume || -f "$STATE_DIR/initialized" ]] || fail 'Cannot resume: no migration state'
 save_state
+if [[ "$MODE" = --prepare ]]; then
+  prepare_before_reboot
+  log 'Legacy services remain active. No cgroup boot changes or cutover performed.'
+  exit 0
+fi
 configure_delegation
 if [[ "$MODE" = --resume ]]; then
   # One-shot resume: remove boot dependency first so failed attempts do not loop.
@@ -573,7 +619,8 @@ if [[ "$(findmnt -no FSTYPE /sys/fs/cgroup)" != cgroup2 ]]; then
   [[ "$MODE" != --resume ]] || fail 'Reboot did not activate cgroup v2; refusing another automatic reboot'
   [[ "$AUTO_REBOOT_CGROUP_V2" = yes ]] || fail 'cgroup v1 detected. Set AUTO_REBOOT_CGROUP_V2=yes for a one-time automatic reboot and resume.'
   need update-grub
-  preboot_release_readiness
+  prepare_before_reboot
+  [[ -f "$STATE_DIR/preboot-ready" ]] || fail 'Preboot preparation not completed'
   touch "$STATE_DIR/migrated-from-cgroup-v1"
   install_resume_unit
   configure_cgroup_boot
@@ -581,6 +628,8 @@ if [[ "$(findmnt -no FSTYPE /sys/fs/cgroup)" != cgroup2 ]]; then
   systemctl reboot
   exit 0
 fi
+# Fresh cgroup v2 hosts also require the full pre-cutover env/backup preparation.
+[[ -f "$STATE_DIR/preboot-ready" ]] || fail 'Missing PREBOOT preparation marker; run --prepare before cutover'
 require_v2
 ensure_rootless "$LEARNING_EXECUTOR_USER"
 # Provision the dormant ZoeBuild executor user for the shared two-pool architecture.
