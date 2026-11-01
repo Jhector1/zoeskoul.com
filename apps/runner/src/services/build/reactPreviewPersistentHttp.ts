@@ -14,7 +14,7 @@ export type PreviewHttpResponse = Readonly<{
 // Each request is an independent localhost fetch; threaded I/O prevents a slow
 // asset from blocking every other asset in the same preview. No shell involved.
 export const PERSISTENT_PREVIEW_HTTP_WORKER = String.raw`
-import base64, concurrent.futures, json, sys, threading, urllib.error, urllib.request
+import base64, concurrent.futures, json, sys, threading, time, urllib.error, urllib.request
 
 LIMIT = 6 * 1024 * 1024
 write_lock = threading.Lock()
@@ -29,6 +29,9 @@ class NoExternalRedirects(urllib.request.HTTPRedirectHandler):
 opener = urllib.request.build_opener(NoExternalRedirects)
 
 def respond(request):
+    started = time.perf_counter()
+    queued_at = request.get("_queuedAt", started)
+    queue_ms = max(0, round((started - queued_at) * 1000))
     ident = request.get("id")
     path = request.get("path")
     method = request.get("method")
@@ -39,12 +42,16 @@ def respond(request):
             raise RuntimeError("Invalid preview transport path")
         url = "http://127.0.0.1:5173" + path
         request_obj = urllib.request.Request(url, method=method)
+        before_headers = time.perf_counter()
         try:
             response = opener.open(request_obj, timeout=20)
         except urllib.error.HTTPError as error:
             response = error
+        headers_ms = max(0, round((time.perf_counter() - before_headers) * 1000))
         with response:
+            before_read = time.perf_counter()
             body = response.read(LIMIT + 1) if method == "GET" else b""
+            read_ms = max(0, round((time.perf_counter() - before_read) * 1000))
             if len(body) > LIMIT:
                 raise RuntimeError("Preview response too large")
             headers = {}
@@ -52,14 +59,22 @@ def respond(request):
                 value = response.headers.get(name)
                 if value:
                     headers[name.lower()] = value
+            before_encode = time.perf_counter()
+            encoded = base64.b64encode(body).decode("ascii")
+            encode_ms = max(0, round((time.perf_counter() - before_encode) * 1000))
             result = {"id": ident, "status": int(response.status), "headers": headers,
-                      "bodyBase64": base64.b64encode(body).decode("ascii")}
+                      "bodyBase64": encoded,
+                      "_transportTiming": {"queueMs": queue_ms, "viteHeadersMs": headers_ms,
+                                           "viteReadMs": read_ms, "encodeMs": encode_ms}}
     except urllib.error.URLError as exc:
         reason = getattr(exc, "reason", None)
         result = {"id": ident, "error": "Connection refused" if isinstance(reason, ConnectionRefusedError) else "Preview transport request failed"}
     except Exception:
         result = {"id": ident, "error": "Preview transport request failed"}
+    before_writer = time.perf_counter()
     with write_lock:
+        if "_transportTiming" in result:
+            result["_transportTiming"]["writerWaitMs"] = max(0, round((time.perf_counter() - before_writer) * 1000))
         sys.stdout.write(json.dumps(result, separators=(",", ":")) + "\n")
         sys.stdout.flush()
 
@@ -69,6 +84,7 @@ for line in sys.stdin:
     try:
         item = json.loads(line)
         if isinstance(item, dict):
+            item["_queuedAt"] = time.perf_counter()
             executor.submit(respond, item)
     except Exception:
         continue
@@ -83,8 +99,15 @@ export const PREVIEW_HTTP_REQUEST_DEADLINE_MS = 46_000;
 const MAX_DOCKER_FRAME = 9 * 1024 * 1024;
 const MAX_LINE = 9 * 1024 * 1024;
 const MAX_IN_FLIGHT = 16;
+// Aggregate-only logging: never log paths, container IDs, credentials or response bodies.
+// Limit diagnostic volume under a flood of slow module requests.
+let lastSlowTransportLogMs = 0;
+const SLOW_TRANSPORT_THRESHOLD_MS = 1_500;
+const SLOW_TRANSPORT_LOG_INTERVAL_MS = 250;
 
 type Pending = {
+  startedAtMs: number;
+  method: "GET" | "HEAD";
   resolve: (result: PreviewHttpResponse) => void;
   reject: (error: Error) => void;
   timer: ReturnType<typeof setTimeout>;
@@ -134,7 +157,7 @@ export class ReactPreviewPersistentHttpChannel {
           this.abort(new Error("Preview transport stalled."));
         }
       }, PREVIEW_HTTP_REQUEST_DEADLINE_MS);
-      this.pending.set(id, { resolve, reject, timer });
+      this.pending.set(id, { startedAtMs: performance.now(), method, resolve, reject, timer });
       try {
         this.stream.write(JSON.stringify({ id, path, method }) + "\n", (error?: Error | null) => {
           if (error) this.abort(new Error("Preview transport write failed."));
@@ -227,8 +250,44 @@ export class ReactPreviewPersistentHttpChannel {
       pending.reject(new Error("Invalid preview HTTP response."));
       return;
     }
+    this.reportSlowTransport(pending, reply);
     pending.resolve({ status: reply.status as number,
       headers: reply.headers as Record<string, string>, bodyBase64: reply.bodyBase64 });
+  }
+
+  /** Inspect only numeric phase summaries from the isolated worker. This is
+   * diagnostic telemetry, never an authority for accepting a module response.
+   */
+  private reportSlowTransport(pending: Pending, reply: Record<string, unknown>) {
+    const now = performance.now();
+    const roundtripMs = Math.max(0, Math.round(now - pending.startedAtMs));
+    if (roundtripMs < SLOW_TRANSPORT_THRESHOLD_MS ||
+        now - lastSlowTransportLogMs < SLOW_TRANSPORT_LOG_INTERVAL_MS) return;
+    const phases = reply._transportTiming;
+    if (!phases || typeof phases !== "object" || Array.isArray(phases)) return;
+    const source = phases as Record<string, unknown>;
+    const pick = (name: string): number | null => {
+      const value = source[name];
+      return typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 120_000
+        ? Math.round(value) : null;
+    };
+    const queueMs = pick("queueMs");
+    const viteHeadersMs = pick("viteHeadersMs");
+    const viteReadMs = pick("viteReadMs");
+    const encodeMs = pick("encodeMs");
+    const writerWaitMs = pick("writerWaitMs");
+    if ([queueMs, viteHeadersMs, viteReadMs, encodeMs, writerWaitMs].some((value) => value === null)) return;
+    lastSlowTransportLogMs = now;
+    const accountedMs = queueMs! + viteHeadersMs! + viteReadMs! + encodeMs! + writerWaitMs!;
+    const encodedLength = (reply.bodyBase64 as string).length;
+    console.info("RUNNER preview transport phases", {
+      method: pending.method,
+      statusClass: `${Math.floor((reply.status as number) / 100)}xx`,
+      encodedKiB: Math.ceil(encodedLength / 1024),
+      roundtripMs, queueMs, viteHeadersMs, viteReadMs, encodeMs, writerWaitMs,
+      // Residual includes JSON serialization, stdout transfer, parsing, and event-loop scheduling.
+      residualMs: Math.max(0, roundtripMs - accountedMs),
+    });
   }
 
   close() { this.abort(new Error("Preview transport stopped.")); }
