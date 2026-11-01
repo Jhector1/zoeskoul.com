@@ -13,7 +13,7 @@ for arg in "$@"; do
     *) echo "Unknown option: $arg" >&2; exit 2 ;;
   esac
 done
-[[ -n "$MODE" ]] || { echo "Usage: sudo bash $0 {--check|--prepare|--apply|--rollback} [--config=/etc/zoeskoul/runner-prod-migration.conf]" >&2; exit 2; }
+[[ -n "$MODE" ]] || { echo "Usage: sudo bash $0 {--check|--prepare|--apply|--resume|--rollback} [--config=/etc/zoeskoul/runner-prod-migration.conf]" >&2; exit 2; }
 [[ "$(id -u)" = 0 ]] || { echo 'Run as root (sudo bash ...)' >&2; exit 1; }
 [[ -f "$CONFIG" && ! -L "$CONFIG" ]] || { echo "Missing private config: $CONFIG" >&2; exit 1; }
 [[ "$(stat -c %u "$CONFIG")" = 0 ]] || { echo 'Config must be owned by root' >&2; exit 1; }
@@ -66,7 +66,14 @@ check_base() {
      -f "$RUNNER_DIR/zoeskoul-learning/compose.yml" && -f "$RUNNER_DIR/gateway/Caddyfile" && \
      -f "$RUNNER_DIR/zoeskoul-learning/judge0-v2/zoe_isolate_box_lease.rb" ]] || fail 'Missing production Runner infrastructure or Judge0 lease implementation'
   # Sparse production checkout: verify the exact committed guard object, not a checked-out file.
-  git -C "$REPO_ROOT" cat-file -e HEAD:apps/runner/src/middleware/executionPoolGuard.ts 2>/dev/null || fail 'Approved commit lacks execution pool guard in Git object database'
+  # This sparse/partial checkout may lack unmaterialized source blobs at boot.
+  # Check the approved commit's tree instead of triggering a network blob fetch.
+  local guard_path guard_entry
+  guard_path='apps/runner/src/middleware/executionPoolGuard.ts'
+  guard_entry="$(git -C "$REPO_ROOT" ls-tree --full-tree -r HEAD -- "$guard_path")" \
+    || fail 'Unable to inspect approved source commit tree'
+  [[ "$guard_entry" =~ ^100644[[:space:]]blob[[:space:]][0-9a-f]{40,64}[[:space:]]apps/runner/src/middleware/executionPoolGuard\.ts$ ]] \
+    || fail 'Approved commit tree does not reference the Runner execution pool guard'
   grep -Fq 'RUNNER_SITE_ADDRESS' "$RUNNER_DIR/gateway/Caddyfile" || fail 'Production gateway source lacks configurable site addresses'
   grep -Fq 'GATEWAY_SCHEME' "$RUNNER_DIR/gateway/compose.yml" || fail 'Production gateway Compose does not support HTTPS selection'
   git -C "$REPO_ROOT" rev-parse --is-inside-work-tree >/dev/null || fail 'Invalid repository root'
