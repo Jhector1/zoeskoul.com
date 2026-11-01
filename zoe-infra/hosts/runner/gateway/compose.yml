@@ -16,6 +16,7 @@ services:
       JUDGE0_AUTHN_TOKEN: ${JUDGE0_AUTHN_TOKEN:?required}
     volumes:
     - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    - ./${ZOEBUILD_ROUTE_FILE:-routes/zoebuild-enabled.caddy}:/etc/caddy/zoebuild-route.caddy:ro
     - caddy_data:/data
     - caddy_config:/config
     networks:

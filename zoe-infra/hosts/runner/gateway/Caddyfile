@@ -22,11 +22,7 @@
 
     @zoebuild path /build /build/*
     handle @zoebuild {
-        reverse_proxy zoebuild-runner:4001 {
-            header_up X-Forwarded-Proto {scheme}
-            header_up X-Forwarded-Host {host}
-            header_up X-Real-IP {remote_host}
-        }
+        import zoebuild-route.caddy
     }
     handle {
         reverse_proxy learning-runner:4001 {

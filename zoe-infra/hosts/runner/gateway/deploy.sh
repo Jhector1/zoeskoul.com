@@ -12,7 +12,12 @@ docker compose --env-file .env -f compose.yml config --quiet
 [ "$#" -eq 0 ] || { echo 'Usage: deploy.sh [--check]' >&2;exit 2; }
 docker network inspect "${RUNNER_INGRESS_NETWORK:-zoeskoul-runner-ingress}" >/dev/null
 # Two backends must exist before publishing gateway routes.
-for name in zoeskoul-learning-runner- zoebuild-runner-runner- zoeskoul-learning-judge0-;do
+case "${ZOEBUILD_ROUTE_FILE:-routes/zoebuild-enabled.caddy}" in
+  routes/zoebuild-enabled.caddy) backend_names="zoeskoul-learning-runner- zoebuild-runner-runner- zoeskoul-learning-judge0-" ;;
+  routes/zoebuild-disabled.caddy) backend_names="zoeskoul-learning-runner- zoeskoul-learning-judge0-" ;;
+  *) echo "ERROR: invalid ZoeBuild gateway route selection" >&2; exit 1 ;;
+esac
+for name in $backend_names;do
   docker ps --filter "network=${RUNNER_INGRESS_NETWORK:-zoeskoul-runner-ingress}" \
     --format '{{.Names}}' | grep -Fq "$name" || {
     echo "ERROR: missing backend for gateway: $name" >&2;exit 1;
