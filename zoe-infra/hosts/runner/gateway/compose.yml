@@ -28,5 +28,9 @@ networks:
     external: true
     name: ${RUNNER_INGRESS_NETWORK:-zoeskoul-runner-ingress}
 volumes:
-  caddy_data: null
-  caddy_config: null
+  caddy_data:
+    external: true
+    name: runner_caddy_data
+  caddy_config:
+    external: true
+    name: runner_caddy_config

@@ -166,5 +166,9 @@ networks:
     external: true
     name: ${RUNNER_INGRESS_NETWORK:-zoeskoul-runner-ingress}
 volumes:
-  judge0_db: null
-  judge0_redis: null
+  judge0_db:
+    external: true
+    name: runner_judge0_db
+  judge0_redis:
+    external: true
+    name: runner_judge0_redis

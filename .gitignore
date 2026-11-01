@@ -115,3 +115,8 @@ apps/web/.playwright/
 # Keep trusted runner source directories named build in source control/context.
 !apps/runner/src/services/build/
 !apps/runner/src/services/build/**
+
+# Two-pool runner environment examples (never commit real .env files).
+!zoe-infra/hosts/runner/gateway/.env.example
+!zoe-infra/hosts/runner/zoebuild/.env.example
+!zoe-infra/hosts/runner/zoeskoul-learning/.env.example

@@ -38,7 +38,7 @@ try: uid=pwd.getpwnam(args.zoebuild_executor_user).pw_uid
 except KeyError: sys.exit('First create an isolated rootless executor user; see README.md')
 if uid == os.getuid(): sys.exit('ERROR: ZoeBuild executor must use a different operating system user')
 old=parse_env(legacy)
-for key in ('GHCR_OWNER','RUNNER_SECRET','RUNNER_SHARED_SECRET','JUDGE0_AUTHN_TOKEN','RUNNER_DOCKER_SOCKET_HOST'):
+for key in ('GHCR_OWNER', 'RUNNER_SECRET', 'RUNNER_SHARED_SECRET', 'JUDGE0_AUTHN_TOKEN', 'JUDGE0_AUTHZ_TOKEN', 'JUDGE0_POSTGRES_PASSWORD', 'JUDGE0_REDIS_PASSWORD', 'RUNNER_DOCKER_SOCKET_HOST', 'RUNNER_CONTAINER_USER', 'RUNNER_WORKSPACE_HOST_ROOT', 'CADDY_EMAIL', 'RUNNER_DOMAIN', 'JUDGE0_DOMAIN'):
     if not old.get(key): sys.exit(f'Legacy .env missing required {key}; manually configure separate pool envs')
 learning = old.copy()
 learning.update(COMPOSE_PROJECT_NAME='zoeskoul-learning', RUNNER_EXECUTION_POOL='zoeskoul-learning', RUNNER_INGRESS_NETWORK='zoeskoul-runner-ingress')
