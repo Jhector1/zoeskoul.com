@@ -38,6 +38,11 @@ try: uid=pwd.getpwnam(args.zoebuild_executor_user).pw_uid
 except KeyError: sys.exit('First create an isolated rootless executor user; see README.md')
 if uid == os.getuid(): sys.exit('ERROR: ZoeBuild executor must use a different operating system user')
 old=parse_env(legacy)
+# Historical docker-compose.yml used this same workspace bind-mount default.
+# The legacy .env often omits it because Compose supplied the fallback.
+# This changes only generated pool configs, never the existing live .env.
+if not old.get('RUNNER_WORKSPACE_HOST_ROOT'):
+    old['RUNNER_WORKSPACE_HOST_ROOT'] = '/var/lib/zoeskoul-runner/workspaces'
 for key in ('GHCR_OWNER', 'RUNNER_SECRET', 'RUNNER_SHARED_SECRET', 'JUDGE0_AUTHN_TOKEN', 'JUDGE0_AUTHZ_TOKEN', 'JUDGE0_POSTGRES_PASSWORD', 'JUDGE0_REDIS_PASSWORD', 'RUNNER_DOCKER_SOCKET_HOST', 'RUNNER_CONTAINER_USER', 'RUNNER_WORKSPACE_HOST_ROOT', 'CADDY_EMAIL', 'RUNNER_DOMAIN', 'JUDGE0_DOMAIN'):
     if not old.get(key): sys.exit(f'Legacy .env missing required {key}; manually configure separate pool envs')
 learning = old.copy()

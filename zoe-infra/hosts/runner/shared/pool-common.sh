@@ -29,26 +29,33 @@ pool_load_env() {
   case "$RUNNER_CONTAINER_USER" in *:*) ;; *) echo 'ERROR: runner uid:gid required' >&2;return 1;; esac
 }
 
+# Inspect each private rootless socket as its owning account, not as jean.
+# /run/user/<uid> is deliberately inaccessible to other users (0700).
 pool_require_isolated_executor() {
   local socket="$RUNNER_DOCKER_SOCKET_HOST"
-  [ -S "$socket" ] || { echo "ERROR: rootless executor socket is missing: $socket" >&2; return 1; }
-  local uid
-  uid="$(stat -c %u "$socket")"
-  case "$socket" in "/run/user/$uid/docker.sock") ;; *) echo "ERROR: expected dedicated rootless socket path for uid $uid" >&2;return 1;; esac
-  local user_id="${RUNNER_CONTAINER_USER%%:*}"
-  if [ "$uid" != "$user_id" ]; then
-    echo "ERROR: container uid ${user_id} must match executor socket owner $uid" >&2
-    return 1
+  local uid="${RUNNER_CONTAINER_USER%%:*}"
+  [[ "$uid" =~ ^[0-9]+$ ]] || { echo 'ERROR: invalid executor UID' >&2; return 1; }
+  [ "$socket" = "/run/user/$uid/docker.sock" ] || {
+    echo 'ERROR: executor socket path must match the dedicated UID' >&2; return 1;
+  }
+  local owner
+  if [ "$(id -u)" = "$uid" ]; then
+    [ -S "$socket" ] || { echo 'ERROR: executor socket missing' >&2; return 1; }
+    owner="$(stat -c %u "$socket")" || return 1
+  else
+    sudo -u "#$uid" test -S "$socket" || {
+      echo 'ERROR: executor socket missing or inaccessible to owner' >&2; return 1;
+    }
+    owner="$(sudo -u "#$uid" stat -c %u "$socket")" || return 1
   fi
+  [ "$owner" = "$uid" ] || { echo 'ERROR: executor socket ownership mismatch' >&2; return 1; }
   pool_docker info --format '{{json .SecurityOptions}}' | grep -qi rootless || {
     echo 'ERROR: executor Docker is not rootless; refusing system Docker fallback' >&2
     return 1
   }
 }
-
 pool_docker() {
-  local uid
-  uid="$(stat -c %u "$RUNNER_DOCKER_SOCKET_HOST")"
+  local uid="${RUNNER_CONTAINER_USER%%:*}"
   if [ "$(id -u)" = "$uid" ]; then
     DOCKER_HOST="unix://${RUNNER_DOCKER_SOCKET_HOST}" docker "$@"
   else
@@ -56,7 +63,6 @@ pool_docker() {
       XDG_RUNTIME_DIR="/run/user/$uid" docker "$@"
   fi
 }
-
 pool_check_not_shared() {
   local other_env="$1" key other
   [ -f "$other_env" ] || return 0
