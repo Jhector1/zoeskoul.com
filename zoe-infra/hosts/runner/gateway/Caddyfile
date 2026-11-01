@@ -13,7 +13,7 @@
     }
 }
 
-{$RUNNER_DOMAIN} {
+{$RUNNER_SITE_ADDRESS} {
     encode zstd gzip
     import common_headers
 
@@ -37,7 +37,7 @@
     }
 }
 
-{$JUDGE0_DOMAIN} {
+{$JUDGE0_SITE_ADDRESS} {
     encode zstd gzip
     import common_headers
 

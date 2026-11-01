@@ -10,7 +10,9 @@ services:
     environment:
       CADDY_EMAIL: ${CADDY_EMAIL:?required}
       RUNNER_DOMAIN: ${RUNNER_DOMAIN:?required}
+      RUNNER_SITE_ADDRESS: ${GATEWAY_SCHEME:-https}://${RUNNER_DOMAIN:?required}
       JUDGE0_DOMAIN: ${JUDGE0_DOMAIN:?required}
+      JUDGE0_SITE_ADDRESS: ${GATEWAY_SCHEME:-https}://${JUDGE0_DOMAIN:?required}
       JUDGE0_AUTHN_TOKEN: ${JUDGE0_AUTHN_TOKEN:?required}
     volumes:
     - ./Caddyfile:/etc/caddy/Caddyfile:ro
