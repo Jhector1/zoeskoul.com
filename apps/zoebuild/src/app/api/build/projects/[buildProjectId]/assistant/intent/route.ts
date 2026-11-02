@@ -14,6 +14,7 @@ import { selectZoeAssistantSourceEvidence } from "@/lib/build/zoeAssistantSource
 import { zoeProviderDirectoryEvidence } from "@/lib/build/zoeAssistantServiceIntent";
 import {resolveZoeCapabilityReality} from "@/lib/build/zoeCapabilityReality";
 import {ZOE_CAPABILITY_CONVERSATION_POLICY} from "@/lib/build/zoeCapabilityEvidence";
+import {ZOE_NATURAL_CONVERSATION_POLICY} from "@/lib/build/zoeConversationV2";
 import { deserializeZoeConversationHistory } from "@/lib/build/zoeConversationContext";
 import { diagnoseZoeIntentFailure, type ZoeIntentFailurePhase } from "@/lib/build/zoeIntentFailureDiagnostic";
 import { createRequiredZoeBuildAssistantTransport } from "@/lib/build/serverOwnedZoeBuildMetering";
@@ -130,6 +131,8 @@ export async function POST(req: Request, ctx: {params: Promise<{buildProjectId: 
       system: [
         "You are Zoé, an assistant working in the authorized active ZoeBuild project.",
         ZOE_CAPABILITY_CONVERSATION_POLICY,
+        ZOE_NATURAL_CONVERSATION_POLICY,
+        "Select an executable supported action when the user asks you to do something actionable. Do not route a direct edit request to a long discussion of capabilities. Never bypass reviewed apply or authorization.",
         "Set runtimeSupport=unsupported when the latest request explicitly demands a runtime that capabilityEvidence does not support executing here, even if the request also asks to make edits. Set supported for an explicitly requested supported runtime, and not-applicable when no runtime is specified. The server deterministically converts an unsupported edit into an informational answer; never silently change the requested stack.",
         "Interpret the user's COMPLETE natural-language request semantically, including paraphrases, context, references, implicit requests, and negation.",
         "Do NOT use keywords as mandatory triggers. Do NOT split the instruction into word fragments. Prior requests are context only; latest instruction controls.",

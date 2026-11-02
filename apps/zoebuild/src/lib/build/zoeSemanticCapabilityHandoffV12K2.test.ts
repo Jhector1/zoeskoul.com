@@ -1,4 +1,5 @@
 import {readFileSync} from "node:fs";
+import {describeZoeActionReceipt} from "./zoeConversationV2";
 import {describe,expect,it} from "vitest";
 const read=(relative:string)=>readFileSync(new URL(relative,import.meta.url),"utf8");
 describe("V12K2 model-led provider decision and grounded project evidence",()=>{
@@ -9,7 +10,18 @@ describe("V12K2 model-led provider decision and grounded project evidence",()=>{
     expect(intent).toContain("User-named services, exclusions and prior project decisions outrank defaults");
     expect(shell).toContain("resolveZoeSelectedProvider(semantic.provider)");
     expect(shell).not.toContain("resolveZoeAssistantServiceIntent(`open");
-    expect(shell).toContain("no connection or activation was changed");
+    // V2 moved user-visible receipt text into the shared, typed action helper.
+    // Check both routing and the actual outcome without freezing its location.
+    expect(shell).toContain('describeZoeActionReceipt({kind:"settings-opened"');
+    const connectedSetup = describeZoeActionReceipt({
+      kind:"settings-opened", providerName:"Stripe", setupAvailable:true,
+    });
+    expect(connectedSetup).toContain("opened Stripe settings");
+    expect(connectedSetup).toContain("haven't connected an account or activated payments");
+    const unavailableSetup = describeZoeActionReceipt({
+      kind:"settings-opened", providerName:"Supabase", setupAvailable:false,
+    });
+    expect(unavailableSetup).toContain("nothing was connected");
   });
   it("does not grant provider connectivity based on directory display",()=>{
     const evidence=read("./zoeAssistantServiceIntent.ts");

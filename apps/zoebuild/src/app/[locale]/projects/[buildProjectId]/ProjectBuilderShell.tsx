@@ -39,6 +39,7 @@ import BuildWorkspaceClient from "./BuildWorkspaceClient";
 import ProjectRevisionHistory from "./ProjectRevisionHistory";
 import HistoryPreviewTransition from "./HistoryPreviewTransition";
 import { historySwitchHasSettled } from "@/lib/build/historySwitchReadiness";
+import { mayHydratePreparedDependencySource } from "@/lib/build/preparedDependencyReplayPolicy";
 import { preserveVersionWorkspaceView } from "@/lib/build/preserveVersionWorkspaceView";
 import { needsDependencyRecoveryAssistance } from "@/lib/build/historyDependencyReview";
 import SiteSettingsWorkspacePanel, { type Section as SiteSettingsSection } from "./SiteSettingsWorkspacePanel";
@@ -66,6 +67,7 @@ import {matchingZoeVersionScope,decodeZoeVersionChatScope,type ZoeVersionChatSco
 import {keepReviewedProposal, recoverReviewedProposal, clearReviewedProposal} from "@/lib/build/zoeReviewedProposalSessionV12K11N";
 import { readZoeAnswerEventStream } from "@/lib/build/zoeAnswerEventStream";
 import { resolveZoeChatFollowState } from "@/lib/build/zoeChatAutoFollow";
+import { describeZoeActionReceipt } from "@/lib/build/zoeConversationV2";
 
 const AI_EDIT_ACCESS_MESSAGE = "AI editing permission is not active for this account. Open ZoeBuild Billing → AI credit balance to check your feature grant. No project source was changed.";
 
@@ -122,7 +124,7 @@ export default function ProjectBuilderShell(props: {
   // The preview transition is independent of editor hydration. Only the preview
   // pane waits for runner acknowledgement; the editor/chat stay usable once
   // the saved files are hydrated.
-  const [historySwitch, setHistorySwitch] = useState<{target:number;sourceVersion:number|null;failed:boolean}|null>(null);
+  const [historySwitch, setHistorySwitch] = useState<{target:number;sourceVersion:number|null;restoreError:boolean}|null>(null);
   // The server's monotonic concurrency token is distinct from the selected
   // saved-history version. Never trust an old editor callback after hydration.
   const activeEditorEpochRef = useRef(editorHydrationEpoch);
@@ -131,7 +133,10 @@ export default function ProjectBuilderShell(props: {
   previewSourceTokenRef.current = previewSourceVersion;
   const authoritativeRefreshInFlightRef = useRef<Promise<boolean> | null>(null);
 
-  async function reconcileStalePreview(attemptedSourceVersion: number): Promise<boolean> {
+  async function reconcileStalePreview(
+    attemptedSourceVersion: number,
+    allowEqualAfterBootstrap = false,
+  ): Promise<boolean> {
     if (authoritativeRefreshInFlightRef.current) return authoritativeRefreshInFlightRef.current;
     // Do not throw away unsaved files, pending AI proposals, or a concurrent
     // selection while a stale preview is being reconciled.
@@ -150,7 +155,8 @@ export default function ProjectBuilderShell(props: {
             pendingFileEdit || pendingPlan) return false;
         if (previewSourceTokenRef.current !== attemptedSourceVersion)
           return previewSourceTokenRef.current > attemptedSourceVersion;
-        if (latest.sourceVersion === attemptedSourceVersion) return false;
+        if (!mayHydratePreparedDependencySource(
+          attemptedSourceVersion, latest.sourceVersion, allowEqualAfterBootstrap)) return false;
         // A new server source is already saved; rehydrate, never PATCH and never
         // append to user-visible history. Remount the editor from that baseline.
         setEditorProject({...latest, workspace:preserveVersionWorkspaceView(latest.workspace,editorViewRef.current)});
@@ -160,7 +166,7 @@ export default function ProjectBuilderShell(props: {
         // When dependency preparation advances the concurrency token, keep
         // the selected historical version's preview transition aligned with it.
         setHistorySwitch(current => current?.sourceVersion === attemptedSourceVersion
-          ? {...current, sourceVersion: latest.sourceVersion, failed: false} : current);
+          ? {...current, sourceVersion: latest.sourceVersion, restoreError: false} : current);
         setRestoredVersionPinned(current => current === attemptedSourceVersion
           ? latest.sourceVersion : current);
         setSavedBuildResult(null);
@@ -199,6 +205,10 @@ export default function ProjectBuilderShell(props: {
     allowDependencyBootstrap: !codeDirty,
     restoredDependencyPinned: restoredVersionPinned === previewSourceVersion,
     onSourceConflict: reconcileStalePreview,
+    // Only invoked after a successful owner-authorized dependency bootstrap.
+    // An exact-lock adoption may leave sourceVersion unchanged; refresh the
+    // authoritative workspace without reloading the entire browser page.
+    onDependencyPrepared: (version) => reconcileStalePreview(version, true),
   });
 
   const previewEntries = exportWorkspaceEntries(previewWorkspace.nodes);
@@ -208,7 +218,9 @@ export default function ProjectBuilderShell(props: {
     : reactPreview;
 
   useEffect(() => {
-    if (!historySwitch || historySwitch.failed || historySwitch.sourceVersion === null) return;
+    // A late but correctly source-acknowledged preview must dismiss the overlay,
+    // even if a previous deadline or restore confirmation had marked it failed.
+    if (!historySwitch || historySwitch.sourceVersion === null) return;
     if (historySwitchHasSettled({
       expectedSourceVersion: historySwitch.sourceVersion,
       hydratedSourceVersion: previewSourceVersion,
@@ -218,20 +230,10 @@ export default function ProjectBuilderShell(props: {
     })) setHistorySwitch(null);
   }, [historySwitch, previewSourceVersion, reactPreview?.confirmedSourceVersion, reactPreview?.attemptedSourceVersion, reactPreview?.state]);
 
-  // Never leave the selected version behind an unbounded transition mask.
-  // The runner already owns preview-start retries/timeouts; this is only a
-  // user-visible escape hatch after the exact selected source remains unready.
-  useEffect(() => {
-    if (!historySwitch || historySwitch.failed) return;
-    const target = historySwitch.target;
-    const sourceVersion = historySwitch.sourceVersion;
-    const watchdog = window.setTimeout(() => {
-      setHistorySwitch(current => current && current.target === target &&
-        current.sourceVersion === sourceVersion && !current.failed
-        ? {...current, failed: true} : current);
-    }, sourceVersion === null ? 45_000 : 145_000);
-    return () => window.clearTimeout(watchdog);
-  }, [historySwitch?.target, historySwitch?.sourceVersion, historySwitch?.failed]);
+  // Preview status has ONE authority: the authenticated runner operation.
+  // A client wall-clock watchdog cannot prove a restore or Vite render failed.
+  // History tracks only the owner-authorized restore acknowledgement; the
+  // preview hook and sandboxed iframe own subsequent preparation/render state.
 
   const [
     commerceCandidate,
@@ -874,9 +876,8 @@ export default function ProjectBuilderShell(props: {
         const known = resolveZoeSelectedProvider(semantic.provider);
         if (known?.kind === "provider") {
           setAssistantSettingsSection(known.section);
-          addMessage(known.setup === "unavailable"
-            ? `${known.providerName} is not connected: ZoeBuild has no enabled setup workflow for this provider. Your choice was preserved; no substitute was connected.`
-            : `${known.providerName} settings opened. Check the actual project connection and authorize setup there; no connection or activation was changed.`);
+          addMessage(describeZoeActionReceipt({kind:"settings-opened",
+            providerName:known.providerName,setupAvailable:known.setup!=="unavailable"}));
         } else if (known?.kind === "ambiguous") {
           setAssistantSettingsSection(undefined);
           addMessage(`${known.name} appears in multiple settings categories (${known.sections.join(" and ")}). Which capability should I open? No connection was changed.`);
@@ -941,7 +942,8 @@ export default function ProjectBuilderShell(props: {
         }
         acceptReviewedProposal(editResult.proposal);
         commitCompletedAttempt();
-        addMessage(`Zoé proposed ${editResult.proposal.edits.length} targeted file change(s): ${editResult.proposal.summary}. Review each file before applying. Nothing has been changed.`);
+        addMessage(describeZoeActionReceipt({kind:"source-proposed",
+          summary:editResult.proposal.summary,fileCount:editResult.proposal.edits.length}));
         return;
       }
 
@@ -986,6 +988,7 @@ export default function ProjectBuilderShell(props: {
   async function refreshAfterSuccessfulApply(
     expectedVersion: number,
     approvedEdits?: ZoeSourceEditProposal["edits"],
+    options?: Readonly<{ deferChatForHistoryRestore?: boolean }>,
   ): Promise<readonly string[]> {
     const latest = await fetchAuthoritativeAppliedProject({
       buildProjectId: props.project.buildProjectId,
@@ -1005,6 +1008,20 @@ export default function ProjectBuilderShell(props: {
     codeDirtyRef.current = false;
     setCodeDirty(false);
     setEditorHydrationEpoch(current => current + 1);
+    // History restores have already established a new authoritative source.
+    // Chat has its own sourceVersion-keyed effect below: do not await a second
+    // scope/history fetch in the History onRestored callback. Immediately
+    // invalidate the previous version's chat before that effect executes.
+    if (options?.deferChatForHistoryRestore) {
+      chatScopeRef.current = null;
+      setChatSavedVersion(null);
+      historyLoadRef.current = null;
+      chatHistoryRef.current = [];
+      setMessages([]);
+      setChatHistoryError(null);
+      return verifiedPaths;
+    }
+    // Non-history apply paths retain their existing verified chat sequence.
     // A successful save starts a new saved-version conversation. History
     // reconciliation is not allowed to undo the server-authoritative source.
     try {
@@ -1086,17 +1103,18 @@ export default function ProjectBuilderShell(props: {
       }
       const approvedEdits = pendingFileEdit.edits;
       discardReviewedProposal();
-      addMessage(`Approved edits saved as source v${savedVersion}. Checking the saved files before updating Preview.`);
+      addMessage(describeZoeActionReceipt({kind:"source-saved",sourceVersion:savedVersion}));
       try {
         const verifiedPaths = await refreshAfterSuccessfulApply(savedVersion, approvedEdits);
-        addMessage(`Verified ${verifiedPaths.length} saved file(s) in source v${savedVersion}: ${verifiedPaths.join(", ")}. Preview received the saved source; check its rendered result. If the change affects another page, open that page in the Preview address bar; source verification does not prove the visible design matches your request.`);
+        addMessage(describeZoeActionReceipt({kind:"source-verified",
+          sourceVersion:savedVersion,verifiedPaths}));
         setThinkingSummary("");
         setThinkingPhase("checking");
       } catch {
         // The PATCH already committed: never retry it or call the provider again.
         // The browser is deliberately left untouched on an unverified refresh.
         setApplyPlanError("Edits were saved, but the source snapshot could not be verified or the editor became dirty. Do not reapply. Preserve unsaved work and refresh after resolving it.");
-        addMessage("The edit was saved, but Preview was not synchronized. Do not retry the apply; inspect the source and refresh after preserving any manual edits.");
+        addMessage(describeZoeActionReceipt({kind:"source-sync-unverified"}));
       }
     } catch (error) {
       setApplyPlanError(error instanceof Error ? error.message : "Edits could not be applied.");
@@ -1174,9 +1192,8 @@ export default function ProjectBuilderShell(props: {
         );
       }
 
-      addMessage(
-        `Plan applied to source version ${payload.apply.sourceVersion}.`,
-      );
+      addMessage(describeZoeActionReceipt({kind:"plan-applied",
+        sourceVersion:payload.apply.sourceVersion}));
 
       setPendingPlan(null);
       pendingPlanBaseVersion.current = null;
@@ -1378,17 +1395,27 @@ export default function ProjectBuilderShell(props: {
                 await historyWritesRef.current;
               }}
               onSwitchStart={(version) => {
-                setHistorySwitch({target:version,sourceVersion:null,failed:false});
+                setHistorySwitch({target:version,sourceVersion:null,restoreError:false});
               }}
               onSwitchFailure={(version, persisted) => {
                 setHistorySwitch(current => current?.target === version
-                  ? (persisted ? {...current,failed:true} : null) : current);
+                  ? (persisted ? {...current,restoreError:true} : null) : current);
               }}
               onStaleSource={reconcileStalePreview}
               onRestored={async (savedVersion, fromVersion) => {
+                // The owner-scoped restore POST has already returned its saved
+                // source token. A later authoritative project/chat fetch must
+                // not leave the 45-second *unacknowledged restore* watchdog
+                // running while the selected version is already Current.
+                // Preview visibility still requires exact hydrated source and
+                // runner acknowledgement via historySwitchHasSettled.
+                setHistorySwitch(current => current?.target === fromVersion
+                  ? {...current,sourceVersion:savedVersion,restoreError:false}
+                  : current);
                 setRestoredVersionPinned(savedVersion);
-                await refreshAfterSuccessfulApply(savedVersion);
-                setHistorySwitch({target:fromVersion,sourceVersion:savedVersion,failed:false});
+                await refreshAfterSuccessfulApply(savedVersion, undefined, {
+                  deferChatForHistoryRestore: true,
+                });
               }}
             />
           ) : null}
@@ -1593,12 +1620,12 @@ export default function ProjectBuilderShell(props: {
             {historySwitch ? <HistoryPreviewTransition
               target={historySwitch.target}
               sourceVersion={historySwitch.sourceVersion}
-              failed={historySwitch.failed}
+              restoreError={historySwitch.restoreError}
               previewMessage={reactPreview?.message ?? null}
               previewState={reactPreview?.state ?? "starting"}
               onRetry={historySwitch.sourceVersion !== null && reactPreview?.onRetry
                 ? () => {
-                    setHistorySwitch(current => current?.failed ? {...current,failed:false} : current);
+                    setHistorySwitch(current => current?.restoreError ? {...current,restoreError:false} : current);
                     reactPreview.onRetry?.();
                   }
                 : undefined}

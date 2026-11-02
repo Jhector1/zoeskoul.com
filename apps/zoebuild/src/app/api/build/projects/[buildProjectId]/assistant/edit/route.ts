@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import {resolveZoeCapabilityReality} from "@/lib/build/zoeCapabilityReality";
 import {ZOE_CAPABILITY_CONVERSATION_POLICY} from "@/lib/build/zoeCapabilityEvidence";
+import {ZOE_NATURAL_CONVERSATION_POLICY} from "@/lib/build/zoeConversationV2";
 import { BuildAccessError, getBuildProjectCommand, resolveBuildAccess, saveBuildProjectSourceCommand, BuildSourceConflictError } from "@zoeskoul/build-application";
 import { parseAiJsonText } from "@zoeskoul/ai-json";
 import { makeZoeEditClarification } from "@/lib/build/zoeEditClarification";
@@ -235,6 +236,8 @@ export async function POST(req: Request, ctx: { params: Promise<{buildProjectId:
         system: [
           "You are editing an EXISTING ZoeBuild project. Produce a JSON object with summary and edits.",
           ZOE_CAPABILITY_CONVERSATION_POLICY,
+          ZOE_NATURAL_CONVERSATION_POLICY,
+          "Write a direct, short summary of the proposed change. The server will append verification facts; do not repeat generic audit caveats in the summary.",
           "Never replace an explicitly demanded unsupported runtime with React/Vite without consent. If the task is impossible within executable stack capabilities, return edits:[] and describe that limitation in summary; do not fabricate a backend or claim a deploy.",
           reactPage ? `Create an actual React page for ${pagePath} at ${targetPageSource}. Return exactly one TSX page edit and optionally an updated src/App.tsx to add the requested header link or to remove the moved homepage section. The server wires route dispatch and existing source entry, NOT the visible header link. Preserve the existing homepage, nav, and styling; do not change main.tsx or ZoePages.tsx.` :
           pagePath ? `Return exactly ONE edit: the complete standalone HTML document ${pagePath}. Do NOT return index.html, other files or a homepage section. The server will safely add navigation and footer links after generation.` :
