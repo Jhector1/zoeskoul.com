@@ -33,6 +33,12 @@ if [[ ! "$owner" =~ ^[a-z0-9-]+$ ]]; then
   exit 2
 fi
 
+# Fail closed if GitHub Actions cannot prove this exact SHA had a successful
+# image-specific build AND digest-recording step. A failed sibling is allowed.
+# The verifier uses the current repository's workflow/job results, not a
+# subjective overall run conclusion.
+python3 scripts/ci/verify-image-build-checks.py
+
 # All candidates are inspected before changing even one prod tag.
 references=()
 digests=()

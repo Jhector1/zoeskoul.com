@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   packages: write
 
 # Manual production promotions must never run against each other concurrently.
@@ -54,4 +55,5 @@ jobs:
         env:
           TARGET_COMMIT: ${{ inputs.commit_sha }}
           TARGET_COMPONENT: ${{ inputs.component }}
+          GH_API_TOKEN: ${{ github.token }}
         run: bash scripts/ci/promote-production-images.sh
