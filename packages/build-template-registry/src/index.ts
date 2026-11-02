@@ -1,4 +1,6 @@
 import type { WorkspaceStateV2 } from "@zoeskoul/workspace-contracts";
+import { TANSTACK_START_TEMPLATE_V1 } from "./tanstackStartTemplate";
+export { TANSTACK_START_TEMPLATE_V1 } from "./tanstackStartTemplate";
 
 /**
  * Provider-neutral source templates for ZoeBuild.

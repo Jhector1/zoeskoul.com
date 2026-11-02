@@ -387,10 +387,16 @@ export type ProjectSpecificationV1 = Readonly<{
 
 export type ProjectSpecification = ProjectSpecificationV1;
 
-export type BuildArtifactDefinition = Readonly<{
-  type: "static-directory";
-  outputPath: string;
-}>;
+/** The artifact tells the publisher what was verified, not how to run source.
+ * An SSR Worker must never be treated as a static dist directory. */
+export type BuildArtifactDefinition =
+  | Readonly<{ type: "static-directory"; outputPath: string }>
+  | Readonly<{
+      type: "worker-bundle";
+      outputPath: "dist/server";
+      assetsPath: "dist/client";
+      entrypoint: "index.js";
+    }>;
 
 export type BuildStackDefinition = Readonly<{
   id: string;

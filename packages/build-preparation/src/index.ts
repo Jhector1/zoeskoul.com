@@ -137,10 +137,25 @@ function requireSafeArtifactDefinition(
     );
   }
 
+  if (artifact.type === "worker-bundle") {
+    // Cloudflare Vite builds currently emit these two distinct outputs. This
+    // stage validates metadata only: executable bundle attestation and
+    // tenant-scoped deployment must be performed by a future trusted adapter.
+    if (artifact.outputPath !== "dist/server" ||
+        artifact.assetsPath !== "dist/client" ||
+        artifact.entrypoint !== "index.js") {
+      throw new BuildPreparationError(
+        "BUILD_PREPARATION_INVALID",
+        "Unsupported TanStack Start worker output contract.",
+      );
+    }
+    return artifact;
+  }
+
   if (artifact.type !== "static-directory") {
     throw new BuildPreparationError(
       "BUILD_PREPARATION_INVALID",
-      `Unsupported ZoeBuild artifact type: ${String((artifact as { type?: unknown }).type)}.`,
+      "Unsupported ZoeBuild artifact type.",
     );
   }
 

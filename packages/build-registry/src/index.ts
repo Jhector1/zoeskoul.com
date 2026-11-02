@@ -48,6 +48,31 @@ export const REACT_VITE_STACK_V1 = {
   deploymentAdapterId: "static-assets-v1",
 } as const satisfies BuildStackDefinition;
 
+/** TanStack Start target stack. Deliberately NOT in BUILD_STACKS_V1 until
+ * isolated SSR preview and Worker publication pass all cutover gates. No
+ * static publisher may reinterpret this artifact as a web directory. */
+export const TANSTACK_START_STACK_V1 = {
+  id: "tanstack-start-v1",
+  projectTypes: ["static-site", "frontend-app", "fullstack-app"],
+  targets: ["web"],
+  runtimeProfileId: "build-worker-v1",
+  templateId: "tanstack-start-v1",
+  commands: {
+    install: ["pnpm", "install", "--frozen-lockfile"],
+    dev: ["pnpm", "dev", "--host", "0.0.0.0"],
+    build: ["pnpm", "build"],
+  },
+  preview: { type: "server", port: 5173 },
+  artifact: {
+    type: "worker-bundle",
+    outputPath: "dist/server",
+    assetsPath: "dist/client",
+    entrypoint: "index.js",
+  },
+  supportedCapabilities: ["backend"],
+  deploymentAdapterId: "cloudflare-workers-v1",
+} as const satisfies BuildStackDefinition;
+
 export const COMMERCE_STATIC_STACK_V1 = {
   id: "commerce-static-v1",
   projectTypes: ["frontend-app"],
