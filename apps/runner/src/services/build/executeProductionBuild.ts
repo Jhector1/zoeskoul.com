@@ -198,7 +198,7 @@ async function waitForBuildContainer(
   }
 }
 
-async function executeBuildStep(
+export async function executeBuildStep(
   args: Readonly<{
     workspaceDir: string;
     command:
