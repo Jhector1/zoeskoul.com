@@ -14,7 +14,7 @@ describe("TanStack Start target stack is declared but not active", () => {
   });
 
   it("does not prematurely activate the unverified SSR runner or publisher", () => {
-    expect(BUILD_STACKS_V1.some(stack => stack.id === TANSTACK_START_STACK_V1.id)).toBe(false);
+    expect(BUILD_STACKS_V1.map(stack => stack.id)).not.toContain(TANSTACK_START_STACK_V1.id);
     expect(getBuildStack(TANSTACK_START_STACK_V1.id)).toBeUndefined();
   });
 });
