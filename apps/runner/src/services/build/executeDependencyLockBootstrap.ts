@@ -16,6 +16,8 @@ import { createWorkspace } from "../workspace/createWorkspace.js";
 import { resolveTrustedBuildOperation } from "./trustedBuildOperations.js";
 import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
 import { bootstrapLockCacheKey, resolveBootstrapLockOnce } from "./dependencyLockBootstrapCache.js";
+import { reportTrustedBuildFailure } from "./trustedBuildFailureDiagnostics.js";
+export { classifyTrustedBuildFailure as classifyDependencyBootstrapFailure } from "./trustedBuildFailureDiagnostics.js";
 
 const MAX_LOCKFILE_BYTES = 2 * 1024 * 1024;
 const BOOTSTRAP_TIMEOUT_MS = 240_000; // bounded cold fallback; measured healthy runs exceed 100 seconds
@@ -91,67 +93,6 @@ async function waitForBootstrapContainer(
   } finally {
     if (timer) clearTimeout(timer);
   }
-}
-
-/**
- * Container failures used to disappear behind an HTTP 500 after up to two minutes.
- * Classify only known error tokens, never print arbitrary pnpm output: package
- * manager output can include source-controlled URLs or other untrusted text.
- */
-export function classifyDependencyBootstrapFailure(args: Readonly<{
-  timedOut: boolean;
-  oomKilled: boolean;
-  exitCode: number | null;
-  output: string;
-}>): "timeout" | "out-of-memory" | "registry-network" |
-  "package-resolution" | "nonzero-exit" | "container-error" {
-  if (args.oomKilled || args.exitCode === 137) return "out-of-memory";
-  if (/\b(?:EAI_AGAIN|ENOTFOUND|ECONNRESET|ECONNREFUSED|ETIMEDOUT|ERR_PNPM_FETCH|ERR_PNPM_META_FETCH_FAIL)\b/i.test(args.output))
-    return "registry-network";
-  if (/\b(?:ERR_PNPM_NO_MATCHING_VERSION|ERR_PNPM_UNSUPPORTED_ENGINE|ERR_PNPM_NO_MATCHING_VERSION_INSIDE_WORKSPACE)\b/i.test(args.output))
-    return "package-resolution";
-  if (args.timedOut) return "timeout";
-  return args.exitCode !== null ? "nonzero-exit" : "container-error";
-}
-
-async function logBootstrapFailure(
-  container: Awaited<ReturnType<typeof docker.createContainer>> | null,
-  error: unknown,
-  elapsedMs: number,
-): Promise<void> {
-  // Capture only short, bounded diagnostics. Never persist or return raw logs.
-  const probe = async <T>(load: Promise<T>, fallback: T): Promise<T> => {
-    let timer: ReturnType<typeof setTimeout> | null = null;
-    try {
-      return await Promise.race([load.catch(() => fallback), new Promise<T>(resolve => {
-        timer = setTimeout(() => resolve(fallback), 1_500);
-      })]);
-    } finally { if (timer) clearTimeout(timer); }
-  };
-  const state = container
-    ? await probe(container.inspect(), null)
-    : null;
-  const raw = container
-    ? await probe(container.logs({ follow: false, stdout: true, stderr: true, tail: 64 }), null)
-    : null;
-  const output = Buffer.isBuffer(raw) ? raw.toString("utf8")
-    : typeof raw === "string" ? raw : "";
-  const exitCode = typeof state?.State?.ExitCode === "number" &&
-    !state.State.Running ? state.State.ExitCode : null;
-  const timedOut = error instanceof Error &&
-    error.message.includes("bootstrap exceeded");
-  console.error("RUNNER trusted dependency bootstrap failed", {
-    category: classifyDependencyBootstrapFailure({
-      timedOut,
-      oomKilled: state?.State?.OOMKilled === true,
-      exitCode,
-      output,
-    }),
-    elapsedMs,
-    exitCode,
-    timedOut,
-    oomKilled: state?.State?.OOMKilled === true,
-  });
 }
 
 async function readLockfile(workspaceDir: string): Promise<string> {
@@ -273,7 +214,10 @@ export async function executeDependencyLockBootstrap(
       }
       return content;
     } catch (error) {
-      await logBootstrapFailure(container, error, Date.now() - startedAt).catch(() => undefined);
+      await reportTrustedBuildFailure({
+        container, stage: "bootstrap", elapsedMs: Date.now() - startedAt,
+        timedOut: error instanceof Error && error.message.includes("bootstrap exceeded"),
+      }).catch(() => undefined);
       throw error;
     } finally {
       if (container) {

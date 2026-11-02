@@ -45,6 +45,7 @@ import {
 } from "./trustedBuildOperations.js";
 import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
 import { TrustedProductionBuildStepFailure, type ProductionBuildStep } from "./productionBuildStepFailure.js";
+import { reportTrustedBuildFailure } from "./trustedBuildFailureDiagnostics.js";
 
 export function buildProductionBuildContainerOptions(
   args: Readonly<{
@@ -211,9 +212,16 @@ export async function executeBuildStep(
     onContainerRemoved?: (containerId: string) => Promise<void>;
   }>,
 ): Promise<void> {
+  const startedAt = Date.now();
   const base = buildProductionBuildContainerOptions(args);
   const container = await docker.createContainer({
     ...base, Labels: {...base.Labels, ...(args.tanstackRunId ? {"com.zoeskoul.runner.tanstack-run": args.tanstackRunId} : {})},
+  }).catch(async (error: unknown) => {
+    await reportTrustedBuildFailure({
+      container: null, stage: args.step, elapsedMs: Date.now() - startedAt,
+      timedOut: false,
+    }).catch(() => undefined);
+    throw error;
   });
   try {
     await args.onContainerCreated?.(container.id);
@@ -221,6 +229,13 @@ export async function executeBuildStep(
     const result = await waitForBuildContainer(container, args.step);
     const statusCode = typeof result.StatusCode === "number" ? result.StatusCode : -1;
     if (statusCode !== 0) throw new TrustedProductionBuildStepFailure(args.step, "nonzero-exit");
+  } catch (error) {
+    // Classify before resource removal, without changing the journal lifecycle.
+    await reportTrustedBuildFailure({
+      container, stage: args.step, elapsedMs: Date.now() - startedAt,
+      timedOut: error instanceof TrustedProductionBuildStepFailure && error.failure === "timeout",
+    }).catch(() => undefined);
+    throw error;
   } finally {
     if (args.strictCleanup) {
       // Full-stack preview install must not silently lose a running install
