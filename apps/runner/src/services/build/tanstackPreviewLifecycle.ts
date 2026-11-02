@@ -1,5 +1,19 @@
 import { isTanstackSsrReady, TANSTACK_PREVIEW_READY_TIMEOUT_MS, TANSTACK_PREVIEW_PROBE_INTERVAL_MS } from "./tanstackPreviewRuntimePolicy.js";
 
+/** Preserve the recovery callback for cleanup failures *before* start returns
+ * a normal handle. The admission owner must quarantine these orphans so they
+ * continue to consume the shared preview slot until teardown is verified. */
+export class TanstackPreviewCleanupError extends Error {
+  constructor(
+    readonly orphan: Readonly<{ containerId: string | null; workspaceDir: string | null }>,
+    readonly recover: () => Promise<void>,
+    cause: unknown,
+  ) {
+    super("TanStack preview failed and sandbox cleanup needs reconciliation.", { cause });
+    this.name = "TanstackPreviewCleanupError";
+  }
+}
+
 /** One lifecycle operation, never a parallel preview registry. Its caller must
  * acquire the EXISTING shared Runner preview-admission lease before invoking.
  * The adapter owns a private workspace and a Docker container per operation. */
@@ -19,7 +33,8 @@ export type TanstackPreviewDriver = Readonly<{
 }>;
 
 export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver,
-  opts: Readonly<{ signal?: AbortSignal; timeoutMs?: number }> = {}): Promise<TanstackSandboxHandle> {
+  opts: Readonly<{ signal?: AbortSignal; timeoutMs?: number;
+    onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void }> = {}): Promise<TanstackSandboxHandle> {
   const timeoutMs = opts.timeoutMs ?? TANSTACK_PREVIEW_READY_TIMEOUT_MS;
   if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0 || timeoutMs > TANSTACK_PREVIEW_READY_TIMEOUT_MS)
     throw new Error("Invalid preview readiness deadline.");
@@ -27,10 +42,13 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
   let containerId: string | null = null;
   try {
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
+    opts.onPhase?.("dependencies");
     workspaceDir = await driver.prepare();
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
+    opts.onPhase?.("container");
     containerId = await driver.launch(workspaceDir);
     const startedAt = driver.now();
+    opts.onPhase?.("readiness");
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
     // Clock guard spans install, container startup and SSR readiness.
     while (driver.now() - startedAt < timeoutMs) {
@@ -49,10 +67,33 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
     throw new Error("Isolated TanStack preview did not become ready.");
   } catch (error) {
     // Cleanup is mandatory even if readiness, installation, or cancellation fails.
-    let cleanupFailed = false;
-    if (containerId) await driver.destroy(containerId).catch(() => { cleanupFailed = true; });
-    if (workspaceDir) await driver.cleanup(workspaceDir).catch(() => { cleanupFailed = true; });
-    if (cleanupFailed) throw new Error("TanStack preview failed and sandbox cleanup needs reconciliation.", { cause: error });
+    const earlier = error instanceof TanstackPreviewCleanupError ? error : null;
+    let containerFailed = false;
+    let workspaceFailed = false;
+    if (containerId) await driver.destroy(containerId).catch(() => { containerFailed = true; });
+    if (workspaceDir) await driver.cleanup(workspaceDir).catch(() => { workspaceFailed = true; });
+    if (earlier || containerFailed || workspaceFailed) {
+      // Retry ONLY resources that have not been confirmed removed. A failed
+      // Docker teardown must never silently turn into a free capacity slot.
+      const outstanding = {
+        containerId: containerFailed ? containerId : (earlier?.orphan.containerId ?? null),
+        workspaceDir: workspaceFailed ? workspaceDir : (earlier?.orphan.workspaceDir ?? null),
+      };
+      // Recoveries that already succeeded must not be retried; a second
+      // workspace deletion might not be idempotent on every storage backend.
+      const pending: Array<() => Promise<void>> = [
+        ...(earlier ? [() => earlier.recover()] : []),
+        ...(containerFailed && containerId ? [containerId].map((id) => () => driver.destroy(id)) : []),
+        ...(workspaceFailed && workspaceDir ? [workspaceDir].map((dir) => () => driver.cleanup(dir)) : []),
+      ];
+      const recover = async () => {
+        const results = await Promise.allSettled(pending.map(task => task()));
+        for (let i = results.length - 1; i >= 0; i--)
+          if (results[i].status === "fulfilled") pending.splice(i, 1);
+        if (pending.length) throw new Error("TanStack preview orphan cleanup still incomplete.");
+      };
+      throw new TanstackPreviewCleanupError(outstanding, recover, error);
+    }
     throw error;
   }
 }

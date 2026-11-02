@@ -105,7 +105,10 @@ async function writeInitialEntries(
   }
 }
 
-export async function createWorkspace(files: WorkspaceSyncEntry[]) {
+export async function createWorkspace(
+  files: WorkspaceSyncEntry[],
+  options: Readonly<{ onWorkspaceAllocated?: (workspaceDir: string) => Promise<void> }> = {},
+) {
   const rootBase = env.workspaceRoot;
 
   // Observability only: no changes to workspace authorization, file writes,
@@ -138,6 +141,9 @@ export async function createWorkspace(files: WorkspaceSyncEntry[]) {
   checkpoint = Date.now();
 
   const root = path.join(rootBase, `zoeskoul-run-${crypto.randomUUID()}`);
+  // Optional trusted lifecycle hook: durable owner records the future path
+  // before the first mkdir, closing the crash/rollback identification gap.
+  await options.onWorkspaceAllocated?.(root);
   stage = "workspace-directory";
   await ensureWorkspaceDir(root);
   timings.workspaceDirMs = Date.now() - checkpoint;

@@ -28,6 +28,8 @@ export {
   PROJECT_DEPENDENCY_APPROVAL_PATH,
   inspectProjectOwnedDependencyPreparation,
   ProjectDependencyApprovalError,
+  verifyProjectDependencies,
+  assertNoUntrustedInstallControls,
 } from "./projectDependencyApproval";
 
 /**

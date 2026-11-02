@@ -198,52 +198,42 @@ async function waitForBuildContainer(
   }
 }
 
+/** Only trusted internal callers can request strict cleanup callbacks.
+ * Default behavior is retained for existing production-build users. */
 export async function executeBuildStep(
   args: Readonly<{
     workspaceDir: string;
-    command:
-      readonly string[];
-    step:
-      ProductionBuildStep;
+    command: readonly string[];
+    step: ProductionBuildStep;
+    strictCleanup?: boolean;
+    tanstackRunId?: string;
+    onContainerCreated?: (containerId: string) => Promise<void>;
+    onContainerRemoved?: (containerId: string) => Promise<void>;
   }>,
 ): Promise<void> {
-  const container =
-    await docker
-      .createContainer(
-        buildProductionBuildContainerOptions(
-          args,
-        ),
-      );
-
+  const base = buildProductionBuildContainerOptions(args);
+  const container = await docker.createContainer({
+    ...base, Labels: {...base.Labels, ...(args.tanstackRunId ? {"com.zoeskoul.runner.tanstack-run": args.tanstackRunId} : {})},
+  });
   try {
+    await args.onContainerCreated?.(container.id);
     await container.start();
-
-    const result =
-      await waitForBuildContainer(
-        container,
-        args.step,
-      );
-
-    const statusCode =
-      typeof result
-        .StatusCode ===
-        "number"
-        ? result.StatusCode
-        : -1;
-
-    if (
-      statusCode !== 0
-    ) {
-      throw new TrustedProductionBuildStepFailure(args.step, "nonzero-exit");
-    }
+    const result = await waitForBuildContainer(container, args.step);
+    const statusCode = typeof result.StatusCode === "number" ? result.StatusCode : -1;
+    if (statusCode !== 0) throw new TrustedProductionBuildStepFailure(args.step, "nonzero-exit");
   } finally {
-    await container
-      .remove({
-        force: true,
-      })
-      .catch(
-        () => undefined,
-      );
+    if (args.strictCleanup) {
+      // Full-stack preview install must not silently lose a running install
+      // container; its journal identity is held until Docker teardown succeeds.
+      try { await container.remove({ force: true }); }
+      catch (error) {
+        if (!(typeof error === "object" && error !== null &&
+              "statusCode" in error && error.statusCode === 404)) throw error;
+      }
+      await args.onContainerRemoved?.(container.id);
+    } else {
+      await container.remove({ force: true }).catch(() => undefined);
+    }
   }
 }
 

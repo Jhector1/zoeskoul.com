@@ -47,3 +47,35 @@ describe("TanStack preview uses the shared Runner admission",()=>{
     expect(sharedFullStackPreviews.get(newer.previewId)).not.toBeNull();
   });
 });
+
+
+describe("failed startup quarantine", () => {
+  it("keeps a leaked container counted and non-routable until cleanup succeeds", async () => {
+    let destroys = 0;
+    const failingDriver = {
+      ...driver,
+      probe: async () => ({...page, status: 503}),
+      now: (() => {let tick=0;return ()=>tick;})(),
+      sleep: async () => {},
+      destroy: async () => {destroys++;if (destroys < 3) throw Error("daemon unavailable");},
+    };
+    // Cancel immediately after launch to avoid the readiness timeout.
+    const controller = new AbortController();
+    const abortDriver = {...failingDriver, launch: async () => {
+      controller.abort();return "container-orphan";
+    }};
+    await expect(startAdmittedTanstackPreview({ownerKey:"owner",request,
+      authorize:async()=>{},signal:controller.signal,driverFactory:()=>abortDriver}))
+      .rejects.toThrow("reconciliation");
+    expect(destroys).toBe(1);
+    expect(sharedFullStackPreviews.count()).toBe(1);
+    const orphan = sharedFullStackPreviews.list()[0];
+    expect(orphan.basePath.startsWith("/quarantined/")).toBe(true);
+    expect(orphan.containerId).toBe("container-orphan");
+    await expect(sharedFullStackPreviews.close(orphan.id)).rejects.toThrow("incomplete");
+    expect(sharedFullStackPreviews.count()).toBe(1);
+    // Explicit verified recovery frees the slot, never startup failure alone.
+    await sharedFullStackPreviews.close(orphan.id);
+    expect(sharedFullStackPreviews.count()).toBe(0);
+  });
+});

@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { env } from "../../lib/env.js";
 import { docker } from "./dockerClient.js";
+import { clearReconciledTanstackJournals } from "../build/tanstackPreviewDurableRecovery.js";
 
 type ListRunnerContainersOptions = {
   all: boolean;
@@ -45,47 +46,49 @@ function listRunnerContainers(): Promise<RunnerContainerInfo[]> {
   });
 }
 
+/** Restart means no in-memory lease can still be authoritative. Docker is
+ * reaped before directories, so running code never retains an active bind to
+ * a workspace the reaper has removed. Fail closed on ANY unverified removal.
+ * One dedicated rootless Docker socket per execution pool is mandatory. */
 export async function cleanupOrphanedRunnerContainers() {
   const containers = await listRunnerContainers();
-
+  const failures: unknown[] = [];
   for (const info of containers) {
-    const container = docker.getContainer(info.Id);
     try {
-      if (info.State === "running") {
-        await container.kill().catch(() => {});
+      await docker.getContainer(info.Id).remove({ force: true });
+    } catch (error) {
+      if (typeof error !== "object" || error === null ||
+          !("statusCode" in error) || error.statusCode !== 404) {
+        failures.push(error);
+        console.error("RUNNER startup Docker resource still present", {id: info.Id.slice(0, 12)});
       }
-      await container.remove({ force: true }).catch(() => {});
-    } catch (err) {
-      console.error("RUNNER orphan container cleanup failed", {
-        id: info.Id.slice(0, 12),
-        message: err instanceof Error ? err.message : String(err),
-      });
     }
   }
+  // A failed daemon list is already fatal. Verify the pool-wide label filter
+  // is empty even if remove() returned success: 204 is not proof of absence.
+  const remaining = await listRunnerContainers();
+  if (failures.length || remaining.length) {
+    throw new Error(`RUNNER startup Docker cleanup incomplete (${failures.length} errors, ${remaining.length} remaining).`);
+  }
 }
-
 
 export async function cleanupAllRunnerWorkspaceDirs() {
   const root = env.workspaceRoot;
-  await fs.mkdir(root, { recursive: true }).catch(() => {});
-
-  const entries = await fs
-    .readdir(root, { withFileTypes: true })
-    .catch(() => []);
-
+  await fs.mkdir(root, { recursive: true });
+  const entries = await fs.readdir(root, { withFileTypes: true });
   for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
     if (!entry.name.startsWith("zoeskoul-run-")) continue;
-
+    // A prefixed symlink or non-directory is not a normal sandbox workspace.
+    // Never follow it or advertise readiness while the root is contaminated.
+    if (!entry.isDirectory() || entry.isSymbolicLink())
+      throw new Error("Unsafe Runner startup workspace entry.");
     const abs = path.join(root, entry.name);
-    await fs.rm(abs, { recursive: true, force: true }).catch((err) => {
-      console.error("RUNNER startup workspace cleanup failed", {
-        workspace: entry.name,
-        message: err instanceof Error ? err.message : String(err),
-      });
-    });
+    await fs.rm(abs, { recursive: true, force: true });
   }
+  const remaining = (await fs.readdir(root)).filter(name => name.startsWith("zoeskoul-run-"));
+  if (remaining.length) throw new Error("RUNNER startup workspace cleanup incomplete.");
 }
+
 
 export async function cleanupExpiredWorkspaceDirs() {
   const root = env.workspaceRoot;
@@ -115,11 +118,9 @@ export async function cleanupExpiredWorkspaceDirs() {
 }
 
 export async function cleanupRunnerOrphansOnStartup() {
-  // Session identity lives in memory. After a runner restart there is no safe
-  // way to reattach old containers/workspaces, so remove every runner-owned
-  // child container and workspace immediately instead of leaving recent
-  // directories stranded forever waiting for an in-memory TTL timer that no
-  // longer exists.
+  // Complete ALL resource removal before releasing the startup gate. Never
+  // ignore Docker failures or discard the durable journal before teardown.
   await cleanupOrphanedRunnerContainers();
   await cleanupAllRunnerWorkspaceDirs();
+  await clearReconciledTanstackJournals(env.workspaceRoot);
 }

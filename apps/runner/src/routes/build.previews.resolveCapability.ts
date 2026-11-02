@@ -5,6 +5,8 @@ import type {
 import {
   resolveReactPreviewContextByCapability,
 } from "../services/build/reactPreviewRuntime.js";
+import { sharedFullStackPreviews } from "../services/build/sharedPreviewRegistry.js";
+import { resolveAdmittedTanstackPreviewCapability } from "../services/build/tanstackPreviewSharedLifecycle.js";
 
 /**
  * Internal ZoeBuild-server capability resolver.
@@ -20,18 +22,11 @@ export const resolveBuildPreviewCapabilityRoute:
     res,
   ) => {
     try {
-      const context =
-        resolveReactPreviewContextByCapability({
-          previewId:
-            String(
-              req.params.previewId,
-            ),
-          path:
-            String(
-              req.body?.path ??
-              "",
-            ),
-        });
+      const previewId = String(req.params.previewId);
+      const path = String(req.body?.path ?? "");
+      const context = sharedFullStackPreviews.get(previewId)
+        ? resolveAdmittedTanstackPreviewCapability({ previewId, path })
+        : resolveReactPreviewContextByCapability({ previewId, path });
 
       return res
         .status(200)

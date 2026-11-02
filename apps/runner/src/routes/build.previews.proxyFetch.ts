@@ -5,6 +5,8 @@ import type {
 import {
   fetchReactPreviewHttpByCapability,
 } from "../services/build/reactPreviewRuntime.js";
+import { sharedFullStackPreviews } from "../services/build/sharedPreviewRegistry.js";
+import { fetchAdmittedTanstackPreview } from "../services/build/tanstackPreviewSharedLifecycle.js";
 
 /**
  * Internal ZoeBuild-server proxy fetch.
@@ -27,19 +29,11 @@ export const proxyFetchBuildPreviewRoute:
           ? "HEAD"
           : "GET";
 
-      const result =
-        await fetchReactPreviewHttpByCapability({
-          previewId:
-            String(
-              req.params.previewId,
-            ),
-          path:
-            String(
-              req.body?.path ??
-              "",
-            ),
-          method,
-        });
+      const previewId = String(req.params.previewId);
+      const path = String(req.body?.path ?? "");
+      const result = sharedFullStackPreviews.get(previewId)
+        ? (await fetchAdmittedTanstackPreview({ previewId, path, method })).response
+        : await fetchReactPreviewHttpByCapability({ previewId, path, method });
 
       return res
         .status(200)

@@ -17,6 +17,17 @@ describe("createWorkspace", () => {
         );
     });
 
+    it("records an allocated workspace path before creating the directory", async () => {
+        let allocated: string | null = null;
+        const root = await createWorkspace([], {onWorkspaceAllocated: async candidate => {
+            allocated = candidate;
+            await expect(fs.stat(candidate)).rejects.toMatchObject({code:"ENOENT"});
+        }});
+        createdRoots.push(root);
+        expect(allocated).toBe(root);
+        expect((await fs.stat(root)).isDirectory()).toBe(true);
+    });
+
     it("accepts .keep starter files for terminal workspaces", async () => {
         const root = await createWorkspace([
             {

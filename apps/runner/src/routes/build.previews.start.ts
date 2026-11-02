@@ -13,6 +13,8 @@ import {
 import {
   startReactPreview,
 } from "../services/build/reactPreviewRuntime.js";
+import { startAdmittedTanstackPreview } from "../services/build/tanstackPreviewSharedLifecycle.js";
+import { authorizeTanstackPreviewSource, assertTanstackPreviewStartupEnabled } from "../services/build/tanstackPreviewSourceAuthorization.js";
 
 function statusForPreviewStartError(
   message: string,
@@ -80,12 +82,17 @@ export const startBuildPreviewRoute:
           });
       }
 
-      const preview =
-        await startReactPreview({
-          ownerKey:
-            actorKey,
-          request,
-        });
+      const isTanstack = request.stackId === "tanstack-start-v1" || request.templateId === "tanstack-start-v1";
+      if (isTanstack) {
+        assertTanstackPreviewStartupEnabled();
+        authorizeTanstackPreviewSource(request);
+      }
+      const preview = isTanstack
+        ? await startAdmittedTanstackPreview({
+            ownerKey: actorKey, request,
+            authorize: async (_ownerKey, source) => authorizeTanstackPreviewSource(source),
+          })
+        : await startReactPreview({ ownerKey: actorKey, request });
 
       return res
         .status(201)

@@ -9,6 +9,8 @@ import {
 import {
   stopReactPreview,
 } from "../services/build/reactPreviewRuntime.js";
+import { sharedFullStackPreviews } from "../services/build/sharedPreviewRegistry.js";
+import { stopAdmittedTanstackPreview } from "../services/build/tanstackPreviewSharedLifecycle.js";
 
 export const cancelBuildPreviewRoute:
   RequestHandler =
@@ -22,14 +24,12 @@ export const cancelBuildPreviewRoute:
           req,
         );
 
-      await stopReactPreview({
-        previewId:
-          String(
-            req.params.previewId,
-          ),
-        ownerKey:
-          actorKey,
-      });
+      const previewId = String(req.params.previewId);
+      if (sharedFullStackPreviews.get(previewId)) {
+        await stopAdmittedTanstackPreview(actorKey, previewId);
+      } else {
+        await stopReactPreview({previewId, ownerKey: actorKey});
+      }
 
       return res
         .status(200)

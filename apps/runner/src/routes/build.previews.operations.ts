@@ -6,12 +6,26 @@ import { env } from "../lib/env.js";
 import path from "node:path";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import { startReactPreview, stopReactPreview } from "../services/build/reactPreviewRuntime.js";
+import { sharedFullStackPreviews } from "../services/build/sharedPreviewRegistry.js";
+import { startAdmittedTanstackPreview, stopAdmittedTanstackPreview } from "../services/build/tanstackPreviewSharedLifecycle.js";
+import { authorizeTanstackPreviewSource, assertTanstackPreviewStartupEnabled } from "../services/build/tanstackPreviewSourceAuthorization.js";
 import { FilePreviewOperationJournal, PreviewOperationRegistry } from "../services/build/reactPreviewOperations.js";
 
 const journal = new FilePreviewOperationJournal(path.join(env.workspaceRoot, ".zoebuild-preview-operations"));
 const operations = new PreviewOperationRegistry<ProductionBuildJobRequestV1>(journal,
-  ({ actorKey, request, signal, onPhase }) => startReactPreview({ ownerKey: actorKey, request, signal, onPhase }),
-  async (actorKey, previewId) => { await stopReactPreview({ ownerKey: actorKey, previewId }); },
+  ({ actorKey, request, signal, onPhase }) => {
+    if (request.stackId === "tanstack-start-v1" || request.templateId === "tanstack-start-v1") {
+      assertTanstackPreviewStartupEnabled();
+      authorizeTanstackPreviewSource(request);
+      return startAdmittedTanstackPreview({ ownerKey: actorKey, request, signal, onPhase,
+        authorize: async (_ownerKey, source) => authorizeTanstackPreviewSource(source) });
+    }
+    return startReactPreview({ ownerKey: actorKey, request, signal, onPhase });
+  },
+  async (actorKey, previewId) => {
+    if (sharedFullStackPreviews.get(previewId)) await stopAdmittedTanstackPreview(actorKey, previewId);
+    else await stopReactPreview({ ownerKey: actorKey, previewId });
+  },
   request => ({ buildProjectId: request.buildProjectId, sourceVersion: request.sourceVersion,
     fingerprint: createHash("sha256").update(JSON.stringify({ stackId: request.stackId, templateId: request.templateId,
       files: request.files })).digest("hex") }),
@@ -22,6 +36,11 @@ export const startBuildPreviewOperationRoute: RequestHandler = async (req, res) 
     const actorKey = getRequiredActorKey(req);
     const request = parseTrustedBuildJobRequest(req.body);
     if (request.operation !== "production-build") return res.status(400).json({ ok:false, error:"Invalid preview build request." });
+    // Deny before allocating an operation ID, reserving capacity, or launching Docker.
+    if (request.stackId === "tanstack-start-v1" || request.templateId === "tanstack-start-v1") {
+      assertTanstackPreviewStartupEnabled();
+      authorizeTanstackPreviewSource(request);
+    }
     const operation = await operations.start(actorKey, request);
     return res.status(operation.state === "ready" ? 200 : 202).json({ ok:true, operation });
   } catch (error) {

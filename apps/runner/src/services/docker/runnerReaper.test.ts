@@ -1,7 +1,23 @@
 import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { env } from "../../lib/env.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+// Use a private, dynamically selected root so parallel workspace tests cannot
+// delete each other's fixtures. Never remove the shared RUNNER_WORKSPACE_ROOT.
+const fixture = vi.hoisted(() => ({ root: "" }));
+vi.mock("../../lib/env.js", async (importOriginal) => {
+  const original = await importOriginal<typeof import("../../lib/env.js")>();
+  return {
+    env: {
+      ...original.env,
+      get workspaceRoot() {
+        return fixture.root;
+      },
+    },
+  };
+});
+
 import { cleanupAllRunnerWorkspaceDirs } from "./runnerReaper.js";
 
 async function exists(filePath: string) {
@@ -14,19 +30,22 @@ async function exists(filePath: string) {
 }
 
 describe("runner startup workspace reaper", () => {
+  let privateRoot: string;
+
   beforeEach(async () => {
-    await fs.rm(env.workspaceRoot, { recursive: true, force: true });
-    await fs.mkdir(env.workspaceRoot, { recursive: true });
+    privateRoot = await fs.mkdtemp(path.join(os.tmpdir(), "zoeskoul-runner-reaper-test-"));
+    fixture.root = privateRoot;
   });
 
   afterEach(async () => {
-    await fs.rm(env.workspaceRoot, { recursive: true, force: true });
+    await fs.rm(privateRoot, { recursive: true, force: true });
+    fixture.root = "";
   });
 
   it("removes every runner-owned workspace after process restart", async () => {
-    const leakedA = path.join(env.workspaceRoot, "zoeskoul-run-a");
-    const leakedB = path.join(env.workspaceRoot, "zoeskoul-run-b");
-    const unrelated = path.join(env.workspaceRoot, "keep-me");
+    const leakedA = path.join(privateRoot, "zoeskoul-run-a");
+    const leakedB = path.join(privateRoot, "zoeskoul-run-b");
+    const unrelated = path.join(privateRoot, "keep-me");
 
     await fs.mkdir(leakedA, { recursive: true });
     await fs.mkdir(leakedB, { recursive: true });

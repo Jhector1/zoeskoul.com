@@ -18,11 +18,9 @@ async function main() {
     socket.destroy();
   });
 
-  await cleanupRunnerOrphansOnStartup().catch((err) => {
-    console.error("RUNNER startup orphan cleanup failed", {
-      message: err instanceof Error ? err.message : String(err),
-    });
-  });
+  // Fail-closed: no listener or admission while a previous process may still
+  // have Docker containers, workspaces or unreconciled recovery journals.
+  await cleanupRunnerOrphansOnStartup();
 
   const rateLimitPruneTimer = setInterval(pruneStartRateLimitBuckets, 60_000);
   if (typeof rateLimitPruneTimer.unref === "function") {
@@ -42,4 +40,9 @@ async function main() {
   });
 }
 
-void main();
+void main().catch((error) => {
+  console.error("RUNNER startup refused: orphan reconciliation failed", {
+    message: error instanceof Error ? error.message : "unknown",
+  });
+  process.exit(1);
+});
