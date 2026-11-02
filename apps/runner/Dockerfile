@@ -19,4 +19,6 @@ RUN DATABASE_URL="postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=
 
 EXPOSE 4001
 
-CMD ["pnpm", "--filter", "@zoeskoul/runner", "start"]
+# The compiled server runs directly: no Corepack/network download on every restart.
+WORKDIR /app/apps/runner
+CMD ["node", "--import=tsx", "dist/server.js"]

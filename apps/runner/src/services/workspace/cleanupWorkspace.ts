@@ -7,14 +7,16 @@ import {
     markSessionFinalized,
 } from "../sessions/sessionStore.js";
 import { forgetSharedShellWorkspace } from "./sharedShellWorkspace.js";
+import { removeRunnerWorkspaceWithRecovery } from "../docker/runnerWorkspaceReclamation.js";
 
 const cleanupTimers = new Map<string, NodeJS.Timeout>();
 
 export async function cleanupWorkspaceNow(workspaceDir: string) {
-    await fs.rm(workspaceDir, {
-        recursive: true,
-        force: true,
-    }).catch(() => {});
+    await removeRunnerWorkspaceWithRecovery(workspaceDir).catch((error) => {
+        console.error("RUNNER workspace cleanup deferred", {
+            message: error instanceof Error ? error.message : "unknown",
+        });
+    });
 }
 
 /**

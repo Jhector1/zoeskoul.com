@@ -3,6 +3,7 @@ import path from "node:path";
 import { env } from "../../lib/env.js";
 import { docker } from "./dockerClient.js";
 import { clearReconciledTanstackJournals } from "../build/tanstackPreviewDurableRecovery.js";
+import { removeRunnerWorkspaceWithRecovery } from "./runnerWorkspaceReclamation.js";
 
 type ListRunnerContainersOptions = {
   all: boolean;
@@ -83,7 +84,7 @@ export async function cleanupAllRunnerWorkspaceDirs() {
     if (!entry.isDirectory() || entry.isSymbolicLink())
       throw new Error("Unsafe Runner startup workspace entry.");
     const abs = path.join(root, entry.name);
-    await fs.rm(abs, { recursive: true, force: true });
+    await removeRunnerWorkspaceWithRecovery(abs);
   }
   const remaining = (await fs.readdir(root)).filter(name => name.startsWith("zoeskoul-run-"));
   if (remaining.length) throw new Error("RUNNER startup workspace cleanup incomplete.");
@@ -108,7 +109,7 @@ export async function cleanupExpiredWorkspaceDirs() {
     if (!stat) continue;
     if (stat.mtimeMs > cutoff) continue;
 
-    await fs.rm(abs, { recursive: true, force: true }).catch((err) => {
+    await removeRunnerWorkspaceWithRecovery(abs).catch((err) => {
       console.error("RUNNER orphan workspace cleanup failed", {
         workspace: entry.name,
         message: err instanceof Error ? err.message : String(err),

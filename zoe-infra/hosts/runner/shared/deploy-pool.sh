@@ -19,6 +19,11 @@ pool_require_isolated_executor
 [ "$#" -eq 0 ] || [ "$1" = '--check' ] || { echo 'Usage: deploy.sh [--check]' >&2;exit 2; }
 
 docker compose --env-file .env -f compose.yml config --quiet
+# Reject mutable/fallback images before any pull, restart, or service replacement.
+if [ "$POOL" = zoebuild ]; then
+  docker compose --env-file .env -f compose.yml config --format json | \
+    python3 ../shared/verify-image-pins.py "$POOL"
+fi
 pool_docker info --format 'Execution Docker root={{.DockerRootDir}}'
 if $CHECK_ONLY; then echo "${POOL}_CONFIG_PASS"; exit 0;fi
 
