@@ -63,6 +63,18 @@ assert_zoebuild_drained() {
   fi
 }
 assert_zoebuild_drained
+# The original 384 MiB trusted-build cap was verified by Docker OOM telemetry
+# to be insufficient for this canonical TanStack dependency graph. This budget
+# applies ONLY to the isolated, one-shot maintenance canary, not normal builds.
+CANARY_BUILD_MEMORY_MB=1024
+CANARY_HOST_RESERVE_MB=512
+AVAILABLE_KB="$(awk '$1 == "MemAvailable:" {print $2}' /proc/meminfo)"
+if [[ ! "$AVAILABLE_KB" =~ ^[0-9]+$ ]] ||
+   (( AVAILABLE_KB < (CANARY_BUILD_MEMORY_MB + CANARY_HOST_RESERVE_MB) * 1024 )); then
+  echo 'P3B3_REFUSE: insufficient available host RAM for bounded canary build' >&2
+  exit 1
+fi
+echo 'P3B3_CANARY_MEMORY_ADMISSION_PASS'
 echo 'P3B3_OPERATOR_MAINTENANCE_GATE_PASS'
 "${COMPOSE[@]}" stop runner
 # Check again after stopping: work may have been admitted between preflight
@@ -77,6 +89,7 @@ echo 'P3B3_OPERATOR_POST_STOP_DRAIN_PASS'
 # evidence. Do not use trap to auto-restart after an incomplete cleanup.
 if ! "${COMPOSE[@]}" run --rm --no-deps -T \
   --entrypoint node \
+  -e RUNNER_BUILD_MEMORY_LIMIT_MB="${CANARY_BUILD_MEMORY_MB}" \
   -e ZOEBUILD_P3B3_OPERATOR_CANARY=I_ACKNOWLEDGE_MAINTENANCE \
   runner --import=tsx dist/acceptance/tanstackCanary.js < "$SOURCE"; then
   echo 'P3B3_OPERATOR_CANARY_FAILED: preserve resources; Runner stays stopped' >&2
