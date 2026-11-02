@@ -1,0 +1,57 @@
+name: Promote verified production images
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: "Full 40-character SHA of a commit on main whose image build completed"
+        required: true
+        type: string
+      component:
+        description: "Which existing immutable image to promote (all preflights every image first)"
+        required: true
+        default: runner
+        type: choice
+        options:
+          - runner
+          - web
+          - runtime
+          - all
+
+permissions:
+  contents: read
+  packages: write
+
+# Manual production promotions must never run against each other concurrently.
+concurrency:
+  group: promote-production-images
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    name: Promote ${{ inputs.component }} from ${{ inputs.commit_sha }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Check out main and full history
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Verify and promote already-built image digests
+        shell: bash
+        env:
+          TARGET_COMMIT: ${{ inputs.commit_sha }}
+          TARGET_COMPONENT: ${{ inputs.component }}
+        run: bash scripts/ci/promote-production-images.sh
