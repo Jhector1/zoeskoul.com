@@ -1,4 +1,3 @@
-import fs from "node:fs/promises";
 import { env } from "../../lib/env.js";
 import {
     deleteSession,
@@ -12,11 +11,10 @@ import { removeRunnerWorkspaceWithRecovery } from "../docker/runnerWorkspaceRecl
 const cleanupTimers = new Map<string, NodeJS.Timeout>();
 
 export async function cleanupWorkspaceNow(workspaceDir: string) {
-    await removeRunnerWorkspaceWithRecovery(workspaceDir).catch((error) => {
-        console.error("RUNNER workspace cleanup deferred", {
-            message: error instanceof Error ? error.message : "unknown",
-        });
-    });
+    // Report an incomplete deletion to the caller so preview admission can
+    // quarantine the orphan instead of freeing its shared capacity lease.
+    // The rootless reclamation helper repairs only validated Runner workspaces.
+    await removeRunnerWorkspaceWithRecovery(workspaceDir);
 }
 
 /**
@@ -88,7 +86,11 @@ export function scheduleWorkspaceCleanup(
 
         if (!sharedByAnotherSession) {
             forgetSharedShellWorkspace(workspaceDir);
-            void cleanupWorkspaceNow(workspaceDir);
+            void cleanupWorkspaceNow(workspaceDir).catch(() => {
+                // The startup reaper retries on its next admission sweep.
+                // Never log raw filesystem errors or private workspace paths.
+                console.error("RUNNER scheduled workspace cleanup deferred");
+            });
         }
     }, ttlMs);
 

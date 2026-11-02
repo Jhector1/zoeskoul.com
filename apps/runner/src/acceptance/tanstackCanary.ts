@@ -81,6 +81,7 @@ async function main():Promise<void> {
   let ownedContainerId: string | null = null;
   let ownedWorkspaceDir: string | null = null;
   let completed = false;
+  let primaryFailure: unknown = null;
   try {
     // Use the existing trusted, scriptless build-install profile. No user
     // supplied commands or Docker options; this is a fixed operator contract.
@@ -153,13 +154,37 @@ async function main():Promise<void> {
     expect(ownedContainerId && await notFound(docker.getContainer(ownedContainerId).inspect()),"preview Docker resource still exists");
     expect(ownedWorkspaceDir && await notFound(fs.lstat(ownedWorkspaceDir)),"preview workspace still exists");
     completed=true;
+  } catch (error) {
+    // Preserve the original install/startup error. Cleanup diagnostics must
+    // never replace it with a secondary generic leak assertion.
+    primaryFailure = error;
+    throw error;
   } finally {
-    // Mandatory cleanup; an error must fail the canary, never announce PASS.
-    if (previewId !== null) await stopAdmittedTanstackPreview(ownerKey,previewId);
-    if (bootstrapDir !== null) await cleanupWorkspaceNow(bootstrapDir);
-    expect(equalSets(beforeContainers,await managedContainerIds()),"sandbox containers leaked");
-    expect(equalSets(beforeWorkspaces,await workspaceIds()),"sandbox workspaces leaked");
-    expect(sharedFullStackPreviews.count()===0,"shared preview lease leaked");
+    // Attempt every cleanup/verification step even if an earlier step fails.
+    // Only fixed identifiers are logged, never source, paths, or Docker logs.
+    const cleanupFailures: string[] = [];
+    if (previewId !== null) {
+      try { await stopAdmittedTanstackPreview(ownerKey, previewId); }
+      catch { cleanupFailures.push("preview-stop"); }
+    }
+    if (bootstrapDir !== null) {
+      try { await cleanupWorkspaceNow(bootstrapDir); }
+      catch { cleanupFailures.push("bootstrap-workspace"); }
+    }
+    try {
+      if (!equalSets(beforeContainers, await managedContainerIds()))
+        cleanupFailures.push("sandbox-containers");
+    } catch { cleanupFailures.push("container-inspection"); }
+    try {
+      if (!equalSets(beforeWorkspaces, await workspaceIds()))
+        cleanupFailures.push("sandbox-workspaces");
+    } catch { cleanupFailures.push("workspace-inspection"); }
+    if (sharedFullStackPreviews.count() !== 0) cleanupFailures.push("preview-leases");
+    if (cleanupFailures.length) {
+      console.error("P3B3_OPERATOR_CLEANUP_INCOMPLETE", { stages: cleanupFailures });
+      if (primaryFailure === null)
+        throw new Error("P3B3_ACCEPTANCE_FAIL: sandbox cleanup incomplete");
+    }
   }
   expect(completed,"canary incomplete");
   console.log("P3B3_PREVIEW_LIFECYCLE_CLEANUP_PASS");
