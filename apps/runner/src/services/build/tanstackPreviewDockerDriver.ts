@@ -58,7 +58,13 @@ export function makeTanstackPreviewDockerDriver(request: ProductionBuildJobReque
       });
     },
     async destroy(containerId) {
-      await docker.getContainer(containerId).remove({ force: true });
+      try { await docker.getContainer(containerId).remove({ force: true }); }
+      catch (error) {
+        // Another teardown may already have removed Docker resources. A
+        // genuine daemon error must retain the capacity lease for retry.
+        if (!(typeof error === "object" && error !== null &&
+              "statusCode" in error && error.statusCode === 404)) throw error;
+      }
     },
     cleanup: cleanupWorkspaceNow,
     now: Date.now,

@@ -11,7 +11,7 @@ describe("ZoeBuild single-preview admission ownership", () => {
     const pending = source.indexOf("pendingPreviewStartsGlobal +=");
     expect(check).toBeGreaterThan(-1);
     expect(pending).toBeGreaterThan(check);
-    expect(source).toContain("previews.size,");
+    expect(source).toContain("previews.size + sharedFullStackPreviews.count()");
     expect(source).toContain("pendingPreviewStartsGlobal,");
   });
   it("keeps the slot during Docker and workspace cleanup and coalesces cancellation", () => {

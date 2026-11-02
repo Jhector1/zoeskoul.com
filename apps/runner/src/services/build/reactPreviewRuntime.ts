@@ -20,7 +20,6 @@ import {
   env,
 } from "../../lib/env.js";
 import { isValidReactPreviewReadyDocument } from "./reactPreviewReadiness.js";
-import { PreviewProjectDrainRegistry } from "./reactPreviewProjectDrainPolicy.js";
 import { ReactPreviewMutationCoordinator, assertNotStaleReactPreviewSource } from "./reactPreviewMutationCoordinator.js";
 import { fetchPersistentPreviewHttp, stopPersistentPreviewHttp } from "./reactPreviewPersistentHttp.js";
 import { previewDependencyLayerStore, previewDependencyLayerKey, PreviewDependencyLayerStore, type DependencyLayerLease } from "./previewDependencyLayerStore.js";
@@ -57,10 +56,9 @@ import {
   assertZoeBuildPreviewCapacity,
   ZOEBUILD_MAX_CONCURRENT_PREVIEWS,
 } from "./zoeBuildPreviewCapacity.js";
-import {
-  PreviewStartCoordinator,
-  choosePreviewsToReclaim,
-} from "./reactPreviewResourceAdmission.js";
+import { choosePreviewsToReclaim } from "./reactPreviewResourceAdmission.js";
+import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
+import { sharedPreviewStartCoordinator, sharedPreviewProjectDrains } from "./sharedPreviewRuntimeState.js";
 
 import {
   REACT_VITE_V1_PREBUILT_LOCK_SHA256,
@@ -111,12 +109,12 @@ type MutablePreviewRecord = {
   lastActivityAt: number;
 };
 
-const projectDrains = new PreviewProjectDrainRegistry();
+const projectDrains = sharedPreviewProjectDrains;
 
 // Serialize preview cold starts to prevent competing requests from consuming
 // the sole preview slot before an earlier request has finished creating it.
 // Admission is bounded; this never raises Docker limits or changes auth.
-const previewStartCoordinator = new PreviewStartCoordinator(8, 75_000);
+const previewStartCoordinator = sharedPreviewStartCoordinator;
 const inFlightPreviewStarts = new Map<string, Promise<Awaited<ReturnType<typeof startReactPreviewInternal>>>>();
 
 const previewMutationCoordinator = new ReactPreviewMutationCoordinator();
@@ -145,9 +143,8 @@ function activePreviewCountForActor(
   ownerKey: string,
 ) {
   let count =
-    pendingPreviewStartsByActor.get(
-      ownerKey,
-    ) ?? 0;
+    (pendingPreviewStartsByActor.get(ownerKey) ?? 0) +
+    sharedFullStackPreviews.countForOwner(ownerKey);
 
   for (
     const preview of
@@ -187,6 +184,7 @@ function reservePreviewCapacity(
   const globalTotal =
     countActiveSessionsGlobal() +
     previews.size +
+    sharedFullStackPreviews.count() +
     pendingPreviewStartsGlobal;
 
   if (
@@ -201,7 +199,7 @@ function reservePreviewCapacity(
   // Reserve no more than one ZoeBuild preview across pending and live states.
   // Each existing preview remains counted until its Docker cleanup finishes.
   assertZoeBuildPreviewCapacity(
-    previews.size,
+    previews.size + sharedFullStackPreviews.count(),
     pendingPreviewStartsGlobal,
   );
 
@@ -262,8 +260,8 @@ function reservePreviewCapacity(
 async function reclaimPreviewCapacity(ownerKey: string, buildProjectId: string): Promise<void> {
   await runReactPreviewCleanupSweep();
   const needsSlot = () =>
-    previews.size + pendingPreviewStartsGlobal >= ZOEBUILD_MAX_CONCURRENT_PREVIEWS ||
-    countActiveSessionsGlobal() + previews.size + pendingPreviewStartsGlobal >= env.maxConcurrentGlobal ||
+    previews.size + sharedFullStackPreviews.count() + pendingPreviewStartsGlobal >= ZOEBUILD_MAX_CONCURRENT_PREVIEWS ||
+    countActiveSessionsGlobal() + previews.size + sharedFullStackPreviews.count() + pendingPreviewStartsGlobal >= env.maxConcurrentGlobal ||
     countActiveSessionsForActor(ownerKey) + activePreviewCountForActor(ownerKey) >= env.maxConcurrentPerActor;
 
   if (!needsSlot()) return;
@@ -273,6 +271,25 @@ async function reclaimPreviewCapacity(ownerKey: string, buildProjectId: string):
     if (!needsSlot()) break;
     await destroyPreview(record);
   }
+  // Warm TanStack leases compete for the same executor resources. Reclaim only
+  // the owner's other projects or sufficiently idle cross-owner sessions.
+  for (const lease of choosePreviewsToReclaim(
+    sharedFullStackPreviews.list(), ownerKey, buildProjectId, currentTime(), 45_000,
+  )) {
+    if (!needsSlot()) break;
+    await sharedFullStackPreviews.close(lease.id);
+  }
+}
+
+/** Internal admission hooks for the canonical full-stack runtime. Same queue,
+ * pending accounting, and project-deletion drain as the current preview. */
+export async function reclaimReactPreviewCapacityForSharedRuntime(ownerKey: string, buildProjectId: string) {
+  await reclaimPreviewCapacity(ownerKey,buildProjectId);
+}
+export function reserveReactPreviewCapacityForSharedRuntime(ownerKey: string) {
+  // The full-stack path spends the same session-start rate-limit budget.
+  consumeStartToken(ownerKey,"code");
+  return reservePreviewCapacity(ownerKey);
 }
 
 function safePreviewBasePath(
@@ -1787,6 +1804,9 @@ export async function drainReactPreviewsForProject(
     );
     stoppedCount += 1;
   }
+  // Project deletion must wait for BOTH runtime families to clean up. A
+  // failed full-stack destroy retains the counted lease and keeps the drain.
+  stoppedCount += await sharedFullStackPreviews.drain(input.ownerKey,input.buildProjectId);
   return { ok: true as const, drainId, stoppedCount };
 }
 
@@ -1845,6 +1865,7 @@ export async function runReactPreviewCleanupSweep(
   at =
     currentTime(),
 ) {
+  await sharedFullStackPreviews.sweep(at,PREVIEW_IDLE_MS,PREVIEW_HARD_LIFETIME_MS);
   for (
     const preview of
     [...previews.values()]
@@ -1906,6 +1927,7 @@ export function __resetReactPreviewsForTests() {
   previewStartCoordinator.resetForTests();
   pendingPreviewStartsByActor.clear();
   projectDrains.reset();
+  sharedFullStackPreviews.resetForTests();
   pendingPreviewStartsGlobal =
     0;
 }
