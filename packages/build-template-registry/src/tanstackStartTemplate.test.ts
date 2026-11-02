@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { TANSTACK_START_TEMPLATE_V1 } from "./tanstackStartTemplate";
 import { getBuildTemplate } from "./index";
 
-const files = new Map(TANSTACK_START_TEMPLATE_V1.files.map(file => [file.path, file.content]));
+const files = new Map<string, string>(TANSTACK_START_TEMPLATE_V1.files.map(file => [file.path, file.content]));
 
 describe("canonical TanStack Start generated app blueprint", () => {
   it("uses one full-stack TanStack Start entrypoint and file-based routing", () => {
