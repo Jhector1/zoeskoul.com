@@ -18,6 +18,7 @@ import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
 import { trustedPnpmWorkspaceEnvironment } from "./trustedPnpmWorkspaceEnvironment.js";
 import { bootstrapLockCacheKey, resolveBootstrapLockOnce } from "./dependencyLockBootstrapCache.js";
 import { reportTrustedBuildFailure } from "./trustedBuildFailureDiagnostics.js";
+import { startTrustedInstallProgressDiagnostics } from "./trustedInstallProgressDiagnostics.js";
 export { classifyTrustedBuildFailure as classifyDependencyBootstrapFailure } from "./trustedBuildFailureDiagnostics.js";
 
 const MAX_LOCKFILE_BYTES = 2 * 1024 * 1024;
@@ -180,6 +181,7 @@ export async function executeDependencyLockBootstrap(
 
     let container: Awaited<ReturnType<typeof docker.createContainer>> | null =
       null;
+    let progressMonitor: ReturnType<typeof startTrustedInstallProgressDiagnostics> | null = null;
 
     try {
       // createWorkspace already normalized the initial, dependency-free tree.
@@ -192,6 +194,9 @@ export async function executeDependencyLockBootstrap(
       );
 
       await container.start();
+      progressMonitor = startTrustedInstallProgressDiagnostics({
+        container, workspaceDir, stage: "bootstrap",
+      });
       const waitResult = await waitForBootstrapContainer(container);
       const statusCode =
         typeof waitResult.StatusCode === "number"
@@ -217,12 +222,14 @@ export async function executeDependencyLockBootstrap(
       }
       return content;
     } catch (error) {
+      await progressMonitor?.captureFailure().catch(() => undefined);
       await reportTrustedBuildFailure({
         container, stage: "bootstrap", elapsedMs: Date.now() - startedAt,
         timedOut: error instanceof Error && error.message.includes("bootstrap exceeded"),
       }).catch(() => undefined);
       throw error;
     } finally {
+      await progressMonitor?.stop().catch(() => undefined);
       if (container) {
         await container.remove({ force: true }).catch(() => undefined);
       }

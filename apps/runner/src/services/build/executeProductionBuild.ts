@@ -48,6 +48,7 @@ import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
 import { trustedPnpmWorkspaceEnvironment } from "./trustedPnpmWorkspaceEnvironment.js";
 import { TrustedProductionBuildStepFailure, type ProductionBuildStep } from "./productionBuildStepFailure.js";
 import { reportTrustedBuildFailure } from "./trustedBuildFailureDiagnostics.js";
+import { startTrustedInstallProgressDiagnostics } from "./trustedInstallProgressDiagnostics.js";
 
 export function buildProductionBuildContainerOptions(
   args: Readonly<{
@@ -227,13 +228,21 @@ export async function executeBuildStep(
     }).catch(() => undefined);
     throw error;
   });
+  let progressMonitor: ReturnType<typeof startTrustedInstallProgressDiagnostics> | null = null;
   try {
     await args.onContainerCreated?.(container.id);
     await container.start();
+    if (args.step === "install") {
+      progressMonitor = startTrustedInstallProgressDiagnostics({
+        container, workspaceDir: args.workspaceDir, stage: "install",
+      });
+    }
     const result = await waitForBuildContainer(container, args.step);
     const statusCode = typeof result.StatusCode === "number" ? result.StatusCode : -1;
     if (statusCode !== 0) throw new TrustedProductionBuildStepFailure(args.step, "nonzero-exit");
   } catch (error) {
+    // Final numeric snapshot before Docker resource removal; probe is best-effort.
+    await progressMonitor?.captureFailure().catch(() => undefined);
     // Classify before resource removal, without changing the journal lifecycle.
     await reportTrustedBuildFailure({
       container, stage: args.step, elapsedMs: Date.now() - startedAt,
@@ -241,6 +250,7 @@ export async function executeBuildStep(
     }).catch(() => undefined);
     throw error;
   } finally {
+    await progressMonitor?.stop().catch(() => undefined);
     if (args.strictCleanup) {
       // Full-stack preview install must not silently lose a running install
       // container; its journal identity is held until Docker teardown succeeds.
