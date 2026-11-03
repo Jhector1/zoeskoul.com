@@ -35,6 +35,8 @@ const envSchema = z.object({
   RUNNER_EXEC_GID: z.coerce.number().int().nonnegative().default(1000),
   // Rootless Docker ownership-repair canary: activate only after a live probe.
   RUNNER_WORKSPACE_OWNERSHIP_REPAIR_ENABLED: boolFlag(false),
+  RUNNER_WORKSPACE_FS_POLICY: z.enum(["legacy", "shared-group-v1"]).default("legacy"),
+  RUNNER_EXECUTION_POOL: z.string().optional(),
 
   RUNNER_MAX_FILES: intEnv(32),
   RUNNER_MAX_TOTAL_BYTES: intEnv(262144),
@@ -88,6 +90,13 @@ const envSchema = z.object({
 });
 
 const parsed = envSchema.parse(process.env);
+if (parsed.RUNNER_WORKSPACE_FS_POLICY === "shared-group-v1" &&
+    (parsed.RUNNER_EXECUTION_POOL !== "zoebuild" ||
+     parsed.RUNNER_EXEC_UID !== 1000 || parsed.RUNNER_EXEC_GID !== 0 ||
+     parsed.RUNNER_WORKSPACE_OWNERSHIP_REPAIR_ENABLED)) {
+  throw new Error("Shared-group workspace policy requires the dedicated ZoeBuild pool, UID 1000:GID 0, and no ownership repair helper.");
+}
+
 
 export const env = {
   port: parsed.PORT,
@@ -105,6 +114,7 @@ export const env = {
   execUid: parsed.RUNNER_EXEC_UID,
   execGid: parsed.RUNNER_EXEC_GID,
   workspaceOwnershipRepairEnabled: parsed.RUNNER_WORKSPACE_OWNERSHIP_REPAIR_ENABLED,
+  workspaceFilesystemPolicy: parsed.RUNNER_WORKSPACE_FS_POLICY,
 
   maxFiles: parsed.RUNNER_MAX_FILES,
   maxTotalBytes: parsed.RUNNER_MAX_TOTAL_BYTES,

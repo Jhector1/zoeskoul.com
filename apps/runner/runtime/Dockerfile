@@ -98,10 +98,12 @@ WORKDIR /workspace
 
 COPY --chown=1000:1000 apps/runner/pty-runner.py /opt/runner/pty-runner.py
 
-RUN chmod 0555 /opt/runner/pty-runner.py \
+COPY --chown=1000:1000 apps/runner/runtime/workspace-entrypoint.sh /opt/runner/workspace-entrypoint.sh
+
+RUN chmod 0555 /opt/runner/pty-runner.py /opt/runner/workspace-entrypoint.sh \
  && Rscript --version \
  && test "$(Rscript --vanilla -e 'cat(mean(c(2, 4, 6)))')" = "4"
 
 USER 1000:1000
 
-ENTRYPOINT ["/usr/bin/tini", "--", "python3", "/opt/runner/pty-runner.py"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/opt/runner/workspace-entrypoint.sh"]

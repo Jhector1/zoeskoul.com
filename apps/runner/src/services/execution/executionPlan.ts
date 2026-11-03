@@ -131,7 +131,7 @@ export function getExecutionPlan(
                 const interactiveShell = [
                     'cd "${START_CWD:-/workspace}"',
                     "export PS1='[zoeskoul]\\w$ '",
-                    "umask 000",
+                    "umask \"${UMASK:-000}\"",
                     "exec /bin/bash --noprofile --norc -i",
                 ].join("\n");
 
@@ -154,7 +154,7 @@ export function getExecutionPlan(
                     "--noprofile",
                     "--norc",
                     "-c",
-                    'export PS1="[zoeskoul]\\w$ "; umask 000; exec /bin/bash --noprofile --norc "$1"',
+                    'export PS1="[zoeskoul]\\w$ "; umask "${UMASK:-000}"; exec /bin/bash --noprofile --norc "$1"',
                     "zoeskoul-bash",
                     entry,
                 ],

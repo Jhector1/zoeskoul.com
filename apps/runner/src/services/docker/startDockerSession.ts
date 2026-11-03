@@ -44,6 +44,7 @@ import { killSession } from "./killSession.js";
 import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
 import { withWorkspaceSyncLock } from "../workspace/workspaceSyncLock.js";
 import { repairSandboxWorkspaceOwnership } from "../workspace/workspaceOwnershipRepair.js";
+import { sharedGroupWorkspaceEnabled, workspaceRuntimeEnvironment } from "../workspace/workspaceFilesystemPolicy.js";
 import {
   acquireSharedShellWorkspace,
   releaseSharedShellWorkspaceReservation,
@@ -382,7 +383,7 @@ async function startDockerSessionUncoordinated(
         // learner-visible shell history or grading evidence.
         "HISTCONTROL=ignoreboth:erasedups",
         "PROMPT_COMMAND=history -a; history -n",
-        "UMASK=000",
+        ...(sharedGroupWorkspaceEnabled() ? workspaceRuntimeEnvironment() : ["UMASK=000"]),
         `START_CWD=${sessionCwd}`,
         `RUNNER_MAX_FILE_WRITE_BYTES=${env.maxWorkspaceBytes}`,
       ],

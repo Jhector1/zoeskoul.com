@@ -10,40 +10,27 @@ import {
   type NormalizedWorkspaceEntry,
 } from "./workspacePolicy.js";
 import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
+import { ensureManagedWorkspaceDirectory, workspaceFileMode } from "./workspaceFilesystemPolicy.js";
 
 export type WorkspaceSyncEntry =
   | (FileEntry & { kind?: "file" })
   | { kind: "directory"; path: string };
 
-// Rootless-Docker preview note:
-// Runtime containers run as a non-root UID, but bind-mounted host workspaces
-// are created by the runner service. Use writable workspace permissions for
-// per-session sandbox directories, while keeping the container isolated with
-// no network, read-only rootfs, cap_drop, pids/mem/cpu limits, and cleanup.
-const DIR_MODE = 0o777;
-const FILE_MODE = 0o666;
-const HISTORY_MODE = 0o666;
-
-async function ensureWorkspaceRoot(dir: string) {
-  await fs.mkdir(dir, { recursive: true, mode: DIR_MODE });
-  await fs.chmod(dir, DIR_MODE).catch(() => {});
-}
-
-async function ensureWorkspaceDir(dir: string) {
-  await fs.mkdir(dir, { recursive: true, mode: DIR_MODE });
-  await fs.chmod(dir, DIR_MODE).catch(() => {});
-}
+// The dedicated ZoeBuild group policy is opt-in; older pools retain their
+// accepted behavior until the new rootless identity canary is complete.
+const ensureWorkspaceRoot = ensureManagedWorkspaceDirectory;
+const ensureWorkspaceDir = ensureManagedWorkspaceDirectory;
 
 async function writeWorkspaceTextFile(abs: string, content: string) {
   await ensureWorkspaceDir(path.dirname(abs));
   await fs.writeFile(abs, content, "utf8");
-  await fs.chmod(abs, FILE_MODE).catch(() => {});
+  await fs.chmod(abs, workspaceFileMode()).catch(() => {});
 }
 
 async function writeWorkspaceBinaryFile(abs: string, bytes: Buffer) {
   await ensureWorkspaceDir(path.dirname(abs));
   await fs.writeFile(abs, bytes);
-  await fs.chmod(abs, FILE_MODE).catch(() => {});
+  await fs.chmod(abs, workspaceFileMode()).catch(() => {});
 }
 
 async function ensureBashHistory(workspaceDir: string) {
@@ -58,7 +45,7 @@ async function ensureBashHistory(workspaceDir: string) {
   const handle = await fs.open(historyPath, "a");
   await handle.close();
 
-  await fs.chmod(historyPath, HISTORY_MODE).catch(() => {});
+  await fs.chmod(historyPath, workspaceFileMode()).catch(() => {});
 }
 
 export async function ensureWorkspaceRuntimeFiles(

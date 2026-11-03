@@ -12,6 +12,7 @@ import {
   normalizeWorkspaceEntries,
 } from "./workspacePolicy.js";
 import { ensureWorkspaceWritableForShellUser } from "./workspacePermissions.js";
+import { ensureManagedWorkspaceDirectory, managedWorkspaceFileMode, workspaceFileMode } from "./workspaceFilesystemPolicy.js";
 import type { NormalizedWorkspaceEntry } from "./workspacePolicy.js";
 
 type CurrentEntry = {
@@ -167,7 +168,7 @@ async function replaceFromBaseline(
     if (before === null ? disk !== null : disk === null || !disk.equals(before)) {
       throw new WorkspaceSyncConflictError(rel);
     }
-    if (after) writes.push({ rel, data: after, mode: st ? (st.mode & 0o777) : 0o666 });
+    if (after) writes.push({ rel, data: after, mode: managedWorkspaceFileMode(st ? (st.mode & 0o777) : null) });
     else if (disk) deletions.push(rel);
   }
 
@@ -177,11 +178,11 @@ async function replaceFromBaseline(
   const staged: Array<{ from: string; to: string }> = [];
   try {
     for (const rel of creations.sort((a, b) => a.split('/').length - b.split('/').length)) {
-      await fs.mkdir(path.join(root, rel), { recursive: true, mode: 0o777 });
+      await ensureManagedWorkspaceDirectory(path.join(root, rel));
     }
     for (const { rel, data, mode } of writes) {
       const abs = path.join(root, rel);
-      await fs.mkdir(path.dirname(abs), { recursive: true, mode: 0o777 });
+      await ensureManagedWorkspaceDirectory(path.dirname(abs));
       await assertSafeParents(root, rel);
       const temporary = path.join(path.dirname(abs), `.${path.basename(abs)}.zoe-sync-${crypto.randomUUID()}`);
       await fs.writeFile(temporary, data, { flag: "wx", mode });
@@ -226,8 +227,7 @@ export async function replaceWorkspaceFiles(
     dropRunnerManaged: true,
   });
 
-  await fs.mkdir(workspaceDir, { recursive: true, mode: 0o777 });
-  await fs.chmod(workspaceDir, 0o777).catch(() => {});
+  await ensureManagedWorkspaceDirectory(workspaceDir);
   await ensureWorkspaceWritableForShellUser(workspaceDir);
 
   if (options.baselineFiles) {
@@ -287,8 +287,7 @@ export async function replaceWorkspaceFiles(
       currentFiles.delete(relPath);
     }
 
-    await fs.mkdir(abs, { recursive: true, mode: 0o777 });
-    await fs.chmod(abs, 0o777).catch(() => {});
+    await ensureManagedWorkspaceDirectory(abs);
     currentDirs.add(relPath);
   }
 
@@ -302,7 +301,7 @@ export async function replaceWorkspaceFiles(
     }
 
     await assertSafeParents(workspaceDir, relPath);
-    await fs.mkdir(path.dirname(abs), { recursive: true });
+    await ensureManagedWorkspaceDirectory(path.dirname(abs));
     // Preserve the execute bit on files that the learner already chmod'd.
     // A workspace/editor resync must not silently turn a runnable script into
     // a non-executable file. New files retain the existing default 0666 mode.
@@ -312,7 +311,7 @@ export async function replaceWorkspaceFiles(
     const data = asBytes(file);
     const current = await readDiskFile(abs);
     if (!current || !current.equals(data)) {
-      await atomicWrite(abs, data, existingMode ?? 0o666);
+      await atomicWrite(abs, data, managedWorkspaceFileMode(existingMode));
     }
     currentFiles.add(relPath);
   }
@@ -353,15 +352,14 @@ export async function replaceWorkspaceFiles(
   }
   const handle = await fs.open(historyPath, "a");
   await handle.close();
-  await fs.chmod(historyPath, 0o666).catch(() => {});
+  await fs.chmod(historyPath, workspaceFileMode()).catch(() => {});
 
   for (const dir of RUNNER_MANAGED_DIRS) {
     const abs = path.join(workspaceDir, dir);
     if ((await statOrNull(abs))?.isSymbolicLink()) {
       throw new Error(`Unsafe runner-managed directory: ${dir}`);
     }
-    await fs.mkdir(abs, { recursive: true, mode: 0o777 });
-    await fs.chmod(abs, 0o777).catch(() => {});
+    await ensureManagedWorkspaceDirectory(abs);
   }
 
   await ensureWorkspaceWritableForShellUser(workspaceDir);
