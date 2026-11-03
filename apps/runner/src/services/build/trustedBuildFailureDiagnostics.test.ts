@@ -32,7 +32,7 @@ describe("P3B3 shared isolated build failure telemetry", () => {
       const visible=JSON.stringify([report,spy.mock.calls]);
       expect(visible).not.toContain("SECRET_TO_NEVER_LOG");
       expect(visible).not.toContain("token@example.com");
-      expect(visible).not.toContain("ERR_PNPM_META_FETCH_FAIL");
+      expect(report.errorCode).toBe("ERR_PNPM_META_FETCH_FAIL");
       expect(spy).toHaveBeenCalledTimes(1);
     } finally { spy.mockRestore(); }
   });
@@ -47,5 +47,60 @@ describe("P3B3 shared isolated build failure telemetry", () => {
       expect(report).toMatchObject({category:"container-error",exitCode:null,oomKilled:false});
       expect(JSON.stringify(spy.mock.calls)).not.toContain("secret");
     } finally {spy.mockRestore();}
+  });
+});
+
+
+describe("bounded install failure signal extraction", () => {
+  it("classifies fixed lockfile, registry, and dependency-store markers", () => {
+    const base = { timedOut:false, oomKilled:false, exitCode:1 };
+    expect(classifyTrustedBuildFailure({...base, output:"ERR_PNPM_OUTDATED_LOCKFILE"})).toBe("package-resolution");
+    expect(classifyTrustedBuildFailure({...base, output:"ERR_PNPM_FETCH_404"})).toBe("registry-network");
+    expect(classifyTrustedBuildFailure({...base, output:"ERR_PNPM_UNEXPECTED_STORE"})).toBe("dependency-state");
+    expect(classifyTrustedBuildFailure({...base, output:"ERR_PNPM_TARBALL_INTEGRITY"})).toBe("package-integrity");
+    expect(classifyTrustedBuildFailure({...base, output:"ERR_PNPM_UNKNOWN_CUSTOM_CODE"})).toBe("nonzero-exit");
+  });
+  it("returns a finite allowlisted code and never an attacker-invented marker", async () => {
+    const { extractTrustedInstallErrorCode } = await import("./trustedBuildFailureDiagnostics.js");
+    expect(extractTrustedInstallErrorCode("ERR_PNPM_OUTDATED_LOCKFILE")).toBe("ERR_PNPM_OUTDATED_LOCKFILE");
+    expect(extractTrustedInstallErrorCode("ERR_PNPM_SECRET_PROJECT_PASSWORD")).toBeNull();
+    expect(extractTrustedInstallErrorCode("ERR_PNPM_FETCH_404\nERR_PNPM_OUTDATED_LOCKFILE")).toBe("ERR_PNPM_OUTDATED_LOCKFILE");
+  });
+  it("reports probe state and recognized code without exposing any raw output", async () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      const logs = Buffer.from("SECRET_USER_PATH https://token@example.invalid\nERR_PNPM_OUTDATED_LOCKFILE");
+      const report = await reportTrustedBuildFailure({
+        stage:"install",elapsedMs:125.8,timedOut:false,
+        container:{
+          inspect:async()=>({State:{Running:false,ExitCode:1,OOMKilled:false}}),
+          logs:async(options: {tail:number})=>{
+            expect(options.tail).toBe(160);
+            return logs;
+          },
+        } as never,
+      });
+      expect(report).toMatchObject({
+        category:"package-resolution", exitCode:1, logProbe:"available",
+        errorCode:"ERR_PNPM_OUTDATED_LOCKFILE",
+      });
+      const visible = JSON.stringify([report, spy.mock.calls]);
+      expect(visible).not.toContain("SECRET_USER_PATH");
+      expect(visible).not.toContain("token@example.invalid");
+    } finally { spy.mockRestore(); }
+  });
+  it("exposes missing Docker logs as unavailable rather than as an assumed clean log", async () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      const report = await reportTrustedBuildFailure({
+        stage:"install",elapsedMs:20,timedOut:false,
+        container:{
+          inspect:async()=>({State:{Running:false,ExitCode:1,OOMKilled:false}}),
+          logs:async()=>{throw new Error("PRIVATE_ERROR_DETAILS");},
+        } as never,
+      });
+      expect(report).toMatchObject({logProbe:"unavailable", errorCode:null, category:"nonzero-exit"});
+      expect(JSON.stringify([report,spy.mock.calls])).not.toContain("PRIVATE_ERROR_DETAILS");
+    } finally { spy.mockRestore(); }
   });
 });
