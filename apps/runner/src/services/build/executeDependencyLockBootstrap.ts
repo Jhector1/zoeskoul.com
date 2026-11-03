@@ -50,6 +50,7 @@ export function buildDependencyLockBootstrapContainerOptions(args: Readonly<{
     },
     Env: [
       trustedRuntimeCommandEnv(args.command),
+      "RUNNER_EXEC_MODE=oneshot",
       "HOME=/tmp",
       "CI=1",
       "NPM_CONFIG_REGISTRY=https://registry.npmjs.org/",

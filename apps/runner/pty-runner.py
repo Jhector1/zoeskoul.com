@@ -312,6 +312,39 @@ def wait_pid_exit_code(pid: int) -> int:
         return 1
 
 
+def run_one_shot_phase(argv: list[str], env: dict[str, str]) -> int:
+    """Run a trusted, noninteractive argv without allocating a PTY.
+
+    The child inherits Docker stdout/stderr; a closed stdin cannot end output
+    forwarding or block a long-running package install behind a PTY buffer.
+    """
+    global CHILD_PID
+
+    pid = os.fork()
+    if pid == 0:
+        try:
+            apply_rlimits()
+            os.chdir(resolve_start_cwd())
+            null_fd = os.open(os.devnull, os.O_RDONLY)
+            try:
+                os.dup2(null_fd, 0)
+            finally:
+                if null_fd != 0:
+                    os.close(null_fd)
+            os.execvpe(argv[0], argv, env)
+        except Exception as error:
+            # Do not print arbitrary command arguments or environment values.
+            print(f"One-shot launch failed: {type(error).__name__}", file=sys.stderr)
+            os._exit(127)
+
+    CHILD_PID = pid
+    try:
+        return wait_pid_exit_code(pid)
+    finally:
+        CHILD_PID = None
+
+
+
 def run_noninteractive_phase(argv: list[str], env: dict[str, str], rows: int, cols: int, stdout_fd: int) -> int:
     global CHILD_PID
 
@@ -422,6 +455,19 @@ def main() -> int:
     signal.signal(signal.SIGINT, handle_signal)
 
     env = build_env()
+
+    execution_mode = os.environ.get("RUNNER_EXEC_MODE", "interactive")
+    if execution_mode not in ("interactive", "oneshot"):
+        print("Unsupported RUNNER_EXEC_MODE", file=sys.stderr)
+        return 1
+
+    if execution_mode == "oneshot":
+        if compile_cmd:
+            compile_rc = run_one_shot_phase(compile_cmd, env)
+            if compile_rc != 0:
+                return compile_rc
+        return run_one_shot_phase(run_cmd, env)
+
     stdin_fd = sys.stdin.fileno()
     stdout_fd = sys.stdout.fileno()
 

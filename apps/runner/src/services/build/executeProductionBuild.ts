@@ -99,6 +99,7 @@ export function buildProductionBuildContainerOptions(
 
     Env: [
       trustedRuntimeCommandEnv(args.command),
+      "RUNNER_EXEC_MODE=oneshot",
       "HOME=/tmp",
       "CI=1",
       `RUNNER_MAX_FILE_WRITE_BYTES=${trustedBuildFileWriteLimitBytes(args.step)}`,
