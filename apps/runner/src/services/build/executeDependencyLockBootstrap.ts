@@ -15,6 +15,7 @@ import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { createWorkspace } from "../workspace/createWorkspace.js";
 import { resolveTrustedBuildOperation } from "./trustedBuildOperations.js";
 import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
+import { trustedPnpmWorkspaceEnvironment } from "./trustedPnpmWorkspaceEnvironment.js";
 import { bootstrapLockCacheKey, resolveBootstrapLockOnce } from "./dependencyLockBootstrapCache.js";
 import { reportTrustedBuildFailure } from "./trustedBuildFailureDiagnostics.js";
 export { classifyTrustedBuildFailure as classifyDependencyBootstrapFailure } from "./trustedBuildFailureDiagnostics.js";
@@ -51,6 +52,7 @@ export function buildDependencyLockBootstrapContainerOptions(args: Readonly<{
     Env: [
       trustedRuntimeCommandEnv(args.command),
       "RUNNER_EXEC_MODE=oneshot",
+      ...trustedPnpmWorkspaceEnvironment(),
       "HOME=/tmp",
       "CI=1",
       "NPM_CONFIG_REGISTRY=https://registry.npmjs.org/",

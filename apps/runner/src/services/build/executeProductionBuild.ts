@@ -45,6 +45,7 @@ import {
   resolveTrustedBuildOperation,
 } from "./trustedBuildOperations.js";
 import { trustedRuntimeCommandEnv } from "./runtimeCommandEnv.js";
+import { trustedPnpmWorkspaceEnvironment } from "./trustedPnpmWorkspaceEnvironment.js";
 import { TrustedProductionBuildStepFailure, type ProductionBuildStep } from "./productionBuildStepFailure.js";
 import { reportTrustedBuildFailure } from "./trustedBuildFailureDiagnostics.js";
 
@@ -100,6 +101,7 @@ export function buildProductionBuildContainerOptions(
     Env: [
       trustedRuntimeCommandEnv(args.command),
       "RUNNER_EXEC_MODE=oneshot",
+      ...trustedPnpmWorkspaceEnvironment(),
       "HOME=/tmp",
       "CI=1",
       `RUNNER_MAX_FILE_WRITE_BYTES=${trustedBuildFileWriteLimitBytes(args.step)}`,
