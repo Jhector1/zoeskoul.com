@@ -26,6 +26,7 @@ import {
 
 import {
   resolveSandboxProfile,
+  trustedBuildFileWriteLimitBytes,
 } from "../execution/sandboxProfile.js";
 
 import {
@@ -100,7 +101,7 @@ export function buildProductionBuildContainerOptions(
       trustedRuntimeCommandEnv(args.command),
       "HOME=/tmp",
       "CI=1",
-      `RUNNER_MAX_FILE_WRITE_BYTES=${profile.maxFileWriteBytes}`,
+      `RUNNER_MAX_FILE_WRITE_BYTES=${trustedBuildFileWriteLimitBytes(args.step)}`,
       "NPM_CONFIG_REGISTRY=https://registry.npmjs.org/",
       "npm_config_registry=https://registry.npmjs.org/",
     ],

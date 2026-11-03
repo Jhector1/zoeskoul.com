@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
+import { buildProductionBuildContainerOptions } from "./executeProductionBuild.js";
 
 const repo = process.cwd();
 
@@ -21,12 +22,21 @@ describe("trusted React build file-write ceiling", () => {
     expect(build.maxFileWriteBytes).toBeGreaterThan(bootstrap.maxFileWriteBytes);
   });
 
-  it("passes the runner-owned ceiling to every shared trusted React container", () => {
-    const source = read("src/services/build/executeProductionBuild.ts");
+  it("keeps the trusted compilation ceiling Runner-owned and isolated", () => {
+    const build = buildProductionBuildContainerOptions({
+      workspaceDir: "/workspaces/trusted-build-test",
+      command: ["pnpm", "build"],
+      step: "build",
+    });
 
-    expect(source).toContain(
-      "`RUNNER_MAX_FILE_WRITE_BYTES=${profile.maxFileWriteBytes}`",
+    expect(build.Env).toContain(
+      `RUNNER_MAX_FILE_WRITE_BYTES=${resolveSandboxProfile("build").maxFileWriteBytes}`,
     );
+    expect(build.Cmd).toEqual(["pnpm", "build"]);
+    expect(build.HostConfig.NetworkMode).toBe("none");
+    expect(build.HostConfig.Privileged).toBe(false);
+
+    const source = read("src/services/build/executeProductionBuild.ts");
     expect(source).toContain("trustedRuntimeCommandEnv(args.command)");
     expect(source).not.toContain("req.body");
   });

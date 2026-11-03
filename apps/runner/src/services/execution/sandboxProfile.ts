@@ -96,3 +96,16 @@ export function resolveSandboxProfile(purpose: SandboxPurpose): SandboxProfile {
     "Sandbox profile is not configured.",
   );
 }
+
+
+/**
+ * The trusted package-install step may unpack large transient archives.
+ * Raise its per-file RLIMIT_FSIZE independently of compilation and Learning.
+ * This limits a single file, not total workspace bytes or Docker disk use.
+ * No request-supplied command or configuration can override this ceiling.
+ */
+export function trustedBuildFileWriteLimitBytes(step: "install" | "build"): number {
+  if (step === "install") return 256 * 1024 * 1024;
+  if (step === "build") return resolveSandboxProfile("build").maxFileWriteBytes;
+  throw new Error("Unsupported trusted build step");
+}
