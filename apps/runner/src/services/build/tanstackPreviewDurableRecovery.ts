@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { removeRunnerWorkspaceWithRecovery } from "../docker/runnerWorkspaceReclamation.js";
 
 /** Private, resource-only crash journal. Never persist owner tokens, source,
  * checkout details or preview capabilities. The journal is NOT an authority
@@ -120,8 +121,9 @@ export async function clearReconciledTanstackJournals(workspaceRoot: string) {
   return entries.length;
 }
 
-/** Stronger than cleanupWorkspaceNow, which intentionally suppresses errors
- * for legacy session cleanup. Full-stack previews must prove deletion. */
+/** Fail-closed full-stack preview cleanup. Reuse the validated rootless
+ * workspace reclamation helper while independently proving deletion before
+ * the recovery journal or preview capacity lease may be released. */
 export async function removeTanstackWorkspaceStrict(workspaceRoot: string, workspaceDir: string) {
   safeWorkspace(workspaceRoot, workspaceDir);
   const stat = await fs.lstat(workspaceDir).catch((error: NodeJS.ErrnoException) => {
@@ -131,7 +133,7 @@ export async function removeTanstackWorkspaceStrict(workspaceRoot: string, works
   if (!stat) return;
   if (!stat.isDirectory() || stat.isSymbolicLink())
     throw new Error("Unsafe TanStack preview workspace.");
-  await fs.rm(workspaceDir, { recursive: true, force: true });
+  await removeRunnerWorkspaceWithRecovery(workspaceDir);
   const remaining = await fs.lstat(workspaceDir).catch((error: NodeJS.ErrnoException) => {
     if (error.code === "ENOENT") return null;
     throw error;
