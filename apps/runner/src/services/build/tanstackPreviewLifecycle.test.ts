@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
+import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError, TanstackPreviewReadinessError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
 
 const good = {status:200,headers:{"content-type":"text/html"},
   bodyBase64:Buffer.from("<html><head></head><body>ok</body></html>").toString("base64")};
@@ -74,5 +74,41 @@ describe("TanStack orphaned startup cleanup", () => {
     expect(error).toBeInstanceOf(TanstackPreviewCleanupError);
     expect(error.orphan.workspaceDir).toBe("/tmp/failed-preparation");
     await expect(error.recover()).resolves.toBeUndefined();
+  });
+});
+
+
+describe("P3B5D sanitized TanStack readiness telemetry", () => {
+  it("records bounded HTTP status without emitting the response body", async () => {
+    const steps: string[] = [];
+    const error = await startIsolatedTanstackPreview(fakeDriver(steps, "never"),
+      { timeoutMs: 1600 }).then(() => null, (reason: unknown) => reason);
+    expect(error).toBeInstanceOf(TanstackPreviewReadinessError);
+    if (!(error instanceof TanstackPreviewReadinessError)) {
+      throw new Error("Expected a sanitized TanStack readiness error.");
+    }
+    expect(error.diagnostic).toEqual({
+      result: "http_status", attempts: 2, lastHttpStatus: 503, elapsedMs: 1600,
+    });
+  });
+
+  it("classifies probe exceptions without including private exception messages", async () => {
+    let tick = 0;
+    const driver: TanstackPreviewDriver = {
+      ...fakeDriver([]),
+      probe: async () => { throw new Error("secret-token-and-user-source"); },
+      now: () => tick,
+      sleep: async (ms) => { tick += ms; },
+    };
+    const error = await startIsolatedTanstackPreview(driver,
+      { timeoutMs: 800 }).then(() => null, (reason: unknown) => reason);
+    expect(error).toBeInstanceOf(TanstackPreviewReadinessError);
+    if (!(error instanceof TanstackPreviewReadinessError)) {
+      throw new Error("Expected a sanitized TanStack readiness error.");
+    }
+    expect(error.diagnostic).toEqual({
+      result: "transport_error", attempts: 1, lastHttpStatus: null, elapsedMs: 800,
+    });
+    expect(error.message).not.toContain("secret-token");
   });
 });
