@@ -10,15 +10,14 @@ describe("saved version selection is idempotent and hides stale previews",()=>{
   expect(historySwitchHasSettled({expectedSourceVersion:21,hydratedSourceVersion:20,acknowledgedSourceVersion:21,attemptedSourceVersion:21,previewState:"ready"})).toBe(false);
   expect(historySwitchHasSettled({expectedSourceVersion:21,hydratedSourceVersion:21,acknowledgedSourceVersion:null,attemptedSourceVersion:21,previewState:"error"})).toBe(true);
  });
- it("has a bounded transition failure and requires a deliberate retry",()=>{
+ it("keeps the operation authoritative instead of a duplicate UI deadline",()=>{
   const shell=read("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx");
-  expect(shell).toContain("sourceVersion === null ? 45_000 : 145_000");
-  expect(shell).toContain("current.sourceVersion === sourceVersion && !current.failed");
+  expect(shell).not.toContain("sourceVersion === null ? 45_000 : 145_000");
+  expect(shell).toContain("historySwitchHasSettled({");
   const overlay=read("../../app/[locale]/projects/[buildProjectId]/HistoryPreviewTransition.tsx");
-  const copy=read("./historyPreviewTransitionCopy.ts");
   expect(overlay).toContain('>Retry preview</button>');
   expect(overlay).toContain('>Reload saved project</button>');
-  expect(copy).toContain("The previous preview remains hidden");
+  expect(overlay).toContain('props.previewState === "error"');
  });
  it("switches exact snapshots without appending duplicate revisions",()=>{
   const source=read("./restoreSavedReactVersion.ts");
@@ -37,6 +36,7 @@ describe("saved version selection is idempotent and hides stale previews",()=>{
   expect(shell).toContain("confirmedSourceVersion !== previewSourceVersion");
   expect(shell).toContain("onSwitchStart=");
   expect(shell).toContain("onSwitchFailure=");
-  expect(hook).toContain("setConfirmedSourceVersion(sendingVersion)");
+  expect(hook).toContain("setConfirmedSourceVersion(startingVersion)");
+  expect(hook).toContain("if (changedDuringStart) setConfirmedSourceVersion(null)");
  });
 });

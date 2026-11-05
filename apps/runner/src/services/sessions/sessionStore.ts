@@ -28,6 +28,9 @@ export type SessionRecord = {
   hardLifetimeMs?: number | null;
   finalizedAt?: number | null;
   expiresAt?: number | null;
+  /** In-memory retry state; startup reaper handles a full process restart. */
+  cleanupFailures?: number;
+  cleanupRetryAt?: number | null;
 };
 
 type SessionListener = (event: RunEvent) => void;
@@ -167,6 +170,8 @@ export function createSession(args: {
     hardLifetimeMs: args.hardLifetimeMs ?? null,
     finalizedAt: null,
     expiresAt: null,
+    cleanupFailures: 0,
+    cleanupRetryAt: null,
   };
 
   sessions.set(session.id, session);

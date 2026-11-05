@@ -23,20 +23,24 @@ const packageJson = `{
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "dev": "vite dev --host 0.0.0.0 --port 5173 --strictPort",
+    "build": "vite build && tsc --noEmit",
+    "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
+    "@tanstack/react-router": "1.170.46",
+    "@tanstack/react-start": "1.169.4",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "@cloudflare/vite-plugin": "1.64.0",
     "@vitejs/plugin-react": "6.0.4",
     "typescript": "6.0.3",
-    "vite": "8.1.5"
+    "vite": "8.1.5",
+    "wrangler": "4.156.1"
   }
 }
 `;
@@ -67,7 +71,7 @@ const project = {
   title: "Example",
   description: null,
   status: "draft",
-  stackId: "react-vite-v1",
+  stackId: "tanstack-start-v1",
   sourceVersion: 4,
   language: "web",
   updatedAt: "2026-10-14T00:00:00.000Z",
@@ -77,10 +81,10 @@ const project = {
   specification: {
     version: 1,
     name: "Bootstrap orchestration",
-    projectType: "frontend-app",
+    projectType: "fullstack-app",
     targets: ["web"],
     requirements: {
-      backend: false,
+      backend: true,
       database: false,
       auth: false,
       storage: false,
@@ -89,8 +93,8 @@ const project = {
       commerce: false,
     },
     pages: ["Home"],
-    stackId: "react-vite-v1",
-    deployment: { preference: "static" },
+    stackId: "tanstack-start-v1",
+    deployment: { preference: "managed-runtime" },
   },
 } as unknown as OwnedBuildProject;
 
@@ -151,6 +155,11 @@ describe("owner-authorized dependency-lock bootstrap orchestration", () => {
 
     expect(store.getOwnedBuildProject).toHaveBeenCalledWith("user_1", "build_1");
     expect(run).toHaveBeenCalledTimes(1);
+    expect(run).toHaveBeenCalledWith(expect.objectContaining({
+      request: expect.objectContaining({
+        stackId: "tanstack-start-v1", templateId: "tanstack-start-v1", sourceVersion: 4,
+      }),
+    }));
     expect(saveOwnedBuildProjectSource).toHaveBeenCalledTimes(1);
 
     const saved = saveOwnedBuildProjectSource.mock.calls[0]?.[0];
@@ -216,8 +225,11 @@ describe("owner-authorized dependency-lock bootstrap orchestration", () => {
       reconcileExisting: true,
       expectedSourceVersion: 4,
       desiredDependencies: {
-        dependencies: { react: "19.2.3", "react-dom": "19.2.3", "react-router": "7.18.4" },
-        devDependencies: { "@types/react": "19.2.14", "@types/react-dom": "19.2.3", "@vitejs/plugin-react": "6.0.4", typescript: "6.0.3", vite: "8.1.5" },
+        dependencies: {
+          "@tanstack/react-router": "1.170.46", "@tanstack/react-start": "1.169.4",
+          react: "19.2.3", "react-dom": "19.2.3", "lucide-react": "0.468.0",
+        },
+        devDependencies: { "@cloudflare/vite-plugin": "1.64.0", "@types/react": "19.2.14", "@types/react-dom": "19.2.3", "@vitejs/plugin-react": "6.0.4", typescript: "6.0.3", vite: "8.1.5", wrangler: "4.156.1" },
       },
     });
     expect(sourceWrites).toHaveLength(1);
@@ -228,7 +240,7 @@ describe("owner-authorized dependency-lock bootstrap orchestration", () => {
     expect(sourceWrites[0]?.workspace.openTabs).toContain("new-lock");
     expect(sourceWrites[0]?.workspace.openTabs).not.toContain("old-lock");
     const pkg = nodes.find(n => n.kind === "file" && n.name === "package.json");
-    expect(pkg?.kind === "file" && pkg.content.includes("react-router")).toBe(true);
+    expect(pkg?.kind === "file" && pkg.content.includes("lucide-react")).toBe(true);
     const approval = nodes.find(n => n.kind === "file" && n.name === "zoebuild-dependency-approval.json");
     expect(approval?.kind === "file" && approval.content.includes('"lockSha256"')).toBe(true);
   });

@@ -1,5 +1,5 @@
 /**
- * Canonical React/Vite commerce capability. A React website is not implicitly
+ * Canonical TanStack Start commerce capability. A React website is not implicitly
  * a store; project specification is authoritative for commerce enablement.
  * This is a pure, shared server/browser predicate, not an authorization check.
  */
@@ -12,7 +12,7 @@ export type ReactCommerceProject = Readonly<{
 }>;
 
 export function hasReactCommerceCapability(project: ReactCommerceProject): boolean {
-  return project.stackId === "react-vite-v1" &&
+  return project.stackId === "tanstack-start-v1" &&
     project.specification?.requirements?.commerce === true &&
-    project.specification.commerce?.storefrontRuntime === "react-vite";
+    project.specification.commerce?.storefrontRuntime === "tanstack-start";
 }

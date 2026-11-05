@@ -217,9 +217,10 @@ export async function POST(
         return json(requestId,{ok:false,code:"BUILD_HISTORY_STALE",
           message:"The saved source changed during preview preparation."},409);
       }
-      if (saved.stackId !== "react-vite-v1") {
+      if (saved.stackId !== "tanstack-start-v1" ||
+          saved.specification?.stackId !== "tanstack-start-v1") {
         return json(requestId,{ok:false,code:"BUILD_PREPARATION_INVALID",
-          message:"Automatic dependency preparation requires React + Vite."},409);
+          message:"Automatic dependency preparation requires a registered TanStack Start project."},409);
       }
       // Construct complete paths so nested workspace install controls cannot
       // bypass the canonical dependency policy.
@@ -342,6 +343,24 @@ export async function POST(
       bootstrap: result,
     });
   } catch (error) {
+    // P2028 "Unable to start a transaction" means Prisma could not obtain a
+    // PostgreSQL transaction connection in time. This is transient service
+    // contention, not a corrupt history lock or a runner bootstrap failure.
+    // Never retry the mutating request automatically; the owner may retry
+    // with its original source-version fence once capacity recovers.
+    if (error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2028" &&
+        error.message.includes("Unable to start a transaction in the given time")) {
+      console.warn("[/api/build/projects/:buildProjectId/dependency-lock/bootstrap] database transaction busy", {
+        requestId, buildProjectId, code: error.code,
+      });
+      const response = json(requestId, {
+        ok: false, code: "BUILD_DATABASE_BUSY",
+        message: "Project storage is busy. Your saved version is unchanged; retry the preview.",
+      }, 503);
+      response.headers.set("Retry-After", "10");
+      return response;
+    }
     if (error instanceof AutoRestoreDependenciesError) {
       return json(requestId, {ok:false,code:error.code,
         message:"The saved historical dependency lock could not be reused automatically. No historical files were changed; inspect the saved package and lock before retrying."},409);

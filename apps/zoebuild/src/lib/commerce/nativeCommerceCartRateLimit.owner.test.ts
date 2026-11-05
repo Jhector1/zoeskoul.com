@@ -101,7 +101,7 @@ describe(
       () => {
         const route =
           source(
-            "../../app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[[...path]]/route.ts",
+            "../../app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[...path]/route.ts",
           );
 
         const post =

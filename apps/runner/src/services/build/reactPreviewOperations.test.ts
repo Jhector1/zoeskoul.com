@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { FilePreviewOperationJournal, PreviewOperationRegistry } from "./reactPreviewOperations.js";
+import { FilePreviewOperationJournal, PreviewOperationRegistry } from "./previewOperationJournal.js";
 
 type Request = {buildProjectId: string; sourceVersion: number; fingerprint: string};
 const request = (sourceVersion = 1):Request => ({buildProjectId:"project",sourceVersion,fingerprint:"lock-a"});

@@ -27,8 +27,8 @@ describe("K18 dependency-aware preview session transitions", () => {
   });
   it("the existing hook routes changed snapshots and specific sync failures into its one-shot restart", () => {
     const hook=readFileSync(join(process.cwd(),"src/components/builder/useReactVitePreview.ts"),"utf8");
-    expect(hook).toContain("previewDependencySnapshotChanged(session.workspaceEntries, sendingEntries)");
-    expect(hook).toContain("response.status === 409 && mayAutoRecoverReactPreviewDependencies({");
+    expect(hook).toContain("decideTanstackPreviewSync({");
+    expect(hook).not.toContain('/sync`');
     expect(hook).toContain('throw new Error("PREVIEW_RESTART_REQUIRED")');
     expect(hook).toContain('await cancelCurrent();');
     expect(hook).toContain('await start();');

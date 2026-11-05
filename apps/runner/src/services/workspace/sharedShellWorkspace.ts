@@ -39,11 +39,12 @@ async function resolveRecord(args: {
   const key = sharedKey(args.ownerKey, args.workspaceKey);
   const existing = recordsByKey.get(key);
 
-  if (existing && (await pathExists(existing.workspaceDir))) {
+  if (existing && (await pathExists(existing.workspaceDir)) &&
+      recordsByKey.get(key) === existing) {
     return existing;
   }
 
-  if (existing) {
+  if (existing && recordsByKey.get(key) === existing) {
     recordsByKey.delete(key);
     keyByWorkspaceDir.delete(existing.workspaceDir);
   }
@@ -77,13 +78,14 @@ export async function acquireSharedShellWorkspace(args: {
   workspaceKey: string;
   files: WorkspaceSyncEntry[];
 }): Promise<SharedShellWorkspaceReservation> {
-  const record = await resolveRecord(args);
-  record.pendingReservations += 1;
-
-  return {
-    key: record.key,
-    workspaceDir: record.workspaceDir,
-  };
+  // A retired workspace must never be handed to a new session while its
+  // final owner is removing the directory. Revalidate after each await.
+  for (;;) {
+    const record = await resolveRecord(args);
+    if (recordsByKey.get(record.key) !== record) continue;
+    record.pendingReservations += 1;
+    return { key: record.key, workspaceDir: record.workspaceDir };
+  }
 }
 
 export async function releaseSharedShellWorkspaceReservation(args: {
@@ -104,6 +106,24 @@ export async function releaseSharedShellWorkspaceReservation(args: {
     keyByWorkspaceDir.delete(record.workspaceDir);
     await fs.rm(record.workspaceDir, { recursive: true, force: true }).catch(() => {});
   }
+}
+
+/**
+ * Atomically detach an unreserved shared workspace before final deletion.
+ * Subsequent acquisitions allocate another directory rather than reusing
+ * a workspace being removed. Pending starts keep the old workspace alive.
+ */
+export function retireSharedShellWorkspaceForCleanup(workspaceDir: string): boolean {
+  const key = keyByWorkspaceDir.get(workspaceDir);
+  if (!key) return true;
+  const record = recordsByKey.get(key);
+  if (!record || record.workspaceDir !== workspaceDir) {
+    keyByWorkspaceDir.delete(workspaceDir);
+    return true;
+  }
+  if (record.pendingReservations > 0) return false;
+  forgetSharedShellWorkspace(workspaceDir);
+  return true;
 }
 
 export function forgetSharedShellWorkspace(workspaceDir: string) {

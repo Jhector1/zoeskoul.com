@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PreviewProjectDrainRegistry } from "./reactPreviewProjectDrainPolicy.js";
+import { PreviewProjectDrainRegistry } from "./previewProjectDrainPolicy.js";
 
 describe("runner project-scoped preview drain", () => {
   it("blocks drain during in-flight startup, then blocks new starts", () => {

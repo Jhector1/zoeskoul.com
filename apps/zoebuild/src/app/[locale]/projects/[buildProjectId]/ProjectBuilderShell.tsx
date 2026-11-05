@@ -29,11 +29,7 @@ import {
   requestZoeBuildPlan,
 } from "@/lib/build/requestZoeBuildPlan";
 
-import WebPreview from "@zoeskoul/learner-workspace/runner/components/WebPreview";
-import type {
-  WebPreviewCommerceRequest,
-} from "@zoeskoul/learner-workspace/runner/components/WebPreview";
-import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
+import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
 
 import BuildWorkspaceClient from "./BuildWorkspaceClient";
 import ProjectRevisionHistory from "./ProjectRevisionHistory";
@@ -194,8 +190,10 @@ export default function ProjectBuilderShell(props: {
   }
 
 
+  // Browser preview is now exclusive to the registered TanStack Start stack.
+  // The historical variable name is retired with the remaining shell cleanup.
   const reactPreviewEnabled =
-    props.project.stackId === "react-vite-v1";
+    props.project.stackId === "tanstack-start-v1";
 
   const reactPreview = useReactVitePreview({
     enabled: reactPreviewEnabled,
@@ -211,11 +209,28 @@ export default function ProjectBuilderShell(props: {
     onDependencyPrepared: (version) => reconcileStalePreview(version, true),
   });
 
-  const previewEntries = exportWorkspaceEntries(previewWorkspace.nodes);
   // Never render a stale runner frame for a different selected source.
   const visibleReactPreview = reactPreview && reactPreview.confirmedSourceVersion !== previewSourceVersion
     ? {...reactPreview, src:null, state:reactPreview.state === "error" ? "error" as const : "starting" as const}
     : reactPreview;
+  // One full-stack preview surface in both Preview and Code. A missing session
+  // is a loading/error state, never permission to run saved TanStack files in
+  // the static HTML preview engine (which cannot enforce server/API isolation).
+  const fullStackPreview: RemoteWebPreviewDescriptor = reactPreviewEnabled
+    ? visibleReactPreview ?? {
+        src: null,
+        state: "starting",
+        revision: 0,
+        title: `${props.project.title} preview`,
+        message: "Connecting to the isolated TanStack preview…",
+      }
+    : {
+        src: null,
+        state: "error",
+        revision: 0,
+        title: `${props.project.title} preview`,
+        message: "This project does not use the supported TanStack Start stack.",
+      };
 
   useEffect(() => {
     // A late but correctly source-acknowledged preview must dismiss the overlay,
@@ -519,156 +534,6 @@ export default function ProjectBuilderShell(props: {
     );
 
   const commerceEnabled = props.commerceEnabled;
-
-  function hostedCheckoutRedirectUrl(
-    value:
-      unknown,
-  ) {
-    if (
-      !value ||
-      typeof value !==
-        "object" ||
-      Array.isArray(
-        value,
-      )
-    ) {
-      throw new Error(
-        "The trusted commerce binding did not return a checkout result.",
-      );
-    }
-
-    const raw =
-      (
-        value as
-          Record<
-            string,
-            unknown
-          >
-      ).url;
-
-    if (
-      typeof raw !==
-        "string" ||
-      !raw.trim()
-    ) {
-      throw new Error(
-        "The trusted commerce binding did not return a checkout URL.",
-      );
-    }
-
-    let checkout:
-      URL;
-
-    try {
-      checkout =
-        new URL(
-          raw,
-        );
-    } catch {
-      throw new Error(
-        "The trusted commerce binding returned an invalid checkout URL.",
-      );
-    }
-
-    if (
-      checkout.protocol !==
-        "https:"
-    ) {
-      throw new Error(
-        "Hosted checkout must use HTTPS.",
-      );
-    }
-
-    return checkout.toString();
-  }
-
-  async function requestStaticPreviewCommerce(
-    request:
-      WebPreviewCommerceRequest,
-  ) {
-    const response =
-      await fetch(
-        `/api/build/projects/${encodeURIComponent(
-          props.project.buildProjectId,
-        )}/commerce/preview`,
-        {
-          method:
-            "POST",
-
-          credentials:
-            "same-origin",
-
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-
-          body:
-            JSON.stringify({
-              method:
-                request.method,
-              input:
-                request.input,
-            }),
-        },
-      );
-
-    const payload =
-      await response
-        .json()
-        .catch(
-          () =>
-            null,
-        ) as
-          | {
-              ok?:
-                boolean;
-              result?:
-                unknown;
-              message?:
-                string;
-            }
-          | null;
-
-    if (
-      !response.ok ||
-      !payload?.ok
-    ) {
-      throw new Error(
-        payload?.message ??
-          "Commerce preview request failed.",
-      );
-    }
-
-    if (
-      request.method ===
-        "checkout.begin"
-    ) {
-      const checkoutUrl =
-        hostedCheckoutRedirectUrl(
-          payload.result,
-        );
-
-      /*
-       * Static Preview stays opaque and never receives top-navigation
-       * permission. The authenticated parent owns the provider-neutral
-       * hosted-checkout redirect.
-       *
-       * Do not resolve this RPC after navigation begins. Generated storefront
-       * source keeps its normal published-site location.assign behavior, but
-       * Preview never reaches that line inside the iframe.
-       */
-      window.location.assign(
-        checkoutUrl,
-      );
-
-      return await new Promise<never>(
-        () => {},
-      );
-    }
-
-    return payload.result;
-  }
 
   function addMessage(
     message: string,
@@ -1650,31 +1515,12 @@ export default function ProjectBuilderShell(props: {
                 </div>
               </div>
             ) : null}
-            {reactPreviewEnabled && reactPreview ? (
-              <PersistentReactPreviewSlot
-                buildProjectId={
-                  props.project.buildProjectId
-                }
-                slotId="project-preview"
-                preview={visibleReactPreview!}
-                active={
-                  !settingsOpen &&
-                  mode === "preview" &&
-                  !dependencyRecoveryNeedsAttention
-                }
-              />
-            ) : (
-              <WebPreview
-                entries={previewEntries}
-                title={`${props.project.title} preview`}
-                sessionKey={props.project.buildProjectId}
-                onCommerceRequest={
-                  commerceEnabled
-                    ? requestStaticPreviewCommerce
-                    : undefined
-                }
-              />
-            )}
+            <PersistentReactPreviewSlot
+              buildProjectId={props.project.buildProjectId}
+              slotId="project-preview"
+              preview={fullStackPreview}
+              active={!settingsOpen && mode === "preview" && !dependencyRecoveryNeedsAttention}
+            />
         </div>
 
         <div
@@ -1708,14 +1554,9 @@ export default function ProjectBuilderShell(props: {
               codeDirtyRef.current = dirty;
               setCodeDirty(dirty);
             }}
-            remoteWebPreview={reactPreviewEnabled ? visibleReactPreview : null}
+            remoteWebPreview={fullStackPreview}
             remotePreviewActive={
               !settingsOpen && mode === "code"
-            }
-            webPreviewCommerceRequest={
-              commerceEnabled && !reactPreviewEnabled
-                ? requestStaticPreviewCommerce
-                : undefined
             }
           />
         </div>

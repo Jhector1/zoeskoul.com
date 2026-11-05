@@ -36,16 +36,14 @@ export default function BuildWorkspaceClient({
   onDirtyChange,
   remoteWebPreview,
   remotePreviewActive,
-  webPreviewCommerceRequest,
 }: {
   project: BuildWorkspaceShellProject;
   onWorkspaceSnapshot?: (workspace: WorkspaceStateV2) => void;
   onWorkspaceViewChange?: (workspace: WorkspaceStateV2) => void;
   onSourceVersionChange?: (sourceVersion: number) => void;
   onDirtyChange?: (dirty: boolean) => void;
-  remoteWebPreview?: RemoteWebPreviewDescriptor | null;
+  remoteWebPreview: RemoteWebPreviewDescriptor;
   remotePreviewActive: boolean;
-  webPreviewCommerceRequest?: import("@zoeskoul/learner-workspace/ide/types").FullIDEProps["webPreviewCommerceRequest"];
 }) {
   const latestWorkspaceRef = useRef<WorkspaceStateV2>(project.workspace);
   const savedWorkspaceRef = useRef<WorkspaceStateV2>(project.workspace);
@@ -227,18 +225,15 @@ export default function BuildWorkspaceClient({
                 projectDescription={project.description}
                 initialWorkspace={project.workspace}
                 onWorkspaceChange={handleWorkspaceChange}
-                remoteWebPreview={remoteWebPreview ?? undefined}
-                webPreviewCommerceRequest={webPreviewCommerceRequest}
+                remoteWebPreview={remoteWebPreview}
                 webPreviewSessionKey={project.buildProjectId}
                 remoteWebPreviewSurface={
-                  remoteWebPreview ? (
-                    <PersistentReactPreviewSlot
-                      buildProjectId={project.buildProjectId}
-                      slotId="code-preview"
-                      preview={remoteWebPreview}
-                      active={remotePreviewActive}
-                    />
-                  ) : undefined
+                  <PersistentReactPreviewSlot
+                    buildProjectId={project.buildProjectId}
+                    slotId="code-preview"
+                    preview={remoteWebPreview}
+                    active={remotePreviewActive}
+                  />
                 }
                 draftStorageMode="off"
                 fullHeight

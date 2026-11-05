@@ -1,9 +1,9 @@
 import type { RequestHandler } from "express";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import {
-  drainReactPreviewsForProject,
-  releaseReactPreviewProjectDrain,
-} from "../services/build/reactPreviewRuntime.js";
+  drainTanstackProjectPreviews,
+  releaseTanstackProjectPreviewDrain,
+} from "../services/build/tanstackPreviewProjectDrain.js";
 
 function input(reqBody: unknown, release: boolean): { buildProjectId: string; drainId?: string } | null {
   if (typeof reqBody !== "object" || reqBody === null || Array.isArray(reqBody)) return null;
@@ -23,7 +23,7 @@ export const drainBuildProjectPreviewsRoute: RequestHandler = async (req, res) =
     const actorKey = getRequiredActorKey(req);
     const validated = input(req.body, false);
     if (!validated) return res.status(400).json({ ok: false, error: "Invalid project." });
-    const result = await drainReactPreviewsForProject({ ownerKey: actorKey, buildProjectId: validated.buildProjectId });
+    const result = await drainTanstackProjectPreviews({ ownerKey: actorKey, buildProjectId: validated.buildProjectId });
     return res.status(200).json(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Preview cleanup unavailable.";
@@ -37,7 +37,7 @@ export const releaseBuildProjectPreviewDrainRoute: RequestHandler = async (req, 
     const actorKey = getRequiredActorKey(req);
     const validated = input(req.body, true);
     if (!validated?.drainId) return res.status(400).json({ ok: false, error: "Invalid release." });
-    const released = releaseReactPreviewProjectDrain({
+    const released = releaseTanstackProjectPreviewDrain({
       ownerKey: actorKey, buildProjectId: validated.buildProjectId, drainId: validated.drainId,
     });
     return res.status(released ? 200 : 409).json({ ok: released });

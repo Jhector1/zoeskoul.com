@@ -54,7 +54,7 @@ describe(
         );
 
         expect(client).toContain(
-          "specification,",
+          "specification: createStarterProjectSpecification(name)",
         );
       },
     );
@@ -73,23 +73,13 @@ describe(
     );
 
     it(
-      "keeps archetypes above technical stack selection",
+      "creates one TanStack Start project without client-selected legacy archetypes",
       () => {
-        expect(client).toContain(
-          '"website"',
-        );
-
-        expect(client).toContain(
-          '"web-app"',
-        );
-
-        expect(client).toContain(
-          '"storefront"',
-        );
-
-        expect(client).toContain(
-          "Business, landing page, portfolio, blog, or content site.",
-        );
+        expect(client).toContain('createStarterProjectSpecification(name)');
+        expect(client).toContain("Start with TanStack Start.");
+        expect(client).toContain('Project name');
+        expect(client).not.toContain('"react-vite-v1"');
+        expect(client).not.toContain('"commerce-static-v1"');
       },
     );
 

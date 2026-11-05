@@ -12,7 +12,7 @@ describe("ZoeBuild opaque-origin React preview module transport", () => {
   it("makes capability content CORS-readable to a sandboxed opaque iframe", () => {
     const route = read(
       "src/app/api/build/projects/[buildProjectId]/preview/" +
-        "[previewId]/content/[capability]/[[...path]]/route.ts",
+        "[previewId]/content/[capability]/[...path]/route.ts",
     );
 
     expect(route).toContain(
@@ -29,7 +29,7 @@ describe("ZoeBuild opaque-origin React preview module transport", () => {
   it("preserves capability-only path validation", () => {
     const route = read(
       "src/app/api/build/projects/[buildProjectId]/preview/" +
-        "[previewId]/content/[capability]/[[...path]]/route.ts",
+        "[previewId]/content/[capability]/[...path]/route.ts",
     );
 
     expect(route).toContain(

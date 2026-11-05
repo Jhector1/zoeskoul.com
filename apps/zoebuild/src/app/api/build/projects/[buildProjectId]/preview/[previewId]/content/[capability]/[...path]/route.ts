@@ -1,0 +1,772 @@
+import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
+import { parseReactPreviewDocumentRequest } from "@/lib/build/reactPreviewDocumentGateway";
+import { previewDocumentProxyTarget, resolvePreviewDocumentProxyPath } from "@/lib/build/reactPreviewDocumentProxyTarget";
+import { injectReactPreviewNavigationBridge, PREVIEW_NAV_SCRIPT } from "@/lib/build/reactPreviewNavigationBridge";
+import {
+  proxyFetchTrustedReactPreviewAtRunner,
+  resolveTrustedReactPreviewCapabilityAtRunner,
+} from "@/lib/build/reactPreviewRunnerClient";
+import {
+  NativeCommerceCatalogInputError,
+} from "@/lib/commerce/nativeCommerceCatalog";
+import {
+  NativeCommerceCartError,
+  parseNativeCommerceCartCommand,
+} from "@/lib/commerce/nativeCommerceCart";
+import {
+  NativeCommerceCheckoutError,
+  parseCommerceCheckoutRequest,
+} from "@/lib/commerce/nativeCommerceCheckout";
+import {
+  enforceNativeCommerceCartRateLimit,
+} from "@/lib/commerce/nativeCommerceCartRateLimit";
+import {
+  CommerceProviderResolutionError,
+} from "@/lib/commerce/commerceProviderResolver";
+import {
+  beginCommerceCheckout,
+  executeCommerceCartCommand,
+  getCommerceProduct,
+  listCommerceProducts,
+} from "@/lib/commerce/commerceRuntime";
+import { trustedCommerceBuyerIpFromRequest } from "@/lib/commerce/trustedCommerceBuyerIp";
+import { prisma } from "@zoeskoul/platform-server/prisma";
+import {
+  parseReactPreviewId,
+  ReactPreviewRequestError,
+} from "@/lib/build/reactPreviewServer";
+import {
+  normalizeReactPreviewProxyPath,
+} from "@/lib/build/reactPreviewProxyPath";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+function errorResponse(message: string, status: number) {
+  return new Response(message, {
+    status,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Cross-Origin-Resource-Policy": "cross-origin",
+      "Cache-Control": "no-store, max-age=0",
+      "Content-Type": "text/plain; charset=utf-8",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+    },
+  });
+}
+
+function validCapability(value: string) {
+  return /^[A-Za-z0-9_-]{32}$/.test(value);
+}
+
+async function proxy(
+  req: Request,
+  ctx: {
+    params: Promise<{
+      buildProjectId: string;
+      previewId: string;
+      capability: string;
+      path?: string[];
+    }>;
+  },
+  method: "GET" | "HEAD",
+) {
+  const { buildProjectId, previewId: rawPreviewId, capability } = await ctx.params;
+
+  try {
+    const previewId = parseReactPreviewId(rawPreviewId);
+    if (!validCapability(capability)) {
+      return errorResponse("Invalid preview capability.", 404);
+    }
+
+    const url = new URL(req.url);
+    const basePath =
+      `/api/build/projects/${encodeURIComponent(buildProjectId)}` +
+      `/preview/${encodeURIComponent(previewId)}` +
+      `/content/${encodeURIComponent(capability)}/`;
+
+    // The document gateway is a synthetic browser-only URL, not a runner
+    // source path. Normalize the authenticated capability ROOT, which the
+    // runner verified on preview/start, before dispatching the document.
+    // Every other path continues through the original strict normalizer.
+    const documentTarget = previewDocumentProxyTarget(url.pathname, basePath);
+    // The exact synthetic document is already constrained to this single
+    // capability path. Do not feed its runner-verified root through the
+    // asset-path normalizer: that normalizer may reject an empty asset suffix.
+    // Ordinary assets and every synthetic lookalike still use strict checks.
+    const normalizedPathname = resolvePreviewDocumentProxyPath({
+      target: documentTarget,
+      basePath,
+      normalize: normalizeReactPreviewProxyPath,
+    });
+
+    if (!normalizedPathname) {
+      const response = errorResponse("Invalid preview path.", 404);
+      if (documentTarget.isDocumentGateway) {
+        console.warn("[ZoeBuild preview document]", {failure: "proxy-path", status: 404});
+        response.headers.set("X-ZoeBuild-Preview-Failure", "proxy-path");
+      }
+      return response;
+    }
+
+    const relativePath = documentTarget.isDocumentGateway
+      ? "__zoebuild/document"
+      : normalizedPathname.slice(basePath.length);
+
+    // The sandbox navigation protocol is an external classic script so the
+    // site's CSP need not allow inline JavaScript. This is a capability-scoped
+    // read-only asset; no project source or session credentials are exposed.
+    if (relativePath === "__zoebuild/navigation.js") {
+      if (method !== "GET" && method !== "HEAD") return errorResponse("Method not allowed.", 405);
+      const context = await resolveTrustedReactPreviewCapabilityAtRunner({
+        previewId, path: normalizedPathname,
+      });
+      if (context.buildProjectId !== buildProjectId) {
+        return errorResponse("Preview capability does not match this project.", 404);
+      }
+      const headers = new Headers({
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "private, no-store, max-age=0",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "no-referrer",
+        "Cross-Origin-Resource-Policy": "cross-origin",
+        "Access-Control-Allow-Origin": "*",
+      });
+      return new Response(method === "HEAD" ? null : PREVIEW_NAV_SCRIPT, {
+        status: 200, headers,
+      });
+    }
+
+    if (
+      relativePath ===
+      "__zoebuild/commerce/products"
+    ) {
+      const context =
+        await resolveTrustedReactPreviewCapabilityAtRunner({
+          previewId,
+          path:
+            normalizedPathname,
+        });
+
+      if (
+        context.buildProjectId !==
+        buildProjectId
+      ) {
+        return errorResponse(
+          "Preview capability does not match this project.",
+          404,
+        );
+      }
+
+      try {
+
+        const id =
+          url.searchParams.get(
+            "id",
+          );
+        const slug =
+          url.searchParams.get(
+            "slug",
+          );
+
+        const payload =
+          id || slug
+            ? {
+                ok: true,
+                product:
+                  await getCommerceProduct(
+                    prisma,
+                    {
+                      buildProjectId:
+                        context.buildProjectId,
+                      surface:
+                        "preview",
+                      id,
+                      slug,
+                    },
+                  ),
+              }
+            : {
+                ok: true,
+                products:
+                  await listCommerceProducts(
+                    prisma,
+                    {
+                      buildProjectId:
+                        context.buildProjectId,
+                      surface:
+                        "preview",
+                      first:
+                        url.searchParams.get(
+                          "first",
+                        ),
+                    },
+                  ),
+              };
+
+        const headers =
+          new Headers({
+            "Access-Control-Allow-Origin":
+              "*",
+            "Cross-Origin-Resource-Policy":
+              "cross-origin",
+            "Cache-Control":
+              "no-store, max-age=0",
+            "Content-Type":
+              "application/json; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+            "Referrer-Policy":
+              "no-referrer",
+          });
+
+        return new Response(
+          method === "HEAD"
+            ? null
+            : JSON.stringify(
+                payload,
+              ),
+          {
+            status: 200,
+            headers,
+          },
+        );
+      } catch (error) {
+        if (
+          error instanceof
+          NativeCommerceCatalogInputError
+        ) {
+          return errorResponse(
+            error.message,
+            400,
+          );
+        }
+
+        if (
+          error instanceof
+          CommerceProviderResolutionError
+        ) {
+          return errorResponse(
+            "Commerce service unavailable.",
+            503,
+          );
+        }
+
+        throw error;
+      }
+    }
+
+    // The document gateway is a real catch-all route, not the Next.js optional
+    // capability root or Vite /index.html. The runner has already verified its
+    // basePath GET as a valid HTML document during startup. Fetch that same
+    // document and let the sandboxed bridge apply the requested React route.
+    const documentGateway = documentTarget.isDocumentGateway;
+    // HEAD is a read-only document probe used by bounded expired-preview recovery.
+    // It must pass through the exact same capability, project and path checks
+    // as GET, returning the runner's classification with an empty body.
+    if (documentGateway && parseReactPreviewDocumentRequest(url) === null)
+      return errorResponse("Invalid preview document route.", 400);
+    const upstreamStartedAt = Date.now();
+    const result = await proxyFetchTrustedReactPreviewAtRunner({
+      previewId,
+      path: documentGateway ? basePath : `${normalizedPathname}${url.search}`,
+      method,
+    });
+
+    const headers = new Headers();
+    if (documentGateway && result.status === 404) {
+      // The runner accepted the capability lookup but its own HTML root
+      // returned 404. Log only the bounded failure category and HTTP status.
+      console.warn("[ZoeBuild preview document]", {failure: "runner-root-404", status: 404});
+      headers.set("X-ZoeBuild-Preview-Failure", "runner-root-404");
+    }
+    const contentType = result.headers["content-type"];
+    if (contentType) headers.set("Content-Type", contentType);
+    const etag = result.headers.etag;
+    if (etag) headers.set("ETag", etag);
+    const location = result.headers.location;
+    if (location && location.startsWith(basePath)) headers.set("Location", location);
+    headers.set("Access-Control-Allow-Origin", "*");
+    headers.set("Cross-Origin-Resource-Policy", "cross-origin");
+    headers.set("Cache-Control", "no-store, max-age=0");
+    // Dependency URLs include Vite's version key; cached responses cannot be
+    // used for another project or capability. HTML and authored source remain uncached.
+    const versionedDependency = method === "GET" && result.status === 200 &&
+      /^node_modules\/\.vite\/deps\/[A-Za-z0-9_.-]+\.(?:js|css)$/.test(relativePath) &&
+      /^[A-Za-z0-9_-]{6,64}$/.test(url.searchParams.get("v") ?? "") &&
+      /^(?:application\/javascript|text\/javascript|text\/css)(?:\s*;|$)/i.test(contentType ?? "");
+    if (versionedDependency) headers.set("Cache-Control", "private, max-age=300");
+    // Expose latency of the authenticated runner bridge in DevTools without
+    // disclosing the runner URL, capability token, file data or credentials.
+    headers.set("Server-Timing", `runner;dur=${Math.max(0, Date.now() - upstreamStartedAt)}`);
+    headers.set("X-Content-Type-Options", "nosniff");
+    headers.set("Referrer-Policy", "no-referrer");
+
+    let body =
+      method === "HEAD"
+        ? null
+        : new Uint8Array(Buffer.from(result.bodyBase64, "base64"));
+
+    // Only HTML documents receive the unprivileged navigation bridge. Never
+    // rewrite Vite modules, API responses, or large/untrusted binary assets.
+    if (method === "GET" && result.status === 200 && body &&
+        /^text\/html(?:;|$)/i.test(contentType ?? "") &&
+        body.byteLength <= 2_000_000) {
+      const originalHtml = new TextDecoder().decode(body);
+      const augmentedHtml = injectReactPreviewNavigationBridge(originalHtml, basePath);
+      if (augmentedHtml !== originalHtml) {
+        body = new TextEncoder().encode(augmentedHtml);
+        headers.delete("ETag"); // The modified document is not the runner ETag.
+      }
+    }
+
+    return new Response(body, { status: result.status, headers });
+  } catch (error) {
+    if (error instanceof ReactPreviewRequestError) {
+      return errorResponse(error.message, error.status);
+    }
+    if (error instanceof RunnerHttpError) {
+      const response = errorResponse(
+        error.status === 404 ? "Preview expired." : "Preview service unavailable.",
+        error.status === 404 ? 404 : 502,
+      );
+      // A runner-client 404 is different from a runner HTML 404 or a rejected
+      // local proxy path. Classify the boundary without leaking its URL/token.
+      if (error.status === 404) {
+        console.warn("[ZoeBuild preview capability]", {failure: "runner-http-404", status: 404});
+        response.headers.set("X-ZoeBuild-Preview-Failure", "runner-http-404");
+      }
+      return response;
+    }
+    console.error("[ZoeBuild preview content proxy] failed", { buildProjectId, error });
+    return errorResponse("Preview service unavailable.", 502);
+  }
+}
+
+
+async function readCommerceJson(
+  request: Request,
+) {
+  const contentType =
+    request.headers.get(
+      "content-type",
+    ) ?? "";
+
+  if (
+    !contentType
+      .toLowerCase()
+      .startsWith(
+        "application/json",
+      )
+  ) {
+    throw new NativeCommerceCartError(
+      "COMMERCE_CONTENT_TYPE_INVALID",
+      "Commerce requests require application/json.",
+      415,
+    );
+  }
+
+  const raw =
+    await request.text();
+
+  if (
+    raw.length >
+    16_384
+  ) {
+    throw new NativeCommerceCartError(
+      "COMMERCE_REQUEST_TOO_LARGE",
+      "Commerce request body is too large.",
+      413,
+    );
+  }
+
+  try {
+    return JSON.parse(
+      raw,
+    ) as unknown;
+  } catch {
+    throw new NativeCommerceCartError(
+      "COMMERCE_REQUEST_INVALID",
+      "Invalid commerce request.",
+      400,
+    );
+  }
+}
+
+export async function POST(
+  req: Request,
+  ctx: {
+    params: Promise<{
+      buildProjectId: string;
+      previewId: string;
+      capability: string;
+      path?: string[];
+    }>;
+  },
+) {
+  const {
+    buildProjectId,
+    previewId:
+      rawPreviewId,
+    capability,
+  } = await ctx.params;
+
+  try {
+    const previewId =
+      parseReactPreviewId(
+        rawPreviewId,
+      );
+
+    if (
+      !validCapability(
+        capability,
+      )
+    ) {
+      return errorResponse(
+        "Invalid preview capability.",
+        404,
+      );
+    }
+
+    const url =
+      new URL(
+        req.url,
+      );
+
+    const basePath =
+      `/api/build/projects/${encodeURIComponent(buildProjectId)}` +
+      `/preview/${encodeURIComponent(previewId)}` +
+      `/content/${encodeURIComponent(capability)}/`;
+
+    const normalizedPathname =
+      normalizeReactPreviewProxyPath({
+        pathname:
+          url.pathname,
+        basePath,
+      });
+
+    if (
+      !normalizedPathname
+    ) {
+      return errorResponse(
+        "Invalid preview path.",
+        404,
+      );
+    }
+
+    const relativePath =
+      normalizedPathname.slice(
+        basePath.length,
+      );
+
+    const isCartPath =
+      relativePath ===
+        "__zoebuild/commerce/cart";
+
+    const isCheckoutPath =
+      relativePath ===
+        "__zoebuild/commerce/checkout";
+
+    if (
+      !isCartPath &&
+      !isCheckoutPath
+    ) {
+      return errorResponse(
+        "Not found.",
+        404,
+      );
+    }
+
+    const context =
+      await resolveTrustedReactPreviewCapabilityAtRunner({
+        previewId,
+        path:
+          normalizedPathname,
+      });
+
+    if (
+      context.buildProjectId !==
+      buildProjectId
+    ) {
+      return errorResponse(
+        "Preview capability does not match this project.",
+        404,
+      );
+    }
+
+    const cartRateLimit =
+      await enforceNativeCommerceCartRateLimit(
+        req,
+        {
+          buildProjectId:
+            context.buildProjectId,
+          scope:
+            `preview:${previewId}`,
+        },
+      );
+
+    if (
+      !cartRateLimit.ok
+    ) {
+      if (
+        cartRateLimit.kind ===
+        "limited"
+      ) {
+        const response =
+          errorResponse(
+            "Too many cart requests.",
+            429,
+          );
+
+        response.headers.set(
+          "Retry-After",
+          String(
+            cartRateLimit.retryAfterSeconds ??
+              60,
+          ),
+        );
+
+        return response;
+      }
+
+      return errorResponse(
+        "Commerce service unavailable.",
+        503,
+      );
+    }
+
+    if (
+      isCheckoutPath
+    ) {
+      const checkout =
+        await beginCommerceCheckout(
+          prisma,
+          {
+            buildProjectId:
+              context.buildProjectId,
+            surface:
+              "preview",
+            request:
+              parseCommerceCheckoutRequest(
+                await readCommerceJson(
+                  req,
+                ),
+              ),
+          },
+          trustedCommerceBuyerIpFromRequest(req),
+        );
+
+      return new Response(
+        JSON.stringify({
+          ok:
+            true,
+          checkout,
+        }),
+        {
+          status:
+            200,
+          headers: {
+            "Access-Control-Allow-Origin":
+              "*",
+            "Cross-Origin-Resource-Policy":
+              "cross-origin",
+            "Cache-Control":
+              "no-store, max-age=0",
+            "Content-Type":
+              "application/json; charset=utf-8",
+            "X-Content-Type-Options":
+              "nosniff",
+            "Referrer-Policy":
+              "no-referrer",
+          },
+        },
+      );
+    }
+
+
+    const command =
+      parseNativeCommerceCartCommand(
+        await readCommerceJson(
+          req,
+        ),
+      );
+
+    const cart =
+      await executeCommerceCartCommand(
+        prisma,
+        {
+          buildProjectId:
+            context.buildProjectId,
+          surface:
+            "preview",
+          command,
+        },
+        trustedCommerceBuyerIpFromRequest(req) ?? undefined,
+      );
+
+    return new Response(
+      JSON.stringify({
+        ok: true,
+        cart,
+      }),
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin":
+            "*",
+          "Cross-Origin-Resource-Policy":
+            "cross-origin",
+          "Cache-Control":
+            "no-store, max-age=0",
+          "Content-Type":
+            "application/json; charset=utf-8",
+          "X-Content-Type-Options":
+            "nosniff",
+          "Referrer-Policy":
+            "no-referrer",
+        },
+      },
+    );
+  } catch (error) {
+    if (
+      error instanceof
+      NativeCommerceCheckoutError
+    ) {
+      return errorResponse(
+        error.message,
+        error.status,
+      );
+    }
+
+    if (
+      error instanceof
+      CommerceProviderResolutionError
+    ) {
+      return errorResponse(
+        "Commerce service unavailable.",
+        503,
+      );
+    }
+
+    if (
+      error instanceof
+      NativeCommerceCartError
+    ) {
+      return errorResponse(
+        error.message,
+        error.status,
+      );
+    }
+
+    if (
+      error instanceof
+      ReactPreviewRequestError
+    ) {
+      return errorResponse(
+        error.message,
+        error.status,
+      );
+    }
+
+    if (
+      error instanceof
+      RunnerHttpError
+    ) {
+      return errorResponse(
+        error.status === 404
+          ? "Preview expired."
+          : "Preview service unavailable.",
+        error.status === 404
+          ? 404
+          : 502,
+      );
+    }
+
+    console.error(
+      "[ZoeBuild preview commerce cart] failed",
+      {
+        buildProjectId,
+        error,
+      },
+    );
+
+    return errorResponse(
+      "Commerce service unavailable.",
+      502,
+    );
+  }
+}
+
+export async function OPTIONS(
+  _req: Request,
+  ctx: {
+    params: Promise<{
+      buildProjectId: string;
+      previewId: string;
+      capability: string;
+      path?: string[];
+    }>;
+  },
+) {
+  const {
+    capability,
+    path = [],
+  } = await ctx.params;
+
+  if (
+    !validCapability(
+      capability,
+    ) ||
+    ![
+      "__zoebuild/commerce/cart",
+      "__zoebuild/commerce/checkout",
+    ].includes(
+      path.join("/"),
+    )
+  ) {
+    return errorResponse(
+      "Not found.",
+      404,
+    );
+  }
+
+  return new Response(
+    null,
+    {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin":
+          "*",
+        "Access-Control-Allow-Methods":
+          "POST, OPTIONS",
+        "Access-Control-Allow-Headers":
+          "Content-Type",
+        "Access-Control-Max-Age":
+          "600",
+        "Cross-Origin-Resource-Policy":
+          "cross-origin",
+        "Cache-Control":
+          "no-store, max-age=0",
+        "X-Content-Type-Options":
+          "nosniff",
+        "Referrer-Policy":
+          "no-referrer",
+      },
+    },
+  );
+}
+
+export async function GET(
+  req: Request,
+  ctx: { params: Promise<{ buildProjectId: string; previewId: string; capability: string; path?: string[] }> },
+) {
+  return proxy(req, ctx, "GET");
+}
+
+export async function HEAD(
+  req: Request,
+  ctx: { params: Promise<{ buildProjectId: string; previewId: string; capability: string; path?: string[] }> },
+) {
+  return proxy(req, ctx, "HEAD");
+}

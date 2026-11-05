@@ -226,8 +226,12 @@ export function clearAllTimeouts(sessionId: string) {
 export async function runSessionCleanupSweep(now = Date.now()) {
     for (const session of getAllSessions()) {
         if (isTerminalState(session.state)) {
-            if (session.expiresAt && session.expiresAt <= now) {
-                await runScheduledWorkspaceCleanupNow(session.id);
+            if (session.expiresAt && session.expiresAt <= now &&
+                (session.cleanupRetryAt ?? 0) <= now) {
+                // One failed removal must not block cleanup of other sessions.
+                await runScheduledWorkspaceCleanupNow(session.id, now).catch(() => {
+                    console.error("RUNNER session workspace cleanup deferred");
+                });
             }
             continue;
         }

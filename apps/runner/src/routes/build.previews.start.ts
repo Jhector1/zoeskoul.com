@@ -10,9 +10,6 @@ import {
   getRequiredActorKey,
 } from "../middleware/serviceAuth.js";
 
-import {
-  startReactPreview,
-} from "../services/build/reactPreviewRuntime.js";
 import { startAdmittedTanstackPreview } from "../services/build/tanstackPreviewSharedLifecycle.js";
 import { authorizeTanstackPreviewSource, assertTanstackPreviewStartupEnabled } from "../services/build/tanstackPreviewSourceAuthorization.js";
 
@@ -82,17 +79,18 @@ export const startBuildPreviewRoute:
           });
       }
 
-      const isTanstack = request.stackId === "tanstack-start-v1" || request.templateId === "tanstack-start-v1";
-      if (isTanstack) {
-        assertTanstackPreviewStartupEnabled();
-        authorizeTanstackPreviewSource(request);
+      // Clean-slate admission: both registered IDs must match TanStack Start.
+      // Reject before reserving capacity, launching Docker, or attempting a
+      // fallback through the obsolete React/Vite preview runtime.
+      if (request.stackId !== "tanstack-start-v1" || request.templateId !== "tanstack-start-v1") {
+        return res.status(400).json({ ok: false, error: "Unsupported preview project stack." });
       }
-      const preview = isTanstack
-        ? await startAdmittedTanstackPreview({
-            ownerKey: actorKey, request,
-            authorize: async (_ownerKey, source) => authorizeTanstackPreviewSource(source),
-          })
-        : await startReactPreview({ ownerKey: actorKey, request });
+      assertTanstackPreviewStartupEnabled();
+      authorizeTanstackPreviewSource(request);
+      const preview = await startAdmittedTanstackPreview({
+        ownerKey: actorKey, request,
+        authorize: async (_ownerKey, source) => authorizeTanstackPreviewSource(source),
+      });
 
       return res
         .status(201)

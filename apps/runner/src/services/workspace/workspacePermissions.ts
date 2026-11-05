@@ -2,6 +2,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import fs from "node:fs/promises";
 import { env } from "../../lib/env.js";
+import { sharedGroupWorkspaceEnabled, verifyPrivateWorkspaceRoot } from "./workspaceFilesystemPolicy.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -26,6 +27,12 @@ async function runBestEffort(command: string, args: string[]) {
  * runner writes so ordinary learner commands can overwrite/copy/move files.
  */
 export async function ensureWorkspaceWritableForShellUser(workspaceDir: string) {
+  if (sharedGroupWorkspaceEnabled()) {
+    // The runner and sandbox share only the mapped executor group. Never run
+    // recursive host chown/chmod or make project data world-writable.
+    await verifyPrivateWorkspaceRoot(workspaceDir);
+    return;
+  }
   if (!env.workspaceOwnershipRepairEnabled) {
     // Legacy behavior for runners that have not yet passed rootless canary.
     const uid = String(process.env.RUNNER_WORKSPACE_UID ?? env.execUid);

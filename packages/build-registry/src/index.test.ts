@@ -1,91 +1,18 @@
 import { describe, expect, it } from "vitest";
-import {
-  BUILD_STACKS_V1,
-  getBuildStack,
-  requireBuildStack,
-} from "./index";
+import { BUILD_STACKS_V1, getBuildStack, requireBuildStack } from "./index";
 
-describe("build registry", () => {
-  it(
-    "registers the controlled provider-neutral web stacks",
-    () => {
-      expect(
-        BUILD_STACKS_V1.map(
-          (stack) => stack.id,
-        ),
-      ).toEqual([
-        "commerce-static-v1",
-        "commerce-react-vite-v1",
-        "static-html-v1",
-        "react-vite-v1",
-      ]);
-    },
-  );
-  it(
-    "keeps platform backend capabilities disabled while commerce delegates only payments and commerce",
-    () => {
-      const byId =
-        new Map(
-          BUILD_STACKS_V1.map(
-            (stack) => [
-              stack.id,
-              stack,
-            ],
-          ),
-        );
-
-      expect(
-        byId.get(
-          "static-html-v1",
-        )?.supportedCapabilities,
-      ).toEqual([]);
-
-      expect(
-        byId.get(
-          "react-vite-v1",
-        )?.supportedCapabilities,
-      ).toEqual([]);
-
-      const commerce =
-        byId.get(
-          "commerce-static-v1",
-        );
-
-      expect(
-        commerce
-          ?.supportedCapabilities,
-      ).toEqual([
-        "payments",
-        "commerce",
-      ]);
-
-      for (
-        const capability of [
-          "backend",
-          "database",
-          "auth",
-          "storage",
-          "email",
-        ] as const
-      ) {
-        expect(
-          commerce
-            ?.supportedCapabilities,
-        ).not.toContain(
-          capability,
-        );
-      }
-    },
-  );
-
-
-  it("looks up supported stacks and fails closed for unknown ids", () => {
-    expect(getBuildStack("react-vite-v1")?.preview).toEqual({
-      type: "server",
-      port: 5173,
+describe("TanStack-only build registry", () => {
+  it("registers exactly one full-stack Worker architecture", () => {
+    expect(BUILD_STACKS_V1.map((stack) => stack.id)).toEqual(["tanstack-start-v1"]);
+    expect(getBuildStack("tanstack-start-v1")).toMatchObject({
+      templateId: "tanstack-start-v1", runtimeProfileId: "build-worker-v1",
+      artifact: { type: "worker-bundle", outputPath: "dist/server" },
     });
-    expect(() => requireBuildStack("unknown-stack")).toThrow(
-      "Unsupported ZoeBuild stack",
-    );
+  });
+  it("rejects former runtime IDs", () => {
+    for (const legacy of ["static-html-v1", "react-vite-v1", "commerce-static-v1", "commerce-react-vite-v1"]) {
+      expect(getBuildStack(legacy)).toBeUndefined();
+      expect(() => requireBuildStack(legacy)).toThrow("Unsupported ZoeBuild stack");
+    }
   });
 });

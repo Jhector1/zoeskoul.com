@@ -1,6 +1,6 @@
 /**
- * Automatic resolution is limited to unsealed legacy manifests and a missing
- * first lock. A bad/mismatched existing signature is NEVER self-approved.
+ * Automatic resolution is limited to pinned manifests and missing first
+ * TanStack locks. A bad/mismatched existing signature is NEVER self-approved.
  * The authenticated bootstrap endpoint still validates ownership, exact
  * versions, current saved revision and the runner-generated lock.
  */
@@ -17,5 +17,5 @@ export function mayAutoRecoverReactPreviewDependencies(input: Readonly<{
   }
 
   return input.code === "BUILD_DEPENDENCY_LOCK_INVALID" &&
-    input.message === "React preview requires one-time trusted dependency preparation.";
+    input.message === "TanStack preview requires one-time trusted dependency preparation.";
 }

@@ -4,61 +4,100 @@ import {
     getSession,
     hasOtherSessionsForWorkspaceDir,
     markSessionFinalized,
+    type SessionRecord,
 } from "../sessions/sessionStore.js";
-import { forgetSharedShellWorkspace } from "./sharedShellWorkspace.js";
+import { retireSharedShellWorkspaceForCleanup } from "./sharedShellWorkspace.js";
 import { removeRunnerWorkspaceWithRecovery } from "../docker/runnerWorkspaceReclamation.js";
 
 const cleanupTimers = new Map<string, NodeJS.Timeout>();
+// Serializes final-owner removal for shared workspaces. Timer and sweep may
+// both fire, but they must never race to reclaim the same directory.
+const workspaceCleanupTasks = new Map<string, Promise<void>>();
+const RETRY_BASE_MS = 5_000;
+const RETRY_MAX_MS = 5 * 60_000;
 
 export async function cleanupWorkspaceNow(workspaceDir: string) {
-    // Report an incomplete deletion to the caller so preview admission can
-    // quarantine the orphan instead of freeing its shared capacity lease.
-    // The rootless reclamation helper repairs only validated Runner workspaces.
+    // An incomplete deletion must propagate to the caller so previews can
+    // quarantine their lease and sessions can retain retryable state.
     await removeRunnerWorkspaceWithRecovery(workspaceDir);
 }
 
-/**
- * Backward-compatible immediate cleanup.
- * Use scheduleWorkspaceCleanup for completed sessions.
- */
+/** Backward-compatible immediate cleanup for trusted callers. */
 export async function cleanupWorkspace(workspaceDir: string) {
     await cleanupWorkspaceNow(workspaceDir);
 }
 
 export function cancelScheduledWorkspaceCleanup(sessionId: string) {
     const timer = cleanupTimers.get(sessionId);
-
     if (timer) {
         clearTimeout(timer);
         cleanupTimers.delete(sessionId);
     }
 }
 
-export async function runScheduledWorkspaceCleanupNow(sessionId: string) {
-    const timer = cleanupTimers.get(sessionId);
+function deferCleanup(session: SessionRecord, now: number) {
+    const failures = Math.min((session.cleanupFailures ?? 0) + 1, 32);
+    session.cleanupFailures = failures;
+    const delay = Math.min(RETRY_MAX_MS,
+        RETRY_BASE_MS * 2 ** Math.min(failures - 1, 6));
+    session.cleanupRetryAt = Math.max(now, Date.now()) + delay;
+}
 
-    if (timer) {
-        clearTimeout(timer);
-        cleanupTimers.delete(sessionId);
-    }
+/**
+ * The session is the cleanup tombstone until its last workspace is removed.
+ * The existing periodic session sweep retries failures with bounded backoff;
+ * on process restart the authoritative startup reaper reconciles both.
+ * `now` is injectable for deterministic sweep tests.
+ */
+export async function runScheduledWorkspaceCleanupNow(
+    sessionId: string,
+    now = Date.now(),
+): Promise<void> {
+    cancelScheduledWorkspaceCleanup(sessionId);
+    const initial = getSession(sessionId);
+    if (!initial) return;
+    if ((initial.cleanupRetryAt ?? 0) > now) return;
 
-    // This helper is intentionally test-friendly and deterministic.
-    // A shared IDE workspace is deleted only after its final terminal closes.
-    const session = getSession(sessionId);
+    const workspaceDir = initial.workspaceDir;
+    const previous = workspaceCleanupTasks.get(workspaceDir);
+    const task = (async () => {
+        // A preceding attempt can reject; the next attempt must still run.
+        if (previous) await previous.catch(() => undefined);
+        const current = getSession(sessionId);
+        if (!current || current.workspaceDir !== workspaceDir ||
+            (current.cleanupRetryAt ?? 0) > now) return;
 
-    if (!session) return;
+        // Closing one of several shared terminal sessions only drops its
+        // record. The last owner is responsible for the filesystem.
+        if (hasOtherSessionsForWorkspaceDir(workspaceDir, sessionId)) {
+            deleteSession(sessionId);
+            return;
+        }
 
-    const workspaceDir = session.workspaceDir;
-    const sharedByAnotherSession = hasOtherSessionsForWorkspaceDir(
-        workspaceDir,
-        sessionId,
-    );
+        // Do not delete a shared workspace while a new terminal is still
+        // between acquiring its reservation and registering its session.
+        if (!retireSharedShellWorkspaceForCleanup(workspaceDir)) {
+            deferCleanup(current, now);
+            throw new Error("RUNNER workspace cleanup deferred for active reservation.");
+        }
 
-    deleteSession(sessionId);
+        try {
+            await cleanupWorkspaceNow(workspaceDir);
+        } catch {
+            // Do not expose raw filesystem errors or paths. Keep the session
+            // so subsequent sweeps can retry without a Runner restart.
+            deferCleanup(current, now);
+            throw new Error("RUNNER workspace cleanup deferred for retry.");
+        }
+        deleteSession(sessionId); // Only after verified successful removal.
+    })();
 
-    if (!sharedByAnotherSession) {
-        forgetSharedShellWorkspace(workspaceDir);
-        await cleanupWorkspaceNow(workspaceDir);
+    workspaceCleanupTasks.set(workspaceDir, task);
+    try {
+        await task;
+    } finally {
+        if (workspaceCleanupTasks.get(workspaceDir) === task)
+            workspaceCleanupTasks.delete(workspaceDir);
     }
 }
 
@@ -68,46 +107,22 @@ export function scheduleWorkspaceCleanup(
     ttlMs = env.workspaceTtlMs,
 ) {
     cancelScheduledWorkspaceCleanup(sessionId);
-
     const expiresAt = Date.now() + ttlMs;
-
-    markSessionFinalized(sessionId, {
-        expiresAt,
-    });
+    markSessionFinalized(sessionId, { expiresAt });
 
     const timer = setTimeout(() => {
         cleanupTimers.delete(sessionId);
-
-        const sharedByAnotherSession = hasOtherSessionsForWorkspaceDir(
-            workspaceDir,
-            sessionId,
-        );
-        deleteSession(sessionId);
-
-        if (!sharedByAnotherSession) {
-            forgetSharedShellWorkspace(workspaceDir);
-            void cleanupWorkspaceNow(workspaceDir).catch(() => {
-                // The startup reaper retries on its next admission sweep.
-                // Never log raw filesystem errors or private workspace paths.
-                console.error("RUNNER scheduled workspace cleanup deferred");
-            });
-        }
+        void runScheduledWorkspaceCleanupNow(sessionId).catch(() => {
+            // A failed cleanup still has its session tombstone for the sweep.
+            console.error("RUNNER scheduled workspace cleanup deferred");
+        });
     }, ttlMs);
 
-    // Do not unref under tests; fake timers can behave differently with unref'd timers.
-    const isTest =
-        process.env.NODE_ENV === "test" ||
+    // Preserve deterministic fake-timer behavior under tests.
+    const isTest = process.env.NODE_ENV === "test" ||
         process.env.VITEST === "true" ||
         Boolean(process.env.VITEST_WORKER_ID);
-
-    if (!isTest && typeof timer.unref === "function") {
-        timer.unref();
-    }
-
+    if (!isTest && typeof timer.unref === "function") timer.unref();
     cleanupTimers.set(sessionId, timer);
-
-    return {
-        expiresAt,
-        ttlMs,
-    };
+    return { expiresAt, ttlMs };
 }

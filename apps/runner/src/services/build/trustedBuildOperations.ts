@@ -2,7 +2,6 @@ import type {
   DependencyLockBootstrapJobRequestV1,
   ProductionBuildJobRequestV1,
   TrustedBuildJobRequest,
-  TrustedBuildOperation,
 } from "@zoeskoul/build-executor-contracts";
 
 export type DependencyLockBootstrapOperationPlan =
@@ -35,7 +34,7 @@ export type ProductionBuildOperationPlan =
     operation:
       "production-build";
     executorProfileId:
-      "build-production-react-vite-v1";
+      "build-production-tanstack-worker-v1";
     installCommand:
       readonly [
         "pnpm",
@@ -46,10 +45,14 @@ export type ProductionBuildOperationPlan =
     buildCommand:
       readonly [
         "pnpm",
+        "exec",
+        "vite",
         "build",
       ];
+    typecheckCommand:
+      readonly ["pnpm", "exec", "tsc", "--noEmit"];
     outputPaths:
-      readonly ["dist"];
+      readonly ["dist/server", "dist/client"];
     allowInteractive:
       false;
     allowShell:
@@ -81,15 +84,11 @@ export function resolveTrustedBuildOperation(
   request:
     TrustedBuildJobRequest,
 ): TrustedBuildOperationPlan {
-  if (
-    request.stackId !==
-      "react-vite-v1" ||
-    request.templateId !==
-      "react-vite-v1"
-  ) {
-    throw new Error(
-      `Trusted ${request.operation} is only registered for react-vite-v1.`,
-    );
+  // Dependency bootstrap and Worker compilation share the canonical stack.
+  // Both operations are isolated; this registry performs no deployment.
+  if (request.stackId !== "tanstack-start-v1" ||
+      request.templateId !== "tanstack-start-v1") {
+    throw new Error("Only the canonical TanStack Start stack is registered.");
   }
 
   if (
@@ -119,42 +118,20 @@ export function resolveTrustedBuildOperation(
     };
   }
 
-  const operation:
-    TrustedBuildOperation =
-      request.operation;
-
-  if (
-    operation !==
-    "production-build"
-  ) {
-    throw new Error(
-      "Trusted Build operation is not registered.",
-    );
+  if (request.operation !== "production-build") {
+    throw new Error("Trusted Build operation is not registered.");
   }
-
+  // This operation is isolated compilation only; publishing is a separate,
+  // explicitly owner-authorized control-plane operation.
   return {
-    operation:
-      "production-build",
-    executorProfileId:
-      "build-production-react-vite-v1",
-    installCommand: [
-      "pnpm",
-      "install",
-      "--frozen-lockfile",
-      "--ignore-scripts",
-    ],
-    buildCommand: [
-      "pnpm",
-      "build",
-    ],
-    outputPaths: [
-      "dist",
-    ],
-    allowInteractive:
-      false,
-    allowShell:
-      false,
-    networkRequirement:
-      "package-registry",
+    operation: "production-build",
+    executorProfileId: "build-production-tanstack-worker-v1",
+    installCommand: ["pnpm", "install", "--frozen-lockfile", "--ignore-scripts"],
+    buildCommand: ["pnpm", "exec", "vite", "build"],
+    typecheckCommand: ["pnpm", "exec", "tsc", "--noEmit"],
+    outputPaths: ["dist/server", "dist/client"],
+    allowInteractive: false,
+    allowShell: false,
+    networkRequirement: "package-registry",
   };
 }

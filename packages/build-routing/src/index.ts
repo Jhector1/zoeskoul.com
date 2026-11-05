@@ -252,16 +252,6 @@ const COMPLEX_TERMS = [
   "complex workflow",
 ];
 
-const RICH_STOREFRONT_TERMS = [
-  "product filters",
-  "filter products",
-  "product search",
-  "client-side search",
-  "interactive catalog",
-  "interactive storefront",
-  "animated storefront",
-] as const;
-
 const FASHION_TERMS = [
   "clothes",
   "clothing",
@@ -360,471 +350,127 @@ function profile(
   };
 }
 
-export function classifyBuildRequest(
-  promptValue: string,
-): BuildRequestProfile {
-  const prompt =
-    normalizePrompt(promptValue);
+type CanonicalProfileInput =
+  Omit<BuildRequestProfile,
+    "projectType" | "targets" | "deploymentPreference" |
+    "stackId" | "supported" | "unsupportedReason" | "commerce"> &
+  Readonly<{
+    commerce?: BuildCommerceSpecification | null;
+    unsupportedReason?: string | null;
+  }>;
 
-  const marketplace =
-    includesAny(
-      prompt,
-      MARKETPLACE_TERMS,
-    );
-
-  if (marketplace) {
-    return profile({
-      siteKind: "marketplace",
-      industry:
-        industryFor(prompt),
-      complexity: "complex",
-      commerceMode:
-        "marketplace",
-      commerce: {
-        storefrontRuntime:
-          "react-vite",
-      },
-      projectType:
-        "fullstack-app",
-      requirements:
-        requirements({
-          backend: true,
-          database: true,
-          auth: true,
-          storage: true,
-          payments: true,
-          email: true,
-          commerce: true,
-        }),
-      deploymentPreference:
-        "managed-runtime",
-      stackId: null,
-      supported: false,
-      unsupportedReason:
-        "Marketplace and multi-vendor commerce require a trusted full-stack commerce foundation that is not registered yet.",
-      confidence: "high",
-      dynamicResponsibilities: [
-        ...DESIGN_RESPONSIBILITIES,
-        "storefront merchandising",
-        "seller-facing visual experience",
-      ],
-      staticResponsibilities:
-        COMMERCE_STATIC_RESPONSIBILITIES,
-    });
-  }
-
-  const commerce =
-    includesAny(
-      prompt,
-      COMMERCE_TERMS,
-    ) ||
-    (
-      /\b(store|shop)\b/.test(
-        prompt,
-      ) &&
-      /\b(product|products|sell|retail|clothes|fashion|jewelry|merch)\b/.test(
-        prompt,
-      )
-    );
-
-  if (commerce) {
-    const complex =
-      includesAny(
-        prompt,
-        COMPLEX_TERMS,
-      );
-
-    const richStorefront =
-      includesAny(
-        prompt,
-        RICH_STOREFRONT_TERMS,
-      );
-
-    const buyerAccounts =
-      /\b(customer account|customer accounts|buyer account|buyer accounts|order history|saved addresses|customer login|customer sign in)\b/.test(
-        prompt,
-      );
-
-    if (
-      complex ||
-      buyerAccounts
-    ) {
-      return profile({
-        siteKind:
-          "ecommerce",
-
-        industry:
-          industryFor(
-            prompt,
-          ),
-
-        complexity:
-          complex
-            ? "complex"
-            : "standard",
-
-        commerceMode:
-          "cart-checkout",
-
-        commerce: {
-          storefrontRuntime:
-            "react-vite",
-        },
-
-        projectType:
-          "frontend-app",
-
-        requirements:
-          requirements({
-            auth:
-              buyerAccounts,
-            payments: true,
-            commerce: true,
-          }),
-
-        deploymentPreference:
-          "managed-runtime",
-
-        stackId: null,
-        supported: false,
-
-        unsupportedReason:
-          complex
-            ? "This ecommerce request requires custom commerce behavior beyond the trusted standard storefront foundation."
-            : "Customer-account ecommerce requires the dedicated Customer Account API boundary before ZoeBuild can generate it safely.",
-
-        confidence:
-          "high",
-
-        dynamicResponsibilities: [
-          ...DESIGN_RESPONSIBILITIES,
-          "storefront visual hierarchy",
-          "product-card presentation",
-          "collection presentation",
-          "merchandising layout",
-          "cart presentation",
-        ],
-
-        staticResponsibilities:
-          COMMERCE_STATIC_RESPONSIBILITIES,
-      });
-    }
-
-    return profile({
-      siteKind:
-        "ecommerce",
-
-      industry:
-        industryFor(
-          prompt,
-        ),
-
-      complexity:
-        "standard",
-
-      commerceMode:
-        "cart-checkout",
-
-      commerce: {
-        storefrontRuntime:
-          richStorefront
-            ? "react-vite"
-            : "static",
-      },
-
-      projectType:
-        "frontend-app",
-
-      requirements:
-        requirements({
-          payments: true,
-          commerce: true,
-        }),
-
-      // The ZoeBuild asset is static. The commerce provider
-      // owns transactional state and hosted checkout.
-      deploymentPreference:
-        "static",
-
-      stackId:
-        richStorefront
-          ? "commerce-react-vite-v1"
-          : "commerce-static-v1",
-
-      supported: true,
-      unsupportedReason:
-        null,
-
-      confidence:
-        "high",
-
-      dynamicResponsibilities: [
-        ...DESIGN_RESPONSIBILITIES,
-        "storefront visual hierarchy",
-        "product-card presentation",
-        "collection presentation",
-        "merchandising layout",
-        "cart presentation",
-      ],
-
-      staticResponsibilities:
-        COMMERCE_STATIC_RESPONSIBILITIES,
-    });
-  }
-
-  const booking =
-    includesAny(
-      prompt,
-      BOOKING_TERMS,
-    );
-
-  if (booking) {
-    return profile({
-      siteKind: "booking",
-      industry:
-        industryFor(prompt),
-      complexity: "standard",
-      commerceMode: "none",
-      projectType:
-        "fullstack-app",
-      requirements:
-        requirements({
-          backend: true,
-          database: true,
-        }),
-      deploymentPreference:
-        "managed-runtime",
-      stackId: null,
-      supported: false,
-      unsupportedReason:
-        "Transactional booking requires a trusted managed backend stack that is not registered yet.",
-      confidence: "high",
-      dynamicResponsibilities:
-        DESIGN_RESPONSIBILITIES,
-      staticResponsibilities: [
-        ...STATIC_RESPONSIBILITIES,
-        "availability mechanics",
-        "booking state",
-      ],
-    });
-  }
-
-  const managedApplication =
-    includesAny(
-      prompt,
-      APP_TERMS,
-    ) ||
-    includesAny(
-      prompt,
-      MANAGED_FEATURE_TERMS,
-    );
-
-  if (managedApplication) {
-    const managed =
-      includesAny(
-        prompt,
-        MANAGED_FEATURE_TERMS,
-      );
-
-    if (managed) {
-      return profile({
-        siteKind:
-          "application",
-        industry:
-          industryFor(prompt),
-        complexity:
-          includesAny(
-            prompt,
-            COMPLEX_TERMS,
-          )
-            ? "complex"
-            : "standard",
-        commerceMode: "none",
-        projectType:
-          "fullstack-app",
-        requirements:
-          requirements({
-            backend: true,
-            database:
-              prompt.includes(
-                "database",
-              ),
-            auth:
-              /\b(login|log in|sign in|authentication|user accounts)\b/.test(
-                prompt,
-              ),
-            storage:
-              prompt.includes(
-                "upload",
-              ),
-          }),
-        deploymentPreference:
-          "managed-runtime",
-        stackId: null,
-        supported: false,
-        unsupportedReason:
-          "This request requires managed application capabilities for which ZoeBuild does not yet have a compatible registered stack.",
-        confidence: "high",
-        dynamicResponsibilities:
-          DESIGN_RESPONSIBILITIES,
-        staticResponsibilities:
-          STATIC_RESPONSIBILITIES,
-      });
-    }
-
-    return profile({
-      siteKind: "application",
-      industry:
-        industryFor(prompt),
-      complexity: "standard",
-      commerceMode: "none",
-      projectType:
-        "frontend-app",
-      requirements:
-        requirements(),
-      deploymentPreference:
-        "static",
-      stackId:
-        "react-vite-v1",
-      supported: true,
-      unsupportedReason: null,
-      confidence: "medium",
-      dynamicResponsibilities:
-        DESIGN_RESPONSIBILITIES,
-      staticResponsibilities:
-        STATIC_RESPONSIBILITIES,
-    });
-  }
-
-  if (
-    includesAny(
-      prompt,
-      PORTFOLIO_TERMS,
-    )
-  ) {
-    return profile({
-      siteKind: "portfolio",
-      industry:
-        prompt.includes(
-          "photograph",
-        )
-          ? "photography"
-          : industryFor(
-              prompt,
-            ),
-      complexity: "simple",
-      commerceMode: "none",
-      projectType:
-        "static-site",
-      requirements:
-        requirements(),
-      deploymentPreference:
-        "static",
-      stackId:
-        "static-html-v1",
-      supported: true,
-      unsupportedReason: null,
-      confidence: "high",
-      dynamicResponsibilities:
-        DESIGN_RESPONSIBILITIES,
-      staticResponsibilities:
-        STATIC_RESPONSIBILITIES,
-    });
-  }
-
-  if (
-    includesAny(
-      prompt,
-      BLOG_TERMS,
-    )
-  ) {
-    return profile({
-      siteKind: "blog",
-      industry:
-        industryFor(prompt),
-      complexity: "simple",
-      commerceMode: "none",
-      projectType:
-        "static-site",
-      requirements:
-        requirements(),
-      deploymentPreference:
-        "static",
-      stackId:
-        "static-html-v1",
-      supported: true,
-      unsupportedReason: null,
-      confidence: "high",
-      dynamicResponsibilities:
-        DESIGN_RESPONSIBILITIES,
-      staticResponsibilities:
-        STATIC_RESPONSIBILITIES,
-    });
-  }
-
-  if (
-    includesAny(
-      prompt,
-      RESTAURANT_TERMS,
-    )
-  ) {
-    return profile({
-      siteKind:
-        "restaurant",
-      industry:
-        "food-hospitality",
-      complexity: "simple",
-      commerceMode: "none",
-      projectType:
-        "static-site",
-      requirements:
-        requirements(),
-      deploymentPreference:
-        "static",
-      stackId:
-        "static-html-v1",
-      supported: true,
-      unsupportedReason: null,
-      confidence: "high",
-      dynamicResponsibilities:
-        DESIGN_RESPONSIBILITIES,
-      staticResponsibilities:
-        STATIC_RESPONSIBILITIES,
-    });
-  }
-
-  const marketing =
-    /\b(landing page|business website|company website|marketing site|service website)\b/.test(
-      prompt,
-    );
-
+/** Route every supported user intent to the single canonical TanStack stack.
+ * Capability gates remain deterministic: do not promise databases, account
+ * infrastructure, uploaded storage or email when no trusted adapter exists.
+ */
+function tanstackProfile(input: CanonicalProfileInput): BuildRequestProfile {
+  const unsupportedReason = input.unsupportedReason ??
+    (input.requirements.auth
+      ? "Customer Account API and authentication require a verified provider boundary."
+      : input.requirements.database
+        ? "Database-backed workflows require a verified database integration."
+        : input.requirements.storage
+          ? "Uploaded storage requires a verified storage integration."
+          : input.requirements.email
+            ? "Transactional email requires a verified email integration."
+            : null);
   return profile({
-    siteKind:
-      marketing
-        ? "marketing"
-        : "unknown",
-    industry:
-      industryFor(prompt),
-    complexity: "simple",
-    commerceMode: "none",
-    projectType:
-      "static-site",
-    requirements:
-      requirements(),
-    deploymentPreference:
-      "static",
-    stackId:
-      "static-html-v1",
-    supported: true,
-    unsupportedReason: null,
-    confidence:
-      marketing
-        ? "high"
-        : "low",
-    dynamicResponsibilities:
-      DESIGN_RESPONSIBILITIES,
-    staticResponsibilities:
-      STATIC_RESPONSIBILITIES,
+    ...input,
+    projectType: "fullstack-app",
+    deploymentPreference: "managed-runtime",
+    stackId: unsupportedReason === null ? "tanstack-start-v1" : null,
+    supported: unsupportedReason === null,
+    unsupportedReason,
+  });
+}
+
+export function classifyBuildRequest(promptValue: string): BuildRequestProfile {
+  const prompt = normalizePrompt(promptValue);
+  const industry = industryFor(prompt);
+
+  if (includesAny(prompt, MARKETPLACE_TERMS)) {
+    return tanstackProfile({
+      siteKind: "marketplace", industry, complexity: "complex",
+      commerceMode: "marketplace",
+      commerce: { storefrontRuntime: "tanstack-start" },
+      requirements: requirements({ backend: true, database: true, auth: true,
+        storage: true, payments: true, email: true, commerce: true }),
+      unsupportedReason: "Multi-vendor marketplace operations need verified seller isolation, commission accounting and provider integration.",
+      confidence: "high",
+      dynamicResponsibilities: [...DESIGN_RESPONSIBILITIES,
+        "storefront merchandising", "seller-facing visual experience"],
+      staticResponsibilities: COMMERCE_STATIC_RESPONSIBILITIES,
+    });
+  }
+
+  const commerce = includesAny(prompt, COMMERCE_TERMS) ||
+    (/\b(store|shop)\b/.test(prompt) &&
+      /\b(product|products|sell|retail|clothes|fashion|jewelry|merch)\b/.test(prompt));
+  if (commerce) {
+    const complex = includesAny(prompt, COMPLEX_TERMS);
+    const buyerAccounts =
+      /\b(customer account|customer accounts|buyer account|buyer accounts|order history|saved addresses|customer login|customer sign in)\b/.test(prompt);
+    return tanstackProfile({
+      siteKind: "ecommerce", industry,
+      complexity: complex ? "complex" : "standard",
+      commerceMode: "cart-checkout",
+      commerce: { storefrontRuntime: "tanstack-start" },
+      requirements: requirements({ backend: true, auth: buyerAccounts,
+        payments: true, commerce: true }),
+      unsupportedReason: complex
+        ? "Custom commerce behavior requires verified integrations beyond the standard storefront."
+        : null,
+      confidence: "high",
+      dynamicResponsibilities: [...DESIGN_RESPONSIBILITIES,
+        "storefront visual hierarchy", "product-card presentation",
+        "collection presentation", "merchandising layout", "cart presentation"],
+      staticResponsibilities: COMMERCE_STATIC_RESPONSIBILITIES,
+    });
+  }
+
+  if (includesAny(prompt, BOOKING_TERMS)) {
+    return tanstackProfile({
+      siteKind: "booking", industry, complexity: "standard", commerceMode: "none",
+      requirements: requirements({ backend: true, database: true }),
+      confidence: "high",
+      dynamicResponsibilities: DESIGN_RESPONSIBILITIES,
+      staticResponsibilities: [...STATIC_RESPONSIBILITIES,
+        "availability mechanics", "booking state"],
+    });
+  }
+
+  if (includesAny(prompt, APP_TERMS) || includesAny(prompt, MANAGED_FEATURE_TERMS)) {
+    return tanstackProfile({
+      siteKind: "application", industry,
+      complexity: includesAny(prompt, COMPLEX_TERMS) ? "complex" : "standard",
+      commerceMode: "none",
+      requirements: requirements({
+        backend: true,
+        database: prompt.includes("database"),
+        auth: /\b(login|log in|sign in|authentication|user accounts)\b/.test(prompt),
+        storage: /\b(upload files|file upload|upload images)\b/.test(prompt),
+      }),
+      confidence: "medium",
+      dynamicResponsibilities: DESIGN_RESPONSIBILITIES,
+      staticResponsibilities: STATIC_RESPONSIBILITIES,
+    });
+  }
+
+  const portfolio = includesAny(prompt, PORTFOLIO_TERMS);
+  const blog = includesAny(prompt, BLOG_TERMS);
+  const restaurant = includesAny(prompt, RESTAURANT_TERMS);
+  const marketing = /\b(landing page|business website|company website|marketing site|service website)\b/.test(prompt);
+  const siteKind: BuildSiteKind = portfolio ? "portfolio" : blog ? "blog" :
+    restaurant ? "restaurant" : marketing ? "marketing" : "unknown";
+  return tanstackProfile({
+    siteKind,
+    industry: portfolio && prompt.includes("photograph") ? "photography" :
+      restaurant ? "food-hospitality" : industry,
+    complexity: "simple", commerceMode: "none",
+    requirements: requirements({ backend: true }),
+    confidence: siteKind === "unknown" ? "low" : "high",
+    dynamicResponsibilities: DESIGN_RESPONSIBILITIES,
+    staticResponsibilities: STATIC_RESPONSIBILITIES,
   });
 }
 

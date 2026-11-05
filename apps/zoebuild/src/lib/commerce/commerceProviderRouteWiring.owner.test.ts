@@ -9,7 +9,7 @@ const read = (p: string) =>
 describe("commerce runtime wiring", () => {
   const surfaces = [
     read("apps/zoebuild/src/app/api/build/projects/[buildProjectId]/commerce/preview/route.ts"),
-    read("apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[[...path]]/route.ts"),
+    read("apps/zoebuild/src/app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[...path]/route.ts"),
     read("apps/zoebuild/src/app/sites/[buildProjectId]/[[...path]]/route.ts"),
   ];
 

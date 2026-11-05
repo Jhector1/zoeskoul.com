@@ -43,18 +43,17 @@ describe(
 
         for (const contract of [
           'projectType:',
-          '"frontend-app"',
           'targets:',
           '"web"',
           'requirements:',
           'profile.requirements',
           'commerce:',
           'profile.requirements.commerce',
-          'storefrontRuntime: "react-vite"',
+          'storefrontRuntime: "tanstack-start"',
           'stackId:',
-          '"react-vite-v1"',
+          'profile.stackId',
           'deployment:',
-          'preference:',
+          'profile.deploymentPreference',
         ]) {
           expect(owner).toContain(contract);
         }

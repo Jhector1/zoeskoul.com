@@ -22,6 +22,21 @@ export type TanstackSandboxHandle = Readonly<{
   workspaceDir: string;
 }>;
 
+/** Bounded diagnostic metadata only; never log user source, paths or errors. */
+export type TanstackReadinessDiagnostic = Readonly<{
+  result: "transport_error" | "http_status" | "invalid_html" | "no_probe";
+  attempts: number;
+  lastHttpStatus: number | null;
+  elapsedMs: number;
+}>;
+
+export class TanstackPreviewReadinessError extends Error {
+  constructor(readonly diagnostic: TanstackReadinessDiagnostic) {
+    super("Isolated TanStack preview did not become ready.");
+    this.name = "TanstackPreviewReadinessError";
+  }
+}
+
 export type TanstackPreviewDriver = Readonly<{
   prepare(): Promise<string>;
   launch(workspaceDir: string): Promise<string>;
@@ -50,21 +65,35 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
     const startedAt = driver.now();
     opts.onPhase?.("readiness");
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
-    // Clock guard spans install, container startup and SSR readiness.
+    // Readiness deadline begins after launch, not during dependency install.
+    let attempts = 0;
+    let result: TanstackReadinessDiagnostic["result"] = "no_probe";
+    let lastHttpStatus: number | null = null;
     while (driver.now() - startedAt < timeoutMs) {
       if (opts.signal?.aborted) throw new Error("Preview cancelled.");
+      attempts++;
       try {
-        if (isTanstackSsrReady(await driver.probe(containerId))) {
-          return { containerId, workspaceDir };
-        }
+        const response = await driver.probe(containerId);
+        if (isTanstackSsrReady(response)) return { containerId, workspaceDir };
+        lastHttpStatus = Number.isInteger(response.status) &&
+          response.status >= 100 && response.status <= 599 ? response.status : null;
+        result = response.status === 200 ? "invalid_html" : "http_status";
       } catch {
-        // A process still booting can refuse localhost HTTP; retry until deadline.
+        // Never log the underlying exception: it may contain response data.
+        result = "transport_error";
       }
       if (opts.signal?.aborted) throw new Error("Preview cancelled.");
       await driver.sleep(Math.min(TANSTACK_PREVIEW_PROBE_INTERVAL_MS,
         Math.max(1, timeoutMs - (driver.now() - startedAt))));
     }
-    throw new Error("Isolated TanStack preview did not become ready.");
+    const diagnostic: TanstackReadinessDiagnostic = {
+      result,
+      attempts,
+      lastHttpStatus,
+      elapsedMs: Math.max(0, Math.floor(driver.now() - startedAt)),
+    };
+    console.warn("RUNNER isolated TanStack readiness timed out", diagnostic);
+    throw new TanstackPreviewReadinessError(diagnostic);
   } catch (error) {
     // Cleanup is mandatory even if readiness, installation, or cancellation fails.
     const earlier = error instanceof TanstackPreviewCleanupError ? error : null;

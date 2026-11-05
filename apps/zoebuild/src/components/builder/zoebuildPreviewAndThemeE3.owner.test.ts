@@ -6,17 +6,20 @@ const repo = resolve(__dirname, "../../../../..");
 function source(path: string) { return readFileSync(resolve(repo, path), "utf8"); }
 const prefix = "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/";
 
-describe("ZoeBuild E3 shared static preview and site settings theme", () => {
-  it("routes static commerce through the same authenticated parent callback in both modes", () => {
+describe("ZoeBuild E3 isolated preview and site settings theme", () => {
+  it("uses one isolated TanStack preview across Preview and Code without a static commerce bridge", () => {
     const shell = source(prefix + "ProjectBuilderShell.tsx");
     const code = source(prefix + "BuildWorkspaceClient.tsx");
-    expect(shell).toContain("onCommerceRequest={");
-    expect(shell).toContain("requestStaticPreviewCommerce");
-    expect(shell).toContain("webPreviewCommerceRequest={");
-    expect(code).toContain("webPreviewCommerceRequest={webPreviewCommerceRequest}");
-    expect(code).toContain("webPreviewSessionKey={project.buildProjectId}");
+    expect(shell).toContain('props.project.stackId === "tanstack-start-v1"');
+    expect(shell).toContain("preview={fullStackPreview}");
+    expect(shell).toContain("remoteWebPreview={fullStackPreview}");
+    expect(shell).not.toContain("requestStaticPreviewCommerce");
+    expect(shell).not.toContain("webPreviewCommerceRequest");
+    expect(code).toContain('slotId="code-preview"');
+    expect(code).toContain("remoteWebPreviewSurface={");
+    expect(code).not.toContain("webPreviewCommerceRequest");
   });
-  it("keeps one generic WebPreview renderer and never alters other IDE callers", () => {
+  it("preserves the shared learner-workspace renderer for other IDE callers", () => {
     const types = source("packages/learner-workspace/src/ide/types.ts");
     const runner = source("packages/learner-workspace/src/runner/CodeRunner.tsx");
     const output = source("packages/learner-workspace/src/runner/components/OutputSurface.tsx");

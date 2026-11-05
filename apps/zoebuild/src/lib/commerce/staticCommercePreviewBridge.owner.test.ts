@@ -73,11 +73,10 @@ describe(
           "acceptWebPreviewCommerceRequest",
         );
 
-        expect(
-          shell,
-        ).toContain(
-          'credentials:\n            "same-origin"',
-        );
+        // The shared static RPC exists for Learning, but ZoeBuild no longer
+        // wires its full-stack preview through that browser callback.
+        expect(shell).not.toContain("requestStaticPreviewCommerce");
+        expect(shell).not.toContain("onCommerceRequest={");
 
         expect(
           route,
@@ -234,7 +233,7 @@ describe(
     );
 
     it(
-      "enables the binding only for commerce projects and keeps the iframe opaque",
+      "keeps the retired shared renderer opaque while ZoeBuild uses TanStack preview",
       () => {
         expect(
           shell,
@@ -242,17 +241,8 @@ describe(
           "commerceEnabled",
         );
 
-        expect(
-          shell,
-        ).toContain(
-          "onCommerceRequest={",
-        );
-
-        expect(
-          shell,
-        ).toContain(
-          "? requestStaticPreviewCommerce",
-        );
+        expect(shell).toContain("preview={fullStackPreview}");
+        expect(shell).not.toContain("<WebPreview");
 
         expect(
           preview,

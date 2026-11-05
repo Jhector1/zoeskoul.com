@@ -39,12 +39,14 @@ export class AutoRestoreDependenciesError extends Error {
 export async function adoptRestoredReactDependencyLock(client: PrismaClient, args: Readonly<{
   ownerId: string; buildProjectId: string; expectedVersion: number;
 }>): Promise<{sourceVersion: number; status: "adopted" | "lock-missing"} | null> {
-  return client.$transaction(async tx => {
-    const owned = await tx.buildProject.findFirst({
+  // Inspect immutable history and prepare the signed artifact OUTSIDE the
+  // interactive transaction. Large workspace parsing and artifact preparation must not
+  // occupy a scarce pooled PostgreSQL transaction connection.
+  const owned = await client.buildProject.findFirst({
       where: {id: args.buildProjectId, stackId: "react-vite-v1", status: {not: "archived"},
         codeProject: {ownerId: args.ownerId, archivedAt: null}},
       select: {id: true, specification: true, codeProject: {select: {
-        id: true, currentVersion: true, workspace: true, settings: true, meta: true,
+        id: true, currentVersion: true, workspaceHash: true, workspace: true, settings: true, meta: true,
         title: true, description: true, visibility: true, shareToken: true,
         scopeKind: true, subjectId: true, moduleId: true, assignmentId: true, scopeKey: true,
       }}},
@@ -57,7 +59,7 @@ export async function adoptRestoredReactDependencyLock(client: PrismaClient, arg
         meta?.restoredSnapshotVersion !== args.expectedVersion)
       throw new AutoRestoreDependenciesError("BUILD_HISTORY_STALE");
     const historyVersion = activeSavedHistoryVersion(args.expectedVersion, cp.meta);
-    const previous = await tx.codeProjectRevision.findUnique({
+    const previous = await client.codeProjectRevision.findUnique({
       where: {projectId_version: {projectId: cp.id, version: historyVersion}},
       select: {snapshot: true, settings: true},
     });
@@ -80,7 +82,7 @@ export async function adoptRestoredReactDependencyLock(client: PrismaClient, arg
       throw new AutoRestoreDependenciesError("BUILD_RESTORE_DEPENDENCIES_UNVERIFIED");
     if (approvedNode) throw new AutoRestoreDependenciesError("BUILD_RESTORE_DEPENDENCY_APPROVAL_PRESENT");
     if (!lockNode || lockNode.kind !== "file" || !lockNode.content.trim()) {
-      return {sourceVersion: args.expectedVersion, status: "lock-missing"};
+      return {sourceVersion: args.expectedVersion, status: "lock-missing" as const};
     }
     // No version ranges, package-manager overrides or unpinned dependencies.
     try { canonicalProjectDependencyManifest(packageNode.content); }
@@ -109,9 +111,7 @@ export async function adoptRestoredReactDependencyLock(client: PrismaClient, arg
     });
     if (plan.dependencyLock.state !== "present")
       throw new AutoRestoreDependenciesError("BUILD_RESTORE_DEPENDENCIES_UNSUPPORTED");
-    let result;
-    try {
-      result = await saveCodeProjectInTransaction(tx, {
+    const sourceToCommit = {
         projectId: cp.id, ownerId: args.ownerId,
         title: cp.title, description: cp.description, language: sealed.language,
         workspace: json(sealed), settings: json(cp.settings),
@@ -127,14 +127,65 @@ export async function adoptRestoredReactDependencyLock(client: PrismaClient, arg
         // A generated authorization seal is not a new user-saved version.
         createRevision: false,
         createdById: args.ownerId, baseVersion: args.expectedVersion,
+    };
+
+    // Re-read the trusted head INSIDE the write transaction. This protects
+    // against a concurrent restore, manual edit or settings mutation while
+    // the sealed artifact was prepared, without holding a transaction open
+    // during parsing, signature generation or artifact planning.
+    return client.$transaction(async tx => {
+      const fresh = await tx.buildProject.findFirst({
+        where: {id: args.buildProjectId, stackId: "react-vite-v1", status: {not: "archived"},
+          codeProject: {ownerId: args.ownerId, archivedAt: null}},
+        select: {specification: true, codeProject: {select: {
+          id: true, currentVersion: true, workspaceHash: true, meta: true, settings: true,
+          title: true, description: true, language: true,
+          visibility: true, shareToken: true, scopeKind: true, subjectId: true,
+          moduleId: true, assignmentId: true, scopeKey: true,
+        }}},
       });
-    } catch (error) {
-      if (error instanceof ProjectVersionConflictError)
+      if (!fresh) return null;
+      const head = fresh.codeProject;
+      const headMeta = obj(head.meta);
+      if (head.id !== cp.id || head.currentVersion !== args.expectedVersion ||
+          headMeta?.lastMutation !== "history-restore" ||
+          headMeta?.restoredSnapshotVersion !== args.expectedVersion ||
+          activeSavedHistoryVersion(head.currentVersion, head.meta) !== historyVersion ||
+          JSON.stringify(head.meta) !== JSON.stringify(cp.meta) ||
+          JSON.stringify(head.settings) !== JSON.stringify(cp.settings) ||
+          JSON.stringify(fresh.specification) !== JSON.stringify(owned.specification) ||
+          head.workspaceHash !== cp.workspaceHash ||
+          head.title !== cp.title || head.description !== cp.description ||
+          head.language !== workspace.language || head.visibility !== cp.visibility ||
+          head.shareToken !== cp.shareToken || head.scopeKind !== cp.scopeKind ||
+          head.subjectId !== cp.subjectId || head.moduleId !== cp.moduleId ||
+          head.assignmentId !== cp.assignmentId || head.scopeKey !== cp.scopeKey)
         throw new AutoRestoreDependenciesError("BUILD_HISTORY_STALE");
-      throw error;
-    }
-    if (result.version !== args.expectedVersion + 1)
-      throw new AutoRestoreDependenciesError("BUILD_HISTORY_STALE");
-    return {sourceVersion: result.version, status: "adopted"};
-  }, {isolationLevel: Prisma.TransactionIsolationLevel.Serializable});
+      // Legacy heads may lack workspaceHash. Compare their full bytes before
+      // permitting a write; never assume two null hashes mean equal source.
+      if (head.workspaceHash === null) {
+        const currentWorkspace = await tx.codeProject.findUnique({
+          where: {id: cp.id}, select: {workspace: true},
+        });
+        if (!currentWorkspace || JSON.stringify(currentWorkspace.workspace) !== JSON.stringify(cp.workspace))
+          throw new AutoRestoreDependenciesError("BUILD_HISTORY_STALE");
+      }
+      let result;
+      try {
+        result = await saveCodeProjectInTransaction(tx, sourceToCommit);
+      } catch (error) {
+        if (error instanceof ProjectVersionConflictError)
+          throw new AutoRestoreDependenciesError("BUILD_HISTORY_STALE");
+        throw error;
+      }
+      if (result.version !== args.expectedVersion + 1)
+        throw new AutoRestoreDependenciesError("BUILD_HISTORY_STALE");
+      return {sourceVersion: result.version, status: "adopted" as const};
+    }, {
+      isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
+      // Bounded connection acquisition under Next dev traffic. Not a request
+      // to rerun any mutation, nor an extension of the runner install deadline.
+      maxWait: 15_000,
+      timeout: 30_000,
+    });
 }

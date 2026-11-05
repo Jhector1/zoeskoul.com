@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { choosePreviewsToReclaim, PreviewStartCoordinator } from "./reactPreviewResourceAdmission.js";
+import { choosePreviewsToReclaim, PreviewStartCoordinator } from "./previewAdmissionPolicy.js";
 
 describe("V12K12K12 runner preview resource admission", () => {
   it("keeps a selected project and protects other actors' fresh sessions", () => {

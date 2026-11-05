@@ -63,7 +63,7 @@ describe(
         );
 
         expect(shell).toContain(
-          "<WebPreview",
+          "<PersistentReactPreviewSlot",
         );
 
         expect(shell).toContain(

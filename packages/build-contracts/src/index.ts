@@ -50,8 +50,7 @@ export type BuildDeploymentPreference =
   (typeof BUILD_DEPLOYMENT_PREFERENCES)[number];
 
 export const BUILD_STOREFRONT_RUNTIMES = [
-  "static",
-  "react-vite",
+  "tanstack-start",
 ] as const;
 
 export type BuildStorefrontRuntime =

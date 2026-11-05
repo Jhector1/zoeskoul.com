@@ -111,8 +111,8 @@ export function evaluateProjectStack(
     stack.commerceRuntime ?? null;
 
   if (
-    specificationCommerceRuntime !==
-    stackCommerceRuntime
+    specification.requirements.commerce &&
+    specificationCommerceRuntime !== stackCommerceRuntime
   ) {
     return {
       compatible: false,

@@ -24,7 +24,12 @@ describe("V12K12K8 automatic historical preview",()=>{
     expect(hook).toContain('message:"Verifying the website document…"');
     expect(hook).toContain('const preparedVersion = bootstrapData.bootstrap?.source?.sourceVersion');
     expect(hook).toContain('await reconcileConflict(startingVersion)');
-    expect(hook).toContain("window.location.reload()");
+    // K20D2A deliberately continues a verified dependency bootstrap in-page.
+    // Do not regress to a full reload that discards the selected history UI.
+    expect(hook).not.toContain("window.location.reload()");
+    expect(hook).toContain("await reconcilePreparedDependencies(startingVersion)");
+    expect(hook).toContain("setPreparedReplaySerial(serial => serial + 1)");
+    expect(hook).toContain('onDependencyPrepared?: (attemptedSourceVersion: number) => Promise<boolean>');
     expect(route).toContain("adoptRestoredReactDependencyLock(prisma");
     expect(route).toContain("createPrismaBuildProjectSourceWriter(prisma, {createRevision:false})");
     expect(route).toContain("expectedSourceVersion: baseVersion");

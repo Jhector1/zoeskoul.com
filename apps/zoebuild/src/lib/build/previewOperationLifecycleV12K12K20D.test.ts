@@ -18,7 +18,8 @@ describe("K20D preview operation handshake",()=>{
  });
  it("polls a bounded durable operation instead of aborting an active installation",()=>{
    const hook=read("components/builder/useReactVitePreview.ts");
-   expect(hook).toContain("PREVIEW_OPERATION_TIMEOUT_MS = 6 * 60_000");
+   expect(hook).not.toContain("PREVIEW_OPERATION_TIMEOUT_MS");
+   expect(hook).toContain("The runner owns the operation deadline");
    expect(hook).toContain("PREVIEW_OPERATION_POLL_INTERVAL_MS = 2_000");
    expect(hook).toContain('current.state === "ready"');
    expect(hook).toContain("supersededDuringStart = true");
