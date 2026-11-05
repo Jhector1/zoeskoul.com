@@ -7,7 +7,7 @@ import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermi
 import { buildProductionBuildContainerOptions, executeBuildStep } from "./executeProductionBuild.js";
 import { assertTanstackWorkerBuildRequest } from "./tanstackWorkerBuildPolicy.js";
 import {
-  TANSTACK_PREVIEW_DEV_COMMAND, TANSTACK_PREVIEW_INSTALL_COMMAND,
+  TANSTACK_PREVIEW_INSTALL_COMMAND, tanstackPreviewDevCommand,
   assertTanstackSandboxOptions,
 } from "./tanstackPreviewRuntimePolicy.js";
 import { TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
@@ -18,8 +18,10 @@ import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport
  * source-version check, and source/manifest dependency authorization.
  * In particular, package-manifest approval must not be inferred from these
  * structural checks; do not expose this driver directly to HTTP. */
-export function makeTanstackPreviewDockerDriver(request: ProductionBuildJobRequestV1): TanstackPreviewDriver {
+export function makeTanstackPreviewDockerDriver(request: ProductionBuildJobRequestV1, basePath: string): TanstackPreviewDriver {
   assertTanstackWorkerBuildRequest(request);
+  // Validate before preparing a workspace or invoking Docker.
+  const command = tanstackPreviewDevCommand(basePath);
   // Journal identity exists BEFORE a workspace is created. Docker labels make
   // create/start crashes discoverable even between container creation and the
   // next journal fsync. The runner must have a single active pool process.
@@ -102,9 +104,10 @@ export function makeTanstackPreviewDockerDriver(request: ProductionBuildJobReque
     },
     async launch(workspaceDir) {
       const base = buildProductionBuildContainerOptions({ workspaceDir,
-        command: TANSTACK_PREVIEW_DEV_COMMAND, step: "build" });
+        command, step: "build" });
       const options = {
         ...base,
+        Env: [...base.Env, `ZOEBUILD_PREVIEW_BASE_PATH=${basePath}`],
         Labels: { ...base.Labels, "com.zoeskoul.runner.purpose": "tanstack-start-preview",
           "com.zoeskoul.runner.tanstack-run": journal.runId },
         HostConfig: { ...base.HostConfig, NetworkMode: "none" },
@@ -127,7 +130,7 @@ export function makeTanstackPreviewDockerDriver(request: ProductionBuildJobReque
     },
     async probe(containerId) {
       return fetchTanstackHttpInsideSandbox(containerId, {
-        method: "GET", path: "/", headers: { accept: "text/html" }, bodyBase64: "",
+        method: "GET", path: basePath, headers: { accept: "text/html" }, bodyBase64: "",
       });
     },
     destroy: removeContainer,

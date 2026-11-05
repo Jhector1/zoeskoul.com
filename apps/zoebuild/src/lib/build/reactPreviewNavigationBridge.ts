@@ -80,8 +80,29 @@ export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
   function report(force) {
     var current = route();
     if (current === null) return;
+    // Vite SPA templates mount into #root, but TanStack Start SSR writes React
+    // markup directly beneath <body>. Do not require a SPA mount node for SSR.
+    // Count actual DOM content, not scripts/styles or an empty placeholder.
     var rootElement = document.getElementById("root");
-    var rendered = Boolean(rootElement && rootElement.childElementCount > 0);
+    var rendered = false;
+    if (rootElement) {
+      rendered = rootElement.childElementCount > 0 ||
+        Boolean((rootElement.textContent || "").trim());
+    } else if (document.body) {
+      var children = document.body.children;
+      for (var i = 0; i < children.length; i++) {
+        var child = children[i];
+        var tag = child.tagName;
+        if (tag === "SCRIPT" || tag === "STYLE" || tag === "LINK" ||
+            tag === "META" || tag === "NOSCRIPT" || tag === "TEMPLATE") continue;
+        if (child.childElementCount > 0 ||
+            Boolean((child.textContent || "").trim()) ||
+            tag === "IMG" || tag === "VIDEO" || tag === "CANVAS") {
+          rendered = true;
+          break;
+        }
+      }
+    }
     var revision = documentRevision;
     var fingerprint = current + "|" + index + "|" + routes.length + "|" + rendered;
     if (!force && fingerprint === lastReport) return;

@@ -17,7 +17,7 @@ assert.doesNotThrow(() => new Function(js));
 const base = "/api/build/projects/cmva2y8l2000221dl6w20b5cm/preview/preview_0d5524f1-b9b1-4165-a986-b40db0de774a/content/hc0yaQh_mkTxk3nnFA5FYsnNzaZwDPmP/";
 function bootstrapScenario({ throwOnRestore = false, badScript = false } = {}) {
   const messages = [];
-  const url = new URL("https://zoe.example" + base + "__zoebuild/document?__zb_preview_route=%2Fapproach&__zb_preview_revision=5");
+  const url = new URL("https://zoe.example" + base + "preview-document?__zb_preview_route=%2Fapproach&__zb_preview_revision=5");
   const script = {
     getAttribute(name) {
       if (name === "src") return badScript ? "https://evil.invalid/external.js" : base + "__zoebuild/navigation.js";

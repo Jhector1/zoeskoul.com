@@ -7,6 +7,15 @@ export const TANSTACK_PREVIEW_DEV_COMMAND = [
 export const TANSTACK_PREVIEW_INSTALL_COMMAND = [
   "pnpm", "install", "--frozen-lockfile", "--ignore-scripts",
 ] as const;
+/** Only Runner-minted browser capability URLs may become Vite's public base.
+ * Never accept a base from application source or an HTTP request parameter. */
+export function tanstackPreviewDevCommand(basePath: string): readonly string[] {
+  if (!/^\/api\/build\/projects\/[A-Za-z0-9_-]+\/preview\/preview_[a-f0-9-]+\/content\/[A-Za-z0-9_-]{32}\/$/.test(basePath)) {
+    throw new Error("Invalid TanStack Vite public base.");
+  }
+  return [...TANSTACK_PREVIEW_DEV_COMMAND, "--base", basePath];
+}
+
 export const TANSTACK_PREVIEW_READY_TIMEOUT_MS = 60_000;
 export const TANSTACK_PREVIEW_PROBE_INTERVAL_MS = 800;
 
@@ -16,11 +25,14 @@ export function tanstackInternalPreviewPath(basePath: string, request: TanstackP
     throw new Error("Invalid preview base path.");
   }
   if (!request.path.startsWith(basePath)) throw new Error("Preview capability mismatch.");
+  // Vite is launched under this exact public base and strips it internally.
+  // Do not strip here: /@id, /src and generated TanStack modules must all
+  // have one consistent URL from browser through gateway to Vite.
   const relative = request.path.slice(basePath.length);
   if (relative.startsWith("/") || relative.includes("#") || /[\\\u0000-\u001f\u007f]/.test(relative)) {
     throw new Error("Unsafe internal preview path.");
   }
-  return relative.startsWith("?") ? `/${relative}` : `/${relative}`;
+  return request.path;
 }
 
 export function isTanstackSsrReady(response: Readonly<{
@@ -35,6 +47,7 @@ export function isTanstackSsrReady(response: Readonly<{
 /** A full-stack preview may execute arbitrary user code. Fail closed on container escapes. */
 export function assertTanstackSandboxOptions(options: Readonly<{
   Cmd?: readonly string[];
+  Env?: readonly string[];
   User?: string;
   HostConfig?: {
     NetworkMode?: string;
@@ -52,7 +65,15 @@ export function assertTanstackSandboxOptions(options: Readonly<{
   };
 }>): void {
   const config = options.HostConfig;
-  if (!config || config.NetworkMode !== "none" || config.Privileged !== false ||
+  const basePath = options.Cmd?.[TANSTACK_PREVIEW_DEV_COMMAND.length + 1] ?? "";
+  const baseIsValid = (() => {
+    try { return JSON.stringify(options.Cmd) === JSON.stringify(tanstackPreviewDevCommand(basePath)); }
+    catch { return false; }
+  })();
+  if (!config || !baseIsValid ||
+      !options.Env ||
+      options.Env.filter(value => value.startsWith("ZOEBUILD_PREVIEW_BASE_PATH=")).length !== 1 ||
+      !options.Env.includes(`ZOEBUILD_PREVIEW_BASE_PATH=${basePath}`) || config.NetworkMode !== "none" || config.Privileged !== false ||
       config.ReadonlyRootfs !== true ||
       !/^\d+:\d+$/.test(options.User ?? "") ||
       !Array.isArray(config.CapDrop) || !config.CapDrop.includes("ALL") ||
@@ -64,8 +85,7 @@ export function assertTanstackSandboxOptions(options: Readonly<{
       !Array.isArray(config.SecurityOpt) || config.SecurityOpt.length === 0 ||
       !Array.isArray(config.Binds) || config.Binds.length !== 1 ||
       !config.Binds[0].endsWith(":/workspace:rw") ||
-      config.PortBindings !== undefined ||
-      JSON.stringify(options.Cmd) !== JSON.stringify(TANSTACK_PREVIEW_DEV_COMMAND)) {
+      config.PortBindings !== undefined) {
     throw new Error("Unsafe full-stack preview sandbox configuration.");
   }
 }

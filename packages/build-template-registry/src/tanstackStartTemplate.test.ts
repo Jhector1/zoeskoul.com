@@ -9,6 +9,8 @@ describe("canonical TanStack Start generated app blueprint", () => {
     expect(TANSTACK_START_TEMPLATE_V1.id).toBe("tanstack-start-v1");
     expect(new Set(files.keys()).size).toBe(TANSTACK_START_TEMPLATE_V1.files.length);
     expect(files.get("src/router.tsx")).toContain("createRouter");
+    expect(files.get("src/router.tsx")).toContain("import.meta.env.BASE_URL");
+    expect(files.get("vite.config.ts")).toContain("ZOEBUILD_PREVIEW_BASE_PATH");
     expect(files.get("src/routes/__root.tsx")).toContain("HeadContent");
     expect(files.get("src/routes/__root.tsx")).toContain("Scripts");
     expect(files.get("src/routes/index.tsx")).toContain('createFileRoute("/")');

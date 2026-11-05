@@ -24,8 +24,11 @@ describe("TanStack preview uses the shared Runner admission",()=>{
     expect(steps).toEqual([]);
   });
   it("accounts for a ready SSR server until verified teardown",async()=>{
+    let mintedBase: string | null = null;
     const result=await startAdmittedTanstackPreview({ownerKey:"owner",request,
-      authorize:async()=>{},driverFactory:()=>driver});
+      authorize:async()=>{},driverFactory:(_request, basePath)=>{ mintedBase = basePath;
+        expect(sharedFullStackPreviews.count()).toBe(0); return driver; }});
+    expect(mintedBase).toBe(result.basePath);
     expect(result.port).toBe(5173);
     expect(sharedFullStackPreviews.count()).toBe(1);
     await expect(stopAdmittedTanstackPreview("other",result.previewId)).rejects.toThrow("Forbidden");

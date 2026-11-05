@@ -19,7 +19,7 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
   authorize: (ownerKey: string, request: ProductionBuildJobRequestV1) => Promise<void>;
   signal?: AbortSignal;
   onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void;
-  driverFactory?: (request: ProductionBuildJobRequestV1) => TanstackPreviewDriver;
+  driverFactory?: (request: ProductionBuildJobRequestV1, basePath: string) => TanstackPreviewDriver;
 }>) {
   if (!input.ownerKey || input.request.stackId !== "tanstack-start-v1" ||
       input.request.templateId !== "tanstack-start-v1" || input.request.operation !== "production-build")
@@ -45,13 +45,15 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
       let handle: Awaited<ReturnType<typeof startIsolatedTanstackPreview>> | null = null;
       let driver: TanstackPreviewDriver | null = null;
       try {
-        const createdDriver = (input.driverFactory ?? makeTanstackPreviewDockerDriver)(request);
-        driver = createdDriver;
-        handle = await startIsolatedTanstackPreview(createdDriver,{signal:input.signal,onPhase:input.onPhase});
-        if (input.signal?.aborted) throw new Error("Preview cancelled.");
+        // Mint the capability BEFORE launch, but do not register or expose it
+        // until readiness succeeds. This is Vite's trusted per-preview base.
         const previewId = `preview_${randomUUID()}`;
         const publicAccessKey = randomBytes(24).toString("base64url");
         const basePath = `/api/build/projects/${encodeURIComponent(request.buildProjectId)}/preview/${previewId}/content/${publicAccessKey}/`;
+        const createdDriver = (input.driverFactory ?? makeTanstackPreviewDockerDriver)(request, basePath);
+        driver = createdDriver;
+        handle = await startIsolatedTanstackPreview(createdDriver,{signal:input.signal,onPhase:input.onPhase});
+        if (input.signal?.aborted) throw new Error("Preview cancelled.");
         const createdAt = Date.now();
         const owned = handle;
         sharedFullStackPreviews.register({

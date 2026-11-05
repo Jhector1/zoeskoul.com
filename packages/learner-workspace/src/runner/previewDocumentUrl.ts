@@ -4,7 +4,7 @@
  * document. React route selection is transmitted as data, not as a proxy path.
  */
 const DUMMY_ORIGIN = "https://preview.invalid";
-export const PREVIEW_DOCUMENT_SEGMENT = "__zoebuild/document";
+export const PREVIEW_DOCUMENT_SEGMENT = "preview-document";
 export const PREVIEW_DOCUMENT_ROUTE_PARAM = "__zb_preview_route";
 const ROOT = /^\/api\/build\/projects\/[^/]+\/preview\/preview_[0-9a-f-]{36}\/content\/[A-Za-z0-9_-]{32}\/$/i;
 
