@@ -16,7 +16,7 @@ describe("K20D3H automatic confirmed-expiry recovery", () => {
 
   it("preserves the existing protected HEAD route and no-public-port sandbox", () => {
     const route = readFileSync(resolve(__dirname, "../../..",
-      "src/app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/%5F%5Fzoebuild/document/route.ts"), "utf8");
+      "src/app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/preview-document/route.ts"), "utf8");
     expect(route).toContain("export async function HEAD(");
     expect(route).toContain("headCapabilityDocument(request, context)");
   });

@@ -111,7 +111,7 @@ async function proxy(
     }
 
     const relativePath = documentTarget.isDocumentGateway
-      ? "__zoebuild/document"
+      ? "preview-document"
       : normalizedPathname.slice(basePath.length);
 
     // The sandbox navigation protocol is an external classic script so the

@@ -6,14 +6,15 @@ const app = path.resolve(process.cwd(), "src/app/api/build/projects/[buildProjec
 const route = (relative: string) => path.join(app, relative);
 
 describe("K20D1B preview gateway route registration", () => {
-  it("exposes the synthetic document as a dedicated static route", () => {
-    const dedicated = route("%5F%5Fzoebuild/document/route.ts");
+  it("exposes the synthetic document as a Next.js-safe dedicated static route", () => {
+    const dedicated = route("preview-document/route.ts");
+    expect(existsSync(route("%5F%5Fzoebuild/document/route.ts"))).toBe(false);
     expect(existsSync(route("__zoebuild/document/route.ts"))).toBe(false);
     expect(existsSync(dedicated)).toBe(true);
     const source = readFileSync(dedicated, "utf8");
     expect(source).toContain('GET as readCapabilityDocument');
     expect(source).toContain('HEAD as headCapabilityDocument');
-    expect(source).toContain('"../../[...path]/route"');
+    expect(source).toContain('"../[...path]/route"');
     expect(source).toContain('export const dynamic = "force-dynamic"');
     expect(source).not.toContain('proxyFetchTrustedReactPreviewAtRunner');
     expect(source).not.toContain('RUNNER_BASE_URL');

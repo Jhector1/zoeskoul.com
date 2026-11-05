@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { parseReactPreviewDocumentRequest } from "./reactPreviewDocumentGateway";
-const START = "https://build.zoeskoul.com/api/build/projects/p/preview/preview_00000000-0000-0000-0000-000000000000/content/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef/__zoebuild/document";
+const START = "https://build.zoeskoul.com/api/build/projects/p/preview/preview_00000000-0000-0000-0000-000000000000/content/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef/preview-document";
 const parse=(route:string, revision="0")=>{const url = new URL(START);url.searchParams.set("__zb_preview_route",route);url.searchParams.set("__zb_preview_revision",revision);return parseReactPreviewDocumentRequest(url);};
 describe("capability-scoped document gateway request",()=>{
   it("accepts and canonicalizes a selected route",()=>{

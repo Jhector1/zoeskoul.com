@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 const root = resolve(process.cwd(), "src/app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]");
 const gateway = readFileSync(resolve(root, "[...path]/route.ts"), "utf8");
-const documentRoute = readFileSync(resolve(root, "%5F%5Fzoebuild/document/route.ts"), "utf8");
+const documentRoute = readFileSync(resolve(root, "preview-document/route.ts"), "utf8");
 
 describe("K20D3J1 migrated preview HEAD recovery contract", () => {
   it("preserves GET/HEAD handlers and protected document target validation", () => {

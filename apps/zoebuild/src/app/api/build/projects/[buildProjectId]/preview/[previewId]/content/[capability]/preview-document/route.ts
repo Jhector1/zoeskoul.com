@@ -1,7 +1,7 @@
 /**
- * Explicit browser document gateway. %5F%5F encodes the two initial
- * underscores; an actual __zoebuild directory would be private in Next.js.
- * Next.js can select this fixed path
+ * Explicit browser document gateway using a Next.js-safe static segment.
+ * Avoid the private/encoded underscore directory ambiguity.
+ * Next.js selects this fixed path
  * without relying on optional catch-all dispatch. The canonical capability
  * proxy remains the only implementation of access control, path checks,
  * runner document forwarding, and sandbox navigation injection.
@@ -9,7 +9,7 @@
 import {
   GET as readCapabilityDocument,
   HEAD as headCapabilityDocument,
-} from "../../[...path]/route";
+} from "../[...path]/route";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

@@ -7,7 +7,7 @@ const read = (f:string) => readFileSync(path.resolve(root, f), "utf8");
 const base = "/api/build/projects/project1/preview/preview_aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa/content/abcdefghijklmnopqrstuvwxyzABCDEF/";
 describe("K11 preview document integrity", () => {
   it("probes the exact browser document gateway, never a raw runner index.html", () => {
-    expect(previewDocumentGatewayUrl(base)).toBe(`${base}__zoebuild/document?__zb_preview_route=%2F&__zb_preview_revision=0`);
+    expect(previewDocumentGatewayUrl(base)).toBe(`${base}preview-document?__zb_preview_route=%2F&__zb_preview_revision=0`);
     expect(() => previewDocumentGatewayUrl("https://evil.example/")).toThrow();
     expect(() => previewDocumentGatewayUrl(base + "?foo=1")).toThrow();
   });

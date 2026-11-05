@@ -35,7 +35,7 @@ export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
   // The authenticated document gateway serves the exact runner-verified
   // Vite root. The browser-selected route is inert query data until this bridge
   // restores the canonical SPA URL BEFORE React's module script executes.
-  if (location.pathname === base + "__zoebuild/document") {
+  if (location.pathname === base + "preview-document") {
     var params = new URLSearchParams(location.search);
     var routesRequested = params.getAll("__zb_preview_route");
     var revisionRequested = params.getAll("__zb_preview_revision");

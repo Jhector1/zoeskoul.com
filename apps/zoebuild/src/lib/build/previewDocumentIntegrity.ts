@@ -8,7 +8,7 @@ export function previewDocumentGatewayUrl(basePath: string): string {
     __zb_preview_route: "/",
     __zb_preview_revision: "0",
   });
-  return `${basePath}__zoebuild/document?${query.toString()}`;
+  return `${basePath}preview-document?${query.toString()}`;
 }
 
 export type PreviewDocumentHealth = "ready" | "expired" | "unavailable";

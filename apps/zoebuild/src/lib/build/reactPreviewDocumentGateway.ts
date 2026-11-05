@@ -1,5 +1,5 @@
 /**
- * The browser-facing /__zoebuild/document endpoint is a pure document gateway.
+ * The browser-facing /preview-document endpoint is a pure document gateway.
  * It serves the runner-verified Vite root after validating the requested React
  * route; the route is applied inside the unprivileged iframe before React boots.
  */

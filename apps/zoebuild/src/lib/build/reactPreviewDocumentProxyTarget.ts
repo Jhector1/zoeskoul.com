@@ -10,7 +10,7 @@ export function previewDocumentProxyTarget(pathname: string, basePath: string): 
   normalizedInput: string;
   isDocumentGateway: boolean;
 }> {
-  const isDocumentGateway = pathname === `${basePath}__zoebuild/document`;
+  const isDocumentGateway = pathname === `${basePath}preview-document`;
   return {
     normalizedInput: isDocumentGateway ? basePath : pathname,
     isDocumentGateway,
@@ -22,7 +22,7 @@ export function previewDocumentProxyTarget(pathname: string, basePath: string): 
  * runner root. An asset-path normalizer may reasonably reject an empty asset
  * suffix, so it must never be invoked for this one synthetic gateway.
  *
- * All other paths, including misleading `__zoebuild/document/*` lookalikes,
+ * All other paths, including misleading `preview-document/*` lookalikes,
  * remain subject to the unchanged strict asset-path normalizer.
  */
 export function resolvePreviewDocumentProxyPath(args: Readonly<{

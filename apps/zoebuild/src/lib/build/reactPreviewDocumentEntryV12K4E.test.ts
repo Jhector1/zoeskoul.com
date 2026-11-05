@@ -3,7 +3,7 @@ import { PREVIEW_NAV_SCRIPT } from "./reactPreviewNavigationBridge";
 import { runInNewContext } from "node:vm";
 const ROOT = "/api/build/projects/cmva2y8l2000221dl6w20b5cm/preview/preview_0d5524f1-b9b1-4165-a986-b40db0de774a/content/hc0yaQh_mkTxk3nnFA5FYsnNzaZwDPmP/";
 function simulate(route: string) {
-  const doc = new URL(`https://zoe.test${ROOT}__zoebuild/document`);
+  const doc = new URL(`https://zoe.test${ROOT}preview-document`);
   doc.searchParams.set("__zb_preview_route",route);
   doc.searchParams.set("__zb_preview_revision","7");
   let address=doc;
