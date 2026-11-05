@@ -5,14 +5,8 @@ import type {
   ProjectSpecification,
 } from "@zoeskoul/build-contracts";
 import { BUILD_STACKS_V1 } from "@zoeskoul/build-registry";
-import {
-  BUILD_TEMPLATES_V1,
-  type BuildTemplateDefinition,
-} from "@zoeskoul/build-template-registry";
-import {
-  materializeBuildProject,
-  materializeRegisteredBuildProject,
-} from "./index";
+import { BUILD_TEMPLATES_V1, type BuildTemplateDefinition } from "@zoeskoul/build-template-registry";
+import { materializeBuildProject, materializeRegisteredBuildProject } from "./index";
 
 const noManagedCapabilities: BuildRequirements = {
   backend: false,
@@ -24,75 +18,57 @@ const noManagedCapabilities: BuildRequirements = {
   commerce: false,
 };
 
-function specification(
-  stackId: string,
-  projectType: ProjectSpecification["projectType"] = "static-site",
-): ProjectSpecification {
+function specification(stackId = "tanstack-start-v1"): ProjectSpecification {
   return {
     version: 1,
     name: "Materializer test",
-    projectType,
+    projectType: "fullstack-app",
     targets: ["web"],
     requirements: noManagedCapabilities,
-    pages: ["home"],
+    pages: ["Home"],
     stackId,
-    deployment: { preference: "static" },
+    deployment: { preference: "managed-runtime" },
   };
 }
 
 describe("build materializer", () => {
-  it("materializes static-html-v1 into the canonical WorkspaceStateV2 shape", () => {
+  it("materializes the canonical TanStack template to WorkspaceStateV2", () => {
     const project = materializeRegisteredBuildProject({
-      specification: specification("static-html-v1"),
+      specification: specification(),
       createdAt: 123,
     });
-
     expect(project.workspace).toMatchObject({
       version: 2,
       language: "web",
-      activeFileId: "index.html",
-      entryFileId: "index.html",
+      activeFileId: "src/routes/index.tsx",
+      entryFileId: "src/router.tsx",
       stdin: "",
-      expanded: [],
       leftPct: 26,
     });
-    expect(project.workspace.nodes.map((node) => node.id)).toEqual([
-      "index.html",
-      "script.js",
-      "styles.css",
-    ]);
-    expect(project.dependencyLock).toBeNull();
+    expect(project.workspace.nodes.some((node) => node.id === "src/routes/index.tsx")).toBe(true);
+    expect(project.workspace.nodes.some((node) => node.id === "src/server/siteInfo.server.ts")).toBe(true);
+    expect(project.workspace.expanded).toContain("src/routes");
   });
 
-  it("materializes React/Vite deterministically and marks dependency lock creation explicitly", () => {
+  it("is deterministic and requires a generated dependency lock", () => {
     const first = materializeRegisteredBuildProject({
-      specification: specification("react-vite-v1", "frontend-app"),
-      createdAt: 456,
+      specification: specification(), createdAt: 456,
     });
     const second = materializeRegisteredBuildProject({
-      specification: specification("react-vite-v1", "frontend-app"),
-      createdAt: 456,
+      specification: specification(), createdAt: 456,
     });
-
     expect(second).toEqual(first);
-    expect(first.workspace.activeFileId).toBe("src/App.tsx");
-    expect(first.workspace.entryFileId).toBe("src/main.tsx");
-    expect(first.workspace.expanded).toEqual(["src"]);
-    expect(first.workspace.nodes.some((node) => node.id === "src")).toBe(true);
     expect(first.workspace.nodes.some((node) => node.id === "package.json")).toBe(true);
     expect(first.workspace.nodes.some((node) => node.id === "pnpm-lock.yaml")).toBe(false);
     expect(first.dependencyLock).toEqual({
-      manager: "pnpm",
-      policy: "generate-once",
-      lockfilePath: "pnpm-lock.yaml",
+      manager: "pnpm", policy: "generate-once", lockfilePath: "pnpm-lock.yaml",
     });
   });
 
   it("keeps every registered stack bound to a registered template", () => {
+    expect(BUILD_STACKS_V1.map((stack) => stack.id)).toEqual(["tanstack-start-v1"]);
     for (const stack of BUILD_STACKS_V1) {
-      const template = BUILD_TEMPLATES_V1.find(
-        (candidate) => candidate.id === stack.templateId,
-      );
+      const template = BUILD_TEMPLATES_V1.find((candidate) => candidate.id === stack.templateId);
       expect(template, stack.id).toBeDefined();
       expect(template?.stackIds).toContain(stack.id);
     }
@@ -101,7 +77,7 @@ describe("build materializer", () => {
   it("rejects path traversal and file/folder ambiguity before creating a workspace", () => {
     const stack: BuildStackDefinition = {
       id: "unsafe-test",
-      projectTypes: ["static-site"],
+      projectTypes: ["fullstack-app"],
       targets: ["web"],
       runtimeProfileId: "disabled-test",
       templateId: "unsafe-test",
@@ -118,32 +94,21 @@ describe("build materializer", () => {
       entryPath: "../secret.txt",
       dependencyLock: null,
     };
-
-    expect(() =>
-      materializeBuildProject({
-        specification: {
-          ...specification("static-html-v1"),
-          stackId: "unsafe-test",
-        },
-        stack,
-        template: unsafeTemplate,
-        createdAt: 1,
-      }),
-    ).toThrow("Unsafe ZoeBuild template path");
+    expect(() => materializeBuildProject({
+      specification: specification("unsafe-test"),
+      stack,
+      template: unsafeTemplate,
+      createdAt: 1,
+    })).toThrow("Unsafe ZoeBuild template path");
   });
 
-  it("fails closed when managed backend capabilities are requested", () => {
-    expect(() =>
-      materializeRegisteredBuildProject({
-        specification: {
-          ...specification("react-vite-v1", "frontend-app"),
-          requirements: {
-            ...noManagedCapabilities,
-            database: true,
-          },
-        },
-        createdAt: 1,
-      }),
-    ).toThrow("ZoeBuild stack is incompatible");
+  it("fails closed on unsupported database capabilities", () => {
+    expect(() => materializeRegisteredBuildProject({
+      specification: {
+        ...specification(),
+        requirements: { ...noManagedCapabilities, database: true },
+      },
+      createdAt: 1,
+    })).toThrow("ZoeBuild stack is incompatible");
   });
 });
