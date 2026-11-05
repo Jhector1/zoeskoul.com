@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { resolveSandboxProfile } from "./sandboxProfile.js";
+import { env } from "../../lib/env.js";
 
 describe("sandbox profile", () => {
   it("preserves the learning sandbox security boundary", () => {
@@ -19,7 +20,11 @@ describe("sandbox profile", () => {
     expect(profile.capDrop).toEqual(["ALL"]);
     expect(profile.securityOpt).toEqual(["no-new-privileges:true"]);
     expect(profile.user).not.toBe("0:0");
-    expect(profile.memoryBytes).toBeLessThanOrEqual(384 * 1024 * 1024);
+    expect(profile.memoryBytes).toBe(env.bootstrapMemoryLimitBytes);
+    expect(profile.memoryBytes).toBeGreaterThanOrEqual(384 * 1024 * 1024);
+    expect(profile.memoryBytes).toBeLessThanOrEqual(1024 * 1024 * 1024);
+    // Raising trusted bootstrap memory must not raise Learning memory.
+    expect(resolveSandboxProfile("learn").memoryBytes).toBe(env.memoryLimitBytes);
     expect(profile.cpuQuota).toBeLessThanOrEqual(100000);
     expect(profile.pidsLimit).toBeLessThanOrEqual(96);
   });

@@ -9,6 +9,8 @@ services:
     - .env
     environment:
       JUDGE0_URL: http://127.0.0.1:9
+      # Trusted package-lock bootstrap ONLY; no change to Learning sandboxes.
+      RUNNER_BOOTSTRAP_MEMORY_LIMIT_MB: ${RUNNER_BOOTSTRAP_MEMORY_LIMIT_MB:-1024}
     networks:
       ingress:
         aliases:

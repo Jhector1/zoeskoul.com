@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { buildDependencyLockBootstrapContainerOptions } from "./executeDependencyLockBootstrap.js";
+import { env } from "../../lib/env.js";
 
 describe("restricted Build dependency-lock bootstrap container", () => {
   it("uses the dedicated non-interactive hardened bootstrap sandbox profile", () => {
@@ -41,9 +42,10 @@ describe("restricted Build dependency-lock bootstrap container", () => {
       NetworkMode: "bridge",
     });
 
-    expect(options.HostConfig.Memory).toBeLessThanOrEqual(
-      384 * 1024 * 1024,
-    );
+    expect(options.HostConfig.Memory).toBe(env.bootstrapMemoryLimitBytes);
+    expect(options.HostConfig.MemorySwap).toBe(options.HostConfig.Memory);
+    expect(options.HostConfig.Memory).toBeGreaterThanOrEqual(384 * 1024 * 1024);
+    expect(options.HostConfig.Memory).toBeLessThanOrEqual(1024 * 1024 * 1024);
     expect(options.HostConfig.CpuQuota).toBeLessThanOrEqual(100000);
     expect(options.HostConfig.PidsLimit).toBeLessThanOrEqual(96);
     expect(options.HostConfig.Binds).toEqual([

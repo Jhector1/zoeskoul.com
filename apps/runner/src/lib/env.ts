@@ -64,6 +64,11 @@ const envSchema = z.object({
   RUNNER_CPU_QUOTA: intEnv(50000),
   RUNNER_PIDS_LIMIT: intEnv(128),
 
+  // Trusted lockfile bootstrap has its own bounded memory budget.
+  // Unlike lesson execution, it resolves a full TanStack dependency graph.
+  RUNNER_BOOTSTRAP_MEMORY_LIMIT_MB: z.coerce.number()
+    .int().min(384).max(1024).default(384),
+
   // Trusted non-interactive production-build sandbox.
   RUNNER_BUILD_MEMORY_LIMIT_MB: intEnv(384),
   RUNNER_BUILD_CPU_QUOTA: intEnv(100000),
@@ -142,6 +147,9 @@ export const env = {
   memoryLimitBytes: parsed.RUNNER_MEMORY_LIMIT_MB * 1024 * 1024,
   cpuQuota: parsed.RUNNER_CPU_QUOTA,
   pidsLimit: parsed.RUNNER_PIDS_LIMIT,
+
+  bootstrapMemoryLimitBytes:
+    parsed.RUNNER_BOOTSTRAP_MEMORY_LIMIT_MB * 1024 * 1024,
 
   buildMemoryLimitBytes:
     parsed.RUNNER_BUILD_MEMORY_LIMIT_MB * 1024 * 1024,

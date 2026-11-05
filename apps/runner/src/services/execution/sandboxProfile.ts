@@ -45,7 +45,9 @@ function buildBootstrapProfile(): SandboxProfile {
     ...base,
     id: "build-dependency-lock-bootstrap-v1",
     networkMode: "bridge",
-    memoryBytes: Math.min(base.memoryBytes, 384 * 1024 * 1024),
+    // Do not inherit the small interactive Learning memory budget.
+    // The operator configures this bounded trusted-only limit.
+    memoryBytes: env.bootstrapMemoryLimitBytes,
     cpuQuota: Math.min(base.cpuQuota, 100000),
     pidsLimit: Math.min(base.pidsLimit, 96),
   };
