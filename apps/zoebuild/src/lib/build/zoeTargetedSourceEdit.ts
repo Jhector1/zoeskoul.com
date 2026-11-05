@@ -5,6 +5,7 @@ import { isZoeStaticPagePath, linkZoeStaticPageInHome } from "./zoeStaticPageLin
 import { isZoeStandalonePageInstruction } from "./zoeAssistantEditIntent";
 import {isZoeReactPageSourcePath,ZOE_REACT_ROUTER_MARKER} from "./zoeReactRouteEdits";
 import { invalidZoeReactPageSource } from "./zoeReactPageGraphValidation";
+import { isTanstackSourceWorkspace, isTanstackEditableSource, isTanstackCreatableSource } from "./zoeTanstackSourcePolicy";
 
 /** E15B is intentionally scoped to editable UI/content files, not application controls. */
 const EDITABLE_SOURCE = /(?:^|\/)(?!.*(?:\.env|\.secret|\.lock))(?:[a-zA-Z0-9_.-]+\.)?(?:tsx|jsx|css|html|md)$/i;
@@ -86,8 +87,10 @@ export function listZoeEditableFiles(workspace: WorkspaceStateV2, activePath: st
       ? [{ path: paths.get(node.id)!, content: node.content }]
       : [],
   );
+  const tanstackWorkspace = isTanstackSourceWorkspace(new Set(paths.values()));
   const available = files.filter((file) =>
-    (EDITABLE_SOURCE.test(file.path) || (isReactWorkspace(workspace, paths) && reactArchitectureFile(file.path))) &&
+    (tanstackWorkspace ? isTanstackEditableSource(file.path, file.content) :
+      (EDITABLE_SOURCE.test(file.path) || (isReactWorkspace(workspace, paths) && reactArchitectureFile(file.path)))) &&
     !file.path.split("/").some((part) => part.startsWith(".") || /^(node_modules|dist|build|\.next|generated|secrets?|config)$/i.test(part)) &&
     !file.path.split("/").some(part => part === "__generated__"),
   );
@@ -138,6 +141,7 @@ export function validateZoeEdits(
 ): readonly ZoeSourceEdit[] {
   const paths = sourcePaths(workspace);
   const reactWorkspace = isReactWorkspace(workspace, paths);
+  const tanstackWorkspace = isTanstackSourceWorkspace(new Set(paths.values()));
   // No AI-specific edit-count limit. The authoritative workspace policy
   // validates final node/file counts and aggregate bytes after in-memory apply.
   if (!Array.isArray(edits) || edits.length < 1) {
@@ -167,8 +171,9 @@ export function validateZoeEdits(
     const { path, content, beforeSha256 } = edit;
     const create = edit.create === true;
     const allowedCreation = create && typeof path === "string" &&
-      ((isZoeStaticPagePath(path) && topLevelHtml && !reactWorkspace) ||
-        (reactWorkspace && (safeNewReactFile(path)))) &&
+      ((isZoeStaticPagePath(path) && topLevelHtml && !reactWorkspace && !tanstackWorkspace) ||
+        (reactWorkspace && safeNewReactFile(path)) ||
+        (tanstackWorkspace && typeof content === "string" && isTanstackCreatableSource(path, content))) &&
       !permitted.has(path) &&
       !originalPaths.has(path);
     // Deterministic homepage linking is still independently verified against source hashes.
@@ -182,12 +187,17 @@ export function validateZoeEdits(
       typeof beforeSha256 !== "string" || !/^[a-f0-9]{64}$/.test(beforeSha256)) {
       throw new ZoeEditInputError("BUILD_EDIT_INVALID", "Edit target or content is invalid.");
     }
-    if (create && isZoeReactPageSourcePath(path) &&
+    if (tanstackWorkspace && typeof path === "string" && typeof content === "string" &&
+        !isTanstackEditableSource(path, content)) {
+      throw new ZoeEditInputError("BUILD_TANSTACK_SOURCE_UNSAFE", "TanStack edits must target validated UI routes or presentation modules.");
+    }
+    if (!tanstackWorkspace && create && isZoeReactPageSourcePath(path) &&
         (typeof content !== "string" || !/export\s+default\b/.test(content))) {
       throw new ZoeEditInputError("BUILD_REACT_ROUTE_INVALID", "React pages must have a default-exported component.");
     }
-    if (reactWorkspace && typeof path === "string" && path.endsWith(".json") &&
-        reactArchitectureFile(path)) {
+    if (((reactWorkspace && typeof path === "string" && reactArchitectureFile(path)) ||
+         (tanstackWorkspace && typeof path === "string" && path.startsWith("src/data/"))) &&
+        typeof path === "string" && path.endsWith(".json")) {
       try { JSON.parse(content as string); }
       catch { throw new ZoeEditInputError("BUILD_EDIT_INVALID", "Invalid structured JSON data."); }
     }
@@ -226,7 +236,9 @@ export function applyZoeEditsToWorkspace(
     throw new ZoeEditInputError("BUILD_EDIT_PAGE_UNSUPPORTED", "Static HTML page creation requires a top-level index.html.");
   }
   const srcFolder = workspace.nodes.find(node => node.kind === "folder" && paths.get(node.id) === "src");
-  const reactCreates = created.filter(edit => safeNewReactFile(edit.path));
+  const tanstackWorkspace = isTanstackSourceWorkspace(new Set(paths.values()));
+  const reactCreates = created.filter(edit => tanstackWorkspace
+    ? isTanstackCreatableSource(edit.path, edit.content) : safeNewReactFile(edit.path));
   if (reactCreates.length && (!srcFolder || srcFolder.kind !== "folder")) {
     throw new ZoeEditInputError("BUILD_REACT_ENTRY_UNSUPPORTED", "React source requires the existing src folder.");
   }
@@ -254,11 +266,13 @@ export function applyZoeEditsToWorkspace(
     }
   }
   const newNodes = created.map(edit => {
-    const reactSource = safeNewReactFile(edit.path);
+    const reactSource = tanstackWorkspace ? isTanstackCreatableSource(edit.path, edit.content)
+      : safeNewReactFile(edit.path);
     const parentPath = edit.path.split("/").slice(0,-1).join("/");
     const parentId = reactSource ? folderByPath.get(parentPath) ?? null : null;
     const templateNode = reactSource
-      ? workspace.nodes.find(node => node.kind === "file" && paths.get(node.id) === "src/App.tsx")
+      ? workspace.nodes.find(node => node.kind === "file" && paths.get(node.id) ===
+          (tanstackWorkspace ? "src/router.tsx" : "src/App.tsx"))
       : home;
     if (!templateNode || templateNode.kind !== "file" || (reactSource && !parentId)) {
       throw new ZoeEditInputError("BUILD_EDIT_PAGE_UNSUPPORTED", "Missing safe source template.");

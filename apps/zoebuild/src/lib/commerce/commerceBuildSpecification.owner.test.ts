@@ -89,14 +89,13 @@ describe(
         expect(
           starter,
         ).toContain(
-          '"storefrontRuntime": "static"',
+          'stackId: "tanstack-start-v1"',
         );
 
-        expect(
-          starter,
-        ).not.toContain(
-          '"provider": "zoebuild-native"',
-        );
+        // No provider is chosen by the project spec or the browser.
+        expect(starter).not.toContain('"provider": "zoebuild-native"');
+        expect(starter).not.toContain('storefrontRuntime: "static"');
+        expect(starter).not.toContain('"react-vite-v1"');
       },
     );
 

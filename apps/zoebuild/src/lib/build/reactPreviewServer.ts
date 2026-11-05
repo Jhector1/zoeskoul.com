@@ -75,13 +75,13 @@ export async function requireOwnedReactPreviewProject(args: Readonly<{
     project.specification;
 
   if (
-    project.stackId !== "react-vite-v1" ||
+    project.stackId !== "tanstack-start-v1" ||
     !specification ||
-    specification.stackId !== "react-vite-v1"
+    specification.stackId !== "tanstack-start-v1"
   ) {
     throw new ReactPreviewRequestError(
       "BUILD_PREVIEW_UNSUPPORTED",
-      "Trusted live preview is only available for registered React/Vite projects.",
+      "Trusted live preview requires a registered TanStack Start project.",
       409,
     );
   }
@@ -146,7 +146,7 @@ export async function createOwnedReactPreviewBuildRequest(args: Readonly<{
   if (previewPlan.dependencyLock.state === "bootstrap-required") {
     throw new ReactPreviewRequestError(
       "BUILD_DEPENDENCY_LOCK_INVALID",
-      "React preview requires one-time trusted dependency preparation.",
+      "TanStack preview requires one-time trusted dependency preparation.",
       409,
     );
   }

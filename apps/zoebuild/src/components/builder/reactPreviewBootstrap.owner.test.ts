@@ -6,8 +6,8 @@ function source(relative: string) {
   return readFileSync(fileURLToPath(new URL(relative, import.meta.url)), "utf8");
 }
 
-describe("ZoeBuild React preview dependency preparation", () => {
-  it("classifies a registered clean React source as lock-bootstrap-required before production build creation", () => {
+describe("ZoeBuild TanStack preview dependency preparation", () => {
+  it("classifies a registered clean TanStack source as lock-bootstrap-required before Worker build creation", () => {
     const server = source("../../lib/build/reactPreviewServer.ts");
 
     const classify = server.indexOf("prepareRegisteredBuildArtifactPlan({");
@@ -22,18 +22,17 @@ describe("ZoeBuild React preview dependency preparation", () => {
     expect(server).toContain('"BUILD_DEPENDENCY_LOCK_INVALID"');
   });
 
-  it("reuses the existing clean-only bootstrap branch instead of weakening the production gate", () => {
+  it("uses bounded CAS-scoped dependency bootstrap without weakening the Worker build gate", () => {
     const hook = source("./useReactVitePreview.ts");
     const shell = source(
       "../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx",
     );
 
-    expect(hook).toContain(
-      'data.code.startsWith("BUILD_DEPENDENCY_LOCK")',
-    );
+    expect(hook).toContain("mayAutoRecoverReactPreviewDependencies({");
     expect(hook).toContain("/dependency-lock/bootstrap");
     expect(hook).toContain("bootstrapAllowedRef.current");
-    expect(hook).toContain("window.location.reload()");
+    expect(hook).not.toContain("window.location.reload()");
+    expect(hook).toContain("await reconcilePreparedDependencies(startingVersion)");
     expect(shell).toContain("allowDependencyBootstrap: !codeDirty");
   });
 });

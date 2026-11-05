@@ -1,150 +1,32 @@
-import type {
-  ProjectSpecification,
-} from "@zoeskoul/build-contracts";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { BuildPreparationError, createRegisteredProductionBuildJob } from "./index";
+import { fresh, withLock, withSignedLock, specification, projectId, secret } from "./tanstackTestFixtures";
 
-import {
-  materializeRegisteredBuildProject,
-} from "@zoeskoul/build-materializer";
+afterEach(() => vi.unstubAllEnvs());
+const run = (workspace: ReturnType<typeof fresh>, buildProjectId = projectId) =>
+  createRegisteredProductionBuildJob({ buildProjectId, specification, workspace, sourceVersion: 4 });
 
-import {
-  describe,
-  expect,
-  it,
-} from "vitest";
-
-import {
-  BuildPreparationError,
-  createRegisteredProductionBuildJob,
-} from "./index";
-
-const specification:
-  ProjectSpecification = {
-    version: 1,
-    name:
-      "Production build",
-    projectType:
-      "frontend-app",
-    targets: ["web"],
-    requirements: {
-      backend: false,
-      database: false,
-      auth: false,
-      storage: false,
-      payments: false,
-      email: false,
-      commerce: false,
-    },
-    pages: ["Home"],
-    stackId:
-      "react-vite-v1",
-    deployment: {
-      preference:
-        "static",
-    },
-  };
-
-function workspaceWithLock() {
-  const materialized =
-    materializeRegisteredBuildProject({
-      specification,
-      createdAt: 1,
-    });
-
-  return {
-    ...materialized.workspace,
-    nodes: [
-      ...materialized
-        .workspace.nodes,
-      {
-        id:
-          "pnpm-lock",
-        kind:
-          "file" as const,
-        name:
-          "pnpm-lock.yaml",
-        parentId:
-          null,
-        content:
-          "lockfileVersion: '9.0'\n",
-        createdAt: 2,
-        updatedAt: 2,
-      },
-    ],
-  };
-}
-
-describe(
-  "registered React production build job creation",
-  () => {
-    it(
-      "creates a shell-free production-build request from registered source",
-      () => {
-        const result =
-          createRegisteredProductionBuildJob({
-            buildProjectId:
-              "build_1",
-            specification,
-            workspace:
-              workspaceWithLock(),
-            sourceVersion: 4,
-          });
-
-        expect(
-          result,
-        ).toMatchObject({
-          protocolVersion: 1,
-          operation:
-            "production-build",
-          buildProjectId:
-            "build_1",
-          sourceVersion: 4,
-          stackId:
-            "react-vite-v1",
-          templateId:
-            "react-vite-v1",
-        });
-
-        expect(
-          result.files.some(
-            (file) =>
-              file.path ===
-              "pnpm-lock.yaml",
-          ),
-        ).toBe(true);
-
-        expect(
-          JSON.stringify(
-            result,
-          ),
-        ).not.toContain(
-          '"command"',
-        );
-      },
-    );
-
-    it(
-      "refuses production build without the frozen lockfile",
-      () => {
-        const materialized =
-          materializeRegisteredBuildProject({
-            specification,
-            createdAt: 1,
-          });
-
-        expect(
-          () =>
-            createRegisteredProductionBuildJob({
-              buildProjectId:
-                "build_1",
-              specification,
-              workspace:
-                materialized.workspace,
-              sourceVersion: 1,
-            }),
-        ).toThrow(
-          BuildPreparationError,
-        );
-      },
-    );
-  },
-);
+describe("trusted TanStack Start preview build request", () => {
+  it("emits a command-free authenticated request for the canonical Worker stack", () => {
+    vi.stubEnv("ZOEBUILD_DEPENDENCY_APPROVAL_SECRET",secret);
+    const request=run(withSignedLock());
+    expect(request).toMatchObject({operation:"production-build",stackId:"tanstack-start-v1",
+      templateId:"tanstack-start-v1",sourceVersion:4,buildProjectId:projectId});
+    expect(request.files.map(f=>f.path)).toContain("zoebuild-dependency-approval.json");
+    expect(JSON.stringify(request)).not.toContain('"command":');
+  });
+  it("rejects an unsealed lockfile, even when it matches the trusted starter", () => {
+    vi.stubEnv("ZOEBUILD_DEPENDENCY_APPROVAL_SECRET",secret);
+    expect(()=>run(withLock())).toThrow(BuildPreparationError);
+    expect(()=>run(fresh())).toThrow(BuildPreparationError);
+  });
+  it("rejects a signed source changed after approval or signed for another project", () => {
+    vi.stubEnv("ZOEBUILD_DEPENDENCY_APPROVAL_SECRET",secret);
+    expect(()=>run(withSignedLock(fresh(),"lockfileVersion: '9.0'\n"), "another-project"))
+      .toThrow(BuildPreparationError);
+    const signed=withSignedLock();
+    const changed={...signed,nodes:signed.nodes.map(n=>
+      n.kind==="file" && n.name==="pnpm-lock.yaml" ? {...n,content:n.content+"tampered\n"} : n)};
+    expect(()=>run(changed)).toThrow(BuildPreparationError);
+  });
+});

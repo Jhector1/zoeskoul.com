@@ -2,26 +2,9 @@ import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-/** The generated server bundle is an executable artifact, never static hosting data. */
-export const TANSTACK_WORKER_ARTIFACT_LIMITS = {
-  files: 1000,
-  fileBytes: 12 * 1024 * 1024,
-  totalBytes: 32 * 1024 * 1024,
-} as const;
-
-export type TanstackWorkerArtifactV1 = Readonly<{
-  type: "worker-bundle";
-  serverOutputPath: "dist/server";
-  assetsOutputPath: "dist/client";
-  entrypoint: "index.js";
-  sha256: string;
-  totalBytes: number;
-  files: readonly Readonly<{
-    path: string;
-    encoding: "base64";
-    data: string;
-  }>[];
-}>;
+import { TANSTACK_WORKER_ARTIFACT_LIMITS, type TanstackWorkerArtifactV1 } from "@zoeskoul/build-executor-contracts";
+export { TANSTACK_WORKER_ARTIFACT_LIMITS } from "@zoeskoul/build-executor-contracts";
+export type { TanstackWorkerArtifactV1 } from "@zoeskoul/build-executor-contracts";
 
 function assertSafeBuildFile(relative: string): void {
   const parts = relative.split("/");

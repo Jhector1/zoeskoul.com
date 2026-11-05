@@ -1,27 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { TANSTACK_START_STACK_V1 } from "./index";
 
-import {
-  REACT_VITE_STACK_V1,
-  STATIC_HTML_STACK_V1,
-} from "./index";
-
-describe("ZoeBuild stack artifact contracts", () => {
-  it("publishes static HTML directly from source", () => {
-    expect(STATIC_HTML_STACK_V1.artifact).toEqual({
-      type: "static-directory",
-      outputPath: ".",
+describe("canonical full-stack build artifact", () => {
+  it("keeps server code separate from published client assets", () => {
+    expect(TANSTACK_START_STACK_V1.artifact).toEqual({
+      type: "worker-bundle", outputPath: "dist/server",
+      assetsPath: "dist/client", entrypoint: "index.js",
     });
-  });
-
-  it("declares Vite dist as the React production artifact", () => {
-    expect(REACT_VITE_STACK_V1.artifact).toEqual({
-      type: "static-directory",
-      outputPath: "dist",
-    });
-    expect(REACT_VITE_STACK_V1.commands.install).toEqual([
-      "pnpm",
-      "install",
-      "--frozen-lockfile",
-    ]);
+    expect(TANSTACK_START_STACK_V1.deploymentAdapterId).toBe("cloudflare-workers-v1");
   });
 });

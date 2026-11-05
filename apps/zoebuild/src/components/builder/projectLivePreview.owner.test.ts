@@ -30,37 +30,14 @@ describe(
   "ZoeBuild live project preview",
   () => {
     it(
-      "renders Preview with canonical shared WebPreview",
+      "renders the canonical isolated TanStack preview, not static HTML",
       () => {
-        expect(
-          projectShell,
-        ).toContain(
-          'import WebPreview from "@zoeskoul/learner-workspace/runner/components/WebPreview";',
-        );
-
-        expect(
-          projectShell,
-        ).toContain(
-          'import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";',
-        );
-
-        expect(
-          projectShell,
-        ).toContain(
-          "exportWorkspaceEntries(previewWorkspace.nodes)",
-        );
-
-        expect(
-          projectShell,
-        ).toContain(
-          "<WebPreview",
-        );
-
-        expect(
-          projectShell,
-        ).not.toContain(
-          '<div className="zb-stage-quiet">',
-        );
+        expect(projectShell).toContain('props.project.stackId === "tanstack-start-v1"');
+        expect(projectShell).toContain("<PersistentReactPreviewSlot");
+        expect(projectShell).toContain("preview={fullStackPreview}");
+        expect(projectShell).toContain("remoteWebPreview={fullStackPreview}");
+        expect(projectShell).not.toContain("<WebPreview");
+        expect(projectShell).not.toContain("exportWorkspaceEntries");
       },
     );
 
@@ -76,7 +53,7 @@ describe(
         expect(
           projectShell,
         ).toContain(
-          "onWorkspaceSnapshot={setPreviewWorkspace}",
+          "onWorkspaceSnapshot={(workspace) => {",
         );
 
         expect(

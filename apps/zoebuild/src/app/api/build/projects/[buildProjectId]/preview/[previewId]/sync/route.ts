@@ -5,6 +5,7 @@ import {
   readJsonSafe,
 } from "@zoeskoul/platform-server/http";
 import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
+import { TANSTACK_PREVIEW_RESTART_REQUIRED } from "@zoeskoul/build-executor-contracts";
 import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import {
@@ -76,6 +77,12 @@ export async function POST(
       return json(requestId, { ok: false, code: error.code, message: error.message }, error.status);
     }
     if (error instanceof RunnerHttpError) {
+      if (error.status === 409 && error.message === TANSTACK_PREVIEW_RESTART_REQUIRED) {
+        return json(requestId, {
+          ok: false, code: "BUILD_PREVIEW_RESTART_REQUIRED",
+          message: "The updated TanStack project needs a fresh isolated preview.",
+        }, 409);
+      }
       return json(
         requestId,
         { ok: false, code: error.status === 409 ? "BUILD_PREVIEW_SOURCE_CONFLICT" : error.status === 404 ? "BUILD_PREVIEW_NOT_FOUND" : "BUILD_PREVIEW_RUNNER_FAILED", message: error.status === 409 ? "A newer source revision is active. Refresh the project." : error.message },

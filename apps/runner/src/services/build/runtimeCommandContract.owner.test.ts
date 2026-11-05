@@ -26,13 +26,14 @@ describe("trusted build runtime image command contract", () => {
     );
   });
 
-  it("makes Vite preview inherit the same trusted production container boundary", () => {
-    const preview = source("./reactPreviewRuntime.ts");
-
-    expect(preview).toContain(
-      "buildProductionBuildContainerOptions({",
-    );
+  it("keeps isolated TanStack preview commands behind the trusted Runner-owned container builder", () => {
+    const preview = source("./tanstackPreviewDockerDriver.ts");
+    const policy = source("./tanstackPreviewRuntimePolicy.ts");
+    expect(preview).toContain("buildProductionBuildContainerOptions({");
+    expect(preview).toContain('NetworkMode: "none"');
+    expect(preview).toContain("assertTanstackSandboxOptions(options)");
     expect(preview).not.toContain("RUN_CMD_JSON=");
+    expect(policy).toContain("TANSTACK_PREVIEW_DEV_COMMAND");
   });
 
   it("does not add a shell or user-controlled executor env surface", () => {

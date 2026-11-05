@@ -1,11 +1,7 @@
-import {afterEach,describe,expect,it,vi} from "vitest";
+import {afterEach,describe,expect,it} from "vitest";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { startAdmittedTanstackPreview, stopAdmittedTanstackPreview } from "./tanstackPreviewSharedLifecycle.js";
 
-vi.mock("./reactPreviewRuntime.js",()=>({
-  reserveReactPreviewCapacityForSharedRuntime:vi.fn(()=>()=>{}),
-  reclaimReactPreviewCapacityForSharedRuntime:vi.fn(async()=>{}),
-}));
 const request={operation:"production-build" as const,protocolVersion:1 as const,
   buildProjectId:"project123",sourceVersion:4,stackId:"tanstack-start-v1",templateId:"tanstack-start-v1",
   files:[{path:"package.json",content:"{}"}]};

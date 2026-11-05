@@ -6,7 +6,7 @@ import { normalizeTanstackPreviewHttpRequest } from "./tanstackPreviewHttpBounda
 import { tanstackInternalPreviewPath } from "./tanstackPreviewRuntimePolicy.js";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { sharedPreviewStartCoordinator, sharedPreviewProjectDrains } from "./sharedPreviewRuntimeState.js";
-import { reserveReactPreviewCapacityForSharedRuntime, reclaimReactPreviewCapacityForSharedRuntime } from "./reactPreviewRuntime.js";
+import { reserveTanstackPreviewCapacity, reclaimTanstackPreviewCapacity } from "./tanstackPreviewCapacity.js";
 import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
 
 /** Internal authenticated route integration. The caller MUST verify
@@ -40,8 +40,8 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
         if (prior.sourceVersion > request.sourceVersion) throw new Error("Preview source is stale.");
         await sharedFullStackPreviews.close(prior.id);
       }
-      await reclaimReactPreviewCapacityForSharedRuntime(ownerKey,request.buildProjectId);
-      const releasePending = reserveReactPreviewCapacityForSharedRuntime(ownerKey);
+      await reclaimTanstackPreviewCapacity(ownerKey,request.buildProjectId);
+      const releasePending = reserveTanstackPreviewCapacity(ownerKey);
       let handle: Awaited<ReturnType<typeof startIsolatedTanstackPreview>> | null = null;
       let driver: TanstackPreviewDriver | null = null;
       try {

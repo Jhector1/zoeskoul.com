@@ -35,8 +35,8 @@ describe("ZoeBuild E4 shared dark-mode ownership", () => {
     expect(css).toContain("--zb-bg:");
     expect(css).toContain(".dark {");
     const shell = read("apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx");
-    expect(shell).toContain("<WebPreview");
-    expect(shell).toContain("onCommerceRequest={");
+    expect(shell).toContain("<PersistentReactPreviewSlot");
+    expect(shell).not.toContain("<WebPreview");
   });
 
   it("uses the app-specific Vitest configuration, not the repository root default", () => {

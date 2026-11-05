@@ -36,14 +36,22 @@ describe("V12K12K13 dependency recovery continuation", () => {
     expect(hook).toContain('bootstrapData?.code === "BUILD_SOURCE_CONFLICT"');
     expect(hook).toContain("preparedVersion > startingVersion");
     expect(hook).toContain("if (await reconcileConflict(startingVersion)) return;");
-    expect(hook).toContain("window.location.reload()");
+    // K20D2A deliberately continues a verified dependency bootstrap in-page.
+    // Do not regress to a full reload that discards the selected history UI.
+    expect(hook).not.toContain("window.location.reload()");
+    expect(hook).toContain("await reconcilePreparedDependencies(startingVersion)");
+    expect(hook).toContain("setPreparedReplaySerial(serial => serial + 1)");
     expect(hook).toContain("if (!bootstrapAllowedRef.current)");
     expect(hook).toContain("BUILD_DEPENDENCY_LOCK_INVALID");
+    expect(hook).toContain("if (!bootstrapAllowedRef.current)");
     expect(hook).toContain("baseVersion: startingVersion");
     expect(hook).toContain("workspaceRevisionRef.current !== startingWorkspaceRevision");
     const shell = readFileSync(new URL("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx", import.meta.url),"utf8");
     expect(shell).toContain("current?.sourceVersion === attemptedSourceVersion");
-    expect(shell).toContain("sourceVersion: latest.sourceVersion, failed: false");
+    expect(shell).toContain("setHistorySwitch(current => current?.sourceVersion === attemptedSourceVersion");
+    // K20D3A split restore errors from preview errors: the source CAS handoff
+    // still clears a prior restore error only for the matching transition.
+    expect(shell).toContain("sourceVersion: latest.sourceVersion, restoreError: false");
     expect(shell).toContain("current === attemptedSourceVersion");
   });
   it("keeps history, capacity, and manual editing boundaries unchanged", () => {

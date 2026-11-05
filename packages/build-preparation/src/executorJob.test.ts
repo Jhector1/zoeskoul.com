@@ -1,66 +1,21 @@
-import { describe, expect, it } from "vitest";
-import type { ProjectSpecification } from "@zoeskoul/build-contracts";
-import { parseTrustedBuildJobRequest } from "@zoeskoul/build-executor-contracts";
-import { materializeRegisteredBuildProject } from "@zoeskoul/build-materializer";
-import { BuildPreparationError, createRegisteredDependencyLockBootstrapJob } from "./index";
+import {describe,expect,it} from "vitest";
+import {parseTrustedBuildJobRequest} from "@zoeskoul/build-executor-contracts";
+import {BuildPreparationError,createRegisteredDependencyLockBootstrapJob} from "./index";
+import {fresh,projectId,specification} from "./tanstackTestFixtures";
 
-const requirements = {
-  backend: false, database: false, auth: false, storage: false,
-  payments: false, email: false, commerce: false,
-} as const;
-
-function spec(stackId: "static-html-v1" | "react-vite-v1"): ProjectSpecification {
-  return {
-    version: 1,
-    name: "Executor job",
-    projectType: stackId === "static-html-v1" ? "static-site" : "frontend-app",
-    targets: ["web"],
-    requirements,
-    pages: ["Home"],
-    stackId,
-    deployment: { preference: "static" },
-  };
-}
-
-function workspace(stackId: "static-html-v1" | "react-vite-v1") {
-  return materializeRegisteredBuildProject({ specification: spec(stackId), createdAt: 1 }).workspace;
-}
-
-describe("dependency-lock bootstrap job creation", () => {
-  it("creates a shell-free shared executor request from registered React source", () => {
-    const job = createRegisteredDependencyLockBootstrapJob({
-      buildProjectId: " build_1 ",
-      specification: spec("react-vite-v1"),
-      workspace: workspace("react-vite-v1"),
-      sourceVersion: 1,
-    });
-
+describe("TanStack-only dependency bootstrap handoff",()=>{
+  it("creates a shell-free registered lock-resolution job",()=>{
+    const job=createRegisteredDependencyLockBootstrapJob({buildProjectId:projectId,
+      specification,workspace:fresh(),sourceVersion:1});
     expect(parseTrustedBuildJobRequest(job)).toEqual(job);
-    expect(job).toMatchObject({
-      protocolVersion: 1,
-      operation: "dependency-lock-bootstrap",
-      buildProjectId: "build_1",
-      stackId: "react-vite-v1",
-      templateId: "react-vite-v1",
-    });
-
-    const raw = job as unknown as Record<string, unknown>;
-    for (const key of ["command", "argv", "shell", "cwd", "env", "network"]) {
-      expect(raw[key]).toBeUndefined();
-    }
+    expect(job).toMatchObject({operation:"dependency-lock-bootstrap",stackId:"tanstack-start-v1",
+      templateId:"tanstack-start-v1",buildProjectId:projectId});
+    for(const key of ["command","argv","shell","cwd","env","network"])
+      expect((job as unknown as Record<string,unknown>)[key]).toBeUndefined();
   });
-
-  it("rejects a retired stack before dependency bootstrap begins", () => {
-    // The retired template cannot be materialized. Use an otherwise valid
-    // workspace to test the bootstrap API's own unsupported-stack guard.
-    const run = () => createRegisteredDependencyLockBootstrapJob({
-      buildProjectId: "build_static",
-      specification: spec("static-html-v1"),
-      workspace: workspace("react-vite-v1"),
-      sourceVersion: 1,
-    });
-
-    expect(run).toThrow(BuildPreparationError);
-    expect(run).toThrow(/Unsupported ZoeBuild (stack|template): static-html-v1/);
+  it("rejects retired framework identifiers",()=>{
+    expect(()=>createRegisteredDependencyLockBootstrapJob({buildProjectId:projectId,
+      specification:{...specification,stackId:"react-vite-v1"},workspace:fresh(),sourceVersion:1}))
+      .toThrow(BuildPreparationError);
   });
 });

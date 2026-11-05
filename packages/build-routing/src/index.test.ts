@@ -33,14 +33,14 @@ describe(
             "cart-checkout",
           commerce: {
             storefrontRuntime:
-              "static",
+              "tanstack-start",
           },
           projectType:
-            "frontend-app",
+            "fullstack-app",
           deploymentPreference:
-            "static",
+            "managed-runtime",
           stackId:
-            "commerce-static-v1",
+            "tanstack-start-v1",
           supported:
             true,
         });
@@ -94,7 +94,7 @@ describe(
     );
 
     it(
-      "routes a photographer portfolio to the deterministic static stack",
+      "routes a photographer portfolio to TanStack Start",
       () => {
         expect(
           classifyBuildRequest(
@@ -104,9 +104,9 @@ describe(
           siteKind:
             "portfolio",
           projectType:
-            "static-site",
+            "fullstack-app",
           stackId:
-            "static-html-v1",
+            "tanstack-start-v1",
           supported:
             true,
         });
@@ -114,7 +114,7 @@ describe(
     );
 
     it(
-      "fails closed instead of pretending the frontend stack has a database",
+      "fails closed when a database and login integration is unavailable",
       () => {
         const profile =
           classifyBuildRequest(
@@ -136,6 +136,17 @@ describe(
         ).toBe(false);
       },
     );
+
+    it("runs ordinary API-backed apps on TanStack without a second stack", () => {
+      const profile = classifyBuildRequest("Build a web app with a backend API.");
+      expect(profile).toMatchObject({
+        projectType: "fullstack-app",
+        stackId: "tanstack-start-v1",
+        deploymentPreference: "managed-runtime",
+        supported: true,
+      });
+      expect(profile.requirements.backend).toBe(true);
+    });
 
     it(
       "uses Luna first for normal text/image work and keeps Sol as escalation",
@@ -203,7 +214,7 @@ describe(
       },
     );
     it(
-      "routes presentation-rich standard commerce to the React/Vite commerce stack",
+      "routes presentation-rich commerce to the same TanStack stack",
       () => {
         const profile =
           classifyBuildRequest(
@@ -212,10 +223,10 @@ describe(
 
         expect(profile.supported).toBe(true);
         expect(profile.stackId).toBe(
-          "commerce-react-vite-v1",
+          "tanstack-start-v1",
         );
         expect(profile.commerce).toEqual({
-          storefrontRuntime: "react-vite",
+          storefrontRuntime: "tanstack-start",
         });
       },
     );
@@ -242,7 +253,7 @@ describe(
           profile.commerce,
         ).toEqual({
           storefrontRuntime:
-            "react-vite",
+            "tanstack-start",
         });
 
         expect(

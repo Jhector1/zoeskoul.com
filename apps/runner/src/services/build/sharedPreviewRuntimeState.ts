@@ -1,5 +1,5 @@
-import { PreviewStartCoordinator } from "./reactPreviewResourceAdmission.js";
-import { PreviewProjectDrainRegistry } from "./reactPreviewProjectDrainPolicy.js";
+import { PreviewStartCoordinator } from "./previewAdmissionPolicy.js";
+import { PreviewProjectDrainRegistry } from "./previewProjectDrainPolicy.js";
 
 /** The one in-process admission queue and project-deletion drain gate used by
  * both the currently active preview and the candidate TanStack runtime. */

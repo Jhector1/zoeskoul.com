@@ -230,7 +230,7 @@ function lockArchitecture(
           ...modelSpecification,
 
           projectType:
-            "frontend-app",
+            profile.projectType,
 
           targets: [
             "web",
@@ -242,15 +242,15 @@ function lockArchitecture(
 
           commerce:
             profile.requirements.commerce
-              ? { storefrontRuntime: "react-vite" }
+              ? { storefrontRuntime: "tanstack-start" }
               : null,
 
           stackId:
-            "react-vite-v1",
+            profile.stackId,
 
           deployment: {
             preference:
-              "static",
+              profile.deploymentPreference,
           },
         },
       };

@@ -4,50 +4,44 @@ import { describe, expect, it } from "vitest";
 
 const read = (relative: string) => readFileSync(resolve(process.cwd(), relative), "utf8");
 
-describe("ZoeBuild single-preview admission ownership", () => {
-  it("checks capacity before reserving a pending start", () => {
-    const source = read("src/services/build/reactPreviewRuntime.ts");
-    const check = source.indexOf("assertZoeBuildPreviewCapacity(");
-    const pending = source.indexOf("pendingPreviewStartsGlobal +=");
-    expect(check).toBeGreaterThan(-1);
-    expect(pending).toBeGreaterThan(check);
-    expect(source).toContain("previews.size + sharedFullStackPreviews.count()");
-    expect(source).toContain("pendingPreviewStartsGlobal,");
+describe("TanStack-only preview capacity ownership", () => {
+  it("authorizes the exact saved revision and reserves through the canonical admission queue", () => {
+    const lifecycle = read("src/services/build/tanstackPreviewSharedLifecycle.ts");
+    const coordinator = lifecycle.indexOf("sharedPreviewStartCoordinator.run(");
+    const authorize = lifecycle.indexOf("await input.authorize(ownerKey,request)", coordinator);
+    const reclaim = lifecycle.indexOf("await reclaimTanstackPreviewCapacity(ownerKey,request.buildProjectId)", authorize);
+    const reserve = lifecycle.indexOf("reserveTanstackPreviewCapacity(ownerKey)", reclaim);
+    expect(coordinator).toBeGreaterThan(-1);
+    expect(authorize).toBeGreaterThan(coordinator);
+    expect(reclaim).toBeGreaterThan(authorize);
+    expect(reserve).toBeGreaterThan(reclaim);
+    expect(lifecycle).toContain("sharedPreviewProjectDrains.beginStart(");
   });
-  it("keeps the slot during Docker and workspace cleanup and coalesces cancellation", () => {
-    const source = read("src/services/build/reactPreviewRuntime.ts");
-    const start = source.indexOf("async function destroyPreview(");
-    const end = source.indexOf("async function reuseExistingProjectPreview(");
-    expect(start).toBeGreaterThan(-1);
-    expect(end).toBeGreaterThan(start);
-    const destroy = source.slice(start, end);
-    expect(destroy).toContain("pendingPreviewDestructions.get(record.id)");
-    expect(destroy).toContain("pendingPreviewDestructions.set(record.id, cleanup)");
-    expect(destroy).toContain(".remove({");
-    expect(destroy).toContain("cleanupWorkspaceNow(");
-    expect(destroy.indexOf("previews.delete(record.id)")).toBeGreaterThan(destroy.indexOf("cleanupWorkspaceNow("));
+  it("keeps the lease counted until Docker and workspace teardown actually succeed", () => {
+    const registry = read("src/services/build/sharedPreviewRegistry.ts");
+    const teardown = registry.indexOf("const task = (async () => { await lease.close(); this.live.delete(id); })()");
+    expect(teardown).toBeGreaterThan(-1);
+    expect(registry).toContain("if (pending) { await pending; return true; }");
+    expect(registry).toContain("this.closing.set(id, task)");
+    const lifecycle = read("src/services/build/tanstackPreviewSharedLifecycle.ts");
+    expect(lifecycle).toContain('basePath: `/quarantined/${id}/`');
+    expect(lifecycle).toContain("close: error.recover");
   });
-  it("preserves preview reuse and existing idle/hard-lifetime cleanup", () => {
-    const source = read("src/services/build/reactPreviewRuntime.ts");
-    const startIndex = source.indexOf("async function startReactPreviewInternal(");
-    const reuseIndex = source.indexOf("await reuseExistingProjectPreview(", startIndex);
-    const reservationIndex = source.indexOf("reservePreviewCapacity(", startIndex);
-    const wrapperIndex = source.indexOf("export async function startReactPreview(");
-    expect(startIndex).toBeGreaterThan(-1);
-    expect(reuseIndex).toBeGreaterThan(startIndex);
-    expect(reservationIndex).toBeGreaterThan(reuseIndex);
-    expect(wrapperIndex).toBeGreaterThan(reservationIndex);
-    expect(source.slice(wrapperIndex)).toContain("projectDrains.beginStart(");
-    expect(source).toContain("PREVIEW_IDLE_MS");
-    expect(source).toContain("PREVIEW_HARD_LIFETIME_MS");
-    expect(source).toContain("runReactPreviewCleanupSweep(");
+  it("enforces one-preview admission, hard expiry and idle eviction without React/Vite", () => {
+    const capacity = read("src/services/build/tanstackPreviewCapacity.ts");
+    const lifecycle = read("src/services/build/tanstackPreviewSharedLifecycle.ts");
+    expect(capacity).toContain("assertZoeBuildPreviewCapacity(sharedFullStackPreviews.count(), pendingGlobal)");
+    expect(capacity).toContain("sharedFullStackPreviews.sweep(now, IDLE_MS, HARD_LIFETIME_MS)");
+    expect(capacity).toContain("countActiveSessionsForActor(ownerKey)");
+    expect(capacity).toContain("countActiveSessionsGlobal()");
+    expect(lifecycle).toContain("if (prior.sourceVersion > request.sourceVersion)");
+    expect(lifecycle).toContain("await sharedFullStackPreviews.close(prior.id)");
   });
-  it("uses the existing 429 status mapping without adding a public execution endpoint", () => {
+  it("keeps the 429 capacity response behind Runner service authentication", () => {
     const route = read("src/routes/build.previews.start.ts");
     const app = read("src/app.ts");
-    expect(route).toContain('message.includes(');
     expect(route).toContain('"Runner is busy"');
-    expect(route).toContain('return 429');
+    expect(route).toContain("return 429");
     expect(app.indexOf("app.use(requireServiceAuth)")).toBeLessThan(app.indexOf('app.post("/build/previews/start"'));
   });
 });

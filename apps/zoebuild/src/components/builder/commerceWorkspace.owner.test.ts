@@ -50,8 +50,14 @@ describe(
         expect(
           shell,
         ).toContain(
-          '"commerce-static-v1"',
+          '"tanstack-start-v1"',
         );
+        const panel = source(
+          "apps/zoebuild/src/app/[locale]/projects/[buildProjectId]/CommerceWorkspacePanel.tsx",
+        );
+        expect(panel).toContain('props.project.stackId !==');
+        expect(panel).toContain('"tanstack-start-v1"');
+        expect(panel).not.toContain('"react-vite-v1"');
 
         expect(
           shell,

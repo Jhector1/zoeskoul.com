@@ -670,9 +670,9 @@ export function createRegisteredProductionBuildJob(
   if (
     !plan.buildReady ||
     plan.stackId !==
-      "react-vite-v1" ||
+      "tanstack-start-v1" ||
     plan.templateId !==
-      "react-vite-v1" ||
+      "tanstack-start-v1" ||
     plan.dependencyLock.state !==
       "present" ||
     plan.dependencyLock.manager !==
@@ -703,20 +703,48 @@ export function createRegisteredProductionBuildJob(
     plan.buildCommand[1] !==
       "build" ||
     plan.artifact.type !==
-      "static-directory" ||
+      "worker-bundle" ||
     plan.artifact.outputPath !==
-      "dist"
+      "dist/server" ||
+    plan.artifact.assetsPath !==
+      "dist/client" ||
+    plan.artifact.entrypoint !==
+      "index.js" ||
+    plan.deploymentAdapterId !==
+      "cloudflare-workers-v1"
   ) {
     throw new BuildPreparationError(
       "BUILD_PREPARATION_INVALID",
-      "This source version is not registered for trusted React production build execution.",
+      "This source version is not registered for trusted TanStack Start execution.",
+    );
+  }
+
+  const sourceFiles = workspaceTextFiles(input.workspace);
+  if (!sourceFiles.has(PROJECT_DEPENDENCY_APPROVAL_PATH)) {
+    throw new BuildPreparationError(
+      "BUILD_DEPENDENCY_LOCK_INVALID",
+      "TanStack preview requires a signed project dependency lock. Run trusted dependency preparation first.",
+    );
+  }
+  // A project/template match cannot replace the server-issued HMAC. The
+  // approval must bind the saved project identity and the exact lock bytes.
+  try {
+    verifyProjectDependencies({
+      projectId: buildProjectId,
+      packageJson: sourceFiles.get("package.json") ?? "",
+      lockfile: sourceFiles.get("pnpm-lock.yaml"),
+      approval: sourceFiles.get(PROJECT_DEPENDENCY_APPROVAL_PATH) ?? "",
+      secret: process.env.ZOEBUILD_DEPENDENCY_APPROVAL_SECRET,
+    });
+  } catch {
+    throw new BuildPreparationError(
+      "BUILD_DEPENDENCY_LOCK_INVALID",
+      "TanStack project dependencies are not approved for this exact saved source.",
     );
   }
 
   const files = [
-    ...workspaceTextFiles(
-      input.workspace,
-    ),
+    ...sourceFiles,
   ]
     .map(
       ([path, content]) => ({
@@ -891,8 +919,8 @@ export function assertRegisteredDependencyBootstrapFiles(input: Readonly<{
   const template = requireBuildTemplate(input.templateId);
 
   if (
-    stack.id !== "react-vite-v1" ||
-    template.id !== "react-vite-v1" ||
+    stack.id !== "tanstack-start-v1" ||
+    template.id !== "tanstack-start-v1" ||
     stack.templateId !== template.id ||
     !template.stackIds.includes(stack.id)
   ) {

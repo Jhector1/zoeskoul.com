@@ -64,11 +64,14 @@ describe("admitted TanStack preview owner handoff",()=>{
     const cancel=read("build.previews.cancel.ts");
     expect(fetch).toContain("getRequiredActorKey");
     expect(fetch).toContain("fetchOwnedTanstackPreview");
-    expect(fetch).toContain('if (method === "POST") return res.status(405)');
+    expect(fetch).toContain('method !== "GET" && method !== "HEAD" && method !== "POST"');
     expect(proxy).toContain("fetchAdmittedTanstackPreview");
+    expect(proxy).not.toContain("fetchReactPreviewHttpByCapability");
     expect(proxy).not.toContain("getRequiredActorKey");
     expect(resolve).toContain("resolveAdmittedTanstackPreviewCapability");
+    expect(resolve).not.toContain("resolveReactPreviewContextByCapability");
     expect(cancel).toContain("stopAdmittedTanstackPreview");
+    expect(cancel).not.toContain("stopReactPreview");
     // No public start route or operation worker is changed in this phase.
     for(const route of [fetch,proxy,resolve,cancel]) {
       expect(route).not.toContain("startAdmittedTanstackPreview");

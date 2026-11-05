@@ -38,7 +38,7 @@ describe("Stripe preview payment visibility and trusted receipt", () => {
     }
   });
   it("reads the real routed payment provider before showing active labels", () => {
-    expect(store).toContain("routes={configuration?.store.routes ?? []}");
+    expect(store).toContain("routes={currentConfiguration?.store.routes ?? []}");
     expect(panel).toContain('route.capability === "payments"');
     expect(panel).toContain('route.provider === "stripe"');
     expect(panel).toContain("route.connected === true");

@@ -1,133 +1,37 @@
-import {
-  readFileSync,
-} from "node:fs";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { describe, expect, it } from "vitest";
 
-import {
-  resolve,
-} from "node:path";
-
-import {
-  describe,
-  expect,
-  it,
-} from "vitest";
-
-const repo =
-  process.cwd();
-
-function read(
-  relative: string,
-) {
-  return readFileSync(
-    resolve(
-      repo,
-      relative,
-    ),
-    "utf8",
-  );
+function read(relative: string): string {
+  return readFileSync(resolve(process.cwd(), relative), "utf8");
 }
 
-describe(
-  "restricted Build production route ownership",
-  () => {
-    it(
-      "parses the shared contract before invoking the trusted production executor",
-      () => {
-        const source =
-          read(
-            "src/routes/build.jobs.productionBuild.ts",
-          );
-
-        expect(
-          source,
-        ).toContain(
-          "parseTrustedBuildJobRequest",
-        );
-
-        expect(
-          source,
-        ).toContain(
-          'request.operation !==\n          "production-build"',
-        );
-
-        expect(
-          source,
-        ).toContain(
-          "executeProductionBuild",
-        );
-
-        expect(
-          source,
-        ).not.toContain(
-          "createContainer(",
-        );
-      },
-    );
-
-    it(
-      "is registered only after global service authentication",
-      () => {
-        const app =
-          read(
-            "src/app.ts",
-          );
-
-        const auth =
-          app.indexOf(
-            "app.use(requireServiceAuth)",
-          );
-
-        const route =
-          app.indexOf(
-            'app.post("/build/jobs/production-build", executeBuildProductionRoute);',
-          );
-
-        expect(
-          auth,
-        ).toBeGreaterThan(
-          -1,
-        );
-
-        expect(
-          route,
-        ).toBeGreaterThan(
-          auth,
-        );
-      },
-    );
-
-    it(
-      "introduces no PTY, terminal, browser command, or websocket boundary",
-      () => {
-        const source =
-          read(
-            "src/routes/build.jobs.productionBuild.ts",
-          ).toLowerCase();
-
-        expect(
-          source,
-        ).not.toContain(
-          "pty",
-        );
-
-        expect(
-          source,
-        ).not.toContain(
-          "/sessions/start",
-        );
-
-        expect(
-          source,
-        ).not.toContain(
-          "websocket",
-        );
-
-        expect(
-          source,
-        ).not.toContain(
-          "child_process",
-        );
-      },
-    );
-  },
-);
+describe("trusted TanStack Worker compilation route", () => {
+  it("parses the executor contract and rejects non-Worker requests before capacity admission", () => {
+    const route = read("src/routes/build.jobs.productionBuild.ts");
+    expect(route).toContain("parseTrustedBuildJobRequest");
+    expect(route).toContain('"production-build"');
+    expect(route.indexOf("assertTanstackWorkerBuildRequest(request)"))
+      .toBeLessThan(route.indexOf("withZoeBuildBuildSlot("));
+    expect(route).toContain("executeTanstackWorkerBuild(request)");
+    expect(route).toContain(".json({ ok: true, result });");
+    expect(route).not.toContain("executeProductionBuild(");
+    expect(route).not.toContain("createContainer(");
+  });
+  it("remains behind global service authentication and isolated from Learning pool", () => {
+    const app = read("src/app.ts");
+    const auth = app.indexOf("app.use(requireServiceAuth)");
+    const route = app.indexOf('app.post("/build/jobs/production-build", executeBuildProductionRoute);');
+    expect(auth).toBeGreaterThan(-1);
+    expect(route).toBeGreaterThan(auth);
+    const guard = read("src/middleware/executionPoolGuard.ts");
+    expect(guard).toContain('if (pool === "zoebuild")');
+    expect(guard).toContain('return path.startsWith("/sessions/")');
+  });
+  it("does not allow PTY, shell, raw commands or browser-controlled execution", () => {
+    const route = read("src/routes/build.jobs.productionBuild.ts").toLowerCase();
+    for (const forbidden of ["child_process", "websocket", "pty", "createcontainer(", "request.command", "/sessions/start"]) {
+      expect(route).not.toContain(forbidden);
+    }
+  });
+});

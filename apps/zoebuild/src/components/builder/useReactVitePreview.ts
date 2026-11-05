@@ -6,17 +6,18 @@ import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 import { workspaceSyncEntriesEqual } from "@zoeskoul/learner-workspace/lib/projects/workspaceSyncEntries";
 import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
-import { registeredReactPreviewRoutes } from "@/lib/build/reactPreviewPageCatalog";
+import { registeredTanstackPreviewRoutes } from "@/lib/build/tanstackPreviewPageCatalog";
 import { mayAutoRecoverReactPreviewDependencies } from "@/lib/build/reactPreviewDependencyRecovery";
-import { previewDependencySnapshotChanged } from "@/lib/build/reactPreviewDependencySession";
 import { previewCapacityRetryDelayMs } from "@/lib/build/previewCapacityRecovery";
 import { previewOperationStageMessage, previewStartOutcomeIsCurrent } from "@/lib/build/previewTransitionPolicy";
 import { previewDocumentGatewayUrl, classifyPreviewDocumentHealth } from "@/lib/build/previewDocumentIntegrity";
 import { claimSavedDependencyFollowUp, clearSavedDependencyRecoveryGuards } from "@/lib/build/savedDependencyRecoveryContinuation";
 import { readPreviewOperationStatus } from "@/lib/build/previewOperationHttp";
+import { decideTanstackPreviewSync } from "@/lib/build/tanstackPreviewSyncDecision";
 
 type PreviewSession = Readonly<{
   previewId: string;
+  sourceVersion: number;
   basePath: string;
   workspaceEntries: readonly WorkspaceSyncEntry[];
 }>;
@@ -236,7 +237,8 @@ export function useReactVitePreview(input: Readonly<{
     );
 
   const [confirmedSourceVersion, setConfirmedSourceVersion] = useState<number|null>(
-    initialSession && workspaceSyncEntriesEqual([...initialSession.workspaceEntries], initialWorkspaceEntries)
+    initialSession && initialSession.sourceVersion === input.sourceVersion &&
+      workspaceSyncEntriesEqual([...initialSession.workspaceEntries], initialWorkspaceEntries)
       ? input.sourceVersion : null,
   );
   const [attemptedSourceVersion, setAttemptedSourceVersion] = useState<number|null>(null);
@@ -262,7 +264,6 @@ export function useReactVitePreview(input: Readonly<{
   const [workspaceContentRevision, setWorkspaceContentRevision] = useState(0);
   const startPromiseRef = useRef<Promise<void> | null>(null);
   const restartPromiseRef = useRef<Promise<void> | null>(null);
-  const syncPromiseRef = useRef<Promise<void> | null>(null);
   const syncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 409 means the saved project advanced on the server. Re-read its canonical
@@ -323,7 +324,7 @@ export function useReactVitePreview(input: Readonly<{
     // exact selected bytes. Identical bytes can reuse the same runner session.
     const session = sessionRef.current;
     const expectedEntries = exportWorkspaceEntries(workspaceRef.current.nodes);
-    setConfirmedSourceVersion(session &&
+    setConfirmedSourceVersion(session && session.sourceVersion === input.sourceVersion &&
       workspaceSyncEntriesEqual([...session.workspaceEntries], expectedEntries)
       ? input.sourceVersion : null);
   }, [input.sourceVersion, input.workspace]);
@@ -355,128 +356,26 @@ export function useReactVitePreview(input: Readonly<{
     );
   }, [input.buildProjectId]);
 
-  // Only one source sync may mutate a preview session at a time. Otherwise
-  // an older in-flight request can overwrite the newer acknowledged source.
+  // An active TanStack lease is immutable. In particular, local editor changes
+  // must NEVER go to the retired mutation endpoint. Only a new owner-authorized /start
+  // may install a new saved-source snapshot (including server functions).
   const syncCurrent = useCallback(async () => {
-    // A previous sync (possibly for a retired session) must settle before
-    // this caller checks which source the active session still needs.
-    while (syncPromiseRef.current) {
-      await syncPromiseRef.current;
+    const session = sessionRef.current;
+    if (!session) return;
+    const selectedVersion = sourceVersionRef.current;
+    const decision = decideTanstackPreviewSync({
+      sessionSourceVersion: session.sourceVersion,
+      selectedSourceVersion: selectedVersion,
+      sessionEntries: session.workspaceEntries,
+      selectedEntries: exportWorkspaceEntries(workspaceRef.current.nodes),
+      hasUnsavedChanges: !bootstrapAllowedRef.current,
+    });
+    if (decision === "hold") return;
+    if (decision === "restart") throw new Error("PREVIEW_RESTART_REQUIRED");
+    if (mountedRef.current && sourceVersionRef.current === selectedVersion) {
+      setConfirmedSourceVersion(selectedVersion);
     }
-
-    const task = (async () => {
-      while (true) {
-        const session = sessionRef.current;
-        if (!session) return;
-
-        // Capture exactly what this request will send. Never acknowledge
-        // source that arrived while a runner request was in flight.
-        const sendingWorkspace = workspaceRef.current;
-        const sendingEntries = exportWorkspaceEntries(sendingWorkspace.nodes);
-        const sendingVersion = sourceVersionRef.current;
-        if (
-          workspaceSyncEntriesEqual([...session.workspaceEntries], sendingEntries)
-        ) {
-          if (mountedRef.current && sourceVersionRef.current === sendingVersion)
-            setConfirmedSourceVersion(sendingVersion);
-          return;
-        }
-
-        // Vite HMR cannot install a different dependency graph. A saved-history
-        // selection may change package.json, its lock, or its server approval.
-        // Stop before sending /sync, release the old capability, and prepare
-        // the EXACT selected revision through the normal /preview/start flow.
-        // A genuine invalid approval will still be rejected by that server flow.
-        if (previewDependencySnapshotChanged(session.workspaceEntries, sendingEntries)) {
-          throw new Error("PREVIEW_RESTART_REQUIRED");
-        }
-
-        if (mountedRef.current) {
-          setPreview((current) =>
-            current ? { ...current, state: "syncing", message: "Updating preview…" } : current,
-          );
-        }
-
-        if (mountedRef.current) setAttemptedSourceVersion(sendingVersion);
-        const response = await fetch(
-          `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/${encodeURIComponent(session.previewId)}/sync`,
-          {
-            method: "POST",
-            credentials: "same-origin",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              sourceVersion: sendingVersion,
-              workspace: sendingWorkspace,
-            }),
-          },
-        );
-
-        const data = await payload(response);
-        if (response.status === 404) throw new Error("PREVIEW_EXPIRED");
-        if (response.status === 409 && data?.code === "BUILD_PREVIEW_SOURCE_CONFLICT") {
-          if (await reconcileConflict(sendingVersion)) {
-            await cancelCurrent();
-            return;
-          }
-          throw new Error("The saved project changed. Keep any unsaved edits before reloading the project.");
-        }
-        if (!response.ok || !data?.ok) {
-          const errorMessage = message(data, "React preview could not be updated.");
-          // A previously cached session can also carry the same dependency
-          // bytes but lack approval in the restored server snapshot. Sync has
-          // no bootstrap step: hand this specific recoverable 409 to /start.
-          if ((response.status === 409 && mayAutoRecoverReactPreviewDependencies({
-            status: response.status, code: data?.code, message: data?.message,
-          })) || /dependencies changed/i.test(errorMessage)) {
-            throw new Error("PREVIEW_RESTART_REQUIRED");
-          }
-          throw new Error(errorMessage);
-        }
-
-        // A restart/cancel can happen while the request is running.
-        // Do not mutate the state or cache of a replacement session.
-        if (sessionRef.current?.previewId !== session.previewId) return;
-
-        const nextSession: PreviewSession = {
-          ...session,
-          workspaceEntries: sendingEntries,
-        };
-        sessionRef.current = nextSession;
-        rememberPreviewSession(input.buildProjectId, nextSession);
-
-        // A newer source arrived during sync: send it through the SAME
-        // session before refreshing the HTTP-only document. No restart.
-        if (
-          !workspaceSyncEntriesEqual(
-            sendingEntries,
-            exportWorkspaceEntries(workspaceRef.current.nodes),
-          )
-        ) continue;
-
-        if (mountedRef.current) {
-          if (sourceVersionRef.current === sendingVersion) setConfirmedSourceVersion(sendingVersion);
-          setPreview((current) =>
-            current
-              ? {
-                  ...current,
-                  state: "ready",
-                  message: null,
-                  revision: current.revision + 1,
-                }
-              : current,
-          );
-        }
-        return;
-      }
-    })();
-
-    syncPromiseRef.current = task;
-    try {
-      await task;
-    } finally {
-      if (syncPromiseRef.current === task) syncPromiseRef.current = null;
-    }
-  }, [input.buildProjectId, cancelCurrent, reconcileConflict]);
+  }, []);
 
   const start = useCallback(async () => {
     if (
@@ -809,6 +708,7 @@ export function useReactVitePreview(input: Readonly<{
 
       const nextSession: PreviewSession = {
         previewId,
+        sourceVersion: startingVersion,
         basePath,
         workspaceEntries: startingEntries,
       };
@@ -830,8 +730,9 @@ export function useReactVitePreview(input: Readonly<{
       if (mountedRef.current) {
         clearSavedDependencyRecoveryGuards(window.sessionStorage,
           `zoebuild:dependency-recovery:${input.buildProjectId}:${startingVersion}`);
-        if (workspaceSyncEntriesEqual(startingEntries, exportWorkspaceEntries(workspaceRef.current.nodes))) {
-          setConfirmedSourceVersion(sourceVersionRef.current);
+        if (!changedDuringStart &&
+            workspaceSyncEntriesEqual(startingEntries, exportWorkspaceEntries(workspaceRef.current.nodes))) {
+          setConfirmedSourceVersion(startingVersion);
           triedResyncVersionsRef.current.delete(startingVersion);
         }
         else setConfirmedSourceVersion(null);
@@ -842,8 +743,18 @@ export function useReactVitePreview(input: Readonly<{
 
       if (changedDuringStart || workspaceRevisionRef.current !== startingWorkspaceRevision) {
         // Old start responses never become visible while a newer source is selected.
-        // The synchronized acknowledgement below must match exact source bytes.
-        await syncCurrent();
+        // TanStack server functions live in an immutable sandbox: retire the
+        // old lease and start the newly selected source, never in-place sync it.
+        try {
+          await syncCurrent();
+        } catch (error) {
+          if (error instanceof Error && error.message === "PREVIEW_RESTART_REQUIRED") {
+            await cancelCurrent();
+            supersededDuringStart = true;
+            return;
+          }
+          throw error;
+        }
       }
     })();
 
@@ -877,7 +788,7 @@ export function useReactVitePreview(input: Readonly<{
         void Promise.resolve().then(() => start());
       }
     }
-  }, [input.buildProjectId, input.enabled, syncCurrent, reconcileConflict, reconcilePreparedDependencies]);
+  }, [input.buildProjectId, input.enabled, syncCurrent, cancelCurrent, reconcileConflict, reconcilePreparedDependencies]);
 
   // An authoritative rehydrate completes on the next React render, not inside
   // the original 409 request. Start only from the NEW source token; never
@@ -912,7 +823,15 @@ export function useReactVitePreview(input: Readonly<{
           sourceVersionRef.current !== input.sourceVersion) return;
       setPreparedReplaySerial(0);
       if (!sessionRef.current) await start();
-      else await syncCurrent();
+      else {
+        try { await syncCurrent(); }
+        catch (error) {
+          if (error instanceof Error && error.message === "PREVIEW_RESTART_REQUIRED") {
+            await cancelCurrent();
+            if (!cancelled && mountedRef.current) await start();
+          } else throw error;
+        }
+      }
     })().catch(() => {
       if (mountedRef.current) setPreview(current => ({
         src: null, state: "error",
@@ -921,7 +840,7 @@ export function useReactVitePreview(input: Readonly<{
       }));
     });
     return () => { cancelled = true; };
-  }, [preparedReplaySerial, input.enabled, input.sourceVersion, input.workspace, start, syncCurrent]);
+  }, [preparedReplaySerial, input.enabled, input.sourceVersion, input.workspace, start, syncCurrent, cancelCurrent]);
 
   const restart = useCallback(() => {
     // Prevent retry clicks from racing with a not-yet-completed cold start.
@@ -932,7 +851,6 @@ export function useReactVitePreview(input: Readonly<{
     } catch { /* optional */ }
     const task=(async()=>{
       await startPromiseRef.current?.catch(()=>{});
-      await syncPromiseRef.current?.catch(()=>{});
       if(!mountedRef.current)return;
       await cancelCurrent();
       if(mountedRef.current)await start();
@@ -1097,7 +1015,7 @@ export function useReactVitePreview(input: Readonly<{
     return () => {
       if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
     };
-  }, [input.enabled, restart, syncCurrent, workspaceContentRevision]);
+  }, [input.enabled, input.sourceVersion, input.allowDependencyBootstrap, restart, syncCurrent, workspaceContentRevision]);
 
-  return preview ? { ...preview, confirmedSourceVersion, attemptedSourceVersion, routes: registeredReactPreviewRoutes(initialWorkspaceEntries), onRetry: restart } : null;
+  return preview ? { ...preview, confirmedSourceVersion, attemptedSourceVersion, routes: registeredTanstackPreviewRoutes(initialWorkspaceEntries), onRetry: restart } : null;
 }

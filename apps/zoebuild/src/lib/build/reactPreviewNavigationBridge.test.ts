@@ -33,7 +33,7 @@ describe("opaque React preview navigation bridge", () => {
   });
 
   it("wires scoped HTML responses into the proxy, never assets or HEAD", () => {
-    const route = readFileSync(resolve(__dirname, "../../app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[[...path]]/route.ts"), "utf8");
+    const route = readFileSync(resolve(__dirname, "../../app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[...path]/route.ts"), "utf8");
     expect(route).toContain('method === "GET" && result.status === 200');
     expect(route).toContain('^text\\/html(?:;|$)');
     expect(route).toContain("injectReactPreviewNavigationBridge(originalHtml, basePath)");

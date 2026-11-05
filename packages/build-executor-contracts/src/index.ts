@@ -1,5 +1,9 @@
 export const BUILD_EXECUTOR_PROTOCOL_VERSION = 1 as const;
 
+/** Internal Runner → ZoeBuild control-plane signal: never treat a TanStack
+ * source replacement as an in-place React/Vite workspace sync. */
+export const TANSTACK_PREVIEW_RESTART_REQUIRED = "TANSTACK_PREVIEW_RESTART_REQUIRED" as const;
+
 export const TRUSTED_BUILD_OPERATIONS = [
   "dependency-lock-bootstrap",
   "production-build",
@@ -322,5 +326,39 @@ export type ProductionBuildExecutionResponseV1 = Readonly<{
       sha256: string;
       files: readonly ProductionBuildArtifactFileV1[];
     }>;
+  }>;
+}>;
+
+/** Canonical isolated TanStack Worker output limits, shared by Runner and control plane.
+ * Worker bundles are executable server and client outputs, never static-directory artifacts. */
+export const TANSTACK_WORKER_ARTIFACT_LIMITS = {
+  files: 1000,
+  fileBytes: 12 * 1024 * 1024,
+  totalBytes: 32 * 1024 * 1024,
+} as const;
+
+export type TanstackWorkerArtifactV1 = Readonly<{
+  type: "worker-bundle";
+  serverOutputPath: "dist/server";
+  assetsOutputPath: "dist/client";
+  entrypoint: "index.js";
+  sha256: string;
+  totalBytes: number;
+  files: readonly Readonly<{
+    path: string;
+    encoding: "base64";
+    data: string;
+  }>[];
+}>;
+
+/** Trusted Runner transport response; publication and save are separate operations. */
+export type TanstackWorkerBuildExecutionResponseV1 = Readonly<{
+  ok: true;
+  result: Readonly<{
+    protocolVersion: typeof BUILD_EXECUTOR_PROTOCOL_VERSION;
+    operation: "production-build";
+    buildProjectId: string;
+    sourceVersion: number;
+    artifact: TanstackWorkerArtifactV1;
   }>;
 }>;

@@ -108,17 +108,13 @@ describe(
             "utf8",
           );
 
-        expect(
-          source,
-        ).toContain(
-          "window.location.reload()",
-        );
-
-        expect(
-          source,
-        ).toContain(
-          "Plan applied to source version",
-        );
+        // The canonical saved source is verified and hydrated in place.
+        // A forced full-page reload would discard the editor/chat continuity.
+        expect(source).toContain("await refreshAfterSuccessfulApply(payload.apply.sourceVersion)");
+        expect(source).toContain('describeZoeActionReceipt({kind:"plan-applied"');
+        expect(source).toContain("fetchAuthoritativeAppliedProject({");
+        expect(source).toContain("setPreviewSourceVersion(latest.sourceVersion)");
+        expect(source).not.toContain("Plan applied to source version");
       },
     );
   },

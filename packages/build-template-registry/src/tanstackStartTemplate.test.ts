@@ -16,8 +16,7 @@ describe("canonical TanStack Start generated app blueprint", () => {
     expect(files.has("index.html")).toBe(false);
     expect(files.has("src/main.tsx")).toBe(false);
     expect(files.has("src/routes/AppRoutes.tsx")).toBe(false);
-    // Staged template is exported for trusted consumers, not customer creation.
-    expect(getBuildTemplate(TANSTACK_START_TEMPLATE_V1.id)).toBeUndefined();
+    expect(getBuildTemplate(TANSTACK_START_TEMPLATE_V1.id)).toBe(TANSTACK_START_TEMPLATE_V1);
   });
 
   it("implements actual server functions, server routes and SSR metadata", () => {

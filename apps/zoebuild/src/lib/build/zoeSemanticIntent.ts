@@ -6,6 +6,7 @@ export const ZOE_INTENT_PAGE_PATHS = ["none", "about.html", "privacy.html", "ter
 export type ZoeIntentAction = (typeof ZOE_INTENT_ACTIONS)[number];
 export type ZoeIntentPagePath = string;
 export const ZOE_RUNTIME_SUPPORT = ["supported", "unsupported", "not-applicable"] as const;
+export const ZOE_CONVERSATION_MODES = ["discuss", "act"] as const;
 export type ZoeSemanticIntent = Readonly<{
   action: ZoeIntentAction;
   pagePath: ZoeIntentPagePath;
@@ -28,13 +29,21 @@ export function parseZoeSemanticIntent(input: unknown): ZoeSemanticIntent {
   if (value.runtimeSupport !== undefined &&
       !ZOE_RUNTIME_SUPPORT.includes(value.runtimeSupport as typeof ZOE_RUNTIME_SUPPORT[number]))
     throw new Error("BUILD_INTENT_INVALID");
+  // Independently model-led: not a local keyword matcher or untrusted client flag.
+  // Missing or invalid phase fails closed before editing; live JSON schema requires it.
+  if (!ZOE_CONVERSATION_MODES.includes(value.conversationMode as typeof ZOE_CONVERSATION_MODES[number]))
+    throw new Error("BUILD_INTENT_INVALID");
   if (value.action !== "edit" && value.pagePath !== "none") throw new Error("BUILD_INTENT_INVALID");
   if (value.action !== "provider_settings" && value.provider !== "") throw new Error("BUILD_INTENT_INVALID");
   // Semantic model output is not authority to silently translate an explicitly
   // requested unsupported runtime into a React/Vite edit. The separate answer
   // route explains the incompatibility; no edit generation is dispatched.
-  if (value.runtimeSupport === "unsupported" &&
-      (value.action === "edit" || value.action === "full_rebuild")) {
+  if ((value.runtimeSupport === "unsupported" &&
+       (value.action === "edit" || value.action === "full_rebuild")) ||
+      (value.conversationMode === "discuss" &&
+       (value.action === "edit" || value.action === "full_rebuild" || value.action === "provider_settings"))) {
+    // A conversation or hypothetical request cannot authorize source inspection,
+    // full regeneration or provider navigation even if action disagrees.
     return {action: "answer", pagePath: "none", provider: "", reply: ""};
   }
   return { action: value.action as ZoeIntentAction, pagePath: value.pagePath as ZoeIntentPagePath,
@@ -44,13 +53,14 @@ export function parseZoeSemanticIntent(input: unknown): ZoeSemanticIntent {
 export function zoeSemanticIntentSchema() {
   return {
     type: "object", additionalProperties: false,
-    required: ["action", "pagePath", "provider", "reply", "runtimeSupport"],
+    required: ["action", "pagePath", "provider", "reply", "runtimeSupport", "conversationMode"],
     properties: {
       action: { type: "string", enum: [...ZOE_INTENT_ACTIONS] },
       pagePath: { type: "string", maxLength: 49 },
       provider: { type: "string" },
       reply: { type: "string" },
       runtimeSupport: {type: "string", enum: [...ZOE_RUNTIME_SUPPORT]},
+      conversationMode: {type: "string", enum: [...ZOE_CONVERSATION_MODES]},
     },
   };
 }

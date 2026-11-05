@@ -11,9 +11,8 @@ import {
   BuildPreparationError,
 } from "@zoeskoul/build-preparation";
 
-import {
-  executeProductionBuild,
-} from "../services/build/executeProductionBuild.js";
+import { executeTanstackWorkerBuild } from "../services/build/tanstackWorkerBuild.js";
+import { assertTanstackWorkerBuildRequest } from "../services/build/tanstackWorkerBuildPolicy.js";
 
 import { classifyProductionBuildStepFailure } from "../services/build/productionBuildStepFailure.js";
 
@@ -48,14 +47,17 @@ export const executeBuildProductionRoute:
             });
         }
 
-        const result =
-          await withZoeBuildBuildSlot(() => executeProductionBuild(request));
+        // Reject old static/React and malformed Worker sources before admission.
+        // This service route is authenticated globally in app.ts; the ZoeBuild
+        // control plane must independently check the owner and source version.
+        assertTanstackWorkerBuildRequest(request);
+        const result = await withZoeBuildBuildSlot(
+          () => executeTanstackWorkerBuild(request),
+        );
 
         return res
           .status(200)
-          .json(
-            result,
-          );
+          .json({ ok: true, result });
       } catch (error) {
         if (error instanceof ZoeBuildBuildCapacityError) {
           return res.status(429).json({

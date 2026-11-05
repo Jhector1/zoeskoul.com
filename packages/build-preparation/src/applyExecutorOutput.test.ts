@@ -10,10 +10,10 @@ import {
 const specification: ProjectSpecification = {
   version: 1,
   name: "Lock output test",
-  projectType: "frontend-app",
+  projectType: "fullstack-app",
   targets: ["web"],
   requirements: {
-    backend: false,
+    backend: true,
     database: false,
     auth: false,
     storage: false,
@@ -22,8 +22,8 @@ const specification: ProjectSpecification = {
     commerce: false,
   },
   pages: ["Home"],
-  stackId: "react-vite-v1",
-  deployment: { preference: "static" },
+  stackId: "tanstack-start-v1",
+  deployment: { preference: "managed-runtime" },
 };
 
 function workspace() {

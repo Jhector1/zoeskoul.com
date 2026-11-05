@@ -36,10 +36,14 @@ export async function GET(_req: Request, ctx: {params: Promise<{ buildProjectId:
     if (preview.buildProjectId !== buildProjectId || preview.sourceVersion !== project.sourceVersion ||
       !preview.basePath.startsWith(`/api/build/projects/${encodeURIComponent(buildProjectId)}/preview/${encodeURIComponent(preview.previewId)}/content/`))
       return json(requestId, {ok:false, code:"BUILD_PREVIEW_IDENTITY_MISMATCH", message:"Preview identity could not be verified."}, 409);
+    // Runner startup already verified a full HTML document. The status path
+    // needs only a fresh capability-scoped liveness/MIME check, not another
+    // complete HTML transfer and base64 encode/decode. The sandboxed browser
+    // iframe owns the one real GET and the React-render acknowledgement.
     let documentResponse;
     try {
       documentResponse = await proxyFetchTrustedReactPreviewAtRunner({
-        previewId: preview.previewId, path: preview.basePath, method:"GET",
+        previewId: preview.previewId, path: preview.basePath, method:"HEAD",
       });
     } catch (error) {
       if (error instanceof RunnerHttpError && error.status === 404) return json(requestId,

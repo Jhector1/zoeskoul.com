@@ -6,7 +6,7 @@ import type {
 import { createBuildProject } from "./index";
 
 const noManagedCapabilities = {
-  backend: false,
+  backend: true,
   database: false,
   auth: false,
   storage: false,
@@ -15,16 +15,16 @@ const noManagedCapabilities = {
   commerce: false,
 } as const;
 
-function reactSpecification() {
+function tanstackSpecification() {
   return {
     version: 1 as const,
     name: "  My Zoe Site  ",
-    projectType: "frontend-app" as const,
+    projectType: "fullstack-app" as const,
     targets: ["web"] as const,
     requirements: noManagedCapabilities,
     pages: ["home"] as const,
-    stackId: "react-vite-v1",
-    deployment: { preference: "static" as const },
+    stackId: "tanstack-start-v1",
+    deployment: { preference: "managed-runtime" as const },
   };
 }
 
@@ -46,7 +46,7 @@ describe("build application service", () => {
 
     const result = await createBuildProject({
       ownerId: " user_1 ",
-      specification: reactSpecification(),
+      specification: tanstackSpecification(),
       createdAt: 123,
       persistence,
     });
@@ -61,23 +61,23 @@ describe("build application service", () => {
       ownerId: "user_1",
       title: "My Zoe Site",
       language: "web",
-      entryPath: "src/main.tsx",
-      activePath: "src/App.tsx",
-      stackId: "react-vite-v1",
-      templateId: "react-vite-v1",
+      entryPath: "src/router.tsx",
+      activePath: "src/routes/index.tsx",
+      stackId: "tanstack-start-v1",
+      templateId: "tanstack-start-v1",
       dependencyLock: { manager: "pnpm", policy: "generate-once", lockfilePath: "pnpm-lock.yaml" },
     });
     expect(persistedInput.workspace).toMatchObject({
       version: 2,
-      entryFileId: "src/main.tsx",
-      activeFileId: "src/App.tsx",
+      entryFileId: "src/router.tsx",
+      activeFileId: "src/routes/index.tsx",
     });
     expect(result).toEqual({
       codeProjectId: "code_1",
       buildProjectId: "build_1",
       sourceVersion: 1,
-      stackId: "react-vite-v1",
-      templateId: "react-vite-v1",
+      stackId: "tanstack-start-v1",
+      templateId: "tanstack-start-v1",
       dependencyLock: { manager: "pnpm", policy: "generate-once", lockfilePath: "pnpm-lock.yaml" },
     });
   });
@@ -94,7 +94,7 @@ describe("build application service", () => {
     await expect(
       createBuildProject({
         ownerId: "   ",
-        specification: reactSpecification(),
+        specification: tanstackSpecification(),
         createdAt: 123,
         persistence,
       }),
@@ -114,7 +114,7 @@ describe("build application service", () => {
     await expect(
       createBuildProject({
         ownerId: "user_2",
-        specification: reactSpecification(),
+        specification: tanstackSpecification(),
         createdAt: 123,
         persistence,
       }),

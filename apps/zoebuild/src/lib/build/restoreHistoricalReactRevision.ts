@@ -2,7 +2,6 @@ import "server-only";
 
 import { Prisma, type PrismaClient } from "@zoeskoul/db";
 import { parseProjectSpecification } from "@zoeskoul/build-application";
-import { createStarterProjectSpecification } from "./starterProjectSpecifications";
 import { parseBuildWorkspaceMutation } from "./buildWorkspaceMutation";
 import { pathOf } from "@zoeskoul/learner-workspace/ide/fsTree";
 import { ProjectVersionConflictError, saveCodeProjectInTransaction } from "@zoeskoul/platform-server/projects/saveCodeProject";
@@ -31,7 +30,19 @@ export function historicalReactSourceMetadata(settings: unknown, meta: unknown) 
  * require real runner verification before committing anything.
  */
 export function historicReactRecoverySpecification(title: string) {
-  return parseProjectSpecification(createStarterProjectSpecification("website", title));
+  // Quarantined historical React-only path. This must never call the new
+  // TanStack starter, which would mislabel an old React source revision.
+  // The entire historical React recovery path is slated for deletion when
+  // TanStack-only source-history replacement is ready.
+  return parseProjectSpecification({
+    version: 1, name: title, projectType: "frontend-app", targets: ["web"],
+    requirements: {
+      backend: false, database: false, auth: false, storage: false,
+      payments: false, email: false, commerce: false,
+    },
+    pages: ["Home"], stackId: "react-vite-v1",
+    deployment: { preference: "static" },
+  });
 }
 
 export class HistoricalReactRestoreError extends Error {

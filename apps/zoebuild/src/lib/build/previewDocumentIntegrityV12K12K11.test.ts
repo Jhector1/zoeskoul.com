@@ -23,6 +23,11 @@ describe("K11 preview document integrity", () => {
     const status = read("src/app/api/build/projects/[buildProjectId]/preview/operations/[operationId]/route.ts");
     expect(start).toContain("submitTrustedReactPreviewOperationAtRunner");
     expect(status).toContain("proxyFetchTrustedReactPreviewAtRunner");
+    // The runner did the full document GET at startup; a ready status must
+    // send only a HEAD to recheck the capability and HTML MIME. Never relay
+    // a second full document through the status polling route.
+    expect(status).toContain('path: preview.basePath, method:"HEAD"');
+    expect(status).not.toContain('path: preview.basePath, method:"GET"');
     // Preparing operations return 200 without a document fetch. Only the
     // final READY branch must verify the capability and saved-source fence.
     expect(status).toContain('if (operation.state !== "ready" || !operation.preview)');
@@ -39,8 +44,10 @@ describe("K11 preview document integrity", () => {
   it("hides cached preview until the document gateway is verified", () => {
     const hook = read("src/components/builder/useReactVitePreview.ts");
     expect(hook).toContain("previewDocumentGatewayUrl(cachedSession.basePath)");
-    expect(hook).toContain("previewDocumentGatewayUrl(basePath)");
+    // The new preview must load the document exactly once in the iframe;
+    // the already-authorized operation status checked it upstream.
+    expect(hook).not.toContain("previewDocumentGatewayUrl(basePath)");
     expect(hook).toContain("src: null,\n        state: \"starting\"");
-    expect(hook).toContain("await cancelPreviewSession(input.buildProjectId, unusable)");
+    expect(hook).toContain("the sandboxed iframe owns");
   });
 });

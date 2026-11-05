@@ -22,6 +22,10 @@ describe("V12K12J cross-stack React history recovery", () => {
     expect(writer).toContain('status: "draft"');
   });
   it("does not permit vanilla/static editing at either paid-edit boundary", () => {
-    expect(edit.match(/project.stackId !== "react-vite-v1"/g)?.length).toBe(2);
+    // Both paid edit boundaries handle TanStack through the verified path and
+    // reject retired stacks before reaching the dormant legacy implementation.
+    expect(edit.match(/project.stackId === "tanstack-start-v1"/g)?.length).toBe(2);
+    expect(edit.match(/zoeTanstackEditRuntimeGate\(project.stackId\)/g)?.length).toBe(2);
+    expect(edit).toContain('if (runtimeGate) return result(requestId');
   });
 });

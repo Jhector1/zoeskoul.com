@@ -61,6 +61,31 @@ describe("TanStack authenticated startup source gate", () => {
     expect(() => authorizeTanstackPreviewSource({...request,files:[...request.files,
       {path:"pnpm-lock.yaml",content:lockfile}]},secret)).toThrow();
   });
+  it("fails closed on legacy and mismatched framework IDs even with a signed lock", () => {
+    const request = validRequest();
+    for (const identity of [
+      { stackId: "react-vite-v1", templateId: "react-vite-v1" },
+      { stackId: "static-html-v1", templateId: "tanstack-start-v1" },
+      { stackId: "tanstack-start-v1", templateId: "react-vite-v1" },
+    ]) {
+      expect(() => authorizeTanstackPreviewSource({ ...request, ...identity }, secret))
+        .toThrow("canonical registered stack");
+    }
+  });
+  it("rejects non-TanStack requests on both start routes before reserving resources", () => {
+    const read = (relative: string) => readFileSync(fileURLToPath(new URL(relative, import.meta.url)), "utf8");
+    const direct = read("../../routes/build.previews.start.ts");
+    const operations = read("../../routes/build.previews.operations.ts");
+    for (const route of [direct, operations]) {
+      expect(route).toContain('request.stackId !== "tanstack-start-v1"');
+      expect(route).toContain('request.templateId !== "tanstack-start-v1"');
+      expect(route).toContain('Unsupported preview project stack.');
+      expect(route).not.toContain("startReactPreview");
+      expect(route).not.toContain("stopReactPreview");
+    }
+    expect(operations.indexOf('request.stackId !== "tanstack-start-v1"', operations.indexOf('export const startBuildPreviewOperationRoute')))
+      .toBeLessThan(operations.indexOf('operations.start(actorKey, request)'));
+  });
   it("keeps the runtime disabled unless explicitly enabled", () => {
     expect(() => assertTanstackPreviewStartupEnabled("true")).not.toThrow();
     for (const value of [undefined, "false", "1", "TRUE", "yes"]) {
@@ -78,7 +103,8 @@ describe("TanStack authenticated startup source gate", () => {
       expect(file).toContain("assertTanstackPreviewStartupEnabled()");
       expect(file).toContain("authorizeTanstackPreviewSource(request)");
       expect(file).toContain("startAdmittedTanstackPreview");
-      expect(file).toContain("startReactPreview");
+      expect(file).not.toContain("startReactPreview");
+      expect(file).not.toContain("stopReactPreview");
       expect(file).not.toContain("req.body.command");
       expect(file).not.toContain("req.body.env");
       expect(file).not.toContain("req.body.port");

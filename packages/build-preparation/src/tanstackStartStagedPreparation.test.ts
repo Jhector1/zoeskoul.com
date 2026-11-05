@@ -54,10 +54,10 @@ describe("TanStack Start staged full-stack preparation", () => {
       sourceVersion: 1 })).toThrow(BuildPreparationError);
   });
 
-  it("keeps project creation and the legacy static build executor closed before cutover", () => {
+  it("allows canonical registered preparation but requires a sealed lock for live execution", () => {
     const workspace = fresh().workspace;
     expect(() => prepareRegisteredBuildArtifactPlan({ specification,
-      workspace, sourceVersion: 1 })).toThrow(BuildPreparationError);
+      workspace, sourceVersion: 1 })).not.toThrow();
     expect(() => createRegisteredProductionBuildJob({ buildProjectId: "trial_1",
       specification, workspace, sourceVersion: 1 })).toThrow(BuildPreparationError);
   });

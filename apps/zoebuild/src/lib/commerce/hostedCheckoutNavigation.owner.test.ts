@@ -55,59 +55,15 @@ describe(
       );
 
     it(
-      "keeps hosted Checkout navigation in the authenticated parent for static Preview",
+      "never allows a static preview checkout bridge to take over TanStack navigation",
       () => {
-        const request =
-          shell.indexOf(
-            "async function requestStaticPreviewCommerce",
-          );
-
-        const checkout =
-          shell.indexOf(
-            'request.method ===\n        "checkout.begin"',
-            request,
-          );
-
-        const topLevelRedirect =
-          shell.indexOf(
-            "window.location.assign(",
-            checkout,
-          );
-
-        const suppressResponse =
-          shell.indexOf(
-            "new Promise<never>",
-            topLevelRedirect,
-          );
-
-        expect(request).toBeGreaterThan(-1);
-        expect(checkout).toBeGreaterThan(request);
-        expect(topLevelRedirect).toBeGreaterThan(checkout);
-        expect(suppressResponse).toBeGreaterThan(topLevelRedirect);
-
-        expect(
-          shell,
-        ).toContain(
-          'checkout.protocol !==\n        "https:"',
-        );
-
-        expect(
-          preview,
-        ).toContain(
-          'sandbox="allow-scripts allow-forms allow-modals"',
-        );
-
-        expect(
-          preview,
-        ).not.toContain(
-          'sandbox="allow-scripts allow-forms allow-modals allow-same-origin"',
-        );
-
-        expect(
-          preview,
-        ).not.toContain(
-          "allow-top-navigation",
-        );
+        const remote = source("packages/learner-workspace/src/runner/components/RemoteWebPreview.tsx");
+        expect(shell).not.toContain("requestStaticPreviewCommerce");
+        expect(shell).not.toContain("hostedCheckoutRedirectUrl");
+        expect(shell).not.toContain("window.location.assign(");
+        expect(shell).toContain("preview={fullStackPreview}");
+        expect(remote).not.toContain("allow-same-origin");
+        expect(preview).not.toContain("allow-top-navigation");
       },
     );
 

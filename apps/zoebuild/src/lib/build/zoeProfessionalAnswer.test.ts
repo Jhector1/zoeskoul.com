@@ -8,8 +8,8 @@ const id="10372f53-65e6-4ba8-883d-2f5748d72210";
 
 describe("E17L.5 professional answer architecture",()=>{
   it("routes informational messages without stuffing long answers into a classifier",()=>{
-    expect(parseZoeSemanticIntent({action:"answer",pagePath:"none",provider:"",reply:""}).action).toBe("answer");
-    expect(parseZoeSemanticIntent({action:"answer",pagePath:"none",provider:"",reply:"A long speculative answer"}).reply).toBe("");
+    expect(parseZoeSemanticIntent({action:"answer",pagePath:"none",provider:"",reply:"",conversationMode:"discuss"}).action).toBe("answer");
+    expect(parseZoeSemanticIntent({action:"answer",pagePath:"none",provider:"",reply:"A long speculative answer",conversationMode:"discuss"}).reply).toBe("");
     const intent=source("../../app/api/build/projects/[buildProjectId]/assistant/intent/route.ts");
     expect(intent).toContain('"For action=answer return reply as an empty string');
     const shell=source("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx");

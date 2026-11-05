@@ -17,7 +17,7 @@ describe("ZoeBuild Shopify E11 merchant connector", () => {
     expect(workspace).toContain("<ShopifyConnectionPanel");
     const shell = source("src/app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx");
     expect(shell).toContain('get("shopify") === "connected"');
-    expect(shell).toContain('initialSection={shopifyConnectedReturn ? "commerce" : undefined}');
+    expect(shell).toContain('initialSection={assistantSettingsSection ?? (shopifyConnectedReturn ? "commerce" : undefined)}');
   });
 
   it("uses one fixed callback URL and an owner-bound one-time state", () => {

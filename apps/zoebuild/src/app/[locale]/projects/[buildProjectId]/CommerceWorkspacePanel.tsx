@@ -293,7 +293,7 @@ export default function CommerceWorkspacePanel(
 
   if (!props.commerceEnabled ||
     props.project.stackId !==
-    "react-vite-v1") {
+    "tanstack-start-v1") {
     return null;
   }
 

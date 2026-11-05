@@ -1,5 +1,5 @@
-/** Live full-stack preview leases. The old SPA preview controller consults these
- * totals so neither runtime can overbook the same rootless ZoeBuild executor.
+/** Canonical live TanStack full-stack preview leases. All preview admission,
+ * cancellation, cleanup and project deletion share this single registry.
  * This is one in-process Runner owner; multi-replica support requires external leases.
  */
 export type FullStackPreviewLease = Readonly<{

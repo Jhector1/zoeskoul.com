@@ -73,7 +73,7 @@ describe("React preview browser capability path", () => {
       resolve(
         __dirname, "../../..",
         "src/app/api/build/projects/[buildProjectId]/preview/" +
-          "[previewId]/content/[capability]/[[...path]]/route.ts",
+          "[previewId]/content/[capability]/[...path]/route.ts",
       ),
       "utf8",
     );
@@ -89,7 +89,7 @@ describe("React preview browser capability path", () => {
     expect(routeSource).toContain("previewDocumentProxyTarget(url.pathname, basePath)");
     expect(routeSource).toContain("resolvePreviewDocumentProxyPath({");
     expect(routeSource).toContain("normalize: normalizeReactPreviewProxyPath");
-    expect(routeSource).toContain(
+    expect(routeSource).not.toContain(
       'if (documentGateway && method !== "GET") return errorResponse("Method not allowed.", 405);',
     );
     expect(routeSource).toContain(

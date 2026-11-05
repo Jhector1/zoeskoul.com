@@ -33,7 +33,7 @@ describe(
       () => {
         const runtime =
           source(
-            "../../../../runner/src/services/build/reactPreviewRuntime.ts",
+            "../../../../runner/src/services/build/tanstackPreviewSharedLifecycle.ts",
           );
         const route =
           source(
@@ -43,23 +43,20 @@ describe(
         expect(
           runtime,
         ).toContain(
-          "resolveReactPreviewContextByCapability",
+          "resolveAdmittedTanstackPreviewCapability",
         );
         expect(
           runtime,
         ).toContain(
-          "normalizePreviewRequestPath(\n    record,\n    input.path",
+          "normalizeTanstackPreviewHttpRequest({",
         );
         expect(
           runtime,
         ).toContain(
-          "buildProjectId:\n      record.buildProjectId",
+          "buildProjectId: lease.buildProjectId",
         );
-        expect(
-          route,
-        ).not.toContain(
-          "getRequiredActorKey",
-        );
+        expect(route).toContain("resolveAdmittedTanstackPreviewCapability");
+        expect(route).not.toContain("getRequiredActorKey");
       },
     );
 
@@ -68,7 +65,7 @@ describe(
       () => {
         const route =
           source(
-            "../../app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[[...path]]/route.ts",
+            "../../app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[...path]/route.ts",
           );
 
         expect(

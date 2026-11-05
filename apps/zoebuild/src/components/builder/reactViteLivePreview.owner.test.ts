@@ -6,13 +6,16 @@ function source(relative: string) {
   return readFileSync(fileURLToPath(new URL(relative, import.meta.url)), "utf8");
 }
 
-describe("ZoeBuild React/Vite live preview ownership", () => {
+describe("ZoeBuild isolated full-stack live preview ownership", () => {
   it("uses one controller for Preview mode and the Code dock", () => {
     const shell = source("../../app/[locale]/projects/[buildProjectId]/ProjectBuilderShell.tsx");
     expect(shell).toContain("useReactVitePreview");
     expect(shell).toContain("<PersistentReactPreviewSlot");
-    expect(shell).toContain("remoteWebPreview={reactPreviewEnabled ? reactPreview : null}");
-    expect(shell).toContain("<WebPreview");
+    expect(shell).toContain("remoteWebPreview={fullStackPreview}");
+    expect(shell).toContain("confirmedSourceVersion !== previewSourceVersion");
+    expect(shell).not.toContain("<WebPreview");
+    expect(shell).toContain("preview={fullStackPreview}");
+    expect(shell).toContain("remoteWebPreview={fullStackPreview}");
   });
 
   it("keeps browser code away from runner origin and port", () => {
@@ -37,7 +40,7 @@ describe("ZoeBuild React/Vite live preview ownership", () => {
   });
 
   it("uses capability content proxy without weakening the iframe sandbox", () => {
-    const content = source("../../app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[[...path]]/route.ts");
+    const content = source("../../app/api/build/projects/[buildProjectId]/preview/[previewId]/content/[capability]/[...path]/route.ts");
     const remote = readFileSync(
       fileURLToPath(
         new URL(
@@ -63,8 +66,9 @@ describe("ZoeBuild React/Vite live preview ownership", () => {
   it("uses bounded server-owned preview operations without blocking the browser for package installation", () => {
     const hook = source("./useReactVitePreview.ts");
     expect(hook).toContain("PREVIEW_START_SLOW_NOTICE_MS = 15_000");
-    expect(hook).toContain("PREVIEW_START_TIMEOUT_MS = 30_000");
-    expect(hook).toContain("PREVIEW_OPERATION_TIMEOUT_MS = 6 * 60_000");
+    expect(hook).toContain("PREVIEW_START_TIMEOUT_MS = 120_000");
+    expect(hook).not.toContain("PREVIEW_OPERATION_TIMEOUT_MS");
+   expect(hook).toContain("The runner owns the operation deadline");
     expect(hook).toContain("new AbortController()");
     expect(hook).toContain("signal: startController.signal");
     expect(hook).toContain("preview/operations/${encodeURIComponent(operationId)}");

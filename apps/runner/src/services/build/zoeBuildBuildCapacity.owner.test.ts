@@ -13,7 +13,9 @@ const sessions = readFileSync(
 
 describe("ZoeBuild shared-runner build admission ownership", () => {
   it("covers both one-shot operations through the same slot owner", () => {
-    expect(production).toContain("withZoeBuildBuildSlot(() => executeProductionBuild(request))");
+    expect(production).toContain("withZoeBuildBuildSlot(");
+    expect(production).toContain("executeTanstackWorkerBuild(request)");
+    expect(production).not.toContain("executeProductionBuild(");
     expect(bootstrap).toContain("withZoeBuildQueuedBootstrapSlot(");
     expect(bootstrap).toContain("requestKey, () => executeDependencyLockBootstrap(request)");
     expect(bootstrap).toContain("getRequiredActorKey(req)");
