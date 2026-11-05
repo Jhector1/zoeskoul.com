@@ -51,6 +51,31 @@ import { TrustedProductionBuildStepFailure, type ProductionBuildStep } from "./p
 import { reportTrustedBuildFailure } from "./trustedBuildFailureDiagnostics.js";
 import { startTrustedInstallProgressDiagnostics } from "./trustedInstallProgressDiagnostics.js";
 
+export type TrustedBuildResourceContext = "standard" | "tanstack-preview-install";
+
+/** The caller is trusted Runner code, never a user-supplied job field.
+ * Keep startup dependency installs independent of production compilation. */
+export function resolveTrustedBuildStepResources(
+  args: Readonly<{ step: ProductionBuildStep; resourceContext?: TrustedBuildResourceContext }>,
+) {
+  if (args.resourceContext === "tanstack-preview-install") {
+    if (args.step !== "install") {
+      throw new Error("Preview install resources can only run trusted install steps.");
+    }
+    return {
+      profile: resolveSandboxProfile("build-preview-install"),
+      timeoutMs: env.previewInstallTimeoutMs,
+    };
+  }
+  if (args.resourceContext !== undefined && args.resourceContext !== "standard") {
+    throw new Error("Unsupported trusted build resource context.");
+  }
+  return {
+    profile: resolveSandboxProfile("build"),
+    timeoutMs: env.buildStepTimeoutMs,
+  };
+}
+
 export function buildProductionBuildContainerOptions(
   args: Readonly<{
     workspaceDir: string;
@@ -58,12 +83,10 @@ export function buildProductionBuildContainerOptions(
       readonly string[];
     step:
       ProductionBuildStep;
+    resourceContext?: TrustedBuildResourceContext;
   }>,
 ) {
-  const profile =
-    resolveSandboxProfile(
-      "build",
-    );
+  const profile = resolveTrustedBuildStepResources(args).profile;
 
   return {
     Image:
@@ -168,6 +191,7 @@ async function waitForBuildContainer(
   },
   step:
     ProductionBuildStep,
+  timeoutMs: number,
 ): Promise<{
   StatusCode?: number;
 }> {
@@ -192,7 +216,7 @@ async function waitForBuildContainer(
                 reject(new TrustedProductionBuildStepFailure(step, "timeout"));
               },
 
-              env.buildStepTimeoutMs,
+              timeoutMs,
             );
         },
       ),
@@ -213,6 +237,7 @@ export async function executeBuildStep(
     workspaceDir: string;
     command: readonly string[];
     step: ProductionBuildStep;
+    resourceContext?: TrustedBuildResourceContext;
     strictCleanup?: boolean;
     tanstackRunId?: string;
     onContainerCreated?: (containerId: string) => Promise<void>;
@@ -239,7 +264,9 @@ export async function executeBuildStep(
         container, workspaceDir: args.workspaceDir, stage: "install",
       });
     }
-    const result = await waitForBuildContainer(container, args.step);
+    const result = await waitForBuildContainer(
+      container, args.step, resolveTrustedBuildStepResources(args).timeoutMs,
+    );
     const statusCode = typeof result.StatusCode === "number" ? result.StatusCode : -1;
     if (statusCode !== 0) throw new TrustedProductionBuildStepFailure(args.step, "nonzero-exit");
   } catch (error) {

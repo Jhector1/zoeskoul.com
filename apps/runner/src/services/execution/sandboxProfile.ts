@@ -1,6 +1,6 @@
 import { env } from "../../lib/env.js";
 
-export const SANDBOX_PURPOSES = ["learn", "build", "build-bootstrap"] as const;
+export const SANDBOX_PURPOSES = ["learn", "build", "build-bootstrap", "build-preview-install"] as const;
 export type SandboxPurpose = (typeof SANDBOX_PURPOSES)[number];
 
 export type SandboxProfile = Readonly<{
@@ -84,6 +84,17 @@ function productionBuildProfile(): SandboxProfile {
     },};
 }
 
+function previewInstallProfile(): SandboxProfile {
+  // Inherit all existing hardened production-build isolation properties.
+  // Only the trusted preview install memory budget differs.
+  const base = productionBuildProfile();
+  return {
+    ...base,
+    id: "build-preview-install-v1",
+    memoryBytes: env.previewInstallMemoryLimitBytes,
+  };
+}
+
 /**
  * Central runtime-policy boundary. Build execution intentionally fails closed
  * until a dedicated build profile is configured and validated; it must never
@@ -92,6 +103,7 @@ function productionBuildProfile(): SandboxProfile {
 export function resolveSandboxProfile(purpose: SandboxPurpose): SandboxProfile {
   if (purpose === "learn") return learningProfile();
   if (purpose === "build-bootstrap") return buildBootstrapProfile();
+  if (purpose === "build-preview-install") return previewInstallProfile();
   if (purpose === "build") return productionBuildProfile();
 
   throw new Error(

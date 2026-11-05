@@ -75,6 +75,13 @@ const envSchema = z.object({
   RUNNER_BUILD_PIDS_LIMIT: intEnv(96),
   RUNNER_BUILD_STEP_TIMEOUT_MS: intEnv(180000),
 
+  // Only the trusted TanStack preview dependency installer uses these
+  // independently bounded budgets. Production and Learning keep their own.
+  RUNNER_PREVIEW_INSTALL_MEMORY_LIMIT_MB: z.coerce.number()
+    .int().min(384).max(1024).default(384),
+  RUNNER_PREVIEW_INSTALL_TIMEOUT_MS: z.coerce.number()
+    .int().min(180000).max(600000).default(180000),
+
   // Keep enough host headroom for Docker/containerd metadata, logs, and a
   // production deploy. The percentage guard prevents a larger disk from
   // silently using nearly all of its capacity before the byte floor trips.
@@ -159,6 +166,10 @@ export const env = {
     parsed.RUNNER_BUILD_PIDS_LIMIT,
   buildStepTimeoutMs:
     parsed.RUNNER_BUILD_STEP_TIMEOUT_MS,
+  previewInstallMemoryLimitBytes:
+    parsed.RUNNER_PREVIEW_INSTALL_MEMORY_LIMIT_MB * 1024 * 1024,
+  previewInstallTimeoutMs:
+    parsed.RUNNER_PREVIEW_INSTALL_TIMEOUT_MS,
 
   minFreeBytes: parsed.RUNNER_MIN_FREE_BYTES,
   minFreePercent: parsed.RUNNER_MIN_FREE_PERCENT,

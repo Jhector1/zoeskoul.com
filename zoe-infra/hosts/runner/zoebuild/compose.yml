@@ -11,6 +11,9 @@ services:
       JUDGE0_URL: http://127.0.0.1:9
       # Trusted package-lock bootstrap ONLY; no change to Learning sandboxes.
       RUNNER_BOOTSTRAP_MEMORY_LIMIT_MB: ${RUNNER_BOOTSTRAP_MEMORY_LIMIT_MB:-1024}
+      # Preview-only install budget; never expands Learning/compilation.
+      RUNNER_PREVIEW_INSTALL_MEMORY_LIMIT_MB: ${RUNNER_PREVIEW_INSTALL_MEMORY_LIMIT_MB:-1024}
+      RUNNER_PREVIEW_INSTALL_TIMEOUT_MS: ${RUNNER_PREVIEW_INSTALL_TIMEOUT_MS:-480000}
     networks:
       ingress:
         aliases:

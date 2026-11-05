@@ -76,6 +76,7 @@ export function makeTanstackPreviewDockerDriver(request: ProductionBuildJobReque
         await ensureWorkspaceWritableForShellUser(preparedWorkspaceDir);
         await executeBuildStep({
           workspaceDir: preparedWorkspaceDir, command: TANSTACK_PREVIEW_INSTALL_COMMAND, step: "install",
+          resourceContext: "tanstack-preview-install",
           strictCleanup: true,
           tanstackRunId: journal.runId,
           onContainerCreated: async id => journal.write({containerId:id}),
