@@ -78,6 +78,7 @@ export async function proxyFetchTrustedReactPreviewAtRunner(args: Readonly<{
   previewId: string;
   path: string;
   method: "GET" | "HEAD";
+  accept: "text/css" | "*/*";
 }>) {
   const result = await runnerPost<{
     ok: true;
@@ -85,7 +86,7 @@ export async function proxyFetchTrustedReactPreviewAtRunner(args: Readonly<{
   }>(
     `/build/previews/${encodeURIComponent(args.previewId)}/proxy-fetch`,
     "zoebuild-preview-proxy",
-    { path: args.path, method: args.method },
+    { path: args.path, method: args.method, accept: args.accept },
   );
   return result.response;
 }

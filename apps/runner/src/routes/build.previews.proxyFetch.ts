@@ -11,7 +11,14 @@ export const proxyFetchBuildPreviewRoute: RequestHandler = async (req, res) => {
       return res.status(405).json({ ok: false, error: "Method not allowed." });
     const previewId = String(req.params.previewId);
     const path = String(req.body?.path ?? "");
-    const result = await fetchAdmittedTanstackPreview({ previewId, path, method });
+    // Service-to-service enum, not a forwarded browser header. Preserve
+    // Vite's CSS-vs-JS request negotiation without exposing other headers.
+    const accept = req.body?.accept ?? "*/*";
+    if (accept !== "text/css" && accept !== "*/*")
+      return res.status(400).json({ ok: false, error: "Invalid preview Accept preference." });
+    const result = await fetchAdmittedTanstackPreview({
+      previewId, path, method, headers: { accept },
+    });
     return res.status(200).json({ ok: true, response: result.response });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Preview unavailable.";

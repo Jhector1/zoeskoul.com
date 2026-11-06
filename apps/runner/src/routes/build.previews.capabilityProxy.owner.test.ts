@@ -24,6 +24,8 @@ describe("TanStack opaque-frame capability transport", () => {
     const owned = read("./build.previews.fetch.ts");
     expect(proxy).toContain("fetchAdmittedTanstackPreview");
     expect(proxy).toContain('method !== "GET" && method !== "HEAD"');
+    expect(proxy).toContain('accept !== "text/css" && accept !== "*/*"');
+    expect(proxy).toContain("headers: { accept }");
     expect(proxy).not.toContain("getRequiredActorKey");
     expect(resolve).toContain("resolveAdmittedTanstackPreviewCapability");
     expect(resolve).not.toContain("getRequiredActorKey");

@@ -10,6 +10,18 @@ const response = {status:200, headers:{"content-type":"text/html; charset=utf-8"
   bodyBase64:Buffer.from("<!doctype html><html><head></head><body>hello</body></html>").toString("base64")};
 
 describe("TanStack isolated SSR preview policy", () => {
+  it("preserves a stylesheet Accept preference through the isolated transport", () => {
+    const css = normalizeTanstackPreviewHttpRequest({
+      basePath: base, path: base + "src/styles.css?direct", method: "GET",
+      headers: { accept: "text/css" },
+    });
+    expect(css.headers).toEqual({ accept: "text/css" });
+    expect(tanstackInternalPreviewPath(base, css)).toBe(base + "src/styles.css?direct");
+    expect(normalizeTanstackPreviewHttpRequest({
+      basePath: base, path: base + "src/styles.css", method: "GET",
+    }).headers.accept).toBe("*/*");
+  });
+
   it("retains the capability prefix for Vite's per-preview base middleware", () => {
     const request = normalizeTanstackPreviewHttpRequest({basePath:base, path:base+"about?ref=1", method:"GET"});
     expect(tanstackInternalPreviewPath(base,request)).toBe(base + "about?ref=1");

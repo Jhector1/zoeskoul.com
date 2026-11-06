@@ -21,3 +21,13 @@ export function parseReactPreviewDocumentRequest(url: URL): string | null {
     return `${target.pathname}${target.search}${target.hash}`;
   } catch { return null; }
 }
+
+/** Translate browser content negotiation into one safe, server-owned hint.
+ * Never forward the browser's raw Accept header, cookies, or credentials to
+ * a generated project. Vite distinguishes a stylesheet fetch from a CSS
+ * module import using Accept: text/css; both may use the same URL. */
+export function previewAssetAccept(acceptHeader: string | null): "text/css" | "*/*" {
+  const tokens = (acceptHeader ?? "").split(",");
+  return tokens.some(token => /^\s*text\/css\s*(?:;|$)/i.test(token))
+    ? "text/css" : "*/*";
+}

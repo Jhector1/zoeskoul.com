@@ -43,7 +43,7 @@ export async function GET(_req: Request, ctx: {params: Promise<{ buildProjectId:
     let documentResponse;
     try {
       documentResponse = await proxyFetchTrustedReactPreviewAtRunner({
-        previewId: preview.previewId, path: preview.basePath, method:"HEAD",
+        previewId: preview.previewId, path: preview.basePath, method:"HEAD", accept: "*/*",
       });
     } catch (error) {
       if (error instanceof RunnerHttpError && error.status === 404) return json(requestId,

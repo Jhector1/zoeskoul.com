@@ -1,5 +1,5 @@
 import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
-import { parseReactPreviewDocumentRequest } from "@/lib/build/reactPreviewDocumentGateway";
+import { parseReactPreviewDocumentRequest, previewAssetAccept } from "@/lib/build/reactPreviewDocumentGateway";
 import { previewDocumentProxyTarget, resolvePreviewDocumentProxyPath } from "@/lib/build/reactPreviewDocumentProxyTarget";
 import { injectReactPreviewNavigationBridge, PREVIEW_NAV_SCRIPT } from "@/lib/build/reactPreviewNavigationBridge";
 import {
@@ -272,6 +272,10 @@ async function proxy(
       previewId,
       path: documentGateway ? basePath : `${normalizedPathname}${url.search}`,
       method,
+      // HTML <link rel="stylesheet"> sends Accept: text/css; a Vite CSS
+      // module import sends */*. Preserve this distinction across the
+      // service-authenticated Runner transport without forwarding raw headers.
+      accept: previewAssetAccept(req.headers.get("accept")),
     });
 
     const headers = new Headers();
