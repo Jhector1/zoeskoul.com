@@ -8,6 +8,8 @@
     "start": "next start --port 3004",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "check:boundary": "node scripts/check-app-boundary.mjs",
+    "test": "vitest run --config vitest.config.ts --exclude 'apps/zoebuild/src/**/*.acceptance.test.ts'",
+    "test:acceptance": "vitest run --config vitest.config.ts apps/zoebuild/src/lib/billing/billingCrossAppPostgres.acceptance.test.ts apps/zoebuild/src/lib/build/aiCreditResultJournal.postgres.acceptance.test.ts apps/zoebuild/src/lib/build/realOpenAiUsageEvidence.acceptance.test.ts apps/zoebuild/src/lib/build/realProviderLedger.postgres.acceptance.test.ts",
     "test:build": "vitest run src/lib/build src/app/api/build"
   },
   "dependencies": {

@@ -21,6 +21,7 @@ import {
   startAdmittedTanstackPreview, stopAdmittedTanstackPreview,
   fetchAdmittedTanstackPreview, fetchOwnedTanstackPreview,
 } from "../services/build/tanstackPreviewSharedLifecycle.js";
+import { resolveTanstackPreviewIdentity } from "../services/build/tanstackPreviewIdentity.js";
 import { assertOperatorCanaryEnvironment, canaryBuildRequest, validateOperatorCanarySource } from "./tanstackCanaryPolicy.js";
 
 function expect(condition: unknown, message: string): asserts condition {
@@ -108,7 +109,8 @@ async function main():Promise<void> {
       f.path==="pnpm-lock.yaml"?{...f,content:f.content+"\n# tamper"}:f)},secret),
       "signature must reject lock mutation");
     console.log("P3B3_SIGNED_PROJECT_DEPENDENCIES_PASS");
-    const preview = await startAdmittedTanstackPreview({ownerKey,request,authorize:async(owner,source)=>{
+    const identity = await resolveTanstackPreviewIdentity(request);
+    const preview = await startAdmittedTanstackPreview({ownerKey,request,identity,authorize:async(owner,source)=>{
       expect(owner===ownerKey && source.buildProjectId===projectId && source.sourceVersion===1,
         "source ownership identity mismatch");
       authorizeTanstackPreviewSource(source,secret);

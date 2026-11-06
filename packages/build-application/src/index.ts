@@ -10,6 +10,7 @@ import type {
 import type {
   WorkspaceStateV2,
 } from "@zoeskoul/workspace-contracts";
+import { personalizeInitialGeneratedSite } from "./generatedSiteIdentity";
 
 /**
  * Provider-neutral ZoeBuild application service.
@@ -141,7 +142,7 @@ export async function createBuildProject(
     title,
     description: null,
     language: materialized.workspace.language,
-    workspace: materialized.workspace,
+    workspace: personalizeInitialGeneratedSite(materialized.workspace, title),
     entryPath: materialized.entryPath,
     activePath: materialized.activePath,
     specification: input.specification,

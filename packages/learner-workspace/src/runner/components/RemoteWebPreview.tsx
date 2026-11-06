@@ -2,7 +2,10 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import type { RemoteWebPreviewDescriptor } from "@zoeskoul/learner-workspace/runner/remotePreview";
+import type {
+    RemoteWebPreviewDescriptor,
+    RemoteWebPreviewTimingKind,
+} from "@zoeskoul/learner-workspace/runner/remotePreview";
 import { withPreviewDocumentRevision } from "../previewDocumentUrl";
 
 type FrameIndex = 0 | 1;
@@ -63,6 +66,15 @@ export default function RemoteWebPreview(props: {
     // One automatic recovery per confirmed-live preview lifecycle. A broken
     // runner must never trigger an unbounded cancel/start/retry loop.
     const automaticExpiryRecoveryRef = useRef(0);
+    const nextDocumentKindRef = useRef<RemoteWebPreviewTimingKind>(
+        preview.observability?.kind ?? "cold",
+    );
+    const documentTimingRef = useRef<{
+        src: string;
+        startedAt: number;
+        kind: RemoteWebPreviewTimingKind;
+    } | null>(null);
+    const reportedTimingSrcRef = useRef<string | null>(null);
 
     const iframeSrc = useMemo(() => {
         if (!preview.src) return null;
@@ -87,7 +99,19 @@ export default function RemoteWebPreview(props: {
         setLoadedDocumentSrc(null);
         setSlowDocumentSrc(null);
         setNavigationWarning(null);
+        nextDocumentKindRef.current = preview.observability?.kind ?? "cold";
+        documentTimingRef.current = null;
+        reportedTimingSrcRef.current = null;
     }, [preview.src]);
+
+    useEffect(() => {
+        if (!iframeSrc || documentTimingRef.current?.src === iframeSrc) return;
+        documentTimingRef.current = {
+            src: iframeSrc,
+            startedAt: performance.now(),
+            kind: nextDocumentKindRef.current,
+        };
+    }, [iframeSrc]);
 
     const [frameSources, setFrameSources] = useState<
         [string | null, string | null]
@@ -160,6 +184,7 @@ export default function RemoteWebPreview(props: {
             if (!candidate) return;
             // Only a rendered React root can confirm the active document.
             if (!value.rendered) return;
+            reportRenderedTiming(value, source);
             automaticExpiryRecoveryRef.current = 0;
             if (frameIndex !== activeFrame) activateFrame(frameIndex as FrameIndex, source);
             setRenderProblem(null);
@@ -279,6 +304,7 @@ export default function RemoteWebPreview(props: {
         setRouteSynced(false);
         setNavigationWarning(null);
         setRenderProblem(null);
+        nextDocumentKindRef.current = "navigation";
         setDirectNavigationRevision(value => value + 1);
     }
 
@@ -342,12 +368,52 @@ export default function RemoteWebPreview(props: {
             setRenderProblem(null);
             setSlowDocumentSrc(null);
             setLoadedDocumentSrc(null);
+            nextDocumentKindRef.current = "refresh";
             setLocalRefresh(value => value + 1); // same Vite session
             return;
         }
         if (!iframeSrc || activeFrame === null) return;
         setRefreshPending(true);
+        nextDocumentKindRef.current = "refresh";
         setLocalRefresh((value) => value + 1);
+    }
+
+    function reportRenderedTiming(value: Record<string, unknown>, source: string) {
+        const observer = preview.observability?.onTiming;
+        const current = documentTimingRef.current;
+        if (!observer || !current || current.src !== source || reportedTimingSrcRef.current === source) return;
+        reportedTimingSrcRef.current = source;
+        const supplied = value.timing && typeof value.timing === "object" && !Array.isArray(value.timing)
+            ? value.timing as Record<string, unknown> : {};
+        const duration = (name: string) => {
+            const raw = supplied[name];
+            return typeof raw === "number" && Number.isFinite(raw) && raw >= 0 && raw <= 86_400_000
+                ? Math.round(raw * 10) / 10 : undefined;
+        };
+        const emit = (stage: "document_response" | "stylesheet_delivery" | "javascript_delivery" |
+            "document_to_rendered", durationMs: number | undefined) => {
+            try {
+                observer(durationMs === undefined
+                    ? {stage, kind:current.kind, outcome:"unavailable"}
+                    : {stage, kind:current.kind, outcome:"ok", durationMs});
+            } catch {
+                // Diagnostics cannot affect frame promotion or navigation.
+            }
+        };
+        emit("document_response", duration("documentResponseMs"));
+        emit("stylesheet_delivery", duration("stylesheetDeliveryMs"));
+        emit("javascript_delivery", duration("javascriptDeliveryMs"));
+        emit("document_to_rendered", duration("renderedMs"));
+        const intentStartedAt = current.kind === "navigation" || current.kind === "refresh"
+            ? current.startedAt : preview.observability.intentStartedAt;
+        const intentDuration = performance.now() - intentStartedAt;
+        try {
+            observer(Number.isFinite(intentDuration) && intentDuration >= 0
+                ? {stage:"intent_to_rendered",kind:current.kind,outcome:"ok",durationMs:intentDuration}
+                : {stage:"intent_to_rendered",kind:current.kind,outcome:"unavailable"});
+        } catch {
+            // Diagnostics cannot affect frame promotion or navigation.
+        }
     }
 
     const documentIsSlow = Boolean(iframeSrc && activeSrc !== iframeSrc &&

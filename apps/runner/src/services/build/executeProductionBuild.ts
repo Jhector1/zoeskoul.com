@@ -242,12 +242,20 @@ export async function executeBuildStep(
     tanstackRunId?: string;
     onContainerCreated?: (containerId: string) => Promise<void>;
     onContainerRemoved?: (containerId: string) => Promise<void>;
+    /** Trusted caller-only immutable image pin. Never populated from a job. */
+    immutableImageId?: string;
   }>,
 ): Promise<void> {
   const startedAt = Date.now();
   const base = buildProductionBuildContainerOptions(args);
+  if (args.immutableImageId !== undefined &&
+      !/^sha256:[a-f0-9]{64}$/.test(args.immutableImageId)) {
+    throw new Error("Trusted build image identity must be immutable.");
+  }
   const container = await docker.createContainer({
-    ...base, Labels: {...base.Labels, ...(args.tanstackRunId ? {"com.zoeskoul.runner.tanstack-run": args.tanstackRunId} : {})},
+    ...base,
+    ...(args.immutableImageId ? {Image:args.immutableImageId} : {}),
+    Labels: {...base.Labels, ...(args.tanstackRunId ? {"com.zoeskoul.runner.tanstack-run": args.tanstackRunId} : {})},
   }).catch(async (error: unknown) => {
     await reportTrustedBuildFailure({
       container: null, stage: args.step, elapsedMs: Date.now() - startedAt,

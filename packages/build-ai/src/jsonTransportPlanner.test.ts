@@ -18,7 +18,7 @@ const validSpecification = {
   name:
     "Photographer Portfolio",
   projectType:
-    "static-site",
+    "fullstack-app",
   targets: ["web"],
   requirements: {
     backend: false,
@@ -35,9 +35,9 @@ const validSpecification = {
     "Contact",
   ],
   stackId:
-    "static-html-v1",
+    "tanstack-start-v1",
   deployment: {
-    preference: "static",
+    preference: "managed-runtime",
   },
 } as const;
 
@@ -121,7 +121,7 @@ describe(
         expect(
           result.specification.stackId,
         ).toBe(
-          "static-html-v1",
+          "tanstack-start-v1",
         );
       },
     );

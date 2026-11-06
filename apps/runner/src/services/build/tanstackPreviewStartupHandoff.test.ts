@@ -72,11 +72,10 @@ describe("TanStack authenticated startup source gate", () => {
         .toThrow("canonical registered stack");
     }
   });
-  it("rejects non-TanStack requests on both start routes before reserving resources", () => {
+  it("rejects non-TanStack requests on the canonical operation route before reserving resources", () => {
     const read = (relative: string) => readFileSync(fileURLToPath(new URL(relative, import.meta.url)), "utf8");
-    const direct = read("../../routes/build.previews.start.ts");
     const operations = read("../../routes/build.previews.operations.ts");
-    for (const route of [direct, operations]) {
+    for (const route of [operations]) {
       expect(route).toContain('request.stackId !== "tanstack-start-v1"');
       expect(route).toContain('request.templateId !== "tanstack-start-v1"');
       expect(route).toContain('Unsupported preview project stack.');
@@ -84,7 +83,7 @@ describe("TanStack authenticated startup source gate", () => {
       expect(route).not.toContain("stopReactPreview");
     }
     expect(operations.indexOf('request.stackId !== "tanstack-start-v1"', operations.indexOf('export const startBuildPreviewOperationRoute')))
-      .toBeLessThan(operations.indexOf('operations.start(actorKey, request)'));
+      .toBeLessThan(operations.indexOf('operations.start(actorKey, {request,identity})'));
   });
   it("keeps the runtime disabled unless explicitly enabled", () => {
     expect(() => assertTanstackPreviewStartupEnabled("true")).not.toThrow();
@@ -92,14 +91,13 @@ describe("TanStack authenticated startup source gate", () => {
       expect(() => assertTanstackPreviewStartupEnabled(value)).toThrow("not activated");
     }
   });
-  it("wires both preview entry points through the same gate before execution", () => {
+  it("wires the sole preview start entry point through the source gate and operation authority", () => {
     function read(relative: string) {
       return readFileSync(fileURLToPath(new URL(relative, import.meta.url)), "utf8");
     }
-    const direct = read("../../routes/build.previews.start.ts");
     const operations = read("../../routes/build.previews.operations.ts");
     const shared = read("./tanstackPreviewSharedLifecycle.ts");
-    for (const file of [direct,operations]) {
+    for (const file of [operations]) {
       expect(file).toContain("assertTanstackPreviewStartupEnabled()");
       expect(file).toContain("authorizeTanstackPreviewSource(request)");
       expect(file).toContain("startAdmittedTanstackPreview");
@@ -110,7 +108,7 @@ describe("TanStack authenticated startup source gate", () => {
       expect(file).not.toContain("req.body.port");
     }
     expect(operations.indexOf("authorizeTanstackPreviewSource(request);", operations.indexOf("export const startBuildPreviewOperationRoute")))
-      .toBeLessThan(operations.indexOf("operations.start(actorKey, request)"));
+      .toBeLessThan(operations.indexOf("operations.start(actorKey, {request,identity})"));
     expect(operations).toContain("stopAdmittedTanstackPreview");
     expect(shared).toContain("sharedPreviewStartCoordinator.run");
     expect(shared).toContain("sharedFullStackPreviews.register");

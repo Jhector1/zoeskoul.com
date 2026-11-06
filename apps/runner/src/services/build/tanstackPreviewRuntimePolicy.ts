@@ -60,11 +60,20 @@ export function assertTanstackSandboxOptions(options: Readonly<{
     MemorySwap?: number;
     PidsLimit?: number;
     Binds?: readonly string[];
+    Tmpfs?: Readonly<Record<string, string>>;
     PortBindings?: unknown;
     SecurityOpt?: readonly string[];
   };
 }>): void {
   const config = options.HostConfig;
+  const dependencyBind = config?.Binds?.[1] ?? "";
+  const cachedDependencies = dependencyBind !== "";
+  const dependencyBindSafe = /^\/[^\r\n:]*\/\.zoebuild-preview-dependency-layers-v1\/[a-f0-9]{64}\/node_modules:\/workspace\/node_modules:ro$/.test(dependencyBind);
+  const [sandboxUid, sandboxGid] = (options.User ?? "").split(":");
+  const viteCacheSafe = config?.Tmpfs?.["/workspace/node_modules/.vite"] ===
+      `rw,noexec,nosuid,nodev,size=64m,uid=${sandboxUid},gid=${sandboxGid},mode=0700` &&
+    config?.Tmpfs?.["/workspace/node_modules/.vite-temp"] ===
+      `rw,noexec,nosuid,nodev,size=16m,uid=${sandboxUid},gid=${sandboxGid},mode=0700`;
   const basePath = options.Cmd?.[TANSTACK_PREVIEW_DEV_COMMAND.length + 1] ?? "";
   const baseIsValid = (() => {
     try { return JSON.stringify(options.Cmd) === JSON.stringify(tanstackPreviewDevCommand(basePath)); }
@@ -83,8 +92,13 @@ export function assertTanstackSandboxOptions(options: Readonly<{
       !Number.isFinite(config.CpuPeriod) || (config.CpuPeriod ?? 0) <= 0 ||
       config.MemorySwap !== config.Memory ||
       !Array.isArray(config.SecurityOpt) || config.SecurityOpt.length === 0 ||
-      !Array.isArray(config.Binds) || config.Binds.length !== 1 ||
-      !config.Binds[0].endsWith(":/workspace:rw") ||
+      !Array.isArray(config.Binds) ||
+      (config.Binds.length !== 1 && config.Binds.length !== 2) ||
+      !/^\/[^\r\n:]+:\/workspace:rw$/.test(config.Binds[0]) ||
+      (cachedDependencies && (!dependencyBindSafe || !viteCacheSafe)) ||
+      (!cachedDependencies &&
+        (config.Tmpfs?.["/workspace/node_modules/.vite"] !== undefined ||
+         config.Tmpfs?.["/workspace/node_modules/.vite-temp"] !== undefined)) ||
       config.PortBindings !== undefined) {
     throw new Error("Unsafe full-stack preview sandbox configuration.");
   }

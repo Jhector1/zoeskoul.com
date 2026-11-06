@@ -19,10 +19,12 @@ function getRunnerBaseUrl() {
 
 export class RunnerHttpError extends Error {
   status: number;
+  code?: string;
 
-  constructor(status: number, message: string) {
+  constructor(status: number, message: string, code?: string) {
     super(message);
     this.status = status;
+    if (code && /^[A-Z][A-Z0-9_]{2,96}$/.test(code)) this.code = code;
   }
 }
 
@@ -53,6 +55,7 @@ export async function runnerPost<T>(
     throw new RunnerHttpError(
       res.status,
       (data as any)?.error ?? `Runner error: ${res.status}`,
+      typeof (data as any)?.code === "string" ? (data as any).code : undefined,
     );
   }
 

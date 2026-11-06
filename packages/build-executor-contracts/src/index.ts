@@ -1,4 +1,7 @@
 export const BUILD_EXECUTOR_PROTOCOL_VERSION = 1 as const;
+/** Express and browser-facing trusted-build JSON limit. Keep both boundaries
+ * identical so ZoeBuild never admits a body the Runner must reject. */
+export const BUILD_EXECUTOR_HTTP_BODY_LIMIT_BYTES = 8 * 1024 * 1024;
 
 /** Internal Runner → ZoeBuild control-plane signal: never treat a TanStack
  * source replacement as an in-place React/Vite workspace sync. */

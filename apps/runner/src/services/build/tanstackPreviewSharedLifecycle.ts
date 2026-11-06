@@ -6,8 +6,10 @@ import { normalizeTanstackPreviewHttpRequest } from "./tanstackPreviewHttpBounda
 import { tanstackInternalPreviewPath } from "./tanstackPreviewRuntimePolicy.js";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { sharedPreviewStartCoordinator, sharedPreviewProjectDrains } from "./sharedPreviewRuntimeState.js";
-import { reserveTanstackPreviewCapacity, reclaimTanstackPreviewCapacity } from "./tanstackPreviewCapacity.js";
+import { reserveTanstackPreviewCapacity, reclaimTanstackPreviewCapacity, TANSTACK_PREVIEW_HARD_LIFETIME_MS } from "./tanstackPreviewCapacity.js";
 import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
+import type { PreviewOperationTelemetry } from "./previewObservability.js";
+import type { TanstackPreviewIdentity } from "./tanstackPreviewIdentity.js";
 
 /** Internal authenticated route integration. The caller MUST verify
  * owner + source version + canonical registered manifest and signed dependency
@@ -16,9 +18,11 @@ import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport
 export async function startAdmittedTanstackPreview(input: Readonly<{
   ownerKey: string;
   request: ProductionBuildJobRequestV1;
+  identity: TanstackPreviewIdentity;
   authorize: (ownerKey: string, request: ProductionBuildJobRequestV1) => Promise<void>;
   signal?: AbortSignal;
   onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void;
+  telemetry?: PreviewOperationTelemetry;
   driverFactory?: (request: ProductionBuildJobRequestV1, basePath: string) => TanstackPreviewDriver;
 }>) {
   if (!input.ownerKey || input.request.stackId !== "tanstack-start-v1" ||
@@ -26,11 +30,20 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
     throw new Error("Invalid TanStack preview identity.");
   if (typeof input.authorize !== "function") throw new Error("Preview authorization required.");
   const {request,ownerKey} = input;
-  return sharedPreviewStartCoordinator.run(async () => {
+  const endQueue = input.telemetry?.begin("queue_wait");
+  try { return await sharedPreviewStartCoordinator.run(async () => {
+    endQueue?.("ok");
     const endStart = sharedPreviewProjectDrains.beginStart(ownerKey,request.buildProjectId);
     try {
       if (input.signal?.aborted) throw new Error("Preview cancelled.");
-      await input.authorize(ownerKey,request);
+      const endAuthorization = input.telemetry?.begin("runner_authorization");
+      try {
+        await input.authorize(ownerKey,request);
+        endAuthorization?.("ok");
+      } catch (error) {
+        endAuthorization?.("error");
+        throw error;
+      }
       if (input.signal?.aborted) throw new Error("Preview cancelled.");
       input.onPhase?.("workspace");
       // Do not silently switch back to an older saved source or run two live
@@ -50,15 +63,22 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
         const previewId = `preview_${randomUUID()}`;
         const publicAccessKey = randomBytes(24).toString("base64url");
         const basePath = `/api/build/projects/${encodeURIComponent(request.buildProjectId)}/preview/${previewId}/content/${publicAccessKey}/`;
-        const createdDriver = (input.driverFactory ?? makeTanstackPreviewDockerDriver)(request, basePath);
+        const createdDriver = input.driverFactory
+          ? input.driverFactory(request, basePath)
+          : makeTanstackPreviewDockerDriver(
+              ownerKey, request, basePath, input.identity, input.telemetry,
+            );
         driver = createdDriver;
-        handle = await startIsolatedTanstackPreview(createdDriver,{signal:input.signal,onPhase:input.onPhase});
+        handle = await startIsolatedTanstackPreview(createdDriver,{
+          signal:input.signal,onPhase:input.onPhase,telemetry:input.telemetry,
+        });
         if (input.signal?.aborted) throw new Error("Preview cancelled.");
         const createdAt = Date.now();
         const owned = handle;
         sharedFullStackPreviews.register({
           id:previewId, ownerKey, buildProjectId:request.buildProjectId,
-          sourceVersion:request.sourceVersion, containerId:owned.containerId, basePath, createdAt, lastActivityAt:createdAt,
+          sourceVersion:request.sourceVersion, identity:input.identity,
+          containerId:owned.containerId, basePath, createdAt, lastActivityAt:createdAt,
           close: () => stopIsolatedTanstackPreview(createdDriver,owned),
         });
         return {previewId,buildProjectId:request.buildProjectId,sourceVersion:request.sourceVersion,
@@ -72,6 +92,7 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
           sharedFullStackPreviews.register({
             id, ownerKey, buildProjectId: request.buildProjectId,
             sourceVersion: request.sourceVersion,
+            identity: input.identity,
             containerId: error.orphan.containerId ?? "orphan-workspace",
             basePath: `/quarantined/${id}/`,
             createdAt: now - 60 * 60_000, lastActivityAt: now - 10 * 60_000,
@@ -90,6 +111,7 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
             const now = Date.now();
             sharedFullStackPreviews.register({
               id, ownerKey, buildProjectId:request.buildProjectId,sourceVersion:request.sourceVersion,
+              identity:input.identity,
               containerId:held.containerId,basePath:`/quarantined/${id}/`,
               createdAt:now-60*60_000,lastActivityAt:now-10*60_000,
               close:()=>stopIsolatedTanstackPreview(controller,held),
@@ -100,7 +122,78 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
         throw error;
       } finally { releasePending(); }
     } finally { endStart(); }
+  }); }
+  catch (error) {
+    endQueue?.(input.signal?.aborted ? "cancelled" : "error");
+    throw error;
+  }
+}
+
+/** Fast path for an already-ready exact lease. It runs before the cold-start
+ * coordinator and capacity reservation, but still reauthorizes the signed
+ * source and participates in the project-deletion drain gate. */
+export async function reuseAdmittedTanstackPreview(input: Readonly<{
+  ownerKey: string;
+  request: ProductionBuildJobRequestV1;
+  identity: TanstackPreviewIdentity;
+  authorize: (ownerKey: string, request: ProductionBuildJobRequestV1) => Promise<void>;
+  telemetry?: PreviewOperationTelemetry;
+}>) {
+  if (!input.ownerKey || input.request.stackId !== "tanstack-start-v1" ||
+      input.request.templateId !== "tanstack-start-v1" ||
+      input.request.operation !== "production-build") {
+    throw new Error("Invalid TanStack preview identity.");
+  }
+  const finishStart = sharedPreviewProjectDrains.beginStart(
+    input.ownerKey,input.request.buildProjectId);
+  try {
+    const endAuthorization = input.telemetry?.begin("runner_authorization");
+    try {
+      await input.authorize(input.ownerKey,input.request);
+      endAuthorization?.("ok");
+    } catch (error) {
+      endAuthorization?.("error");
+      throw error;
+    }
+    const endHealth = input.telemetry?.begin("reuse_health_check");
+    const lease = await sharedFullStackPreviews.claimReusable({
+      ownerKey:input.ownerKey,
+      buildProjectId:input.request.buildProjectId,
+      sourceVersion:input.request.sourceVersion,
+      identity:input.identity,
+      maxLifetimeMs:TANSTACK_PREVIEW_HARD_LIFETIME_MS,
+      healthCheck:checkLeaseHealth,
+    });
+    endHealth?.(lease ? "ok" : "error");
+    if (!lease) return null;
+    return {previewId:lease.id,buildProjectId:lease.buildProjectId,
+      sourceVersion:lease.sourceVersion,port:5173 as const,basePath:lease.basePath};
+  } finally {
+    finishStart();
+  }
+}
+
+async function checkLeaseHealth(lease: Readonly<{containerId:string;basePath:string}>) {
+  const safe = normalizeTanstackPreviewHttpRequest({
+    basePath:lease.basePath,path:lease.basePath,method:"HEAD",headers:{accept:"text/html"},
   });
+  const response = await fetchTanstackHttpInsideSandbox(lease.containerId,{
+    ...safe,path:tanstackInternalPreviewPath(lease.basePath,safe),
+  });
+  return response.status === 200 &&
+    /^text\/html(?:\s*;|\s*$)/i.test(response.headers["content-type"] ?? "");
+}
+
+export async function verifyAdmittedTanstackPreviewReady(input: Readonly<{
+  ownerKey:string;
+  preview:{previewId:string;buildProjectId:string;sourceVersion:number;basePath:string};
+}>) {
+  const lease = sharedFullStackPreviews.get(input.preview.previewId);
+  if (!lease || lease.ownerKey !== input.ownerKey ||
+      lease.buildProjectId !== input.preview.buildProjectId ||
+      lease.sourceVersion !== input.preview.sourceVersion ||
+      lease.basePath !== input.preview.basePath) return false;
+  return sharedFullStackPreviews.checkLive(lease.id,checkLeaseHealth);
 }
 
 /** Capability-only fetch, with no platform credentials forwarded to generated

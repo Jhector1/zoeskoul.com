@@ -13,8 +13,8 @@ describe("K20D preview operation handshake",()=>{
    const status=read("app/api/build/projects/[buildProjectId]/preview/operations/[operationId]/route.ts");
    expect(status).toContain("loadCurrentBuildAccessSnapshot");
    expect(status).toContain("requireOwnedReactPreviewProject");
-   expect(status).toContain("afterDocument.sourceVersion !== project.sourceVersion");
-   expect(status).toContain("proxyFetchTrustedReactPreviewAtRunner");
+   expect(status).toContain("afterHealth.sourceVersion !== project.sourceVersion");
+   expect(status).not.toContain("proxyFetchTrustedReactPreviewAtRunner");
  });
  it("polls a bounded durable operation instead of aborting an active installation",()=>{
    const hook=read("components/builder/useReactVitePreview.ts");

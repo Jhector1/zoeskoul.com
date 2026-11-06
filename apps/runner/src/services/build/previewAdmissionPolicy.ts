@@ -35,6 +35,7 @@ export function choosePreviewsToReclaim<T extends PreviewReclaimCandidate>(
 export class PreviewStartCoordinator {
   private tail: Promise<void> = Promise.resolve();
   private admitted = 0;
+  private executing = 0;
   constructor(private readonly maxAdmitted: number, private readonly maxWaitMs: number) {
     if (!Number.isSafeInteger(maxAdmitted) || maxAdmitted < 1 ||
         !Number.isSafeInteger(maxWaitMs) || maxWaitMs < 1) throw new Error("Invalid queue limits.");
@@ -58,7 +59,9 @@ export class PreviewStartCoordinator {
         }),
       ]);
       if (timer) clearTimeout(timer);
-      return await work();
+      this.executing += 1;
+      try { return await work(); }
+      finally { this.executing = Math.max(0, this.executing - 1); }
     } finally {
       if (timer) clearTimeout(timer);
       release();
@@ -66,8 +69,18 @@ export class PreviewStartCoordinator {
     }
   }
 
+  snapshot() {
+    return {
+      admitted: this.admitted,
+      executing: this.executing,
+      waiting: Math.max(0, this.admitted - this.executing),
+      limit: this.maxAdmitted,
+      maxWaitMs: this.maxWaitMs,
+    } as const;
+  }
+
   resetForTests() {
-    if (this.admitted !== 0) throw new Error("Cannot reset active preview admissions.");
+    if (this.admitted !== 0 || this.executing !== 0) throw new Error("Cannot reset active preview admissions.");
     this.tail = Promise.resolve();
   }
 }

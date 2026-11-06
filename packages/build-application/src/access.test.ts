@@ -17,16 +17,16 @@ const requirements = {
   commerce: false,
 } as const;
 
-function specification(stackId = "react-vite-v1") {
+function specification(stackId = "tanstack-start-v1") {
   return {
     version: 1 as const,
     name: "My Site",
-    projectType: "frontend-app" as const,
+    projectType: "fullstack-app" as const,
     targets: ["web"] as const,
     requirements,
     pages: ["home"] as const,
     stackId,
-    deployment: { preference: "static" as const },
+    deployment: { preference: "managed-runtime" as const },
   };
 }
 

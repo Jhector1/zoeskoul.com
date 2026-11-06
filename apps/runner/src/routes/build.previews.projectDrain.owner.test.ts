@@ -22,6 +22,7 @@ describe("TanStack-only project deletion drain boundary", () => {
     expect(drain).toContain("sharedPreviewProjectDrains.beginDrain");
     expect(drain).toContain("sharedFullStackPreviews.drain");
     expect(drain).toContain("sharedPreviewProjectDrains.releaseDrain");
-    expect(leases).toContain("await lease.close(); this.live.delete(id)");
+    expect(leases.indexOf("await lease.close();")).toBeLessThan(leases.indexOf("this.live.delete(id);"));
+    expect(leases).toContain("this.closing.set(id, marker)");
   });
 });

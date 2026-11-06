@@ -58,12 +58,19 @@ describe("ZoeBuild rootless shared-group workspace filesystem policy", () => {
     ]);
 
     await ensureManagedWorkspaceDirectory(root);
-    expect((await fs.stat(root)).mode & 0o7777).toBe(0o2770);
-    await verifyPrivateWorkspaceRoot(root);
+    // Linux preserves the setgid bit used by the dedicated executor group.
+    // macOS clears it on chmod; the production verifier must then fail closed.
+    const persistedDirectoryMode = process.platform === "linux" ? 0o2770 : 0o770;
+    expect((await fs.stat(root)).mode & 0o7777).toBe(persistedDirectoryMode);
     const child = path.join(root, "nested", "components");
     await ensureManagedWorkspaceDirectory(child);
-    expect((await fs.stat(path.join(root, "nested"))).mode & 0o7777).toBe(0o2770);
-    expect((await fs.stat(child)).mode & 0o7777).toBe(0o2770);
+    expect((await fs.stat(path.join(root, "nested"))).mode & 0o7777).toBe(persistedDirectoryMode);
+    expect((await fs.stat(child)).mode & 0o7777).toBe(persistedDirectoryMode);
+    if (process.platform === "linux") {
+      await expect(verifyPrivateWorkspaceRoot(root)).resolves.toBeUndefined();
+    } else {
+      await expect(verifyPrivateWorkspaceRoot(root)).rejects.toThrow(/not private/);
+    }
   });
 
   it("fails closed for a symlinked existing directory and non-private workspace root", async () => {

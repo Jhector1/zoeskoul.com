@@ -18,12 +18,12 @@ function validSpecification() {
   return {
     version: 1,
     name: "  Portfolio Site  ",
-    projectType: "static-site",
+    projectType: "fullstack-app",
     targets: ["web"],
     requirements,
     pages: [" Home ", "About"],
-    stackId: " static-html-v1 ",
-    deployment: { preference: "static" },
+    stackId: " tanstack-start-v1 ",
+    deployment: { preference: "managed-runtime" },
   };
 }
 
@@ -32,12 +32,12 @@ describe("ProjectSpecification runtime validation", () => {
     expect(parseProjectSpecification(validSpecification())).toEqual({
       version: 1,
       name: "Portfolio Site",
-      projectType: "static-site",
+      projectType: "fullstack-app",
       targets: ["web"],
       requirements,
       pages: ["Home", "About"],
-      stackId: "static-html-v1",
-      deployment: { preference: "static" },
+      stackId: "tanstack-start-v1",
+      deployment: { preference: "managed-runtime" },
     });
   });
 
@@ -50,8 +50,8 @@ describe("ProjectSpecification runtime validation", () => {
           payments: true,
           commerce: true,
         },
-        projectType: "frontend-app",
-        stackId: "commerce-static-v1",
+        projectType: "fullstack-app",
+        stackId: "tanstack-start-v1",
       }),
     ).toThrow(BuildSpecificationError);
 
@@ -63,15 +63,15 @@ describe("ProjectSpecification runtime validation", () => {
           payments: true,
           commerce: true,
         },
-        projectType: "frontend-app",
-        stackId: "commerce-static-v1",
+        projectType: "fullstack-app",
+        stackId: "tanstack-start-v1",
         commerce: {
-          storefrontRuntime: "static",
+          storefrontRuntime: "tanstack-start",
         },
       });
 
     expect(parsed.commerce).toEqual({
-      storefrontRuntime: "static",
+      storefrontRuntime: "tanstack-start",
     });
   });
 
@@ -80,7 +80,7 @@ describe("ProjectSpecification runtime validation", () => {
       parseProjectSpecification({
         ...validSpecification(),
         commerce: {
-          storefrontRuntime: "static",
+          storefrontRuntime: "tanstack-start",
         },
       }),
     ).toThrow(BuildSpecificationError);

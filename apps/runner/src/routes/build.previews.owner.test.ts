@@ -10,7 +10,7 @@ describe("TanStack-only Runner preview owner boundary", () => {
     const guard = app.indexOf("app.use(requireServiceAuth)");
     expect(guard).toBeGreaterThan(0);
     for (const path of [
-      'app.post("/build/previews/start"',
+      'app.post("/build/previews/operations/start"',
       'app.post("/build/previews/:previewId/fetch"',
       'app.post("/build/previews/:previewId/cancel"',
       'app.post("/build/previews/:previewId/proxy-fetch"',
@@ -35,7 +35,7 @@ describe("TanStack-only Runner preview owner boundary", () => {
 
   it("does not accept arbitrary Docker launch controls from preview requests", () => {
     const combined = [
-      "build.previews.start.ts", "build.previews.operations.ts", "build.previews.sync.ts",
+      "build.previews.operations.ts", "build.previews.sync.ts",
       "build.previews.fetch.ts", "build.previews.cancel.ts",
     ].map(file => read(`./${file}`)).join("\n");
     for (const forbidden of ["req.body.command", "req.body.argv", "req.body.shell", "req.body.image",

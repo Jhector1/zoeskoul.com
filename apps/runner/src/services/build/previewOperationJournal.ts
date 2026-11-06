@@ -1,6 +1,13 @@
 import { createHash, randomUUID } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
+import {
+  previewObservability,
+  type PreviewOperationTelemetry,
+  type PreviewOperationTimingSnapshot,
+  type PreviewStartKind,
+  unavailablePreviewOperationTiming,
+} from "./previewObservability.js";
 
 /** K20D: only lifecycle metadata is journaled. No actor tokens, source, capability,
  * workspace paths, or Docker identifiers are persisted. A restarted runner cannot
@@ -17,8 +24,9 @@ export type PreviewOperationStatus = Readonly<{
   sourceVersion: number;
   state: PreviewOperationState;
   stage: PreviewOperationStage;
-  code?: "PREVIEW_CAPACITY" | "PREVIEW_SOURCE_CONFLICT" | "PREVIEW_START_FAILED" | "PREVIEW_CANCELLED" | "PREVIEW_RUNNER_RESTARTED";
+  code?: "PREVIEW_CAPACITY" | "PREVIEW_SOURCE_CONFLICT" | "PREVIEW_START_FAILED" | "PREVIEW_CANCELLED" | "PREVIEW_RUNNER_RESTARTED" | "PREVIEW_LEASE_UNAVAILABLE";
   preview?: PreviewOperationResult;
+  timing: PreviewOperationTimingSnapshot;
 }>;
 
 type InternalRecord = {
@@ -27,6 +35,7 @@ type InternalRecord = {
   code?: PreviewOperationStatus["code"]; preview?: PreviewOperationResult;
   expiresAt: number; abort: AbortController;
   pendingWrite: Promise<void>;
+  telemetry: PreviewOperationTelemetry;
 };
 type JournalRecord = Pick<InternalRecord, "id" | "ownerHash" | "projectHash" | "sourceVersion" | "state" | "stage" | "code" | "expiresAt">;
 const ID_PATTERN = /^preview_op_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -82,19 +91,28 @@ export class PreviewOperationRegistry<Request> {
   private readonly records = new Map<string, InternalRecord>();
   private readonly keys = new Map<string, string>();
   private readonly workerTasks = new Set<Promise<void>>();
+  private readonly reuseTasks = new Map<string, Promise<PreviewOperationStatus | null>>();
   constructor(
     private readonly journal: FilePreviewOperationJournal,
     private readonly worker: (input: { actorKey: string; request: Request; signal: AbortSignal;
-      onPhase: (phase: PreviewOperationStage) => void }) => Promise<PreviewOperationResult>,
+      onPhase: (phase: PreviewOperationStage) => void;
+      telemetry: PreviewOperationTelemetry }) => Promise<PreviewOperationResult>,
     private readonly cancelPreview: (actorKey: string, previewId: string) => Promise<unknown>,
     private readonly identify: (request: Request) => { buildProjectId: string; sourceVersion: number; fingerprint: string },
     private readonly now = () => Date.now(),
+    private readonly telemetryFactory = (input: Readonly<{startKind: PreviewStartKind; reuseCandidate: boolean}>) =>
+      previewObservability.beginOperation(input),
+    private readonly reuseReady?: (input: Readonly<{actorKey: string; request: Request;
+      preview: PreviewOperationResult; telemetry: PreviewOperationTelemetry}>) => Promise<PreviewOperationResult | null>,
+    private readonly verifyReady?: (input: Readonly<{actorKey:string;
+      preview:PreviewOperationResult}>) => Promise<boolean>,
   ) {}
 
   private publicStatus(record: InternalRecord): PreviewOperationStatus {
     return { operationId: record.id, sourceVersion: record.sourceVersion,
       state: record.state, stage: record.stage, ...(record.code ? { code: record.code } : {}),
-      ...(record.state === "ready" && record.preview ? { preview: record.preview } : {}) };
+      ...(record.state === "ready" && record.preview ? { preview: record.preview } : {}),
+      timing: record.telemetry.snapshot() };
   }
   private persist(record: InternalRecord): Promise<void> {
     const entry: JournalRecord = { id: record.id, ownerHash: record.ownerHash,
@@ -120,11 +138,6 @@ export class PreviewOperationRegistry<Request> {
     const ownerHash = sha256(actorKey);
     const projectHash = sha256(identity.buildProjectId);
     const key = sha256(`${ownerHash}\0${projectHash}\0${identity.sourceVersion}\0${identity.fingerprint}`);
-    const previousId = this.keys.get(key);
-    const previous = previousId && this.records.get(previousId);
-    if (previous && previous.state === "preparing")
-      return this.publicStatus(previous);
-
     // A queued old saved-source token must not race with a newly selected head.
     for (const record of this.records.values()) {
       if (record.ownerHash !== ownerHash || record.projectHash !== projectHash) continue;
@@ -133,34 +146,73 @@ export class PreviewOperationRegistry<Request> {
       if (record.sourceVersion < identity.sourceVersion && record.state === "preparing")
         record.abort.abort();
     }
+    const previousId = this.keys.get(key);
+    const previous = previousId ? this.records.get(previousId) : undefined;
+    if (previous && previous.state === "preparing")
+      return this.publicStatus(previous);
+
+    if (previous?.state === "ready" && previous.preview && this.reuseReady) {
+      let reuseTask = this.reuseTasks.get(key);
+      if (!reuseTask) {
+        reuseTask = this.tryReuse(actorKey, request, identity, key, ownerHash, projectHash, previous.preview);
+        this.reuseTasks.set(key, reuseTask);
+        void reuseTask.finally(() => {
+          if (this.reuseTasks.get(key) === reuseTask) this.reuseTasks.delete(key);
+        }).catch(() => undefined);
+      }
+      const reused = await reuseTask;
+      if (reused) return reused;
+      if ([...this.records.values()].some(record =>
+        record.ownerHash === ownerHash && record.projectHash === projectHash &&
+        record.sourceVersion > identity.sourceVersion)) {
+        throw new Error("Preview source is stale.");
+      }
+    }
     if ([...this.records.values()].filter(r => r.state === "preparing").length >= MAX_OPERATIONS)
       throw new Error("Runner is busy. Preview operation queue is full.");
 
+    const related = [...this.records.values()].filter(item =>
+      item.ownerHash === ownerHash && item.projectHash === projectHash);
+    const telemetry = this.telemetryFactory({
+      startKind: related.length ? "restart" : "cold",
+      reuseCandidate: related.some(item => item.state === "ready" && item.key === key),
+    });
     const record: InternalRecord = { id: `preview_op_${randomUUID()}`, key, ownerHash, projectHash,
       sourceVersion: identity.sourceVersion, state: "preparing", stage: "queued",
-      expiresAt: this.now() + TTL_MS, abort: new AbortController(), pendingWrite: Promise.resolve() };
+      expiresAt: this.now() + TTL_MS, abort: new AbortController(), pendingWrite: Promise.resolve(), telemetry };
     this.records.set(record.id, record);
     this.keys.set(key, record.id);
-    try { await this.persist(record); }
-    catch (error) { this.records.delete(record.id); this.keys.delete(key); throw error; }
+    const endAdmission = telemetry.begin("operation_admission");
+    try { await this.persist(record); endAdmission("ok"); }
+    catch (error) {
+      endAdmission("error");
+      telemetry.finish("error");
+      this.records.delete(record.id); this.keys.delete(key); throw error;
+    }
 
     // The HTTP request owns only the acknowledgement. The runner owns the job,
     // including cancellation and verified cleanup, after the response closes.
     const workerTask = (async () => {
       try {
-        const result = await this.worker({ actorKey, request, signal: record.abort.signal,
+        const result = await this.worker({ actorKey, request, signal: record.abort.signal, telemetry,
           onPhase: phase => { record.stage = phase; void this.persist(record).catch(() => undefined); } });
         if (record.abort.signal.aborted) {
           await this.cancelPreview(actorKey, result.previewId);
           record.state = "cancelled";
           record.code = "PREVIEW_CANCELLED";
-        } else { record.preview = result; record.state = "ready"; }
+          telemetry.finish("cancelled");
+        } else {
+          record.preview = result;
+          record.state = "ready";
+          telemetry.finish("ok");
+        }
       } catch (error) {
         const msg = error instanceof Error ? error.message : "";
         record.code = record.abort.signal.aborted ? "PREVIEW_CANCELLED" :
           msg === "Preview source is stale." ? "PREVIEW_SOURCE_CONFLICT" :
           /Runner is busy|Too many active sessions|Too many code session starts/i.test(msg) ? "PREVIEW_CAPACITY" : "PREVIEW_START_FAILED";
         record.state = record.abort.signal.aborted ? "cancelled" : "failed";
+        telemetry.finish(record.abort.signal.aborted ? "cancelled" : "error");
       } finally {
         record.expiresAt = this.now() + TTL_MS;
         await this.persist(record).catch(error => console.error("RUNNER preview operation journal failure", {
@@ -174,6 +226,49 @@ export class PreviewOperationRegistry<Request> {
       () => { this.workerTasks.delete(workerTask); },
     );
     return this.publicStatus(record);
+  }
+
+  private async tryReuse(
+    actorKey: string,
+    request: Request,
+    identity: ReturnType<PreviewOperationRegistry<Request>["identify"]>,
+    key: string,
+    ownerHash: string,
+    projectHash: string,
+    preview: PreviewOperationResult,
+  ): Promise<PreviewOperationStatus | null> {
+    const telemetry = this.telemetryFactory({startKind:"reuse",reuseCandidate:true});
+    const endAdmission = telemetry.begin("operation_admission");
+    endAdmission("ok");
+    let reused: PreviewOperationResult | null = null;
+    try {
+      reused = await this.reuseReady!({actorKey,request,preview,telemetry});
+      if (!reused) {
+        telemetry.finish("error");
+        return null;
+      }
+      // A newer source admitted while health was being checked fences this
+      // result. Never publish an old lease after a source advance.
+      if ([...this.records.values()].some(record =>
+        record.ownerHash === ownerHash && record.projectHash === projectHash &&
+        record.sourceVersion > identity.sourceVersion)) {
+        telemetry.finish("cancelled");
+        throw new Error("Preview source is stale.");
+      }
+      telemetry.finish("ok");
+      const record: InternalRecord = {
+        id:`preview_op_${randomUUID()}`,key,ownerHash,projectHash,
+        sourceVersion:identity.sourceVersion,state:"ready",stage:"readiness",preview:reused,
+        expiresAt:this.now()+TTL_MS,abort:new AbortController(),pendingWrite:Promise.resolve(),telemetry,
+      };
+      this.records.set(record.id,record);
+      this.keys.set(key,record.id);
+      await this.persist(record);
+      return this.publicStatus(record);
+    } catch (error) {
+      if (!reused) telemetry.finish("error");
+      throw error;
+    }
   }
 
   /** Waits for acknowledged background work and its journal writes to settle.
@@ -191,13 +286,29 @@ export class PreviewOperationRegistry<Request> {
     const existing = this.records.get(operationId);
     if (existing) {
       if (existing.ownerHash !== ownerHash || existing.projectHash !== sha256(buildProjectId)) return null;
+      if (existing.state === "ready" && existing.preview && this.verifyReady) {
+        const previewId = existing.preview.previewId;
+        const healthy = await this.verifyReady({actorKey,preview:existing.preview}).catch(() => false);
+        if (!healthy) {
+          const writes: Promise<void>[] = [];
+          for (const record of this.records.values()) {
+            if (record.state !== "ready" || record.preview?.previewId !== previewId) continue;
+            record.state = "failed";
+            record.code = "PREVIEW_LEASE_UNAVAILABLE";
+            record.preview = undefined;
+            writes.push(this.persist(record));
+          }
+          await Promise.all(writes);
+        }
+      }
       return existing.expiresAt <= this.now() && existing.state !== "preparing"
         ? null : this.publicStatus(existing);
     }
     const persisted = await this.journal.read(operationId);
     if (!persisted || (persisted.ownerHash !== ownerHash || persisted.projectHash !== sha256(buildProjectId)) || persisted.expiresAt <= this.now()) return null;
     return { operationId, sourceVersion: persisted.sourceVersion, stage: persisted.stage,
-      state: "failed", code: "PREVIEW_RUNNER_RESTARTED" };
+      state: "failed", code: "PREVIEW_RUNNER_RESTARTED",
+      timing: unavailablePreviewOperationTiming("restart") };
   }
 
   async cancel(operationId: string, actorKey: string, buildProjectId: string): Promise<boolean> {

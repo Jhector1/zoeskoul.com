@@ -17,6 +17,7 @@ import {
   BuildWorkspaceMutationError,
   parseBuildWorkspaceMutation,
 } from "@/lib/build/buildWorkspaceMutation";
+import { previewWorkspaceMatchesSavedSource } from "@/lib/build/previewSourceIdentity";
 
 export class ReactPreviewRequestError extends Error {
   constructor(
@@ -126,6 +127,14 @@ export async function createOwnedReactPreviewBuildRequest(args: Readonly<{
       );
     }
     throw error;
+  }
+
+  if (!previewWorkspaceMatchesSavedSource(project.workspace,workspace)) {
+    throw new ReactPreviewRequestError(
+      "BUILD_PREVIEW_SOURCE_CONFLICT",
+      `Preview source bytes do not match saved source v${project.sourceVersion}.`,
+      409,
+    );
   }
 
   let previewPlan;

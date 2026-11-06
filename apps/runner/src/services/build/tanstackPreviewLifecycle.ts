@@ -1,4 +1,5 @@
 import { isTanstackSsrReady, TANSTACK_PREVIEW_READY_TIMEOUT_MS, TANSTACK_PREVIEW_PROBE_INTERVAL_MS } from "./tanstackPreviewRuntimePolicy.js";
+import { previewObservability, type PreviewOperationTelemetry } from "./previewObservability.js";
 
 /** Preserve the recovery callback for cleanup failures *before* start returns
  * a normal handle. The admission owner must quarantine these orphans so they
@@ -49,12 +50,15 @@ export type TanstackPreviewDriver = Readonly<{
 
 export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver,
   opts: Readonly<{ signal?: AbortSignal; timeoutMs?: number;
-    onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void }> = {}): Promise<TanstackSandboxHandle> {
+    onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void;
+    telemetry?: PreviewOperationTelemetry }> = {}): Promise<TanstackSandboxHandle> {
   const timeoutMs = opts.timeoutMs ?? TANSTACK_PREVIEW_READY_TIMEOUT_MS;
   if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0 || timeoutMs > TANSTACK_PREVIEW_READY_TIMEOUT_MS)
     throw new Error("Invalid preview readiness deadline.");
   let workspaceDir: string | null = null;
   let containerId: string | null = null;
+  let endReadiness: ReturnType<PreviewOperationTelemetry["begin"]> | null = null;
+  let endFirstSsr: ReturnType<PreviewOperationTelemetry["begin"]> | null = null;
   try {
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
     opts.onPhase?.("dependencies");
@@ -64,6 +68,8 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
     containerId = await driver.launch(workspaceDir);
     const startedAt = driver.now();
     opts.onPhase?.("readiness");
+    endReadiness = opts.telemetry?.begin("vite_readiness") ?? null;
+    endFirstSsr = opts.telemetry?.begin("first_ssr") ?? null;
     if (opts.signal?.aborted) throw new Error("Preview cancelled.");
     // Readiness deadline begins after launch, not during dependency install.
     let attempts = 0;
@@ -74,7 +80,11 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
       attempts++;
       try {
         const response = await driver.probe(containerId);
-        if (isTanstackSsrReady(response)) return { containerId, workspaceDir };
+        if (isTanstackSsrReady(response)) {
+          endReadiness?.("ok");
+          endFirstSsr?.("ok");
+          return { containerId, workspaceDir };
+        }
         lastHttpStatus = Number.isInteger(response.status) &&
           response.status >= 100 && response.status <= 599 ? response.status : null;
         result = response.status === 200 ? "invalid_html" : "http_status";
@@ -95,12 +105,17 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
     console.warn("RUNNER isolated TanStack readiness timed out", diagnostic);
     throw new TanstackPreviewReadinessError(diagnostic);
   } catch (error) {
+    endReadiness?.(opts.signal?.aborted ? "cancelled" : "error");
+    endFirstSsr?.(opts.signal?.aborted ? "cancelled" : "error");
     // Cleanup is mandatory even if readiness, installation, or cancellation fails.
     const earlier = error instanceof TanstackPreviewCleanupError ? error : null;
     let containerFailed = false;
     let workspaceFailed = false;
+    const endCleanup = containerId || workspaceDir
+      ? previewObservability.beginCleanup() : null;
     if (containerId) await driver.destroy(containerId).catch(() => { containerFailed = true; });
     if (workspaceDir) await driver.cleanup(workspaceDir).catch(() => { workspaceFailed = true; });
+    endCleanup?.(earlier || containerFailed || workspaceFailed ? "error" : "ok");
     if (earlier || containerFailed || workspaceFailed) {
       // Retry ONLY resources that have not been confirmed removed. A failed
       // Docker teardown must never silently turn into a free capacity slot.

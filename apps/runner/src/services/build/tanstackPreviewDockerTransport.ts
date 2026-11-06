@@ -1,16 +1,26 @@
 import { PassThrough } from "node:stream";
+import { performance } from "node:perf_hooks";
 import { docker } from "../docker/dockerClient.js";
 import { TANSTACK_PREVIEW_HTTP_WORKER } from "./tanstackPreviewHttpWorker.js";
 import {
   normalizeTanstackPreviewHttpResponse,
   type TanstackPreviewTransportRequest,
 } from "./tanstackPreviewHttpBoundary.js";
+import { boundedPreviewDuration, previewObservability } from "./previewObservability.js";
 
 /** One HTTP request per Docker exec. No socket or host port is exposed.
  * This is deliberately not an HMR/WebSocket bridge: that requires its own
  * authenticated streaming transport and acceptance tests. */
 export async function fetchTanstackHttpInsideSandbox(containerId: string,
-  request: TanstackPreviewTransportRequest) {
+  request: TanstackPreviewTransportRequest): Promise<Readonly<{
+    status: number;
+    headers: Readonly<Record<string,string>>;
+    bodyBase64: string;
+    timing?: Readonly<{dockerExecMs:number;viteUpstreamMs:number|null}>;
+  }>> {
+  const startedAt = performance.now();
+  const endDockerExec = previewObservability.beginDockerExec();
+  try {
   const exec = await docker.getContainer(containerId).exec({
     Cmd: ["python3", "-u", "-c", TANSTACK_PREVIEW_HTTP_WORKER],
     AttachStdin: true, AttachStdout: true, AttachStderr: false, Tty: false,
@@ -64,5 +74,21 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
     } catch { finish(new Error("Preview HTTP request failed.")); }
   });
   // No Set-Cookie, Location, or caller-supplied authentication can emerge.
-  return normalizeTanstackPreviewHttpResponse(reply);
+  const normalized = normalizeTanstackPreviewHttpResponse(reply);
+  if (normalized.upstreamDurationMs !== null)
+    previewObservability.observeViteUpstream(normalized.upstreamDurationMs);
+  endDockerExec("ok");
+  return {
+    status: normalized.status,
+    headers: normalized.headers,
+    bodyBase64: normalized.bodyBase64,
+    timing: {
+      dockerExecMs: boundedPreviewDuration(performance.now() - startedAt),
+      viteUpstreamMs: normalized.upstreamDurationMs,
+    },
+  } as const;
+  } catch (error) {
+    endDockerExec("error");
+    throw error;
+  }
 }

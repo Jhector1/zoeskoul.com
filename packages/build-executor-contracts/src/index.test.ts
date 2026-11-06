@@ -1,5 +1,6 @@
 import {
   BuildExecutorContractError,
+  BUILD_EXECUTOR_HTTP_BODY_LIMIT_BYTES,
   parseTrustedBuildJobRequest,
 } from "./index";
 
@@ -18,9 +19,9 @@ function bootstrapRequest() {
       "build_1",
     sourceVersion: 2,
     stackId:
-      "react-vite-v1",
+      "tanstack-start-v1",
     templateId:
-      "react-vite-v1",
+      "tanstack-start-v1",
     files: [
       {
         path:
@@ -58,6 +59,9 @@ function productionRequest() {
 describe(
   "trusted Build executor contract",
   () => {
+    it("publishes the shared bounded HTTP request limit",()=>{
+      expect(BUILD_EXECUTOR_HTTP_BODY_LIMIT_BYTES).toBe(8*1024*1024);
+    });
     it(
       "accepts the narrow lock-bootstrap request shape",
       () => {
@@ -73,9 +77,9 @@ describe(
             "build_1",
           sourceVersion: 2,
           stackId:
-            "react-vite-v1",
+            "tanstack-start-v1",
           templateId:
-            "react-vite-v1",
+            "tanstack-start-v1",
         });
       },
     );
@@ -95,9 +99,9 @@ describe(
             "build_1",
           sourceVersion: 2,
           stackId:
-            "react-vite-v1",
+            "tanstack-start-v1",
           templateId:
-            "react-vite-v1",
+            "tanstack-start-v1",
         });
       },
     );

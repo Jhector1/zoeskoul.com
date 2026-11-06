@@ -14,6 +14,7 @@ import { previewDocumentGatewayUrl, classifyPreviewDocumentHealth } from "@/lib/
 import { claimSavedDependencyFollowUp, clearSavedDependencyRecoveryGuards } from "@/lib/build/savedDependencyRecoveryContinuation";
 import { readPreviewOperationStatus } from "@/lib/build/previewOperationHttp";
 import { decideTanstackPreviewSync } from "@/lib/build/tanstackPreviewSyncDecision";
+import { recordPreviewBrowserTiming } from "@/lib/build/previewPerformance";
 
 type PreviewSession = Readonly<{
   previewId: string;
@@ -33,6 +34,11 @@ type ApiPayload = {
     stage?: "queued" | "workspace" | "dependencies" | "container" | "readiness";
     code?: string;
     preview?: { previewId?: string; basePath?: string };
+    timing?: {
+      startKind?: "cold" | "restart" | "reuse";
+      reuseCandidate?: boolean;
+      stages?: Record<string,{outcome?:string;durationMs?:number;reason?:string}>;
+    };
   };
   bootstrap?: { source?: { sourceVersion?: number } };
 };
@@ -386,6 +392,16 @@ export function useReactVitePreview(input: Readonly<{
 
     const startingWorkspaceRevision = workspaceRevisionRef.current;
     const startingSourceVersion = sourceVersionRef.current;
+    const intentStartedAt = performance.now();
+    let startKind: "cold" | "restart" | "reuse" = "cold";
+    let operationStartedAtForMetrics: number | null = null;
+    let operationTimingRecorded = false;
+    const recordOperationTiming = (outcome: "ok" | "error" | "cancelled") => {
+      if (operationTimingRecorded || operationStartedAtForMetrics === null) return;
+      operationTimingRecorded = true;
+      recordPreviewBrowserTiming({stage:"operation_ready",kind:startKind,outcome,
+        durationMs:performance.now()-operationStartedAtForMetrics});
+    };
     let supersededDuringStart = false;
     const task = (async () => {
       if (mountedRef.current) {
@@ -425,6 +441,8 @@ export function useReactVitePreview(input: Readonly<{
 
       if (mountedRef.current) setAttemptedSourceVersion(startingVersion);
       let response: Response;
+      const acknowledgementStartedAt = performance.now();
+      let acknowledgementDurationMs = 0;
       try {
         response = await fetch(
           `/api/build/projects/${encodeURIComponent(input.buildProjectId)}/preview/start`,
@@ -439,7 +457,13 @@ export function useReactVitePreview(input: Readonly<{
             signal: startController.signal,
           },
         );
+        acknowledgementDurationMs = performance.now()-acknowledgementStartedAt;
       } catch (error) {
+        recordPreviewBrowserTiming({
+          stage:"start_acknowledgement",kind:startKind,
+          outcome:startController.signal.aborted?"cancelled":"error",
+          durationMs:performance.now()-acknowledgementStartedAt,
+        });
         if (startController.signal.aborted) {
           throw new Error(
             "The preview server did not acknowledge the start request. Retry preview.",
@@ -451,7 +475,15 @@ export function useReactVitePreview(input: Readonly<{
         clearTimeout(startTimeoutTimer);
       }
       let data = await payload(response);
-      if (response.status === 409 && data?.code === "BUILD_PREVIEW_SOURCE_CONFLICT") {
+      startKind = data?.operation?.timing?.startKind === "reuse" ? "reuse" :
+        data?.operation?.timing?.startKind === "restart" ? "restart" : "cold";
+      recordPreviewBrowserTiming({
+        stage:"start_acknowledgement",kind:startKind,
+        outcome:response.ok?"ok":"error",durationMs:acknowledgementDurationMs,
+      });
+      if (response.status === 409 &&
+          (data?.code === "BUILD_PREVIEW_SOURCE_CONFLICT" ||
+           data?.code === "BUILD_PREVIEW_NEWER_OPERATION")) {
         if (await reconcileConflict(startingVersion)) return;
         throw new Error("The saved project changed. Keep any unsaved edits before reloading the project.");
       }
@@ -514,27 +546,48 @@ export function useReactVitePreview(input: Readonly<{
           },
         );
         const capacityStartedAt = Date.now();
+        const bootstrapStartedAt = performance.now();
         let capacityRetries = 0;
-        let bootstrap = await requestBootstrap();
-        let bootstrapData = await payload(bootstrap);
-        while (bootstrap.status === 429 &&
-            bootstrapData?.code === "BUILD_RUNNER_CAPACITY_REACHED" &&
-            capacityRetries < 4) {
-          const waitMs = previewCapacityRetryDelayMs(bootstrap.headers.get("Retry-After"));
-          if (Date.now() - capacityStartedAt + waitMs > 240_000) break;
-          if (mountedRef.current) setPreview(current => ({
-            src: null, state: "starting",
-            message: "Preparing your website when a preview worker is available…",
-            revision: current?.revision ?? 0,
-          }));
-          await new Promise<void>(resolve => window.setTimeout(resolve, waitMs));
-          if (!mountedRef.current || !bootstrapAllowedRef.current ||
-              workspaceRevisionRef.current !== startingWorkspaceRevision ||
-              sourceVersionRef.current !== startingVersion) return;
-          capacityRetries += 1;
+        let bootstrap: Response;
+        let bootstrapData: ApiPayload | null;
+        try {
           bootstrap = await requestBootstrap();
           bootstrapData = await payload(bootstrap);
+          while (bootstrap.status === 429 &&
+              bootstrapData?.code === "BUILD_RUNNER_CAPACITY_REACHED" &&
+              capacityRetries < 4) {
+            const waitMs = previewCapacityRetryDelayMs(bootstrap.headers.get("Retry-After"));
+            if (Date.now() - capacityStartedAt + waitMs > 240_000) break;
+            if (mountedRef.current) setPreview(current => ({
+              src: null, state: "starting",
+              message: "Preparing your website when a preview worker is available…",
+              revision: current?.revision ?? 0,
+            }));
+            await new Promise<void>(resolve => window.setTimeout(resolve, waitMs));
+            const bootstrapCancelled = !mountedRef.current || !bootstrapAllowedRef.current ||
+                workspaceRevisionRef.current !== startingWorkspaceRevision ||
+                sourceVersionRef.current !== startingVersion;
+            if (bootstrapCancelled) {
+              recordPreviewBrowserTiming({stage:"dependency_bootstrap",kind:startKind,
+                outcome:"cancelled",durationMs:performance.now()-bootstrapStartedAt});
+            }
+            if (!mountedRef.current || !bootstrapAllowedRef.current ||
+                workspaceRevisionRef.current !== startingWorkspaceRevision ||
+                sourceVersionRef.current !== startingVersion) return;
+            capacityRetries += 1;
+            bootstrap = await requestBootstrap();
+            bootstrapData = await payload(bootstrap);
+          }
+        } catch (error) {
+          recordPreviewBrowserTiming({stage:"dependency_bootstrap",kind:startKind,
+            outcome:"error",durationMs:performance.now()-bootstrapStartedAt});
+          throw error;
         }
+        recordPreviewBrowserTiming({
+          stage:"dependency_bootstrap",kind:startKind,
+          outcome:bootstrap.ok&&bootstrapData?.ok?"ok":"error",
+          durationMs:performance.now()-bootstrapStartedAt,
+        });
         if (bootstrap.status === 429 &&
             bootstrapData?.code === "BUILD_RUNNER_CAPACITY_REACHED") {
           throw new Error("Preview preparation is temporarily at capacity. Your saved version is safe; retry when a worker is free.");
@@ -617,22 +670,28 @@ export function useReactVitePreview(input: Readonly<{
         // could falsely fail a still-active install while the browser's API
         // route is blocked by development compilation.
         let current = data.operation;
+        operationStartedAtForMetrics = performance.now();
         while (true) {
           // A browser tab may select a different saved revision while the
           // runner continues. Do not publish an obsolete preview document.
-          if (!mountedRef.current) return;
+          if (!mountedRef.current) { recordOperationTiming("cancelled"); return; }
           if (sourceVersionRef.current !== startingVersion ||
               workspaceRevisionRef.current !== startingWorkspaceRevision) {
             supersededDuringStart = true;
+            recordOperationTiming("cancelled");
             return;
           }
           if (current.state === "ready" && current.preview) {
+            recordOperationTiming("ok");
             data = { ok: true, preview: current.preview };
             break;
           }
           if (current.state === "failed" || current.state === "cancelled") {
+            recordOperationTiming(current.state==="cancelled"?"cancelled":"error");
             const failure = current.code === "PREVIEW_RUNNER_RESTARTED"
               ? "The preview worker restarted. Retry to start a new preview."
+              : current.code === "PREVIEW_LEASE_UNAVAILABLE"
+                ? "The preview worker stopped responding. Retry to start a replacement."
               : current.code === "PREVIEW_CAPACITY"
                 ? "Preview capacity is busy. Retry when the worker is available."
                 : current.code === "PREVIEW_SOURCE_CONFLICT"
@@ -648,10 +707,11 @@ export function useReactVitePreview(input: Readonly<{
             revision: previous?.revision ?? 0,
           }));
           await new Promise<void>(resolve => window.setTimeout(resolve, PREVIEW_OPERATION_POLL_INTERVAL_MS));
-          if (!mountedRef.current) return;
+          if (!mountedRef.current) { recordOperationTiming("cancelled"); return; }
           if (sourceVersionRef.current !== startingVersion ||
               workspaceRevisionRef.current !== startingWorkspaceRevision) {
             supersededDuringStart = true;
+            recordOperationTiming("cancelled");
             return;
           }
           const statusResponse = await readPreviewOperationStatus(
@@ -738,7 +798,8 @@ export function useReactVitePreview(input: Readonly<{
         else setConfirmedSourceVersion(null);
         setPreview(changedDuringStart
           ? {src:null,state:"syncing",message:"Synchronizing the newly selected version…",revision:0}
-          : {src:basePath,state:"ready",message:null,revision:0});
+          : {src:basePath,state:"ready",message:null,revision:0,
+              observability:{kind:startKind,intentStartedAt,onTiming:recordPreviewBrowserTiming}});
       }
 
       if (changedDuringStart || workspaceRevisionRef.current !== startingWorkspaceRevision) {
@@ -762,6 +823,7 @@ export function useReactVitePreview(input: Readonly<{
     try {
       await task;
     } catch (error) {
+      recordOperationTiming("error");
       // A failed operation from an older selection must not replace the current
       // version's preview state. A newer request starts after this retires.
       const stillCurrent = previewStartOutcomeIsCurrent({
@@ -878,6 +940,7 @@ export function useReactVitePreview(input: Readonly<{
       );
 
     if (cachedSession) {
+      const reopenStartedAt = performance.now();
       sessionRef.current =
         cachedSession;
 
@@ -914,6 +977,8 @@ export function useReactVitePreview(input: Readonly<{
         setPreview(current => ({
           src: cachedSession.basePath, state: "ready", message: null,
           revision: current?.revision ?? 0,
+          observability:{kind:"reopen",intentStartedAt:reopenStartedAt,
+            onTiming:recordPreviewBrowserTiming},
         }));
       })().catch(
         (error) => {

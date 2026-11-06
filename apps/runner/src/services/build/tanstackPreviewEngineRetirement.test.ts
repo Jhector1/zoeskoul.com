@@ -21,7 +21,8 @@ describe("TanStack-only preview runtime retirement", () => {
         expect(source, file).not.toMatch(/from\s*["'][^"']*reactPreview(Runtime|PersistentHttp|Readiness|MutationCoordinator|ResourceAdmission|ProjectDrainPolicy|Operations)\.js["']/);
       }
     }
-    const route = readFileSync(join(routes, "build.previews.start.ts"), "utf8");
+    expect(readdirSync(routes)).not.toContain("build.previews.start.ts");
+    const route = readFileSync(join(routes, "build.previews.operations.ts"), "utf8");
     expect(route).toContain("startAdmittedTanstackPreview");
     expect(route).not.toContain("startReactPreview(");
   });

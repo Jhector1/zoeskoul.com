@@ -349,6 +349,30 @@ export async function assertRunnerFilesystemHasCapacity(root: string) {
   }
 }
 
+/** Reserve capacity for a trusted, bounded copy before it is created.
+ * The workspace-root scan already includes dependency layers, live workspaces,
+ * and private pnpm stores, so this is one joint accounting boundary rather
+ * than an independent cache quota. */
+export async function assertWorkspaceRootCanGrowBy(
+  root: string,
+  additionalBytes: number,
+) {
+  if (!Number.isSafeInteger(additionalBytes) || additionalBytes < 0 ||
+      additionalBytes > env.maxWorkspaceRootBytes) {
+    throw new Error("Invalid Runner workspace capacity reservation.");
+  }
+  await fs.mkdir(root, { recursive: true }).catch(() => {});
+  const remaining = env.maxWorkspaceRootBytes - additionalBytes;
+  const usage = await getDirectoryUsage(root, { maxBytes: remaining });
+  if (usage.bytes > remaining) {
+    throw new Error("Runner workspace root cannot reserve additional storage.");
+  }
+  const capacity = await getRunnerFilesystemCapacity(root);
+  if (capacity && capacity.freeBytes - additionalBytes < capacity.requiredFreeBytes) {
+    throw new Error("Runner host disk cannot reserve additional storage.");
+  }
+}
+
 export async function assertWorkspaceRootHasCapacity(root: string) {
   await fs.mkdir(root, { recursive: true }).catch(() => {});
 

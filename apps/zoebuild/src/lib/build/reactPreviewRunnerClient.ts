@@ -15,6 +15,11 @@ export type ReactPreviewFetchResult = Readonly<{
   status: number;
   headers: Readonly<Record<string, string>>;
   bodyBase64: string;
+  timing?: Readonly<{
+    dockerExecMs?: number;
+    viteUpstreamMs?: number | null;
+    runnerProxyMs?: number;
+  }>;
 }>;
 
 export type ReactPreviewCapabilityContext = Readonly<{
@@ -22,18 +27,6 @@ export type ReactPreviewCapabilityContext = Readonly<{
   buildProjectId: string;
   sourceVersion: number;
 }>;
-
-export async function startTrustedReactPreviewAtRunner(args: Readonly<{
-  actorKey: string;
-  request: ProductionBuildJobRequestV1;
-}>) {
-  const result = await runnerPost<{ ok: true; preview: ReactPreviewStartResult }>(
-    "/build/previews/start",
-    args.actorKey,
-    args.request,
-  );
-  return result.preview;
-}
 
 export async function syncTrustedReactPreviewAtRunner(args: Readonly<{
   actorKey: string;
@@ -115,8 +108,17 @@ export type ReactPreviewOperationResult = Readonly<{
   sourceVersion: number;
   state: "preparing" | "ready" | "failed" | "cancelled";
   stage: "queued" | "workspace" | "dependencies" | "container" | "readiness";
-  code?: "PREVIEW_CAPACITY" | "PREVIEW_SOURCE_CONFLICT" | "PREVIEW_START_FAILED" | "PREVIEW_CANCELLED" | "PREVIEW_RUNNER_RESTARTED";
+  code?: "PREVIEW_CAPACITY" | "PREVIEW_SOURCE_CONFLICT" | "PREVIEW_START_FAILED" | "PREVIEW_CANCELLED" | "PREVIEW_RUNNER_RESTARTED" | "PREVIEW_LEASE_UNAVAILABLE";
   preview?: ReactPreviewStartResult;
+  timing: Readonly<{
+    startKind: "cold" | "restart" | "reuse";
+    reuseCandidate: boolean;
+    stages: Readonly<Record<string, Readonly<{
+      outcome: "ok" | "error" | "cancelled" | "pending" | "unavailable";
+      durationMs?: number;
+      reason?: "not_started" | "in_progress" | "prior_stage_failed";
+    }>>>;
+  }>;
 }>;
 export async function submitTrustedReactPreviewOperationAtRunner(args: Readonly<{
   actorKey: string; request: ProductionBuildJobRequestV1;

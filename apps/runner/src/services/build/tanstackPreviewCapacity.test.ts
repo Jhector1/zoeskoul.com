@@ -2,13 +2,16 @@ import { afterEach, describe, expect, it } from "vitest";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import { reclaimTanstackPreviewCapacity, reserveTanstackPreviewCapacity } from "./tanstackPreviewCapacity.js";
 
+const identity={sourceFingerprint:"source",dependencyFingerprint:"dependencies",
+  runtimeImageId:`sha256:${"a".repeat(64)}`,fingerprint:"identity"} as const;
+
 let number = 0;
 function addLease(ownerKey: string, buildProjectId: string, ageMs: number,
                   close: () => Promise<void> = async () => {}) {
   const now = Date.now();
   const id = `p3b7d6_${++number}`;
   sharedFullStackPreviews.register({
-    id, ownerKey, buildProjectId, sourceVersion: 1,
+    id, ownerKey, buildProjectId, sourceVersion: 1, identity,
     containerId: `sandbox_${id}`, basePath: `/content/${id}/`,
     createdAt: now - ageMs, lastActivityAt: now - ageMs,
     close,

@@ -3,7 +3,13 @@ import { constants } from "node:fs";
 import fs from "node:fs/promises";
 import { createReadStream } from "node:fs";
 import path from "node:path";
+import { performance } from "node:perf_hooks";
 import { env } from "../../lib/env.js";
+import { assertWorkspaceRootCanGrowBy } from "../workspace/workspacePolicy.js";
+import {
+  previewObservability,
+  type DependencyLayerLookupOutcome,
+} from "./previewObservability.js";
 
 /**
  * Content-verified, project-scoped dependency layers in the SAME bind-mounted
@@ -29,6 +35,11 @@ type Manifest = {
   files: number;
 };
 export type DependencyLayerLease = { nodeModulesDir: string; release(): void };
+export type DependencyLayerLookup = Readonly<{
+  outcome: DependencyLayerLookupOutcome;
+  verificationMs: number | null;
+  lease: DependencyLayerLease | null;
+}>;
 
 export function previewDependencyLayerKey(input: Readonly<{
   actorKey: string;
@@ -36,10 +47,12 @@ export function previewDependencyLayerKey(input: Readonly<{
   dependencyFingerprint: string;
   command: readonly string[];
   imageId: string;
+  installPolicyFingerprint: string;
 }>): string {
   return createHash("sha256")
     .update(JSON.stringify([SCHEMA, input.actorKey, input.projectId,
-      input.dependencyFingerprint, input.command, input.imageId]))
+      input.dependencyFingerprint, input.command, input.imageId,
+      input.installPolicyFingerprint]))
     .digest("hex");
 }
 
@@ -135,9 +148,33 @@ async function attestTree(root: string, options: Readonly<{
 
 export class PreviewDependencyLayerStore {
   private readonly leases = new Map<string, number>();
+  private readonly removing = new Set<string>();
   private readonly root: string;
-  constructor(workspaceRoot: string = env.workspaceRoot) {
+  private readonly workspaceRoot: string;
+  private readonly now: () => number;
+  private readonly reserveCapacity: (root: string, additionalBytes: number) => Promise<void>;
+  private readonly activeStaging = new Set<string>();
+  private publicationTail: Promise<void> = Promise.resolve();
+  private lookups = 0;
+  private hits = 0;
+  private misses = 0;
+  private rejected = 0;
+  private unavailable = 0;
+  private corrupt = 0;
+  private publishAttempts = 0;
+  private published = 0;
+  private publishSkipped = 0;
+  constructor(
+    workspaceRoot: string = env.workspaceRoot,
+    options: Readonly<{
+      now?: () => number;
+      reserveCapacity?: (root: string, additionalBytes: number) => Promise<void>;
+    }> = {},
+  ) {
+    this.workspaceRoot = workspaceRoot;
     this.root = path.join(workspaceRoot, ".zoebuild-preview-dependency-layers-v1");
+    this.now = options.now ?? Date.now;
+    this.reserveCapacity = options.reserveCapacity ?? assertWorkspaceRootCanGrowBy;
   }
 
   private entry(key: string): string {
@@ -170,7 +207,7 @@ export class PreviewDependencyLayerStore {
       if (!parsed || typeof parsed !== "object") return null;
       const m = parsed as Manifest;
       if (m.schema !== SCHEMA || m.key !== key ||
-          !Number.isSafeInteger(m.createdAt) || m.createdAt > Date.now() ||
+          !Number.isSafeInteger(m.createdAt) || m.createdAt > this.now() ||
           !KEY.test(m.digest) || !Number.isSafeInteger(m.bytes) ||
           m.bytes < 0 || m.bytes > MAX_ITEM_BYTES ||
           !Number.isSafeInteger(m.files) || m.files < 0 || m.files > MAX_FILES) return null;
@@ -178,27 +215,63 @@ export class PreviewDependencyLayerStore {
     } catch { return null; }
   }
 
-  private async verified(key: string): Promise<Manifest | null> {
+  private async verified(key: string): Promise<Readonly<{
+    outcome: DependencyLayerLookupOutcome;
+    manifest: Manifest | null;
+    verificationMs: number | null;
+  }>> {
     const m = await this.manifest(key);
-    if (!m) return null;
-    if (Date.now() - m.createdAt > TTL_MS) return null;
+    if (!m) {
+      const exists = await fs.lstat(this.entry(key)).catch(() => null);
+      return { outcome: exists ? "corrupt" : "miss", manifest: null, verificationMs: null };
+    }
+    if (this.now() - m.createdAt > TTL_MS)
+      return { outcome: "rejected", manifest: null, verificationMs: null };
+    const startedAt = performance.now();
     const tree = await attestTree(path.join(this.entry(key), "node_modules"));
-    if (!tree || tree.digest !== m.digest || tree.bytes !== m.bytes || tree.files !== m.files) return null;
-    return m;
+    const verificationMs = performance.now() - startedAt;
+    if (!tree || tree.digest !== m.digest || tree.bytes !== m.bytes || tree.files !== m.files)
+      return { outcome: "corrupt", manifest: null, verificationMs };
+    return { outcome: "hit", manifest: m, verificationMs };
   }
 
-  private async remove(key: string): Promise<void> {
-    if (this.leases.get(key)) return;
-    const dir = this.entry(key);
-    const st = await fs.lstat(dir).catch(() => null);
-    if (st?.isSymbolicLink()) { await fs.unlink(dir); return; }
-    if (st?.isDirectory()) await fs.rm(dir, { recursive: true, force: true });
+  private async remove(key: string): Promise<boolean> {
+    if (this.leases.get(key) || this.removing.has(key)) return false;
+    this.removing.add(key);
+    try {
+      // The marker closes the verification-to-lease race: lookup checks it
+      // immediately before issuing a lease, with no await between the check
+      // and lease accounting.
+      if (this.leases.get(key)) return false;
+      const dir = this.entry(key);
+      const st = await fs.lstat(dir).catch(() => null);
+      if (st?.isSymbolicLink()) { await fs.unlink(dir); return true; }
+      if (st?.isDirectory()) await fs.rm(dir, { recursive: true, force: true });
+      return Boolean(st);
+    } finally {
+      this.removing.delete(key);
+    }
   }
 
   /** Reclaim old entries without touching any mounted by a live preview. */
-  private async sweep(excludeKey: string): Promise<void> {
+  private async sweep(excludeKey: string, incomingBytes: number): Promise<void> {
     const entries: { key: string; createdAt: number; bytes: number }[] = [];
     for (const name of await fs.readdir(this.root)) {
+      if (/^\.pending-[0-9a-f-]{36}$/i.test(name)) {
+        if (this.activeStaging.has(name)) continue;
+        const pending = path.join(this.root, name);
+        const info = await fs.lstat(pending).catch(() => null);
+        if (info && !info.isSymbolicLink() &&
+            this.now() - info.mtimeMs > MIN_EVICTION_AGE_MS) {
+          try {
+            await fs.rm(pending, { recursive: true, force: true });
+            previewObservability.recordDependencyLayerCleanup("evicted");
+          } catch {
+            previewObservability.recordDependencyLayerCleanup("failed");
+          }
+        }
+        continue;
+      }
       if (!KEY.test(name)) continue;
       const m = await this.manifest(name);
       if (!m) {
@@ -207,30 +280,43 @@ export class PreviewDependencyLayerStore {
         // than the maximum preview lifetime even when metadata is invalid.
         const info = await fs.lstat(this.entry(name)).catch(() => null);
         if (name !== excludeKey && info &&
-            Date.now() - info.mtimeMs > MIN_EVICTION_AGE_MS) await this.remove(name);
+            this.now() - info.mtimeMs > MIN_EVICTION_AGE_MS) {
+          try {
+            if (await this.remove(name)) previewObservability.recordDependencyLayerCleanup("evicted");
+          } catch { previewObservability.recordDependencyLayerCleanup("failed"); }
+        }
         continue;
       }
-      if (Date.now() - m.createdAt > TTL_MS) {
-        if (name !== excludeKey && Date.now() - m.createdAt > MIN_EVICTION_AGE_MS) await this.remove(name);
+      if (this.now() - m.createdAt > TTL_MS) {
+        if (name !== excludeKey && this.now() - m.createdAt > MIN_EVICTION_AGE_MS) {
+          try {
+            if (await this.remove(name)) previewObservability.recordDependencyLayerCleanup("evicted");
+          } catch { previewObservability.recordDependencyLayerCleanup("failed"); }
+        }
         continue;
       }
       entries.push({ key: name, createdAt: m.createdAt, bytes: m.bytes });
     }
-    entries.sort((a, b) => a.createdAt - b.createdAt);
+    entries.sort((a, b) => a.createdAt - b.createdAt || a.key.localeCompare(b.key));
     let bytes = entries.reduce((n, e) => n + e.bytes, 0);
     let count = entries.length;
     for (const e of entries) {
-      if (count <= MAX_ENTRIES && bytes <= MAX_TOTAL_BYTES) break;
+      if (count < MAX_ENTRIES && bytes + incomingBytes <= MAX_TOTAL_BYTES) break;
       if (e.key === excludeKey || this.leases.get(e.key) ||
-          Date.now() - e.createdAt < MIN_EVICTION_AGE_MS) continue;
-      await this.remove(e.key);
-      bytes -= e.bytes;
-      count--;
+          this.now() - e.createdAt < MIN_EVICTION_AGE_MS) continue;
+      try {
+        if (await this.remove(e.key)) {
+          previewObservability.recordDependencyLayerCleanup("evicted");
+          bytes -= e.bytes;
+          count--;
+        }
+      } catch { previewObservability.recordDependencyLayerCleanup("failed"); }
     }
   }
 
   private lease(key: string): DependencyLayerLease {
     this.leases.set(key, (this.leases.get(key) ?? 0) + 1);
+    previewObservability.recordDependencyLayerLease("acquire");
     let released = false;
     return {
       nodeModulesDir: path.join(this.entry(key), "node_modules"),
@@ -240,14 +326,53 @@ export class PreviewDependencyLayerStore {
         const remaining = (this.leases.get(key) ?? 1) - 1;
         if (remaining) this.leases.set(key, remaining);
         else this.leases.delete(key);
+        previewObservability.recordDependencyLayerLease("release");
       },
     };
   }
 
+  async lookup(key: string): Promise<DependencyLayerLookup> {
+    const startedAt = performance.now();
+    this.lookups += 1;
+    if (!KEY.test(key)) {
+      this.rejected += 1;
+      const durationMs = performance.now() - startedAt;
+      previewObservability.recordDependencyLayerLookup("rejected", durationMs, null);
+      return { outcome: "rejected", verificationMs: null, lease: null };
+    }
+    if (!await this.rootReady()) {
+      this.unavailable += 1;
+      const durationMs = performance.now() - startedAt;
+      previewObservability.recordDependencyLayerLookup("unavailable", durationMs, null);
+      return { outcome: "unavailable", verificationMs: null, lease: null };
+    }
+    const verified = await this.verified(key);
+    if (verified.outcome !== "hit") {
+      this.misses += 1;
+      if (verified.outcome === "rejected") this.rejected += 1;
+      if (verified.outcome === "corrupt") this.corrupt += 1;
+      const durationMs = performance.now() - startedAt;
+      previewObservability.recordDependencyLayerLookup(
+        verified.outcome, durationMs, verified.verificationMs,
+      );
+      return { outcome: verified.outcome, verificationMs: verified.verificationMs, lease: null };
+    }
+    if (this.removing.has(key)) {
+      this.misses += 1;
+      const durationMs = performance.now() - startedAt;
+      previewObservability.recordDependencyLayerLookup(
+        "miss", durationMs, verified.verificationMs,
+      );
+      return { outcome: "miss", verificationMs: verified.verificationMs, lease: null };
+    }
+    this.hits += 1;
+    const durationMs = performance.now() - startedAt;
+    previewObservability.recordDependencyLayerLookup("hit", durationMs, verified.verificationMs);
+    return { outcome: "hit", verificationMs: verified.verificationMs, lease: this.lease(key) };
+  }
+
   async acquire(key: string): Promise<DependencyLayerLease | null> {
-    if (!KEY.test(key) || !await this.rootReady()) return null;
-    if (!await this.verified(key)) return null;
-    return this.lease(key);
+    return (await this.lookup(key)).lease;
   }
 
   /**
@@ -261,7 +386,30 @@ export class PreviewDependencyLayerStore {
    * up with that workspace. Failed publication must never break that preview.
    */
   async publish(key: string, workspaceDir: string): Promise<DependencyLayerLease | null> {
+    const prior = this.publicationTail;
+    let release!: () => void;
+    this.publicationTail = new Promise<void>(resolve => { release = resolve; });
+    await prior;
+    try {
+      return await this.publishExclusive(key, workspaceDir);
+    } finally {
+      release();
+    }
+  }
+
+  /** Serialize capacity reservation, eviction, copy, and rename in the one
+   * active Runner process so concurrent misses cannot jointly overcommit disk. */
+  private async publishExclusive(
+    key: string,
+    workspaceDir: string,
+  ): Promise<DependencyLayerLease | null> {
+    const startedAt = performance.now();
+    this.publishAttempts += 1;
     const skip = (reason: string) => {
+      this.publishSkipped += 1;
+      previewObservability.recordDependencyLayerPublication(
+        "skipped", performance.now() - startedAt,
+      );
       console.info("RUNNER React preview dependency layer publication", { result: "skipped", reason });
       return null;
     };
@@ -282,17 +430,30 @@ export class PreviewDependencyLayerStore {
       }
     }
     const existing = await this.acquire(key);
-    if (existing) return existing;
-    await this.sweep(key).catch(() => undefined);
+    if (existing) {
+      this.publishSkipped += 1;
+      previewObservability.recordDependencyLayerPublication(
+        "skipped", performance.now() - startedAt,
+      );
+      return existing;
+    }
+    await this.sweep(key, inspected.bytes).catch(() => undefined);
     const published = (await Promise.all((await fs.readdir(this.root))
       .filter(name => KEY.test(name)).map(name => this.manifest(name)))).filter((m): m is Manifest => m !== null);
     if (published.length >= MAX_ENTRIES ||
         published.reduce((sum, m) => sum + m.bytes, 0) + inspected.bytes > MAX_TOTAL_BYTES) {
       return skip("cache-capacity");
     }
+    try {
+      await this.reserveCapacity(this.workspaceRoot, inspected.bytes);
+    } catch {
+      return skip("disk-headroom");
+    }
 
     const staged = path.join(this.root, `.pending-${randomUUID()}`);
+    const stagedName = path.basename(staged);
     const dest = this.entry(key);
+    this.activeStaging.add(stagedName);
     try {
       await fs.mkdir(staged, { mode: 0o755 });
       const cloned = path.join(staged, "node_modules");
@@ -318,7 +479,7 @@ export class PreviewDependencyLayerStore {
       // that now escape the copied tree. A digest covers *actual* bytes.
       const tree = await attestTree(cloned);
       if (!tree) return skip("detached-tree-invalid");
-      const manifest: Manifest = { schema: SCHEMA, key, createdAt: Date.now(), ...tree };
+      const manifest: Manifest = { schema: SCHEMA, key, createdAt: this.now(), ...tree };
       await fs.writeFile(path.join(staged, "manifest.json"), JSON.stringify(manifest), {
         mode: 0o644, flag: "wx",
       });
@@ -326,11 +487,21 @@ export class PreviewDependencyLayerStore {
         // An old writer can finish the same content concurrently. Only
         // replace an unleased invalid entry; never alter a mounted layer.
         const winner = await this.acquire(key);
-        if (winner) return winner;
+        if (winner) {
+          this.publishSkipped += 1;
+          previewObservability.recordDependencyLayerPublication(
+            "skipped", performance.now() - startedAt,
+          );
+          return winner;
+        }
         if (this.leases.get(key)) return skip("layer-in-use");
         await this.remove(key);
       }
       await fs.rename(staged, dest);
+      this.published += 1;
+      previewObservability.recordDependencyLayerPublication(
+        "published", performance.now() - startedAt,
+      );
       return this.lease(key);
     } catch (error: unknown) {
       const code = typeof error === "object" && error !== null && "code" in error &&
@@ -338,15 +509,58 @@ export class PreviewDependencyLayerStore {
       console.info("RUNNER React preview dependency layer publication", {
         result: "skipped", reason: "staging-failed", code,
       });
+      this.publishSkipped += 1;
+      previewObservability.recordDependencyLayerPublication(
+        "skipped", performance.now() - startedAt,
+      );
       return null;
     } finally {
+      this.activeStaging.delete(stagedName);
       await fs.rm(staged, { force: true, recursive: true }).catch(() => undefined);
     }
   }
 
+  snapshot() {
+    return {
+      lookups: this.lookups,
+      hits: this.hits,
+      misses: this.misses,
+      rejected: this.rejected,
+      unavailable: this.unavailable,
+      corrupt: this.corrupt,
+      publishAttempts: this.publishAttempts,
+      published: this.published,
+      publishSkipped: this.publishSkipped,
+      activeKeys: this.leases.size,
+      activeLeases: [...this.leases.values()].reduce((sum, count) => sum + count, 0),
+      diskBytes: { available: false, reason: "included_in_workspace_root_scan" },
+    } as const;
+  }
+
+  /** Bounded metadata-only inventory for the authenticated metrics endpoint. */
+  async storageSnapshot() {
+    if (!await this.rootReady()) return { available: false as const, entries: 0, bytes: 0 };
+    let entries = 0;
+    let bytes = 0;
+    for (const name of await fs.readdir(this.root)) {
+      if (!KEY.test(name)) continue;
+      const manifest = await this.manifest(name);
+      if (!manifest) continue;
+      entries += 1;
+      bytes += manifest.bytes;
+    }
+    return { available: true as const, entries, bytes };
+  }
+
   /** Reject unavailable mounts without exposing the private store root. */
   static bind(lease: DependencyLayerLease): string {
-    if (!path.isAbsolute(lease.nodeModulesDir) || !lease.nodeModulesDir.endsWith("/node_modules")) {
+    const normalized = path.resolve(lease.nodeModulesDir);
+    const layer = path.dirname(normalized);
+    const store = path.dirname(layer);
+    if (!path.isAbsolute(lease.nodeModulesDir) || normalized !== lease.nodeModulesDir ||
+        path.basename(normalized) !== "node_modules" || !KEY.test(path.basename(layer)) ||
+        path.basename(store) !== ".zoebuild-preview-dependency-layers-v1" ||
+        /[\r\n:]/.test(lease.nodeModulesDir)) {
       throw new Error("Invalid trusted dependency layer mount.");
     }
     return `${lease.nodeModulesDir}:/workspace/node_modules:ro`;

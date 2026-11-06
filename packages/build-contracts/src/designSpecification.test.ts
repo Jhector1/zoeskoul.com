@@ -95,7 +95,7 @@ function project(
       "Maison Zoe",
 
     projectType:
-      "frontend-app",
+      "fullstack-app",
 
     targets: [
       "web",
@@ -118,11 +118,11 @@ function project(
     ],
 
     stackId:
-      "commerce-static-v1",
+      "tanstack-start-v1",
 
     commerce: {
       storefrontRuntime:
-        "static",
+        "tanstack-start",
     },
 
     design:
@@ -130,7 +130,7 @@ function project(
 
     deployment: {
       preference:
-        "static",
+        "managed-runtime",
     },
   };
 }

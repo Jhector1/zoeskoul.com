@@ -10,6 +10,7 @@
     "typecheck": "turbo run typecheck",
     "typecheck:web": "pnpm --filter @zoeskoul/web typecheck",
     "test": "turbo run test",
+    "test:zoebuild": "node scripts/test-zoebuild.mjs",
     "test:web": "pnpm --filter @zoeskoul/web test",
     "test:web:watch": "pnpm --filter @zoeskoul/web test:watch",
     "test:e2e:web": "pnpm --filter @zoeskoul/web test:e2e",

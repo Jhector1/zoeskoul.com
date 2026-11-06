@@ -8,6 +8,8 @@ export const PREVIEW_NAV_CHANNEL = "zoebuild.preview.navigation.v1";
 export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
   "use strict";
   var channel = "zoebuild.preview.navigation.v1";
+  var navigationStartedAt = typeof performance !== "undefined" && typeof performance.now === "function"
+    ? performance.now() : null;
   // Observe a stable, server-authored script element rather than assuming
   // document.currentScript survives a browser's execution/CSP timing. A known
   // initialization failure is reported once; never silently abandon the toolbar.
@@ -77,6 +79,33 @@ export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
   }
   routes.push(route());
   var lastReport = null;
+  function boundedTiming() {
+    if (navigationStartedAt === null || typeof performance === "undefined" ||
+        typeof performance.now !== "function" || typeof performance.getEntriesByType !== "function") return null;
+    function duration(value) {
+      return typeof value === "number" && isFinite(value) && value >= 0
+        ? Math.min(86400000, Math.round(value * 10) / 10) : null;
+    }
+    var navigation = performance.getEntriesByType("navigation")[0];
+    var documentResponseMs = navigation ? duration(navigation.responseEnd - navigation.startTime) : null;
+    var stylesheetDeliveryMs = null;
+    var javascriptDeliveryMs = null;
+    var resources = performance.getEntriesByType("resource");
+    for (var r = 0; r < resources.length; r++) {
+      var resource = resources[r];
+      var delivered = duration(resource.responseEnd);
+      if (delivered === null) continue;
+      if (resource.initiatorType === "link") {
+        stylesheetDeliveryMs = Math.max(stylesheetDeliveryMs === null ? 0 : stylesheetDeliveryMs, delivered);
+      } else if (resource.initiatorType === "script") {
+        javascriptDeliveryMs = Math.max(javascriptDeliveryMs === null ? 0 : javascriptDeliveryMs, delivered);
+      }
+    }
+    return { documentResponseMs: documentResponseMs,
+      stylesheetDeliveryMs: stylesheetDeliveryMs,
+      javascriptDeliveryMs: javascriptDeliveryMs,
+      renderedMs: duration(performance.now() - navigationStartedAt) };
+  }
   function report(force) {
     var current = route();
     if (current === null) return;
@@ -109,7 +138,7 @@ export const PREVIEW_NAV_SCRIPT = String.raw`(function () {
     lastReport = fingerprint;
     window.parent.postMessage({ channel: channel, type: "state", basePath: base, route: current,
       canGoBack: index > 0, canGoForward: index < routes.length - 1,
-      rendered: rendered, revision: revision }, "*");
+      rendered: rendered, revision: revision, timing: rendered ? boundedTiming() : null }, "*");
   }
   var push = history.pushState;
   var replace = history.replaceState;

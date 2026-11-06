@@ -42,7 +42,7 @@ describe("Build AI structured output ownership", () => {
           text: JSON.stringify({
             version: 1,
             name: "Structured output test",
-            projectType: "static-site",
+            projectType: "fullstack-app",
             targets: ["web"],
             requirements: {
               backend: false,
@@ -54,9 +54,9 @@ describe("Build AI structured output ownership", () => {
               commerce: false,
             },
             pages: ["Home"],
-            stackId: "static-html-v1",
+            stackId: "tanstack-start-v1",
             deployment: {
-              preference: "static",
+              preference: "managed-runtime",
             },
           }),
           metadata: {

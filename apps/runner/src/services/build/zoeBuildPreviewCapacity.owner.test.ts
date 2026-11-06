@@ -19,10 +19,9 @@ describe("TanStack-only preview capacity ownership", () => {
   });
   it("keeps the lease counted until Docker and workspace teardown actually succeed", () => {
     const registry = read("src/services/build/sharedPreviewRegistry.ts");
-    const teardown = registry.indexOf("const task = (async () => { await lease.close(); this.live.delete(id); })()");
-    expect(teardown).toBeGreaterThan(-1);
+    expect(registry.indexOf("await lease.close();")).toBeLessThan(registry.indexOf("this.live.delete(id);"));
     expect(registry).toContain("if (pending) { await pending; return true; }");
-    expect(registry).toContain("this.closing.set(id, task)");
+    expect(registry).toContain("this.closing.set(id, marker)");
     const lifecycle = read("src/services/build/tanstackPreviewSharedLifecycle.ts");
     expect(lifecycle).toContain('basePath: `/quarantined/${id}/`');
     expect(lifecycle).toContain("close: error.recover");
@@ -31,17 +30,17 @@ describe("TanStack-only preview capacity ownership", () => {
     const capacity = read("src/services/build/tanstackPreviewCapacity.ts");
     const lifecycle = read("src/services/build/tanstackPreviewSharedLifecycle.ts");
     expect(capacity).toContain("assertZoeBuildPreviewCapacity(sharedFullStackPreviews.count(), pendingGlobal)");
-    expect(capacity).toContain("sharedFullStackPreviews.sweep(now, IDLE_MS, HARD_LIFETIME_MS)");
+    expect(capacity).toContain("sharedFullStackPreviews.sweep(now, IDLE_MS, TANSTACK_PREVIEW_HARD_LIFETIME_MS)");
     expect(capacity).toContain("countActiveSessionsForActor(ownerKey)");
     expect(capacity).toContain("countActiveSessionsGlobal()");
     expect(lifecycle).toContain("if (prior.sourceVersion > request.sourceVersion)");
     expect(lifecycle).toContain("await sharedFullStackPreviews.close(prior.id)");
   });
   it("keeps the 429 capacity response behind Runner service authentication", () => {
-    const route = read("src/routes/build.previews.start.ts");
+    const route = read("src/routes/build.previews.operations.ts");
     const app = read("src/app.ts");
-    expect(route).toContain('"Runner is busy"');
-    expect(route).toContain("return 429");
-    expect(app.indexOf("app.use(requireServiceAuth)")).toBeLessThan(app.indexOf('app.post("/build/previews/start"'));
+    expect(route).toContain("/Runner is busy|Too many active sessions/");
+    expect(route).toContain("? 429");
+    expect(app.indexOf("app.use(requireServiceAuth)")).toBeLessThan(app.indexOf('app.post("/build/previews/operations/start"'));
   });
 });

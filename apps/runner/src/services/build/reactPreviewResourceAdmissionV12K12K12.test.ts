@@ -28,11 +28,13 @@ describe("V12K12K12 runner preview resource admission", () => {
     const c = q.run(async()=>{order.push("c");return 3});
     await new Promise<void>(resolve => setImmediate(resolve));
     expect(order).toEqual(["a:start"]);
+    expect(q.snapshot()).toEqual({admitted:3,executing:1,waiting:2,limit:3,maxWaitMs:1000});
     finish();
     expect(await a).toBe(1);
     await expect(b).rejects.toThrow("failed");
     expect(await c).toBe(3);
     expect(order).toEqual(["a:start", "a:end", "b", "c"]);
+    expect(q.snapshot()).toMatchObject({admitted:0,executing:0,waiting:0});
   });
   it("bounds queue size and does not start rejected work", async () => {
     const q = new PreviewStartCoordinator(1,1000);

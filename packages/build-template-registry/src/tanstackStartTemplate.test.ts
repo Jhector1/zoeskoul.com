@@ -37,6 +37,22 @@ describe("canonical TanStack Start generated app blueprint", () => {
     expect((shell.match(/<SiteFooter \/>/g) ?? []).length).toBe(1);
   });
 
+  it("has neutral customer-facing copy, with in-app navigation and one shared site identity", () => {
+    const site = files.get("src/data/site.ts") ?? "";
+    const header = files.get("src/components/SiteHeader.tsx") ?? "";
+    const footer = files.get("src/components/SiteFooter.tsx") ?? "";
+    const home = files.get("src/routes/index.tsx") ?? "";
+    const about = files.get("src/routes/about.tsx") ?? "";
+    expect(site).toContain('name: "My Website"');
+    expect(site).toContain('tagline: "Welcome to My Website"');
+    expect(site).not.toContain("Zoé Build");
+    expect(home).not.toContain("A new standard for building");
+    expect(footer).not.toContain("Built with Zoé");
+    expect(header).toContain('to="/"');
+    expect(header).toContain("{site.name}");
+    expect(about).toContain("{site.name}");
+  });
+
   it("pins every generated package to an exact version for the existing approval gate", () => {
     const packageJson = JSON.parse(files.get("package.json") ?? "{}");
     expect(packageJson.packageManager).toBe("pnpm@10.33.0");

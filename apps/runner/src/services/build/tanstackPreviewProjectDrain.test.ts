@@ -8,10 +8,12 @@ import {
 
 const owner = "owner-a";
 const project = "project-123";
+const identity={sourceFingerprint:"source",dependencyFingerprint:"dependencies",
+  runtimeImageId:`sha256:${"a".repeat(64)}`,fingerprint:"identity"} as const;
 function register(id: string, ownerKey: string, buildProjectId: string, close: () => Promise<void>) {
   const now = Date.now();
   sharedFullStackPreviews.register({
-    id, ownerKey, buildProjectId, sourceVersion: 1,
+    id, ownerKey, buildProjectId, sourceVersion: 1, identity,
     containerId: `container-${id}`, basePath: `/content/${id}/`,
     createdAt: now, lastActivityAt: now, close,
   });

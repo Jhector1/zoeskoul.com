@@ -48,6 +48,26 @@ describe("TanStack full-stack HTTP preview security boundary", () => {
     expect(result.headers).toEqual({"content-type":"text/html", "cache-control":"no-store"});
     expect(() => normalizeTanstackPreviewHttpResponse({status:302,headers:{location:"https://evil.invalid"},bodyBase64:""})).toThrow();
   });
+  it("preserves the bounded document, stylesheet, and JavaScript MIME contracts", () => {
+    for (const contentType of [
+      "text/html; charset=utf-8",
+      "text/css; charset=utf-8",
+      "application/javascript; charset=utf-8",
+    ]) {
+      expect(normalizeTanstackPreviewHttpResponse({
+        status:200,headers:{"content-type":contentType},bodyBase64:"",
+      }).headers["content-type"]).toBe(contentType);
+    }
+  });
+  it("accepts only a bounded numeric Vite duration and strips timing labels", () => {
+    expect(normalizeTanstackPreviewHttpResponse({status:200,headers:{},bodyBase64:"",
+      upstreamDurationMs:12.34,internalAddress:"127.0.0.1:5173",capability:"secret"}))
+      .toMatchObject({upstreamDurationMs:12.3});
+    expect(normalizeTanstackPreviewHttpResponse({status:200,headers:{},bodyBase64:"",
+      upstreamDurationMs:Number.POSITIVE_INFINITY}).upstreamDurationMs).toBeNull();
+    expect(normalizeTanstackPreviewHttpResponse({status:200,headers:{},bodyBase64:"",
+      upstreamDurationMs:20_001}).upstreamDurationMs).toBeNull();
+  });
   it("limits response bytes", () => {
     expect(() => normalizeTanstackPreviewHttpResponse({status:200, headers:{},
       bodyBase64:Buffer.alloc(TANSTACK_PREVIEW_MAX_RESPONSE_BYTES+1).toString("base64")})).toThrow();

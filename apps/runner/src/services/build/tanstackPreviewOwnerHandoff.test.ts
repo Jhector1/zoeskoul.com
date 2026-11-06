@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { sharedFullStackPreviews } from "./sharedPreviewRegistry.js";
 import {
+  fetchAdmittedTanstackPreview,
   fetchOwnedTanstackPreview,
   resolveAdmittedTanstackPreviewCapability,
 } from "./tanstackPreviewSharedLifecycle.js";
@@ -15,11 +16,14 @@ vi.mock("./tanstackPreviewDockerTransport.js", () => ({
 const previewId = "preview_test";
 const basePath = `/api/build/projects/store1/preview/${previewId}/content/${"A".repeat(32)}/`;
 const response = {status:200,headers:{"content-type":"application/json","cache-control":"no-store"},bodyBase64:"e30="};
+const identity={sourceFingerprint:"source",dependencyFingerprint:"dependencies",
+  runtimeImageId:`sha256:${"a".repeat(64)}`,fingerprint:"identity"} as const;
 
 beforeEach(() => {
   sharedFullStackPreviews.resetForTests();
   sharedFullStackPreviews.register({
     id:previewId,ownerKey:"owner1",buildProjectId:"store1",sourceVersion:17,
+    identity,
     containerId:"container-test",basePath,createdAt:1,lastActivityAt:1,
     close:async()=>undefined,
   });
@@ -39,7 +43,7 @@ describe("admitted TanStack preview owner handoff",()=>{
     expect(fetchTanstackHttpInsideSandbox).not.toHaveBeenCalled();
     await expect(fetchOwnedTanstackPreview(base)).resolves.toEqual(response);
     expect(fetchTanstackHttpInsideSandbox).toHaveBeenCalledWith("container-test",{
-      path:"/api/cart",method:"POST",headers:{accept:"*/*","content-type":"application/json"},bodyBase64:"e30=",
+      path:basePath+"api/cart",method:"POST",headers:{accept:"*/*","content-type":"application/json"},bodyBase64:"e30=",
     });
   });
 
@@ -47,13 +51,40 @@ describe("admitted TanStack preview owner handoff",()=>{
     await fetchOwnedTanstackPreview({ownerKey:"owner1",previewId,buildProjectId:"store1",sourceVersion:17,
       path:basePath,method:"GET",headers:{accept:"text/html",cookie:"secret",authorization:"Bearer secret",host:"internal"}});
     expect(fetchTanstackHttpInsideSandbox).toHaveBeenCalledWith("container-test",{
-      path:"/",method:"GET",headers:{accept:"text/html"},bodyBase64:"",
+      path:basePath,method:"GET",headers:{accept:"text/html"},bodyBase64:"",
     });
   });
 
   it("resolves only the exact live capability, without authorizing POST",()=>{
     expect(resolveAdmittedTanstackPreviewCapability({previewId,path:basePath})).toEqual({previewId,buildProjectId:"store1",sourceVersion:17});
     expect(()=>resolveAdmittedTanstackPreviewCapability({previewId,path:basePath.replace("A","B")})).toThrow();
+  });
+
+  it("preserves MIME responses while keeping bearer fetches read-only and capability-exact",async()=>{
+    const css = {status:200,headers:{"content-type":"text/css; charset=utf-8","cache-control":"no-store"},
+      bodyBase64:Buffer.from("body{color:red}").toString("base64")};
+    vi.mocked(fetchTanstackHttpInsideSandbox).mockResolvedValueOnce(css);
+    await expect(fetchAdmittedTanstackPreview({
+      previewId,path:basePath+"src/styles.css",method:"GET",
+      headers:{accept:"text/css",cookie:"secret",authorization:"Bearer secret"},
+    })).resolves.toEqual({sourceVersion:17,response:css});
+    expect(fetchTanstackHttpInsideSandbox).toHaveBeenLastCalledWith("container-test",{
+      path:basePath+"src/styles.css",method:"GET",headers:{accept:"text/css"},bodyBase64:"",
+    });
+
+    await expect(fetchAdmittedTanstackPreview({
+      previewId,path:basePath+"api/cart",method:"POST",
+    })).rejects.toThrow(/owner-bound authentication/);
+    await expect(fetchAdmittedTanstackPreview({
+      previewId,path:basePath.replace("store1","store2"),method:"GET",
+    })).rejects.toThrow(/Unsafe full-stack preview path/);
+    await expect(fetchAdmittedTanstackPreview({
+      previewId,path:basePath.replace(previewId,"preview_other"),method:"GET",
+    })).rejects.toThrow(/Unsafe full-stack preview path/);
+    sharedFullStackPreviews.resetForTests();
+    await expect(fetchAdmittedTanstackPreview({
+      previewId,path:basePath,method:"GET",
+    })).rejects.toThrow("Preview not found.");
   });
 
   it("keeps route ownership, POST downgrading and activation checks in one place",()=>{

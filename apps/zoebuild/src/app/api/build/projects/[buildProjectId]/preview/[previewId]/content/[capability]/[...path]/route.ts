@@ -38,6 +38,7 @@ import {
 import {
   normalizeReactPreviewProxyPath,
 } from "@/lib/build/reactPreviewProxyPath";
+import { previewServerTimingHeader } from "@/lib/build/previewPerformance";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -72,6 +73,7 @@ async function proxy(
   },
   method: "GET" | "HEAD",
 ) {
+  const gatewayStartedAt = performance.now();
   const { buildProjectId, previewId: rawPreviewId, capability } = await ctx.params;
 
   try {
@@ -267,7 +269,7 @@ async function proxy(
     // as GET, returning the runner's classification with an empty body.
     if (documentGateway && parseReactPreviewDocumentRequest(url) === null)
       return errorResponse("Invalid preview document route.", 400);
-    const upstreamStartedAt = Date.now();
+    const upstreamStartedAt = performance.now();
     const result = await proxyFetchTrustedReactPreviewAtRunner({
       previewId,
       path: documentGateway ? basePath : `${normalizedPathname}${url.search}`,
@@ -303,7 +305,6 @@ async function proxy(
     if (versionedDependency) headers.set("Cache-Control", "private, max-age=300");
     // Expose latency of the authenticated runner bridge in DevTools without
     // disclosing the runner URL, capability token, file data or credentials.
-    headers.set("Server-Timing", `runner;dur=${Math.max(0, Date.now() - upstreamStartedAt)}`);
     headers.set("X-Content-Type-Options", "nosniff");
     headers.set("Referrer-Policy", "no-referrer");
 
@@ -325,6 +326,14 @@ async function proxy(
       }
     }
 
+    headers.set("Server-Timing", previewServerTimingHeader([
+      { name: "gateway", durationMs: performance.now() - gatewayStartedAt },
+      { name: "runner_roundtrip", durationMs: performance.now() - upstreamStartedAt },
+      { name: "runner_proxy", durationMs: result.timing?.runnerProxyMs },
+      { name: "docker_exec", durationMs: result.timing?.dockerExecMs },
+      { name: "vite_upstream", durationMs: result.timing?.viteUpstreamMs },
+    ]));
+
     return new Response(body, { status: result.status, headers });
   } catch (error) {
     if (error instanceof ReactPreviewRequestError) {
@@ -343,7 +352,9 @@ async function proxy(
       }
       return response;
     }
-    console.error("[ZoeBuild preview content proxy] failed", { buildProjectId, error });
+    console.error("[ZoeBuild preview content proxy] failed", {
+      category:error instanceof Error ? error.name : "unknown",
+    });
     return errorResponse("Preview service unavailable.", 502);
   }
 }

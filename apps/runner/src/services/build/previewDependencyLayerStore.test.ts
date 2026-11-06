@@ -21,6 +21,7 @@ const keyInput = {
   actorKey: "owner-1", projectId: "project-1", dependencyFingerprint: "frozen-exact-1",
   command: ["pnpm", "install", "--frozen-lockfile", "--ignore-scripts"],
   imageId: `sha256:${"a".repeat(64)}`,
+  installPolicyFingerprint: "install-policy-v1",
 };
 const key = () => previewDependencyLayerKey(keyInput);
 
@@ -36,6 +37,10 @@ describe("K20D3F persistent verified dependency layers", () => {
     const restarted = new PreviewDependencyLayerStore(root);
     const next = await restarted.acquire(key());
     expect(next).not.toBeNull();
+    expect(restarted.snapshot()).toMatchObject({lookups:1,hits:1,misses:0,activeKeys:1,activeLeases:1});
+    expect(store.snapshot()).toMatchObject({publishAttempts:1,published:1,activeLeases:1});
+    expect(await restarted.storageSnapshot()).toMatchObject({available:true,entries:1});
+    expect((await restarted.storageSnapshot()).bytes).toBeGreaterThan(0);
     next!.release(); lease!.release();
   });
 
@@ -81,6 +86,7 @@ describe("K20D3F persistent verified dependency layers", () => {
       { ...keyInput, dependencyFingerprint: "different-lock" },
       { ...keyInput, command: ["pnpm", "install"] },
       { ...keyInput, imageId: `sha256:${"b".repeat(64)}` },
+      { ...keyInput, installPolicyFingerprint: "install-policy-v2" },
     ]) expect(await store.acquire(previewDependencyLayerKey(item))).toBeNull();
   });
 
@@ -154,6 +160,91 @@ describe("K20D3F persistent verified dependency layers", () => {
     expect(PreviewDependencyLayerStore.bind(lease!)).not.toContain(":rw");
     expect(PreviewDependencyLayerStore.bind(lease!)).not.toContain("docker.sock");
     expect(PreviewDependencyLayerStore.bind(lease!)).not.toBe(`${root}:/workspace:ro`);
+    lease!.release();
+  });
+
+  it("rejects expired layers and reports corrupt content distinctly", async () => {
+    let now = 10_000_000_000;
+    const { first, root } = await fixture();
+    const store = new PreviewDependencyLayerStore(root, { now: () => now });
+    const lease = await store.publish(key(), first);
+    lease!.release();
+    now += 24 * 60 * 60_000 + 1;
+    expect((await store.lookup(key())).outcome).toBe("rejected");
+    now -= 24 * 60 * 60_000 + 1;
+    await fs.appendFile(path.join(lease!.nodeModulesDir, "foo", "index.js"), "tamper");
+    expect((await store.lookup(key())).outcome).toBe("corrupt");
+    expect(store.snapshot()).toMatchObject({ rejected: 1, corrupt: 1 });
+  });
+
+  it("falls back without publishing when prospective disk headroom is unavailable", async () => {
+    const { first, root } = await fixture();
+    const store = new PreviewDependencyLayerStore(root, {
+      reserveCapacity: async () => { throw new Error("disk reserve unavailable"); },
+    });
+    expect(await store.publish(key(), first)).toBeNull();
+    expect((await fs.lstat(path.join(first, "node_modules"))).isDirectory()).toBe(true);
+    expect(store.snapshot()).toMatchObject({ publishAttempts: 1, publishSkipped: 1 });
+  });
+
+  it("atomically resolves concurrent identical publications", async () => {
+    const { first, root, store } = await fixture();
+    const results = await Promise.all([
+      store.publish(key(), first),
+      store.publish(key(), first),
+      store.publish(key(), first),
+    ]);
+    expect(results.filter(Boolean).length).toBeGreaterThanOrEqual(1);
+    for (const lease of results) lease?.release();
+    const entries = (await fs.readdir(path.join(root, ".zoebuild-preview-dependency-layers-v1")))
+      .filter(name => /^[a-f0-9]{64}$/.test(name));
+    expect(entries).toEqual([key()]);
+    const acquired = await store.acquire(key());
+    expect(acquired).not.toBeNull();
+    acquired!.release();
+  });
+
+  it("evicts deterministically without removing a leased layer", async () => {
+    let now = 20_000_000_000;
+    const { first, root } = await fixture();
+    const store = new PreviewDependencyLayerStore(root, { now: () => now });
+    let held: Awaited<ReturnType<PreviewDependencyLayerStore["publish"]>> = null;
+    const keys: string[] = [];
+    for (let i = 0; i < 24; i++) {
+      const itemKey = previewDependencyLayerKey({
+        ...keyInput, dependencyFingerprint: `dependencies-${String(i).padStart(2, "0")}`,
+      });
+      keys.push(itemKey);
+      const lease = await store.publish(itemKey, first);
+      expect(lease).not.toBeNull();
+      if (i === 0) held = lease;
+      else lease!.release();
+      now += 1;
+    }
+    now += 76 * 60_000;
+    const newest = previewDependencyLayerKey({ ...keyInput, dependencyFingerprint: "dependencies-24" });
+    const added = await store.publish(newest, first);
+    expect(added).not.toBeNull();
+    const remaining = await fs.readdir(path.join(root, ".zoebuild-preview-dependency-layers-v1"));
+    expect(remaining).toContain(keys[0]);
+    expect(remaining).not.toContain(keys[1]);
+    expect(remaining).toContain(newest);
+    added!.release();
+    held!.release();
+  }, 30_000);
+
+  it("cleans only old incomplete staging directories during a later publication", async () => {
+    const { first, root } = await fixture();
+    const storeRoot = path.join(root, ".zoebuild-preview-dependency-layers-v1");
+    await fs.mkdir(storeRoot);
+    const abandoned = path.join(storeRoot, ".pending-11111111-1111-1111-1111-111111111111");
+    await fs.mkdir(abandoned);
+    const old = new Date(Date.now() - 2 * 60 * 60_000);
+    await fs.utimes(abandoned, old, old);
+    const store = new PreviewDependencyLayerStore(root);
+    const lease = await store.publish(key(), first);
+    expect(lease).not.toBeNull();
+    expect(await fs.lstat(abandoned).catch(() => null)).toBeNull();
     lease!.release();
   });
 });

@@ -100,6 +100,7 @@ export function normalizeTanstackPreviewHttpResponse(input: unknown): Readonly<{
   status: number;
   headers: Readonly<Record<string, string>>;
   bodyBase64: string;
+  upstreamDurationMs: number | null;
 }> {
   if (!input || typeof input !== "object" || Array.isArray(input))
     throw new Error("Invalid full-stack preview response.");
@@ -115,10 +116,15 @@ export function normalizeTanstackPreviewHttpResponse(input: unknown): Readonly<{
   const values = record.headers && typeof record.headers === "object" && !Array.isArray(record.headers)
     ? record.headers as Record<string, unknown> : {};
   const contentType = requireSafeHeader(values["content-type"], 180);
+  const upstreamDurationMs = typeof record.upstreamDurationMs === "number" &&
+    Number.isFinite(record.upstreamDurationMs) && record.upstreamDurationMs >= 0 &&
+    record.upstreamDurationMs <= 20_000
+    ? Math.round(record.upstreamDurationMs * 10) / 10 : null;
   return {
     status: record.status,
     headers: contentType ? { "content-type": contentType, "cache-control": "no-store" }
       : { "cache-control": "no-store" },
     bodyBase64: record.bodyBase64,
+    upstreamDurationMs,
   };
 }

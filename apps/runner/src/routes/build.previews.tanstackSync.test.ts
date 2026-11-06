@@ -7,6 +7,8 @@ import { sharedFullStackPreviews } from "../services/build/sharedPreviewRegistry
 const previewId = "preview_p3b7d7";
 const projectId = "project_p3b7d7";
 const ownerKey = "actor-p3b7d7";
+const identity={sourceFingerprint:"source",dependencyFingerprint:"dependencies",
+  runtimeImageId:`sha256:${"a".repeat(64)}`,fingerprint:"identity"} as const;
 const baseRequest = {
   operation: "production-build" as const,
   protocolVersion: 1 as const,
@@ -27,6 +29,7 @@ function registerLease() {
     ownerKey,
     buildProjectId: projectId,
     sourceVersion: 8,
+    identity,
     containerId: "sandbox_p3b7d7",
     basePath: `/api/build/projects/${projectId}/preview/${previewId}/content/cap/`,
     createdAt: now,

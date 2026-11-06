@@ -16,7 +16,7 @@ import {
 const validSpecification = {
   version: 1,
   name: "Photographer Portfolio",
-  projectType: "static-site",
+  projectType: "fullstack-app",
   targets: ["web"],
   requirements: {
     backend: false,
@@ -28,9 +28,9 @@ const validSpecification = {
     commerce: false,
   },
   pages: ["Home", "Gallery", "Contact"],
-  stackId: "static-html-v1",
+  stackId: "tanstack-start-v1",
   deployment: {
-    preference: "static",
+    preference: "managed-runtime",
   },
 } as const;
 

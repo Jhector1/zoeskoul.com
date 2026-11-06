@@ -53,5 +53,17 @@ describe("TanStack isolated SSR preview policy", () => {
     expect(() => assertTanstackSandboxOptions({...options,HostConfig:{...options.HostConfig,NetworkMode:"bridge"}})).toThrow();
     expect(() => assertTanstackSandboxOptions({...options,User:"0:0",HostConfig:{...options.HostConfig,PortBindings:{"5173/tcp":[{}]}}})).toThrow();
     expect(() => assertTanstackSandboxOptions({...options,HostConfig:{...options.HostConfig,Binds:[...options.HostConfig.Binds,"/var/run/docker.sock:/var/run/docker.sock:rw"]}})).toThrow();
+
+    const layer = `/workspaces/.zoebuild-preview-dependency-layers-v1/${"a".repeat(64)}/node_modules:/workspace/node_modules:ro`;
+    const cached = {...options, HostConfig:{...options.HostConfig,
+      Binds:[...options.HostConfig.Binds,layer],Tmpfs:{
+        "/workspace/node_modules/.vite":"rw,noexec,nosuid,nodev,size=64m,uid=1000,gid=1000,mode=0700",
+        "/workspace/node_modules/.vite-temp":"rw,noexec,nosuid,nodev,size=16m,uid=1000,gid=1000,mode=0700",
+      }}};
+    expect(() => assertTanstackSandboxOptions(cached)).not.toThrow();
+    expect(() => assertTanstackSandboxOptions({...cached,HostConfig:{...cached.HostConfig,
+      Binds:[cached.HostConfig.Binds[0],layer.replace(":ro",":rw")]}})).toThrow();
+    expect(() => assertTanstackSandboxOptions({...cached,HostConfig:{...cached.HostConfig,
+      Tmpfs:{...cached.HostConfig.Tmpfs,"/workspace/node_modules/.vite":"rw,size=1g"}}})).toThrow();
   });
 });

@@ -1,4 +1,5 @@
 import express from "express";
+import { BUILD_EXECUTOR_HTTP_BODY_LIMIT_BYTES } from "@zoeskoul/build-executor-contracts";
 import { requireServiceAuth } from "./middleware/serviceAuth.js";
 import { executionPoolGuard } from "./middleware/executionPoolGuard.js";
 import { startSessionRoute } from "./routes/sessions.start.js";
@@ -13,7 +14,6 @@ import { activeSessionsRoute } from "./routes/sessions.active.js";
 import { validateBuildJobRoute } from "./routes/build.jobs.validate.js";
 import { executeBuildDependencyLockBootstrapRoute } from "./routes/build.jobs.dependencyLockBootstrap.js";
 import { executeBuildProductionRoute } from "./routes/build.jobs.productionBuild.js";
-import { startBuildPreviewRoute } from "./routes/build.previews.start.js";
 import { startBuildPreviewOperationRoute, statusBuildPreviewOperationRoute, cancelBuildPreviewOperationRoute } from "./routes/build.previews.operations.js";
 import { syncBuildPreviewRoute } from "./routes/build.previews.sync.js";
 import { fetchBuildPreviewRoute } from "./routes/build.previews.fetch.js";
@@ -27,14 +27,45 @@ import {
   getDirectoryUsage,
   getRunnerFilesystemCapacity,
 } from "./services/workspace/workspacePolicy.js";
+import { previewObservability } from "./services/build/previewObservability.js";
+import { sharedFullStackPreviews } from "./services/build/sharedPreviewRegistry.js";
+import { sharedPreviewStartCoordinator } from "./services/build/sharedPreviewRuntimeState.js";
+import { previewDependencyLayerStore } from "./services/build/previewDependencyLayerStore.js";
+import { zoeBuildBootstrapQueueSnapshot } from "./services/build/zoeBuildBuildCapacity.js";
 
 export const app = express();
+
+async function zoeBuildPreviewMetricsSnapshot() {
+  const leases = sharedFullStackPreviews.snapshot();
+  const lifecycle = previewObservability.snapshot();
+  const dependencyLayerStorage = await previewDependencyLayerStore.storageSnapshot();
+  return {
+    resources: {
+      active: leases.active,
+      starting: lifecycle.operations.active,
+      closing: leases.closing,
+      quarantined: leases.quarantined,
+    },
+    leases,
+    startQueue: sharedPreviewStartCoordinator.snapshot(),
+    lifecycle,
+    dependencyBootstrapQueue: zoeBuildBootstrapQueueSnapshot(),
+    dependencyLayers: {
+      ...previewDependencyLayerStore.snapshot(),
+      storage: dependencyLayerStorage,
+    },
+    containerResources: {
+      available: false,
+      reason: "not_polled_to_avoid_preview_overhead",
+    },
+  } as const;
+}
 
 app.disable("x-powered-by");
 app.set("trust proxy", 1);
 
 // 5 MB workspace + JSON overhead
-app.use(express.json({ limit: "8mb" }));
+app.use(express.json({ limit: BUILD_EXECUTOR_HTTP_BODY_LIMIT_BYTES }));
 
 // Public container healthcheck. It reveals no sensitive state and must return exact 200.
 app.get("/healthz", (_req, res) => {
@@ -68,13 +99,18 @@ app.get("/metrics", async (_req, res) => {
         maxWorkspaceRootBytes: env.maxWorkspaceRootBytes,
         filesystem,
       },
+      zoeBuildPreview: await zoeBuildPreviewMetricsSnapshot(),
     });
-  } catch (err) {
+  } catch {
     res.status(200).json({
       ok: true,
       stats: getSessionStats(),
       storage: {
-        error: err instanceof Error ? err.message : String(err),
+        error: "workspace_metrics_unavailable",
+      },
+      zoeBuildPreview: {
+        available: false,
+        reason: "preview_metrics_unavailable",
       },
     });
   }
@@ -83,7 +119,6 @@ app.get("/metrics", async (_req, res) => {
 app.post("/build/jobs/validate", validateBuildJobRoute);
 app.post("/build/jobs/dependency-lock-bootstrap", executeBuildDependencyLockBootstrapRoute);
 app.post("/build/jobs/production-build", executeBuildProductionRoute);
-app.post("/build/previews/start", startBuildPreviewRoute);
 app.post("/build/previews/operations/start", startBuildPreviewOperationRoute);
 app.post("/build/previews/operations/:operationId/status", statusBuildPreviewOperationRoute);
 app.post("/build/previews/operations/:operationId/cancel", cancelBuildPreviewOperationRoute);

@@ -13,7 +13,7 @@ import { assertZoeBuildPreviewCapacity, ZOEBUILD_MAX_CONCURRENT_PREVIEWS } from 
 const pendingByActor = new Map<string, number>();
 let pendingGlobal = 0;
 const IDLE_MS = 10 * 60_000;
-const HARD_LIFETIME_MS = 60 * 60_000;
+export const TANSTACK_PREVIEW_HARD_LIFETIME_MS = 60 * 60_000;
 const CROSS_ACTOR_IDLE_MS = 45_000;
 
 function activeForActor(ownerKey: string): number {
@@ -34,7 +34,7 @@ function needsSlot(ownerKey: string): boolean {
 export async function reclaimTanstackPreviewCapacity(ownerKey: string, buildProjectId: string): Promise<void> {
   if (!ownerKey || !buildProjectId) throw new Error("Preview identity required.");
   const now = Date.now();
-  await sharedFullStackPreviews.sweep(now, IDLE_MS, HARD_LIFETIME_MS);
+  await sharedFullStackPreviews.sweep(now, IDLE_MS, TANSTACK_PREVIEW_HARD_LIFETIME_MS);
   if (!needsSlot(ownerKey)) return;
   const candidates = choosePreviewsToReclaim(
     sharedFullStackPreviews.list(), ownerKey, buildProjectId, now, CROSS_ACTOR_IDLE_MS,

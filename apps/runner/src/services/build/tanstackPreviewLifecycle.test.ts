@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError, TanstackPreviewReadinessError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
+import { PreviewObservability } from "./previewObservability.js";
 
 const good = {status:200,headers:{"content-type":"text/html"},
   bodyBase64:Buffer.from("<html><head></head><body>ok</body></html>").toString("base64")};
@@ -36,6 +37,19 @@ describe("TanStack preview lifecycle without a second capacity registry",()=>{
     const steps:string[]=[];const controller=new AbortController(); controller.abort();
     await expect(startIsolatedTanstackPreview(fakeDriver(steps),{signal:controller.signal})).rejects.toThrow("cancelled");
     expect(steps).toEqual([]);
+  });
+  it("reports readiness and first SSR from the same process clock without changing control flow", async()=>{
+    let now=0;
+    const metrics=new PreviewObservability(()=>now);
+    const telemetry=metrics.beginOperation({startKind:"cold",reuseCandidate:false});
+    const driver=fakeDriver([]);
+    const measured:TanstackPreviewDriver={...driver,probe:async()=>{now=12;return good;}};
+    await expect(startIsolatedTanstackPreview(measured,{telemetry})).resolves.toEqual({
+      containerId:"docker123",workspaceDir:"/temp/project",
+    });
+    telemetry.finish("ok");
+    expect(telemetry.snapshot().stages.vite_readiness).toEqual({outcome:"ok",durationMs:12});
+    expect(telemetry.snapshot().stages.first_ssr).toEqual({outcome:"ok",durationMs:12});
   });
 });
 
@@ -110,5 +124,18 @@ describe("P3B5D sanitized TanStack readiness telemetry", () => {
       result: "transport_error", attempts: 1, lastHttpStatus: null, elapsedMs: 800,
     });
     expect(error.message).not.toContain("secret-token");
+  });
+
+  it("attributes a readiness failure and leaves later stages unavailable", async () => {
+    let now=0;
+    const metrics=new PreviewObservability(()=>now);
+    const telemetry=metrics.beginOperation({startKind:"restart",reuseCandidate:false});
+    const driver:TanstackPreviewDriver={...fakeDriver([],"never"),now:()=>now,
+      sleep:async(ms)=>{now+=ms;}};
+    await expect(startIsolatedTanstackPreview(driver,{timeoutMs:800,telemetry})).rejects.toThrow("ready");
+    telemetry.finish("error");
+    expect(telemetry.snapshot().stages.vite_readiness).toEqual({outcome:"error",durationMs:800});
+    expect(telemetry.snapshot().stages.first_ssr).toEqual({outcome:"error",durationMs:800});
+    expect(telemetry.snapshot().stages.operation_total.outcome).toBe("error");
   });
 });

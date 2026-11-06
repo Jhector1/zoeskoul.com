@@ -19,7 +19,7 @@ import {
 } from "./index";
 
 function specification(
-  stackId = "react-vite-v1",
+  stackId = "tanstack-start-v1",
 ): ProjectSpecification {
   return {
     version: 1,
@@ -28,7 +28,7 @@ function specification(
       "Applied project",
 
     projectType:
-      "frontend-app",
+      "fullstack-app",
 
     targets: [
       "web",
@@ -52,7 +52,7 @@ function specification(
 
     deployment: {
       preference:
-        "static",
+        "managed-runtime",
     },
   };
 }
@@ -147,10 +147,10 @@ describe(
           baseVersion: 4,
 
           stackId:
-            "react-vite-v1",
+            "tanstack-start-v1",
 
           templateId:
-            "react-vite-v1",
+            "tanstack-start-v1",
         });
 
         expect(

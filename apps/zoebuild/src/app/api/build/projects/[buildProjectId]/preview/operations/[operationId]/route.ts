@@ -3,7 +3,7 @@ import { RunnerHttpError } from "@zoeskoul/platform-server/server/runnerClient";
 import { loadCurrentBuildAccessSnapshot } from "@/lib/build/currentBuildAccess";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { requireOwnedReactPreviewProject, ReactPreviewRequestError } from "@/lib/build/reactPreviewServer";
-import { getTrustedReactPreviewOperationAtRunner, proxyFetchTrustedReactPreviewAtRunner } from "@/lib/build/reactPreviewRunnerClient";
+import { getTrustedReactPreviewOperationAtRunner } from "@/lib/build/reactPreviewRunnerClient";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -36,24 +36,11 @@ export async function GET(_req: Request, ctx: {params: Promise<{ buildProjectId:
     if (preview.buildProjectId !== buildProjectId || preview.sourceVersion !== project.sourceVersion ||
       !preview.basePath.startsWith(`/api/build/projects/${encodeURIComponent(buildProjectId)}/preview/${encodeURIComponent(preview.previewId)}/content/`))
       return json(requestId, {ok:false, code:"BUILD_PREVIEW_IDENTITY_MISMATCH", message:"Preview identity could not be verified."}, 409);
-    // Runner startup already verified a full HTML document. The status path
-    // needs only a fresh capability-scoped liveness/MIME check, not another
-    // complete HTML transfer and base64 encode/decode. The sandboxed browser
-    // iframe owns the one real GET and the React-render acknowledgement.
-    let documentResponse;
-    try {
-      documentResponse = await proxyFetchTrustedReactPreviewAtRunner({
-        previewId: preview.previewId, path: preview.basePath, method:"HEAD", accept: "*/*",
-      });
-    } catch (error) {
-      if (error instanceof RunnerHttpError && error.status === 404) return json(requestId,
-        {ok:false, code:"BUILD_PREVIEW_RUNNER_ROUTING", message:"Preview session is unavailable. Retry to prepare it again."}, 503);
-      throw error;
-    }
-    if (documentResponse.status !== 200 || !/^text\/html(?:\s*;|\s*$)/i.test(documentResponse.headers["content-type"] ?? ""))
-      return json(requestId, {ok:false, code:"BUILD_PREVIEW_DOCUMENT_NOT_READY", message:"The preview website is not available. Retry preview."}, 503);
-    const afterDocument = await requireOwnedReactPreviewProject({access, buildProjectId});
-    if (afterDocument.sourceVersion !== project.sourceVersion) return json(requestId,
+    // Runner operation status owns the fresh lease health transition. Recheck
+    // the project CAS after that bounded probe so a concurrent save cannot
+    // publish an older ready operation.
+    const afterHealth = await requireOwnedReactPreviewProject({access, buildProjectId});
+    if (afterHealth.sourceVersion !== project.sourceVersion) return json(requestId,
       {ok:false, code:"BUILD_PREVIEW_SOURCE_CONFLICT", message:"The saved source changed during preview verification."}, 409);
     return json(requestId, {ok:true, operation}, 200);
   } catch (error) {
@@ -63,7 +50,9 @@ export async function GET(_req: Request, ctx: {params: Promise<{ buildProjectId:
       {ok:false,code:error.status===404 ? "BUILD_PREVIEW_OPERATION_EXPIRED" : "BUILD_PREVIEW_RUNNER_UNAVAILABLE",
         message:error.status===404 ? "This preview operation expired. Retry preview." : "Preview runner is unavailable."},
       error.status===404 ? 404 : 503);
-    console.error("[ZoeBuild preview operation status] failed", {requestId, error});
+    console.error("[ZoeBuild preview operation status] failed", {
+      requestId,category:error instanceof Error ? error.name : "unknown",
+    });
     return json(requestId, {ok:false,code:"BUILD_PREVIEW_STATUS_FAILED",message:"Preview status is unavailable."}, 503);
   }
 }
