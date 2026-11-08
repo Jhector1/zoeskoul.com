@@ -14,6 +14,7 @@ import { env } from "../../lib/env.js";
 import {
   isRunnerManagedDirPath,
   isRunnerManagedFilePath,
+  isWorkspaceProtectedTrashPath,
 } from "./runnerManagedWorkspace.js";
 
 export type NormalizedWorkspaceEntry =
@@ -119,7 +120,7 @@ export function normalizeWorkspaceEntries(
 
       if (
         args.dropRunnerManaged &&
-        (isRunnerManagedFilePath(relPath) || isRunnerManagedDirPath(relPath))
+        (isRunnerManagedFilePath(relPath) || isRunnerManagedDirPath(relPath) || isWorkspaceProtectedTrashPath(relPath))
       ) {
         return null;
       }

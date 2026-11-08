@@ -6,7 +6,7 @@ export const RUNNER_MANAGED_DIRS = new Set(["build"]);
  * projection. These directories must survive editor-to-terminal replacement,
  * but they must never be returned to Explorer snapshots.
  */
-export const WORKSPACE_INTERNAL_STATE_DIRS = new Set([".git", ".zoeskoul"]);
+export const WORKSPACE_INTERNAL_STATE_DIRS = new Set([".git", ".zoeskoul", ".zoe-v6-trash"]);
 
 export function normalizeWorkspaceRelPath(input: string) {
     return String(input ?? "").replace(/\\/g, "/").trim();
@@ -38,6 +38,11 @@ export function isRunnerManagedFilePath(relPath: string) {
 
 export function isRunnerManagedDirPath(relPath: string) {
     return pathContainsSegment(relPath, RUNNER_MANAGED_DIRS);
+}
+
+/** Recoverable V6 trash belongs only to the sandbox worker, never to editor sync. */
+export function isWorkspaceProtectedTrashPath(relPath: string) {
+    return safePathParts(relPath).includes(".zoe-v6-trash");
 }
 
 export function isWorkspaceInternalStatePath(relPath: string) {

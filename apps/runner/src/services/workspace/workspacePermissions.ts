@@ -60,8 +60,11 @@ export async function ensureWorkspaceWritableForShellUser(workspaceDir: string) 
   // Source files remain writable but node_modules is owned by the trusted
   // rootless installer or an immutable read-only layer. Never recurse into it.
   // GNU/BSD find both support pruning and batched -exec ... {} +.
+  // V6 trash is sandbox-owned recovery data. Never descend into it or
+  // broaden its 0700 permissions while repairing ordinary shell files.
   await runBestEffort("find", [
-    workspaceDir, "-name", "node_modules", "-prune", "-o",
-    "-exec", "chmod", "a+rwX", "{}", "+",
+    workspaceDir,
+    "(", "-name", "node_modules", "-o", "-name", ".zoe-v6-trash", ")",
+    "-prune", "-o", "-exec", "chmod", "a+rwX", "{}", "+",
   ]);
 }

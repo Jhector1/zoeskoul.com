@@ -42,7 +42,9 @@ async function walkCurrentEntries(
     const abs = path.join(dir, entry.name);
     const rel = path.relative(root, abs).replace(/\\/g, "/");
 
-    if (!isSafeRelativePath(rel)) continue;
+    // Skip protected runtime state *before* walking it. The host-side Runner
+    // must not open sandbox-owned .zoe-v6-trash (typically mode 0700).
+    if (!isSafeRelativePath(rel) || isWorkspacePreservedPath(rel)) continue;
     if (entry.isDirectory()) {
       out.push({ kind: "directory", path: rel });
       await walkCurrentEntries(root, abs, out);
