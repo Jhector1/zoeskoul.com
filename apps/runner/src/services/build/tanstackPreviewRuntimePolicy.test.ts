@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { normalizeTanstackPreviewHttpRequest } from "./tanstackPreviewHttpBoundary.js";
 import {
   TANSTACK_PREVIEW_DEV_COMMAND, tanstackPreviewDevCommand, isTanstackSsrReady, tanstackInternalPreviewPath,
-  assertTanstackSandboxOptions,
+  TANSTACK_PREVIEW_OFFLINE_ENV, assertTanstackSandboxOptions,
 } from "./tanstackPreviewRuntimePolicy.js";
 
 const base = `/api/build/projects/project1/preview/preview1/content/${"x".repeat(32)}/`;
@@ -42,7 +42,12 @@ describe("TanStack isolated SSR preview policy", () => {
     const mintBase = `/api/build/projects/project1/preview/preview_11111111-1111-1111-1111-111111111111/content/${"x".repeat(32)}/`;
     const command = tanstackPreviewDevCommand(mintBase);
     expect(command).toEqual([...TANSTACK_PREVIEW_DEV_COMMAND, "--base", mintBase]);
-    const options = { Cmd:command, Env:[`ZOEBUILD_PREVIEW_BASE_PATH=${mintBase}`], User:"1000:1000",
+    expect(command).toContain("--logLevel");
+    expect(command).toContain("warn");
+    const options = { Cmd:command, Env:[
+      `ZOEBUILD_PREVIEW_BASE_PATH=${mintBase}`,
+      TANSTACK_PREVIEW_OFFLINE_ENV,
+    ], User:"1000:1000",
       HostConfig:{ NetworkMode:"none",Privileged:false,ReadonlyRootfs:true,CpuPeriod:100000,CpuQuota:80000,CapDrop:["ALL"],Memory:1024*1024*1024,MemorySwap:1024*1024*1024,
         PidsLimit:128,Binds:["/isolated/workspace:/workspace:rw"],SecurityOpt:["no-new-privileges:true"] }};
     expect(() => assertTanstackSandboxOptions(options)).not.toThrow();
@@ -50,6 +55,11 @@ describe("TanStack isolated SSR preview policy", () => {
     expect(() => assertTanstackSandboxOptions({...options, Cmd:[...command.slice(0,-1), "/evil/"]})).toThrow();
     expect(() => assertTanstackSandboxOptions({...options, Env:[]})).toThrow();
     expect(() => assertTanstackSandboxOptions({...options, Env:[...options.Env, `ZOEBUILD_PREVIEW_BASE_PATH=${mintBase}`]})).toThrow();
+    expect(() => assertTanstackSandboxOptions({...options,
+      Env:options.Env.filter(value => value !== TANSTACK_PREVIEW_OFFLINE_ENV)})).toThrow();
+    expect(() => assertTanstackSandboxOptions({...options,
+      Env:options.Env.map(value => value === TANSTACK_PREVIEW_OFFLINE_ENV
+        ? "CLOUDFLARE_CF_FETCH_ENABLED=true" : value)})).toThrow();
     expect(() => assertTanstackSandboxOptions({...options,HostConfig:{...options.HostConfig,NetworkMode:"bridge"}})).toThrow();
     expect(() => assertTanstackSandboxOptions({...options,User:"0:0",HostConfig:{...options.HostConfig,PortBindings:{"5173/tcp":[{}]}}})).toThrow();
     expect(() => assertTanstackSandboxOptions({...options,HostConfig:{...options.HostConfig,Binds:[...options.HostConfig.Binds,"/var/run/docker.sock:/var/run/docker.sock:rw"]}})).toThrow();

@@ -34,6 +34,16 @@ type Manifest = {
   bytes: number;
   files: number;
 };
+type TreeAttestation =
+  | Readonly<{ ok: true; tree: Omit<Manifest, "schema" | "key" | "createdAt"> }>
+  | Readonly<{ ok: false; reason:
+      | "root-unavailable"
+      | "file-limit"
+      | "byte-limit"
+      | "unsafe-link"
+      | "external-hardlink"
+      | "unsupported-entry"
+      | "read-failure" }>;
 export type DependencyLayerLease = { nodeModulesDir: string; release(): void };
 export type DependencyLayerLookup = Readonly<{
   outcome: DependencyLayerLookupOutcome;
@@ -64,13 +74,20 @@ function within(root: string, absolute: string) {
 async function attestTree(root: string, options: Readonly<{
   allowExternalHardlinks?: boolean;
   metadataOnly?: boolean;
-}> = {}): Promise<Omit<Manifest, "schema" | "key" | "createdAt"> | null> {
+}> = {}): Promise<TreeAttestation> {
   const st = await fs.lstat(root).catch(() => null);
-  if (!st?.isDirectory() || st.isSymbolicLink()) return null;
-  const canonical = await fs.realpath(root);
+  if (!st?.isDirectory() || st.isSymbolicLink())
+    return { ok: false, reason: "root-unavailable" };
+  const canonical = await fs.realpath(root).catch(() => null);
+  if (!canonical) return { ok: false, reason: "root-unavailable" };
   const digest = createHash("sha256");
   let bytes = 0;
   let files = 0;
+  let rejection: Extract<TreeAttestation, { ok: false }>["reason"] | null = null;
+  const reject = (reason: NonNullable<typeof rejection>) => {
+    rejection = reason;
+    return false;
+  };
   const walk = async (dir: string, prefix: string): Promise<boolean> => {
     const children = (await fs.readdir(dir, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name));
     // The layer is verified against its exact byte digest on EVERY acquire.
@@ -97,15 +114,15 @@ async function attestTree(root: string, options: Readonly<{
     };
     for (const [i, child] of children.entries()) {
       fillPrefetch(i);
-      if (++files > MAX_FILES) return false;
+      if (++files > MAX_FILES) return reject("file-limit");
       const filename = path.join(dir, child.name);
       const relative = prefix ? `${prefix}/${child.name}` : child.name;
       const info = await fs.lstat(filename);
       if (info.isSymbolicLink()) {
         const target = await fs.readlink(filename);
-        if (path.isAbsolute(target)) return false;
+        if (path.isAbsolute(target)) return reject("unsafe-link");
         const resolved = await fs.realpath(filename).catch(() => null);
-        if (!resolved || !within(canonical, resolved)) return false;
+        if (!resolved || !within(canonical, resolved)) return reject("unsafe-link");
         digest.update(`L\0${relative}\0${target}\0`);
       } else if (info.isDirectory()) {
         digest.update(`D\0${relative}\0`);
@@ -113,9 +130,10 @@ async function attestTree(root: string, options: Readonly<{
       } else if (info.isFile()) {
         // Do not accept an inode also reachable through a writable external
         // path. A read-only Docker mount does not make its other hardlinks RO.
-        if (!options.allowExternalHardlinks && info.nlink > 1) return false;
+        if (!options.allowExternalHardlinks && info.nlink > 1)
+          return reject("external-hardlink");
         bytes += info.size;
-        if (bytes > MAX_ITEM_BYTES) return false;
+        if (bytes > MAX_ITEM_BYTES) return reject("byte-limit");
         digest.update(`F\0${relative}\0${info.mode & 0o111}\0${info.size}\0`);
         // Stream large files so a cache check cannot allocate hundreds of MiB
         // inside the runner's 512 MiB service memory allowance.
@@ -133,17 +151,18 @@ async function attestTree(root: string, options: Readonly<{
               streamed += (chunk as Buffer).byteLength;
               digest.update(chunk as Buffer);
             }
-            if (streamed !== info.size) return false;
+            if (streamed !== info.size) return reject("read-failure");
           }
         }
-      } else return false;
+      } else return reject("unsupported-entry");
     }
     return true;
   };
   try {
-    if (!await walk(root, "")) return null;
-  } catch { return null; }
-  return { digest: digest.digest("hex"), bytes, files };
+    if (!await walk(root, ""))
+      return { ok: false, reason: rejection ?? "read-failure" };
+  } catch { return { ok: false, reason: "read-failure" }; }
+  return { ok: true, tree: { digest: digest.digest("hex"), bytes, files } };
 }
 
 export class PreviewDependencyLayerStore {
@@ -228,9 +247,10 @@ export class PreviewDependencyLayerStore {
     if (this.now() - m.createdAt > TTL_MS)
       return { outcome: "rejected", manifest: null, verificationMs: null };
     const startedAt = performance.now();
-    const tree = await attestTree(path.join(this.entry(key), "node_modules"));
+    const attestation = await attestTree(path.join(this.entry(key), "node_modules"));
     const verificationMs = performance.now() - startedAt;
-    if (!tree || tree.digest !== m.digest || tree.bytes !== m.bytes || tree.files !== m.files)
+    if (!attestation.ok || attestation.tree.digest !== m.digest ||
+        attestation.tree.bytes !== m.bytes || attestation.tree.files !== m.files)
       return { outcome: "corrupt", manifest: null, verificationMs };
     return { outcome: "hit", manifest: m, verificationMs };
   }
@@ -422,7 +442,7 @@ export class PreviewDependencyLayerStore {
     const inspected = await attestTree(source, {
       allowExternalHardlinks: true, metadataOnly: true,
     });
-    if (!inspected) return skip("source-tree-unavailable-or-limit");
+    if (!inspected.ok) return skip(`source-tree-${inspected.reason}`);
     for (const name of [".vite", ".vite-temp"]) {
       const entry = await fs.lstat(path.join(source, name)).catch(() => null);
       if (entry && (!entry.isDirectory() || entry.isSymbolicLink())) {
@@ -437,15 +457,15 @@ export class PreviewDependencyLayerStore {
       );
       return existing;
     }
-    await this.sweep(key, inspected.bytes).catch(() => undefined);
+    await this.sweep(key, inspected.tree.bytes).catch(() => undefined);
     const published = (await Promise.all((await fs.readdir(this.root))
       .filter(name => KEY.test(name)).map(name => this.manifest(name)))).filter((m): m is Manifest => m !== null);
     if (published.length >= MAX_ENTRIES ||
-        published.reduce((sum, m) => sum + m.bytes, 0) + inspected.bytes > MAX_TOTAL_BYTES) {
+        published.reduce((sum, m) => sum + m.bytes, 0) + inspected.tree.bytes > MAX_TOTAL_BYTES) {
       return skip("cache-capacity");
     }
     try {
-      await this.reserveCapacity(this.workspaceRoot, inspected.bytes);
+      await this.reserveCapacity(this.workspaceRoot, inspected.tree.bytes);
     } catch {
       return skip("disk-headroom");
     }
@@ -478,8 +498,10 @@ export class PreviewDependencyLayerStore {
       // This scan rejects any hardlink that survived the copy and symlinks
       // that now escape the copied tree. A digest covers *actual* bytes.
       const tree = await attestTree(cloned);
-      if (!tree) return skip("detached-tree-invalid");
-      const manifest: Manifest = { schema: SCHEMA, key, createdAt: this.now(), ...tree };
+      if (!tree.ok) return skip(`detached-tree-${tree.reason}`);
+      const manifest: Manifest = {
+        schema: SCHEMA, key, createdAt: this.now(), ...tree.tree,
+      };
       await fs.writeFile(path.join(staged, "manifest.json"), JSON.stringify(manifest), {
         mode: 0o644, flag: "wx",
       });

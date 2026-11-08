@@ -116,6 +116,7 @@ async function cachedDriver() {
     store,
     driver: makeTanstackPreviewDockerDriver(
       "owner-a", source, basePath, identity, undefined, store,
+      { operation: "a".repeat(16), preview: "b".repeat(16) },
     ),
   };
 }
@@ -138,6 +139,11 @@ describe("Wave 3 Docker dependency mount ownership", () => {
       ),
     });
     expect(state.options.HostConfig.NetworkMode).toBe("none");
+    expect(state.options.Env).toContain("CLOUDFLARE_CF_FETCH_ENABLED=false");
+    expect(state.options.Labels).toMatchObject({
+      "com.zoeskoul.runner.operation-correlation": "a".repeat(16),
+      "com.zoeskoul.runner.preview-correlation": "b".repeat(16),
+    });
     await driver.destroy(containerId);
     expect(store.snapshot().activeLeases).toBe(0);
     await driver.cleanup(workspace);

@@ -94,7 +94,7 @@ export class PreviewOperationRegistry<Request> {
   private readonly reuseTasks = new Map<string, Promise<PreviewOperationStatus | null>>();
   constructor(
     private readonly journal: FilePreviewOperationJournal,
-    private readonly worker: (input: { actorKey: string; request: Request; signal: AbortSignal;
+    private readonly worker: (input: { operationId: string; actorKey: string; request: Request; signal: AbortSignal;
       onPhase: (phase: PreviewOperationStage) => void;
       telemetry: PreviewOperationTelemetry }) => Promise<PreviewOperationResult>,
     private readonly cancelPreview: (actorKey: string, previewId: string) => Promise<unknown>,
@@ -194,7 +194,8 @@ export class PreviewOperationRegistry<Request> {
     // including cancellation and verified cleanup, after the response closes.
     const workerTask = (async () => {
       try {
-        const result = await this.worker({ actorKey, request, signal: record.abort.signal, telemetry,
+        const result = await this.worker({ operationId: record.id, actorKey, request,
+          signal: record.abort.signal, telemetry,
           onPhase: phase => { record.stage = phase; void this.persist(record).catch(() => undefined); } });
         if (record.abort.signal.aborted) {
           await this.cancelPreview(actorKey, result.previewId);

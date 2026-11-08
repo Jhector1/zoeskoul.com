@@ -10,7 +10,7 @@ import { buildProductionBuildContainerOptions, executeBuildStep } from "./execut
 import { assertTanstackWorkerBuildRequest } from "./tanstackWorkerBuildPolicy.js";
 import {
   TANSTACK_PREVIEW_INSTALL_COMMAND, tanstackPreviewDevCommand,
-  assertTanstackSandboxOptions,
+  TANSTACK_PREVIEW_OFFLINE_ENV, assertTanstackSandboxOptions,
 } from "./tanstackPreviewRuntimePolicy.js";
 import { TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
 import { fetchTanstackHttpInsideSandbox } from "./tanstackPreviewDockerTransport.js";
@@ -100,8 +100,14 @@ export function makeTanstackPreviewDockerDriver(
   identity: TanstackPreviewIdentity,
   telemetry?: PreviewOperationTelemetry,
   dependencyStore: PreviewDependencyLayerStore = previewDependencyLayerStore,
+  diagnosticCorrelation?: Readonly<{operation:string;preview:string}>,
 ): TanstackPreviewDriver {
   if (!ownerKey) throw new Error("TanStack preview owner identity required.");
+  if (diagnosticCorrelation &&
+      (!/^[a-f0-9]{16}$/.test(diagnosticCorrelation.operation) ||
+       !/^[a-f0-9]{16}$/.test(diagnosticCorrelation.preview))) {
+    throw new Error("Invalid preview diagnostic correlation.");
+  }
   assertTanstackWorkerBuildRequest(request);
   // Validate before preparing a workspace or invoking Docker.
   const command = tanstackPreviewDevCommand(basePath);
@@ -236,9 +242,18 @@ export function makeTanstackPreviewDockerDriver(
         const options = {
           ...base,
           Image: identity.runtimeImageId,
-          Env: [...base.Env, `ZOEBUILD_PREVIEW_BASE_PATH=${basePath}`],
+          Env: [
+            ...base.Env,
+            `ZOEBUILD_PREVIEW_BASE_PATH=${basePath}`,
+            TANSTACK_PREVIEW_OFFLINE_ENV,
+          ],
           Labels: { ...base.Labels, "com.zoeskoul.runner.purpose": "tanstack-start-preview",
-            "com.zoeskoul.runner.tanstack-run": journal.runId },
+            "com.zoeskoul.runner.tanstack-run": journal.runId,
+            ...(diagnosticCorrelation ? {
+              "com.zoeskoul.runner.operation-correlation": diagnosticCorrelation.operation,
+              "com.zoeskoul.runner.preview-correlation": diagnosticCorrelation.preview,
+            } : {}),
+          },
           HostConfig: {
             ...base.HostConfig,
             NetworkMode: "none",

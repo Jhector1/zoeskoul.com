@@ -53,10 +53,13 @@ for (const suite of suites) {
   process.stdout.write(result.stdout ?? "");
   process.stderr.write(result.stderr ?? "");
 
-  const output = `${result.stdout ?? ""}\n${result.stderr ?? ""}`;
+  const output = `${result.stdout ?? ""}\n${result.stderr ?? ""}`
+    .replace(/\x1b\[[0-?]*[ -/]*[@-~]/g, "");
   const skipped = /^\s*(?:Test Files|Tests)\s+.*\bskipped\b.*$/m.test(output);
-  const fileCount = Number(output.match(/Test Files\s+(\d+) passed/)?.[1] ?? 0);
-  const testCount = Number(output.match(/^\s*Tests\s+(\d+) passed/m)?.[1] ?? 0);
+  const fileSummary = output.match(/^\s*Test Files\s+.*$/gm)?.at(-1) ?? "";
+  const testSummary = output.match(/^\s*Tests\s+.*$/gm)?.at(-1) ?? "";
+  const fileCount = Number(fileSummary.match(/\b(\d+)\s+passed\b/)?.[1] ?? 0);
+  const testCount = Number(testSummary.match(/\b(\d+)\s+passed\b/)?.[1] ?? 0);
   const incompleteDiscovery =
     fileCount < suite.minimumFiles || testCount < suite.minimumTests;
 

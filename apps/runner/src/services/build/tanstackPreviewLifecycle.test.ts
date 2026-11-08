@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError, TanstackPreviewReadinessError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
 import { PreviewObservability } from "./previewObservability.js";
+import { TanstackPreviewTransportError } from "./tanstackPreviewDockerTransport.js";
 
 const good = {status:200,headers:{"content-type":"text/html"},
   bodyBase64:Buffer.from("<html><head></head><body>ok</body></html>").toString("base64")};
@@ -102,7 +103,8 @@ describe("P3B5D sanitized TanStack readiness telemetry", () => {
       throw new Error("Expected a sanitized TanStack readiness error.");
     }
     expect(error.diagnostic).toEqual({
-      result: "http_status", attempts: 2, lastHttpStatus: 503, elapsedMs: 1600,
+      result: "http_status", attempts: 2, lastHttpStatus: 503,
+      transportStage: null, elapsedMs: 1600,
     });
   });
 
@@ -121,9 +123,31 @@ describe("P3B5D sanitized TanStack readiness telemetry", () => {
       throw new Error("Expected a sanitized TanStack readiness error.");
     }
     expect(error.diagnostic).toEqual({
-      result: "transport_error", attempts: 1, lastHttpStatus: null, elapsedMs: 800,
+      result: "transport_error", attempts: 1, lastHttpStatus: null,
+      transportStage: "unclassified", elapsedMs: 800,
     });
     expect(error.message).not.toContain("secret-token");
+  });
+
+  it("retains only the bounded transport stage for loopback failures", async () => {
+    let tick = 0;
+    const driver: TanstackPreviewDriver = {
+      ...fakeDriver([]),
+      probe: async () => { throw new TanstackPreviewTransportError("loopback_connection"); },
+      now: () => tick,
+      sleep: async (ms) => { tick += ms; },
+    };
+    const error = await startIsolatedTanstackPreview(driver,
+      { timeoutMs: 800 }).then(() => null, (reason: unknown) => reason);
+    expect(error).toBeInstanceOf(TanstackPreviewReadinessError);
+    if (!(error instanceof TanstackPreviewReadinessError)) {
+      throw new Error("Expected a sanitized TanStack readiness error.");
+    }
+    expect(error.diagnostic).toEqual({
+      result: "transport_error", attempts: 1, lastHttpStatus: null,
+      transportStage: "loopback_connection", elapsedMs: 800,
+    });
+    expect(JSON.stringify(error.diagnostic)).not.toContain("127.0.0.1");
   });
 
   it("attributes a readiness failure and leaves later stages unavailable", async () => {

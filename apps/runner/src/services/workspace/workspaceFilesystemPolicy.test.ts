@@ -58,17 +58,29 @@ describe("ZoeBuild rootless shared-group workspace filesystem policy", () => {
     ]);
 
     await ensureManagedWorkspaceDirectory(root);
-    // Linux preserves the setgid bit used by the dedicated executor group.
-    // macOS clears it on chmod; the production verifier must then fail closed.
-    const persistedDirectoryMode = process.platform === "linux" ? 0o2770 : 0o770;
-    expect((await fs.stat(root)).mode & 0o7777).toBe(persistedDirectoryMode);
+    // Linux requires setgid. macOS may retain or clear it.
+    const assertManagedDirectoryMode = async (directory: string) => {
+      const actualMode = (await fs.stat(directory)).mode & 0o7777;
+      if (process.platform === "linux") {
+        expect(actualMode).toBe(0o2770);
+      } else {
+        expect([0o770, 0o2770]).toContain(actualMode);
+      }
+    };
+    await assertManagedDirectoryMode(root);
     const child = path.join(root, "nested", "components");
     await ensureManagedWorkspaceDirectory(child);
-    expect((await fs.stat(path.join(root, "nested"))).mode & 0o7777).toBe(persistedDirectoryMode);
-    expect((await fs.stat(child)).mode & 0o7777).toBe(persistedDirectoryMode);
-    if (process.platform === "linux") {
+    await assertManagedDirectoryMode(path.join(root, "nested"));
+    await assertManagedDirectoryMode(child);
+    // Verification depends on persisted permissions, not OS name.
+    // A directory with the required setgid bit must be accepted.
+    // A directory missing that bit must fail closed.
+    const persistedRootMode = (await fs.stat(root)).mode & 0o7777;
+
+    if (persistedRootMode === 0o2770) {
       await expect(verifyPrivateWorkspaceRoot(root)).resolves.toBeUndefined();
     } else {
+      expect(persistedRootMode).toBe(0o770);
       await expect(verifyPrivateWorkspaceRoot(root)).rejects.toThrow(/not private/);
     }
   });

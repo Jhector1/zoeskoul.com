@@ -1,4 +1,4 @@
-import { randomBytes, randomUUID } from "node:crypto";
+import { createHash, randomBytes, randomUUID } from "node:crypto";
 import type { ProductionBuildJobRequestV1 } from "@zoeskoul/build-executor-contracts";
 import { makeTanstackPreviewDockerDriver } from "./tanstackPreviewDockerDriver.js";
 import { startIsolatedTanstackPreview, stopIsolatedTanstackPreview, TanstackPreviewCleanupError, type TanstackPreviewDriver } from "./tanstackPreviewLifecycle.js";
@@ -23,11 +23,14 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
   signal?: AbortSignal;
   onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void;
   telemetry?: PreviewOperationTelemetry;
+  operationCorrelation?: string;
   driverFactory?: (request: ProductionBuildJobRequestV1, basePath: string) => TanstackPreviewDriver;
 }>) {
   if (!input.ownerKey || input.request.stackId !== "tanstack-start-v1" ||
       input.request.templateId !== "tanstack-start-v1" || input.request.operation !== "production-build")
     throw new Error("Invalid TanStack preview identity.");
+  if (input.operationCorrelation !== undefined && !/^[a-f0-9]{16}$/.test(input.operationCorrelation))
+    throw new Error("Invalid preview diagnostic correlation.");
   if (typeof input.authorize !== "function") throw new Error("Preview authorization required.");
   const {request,ownerKey} = input;
   const endQueue = input.telemetry?.begin("queue_wait");
@@ -61,16 +64,21 @@ export async function startAdmittedTanstackPreview(input: Readonly<{
         // Mint the capability BEFORE launch, but do not register or expose it
         // until readiness succeeds. This is Vite's trusted per-preview base.
         const previewId = `preview_${randomUUID()}`;
+        const previewCorrelation = createHash("sha256").update(previewId).digest("hex").slice(0,16);
+        const diagnosticCorrelation = input.operationCorrelation
+          ? { operation: input.operationCorrelation, preview: previewCorrelation } : undefined;
         const publicAccessKey = randomBytes(24).toString("base64url");
         const basePath = `/api/build/projects/${encodeURIComponent(request.buildProjectId)}/preview/${previewId}/content/${publicAccessKey}/`;
         const createdDriver = input.driverFactory
           ? input.driverFactory(request, basePath)
           : makeTanstackPreviewDockerDriver(
               ownerKey, request, basePath, input.identity, input.telemetry,
+              undefined, diagnosticCorrelation,
             );
         driver = createdDriver;
         handle = await startIsolatedTanstackPreview(createdDriver,{
           signal:input.signal,onPhase:input.onPhase,telemetry:input.telemetry,
+          diagnosticCorrelation,
         });
         if (input.signal?.aborted) throw new Error("Preview cancelled.");
         const createdAt = Date.now();

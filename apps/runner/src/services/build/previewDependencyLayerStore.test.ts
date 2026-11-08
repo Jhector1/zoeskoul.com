@@ -1,11 +1,12 @@
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { PreviewDependencyLayerStore, previewDependencyLayerKey } from "./previewDependencyLayerStore.js";
 
 const roots: string[] = [];
 afterEach(async () => {
+  vi.restoreAllMocks();
   for (const root of roots.splice(0)) await fs.rm(root, { recursive: true, force: true });
 });
 async function fixture() {
@@ -144,6 +145,20 @@ describe("K20D3F persistent verified dependency layers", () => {
     expect((await fs.lstat(path.join(first, "node_modules"))).isDirectory()).toBe(true);
     expect(await fs.readdir(path.join(root, ".zoebuild-preview-dependency-layers-v1")))
       .not.toContain(key());
+  });
+
+  it("identifies an oversized dependency tree without copying or increasing the quota", async () => {
+    const { first, store } = await fixture();
+    const oversized = await fs.open(path.join(first, "node_modules", "oversized.bin"), "w");
+    try { await oversized.truncate(256 * 1024 * 1024 + 1); }
+    finally { await oversized.close(); }
+    const info = vi.spyOn(console, "info").mockImplementation(() => undefined);
+    expect(await store.publish(key(), first)).toBeNull();
+    expect(info).toHaveBeenCalledWith(
+      "RUNNER React preview dependency layer publication",
+      { result: "skipped", reason: "source-tree-byte-limit" },
+    );
+    expect(store.snapshot()).toMatchObject({ publishAttempts: 1, publishSkipped: 1 });
   });
 
   it("rejects a symlink workspace dependency root", async () => {

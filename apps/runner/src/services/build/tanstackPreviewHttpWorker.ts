@@ -6,13 +6,17 @@
  * destinations. Not connected to any route in Phase 3B1.
  */
 export const TANSTACK_PREVIEW_HTTP_WORKER = String.raw`
-import base64, binascii, concurrent.futures, http.client, json, sys, threading, time
+import base64, binascii, concurrent.futures, http.client, json, socket, sys, threading, time
 
 MAX_REQUEST = 256 * 1024
 MAX_RESPONSE = 6 * 1024 * 1024
 MAX_LINE = 400 * 1024
 LOCK = threading.Lock()
 POOL = concurrent.futures.ThreadPoolExecutor(max_workers=6)
+
+class WorkerFailure(Exception):
+    def __init__(self, code):
+        self.code = code
 
 def perform(item):
     ident = item.get("id")
@@ -45,19 +49,30 @@ def perform(item):
         # Hardcoded IPv4 loopback, no redirects, no caller-selected host/port.
         connection = http.client.HTTPConnection("127.0.0.1", 5173, timeout=20)
         upstream_started = time.monotonic_ns()
-        connection.request(method, path, body=body if method == "POST" else None, headers=headers)
-        reply = connection.getresponse()
-        data = reply.read(MAX_RESPONSE + 1) if method != "HEAD" else b""
+        try:
+            connection.connect()
+        except (ConnectionRefusedError, ConnectionResetError, socket.timeout, TimeoutError, OSError):
+            raise WorkerFailure("loopback_connection")
+        try:
+            connection.request(method, path, body=body if method == "POST" else None, headers=headers)
+            reply = connection.getresponse()
+            data = reply.read(MAX_RESPONSE + 1) if method != "HEAD" else b""
+        except (socket.timeout, TimeoutError, http.client.HTTPException, OSError):
+            raise WorkerFailure("vite_request")
         upstream_ms = max(0, min(20000, round((time.monotonic_ns() - upstream_started) / 1000000, 1)))
         if len(data) > MAX_RESPONSE:
-            raise ValueError("response too large")
+            raise WorkerFailure("vite_response")
         header_type = reply.getheader("Content-Type", "")
         safe_headers = {"content-type": header_type} if isinstance(header_type, str) and 0 < len(header_type) <= 180 else {}
         result = {"id": ident, "status": reply.status, "headers": safe_headers,
                   "bodyBase64": base64.b64encode(data).decode("ascii"),
                   "upstreamDurationMs": upstream_ms}
+    except WorkerFailure as error:
+        result = {"id": ident, "error": error.code}
+    except ValueError:
+        result = {"id": ident, "error": "worker_protocol"}
     except Exception:
-        result = {"id": ident, "error": "Full-stack preview transport request failed"}
+        result = {"id": ident, "error": "worker_protocol"}
     finally:
         if connection is not None:
             try: connection.close()

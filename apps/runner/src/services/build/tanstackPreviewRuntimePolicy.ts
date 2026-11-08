@@ -3,10 +3,18 @@ import type { TanstackPreviewTransportRequest } from "./tanstackPreviewHttpBound
 /** Canonical runtime argv. No user-supplied commands, ports or environment. */
 export const TANSTACK_PREVIEW_DEV_COMMAND = [
   "pnpm", "exec", "vite", "dev", "--host", "127.0.0.1", "--port", "5173", "--strictPort",
+  // Vite's info banner includes its public base, which is a bearer capability.
+  // Readiness is measured over the private HTTP worker, never by parsing logs.
+  "--logLevel", "warn",
 ] as const;
 export const TANSTACK_PREVIEW_INSTALL_COMMAND = [
   "pnpm", "install", "--frozen-lockfile", "--ignore-scripts",
 ] as const;
+/** Miniflare otherwise makes an optional Request.cf metadata lookup during
+ * local startup. Preview sandboxes are intentionally network-disabled, so use
+ * the verified Miniflare fallback switch instead of attempting DNS. This is
+ * preview-only; generated production builds still use the Cloudflare adapter. */
+export const TANSTACK_PREVIEW_OFFLINE_ENV = "CLOUDFLARE_CF_FETCH_ENABLED=false" as const;
 /** Only Runner-minted browser capability URLs may become Vite's public base.
  * Never accept a base from application source or an HTTP request parameter. */
 export function tanstackPreviewDevCommand(basePath: string): readonly string[] {
@@ -82,7 +90,10 @@ export function assertTanstackSandboxOptions(options: Readonly<{
   if (!config || !baseIsValid ||
       !options.Env ||
       options.Env.filter(value => value.startsWith("ZOEBUILD_PREVIEW_BASE_PATH=")).length !== 1 ||
-      !options.Env.includes(`ZOEBUILD_PREVIEW_BASE_PATH=${basePath}`) || config.NetworkMode !== "none" || config.Privileged !== false ||
+      !options.Env.includes(`ZOEBUILD_PREVIEW_BASE_PATH=${basePath}`) ||
+      options.Env.filter(value => value.startsWith("CLOUDFLARE_CF_FETCH_ENABLED=")).length !== 1 ||
+      !options.Env.includes(TANSTACK_PREVIEW_OFFLINE_ENV) ||
+      config.NetworkMode !== "none" || config.Privileged !== false ||
       config.ReadonlyRootfs !== true ||
       !/^\d+:\d+$/.test(options.User ?? "") ||
       !Array.isArray(config.CapDrop) || !config.CapDrop.includes("ALL") ||

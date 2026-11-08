@@ -1,5 +1,9 @@
 import { isTanstackSsrReady, TANSTACK_PREVIEW_READY_TIMEOUT_MS, TANSTACK_PREVIEW_PROBE_INTERVAL_MS } from "./tanstackPreviewRuntimePolicy.js";
 import { previewObservability, type PreviewOperationTelemetry } from "./previewObservability.js";
+import {
+  TanstackPreviewTransportError,
+  type TanstackPreviewTransportFailureStage,
+} from "./tanstackPreviewDockerTransport.js";
 
 /** Preserve the recovery callback for cleanup failures *before* start returns
  * a normal handle. The admission owner must quarantine these orphans so they
@@ -28,6 +32,7 @@ export type TanstackReadinessDiagnostic = Readonly<{
   result: "transport_error" | "http_status" | "invalid_html" | "no_probe";
   attempts: number;
   lastHttpStatus: number | null;
+  transportStage: TanstackPreviewTransportFailureStage | "unclassified" | null;
   elapsedMs: number;
 }>;
 
@@ -51,7 +56,8 @@ export type TanstackPreviewDriver = Readonly<{
 export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver,
   opts: Readonly<{ signal?: AbortSignal; timeoutMs?: number;
     onPhase?: (phase: "queued" | "workspace" | "dependencies" | "container" | "readiness") => void;
-    telemetry?: PreviewOperationTelemetry }> = {}): Promise<TanstackSandboxHandle> {
+    telemetry?: PreviewOperationTelemetry;
+    diagnosticCorrelation?: Readonly<{operation:string;preview:string}> }> = {}): Promise<TanstackSandboxHandle> {
   const timeoutMs = opts.timeoutMs ?? TANSTACK_PREVIEW_READY_TIMEOUT_MS;
   if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0 || timeoutMs > TANSTACK_PREVIEW_READY_TIMEOUT_MS)
     throw new Error("Invalid preview readiness deadline.");
@@ -75,6 +81,7 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
     let attempts = 0;
     let result: TanstackReadinessDiagnostic["result"] = "no_probe";
     let lastHttpStatus: number | null = null;
+    let transportStage: TanstackReadinessDiagnostic["transportStage"] = null;
     while (driver.now() - startedAt < timeoutMs) {
       if (opts.signal?.aborted) throw new Error("Preview cancelled.");
       attempts++;
@@ -87,10 +94,14 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
         }
         lastHttpStatus = Number.isInteger(response.status) &&
           response.status >= 100 && response.status <= 599 ? response.status : null;
+        transportStage = null;
         result = response.status === 200 ? "invalid_html" : "http_status";
-      } catch {
+      } catch (error) {
         // Never log the underlying exception: it may contain response data.
         result = "transport_error";
+        lastHttpStatus = null;
+        transportStage = error instanceof TanstackPreviewTransportError
+          ? error.stage : "unclassified";
       }
       if (opts.signal?.aborted) throw new Error("Preview cancelled.");
       await driver.sleep(Math.min(TANSTACK_PREVIEW_PROBE_INTERVAL_MS,
@@ -100,9 +111,16 @@ export async function startIsolatedTanstackPreview(driver: TanstackPreviewDriver
       result,
       attempts,
       lastHttpStatus,
+      transportStage,
       elapsedMs: Math.max(0, Math.floor(driver.now() - startedAt)),
     };
-    console.warn("RUNNER isolated TanStack readiness timed out", diagnostic);
+    console.warn("RUNNER isolated TanStack readiness timed out", {
+      ...diagnostic,
+      ...(opts.diagnosticCorrelation ? {
+        operationCorrelation: opts.diagnosticCorrelation.operation,
+        previewCorrelation: opts.diagnosticCorrelation.preview,
+      } : {}),
+    });
     throw new TanstackPreviewReadinessError(diagnostic);
   } catch (error) {
     endReadiness?.(opts.signal?.aborted ? "cancelled" : "error");

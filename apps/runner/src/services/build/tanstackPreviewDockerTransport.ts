@@ -8,6 +8,45 @@ import {
 } from "./tanstackPreviewHttpBoundary.js";
 import { boundedPreviewDuration, previewObservability } from "./previewObservability.js";
 
+export type TanstackPreviewTransportFailureStage =
+  | "docker_exec_create"
+  | "docker_exec_attach"
+  | "worker_protocol"
+  | "loopback_connection"
+  | "vite_request"
+  | "vite_response"
+  | "deadline";
+
+/** A bounded, source-free failure category. Never attach the underlying
+ * Docker, HTTP, path, response, or capability error to this exception. */
+export class TanstackPreviewTransportError extends Error {
+  constructor(readonly stage: TanstackPreviewTransportFailureStage) {
+    super("Isolated preview transport failed.");
+    this.name = "TanstackPreviewTransportError";
+  }
+}
+
+const workerFailureStages = new Set<TanstackPreviewTransportFailureStage>([
+  "worker_protocol", "loopback_connection", "vite_request", "vite_response",
+]);
+
+/** Validate the one-line worker envelope without surfacing worker-controlled
+ * text. Exported for protocol regression tests; it performs no I/O. */
+export function validateTanstackPreviewWorkerReply(value: unknown): object {
+  if (!value || typeof value !== "object" || Array.isArray(value) ||
+      (value as { id?: unknown }).id !== 1) {
+    throw new TanstackPreviewTransportError("worker_protocol");
+  }
+  const error = (value as { error?: unknown }).error;
+  if (error !== undefined) {
+    const stage = typeof error === "string" &&
+      workerFailureStages.has(error as TanstackPreviewTransportFailureStage)
+      ? error as TanstackPreviewTransportFailureStage : "worker_protocol";
+    throw new TanstackPreviewTransportError(stage);
+  }
+  return value;
+}
+
 /** One HTTP request per Docker exec. No socket or host port is exposed.
  * This is deliberately not an HMR/WebSocket bridge: that requires its own
  * authenticated streaming transport and acceptance tests. */
@@ -24,8 +63,9 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
   const exec = await docker.getContainer(containerId).exec({
     Cmd: ["python3", "-u", "-c", TANSTACK_PREVIEW_HTTP_WORKER],
     AttachStdin: true, AttachStdout: true, AttachStderr: false, Tty: false,
-  });
-  const stream = await exec.start({ hijack: true, stdin: true });
+  }).catch(() => { throw new TanstackPreviewTransportError("docker_exec_create"); });
+  const stream = await exec.start({ hijack: true, stdin: true })
+    .catch(() => { throw new TanstackPreviewTransportError("docker_exec_attach"); });
   const stdout = new PassThrough();
   const stderr = new PassThrough();
   // Docker multiplex framing must be parsed by Dockerode, not interpreted as
@@ -36,7 +76,8 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
     let settled = false;
     const pieces: Buffer[] = [];
     let totalBytes = 0;
-    const timeout = setTimeout(() => finish(new Error("Preview HTTP deadline exceeded.")), 24_000);
+    const timeout = setTimeout(() =>
+      finish(new TanstackPreviewTransportError("deadline")), 24_000);
     function finish(error?: Error, result?: unknown) {
       if (settled) return;
       settled = true;
@@ -49,7 +90,7 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
     stdout.on("data", (chunk: Buffer) => {
       totalBytes += chunk.length;
       if (totalBytes > MAX_REPLY) {
-        finish(new Error("Preview HTTP response too large."));
+        finish(new TanstackPreviewTransportError("vite_response"));
         return;
       }
       pieces.push(chunk);
@@ -58,23 +99,23 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
         const bytes = Buffer.concat(pieces, totalBytes);
         const end = bytes.indexOf(10);
         const item: unknown = JSON.parse(bytes.subarray(0, end).toString("utf8"));
-        if (!item || typeof item !== "object" || Array.isArray(item) ||
-            (item as { id?: unknown }).id !== 1 ||
-            typeof (item as { error?: unknown }).error === "string") {
-          throw new Error("Preview HTTP transport failed.");
-        }
-        finish(undefined, item);
-      } catch { finish(new Error("Invalid preview HTTP transport response.")); }
+        finish(undefined, validateTanstackPreviewWorkerReply(item));
+      } catch (error) {
+        finish(error instanceof TanstackPreviewTransportError
+          ? error : new TanstackPreviewTransportError("worker_protocol"));
+      }
     });
-    stdout.on("error", () => finish(new Error("Preview HTTP transport failed.")));
-    stream.on("error", () => finish(new Error("Preview HTTP transport failed.")));
-    stream.on("close", () => finish(new Error("Preview HTTP connection closed.")));
+    stdout.on("error", () => finish(new TanstackPreviewTransportError("worker_protocol")));
+    stream.on("error", () => finish(new TanstackPreviewTransportError("docker_exec_attach")));
+    stream.on("close", () => finish(new TanstackPreviewTransportError("worker_protocol")));
     try {
       stream.end(JSON.stringify({ id: 1, ...request }) + "\n");
-    } catch { finish(new Error("Preview HTTP request failed.")); }
+    } catch { finish(new TanstackPreviewTransportError("worker_protocol")); }
   });
   // No Set-Cookie, Location, or caller-supplied authentication can emerge.
-  const normalized = normalizeTanstackPreviewHttpResponse(reply);
+  let normalized: ReturnType<typeof normalizeTanstackPreviewHttpResponse>;
+  try { normalized = normalizeTanstackPreviewHttpResponse(reply); }
+  catch { throw new TanstackPreviewTransportError("worker_protocol"); }
   if (normalized.upstreamDurationMs !== null)
     previewObservability.observeViteUpstream(normalized.upstreamDurationMs);
   endDockerExec("ok");
@@ -89,6 +130,7 @@ export async function fetchTanstackHttpInsideSandbox(containerId: string,
   } as const;
   } catch (error) {
     endDockerExec("error");
-    throw error;
+    throw error instanceof TanstackPreviewTransportError
+      ? error : new TanstackPreviewTransportError("worker_protocol");
   }
 }
