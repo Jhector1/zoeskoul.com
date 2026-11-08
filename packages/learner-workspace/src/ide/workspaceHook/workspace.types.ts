@@ -39,6 +39,8 @@ export type UseIdeWorkspaceOpts = {
 
   policy?: IdeWorkspacePolicy;
   fileActions?: IdeFileActionsConfig | null;
+  /** V6 server-first filesystem actions cannot be undone by local tree snapshots. */
+  disableHistoryRewind?: boolean;
 
   /**
    * Called immediately before a learner action is expected to mutate the

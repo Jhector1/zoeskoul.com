@@ -62,6 +62,8 @@ type Props = {
     ) => void | Promise<void>;
     onTerminalEvidenceChange?: (evidence: import("@zoeskoul/learner-workspace/contracts/practiceTypes").TerminalEvidence) => void;
     onTerminalSyncReady?: (sync: (() => Promise<boolean>) | null) => void;
+    fileSyncMode?: "v5" | "v6";
+    onV6ExplorerExecutorReady?: import("@zoeskoul/learner-workspace/runner/runtime").WorkspaceTerminalConfig["onV6ExplorerExecutorReady"];
     onChangeLanguage: (language: any) => void;
     onChangeFileCode: (fileId: string, code: string) => void;
     onChangeSqlDialect: (dialect: any) => void;
@@ -149,6 +151,8 @@ export default function IdeEditorPane({
     sqlInitialTableSnapshots,
     onTerminalEvidenceChange,
     onTerminalSyncReady,
+    fileSyncMode = "v5",
+    onV6ExplorerExecutorReady,
 }: Props) {
     const t = useTranslations("ide.editor");
     const terminalT = useTranslations("ide.terminal");
@@ -415,6 +419,8 @@ export default function IdeEditorPane({
                                         getWorkspaceFiles: () => workspaceEntries,
                                         onTerminalSnapshotFiles:
                                             onApplyTerminalSnapshotFiles,
+                                        fileSyncMode,
+                                        onV6ExplorerExecutorReady,
                                         lazy: true,
                                         title: terminalT("title"),
                                         historyScopeKey: terminalHistoryScopeKey,

@@ -256,6 +256,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     const forcedLanguage = opts?.forcedLanguage;
     const resetOnForcedLanguageChange = !!opts?.resetOnForcedLanguageChange;
     const access = opts?.access ?? DEFAULT_ACCESS;
+    const disableHistoryRewind = opts?.disableHistoryRewind === true;
 
     const [language, setLanguageState] = useState<WorkspaceLanguage>(
         forcedLanguage ?? "python",
@@ -518,6 +519,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     }, [takeHistorySnapshot, syncHistoryFlags]);
 
     const undo = useCallback(() => {
+        if (disableHistoryRewind) return;
         const prev = historyRef.current.past.pop();
         if (!prev) return;
 
@@ -531,9 +533,10 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
         restoreHistorySnapshot(prev);
         syncHistoryFlags();
-    }, [notifyUserWorkspaceMutation, takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
+    }, [disableHistoryRewind, notifyUserWorkspaceMutation, takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
 
     const redo = useCallback(() => {
+        if (disableHistoryRewind) return;
         const next = historyRef.current.future.pop();
         if (!next) return;
 
@@ -547,10 +550,11 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
         restoreHistorySnapshot(next);
         syncHistoryFlags();
-    }, [notifyUserWorkspaceMutation, takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
+    }, [disableHistoryRewind, notifyUserWorkspaceMutation, takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
 
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
+            if (disableHistoryRewind) return;
             const mod = e.metaKey || e.ctrlKey;
             if (!mod || e.altKey) return;
             if (isEditableTarget(e.target)) return;
@@ -573,7 +577,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
         window.addEventListener("keydown", onKeyDown);
         return () => window.removeEventListener("keydown", onKeyDown);
-    }, [undo, redo, canUndo, canRedo]);
+    }, [undo, redo, canUndo, canRedo, disableHistoryRewind]);
 
     const replaceWorkspace = useCallback(
         (ws: WorkspaceStateV2) => {

@@ -37,13 +37,13 @@ export const sessionsWorkspaceFileRoute: RequestHandler = async (req, res) => {
       return runWorkspaceFileWorker(session, request);
     });
     if (result.ok) return res.status(200).json(result);
-    const status = result.code === "CONFLICT" ? 409 :
+    const status = result.code === "CONFLICT" || result.code === "DIRECTORY_NOT_EMPTY" ? 409 :
       result.code === "NOT_FOUND" ? 404 :
       result.code === "PRECONDITION_REQUIRED" ? 428 :
       result.code === "TOO_LARGE" || result.code === "TOO_MANY_ENTRIES" ? 413 :
       result.code === "READ_ONLY" ? 403 :
       result.code === "SESSION_INACTIVE" ? 409 :
-      result.code === "TIMEOUT" ? 503 :
+      result.code === "TIMEOUT" || result.code === "UNSUPPORTED_OPERATION" ? 503 :
       result.code.startsWith("INVALID_") ? 400 : 500;
     return res.status(status).json(result);
   } catch (error: unknown) {

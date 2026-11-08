@@ -14,6 +14,8 @@ import { useProjectDirtyState } from "@zoeskoul/learner-workspace/projects/hooks
 import { useProjectsList } from "@zoeskoul/learner-workspace/projects/hooks/useProjectsList";
 
 import { pathOf } from "@zoeskoul/learner-workspace/ide/fsTree";
+import { planV6InlineIntent, planV6MoveIntent, planV6DeleteIntent } from "./v6ExplorerIntent";
+import type { WorkspaceExplorerExecutorV6 } from "@zoeskoul/learner-workspace/runner/runtime";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { useIdeWorkspace } from "@zoeskoul/learner-workspace/ide/workspaceHook/useIdeWorkspace";
 import { cn } from "@zoeskoul/learner-workspace/ide/utils";
@@ -66,6 +68,7 @@ type FullIDEInnerProps = {
     projectDescription?: string | null;
     projectScope: FullIDEProps["projectScope"];
     readOnly: boolean;
+    fileSyncMode?: "v5" | "v6";
     /** Umbrella policy for every browser-local learner-state cache below FullIDE. */
     draftStorageMode: NonNullable<FullIDEProps["draftStorageMode"]>;
     router: ReturnType<typeof useFullIDERouter>;
@@ -189,6 +192,7 @@ function FullIDEInner({
                           projectScope,
                           draftStorageMode,
                           readOnly,
+                          fileSyncMode = "v5",
                           exerciseStateKey,
                           workspaceReplacementRevision,
                           onWorkspaceReplacementApplied,
@@ -644,6 +648,85 @@ function FullIDEInner({
         [readOnly, state.policy],
     );
     const noOp = useCallback(() => undefined, []);
+    const useV6Explorer = fileSyncMode === "v6" && canUseWorkspaceTerminal && !readOnly;
+    const v6ExecutorRef = useRef<WorkspaceExplorerExecutorV6 | null>(null);
+    const v6UiBusyRef = useRef(false);
+    const onV6ExplorerExecutorReady = useCallback((executor: WorkspaceExplorerExecutorV6 | null) => {
+        v6ExecutorRef.current = executor;
+    }, []);
+    useEffect(() => () => { v6ExecutorRef.current = null; }, []);
+    const runV6ExplorerIntent = useCallback(async (intent: import("@zoeskoul/learner-workspace/runner/runtime").WorkspaceExplorerIntentV6) => {
+        if (v6UiBusyRef.current) {
+            actions.setToast({kind:"error", text:"A file operation is already in progress."});
+            return false;
+        }
+        const executor = v6ExecutorRef.current;
+        if (!executor) {
+            actions.setToast({kind:"error", text:"Start and connect the V6 terminal before changing files or folders."});
+            return false;
+        }
+        v6UiBusyRef.current = true;
+        try {
+            await executor(intent); // Runner accepted and authoritative workspace snapshot was applied.
+            actions.cancelInlineEdit();
+            actions.setPendingDeleteId(null);
+            return true;
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Unknown V6 filesystem error";
+            actions.setToast({kind:"error", text:`V6 file operation blocked: ${message}. Refresh the terminal workspace before retrying.`});
+            return false;
+        } finally {
+            v6UiBusyRef.current = false;
+        }
+    }, [actions]);
+    const listV6Trash = useCallback(async () => {
+        const executor = v6ExecutorRef.current;
+        if (!executor) throw new Error("The V6 terminal session must be connected to list recoverable folders.");
+        const result = await executor({kind:"list_trash",path:""});
+        if (result.state !== "read_only" || !result.entries) {
+            throw new Error("Invalid recoverable-folder response.");
+        }
+        return result.entries;
+    }, []);
+    const restoreV6Trash = useCallback(async (entry: Readonly<{originalPath:string;trashId:string}>) => {
+        return runV6ExplorerIntent({kind:"restore_directory",path:entry.originalPath,trashId:entry.trashId});
+    }, [runV6ExplorerIntent]);
+    const v6CommitInlineEdit = useCallback(() => {
+        if (!useV6Explorer || !inlineEdit) {
+            actions.commitInlineEdit();
+            return;
+        }
+        if (inlineEdit.mode === "new-file") {
+            const name = inlineEdit.value.trim();
+            if (!name || name === "." || name === ".." || name.includes("/") ||
+                name.includes("\\") || name.includes("\0")) {
+                actions.setToast({kind:"error",text:"V6 requires a single safe filename; nested file creation is not ready."});
+                return;
+            }
+            actions.commitInlineEdit(); // V6 CAS writer creates the file on the next sync.
+            return;
+        }
+        try {
+            const intent = planV6InlineIntent(nodes, inlineEdit);
+            if (intent) void runV6ExplorerIntent(intent);
+            else actions.cancelInlineEdit();
+        } catch (error) {
+            actions.setToast({kind:"error",text:error instanceof Error ? error.message : "Invalid file action."});
+        }
+    }, [actions, inlineEdit, nodes, runV6ExplorerIntent, useV6Explorer]);
+    const v6MoveNode = useCallback((id:string, parentId:string|null) => {
+        if (!useV6Explorer) { actions.moveNode(id,parentId); return; }
+        try {
+            const intent=planV6MoveIntent(nodes,id,parentId);
+            if (intent) void runV6ExplorerIntent(intent);
+        } catch (error) {
+            actions.setToast({kind:"error",text:error instanceof Error ? error.message : "Invalid folder move."});
+        }
+    },[actions,nodes,runV6ExplorerIntent,useV6Explorer]);
+    const v6ImportFiles = useCallback((files: import("@zoeskoul/learner-workspace/ide/workspaceHook/workspace.policy").ImportedWorkspaceFile[])=> {
+        if (!useV6Explorer) { actions.importExternalFiles(files); return; }
+        actions.setToast({kind:"error",text:"V6 file importing is disabled until server-first upload reconciliation is verified."});
+    },[actions,useV6Explorer]);
     const explorerPane = (
         <IdeExplorerPane
             isSql={isSql}
@@ -659,14 +742,19 @@ function FullIDEInner({
             inlineEdit={inlineEdit}
             stdin={stdin}
             access={access}
-            policy={explorerPolicy}
+            policy={useV6Explorer ? {
+                ...explorerPolicy,
+                // V6 upload/import must not create local folders before server acceptance.
+                canUploadFiles: false,
+                canUploadBinaryFiles: false,
+            } : explorerPolicy}
             onUpgrade={() => router.push(access.hasUser ? billingHref : loginHref)}
             onChangeFilter={actions.setFilter}
             onChangeStdin={handleChangeStdin}
-            canUndo={!readOnly && history.canUndo}
-            canRedo={!readOnly && history.canRedo}
-            onUndo={readOnly ? noOp : actions.undo}
-            onRedo={readOnly ? noOp : actions.redo}
+            canUndo={!readOnly && !useV6Explorer && history.canUndo}
+            canRedo={!readOnly && !useV6Explorer && history.canRedo}
+            onUndo={readOnly || useV6Explorer ? noOp : actions.undo}
+            onRedo={readOnly || useV6Explorer ? noOp : actions.redo}
             onToggleExplorer={
                 viewport.isDesktop
                     ? () => setExplorerCollapsed(true)
@@ -675,6 +763,8 @@ function FullIDEInner({
                         : undefined
             }
             services={services}
+            onV6ListTrash={useV6Explorer ? listV6Trash : undefined}
+            onV6RestoreTrash={useV6Explorer ? restoreV6Trash : undefined}
             actions={{
                 setInlineEdit: readOnly ? noOp : actions.setInlineEdit,
                 setToast: actions.setToast,
@@ -685,10 +775,10 @@ function FullIDEInner({
                 startNewFolder: readOnly ? noOp : actions.startNewFolder,
                 startRename: readOnly ? noOp : actions.startRename,
                 setEntry: readOnly ? noOp : actions.setEntry,
-                moveNode: readOnly ? noOp : actions.moveNode,
-                importExternalFiles: readOnly ? noOp : actions.importExternalFiles,
+                moveNode: readOnly ? noOp : v6MoveNode,
+                importExternalFiles: readOnly ? noOp : v6ImportFiles,
                 requestDelete: readOnly ? noOp : actions.requestDelete,
-                commitInlineEdit: readOnly ? noOp : actions.commitInlineEdit,
+                commitInlineEdit: readOnly ? noOp : v6CommitInlineEdit,
                 cancelInlineEdit: actions.cancelInlineEdit,
             }}
         />
@@ -756,6 +846,8 @@ function FullIDEInner({
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
             onTerminalSyncReady={onTerminalSyncReady}
+            fileSyncMode={useV6Explorer ? "v6" : "v5"}
+            onV6ExplorerExecutorReady={useV6Explorer ? onV6ExplorerExecutorReady : undefined}
             onTerminalEvidenceChange={onTerminalEvidenceChange}
             sqlDatasetId={sqlDatasetId}
             sqlResultShape={sqlResultShape}
@@ -771,11 +863,17 @@ function FullIDEInner({
 
     const handleConfirmDelete = () => {
         if (readOnly || !pendingDeleteId) return;
-        actions.performDelete();
+        if (!useV6Explorer) { actions.performDelete(); return; }
+        try {
+            const intent = planV6DeleteIntent(nodes, pendingDeleteId);
+            void runV6ExplorerIntent(intent);
+        } catch (error) {
+            actions.setToast({kind:"error",text:error instanceof Error ? error.message : "Invalid delete."});
+        }
     };
 
     const handlePrimarySave = () => {
-        if (readOnly) return;
+        if (readOnly || (useV6Explorer && v6UiBusyRef.current)) return;
         if (!access.canSaveCloud) {
             router.push(access.hasUser ? billingHref : loginHref);
             return;
@@ -881,10 +979,10 @@ function FullIDEInner({
                             services.explorer.enabled &&
                             services.explorer.showHistoryControls
                         }
-                        canUndo={services.explorer.enabled && history.canUndo}
-                        canRedo={services.explorer.enabled && history.canRedo}
-                        onUndo={actions.undo}
-                        onRedo={actions.redo}
+                        canUndo={!useV6Explorer && services.explorer.enabled && history.canUndo}
+                        canRedo={!useV6Explorer && services.explorer.enabled && history.canRedo}
+                        onUndo={useV6Explorer ? noOp : actions.undo}
+                        onRedo={useV6Explorer ? noOp : actions.redo}
                         explorer={explorerAvailable ? explorerPane : null}
                         editor={editorPane}
                     />
@@ -1029,6 +1127,7 @@ export default function FullIDE(props: FullIDEProps) {
         projectScope,
         draftStorageMode = "local",
         readOnly = false,
+        fileSyncMode = "v5",
         onReadyChange,
         servicePreset,
         services: serviceOverrides,
@@ -1173,6 +1272,7 @@ export default function FullIDE(props: FullIDEProps) {
         draftStorageMode: effectiveDraftStorageMode,
         localWorkspaceId,
         fileActions: services.explorer.fileActions,
+        disableHistoryRewind: fileSyncMode === "v6",
         onUserWorkspaceMutation: markNextWorkspaceChangeAsUser,
     });
 
@@ -1459,6 +1559,7 @@ export default function FullIDE(props: FullIDEProps) {
                 projectScope={projectScope}
                 draftStorageMode={effectiveDraftStorageMode}
                 readOnly={readOnly}
+                fileSyncMode={fileSyncMode}
                 exerciseStateKey={props.exerciseStateKey}
                 workspaceReplacementRevision={
                     readyWorkspaceReplacementRevision

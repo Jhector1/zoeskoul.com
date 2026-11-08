@@ -135,5 +135,136 @@ class WorkspaceFileWorkerTest(unittest.TestCase):
             self.request("write", "missing/x.c", expectedRevision=None, data=b64(b"x"))
 
 
+    def test_move_file_is_revision_checked_and_preserves_mode(self):
+        item = self.root / "src" / "tool.sh"
+        item.write_bytes(b"#!/bin/sh\necho ok\n")
+        item.chmod(0o755)
+        expected = worker.fingerprint(item.read_bytes())
+        (self.root / "other").mkdir()
+        result = self.request("move", "src/tool.sh", destinationPath="other/tool.sh", expectedRevision=expected)
+        self.assertEqual(result["kind"], "file")
+        self.assertEqual(result["revision"], expected)
+        self.assertFalse(item.exists())
+        target = self.root / "other" / "tool.sh"
+        self.assertEqual(target.read_bytes(), b"#!/bin/sh\necho ok\n")
+        self.assertEqual(target.stat().st_mode & 0o777, 0o755)
+
+    def test_move_file_refuses_stale_revision_and_preserves_source(self):
+        item = self.root / "src" / "main.py"
+        item.write_bytes(b"terminal edit")
+        with self.assertRaisesRegex(worker.WorkerError, "CONFLICT"):
+            self.request("move", "src/main.py", destinationPath="src/renamed.py",
+                         expectedRevision=worker.fingerprint(b"old version"))
+        self.assertEqual(item.read_bytes(), b"terminal edit")
+        self.assertFalse((self.root / "src" / "renamed.py").exists())
+
+    def test_move_file_requires_revision(self):
+        (self.root / "src" / "script.sh").write_bytes(b"hi")
+        with self.assertRaisesRegex(worker.WorkerError, "PRECONDITION_REQUIRED"):
+            self.request("move", "src/script.sh", destinationPath="src/new.sh", expectedRevision=None)
+        with self.assertRaisesRegex(worker.WorkerError, "PRECONDITION_REQUIRED"):
+            self.request("move", "src/script.sh", destinationPath="src/new.sh")
+
+    def test_move_never_overwrites_existing_destination(self):
+        origin = self.root / "src" / "main.c"
+        destination = self.root / "src" / "target.c"
+        origin.write_bytes(b"source")
+        destination.write_bytes(b"terminal saved")
+        with self.assertRaisesRegex(worker.WorkerError, "CONFLICT"):
+            self.request("move", "src/main.c", destinationPath="src/target.c",
+                         expectedRevision=worker.fingerprint(b"source"))
+        self.assertEqual(origin.read_bytes(), b"source")
+        self.assertEqual(destination.read_bytes(), b"terminal saved")
+
+    def test_move_destination_symlink_never_overwritten(self):
+        origin = self.root / "src" / "a.py"
+        origin.write_bytes(b"first")
+        (self.root / "src" / "b.py").symlink_to("a.py")
+        with self.assertRaisesRegex(worker.WorkerError, "CONFLICT"):
+            self.request("move", "src/a.py", destinationPath="src/b.py",
+                         expectedRevision=worker.fingerprint(b"first"))
+        self.assertTrue(origin.exists())
+        self.assertTrue((self.root / "src" / "b.py").is_symlink())
+
+    def test_move_refuses_symlink_source(self):
+        (self.root / "src" / "link.py").symlink_to("something.py")
+        with self.assertRaisesRegex(worker.WorkerError, "INVALID_ENTRY"):
+            self.request("move", "src/link.py", destinationPath="src/new.py",
+                         expectedRevision=worker.fingerprint(b"something"))
+
+    def test_move_refuses_symlink_parent_and_protected_paths(self):
+        outside = self.root.parent / (self.root.name + "-outside")
+        outside.mkdir()
+        self.addCleanup(lambda: outside.rmdir())
+        (self.root / "other").symlink_to(outside, target_is_directory=True)
+        (self.root / "src" / "code.py").write_bytes(b"safe")
+        revision = worker.fingerprint(b"safe")
+        for destination in ("../escape.py", "src/../../bad.py", ".zoeskoul/x.py",
+                            "src/.git/x.py", "other/escape.py"):
+            with self.subTest(destination=destination), self.assertRaises((worker.WorkerError, OSError)):
+                self.request("move", "src/code.py", destinationPath=destination,
+                             expectedRevision=revision)
+        self.assertFalse((outside / "escape.py").exists())
+        self.assertEqual((self.root / "src" / "code.py").read_bytes(), b"safe")
+
+    def test_move_refuses_same_path(self):
+        (self.root / "src" / "file.py").write_bytes(b"a")
+        with self.assertRaisesRegex(worker.WorkerError, "CONFLICT"):
+            self.request("move", "src/file.py", destinationPath="src/file.py",
+                         expectedRevision=worker.fingerprint(b"a"))
+
+    def test_move_empty_directory_succeeds_with_null_revision(self):
+        (self.root / "src" / "empty").mkdir()
+        result = self.request("move", "src/empty", destinationPath="src/renamed", expectedRevision=None)
+        self.assertTrue(result["moved"])
+        self.assertEqual(result["kind"], "directory")
+        self.assertFalse((self.root / "src" / "empty").exists())
+        self.assertTrue((self.root / "src" / "renamed").is_dir())
+
+    def test_move_nonempty_directory_is_never_implicit(self):
+        (self.root / "src" / "folder").mkdir()
+        (self.root / "src" / "folder" / "notes.txt").write_text("user data")
+        with self.assertRaisesRegex(worker.WorkerError, "DIRECTORY_NOT_EMPTY"):
+            self.request("move", "src/folder", destinationPath="src/moved", expectedRevision=None)
+        self.assertEqual((self.root / "src" / "folder" / "notes.txt").read_text(), "user data")
+
+    def test_rmdir_empty_only(self):
+        (self.root / "src" / "empty").mkdir()
+        result = self.request("rmdir", "src/empty", expectedRevision=None)
+        self.assertTrue(result["deleted"])
+        self.assertFalse((self.root / "src" / "empty").exists())
+
+    def test_rmdir_nonempty_protects_student_data(self):
+        folder = self.root / "src" / "nonempty"
+        folder.mkdir()
+        (folder / "work.txt").write_text("do not lose")
+        with self.assertRaisesRegex(worker.WorkerError, "DIRECTORY_NOT_EMPTY"):
+            self.request("rmdir", "src/nonempty", expectedRevision=None)
+        self.assertEqual((folder / "work.txt").read_text(), "do not lose")
+
+    def test_rmdir_symlink_rejected_without_touching_target(self):
+        target = self.root / "src" / "actual"
+        target.mkdir()
+        (self.root / "src" / "shortcut").symlink_to("actual", target_is_directory=True)
+        with self.assertRaises(OSError):
+            self.request("rmdir", "src/shortcut", expectedRevision=None)
+        self.assertTrue(target.is_dir())
+        self.assertTrue((self.root / "src" / "shortcut").is_symlink())
+
+    def test_rmdir_rejects_non_null_revision(self):
+        (self.root / "src" / "empty").mkdir()
+        with self.assertRaisesRegex(worker.WorkerError, "INVALID_REVISION"):
+            self.request("rmdir", "src/empty", expectedRevision=worker.fingerprint(b"abc"))
+
+    def test_move_failure_never_changes_a_nested_workspace_root(self):
+        folder = self.root / "src" / "folder"
+        folder.mkdir()
+        (folder / "nested").mkdir()
+        (folder / "nested" / "file.txt").write_bytes(b"preserve")
+        with self.assertRaisesRegex(worker.WorkerError, "DIRECTORY_NOT_EMPTY"):
+            self.request("move", "src/folder", destinationPath="src/folder/new", expectedRevision=None)
+        self.assertEqual((folder / "nested" / "file.txt").read_bytes(), b"preserve")
+
+
 if __name__ == "__main__":
     unittest.main()

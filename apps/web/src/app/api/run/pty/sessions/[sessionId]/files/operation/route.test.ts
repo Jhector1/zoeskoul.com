@@ -133,9 +133,41 @@ describe("V6B2 guarded Learning file Web proxy", () => {
     expect(await response.json()).toEqual({ ok: false, code: "FORBIDDEN" });
   });
 
-  it("rejects oversized JSON before calling Runner", async () => {
+  it("keeps non-write requests bounded to 512 KiB", async () => {
     const response = await POST(req({ op: "read", path: "x".repeat(530_000) }), ctx);
     expect(response.status).toBe(413);
+    expect(mocks.runnerPost).not.toHaveBeenCalled();
+  });
+
+  it("forwards a V6 base64 write that exceeds the old 512 KiB proxy limit", async () => {
+    const body = {
+      op: "write", path: "notes.txt", expectedRevision: null,
+      data: Buffer.alloc(450_000, 0x61).toString("base64"),
+    };
+    const response = await POST(req(body), ctx);
+    expect(response.status).toBe(200);
+    expect(mocks.runnerPost).toHaveBeenCalledWith(
+      "/sessions/session-1/files/operation", OWNER, body,
+    );
+  });
+
+  it("rejects requests above the strict 7 MiB limit before Runner forwarding", async () => {
+    const body = {
+      op: "write", path: "notes.txt", expectedRevision: null,
+      data: "A".repeat(7 * 1024 * 1024),
+    };
+    const response = await POST(req(body), ctx);
+    expect(response.status).toBe(413);
+    expect(mocks.runnerPost).not.toHaveBeenCalled();
+  });
+
+  it("rejects unauthenticated large writes before parsing their bodies", async () => {
+    mocks.requireRunnerActorKey.mockRejectedValue(new Error("Unauthorized"));
+    const response = await POST(req({
+      op: "write", path: "notes.txt", expectedRevision: null,
+      data: Buffer.alloc(450_000, 0x61).toString("base64"),
+    }), ctx);
+    expect(response.status).toBe(401);
     expect(mocks.runnerPost).not.toHaveBeenCalled();
   });
 

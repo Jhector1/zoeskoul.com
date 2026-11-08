@@ -44,6 +44,7 @@ import {
     createTerminalEvidence,
     type WorkspaceSyncEntry,
     type WorkspaceTerminalConfig,
+    type WorkspaceExplorerExecutorV6,
 } from "@zoeskoul/learner-workspace/runner/runtime";
 import { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import { cx } from "@zoeskoul/learner-workspace/tools/utils/cx";
@@ -206,7 +207,9 @@ export function workspaceTerminalRuntimeBridgePropsEqual(
         previous.controllerConfig.getWorkspaceFiles ===
             next.controllerConfig.getWorkspaceFiles &&
         previous.controllerConfig.onTerminalSnapshotFiles ===
-            next.controllerConfig.onTerminalSnapshotFiles
+            next.controllerConfig.onTerminalSnapshotFiles &&
+        previous.controllerConfig.fileSyncMode === next.controllerConfig.fileSyncMode &&
+        previous.controllerConfig.onV6ExplorerExecutorReady === next.controllerConfig.onV6ExplorerExecutorReady
     );
 }
 
@@ -252,7 +255,7 @@ const WorkspaceTerminalRuntimeBridge = React.memo(
             }),
             // runtimeKey captures every lifecycle-setting field. Workspace
             // callbacks stay current through refs without recreating the hook.
-            [runtimeKey],
+            [runtimeKey, controllerConfig.fileSyncMode],
         );
         const controller = useWorkspaceTerminalController(stableControllerConfig);
 
@@ -1762,6 +1765,28 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             DORMANT_WORKSPACE_TERMINAL_CONTROLLER,
         [activeTerminalId, terminalControllerRevision],
     );
+
+    const workspaceTermRef = useRef(workspaceTerm);
+    workspaceTermRef.current = workspaceTerm;
+    const v6ExplorerExecutor = useCallback<WorkspaceExplorerExecutorV6>(async (intent) => {
+        const current = workspaceTermRef.current;
+        if (!current.sessionId || !current.interactiveReady || !current.executeExplorerIntentV6) {
+            throw new Error("The V6 terminal session is not ready for file actions.");
+        }
+        return current.executeExplorerIntentV6(intent);
+    }, []);
+    const onV6ExplorerExecutorReady = workspaceTerminal?.onV6ExplorerExecutorReady;
+    useEffect(() => {
+        if (!onV6ExplorerExecutorReady) return;
+        if (workspaceTerminal?.fileSyncMode !== "v6" || !workspaceTerm.sessionId ||
+            !workspaceTerm.interactiveReady) {
+            onV6ExplorerExecutorReady(null);
+            return;
+        }
+        onV6ExplorerExecutorReady(v6ExplorerExecutor);
+        return () => onV6ExplorerExecutorReady(null);
+    }, [onV6ExplorerExecutorReady, workspaceTerminal?.fileSyncMode,
+        workspaceTerm.sessionId, workspaceTerm.interactiveReady, v6ExplorerExecutor]);
 
     const pendingWorkspaceTerm = useMemo(
         () =>
@@ -3334,6 +3359,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                   terminalId: tab.id,
                               }),
                               preserveSessionOnUnmount: true,
+                              fileSyncMode: workspaceTerminal?.fileSyncMode ?? "v5",
                               initialFiles: workspaceTerminal?.initialFiles,
                               getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
                               onTerminalSnapshotFiles:

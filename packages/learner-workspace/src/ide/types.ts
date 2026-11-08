@@ -90,6 +90,8 @@ export type FullIDEProps = {
     draftStorageMode?: "off" | "local";
     /** Prevent local edits while still allowing navigation and remote hydration. */
     readOnly?: boolean;
+    /** Developer-only V6 test gate; default V5 until live acceptance. */
+    fileSyncMode?: "v5" | "v6";
     onReadyChange?: (ready: boolean) => void;
     servicePreset?: FullIDEServicePreset;
     services?: FullIDEServicesInput;

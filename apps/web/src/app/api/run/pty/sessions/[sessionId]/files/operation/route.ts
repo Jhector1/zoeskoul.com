@@ -5,7 +5,13 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // V6B2 remains opt-in. V5 is the active Student IDE protocol.
-const MAX_BODY_BYTES = 512 * 1024;
+// Preserve the V5-sized cap for list/read/delete/mkdir requests. A V6 write
+// carries canonical base64: up to 5 MiB of worker bytes expands to ~6.67 MiB.
+// Keep the larger allowance bounded and *only* usable by authenticated,
+// same-origin write requests; Runner independently validates file capability,
+// revision and its configured byte limits.
+const MAX_SMALL_BODY_BYTES = 512 * 1024;
+const MAX_BODY_BYTES = 7 * 1024 * 1024;
 const REAL_USER_ACTOR = /^u:[a-f0-9]{64}$/;
 
 type WorkerResponse = { ok: boolean; code?: string; [key: string]: unknown };
@@ -45,7 +51,7 @@ function hasTrustedOrigin(request: Request): boolean {
   return allowed.has(origin);
 }
 
-async function readBoundedJson(request: Request): Promise<unknown> {
+async function readBoundedJson(request: Request): Promise<{ payload: unknown; size: number }> {
   const lengthHeader = request.headers.get("content-length");
   if (lengthHeader !== null) {
     const length = Number(lengthHeader);
@@ -75,7 +81,7 @@ async function readBoundedJson(request: Request): Promise<unknown> {
     await reader.cancel().catch(() => {});
   }
   try {
-    return JSON.parse(text) as unknown;
+    return { payload: JSON.parse(text) as unknown, size };
   } catch {
     throw new Error("INVALID_BODY");
   }
@@ -115,9 +121,15 @@ export async function POST(
     if (!/^[A-Za-z0-9_-]{1,128}$/.test(sessionId)) {
       return jsonNoStore({ ok: false, code: "INVALID_SESSION" }, 400);
     }
-    const payload = await readBoundedJson(request);
+    const { payload, size } = await readBoundedJson(request);
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
       return jsonNoStore({ ok: false, code: "INVALID_BODY" }, 400);
+    }
+    // A large request is never forwarded unless it is a V6 file write.
+    // The internal Runner remains the authority for paths and file sizes.
+    if (size > MAX_SMALL_BODY_BYTES &&
+        (payload as { op?: unknown }).op !== "write") {
+      return jsonNoStore({ ok: false, code: "BODY_TOO_LARGE" }, 413);
     }
     const result = await runnerPost<WorkerResponse>(
       `/sessions/${encodeURIComponent(sessionId)}/files/operation`,

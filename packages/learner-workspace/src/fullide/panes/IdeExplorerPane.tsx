@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLearnerWorkspaceTranslations as useTranslations } from "@zoeskoul/learner-workspace/runtime/appRuntime";
 import ExplorerTree from "@zoeskoul/learner-workspace/fullide/ExplorerTree";
 import { SQL_DIALECT_LABEL } from "@zoeskoul/learner-workspace/ide/constants";
@@ -42,6 +42,8 @@ type Props = {
     onUndo: () => void;
     onRedo: () => void;
     onToggleExplorer?: () => void;
+    onV6ListTrash?: () => Promise<ReadonlyArray<Readonly<{originalPath:string;trashId:string}>>>;
+    onV6RestoreTrash?: (entry: Readonly<{originalPath:string;trashId:string}>) => Promise<boolean>;
     services: FullIDEServices;
     actions: {
         setInlineEdit: (value: any) => void;
@@ -225,11 +227,33 @@ export default function IdeExplorerPane({
                                             onUndo,
                                             onRedo,
                                             onToggleExplorer,
+                                            onV6ListTrash,
+                                            onV6RestoreTrash,
                                             services,
 }: Props) {
     const t = useTranslations("ide.explorer.pane");
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const folderInputRef = useRef<HTMLInputElement | null>(null);
+    const [trashEntries, setTrashEntries] = useState<ReadonlyArray<Readonly<{originalPath:string;trashId:string}>> | null>(null);
+    const [trashBusy, setTrashBusy] = useState(false);
+    const loadV6Trash = async () => {
+        if (!onV6ListTrash || trashBusy) return;
+        setTrashBusy(true);
+        try { setTrashEntries(await onV6ListTrash()); }
+        catch (error) {
+            actions.setToast({kind:"error",text:error instanceof Error ? error.message : "Unable to list recoverable folders."});
+        }
+        finally { setTrashBusy(false); }
+    };
+    const restoreV6Folder = async (entry: Readonly<{originalPath:string;trashId:string}>) => {
+        if (!onV6RestoreTrash || trashBusy) return;
+        setTrashBusy(true);
+        try {
+            if (await onV6RestoreTrash(entry)) {
+                setTrashEntries((items) => items?.filter((item) => item.trashId !== entry.trashId) ?? null);
+            }
+        } finally { setTrashBusy(false); }
+    };
     const importReadLimits = useMemo<ImportReadLimits>(
         () => ({
             maxFiles: policy.maxImportFiles,
@@ -436,6 +460,27 @@ export default function IdeExplorerPane({
 
                 </div>
             </div>
+
+            {onV6ListTrash && onV6RestoreTrash ? (
+                <div className="border-b border-neutral-200 px-3 py-2 dark:border-white/10">
+                    <button type="button" disabled={trashBusy} onClick={() => void loadV6Trash()}
+                        className="text-xs font-semibold text-neutral-600 underline disabled:opacity-50 dark:text-white/70">
+                        {trashBusy ? "Checking recoverable folders…" : "Recover deleted folder"}
+                    </button>
+                    {trashEntries !== null ? (
+                        <div className="mt-2 space-y-1 text-xs" aria-live="polite">
+                            {trashEntries.length === 0 ? <p>No recoverable folders.</p> : trashEntries.map((entry) => (
+                                <div key={entry.trashId} className="flex items-center justify-between gap-2">
+                                    <span className="min-w-0 truncate" title={entry.originalPath}>{entry.originalPath}</span>
+                                    <button type="button" disabled={trashBusy}
+                                        onClick={() => void restoreV6Folder(entry)}
+                                        className="rounded border px-2 py-1 font-medium disabled:opacity-50">Restore</button>
+                                </div>
+                            ))}
+                        </div>
+                    ) : null}
+                </div>
+            ) : null}
 
             {services.explorer.showFilter ? (
                 <div className="border-b border-neutral-200 p-3 dark:border-white/10">

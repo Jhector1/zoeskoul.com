@@ -11,6 +11,7 @@ import type {
     WorkspaceSyncEntry,
     WorkspaceTerminalController,
     WorkspaceTerminalConfig,
+    WorkspaceExplorerExecutorV6,
 } from "@zoeskoul/learner-workspace/runner/runtime";
 import {
     appendTerminalEvidenceCommand,
@@ -29,6 +30,12 @@ import {
     workspaceSyncEntriesEqual,
     workspaceSyncEntryValue,
 } from "@zoeskoul/learner-workspace/lib/projects/workspaceSyncEntries";
+
+import { WorkspaceFileRevisionV6 } from "./workspaceFileRevisionV6";
+import { pushWorkspaceFileDeltaV6 } from "./workspaceFileDeltaSyncV6";
+import { WorkspaceStructuralActionsV6 } from "./workspaceFileStructuralActionsV6";
+import { WorkspaceFileV6Error } from "./workspaceFileClientV6";
+import { isBinaryWorkspaceEntry } from "@zoeskoul/learner-workspace/lib/ide/workspaceFileContent";
 
 import { useRunSession } from "@zoeskoul/learner-workspace/runner/useRunSession";
 import {
@@ -977,6 +984,39 @@ export function useWorkspaceTerminalController(
     const quietTimerRef = React.useRef<number | null>(null);
     const awaitingPostEnterSnapshotRef = React.useRef(false);
     const snapshotInFlightRef = React.useRef<Promise<boolean> | null>(null);
+    const v6RevisionRef = React.useRef<{
+        sessionId: string;
+        coordinator: WorkspaceFileRevisionV6;
+    } | null>(null);
+    const v6PushInFlightRef = React.useRef<Promise<void> | null>(null);
+    const v6StructuralBusyRef = React.useRef(false);
+    const v6StructuralNeedsReconcileRef = React.useRef(false);
+    const v6StructuralSnapshotAllowedRef = React.useRef(false);
+    const writerModeRef = React.useRef<{
+        sessionId: string;
+        mode: "v5" | "v6";
+    } | null>(null);
+    const assertSessionWriterMode = React.useCallback((activeSessionId: string) => {
+        const mode = args.fileSyncMode === "v6" ? "v6" : "v5";
+        const selected = writerModeRef.current;
+        if (!selected || selected.sessionId !== activeSessionId) {
+            writerModeRef.current = { sessionId: activeSessionId, mode };
+        } else if (selected.mode !== mode) {
+            // A prop change must not silently switch writers in a live shell.
+            throw new Error("Workspace sync mode changed. Start a new terminal session before switching writers.");
+        }
+    }, [args.fileSyncMode]);
+    React.useEffect(() => () => {
+        v6RevisionRef.current?.coordinator.dispose();
+        v6RevisionRef.current = null;
+    }, []);
+    React.useEffect(() => {
+        const previous = v6RevisionRef.current;
+        if (previous && previous.sessionId !== sessionId) {
+            previous.coordinator.dispose();
+            v6RevisionRef.current = null;
+        }
+    }, [sessionId]);
     const pushInFlightRef = React.useRef<Promise<boolean> | null>(null);
     const lastWorkspaceSyncErrorRef = React.useRef<string | null>(null);
     const openInFlightRef = React.useRef<Promise<void> | null>(null);
@@ -1575,9 +1615,60 @@ export function useWorkspaceTerminalController(
             setSyncStatus("pushing");
 
             try {
+                assertSessionWriterMode(sessionId);
+                if (args.fileSyncMode === "v6" &&
+                    (v6StructuralBusyRef.current || v6StructuralNeedsReconcileRef.current)) {
+                    throw new WorkspaceFileV6Error("RECONCILIATION_REQUIRED", 409);
+                }
                 const visible = sortEntries(files).filter(
                     (entry) => !isHiddenHistoryEntry(entry),
                 );
+
+                // Exactly one workspace writer per terminal session. In the
+                // opt-in V6 mode never invoke /workspace/replace, including
+                // when a V6 operation conflicts or its transport is unavailable.
+                if (args.fileSyncMode === "v6") {
+                    if (v6PushInFlightRef.current) {
+                        await v6PushInFlightRef.current;
+                    }
+                    if (v6RevisionRef.current?.sessionId !== sessionId) {
+                        v6RevisionRef.current?.coordinator.dispose();
+                        v6RevisionRef.current = {
+                            sessionId,
+                            coordinator: new WorkspaceFileRevisionV6(sessionId),
+                        };
+                    }
+                    const coordinator = v6RevisionRef.current.coordinator;
+                    const run = pushWorkspaceFileDeltaV6({
+                        revision: coordinator,
+                        baseline: lastPushedEntriesRef.current,
+                        desired: visible,
+                        getLatestEntries: getWorkspaceEntries,
+                        onCommitted: (path, next) => {
+                            if (v6RevisionRef.current?.coordinator !== coordinator) {
+                                throw new Error("Terminal session changed during workspace save.");
+                            }
+                            const updated = new Map(
+                                lastPushedEntriesRef.current.map((entry) => [entry.path, entry] as const),
+                            );
+                            if (next) updated.set(path, next);
+                            else updated.delete(path);
+                            lastPushedEntriesRef.current = sortEntries([...updated.values()]);
+                        },
+                    });
+                    v6PushInFlightRef.current = run;
+                    try {
+                        await run;
+                    } finally {
+                        if (v6PushInFlightRef.current === run) {
+                            v6PushInFlightRef.current = null;
+                        }
+                    }
+                    lastWorkspaceSyncErrorRef.current = null;
+                    setSyncStatus("idle");
+                    return true;
+                }
+
                 const historyContent = await ensureHistoryLoaded();
                 const payload = augmentEntriesWithHistory(visible, historyContent);
 
@@ -1607,7 +1698,7 @@ export function useWorkspaceTerminalController(
                 return false;
             }
         },
-        [sessionId, ensureHistoryLoaded, pushChunk],
+        [sessionId, args.fileSyncMode, assertSessionWriterMode, getWorkspaceEntries, ensureHistoryLoaded, pushChunk],
     );
 
     const snapshotFiles = React.useCallback(async (): Promise<WorkspaceSyncEntry[]> => {
@@ -1664,7 +1755,7 @@ export function useWorkspaceTerminalController(
     );
 
     const pullSnapshotIntoWorkspace = React.useCallback(async (): Promise<boolean> => {
-        if (!sessionId) return false;
+        if (!sessionId || (v6StructuralBusyRef.current && !v6StructuralSnapshotAllowedRef.current)) return false;
         if (snapshotInFlightRef.current) return await snapshotInFlightRef.current;
 
         const run = (async (): Promise<boolean> => {
@@ -1692,6 +1783,9 @@ export function useWorkspaceTerminalController(
             });
             // Advance the baseline only after the IDE accepts the snapshot.
             lastPushedEntriesRef.current = nextBaseline;
+            if (args.fileSyncMode === "v6" && dirtyUiPaths.size === 0) {
+                v6StructuralNeedsReconcileRef.current = false;
+            }
             return true;
         })();
 
@@ -1712,6 +1806,81 @@ export function useWorkspaceTerminalController(
         args.onTerminalSnapshotFiles,
     ]);
 
+    const executeExplorerIntentV6 = React.useCallback<WorkspaceExplorerExecutorV6>(async (intent) => {
+        if (args.fileSyncMode !== "v6" || !args.enabled || !sessionId || !interactiveReady ||
+            v6StructuralBusyRef.current || v6StructuralNeedsReconcileRef.current ||
+            v6PushInFlightRef.current || pushInFlightRef.current || snapshotInFlightRef.current) {
+            throw new WorkspaceFileV6Error("SESSION_NOT_READY", 409);
+        }
+        assertSessionWriterMode(sessionId);
+        const baseline = lastPushedEntriesRef.current;
+        const clean = () => sessionIdRef.current === sessionId &&
+            entriesEqual(getWorkspaceEntries(), baseline) &&
+            !v6PushInFlightRef.current && !pushInFlightRef.current;
+        if (!clean()) throw new WorkspaceFileV6Error("LOCAL_DRAFT_CHANGED", 409);
+        v6StructuralBusyRef.current = true;
+        const bridge = new WorkspaceStructuralActionsV6(sessionId, clean);
+        try {
+            if (intent.kind === "list_trash") {
+                return {state:"read_only" as const, kind:"list_trash" as const,
+                    path:"" as const, entries: await bridge.listTrash()};
+            }
+            let result;
+            // File moves/deletes must match the bytes last acknowledged by the
+            // editor, not merely whatever happens to be on disk right now.
+            if (intent.kind === "move_file" || intent.kind === "delete_file") {
+                const entry = baseline.find((item) => item.path === intent.path && item.kind === "file");
+                if (!entry) throw new WorkspaceFileV6Error("CONFLICT", 409);
+                const reader = new WorkspaceFileRevisionV6(sessionId);
+                try {
+                    const binary = isBinaryWorkspaceEntry(entry);
+                    const remote = binary ? await reader.readBinary(intent.path) : await reader.readText(intent.path);
+                    if (!remote.exists || (binary
+                        ? !("data" in remote) || remote.data !== (entry as {data:string}).data
+                        : !("content" in remote) || remote.content !== (entry as {content:string}).content)) {
+                        throw new WorkspaceFileV6Error("CONFLICT", 409);
+                    }
+                    if (!clean()) throw new WorkspaceFileV6Error("LOCAL_DRAFT_CHANGED", 409);
+                    if (intent.kind === "delete_file") {
+                        reader.acknowledgeRead(intent.path, remote.revision);
+                        // A transport failure may occur after the server commits:
+                        // keep reconciliation required until a read-only snapshot.
+                        v6StructuralNeedsReconcileRef.current = true;
+                        await reader.deleteFile(intent.path);
+                        result = {state:"reconciliation_required" as const,kind:intent.kind,path:intent.path};
+                    } else {
+                        v6StructuralNeedsReconcileRef.current = true;
+                        result = await bridge.execute({...intent,expectedRevision:remote.revision});
+                    }
+                } finally {
+                    reader.dispose();
+                }
+            } else {
+                v6StructuralNeedsReconcileRef.current = true;
+                result = await bridge.execute(intent);
+            }
+            v6StructuralSnapshotAllowedRef.current = true;
+            try {
+                if (sessionIdRef.current !== sessionId || !await pullSnapshotIntoWorkspace() ||
+                    v6StructuralNeedsReconcileRef.current) {
+                    throw new WorkspaceFileV6Error("RECONCILIATION_REQUIRED", 409);
+                }
+            } finally {
+                v6StructuralSnapshotAllowedRef.current = false;
+            }
+            // Structural mutations invalidate cached paths/revisions.
+            if (v6RevisionRef.current?.sessionId === sessionId) {
+                v6RevisionRef.current.coordinator.dispose();
+                v6RevisionRef.current = null;
+            }
+            return result;
+        } finally {
+            bridge.dispose();
+            v6StructuralBusyRef.current = false;
+        }
+    }, [args.enabled, args.fileSyncMode, assertSessionWriterMode, getWorkspaceEntries,
+        interactiveReady, pullSnapshotIntoWorkspace, sessionId]);
+
     const schedulePostEnterSnapshot = React.useCallback(
         (delayMs = 700) => {
             if (!awaitingPostEnterSnapshotRef.current) return;
@@ -1726,11 +1895,15 @@ export function useWorkspaceTerminalController(
     );
 
     const beforeSubmitEnter = React.useCallback(async (): Promise<void> => {
+        if (args.fileSyncMode === "v6" && (v6StructuralBusyRef.current || v6StructuralNeedsReconcileRef.current)) {
+            throw new WorkspaceFileV6Error("RECONCILIATION_REQUIRED", 409);
+        }
+        if (sessionId) assertSessionWriterMode(sessionId);
         const ok = await pushWorkspaceFromSource(false);
         if (!ok) {
             throw new Error("Could not push local workspace to terminal.");
         }
-    }, [pushWorkspaceFromSource]);
+    }, [sessionId, args.fileSyncMode, assertSessionWriterMode, pushWorkspaceFromSource]);
 
     const afterSubmitEnter = React.useCallback(async (): Promise<void> => {
         awaitingPostEnterSnapshotRef.current = true;
@@ -3131,6 +3304,7 @@ export function useWorkspaceTerminalController(
             replaceFiles,
             snapshotFiles,
             syncWorkspaceNow: pullSnapshotIntoWorkspace,
+            executeExplorerIntentV6,
             beforeSubmitEnter,
             afterSubmitEnter,
         }),
@@ -3149,6 +3323,7 @@ export function useWorkspaceTerminalController(
             lastMessageAt,
             open,
             pullSnapshotIntoWorkspace,
+            executeExplorerIntentV6,
             recoverMessage,
             recoverState,
             replaceFiles,

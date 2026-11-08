@@ -116,8 +116,36 @@ export type SharedRunnerArgs = {
     ) => void | Promise<void>;
 };
 
+export type WorkspaceExplorerIntentV6 =
+    | Readonly<{kind:"mkdir";path:string}>
+    | Readonly<{kind:"rmdir";path:string}>
+    | Readonly<{kind:"move_file";path:string;destinationPath:string}>
+    | Readonly<{kind:"move_directory";path:string;destinationPath:string}>
+    | Readonly<{kind:"delete_file";path:string}>
+    | Readonly<{kind:"trash_directory";path:string}>
+     | Readonly<{kind:"restore_directory";path:string;trashId:string}>
+     | Readonly<{kind:"list_trash";path:""}>;
+export type WorkspaceExplorerResultV6 = Readonly<{
+     state:"reconciliation_required" | "read_only";
+     kind: WorkspaceExplorerIntentV6["kind"];
+    path:string;
+    destinationPath?:string;
+    trashId?:string;
+    entries?: ReadonlyArray<Readonly<{originalPath:string;trashId:string}>>;
+}>;
+export type WorkspaceExplorerExecutorV6 =
+    (intent: WorkspaceExplorerIntentV6) => Promise<WorkspaceExplorerResultV6>;
+
 export type WorkspaceTerminalConfig = {
     enabled?: boolean;
+    /**
+     * V6 is an explicit, nondefault single-writer experiment. Never turn this
+     * on for ordinary student sessions before end-to-end acceptance.
+     * In V6 mode unsupported edits fail closed; there is no V5 write fallback.
+     */
+    fileSyncMode?: "v5" | "v6";
+    /** Only an active, owned, V6 terminal may publish an executor. */
+    onV6ExplorerExecutorReady?: (executor: WorkspaceExplorerExecutorV6 | null) => void;
     projectId?: string;
     cwd?: string;
     terminalSessionScope?: TerminalSessionScope;
@@ -225,6 +253,8 @@ export type WorkspaceTerminalController = {
     replaceFiles: (files: WorkspaceSyncEntry[]) => Promise<boolean>;
     snapshotFiles: () => Promise<WorkspaceSyncEntry[]>;
     syncWorkspaceNow: () => Promise<boolean>;
+    /** Opt-in server-first structural operation; V5 always fails closed. */
+    executeExplorerIntentV6?: WorkspaceExplorerExecutorV6;
     beforeSubmitEnter: () => Promise<void>;
     afterSubmitEnter: () => Promise<void>;
 };
