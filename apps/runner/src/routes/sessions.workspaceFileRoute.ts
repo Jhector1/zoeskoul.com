@@ -24,15 +24,25 @@ export const sessionsWorkspaceFileRoute: RequestHandler = async (req, res) => {
       return res.status(409).json({ ok: false, error: "Active shell workspace required." });
     }
     const request = parseWorkspaceFileRequest(req.body);
-    const result = await withWorkspaceSyncLock(session.workspaceDir, () =>
-      runWorkspaceFileWorker(session, request),
-    );
+    const result = await withWorkspaceSyncLock(session.workspaceDir, () => {
+      // A request can wait behind an earlier workspace mutation. The session
+      // may expire or be replaced while it waits. Reauthorize at execution
+      // time, not just before acquiring the queue.
+      const active = getSession(session.id);
+      if (active !== session || active.ownerKey !== actorKey ||
+          active.kind !== "shell" || active.state !== "waiting_for_input" ||
+          active.workspaceDir !== session.workspaceDir) {
+        return Promise.resolve({ ok: false as const, code: "SESSION_INACTIVE" });
+      }
+      return runWorkspaceFileWorker(session, request);
+    });
     if (result.ok) return res.status(200).json(result);
     const status = result.code === "CONFLICT" ? 409 :
       result.code === "NOT_FOUND" ? 404 :
       result.code === "PRECONDITION_REQUIRED" ? 428 :
       result.code === "TOO_LARGE" || result.code === "TOO_MANY_ENTRIES" ? 413 :
       result.code === "READ_ONLY" ? 403 :
+      result.code === "SESSION_INACTIVE" ? 409 :
       result.code === "TIMEOUT" ? 503 :
       result.code.startsWith("INVALID_") ? 400 : 500;
     return res.status(status).json(result);
