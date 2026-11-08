@@ -35,6 +35,8 @@ const envSchema = z.object({
   RUNNER_EXEC_GID: z.coerce.number().int().nonnegative().default(1000),
   // Rootless Docker ownership-repair canary: activate only after a live probe.
   RUNNER_WORKSPACE_OWNERSHIP_REPAIR_ENABLED: boolFlag(false),
+  // V6A internal sandbox-side file-worker canary; OFF until rootless validation.
+  RUNNER_WORKSPACE_FILE_API_ENABLED: boolFlag(false),
   RUNNER_WORKSPACE_FS_POLICY: z.enum(["legacy", "shared-group-v1"]).default("legacy"),
   RUNNER_EXECUTION_POOL: z.string().optional(),
 
@@ -126,6 +128,7 @@ export const env = {
   execUid: parsed.RUNNER_EXEC_UID,
   execGid: parsed.RUNNER_EXEC_GID,
   workspaceOwnershipRepairEnabled: parsed.RUNNER_WORKSPACE_OWNERSHIP_REPAIR_ENABLED,
+  workspaceFileApiEnabled: parsed.RUNNER_WORKSPACE_FILE_API_ENABLED,
   workspaceFilesystemPolicy: parsed.RUNNER_WORKSPACE_FS_POLICY,
 
   maxFiles: parsed.RUNNER_MAX_FILES,

@@ -9,6 +9,7 @@ import { streamSessionRoute } from "./routes/sessions.stream.js";
 import { resizeSessionRoute } from "./routes/sessions.resize.js";
 import { snapshotWorkspaceRoute } from "./routes/sessions.snapshotWorkspace.js";
 import { sessionsReplaceWorkspaceRoute } from "./routes/sessions.replaceWorkspaceRoute.js";
+import { sessionsWorkspaceFileRoute } from "./routes/sessions.workspaceFileRoute.js";
 import { heartbeatSessionRoute } from "./routes/sessions.heartbeat.js";
 import { activeSessionsRoute } from "./routes/sessions.active.js";
 import { validateBuildJobRoute } from "./routes/build.jobs.validate.js";
@@ -137,6 +138,8 @@ app.post("/sessions/:sessionId/cancel", cancelSessionRoute);
 app.post("/sessions/:sessionId/heartbeat", heartbeatSessionRoute);
 app.get("/sessions/:sessionId/stream", streamSessionRoute);
 app.post("/sessions/:sessionId/snapshot-workspace", snapshotWorkspaceRoute);
+// V6A: internal opt-in file operations, not yet used by the IDE.
+app.post("/sessions/:sessionId/files/operation", sessionsWorkspaceFileRoute);
 app.post(
   "/sessions/:sessionId/replace-workspace",
   sessionsReplaceWorkspaceRoute,
