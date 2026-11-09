@@ -21,9 +21,17 @@ export function buildOwnershipRepairOptions(workspaceDir: string) {
   const gid = env.execGid;
 
   // uid/gid have already been validated as nonnegative integers by envSchema.
+  // Never enter sandbox-owned private recovery or transient file namespaces.
+  // "find" must prune them before both the ownership pass and the audit.
+  // -P is find's default: symlinks are not followed; chown -h changes links only.
+  const pruned = String.raw`\( -name .zoe-v6-trash -o -name node_modules -o -name '.zoe-v6-file-*' -o -name '.zoe-sync-*' \) -prune`;
   const script = [
-    `chown -hR -P -- ${uid}:${gid} /workspace`,
-    `unexpected=$(find /workspace -xdev \\( ! -uid ${uid} -o ! -gid ${gid} \\) -print -quit )`,
+    `if ! find /workspace -xdev ${pruned} -o -exec chown -h -- ${uid}:${gid} {} +; then`,
+    `  echo 'WORKSPACE_OWNERSHIP_CHOWN_FAILED' >&2; exit 41`,
+    `fi`,
+    `if ! unexpected=$(find /workspace -xdev ${pruned} -o \\( ! -uid ${uid} -o ! -gid ${gid} \\) -print -quit); then`,
+    `  echo 'WORKSPACE_OWNERSHIP_SCAN_FAILED' >&2; exit 42`,
+    `fi`,
     `if [ -n "$unexpected" ]; then`,
     `  echo 'WORKSPACE_OWNERSHIP_INCOMPLETE' >&2; exit 31`,
     `fi`,
@@ -87,7 +95,11 @@ export async function repairSandboxWorkspaceOwnership(workspaceDir: string) {
       }),
     ]);
     if (result.StatusCode !== 0) {
-      throw new Error(`Workspace ownership repair failed (status ${result.StatusCode}); sandbox start/sync blocked.`);
+      // Expose a bounded failure category, not helper stderr or student paths.
+      const phase = result.StatusCode === 41 ? "ownership update" :
+        result.StatusCode === 42 ? "ownership audit" :
+        result.StatusCode === 31 ? "ownership incomplete" : "unknown";
+      throw new Error(`Workspace ownership repair failed (${phase}; status ${result.StatusCode}); sandbox start/sync blocked.`);
     }
   } finally {
     if (timeout) clearTimeout(timeout);
