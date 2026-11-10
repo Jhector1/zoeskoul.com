@@ -1,3 +1,4 @@
+import { selectedCanonicalDatabaseUrl } from "./canonicalDatabaseUrl.mjs";
 /**
  * V12J.6I: Read-only investigation of Stripe test-mode immediate cancellation.
  * Require the V12J.6C dedicated student approval and a canceled provider subscription.
@@ -146,7 +147,7 @@ async function main() {
   const args = process.argv.slice(2);
   if (args.length !== 1 || args[0] !== '--audit') throw new LifecycleRefusal('USAGE_AUDIT_ONLY');
   validateCheckArgs(process.env, ['--check', 'builder_ai', 'canceled']);
-  const uri = process.env.ADMIN_DATABASE_URL || process.env.WEB_DATABASE_URL || process.env.DATABASE_URL;
+  const uri = selectedCanonicalDatabaseUrl();
   let url;
   try { url = new URL(uri); } catch { throw new LifecycleRefusal('POSTGRES_URL_INVALID'); }
   if (!['postgresql:', 'postgres:'].includes(url.protocol) || !url.hostname || url.pathname === '/') throw new LifecycleRefusal('POSTGRES_URL_INVALID');

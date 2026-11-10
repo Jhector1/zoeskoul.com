@@ -13,6 +13,9 @@ describe("Admin Vite route ownership", () => {
       kind: "curriculum",
     });
     expect(resolveAdminRoute("/promotions")).toEqual({ kind: "promotions" });
+    expect(resolveAdminRoute("/learning-visibility")).toEqual({
+      kind: "learning-visibility",
+    });
     expect(resolveAdminRoute("/learners/user%3A123")).toEqual({
       kind: "learner",
       actorKey: "user:123",
@@ -26,6 +29,9 @@ describe("Admin Vite route ownership", () => {
     });
     expect(resolveAdminRoute("/admin/promotions")).toEqual({
       kind: "promotions",
+    });
+    expect(resolveAdminRoute("/admin/learning-visibility")).toEqual({
+      kind: "learning-visibility",
     });
     expect(resolveAdminRoute("/admin/learners/guest%3A7")).toEqual({
       kind: "learner",

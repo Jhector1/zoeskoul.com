@@ -121,6 +121,11 @@ export function parseSaveProjectRequest(raw: unknown): SaveProjectRequest {
             typeof body.clientDraftUpdatedAt === "string"
                 ? body.clientDraftUpdatedAt
                 : null,
+        creationRequestKey: body.creationRequestKey == null ? null
+            : typeof body.creationRequestKey === "string" &&
+              /^[A-Za-z0-9_-]{20,96}$/.test(body.creationRequestKey)
+                ? body.creationRequestKey
+                : (() => { throw new Error("Invalid project creation request key."); })(),
     };
 }
 

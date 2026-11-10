@@ -3,6 +3,7 @@
 import { resolveExerciseExplorerAvailability } from "./explorerAvailability";
 import { getLearnerWorkspaceEnv, getLearnerWorkspaceStaticConfig } from "@zoeskoul/learner-workspace/runtime/appRuntime";
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 import {
     useFullIDEAuthenticatedUserId,
@@ -13,18 +14,28 @@ import { DEFAULT_SQL_DIALECT } from "@zoeskoul/learner-workspace/runner/constant
 import { useProjectDirtyState } from "@zoeskoul/learner-workspace/projects/hooks/useProjectDirtyState";
 import { useProjectsList } from "@zoeskoul/learner-workspace/projects/hooks/useProjectsList";
 
-import { pathOf } from "@zoeskoul/learner-workspace/ide/fsTree";
+import { pathOf, exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
 import { planV6InlineIntent, planV6MoveIntent, planV6DeleteIntent } from "./v6ExplorerIntent";
+import { v6ExplorerFailureMessage } from "./v6ExplorerFeedback";
+import { V6StructuralHistory, supportsV6StructuralHistory } from "./v6StructuralHistory";
+import { planV6ExecutorHistoryPublication, v6FileActionLabel } from "./v6ExecutorHistoryLease";
+import { prepareV6SessionDownload, saveV6BrowserDownload,
+    type V6DownloadSelection } from "./workspaceDownloadV6Session";
+import { startV6TabDraftLease, type LeaseIdentity } from "./v6TabDraftLease";
 import type { WorkspaceExplorerExecutorV6 } from "@zoeskoul/learner-workspace/runner/runtime";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 import { useIdeWorkspace } from "@zoeskoul/learner-workspace/ide/workspaceHook/useIdeWorkspace";
 import { cn } from "@zoeskoul/learner-workspace/ide/utils";
 import IdeDesktopLayout from "@zoeskoul/learner-workspace/fullide/chrome/IdeDesktopLayout";
 import IdeHeader from "./IdeHeader";
+import { planV6Import } from "./v6ImportPlan";
+import { waitForV6ImportView } from "./v6ImportViewBarrier";
 import IdeMobileLayout from "@zoeskoul/learner-workspace/fullide/chrome/IdeMobileLayout";
 import IdeStatusBanners from "@zoeskoul/learner-workspace/ide/fullide/chrome/IdeStatusBanners";
 import IdeToastHost from "@zoeskoul/learner-workspace/fullide/chrome/IdeToastHost";
 import IdeConflictBanner from "@zoeskoul/learner-workspace/ide/fullide/chrome/IdeConflictBanner";
+import IdeCloudConflictDialog from "./modals/IdeCloudConflictDialog";
+import { cloudSaveIntent } from "./hooks/v6CloudConflictPolicy";
 import { useIdeProjectSession } from "@zoeskoul/learner-workspace/fullide/hooks/useIdeProjectSession";
 import { useIdeRunner } from "@zoeskoul/learner-workspace/fullide/hooks/useIdeRunner";
 import { useIdeViewport } from "@zoeskoul/learner-workspace/ide/fullide/hooks/useIdeViewport";
@@ -69,6 +80,8 @@ type FullIDEInnerProps = {
     projectScope: FullIDEProps["projectScope"];
     readOnly: boolean;
     fileSyncMode?: "v5" | "v6";
+    v6DraftTabId?: string | null;
+    v6InheritedDraftTabId?: string | null;
     /** Umbrella policy for every browser-local learner-state cache below FullIDE. */
     draftStorageMode: NonNullable<FullIDEProps["draftStorageMode"]>;
     router: ReturnType<typeof useFullIDERouter>;
@@ -193,6 +206,8 @@ function FullIDEInner({
                           draftStorageMode,
                           readOnly,
                           fileSyncMode = "v5",
+                          v6DraftTabId,
+                          v6InheritedDraftTabId,
                           exerciseStateKey,
                           workspaceReplacementRevision,
                           onWorkspaceReplacementApplied,
@@ -273,6 +288,7 @@ function FullIDEInner({
         maxFiles: state.policy.maxFiles,
     });
     const [explorerCollapsed, setExplorerCollapsed] = useState(false);
+    const [cloudConflictDialogOpen, setCloudConflictDialogOpen] = useState(false);
     const [editorSplit, setEditorSplit] = useState<{
         fileId: string;
         placement: EditorSplitPlacement;
@@ -458,6 +474,8 @@ function FullIDEInner({
         projectScope,
         initialProjectId,
         draftStorageMode,
+        v6DraftTabId,
+        v6InheritedDraftTabId,
         access,
         loginHref,
         billingHref,
@@ -465,6 +483,7 @@ function FullIDEInner({
         language,
         sqlDialect,
         currentWorkspace,
+        workspaceHydrated: derived.storageHydrated,
         nodes,
         activeFile,
         entryFile,
@@ -649,11 +668,23 @@ function FullIDEInner({
     );
     const noOp = useCallback(() => undefined, []);
     const useV6Explorer = fileSyncMode === "v6" && canUseWorkspaceTerminal && !readOnly;
+    const v6HistoryRef = useRef<V6StructuralHistory>(new V6StructuralHistory());
+    const [v6HistoryVersion, setV6HistoryVersion] = useState(0);
+    const updateV6History = useCallback(() => setV6HistoryVersion(value => value + 1), []);
+    void v6HistoryVersion;
     const v6ExecutorRef = useRef<WorkspaceExplorerExecutorV6 | null>(null);
+    const v6HistorySessionIdRef = useRef<string | null>(null);
     const v6UiBusyRef = useRef(false);
-    const onV6ExplorerExecutorReady = useCallback((executor: WorkspaceExplorerExecutorV6 | null) => {
-        v6ExecutorRef.current = executor;
-    }, []);
+    const [v6BusyLabel, setV6BusyLabel] = useState<string | null>(null);
+    const onV6ExplorerExecutorReady = useCallback((executor: WorkspaceExplorerExecutorV6 | null, sessionId?: string | null) => {
+        const next = planV6ExecutorHistoryPublication(v6HistorySessionIdRef.current, sessionId, Boolean(executor));
+        if (next.resetHistory) v6HistoryRef.current.clear();
+        v6HistorySessionIdRef.current = next.sessionId;
+        // Temporary unpublishing during reconciliation must not erase valid Undo.
+        // A new terminal session always starts with an empty history.
+        v6ExecutorRef.current = next.acceptExecutor ? executor : null;
+        updateV6History();
+    }, [updateV6History]);
     useEffect(() => () => { v6ExecutorRef.current = null; }, []);
     const runV6ExplorerIntent = useCallback(async (intent: import("@zoeskoul/learner-workspace/runner/runtime").WorkspaceExplorerIntentV6) => {
         if (v6UiBusyRef.current) {
@@ -666,19 +697,164 @@ function FullIDEInner({
             return false;
         }
         v6UiBusyRef.current = true;
+        const boundSessionId = v6HistorySessionIdRef.current;
+        setV6BusyLabel(v6FileActionLabel(intent));
         try {
-            await executor(intent); // Runner accepted and authoritative workspace snapshot was applied.
+            const canRecord = supportsV6StructuralHistory(intent);
+            // Drain acknowledged writes before a structural mutation, using
+            // the SAME authenticated snapshot as its authoritative pre-state.
+            // This avoids a duplicate full workspace export on every action.
+            let before: import("@zoeskoul/code-contracts").WorkspaceSyncEntry[] | null = null;
+            if (canRecord) {
+                const synced = await executor({kind:"sync_editor",path:""});
+                if (synced.state !== "reconciliation_required" || !synced.files || !synced.committed ||
+                    !v6HistoryRef.current.recordCommittedFiles(synced.committed,synced.files)) {
+                    v6HistoryRef.current.clear();
+                    throw new Error("Could not verify pending editor changes before the file operation.");
+                }
+                before = synced.files;
+            }
+            const result = await executor(intent); // authoritative mutation + reconciliation
+            if (!boundSessionId || v6HistorySessionIdRef.current !== boundSessionId) {
+                v6HistoryRef.current.clear();
+                throw new Error("Terminal session changed during the file operation. Verify the workspace before retrying.");
+            }
+            if (before) {
+                try {
+                    if (v6HistorySessionIdRef.current !== boundSessionId) {
+                        throw new Error("Terminal session changed while verifying the operation.");
+                    }
+                    // The mutation result carries the exact Runner snapshot
+                    // accepted during reconciliation, not a second export
+                    // racing React's pending state update.
+                    v6HistoryRef.current.recordReconciled(intent,result,before);
+                } catch {
+                    // Mutations are not rolled back on a failed *post* snapshot.
+                    // Clear history so a future Undo cannot replay uncertainty.
+                    v6HistoryRef.current.clear();
+                }
+            } else {
+                v6HistoryRef.current.clear();
+            }
+            updateV6History();
             actions.cancelInlineEdit();
             actions.setPendingDeleteId(null);
+            if (intent.kind === "trash_directory") {
+                actions.setToast({kind:"success", text: v6HistoryRef.current.canUndo
+                    ? "Folder moved to recoverable trash. Use Undo to restore it."
+                    : "Folder moved to recoverable trash. Open Recovery options to restore it."});
+            } else if (intent.kind === "restore_directory") {
+                actions.setToast({kind:"success", text:"Folder restored from the terminal session's recoverable trash."});
+            } else if (intent.kind === "delete_file") {
+                actions.setToast({kind:"success", text:v6HistoryRef.current.canUndo
+                    ? "File deleted. Use Undo to restore it."
+                    : "File deleted. Undo is unavailable because its recovery state could not be verified."});
+            }
             return true;
         } catch (error) {
-            const message = error instanceof Error ? error.message : "Unknown V6 filesystem error";
-            actions.setToast({kind:"error", text:`V6 file operation blocked: ${message}. Refresh the terminal workspace before retrying.`});
+            actions.setToast({kind:"error", text:v6ExplorerFailureMessage(error)});
             return false;
         } finally {
             v6UiBusyRef.current = false;
+            setV6BusyLabel(null);
         }
-    }, [actions]);
+    }, [actions, updateV6History]);
+    const runV6HistoryStep = useCallback(async (direction: "undo" | "redo") => {
+        const executor = v6ExecutorRef.current;
+        if (!executor || v6UiBusyRef.current) return;
+        v6UiBusyRef.current = true;
+        const boundSessionId = v6HistorySessionIdRef.current;
+        setV6BusyLabel(direction === "undo" ? "Undoing file operation…" : "Redoing file operation…");
+        try {
+            // A pending edit must be journaled before Undo selects its target.
+            // Otherwise an earlier filesystem operation could be undone while
+            // the newest text draft is still in flight.
+            const synced = await executor({kind:"sync_editor",path:""});
+            if (synced.state !== "reconciliation_required" || !synced.files || !synced.committed ||
+                !v6HistoryRef.current.recordCommittedFiles(synced.committed,synced.files)) {
+                v6HistoryRef.current.clear();
+                throw new Error("Could not verify editor changes before Undo/Redo.");
+            }
+            const snapshot = async () => {
+                const result = await executor({kind:"history_snapshot",path:""});
+                if (result.state !== "read_only" || !result.files) {
+                    throw new Error("Could not verify the terminal workspace for Undo/Redo.");
+                }
+                return result.files;
+            };
+            if (!boundSessionId || boundSessionId !== v6HistorySessionIdRef.current) {
+                throw new Error("The terminal session changed. Undo/Redo was canceled.");
+            }
+            if (direction === "undo") await v6HistoryRef.current.undo(executor,snapshot);
+            else await v6HistoryRef.current.redo(executor,snapshot);
+            if (boundSessionId !== v6HistorySessionIdRef.current) {
+                v6HistoryRef.current.clear();
+                throw new Error("The terminal session changed during Undo/Redo. Verify the workspace.");
+            }
+            actions.cancelInlineEdit();
+            actions.setPendingDeleteId(null);
+            actions.setToast({kind:"success",text: direction === "undo" ? "Undo completed in the terminal workspace." : "Redo completed in the terminal workspace."});
+        } catch (error) {
+            actions.setToast({kind:"error",text:v6ExplorerFailureMessage(error)});
+        } finally {
+            v6UiBusyRef.current = false;
+            setV6BusyLabel(null);
+            updateV6History();
+        }
+    },[actions,updateV6History]);
+    const v6EditSyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const v6EditSyncEpochRef = useRef(0);
+    const v6EditSyncSessionRef = useRef<string | null>(null);
+    const flushV6EditorHistory = useCallback(async (epoch:number) => {
+        if (epoch !== v6EditSyncEpochRef.current) return;
+        if (v6UiBusyRef.current) {
+            // Defer before the next CAS begins; never automatically retry an
+            // ambiguous server mutation.
+            v6EditSyncTimerRef.current = setTimeout(() => {
+                v6EditSyncTimerRef.current = null;
+                void flushV6EditorHistory(epoch);
+            }, 300);
+            return;
+        }
+        const executor = v6ExecutorRef.current;
+        const session = v6HistorySessionIdRef.current;
+        if (!executor || !session || session !== v6EditSyncSessionRef.current) return;
+        v6UiBusyRef.current = true;
+        try {
+            const result = await executor({kind:"sync_editor",path:""});
+            if (session !== v6HistorySessionIdRef.current) {
+                v6HistoryRef.current.clear();return;
+            }
+            // A learner may keep typing while a previous commit is in flight.
+            // Record exactly the acknowledged bytes; the latest draft remains
+            // pending for the next debounce cycle.
+            if (result.state !== "reconciliation_required" || !result.files || !result.committed ||
+                !v6HistoryRef.current.recordCommittedFiles(result.committed,result.files)) {
+                v6HistoryRef.current.clear();
+                throw new Error("Editor changes were synchronized but cannot be safely added to Undo history.");
+            }
+        } catch (error) {
+            actions.setToast({kind:"error",text:v6ExplorerFailureMessage(error)});
+        } finally {
+            v6UiBusyRef.current = false;
+            updateV6History();
+        }
+    },[actions,updateV6History]);
+    const v6ChangeFileCode = useCallback((id:string,code:string) => {
+        handleChangeFileCode(id,code);
+        if (!useV6Explorer) return;
+        v6EditSyncSessionRef.current = v6HistorySessionIdRef.current;
+        const epoch = ++v6EditSyncEpochRef.current;
+        if (v6EditSyncTimerRef.current !== null) clearTimeout(v6EditSyncTimerRef.current);
+        v6EditSyncTimerRef.current = setTimeout(() => {
+            v6EditSyncTimerRef.current = null;
+            void flushV6EditorHistory(epoch);
+        }, 900);
+    },[handleChangeFileCode,useV6Explorer,flushV6EditorHistory]);
+    useEffect(() => () => {
+        if (v6EditSyncTimerRef.current !== null) clearTimeout(v6EditSyncTimerRef.current);
+        v6EditSyncEpochRef.current++;
+    }, []);
     const listV6Trash = useCallback(async () => {
         const executor = v6ExecutorRef.current;
         if (!executor) throw new Error("The V6 terminal session must be connected to list recoverable folders.");
@@ -691,19 +867,32 @@ function FullIDEInner({
     const restoreV6Trash = useCallback(async (entry: Readonly<{originalPath:string;trashId:string}>) => {
         return runV6ExplorerIntent({kind:"restore_directory",path:entry.originalPath,trashId:entry.trashId});
     }, [runV6ExplorerIntent]);
+    const downloadV6Selection = useCallback(async (selection: V6DownloadSelection) => {
+        const executor = v6ExecutorRef.current;
+        if (!executor || v6UiBusyRef.current) {
+            actions.setToast({kind:"error",text:"Connect the V6 terminal and finish pending file operations before downloading."});
+            return;
+        }
+        v6UiBusyRef.current = true;
+        setV6BusyLabel("Preparing download…");
+        try {
+            const result = await executor({kind:"export_snapshot",path:""});
+            if (result.state !== "read_only" || !result.files) {
+                throw new Error("The terminal did not return a verified workspace snapshot.");
+            }
+            const prepared = prepareV6SessionDownload(result.files,
+                selection.kind === "project" ? {...selection,projectName:headerProjectTitle} : selection);
+            saveV6BrowserDownload(prepared);
+        } catch (error) {
+            actions.setToast({kind:"error",text:v6ExplorerFailureMessage(error)});
+        } finally {
+            v6UiBusyRef.current = false;
+            setV6BusyLabel(null);
+        }
+    },[actions,headerProjectTitle]);
     const v6CommitInlineEdit = useCallback(() => {
         if (!useV6Explorer || !inlineEdit) {
             actions.commitInlineEdit();
-            return;
-        }
-        if (inlineEdit.mode === "new-file") {
-            const name = inlineEdit.value.trim();
-            if (!name || name === "." || name === ".." || name.includes("/") ||
-                name.includes("\\") || name.includes("\0")) {
-                actions.setToast({kind:"error",text:"V6 requires a single safe filename; nested file creation is not ready."});
-                return;
-            }
-            actions.commitInlineEdit(); // V6 CAS writer creates the file on the next sync.
             return;
         }
         try {
@@ -713,7 +902,7 @@ function FullIDEInner({
         } catch (error) {
             actions.setToast({kind:"error",text:error instanceof Error ? error.message : "Invalid file action."});
         }
-    }, [actions, inlineEdit, nodes, runV6ExplorerIntent, useV6Explorer]);
+    }, [actions, inlineEdit, nodes, runV6ExplorerIntent, useV6Explorer, updateV6History]);
     const v6MoveNode = useCallback((id:string, parentId:string|null) => {
         if (!useV6Explorer) { actions.moveNode(id,parentId); return; }
         try {
@@ -723,10 +912,74 @@ function FullIDEInner({
             actions.setToast({kind:"error",text:error instanceof Error ? error.message : "Invalid folder move."});
         }
     },[actions,nodes,runV6ExplorerIntent,useV6Explorer]);
-    const v6ImportFiles = useCallback((files: import("@zoeskoul/learner-workspace/ide/workspaceHook/workspace.policy").ImportedWorkspaceFile[])=> {
+    const v6ImportFiles = useCallback(async (files: import("@zoeskoul/learner-workspace/ide/workspaceHook/workspace.policy").ImportedWorkspaceFile[])=> {
         if (!useV6Explorer) { actions.importExternalFiles(files); return; }
-        actions.setToast({kind:"error",text:"V6 file importing is disabled until server-first upload reconciliation is verified."});
-    },[actions,useV6Explorer]);
+        const executor = v6ExecutorRef.current;
+        if (!executor || v6UiBusyRef.current) {
+            actions.setToast({kind:"error",text:"Connect the terminal and finish the active file operation before importing."});
+            return;
+        }
+        v6UiBusyRef.current = true;
+        const boundSessionId = v6HistorySessionIdRef.current;
+        setV6BusyLabel("Importing files into terminal workspace…");
+        let completed=0;
+        try {
+            // Never upload against unsynchronized local edits. Journal only
+            // acknowledged changes before modifying the Runner filesystem.
+            const synced = await executor({kind:"sync_editor",path:""});
+            if (synced.state !== "reconciliation_required" || !synced.files || !synced.committed ||
+                !v6HistoryRef.current.recordCommittedFiles(synced.committed,synced.files)) {
+                throw new Error("Editor synchronization must be verified before importing.");
+            }
+            const plan = planV6Import(files,synced.files,{
+                maxFiles:explorerPolicy.maxImportFiles,
+                maxDepth:explorerPolicy.maxDepth,
+                maxTextBytes:explorerPolicy.maxFileContentBytes,
+                maxBinaryBytes:explorerPolicy.maxUploadFileBytes,
+            });
+            // Each mutation returns an acknowledged server snapshot. Wait for
+            // React to reflect it before another CAS operation; otherwise the
+            // next clean() guard can reject the previous successful mutation.
+            const awaitImportHandoff = async (result: Awaited<ReturnType<WorkspaceExplorerExecutorV6>>) => {
+                if (!result.files) throw new Error("Runner did not acknowledge an import snapshot.");
+                await waitForV6ImportView({
+                    verified: result.files,
+                    readView: () => exportWorkspaceEntries(currentWorkspaceRef.current?.nodes ?? []),
+                    sameSession: () => v6HistorySessionIdRef.current === boundSessionId,
+                });
+            };
+            for (const dir of plan.directories) {
+                if (v6HistorySessionIdRef.current !== boundSessionId) throw new Error("Terminal session changed during import.");
+                try {
+                    await awaitImportHandoff(await executor({kind:"mkdir",path:dir}));
+                } catch (error) {
+                    throw new Error(`Folder ${dir}: ${v6ExplorerFailureMessage(error)}`);
+                }
+            }
+            for (const entry of plan.entries) {
+                if (v6HistorySessionIdRef.current !== boundSessionId) throw new Error("Terminal session changed during import.");
+                try {
+                    await awaitImportHandoff(await executor({kind:"import_file",path:entry.path,entry}));
+                } catch (error) {
+                    throw new Error(`File ${entry.path}: ${v6ExplorerFailureMessage(error)}`);
+                }
+                completed++;
+                setV6BusyLabel(`Importing files… ${completed}/${plan.entries.length}`);
+            }
+            // Import is not an editor-typed change. Do not reuse pre-import
+            // Undo entries against a workspace with newly created paths.
+            v6HistoryRef.current.clear();
+            actions.setToast({kind:"success",text:`Imported ${completed} file${completed === 1 ? "" : "s"} into the terminal workspace.`});
+        } catch (error) {
+            v6HistoryRef.current.clear();
+            actions.setToast({kind:"error",text:`Import stopped after ${completed} file${completed === 1 ? "" : "s"}. Existing files were not overwritten. ${v6ExplorerFailureMessage(error)}`});
+        } finally {
+            v6UiBusyRef.current = false;
+            setV6BusyLabel(null);
+            updateV6History();
+        }
+    },[actions,useV6Explorer,explorerPolicy.maxImportFiles,explorerPolicy.maxDepth,
+        explorerPolicy.maxFileContentBytes,explorerPolicy.maxUploadFileBytes,updateV6History]);
     const explorerPane = (
         <IdeExplorerPane
             isSql={isSql}
@@ -742,19 +995,14 @@ function FullIDEInner({
             inlineEdit={inlineEdit}
             stdin={stdin}
             access={access}
-            policy={useV6Explorer ? {
-                ...explorerPolicy,
-                // V6 upload/import must not create local folders before server acceptance.
-                canUploadFiles: false,
-                canUploadBinaryFiles: false,
-            } : explorerPolicy}
+            policy={explorerPolicy}
             onUpgrade={() => router.push(access.hasUser ? billingHref : loginHref)}
             onChangeFilter={actions.setFilter}
             onChangeStdin={handleChangeStdin}
-            canUndo={!readOnly && !useV6Explorer && history.canUndo}
-            canRedo={!readOnly && !useV6Explorer && history.canRedo}
-            onUndo={readOnly || useV6Explorer ? noOp : actions.undo}
-            onRedo={readOnly || useV6Explorer ? noOp : actions.redo}
+            canUndo={!readOnly && (useV6Explorer ? v6HistoryRef.current.canUndo : history.canUndo)}
+            canRedo={!readOnly && (useV6Explorer ? v6HistoryRef.current.canRedo : history.canRedo)}
+            onUndo={readOnly ? noOp : useV6Explorer ? () => void runV6HistoryStep("undo") : actions.undo}
+            onRedo={readOnly ? noOp : useV6Explorer ? () => void runV6HistoryStep("redo") : actions.redo}
             onToggleExplorer={
                 viewport.isDesktop
                     ? () => setExplorerCollapsed(true)
@@ -765,6 +1013,7 @@ function FullIDEInner({
             services={services}
             onV6ListTrash={useV6Explorer ? listV6Trash : undefined}
             onV6RestoreTrash={useV6Explorer ? restoreV6Trash : undefined}
+            onV6Download={useV6Explorer ? downloadV6Selection : undefined}
             actions={{
                 setInlineEdit: readOnly ? noOp : actions.setInlineEdit,
                 setToast: actions.setToast,
@@ -823,7 +1072,7 @@ function FullIDEInner({
             services={services}
             onChangeLanguage={setLangUI}
             isAuthenticated={access.hasUser}
-            onChangeFileCode={handleChangeFileCode}
+            onChangeFileCode={v6ChangeFileCode}
             onChangeSqlDialect={setSqlDialect}
             onBeforeRun={onBeforeRun}
             onRunResult={onRunResult}
@@ -872,8 +1121,16 @@ function FullIDEInner({
         }
     };
 
+    useEffect(() => {
+        if (!projectSession.conflictInfo) setCloudConflictDialogOpen(false);
+    }, [projectSession.conflictInfo]);
+
     const handlePrimarySave = () => {
         if (readOnly || (useV6Explorer && v6UiBusyRef.current)) return;
+        if (cloudSaveIntent(Boolean(projectSession.conflictInfo)) === "resolve") {
+            setCloudConflictDialogOpen(true);
+            return;
+        }
         if (!access.canSaveCloud) {
             router.push(access.hasUser ? billingHref : loginHref);
             return;
@@ -896,10 +1153,20 @@ function FullIDEInner({
     return (
         <>
             <IdeToastHost toast={toast} />
+            {useV6Explorer && v6BusyLabel ? (
+                <div role="status" aria-live="polite" aria-atomic="true"
+                     className="fixed inset-0 flex items-center justify-center bg-black/25 p-4"
+                     style={{zIndex: 2147483000}}>
+                    <div className="flex min-w-[230px] max-w-sm items-center gap-3 rounded-xl border border-neutral-200 bg-white px-5 py-4 text-sm font-semibold text-neutral-900 shadow-2xl dark:border-white/15 dark:bg-neutral-900 dark:text-white">
+                        <LoaderCircle className="h-5 w-5 shrink-0 animate-spin text-emerald-600" aria-hidden="true" />
+                        <span>{v6BusyLabel}</span>
+                    </div>
+                </div>
+            ) : null}
 
             <IdeStatusBanners
                 loadingProject={projectSession.loadingProject}
-                saveError={projectSession.saveError}
+                saveError={projectSession.conflictInfo ? null : projectSession.saveError}
             />
 
             {projectSession.conflictInfo ? (
@@ -907,12 +1174,20 @@ function FullIDEInner({
                     projectTitle={projectSession.conflictInfo.title || headerProjectTitle}
                     serverVersion={projectSession.conflictInfo.serverVersion}
                     clientBaseVersion={projectSession.conflictInfo.clientBaseVersion}
-                    serverUpdatedAt={projectSession.conflictInfo.serverUpdatedAt}
-                    onReloadCloud={() => void projectSession.reloadProjectFromCloud()}
-                    onSaveAsCopy={handleSaveAsIntent}
-                    onDismiss={projectSession.dismissConflict}
                 />
             ) : null}
+
+            <IdeCloudConflictDialog
+                open={cloudConflictDialogOpen}
+                conflict={projectSession.conflictInfo}
+                busy={projectSession.isSavingProject || projectSession.loadingProject}
+                onKeepEditing={() => setCloudConflictDialogOpen(false)}
+                onSaveCopy={() => {
+                    setCloudConflictDialogOpen(false);
+                    handleSaveAsIntent();
+                }}
+                onReloadCloud={projectSession.reloadProjectFromCloud}
+            />
 
             {services.chrome.showHeader ? (
                 <IdeHeader
@@ -921,6 +1196,8 @@ function FullIDEInner({
                     showBackButton={services.chrome.showBackButton}
                     showMobileFilesButton={mobileExplorerAvailable}
                     showProjectSwitcher={services.projects.showProjectSwitcher}
+                    showNewWorkspace={!readOnly && showProjectsUi}
+                    onNewWorkspace={() => projectSession.setProjectsOpen(true)}
                     showActivePath={services.chrome.showActivePath}
                     showStatus={services.chrome.showStatus}
                     showSaveControls={services.projects.showSaveControls}
@@ -952,7 +1229,7 @@ function FullIDEInner({
                     }
                     saveBusy={projectSession.isSavingProject}
                     saveAsDisabled={
-                        readOnly || projectSession.loadingProject || !currentWorkspace
+                        readOnly || projectSession.isSavingProject || projectSession.loadingProject || !currentWorkspace
                     }
                     canSaveCloud={access.canSaveCloud}
                     hasUser={access.hasUser}
@@ -979,10 +1256,10 @@ function FullIDEInner({
                             services.explorer.enabled &&
                             services.explorer.showHistoryControls
                         }
-                        canUndo={!useV6Explorer && services.explorer.enabled && history.canUndo}
-                        canRedo={!useV6Explorer && services.explorer.enabled && history.canRedo}
-                        onUndo={useV6Explorer ? noOp : actions.undo}
-                        onRedo={useV6Explorer ? noOp : actions.redo}
+                        canUndo={services.explorer.enabled && (useV6Explorer ? v6HistoryRef.current.canUndo : history.canUndo)}
+                        canRedo={services.explorer.enabled && (useV6Explorer ? v6HistoryRef.current.canRedo : history.canRedo)}
+                        onUndo={useV6Explorer ? () => void runV6HistoryStep("undo") : actions.undo}
+                        onRedo={useV6Explorer ? () => void runV6HistoryStep("redo") : actions.redo}
                         explorer={explorerAvailable ? explorerPane : null}
                         editor={editorPane}
                     />
@@ -1013,6 +1290,7 @@ function FullIDEInner({
                 showDeleteModal={!readOnly && services.explorer.showActions}
                 showProjects={showProjectsUi}
                 showSaveAs={services.projects.showSaveAs}
+                saveAsCopyMode={Boolean(projectSession.conflictInfo)}
                 showRename={!readOnly && services.projects.showCloudProjects}
                 nodes={nodes}
                 pendingDeleteId={pendingDeleteId}
@@ -1194,6 +1472,23 @@ export default function FullIDE(props: FullIDEProps) {
         [loginHref],
     );
 
+    const v6DraftNamespace = `${storageKey}:${scopeKey ?? "global"}`;
+    const [v6DraftLease, setV6DraftLease] = useState<(LeaseIdentity & {namespace: string}) | null>(null);
+    const reservedV6DraftLease = v6DraftLease?.namespace === v6DraftNamespace
+        ? v6DraftLease : null;
+    useEffect(() => {
+        if (fileSyncMode !== "v6" || draftStorageMode !== "local") {
+            setV6DraftLease(null);
+            return;
+        }
+        let cancelled = false;
+        const lease = startV6TabDraftLease({ namespace: v6DraftNamespace });
+        void lease.ready.then((identity) => {
+            if (!cancelled) setV6DraftLease({...identity, namespace: v6DraftNamespace});
+        });
+        return () => { cancelled = true; lease.close(); };
+    }, [fileSyncMode, draftStorageMode, v6DraftNamespace]);
+
     const localWorkspaceId = useMemo(
         () =>
             buildLocalWorkspaceIdSeed({
@@ -1203,12 +1498,33 @@ export default function FullIDE(props: FullIDEProps) {
         [projectScope, forcedLanguage],
     );
 
-    const scopedStorageKey = useMemo(() => {
-        return `${storageKey}:${scopeKey ?? "global"}`;
-    }, [storageKey, scopeKey]);
+    const previousSharedStorageKey = useMemo(
+        () => `${storageKey}:${scopeKey ?? "global"}`,
+        [storageKey, scopeKey],
+    );
+    const scopedStorageKey = useMemo(() =>
+        fileSyncMode === "v6" && reservedV6DraftLease
+            ? `${previousSharedStorageKey}:v6tab:${reservedV6DraftLease.id}`
+            : previousSharedStorageKey,
+        [fileSyncMode, reservedV6DraftLease, previousSharedStorageKey],
+    );
+    const legacyDraftBaseStorageKeys = useMemo(() =>
+        fileSyncMode === "v6" && reservedV6DraftLease
+            ? [
+                ...(reservedV6DraftLease.inheritedFromId
+                    ? [`${previousSharedStorageKey}:v6tab:${reservedV6DraftLease.inheritedFromId}`]
+                    : []),
+                previousSharedStorageKey,
+              ]
+            : [],
+        [fileSyncMode, reservedV6DraftLease, previousSharedStorageKey],
+    );
 
     const requestedDraftStorageMode = (draftStorageMode ?? "local") as "off" | "local";
-    const effectiveDraftStorageMode = actorReady ? requestedDraftStorageMode : "off";
+    const waitingForV6DraftLease = fileSyncMode === "v6" &&
+        requestedDraftStorageMode === "local" && !reservedV6DraftLease;
+    const effectiveDraftStorageMode = actorReady && !waitingForV6DraftLease
+        ? requestedDraftStorageMode : "off";
 
     const services = useMemo(
         () =>
@@ -1261,6 +1577,7 @@ export default function FullIDE(props: FullIDEProps) {
 
     const workspace = useIdeWorkspace({
         storageKey: scopedStorageKey,
+        legacyDraftBaseStorageKeys,
         forcedLanguage,
         resetOnForcedLanguageChange,
         access,
@@ -1501,7 +1818,7 @@ export default function FullIDE(props: FullIDEProps) {
     );
 
     const isIdeReady = !!(
-        actorReady &&
+        actorReady && !waitingForV6DraftLease &&
         workspace.derived.storageHydrated &&
         workspace.derived.currentWorkspace &&
         workspace.state.nodes.length > 0 &&
@@ -1541,6 +1858,8 @@ export default function FullIDE(props: FullIDEProps) {
             )}
             style={fullHeight ? { height: "100%" } : { minHeight: height }}
         >
+            {(fileSyncMode !== "v6" ||
+              (actorReady && !waitingForV6DraftLease && workspace.derived.storageHydrated)) && (
             <FullIDEInner
                 key={sessionRemountKey}
                 actorKey={actorKey}
@@ -1560,6 +1879,8 @@ export default function FullIDE(props: FullIDEProps) {
                 draftStorageMode={effectiveDraftStorageMode}
                 readOnly={readOnly}
                 fileSyncMode={fileSyncMode}
+                v6DraftTabId={fileSyncMode === "v6" ? reservedV6DraftLease?.id : null}
+                v6InheritedDraftTabId={fileSyncMode === "v6" ? reservedV6DraftLease?.inheritedFromId : null}
                 exerciseStateKey={props.exerciseStateKey}
                 workspaceReplacementRevision={
                     readyWorkspaceReplacementRevision
@@ -1601,6 +1922,7 @@ export default function FullIDE(props: FullIDEProps) {
                 onTerminalEvidenceChange={onTerminalEvidenceChange}
                 onTerminalSyncReady={onTerminalSyncReady}
             />
+            )}
         </div>
     );
 }

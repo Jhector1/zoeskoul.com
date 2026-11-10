@@ -220,21 +220,13 @@ function MarkdownIcon({ className }: IconProps) {
 }
 
 function PythonIcon({ className }: IconProps) {
+    // Python's recognizable interlocking blue and yellow snakes, not a generic file glyph.
     return (
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            className={className}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M12 3c-4.2 0-4 1.8-4 1.8V8h4v1H6.6S3 8.6 3 13s3.2 4.2 3.2 4.2H8V14c0-1.6 1.3-3 3-3h5c1.7 0 3-1.4 3-3V5.8S19.3 3 12 3Z" />
-            <circle cx="10" cy="5.8" r=".75" fill="currentColor" stroke="none" />
-            <path d="M12 21c4.2 0 4-1.8 4-1.8V16h-4v-1h5.4S21 15.4 21 11s-3.2-4.2-3.2-4.2H16V10c0 1.6-1.3 3-3 3H8c-1.7 0-3 1.4-3 3v2.2S4.7 21 12 21Z" />
-            <circle cx="14" cy="18.2" r=".75" fill="currentColor" stroke="none" />
+        <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+            <path fill="#3776AB" d="M12 2.5c-4.5 0-4.5 2.05-4.5 2.05V8h4.9v1.15H5.85C3.8 9.15 3 11.05 3 13.05c0 2.15.85 3.85 2.85 3.85H7.4v-3.35c0-1.85 1.5-3.35 3.35-3.35h5.25c1.75 0 2.85-1.25 2.85-3V5.4c0-1.75-1.5-2.9-6.85-2.9Z"/>
+            <circle cx="10.15" cy="5.15" r=".78" fill="#fff"/>
+            <path fill="#FFD43B" d="M12 21.5c4.5 0 4.5-2.05 4.5-2.05V16h-4.9v-1.15h6.55c2.05 0 2.85-1.9 2.85-3.9 0-2.15-.85-3.85-2.85-3.85H16.6v3.35c0 1.85-1.5 3.35-3.35 3.35H8c-1.75 0-2.85 1.25-2.85 3v1.8c0 1.75 1.5 2.9 6.85 2.9Z"/>
+            <circle cx="13.85" cy="18.85" r=".78" fill="#fff"/>
         </svg>
     );
 }
@@ -267,7 +259,7 @@ export default function WorkspaceFileIcon(props: {
             case "markdown":
                 return <MarkdownIcon className={`${className} text-slate-600 dark:text-slate-300`} />;
             case "python":
-                return <PythonIcon className={`${className} text-indigo-600 dark:text-yellow-300`} />;
+                return <PythonIcon className={className} />;
             case "sql":
                 return <Database className={`${className} text-violet-600 dark:text-violet-400`} />;
             case "shell":

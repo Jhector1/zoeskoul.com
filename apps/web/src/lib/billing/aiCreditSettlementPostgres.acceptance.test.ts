@@ -89,9 +89,7 @@ describe.runIf(enabled)("V12J.8A real PostgreSQL synthetic AI credit settlement"
     const candidate = selectedDevDatabaseUrl();
     const preflight = await preflightBillingDevelopmentDatabase(candidate);
     if (!candidate || !preflight.ok) throw Error("AI_SETTLEMENT_PREFLIGHT_FAILED");
-    // The canonical DB factory prefers ADMIN/WEB; pin all to inspected target.
-    process.env.ADMIN_DATABASE_URL = candidate;
-    process.env.WEB_DATABASE_URL = candidate;
+    // The canonical Prisma client uses only this independently verified target.
     process.env.DATABASE_URL = candidate;
     const {getPrismaClient} = await import("@zoeskoul/db");
     db = getPrismaClient();

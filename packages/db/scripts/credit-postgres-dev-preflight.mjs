@@ -4,9 +4,10 @@
  * This is test infrastructure, never application subscription/billing logic.
  */
 import { Pool } from "pg";
+import { selectedCanonicalDatabaseUrl } from "./canonicalDatabaseUrl.mjs";
 
 export function selectedDevDatabaseUrl() {
-  return process.env.ADMIN_DATABASE_URL || process.env.WEB_DATABASE_URL || process.env.DATABASE_URL;
+  return selectedCanonicalDatabaseUrl();
 }
 
 function checkUrl(raw) {

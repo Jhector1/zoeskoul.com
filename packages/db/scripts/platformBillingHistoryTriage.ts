@@ -1,3 +1,4 @@
+import { requireCanonicalDatabaseUrl } from "../src/databaseUrl";
 /**
  * Read-only multi-subscription triage to explain V12H.1 release audit warnings.
  * NO writes, Stripe calls, migrations, or event replay; no PII, account IDs, price IDs, secrets.
@@ -11,7 +12,7 @@ function arg(name:string):string{
   return process.argv[i+1]!;
 }
 function dbTarget():{host:string;db:string}{
-  const raw=process.env.ADMIN_DATABASE_URL??process.env.WEB_DATABASE_URL??process.env.DATABASE_URL;
+  const raw=requireCanonicalDatabaseUrl();
   if(!raw)throw Error('Database configuration missing');
   const u=new URL(raw);
   if(!['postgresql:','postgres:'].includes(u.protocol)||!u.hostname)throw Error('Invalid PostgreSQL target');

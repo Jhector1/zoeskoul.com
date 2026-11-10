@@ -318,3 +318,10 @@ pnpm dlx dotenv-cli \
      --max-turns 800
 
     pnpm curr:course -- status python python-v2
+
+
+    cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
+
+    pnpm --filter @zoeskoul/zoebuild exec \
+      node ../../scripts/run-with-shared-env.mjs \
+      next dev --port 3004 --webpack

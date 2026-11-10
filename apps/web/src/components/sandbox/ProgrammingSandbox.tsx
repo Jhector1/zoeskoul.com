@@ -1,5 +1,7 @@
 "use client";
 
+import { selectDevV6FileSyncMode } from "./v6DevMode";
+
 import FullIDE from "@/components/ide/fullide/FullIDE";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
@@ -425,6 +427,7 @@ export default function ProgrammingIdeSandbox({
                                         ideReady ? "opacity-100" : "opacity-0",
                                     )}
                                     servicePreset="workspace"
+                                    services={{ explorer: { showStdin: false } }}
                                     title={title}
                                     fullHeight
                                     storageKey={storageKey}
@@ -440,6 +443,11 @@ export default function ProgrammingIdeSandbox({
                                     loginHref={authHref as any}
                                     billingHref="/billing"
                                     draftStorageMode="local"
+                                    fileSyncMode={selectDevV6FileSyncMode({
+                                        nodeEnv: process.env.NODE_ENV,
+                                        enabled: process.env.NEXT_PUBLIC_ZOELEARNING_V6_DEV_ENABLED,
+                                        hasUser: access.hasUser,
+                                    })}
                                     projectTitle={`${title} Project`}
                                 />
 

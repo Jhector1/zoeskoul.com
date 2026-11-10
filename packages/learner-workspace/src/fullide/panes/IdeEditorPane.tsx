@@ -20,6 +20,7 @@ import { resolveWorkspaceEditorLanguage } from "@zoeskoul/code-contracts";
 import { isBinaryFileNode } from "@zoeskoul/learner-workspace/lib/ide/workspaceFileContent";
 
 import TabsBar from "@zoeskoul/learner-workspace/fullide/TabsBar";
+import MathMarkdown from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
 import { PANEL_CARD_CLASS } from "@zoeskoul/learner-workspace/ide/constants";
 import { cn } from "@zoeskoul/learner-workspace/ide/utils";
 import { exportWorkspaceEntries } from "@zoeskoul/learner-workspace/ide/fsTree";
@@ -157,6 +158,9 @@ export default function IdeEditorPane({
     const t = useTranslations("ide.editor");
     const terminalT = useTranslations("ide.terminal");
     const isWeb = language === "web";
+    const isMarkdown = !!activeFile && !isBinaryFileNode(activeFile) && /(?:\.md(?:own)?$|^readme$)/i.test(activeFile.name);
+    const [markdownPreview, setMarkdownPreview] = React.useState(true);
+    React.useEffect(() => { setMarkdownPreview(true); }, [activeFile?.id]);
     const terminalWorkspaceOnly =
         services.editor.showEditor === false &&
         services.runner.enableWorkspaceTerminal &&
@@ -279,7 +283,7 @@ export default function IdeEditorPane({
                 ) : null}
 
                 {activeFile || terminalWorkspaceOnly ? (
-                    <div className={cn("h-full overflow-hidden pt-2", PANEL_CARD_CLASS)}>
+                    <div className={cn("relative h-full overflow-hidden pt-2", PANEL_CARD_CLASS)}>
                         <CodeRunner
                             frame="plain"
                             title={
@@ -295,6 +299,36 @@ export default function IdeEditorPane({
                                     : activeFile?.content ?? ""
                             }
                             onChangeCode={handleBoundCodeChange}
+                            editorToolbar={isMarkdown ? (
+                                <div role="group" aria-label="Markdown view" className="flex gap-0.5 rounded-md border border-neutral-200 bg-white/95 p-0.5 shadow-sm dark:border-neutral-700 dark:bg-neutral-900/95">
+                                    <button type="button" onClick={() => setMarkdownPreview(true)} aria-pressed={markdownPreview}
+                                        className={`rounded px-2.5 py-1 text-xs font-medium ${markdownPreview ? "bg-neutral-100 text-neutral-900 dark:bg-neutral-700 dark:text-neutral-50" : "text-neutral-600 hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800"}`}>Preview</button>
+                                    <button type="button" onClick={() => setMarkdownPreview(false)} aria-pressed={!markdownPreview}
+                                        className={`rounded px-2.5 py-1 text-xs font-medium ${!markdownPreview ? "bg-neutral-100 text-neutral-900 dark:bg-neutral-700 dark:text-neutral-50" : "text-neutral-600 hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800"}`}>Code</button>
+                                </div>
+                            ) : undefined}
+                            editorOverlay={isMarkdown && markdownPreview ? (
+                                <div className="v6-readme-preview h-full min-h-0 overflow-y-auto bg-white px-5 pb-8 pt-14 text-sm text-neutral-800 dark:bg-neutral-950 dark:text-neutral-200 sm:px-7" role="region" aria-label={`Markdown preview of ${activeFile?.name ?? "file"}`}>
+<style>{`
+                                    .v6-readme-preview .zoe-lesson-markdown { max-width: 62rem; margin: 0 auto; font-size: 0.875rem; line-height: 1.65; }
+                                    .v6-readme-preview :is(pre, .zoe-code-frame) { border-radius: 7px; box-shadow: none; }
+                                    .v6-readme-preview .zoe-code-frame { background: #f8fafc; color: #334155; border: 1px solid #e2e8f0; border-radius: 7px; box-shadow: none; margin: .85rem 0; }
+                                    .v6-readme-preview .zoe-code-toolbar { min-height: 2.05rem; padding: .2rem .55rem .2rem .75rem; border-bottom-color: #e2e8f0; }
+                                    .v6-readme-preview .zoe-code-language { color: #64748b; font-size: .67rem; font-weight: 600; letter-spacing: .04em; }
+                                    .v6-readme-preview .zoe-code-copy { color: #475569; border-color: #cbd5e1; background: #fff; border-radius: 5px; font-size: .7rem; padding: .25rem .45rem; }
+                                    .v6-readme-preview .zoe-code-copy:hover { color: #0f172a; background: #e2e8f0; }
+                                    .v6-readme-preview .zoe-code-frame pre { color: #334155; font-size: .775rem; line-height: 1.55; padding: .72rem .85rem; }
+                                    .v6-readme-preview .zoe-code-frame :is(code, code.hljs) { color: inherit; }
+                                    :is(.dark, [data-theme="dark"]) .v6-readme-preview .zoe-code-frame { background: #111827; color: #e5e7eb; border-color: #374151; }
+                                    :is(.dark, [data-theme="dark"]) .v6-readme-preview .zoe-code-toolbar { border-bottom-color: #374151; }
+                                    :is(.dark, [data-theme="dark"]) .v6-readme-preview .zoe-code-language { color: #9ca3af; }
+                                    :is(.dark, [data-theme="dark"]) .v6-readme-preview .zoe-code-copy { color: #d1d5db; background: #1f2937; border-color: #4b5563; }
+                                    :is(.dark, [data-theme="dark"]) .v6-readme-preview .zoe-code-copy:hover { background: #374151; color: #fff; }
+                                    :is(.dark, [data-theme="dark"]) .v6-readme-preview .zoe-code-frame pre { color: #e5e7eb; }
+                                `}</style>
+                                    <MathMarkdown content={activeFile?.content ?? ""} />
+                                </div>
+                            ) : undefined}
                             activeBinaryFile={
                                 isBinaryFileNode(activeFile)
                                     ? {

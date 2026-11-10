@@ -9,9 +9,9 @@ const MAX_BODY=2048;
 function json(body:Record<string,unknown>,status=200){return NextResponse.json(body,{status,headers:{"Cache-Control":"no-store"}});}
 /** ZoeBuild SaaS Checkout only; no generated-store customer/order/payment routes. */
 export async function POST(request:Request){
- const configuredOrigin = process.env.NEXT_PUBLIC_ZOEBUILD_ORIGIN?.trim() || process.env.ZOEBUILD_ORIGIN?.trim();
+ const configuredOrigin = process.env.NEXT_PUBLIC_ZOEBUILD_ORIGIN?.trim();
  if (!isTrustedBillingMutation(request, configuredOrigin))
-  return json({error:"ZoeBuild billing request origin does not match the app URL. Check your browser URL and NEXT_PUBLIC_ZOEBUILD_ORIGIN (or ZOEBUILD_ORIGIN).",
+  return json({error:"ZoeBuild billing request origin does not match the app URL. Check your browser URL and NEXT_PUBLIC_ZOEBUILD_ORIGIN.",
     code:"BILLING_ORIGIN_MISMATCH"},403);
  const access=await loadCurrentBuildAccessSnapshot(request);
  if(!access.userId)return json({error:"Unauthorized"},401);

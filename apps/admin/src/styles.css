@@ -1360,3 +1360,37 @@ select:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+/* Learning visibility — uses the Admin app's existing panel, button and badge tokens. */
+.learning-visibility-page .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.visibility-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.visibility-controls label { display: grid; gap: 6px; color: var(--muted-strong); font-size: 12px; font-weight: 650; }
+.visibility-search { flex: 1 1 260px; }
+.visibility-filter { flex: 0 1 175px; }
+.visibility-controls input, .visibility-controls select { width: 100%; min-height: 39px; padding: 8px 11px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); font-size: 14px; }
+.visibility-group h3 { margin: 0; padding: 13px 20px; background: var(--surface-soft); border-bottom: 1px solid var(--border); font-size: 14px; }
+.visibility-group h3 span { color: var(--muted); font-weight: 400; }
+.visibility-group + .visibility-group { border-top: 1px solid var(--border); }
+.visibility-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 20px; border-bottom: 1px solid var(--border); }
+.visibility-row:last-child { border-bottom: 0; }
+.visibility-item-details { min-width: 0; display: grid; gap: 3px; }
+.visibility-item-details strong { overflow-wrap: anywhere; font-size: 14px; }
+.visibility-item-slug { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; overflow-wrap: anywhere; }
+.visibility-item-status { color: var(--muted); font-size: 11px; }
+.visibility-actions { display: flex; flex-shrink: 0; align-items: center; gap: 12px; }
+.visibility-actions .button { min-width: 68px; }
+.visibility-actions .button:disabled { opacity: .55; cursor: not-allowed; }
+.visibility-empty { margin: 0; padding: 15px 20px; color: var(--muted); font-size: 13px; }
+.visibility-alert { margin: 16px 20px 0; padding: 10px 12px; border-radius: 8px; font-size: 13px; }
+.visibility-alert-error { color: var(--danger); background: var(--danger-soft); }
+.visibility-alert-success { color: var(--good); background: var(--good-soft); }
+.visibility-audit-summary { padding: 14px 20px; color: var(--muted-strong); font-size: 13px; }
+.visibility-audit-scroll { max-height: 380px; overflow: auto; }
+.visibility-audit-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+.visibility-audit-table th, .visibility-audit-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.visibility-audit-table th { background: var(--surface-soft); font-size: 12px; }
+.visibility-audit-table code { overflow-wrap: anywhere; font-size: 12px; }
+.visibility-audit-clean { padding: 0 20px; color: var(--good); font-size: 13px; }
+.visibility-note { padding: 0 20px 18px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+@media (max-width: 900px) { .learning-visibility-page .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .learning-visibility-page .stats-grid { grid-template-columns: 1fr; } .visibility-controls { display: grid; } .visibility-row { align-items: flex-start; flex-direction: column; } .visibility-actions { width: 100%; justify-content: space-between; } }

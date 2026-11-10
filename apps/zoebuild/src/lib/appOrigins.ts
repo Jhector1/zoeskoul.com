@@ -26,17 +26,13 @@ export function resolveZoeBuildOrigins() {
 
   const websiteOrigin = resolveAppOrigin({
     appId: "website",
-    configuredOrigin:
-      configured("NEXT_PUBLIC_WEBSITE_ORIGIN") ??
-      configured("WEBSITE_ORIGIN"),
+    configuredOrigin: configured("NEXT_PUBLIC_WEBSITE_ORIGIN"),
     deploymentEnvironment: environment,
   });
 
   const zoebuildOrigin = resolveAppOrigin({
     appId: "zoebuild",
-    configuredOrigin:
-      configured("NEXT_PUBLIC_ZOEBUILD_ORIGIN") ??
-      configured("ZOEBUILD_ORIGIN"),
+    configuredOrigin: configured("NEXT_PUBLIC_ZOEBUILD_ORIGIN"),
     deploymentEnvironment: environment,
   });
 

@@ -49,6 +49,8 @@ export type SaveProjectRequest = {
     baseVersion?: number | null;
     clientInstanceId?: string | null;
     clientDraftUpdatedAt?: string | null;
+    /** Stable across retries of one Create/Save Copy intent (not used on PATCH). */
+    creationRequestKey?: string | null;
 };
 
 export type ProjectSummary = {

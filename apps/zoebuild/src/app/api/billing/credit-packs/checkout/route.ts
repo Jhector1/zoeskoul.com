@@ -10,7 +10,7 @@ const json=(code:string,status:number)=>NextResponse.json({code},{status,headers
 /** Buy only Web-reviewed Stripe test credit packs; user identity comes from
  * the revocable host-only session, not a browser-supplied user ID. */
 export async function POST(request:NextRequest){
-  const origin=process.env.NEXT_PUBLIC_ZOEBUILD_ORIGIN?.trim() || process.env.ZOEBUILD_ORIGIN?.trim();
+  const origin=process.env.NEXT_PUBLIC_ZOEBUILD_ORIGIN?.trim();
   if(!isTrustedBillingMutation(request,origin))return json("BILLING_ORIGIN_MISMATCH",403);
   const token=request.cookies.get(SESSION_COOKIE)?.value;
   if(!token)return json("SESSION_EXPIRED",401);

@@ -1,7 +1,17 @@
 "use client";
 
+import { resolveSaveProjectTarget } from "./resolveSaveProjectTarget";
+import {getOrCreateCreationIntent, clearAcknowledgedCreationIntent} from "./v6CreationIntent";
+
 import { learnerWorkspaceApiRaw } from "@zoeskoul/learner-workspace/runtime/browserApi";
 import {useCallback, useEffect, useRef, useState} from "react";
+import { newerProjectVersionFromOtherTab } from "./v6ProjectTabVersion";
+import { isUnresolvedCloudUpdate } from "./v6CloudConflictPolicy";
+import { isValidCloudSaveAcknowledgment } from "./v6CloudSaveAcknowledgment";
+import { createCloudSaveGate } from "./v6CloudSaveGate";
+import { canSkipUnchangedCloudSave, isValidCloudProjectSnapshot, workspaceChangedDuringCloudReload } from "./v6CloudReloadSafety";
+import { cloudWorkspaceFingerprint } from "../../projects/hooks/cloudWorkspaceFingerprint";
+import { planRestoredCloudBaseline } from "./v6RestoredCloudBaseline";
 
 import type {
     ProjectConflictResponse,
@@ -63,23 +73,15 @@ function createEphemeralBrowserInstanceId() {
 }
 
 function ensureBrowserInstanceId(
-    browserPersistenceEnabled: boolean,
-    key: string,
+    _browserPersistenceEnabled: boolean,
+    _key: string,
 ) {
+    // An instance is a mounted editor, not a user or project identity. In
+    // particular, localStorage is shared across tabs and must not give two
+    // concurrently running editors the same clientInstanceId. Start fresh on
+    // every mount; cloud revisions and local drafts retain their own keys.
     if (typeof window === "undefined") return "server";
-
-    const ephemeralId = createEphemeralBrowserInstanceId();
-    if (!browserPersistenceEnabled) return ephemeralId;
-
-    try {
-        const raw = window.localStorage.getItem(key);
-        if (raw) return raw;
-
-        window.localStorage.setItem(key, ephemeralId);
-        return ephemeralId;
-    } catch {
-        return ephemeralId;
-    }
+    return createEphemeralBrowserInstanceId();
 }
 function readProjectSessionMeta(
     browserPersistenceEnabled: boolean,
@@ -143,6 +145,8 @@ export function useIdeProjectSession({
                                          projectScope,
                                          initialProjectId = null,
                                          draftStorageMode = "local",
+                                         v6DraftTabId = null,
+                                         v6InheritedDraftTabId = null,
                                          access,
                                          loginHref,
                                          billingHref,
@@ -150,6 +154,7 @@ export function useIdeProjectSession({
                                          language,
                                          sqlDialect,
                                          currentWorkspace,
+                                         workspaceHydrated = false,
                                          nodes,
                                          activeFile,
                                          entryFile,
@@ -163,27 +168,43 @@ export function useIdeProjectSession({
                                          refreshProjects,
                                      }: UseIdeProjectSessionArgs): ProjectSessionApi & {
     conflictInfo: ProjectConflictInfo | null;
-    dismissConflict: () => void;
-    reloadProjectFromCloud: () => Promise<void>;
+    reloadProjectFromCloud: () => Promise<boolean>;
 } {
     const loadedProjectIdRef = useRef<string | null>(null);
     const loadSeqRef = useRef(0);
     const loadAbortRef = useRef<AbortController | null>(null);
     const projectIdSourceRef = useRef<ProjectIdSource>(null);
+    // useState alone cannot prevent two saves fired before React re-renders.
+    const cloudSaveGateRef = useRef(createCloudSaveGate());
+    const transientCreateIntentRef = useRef<string | null>(null);
+    // Always compare against the *latest* draft when a cloud GET completes.
+    const currentWorkspaceRef = useRef(currentWorkspace);
+    currentWorkspaceRef.current = currentWorkspace;
 
-    const sessionKey = projectSessionStorageKey({
+    const commonSessionKey = projectSessionStorageKey({
         actorKey,
         projectScope,
         language,
     });
+    // A V6 tab owns its local project metadata. The old shared key remains a
+    // read-only migration source and a version-notice signal, never a draft.
+    const sessionKey = v6DraftTabId
+        ? `${commonSessionKey}:v6tab:${v6DraftTabId}`
+        : commonSessionKey;
+    const versionSignalKey = `${commonSessionKey}:v6-cloud-version-signal`;
+    const inheritedSessionKey = v6InheritedDraftTabId
+        ? `${commonSessionKey}:v6tab:${v6InheritedDraftTabId}`
+        : null;
     const browserInstanceKey = `${sessionKey}:browser-instance`;
     const browserPersistenceEnabled = draftStorageMode === "local";
+    const creationIntentKey = `${sessionKey}:creation-intent:v1`;
 
     const [projectId, setProjectId] = useState<string | null>(initialProjectId);
     const [currentProjectName, setCurrentProjectName] = useState(
         projectTitle ?? title,
     );
     const [loadingProject, setLoadingProject] = useState(false);
+    const [verifyingRestoredCloud, setVerifyingRestoredCloud] = useState(false);
     const [isSavingProject, setIsSavingProject] = useState(false);
     const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
     const [baseVersion, setBaseVersion] = useState<number | null>(null);
@@ -226,6 +247,21 @@ export function useIdeProjectSession({
         },
         [browserPersistenceEnabled, sessionKey, clientInstanceId, browserInstanceKey],
     );
+
+    // Emit a shared advisory notice only after the cloud API acknowledged a
+    // save/rename. A load or local state update must not masquerade as a save.
+    const announceCloudVersion = useCallback((next: {
+        projectId: string | null;
+        currentProjectName: string;
+        lastSavedAt: string | null;
+        baseVersion: number | null;
+    }) => {
+        if (!v6DraftTabId || !next.projectId || next.baseVersion == null) return;
+        writeProjectSessionMeta(browserPersistenceEnabled, versionSignalKey, {
+            ...next,
+            clientInstanceId,
+        });
+    }, [browserPersistenceEnabled, versionSignalKey, clientInstanceId, v6DraftTabId]);
 
     const resetLanguageScopedProjectState = useCallback(
         (opts?: { keepProjectsOpen?: boolean; keepSaveError?: boolean }) => {
@@ -275,11 +311,6 @@ export function useIdeProjectSession({
             setToast,
         ],
     );
-
-    const dismissConflict = useCallback(() => {
-        setConflictInfo(null);
-        setSaveError(null);
-    }, []);
 
     const handleProjectApiFailure = useCallback(
         async (res: Response) => {
@@ -349,7 +380,13 @@ export function useIdeProjectSession({
             return;
         }
 
-        const meta = readProjectSessionMeta(browserPersistenceEnabled, sessionKey);
+        const meta = readProjectSessionMeta(browserPersistenceEnabled, sessionKey) ??
+            (inheritedSessionKey
+                ? readProjectSessionMeta(browserPersistenceEnabled, inheritedSessionKey)
+                : null) ??
+            (v6DraftTabId
+                ? readProjectSessionMeta(browserPersistenceEnabled, commonSessionKey)
+                : null);
 
         if (meta) {
             projectIdSourceRef.current = "session";
@@ -371,6 +408,9 @@ export function useIdeProjectSession({
         browserPersistenceEnabled,
         initialProjectId,
         sessionKey,
+        commonSessionKey,
+        inheritedSessionKey,
+        v6DraftTabId,
         browserInstanceKey,
         projectTitle,
         title,
@@ -396,6 +436,41 @@ export function useIdeProjectSession({
         baseVersion,
     ]);
 
+    // Notify (never overwrite) a tab when another tab records a newer cloud
+    // project version. The server still enforces baseVersion on save. The
+    // browser storage event is only an advisory signal, not an authorization
+    // source and not evidence that the terminal workspaces are shared.
+    useEffect(() => {
+        if (!browserPersistenceEnabled || !projectId || baseVersion == null ||
+            hydratedSessionKey !== sessionKey || typeof window === "undefined") return;
+
+        const onStorage = (event: StorageEvent) => {
+            if (event.storageArea !== window.localStorage) return;
+            if (v6DraftTabId
+                ? event.key !== versionSignalKey && event.key !== commonSessionKey
+                : event.key !== sessionKey) return;
+            const hint = newerProjectVersionFromOtherTab(event.newValue, {
+                projectId,
+                baseVersion,
+                clientInstanceId,
+            });
+            if (!hint) return;
+            setConflictInfo({
+                projectId,
+                clientBaseVersion: baseVersion,
+                serverVersion: hint.version,
+                serverUpdatedAt: hint.savedAt ?? "",
+                title: hint.title,
+            });
+            setSaveError(
+                "Another browser tab reported a newer cloud project version. Your local draft was preserved. Save as a copy, or review the cloud version before reloading.",
+            );
+        };
+        window.addEventListener("storage", onStorage);
+        return () => window.removeEventListener("storage", onStorage);
+    }, [browserPersistenceEnabled, projectId, baseVersion, hydratedSessionKey,
+        sessionKey, commonSessionKey, versionSignalKey, v6DraftTabId, clientInstanceId]);
+
     // Local terminal sync is handled directly by the workspace terminal controller now.
     // Keep this no-op only to avoid breaking older type contracts while removing the cloud-sync path.
     const syncTerminalFiles = useCallback(
@@ -417,7 +492,11 @@ export function useIdeProjectSession({
             },
         ) => {
             if (!access.canSaveCloud) return false;
-
+            if (cloudSaveGateRef.current.busy) {
+                setToast({kind: "error", text: "Finish saving before opening a cloud project."});
+                return false;
+            }
+            const draftAtRequest = currentWorkspaceRef.current;
             const seq = ++loadSeqRef.current;
 
             loadAbortRef.current?.abort();
@@ -454,6 +533,17 @@ export function useIdeProjectSession({
                 const data = await res.json();
 
                 if (seq !== loadSeqRef.current) return false;
+                if (!isValidCloudProjectSnapshot(data, targetProjectId)) {
+                    throw new Error("Cloud project response was incomplete. Your local draft was kept.");
+                }
+                // A user can keep typing during a GET. Never discard those *new*
+                // edits even after an earlier explicit Reload Cloud confirmation.
+                if (draftAtRequest && workspaceChangedDuringCloudReload(draftAtRequest, currentWorkspaceRef.current)) {
+                    const message = "Local files changed while the cloud version was loading. Those edits were kept; review and reload again if desired.";
+                    setSaveError(message);
+                    setToast({kind: "error", text: message});
+                    return false;
+                }
 
                 if (data?.project?.language && data.project.language !== language) {
                     if (projectId === targetProjectId) {
@@ -562,6 +652,92 @@ export function useIdeProjectSession({
         ],
     );
 
+    // On browser refresh the local workspace and project metadata hydrate
+    // independently. A session-restored project must verify its cloud baseline
+    // before it may display Saved. This GET is strictly read-only: no draft
+    // replacement, no automatic merge, and no new cloud revision.
+    useEffect(() => {
+        if (!browserPersistenceEnabled || !access.canSaveCloud || !workspaceHydrated ||
+            hydratedSessionKey !== sessionKey || !projectId ||
+            projectIdSourceRef.current !== "session" ||
+            loadedProjectIdRef.current === projectId) return;
+
+        let live = true;
+        const controller = new AbortController();
+        setVerifyingRestoredCloud(true);
+        void (async () => {
+            try {
+                const res = await learnerWorkspaceApiRaw(
+                    `/api/ide/projects/${encodeURIComponent(projectId)}`,
+                    {method:"GET",cache:"no-store",signal:controller.signal},
+                );
+                if (!live) return;
+                if (res.status === 404) {
+                    detachMissingProject("This cloud project no longer exists. Your local draft was preserved; save it as a new project.");
+                    return;
+                }
+                if (!res.ok) {
+                    await handleProjectApiFailure(res);
+                    return;
+                }
+                const data = await res.json();
+                if (!live) return;
+                if (!isValidCloudProjectSnapshot(data, projectId) ||
+                    data.project.language !== language) {
+                    throw new Error("The saved cloud workspace could not be verified. Local files were preserved.");
+                }
+                const remote = data.project;
+                const decision = planRestoredCloudBaseline({
+                    localFingerprint: cloudWorkspaceFingerprint(currentWorkspaceRef.current),
+                    cloudFingerprint: cloudWorkspaceFingerprint(remote.workspace),
+                    cachedVersion: baseVersion,
+                    cloudVersion: remote.currentVersion,
+                });
+                if (decision === "unverified") {
+                    setSaveError("Cloud revision could not be verified. Your local files were preserved.");
+                    return;
+                }
+                if (decision === "conflict") {
+                    setConflictInfo({
+                        projectId: remote.id,
+                        clientBaseVersion: baseVersion,
+                        serverVersion: remote.currentVersion,
+                        serverUpdatedAt: remote.updatedAt,
+                        title: remote.title,
+                    });
+                    setSaveError("The cloud project changed in another session. Your local draft was preserved. Use Resolve or Save Copy.");
+                    return;
+                }
+                // For a local-only draft this establishes the actual cloud
+                // baseline without overwriting its newer local content.
+                markLoaded(remote.workspace);
+                loadedProjectIdRef.current = remote.id;
+                setProjectId(remote.id);
+                setCurrentProjectName(remote.title);
+                setLastSavedAt(remote.updatedAt);
+                setBaseVersion(remote.currentVersion);
+                setConflictInfo(null);
+                setSaveError(null);
+                persistLocalMeta({
+                    projectId: remote.id,
+                    currentProjectName: remote.title,
+                    lastSavedAt: remote.updatedAt,
+                    baseVersion: remote.currentVersion,
+                });
+            } catch (error: any) {
+                if (!live || error?.name === "AbortError") return;
+                setSaveError(error?.message ?? "Cloud save verification failed. Local files were preserved.");
+            } finally {
+                if (live) setVerifyingRestoredCloud(false);
+            }
+        })();
+        return () => {live = false;controller.abort();};
+    }, [
+        browserPersistenceEnabled, access.canSaveCloud, workspaceHydrated,
+        hydratedSessionKey, sessionKey, projectId, baseVersion, language,
+        detachMissingProject, handleProjectApiFailure, markLoaded, persistLocalMeta,
+    ]);
+
     useEffect(() => {
         if (!projectId) return;
         if (!access.canSaveCloud) return;
@@ -581,9 +757,9 @@ export function useIdeProjectSession({
 
     const reloadProjectFromCloud = useCallback(async () => {
         const targetProjectId = conflictInfo?.projectId ?? projectId;
-        if (!targetProjectId) return;
+        if (!targetProjectId) return false;
 
-        await loadProjectFromCloud(targetProjectId, {forceReplaceLocal: true});
+        return loadProjectFromCloud(targetProjectId, {forceReplaceLocal: true});
     }, [conflictInfo?.projectId, projectId, loadProjectFromCloud]);
 
     const persistProject = useCallback(
@@ -591,10 +767,15 @@ export function useIdeProjectSession({
             targetProjectId?: string | null;
             forcedTitle?: string | null;
             createRevision?: boolean;
-        }): Promise<PersistProjectResult> => {
+        }): Promise<PersistProjectResult & {creationRequestKey?: string | null}> => {
             if (!currentWorkspace) {
                 setToast({kind: "error", text: "Nothing to save yet."});
                 return {ok: false};
+            }
+
+            if (verifyingRestoredCloud) {
+                setToast({kind:"info",text:"Checking the saved cloud version before editing its history."});
+                return {ok:false};
             }
 
             if (!access.canSaveCloud) {
@@ -603,8 +784,16 @@ export function useIdeProjectSession({
             }
 
             const localMeta = readProjectSessionMeta(browserPersistenceEnabled, sessionKey);
-            const targetProjectId =
-                args?.targetProjectId ?? projectId ?? localMeta?.projectId ?? null;
+            const targetProjectId = resolveSaveProjectTarget(args, projectId, localMeta?.projectId ?? null);
+            if (isUnresolvedCloudUpdate({
+                targetProjectId,
+                conflictProjectId: conflictInfo?.projectId ?? null,
+            })) {
+                const message = "A newer cloud version exists. Review the conflict or save a separate copy; your local draft is preserved.";
+                setSaveError(message);
+                setToast({kind: "error", text: message});
+                return {ok: false};
+            }
 
             const titleToUse =
                 args?.forcedTitle?.trim() ||
@@ -613,7 +802,34 @@ export function useIdeProjectSession({
                 projectTitle ||
                 title;
 
+            // Never create a cloud project without a durable idempotency key.
+            // After a network error the next attempt reuses the same key,
+            // so a lost 201 response cannot silently create two projects.
+            let creationRequestKey: string | null = null;
+            try {
+                if (!targetProjectId) {
+                    if (browserPersistenceEnabled) {
+                        creationRequestKey = getOrCreateCreationIntent(
+                            typeof window !== "undefined" ? window.localStorage : null,
+                            creationIntentKey,
+                            createEphemeralBrowserInstanceId,
+                        );
+                    } else {
+                        // Explicit draft-storage opt-out still permits cloud Save.
+                        // The key is stable for this mounted editor only.
+                        creationRequestKey = transientCreateIntentRef.current ??
+                            (transientCreateIntentRef.current = createEphemeralBrowserInstanceId());
+                    }
+                }
+            } catch (error: any) {
+                const message = error?.message ?? "Project creation could not be protected against duplicate requests.";
+                setSaveError(message);
+                setToast({kind: "error", text: message});
+                return {ok: false};
+            }
+
             const body: SaveProjectRequest = {
+                creationRequestKey,
                 title: titleToUse,
                 description: projectDescription,
                 language,
@@ -633,6 +849,10 @@ export function useIdeProjectSession({
                 clientDraftUpdatedAt: new Date().toISOString(),
             };
 
+            if (!cloudSaveGateRef.current.begin()) {
+                setToast({kind: "error", text: "A cloud save is already running. Your draft is unchanged."});
+                return {ok: false};
+            }
             try {
                 setIsSavingProject(true);
                 setSaveError(null);
@@ -661,13 +881,19 @@ export function useIdeProjectSession({
                 }
 
                 const data = await res.json();
-                return {ok: true, data};
+                if (!isValidCloudSaveAcknowledgment(data, targetProjectId, projectId ?? localMeta?.projectId ?? null)) {
+                    throw new Error("Cloud save could not be confirmed. Your local draft remains available; check the project list before retrying.");
+                }
+                // Do not clear the durable key here: a crash between receiving
+                // the 201 and persisting project metadata must still be retryable.
+                return {ok: true, data, creationRequestKey};
             } catch (e: any) {
                 const message = e?.message ?? "Failed to save project.";
                 setSaveError(message);
                 setToast({kind: "error", text: message});
                 return {ok: false};
             } finally {
+                cloudSaveGateRef.current.end();
                 setIsSavingProject(false);
             }
         },
@@ -675,6 +901,7 @@ export function useIdeProjectSession({
             browserPersistenceEnabled,
             currentWorkspace,
             access.canSaveCloud,
+            verifyingRestoredCloud,
             goToUpgrade,
             projectId,
             currentProjectName,
@@ -693,6 +920,8 @@ export function useIdeProjectSession({
             sessionKey,
             baseVersion,
             clientInstanceId,
+            creationIntentKey,
+            conflictInfo?.projectId,
         ],
     );
 
@@ -704,7 +933,7 @@ export function useIdeProjectSession({
             return false;
         }
 
-        if (loadingProject) {
+        if (loadingProject || verifyingRestoredCloud) {
             setToast({
                 kind: "error",
                 text: "Finish opening the project before saving.",
@@ -719,6 +948,20 @@ export function useIdeProjectSession({
             localMeta?.currentProjectName ||
             projectTitle ||
             title;
+
+        // A cloud reload can change the Explorer's view state without changing
+        // the actual project. Re-saving that view would needlessly increment
+        // the cloud revision and can cause repeated two-tab conflicts.
+        if (canSkipUnchangedCloudSave({
+            projectId: effectiveProjectId,
+            baseVersion,
+            isDirty,
+            hasConflict: Boolean(conflictInfo),
+        })) {
+            setSaveError(null);
+            setToast({kind: "info", text: "No local changes since the last cloud save."});
+            return true;
+        }
 
         const result = await persistProject({
             targetProjectId: effectiveProjectId,
@@ -752,8 +995,23 @@ export function useIdeProjectSession({
             lastSavedAt: data.project.updatedAt ?? null,
             baseVersion: nextVersion,
         });
+        announceCloudVersion({
+            projectId: data.project.id,
+            currentProjectName: nextName,
+            lastSavedAt: data.project.updatedAt ?? null,
+            baseVersion: nextVersion,
+        });
 
         markSaved(workspaceToSave);
+        // Commit the local project identity before retiring the create key.
+        // If metadata storage failed, keep the key for a safe post-refresh replay.
+        if (result.creationRequestKey) {
+            if (!browserPersistenceEnabled) transientCreateIntentRef.current = null;
+            else if (typeof window !== "undefined" &&
+                readProjectSessionMeta(true, sessionKey)?.projectId === data.project.id) {
+                clearAcknowledgedCreationIntent(window.localStorage, creationIntentKey, result.creationRequestKey);
+            }
+        }
         setToast({kind: "success", text: "Project saved."});
         void refreshProjects();
         return true;
@@ -761,13 +1019,19 @@ export function useIdeProjectSession({
         browserPersistenceEnabled,
         currentWorkspace,
         loadingProject,
+        verifyingRestoredCloud,
         sessionKey,
         projectId,
         currentProjectName,
         projectTitle,
         title,
+        baseVersion,
+        isDirty,
+        conflictInfo,
         persistProject,
         persistLocalMeta,
+        announceCloudVersion,
+        creationIntentKey,
         markSaved,
         refreshProjects,
         setToast,
@@ -812,8 +1076,21 @@ export function useIdeProjectSession({
                 lastSavedAt: data.project.updatedAt ?? null,
                 baseVersion: nextVersion,
             });
+            announceCloudVersion({
+                projectId: data.project.id,
+                currentProjectName: nextName,
+                lastSavedAt: data.project.updatedAt ?? null,
+                baseVersion: nextVersion,
+            });
 
             markSaved(workspaceToSave);
+            if (result.creationRequestKey) {
+                if (!browserPersistenceEnabled) transientCreateIntentRef.current = null;
+                else if (typeof window !== "undefined" &&
+                    readProjectSessionMeta(true, sessionKey)?.projectId === data.project.id) {
+                    clearAcknowledgedCreationIntent(window.localStorage, creationIntentKey, result.creationRequestKey);
+                }
+            }
             setToast({kind: "success", text: "Project saved as a new project."});
             setSaveAsOpen(false);
             void refreshProjects();
@@ -823,6 +1100,10 @@ export function useIdeProjectSession({
             currentWorkspace,
             persistProject,
             persistLocalMeta,
+            announceCloudVersion,
+            browserPersistenceEnabled,
+            sessionKey,
+            creationIntentKey,
             markSaved,
             refreshProjects,
             setToast,
@@ -891,6 +1172,13 @@ export function useIdeProjectSession({
                                 ? data.project.currentVersion
                                 : baseVersion,
                     });
+                    announceCloudVersion({
+                        projectId,
+                        currentProjectName: data?.project?.title ?? nextTitle,
+                        lastSavedAt: data?.project?.updatedAt ?? lastSavedAt ?? null,
+                        baseVersion: typeof data?.project?.currentVersion === "number"
+                            ? data.project.currentVersion : baseVersion,
+                    });
                 }
 
                 setRenameOpen(false);
@@ -914,6 +1202,7 @@ export function useIdeProjectSession({
             baseVersion,
             lastSavedAt,
             persistLocalMeta,
+            announceCloudVersion,
             detachMissingProject,
             refreshProjects,
             setToast,
@@ -1127,7 +1416,6 @@ export function useIdeProjectSession({
         handleDiscardAndContinue,
         cancelPendingSwitch,
         conflictInfo,
-        dismissConflict,
         syncTerminalFiles,
         reloadProjectFromCloud,
     };

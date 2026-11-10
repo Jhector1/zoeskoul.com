@@ -104,6 +104,10 @@ export type CommonProps = {
     frame?: CodeRunnerFrame;
     className?: string;
     hintMarkdown?: string;
+    /** Local, non-interactive replacement content for the primary editor surface only. */
+    editorOverlay?: import("react").ReactNode;
+    /** Primary editor-specific toolbar (e.g. Markdown Preview / Code). */
+    editorToolbar?: import("react").ReactNode;
     editorModelKey?: string;
     toolScopeKey?: string;
     exerciseStateKey?: string;

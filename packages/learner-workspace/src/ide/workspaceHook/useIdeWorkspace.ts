@@ -268,6 +268,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
     const draftStorageMode = opts?.draftStorageMode ?? "local";
+    const legacyDraftBaseStorageKeys = opts?.legacyDraftBaseStorageKeys;
     const initialWorkspace = opts?.initialWorkspace ?? null;
 
     const localWorkspaceIdRef = useRef<string>(
@@ -628,9 +629,11 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 scopeKey,
                 exerciseStateKey,
                 localWorkspaceId: projectId ? null : localWorkspaceIdRef.current,
+                legacyDraftBaseStorageKeys,
             }),
         [
             baseStorageKey,
+            legacyDraftBaseStorageKeys,
             draftStorageMode,
             actorKey,
             projectId,
@@ -640,7 +643,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
     const saveWorkspaceForLanguage = useCallback(
-        (ws: WorkspaceStateV2 | null) =>
+        (ws: WorkspaceStateV2 | null, urgency?: "unload") =>
             saveWorkspaceForLanguageRaw({
                 baseStorageKey,
                 ws,
@@ -650,6 +653,10 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 scopeKey,
                 exerciseStateKey,
                 localWorkspaceId: projectId ? null : localWorkspaceIdRef.current,
+                urgency,
+            }).catch((error) => {
+                console.error("[ide] Could not persist local draft", error);
+                setToast({kind: "error", text: "Local draft storage is full or unavailable. Download a project ZIP to protect your work."});
             }),
         [
             baseStorageKey,
@@ -751,7 +758,10 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
                 setStorageHydrated(false);
 
-                const meta = readWorkspaceMeta(baseStorageKey);
+                const meta = readWorkspaceMeta(baseStorageKey) ??
+                    (legacyDraftBaseStorageKeys?.length
+                        ? readWorkspaceMeta(legacyDraftBaseStorageKeys[legacyDraftBaseStorageKeys.length - 1]!)
+                        : null);
 
                 const wanted =
                     forcedLanguage ??
@@ -830,6 +840,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     }, [
         initialWorkspace,
         baseStorageKey,
+        legacyDraftBaseStorageKeys,
         forcedLanguage,
         resetOnForcedLanguageChange,
         loadWorkspaceForLanguage,
@@ -872,7 +883,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         if (draftStorageMode !== "local") return;
 
         const flush = () => {
-            saveWorkspaceForLanguage(currentWorkspaceRef.current);
+            void saveWorkspaceForLanguage(currentWorkspaceRef.current, "unload");
         };
 
         window.addEventListener("pagehide", flush);
@@ -899,7 +910,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
         const onVisibilityChange = () => {
             if (document.visibilityState === "hidden") {
-                saveWorkspaceForLanguage(currentWorkspaceRef.current);
+                void saveWorkspaceForLanguage(currentWorkspaceRef.current, "unload");
             }
         };
 

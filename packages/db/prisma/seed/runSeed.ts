@@ -2,6 +2,7 @@ import "dotenv/config";
 import { Prisma, prisma } from "../../src/client.js";
 
 import { buildSeedData, type SeedDataSelection } from "./data";
+import { seedMetaPreservingDiscoveryFlag } from "../../src/discoveryVisibilityMeta.js";
 
 export type RunSeedOptions = SeedDataSelection;
 
@@ -28,13 +29,19 @@ export async function runSeed(options: RunSeedOptions = {}) {
       const catalogIdBySlug = new Map<string, string>();
 
       for (const c of CATALOGS) {
+        // Lock the existing row before reading admin-owned meta; concurrent admin
+        // Hide/Show writes must never be lost by a curriculum re-seed.
+        const prior = await tx.$queryRaw<Array<{ meta: unknown }>>`
+          SELECT "meta" FROM "PracticeCatalog" WHERE "slug" = ${c.slug} FOR UPDATE
+        `;
+        const catalogMeta = toJson(seedMetaPreservingDiscoveryFlag(c.meta, prior[0]?.meta));
         const row = await tx.practiceCatalog.upsert({
           where: { slug: c.slug },
           update: {
             order: c.order,
             title: c.title,
             description: c.description ?? null,
-            meta: toJson(c.meta),
+            meta: catalogMeta,
             imagePublicId: c.imagePublicId ?? null,
             imageAlt: c.imageAlt ?? null,
             defaultSubjectSlug: c.defaultSubjectSlug ?? null,
@@ -45,7 +52,7 @@ export async function runSeed(options: RunSeedOptions = {}) {
             order: c.order,
             title: c.title,
             description: c.description ?? null,
-            meta: toJson(c.meta),
+            meta: catalogMeta,
             imagePublicId: c.imagePublicId ?? null,
             imageAlt: c.imageAlt ?? null,
             defaultSubjectSlug: c.defaultSubjectSlug ?? null,
@@ -62,6 +69,10 @@ export async function runSeed(options: RunSeedOptions = {}) {
       const subjectIdBySlug = new Map<string, string>();
 
       for (const s of SUBJECTS) {
+        const prior = await tx.$queryRaw<Array<{ meta: unknown }>>`
+          SELECT "meta" FROM "PracticeSubject" WHERE "slug" = ${s.slug} FOR UPDATE
+        `;
+        const subjectMeta = toJson(seedMetaPreservingDiscoveryFlag(s.meta, prior[0]?.meta));
         const catalogId = catalogIdBySlug.get(s.catalogSlug) ?? null;
 
         if (!catalogId) {
@@ -75,7 +86,7 @@ export async function runSeed(options: RunSeedOptions = {}) {
             order: s.order,
             title: s.title,
             description: s.description ?? null,
-            meta: toJson(s.meta),
+            meta: subjectMeta,
             imagePublicId: s.imagePublicId ?? null,
             imageAlt: s.imageAlt ?? null,
             accessPolicy: s.accessPolicy ?? "free",
@@ -89,7 +100,7 @@ export async function runSeed(options: RunSeedOptions = {}) {
             order: s.order,
             title: s.title,
             description: s.description ?? null,
-            meta: toJson(s.meta),
+            meta: subjectMeta,
             imagePublicId: s.imagePublicId ?? null,
             imageAlt: s.imageAlt ?? null,
             accessPolicy: s.accessPolicy ?? "free",
@@ -195,7 +206,7 @@ export async function runSeed(options: RunSeedOptions = {}) {
             order: s.order,
             title: s.title,
             description: s.description ?? null,
-            meta: toJson(s.meta),
+            meta: subjectMeta,
             subjectId,
             moduleId,
           },
@@ -204,7 +215,7 @@ export async function runSeed(options: RunSeedOptions = {}) {
             order: s.order,
             title: s.title,
             description: s.description ?? null,
-            meta: toJson(s.meta),
+            meta: subjectMeta,
             subjectId,
             moduleId,
           },

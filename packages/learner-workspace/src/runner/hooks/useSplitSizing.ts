@@ -4,6 +4,7 @@ import * as React from "react";
 import type { TerminalDock } from "@zoeskoul/learner-workspace/runner/types";
 import { clamp } from "@zoeskoul/learner-workspace/runner/utils/text";
 import { beginViewportResizeDrag } from "../../ui/resizeDrag";
+import { preferredBottomTerminalSize } from "./binaryPreviewTerminalSizing";
 
 type Size = {
     w: number;
@@ -27,6 +28,7 @@ export function useSplitSizing(args: {
     dock: TerminalDock;
     disabled: boolean;
     initialTerminalSize?: number;
+    compactBinaryPreview?: boolean;
 
     mainRef: React.RefObject<HTMLDivElement | null>;
     requestLayout: () => void;
@@ -45,6 +47,7 @@ export function useSplitSizing(args: {
         dock,
         disabled,
         initialTerminalSize = 240,
+        compactBinaryPreview = false,
         mainRef,
         requestLayout,
 
@@ -146,13 +149,20 @@ export function useSplitSizing(args: {
     const totalW = Math.max(0, mainSize.w || 0);
 
     const [termH, setTermH] = React.useState<number>(() =>
-        clamp(initialTerminalSize, hardMinTermH, 720),
+        clamp(preferredBottomTerminalSize(initialTerminalSize, compactBinaryPreview), hardMinTermH, 720),
     );
     const [termW, setTermW] = React.useState<number>(() =>
         clamp(initialTerminalSize, hardMinTermW, 960),
     );
 
     const userResizedRef = React.useRef(false);
+    // Never override a terminal height that the learner explicitly resized.
+    React.useEffect(() => {
+        if (!hasSplit || dock !== "bottom" || userResizedRef.current) return;
+        const preferred = preferredBottomTerminalSize(initialTerminalSize, compactBinaryPreview);
+        setTermH((current) => current === preferred ? current : preferred);
+    }, [hasSplit, dock, initialTerminalSize, compactBinaryPreview]);
+
     const restoreFocusRef = React.useRef<HTMLElement | null>(null);
     const [isResizing, setIsResizing] = React.useState(false);
     const dragCleanupRef = React.useRef<(() => void) | null>(null);

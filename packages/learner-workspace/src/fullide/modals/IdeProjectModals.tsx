@@ -10,6 +10,7 @@ export default function IdeProjectModals({
   showDeleteModal = true,
   showProjects = true,
   showSaveAs = true,
+  saveAsCopyMode = false,
   showRename = true,
   nodes,
   pendingDeleteId,
@@ -88,9 +89,11 @@ export default function IdeProjectModals({
         <ProjectNameModal
           open={saveAsOpen}
           busy={isSavingProject}
-          title="Save as new project"
-          description="Create a new saved project from your current local workspace."
-          confirmLabel="Save As"
+          title={saveAsCopyMode ? "Save a separate copy" : "Save as new project"}
+          description={saveAsCopyMode
+            ? "Create a new cloud project from your local draft. The newer original cloud project will not be overwritten."
+            : "Create a new saved project from your current local workspace."}
+          confirmLabel={saveAsCopyMode ? "Save Copy" : "Save As"}
           initialValue={saveAsInitialValue}
           onConfirm={onSaveAsConfirm}
           onCancel={onSaveAsCancel}

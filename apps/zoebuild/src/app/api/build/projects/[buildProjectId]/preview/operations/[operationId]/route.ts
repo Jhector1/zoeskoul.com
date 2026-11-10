@@ -46,10 +46,31 @@ export async function GET(_req: Request, ctx: {params: Promise<{ buildProjectId:
   } catch (error) {
     if (error instanceof ReactPreviewRequestError)
       return json(requestId, {ok:false,code:error.code,message:error.message}, error.status);
-    if (error instanceof RunnerHttpError) return json(requestId,
-      {ok:false,code:error.status===404 ? "BUILD_PREVIEW_OPERATION_EXPIRED" : "BUILD_PREVIEW_RUNNER_UNAVAILABLE",
-        message:error.status===404 ? "This preview operation expired. Retry preview." : "Preview runner is unavailable."},
-      error.status===404 ? 404 : 503);
+    if (error instanceof RunnerHttpError) {
+      console.warn("[ZoeBuild preview operation status] runner rejected", {
+        requestId,
+        upstreamStatus: error.status,
+        upstreamCode: error.code ?? "UNSPECIFIED",
+      });
+      // WAVE3_TRANSIENT_PREVIEW_STATUS_V1: only genuine gateway/unavailable
+      // responses are eligible for bounded browser GET retries.
+      if (error.status === 404) return json(requestId,
+        {ok:false, code:"BUILD_PREVIEW_OPERATION_EXPIRED",
+          message:"This preview operation expired. Retry preview."}, 404);
+      if (error.status === 502 || error.status === 503 || error.status === 504)
+        return json(requestId,
+          {ok:false, code:"BUILD_PREVIEW_RUNNER_UNAVAILABLE",
+            message:"Preview runner is temporarily unavailable."}, 503);
+      if (error.status === 429) return json(requestId,
+        {ok:false, code:"BUILD_PREVIEW_CAPACITY",
+          message:"Preview service is busy. Retry preview later."}, 429);
+      if (error.status === 409) return json(requestId,
+        {ok:false, code:"BUILD_PREVIEW_RUNNER_REJECTED",
+          message:"Preview operation status was rejected."}, 409);
+      return json(requestId,
+        {ok:false, code:"BUILD_PREVIEW_STATUS_FAILED",
+          message:"Preview operation status is unavailable."}, 503);
+    }
     console.error("[ZoeBuild preview operation status] failed", {
       requestId,category:error instanceof Error ? error.name : "unknown",
     });

@@ -2,6 +2,7 @@ export type AdminRoute =
   | { kind: "overview" }
   | { kind: "questions" }
   | { kind: "curriculum" }
+  | { kind: "learning-visibility" }
   | { kind: "public-challenges" }
   | { kind: "promotions" }
   | { kind: "campaigns" }
@@ -31,6 +32,10 @@ export function resolveAdminRoute(pathname: string): AdminRoute {
     path === "/admin/curriculum"
   ) {
     return { kind: "curriculum" };
+  }
+
+  if (path === "/learning-visibility" || path === "/admin/learning-visibility") {
+    return { kind: "learning-visibility" };
   }
 
   if (

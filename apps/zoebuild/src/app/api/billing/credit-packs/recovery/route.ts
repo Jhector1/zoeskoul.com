@@ -9,7 +9,7 @@ const PRICE=/^price_[A-Za-z0-9_]+$/;
 const json=(code:string,status:number)=>NextResponse.json({code},{status,headers});
 /** Same-origin authenticated proxy. Browser never chooses a user or Stripe mode. */
 export async function POST(request:NextRequest){
-  const origin=process.env.NEXT_PUBLIC_ZOEBUILD_ORIGIN?.trim()||process.env.ZOEBUILD_ORIGIN?.trim();
+  const origin=process.env.NEXT_PUBLIC_ZOEBUILD_ORIGIN?.trim();
   if(!isTrustedBillingMutation(request,origin))return json("BILLING_ORIGIN_MISMATCH",403);
   const token=request.cookies.get(SESSION_COOKIE)?.value;
   if(!token)return json("SESSION_EXPIRED",401);

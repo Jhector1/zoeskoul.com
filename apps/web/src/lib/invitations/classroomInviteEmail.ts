@@ -15,6 +15,8 @@ import {
   type TransactionalEmailResult,
 } from "@/lib/email/transactionalEmail";
 
+import { resolveEmailSenderSettings } from "@/lib/email/senderConfig";
+
 export type ClassroomInviteEmailResult = TransactionalEmailResult;
 
 export type ClassroomInviteArgs = {
@@ -31,17 +33,9 @@ export type ClassroomInviteEmailArgs = ClassroomInviteArgs & {
 };
 
 function resolveInviteSender() {
-  return resolveTransactionalEmailSender({
-    from:
-      process.env.BREVO_INVITE_FROM_EMAIL ??
-      process.env.BREVO_FROM_EMAIL ??
-      process.env.CLASSROOM_INVITE_FROM_EMAIL ??
-      process.env.LEARNING_INVITE_FROM_EMAIL ??
-      process.env.EMAIL_FROM,
-    name:
-      process.env.BREVO_INVITE_FROM_NAME ?? process.env.BREVO_FROM_NAME,
-    defaultName: "ZoeSkoul",
-  });
+  return resolveTransactionalEmailSender(
+    resolveEmailSenderSettings("classroom-invite", process.env),
+  );
 }
 
 function classroomInviteCopy(args: ClassroomInviteArgs) {

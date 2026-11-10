@@ -1,6 +1,7 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
+import { requireCanonicalDatabaseUrl } from "./databaseUrl.js";
 
 type PrismaPgPool = ConstructorParameters<typeof PrismaPg>[0];
 
@@ -9,28 +10,13 @@ const globalForPrisma = globalThis as unknown as {
     prismaPgPool?: PrismaPgPool;
 };
 
-function getDatabaseUrl() {
-    const databaseUrl =
-        process.env.ADMIN_DATABASE_URL ??
-        process.env.WEB_DATABASE_URL ??
-        process.env.DATABASE_URL;
-
-    if (!databaseUrl) {
-        throw new Error(
-            "Missing DATABASE_URL. Set DATABASE_URL, WEB_DATABASE_URL, or ADMIN_DATABASE_URL.",
-        );
-    }
-
-    return databaseUrl;
-}
-
 function createPrismaClient() {
     const pool =
         globalForPrisma.prismaPgPool ??
         // `pg` and `@prisma/adapter-pg` can resolve different `@types/pg` versions.
         // Cast to the adapter's accepted pool type to avoid a types-only mismatch.
         (new Pool({
-            connectionString: getDatabaseUrl(),
+            connectionString: requireCanonicalDatabaseUrl(),
         }) as unknown as PrismaPgPool);
 
     if (process.env.NODE_ENV !== "production") {

@@ -1,5 +1,6 @@
 import { getLearnerWorkspaceEnv, getLearnerWorkspaceStaticConfig } from "@zoeskoul/learner-workspace/runtime/staticConfig";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
+import { createWorkspaceWriteQueue } from "./workspaceWriteQueue";
 
 const DB_NAME = `${getLearnerWorkspaceStaticConfig().appName}.ide.storage`;
 const DB_VERSION = 1;
@@ -13,6 +14,7 @@ type WorkspaceBodyRecord = {
 };
 
 let dbPromise: Promise<IDBDatabase> | null = null;
+const writeQueue = createWorkspaceWriteQueue();
 
 function canUseIndexedDb() {
     return typeof window !== "undefined" && typeof indexedDB !== "undefined";
@@ -101,49 +103,49 @@ function waitForTransaction(tx: IDBTransaction): Promise<void> {
     });
 }
 
-export async function getWorkspaceBody(
+export async function getWorkspaceBodyRecord(
     key: string,
-): Promise<WorkspaceStateV2 | null> {
+): Promise<WorkspaceBodyRecord | null> {
     if (!canUseIndexedDb()) return null;
+    await writeQueue.flush(key);
 
     const db = await openDb();
     const tx = db.transaction(WORKSPACE_STORE, "readonly");
     const store = tx.objectStore(WORKSPACE_STORE);
-
+    const committed = waitForTransaction(tx);
     const record = await requestToPromise<WorkspaceBodyRecord | undefined>(store.get(key));
-    await waitForTransaction(tx);
+    await committed;
 
-    return record?.workspace ?? null;
+    return record ?? null;
+}
+
+export async function getWorkspaceBody(key: string): Promise<WorkspaceStateV2 | null> {
+    return (await getWorkspaceBodyRecord(key))?.workspace ?? null;
 }
 
 export async function putWorkspaceBody(
     key: string,
     workspace: WorkspaceStateV2,
+    savedAt = Date.now(),
 ): Promise<void> {
-    if (!canUseIndexedDb()) return;
-
-    const db = await openDb();
-    const tx = db.transaction(WORKSPACE_STORE, "readwrite");
-    const store = tx.objectStore(WORKSPACE_STORE);
-
-    await requestToPromise(
-        store.put({
-            key,
-            savedAt: Date.now(),
-            workspace,
-        } satisfies WorkspaceBodyRecord),
-    );
-
-    await waitForTransaction(tx);
+    if (!canUseIndexedDb()) throw new Error("IndexedDB is unavailable.");
+    return writeQueue.enqueue(key, async () => {
+        const db = await openDb();
+        const tx = db.transaction(WORKSPACE_STORE, "readwrite");
+        const store = tx.objectStore(WORKSPACE_STORE);
+        const committed = waitForTransaction(tx);
+        store.put({key, savedAt, workspace} satisfies WorkspaceBodyRecord);
+        await committed;
+    });
 }
 
 export async function deleteWorkspaceBody(key: string): Promise<void> {
     if (!canUseIndexedDb()) return;
-
-    const db = await openDb();
-    const tx = db.transaction(WORKSPACE_STORE, "readwrite");
-    const store = tx.objectStore(WORKSPACE_STORE);
-
-    await requestToPromise(store.delete(key));
-    await waitForTransaction(tx);
+    return writeQueue.enqueue(key, async () => {
+        const db = await openDb();
+        const tx = db.transaction(WORKSPACE_STORE, "readwrite");
+        const committed = waitForTransaction(tx);
+        tx.objectStore(WORKSPACE_STORE).delete(key);
+        await committed;
+    });
 }

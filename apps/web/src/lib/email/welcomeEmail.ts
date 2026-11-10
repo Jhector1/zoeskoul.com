@@ -7,6 +7,7 @@ import {
   type TransactionalEmailResult,
 } from "@/lib/email/transactionalEmail";
 import { getSiteUrl } from "@/lib/seo/site";
+import { resolveEmailSenderSettings } from "@/lib/email/senderConfig";
 
 export type WelcomeEmailArgs = {
   to: string;
@@ -21,16 +22,9 @@ function firstName(name?: string | null) {
 }
 
 function resolveWelcomeSender() {
-  return resolveTransactionalEmailSender({
-    from:
-      process.env.BREVO_WELCOME_FROM_EMAIL ??
-      process.env.BREVO_FROM_EMAIL ??
-      process.env.EMAIL_FROM,
-    name:
-      process.env.BREVO_WELCOME_FROM_NAME ??
-      process.env.BREVO_FROM_NAME,
-    defaultName: "ZoeSkoul",
-  });
+  return resolveTransactionalEmailSender(
+    resolveEmailSenderSettings("welcome", process.env),
+  );
 }
 
 export async function sendWelcomeEmail(

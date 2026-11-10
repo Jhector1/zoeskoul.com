@@ -1,3 +1,4 @@
+import { requireCanonicalDatabaseUrl } from "../src/databaseUrl";
 /**
  * DEV ONLY: scoped local-DB reset for the TWO previously verified Stripe sandbox
  * subscription IDs. Does not call Stripe, alter payment records, or change code.
@@ -17,7 +18,7 @@ function flag(name: string): string | null {
 }
 function validateTarget(): void {
   if (process.env.NODE_ENV === "production") throw Error("PRODUCTION_RUNTIME_REFUSED");
-  const raw = process.env.ADMIN_DATABASE_URL ?? process.env.WEB_DATABASE_URL ?? process.env.DATABASE_URL;
+  const raw = requireCanonicalDatabaseUrl();
   if (!raw) throw Error("MISSING_DATABASE_CONFIGURATION");
   const u = new URL(raw);
   if (u.protocol !== "postgresql:" && u.protocol !== "postgres:") throw Error("POSTGRES_REQUIRED");

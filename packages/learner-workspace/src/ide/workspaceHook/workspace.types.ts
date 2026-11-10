@@ -36,6 +36,8 @@ export type UseIdeWorkspaceOpts = {
   scopeKey?: string | null;
   exerciseStateKey?: string | null;
   localWorkspaceId?: string | null;
+  /** V6-only read-only migration sources; previous keys are never deleted. */
+  legacyDraftBaseStorageKeys?: readonly string[];
 
   policy?: IdeWorkspacePolicy;
   fileActions?: IdeFileActionsConfig | null;

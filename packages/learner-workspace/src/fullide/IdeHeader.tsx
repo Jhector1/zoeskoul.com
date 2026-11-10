@@ -8,6 +8,7 @@ import {
 
 
 
+import { PlusIcon } from "lucide-react";
 import ProjectSwitcherButton from "@zoeskoul/learner-workspace/projects/ProjectSwitcherButton";
 import type { WorkspaceLanguage, SqlDialect } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
@@ -108,6 +109,8 @@ export default function IdeHeader({
                                       onBack,
                                       onOpenFiles,
                                       onOpenProjects,
+                                      onNewWorkspace,
+                                      showNewWorkspace,
                                       activePath,
                                       projectTitle,
                                       dirty,
@@ -141,6 +144,8 @@ export default function IdeHeader({
     onBack: () => void;
     onOpenFiles: () => void;
     onOpenProjects: () => void;
+    onNewWorkspace: () => void;
+    showNewWorkspace: boolean;
     activePath: string;
     projectTitle: string;
     dirty: boolean;
@@ -210,7 +215,7 @@ export default function IdeHeader({
 
     return (
         <div className="border-b border-neutral-200 bg-white/92 backdrop-blur dark:border-white/10 dark:bg-neutral-950/92">
-            <div className="flex items-center gap-1.5 px-2.5 py-2">
+            <div className="flex min-w-0 items-center gap-1.5 px-2.5 py-2">
                 {showBackButton ? (
                     <button
                         type="button"
@@ -247,7 +252,7 @@ export default function IdeHeader({
                 )}
 
                 {showActivePath ? (
-                    <div className="hidden min-w-0 flex-1 md:block">
+                    <div className="hidden min-w-0 flex-1 xl:block">
                         <div
                             className="truncate text-[11px] font-medium text-neutral-500 dark:text-white/45"
                             title={activePath}
@@ -259,7 +264,15 @@ export default function IdeHeader({
                     <div className="flex-1" />
                 )}
 
-                <div className="ml-auto flex items-center gap-1">
+                <div className="ml-auto flex shrink-0 items-center gap-1">
+                    {showNewWorkspace ? (
+                        <button type="button" onClick={onNewWorkspace}
+                            className={IDE_PRIMARY_BTN} title="Start a new workspace"
+                            aria-label="New Workspace" data-testid="new-workspace-button">
+                            <PlusIcon className="h-3.5 w-3.5" />
+                            <span className="hidden sm:inline">New Workspace</span>
+                        </button>
+                    ) : null}
                     {showStatus ? (
                         <StatusChip
                             conflict={conflict}
@@ -269,14 +282,14 @@ export default function IdeHeader({
                         />
                     ) : null}
 
-                    {showSaveAs ? (
+                    {showSaveAs && !conflict ? (
                         <button
                             type="button"
                             onClick={onSaveAs}
                             disabled={saveAsDisabled}
                             className={IDE_PRIMARY_BTN}
                         >
-                            {conflict ? t("saveCopy") : t("saveAs")}
+                            {t("saveAs")}
                         </button>
                     ) : null}
 
@@ -285,6 +298,8 @@ export default function IdeHeader({
                             type="button"
                             onClick={onSave}
                             disabled={saveDisabled}
+                            aria-label={conflict ? "Review cloud version conflict" : saveButtonLabel}
+                            title={conflict ? "Review safe options for local and cloud versions" : undefined}
                             className={cn(
                                 IDE_SAVE_BTN,
                                 conflict &&

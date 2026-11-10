@@ -37,8 +37,19 @@ function checkDestination(nodes: FSNode[], parentId: string|null, name: string, 
     }
 }
 export function planV6InlineIntent(nodes: FSNode[], edit: InlineEdit): WorkspaceExplorerIntentV6|null {
-    if (!edit || edit.mode === "new-file") return null; // V6 file creation is handled by CAS writer.
+    if (!edit) return null;
     const name = requireName(edit.value);
+    if (edit.mode === "new-file") {
+        if (edit.parentId && node(nodes,edit.parentId).kind !== "folder") {
+            throw new Error("Invalid parent folder.");
+        }
+        checkDestination(nodes,edit.parentId,name);
+        const path = edit.parentId ? `${fullPath(nodes,edit.parentId)}/${name}` : name;
+        if (resolveWorkspaceFileCapability(path)?.storage !== "text") {
+            throw new Error("Create a supported text file; binary files must be uploaded.");
+        }
+        return {kind:"create_file",path};
+    }
     if (edit.mode === "new-folder") {
         if (edit.parentId) {
             const parent = node(nodes, edit.parentId);

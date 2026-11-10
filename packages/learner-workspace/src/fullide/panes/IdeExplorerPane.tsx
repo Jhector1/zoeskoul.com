@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useLearnerWorkspaceTranslations as useTranslations } from "@zoeskoul/learner-workspace/runtime/appRuntime";
 import ExplorerTree from "@zoeskoul/learner-workspace/fullide/ExplorerTree";
 import { SQL_DIALECT_LABEL } from "@zoeskoul/learner-workspace/ide/constants";
@@ -13,11 +14,12 @@ import type {
 import type { Toast } from "@zoeskoul/learner-workspace/ide/types";
 import { IconChevronRight, IconFile, IconFolder } from "@zoeskoul/learner-workspace/ide/fullide/icons";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import { PlusIcon, Redo2, Undo2 } from "lucide-react";
+import { CircleHelp, Download, PlusIcon, Redo2, Undo2 } from "lucide-react";
 import Tooltip from "@zoeskoul/learner-workspace/ui/Tooltip";
 import type { FullIDEServices } from "@zoeskoul/learner-workspace/ide/fullide/services";
 import type { EditorSplitPlacement } from "@zoeskoul/learner-workspace/runner/types";
 import { resolveWorkspaceFileCapability } from "@zoeskoul/code-contracts";
+import { shouldSkipV6FolderImportPath } from "../v6FolderImportFilter";
 
 type Props = {
     isSql: boolean;
@@ -44,6 +46,7 @@ type Props = {
     onToggleExplorer?: () => void;
     onV6ListTrash?: () => Promise<ReadonlyArray<Readonly<{originalPath:string;trashId:string}>>>;
     onV6RestoreTrash?: (entry: Readonly<{originalPath:string;trashId:string}>) => Promise<boolean>;
+    onV6Download?: (selection: import("../workspaceDownloadV6Session").V6DownloadSelection) => Promise<void>;
     services: FullIDEServices;
     actions: {
         setInlineEdit: (value: any) => void;
@@ -148,6 +151,10 @@ async function readBrowserFile(
     };
 }
 
+function importedFolderSummary(skipped: string[]): string {
+    const names = skipped.slice(0, 3).join(", ");
+    return `${skipped.length} generated/private item${skipped.length === 1 ? "" : "s"} excluded${names ? ` (e.g. ${names})` : ""}.`;
+}
 type FsPickerWindow = Window & {
     showOpenFilePicker?: (options?: any) => Promise<any[]>;
     showDirectoryPicker?: (options?: any) => Promise<any>;
@@ -159,9 +166,10 @@ async function readFileList(
     limits: ImportReadLimits,
 ): Promise<ImportedWorkspaceFile[]> {
     const files = Array.from(list ?? []);
-    assertImportCount(files.length, limits);
+    const selected = useRelativePath ? files.filter(file => !shouldSkipV6FolderImportPath(file.webkitRelativePath || file.name)) : files;
+    assertImportCount(selected.length, limits);
     return Promise.all(
-        files.map(async (file) => {
+        selected.map(async (file) => {
             const relative =
                 useRelativePath &&
                 "webkitRelativePath" in file &&
@@ -180,9 +188,14 @@ async function readDirectoryHandleRecursive(
     basePath: string,
     limits: ImportReadLimits,
     out: ImportedWorkspaceFile[] = [],
+    skipped: string[] = [],
 ): Promise<ImportedWorkspaceFile[]> {
     for await (const entry of handle.values()) {
         const nextPath = basePath ? `${basePath}/${entry.name}` : entry.name;
+        if (shouldSkipV6FolderImportPath(nextPath)) {
+            skipped.push(nextPath);
+            continue;
+        }
 
         if (entry.kind === "file") {
             assertImportCount(out.length + 1, limits);
@@ -192,7 +205,7 @@ async function readDirectoryHandleRecursive(
         }
 
         if (entry.kind === "directory") {
-            await readDirectoryHandleRecursive(entry, nextPath, limits, out);
+            await readDirectoryHandleRecursive(entry, nextPath, limits, out, skipped);
         }
     }
 
@@ -229,6 +242,7 @@ export default function IdeExplorerPane({
                                             onToggleExplorer,
                                             onV6ListTrash,
                                             onV6RestoreTrash,
+                                            onV6Download,
                                             services,
 }: Props) {
     const t = useTranslations("ide.explorer.pane");
@@ -236,6 +250,47 @@ export default function IdeExplorerPane({
     const folderInputRef = useRef<HTMLInputElement | null>(null);
     const [trashEntries, setTrashEntries] = useState<ReadonlyArray<Readonly<{originalPath:string;trashId:string}>> | null>(null);
     const [trashBusy, setTrashBusy] = useState(false);
+    const [folderImportNote, setFolderImportNote] = useState<string | null>(null);
+    const [helpOpen, setHelpOpen] = useState(false);
+    const [helpPosition, setHelpPosition] = useState({ top: 44, left: 8 });
+    const helpButtonRef = useRef<HTMLButtonElement | null>(null);
+    const helpPanelRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!helpOpen) return;
+        const updatePosition = () => {
+            const rect = helpButtonRef.current?.getBoundingClientRect();
+            if (!rect) return;
+            const width = Math.min(320, window.innerWidth - 16);
+            setHelpPosition({
+                top: Math.min(rect.bottom + 8, Math.max(8, window.innerHeight - 180)),
+                left: Math.max(8, Math.min(rect.right - width, window.innerWidth - width - 8)),
+            });
+        };
+        const closeOnOutside = (event: PointerEvent) => {
+            const target = event.target;
+            if (!(target instanceof Node)) return;
+            if (helpButtonRef.current?.contains(target) || helpPanelRef.current?.contains(target)) return;
+            setHelpOpen(false);
+        };
+        const closeOnEscape = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setHelpOpen(false);
+                helpButtonRef.current?.focus();
+            }
+        };
+        updatePosition();
+        window.addEventListener("resize", updatePosition);
+        window.addEventListener("scroll", updatePosition, true);
+        document.addEventListener("pointerdown", closeOnOutside);
+        document.addEventListener("keydown", closeOnEscape);
+        return () => {
+            window.removeEventListener("resize", updatePosition);
+            window.removeEventListener("scroll", updatePosition, true);
+            document.removeEventListener("pointerdown", closeOnOutside);
+            document.removeEventListener("keydown", closeOnEscape);
+        };
+    }, [helpOpen]);
     const loadV6Trash = async () => {
         if (!onV6ListTrash || trashBusy) return;
         setTrashBusy(true);
@@ -271,15 +326,11 @@ export default function IdeExplorerPane({
 
     const showNewFile = policy.canCreateFiles;
     const showNewFolder = policy.canCreateFolders;
-    const showOpenFile =
-        services.explorer.showFooter &&
-        services.explorer.fileActions.enabled &&
-        policy.canUploadFiles;
-    const showOpenFolder =
-        services.explorer.showFooter &&
-        services.explorer.fileActions.enabled &&
-        policy.canUploadFiles &&
-        policy.canCreateFolders;
+    // Visibility follows the actual import capability, not the unrelated footer.
+    const showOpenFile = services.explorer.showActions &&
+        services.explorer.fileActions.enabled && policy.canUploadFiles;
+    const showOpenFolder = services.explorer.showActions &&
+        services.explorer.fileActions.enabled && policy.canUploadFiles && policy.canCreateFolders;
 
     const uploadHint = useMemo(() => {
         if (!policy.canUploadFiles) {
@@ -365,11 +416,12 @@ export default function IdeExplorerPane({
 
             if (typeof w.showDirectoryPicker === "function") {
                 const handle = await w.showDirectoryPicker();
+                const skipped: string[] = [];
                 const imported = await readDirectoryHandleRecursive(
-                    handle,
-                    handle.name,
-                    importReadLimits,
+                    handle, handle.name, importReadLimits, [], skipped,
                 );
+                if (!imported.length) throw new Error("No supported files found in this folder.");
+                setFolderImportNote(skipped.length ? importedFolderSummary(skipped) : null);
                 actions.importExternalFiles(imported);
                 return;
             }
@@ -396,6 +448,40 @@ export default function IdeExplorerPane({
                 </div>
 
                 <div className="flex items-center gap-2">
+                    {onV6ListTrash && onV6RestoreTrash ? (
+                        <>
+                            <button
+                                ref={helpButtonRef}
+                                type="button"
+                                aria-label="Workspace help"
+                                aria-expanded={helpOpen}
+                                aria-controls="zoelearning-workspace-help"
+                                title="Workspace help"
+                                onClick={() => setHelpOpen(open => !open)}
+                                className="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 text-neutral-600 hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:border-white/10 dark:text-neutral-300 dark:hover:bg-white/10"
+                            >
+                                <CircleHelp className="h-4 w-4" aria-hidden="true" />
+                            </button>
+                            {helpOpen && typeof document !== "undefined" ? createPortal(
+                                <div
+                                    ref={helpPanelRef}
+                                    id="zoelearning-workspace-help"
+                                    role="region"
+                                    aria-label="Workspace help"
+                                    className="fixed z-[9999] w-[min(20rem,calc(100vw-1rem))] max-h-[min(18rem,calc(100vh-2rem))] overflow-y-auto rounded-lg border border-neutral-200 bg-white p-3 text-left text-xs leading-relaxed text-neutral-700 shadow-xl dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200"
+                                    style={{ top: helpPosition.top, left: helpPosition.left }}
+                                >
+                                    <div className="flex items-center justify-between gap-2">
+                                        <strong className="font-semibold text-neutral-900 dark:text-neutral-50">Workspace help</strong>
+                                        <button type="button" onClick={() => { setHelpOpen(false); helpButtonRef.current?.focus(); }} aria-label="Close workspace help" className="rounded px-2 py-1 hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 dark:hover:bg-white/10">Close</button>
+                                    </div>
+                                    <p className="mt-2">Files synchronize with this terminal session. Use <strong>Save Project</strong> to save a separate cloud version when available.</p>
+                                    <p className="mt-2">Other tabs may have different terminal sessions. If a synchronization conflict appears, preserve your draft before retrying.</p>
+                                    <p className="mt-2">Recovery options below can restore deleted folders.</p>
+                                </div>, document.body
+                            ) : null}
+                        </>
+                    ) : null}
                     {services.explorer.showHistoryControls ? (
                         <div className="flex items-center gap-1">
                             <Tooltip tip={t("undoTip")} side="bottom">
@@ -463,10 +549,12 @@ export default function IdeExplorerPane({
 
             {onV6ListTrash && onV6RestoreTrash ? (
                 <div className="border-b border-neutral-200 px-3 py-2 dark:border-white/10">
-                    <button type="button" disabled={trashBusy} onClick={() => void loadV6Trash()}
-                        className="text-xs font-semibold text-neutral-600 underline disabled:opacity-50 dark:text-white/70">
-                        {trashBusy ? "Checking recoverable folders…" : "Recover deleted folder"}
-                    </button>
+                    <details className="text-xs text-neutral-600 dark:text-white/70">
+                        <summary className="cursor-pointer font-medium">Recovery options</summary>
+                        <button type="button" disabled={trashBusy} onClick={() => void loadV6Trash()}
+                            className="mt-2 text-xs font-semibold underline disabled:opacity-50">
+                            {trashBusy ? "Checking recoverable folders…" : "Browse previously deleted folders"}
+                        </button>
                     {trashEntries !== null ? (
                         <div className="mt-2 space-y-1 text-xs" aria-live="polite">
                             {trashEntries.length === 0 ? <p>No recoverable folders.</p> : trashEntries.map((entry) => (
@@ -479,6 +567,7 @@ export default function IdeExplorerPane({
                             ))}
                         </div>
                     ) : null}
+                    </details>
                 </div>
             ) : null}
 
@@ -493,8 +582,24 @@ export default function IdeExplorerPane({
                 </div>
             ) : null}
 
+            {(onV6Download || (services.explorer.showActions && (showNewFile || showNewFolder || showOpenFile || showOpenFolder))) ? (
+                <details data-testid="explorer-file-actions" className="group border-b border-neutral-200 dark:border-white/10">
+                    <summary className="flex cursor-pointer select-none items-center justify-between gap-2 px-3 py-2.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-100/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-500 dark:text-white/75 dark:hover:bg-white/[0.04]">
+                        <span>File actions</span>
+                        <span className="flex items-center gap-2 text-[11px] font-normal text-neutral-500 dark:text-white/50">New · Open · Download <IconChevronRight className="h-3.5 w-3.5 transition-transform group-open:rotate-90" /></span>
+                    </summary>
+                    <div className="border-t border-neutral-200/70 dark:border-white/10">
+            {onV6Download ? (
+                <div className="px-3 py-2">
+                    <button type="button" onClick={()=>void onV6Download({kind:"project",projectName:"project"})}
+                        className="flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-xs font-medium text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]">
+                        <Download className="h-3.5 w-3.5" /> Download project ZIP
+                    </button>
+                </div>
+            ) : null}
+
             {services.explorer.showActions && (showNewFile || showNewFolder || showOpenFile || showOpenFolder) ? (
-                <div className="border-b border-neutral-200 p-3 dark:border-white/10">
+                <div className="px-3 py-2">
                     <div className="grid grid-cols-2 gap-1.5">
                         {showNewFile ? (
                             <button
@@ -555,6 +660,8 @@ export default function IdeExplorerPane({
                                         false,
                                         importReadLimits,
                                     );
+                                    if (!imported.length) throw new Error("No files selected.");
+                                    setFolderImportNote(null);
                                     actions.importExternalFiles(imported);
                                 } catch (error) {
                                     actions.setToast({
@@ -585,6 +692,9 @@ export default function IdeExplorerPane({
                                         true,
                                         importReadLimits,
                                     );
+                                    if (!imported.length) throw new Error("No supported files found in this folder.");
+                                    const skipped = Array.from(input.files ?? []).filter(file => shouldSkipV6FolderImportPath(file.webkitRelativePath || file.name)).map(file => file.webkitRelativePath || file.name);
+                                    setFolderImportNote(skipped.length ? importedFolderSummary(skipped) : null);
                                     actions.importExternalFiles(imported);
                                 } catch (error) {
                                     actions.setToast({
@@ -601,6 +711,9 @@ export default function IdeExplorerPane({
                         />
                     ) : null}
 
+                    {folderImportNote ? (
+                        <p role="status" className="mt-2 text-[11px] text-amber-700 dark:text-amber-300">{folderImportNote}</p>
+                    ) : null}
                     {showOpenFile || showOpenFolder ? (
                         <div className="mt-2 text-[11px] font-semibold text-neutral-500 dark:text-white/50">
                             {uploadHint}
@@ -609,6 +722,9 @@ export default function IdeExplorerPane({
                 </div>
             ) : null}
 
+                    </div>
+                </details>
+            ) : null}
             {upgradeText ? (
                 <div className="border-b border-neutral-200 px-3 py-3 dark:border-white/10">
                     <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-3 text-xs font-semibold text-amber-900 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-100">
@@ -642,6 +758,7 @@ export default function IdeExplorerPane({
                     startRename={actions.startRename}
                     setEntry={actions.setEntry}
                     requestDelete={actions.requestDelete}
+                    onDownloadNode={onV6Download ? (path,kind)=>void onV6Download({kind,path}) : undefined}
                     moveNode={actions.moveNode}
                     commitInlineEdit={actions.commitInlineEdit}
                     cancelInlineEdit={actions.cancelInlineEdit}

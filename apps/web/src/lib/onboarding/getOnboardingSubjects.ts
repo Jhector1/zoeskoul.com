@@ -1,4 +1,5 @@
 import "server-only";
+import {getHiddenDiscovery} from "@/lib/subjects/server/learningDiscoveryVisibility";
 
 import { prisma } from "@/lib/prisma";
 import {
@@ -40,7 +41,7 @@ function badgeFromSubject(input: {
 }
 
 export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]> {
-    const [subjects, manifestMap] = await Promise.all([
+    const [subjects, manifestMap, hidden] = await Promise.all([
         prisma.practiceSubject.findMany({
             where: {
                 status: "active",
@@ -59,6 +60,7 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
             },
         }),
         getResolvedSubjectCatalogMap(),
+        getHiddenDiscovery(),
     ]);
 
     const mappedSubjects = subjects
@@ -79,7 +81,7 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
     const visibleSubjects = selectVisibleSubjectsForActor(
         await withSubjectEnrollmentActivity(mappedSubjects),
         { familyPreference: "enrolled" },
-    ).filter(({ db, enrolled }) => enrolled || db.showInOnboarding);
+    ).filter(({ db, enrolled }) => enrolled || (db.showInOnboarding && !hidden.courses.has(db.slug) && !hidden.catalogs.has(SUBJECT_CATALOG_SLUGS[db.slug] ?? "other")));
 
     return visibleSubjects.map(({ db: s, resolved, enrolled, lastSeenAt }) => {
         const imagePublicId = resolved?.imagePublicId ?? s.imagePublicId;
@@ -123,10 +125,10 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
 export async function getPublicOnboardingSubjects(): Promise<
     OnboardingSubjectOption[]
 > {
-    const catalogMap = await getResolvedCatalogMap();
+    const [catalogMap, hidden] = await Promise.all([getResolvedCatalogMap(), getHiddenDiscovery()]);
 
     return Object.values(catalogMap)
-        .filter((catalog) => catalog.status === "active")
+        .filter((catalog) => catalog.status === "active" && !hidden.catalogs.has(catalog.slug))
         .flatMap((catalog) => {
             const catalogOrder =
                 CATALOG_MANIFESTS[catalog.slug]?.catalog?.order ??
@@ -137,6 +139,7 @@ export async function getPublicOnboardingSubjects(): Promise<
                     const lifecycleStatus = subject.versioning?.status;
 
                     return (
+                        !hidden.courses.has(subject.slug) &&
                         subject.visibility === "public" &&
                         subject.status === "active" &&
                         lifecycleStatus !== "draft" &&

@@ -32,3 +32,67 @@ describe("preview operation renewal never bypasses authority", () => {
     expect(fetcher).toHaveBeenCalledTimes(3);
   });
 });
+
+
+describe("Wave 3 transient preview-status recovery", () => {
+  it("retries a gateway failure on the exact same GET, without creating an operation", async () => {
+    vi.useFakeTimers();
+    try {
+      const fetcher = vi.fn()
+        .mockResolvedValueOnce(ok(503, {ok:false,code:"BUILD_PREVIEW_RUNNER_UNAVAILABLE"}))
+        .mockResolvedValueOnce(ok(200, {ok:true}));
+      const pending = readPreviewOperationStatus("/same-operation", fetcher);
+      await vi.runAllTimersAsync();
+      expect((await pending).status).toBe(200);
+      expect(fetcher).toHaveBeenCalledTimes(2);
+      for (const call of fetcher.mock.calls) {
+        expect(call[0]).toBe("/same-operation");
+        expect(call[1]).toMatchObject({method:"GET",credentials:"same-origin"});
+      }
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("stops after two retries and returns a persistent temporary failure", async () => {
+    vi.useFakeTimers();
+    try {
+      const fetcher = vi.fn().mockImplementation(async () =>
+        ok(503, {ok:false,code:"BUILD_PREVIEW_RUNNER_UNAVAILABLE"}));
+      const pending = readPreviewOperationStatus("/same-operation", fetcher);
+      await vi.runAllTimersAsync();
+      expect((await pending).status).toBe(503);
+      expect(fetcher).toHaveBeenCalledTimes(3);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("does not retry a nontransient 503, 409, 429, or 403", async () => {
+    for (const [status, body] of [
+      [503, {code:"BUILD_PREVIEW_STATUS_FAILED"}],
+      [409, {code:"BUILD_PREVIEW_SOURCE_CONFLICT"}],
+      [429, {code:"BUILD_PREVIEW_CAPACITY"}],
+      [403, {code:"BUILD_FORBIDDEN"}],
+    ] as const) {
+      const fetcher = vi.fn().mockResolvedValue(ok(status, body));
+      expect((await readPreviewOperationStatus("/same-operation", fetcher)).status).toBe(status);
+      expect(fetcher).toHaveBeenCalledTimes(1);
+    }
+  });
+
+  it("retries a thrown network error for an idempotent GET only", async () => {
+    vi.useFakeTimers();
+    try {
+      const fetcher = vi.fn()
+        .mockRejectedValueOnce(new TypeError("network interrupted"))
+        .mockResolvedValueOnce(ok(200));
+      const pending = readPreviewOperationStatus("/same-operation", fetcher);
+      await vi.runAllTimersAsync();
+      expect((await pending).status).toBe(200);
+      expect(fetcher).toHaveBeenCalledTimes(2);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});

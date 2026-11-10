@@ -672,6 +672,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlResultShape,
         onRun,
         editorModelKey,
+        editorOverlay,
+        editorToolbar,
         toolScopeKey,
         exerciseStateKey,
         workspace,
@@ -1652,6 +1654,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         dock: effectiveDock,
         disabled,
         initialTerminalSize: (props as any).initialTerminalSize ?? 240,
+        compactBinaryPreview: Boolean(activeBinaryFile),
         mainRef,
         requestLayout,
     });
@@ -1780,11 +1783,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         if (!onV6ExplorerExecutorReady) return;
         if (workspaceTerminal?.fileSyncMode !== "v6" || !workspaceTerm.sessionId ||
             !workspaceTerm.interactiveReady) {
-            onV6ExplorerExecutorReady(null);
+            onV6ExplorerExecutorReady(null, workspaceTerm.sessionId);
             return;
         }
-        onV6ExplorerExecutorReady(v6ExplorerExecutor);
-        return () => onV6ExplorerExecutorReady(null);
+        // Publish the authoritative session identity along with the stable executor.
+        // Readiness can change during file reconciliation without changing sessions.
+        onV6ExplorerExecutorReady(v6ExplorerExecutor, workspaceTerm.sessionId);
+        return () => onV6ExplorerExecutorReady(null, workspaceTerm.sessionId);
     }, [onV6ExplorerExecutorReady, workspaceTerminal?.fileSyncMode,
         workspaceTerm.sessionId, workspaceTerm.interactiveReady, v6ExplorerExecutor]);
 
@@ -3186,6 +3191,16 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                     : undefined
                             }
                         />
+                        {args.primary && editorOverlay ? (
+                            <div data-testid="primary-editor-overlay" className="absolute inset-0 z-10 flex min-h-0 flex-col overflow-hidden bg-white dark:bg-neutral-950">
+                                {editorOverlay}
+                            </div>
+                        ) : null}
+                        {args.primary && editorToolbar ? (
+                            <div data-testid="primary-editor-toolbar" className="absolute right-3 top-2 z-20">
+                                {editorToolbar}
+                            </div>
+                        ) : null}
                     </>
                 )}
             </div>
@@ -3557,9 +3572,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             <div className="flex h-full min-h-0 flex-col">
                                 <div
                                     className={cx(
-                                        "min-h-0",
+                                        "min-h-0 shrink-0 overflow-hidden",
                                         PANEL_EDITOR,
                                     )}
+                                    style={{ height: split.bottomEditorH }}
                                 >
                                     {renderEditorPane(split.bottomEditorH)}
                                 </div>

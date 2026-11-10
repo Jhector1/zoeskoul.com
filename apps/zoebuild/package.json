@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "node ../../scripts/run-with-shared-env.mjs next dev --port 3004",
-    "build": "next build",
+    "build": "node ../../scripts/run-with-local-shared-build.mjs next build",
     "start": "next start --port 3004",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "check:boundary": "node scripts/check-app-boundary.mjs",

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Download } from "lucide-react";
 import { useLearnerWorkspaceTranslations as useTranslations } from "@zoeskoul/learner-workspace/runtime/appRuntime";
 import type { FSNode, InlineEdit, NodeId } from "@zoeskoul/learner-workspace/ide/types";
 import { cn } from "@zoeskoul/learner-workspace/ide/utils";
@@ -70,7 +71,7 @@ function IndentGuides({ depth }: { depth: number }) {
                     <div
                         key={i}
                         data-tree-indent-lane="true"
-                        className="relative min-h-[36px] w-7 shrink-0 self-stretch"
+                        className="relative min-h-[30px] w-5 shrink-0 self-stretch"
                     >
                         <div className="absolute -inset-y-[2px] left-1/2 w-px -translate-x-1/2 bg-neutral-200/90 dark:bg-white/10" />
                         {isBranch ? (
@@ -115,12 +116,12 @@ function InlineNameRow(props: {
 
     return (
         <div className="rounded-md border border-neutral-200 bg-white px-2 py-2 dark:border-white/10 dark:bg-white/[0.04]">
-            <div className="flex min-h-[36px] items-center">
+            <div className="flex min-h-[30px] items-center">
                 <IndentGuides depth={depth} />
                 <div className="grid h-5 w-5 place-items-center opacity-50" />
                 <div className="grid h-5 w-5 place-items-center text-neutral-600 dark:text-white/70">
                     {kind === "folder" ? (
-                        <IconFolder className="h-3.5 w-3.5" />
+                        <IconFolder className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
                     ) : (
                         <WorkspaceFileIcon fileName={value} className="h-3.5 w-3.5" />
                     )}
@@ -224,6 +225,7 @@ type TreeProps = {
 
     setEntry: (id: NodeId) => void;
     requestDelete: (id: NodeId) => void;
+    onDownloadNode?: (path:string,kind:"file"|"folder") => void;
     moveNode: (id: NodeId, parentId: NodeId | null) => void;
     allowSetEntry: boolean;
 
@@ -273,6 +275,7 @@ function Tree(props: TreeProps) {
         startRename,
         setEntry,
         requestDelete,
+        onDownloadNode,
         moveNode,
         allowSetEntry,
         commitInlineEdit,
@@ -306,7 +309,7 @@ function Tree(props: TreeProps) {
         inlineEdit.parentId === parentId;
 
     return (
-        <div className="space-y-[2px]">
+        <div className="space-y-px">
             {showInlineNewHere ? (
                 <InlineNameRow
                     depth={depth}
@@ -387,6 +390,10 @@ function Tree(props: TreeProps) {
                             },
                         ]
                         : []),
+                    ...(onDownloadNode
+                        ? [{label:"Download",onClick:()=>onDownloadNode(nodePath,"file"),
+                            icon:<Download className="h-4 w-4"/>}]
+                        : []),
                     ...(policy.canDeleteNodes
                         ? [
                             {
@@ -427,6 +434,10 @@ function Tree(props: TreeProps) {
                                 icon: <IconPencil className="h-4 w-4" />,
                             },
                         ]
+                        : []),
+                    ...(onDownloadNode
+                        ? [{label:"Download",onClick:()=>onDownloadNode(nodePath,"folder"),
+                            icon:<Download className="h-4 w-4"/>}]
                         : []),
                     ...(policy.canDeleteNodes
                         ? [
@@ -482,7 +493,7 @@ function Tree(props: TreeProps) {
                             />
 
                             {isFolder && isOpen ? (
-                                <div className="mt-[2px]">
+                                <div className="mt-px">
                                     <Tree
                                         parentId={n.id}
                                         depth={depth + 1}
@@ -506,6 +517,7 @@ function Tree(props: TreeProps) {
                                         allowSetEntry={allowSetEntry}
                                         policy={policy}
                                         requestDelete={requestDelete}
+                                        onDownloadNode={onDownloadNode}
                                         moveNode={moveNode}
                                         commitInlineEdit={commitInlineEdit}
                                         cancelInlineEdit={cancelInlineEdit}
@@ -569,7 +581,7 @@ function Tree(props: TreeProps) {
                                 clearAutoExpand();
                             }}
                             className={cn(
-                                "group flex min-h-[36px] items-center rounded-md border border-transparent px-2 transition-colors",
+                                "group flex min-h-[30px] items-center rounded-md border border-transparent px-1 transition-colors",
                                 "hover:bg-neutral-50 hover:border-neutral-200 dark:hover:bg-white/[0.06] dark:hover:border-white/10",
                                 "cursor-pointer",
                                 isActive &&
@@ -651,7 +663,8 @@ function Tree(props: TreeProps) {
 
                             <div
                                 className={cn(
-                                    "grid h-7 w-7 place-items-center text-neutral-700 dark:text-white/80",
+                                    "grid h-7 w-7 place-items-center",
+                                    isFolder ? "text-sky-600 dark:text-sky-400" : "text-neutral-700 dark:text-white/80",
                                     isActive && "text-emerald-700 dark:text-emerald-200",
                                 )}
                             >
@@ -705,7 +718,7 @@ function Tree(props: TreeProps) {
                         </div>
 
                         {isFolder && isOpen ? (
-                            <div className="mt-[2px]">
+                            <div className="mt-px">
                                 <Tree
                                     parentId={n.id}
                                     depth={depth + 1}
@@ -728,6 +741,7 @@ function Tree(props: TreeProps) {
                                     setEntry={setEntry}
                                     allowSetEntry={allowSetEntry}
                                     requestDelete={requestDelete}
+                                    onDownloadNode={onDownloadNode}
                                     moveNode={moveNode}
                                     commitInlineEdit={commitInlineEdit}
                                     cancelInlineEdit={cancelInlineEdit}
@@ -766,6 +780,7 @@ export default function ExplorerTree(props: {
 
     setEntry: (id: NodeId) => void;
     requestDelete: (id: NodeId) => void;
+    onDownloadNode?: (path:string,kind:"file"|"folder") => void;
     moveNode: (id: NodeId, parentId: NodeId | null) => void;
     allowSetEntry?: boolean;
 
@@ -792,6 +807,7 @@ export default function ExplorerTree(props: {
         startRename,
         setEntry,
         requestDelete,
+        onDownloadNode,
         moveNode,
         allowSetEntry = true,
         commitInlineEdit,
@@ -1062,6 +1078,7 @@ export default function ExplorerTree(props: {
                     setEntry={setEntry}
                     allowSetEntry={allowSetEntry}
                     requestDelete={requestDelete}
+                    onDownloadNode={onDownloadNode}
                     moveNode={moveNode}
                     commitInlineEdit={commitInlineEdit}
                     cancelInlineEdit={cancelInlineEdit}

@@ -61,6 +61,8 @@ model CodeProject {
   entryPath      String?
   activePath     String?
   workspaceHash  String?               @db.VarChar(64)
+  creationRequestKey  String?             @db.VarChar(96)
+  creationRequestHash String?             @db.VarChar(64)
   workspace      Json
   settings       Json?
   meta           Json?
@@ -76,6 +78,7 @@ model CodeProject {
   revisions      CodeProjectRevision[]
   buildProject   BuildProject?
 
+  @@unique([ownerId, creationRequestKey])
   @@index([ownerId, updatedAt])
   @@index([ownerId, scopeKind, updatedAt])
   @@index([subjectId, updatedAt])

@@ -10,6 +10,7 @@ import {
     Sparkles,
     ArrowRight,
     TerminalSquare,
+    PanelsTopLeft,
 } from "lucide-react";
 
 type SandboxSlug =
@@ -17,6 +18,7 @@ type SandboxSlug =
     | "programming-shell"
     | "sql"
     | "linear-algebra"
+    | "board"
     | "tools";
 
 type SandboxOption = {
@@ -101,6 +103,15 @@ export default function SandboxChooserClient({ locale }: { locale: string }) {
                 tags: ["Vectors", "Matrices", "Transforms"],
                 path: "math/linear-algebra",
                 badge: { text: "Interactive", tone: "good" },
+            },
+            {
+                slug: "board",
+                title: "Whiteboard",
+                description: "Draw diagrams, annotate ideas, and work visually on a personal board.",
+                icon: <PanelsTopLeft className="h-4 w-4" />,
+                tags: ["Draw", "Shapes", "Notes", "Sketch"],
+                path: "board",
+                badge: { text: "Visual workspace", tone: "good" },
             },
             {
                 slug: "tools",

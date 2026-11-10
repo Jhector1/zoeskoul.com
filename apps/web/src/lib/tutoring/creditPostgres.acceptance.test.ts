@@ -65,7 +65,7 @@ describe.runIf(enabled)("V12I.4 real PostgreSQL credit concurrency acceptance", 
     if (acceptanceMode === DEV_APPROVAL) {
       // Use exactly the already configured app DB connection, only after
       // explicit manual identity confirmation and a read-only PG inspection.
-      candidate = process.env.ADMIN_DATABASE_URL || process.env.WEB_DATABASE_URL || process.env.DATABASE_URL;
+      candidate = process.env.DATABASE_URL;
       const { preflightDevelopmentCreditAcceptance } = await import(
         "../../../../../packages/db/scripts/credit-postgres-dev-preflight.mjs");
       preflight = await preflightDevelopmentCreditAcceptance(candidate);
@@ -74,15 +74,12 @@ describe.runIf(enabled)("V12I.4 real PostgreSQL credit concurrency acceptance", 
       candidate = process.env.CREDIT_ACCEPTANCE_DATABASE_URL;
       const { preflightCreditAcceptance } = await import(
         "../../../../../packages/db/scripts/credit-postgres-acceptance-preflight.mjs");
-      const existing = [process.env.DATABASE_URL, process.env.WEB_DATABASE_URL,
-        process.env.ADMIN_DATABASE_URL].filter(Boolean);
+      const existing = [process.env.DATABASE_URL].filter(Boolean);
       if (!candidate || existing.includes(candidate)) throw Error("ACCEPTANCE_DATABASE_NOT_SEPARATELY_CONFIGURED");
       preflight = await preflightCreditAcceptance(candidate);
     }
     if (!candidate || !preflight.ok) throw Error("ACCEPTANCE_PREFLIGHT_FAILED");
-    // The @zoeskoul/db client chooses ADMIN/WEB before DATABASE_URL.
-    process.env.ADMIN_DATABASE_URL = candidate;
-    process.env.WEB_DATABASE_URL = candidate;
+    // Set only the canonical application database target after preflight approval.
     process.env.DATABASE_URL = candidate;
     const { getPrismaClient } = await import("@zoeskoul/db");
     db = getPrismaClient();

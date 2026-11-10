@@ -3,9 +3,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { WorkspaceStateV2 } from "@zoeskoul/learner-workspace/ide/types";
 import type { WorkspaceLanguage } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
+import { cloudWorkspaceFingerprint } from "./cloudWorkspaceFingerprint";
 
 function snapshotOfWorkspace(ws: WorkspaceStateV2 | null | undefined) {
-    return JSON.stringify(ws ?? null);
+    return cloudWorkspaceFingerprint(ws);
 }
 
 export function useProjectDirtyState(

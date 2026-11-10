@@ -12,10 +12,14 @@ import {
 } from "@zoeskoul/learner-workspace/ide/languageDefaults";
 import type { WorkspaceLanguage } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 import {
-    getWorkspaceBody,
+    getWorkspaceBodyRecord,
     putWorkspaceBody,
     deleteWorkspaceBody,
 } from "@zoeskoul/learner-workspace/ide/workspaceHook/workspace.idb";
+import {
+    emergencyDraftKey, encodeEmergencyDraft, parseEmergencyDraft,
+    shouldRestoreEmergencyDraft,
+} from "./workspaceHook/v6DraftEmergencyCheckpoint";
 
 export const STORAGE_KEY_V2 = `${getLearnerWorkspaceStaticConfig().appName}.ide.workspace.v2`;
 export const STORAGE_KEY_V1 = `${getLearnerWorkspaceStaticConfig().appName}.ide.workspace.v1`;
@@ -400,56 +404,110 @@ function loadLegacyV2FromLocalStorage(
     }
 }
 
-function saveLegacyV2ToLocalStorage(storageKey: string, ws: WorkspaceStateV2) {
-    try {
-        localStorage.setItem(storageKey, JSON.stringify(ws));
-    } catch {}
+function saveLegacyV2ToLocalStorage(storageKey: string, ws: WorkspaceStateV2, savedAt: number) {
+    // If both storage backends fail the caller must know a draft is at risk.
+    // One atomic key avoids a successfully written fallback with a missing timestamp.
+    localStorage.setItem(storageKey, JSON.stringify({...ws, __zoeFallbackSavedAt: savedAt}));
 }
 
 function removeLegacyV2FromLocalStorage(storageKey: string) {
     try {
         localStorage.removeItem(storageKey);
+        localStorage.removeItem(`${storageKey}:fallback-saved-at`);
     } catch {}
+}
+
+/** Synchronous, best-effort checkpoint used only during page lifecycle exit.
+ * Large/binary workspaces continue to rely on the ordered IndexedDB save.
+ */
+export function checkpointV2ForUnload(key: string, ws: WorkspaceStateV2) {
+    const payload = encodeEmergencyDraft(ws, Date.now());
+    if (!payload) return false;
+    try {
+        localStorage.setItem(emergencyDraftKey(key), payload);
+        return true;
+    } catch { return false; }
+}
+
+function readEmergencyDraft(key: string) {
+    try {return parseEmergencyDraft(localStorage.getItem(emergencyDraftKey(key)));}
+    catch {return null;}
+}
+
+function clearEmergencyIfCovered(key: string, timestamp: number, workspace: WorkspaceStateV2) {
+    const emergency = readEmergencyDraft(key);
+    if (!emergency) return;
+    if (emergency.savedAt < timestamp ||
+        (emergency.savedAt === timestamp && JSON.stringify(emergency.workspace) === JSON.stringify(workspace))) {
+        try { localStorage.removeItem(emergencyDraftKey(key)); } catch {}
+    }
 }
 
 export async function loadV2(
     storageKey: string,
     fallbackLanguage: WorkspaceLanguage = "python",
 ): Promise<WorkspaceStateV2 | null> {
-    try {
-        const fromIdb = await getWorkspaceBody(storageKey);
-        if (fromIdb) {
-            return repairWorkspaceStateV2(fromIdb, fallbackLanguage);
-        }
-    } catch {
-        // fall through to legacy
-    }
+    let idbRecord: Awaited<ReturnType<typeof getWorkspaceBodyRecord>> = null;
+    try { idbRecord = await getWorkspaceBodyRecord(storageKey); }
+    catch { /* IndexedDB unavailable; recover from local fallback */ }
 
+    const emergency = readEmergencyDraft(storageKey);
     const legacy = loadLegacyV2FromLocalStorage(storageKey, fallbackLanguage);
-    if (!legacy) return null;
-
+    let legacySavedAt = 0;
     try {
-        await putWorkspaceBody(storageKey, legacy);
-        removeLegacyV2FromLocalStorage(storageKey);
-    } catch {
-        // keep legacy copy if IDB write fails
+        const raw = localStorage.getItem(storageKey);
+        legacySavedAt = raw ? Number(JSON.parse(raw)?.__zoeFallbackSavedAt) || 0 : 0;
+    } catch {}
+    const legacyIsLatest = !!legacy && legacySavedAt > 0 &&
+        legacySavedAt >= (idbRecord?.savedAt ?? 0) &&
+        legacySavedAt >= (emergency?.savedAt ?? 0);
+    if (legacyIsLatest && legacy) {
+        try {
+            await putWorkspaceBody(storageKey, legacy, legacySavedAt);
+            removeLegacyV2FromLocalStorage(storageKey);
+            clearEmergencyIfCovered(storageKey, legacySavedAt, legacy);
+        } catch { /* keep the fallback if IndexedDB remains unavailable */ }
+        return legacy;
+    }
+    if (shouldRestoreEmergencyDraft(emergency, idbRecord?.savedAt ?? null, idbRecord?.workspace) && emergency) {
+        // A last-moment checkpoint is newer than the last committed IDB record.
+        const recovered = repairWorkspaceStateV2(emergency.workspace, fallbackLanguage);
+        try {
+            await putWorkspaceBody(storageKey, recovered, emergency.savedAt);
+            clearEmergencyIfCovered(storageKey, emergency.savedAt, recovered);
+        } catch { /* keep checkpoint intact for the next reload */ }
+        return recovered;
+    }
+    if (idbRecord) {
+        clearEmergencyIfCovered(storageKey, idbRecord.savedAt, idbRecord.workspace);
     }
 
-    return legacy;
+    if (idbRecord) {
+        return repairWorkspaceStateV2(idbRecord.workspace, fallbackLanguage);
+    }
+    if (legacy) {
+        try {
+            await putWorkspaceBody(storageKey, legacy);
+            removeLegacyV2FromLocalStorage(storageKey);
+        } catch { /* keep legacy fallback */ }
+        return legacy;
+    }
+    return null;
 }
 
 export async function saveV2(storageKey: string, ws: WorkspaceStateV2) {
     const safe = repairWorkspaceStateV2(ws, ws.language);
-
+    const requestAt = Date.now();
     try {
-        await putWorkspaceBody(storageKey, safe);
+        await putWorkspaceBody(storageKey, safe, requestAt);
         removeLegacyV2FromLocalStorage(storageKey);
+        clearEmergencyIfCovered(storageKey, requestAt, safe);
         return;
     } catch {
-        // fallback for browsers where IDB fails unexpectedly
+        // IndexedDB failed; preserve this draft in localStorage if possible.
     }
-
-    saveLegacyV2ToLocalStorage(storageKey, safe);
+    // If both stores fail, reject rather than claiming the draft was saved.
+    saveLegacyV2ToLocalStorage(storageKey, safe, requestAt);
 }
 
 export async function deleteV2(storageKey: string) {
@@ -458,6 +516,7 @@ export async function deleteV2(storageKey: string) {
     } catch {}
 
     removeLegacyV2FromLocalStorage(storageKey);
+    try {localStorage.removeItem(emergencyDraftKey(storageKey));} catch {}
 }
 
 function buildCodeWorkspaceFromV1(

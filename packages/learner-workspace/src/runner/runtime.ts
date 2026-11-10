@@ -122,9 +122,23 @@ export type WorkspaceExplorerIntentV6 =
     | Readonly<{kind:"move_file";path:string;destinationPath:string}>
     | Readonly<{kind:"move_directory";path:string;destinationPath:string}>
     | Readonly<{kind:"delete_file";path:string}>
+    /** Create an empty text file only if the authoritative Runner path is absent. */
+    | Readonly<{kind:"create_file";path:string}>
+    /** Internal history-only CAS replacement of an existing file's bytes. */
+    | Readonly<{kind:"replace_file";path:string;entry:WorkspaceSyncEntry}>
+    /** Acknowledges pending editor edits through the existing V6 CAS writer. */
+    | Readonly<{kind:"sync_editor";path:""}>
+    /** Internal Undo only; writes exact saved bytes with a CAS-absent precondition. */
+    | Readonly<{kind:"restore_file";path:string;entry:WorkspaceSyncEntry}>
+    /** Import a local file only if it is absent on the authoritative Runner. */
+    | Readonly<{kind:"import_file";path:string;entry:WorkspaceSyncEntry}>
     | Readonly<{kind:"trash_directory";path:string}>
      | Readonly<{kind:"restore_directory";path:string;trashId:string}>
-     | Readonly<{kind:"list_trash";path:""}>;
+     | Readonly<{kind:"list_trash";path:""}>
+     /** Read-only export of the current authenticated terminal workspace after CAS sync. */
+     | Readonly<{kind:"export_snapshot";path:""}>
+     /** Internal history verification: never pushes browser state to the Runner. */
+     | Readonly<{kind:"history_snapshot";path:""}>;
 export type WorkspaceExplorerResultV6 = Readonly<{
      state:"reconciliation_required" | "read_only";
      kind: WorkspaceExplorerIntentV6["kind"];
@@ -132,6 +146,13 @@ export type WorkspaceExplorerResultV6 = Readonly<{
     destinationPath?:string;
     trashId?:string;
     entries?: ReadonlyArray<Readonly<{originalPath:string;trashId:string}>>;
+    files?: WorkspaceSyncEntry[];
+    /** Only for acknowledged editor changes; each before/after is CAS committed. */
+    committed?: ReadonlyArray<Readonly<{
+        path:string;
+        before:WorkspaceSyncEntry|null;
+        after:WorkspaceSyncEntry|null;
+    }>>;
 }>;
 export type WorkspaceExplorerExecutorV6 =
     (intent: WorkspaceExplorerIntentV6) => Promise<WorkspaceExplorerResultV6>;
@@ -145,7 +166,7 @@ export type WorkspaceTerminalConfig = {
      */
     fileSyncMode?: "v5" | "v6";
     /** Only an active, owned, V6 terminal may publish an executor. */
-    onV6ExplorerExecutorReady?: (executor: WorkspaceExplorerExecutorV6 | null) => void;
+    onV6ExplorerExecutorReady?: (executor: WorkspaceExplorerExecutorV6 | null, sessionId?: string | null) => void;
     projectId?: string;
     cwd?: string;
     terminalSessionScope?: TerminalSessionScope;

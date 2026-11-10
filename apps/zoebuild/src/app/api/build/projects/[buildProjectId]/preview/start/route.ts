@@ -78,8 +78,21 @@ export async function POST(
     // request or browser connection open during a multi-minute install.
     const runnerOperationStartedAt = performance.now();
     const operation = await (async () => {
-      const actorKey = await requireRunnerActorKey(userId);
-      return submitTrustedReactPreviewOperationAtRunner({ actorKey, request });
+      const actorIdentityStartedAt = performance.now();
+      const actorKey = await requireRunnerActorKey(userId).finally(() => {
+        timing.push({
+          name: "actor_identity",
+          durationMs: performance.now() - actorIdentityStartedAt,
+        });
+      });
+
+      const runnerSubmissionStartedAt = performance.now();
+      return submitTrustedReactPreviewOperationAtRunner({ actorKey, request }).finally(() => {
+        timing.push({
+          name: "runner_submit",
+          durationMs: performance.now() - runnerSubmissionStartedAt,
+        });
+      });
     })().finally(() => {
       timing.push({name:"runner_operation",durationMs:performance.now()-runnerOperationStartedAt});
     });

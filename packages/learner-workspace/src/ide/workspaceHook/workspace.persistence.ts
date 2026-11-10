@@ -5,6 +5,7 @@ import type { DraftStorageMode, WorkspaceMeta } from "@zoeskoul/learner-workspac
 import {
   loadV2,
   saveV2,
+  checkpointV2ForUnload,
   storageKeyForWorkspace,
   legacyStorageKeyForWorkspace,
   tryMigrateV1,
@@ -58,6 +59,8 @@ export async function loadWorkspaceForLanguage(args: {
   scopeKey?: string | null;
   exerciseStateKey?: string | null;
   localWorkspaceId?: string | null;
+  /** Candidate pre-V6 or inherited tab keys. Never delete or overwrite them. */
+  legacyDraftBaseStorageKeys?: readonly string[];
 }) {
   if (args.draftStorageMode !== "local") return null;
 
@@ -73,6 +76,31 @@ export async function loadWorkspaceForLanguage(args: {
 
   const loaded = await loadV2(key, args.next);
   if (loaded) return loaded;
+
+  // On first V6 tab load, copy—not move—the last V5/shared draft (or the
+  // opener tab's draft when sessionStorage was duplicated). Once written, all
+  // later saves use only the reserved tab key. A failed copy leaves the original.
+  for (const sourceBase of args.legacyDraftBaseStorageKeys ?? []) {
+    for (const sourceKey of [
+      storageKeyForWorkspace({
+        baseKey: sourceBase, language: args.next,
+        actorKey: args.actorKey, projectId: args.projectId,
+        scopeKey: args.scopeKey, exerciseStateKey: args.exerciseStateKey,
+        localWorkspaceId: args.localWorkspaceId,
+      }),
+      legacyStorageKeyForWorkspace({
+        baseKey: sourceBase, language: args.next,
+        actorKey: args.actorKey, projectId: args.projectId,
+        scopeKey: args.scopeKey, localWorkspaceId: args.localWorkspaceId,
+      }),
+    ]) {
+      if (sourceKey === key) continue;
+      const previous = await loadV2(sourceKey, args.next);
+      if (!previous) continue;
+      await saveV2(key, previous);
+      return previous;
+    }
+  }
 
   const legacyKey = legacyStorageKeyForWorkspace({
     baseKey: args.baseStorageKey,
@@ -102,7 +130,8 @@ export function saveWorkspaceForLanguage(args: {
   scopeKey?: string | null;
   exerciseStateKey?: string | null;
   localWorkspaceId?: string | null;
-}) {
+  urgency?: "unload";
+}): Promise<void> {
   const {
     baseStorageKey,
     ws,
@@ -114,8 +143,8 @@ export function saveWorkspaceForLanguage(args: {
     localWorkspaceId,
   } = args;
 
-  if (!ws) return;
-  if (draftStorageMode !== "local") return;
+  if (!ws) return Promise.resolve();
+  if (draftStorageMode !== "local") return Promise.resolve();
 
   const key = storageKeyForWorkspace({
     baseKey: baseStorageKey,
@@ -136,7 +165,8 @@ export function saveWorkspaceForLanguage(args: {
     localWorkspaceId: localWorkspaceId ?? null,
   });
 
-  void saveV2(key, ws);
+  if (args.urgency === "unload") checkpointV2ForUnload(key, ws);
+  return saveV2(key, ws);
 }
 
 export function tryMigrateInitialWorkspace(args: {

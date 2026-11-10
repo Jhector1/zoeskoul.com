@@ -354,3 +354,43 @@ export type PublicChallengeSocialPublishResponse = {
   challengeCode: string;
   results: PublicChallengeSocialPublishResult[];
 };
+
+/** Learning discovery Admin UI contract; curriculum is authored in manifests. */
+export type LearningVisibilityKind = "catalog" | "course";
+export type LearningVisibilityItem = {
+  kind: LearningVisibilityKind;
+  slug: string;
+  title: string;
+  status: string;
+  hidden: boolean;
+  seeded: boolean;
+};
+export type LearningReconciliationObservation = {
+  kind: "catalog" | "course" | "override";
+  slug: string;
+  code: string;
+  message: string;
+};
+export type LearningVisibilityAdminResponse = {
+  items: LearningVisibilityItem[];
+  audit: {
+    issues: LearningReconciliationObservation[];
+    summary: {
+      manifestCatalogs: number;
+      manifestCourses: number;
+      storedCatalogs: number;
+      storedCourses: number;
+      unseededActiveCourses: number;
+      orphanedOverrides: number;
+    };
+  };
+};
+export type LearningVisibilityChangeRequest = {
+  kind: LearningVisibilityKind;
+  slug: string;
+  hidden: boolean;
+};
+export type LearningVisibilityChangeResponse = {
+  ok: true;
+  visibility: LearningVisibilityChangeRequest;
+};

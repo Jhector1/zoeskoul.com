@@ -5,6 +5,7 @@ import type { AdminAppAccess } from "@/app/AdminAccessGate";
 import { AdminLink } from "@/app/navigation";
 import { resolveAdminRoute } from "@/app/adminRoutes";
 import { CurriculumDraftsPage } from "@/features/curriculum/CurriculumDraftsPage";
+import { LearningVisibilityPage } from "@/features/curriculum/LearningVisibilityPage";
 import { AdminDashboard } from "@/features/dashboard/AdminDashboard";
 import { LearnerDetail } from "@/features/learners/LearnerDetail";
 import { BillingPromotionManager } from "@/features/promotions/BillingPromotionManager";
@@ -21,6 +22,7 @@ const navItems = [
   { href: "/", label: "Overview", route: "overview" },
   { href: "/questions", label: "Questions", route: "questions" },
   { href: "/curriculum", label: "Curriculum", route: "curriculum" },
+  { href: "/learning-visibility", label: "Course visibility", route: "learning-visibility" },
   { href: "/public-challenges", label: "Public Challenges", route: "public-challenges" },
   { href: "/promotions", label: "Promotions", route: "promotions" },
   { href: "/campaigns", label: "Campaigns", route: "campaigns" },
@@ -149,6 +151,10 @@ export function AdminShell(props: {
 
         {route.kind === "curriculum" ? (
           <CurriculumDraftsPage />
+        ) : null}
+
+        {route.kind === "learning-visibility" ? (
+          <LearningVisibilityPage apiOrigin={props.apiOrigin} />
         ) : null}
 
         {route.kind === "public-challenges" ? (

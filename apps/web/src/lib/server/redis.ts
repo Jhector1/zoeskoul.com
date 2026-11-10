@@ -1,22 +1,15 @@
 import "server-only";
 
 import Redis from "ioredis";
+import { selectPtyRedisUrl } from "./ptyRedisUrl";
 
 const REDIS_UNAVAILABLE_MESSAGE =
-    "Redis is unavailable. Start Redis and set REDIS_URL, then restart the app.";
+    "Redis is unavailable. Start Redis and set PTY_REDIS_URL, then restart the app.";
 
 const globalForRedis = globalThis as typeof globalThis & {
     __zoeskoulRedis?: Redis;
     __zoeskoulRedisReadyPromise?: Promise<Redis> | null;
 };
-
-function getRedisUrl() {
-    return (
-        process.env.PTY_REDIS_URL?.trim() ||
-        process.env.REDIS_URL?.trim() ||
-        ""
-    );
-}
 
 function friendlyRedisError(error: unknown) {
     const message =
@@ -48,13 +41,7 @@ export function getServerRedis(): Redis {
     const existing = globalForRedis.__zoeskoulRedis;
     if (existing) return existing;
 
-    const url = getRedisUrl();
-
-    if (!url) {
-        throw new Error(
-            "Missing REDIS_URL or PTY_REDIS_URL. Redis is required for production PTY session leases.",
-        );
-    }
+    const url = selectPtyRedisUrl();
 
     const redis = new Redis(url, {
         lazyConnect: true,

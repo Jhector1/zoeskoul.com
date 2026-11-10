@@ -234,6 +234,7 @@ export default function XtermTerminal(props: {
     const onInactiveInputAttemptRef = useRef(onInactiveInputAttempt);
     const inputQueueRef = useRef<Promise<void>>(Promise.resolve());
     const [terminalOpenEpoch, setTerminalOpenEpoch] = React.useState(0);
+    const [commandSyncError, setCommandSyncError] = React.useState<string | null>(null);
 
     const isCurrentTerminalUsable = useCallback((term: XTerm | null): term is XTerm => {
         if (!term) return false;
@@ -313,7 +314,13 @@ export default function XtermTerminal(props: {
                 continue;
             }
 
-            await onBeforeSubmitEnterRef.current?.();
+            try {
+                await onBeforeSubmitEnterRef.current?.();
+            } catch {
+                setCommandSyncError("Command was not sent because workspace synchronization failed. Your editor draft is preserved; review the terminal synchronization warning before retrying.");
+                return false;
+            }
+            setCommandSyncError(null);
             onSendDataRef.current(part.value);
             await onAfterSubmitEnterRef.current?.();
         }
@@ -342,7 +349,13 @@ export default function XtermTerminal(props: {
 
             for (const part of parts) {
                 if (part.kind !== "enter") continue;
-                await onBeforeSubmitEnterRef.current?.();
+                try {
+                    await onBeforeSubmitEnterRef.current?.();
+                } catch {
+                    setCommandSyncError("Workspace synchronization failed; command not submitted. Review the terminal warning before retrying.");
+                    return false;
+                }
+                setCommandSyncError(null);
                 await onAfterSubmitEnterRef.current?.();
             }
 
@@ -557,7 +570,13 @@ export default function XtermTerminal(props: {
                                         continue;
                                     }
 
-                                    await onBeforeSubmitEnterRef.current?.();
+                                    try {
+                                        await onBeforeSubmitEnterRef.current?.();
+                                    } catch {
+                                        setCommandSyncError("Command was not sent: workspace synchronization failed. Local edits were preserved; resolve the conflict before retrying.");
+                                        return;
+                                    }
+                                    setCommandSyncError(null);
                                     onSendDataRef.current(part.value);
                                     await onAfterSubmitEnterRef.current?.();
                                 }
@@ -789,6 +808,12 @@ export default function XtermTerminal(props: {
                 ].join(" ")}
                 data-testid="interactive-terminal-panel"
             >
+                {commandSyncError ? (
+                    <div role="alert" data-testid="interactive-terminal-sync-error"
+                        className="mx-2 mb-2 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-950 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-100">
+                        {commandSyncError}
+                    </div>
+                ) : null}
                 {recoveryText ? (
                     <div
                         className={[

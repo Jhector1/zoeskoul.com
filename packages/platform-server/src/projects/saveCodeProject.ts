@@ -35,6 +35,13 @@ export class ProjectVersionConflictError extends Error {
     }
 }
 
+export class ProjectCreationIntentConflictError extends Error {
+    readonly code = "CREATE_REQUEST_REUSED" as const;
+    constructor() {
+        super("This project creation request was already used with different content. Your local draft was preserved.");
+    }
+}
+
 export type SaveCodeProjectInput = {
     projectId?: string;
     ownerId: string;
@@ -63,6 +70,7 @@ export type SaveCodeProjectInput = {
     baseVersion?: number | null;
     clientInstanceId?: string | null;
     clientDraftUpdatedAt?: string | null;
+    creationRequestKey?: string | null;
 };
 
 function hashSnapshot(value: unknown) {
@@ -168,6 +176,22 @@ async function saveCodeProjectWithClient(
         meta: input.meta,
     });
 
+
+        // Replays are read-only. Only the owner can recover an existing create,
+        // and the request body must match the original intent byte-for-byte.
+        if (!input.projectId && input.creationRequestKey) {
+            const prior = await tx.codeProject.findFirst({
+                where: { ownerId: input.ownerId, creationRequestKey: input.creationRequestKey },
+            });
+            if (prior) {
+                if (prior.creationRequestHash !== incomingHeadHash ||
+                    prior.archivedAt != null || prior.currentVersion !== 1 ||
+                    prior.workspaceHash !== workspaceHash) {
+                    throw new ProjectCreationIntentConflictError();
+                }
+                return {project: prior, changed: false, workspaceChanged: false, version: prior.currentVersion};
+            }
+        }
 
         const existing = input.projectId
             ? await tx.codeProject.findFirst({
@@ -278,18 +302,59 @@ async function saveCodeProjectWithClient(
             lastOpenedAt: new Date(),
         };
 
-        const project = existing
-            ? await tx.codeProject.update({
-                where: { id: existing.id },
+        // The version comparison above is only a preflight. Another browser tab
+        // can commit after our read, so the actual write MUST be guarded by the
+        // previously observed version in the same SQL UPDATE. PostgreSQL will
+        // re-evaluate this predicate after waiting for any concurrent row lock.
+        let project;
+        if (existing) {
+            const committed = await tx.codeProject.updateMany({
+                where: {
+                    id: existing.id,
+                    ownerId: input.ownerId,
+                    archivedAt: null,
+                    currentVersion: existing.currentVersion,
+                },
                 data: projectData,
-            })
-            : await tx.codeProject.create({
+            });
+            if (committed.count !== 1) {
+                const latest = await tx.codeProject.findFirst({
+                    where: {
+                        id: existing.id,
+                        ownerId: input.ownerId,
+                        archivedAt: null,
+                    },
+                    select: {
+                        id: true,
+                        currentVersion: true,
+                        updatedAt: true,
+                        title: true,
+                    },
+                });
+                if (!latest) throw new Error("Project not found or not owned by user.");
+                throw new ProjectVersionConflictError({
+                    projectId: latest.id,
+                    serverVersion: latest.currentVersion,
+                    serverUpdatedAt: latest.updatedAt,
+                    title: latest.title,
+                });
+            }
+            const committedProject = await tx.codeProject.findFirst({
+                where: { id: existing.id, ownerId: input.ownerId, archivedAt: null },
+            });
+            if (!committedProject) throw new Error("Project not found after saving.");
+            project = committedProject;
+        } else {
+            project = await tx.codeProject.create({
                 data: {
                     ownerId: input.ownerId,
                     schemaVersion: 1,
                     ...projectData,
+                    creationRequestKey: input.creationRequestKey ?? null,
+                    creationRequestHash: input.creationRequestKey ? incomingHeadHash : null,
                 },
             });
+        }
 
         const shouldCreateRevision =
             !existing ||
@@ -336,7 +401,39 @@ export async function saveCodeProject(
     prisma: PrismaClient,
     input: SaveCodeProjectInput,
 ) {
-    return prisma.$transaction((tx) =>
-        saveCodeProjectInTransaction(tx, input),
-    );
+    try {
+        return await prisma.$transaction((tx) =>
+            saveCodeProjectInTransaction(tx, input),
+        );
+    } catch (error) {
+        // A second request can race the first and lose on the DB unique index.
+        // Resolve outside the aborted transaction; never mutate an existing row.
+        if (!input.projectId && input.creationRequestKey &&
+            (error as {code?: string})?.code === "P2002") {
+            const prior = await prisma.codeProject.findFirst({
+                where: {ownerId: input.ownerId, creationRequestKey: input.creationRequestKey},
+            });
+            if (prior) {
+                const incomingHash = buildHeadHash({
+                    title: input.title, description: input.description,
+                    language: input.language, scope: normalizeScope(input.scope),
+                    visibility: input.visibility, shareToken: input.shareToken,
+                    entryPath: input.entryPath, activePath: input.activePath,
+                    workspace: input.workspace, settings: input.settings, meta: input.meta,
+                });
+                const originalWorkspaceHash = buildWorkspaceHash({
+                    language: input.language, entryPath: input.entryPath,
+                    activePath: input.activePath, workspace: input.workspace,
+                    settings: input.settings,
+                });
+                if (prior.creationRequestHash !== incomingHash ||
+                    prior.archivedAt != null || prior.currentVersion !== 1 ||
+                    prior.workspaceHash !== originalWorkspaceHash) {
+                    throw new ProjectCreationIntentConflictError();
+                }
+                return {project: prior, changed: false, workspaceChanged: false, version: prior.currentVersion};
+            }
+        }
+        throw error;
+    }
 }

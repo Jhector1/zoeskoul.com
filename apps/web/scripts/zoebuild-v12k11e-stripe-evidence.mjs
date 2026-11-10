@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /** V12K11E: human-driven real Stripe TEST evidence audit. GET only; Postgres READ ONLY. */
 import {evaluateStripeCreditEvidence, StripeEvidenceError} from '../../../packages/db/scripts/zoebuild-v12k11e-stripe-evidence-policy.mjs';
+import {selectedCanonicalDatabaseUrl} from '../../../packages/db/scripts/canonicalDatabaseUrl.mjs';
 
 const args = Object.fromEntries(process.argv.slice(2).map(s => {
   const match = /^--([a-z-]+)(?:=(.*))?$/.exec(s);
@@ -15,14 +16,12 @@ function preflight() {
      !/^price_[A-Za-z0-9_]+$/.test(process.env.ZOEBUILD_AI_CREDIT_500_TEST_PRICE_ID??'') ||
      process.env.ZOEBUILD_AI_CREDIT_FUNDING_MODE !== 'sandbox-only' ||
      !/^whsec_[A-Za-z0-9_]{12,}$/.test(process.env.STRIPE_WEBHOOK_SECRET??'')) fail('TEST_STRIPE_CONFIG_INCOMPLETE');
-  const raw = process.env.DATABASE_URL;
+  let raw;
+  try { raw = selectedCanonicalDatabaseUrl(); } catch { fail("DB_URL_OVERRIDE_CONFLICT"); }
   let url;
   try {url = new URL(raw);} catch {fail('DB_URL_UNAVAILABLE');}
   if(!['localhost','127.0.0.1'].includes(url.hostname) ||
     decodeURIComponent(url.pathname.slice(1)) !== 'learnoir_db') fail('DB_TARGET_NOT_APPROVED');
-  for(const name of ['WEB_DATABASE_URL','ADMIN_DATABASE_URL']) {
-    if(process.env[name] && process.env[name]!==raw) fail('DB_URL_OVERRIDE_CONFLICT');
-  }
   if(process.env.ZOEBUILD_AI_CREDITS_ENFORCEMENT==='required') fail('PAID_CUSTOMER_METERING_ENABLED_STOP');
   return {priceId:process.env.ZOEBUILD_AI_CREDIT_500_TEST_PRICE_ID};
 }

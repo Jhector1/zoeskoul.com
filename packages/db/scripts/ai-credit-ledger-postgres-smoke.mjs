@@ -6,16 +6,14 @@
  */
 import { randomUUID } from 'node:crypto';
 import pg from 'pg';
+import { selectedCanonicalDatabaseUrl } from './canonicalDatabaseUrl.mjs';
 
 if (process.env.ZOEBUILD_AI_CREDIT_PG_SMOKE !== 'ROLLBACK_ONLY') {
   throw new Error('REFUSED: ZOEBUILD_AI_CREDIT_PG_SMOKE=ROLLBACK_ONLY is required');
 }
-if (!process.env.DATABASE_URL) throw new Error('REFUSED: DATABASE_URL is missing');
-if (process.env.ADMIN_DATABASE_URL || process.env.WEB_DATABASE_URL) {
-  // Direct pg uses only DATABASE_URL, regardless of Prisma's runtime preference.
-  console.log('INFO: smoke test uses DATABASE_URL only (not ADMIN_DATABASE_URL / WEB_DATABASE_URL)');
-}
-const database = new URL(process.env.DATABASE_URL);
+const raw = selectedCanonicalDatabaseUrl();
+if (!raw) throw new Error('REFUSED: DATABASE_URL is missing');
+const database = new URL(raw);
 if (!['localhost', '127.0.0.1'].includes(database.hostname) ||
     database.port !== '5432' ||
     decodeURIComponent(database.pathname) !== '/learnoir_db' ||
@@ -26,7 +24,7 @@ if (database.searchParams.get('schema') && database.searchParams.get('schema') !
   throw new Error('REFUSED: expected public schema');
 }
 
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL, max: 1,
+const pool = new pg.Pool({ connectionString: raw, max: 1,
   connectionTimeoutMillis: 5000 });
 const userId = `e16c3b_smoke_${randomUUID()}`;
 let client;

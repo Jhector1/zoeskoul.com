@@ -15,6 +15,7 @@ import {
     type SubjectStateActor,
 } from "@/lib/subjects/server/subjectVisibility";
 import type { SubjectCardPresentation } from "@/lib/subjects/subjectCardPresentation";
+import {getHiddenDiscovery} from "@/lib/subjects/server/learningDiscoveryVisibility";
 import {
     selectCatalogSubjectsForMode,
     selectPublicCatalogSubjects,
@@ -125,10 +126,10 @@ export async function selectCatalogSubjectsForActor<
     const access = actorAccess ?? (await getCatalogActorAccess());
     const subjectsWithState = await withSubjectCardState(subjects);
 
-    return selectHydratedCatalogSubjectsForActor(
-        subjectsWithState,
-        access,
-    );
+    const visible = selectHydratedCatalogSubjectsForActor(subjectsWithState, access);
+    if (access.mode === "admin") return visible;
+    const hidden = await getHiddenDiscovery();
+    return visible.filter(subject => !hidden.courses.has(subject.slug));
 }
 
 export async function getAvailableVisibleSubjectCardsForActor(): Promise<
@@ -176,9 +177,10 @@ export async function getAvailableVisibleCatalogsForActor(
 ): Promise<VisibleCatalog[]> {
     const actorAccess = await getCatalogActorAccess(identity);
 
+    const hidden = actorAccess.mode === "learner" ? await getHiddenDiscovery() : null;
     const rawCatalogs = Object.values(await getResolvedCatalogMap()).filter(
-        (catalog) =>
-            actorAccess.canSeeAllCatalogSubjects || catalog.status !== "disabled",
+        (catalog) => actorAccess.canSeeAllCatalogSubjects ||
+            (catalog.status !== "disabled" && !hidden?.catalogs.has(catalog.slug)),
     );
 
     const allCatalogSubjects = rawCatalogs.flatMap(
@@ -203,11 +205,8 @@ export async function getAvailableVisibleCatalogsForActor(
 
             subjectOffset = endOffset;
 
-            const subjects =
-                selectHydratedCatalogSubjectsForActor(
-                    catalogSubjectsWithState,
-                    actorAccess,
-                );
+            const selected = selectHydratedCatalogSubjectsForActor(catalogSubjectsWithState, actorAccess);
+            const subjects = hidden ? selected.filter(subject => !hidden.courses.has(subject.slug)) : selected;
 
             return {
                 ...catalog,
@@ -238,8 +237,10 @@ export async function getAvailableVisibleCatalogForActor(
         return null;
     }
 
-    if (catalog.status === "disabled" && !actorAccess.canSeeAllCatalogSubjects) {
-        return null;
+    if (!actorAccess.canSeeAllCatalogSubjects) {
+        if (catalog.status === "disabled") return null;
+        const hidden = await getHiddenDiscovery();
+        if (hidden.catalogs.has(catalogSlug)) return null;
     }
 
     const subjects = await selectCatalogSubjectsForActor(

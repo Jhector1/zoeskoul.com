@@ -1,3 +1,4 @@
+import { selectedCanonicalDatabaseUrl } from "./canonicalDatabaseUrl.mjs";
 /**
  * Read-only diagnostics for V12J.6D Builder acceptance REVIEW: no provider or DB mutation.
  * Refuses non-dedicated, non-student or non-matching Stripe customer before fetching records.
@@ -139,7 +140,7 @@ function safeError(e) {return e instanceof LifecycleRefusal?e.message:'READ_ONLY
 async function main() {
   if(process.argv.length!==3||process.argv[2]!=='--diagnose') throw new LifecycleRefusal('USAGE_DIAGNOSE_REQUIRED');
   validateCheckArgs(process.env,args);
-  const uri=process.env.ADMIN_DATABASE_URL||process.env.WEB_DATABASE_URL||process.env.DATABASE_URL;
+  const uri=selectedCanonicalDatabaseUrl();
   let url;
   try{url=new URL(uri);}catch{throw new LifecycleRefusal('DATABASE_URL_MISSING_OR_INVALID');}
   if(!['postgres:','postgresql:'].includes(url.protocol)||!url.hostname||url.pathname==='/')

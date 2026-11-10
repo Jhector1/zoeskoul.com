@@ -154,8 +154,6 @@ describe.runIf(enabled)("V12J.5A signed webhook -> real PostgreSQL subscription 
     if (!candidate || !checked.ok) throw Error("BILLING_ACCEPTANCE_PREFLIGHT_FAILED");
 
     // Never initialize app Prisma until the exact database and role are approved.
-    process.env.ADMIN_DATABASE_URL = candidate;
-    process.env.WEB_DATABASE_URL = candidate;
     process.env.DATABASE_URL = candidate;
     const { prisma } = await import("@/lib/prisma");
     db = prisma;

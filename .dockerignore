@@ -83,3 +83,12 @@ zoe-infra/redis-data
 # Keep trusted runner source directories named build in source control/context.
 !apps/runner/src/services/build/
 !apps/runner/src/services/build/**
+
+# BEGIN ZOESKOUL WAVE3D8 - private dotenv paths (last-match guard)
+**/.env
+**/.env.*
+**/.envrc
+# Keep existing root-level example-template exceptions
+!.env.example
+!.env*.example
+# END ZOESKOUL WAVE3D8

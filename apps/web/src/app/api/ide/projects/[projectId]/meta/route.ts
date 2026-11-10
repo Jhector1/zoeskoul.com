@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { checkIdeCapability } from "@/lib/access/ideCapabilityServer";
 import { getActor } from "@/lib/practice/actor";
+import { enforceSameOriginPost } from "@/lib/practice/api/shared/http";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -54,6 +55,9 @@ export async function PATCH(
     ctx: { params: Promise<{ projectId: string }> },
 ) {
     try {
+        if (!enforceSameOriginPost(req)) {
+            return jsonNoStore({ ok: false, error: "Forbidden." }, 403);
+        }
         const actor = await getActor();
 
         const gate = await checkIdeCapability(prisma, {
@@ -76,7 +80,11 @@ export async function PATCH(
             );
         }
 
-        if (!actor.userId) {
+        // Snapshot the authenticated identity after checking it. Unlike a
+        // mutable object property, this local string remains narrowed inside
+        // the async database transaction closure below.
+        const ownerId = actor.userId;
+        if (!ownerId) {
             return jsonNoStore(
                 { ok: false, error: "Sign in required." },
                 401,
@@ -89,7 +97,7 @@ export async function PATCH(
         const existing = await prisma.codeProject.findFirst({
             where: {
                 id: projectId,
-                ownerId: actor.userId,
+                ownerId,
                 archivedAt: null,
             },
             select: {
@@ -153,23 +161,59 @@ export async function PATCH(
             });
         }
 
-        const updated = await prisma.codeProject.update({
-            where: { id: existing.id },
-            data: {
-                title: body.title,
-                ...(body.description !== undefined
-                    ? { description: body.description }
-                    : {}),
-                currentVersion: existing.currentVersion + 1,
-            },
-            select: {
-                id: true,
-                title: true,
-                description: true,
-                updatedAt: true,
-                currentVersion: true,
-            },
+        // A second tab may change this row after our preflight. Compare and
+        // increment atomically; never overwrite a newer project revision.
+        // Keep the conditional update and its returned revision within one
+        // database transaction. An unrelated save cannot race between the
+        // successful update and the metadata we acknowledge to the browser.
+        const outcome = await prisma.$transaction(async (tx) => {
+            const committed = await tx.codeProject.updateMany({
+                where: {
+                    id: existing.id,
+                    ownerId,
+                    archivedAt: null,
+                    currentVersion: existing.currentVersion,
+                },
+                data: {
+                    title: body.title,
+                    ...(body.description !== undefined
+                        ? { description: body.description }
+                        : {}),
+                    currentVersion: { increment: 1 },
+                },
+            });
+            const latest = await tx.codeProject.findFirst({
+                where: { id: existing.id, ownerId, archivedAt: null },
+                select: {
+                    id: true, title: true, description: true,
+                    updatedAt: true, currentVersion: true,
+                },
+            });
+            return {updated: committed.count === 1, project: latest};
         });
+        if (!outcome.project) return jsonNoStore({ ok: false, error: "Project not found." }, 404);
+        if (!outcome.updated) {
+            const latest = outcome.project;
+            return jsonNoStore({
+                ok: false,
+                code: "PROJECT_CONFLICT",
+                error: "A newer cloud version already exists.",
+                conflict: {
+                    projectId: latest.id,
+                    clientBaseVersion: body.baseVersion,
+                    serverVersion: latest.currentVersion,
+                    serverUpdatedAt: latest.updatedAt.toISOString(),
+                    title: latest.title,
+                },
+                project: {
+                    id: latest.id, title: latest.title,
+                    description: latest.description ?? null,
+                    updatedAt: latest.updatedAt.toISOString(),
+                    currentVersion: latest.currentVersion,
+                },
+            }, 409);
+        }
+        const updated = outcome.project;
 
         return jsonNoStore({
             ok: true,

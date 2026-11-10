@@ -2,7 +2,7 @@ import { buildRunnerHeaders } from "@zoeskoul/curriculum-runtime";
 
 function getRunnerBaseUrl() {
   const base =
-    process.env.RUNNER_BASE_URL?.trim() || process.env.RUNNER_URL?.trim();
+    process.env.RUNNER_BASE_URL?.trim();
   if (!base) {
     throw new Error("Missing RUNNER_BASE_URL");
   }
@@ -10,7 +10,7 @@ function getRunnerBaseUrl() {
   const normalized = base.replace(/\/+$/, "");
   if (!/^https?:\/\//i.test(normalized)) {
     throw new Error(
-      `RUNNER_BASE_URL must start with http:// or https://. Got: ${normalized}`,
+      "RUNNER_BASE_URL must start with http:// or https://",
     );
   }
 

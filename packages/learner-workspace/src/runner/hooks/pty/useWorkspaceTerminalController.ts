@@ -33,9 +33,13 @@ import {
 
 import { WorkspaceFileRevisionV6 } from "./workspaceFileRevisionV6";
 import { pushWorkspaceFileDeltaV6 } from "./workspaceFileDeltaSyncV6";
+import { V6AcknowledgedEditJournal } from "./v6AcknowledgedEditJournal";
+import { verifyV6StartupSnapshot } from "./v6StartupSnapshotGuard";
 import { WorkspaceStructuralActionsV6 } from "./workspaceFileStructuralActionsV6";
 import { WorkspaceFileV6Error } from "./workspaceFileClientV6";
+import { restoreDeletedWorkspaceFileV6, replaceHistoryWorkspaceFileV6 } from "./workspaceFileHistoryRestoreV6";
 import { isBinaryWorkspaceEntry } from "@zoeskoul/learner-workspace/lib/ide/workspaceFileContent";
+import { assertWorkspaceRelativePath, resolveWorkspaceFileCapability } from "@zoeskoul/code-contracts";
 
 import { useRunSession } from "@zoeskoul/learner-workspace/runner/useRunSession";
 import {
@@ -498,6 +502,7 @@ function normalizeGitSafeDirectory(value: string): string | null {
 
 export function resolveWorkspaceTerminalStartupCwd(args: {
     cwd?: string | null;
+    enableLsColors?: boolean;
     bootstrap?: WorkspaceTerminalConfig["bootstrap"];
 }): string | null {
     const cwd = normalizePath(args.cwd ?? "") || "/workspace";
@@ -509,7 +514,8 @@ export function resolveWorkspaceTerminalStartupCwd(args: {
             String(args.bootstrap?.setupScriptPath ?? ""),
         ) != null;
 
-    return cwd === "/workspace" && !hasGitTrustBootstrap && !hasWorkspaceSetup
+    return cwd === "/workspace" && !hasGitTrustBootstrap && !hasWorkspaceSetup &&
+        !args.enableLsColors
         ? null
         : cwd;
 }
@@ -537,6 +543,7 @@ function resolveGitSafeDirectoriesForShell(args: {
 
 export function buildWorkspaceTerminalStartupInput(args: {
     cwd: string;
+    enableLsColors?: boolean;
     bootstrap?: WorkspaceTerminalConfig["bootstrap"];
     markerParts: [string, string, string];
 }): string {
@@ -561,6 +568,11 @@ export function buildWorkspaceTerminalStartupInput(args: {
                 ]),
             ]
             : [];
+    // Only the interactive GNU ls command changes: no profile files, PATH
+    // overrides, or colorization of script/non-interactive command output.
+    const lsColorStartup = args.enableLsColors
+        ? "if command ls --color=auto -d / >/dev/null 2>&1; then alias ls='ls --color=auto'; fi"
+        : null;
     const [markerPartA, markerPartB, markerPartC] = args.markerParts;
     const successMarkerCommand = `printf '%s%s%s\\n' ${shellQuotePosix(markerPartA)} ${shellQuotePosix(markerPartB)} ${shellQuotePosix(markerPartC)}`;
     const failureMarkerCommand = `printf '%s%s%s%s\\n' ${shellQuotePosix(`${STARTUP_CWD_FAILED_MARKER}_`)} ${shellQuotePosix(markerPartA)} ${shellQuotePosix(markerPartB)} ${shellQuotePosix(markerPartC)}`;
@@ -569,6 +581,7 @@ export function buildWorkspaceTerminalStartupInput(args: {
         return [
             `cd -- ${shellQuotePosix(cwd)}`,
             "export PS1='[zoeskoul]\\w\\$ '",
+            ...(lsColorStartup ? [lsColorStartup] : []),
             successMarkerCommand,
         ].join(" && ") + "\n";
     }
@@ -608,6 +621,7 @@ export function buildWorkspaceTerminalStartupInput(args: {
     const prepareInteractiveShell = [
         `cd -- ${shellQuotePosix(cwd)}`,
         "export PS1='[zoeskoul]\\w\\$ '",
+        ...(lsColorStartup ? [lsColorStartup] : []),
     ].join(" && ");
     const startupScript = [
         bootstrapEnvironment,
@@ -989,8 +1003,15 @@ export function useWorkspaceTerminalController(
         coordinator: WorkspaceFileRevisionV6;
     } | null>(null);
     const v6PushInFlightRef = React.useRef<Promise<void> | null>(null);
+    // The history journal follows actual acknowledged CAS writes, not the
+    // editor snapshot captured before a read-only preflight. Enter, autosave,
+    // and export can all commit edits before the history debounce runs.
+    const v6CommittedEditsRef = React.useRef(new V6AcknowledgedEditJournal());
+
     const v6StructuralBusyRef = React.useRef(false);
     const v6StructuralNeedsReconcileRef = React.useRef(false);
+    // Session-start mismatch cannot be cleared by a later ordinary snapshot.
+    const v6StartupMismatchRef = React.useRef<string | null>(null);
     const v6StructuralSnapshotAllowedRef = React.useRef(false);
     const writerModeRef = React.useRef<{
         sessionId: string;
@@ -1016,6 +1037,7 @@ export function useWorkspaceTerminalController(
             previous.coordinator.dispose();
             v6RevisionRef.current = null;
         }
+        v6CommittedEditsRef.current.reset(sessionId);
     }, [sessionId]);
     const pushInFlightRef = React.useRef<Promise<boolean> | null>(null);
     const lastWorkspaceSyncErrorRef = React.useRef<string | null>(null);
@@ -1617,7 +1639,7 @@ export function useWorkspaceTerminalController(
             try {
                 assertSessionWriterMode(sessionId);
                 if (args.fileSyncMode === "v6" &&
-                    (v6StructuralBusyRef.current || v6StructuralNeedsReconcileRef.current)) {
+                    (v6StructuralBusyRef.current || v6StructuralNeedsReconcileRef.current || v6StartupMismatchRef.current !== null)) {
                     throw new WorkspaceFileV6Error("RECONCILIATION_REQUIRED", 409);
                 }
                 const visible = sortEntries(files).filter(
@@ -1639,29 +1661,47 @@ export function useWorkspaceTerminalController(
                         };
                     }
                     const coordinator = v6RevisionRef.current.coordinator;
-                    const run = pushWorkspaceFileDeltaV6({
-                        revision: coordinator,
-                        baseline: lastPushedEntriesRef.current,
-                        desired: visible,
-                        getLatestEntries: getWorkspaceEntries,
-                        onCommitted: (path, next) => {
-                            if (v6RevisionRef.current?.coordinator !== coordinator) {
-                                throw new Error("Terminal session changed during workspace save.");
+                    // A learner may type again during a READ-ONLY CAS preflight.
+                    // One fresh attempt is safe only when zero writes were
+                    // acknowledged. Never retry a transport failure, a remote
+                    // conflict, or a partially committed batch.
+                    for (let attempt = 0; attempt < 2; attempt++) {
+                        let acknowledged = false;
+                        const desired = attempt === 0 ? visible : sortEntries(
+                            getWorkspaceEntries(),
+                        ).filter(entry => !isHiddenHistoryEntry(entry));
+                        const run = pushWorkspaceFileDeltaV6({
+                            revision: coordinator,
+                            baseline: lastPushedEntriesRef.current,
+                            desired,
+                            getLatestEntries: getWorkspaceEntries,
+                            onCommitted: (path, next) => {
+                                if (v6RevisionRef.current?.coordinator !== coordinator) {
+                                    throw new Error("Terminal session changed during workspace save.");
+                                }
+                                acknowledged = true;
+                                const updated = new Map(
+                                    lastPushedEntriesRef.current.map((entry) => [entry.path, entry] as const),
+                                );
+                                const before = updated.get(path) ?? null;
+                                v6CommittedEditsRef.current.append(sessionId, {path, before, after: next});
+                                if (next) updated.set(path, next);
+                                else updated.delete(path);
+                                lastPushedEntriesRef.current = sortEntries([...updated.values()]);
+                            },
+                        });
+                        v6PushInFlightRef.current = run;
+                        try {
+                            await run;
+                            break;
+                        } catch (error) {
+                            if (attempt !== 0 || acknowledged ||
+                                !(error instanceof WorkspaceFileV6Error) ||
+                                error.code !== "LOCAL_DRAFT_CHANGED") throw error;
+                        } finally {
+                            if (v6PushInFlightRef.current === run) {
+                                v6PushInFlightRef.current = null;
                             }
-                            const updated = new Map(
-                                lastPushedEntriesRef.current.map((entry) => [entry.path, entry] as const),
-                            );
-                            if (next) updated.set(path, next);
-                            else updated.delete(path);
-                            lastPushedEntriesRef.current = sortEntries([...updated.values()]);
-                        },
-                    });
-                    v6PushInFlightRef.current = run;
-                    try {
-                        await run;
-                    } finally {
-                        if (v6PushInFlightRef.current === run) {
-                            v6PushInFlightRef.current = null;
                         }
                     }
                     lastWorkspaceSyncErrorRef.current = null;
@@ -1736,15 +1776,18 @@ export function useWorkspaceTerminalController(
         async (force = false): Promise<boolean> => {
             // Do not let two Enter/save handlers race and both send an obsolete
             // baseline. Read fresh editor entries after the earlier push settles.
-            if (pushInFlightRef.current) {
-                const priorOk = await pushInFlightRef.current;
-                if (!priorOk) return false;
-            }
-            const entries = getWorkspaceEntries();
-            if (!force && entriesEqual(entries, lastPushedEntriesRef.current)) {
-                return true;
-            }
-            const run = replaceFiles(entries);
+            // Claim the queue slot BEFORE awaiting a prior writer. Otherwise
+            // two waiters resume together, read the same baseline, and race.
+            const previous = pushInFlightRef.current;
+            const run = (async (): Promise<boolean> => {
+                if (previous && !await previous) return false;
+                if (sessionIdRef.current !== sessionId) return false;
+                const entries = getWorkspaceEntries();
+                if (!force && entriesEqual(entries, lastPushedEntriesRef.current)) {
+                    return true;
+                }
+                return replaceFiles(entries);
+            })();
             pushInFlightRef.current = run;
             try { return await run; }
             finally {
@@ -1754,7 +1797,9 @@ export function useWorkspaceTerminalController(
         [getWorkspaceEntries, replaceFiles],
     );
 
-    const pullSnapshotIntoWorkspace = React.useCallback(async (): Promise<boolean> => {
+    const pullSnapshotIntoWorkspace = React.useCallback(async (
+        onVerifiedSnapshot?: (files: WorkspaceSyncEntry[]) => void,
+    ): Promise<boolean> => {
         if (!sessionId || (v6StructuralBusyRef.current && !v6StructuralSnapshotAllowedRef.current)) return false;
         if (snapshotInFlightRef.current) return await snapshotInFlightRef.current;
 
@@ -1783,9 +1828,13 @@ export function useWorkspaceTerminalController(
             });
             // Advance the baseline only after the IDE accepts the snapshot.
             lastPushedEntriesRef.current = nextBaseline;
-            if (args.fileSyncMode === "v6" && dirtyUiPaths.size === 0) {
+            if (args.fileSyncMode === "v6" && dirtyUiPaths.size === 0 && !v6StartupMismatchRef.current) {
                 v6StructuralNeedsReconcileRef.current = false;
             }
+            // This is the exact authenticated Runner snapshot used for the
+            // successful reconciliation. History must not perform another
+            // export against a React tree that has not yet rendered the merge.
+            onVerifiedSnapshot?.(snapshot);
             return true;
         })();
 
@@ -1807,24 +1856,129 @@ export function useWorkspaceTerminalController(
     ]);
 
     const executeExplorerIntentV6 = React.useCallback<WorkspaceExplorerExecutorV6>(async (intent) => {
+        // Reading the session's recoverable trash never consumes a local draft
+        // and remains available while a failed mutation awaits reconciliation.
+        const isTrashList = intent.kind === "list_trash";
+        const isExport = intent.kind === "export_snapshot";
+        const isHistoryRead = intent.kind === "history_snapshot";
+        const isEditorSync = intent.kind === "sync_editor";
+        // A history/debounce or export is a barrier, not an independent writer.
+        // Wait for the already-queued save before inspecting its acknowledgements.
+        // Real conflicts still fail closed in the underlying CAS writer.
+        if ((isEditorSync || isExport) && args.fileSyncMode === "v6") {
+            const pendingPush = pushInFlightRef.current;
+            if (pendingPush && !await pendingPush) {
+                throw new WorkspaceFileV6Error("LOCAL_SYNC_FAILED", 409);
+            }
+            const pendingV6 = v6PushInFlightRef.current;
+            if (pendingV6) await pendingV6;
+            const pendingSnapshot = snapshotInFlightRef.current;
+            if (pendingSnapshot && !await pendingSnapshot) {
+                throw new WorkspaceFileV6Error("RECONCILIATION_REQUIRED", 409);
+            }
+        }
         if (args.fileSyncMode !== "v6" || !args.enabled || !sessionId || !interactiveReady ||
-            v6StructuralBusyRef.current || v6StructuralNeedsReconcileRef.current ||
-            v6PushInFlightRef.current || pushInFlightRef.current || snapshotInFlightRef.current) {
+            v6StructuralBusyRef.current ||
+            (!isTrashList && (v6StructuralNeedsReconcileRef.current || v6StartupMismatchRef.current !== null ||
+                v6PushInFlightRef.current || pushInFlightRef.current || snapshotInFlightRef.current))) {
             throw new WorkspaceFileV6Error("SESSION_NOT_READY", 409);
         }
         assertSessionWriterMode(sessionId);
+        if (isTrashList) {
+            const reader = new WorkspaceStructuralActionsV6(sessionId, () => true);
+            try {
+                return {state:"read_only" as const, kind:"list_trash" as const,
+                    path:"" as const, entries: await reader.listTrash()};
+            } finally {
+                reader.dispose();
+            }
+        }
+
+        if (isHistoryRead) {
+            // Undo/Redo must NEVER push stale browser state into the Runner.
+            // A pending local edit (or React reconciliation lag) blocks history
+            // until the view catches up; the read itself is strictly read-only.
+            if (!entriesEqual(getWorkspaceEntries(), lastPushedEntriesRef.current)) {
+                throw new WorkspaceFileV6Error("LOCAL_DRAFT_CHANGED", 409);
+            }
+            const files = await snapshotFiles();
+            if (sessionIdRef.current !== sessionId ||
+                !entriesEqual(getWorkspaceEntries(), lastPushedEntriesRef.current) ||
+                v6StructuralNeedsReconcileRef.current) {
+                throw new WorkspaceFileV6Error("LOCAL_DRAFT_CHANGED", 409);
+            }
+            return {state:"read_only" as const,kind:"history_snapshot" as const,
+                path:"" as const, files};
+        }
+
+        if (isEditorSync) {
+            // Collect exactly the browser paths that the existing per-file CAS
+            // writer is about to commit. Do not mistake terminal-only changes
+            // discovered by reconciliation for user-authored editor history.
+            if (!entriesEqual(getWorkspaceEntries(), lastPushedEntriesRef.current) &&
+                !await pushWorkspaceFromSource(false)) {
+                throw new WorkspaceFileV6Error("LOCAL_SYNC_FAILED", 409);
+            }
+            const verified = {files:null as WorkspaceSyncEntry[] | null};
+            if (sessionIdRef.current !== sessionId ||
+                !await pullSnapshotIntoWorkspace(files => {verified.files = files;}) ||
+                !verified.files || v6StructuralNeedsReconcileRef.current) {
+                throw new WorkspaceFileV6Error("RECONCILIATION_REQUIRED", 409);
+            }
+            // Only drain after a verified authenticated Runner snapshot.
+            const committed = v6CommittedEditsRef.current.drain(sessionId);
+            return {state:"reconciliation_required" as const,kind:"sync_editor" as const,path:"" as const,
+                files:verified.files,committed};
+        }
+
+        if (isExport) {
+            // The terminal snapshot is authoritative. Flush local edits via the same
+            // V6 per-file CAS writer used by the explorer before exporting anything.
+            // Never export a stale browser draft or silently fall back to V5.
+            if (!entriesEqual(getWorkspaceEntries(), lastPushedEntriesRef.current)) {
+                if (!await pushWorkspaceFromSource(false)) {
+                    throw new WorkspaceFileV6Error("LOCAL_SYNC_FAILED", 409);
+                }
+            }
+            if (sessionIdRef.current !== sessionId ||
+                !entriesEqual(getWorkspaceEntries(), lastPushedEntriesRef.current) ||
+                v6StructuralNeedsReconcileRef.current) {
+                throw new WorkspaceFileV6Error("LOCAL_DRAFT_CHANGED", 409);
+            }
+            const files = await snapshotFiles();
+            if (sessionIdRef.current !== sessionId ||
+                !entriesEqual(getWorkspaceEntries(), lastPushedEntriesRef.current)) {
+                throw new WorkspaceFileV6Error("LOCAL_DRAFT_CHANGED", 409);
+            }
+            return {state:"read_only" as const, kind:"export_snapshot" as const,
+                path:"" as const, files};
+        }
+
+        // Keep the unified history in actual Runner commit order. A structural
+        // mutation cannot pass an unjournaled acknowledged content edit.
+        if (v6CommittedEditsRef.current.hasPending(sessionId)) {
+            throw new WorkspaceFileV6Error("EDITOR_HISTORY_PENDING", 409);
+        }
+        // An editor can be newer than the last acknowledged terminal snapshot
+        // even when the project UI reports a cloud save. Before ANY structural
+        // mutation, flush the current editor via the existing per-file CAS
+        // writer. That writer checks both the remote revision and live editor
+        // content. Never infer a rename from a delete+create and never fall back
+        // to V5 whole-workspace replacement.
+        if (!entriesEqual(getWorkspaceEntries(), lastPushedEntriesRef.current)) {
+            if (!await pushWorkspaceFromSource(false)) {
+                throw new WorkspaceFileV6Error("LOCAL_SYNC_FAILED", 409);
+            }
+        }
         const baseline = lastPushedEntriesRef.current;
         const clean = () => sessionIdRef.current === sessionId &&
             entriesEqual(getWorkspaceEntries(), baseline) &&
-            !v6PushInFlightRef.current && !pushInFlightRef.current;
+            !v6PushInFlightRef.current && !pushInFlightRef.current &&
+            !snapshotInFlightRef.current;
         if (!clean()) throw new WorkspaceFileV6Error("LOCAL_DRAFT_CHANGED", 409);
         v6StructuralBusyRef.current = true;
         const bridge = new WorkspaceStructuralActionsV6(sessionId, clean);
         try {
-            if (intent.kind === "list_trash") {
-                return {state:"read_only" as const, kind:"list_trash" as const,
-                    path:"" as const, entries: await bridge.listTrash()};
-            }
             let result;
             // File moves/deletes must match the bytes last acknowledged by the
             // editor, not merely whatever happens to be on disk right now.
@@ -1855,14 +2009,66 @@ export function useWorkspaceTerminalController(
                 } finally {
                     reader.dispose();
                 }
+            } else if (intent.kind === "create_file") {
+                // New files are server-first. Never stage a local-only tree node
+                // and never overwrite a file concurrently created by a terminal.
+                const path = assertWorkspaceRelativePath(intent.path);
+                if (path !== intent.path || resolveWorkspaceFileCapability(path)?.storage !== "text" ||
+                    baseline.some(item => item.path === path || item.path.startsWith(`${path}/`))) {
+                    throw new WorkspaceFileV6Error("CONFLICT", 409);
+                }
+                const revision = new WorkspaceFileRevisionV6(sessionId);
+                try {
+                    const current = await revision.readText(path);
+                    if (current.exists || !clean()) throw new WorkspaceFileV6Error("CONFLICT", 409);
+                    revision.acknowledgeRead(path, null);
+                    // Any ambiguous response requires reconciliation, never retry.
+                    v6StructuralNeedsReconcileRef.current = true;
+                    await revision.writeText(path, "");
+                    result = {state:"reconciliation_required" as const,kind:intent.kind,path};
+                } finally {
+                    revision.dispose();
+                }
+            } else if (intent.kind === "replace_file") {
+                const previous = baseline.find(item => item.path === intent.path && item.kind === "file");
+                if (!previous) throw new WorkspaceFileV6Error("CONFLICT", 409);
+                const revision = new WorkspaceFileRevisionV6(sessionId);
+                try {
+                    await replaceHistoryWorkspaceFileV6(intent.path, previous, intent.entry, revision, clean,
+                        () => {v6StructuralNeedsReconcileRef.current = true;});
+                    result = {state:"reconciliation_required" as const,kind:intent.kind,path:intent.path};
+                } finally {
+                    revision.dispose();
+                }
+            } else if (intent.kind === "restore_file" || intent.kind === "import_file") {
+                // The inverse of a confirmed delete is an atomic, absent-only
+                // write. Read the Runner first; never restore browser bytes over
+                // an existing file or use V5 whole-workspace replacement.
+                if (baseline.some(item => item.path === intent.path)) {
+                    throw new WorkspaceFileV6Error("CONFLICT", 409);
+                }
+                const revision = new WorkspaceFileRevisionV6(sessionId);
+                try {
+                    await restoreDeletedWorkspaceFileV6(intent.path, intent.entry, revision, clean, () => {
+                        v6StructuralNeedsReconcileRef.current = true;
+                    });
+                    result = {state:"reconciliation_required" as const,kind:intent.kind,path:intent.path};
+                } finally {
+                    revision.dispose();
+                }
             } else {
                 v6StructuralNeedsReconcileRef.current = true;
                 result = await bridge.execute(intent);
             }
+            // Capture the same server snapshot accepted by the workspace
+            // reconciler. A second browser export immediately after mutation
+            // can observe the pre-render UI and repush deleted content.
+            const verified = {files: null as WorkspaceSyncEntry[] | null};
             v6StructuralSnapshotAllowedRef.current = true;
             try {
-                if (sessionIdRef.current !== sessionId || !await pullSnapshotIntoWorkspace() ||
-                    v6StructuralNeedsReconcileRef.current) {
+                if (sessionIdRef.current !== sessionId ||
+                    !await pullSnapshotIntoWorkspace(files => { verified.files = files; }) ||
+                    v6StructuralNeedsReconcileRef.current || !verified.files) {
                     throw new WorkspaceFileV6Error("RECONCILIATION_REQUIRED", 409);
                 }
             } finally {
@@ -1873,13 +2079,13 @@ export function useWorkspaceTerminalController(
                 v6RevisionRef.current.coordinator.dispose();
                 v6RevisionRef.current = null;
             }
-            return result;
+            return {...result,files:verified.files};
         } finally {
             bridge.dispose();
             v6StructuralBusyRef.current = false;
         }
     }, [args.enabled, args.fileSyncMode, assertSessionWriterMode, getWorkspaceEntries,
-        interactiveReady, pullSnapshotIntoWorkspace, sessionId]);
+        interactiveReady, pullSnapshotIntoWorkspace, pushWorkspaceFromSource, snapshotFiles, sessionId]);
 
     const schedulePostEnterSnapshot = React.useCallback(
         (delayMs = 700) => {
@@ -1895,7 +2101,7 @@ export function useWorkspaceTerminalController(
     );
 
     const beforeSubmitEnter = React.useCallback(async (): Promise<void> => {
-        if (args.fileSyncMode === "v6" && (v6StructuralBusyRef.current || v6StructuralNeedsReconcileRef.current)) {
+        if (args.fileSyncMode === "v6" && (v6StructuralBusyRef.current || v6StructuralNeedsReconcileRef.current || v6StartupMismatchRef.current !== null)) {
             throw new WorkspaceFileV6Error("RECONCILIATION_REQUIRED", 409);
         }
         if (sessionId) assertSessionWriterMode(sessionId);
@@ -1975,6 +2181,7 @@ export function useWorkspaceTerminalController(
             const normalizedCwd = resolveWorkspaceTerminalStartupCwd({
                 cwd,
                 bootstrap: resolvedBootstrap,
+                enableLsColors: args.fileSyncMode === "v6",
             });
             if (!normalizedCwd) return;
 
@@ -2006,6 +2213,7 @@ export function useWorkspaceTerminalController(
             pendingStartupInputRef.current = buildWorkspaceTerminalStartupInput({
                 cwd: normalizedCwd,
                 bootstrap: resolvedBootstrap,
+                enableLsColors: args.fileSyncMode === "v6",
                 markerParts: [markerPartA, markerPartB, markerPartC],
             });
             pendingStartupCwdRef.current = normalizedCwd;
@@ -2028,6 +2236,7 @@ export function useWorkspaceTerminalController(
         [
             clearPromptPrimeTimer,
             resolvedBootstrap,
+            args.fileSyncMode,
             flushPendingStartupInput,
             scheduleStartupCwdFlush,
         ],
@@ -2133,6 +2342,7 @@ export function useWorkspaceTerminalController(
                 }
 
                 awaitingPostEnterSnapshotRef.current = false;
+                v6StartupMismatchRef.current = null;
                 terminalProcessExitedRef.current = false;
                 terminalExitCodeRef.current = null;
                 promptPrimeAttemptsRef.current = 0;
@@ -2171,6 +2381,7 @@ export function useWorkspaceTerminalController(
                 const normalizedInitialCwd = resolveWorkspaceTerminalStartupCwd({
                     cwd: args.cwd,
                     bootstrap: resolvedBootstrap,
+                    enableLsColors: args.fileSyncMode === "v6",
                 });
                 const initialCwdToQueue = resolveInitialWorkspaceTerminalCwd({
                     normalizedCwd: normalizedInitialCwd,
@@ -2253,7 +2464,9 @@ export function useWorkspaceTerminalController(
                      * open/reattach, delayed the prompt, and could overwrite changes made
                      * by another terminal attached to the shared project.
                      */
-                    workspaceReadyRef.current = true;
+                    // Do not mark a V6 workspace ready before its authoritative
+                    // snapshot is verified below.
+                    workspaceReadyRef.current = args.fileSyncMode !== "v6";
 
                     if (
                         !mountedRef.current ||
@@ -2265,6 +2478,7 @@ export function useWorkspaceTerminalController(
                     const normalizedStartCwd = resolveWorkspaceTerminalStartupCwd({
                         cwd: args.cwd,
                         bootstrap: resolvedBootstrap,
+                        enableLsColors: args.fileSyncMode === "v6",
                     });
                     if (
                         normalizedStartCwd &&
@@ -2281,9 +2495,46 @@ export function useWorkspaceTerminalController(
                         queueAuthoredCwd(normalizedStartCwd);
                     }
 
+                    // A resumed shell can retain different bytes than the start
+                    // request. Never assume the browser draft is the Runner's
+                    // acknowledged baseline; verify the actual session first.
+                    // On mismatch/read failure, preserve BOTH versions and block
+                    // V6 writers. This does not reset the container or replay
+                    // any user-supplied file contents.
+                    if (args.fileSyncMode === "v6") {
+                        const startupCheck = await (async () => {
+                            try {
+                                return verifyV6StartupSnapshot({
+                                    expected: visibleEntries,
+                                    actual: await snapshotWorkspaceForSession(nextSessionId),
+                                });
+                            } catch {
+                                return {ok: false as const, reason: "snapshot_unavailable" as const,
+                                    divergentPaths: [] as string[]};
+                            }
+                        })();
+                        if (!mountedRef.current ||
+                            currentLeaseMountGeneration(terminalOwnerKey) !== attemptLeaseGeneration) return;
+                        if (!startupCheck.ok) {
+                            // No independently persisted acknowledged ancestor exists for this
+                            // resumed browser. Classify mismatches as unverified, not as
+                            // automatically mergeable or safe-to-overwrite changes.
+                            const detail = startupCheck.reason === "snapshot_unavailable"
+                                ? "Runner snapshot could not be verified"
+                                : `Runner and browser differ on ${startupCheck.divergentPaths.length} path(s); reconciliation requires a verified ancestor. Both versions preserved` ;
+                            v6StartupMismatchRef.current = detail;
+                            v6StructuralNeedsReconcileRef.current = true;
+                            setSyncStatus("error");
+                            pushChunk("err", `\r\nWorkspace synchronization blocked: ${detail}. Existing Runner and browser files have been preserved. Reconcile differences before editing through this terminal; do not force an overwrite.\r\n`);
+                        } else {
+                            lastPushedEntriesRef.current = visibleEntries;
+                            v6StructuralNeedsReconcileRef.current = false;
+                        }
+                    } else {
+                        lastPushedEntriesRef.current = visibleEntries;
+                    }
                     workspaceReadyRef.current = true;
                     scheduleStartupCwdFlush();
-                    lastPushedEntriesRef.current = visibleEntries;
                     setAttachedOwnerKey(terminalOwnerKey);
                     startedRef.current = true;
                     releaseAutomaticTerminalStart(terminalStartClaimKey);

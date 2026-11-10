@@ -1,3 +1,4 @@
+import { requireCanonicalDatabaseUrl } from "../src/databaseUrl";
 /**
  * Read-only release audit for ONE existing Stripe test subscription and webhook.
  * Uses only Prisma findUnique/findMany. No payment actions, migrations or writes.
@@ -12,7 +13,7 @@ function requiredArg(flag:string):string {
   return process.argv[index+1]!;
 }
 function normalizeDbTarget():{host:string;database:string} {
-  const raw=process.env.ADMIN_DATABASE_URL??process.env.WEB_DATABASE_URL??process.env.DATABASE_URL;
+  const raw=requireCanonicalDatabaseUrl();
   if(!raw)throw new Error("Database configuration missing");
   const url=new URL(raw);
   if(!["postgresql:","postgres:"].includes(url.protocol)||!url.hostname)throw new Error("Not a PostgreSQL connection");

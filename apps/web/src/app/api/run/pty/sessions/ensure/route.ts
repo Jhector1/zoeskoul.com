@@ -6,6 +6,7 @@ import type {
 } from "@zoeskoul/code-contracts";
 import { createAttachToken } from "@/lib/server/ptyAttachToken";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
+import { getRunnerWsBase } from "@/lib/server/runnerWsBase";
 import { RunnerHttpError, runnerPost } from "@/lib/server/runnerClient";
 import {
     readRunnerPtyCapacity,
@@ -57,43 +58,6 @@ type EnsureBrowserSessionResult =
 function isShellRequest(body: unknown): body is ShellEnsureReq {
     if (!body || typeof body !== "object") return false;
     return (body as { kind?: unknown }).kind === "shell";
-}
-
-function getRunnerWsBase() {
-    const explicit =
-        process.env.RUNNER_WS_BASE_URL?.trim() ||
-        process.env.NEXT_PUBLIC_RUNNER_WS_BASE_URL?.trim();
-
-    if (explicit) {
-        const normalized = explicit.replace(/\/+$/, "");
-        if (!/^wss?:\/\//i.test(normalized)) {
-            throw new Error(
-                `RUNNER_WS_BASE_URL must start with ws:// or wss://. Got: ${normalized}`,
-            );
-        }
-        return normalized;
-    }
-
-    const runnerBase =
-        process.env.RUNNER_BASE_URL?.trim() || process.env.RUNNER_URL?.trim();
-
-    if (runnerBase) {
-        const normalized = runnerBase.replace(/\/+$/, "");
-
-        if (/^https:\/\//i.test(normalized)) {
-            return normalized.replace(/^https:/i, "wss:");
-        }
-
-        if (/^http:\/\//i.test(normalized)) {
-            return normalized.replace(/^http:/i, "ws:");
-        }
-
-        throw new Error(
-            `RUNNER_BASE_URL must start with http:// or https://. Got: ${normalized}`,
-        );
-    }
-
-    throw new Error("Missing RUNNER_WS_BASE_URL or RUNNER_BASE_URL");
 }
 
 function buildWsUrl(sessionId: string, attachToken: string) {

@@ -1,5 +1,5 @@
 // src/app/api/ide/projects/route.ts
-import { saveCodeProject } from "@/lib/projects/saveCodeProject";
+import { saveCodeProject, ProjectCreationIntentConflictError } from "@/lib/projects/saveCodeProject";
 import { prisma } from "@/lib/prisma";
 import type { ProjectListResponse } from "@/lib/projects/projectApiTypes";
 import {
@@ -104,6 +104,7 @@ export async function POST(req: Request) {
             meta: toPrismaNullableJson(body.meta ?? null),
             clientInstanceId: body.clientInstanceId ?? null,
             clientDraftUpdatedAt: body.clientDraftUpdatedAt ?? null,
+            creationRequestKey: body.creationRequestKey ?? null,
         });
 
         return jsonNoStore(
@@ -114,6 +115,9 @@ export async function POST(req: Request) {
             201,
         );
     } catch (e: any) {
+        if (e instanceof ProjectCreationIntentConflictError) {
+            return jsonNoStore({ok: false, code: e.code, error: e.message}, 409);
+        }
         return jsonNoStore(
             {
                 ok: false,

@@ -9,6 +9,9 @@ import {
     FileQuestion,
     FileText,
     FileVideo,
+    Minus,
+    Plus,
+    Scan,
     Type,
 } from "lucide-react";
 import { useLearnerWorkspaceTranslations as useTranslations } from "@zoeskoul/learner-workspace/runtime/appRuntime";
@@ -101,6 +104,64 @@ export default function BinaryFileViewer({
     const viewer = capability?.storage === "binary" ? capability.viewer : "details";
     const { url, error } = useBinaryObjectUrl(binary);
     const fontFamily = React.useId().replace(/:/g, "");
+    const [imageZoom, setImageZoom] = React.useState<number | null>(null);
+    const [isPanning, setIsPanning] = React.useState(false);
+    const [pan, setPan] = React.useState({x: 0, y: 0});
+    const panOffset = React.useRef({x: 0, y: 0});
+    const panViewport = React.useRef<HTMLDivElement>(null);
+    const panImage = React.useRef<HTMLImageElement>(null);
+    const panStart = React.useRef<{ pointerId: number; x: number; y: number; left: number; top: number } | null>(null);
+    React.useEffect(() => {
+        setImageZoom(null);
+        setPan({x:0,y:0});
+        panOffset.current = {x:0,y:0};
+        setIsPanning(false);
+        panStart.current = null;
+    }, [fileName, binary.data]);
+
+    const clampPan = (x: number, y: number) => {
+        const pane = panViewport.current;
+        const image = panImage.current;
+        if (!pane || !image) return {x: 0, y: 0};
+        const width = image.offsetWidth;
+        const height = image.offsetHeight;
+        // When smaller than the pane, keep the image entirely visible.
+        // When larger, permit reaching all four edges without revealing empty gaps.
+        const dx = Math.abs(width - pane.clientWidth) / 2;
+        const dy = Math.abs(height - pane.clientHeight) / 2;
+        return {x: Math.max(-dx, Math.min(dx, x)), y: Math.max(-dy, Math.min(dy, y))};
+    };
+    const beginImagePan = (event: React.PointerEvent<HTMLDivElement>) => {
+        if (!event.isPrimary || event.button !== 0 || !panImage.current) return;
+        panStart.current = {
+            pointerId: event.pointerId, x: event.clientX, y: event.clientY,
+            left: panOffset.current.x, top: panOffset.current.y,
+        };
+        event.currentTarget.setPointerCapture(event.pointerId);
+        setIsPanning(true);
+        event.preventDefault();
+    };
+    const moveImagePan = (event: React.PointerEvent<HTMLDivElement>) => {
+        const start = panStart.current;
+        if (!start || start.pointerId !== event.pointerId) return;
+        const next = clampPan(start.left + event.clientX - start.x, start.top + event.clientY - start.y);
+        panOffset.current = next;
+        setPan(next);
+        event.preventDefault();
+    };
+    const endImagePan = (event: React.PointerEvent<HTMLDivElement>) => {
+        if (panStart.current?.pointerId !== event.pointerId) return;
+        panStart.current = null;
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+            event.currentTarget.releasePointerCapture(event.pointerId);
+        }
+        setIsPanning(false);
+    };
+    const zoomImage = (direction: -1 | 1) => {
+        setImageZoom(current => Math.max(0.25, Math.min(4, Math.round(((current ?? 1) + direction * 0.25) * 100) / 100)));
+        panOffset.current = {x:0,y:0};
+        setPan({x:0,y:0});
+    };
 
     const download = React.useCallback(() => {
         if (!url) return;
@@ -130,13 +191,37 @@ export default function BinaryFileViewer({
 
         if (viewer === "image") {
             return (
-                <div className="flex h-full items-center justify-center overflow-auto bg-[linear-gradient(45deg,rgba(127,127,127,.08)_25%,transparent_25%),linear-gradient(-45deg,rgba(127,127,127,.08)_25%,transparent_25%),linear-gradient(45deg,transparent_75%,rgba(127,127,127,.08)_75%),linear-gradient(-45deg,transparent_75%,rgba(127,127,127,.08)_75%)] bg-[length:20px_20px] bg-[position:0_0,0_10px,10px_-10px,-10px_0px] p-5">
-                    {/* Blob URLs keep binary bytes out of Monaco and avoid UTF-8 corruption. */}
-                    <img
-                        src={url}
-                        alt={t("imageAlt", { fileName })}
-                        className="max-h-full max-w-full rounded-md object-contain shadow-sm"
-                    />
+                <div className="flex h-full min-h-0 min-w-0 flex-col">
+                    <div className="flex shrink-0 items-center justify-center gap-1 border-b border-neutral-200 bg-neutral-50 px-2 py-1 dark:border-white/10 dark:bg-neutral-900/80" role="toolbar" aria-label="Image zoom">
+                        <button type="button" onClick={() => zoomImage(-1)} aria-label="Zoom out" title="Zoom out" className="rounded p-1.5 text-neutral-600 hover:bg-neutral-200 disabled:opacity-40 dark:text-neutral-300 dark:hover:bg-white/10" disabled={imageZoom !== null && imageZoom <= 0.25}><Minus className="h-4 w-4" /></button>
+                        <span aria-live="polite" className="min-w-12 text-center font-mono text-[11px] text-neutral-600 dark:text-neutral-300">{imageZoom === null ? "Fit" : `${Math.round(imageZoom * 100)}%`}</span>
+                        <button type="button" onClick={() => zoomImage(1)} aria-label="Zoom in" title="Zoom in" className="rounded p-1.5 text-neutral-600 hover:bg-neutral-200 disabled:opacity-40 dark:text-neutral-300 dark:hover:bg-white/10" disabled={imageZoom !== null && imageZoom >= 4}><Plus className="h-4 w-4" /></button>
+                        <button type="button" onClick={() => {setImageZoom(null); panOffset.current={x:0,y:0}; setPan({x:0,y:0});}} aria-label="Fit image to pane" title="Fit image to pane" className="ml-2 inline-flex items-center gap-1 rounded px-2 py-1.5 text-[11px] text-neutral-600 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-white/10"><Scan className="h-3.5 w-3.5"/> Fit</button>
+                    </div>
+                    <div
+                        role="region"
+                        ref={panViewport}
+                        aria-label="Image preview; drag to reposition, or zoom and drag to inspect"
+                        onPointerDown={beginImagePan}
+                        onPointerMove={moveImagePan}
+                        onPointerUp={endImagePan}
+                        onPointerCancel={endImagePan}
+                        onLostPointerCapture={endImagePan}
+                        className={`min-h-0 min-w-0 flex-1 overflow-hidden overscroll-contain bg-[linear-gradient(45deg,rgba(127,127,127,.08)_25%,transparent_25%),linear-gradient(-45deg,rgba(127,127,127,.08)_25%,transparent_25%),linear-gradient(45deg,transparent_75%,rgba(127,127,127,.08)_75%),linear-gradient(-45deg,transparent_75%,rgba(127,127,127,.08)_75%)] bg-[length:20px_20px] bg-[position:0_0,0_10px,10px_-10px,-10px_0px] ${isPanning ? "cursor-grabbing select-none" : "cursor-grab"}`}
+                        style={{ touchAction: "none" }}
+                    >
+                        <div className="flex h-full w-full items-center justify-center overflow-hidden p-4">
+                            {/* Fit never enlarges the original; manual zoom enlarges within a scrollable area. */}
+                            <img
+                                src={url}
+                                ref={panImage}
+                                alt={t("imageAlt", { fileName })}
+                                draggable={false}
+                                className={imageZoom === null ? "block h-auto w-auto max-h-full max-w-full object-contain shadow-sm" : "block h-auto max-w-none shrink-0 object-contain shadow-sm"}
+                                style={imageZoom === null ? { maxHeight: "100%", transform: `translate3d(${pan.x}px, ${pan.y}px, 0)` } : { width: `${Math.round(imageZoom * 100)}%`, transform: `translate3d(${pan.x}px, ${pan.y}px, 0)` }}
+                            />
+                        </div>
+                    </div>
                 </div>
             );
         }
@@ -239,9 +324,6 @@ export default function BinaryFileViewer({
                 <div className="flex min-w-0 items-center gap-2 text-neutral-600 dark:text-white/65">
                     <ViewerIcon viewer={viewer} />
                     <div className="min-w-0">
-                        <div className="truncate text-xs font-semibold text-neutral-900 dark:text-white/90">
-                            {fileName}
-                        </div>
                         <div className="truncate text-[10px] text-neutral-500 dark:text-white/45">
                             {binary.mimeType} · {formatBytes(binary.sizeBytes)}
                         </div>

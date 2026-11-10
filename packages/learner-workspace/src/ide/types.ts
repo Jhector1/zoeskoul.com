@@ -214,6 +214,9 @@ export type UseIdeProjectSessionArgs = {
     initialProjectId?: string | null;
     /** Controls browser-local project/session metadata; cloud persistence is unaffected. */
     draftStorageMode?: FullIDEProps["draftStorageMode"];
+    /** V6-only browser tab scope for project metadata. */
+    v6DraftTabId?: string | null;
+    v6InheritedDraftTabId?: string | null;
     access: FullIDEProps["access"];
     loginHref: string;
     billingHref: string;
@@ -221,6 +224,8 @@ export type UseIdeProjectSessionArgs = {
     language: WorkspaceLanguage;
     sqlDialect: SqlDialect;
     currentWorkspace: SaveProjectRequest["workspace"] | null;
+    /** True only after the browser draft has finished hydrating. */
+    workspaceHydrated?: boolean;
     nodes: any[];
     activeFile: any | null;
     entryFile: any | null;
