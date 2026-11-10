@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { requiresAuthoritativeAdminLabEvidence } from "./grade/adminLabFilesystemEvidencePolicy";
+
 
 import { attachGuestCookie } from "@/lib/practice/actor";
 import { awardValidateGamification } from "@/lib/gamification/awardValidateGamification";
@@ -276,6 +278,31 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         instance,
         persistedExpected: expectedCanon,
     });
+
+    // Never grade privileged filesystem state from client-supplied commands,
+    // terminal output, or workspace JSON. When an exercise opts into these
+    // expectations, verification must come from the future actor-bound Runner
+    // probe. Return a retryable 503 *before* recording an attempt or credit.
+    if (requiresAuthoritativeAdminLabEvidence(expectedCanon) ||
+        requiresAuthoritativeAdminLabEvidence(effectiveExpectedCanon)) {
+        const response = jsonApiResponse({
+            requestId,
+            message: "Administrative filesystem verification is not available yet.",
+            status: 503,
+            extra: {
+                ok: null,
+                code: "ADMIN_LAB_VERIFIER_UNAVAILABLE",
+                explanation: null,
+                feedback: null,
+                finalized: false,
+                duplicate: false,
+                attempts: null,
+                sessionComplete: false,
+            },
+        });
+        response.headers.set("Retry-After", "60");
+        return attachGuestCookie(response, setGuestId ?? undefined);
+    }
 
     const graded = await gradeInstance({
         instance,

@@ -11,6 +11,8 @@ import type {
 } from "@zoeskoul/learning-runtime";
 
 import CardRenderer from "@/components/review/module/CardRenderer";
+import AdminLabTopicPanel from "./AdminLabTopicPanel";
+import { adminLabTopicForDisplay } from "./adminLabTopicDisplayPolicy";
 import FlowNavigator from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "@zoeskoul/learning-runtime/review/module/runtime/runtimeProgressBridge";
@@ -307,6 +309,14 @@ export default function ReviewTopicCards({
           {/*      {progressiveLockMessage}*/}
           {/*    </div>*/}
           {/*) : null}*/}
+          {process.env.NEXT_PUBLIC_ZOESKOUL_ADMIN_LAB_UI_ENABLED === "true" &&
+           workspaceCapabilities.canSubmitPractice &&
+           adminLabTopicForDisplay({ subjectSlug, moduleSlug, topicId: viewTid }) ? (
+              <AdminLabTopicPanel
+                  key={`${subjectSlug}/${moduleSlug}/${viewTid}`}
+                  target={{ moduleSlug, topicSlug: viewTid }}
+              />
+           ) : null}
           <FlowNavigator
             items={viewCards}
             mode={navModes.cards}
