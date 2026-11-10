@@ -1,4 +1,5 @@
 import { env } from "../../lib/env.js";
+import { removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
 import {
     deleteSession,
     getSession,
@@ -58,8 +59,16 @@ export async function runScheduledWorkspaceCleanupNow(
     if (!initial) return;
     if ((initial.cleanupRetryAt ?? 0) > now) return;
 
-    // Admin lab root filesystem is discarded with the container. No host path.
+    // Admin volume remains memory-backed but is a separate Docker resource.
+    // Preserve the session tombstone on cleanup failure so existing sweeps retry.
     if (initial.labMode === "admin" && initial.workspaceDir === "") {
+        try {
+            if (!initial.adminVolumeName) throw new Error("Admin workspace identity missing.");
+            await removeAdminWorkspaceVolume(initial.adminVolumeName, initial.id);
+        } catch {
+            deferCleanup(initial, now);
+            throw new Error("RUNNER admin volume cleanup deferred for retry.");
+        }
         deleteSession(sessionId);
         return;
     }

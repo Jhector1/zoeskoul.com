@@ -9,9 +9,25 @@ const fixture = vi.hoisted(() => ({
   failDelete: false,
   failList: false,
   noEffect: false,
+  volumes: [] as string[],
+  volumeNoEffect: false,
 }));
 vi.mock("../../lib/env.js", () => ({ env: { get workspaceRoot() { return fixture.root; } } }));
 vi.mock("./dockerClient.js", () => ({ docker: {
+  listVolumes: async () => ({Volumes: fixture.volumes.map(Name=>({
+    Name,
+    Driver: "local",
+    Options: {type:"tmpfs",device:"tmpfs",o:"size=16m,mode=1777"},
+    Labels: {
+      "com.zoeskoul.learning.admin-workspace":"v1",
+      "com.zoeskoul.runner.session":Name.slice("zoeskoul-admin-ws-".length),
+      "com.zoeskoul.runner.purpose":"learn",
+    },
+  }))}),
+  getVolume: (name:string) => ({remove: async () => {
+    if (fixture.failDelete) throw new Error("daemon unavailable");
+    if (!fixture.volumeNoEffect) fixture.volumes=fixture.volumes.filter(item=>item!==name);
+  }}),
   listContainers: (_opts:unknown, cb:(error:Error|null,list?:unknown[])=>void) => {
     if (fixture.failList) cb(new Error("daemon unavailable"));
     else cb(null,fixture.containers.map(Id=>({Id,State:"running"})));
@@ -32,6 +48,8 @@ beforeEach(async () => {
   fixture.failDelete = false;
   fixture.failList = false;
   fixture.noEffect = false;
+  fixture.volumes = [];
+  fixture.volumeNoEffect = false;
 });
 afterEach(async()=>{await fs.rm(root,{recursive:true,force:true});});
 
@@ -62,6 +80,18 @@ describe("Runner startup cleanup admission gate",()=>{
     fixture.containers = ["d".repeat(64)];
     fixture.noEffect = true;
     await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("remaining");
+  });
+
+  it("reclaims private admin tmpfs volumes before releasing startup gate", async()=>{
+    fixture.volumes = ["zoeskoul-admin-ws-sess_11111111-1111-4111-8111-111111111111"];
+    await cleanupRunnerOrphansOnStartup();
+    expect(fixture.volumes).toEqual([]);
+  });
+
+  it("refuses startup while admin volumes are still present", async()=>{
+    fixture.volumes = ["zoeskoul-admin-ws-sess_11111111-1111-4111-8111-111111111111"];
+    fixture.volumeNoEffect = true;
+    await expect(cleanupRunnerOrphansOnStartup()).rejects.toThrow("admin");
   });
 
   it("never reaps unrelated workspace directories",async()=>{

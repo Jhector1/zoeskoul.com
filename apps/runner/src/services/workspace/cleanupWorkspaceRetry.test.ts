@@ -3,11 +3,15 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("../execution/adminWorkspaceVolume.js", () => ({
+  removeAdminWorkspaceVolume: vi.fn(),
+}));
 vi.mock("../docker/runnerWorkspaceReclamation.js", () => ({
   removeRunnerWorkspaceWithRecovery: vi.fn(),
 }));
 
 import { removeRunnerWorkspaceWithRecovery } from "../docker/runnerWorkspaceReclamation.js";
+import { removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
 import { createSession, deleteSession, getSession, pushEvent } from "../sessions/sessionStore.js";
 import { runSessionCleanupSweep } from "../sessions/timeoutManager.js";
 import {
@@ -17,7 +21,8 @@ import {
 } from "./cleanupWorkspace.js";
 
 const remove = vi.mocked(removeRunnerWorkspaceWithRecovery);
-const ids = ["p3b5d-retry", "p3b5d-same-a", "p3b5d-same-b", "p3b5d-pending"];
+const removeAdmin = vi.mocked(removeAdminWorkspaceVolume);
+const ids = ["p3b5d-retry", "p3b5d-same-a", "p3b5d-same-b", "p3b5d-pending", "sess_11111111-1111-4111-8111-111111111111"];
 
 describe("P3B5D retryable session workspace cleanup", () => {
   let root: string;
@@ -25,6 +30,8 @@ describe("P3B5D retryable session workspace cleanup", () => {
   beforeEach(async () => {
     root = await fs.mkdtemp(path.join(os.tmpdir(), "p3b5d-cleanup-"));
     remove.mockReset();
+    removeAdmin.mockReset();
+    removeAdmin.mockResolvedValue(undefined);
     remove.mockImplementation(async (dir) => fs.rm(dir, { recursive: true, force: true }));
   });
 
@@ -82,6 +89,21 @@ describe("P3B5D retryable session workspace cleanup", () => {
     await Promise.all([first, second]);
     expect(remove).toHaveBeenCalledTimes(1);
     expect(getSession(ids[2])).toBeNull();
+  });
+
+  it("retains administrator volume ownership when removal fails, then retries",async()=>{
+    const id = ids[4];
+    const volume = `zoeskoul-admin-ws-${id}`;
+    createSession({id, containerId:"container", workspaceDir:"", labMode:"admin",adminVolumeName:volume});
+    scheduleWorkspaceCleanup(id,"",100_000);
+    removeAdmin.mockRejectedValueOnce(new Error("volume still in use"));
+    await expect(runScheduledWorkspaceCleanupNow(id)).rejects.toThrow("deferred for retry");
+    const retained=getSession(id)!;
+    expect(retained.adminVolumeName).toBe(volume);
+    expect(retained.cleanupFailures).toBe(1);
+    await runScheduledWorkspaceCleanupNow(id,retained.cleanupRetryAt!+1);
+    expect(getSession(id)).toBeNull();
+    expect(removeAdmin).toHaveBeenCalledTimes(2);
   });
 
   it("keeps sweeping unrelated finalized sessions when one cleanup fails", async () => {

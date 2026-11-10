@@ -6,7 +6,8 @@ describe("rootless admin sandbox boundary",()=>{
     expect(adminHostConfig).not.toHaveProperty("Binds");
     expect(adminHostConfig).not.toHaveProperty("Mounts");
     expect(adminHostConfig.CapDrop).toContain("ALL");
-    expect(adminHostConfig.Tmpfs).toHaveProperty("/workspace");
+    expect(adminHostConfig.Tmpfs).not.toHaveProperty("/workspace");
+    expect(adminHostConfig.Tmpfs).toHaveProperty("/tmp");
     expect(adminHostConfig.PidsLimit).toBeLessThanOrEqual(48);
   });
   it("rejects non-rootless execution",async()=>{

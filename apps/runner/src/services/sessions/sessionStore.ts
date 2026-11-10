@@ -17,6 +17,8 @@ export type SessionRecord = {
   labMode?: LearningLabMode;
   /** Signed lesson identity retained for actor-bound verification. */
   adminTopicSlug?: string | null;
+  /** Runner-created private tmpfs volume; only admin sessions own one. */
+  adminVolumeName?: string | null;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -148,6 +150,8 @@ export function createSession(args: {
   labMode?: LearningLabMode;
   /** Signed lesson identity retained for actor-bound verification. */
   adminTopicSlug?: string | null;
+  /** Runner-created private tmpfs volume; only admin sessions own one. */
+  adminVolumeName?: string | null;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -164,6 +168,7 @@ export function createSession(args: {
     kind: args.kind,
     labMode: args.labMode ?? "standard",
     adminTopicSlug: args.labMode === "admin" ? args.adminTopicSlug ?? null : null,
+    adminVolumeName: args.labMode === "admin" ? args.adminVolumeName ?? null : null,
     workspaceKey: args.workspaceKey ?? null,
     clientHostKey: args.clientHostKey ?? null,
     clientOwnerKey: args.clientOwnerKey ?? null,

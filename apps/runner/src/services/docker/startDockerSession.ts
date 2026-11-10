@@ -42,6 +42,7 @@ import { inspectLearningLabRequest, type LearningLabMode } from "../execution/le
 import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGrant } from "../execution/learningAdminGrant.js";
 import { ADMIN_COURSE_SLUG, isEligibleAdminLabLesson } from "../execution/learningAdminLessonPolicy.js";
 import { adminHostConfig, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
+import { createAdminWorkspaceVolume, removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
 import { assertAdminLabSwitch } from "../execution/learningAdminSwitch.js";
 import { docker } from "./dockerClient.js";
 import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
@@ -286,6 +287,7 @@ async function startDockerSessionUncoordinated(
   let sharedWorkspaceReservation: SharedShellWorkspaceReservation | null = null;
   let sessionRegistered = false;
   let sessionId = "";
+  let adminVolumeName: string | null = null;
 
   try {
     const normalized = normalizeRequest(req);
@@ -364,6 +366,10 @@ async function startDockerSessionUncoordinated(
 
     sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
+    if (adminImage) {
+      adminVolumeName = await createAdminWorkspaceVolume(sessionId);
+      assertAdminLabSwitch(adminGeneration);
+    }
 
     // Shared sessions may be reused while the IDE is saving. Coordinate the
     // startup normalization and ownership repair with replacement/snapshots.
@@ -428,8 +434,14 @@ async function startDockerSessionUncoordinated(
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: adminImage ? {
         ...adminHostConfig,
-        // Do not introduce Binds, Mounts or Docker socket: guest root is NEVER
-        // allowed access to the host-backed learner workspace.
+        Mounts: [{
+          Type: "volume" as const,
+          Source: adminVolumeName!,
+          Target: "/workspace",
+          ReadOnly: false,
+          VolumeOptions: { NoCopy: true } as import("dockerode").MountSettings["VolumeOptions"],
+        }],
+        // Runner-created named tmpfs is private to this session. Never a host bind/socket.
       } : {
         Binds: [`${resolvedWorkspaceDir}:/workspace`],
         NetworkMode: sandboxProfile.networkMode,
@@ -459,6 +471,7 @@ async function startDockerSessionUncoordinated(
       kind: normalized.kind,
       labMode,
       adminTopicSlug: labMode === "admin" ? adminTopicSlug : null,
+      adminVolumeName: labMode === "admin" ? adminVolumeName : null,
       workspaceKey:
         normalized.kind === "shell" ? normalized.workspaceKey ?? null : null,
       clientHostKey:
@@ -631,6 +644,13 @@ async function startDockerSessionUncoordinated(
       sharedWorkspaceReservation = null;
     } else if (workspaceDir && !sessionRegistered) {
       await cleanupWorkspaceNow(workspaceDir);
+    }
+    if (!sessionRegistered && adminVolumeName) {
+      // This may have failed before a container was created. On a daemon
+      // failure startup reconciliation will reclaim the labeled orphan.
+      await removeAdminWorkspaceVolume(adminVolumeName, sessionId).catch(() => {
+        console.error("RUNNER admin workspace startup cleanup deferred to startup reaper");
+      });
     }
 
     return {

@@ -16,7 +16,6 @@ export const adminHostConfig = {
   // Intentional: do not set no-new-privileges for this isolated setuid lab.
   // It cannot be used on the ordinary Learning profile.
   Tmpfs: {
-    "/workspace": "rw,nodev,nosuid,size=16m,mode=1777",
     "/tmp": "rw,nodev,nosuid,size=8m,mode=1777",
   },
 };
