@@ -41,6 +41,7 @@ import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { inspectLearningLabRequest, type LearningLabMode } from "../execution/learningLabMode.js";
 import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGrant } from "../execution/learningAdminGrant.js";
 import { adminHostConfig, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
+import { assertAdminLabSwitch } from "../execution/learningAdminSwitch.js";
 import { docker } from "./dockerClient.js";
 import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
 import { killSession } from "./killSession.js";
@@ -263,6 +264,7 @@ async function startDockerSessionUncoordinated(
   req: InteractiveRunReq,
   ownerKey: string,
   labMode: LearningLabMode = "standard",
+  adminGeneration?: number,
 ): Promise<StartSessionResult> {
   // Enforce at the service boundary too: internal callers must not bypass
   // the HTTP guard. No session, workspace, or container exists on refusal.
@@ -290,8 +292,12 @@ async function startDockerSessionUncoordinated(
         normalized.clientOwnerKey || normalized.clientWorkspaceKey || normalized.clientHostKey)) {
       throw new Error("Admin labs require an empty disposable shell workspace.");
     }
+    if (labMode === "admin") assertAdminLabSwitch(adminGeneration);
     const adminImage = labMode === "admin" ? adminLabConfiguration().image : null;
-    if (adminImage) await verifyAdminSandboxImage(docker, adminImage);
+    if (adminImage) {
+      await verifyAdminSandboxImage(docker, adminImage);
+      assertAdminLabSwitch(adminGeneration);
+    }
 
     if (labMode === "standard" && normalized.kind === "shell" && !normalized.workspaceKey) {
       await cancelLegacyShellSessionsForActor(ownerKey);
@@ -306,7 +312,10 @@ async function startDockerSessionUncoordinated(
     const timeouts = labMode === "admin"
       ? { ...standardTimeouts, idleTimeoutMs: 5 * 60 * 1000, hardLifetimeMs: 10 * 60 * 1000 }
       : standardTimeouts;
-    if (normalized.kind === "shell" && normalized.workspaceKey) {
+    if (labMode === "admin") {
+      // Disposable root guest must NEVER create or mount a host workspace.
+      workspaceDir = "";
+    } else if (normalized.kind === "shell" && normalized.workspaceKey) {
       sharedWorkspaceReservation = await acquireSharedShellWorkspace({
         ownerKey,
         workspaceKey: normalized.workspaceKey,
@@ -317,7 +326,7 @@ async function startDockerSessionUncoordinated(
       workspaceDir = await createWorkspace(normalized.files);
     }
 
-    if (!workspaceDir) {
+    if (!workspaceDir && labMode !== "admin") {
       throw new Error("Runner workspace allocation did not return a directory.");
     }
     const resolvedWorkspaceDir = workspaceDir;
@@ -363,6 +372,7 @@ async function startDockerSessionUncoordinated(
 
     const sandboxProfile = resolveSandboxProfile("learn");
 
+    if (labMode === "admin") assertAdminLabSwitch(adminGeneration);
     const container = await docker.createContainer({
       Image: adminImage ?? sandboxProfile.image,
       name: containerName,
@@ -431,6 +441,13 @@ async function startDockerSessionUncoordinated(
       },
     });
 
+    if (labMode === "admin") {
+      try { assertAdminLabSwitch(adminGeneration); }
+      catch (error) {
+        await container.remove({ force: true }).catch(() => {});
+        throw error;
+      }
+    }
     createSession({
       id: sessionId,
       ownerKey,
@@ -509,7 +526,9 @@ async function startDockerSessionUncoordinated(
        */
       const attachDrainPromise = waitForAttachOutputDrain(attach);
 
+      if (labMode === "admin") assertAdminLabSwitch(adminGeneration);
       await container.start();
+      if (labMode === "admin") assertAdminLabSwitch(adminGeneration);
 
       pushEvent(sessionId, {
         type: "status",
@@ -587,7 +606,7 @@ async function startDockerSessionUncoordinated(
       // A container that was created but failed before start may never trigger
       // AutoRemove. Force-remove it now so failed starts cannot accumulate.
       await container.remove({ force: true }).catch(() => {});
-      if (workspaceDir) {
+      if (workspaceDir !== null) {
         scheduleWorkspaceCleanup(sessionId, workspaceDir);
       }
       return {
@@ -692,9 +711,10 @@ export async function startDockerAdminSession(
   grant: VerifiedAdminGrant,
 ): Promise<StartSessionResult> {
   assertVerifiedAdminGrant(grant, ownerKey);
+  const admissionGeneration = assertAdminLabSwitch();
   consumeStartToken(ownerKey, "shell");
   // Distinct from /sessions/start: never reattach a standard shell as admin.
   return startDockerSessionUncoordinated({
     kind: "shell", mode: "interactive", language: "bash", files: [], forceNew: true,
-  }, ownerKey, "admin");
+  }, ownerKey, "admin", admissionGeneration);
 }

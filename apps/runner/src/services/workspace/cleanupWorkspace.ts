@@ -58,6 +58,11 @@ export async function runScheduledWorkspaceCleanupNow(
     if (!initial) return;
     if ((initial.cleanupRetryAt ?? 0) > now) return;
 
+    // Admin lab root filesystem is discarded with the container. No host path.
+    if (initial.labMode === "admin" && initial.workspaceDir === "") {
+        deleteSession(sessionId);
+        return;
+    }
     const workspaceDir = initial.workspaceDir;
     const previous = workspaceCleanupTasks.get(workspaceDir);
     const task = (async () => {

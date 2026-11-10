@@ -4,12 +4,8 @@
  * trusted published lesson metadata, and the requested sandbox profile.
  */
 import crypto from "node:crypto";
-
-const allowlistedTopics = new Set([
-  "sudo-root-concepts",
-  "ownership-administration-concepts",
-  "final-capstone-secure-project",
-]);
+import { assertAdminLabSwitch } from "./learningAdminSwitch.js";
+import { isEligibleAdminLabLesson } from "./learningAdminLessonPolicy.js";
 const usedNonces = new Map<string, number>();
 const verifiedTokens = new WeakSet<object>();
 const MAX_REPLAY_ENTRIES = 4096;
@@ -54,6 +50,8 @@ export function adminLabConfiguration() {
 
 /** Grant is minted by an operator/trusted entitlement service, never by React. */
 export function verifyAdminGrant(token: unknown, actorKey: string, now = Date.now()): VerifiedAdminGrant {
+  try { assertAdminLabSwitch(); }
+  catch { throw new AdminGrantError(403, "Administrative learning labs are disabled."); }
   const { secret } = adminLabConfiguration();
   if (typeof token !== "string" || token.length < 20 || token.length > 4096) {
     throw new AdminGrantError(400, "Invalid administrative lab grant.");
@@ -81,7 +79,7 @@ export function verifyAdminGrant(token: unknown, actorKey: string, now = Date.no
       claims.v !== 1 || claims.aud !== "zoeskoul-learning-admin" ||
       claims.actorKey !== actorKey || !actorKey ||
       claims.courseSlug !== "linux-files-permissions-users" ||
-      typeof claims.topicSlug !== "string" || !allowlistedTopics.has(claims.topicSlug) ||
+      typeof claims.topicSlug !== "string" || !isEligibleAdminLabLesson(claims.courseSlug, claims.topicSlug) ||
       typeof claims.iat !== "number" || !Number.isInteger(claims.iat) ||
       typeof claims.exp !== "number" || !Number.isInteger(claims.exp) ||
       claims.iat > clock + 5 || claims.iat < clock - 60 ||
@@ -113,4 +111,6 @@ export function assertVerifiedAdminGrant(grant: VerifiedAdminGrant, actorKey: st
     throw new AdminGrantError(403, "Administrative lab authorization required.");
   }
   adminLabConfiguration();
+  try { assertAdminLabSwitch(); }
+  catch { throw new AdminGrantError(403, "Administrative learning labs are disabled."); }
 }

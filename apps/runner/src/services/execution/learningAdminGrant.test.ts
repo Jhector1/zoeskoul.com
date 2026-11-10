@@ -1,10 +1,11 @@
 import crypto from "node:crypto";
 import { describe, it, expect, afterEach } from "vitest";
 import { verifyAdminGrant, assertVerifiedAdminGrant } from "./learningAdminGrant.js";
+import { setAdminLabSwitch } from "./learningAdminSwitch.js";
 
 const vars = ["ZOESKOUL_LEARNING_ADMIN_LABS_ENABLED", "ZOESKOUL_LEARNING_ADMIN_GRANT_SECRET", "ZOESKOUL_LEARNING_ADMIN_LAB_IMAGE", "RUNNER_EXECUTION_POOL"] as const;
 const originals = Object.fromEntries(vars.map(v=>[v,process.env[v]]));
-afterEach(()=> { for(const key of vars) {
+afterEach(()=> { setAdminLabSwitch(false); for(const key of vars) {
   if(originals[key]===undefined) delete process.env[key]; else process.env[key]=originals[key];
 } });
 function configure() {
@@ -12,6 +13,7 @@ function configure() {
  process.env.ZOESKOUL_LEARNING_ADMIN_GRANT_SECRET="q".repeat(64);
  process.env.ZOESKOUL_LEARNING_ADMIN_LAB_IMAGE="sha256:"+"a".repeat(64);
  process.env.RUNNER_EXECUTION_POOL="zoeskoul-learning";
+ setAdminLabSwitch(true);
 }
 function issue(actorKey="actor1", topicSlug="sudo-root-concepts", nonce=crypto.randomBytes(16).toString("hex")) {
  const iat = Math.floor(Date.now()/1000);

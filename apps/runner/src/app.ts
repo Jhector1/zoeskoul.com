@@ -5,6 +5,7 @@ import { executionPoolGuard } from "./middleware/executionPoolGuard.js";
 import { startSessionRoute } from "./routes/sessions.start.js";
 import { startAdminSessionRoute } from "./routes/sessions.admin.start.js";
 import { revokeAdminSessionsRoute } from "./routes/sessions.admin.revoke.js";
+import { adminLabControlRoute, adminLabControlStatusRoute } from "./routes/sessions.admin.control.js";
 import { blockAdminWorkspaceApis } from "./middleware/adminWorkspaceBoundary.js";
 import { inputSessionRoute } from "./routes/sessions.input.js";
 import { cancelSessionRoute } from "./routes/sessions.cancel.js";
@@ -136,6 +137,8 @@ app.post("/build/previews/project/release", releaseBuildProjectPreviewDrainRoute
 app.post("/sessions/start", startSessionRoute);
 app.post("/sessions/admin/start", startAdminSessionRoute);
 app.post("/sessions/admin/revoke", revokeAdminSessionsRoute);
+app.post("/sessions/admin/control", adminLabControlRoute);
+app.post("/sessions/admin/control/status", adminLabControlStatusRoute);
 // Register BEFORE any workspace/file route. No container-root to host-file bridge.
 app.use("/sessions/:sessionId/snapshot-workspace", blockAdminWorkspaceApis);
 app.use("/sessions/:sessionId/replace-workspace", blockAdminWorkspaceApis);
