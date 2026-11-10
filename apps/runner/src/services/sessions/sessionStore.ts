@@ -6,12 +6,15 @@ import type {
 } from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
 
+import type { LearningLabMode } from "../execution/learningLabMode.js";
+
 export type NodeJSStream = NodeJS.ReadWriteStream;
 
 export type SessionRecord = {
   id: string;
   ownerKey?: string;
   kind?: "code" | "shell";
+  labMode?: LearningLabMode;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -140,6 +143,7 @@ export function createSession(args: {
   id: string;
   ownerKey?: string;
   kind?: "code" | "shell";
+  labMode?: LearningLabMode;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -154,6 +158,7 @@ export function createSession(args: {
     id: args.id,
     ownerKey: args.ownerKey,
     kind: args.kind,
+    labMode: args.labMode ?? "standard",
     workspaceKey: args.workspaceKey ?? null,
     clientHostKey: args.clientHostKey ?? null,
     clientOwnerKey: args.clientOwnerKey ?? null,

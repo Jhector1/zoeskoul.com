@@ -11,6 +11,7 @@ export type ActiveRunnerSession = {
   sessionId: string;
   state: RunSessionState;
   kind: "code" | "shell" | null;
+  labMode: "standard" | "admin";
   workspaceKey: string | null;
   clientHostKey: string | null;
   clientOwnerKey: string | null;
@@ -44,6 +45,7 @@ export const activeSessionsRoute: RequestHandler = (req, res) => {
         sessionId: session.id,
         state: session.state,
         kind: session.kind ?? null,
+        labMode: session.labMode ?? "standard",
         workspaceKey: session.workspaceKey ?? null,
         clientHostKey: session.clientHostKey ?? null,
         clientOwnerKey: session.clientOwnerKey ?? null,

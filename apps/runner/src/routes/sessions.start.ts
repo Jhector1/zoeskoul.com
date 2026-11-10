@@ -2,9 +2,12 @@ import type { RequestHandler } from "express";
 import { interactiveRunReqSchema } from "@zoeskoul/code-contracts";
 import { startDockerSession } from "../services/docker/startDockerSession.js";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
+import { inspectLearningLabRequest } from "../services/execution/learningLabMode.js";
 
 export function statusForError(message: string) {
   if (message === "Unauthorized") return 401;
+  if (message === "Administrative learning labs are disabled.") return 403;
+  if (message === "Administrative learning lab isolation is not configured.") return 503;
   if (message.includes("Too many") || message.includes("Runner is busy"))
     return 429;
   if (
@@ -27,6 +30,12 @@ export function statusForError(message: string) {
 export const startSessionRoute: RequestHandler = async (req, res) => {
   try {
     const actorKey = getRequiredActorKey(req);
+    // Guard the raw payload before Zod strips unknown privilege fields.
+    // Client metadata is never sufficient to authorize host-side privilege.
+    const labDecision = inspectLearningLabRequest(req.body);
+    if (!labDecision.ok) {
+      return res.status(labDecision.status).json({ ok: false, error: labDecision.error });
+    }
     const parsed = interactiveRunReqSchema.parse(req.body);
 
     /**

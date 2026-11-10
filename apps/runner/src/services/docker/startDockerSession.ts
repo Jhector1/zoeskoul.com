@@ -38,6 +38,9 @@ import {
 
 import { getExecutionPlan } from "../execution/executionPlan.js";
 import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
+import { inspectLearningLabRequest, type LearningLabMode } from "../execution/learningLabMode.js";
+import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGrant } from "../execution/learningAdminGrant.js";
+import { adminHostConfig, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
 import { docker } from "./dockerClient.js";
 import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
 import { killSession } from "./killSession.js";
@@ -238,7 +241,8 @@ async function cancelLegacyShellSessionsForActor(ownerKey: string) {
   const legacySessions = getActiveSessionsForActor(ownerKey).filter(
     (session) =>
       (session.kind === "shell" || session.kind == null) &&
-      !session.workspaceKey,
+      !session.workspaceKey &&
+      session.labMode !== "admin",
   );
 
   for (const session of legacySessions) {
@@ -258,7 +262,14 @@ function isTerminalState(state: string) {
 async function startDockerSessionUncoordinated(
   req: InteractiveRunReq,
   ownerKey: string,
+  labMode: LearningLabMode = "standard",
 ): Promise<StartSessionResult> {
+  // Enforce at the service boundary too: internal callers must not bypass
+  // the HTTP guard. No session, workspace, or container exists on refusal.
+  const labDecision = inspectLearningLabRequest(req);
+  if (!labDecision.ok) {
+    return { ok: false, error: labDecision.error };
+  }
   let releaseSlot: (() => void) | null = null;
   let slotReleased = false;
   const releaseReservedSlot = () => {
@@ -274,17 +285,27 @@ async function startDockerSessionUncoordinated(
 
   try {
     const normalized = normalizeRequest(req);
+    if (labMode === "admin" && (normalized.kind !== "shell" ||
+        normalized.files.length !== 0 || normalized.workspaceKey || normalized.cwd ||
+        normalized.clientOwnerKey || normalized.clientWorkspaceKey || normalized.clientHostKey)) {
+      throw new Error("Admin labs require an empty disposable shell workspace.");
+    }
+    const adminImage = labMode === "admin" ? adminLabConfiguration().image : null;
+    if (adminImage) await verifyAdminSandboxImage(docker, adminImage);
 
-    if (normalized.kind === "shell" && !normalized.workspaceKey) {
+    if (labMode === "standard" && normalized.kind === "shell" && !normalized.workspaceKey) {
       await cancelLegacyShellSessionsForActor(ownerKey);
     }
 
     releaseSlot = reserveSessionSlot(ownerKey);
-    const timeouts = resolveTimeoutPolicy({
+    const standardTimeouts = resolveTimeoutPolicy({
       kind: normalized.kind,
       requestedIdleTimeoutMs: normalized.idleTimeoutMs,
       requestedWallTimeoutMs: normalized.wallTimeoutMs,
     });
+    const timeouts = labMode === "admin"
+      ? { ...standardTimeouts, idleTimeoutMs: 5 * 60 * 1000, hardLifetimeMs: 10 * 60 * 1000 }
+      : standardTimeouts;
     if (normalized.kind === "shell" && normalized.workspaceKey) {
       sharedWorkspaceReservation = await acquireSharedShellWorkspace({
         ownerKey,
@@ -332,17 +353,18 @@ async function startDockerSessionUncoordinated(
 
     // Shared sessions may be reused while the IDE is saving. Coordinate the
     // startup normalization and ownership repair with replacement/snapshots.
-    await withWorkspaceSyncLock(resolvedWorkspaceDir, async () => {
-      await ensureWorkspaceRuntimeFiles(resolvedWorkspaceDir, plan.prepareDirs ?? []);
-      await ensureWorkspaceWritableForShellUser(resolvedWorkspaceDir);
-      // Never expose a PTY before the repaired UID mapping is validated.
-      await repairSandboxWorkspaceOwnership(resolvedWorkspaceDir);
-    });
+    if (labMode === "standard") {
+      await withWorkspaceSyncLock(resolvedWorkspaceDir, async () => {
+        await ensureWorkspaceRuntimeFiles(resolvedWorkspaceDir, plan.prepareDirs ?? []);
+        await ensureWorkspaceWritableForShellUser(resolvedWorkspaceDir);
+        await repairSandboxWorkspaceOwnership(resolvedWorkspaceDir);
+      });
+    }
 
     const sandboxProfile = resolveSandboxProfile("learn");
 
     const container = await docker.createContainer({
-      Image: sandboxProfile.image,
+      Image: adminImage ?? sandboxProfile.image,
       name: containerName,
       Tty: true,
       OpenStdin: true,
@@ -351,18 +373,19 @@ async function startDockerSessionUncoordinated(
       AttachStdout: true,
       AttachStderr: true,
       WorkingDir: sessionCwd,
-      User: sandboxProfile.user,
+      User: adminImage ? "0:0" : sandboxProfile.user,
       Labels: {
         "com.zoeskoul.runner": "true",
         "com.zoeskoul.runner.session": sessionId,
         "com.zoeskoul.runner.owner": ownerKey.slice(0, 64),
         "com.zoeskoul.runner.purpose": "learn",
-        "com.zoeskoul.runner.profile": sandboxProfile.id,
+        "com.zoeskoul.runner.profile": adminImage ? "learning-admin-disposable-v1" : sandboxProfile.id,
+        "com.zoeskoul.runner.lab-mode": labMode,
       },
       Env: [
-        `PREPARE_DIRS_JSON=${JSON.stringify(plan.prepareDirs ?? [])}`,
-        `COMPILE_CMD_JSON=${JSON.stringify(plan.compileCmd ?? null)}`,
-        `RUN_CMD_JSON=${JSON.stringify(plan.runCmd)}`,
+        `PREPARE_DIRS_JSON=${JSON.stringify(adminImage ? [] : plan.prepareDirs ?? [])}`,
+        `COMPILE_CMD_JSON=${JSON.stringify(adminImage ? null : plan.compileCmd ?? null)}`,
+        `RUN_CMD_JSON=${JSON.stringify(adminImage ? ["su", "-", "sandbox"] : plan.runCmd)}`,
         "TERM=xterm-256color",
         "COLUMNS=120",
         "LINES=30",
@@ -388,7 +411,11 @@ async function startDockerSessionUncoordinated(
         `RUNNER_MAX_FILE_WRITE_BYTES=${env.maxWorkspaceBytes}`,
       ],
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
-      HostConfig: {
+      HostConfig: adminImage ? {
+        ...adminHostConfig,
+        // Do not introduce Binds, Mounts or Docker socket: guest root is NEVER
+        // allowed access to the host-backed learner workspace.
+      } : {
         Binds: [`${resolvedWorkspaceDir}:/workspace`],
         NetworkMode: sandboxProfile.networkMode,
         ReadonlyRootfs: sandboxProfile.readonlyRootfs,
@@ -408,6 +435,7 @@ async function startDockerSessionUncoordinated(
       id: sessionId,
       ownerKey,
       kind: normalized.kind,
+      labMode,
       workspaceKey:
         normalized.kind === "shell" ? normalized.workspaceKey ?? null : null,
       clientHostKey:
@@ -495,7 +523,7 @@ async function startDockerSessionUncoordinated(
       if (typeof timeouts.hardLifetimeMs === "number") {
         armHardLifetimeTimeout(sessionId, timeouts.hardLifetimeMs);
       }
-      armWorkspacePressureGuard(sessionId, resolvedWorkspaceDir);
+      if (labMode === "standard") armWorkspacePressureGuard(sessionId, resolvedWorkspaceDir);
 
       void container
         .wait()
@@ -599,6 +627,10 @@ export async function startDockerSession(
   req: InteractiveRunReq,
   ownerKey: string,
 ): Promise<StartSessionResult> {
+  // This must precede the reattach path. Otherwise an untrusted "admin"
+  // request could be silently served a standard session as if elevated.
+  const labDecision = inspectLearningLabRequest(req);
+  if (!labDecision.ok) return { ok: false, error: labDecision.error };
   if (req.kind !== "shell" || !req.clientOwnerKey) {
     consumeStartToken(ownerKey, req.kind === "shell" ? "shell" : "code");
     return await startDockerSessionUncoordinated(req, ownerKey);
@@ -652,4 +684,17 @@ export async function startDockerSession(
       shellStartsByOwner.delete(startKey);
     }
   }
+}
+
+/** Only the dedicated authenticated admin route may call this function. */
+export async function startDockerAdminSession(
+  ownerKey: string,
+  grant: VerifiedAdminGrant,
+): Promise<StartSessionResult> {
+  assertVerifiedAdminGrant(grant, ownerKey);
+  consumeStartToken(ownerKey, "shell");
+  // Distinct from /sessions/start: never reattach a standard shell as admin.
+  return startDockerSessionUncoordinated({
+    kind: "shell", mode: "interactive", language: "bash", files: [], forceNew: true,
+  }, ownerKey, "admin");
 }

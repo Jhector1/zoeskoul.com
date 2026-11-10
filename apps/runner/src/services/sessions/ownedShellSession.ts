@@ -1,4 +1,5 @@
 import type { SessionRecord } from "./sessionStore.js";
+import { sessionLearningLabMode, type LearningLabMode } from "../execution/learningLabMode.js";
 
 export function resolveOwnedShellSession(args: {
   sessions: SessionRecord[];
@@ -7,6 +8,7 @@ export function resolveOwnedShellSession(args: {
   clientWorkspaceKey?: string;
   workspaceKey?: string;
   forceNew?: boolean;
+  labMode?: LearningLabMode;
 }) {
   const owned = args.sessions.filter(
     (session) =>
@@ -18,7 +20,8 @@ export function resolveOwnedShellSession(args: {
     (session) =>
       session.clientHostKey === (args.clientHostKey ?? null) &&
       session.clientWorkspaceKey === (args.clientWorkspaceKey ?? null) &&
-      session.workspaceKey === (args.workspaceKey ?? null),
+      session.workspaceKey === (args.workspaceKey ?? null) &&
+      sessionLearningLabMode(session.labMode) === (args.labMode ?? "standard"),
   );
 
   return {

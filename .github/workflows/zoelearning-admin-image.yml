@@ -1,0 +1,124 @@
+name: ZoeLearning admin lab image (GHCR)
+
+on:
+  push:
+    branches:
+      - main
+      - 'feat/zoelearning-admin-*'
+    paths:
+      - '.github/workflows/zoelearning-admin-image.yml'
+      - 'apps/runner/runtime/learning-admin.Dockerfile'
+      - 'apps/runner/runtime/learning-admin-init.sh'
+      - 'apps/runner/pty-runner.py'
+      - 'apps/runner/src/services/execution/learningAdmin*'
+      - 'apps/runner/src/services/docker/startDockerSession.ts'
+      - 'apps/runner/src/routes/sessions.admin.*'
+      - 'scripts/learning-admin-lab/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/zoelearning-admin-image.yml'
+      - 'apps/runner/runtime/learning-admin.Dockerfile'
+      - 'apps/runner/runtime/learning-admin-init.sh'
+      - 'apps/runner/pty-runner.py'
+      - 'apps/runner/src/services/execution/learningAdmin*'
+      - 'apps/runner/src/services/docker/startDockerSession.ts'
+      - 'apps/runner/src/routes/sessions.admin.*'
+      - 'scripts/learning-admin-lab/**'
+  workflow_dispatch:
+
+concurrency:
+  group: zoelearning-admin-image-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  runner-tests:
+    name: Runner security and TypeScript checks
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '10.33.0'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install workspace dependencies
+        env:
+          DATABASE_URL: postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=public
+        run: pnpm install --frozen-lockfile
+      - name: Verify admin image sources
+        run: python3 scripts/learning-admin-lab/verify-admin-image-source.py
+      - name: Runner security tests
+        working-directory: apps/runner
+        run: |
+          pnpm exec vitest run --root . \
+            src/services/execution/learningAdminGrant.test.ts \
+            src/services/execution/learningAdminSandbox.test.ts \
+            src/services/execution/learningLabMode.test.ts \
+            src/services/sessions/ownedShellSession.test.ts \
+            src/services/execution/sandboxProfile.test.ts
+      - name: Runner TypeScript check
+        working-directory: apps/runner
+        run: pnpm exec tsc -p tsconfig.json --noEmit
+
+  image:
+    name: Build, smoke-test, and publish image
+    needs: runner-tests
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify image sources
+        run: python3 scripts/learning-admin-lab/verify-admin-image-source.py
+      - uses: docker/setup-buildx-action@v3
+      - name: Build image locally for smoke test
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/runner/runtime/learning-admin.Dockerfile
+          push: false
+          load: true
+          tags: zoeskoul-learning-admin:ci
+          cache-from: type=gha,scope=zoelearning-admin
+          cache-to: type=gha,scope=zoelearning-admin,mode=max
+      - name: Disposable image smoke test
+        run: bash scripts/learning-admin-lab/smoke-admin-image.sh zoeskoul-learning-admin:ci
+      - name: Authenticate to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish SHA-tagged image
+        id: publish
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/runner/runtime/learning-admin.Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/zoeskoul-learning-admin:sha-${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+          cache-from: type=gha,scope=zoelearning-admin
+          provenance: mode=max
+      - name: Record digest and pull command
+        env:
+          OWNER: ${{ github.repository_owner }}
+          DIGEST: ${{ steps.publish.outputs.digest }}
+        run: |
+          IMAGE="ghcr.io/${OWNER,,}/zoeskoul-learning-admin@${DIGEST}"
+          {
+            echo '## ZoeLearning admin image published (not deployed)'
+            echo "Digest: $DIGEST"
+            echo "Pull: docker --host unix:///run/user/1000/docker.sock pull $IMAGE"
+            echo 'Admin lab feature flag remains OFF until live isolation acceptance.'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -3,6 +3,9 @@ import { BUILD_EXECUTOR_HTTP_BODY_LIMIT_BYTES } from "@zoeskoul/build-executor-c
 import { requireServiceAuth } from "./middleware/serviceAuth.js";
 import { executionPoolGuard } from "./middleware/executionPoolGuard.js";
 import { startSessionRoute } from "./routes/sessions.start.js";
+import { startAdminSessionRoute } from "./routes/sessions.admin.start.js";
+import { revokeAdminSessionsRoute } from "./routes/sessions.admin.revoke.js";
+import { blockAdminWorkspaceApis } from "./middleware/adminWorkspaceBoundary.js";
 import { inputSessionRoute } from "./routes/sessions.input.js";
 import { cancelSessionRoute } from "./routes/sessions.cancel.js";
 import { streamSessionRoute } from "./routes/sessions.stream.js";
@@ -131,6 +134,12 @@ app.post("/build/previews/:previewId/cancel", cancelBuildPreviewRoute);
 app.post("/build/previews/project/drain", drainBuildProjectPreviewsRoute);
 app.post("/build/previews/project/release", releaseBuildProjectPreviewDrainRoute);
 app.post("/sessions/start", startSessionRoute);
+app.post("/sessions/admin/start", startAdminSessionRoute);
+app.post("/sessions/admin/revoke", revokeAdminSessionsRoute);
+// Register BEFORE any workspace/file route. No container-root to host-file bridge.
+app.use("/sessions/:sessionId/snapshot-workspace", blockAdminWorkspaceApis);
+app.use("/sessions/:sessionId/replace-workspace", blockAdminWorkspaceApis);
+app.use("/sessions/:sessionId/files", blockAdminWorkspaceApis);
 app.post("/sessions/active", activeSessionsRoute);
 app.post("/sessions/:sessionId/input", inputSessionRoute);
 app.post("/sessions/:sessionId/resize", resizeSessionRoute);

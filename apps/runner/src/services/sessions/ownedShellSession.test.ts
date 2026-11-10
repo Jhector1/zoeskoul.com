@@ -51,6 +51,30 @@ describe("resolveOwnedShellSession", () => {
     expect(result.sessionsToCancel.map((item) => item.id)).toEqual([existing.id]);
   });
 
+it("does not reuse a standard terminal for a future admin profile", () => {
+  const result = resolveOwnedShellSession({
+    sessions: [session({ labMode: "standard" })],
+    clientHostKey: "host-a",
+    clientOwnerKey: "terminal-a",
+    clientWorkspaceKey: "lesson-a",
+    workspaceKey: "runner-workspace-a",
+    labMode: "admin",
+  });
+  expect(result.reusable).toBeNull();
+  expect(result.sessionsToCancel.map((item) => item.id)).toEqual(["session-a"]);
+});
+
+it("preserves standard reattach for legacy sessions without mode metadata", () => {
+  const result = resolveOwnedShellSession({
+    sessions: [session({ labMode: undefined })],
+    clientHostKey: "host-a",
+    clientOwnerKey: "terminal-a",
+    clientWorkspaceKey: "lesson-a",
+    workspaceKey: "runner-workspace-a",
+  });
+  expect(result.reusable?.id).toBe("session-a");
+});
+
   it("honors an explicit fresh-terminal restart", () => {
     const existing = session();
     const result = resolveOwnedShellSession({
