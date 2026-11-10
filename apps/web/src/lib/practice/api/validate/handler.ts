@@ -279,37 +279,27 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         persistedExpected: expectedCanon,
     });
 
-    // Never grade privileged filesystem state from client-supplied commands,
-    // terminal output, or workspace JSON. When an exercise opts into these
-    // expectations, verification must come from the future actor-bound Runner
-    // probe. Return a retryable 503 *before* recording an attempt or credit.
-    if (requiresAuthoritativeAdminLabEvidence(expectedCanon) ||
-        requiresAuthoritativeAdminLabEvidence(effectiveExpectedCanon)) {
-        const response = jsonApiResponse({
-            requestId,
-            message: "Administrative filesystem verification is not available yet.",
-            status: 503,
-            extra: {
-                ok: null,
-                code: "ADMIN_LAB_VERIFIER_UNAVAILABLE",
-                explanation: null,
-                feedback: null,
-                finalized: false,
-                duplicate: false,
-                attempts: null,
-                sessionComplete: false,
-            },
+    // Admin tasks use only server-authored expectations and Docker-daemon
+    // metadata. Normal programming/terminal exercises retain the current grader.
+    // This branch uses the SAME persistValidatedAttempt/completion path below.
+    const isAdminFilesystemTask = requiresAuthoritativeAdminLabEvidence(expectedCanon) ||
+        requiresAuthoritativeAdminLabEvidence(effectiveExpectedCanon);
+    const adminVerifier = isAdminFilesystemTask
+        ? (await import("./grade/verifyAdminLabFilesystem")).verifyAdminLabFilesystemForPractice
+        : null;
+    const graded = adminVerifier
+        ? await adminVerifier({
+            instance, actor, request: req,
+            answer: isReveal ? null : (answer ?? null),
+            persistedExpected: expectedCanon,
+            effectiveExpected: effectiveExpectedCanon,
+        })
+        : await gradeInstance({
+            instance,
+            expectedCanon: effectiveExpectedCanon,
+            answer: isReveal ? null : answer!,
+            showDebug: Boolean(session?.assignment?.showDebug),
         });
-        response.headers.set("Retry-After", "60");
-        return attachGuestCookie(response, setGuestId ?? undefined);
-    }
-
-    const graded = await gradeInstance({
-        instance,
-        expectedCanon: effectiveExpectedCanon,
-        answer: isReveal ? null : answer!,
-        showDebug: Boolean(session?.assignment?.showDebug),
-    });
 
     if (graded.infrastructureFailure) {
         const failure = graded.infrastructureFailure;

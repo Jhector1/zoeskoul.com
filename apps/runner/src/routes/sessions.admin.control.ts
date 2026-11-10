@@ -6,7 +6,7 @@ import { getAllSessions } from "../services/sessions/sessionStore.js";
 import { killSession } from "../services/docker/killSession.js";
 import { docker } from "../services/docker/dockerClient.js";
 
-function validOperatorSecret(submitted: string): boolean {
+export function validOperatorSecret(submitted: string): boolean {
   const configured = process.env.ZOESKOUL_LEARNING_ADMIN_CONTROL_SECRET ?? "";
   if (Buffer.byteLength(configured, "utf8") < 32 || submitted.length > 512) return false;
   const expected = Buffer.from(configured, "utf8");

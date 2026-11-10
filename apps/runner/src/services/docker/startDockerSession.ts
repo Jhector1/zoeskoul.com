@@ -40,6 +40,7 @@ import { getExecutionPlan } from "../execution/executionPlan.js";
 import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
 import { inspectLearningLabRequest, type LearningLabMode } from "../execution/learningLabMode.js";
 import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGrant } from "../execution/learningAdminGrant.js";
+import { ADMIN_COURSE_SLUG, isEligibleAdminLabLesson } from "../execution/learningAdminLessonPolicy.js";
 import { adminHostConfig, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
 import { assertAdminLabSwitch } from "../execution/learningAdminSwitch.js";
 import { docker } from "./dockerClient.js";
@@ -265,6 +266,7 @@ async function startDockerSessionUncoordinated(
   ownerKey: string,
   labMode: LearningLabMode = "standard",
   adminGeneration?: number,
+  adminTopicSlug?: string,
 ): Promise<StartSessionResult> {
   // Enforce at the service boundary too: internal callers must not bypass
   // the HTTP guard. No session, workspace, or container exists on refusal.
@@ -291,6 +293,9 @@ async function startDockerSessionUncoordinated(
         normalized.files.length !== 0 || normalized.workspaceKey || normalized.cwd ||
         normalized.clientOwnerKey || normalized.clientWorkspaceKey || normalized.clientHostKey)) {
       throw new Error("Admin labs require an empty disposable shell workspace.");
+    }
+    if (labMode === "admin" && !isEligibleAdminLabLesson(ADMIN_COURSE_SLUG, adminTopicSlug)) {
+      throw new Error("Verified administrative lesson identity required.");
     }
     if (labMode === "admin") assertAdminLabSwitch(adminGeneration);
     const adminImage = labMode === "admin" ? adminLabConfiguration().image : null;
@@ -453,6 +458,7 @@ async function startDockerSessionUncoordinated(
       ownerKey,
       kind: normalized.kind,
       labMode,
+      adminTopicSlug: labMode === "admin" ? adminTopicSlug : null,
       workspaceKey:
         normalized.kind === "shell" ? normalized.workspaceKey ?? null : null,
       clientHostKey:
@@ -716,5 +722,5 @@ export async function startDockerAdminSession(
   // Distinct from /sessions/start: never reattach a standard shell as admin.
   return startDockerSessionUncoordinated({
     kind: "shell", mode: "interactive", language: "bash", files: [], forceNew: true,
-  }, ownerKey, "admin", admissionGeneration);
+  }, ownerKey, "admin", admissionGeneration, grant.topicSlug);
 }

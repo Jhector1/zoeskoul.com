@@ -15,6 +15,8 @@ export type SessionRecord = {
   ownerKey?: string;
   kind?: "code" | "shell";
   labMode?: LearningLabMode;
+  /** Signed lesson identity retained for actor-bound verification. */
+  adminTopicSlug?: string | null;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -144,6 +146,8 @@ export function createSession(args: {
   ownerKey?: string;
   kind?: "code" | "shell";
   labMode?: LearningLabMode;
+  /** Signed lesson identity retained for actor-bound verification. */
+  adminTopicSlug?: string | null;
   workspaceKey?: string | null;
   clientHostKey?: string | null;
   clientOwnerKey?: string | null;
@@ -159,6 +163,7 @@ export function createSession(args: {
     ownerKey: args.ownerKey,
     kind: args.kind,
     labMode: args.labMode ?? "standard",
+    adminTopicSlug: args.labMode === "admin" ? args.adminTopicSlug ?? null : null,
     workspaceKey: args.workspaceKey ?? null,
     clientHostKey: args.clientHostKey ?? null,
     clientOwnerKey: args.clientOwnerKey ?? null,

@@ -1,16 +1,12 @@
-import crypto from "node:crypto";
 import type { RequestHandler } from "express";
 import { getAllSessions } from "../services/sessions/sessionStore.js";
 import { killSession } from "../services/docker/killSession.js";
 import { setAdminLabSwitch } from "../services/execution/learningAdminSwitch.js";
+import { validOperatorSecret } from "./sessions.admin.control.js";
 
 /** Explicit operator revocation. Requires independent control secret. */
 export const revokeAdminSessionsRoute: RequestHandler = async (req, res) => {
-  const secret = process.env.ZOESKOUL_LEARNING_ADMIN_GRANT_SECRET ?? "";
-  const submitted = req.header("x-learning-admin-control") ?? "";
-  const a = Buffer.from(secret);
-  const b = Buffer.from(submitted);
-  if (secret.length < 32 || b.length !== a.length || !crypto.timingSafeEqual(a,b)) {
+  if (!validOperatorSecret(req.header("x-learning-admin-control") ?? "")) {
     return res.status(403).json({ ok: false, error: "Forbidden." });
   }
   setAdminLabSwitch(false);
