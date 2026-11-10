@@ -39,11 +39,11 @@ jobs:
     name: Runner security and TypeScript checks
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
         with:
           version: '10.33.0'
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: pnpm
@@ -51,6 +51,10 @@ jobs:
         env:
           DATABASE_URL: postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=public
         run: pnpm install --frozen-lockfile
+      - name: Build Runner workspace dependencies
+        env:
+          DATABASE_URL: postgresql://zoeskoul:zoeskoul@localhost:5432/zoeskoul?schema=public
+        run: pnpm --filter '@zoeskoul/runner^...' --if-present run build
       - name: Verify admin image sources
         run: python3 scripts/learning-admin-lab/verify-admin-image-source.py
       - name: Runner security tests
@@ -75,12 +79,12 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Verify image sources
         run: python3 scripts/learning-admin-lab/verify-admin-image-source.py
-      - uses: docker/setup-buildx-action@v3
+      - uses: docker/setup-buildx-action@v4
       - name: Build image locally for smoke test
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: apps/runner/runtime/learning-admin.Dockerfile
@@ -92,14 +96,14 @@ jobs:
       - name: Disposable image smoke test
         run: bash scripts/learning-admin-lab/smoke-admin-image.sh zoeskoul-learning-admin:ci
       - name: Authenticate to GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish SHA-tagged image
         id: publish
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: apps/runner/runtime/learning-admin.Dockerfile
