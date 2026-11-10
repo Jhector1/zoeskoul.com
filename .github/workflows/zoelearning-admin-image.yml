@@ -101,6 +101,15 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Resolve lowercase GHCR image name
+        id: ghcr-image
+        shell: bash
+        env:
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          owner_lower="$(printf '%s' "$OWNER" | LC_ALL=C tr '[:upper:]' '[:lower:]')"
+          printf 'image=ghcr.io/%s/zoeskoul-learning-admin\n' "$owner_lower" >> "$GITHUB_OUTPUT"
+          printf 'Publishing to ghcr.io/%s/zoeskoul-learning-admin\n' "$owner_lower"
       - name: Publish SHA-tagged image
         id: publish
         uses: docker/build-push-action@v7
@@ -108,7 +117,7 @@ jobs:
           context: .
           file: apps/runner/runtime/learning-admin.Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/zoeskoul-learning-admin:sha-${{ github.sha }}
+          tags: ${{ steps.ghcr-image.outputs.image }}:sha-${{ github.sha }}
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
@@ -116,10 +125,10 @@ jobs:
           provenance: mode=max
       - name: Record digest and pull command
         env:
-          OWNER: ${{ github.repository_owner }}
+          IMAGE_NAME: ${{ steps.ghcr-image.outputs.image }}
           DIGEST: ${{ steps.publish.outputs.digest }}
         run: |
-          IMAGE="ghcr.io/${OWNER,,}/zoeskoul-learning-admin@${DIGEST}"
+          IMAGE="${IMAGE_NAME}@${DIGEST}"
           {
             echo '## ZoeLearning admin image published (not deployed)'
             echo "Digest: $DIGEST"
