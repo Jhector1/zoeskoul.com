@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { readAdminVerifierLogOutput } from "./adminVerifierLogOutput.js";
 import type { AdminLabFilesystemExpected } from "@zoeskoul/code-contracts";
 import { AdminLabFilesystemExpectedSchema } from "@zoeskoul/code-contracts";
 import { docker } from "../docker/dockerClient.js";
@@ -181,8 +182,8 @@ async function inspectWithSidecar(args: {
     const status = await withTimeout(container.wait(), 7000);
     if (status.StatusCode !== 0) throw new AdminFilesystemVerifierUnavailable();
     const output = await withTimeout(container.logs({stdout:true,stderr:true,tail:4}), 5000);
-    if (!Buffer.isBuffer(output) || output.length > 8192) throw new AdminFilesystemVerifierUnavailable();
-    const parsed = JSON.parse(output.toString("utf8").trim()) as {ok?:unknown;failedPaths?:unknown};
+    const verifiedText = await readAdminVerifierLogOutput(output);
+    const parsed = JSON.parse(verifiedText) as {ok?:unknown;failedPaths?:unknown};
     const expectedPaths = new Set(args.expected.required.map((entry) => entry.path));
     if (parsed.ok !== true || !Array.isArray(parsed.failedPaths) ||
         parsed.failedPaths.some((path) => typeof path !== "string" || !expectedPaths.has(path)) ||
