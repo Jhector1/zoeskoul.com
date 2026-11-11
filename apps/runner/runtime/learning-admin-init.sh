@@ -17,7 +17,8 @@ fi
 umask 077
 # This password belongs exclusively to this disposable lab.
 lab_root_password="$(python3 -c 'import secrets; print(secrets.token_urlsafe(24))')"
-printf 'root:%s\n' "$lab_root_password" | chpasswd
+# Runner limits PATH to /usr/bin:/bin. This account tool lives in /usr/sbin.
+printf 'root:%s\n' "$lab_root_password" | /usr/sbin/chpasswd
 printf '%s\n' "$lab_root_password" > /workspace/.lab-root-password
 chown 1000:1000 /workspace/.lab-root-password
 chmod 0600 /workspace/.lab-root-password

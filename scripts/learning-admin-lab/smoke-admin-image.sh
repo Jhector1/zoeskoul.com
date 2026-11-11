@@ -12,9 +12,12 @@ docker run --rm --network none --cap-drop ALL \
   --memory 192m --memory-swap 192m --cpus 0.5 --pids-limit 48 \
   --tmpfs /workspace:rw,nodev,nosuid,size=16m,mode=1777 \
   --tmpfs /tmp:rw,nodev,nosuid,size=8m,mode=1777 \
+  -e PATH=/usr/bin:/bin \
   --entrypoint /opt/runner/admin-init.sh \
   "$image" /bin/bash -ec '
     test "$(id -u)" = 0
+    test "$PATH" = /usr/bin:/bin
+    test -x /usr/sbin/chpasswd
     test "$(stat -c %a:%u /workspace/.lab-root-password)" = 600:1000
     test "$(wc -c < /workspace/.lab-root-password)" -ge 24
     test "$(su - sandbox -c "id -u")" = 1000
