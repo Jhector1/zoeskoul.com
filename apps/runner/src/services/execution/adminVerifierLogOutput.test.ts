@@ -18,6 +18,56 @@ describe("bounded Dockerode administrator verifier log handling", () => {
     expect(await readAdminVerifierLogOutput(Readable.from([evidence]))).toBe(evidence.trim());
   });
 
+  it("accepts Dockerode's exact parsed JSON result for a missing file", async () => {
+    const value = { ok: true, failedPaths: ["/workspace/stage4b8m-missing-proof.txt"] };
+    expect(JSON.parse(await readAdminVerifierLogOutput(value))).toEqual(value);
+  });
+
+  it("accepts the exact parsed JSON response when every check passes", async () => {
+    expect(await readAdminVerifierLogOutput({ok: true, failedPaths: []}))
+      .toBe('{"ok":true,"failedPaths":[]}');
+  });
+
+  it("rejects unexpected or missing structured result fields", async () => {
+    for (const value of [
+      {ok: true, failedPaths: [], extra: true},
+      {ok: true},
+      {ok: false, failedPaths: []},
+      {ok: 1, failedPaths: []},
+      {ok: true, failedPaths: "[]"},
+      {ok: true, failedPaths: [], toJSON: () => "sneaky"},
+    ]) {
+      await expect(readAdminVerifierLogOutput(value)).rejects.toThrow(/unavailable/i);
+    }
+  });
+
+  it("rejects invalid structured paths, duplicates and arrays over the limit", async () => {
+    for (const value of [
+      {ok: true, failedPaths: ["/etc/shadow"]},
+      {ok: true, failedPaths: [123]},
+      {ok: true, failedPaths: ["/workspace/a", "/workspace/a"]},
+      {ok: true, failedPaths: Array(9).fill("/workspace/a")},
+      {ok: true, failedPaths: ["/workspace/" + "x".repeat(513)]},
+      {ok: true, failedPaths: new Array(1)},
+      {ok: true, failedPaths: Object.assign(["/workspace/a"], {evil: true})},
+    ]) {
+      await expect(readAdminVerifierLogOutput(value)).rejects.toThrow(/unavailable/i);
+    }
+  });
+
+  it("rejects accessors, non-plain objects and symbol properties", async () => {
+    const getter = Object.defineProperties({}, {
+      ok: { enumerable: true, get() { throw new Error("must not run"); } },
+      failedPaths: { value: [], enumerable: true },
+    });
+    const derived = Object.assign(Object.create({ inherited: true }),
+      {ok: true, failedPaths: []});
+    const symbolic = {ok: true, failedPaths: [], [Symbol("hidden")]: true};
+    for (const value of [getter, derived, symbolic]) {
+      await expect(readAdminVerifierLogOutput(value)).rejects.toThrow(/unavailable/i);
+    }
+  });
+
   it("fails closed on oversized logs and destroys the stream", async () => {
     const stream = Readable.from([Buffer.alloc(8193, "x")]);
     await expect(readAdminVerifierLogOutput(stream)).rejects.toThrow(/unavailable/i);

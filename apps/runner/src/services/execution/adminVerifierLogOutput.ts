@@ -11,6 +11,62 @@ export class AdminVerifierLogOutputUnavailable extends Error {
   }
 }
 
+
+/**
+ * Dockerode can JSON-decode application/json container logs before returning
+ * them. Treat that response as untrusted evidence, not an arbitrary object.
+ * The caller still verifies that every failed path was actually requested.
+ */
+function readParsedDockerodeVerifierResult(source: object): string {
+  try {
+    const prototype = Object.getPrototypeOf(source);
+    if (prototype !== Object.prototype && prototype !== null) {
+      throw new Error("non-plain result");
+    }
+
+    const keys = Reflect.ownKeys(source);
+    if (keys.length !== 2 || !keys.includes("ok") || !keys.includes("failedPaths")) {
+      throw new Error("unexpected result keys");
+    }
+
+    const okProperty = Object.getOwnPropertyDescriptor(source, "ok");
+    const failedProperty = Object.getOwnPropertyDescriptor(source, "failedPaths");
+    if (!okProperty || !Object.hasOwn(okProperty, "value") ||
+        !failedProperty || !Object.hasOwn(failedProperty, "value") ||
+        okProperty.value !== true || !Array.isArray(failedProperty.value)) {
+      throw new Error("invalid result fields");
+    }
+
+    const failedPaths: unknown[] = failedProperty.value;
+    if (Object.getPrototypeOf(failedPaths) !== Array.prototype || failedPaths.length > 8 ||
+        Reflect.ownKeys(failedPaths).length !== failedPaths.length + 1) {
+      throw new Error("invalid result array");
+    }
+
+    const checked: string[] = [];
+    for (let i = 0; i < failedPaths.length; i++) {
+      const entry = Object.getOwnPropertyDescriptor(failedPaths, String(i));
+      if (!entry || !Object.hasOwn(entry, "value") || typeof entry.value !== "string" ||
+          !entry.value.startsWith("/workspace/") || entry.value.length > 512) {
+        throw new Error("invalid result path");
+      }
+      checked.push(entry.value);
+    }
+    if (new Set(checked).size !== checked.length) {
+      throw new Error("duplicate result path");
+    }
+
+    const canonical = JSON.stringify({ ok: true, failedPaths: checked });
+    if (Buffer.byteLength(canonical, "utf8") === 0 ||
+        Buffer.byteLength(canonical, "utf8") > MAX_VERIFIER_LOG_BYTES) {
+      throw new Error("result too large");
+    }
+    return canonical;
+  } catch {
+    throw new AdminVerifierLogOutputUnavailable();
+  }
+}
+
 export async function readAdminVerifierLogOutput(
   source: unknown,
   timeoutMs = VERIFIER_LOG_TIMEOUT_MS,
@@ -27,7 +83,7 @@ export async function readAdminVerifierLogOutput(
     const stream = source as Readable;
     if (typeof stream[Symbol.asyncIterator] !== "function" ||
         typeof stream.destroy !== "function") {
-      throw new AdminVerifierLogOutputUnavailable();
+      return readParsedDockerodeVerifierResult(source);
     }
 
     const chunks: Buffer[] = [];
