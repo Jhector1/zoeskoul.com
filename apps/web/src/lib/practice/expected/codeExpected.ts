@@ -1,4 +1,5 @@
 import type { CodeExpectedInput } from "@/lib/practice/api/validate/schemas";
+import { AdminLabFilesystemExpectedSchema } from "@zoeskoul/code-contracts";
 import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
 import type { SqlDialect } from "@/lib/practice/types";
 import {
@@ -88,25 +89,87 @@ ${stdout.trimEnd()}
 }
 
 
+/**
+ * Course 2 filesystem evidence is a SERVER-ONLY expected payload. This
+ * normalizer is the existing secretPayload.expected persistence boundary;
+ * it does not authorize a lab, expose data to students, or execute grading.
+ */
 function normalizeShellTaskExpectedForSave(expected: any) {
+    const hasFilesystemEvidence = Boolean(
+        expected && typeof expected === "object" &&
+        Object.prototype.hasOwnProperty.call(expected, "adminLabFilesystemExpectations"),
+    );
     if (!isShellTaskExpectedLike(expected)) {
+        if (hasFilesystemEvidence) {
+            throw new Error("Invalid admin filesystem expected: Bash shell_task required.");
+        }
         return null;
     }
 
-    return makeShellTaskExpected({
-        mode: getShellTaskExpectedMode(expected) ?? "terminal_workspace",
-        workspaceExpectations:
-            expected?.workspaceExpectations ??
-            expected?.workspace?.workspaceExpectations,
-        terminalExpectations: expected?.terminalExpectations,
-        hiddenShellCheck: expected?.hiddenShellCheck,
-        sourceChecks: expected?.sourceChecks,
-        tests: Array.isArray(expected?.tests) ? expected.tests : undefined,
-        solutionCode:
-            typeof expected?.solutionCode === "string"
-                ? expected.solutionCode
-                : undefined,
-    }) as any;
+    // Preserve Course 1 and all ordinary shell_task behavior byte-for-byte.
+    if (!hasFilesystemEvidence) {
+        return makeShellTaskExpected({
+            mode: getShellTaskExpectedMode(expected) ?? "terminal_workspace",
+            workspaceExpectations:
+                expected?.workspaceExpectations ??
+                expected?.workspace?.workspaceExpectations,
+            terminalExpectations: expected?.terminalExpectations,
+            hiddenShellCheck: expected?.hiddenShellCheck,
+            sourceChecks: expected?.sourceChecks,
+            tests: Array.isArray(expected?.tests) ? expected.tests : undefined,
+            solutionCode:
+                typeof expected?.solutionCode === "string"
+                    ? expected.solutionCode
+                    : undefined,
+        }) as any;
+    }
+
+    const parsed = AdminLabFilesystemExpectedSchema.safeParse(
+        expected.adminLabFilesystemExpectations,
+    );
+    if (!parsed.success || expected.language !== "bash" ||
+        expected.recipeType !== "shell_task" ||
+        getShellTaskExpectedMode(expected) !== "terminal_workspace") {
+        throw new Error("Invalid admin filesystem expected: authorized Bash terminal contract required.");
+    }
+
+    // Never blend transcript/source/workspace grading with authoritative
+    // read-only Docker metadata evidence. Empty semanticChecks are a legacy
+    // shell_task default and are removed below because the verifier rejects
+    // even empty secondary strategy fields.
+    const incompatible = [
+        "workspaceExpectations", "terminalExpectations", "hiddenShellCheck",
+        "sourceChecks", "solutionFiles",
+    ].some((key) => expected[key] != null) ||
+        expected?.workspace?.workspaceExpectations != null ||
+        (Array.isArray(expected?.semanticChecks) && expected.semanticChecks.length > 0) ||
+        (expected?.semanticChecks != null && !Array.isArray(expected.semanticChecks)) ||
+        (Array.isArray(expected?.tests) && expected.tests.some((test: any) => {
+            if (!test || typeof test !== "object") return false;
+            const stdout = typeof test.stdout === "string" ? test.stdout.trim() : "";
+            const stdin = typeof test.stdin === "string" ? test.stdin.trim() : "";
+            return Boolean(stdout || stdin);
+        })) ||
+        (expected?.tests != null && !Array.isArray(expected.tests));
+    if (incompatible) {
+        throw new Error("Invalid admin filesystem expected: conflicting grading strategy.");
+    }
+
+    // The ordinary Course 1 shell_task builder deliberately requires at least
+    // one of the regular terminal/workspace strategies. It MUST remain strict.
+    // This independently authorized, filesystem-only expected contract instead
+    // goes through the existing practice persistence + trusted Runner branch.
+    // Materialize only canonical metadata and validated server-private evidence;
+    // do not invent a dummy check or persist a competing grading strategy.
+    return {
+        kind: "code_input",
+        strategy: "programming",
+        language: "bash",
+        checkMode: "stdout",
+        recipeType: "shell_task",
+        shellTaskMode: "terminal_workspace",
+        adminLabFilesystemExpectations: parsed.data,
+    } as any;
 }
 export function makeCodeExpected(args: ProgrammingMakeCodeExpectedArgs): CodeExpectedInput;
 export function makeCodeExpected(args: SqlMakeCodeExpectedArgs): CodeExpectedInput;
