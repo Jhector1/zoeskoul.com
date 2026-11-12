@@ -88,7 +88,10 @@ def main():
                 if not ok:
                     failed.append(path)
             except OSError as exc:
-                if exc.errno in (errno.ENOENT, errno.ELOOP, errno.ENOTDIR):
+                # Unsearchable directory => ordinary verification FAIL, never
+                # assume inaccessible metadata matches the expected state.
+                if exc.errno in (errno.ENOENT, errno.ELOOP, errno.ENOTDIR,
+                                 errno.EACCES, errno.EPERM):
                     failed.append(path)
                 else:
                     raise
@@ -136,6 +139,11 @@ function verifyLearnerContainer(inspected: any, session: { id: string; adminVolu
   }
 }
 
+// Match the unprivileged owner of the dedicated course workspace. Root with
+// CapDrop=[ALL] cannot traverse 0700 directories owned by UID 1000; never add
+// DAC bypass capabilities to the verifier to work around that restriction.
+const ADMIN_FILESYSTEM_VERIFIER_USER = "1000:1000";
+
 async function inspectWithSidecar(args: {
   image: string;
   volume: string;
@@ -149,7 +157,7 @@ async function inspectWithSidecar(args: {
     container = await withTimeout(docker.createContainer({
       name,
       Image: args.image,
-      User: "0:0",
+      User: ADMIN_FILESYSTEM_VERIFIER_USER,
       Entrypoint: ["/usr/bin/python3"],
       Cmd: ["-I", "-B", "-c", VERIFY_PROGRAM, JSON.stringify(args.expected.required)],
       Tty: true,
@@ -181,7 +189,8 @@ async function inspectWithSidecar(args: {
     stage = "sidecar_attestation";
     const inspected = await withTimeout(container.inspect(), 5000);
     const host = inspected.HostConfig;
-    if (host?.NetworkMode !== "none" || host?.ReadonlyRootfs !== true ||
+    if (inspected.Config?.User !== ADMIN_FILESYSTEM_VERIFIER_USER ||
+        host?.NetworkMode !== "none" || host?.ReadonlyRootfs !== true ||
         host?.Privileged !== false || (host?.Binds ?? []).length !== 0 ||
         (host?.CapAdd ?? []).length !== 0 ||
         !host?.CapDrop?.includes("ALL") ||

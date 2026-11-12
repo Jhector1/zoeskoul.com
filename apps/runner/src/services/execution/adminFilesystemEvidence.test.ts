@@ -51,7 +51,7 @@ beforeEach(() => {
   mocks.getActiveSessionsForActor.mockReturnValue([session]);
   learner = {inspect:vi.fn(async()=>learnerInspect())};
   sidecar = {
-    inspect:vi.fn(async()=>({HostConfig:{NetworkMode:"none",ReadonlyRootfs:true,
+    inspect:vi.fn(async()=>({Config:{User:"1000:1000"},HostConfig:{NetworkMode:"none",ReadonlyRootfs:true,
       Privileged:false,Binds:[],CapAdd:[],CapDrop:["ALL"],
       Mounts:[{Source:VOLUME,ReadOnly:true}]}})),
     start:vi.fn(async()=>undefined),
@@ -71,7 +71,11 @@ describe("admin filesystem grading via read-only shared tmpfs", () => {
     expect(created.HostConfig).toMatchObject({NetworkMode:"none",ReadonlyRootfs:true,CapDrop:["ALL"],
       Mounts:[{Source:VOLUME,Target:"/workspace",ReadOnly:true}]});
     expect(created.Image).toBe(IMAGE);
+    expect(created.User).toBe("1000:1000");
+    expect(created.HostConfig.SecurityOpt).toContain("no-new-privileges");
     expect(created.Cmd[0]).toBe("-I");
+    expect(created.Cmd.join(" ")).toContain("errno.EACCES");
+    expect(created.Cmd.join(" ")).toContain("errno.EPERM");
     expect(created.Cmd.join(" ")).toContain("O_NOFOLLOW");
     expect(learner.exec).toBeUndefined();
     expect(sidecar.remove).toHaveBeenCalledWith({force:true});
@@ -79,6 +83,35 @@ describe("admin filesystem grading via read-only shared tmpfs", () => {
   it("returns incorrect and missing paths without consuming an infrastructure error",async()=>{
     sidecar.logs.mockResolvedValue(Buffer.from('{"ok":true,"failedPaths":["/workspace/project"]}\n'));
     expect(await verifyAdminFilesystem(checked())).toEqual({passed:false,failedPaths:["/workspace/project"]});
+  });
+  it("rejects an incorrectly privileged verifier identity before launch", async()=>{
+    sidecar.inspect.mockResolvedValueOnce({
+      Config:{User:"0:0"},
+      HostConfig:{NetworkMode:"none",ReadonlyRootfs:true,
+        Privileged:false,Binds:[],CapAdd:[],CapDrop:["ALL"],
+        Mounts:[{Source:VOLUME,ReadOnly:true}]},
+    });
+    await expect(verifyAdminFilesystem(checked())).rejects.toThrow("unavailable");
+    expect(sidecar.start).not.toHaveBeenCalled();
+    expect(sidecar.remove).toHaveBeenCalledWith({force:true});
+  });
+  it("forwards seven mixed-ownership capstone paths without relaxing path validation", async()=>{
+    const root="/workspace/secure-project";
+    const expected={required:[
+      {path:root,kind:"directory" as const,mode:"0755",uid:1000,gid:1000},
+      {path:`${root}/README.md`,kind:"file" as const,mode:"0644",uid:0,gid:0},
+      {path:`${root}/scripts`,kind:"directory" as const,mode:"0700",uid:1000,gid:1000},
+      {path:`${root}/scripts/run.sh`,kind:"file" as const,mode:"0700",uid:1000,gid:1000},
+      {path:`${root}/secrets.env`,kind:"file" as const,mode:"0600",uid:1000,gid:1000},
+      {path:`${root}/shared`,kind:"directory" as const,mode:"0770",uid:1000,gid:1000},
+      {path:`${root}/shared/notes.txt`,kind:"file" as const,mode:"0640",uid:1000,gid:1000},
+    ]};
+    await expect(verifyAdminFilesystem({...checked(),expected})).resolves.toEqual({passed:true,failedPaths:[]});
+    const created=mocks.createContainer.mock.calls[0][0];
+    expect(created.User).toBe("1000:1000");
+    expect(JSON.parse(created.Cmd[4])).toEqual(expected.required);
+    expect(created.HostConfig.CapDrop).toEqual(["ALL"]);
+    expect(created.HostConfig.Mounts[0].ReadOnly).toBe(true);
   });
   it("rejects wrong-topic, standard, ambiguous and unowned sessions",async()=>{
     mocks.getActiveSessionsForActor.mockReturnValue([{...session,labMode:"standard"}]);
