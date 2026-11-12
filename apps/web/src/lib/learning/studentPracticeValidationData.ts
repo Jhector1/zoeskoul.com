@@ -5,6 +5,7 @@ import type {
 type JsonRecord = Record<string, unknown>;
 
 const FORBIDDEN_KEYS = new Set([
+  "adminLabFilesystemExpectations",
   "answer",
   "answerId",
   "answerKey",

@@ -104,6 +104,7 @@ const KIND_PUBLIC_FIELDS: Record<
 };
 
 const FORBIDDEN_FIELDS = new Set<string>([
+  "adminLabFilesystemExpectations",
   "answer",
   "answerId",
   "answerKey",
