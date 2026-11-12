@@ -14,6 +14,7 @@ import {
     toPracticeKindOrThrow,
 } from "../../shared/prismaMappers";
 import { normalizeExpectedForSave } from "../mappers/normalizeExpected.mapper";
+import { redactAdminFilesystemExpectations } from "./privateAdminFilesystemPayload";
 import { buildExpectedAnswerPayload } from "../mappers/expectedAnswerPayload.mapper";
 
 export function toDbPurpose(
@@ -126,7 +127,10 @@ export async function createPracticeInstance(args: {
      * for authored contract fields.
      */
     const publicPayload = {
-        ...(exercise as any),
+        // The same raw snapshot is returned by /api/practice/get. Preserve
+        // Course 1's public fields, but never persist private filesystem
+        // expectations into a student-readable instance payload.
+        ...redactAdminFilesystemExpectations(exercise as any),
         topic: dbTopicSlug,
     } as any;
 
