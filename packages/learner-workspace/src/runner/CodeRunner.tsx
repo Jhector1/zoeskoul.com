@@ -298,6 +298,7 @@ export const resolveSqlMobilePaneDefault =
 
 export function resolveRunnerPaneDefaultTab(args: {
     policy?: ToolRunnerPanePolicy | null;
+    language?: WorkspaceLanguage;
     compact: boolean;
     terminalAvailable: boolean;
     terminalOnlyMode: boolean;
@@ -308,7 +309,15 @@ export function resolveRunnerPaneDefaultTab(args: {
         ? args.policy?.compactDefaultTab ?? args.policy?.defaultTab
         : args.policy?.defaultTab;
 
-    return authored === "terminal" && args.terminalAvailable
+    // Keep an explicit authored Output choice. Bash lessons without an authored
+    // tab preference should open the existing interactive PTY by default.
+    // This changes presentation only; authorization and session creation remain
+    // owned by the existing terminal controller and the server.
+    if (authored === "output") return "output";
+    if (authored === "terminal") {
+        return args.terminalAvailable ? "terminal" : "output";
+    }
+    return args.language === "bash" && args.terminalAvailable
         ? "terminal"
         : "output";
 }
@@ -335,6 +344,7 @@ type IdleOutputCollapseArgs = {
 type WorkspaceTerminalAutoOpenArgs = {
     outputTab: OutputTab;
     workspaceTerminalEnabled: boolean;
+    surfaceActive?: boolean;
     recoverState: string;
     state: string;
     restarting: boolean;
@@ -574,7 +584,11 @@ export function resolveMobileKeyboardViewport(args: {
 }
 
 export function shouldAutoOpenWorkspaceTerminal(args: WorkspaceTerminalAutoOpenArgs) {
-    if (args.outputTab !== "terminal" || !args.workspaceTerminalEnabled) {
+    if (
+        args.outputTab !== "terminal" ||
+        !args.workspaceTerminalEnabled ||
+        args.surfaceActive === false
+    ) {
         return false;
     }
 
@@ -720,6 +734,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const resolvedTheme = useResolvedAppTheme();
     const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs-dark");
     const runnerRootRef = useRef<HTMLDivElement | null>(null);
+    const [terminalSurfaceActive, setTerminalSurfaceActive] = useState(false);
     const editorSplitHostRef = useRef<HTMLDivElement | null>(null);
     const editorSplitDragCleanupRef = useRef<(() => void) | null>(null);
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
@@ -854,6 +869,43 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         isAuthenticated === true &&
         lang !== "sql" &&
         !isWeb;
+
+    // The Tools Code pane may remain mounted beneath an inactive Board/Notes
+    // tab. Do not allocate a new PTY just because an invisible Bash runner was
+    // mounted; resume the existing bounded auto-start when Code is revealed.
+    useEffect(() => {
+        const root = runnerRootRef.current;
+        if (!root || !workspaceTerminalEnabled || !showTerminal) {
+            setTerminalSurfaceActive(false);
+            return;
+        }
+
+        const refreshVisibility = () => {
+            const visible =
+                document.visibilityState === "visible" &&
+                root.isConnected &&
+                root.getClientRects().length > 0 &&
+                !root.closest('[aria-hidden="true"]');
+            setTerminalSurfaceActive((previous) =>
+                previous === visible ? previous : visible,
+            );
+        };
+
+        const observer = new MutationObserver(refreshVisibility);
+        for (let node: HTMLElement | null = root; node; node = node.parentElement) {
+            observer.observe(node, {
+                attributes: true,
+                attributeFilter: ["aria-hidden", "hidden", "style", "class"],
+            });
+        }
+        document.addEventListener("visibilitychange", refreshVisibility);
+        refreshVisibility();
+        return () => {
+            observer.disconnect();
+            document.removeEventListener("visibilitychange", refreshVisibility);
+        };
+    }, [workspaceTerminalEnabled, showTerminal]);
+
     const [terminalWindowId, setTerminalWindowId] = useState<string | null>(null);
     const [terminalTabs, setTerminalTabs] = useState<WorkspaceTerminalTab[]>([
         { id: "primary", label: "Terminal 1" },
@@ -1260,6 +1312,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const [outputTab, setOutputTab] = useState<OutputTab>(() =>
         resolveRunnerPaneDefaultTab({
             policy: runnerPaneOptions,
+            language: lang,
             compact: false,
             terminalAvailable: workspaceTerminalEnabled,
             terminalOnlyMode,
@@ -1298,6 +1351,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const runnerPaneDefaultTab = resolveRunnerPaneDefaultTab({
         policy: runnerPaneOptions,
+        language: lang,
         compact: isNarrowScreen,
         terminalAvailable: workspaceTerminalEnabled,
         terminalOnlyMode,
@@ -2123,6 +2177,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             terminalAutoOpenKey,
             outputTab,
             workspaceTerminalEnabled,
+            surfaceActive: terminalSurfaceActive,
             recoverState: workspaceTerm.recoverState,
             state: workspaceTerm.state,
             restarting: workspaceTerm.restarting,
@@ -2137,6 +2192,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [
         outputTab,
         workspaceTerminalEnabled,
+        terminalSurfaceActive,
         workspaceTerm.recoverState,
         workspaceTerm.state,
         workspaceTerm.restarting,
@@ -2180,6 +2236,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             !shouldAutoOpenWorkspaceTerminal({
                 outputTab,
                 workspaceTerminalEnabled,
+                surfaceActive: terminalSurfaceActive,
                 recoverState: workspaceTerm.recoverState,
                 state: workspaceTerm.state,
                 restarting: workspaceTerm.restarting,
@@ -2230,6 +2287,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [
         outputTab,
         workspaceTerminalEnabled,
+        terminalSurfaceActive,
         workspaceTerm.available,
         workspaceTerm.sessionId,
         workspaceTerm.started,
@@ -2348,6 +2406,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showHeaderBar &&
         showOpenTerminalButton !== false &&
         workspaceTerminalEnabled &&
+        !(lang === "bash" && runnerPaneDefaultTab === "terminal") &&
         !isWeb &&
         lang !== "sql" &&
         !terminalOnlyMode;
