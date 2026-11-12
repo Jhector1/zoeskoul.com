@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { RunSessionState, StartSessionResult } from "@zoeskoul/code-contracts";
-import { getActor } from "@/lib/practice/actor";
+import { getActor, actorKeyOf } from "@/lib/practice/actor";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { runnerPost, RunnerHttpError } from "@/lib/server/runnerClient";
 import { createAttachToken } from "@/lib/server/ptyAttachToken";
@@ -74,6 +74,9 @@ export async function POST(request: NextRequest) {
     if (!actor.userId) return reject("Sign in required.", 401);
     const actorKey = await requireRunnerActorKey();
     if (!/^u:[0-9a-f]{64}$/.test(actorKey)) return reject("Forbidden.", 403);
+    // Identity is resolved by two independent server helpers; refuse
+    // a mismatched user before access checks or grant creation.
+    if (actorKeyOf(actor) !== actorKey) return reject("Forbidden.", 403);
     if (!await authorizeStudentAdminLab({ actor, request, target })) {
       return reject("Administrative lab not authorized for this lesson.", 403);
     }

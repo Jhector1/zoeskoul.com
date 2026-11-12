@@ -4,7 +4,7 @@ import { authorizeStudentAdminLab } from "@/lib/learning/server/authorizeStudent
 import { parseStudentAdminLabTarget, STUDENT_ADMIN_COURSE_SLUG } from "@/lib/learning/server/learningAdminStudentPolicy";
 import { runnerPost } from "@/lib/server/runnerClient";
 import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
-import type { Actor } from "@/lib/practice/actor";
+import { actorKeyOf, type Actor } from "@/lib/practice/actor";
 import type { LoadedValidateInstance } from "../repositories/instance.repo";
 import type { SubmitAnswer } from "../schemas";
 import type { GradeResult } from "./index";
@@ -51,6 +51,8 @@ export async function verifyAdminLabFilesystemForPractice(args: {
     if (!await authorizeStudentAdminLab({actor: args.actor, request: args.request, target})) return unavailable();
     const actorKey = await requireRunnerActorKey();
     if (!/^u:[0-9a-f]{64}$/.test(actorKey)) return unavailable();
+    // Match the enrolled practice actor before consulting privileged evidence.
+    if (actorKeyOf(args.actor) !== actorKey) return unavailable();
     const result = await runnerPost<{
       ok: boolean;
       passed: boolean;

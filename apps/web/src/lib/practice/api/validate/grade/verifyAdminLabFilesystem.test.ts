@@ -2,11 +2,13 @@ import {beforeEach, describe, expect, it, vi} from "vitest";
 const mocks = vi.hoisted(() => ({
   authorize:vi.fn(),
   actorKey:vi.fn(),
+  actorKeyOf:vi.fn(),
   runnerPost:vi.fn(),
 }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/learning/server/authorizeStudentAdminLab", () => ({authorizeStudentAdminLab:mocks.authorize}));
 vi.mock("@/lib/server/runnerActorKey", () => ({requireRunnerActorKey:mocks.actorKey}));
+vi.mock("@/lib/practice/actor", () => ({actorKeyOf:mocks.actorKeyOf}));
 vi.mock("@/lib/server/runnerClient", () => ({runnerPost:mocks.runnerPost}));
 import {verifyAdminLabFilesystemForPractice} from "./verifyAdminLabFilesystem";
 const target = {topicSlug:"sudo-root-concepts",moduleSlug:"linux-module-3-users-groups-troubleshooting"};
@@ -22,12 +24,14 @@ beforeEach(() => {
   vi.clearAllMocks();
   mocks.authorize.mockResolvedValue(true);
   mocks.actorKey.mockResolvedValue("u:"+"a".repeat(64));
+  mocks.actorKeyOf.mockReturnValue("u:"+"a".repeat(64));
   mocks.runnerPost.mockResolvedValue({ok:true,passed:true,failedPaths:[]});
 });
 describe("reuse existing practice grading with Runner filesystem evidence", () => {
   it("grades only trusted Runner evidence and avoids sending browser transcripts", async () => {
     const result = await verify();
     expect(result.ok).toBe(true);
+    expect(mocks.actorKeyOf).toHaveBeenCalledWith(base.actor);
     expect(mocks.runnerPost).toHaveBeenCalledWith("/sessions/admin/verify-filesystem", "u:"+"a".repeat(64), {
       topicSlug:target.topicSlug,expected:expected.adminLabFilesystemExpectations,
     });
@@ -45,6 +49,22 @@ describe("reuse existing practice grading with Runner filesystem evidence", () =
     mocks.runnerPost.mockRejectedValueOnce(new Error("offline"));
     expect((await verify()).infrastructureFailure?.status).toBe(503);
   });
+  it("fails closed when a different student owns the Runner identity", async () => {
+    mocks.actorKeyOf.mockReturnValueOnce("u:"+"b".repeat(64));
+    const result = await verify();
+    expect(result.ok).toBe(false);
+    expect(result.infrastructureFailure?.status).toBe(503);
+    expect(mocks.runnerPost).not.toHaveBeenCalled();
+  });
+
+  it("fails closed if canonical actor identity resolution throws", async () => {
+    mocks.actorKeyOf.mockImplementationOnce(() => {throw new Error("PRIVATE_IDENTITY_FAILURE");});
+    const result = await verify();
+    expect(result.ok).toBe(false);
+    expect(result.infrastructureFailure?.status).toBe(503);
+    expect(mocks.runnerPost).not.toHaveBeenCalled();
+  });
+
   it("rejects mismatched lessons, malformed authored expectations and missing answers", async () => {
     expect((await verify({instance:{...instance,topic:{...instance.topic,slug:"other"}}})).infrastructureFailure).toBeDefined();
     expect((await verify({effectiveExpected:{...expected,adminLabFilesystemExpectations:{required:[]}}})).infrastructureFailure).toBeDefined();
