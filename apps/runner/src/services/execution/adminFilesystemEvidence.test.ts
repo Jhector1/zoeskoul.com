@@ -148,4 +148,56 @@ describe("admin filesystem grading via read-only shared tmpfs", () => {
       .mockImplementationOnce(()=>{throw new Error("OFF");});
     await expect(verifyAdminFilesystem(checked())).rejects.toThrow("unavailable");
   });
+
+  it("emits bounded diagnostics for each trust boundary without leaking actor, topic, or path",async()=>{
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const run = async(stage:string) => {
+      warn.mockClear();
+      await expect(verifyAdminFilesystem(checked())).rejects.toThrow("unavailable");
+      expect(warn).toHaveBeenCalledTimes(1);
+      expect(warn).toHaveBeenCalledWith("RUNNER_ADMIN_FILESYSTEM_UNAVAILABLE", {stage});
+      const messages = JSON.stringify(warn.mock.calls);
+      expect(messages).not.toContain("actor");
+      expect(messages).not.toContain("sudo-root-concepts");
+      expect(messages).not.toContain("/workspace/project");
+      expect(messages).not.toContain(SESSION_ID);
+      expect(messages).not.toContain(VOLUME);
+    };
+    try {
+      mocks.getActiveSessionsForActor.mockReturnValue([]);
+      await run("session_match");
+      mocks.getActiveSessionsForActor.mockReturnValue([session]);
+      mocks.verifyAdminWorkspaceVolume.mockRejectedValueOnce(new Error("private-volume-detail"));
+      await run("workspace_attestation");
+      learner.inspect.mockRejectedValueOnce(new Error("private-container-detail"));
+      await run("learner_inspect");
+      learner.inspect.mockResolvedValueOnce(learnerInspect({HostConfig:{NetworkMode:"bridge"}}));
+      await run("learner_attestation");
+      mocks.createContainer.mockRejectedValueOnce(new Error("private-docker-detail"));
+      await run("sidecar_create");
+      sidecar.inspect.mockResolvedValueOnce({HostConfig:{NetworkMode:"bridge"}});
+      await run("sidecar_attestation");
+      sidecar.start.mockRejectedValueOnce(new Error("private-start-detail"));
+      await run("sidecar_start");
+      sidecar.wait.mockResolvedValueOnce({StatusCode:1});
+      await run("sidecar_exit_nonzero");
+      sidecar.logs.mockResolvedValueOnce(Buffer.from('{bad-json'));
+      await run("sidecar_response");
+      sidecar.remove.mockRejectedValueOnce(new Error("private-cleanup-detail"));
+      await run("sidecar_cleanup");
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
+  it("does not log a failure stage for a legitimate filesystem FAIL",async()=>{
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    try {
+      sidecar.logs.mockResolvedValueOnce(Buffer.from('{"ok":true,"failedPaths":["/workspace/project"]}'));
+      await expect(verifyAdminFilesystem(checked())).resolves.toEqual({passed:false,failedPaths:["/workspace/project"]});
+      expect(warn).not.toHaveBeenCalledWith("RUNNER_ADMIN_FILESYSTEM_UNAVAILABLE", expect.anything());
+    } finally {
+      warn.mockRestore();
+    }
+  });
 });

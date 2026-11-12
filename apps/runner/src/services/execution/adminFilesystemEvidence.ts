@@ -9,8 +9,18 @@ import { verifyAdminWorkspaceVolume } from "./adminWorkspaceVolume.js";
 import { getActiveSessionsForActor } from "../sessions/sessionStore.js";
 
 /** Trusted, read-only verifier: separate PID/mount namespace, never guest exec. */
+/** Internal-only, bounded diagnostic stages. Never include actor keys, paths, session IDs or Docker errors. */
+export type AdminFilesystemFailureStage =
+  | "feature_gate" | "expectations" | "image_configuration" | "session_match"
+  | "workspace_attestation" | "learner_inspect" | "learner_attestation"
+  | "feature_gate_recheck" | "sidecar_create" | "sidecar_attestation"
+  | "sidecar_start" | "sidecar_wait" | "sidecar_exit_nonzero"
+  | "sidecar_logs" | "sidecar_response" | "sidecar_cleanup";
+
 export class AdminFilesystemVerifierUnavailable extends Error {
-  constructor() { super("Administrative filesystem verification is unavailable."); }
+  constructor(public readonly stage?: AdminFilesystemFailureStage) {
+    super("Administrative filesystem verification is unavailable.");
+  }
 }
 
 // This program comes from the pinned image command, not the student workspace.
@@ -134,6 +144,7 @@ async function inspectWithSidecar(args: {
 }): Promise<{passed: boolean; failedPaths: string[]}> {
   const name = `zoeskoul_admin_verify_${crypto.randomUUID()}`;
   let container: Awaited<ReturnType<typeof docker.createContainer>> | null = null;
+  let stage: AdminFilesystemFailureStage = "sidecar_create";
   try {
     container = await withTimeout(docker.createContainer({
       name,
@@ -167,6 +178,7 @@ async function inspectWithSidecar(args: {
         }],
       },
     }), 5000);
+    stage = "sidecar_attestation";
     const inspected = await withTimeout(container.inspect(), 5000);
     const host = inspected.HostConfig;
     if (host?.NetworkMode !== "none" || host?.ReadonlyRootfs !== true ||
@@ -176,23 +188,29 @@ async function inspectWithSidecar(args: {
         (host?.Mounts ?? []).length !== 1 ||
         host?.Mounts?.[0]?.Source !== args.volume ||
         host?.Mounts?.[0]?.ReadOnly !== true) {
-      throw new AdminFilesystemVerifierUnavailable();
+      throw new AdminFilesystemVerifierUnavailable(stage);
     }
+    stage = "sidecar_start";
     await withTimeout(container.start(), 5000);
+    stage = "sidecar_wait";
     const status = await withTimeout(container.wait(), 7000);
-    if (status.StatusCode !== 0) throw new AdminFilesystemVerifierUnavailable();
+    if (status.StatusCode !== 0) throw new AdminFilesystemVerifierUnavailable("sidecar_exit_nonzero");
+    stage = "sidecar_logs";
     const output = await withTimeout(container.logs({stdout:true,stderr:true,tail:4}), 5000);
     const verifiedText = await readAdminVerifierLogOutput(output);
+    stage = "sidecar_response";
     const parsed = JSON.parse(verifiedText) as {ok?:unknown;failedPaths?:unknown};
     const expectedPaths = new Set(args.expected.required.map((entry) => entry.path));
     if (parsed.ok !== true || !Array.isArray(parsed.failedPaths) ||
         parsed.failedPaths.some((path) => typeof path !== "string" || !expectedPaths.has(path)) ||
         new Set(parsed.failedPaths).size !== parsed.failedPaths.length) {
-      throw new AdminFilesystemVerifierUnavailable();
+      throw new AdminFilesystemVerifierUnavailable(stage);
     }
     return {passed: parsed.failedPaths.length === 0, failedPaths: parsed.failedPaths as string[]};
-  } catch {
-    throw new AdminFilesystemVerifierUnavailable();
+  } catch (error) {
+    throw new AdminFilesystemVerifierUnavailable(
+      error instanceof AdminFilesystemVerifierUnavailable && error.stage ? error.stage : stage,
+    );
   } finally {
     // Force-remove even if startup, execution, or inspection failed. Existing
     // runner startup reaper also recognizes labeled orphan verifier containers.
@@ -202,7 +220,7 @@ async function inspectWithSidecar(args: {
     } catch {
       // Never award credit if the verification container could not be removed.
       console.error("RUNNER admin verifier teardown deferred to startup reaper");
-      throw new AdminFilesystemVerifierUnavailable();
+      throw new AdminFilesystemVerifierUnavailable("sidecar_cleanup");
     }
   }
 }
@@ -212,28 +230,42 @@ export async function verifyAdminFilesystem(args: {
   topicSlug: string;
   expected: AdminLabFilesystemExpected;
 }): Promise<{passed: boolean; failedPaths: string[]}> {
-  const generation = assertAdminLabSwitch();
-  const parsed = AdminLabFilesystemExpectedSchema.safeParse(args.expected);
-  if (!parsed.success) throw new AdminFilesystemVerifierUnavailable();
-  const {image} = adminLabConfiguration();
-  const matching = getActiveSessionsForActor(args.actorKey).filter((session) =>
-    session.labMode === "admin" && session.ownerKey === args.actorKey &&
-    session.adminTopicSlug === args.topicSlug &&
-    (session.state === "running" || session.state === "waiting_for_input"));
-  if (matching.length !== 1) throw new AdminFilesystemVerifierUnavailable();
-  const session = matching[0];
-  if (!session.adminVolumeName) throw new AdminFilesystemVerifierUnavailable();
+  let stage: AdminFilesystemFailureStage = "feature_gate";
   try {
+    const generation = assertAdminLabSwitch();
+    stage = "expectations";
+    const parsed = AdminLabFilesystemExpectedSchema.safeParse(args.expected);
+    if (!parsed.success) throw new AdminFilesystemVerifierUnavailable(stage);
+    stage = "image_configuration";
+    const {image} = adminLabConfiguration();
+    stage = "session_match";
+    const matching = getActiveSessionsForActor(args.actorKey).filter((session) =>
+      session.labMode === "admin" && session.ownerKey === args.actorKey &&
+      session.adminTopicSlug === args.topicSlug &&
+      (session.state === "running" || session.state === "waiting_for_input"));
+    if (matching.length !== 1) throw new AdminFilesystemVerifierUnavailable(stage);
+    const session = matching[0];
+    if (!session.adminVolumeName) throw new AdminFilesystemVerifierUnavailable(stage);
+    stage = "workspace_attestation";
     await verifyAdminWorkspaceVolume(session.adminVolumeName, session.id);
+    stage = "learner_inspect";
     const container = await withTimeout(docker.getContainer(session.containerId).inspect(), 5000);
+    stage = "learner_attestation";
     verifyLearnerContainer(container, session, image);
+    stage = "feature_gate_recheck";
     assertAdminLabSwitch(generation);
+    stage = "sidecar_create";
     const result = await inspectWithSidecar({
       image, volume: session.adminVolumeName, sessionId:session.id, expected:parsed.data,
     });
+    stage = "feature_gate_recheck";
     assertAdminLabSwitch(generation);
     return result;
-  } catch {
-    throw new AdminFilesystemVerifierUnavailable();
+  } catch (error) {
+    // Keep HTTP errors generic. Operator logs expose only a fixed stage label,
+    // never actor identity, session IDs, project paths, command output or Docker messages.
+    const failureStage = error instanceof AdminFilesystemVerifierUnavailable && error.stage ? error.stage : stage;
+    console.warn("RUNNER_ADMIN_FILESYSTEM_UNAVAILABLE", {stage: failureStage});
+    throw new AdminFilesystemVerifierUnavailable(failureStage);
   }
 }
