@@ -89,6 +89,42 @@ describe("admin filesystem grading via read-only shared tmpfs", () => {
     await expect(verifyAdminFilesystem(checked())).rejects.toThrow("unavailable");
     expect(mocks.createContainer).not.toHaveBeenCalled();
   });
+  it("fails closed if an actor receives a session owned by someone else",async()=>{
+    mocks.getActiveSessionsForActor.mockReturnValue([{...session,ownerKey:"other-actor"}]);
+    await expect(verifyAdminFilesystem(checked())).rejects.toThrow("unavailable");
+    expect(mocks.getActiveSessionsForActor).toHaveBeenCalledWith("actor");
+    expect(mocks.createContainer).not.toHaveBeenCalled();
+  });
+
+  it("cannot use another actor key to verify an existing admin session",async()=>{
+    await expect(verifyAdminFilesystem({...checked(),actorKey:"other-actor"}))
+      .rejects.toThrow("unavailable");
+    expect(mocks.getActiveSessionsForActor).toHaveBeenCalledWith("other-actor");
+    expect(mocks.createContainer).not.toHaveBeenCalled();
+  });
+
+  it("rejects wrong-topic and non-grading session states before creating a sidecar",async()=>{
+    mocks.getActiveSessionsForActor.mockReturnValue([
+      {...session,adminTopicSlug:"final-capstone-secure-project"},
+    ]);
+    await expect(verifyAdminFilesystem(checked())).rejects.toThrow("unavailable");
+
+    for (const state of ["starting", "completed", "failed", "canceled", "timed_out"]) {
+      mocks.getActiveSessionsForActor.mockReturnValue([{...session,state}]);
+      await expect(verifyAdminFilesystem(checked())).rejects.toThrow("unavailable");
+    }
+    expect(mocks.createContainer).not.toHaveBeenCalled();
+  });
+
+  it("permits exactly one matching session even when another topic is active",async()=>{
+    mocks.getActiveSessionsForActor.mockReturnValue([
+      session,
+      {...session,id:"sess-other-topic",adminTopicSlug:"ownership-administration-concepts"},
+    ]);
+    await expect(verifyAdminFilesystem(checked())).resolves.toEqual({passed:true,failedPaths:[]});
+    expect(mocks.createContainer).toHaveBeenCalledTimes(1);
+  });
+
   it("rejects a replaced learner volume or network changes",async()=>{
     learner.inspect.mockResolvedValueOnce(learnerInspect({Mounts:[{
       Destination:"/workspace",Type:"volume",Name:"unrelated",RW:true}],

@@ -217,7 +217,8 @@ export async function verifyAdminFilesystem(args: {
   if (!parsed.success) throw new AdminFilesystemVerifierUnavailable();
   const {image} = adminLabConfiguration();
   const matching = getActiveSessionsForActor(args.actorKey).filter((session) =>
-    session.labMode === "admin" && session.adminTopicSlug === args.topicSlug &&
+    session.labMode === "admin" && session.ownerKey === args.actorKey &&
+    session.adminTopicSlug === args.topicSlug &&
     (session.state === "running" || session.state === "waiting_for_input"));
   if (matching.length !== 1) throw new AdminFilesystemVerifierUnavailable();
   const session = matching[0];
