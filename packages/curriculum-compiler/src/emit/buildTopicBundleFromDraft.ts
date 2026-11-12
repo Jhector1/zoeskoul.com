@@ -221,7 +221,9 @@ export function buildTopicBundleFromDraft(args: {
         ? []
         : draft.quizDraft.filter((exercise) => exercise.kind === "code_input");
 
-    const quizOnlyExercises = isProjectOnlyTopic ? [] : quizExercises(draft);
+    // A project topic may also teach reasoning. Keep non-code questions in
+    // the existing quiz pool; project steps remain code_input only.
+    const quizOnlyExercises = quizExercises(draft);
 
     const quizVisibleDefault = targets?.quizVisibleDefault ?? 4;
     const quizVisibleMax = targets?.quizVisibleMax ?? 6;
@@ -345,7 +347,7 @@ export function buildTopicBundleFromDraft(args: {
     });
 
     const quizCard: ManifestCard[] =
-        !isProjectOnlyTopic && quizOnlyExercises.length > 0
+        quizOnlyExercises.length > 0
             ? [
                 {
                     id: "quiz",
@@ -448,7 +450,9 @@ export function buildTopicBundleFromDraft(args: {
     const projectStepIdSet = new Set(projectStepIds);
 
     const emittedDraftExercises = isProjectOnlyTopic
-        ? draft.quizDraft.filter((exercise) => projectStepIdSet.has(exercise.id))
+        ? draft.quizDraft.filter((exercise) =>
+            projectStepIdSet.has(exercise.id) || exercise.kind !== "code_input"
+        )
         : [
             ...draft.quizDraft,
             ...explicitTryItExercises,
@@ -823,7 +827,13 @@ export function buildTopicBundleFromDraft(args: {
                 seed.topicId,
             ),
         },
-        cards: [...sketchCards, ...quizCard, ...projectCard],
+        // On capstones, show existing project steps before the optional
+        // reasoning quiz. Project-only topics without a quiz are unchanged.
+        cards: [
+            ...sketchCards,
+            ...(isProjectOnlyTopic ? projectCard : quizCard),
+            ...(isProjectOnlyTopic ? quizCard : projectCard),
+        ],
         sketches,
         exercises,
     };
