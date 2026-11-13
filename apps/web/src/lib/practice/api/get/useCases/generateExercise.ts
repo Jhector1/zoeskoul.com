@@ -28,6 +28,7 @@ import { authoredManifestTopicAliasSuffixes } from "../services/authoredManifest
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
 import { readSharedChallengeMeta } from "@/lib/practice/challenges/session";
 import { selfPacedPracticeExperienceOwnerPrefix } from "@/lib/practice/experience/authoredPracticeQueue";
+import { lacksPublishedCourse2FinalFilesystemContract } from "../../validate/grade/adminLabFilesystemEvidencePolicy";
 
 export function openPracticeInstanceMatchesRequestedExercise(
     publicPayload: unknown,
@@ -816,6 +817,24 @@ export async function generatePracticeExercise(
             exerciseKey: String(exerciseKey),
             diff,
         });
+
+        // Do not issue an ungradable final capstone instance while the
+        // published exercise lacks its server-private, Runner-authoritative
+        // filesystem contract. Do not create, reset, or consume an attempt.
+        if (lacksPublishedCourse2FinalFilesystemContract({
+            exerciseKey,
+            topicBundle: authored.topicBundle,
+            expected: authored.expected,
+        })) {
+            return {
+                kind: "json",
+                status: 503,
+                body: {
+                    code: "CAPSTONE_FILESYSTEM_GRADING_UNAVAILABLE",
+                    message: "Final filesystem assessment is not yet available.",
+                },
+            };
+        }
 
         const instance = await createPracticeInstance({
             prisma,
