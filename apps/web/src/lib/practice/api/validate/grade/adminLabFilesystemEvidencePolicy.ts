@@ -36,6 +36,44 @@ export function requiresCourse2FinalCapstoneFilesystemEvidence(instance: unknown
 }
 
 /**
+ * The final step is a COMPLETE seven-path assessment, not a generic single-file
+ * permission exercise. Its published contract must cover the entire approved
+ * project tree (including the one deliberately root-owned README).
+ *
+ * This is a server-side admission/validation invariant, NOT a source of the
+ * published private contract. Only the approved, version-bound server-private
+ * curriculum handoff can supply that contract; draft QA must never supply it.
+ *
+ * Compare parsed, canonical schema values, not browser claims or path prefixes.
+ * Order is irrelevant; duplicates, omissions and permissive substitutions are
+ * forbidden. Ordinary Course 1 tasks are NOT subject to this capstone policy.
+ */
+export function matchesCompleteCourse2FinalFilesystemContract(raw: unknown): boolean {
+    const parsed = AdminLabFilesystemExpectedSchema.safeParse(raw);
+    if (!parsed.success) return false;
+    const required = parsed.data.required;
+    const approved = new Map<string, readonly ["file" | "directory", string, number, number]>([
+        ["/workspace/secure-project", ["directory", "0755", 1000, 1000]],
+        ["/workspace/secure-project/README.md", ["file", "0644", 0, 0]],
+        ["/workspace/secure-project/scripts", ["directory", "0700", 1000, 1000]],
+        ["/workspace/secure-project/scripts/run.sh", ["file", "0700", 1000, 1000]],
+        ["/workspace/secure-project/secrets.env", ["file", "0600", 1000, 1000]],
+        ["/workspace/secure-project/shared", ["directory", "0770", 1000, 1000]],
+        ["/workspace/secure-project/shared/notes.txt", ["file", "0640", 1000, 1000]],
+    ]);
+    if (required.length !== approved.size) return false;
+    const seen = new Set<string>();
+    for (const entry of required) {
+        const reference = approved.get(entry.path);
+        if (!reference || seen.has(entry.path)) return false;
+        seen.add(entry.path);
+        if (entry.kind !== reference[0] || entry.mode !== reference[1] ||
+            entry.uid !== reference[2] || entry.gid !== reference[3]) return false;
+    }
+    return seen.size === approved.size;
+}
+
+/**
  * Guard the exact published Course 2 capstone step at the existing GET
  * generation boundary, BEFORE a practice instance is persisted.
  *
@@ -75,5 +113,5 @@ export function lacksPublishedCourse2FinalFilesystemContract(args: {
                 Boolean((test as { stdout: string }).stdout.trim()) ||
              typeof (test as { stdin?: unknown }).stdin === "string" &&
                 Boolean((test as { stdin: string }).stdin.trim()))));
-    return !AdminLabFilesystemExpectedSchema.safeParse(raw).success || incompatible;
+    return incompatible || !matchesCompleteCourse2FinalFilesystemContract(raw);
 }

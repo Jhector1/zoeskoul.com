@@ -57,6 +57,30 @@ describe("reuse existing practice grading with Runner filesystem evidence", () =
     expect(mocks.runnerPost).not.toHaveBeenCalled();
   });
 
+  it("rejects incomplete final capstone contracts before contacting the Runner", async () => {
+    const finalInstance = {...instance, exerciseKey: "final-capstone-secure-project-step-5",
+      topic: {...instance.topic, slug: "final-capstone-secure-project",
+        module: {...instance.topic.module, slug: "linux-module-4-secure-project-capstone"}}};
+    const partial = await verify({instance: finalInstance});
+    expect(partial.infrastructureFailure?.status).toBe(503);
+    expect(mocks.runnerPost).not.toHaveBeenCalled();
+
+    const complete = {kind: "code_input", adminLabFilesystemExpectations: {required: [
+      {path: "/workspace/secure-project", kind: "directory", mode: "0755", uid: 1000, gid: 1000},
+      {path: "/workspace/secure-project/README.md", kind: "file", mode: "0644", uid: 0, gid: 0},
+      {path: "/workspace/secure-project/scripts", kind: "directory", mode: "0700", uid: 1000, gid: 1000},
+      {path: "/workspace/secure-project/scripts/run.sh", kind: "file", mode: "0700", uid: 1000, gid: 1000},
+      {path: "/workspace/secure-project/secrets.env", kind: "file", mode: "0600", uid: 1000, gid: 1000},
+      {path: "/workspace/secure-project/shared", kind: "directory", mode: "0770", uid: 1000, gid: 1000},
+      {path: "/workspace/secure-project/shared/notes.txt", kind: "file", mode: "0640", uid: 1000, gid: 1000},
+    ]}};
+    const full = await verify({instance: finalInstance, persistedExpected: complete, effectiveExpected: complete});
+    expect(full.ok).toBe(true);
+    expect(mocks.runnerPost).toHaveBeenCalledWith("/sessions/admin/verify-filesystem", "u:"+"a".repeat(64), {
+      topicSlug: "final-capstone-secure-project", expected: complete.adminLabFilesystemExpectations,
+    });
+  });
+
   it("fails closed if canonical actor identity resolution throws", async () => {
     mocks.actorKeyOf.mockImplementationOnce(() => {throw new Error("PRIVATE_IDENTITY_FAILURE");});
     const result = await verify();

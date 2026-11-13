@@ -9,6 +9,7 @@ import type { LoadedValidateInstance } from "../repositories/instance.repo";
 import type { SubmitAnswer } from "../schemas";
 import type { GradeResult } from "./index";
 import { createRunnerUnavailableGradeResult } from "./infrastructureFailure";
+import { matchesCompleteCourse2FinalFilesystemContract, requiresCourse2FinalCapstoneFilesystemEvidence } from "./adminLabFilesystemEvidencePolicy";
 
 /** Adapter into the EXISTING grading/attempts pipeline; not a second grader. */
 export async function verifyAdminLabFilesystemForPractice(args: {
@@ -37,6 +38,11 @@ export async function verifyAdminLabFilesystemForPractice(args: {
        typeof (test as {stdin?: unknown}).stdin === "string" && Boolean((test as {stdin: string}).stdin.trim()))));
   if (!parsed.success || incompatible || args.instance.kind !== "code_input" ||
       args.answer?.kind !== "code_input") return unavailable();
+  // Final Course 2 assessment must always cover ALL seven exact paths. The
+  // presence of any schema-valid one-path contract must never award a capstone.
+  // This also protects previously persisted instances created before GET guards.
+  if (requiresCourse2FinalCapstoneFilesystemEvidence(args.instance) &&
+      !matchesCompleteCourse2FinalFilesystemContract(effectiveRaw)) return unavailable();
   const topic = args.instance.topic;
   const target = parseStudentAdminLabTarget({
     topicSlug: topic?.slug,
