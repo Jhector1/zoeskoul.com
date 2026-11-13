@@ -979,4 +979,62 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     ).toThrow(/is not present in the authored files/);
   });
 
+
+  it("keeps Course 1 shell_task expected behavior when there is no private grading contract", () => {
+    const result = buildExerciseFromManifest(
+      LINUX_COURSE1_TERMINAL_FIXTURE as any,
+      {...makeArgs(),topic:"linux-course-1-terminal-lab"},
+    );
+    expect((result.expected as any).adminLabFilesystemExpectations).toBeUndefined();
+    expect((result.expected as any).terminalExpectations).toBeDefined();
+    expect((result.expected as any).workspaceExpectations).toBeDefined();
+  });
+
+  it("supplies a filesystem-only private expected payload without exposing it in student exercise", () => {
+    const fixture = {
+      id: "course2-final-capstone-step-5",
+      kind: "code_input",
+      language: "bash",
+      messageBase: "quiz.course2_capstone_step5",
+      recipe: {type:"shell_task",mode:"terminal_workspace"},
+      workspace: {starterFiles:[{path:"main.sh",content:"# work in the terminal\\n"}]},
+    } as any;
+    const expected = {adminLabFilesystemExpectations:{required:[
+      {path:"/workspace/secure-project",kind:"directory",mode:"0755",uid:1000,gid:1000},
+    ]}};
+    const result = buildExerciseFromManifest(
+      fixture,
+      {...makeArgs(),topic:"final-capstone-secure-project"},
+      undefined,
+      expected,
+    );
+    expect((result.expected as any).adminLabFilesystemExpectations).toEqual(expected.adminLabFilesystemExpectations);
+    expect((result.expected as any).terminalExpectations).toBeUndefined();
+    expect((result.expected as any).workspaceExpectations).toBeUndefined();
+    expect(JSON.stringify(result.exercise)).not.toContain("adminLabFilesystemExpectations");
+    expect(JSON.stringify(result.exercise)).not.toContain("/workspace/secure-project");
+  });
+
+  it("fails closed on mixed grading, malformed contracts, and manifest-embedded answer keys", () => {
+    const fixture = {
+      id: "course2-final-capstone-step-5",
+      kind: "code_input",
+      language: "bash",
+      messageBase: "quiz.course2_capstone_step5",
+      recipe: {type:"shell_task",mode:"terminal_workspace"},
+    } as any;
+    const evidence = {adminLabFilesystemExpectations:{required:[
+      {path:"/workspace/secure-project",kind:"directory",mode:"0755"},
+    ]}};
+    const build = (def:any, privateEvidence: unknown) =>
+      buildExerciseFromManifest(def,makeArgs(),undefined,privateEvidence);
+    expect(() => build({...fixture,terminalExpectations:{requiredCommands:[{pattern:"^pwd$"}]}},evidence)).toThrow(/conflicts with existing shell grading/);
+    expect(() => build({...fixture,workspaceExpectations:{requiredFiles:["foo"]}},evidence)).toThrow(/conflicts with existing shell grading/);
+    expect(() => build(fixture,{adminLabFilesystemExpectations:{required:[]}})).toThrow(/Private filesystem expected requires/);
+    expect(() => build(fixture,{adminLabFilesystemExpectations:evidence.adminLabFilesystemExpectations,extra:true})).toThrow(/Invalid private filesystem expected contract/);
+    expect(() => build({...fixture,adminLabFilesystemExpectations:evidence.adminLabFilesystemExpectations},undefined)).toThrow(/must not be embedded/);
+    expect(() => build({...fixture,__serverPrivateFilesystemExpected:evidence},undefined)).toThrow(/must not be embedded/);
+    expect(() => build({...fixture,recipe:{type:"fixed_tests",tests:[{stdout:"OK"}]}},evidence)).toThrow(/requires the existing shell_task/);
+  });
+
 });

@@ -53,6 +53,7 @@ function buildCodeInput(
     def: ManifestCodeInput,
     args: HandlerArgs,
     manifest?: Pick<TopicBundleManifest, "runtimeDefaults">,
+    serverPrivateFilesystemExpected?: unknown,
 ): GenOut<"code_input"> {
     const resolved = resolveBase(def.messageBase);
     const recipeHandler = RECIPE_REGISTRY[def.recipe.type];
@@ -61,9 +62,19 @@ function buildCodeInput(
         throw new Error(`Unknown recipe type "${def.recipe.type}" for "${def.id}"`);
     }
 
+    if (Object.prototype.hasOwnProperty.call(def, "__serverPrivateFilesystemExpected")) {
+        throw new Error("Filesystem grading contract may only be passed as a server-private argument.");
+    }
+    if (serverPrivateFilesystemExpected !== undefined && def.recipe.type !== "shell_task") {
+        throw new Error("Private filesystem evidence requires the existing shell_task recipe.");
+    }
+
     const output = recipeHandler(
         {
             ...(def as any),
+            ...(serverPrivateFilesystemExpected !== undefined
+                ? { __serverPrivateFilesystemExpected: serverPrivateFilesystemExpected }
+                : {}),
             topicRuntimeDefaults: manifest?.runtimeDefaults ?? null,
         },
         args,
@@ -85,7 +96,14 @@ export function buildExerciseFromManifest(
     def: ManifestExercise,
     args: HandlerArgs,
     manifest?: Pick<TopicBundleManifest, "serviceDefaults" | "runtimeDefaults">,
+    serverPrivateFilesystemExpected?: unknown,
 ): AnyGenOut {
+    // Authored/compiled topic bundles must never carry private filesystem
+    // answer keys, even when the exercise is not a Bash shell task.
+    if (Object.prototype.hasOwnProperty.call(def, "adminLabFilesystemExpectations") ||
+        Object.prototype.hasOwnProperty.call(def, "__serverPrivateFilesystemExpected")) {
+        throw new Error("Filesystem grading contracts must not be embedded in topic manifests.");
+    }
     const resolved = resolveBase(def.messageBase);
     const authoredIdeConfig = (def as any).ideConfig ?? null;
 
@@ -96,6 +114,10 @@ export function buildExerciseFromManifest(
         authoredIdeConfig,
         def.serviceOverrides ?? null,
     );
+
+    if (serverPrivateFilesystemExpected !== undefined && def.kind !== "code_input") {
+        throw new Error("Private filesystem evidence is only supported for code_input.");
+    }
 
     switch (def.kind) {
         case "single_choice":
@@ -270,6 +292,7 @@ export function buildExerciseFromManifest(
                 },
                 args,
                 manifest,
+                serverPrivateFilesystemExpected,
             );
 
         default:
