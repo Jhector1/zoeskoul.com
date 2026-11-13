@@ -169,3 +169,51 @@ describe("handlePracticeValidate runner outages", () => {
         expect(mocks.persistValidatedAttempt).not.toHaveBeenCalled();
     });
 });
+
+
+describe("Course 2 authoritative final-step grading guard", () => {
+    it("blocks legacy command-only completion before attempts, grading, or replay", async () => {
+        const response = await handlePracticeValidate({
+            prisma: {} as never,
+            req: new Request("https://zoeskoul.test/api/practice/validate", { method: "POST" }),
+            requestId: "capstone-no-private-contract",
+            body: {
+                key: "signed-key",
+                submissionId: "capstone-submit",
+                answer: { kind: "code_input", language: "bash", code: "chmod 600 /workspace/secure-project/secrets.env" },
+            } as never,
+            key: "signed-key",
+            payload: {},
+            actor: { userId: "student-1", guestId: null } as never,
+            setGuestId: null,
+            instance: {
+                id: "old-capstone-final",
+                exerciseKey: "final-capstone-secure-project-step-5",
+                kind: "code_input",
+                // A previously finalized command-only instance must not be
+                // treated as trusted filesystem evidence.
+                answeredAt: new Date("2026-11-01T00:00:00Z"),
+                publicPayload: {},
+                secretPayload: { expected: { terminalExpectations: { requiredCommands: [] } } },
+                topic: {
+                    slug: "linux-files-permissions-users.final-capstone-secure-project",
+                    subject: { slug: "linux-files-permissions-users" },
+                    module: { slug: "linux-module-4-secure-project-capstone" },
+                },
+                session: null,
+            } as never,
+            session: null,
+            locale: "en",
+        });
+        expect(response.status).toBe(503);
+        expect(response.headers.get("Retry-After")).toBe("5");
+        await expect(response.json()).resolves.toMatchObject({
+            ok: null,
+            code: "RUNNER_UNAVAILABLE",
+            finalized: false,
+            attempts: null,
+        });
+        expect(mocks.gradeInstance).not.toHaveBeenCalled();
+        expect(mocks.persistValidatedAttempt).not.toHaveBeenCalled();
+    });
+});

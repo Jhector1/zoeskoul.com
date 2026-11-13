@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { requiresAuthoritativeAdminLabEvidence } from "./grade/adminLabFilesystemEvidencePolicy";
+import { requiresAuthoritativeAdminLabEvidence, requiresCourse2FinalCapstoneFilesystemEvidence } from "./grade/adminLabFilesystemEvidencePolicy";
+import { createRunnerUnavailableGradeResult } from "./grade/infrastructureFailure";
 
 
 import { attachGuestCookie } from "@/lib/practice/actor";
@@ -238,6 +239,37 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
             readDailyFiveMeta(session?.meta ?? null)?.maxAttempts ??
             null,
     });
+
+
+    // The final Course 2 step is filesystem-authoritative. Old or partially
+    // published command-only instances must not be accepted or replayed as
+    // completed, including a previously finalized command-pattern instance.
+    // This is deliberately before the duplicate/finalized snapshot shortcut.
+    if (requiresCourse2FinalCapstoneFilesystemEvidence(instance) &&
+        !requiresAuthoritativeAdminLabEvidence(
+            (instance.secretPayload as { expected?: unknown } | null)?.expected,
+        )) {
+        const unavailable = createRunnerUnavailableGradeResult(
+            "Published capstone filesystem contract is missing",
+        ).infrastructureFailure;
+        const response = jsonApiResponse({
+            requestId,
+            message: unavailable.message,
+            status: unavailable.status,
+            extra: {
+                ok: null,
+                code: unavailable.code,
+                explanation: null,
+                feedback: null,
+                finalized: false,
+                duplicate: false,
+                attempts: null,
+                sessionComplete: false,
+            },
+        });
+        response.headers.set("Retry-After", String(unavailable.retryAfterSeconds));
+        return attachGuestCookie(response, setGuestId ?? undefined);
+    }
 
     if (!isReveal && instance.answeredAt) {
         const snapshot = await loadFinalizedValidateSnapshot(prisma, {
