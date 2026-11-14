@@ -48,19 +48,29 @@ export function requiresCourse2FinalCapstoneFilesystemEvidence(instance: unknown
  * Order is irrelevant; duplicates, omissions and permissive substitutions are
  * forbidden. Ordinary Course 1 tasks are NOT subject to this capstone policy.
  */
+/** Fixed candidate contract, supplied ONLY by the separately approved server
+ * publication handoff. Merely importing this function never authorizes grading.
+ * Reused by both the fingerprint-gated private resolver and strict validator.
+ */
+export function course2FinalFilesystemExpected() {
+    return {required: [
+        {path: "/workspace/secure-project", kind: "directory" as const, mode: "0755", uid: 1000, gid: 1000},
+        {path: "/workspace/secure-project/README.md", kind: "file" as const, mode: "0644", uid: 0, gid: 0},
+        {path: "/workspace/secure-project/scripts", kind: "directory" as const, mode: "0700", uid: 1000, gid: 1000},
+        {path: "/workspace/secure-project/scripts/run.sh", kind: "file" as const, mode: "0700", uid: 1000, gid: 1000},
+        {path: "/workspace/secure-project/secrets.env", kind: "file" as const, mode: "0600", uid: 1000, gid: 1000},
+        {path: "/workspace/secure-project/shared", kind: "directory" as const, mode: "0770", uid: 1000, gid: 1000},
+        {path: "/workspace/secure-project/shared/notes.txt", kind: "file" as const, mode: "0640", uid: 1000, gid: 1000},
+    ]};
+}
+
 export function matchesCompleteCourse2FinalFilesystemContract(raw: unknown): boolean {
     const parsed = AdminLabFilesystemExpectedSchema.safeParse(raw);
     if (!parsed.success) return false;
     const required = parsed.data.required;
-    const approved = new Map<string, readonly ["file" | "directory", string, number, number]>([
-        ["/workspace/secure-project", ["directory", "0755", 1000, 1000]],
-        ["/workspace/secure-project/README.md", ["file", "0644", 0, 0]],
-        ["/workspace/secure-project/scripts", ["directory", "0700", 1000, 1000]],
-        ["/workspace/secure-project/scripts/run.sh", ["file", "0700", 1000, 1000]],
-        ["/workspace/secure-project/secrets.env", ["file", "0600", 1000, 1000]],
-        ["/workspace/secure-project/shared", ["directory", "0770", 1000, 1000]],
-        ["/workspace/secure-project/shared/notes.txt", ["file", "0640", 1000, 1000]],
-    ]);
+    const approved = new Map(course2FinalFilesystemExpected().required.map((entry) =>
+        [entry.path, [entry.kind, entry.mode, entry.uid, entry.gid] as const] as const,
+    ));
     if (required.length !== approved.size) return false;
     const seen = new Set<string>();
     for (const entry of required) {
@@ -71,6 +81,33 @@ export function matchesCompleteCourse2FinalFilesystemContract(raw: unknown): boo
             entry.uid !== reference[2] || entry.gid !== reference[3]) return false;
     }
     return seen.size === approved.size;
+}
+
+/** An administrator filesystem assessment has exactly one grading authority.
+ * Browser transcripts, shell stdout, source solutions and workspace assertions
+ * must never become alternate ways to earn a filesystem PASS.
+ */
+export function hasCompetingAdminLabGradingStrategy(raw: unknown): boolean {
+    if (!raw || typeof raw !== "object" || Array.isArray(raw)) return true;
+    const value = raw as Record<string, unknown>;
+    const blocked = [
+        "workspaceExpectations", "terminalExpectations", "hiddenShellCheck",
+        "sourceChecks", "semanticChecks", "solutionFiles", "solutionCode",
+    ].some((field) => value[field] !== undefined && value[field] !== null);
+    const tests = value.tests;
+    const hasTests = tests !== undefined && tests !== null &&
+        (!Array.isArray(tests) || tests.some((test: unknown) =>
+            test && typeof test === "object" && (
+                typeof (test as {stdout?: unknown}).stdout === "string" &&
+                    Boolean((test as {stdout:string}).stdout.trim()) ||
+                typeof (test as {stdin?: unknown}).stdin === "string" &&
+                    Boolean((test as {stdin:string}).stdin.trim())
+            )));
+    const nested = value.workspace;
+    const nestedExpected = nested && typeof nested === "object" &&
+        !Array.isArray(nested) &&
+        (nested as {workspaceExpectations?:unknown}).workspaceExpectations != null;
+    return blocked || hasTests || Boolean(nestedExpected);
 }
 
 /**
@@ -103,15 +140,10 @@ export function lacksPublishedCourse2FinalFilesystemContract(args: {
     if (!requiresAuthoritativeAdminLabEvidence(expected)) return true;
     const record = expected as Record<string, unknown>;
     const raw = record.adminLabFilesystemExpectations;
-    const incompatible = [
-        "workspaceExpectations", "terminalExpectations", "hiddenShellCheck",
-        "sourceChecks", "semanticChecks",
-    ].some((field) => record[field] !== undefined && record[field] !== null) ||
-        (Array.isArray(record.tests) && record.tests.some((test: unknown) =>
-            test && typeof test === "object" &&
-            (typeof (test as { stdout?: unknown }).stdout === "string" &&
-                Boolean((test as { stdout: string }).stdout.trim()) ||
-             typeof (test as { stdin?: unknown }).stdin === "string" &&
-                Boolean((test as { stdin: string }).stdin.trim()))));
-    return incompatible || !matchesCompleteCourse2FinalFilesystemContract(raw);
+    // The server-minted compiled-bundle fingerprint is required even when the
+    // seven filesystem rows are complete. An unversioned key is not approved.
+    if (typeof record.adminLabPublishedTopicSha256 !== "string" ||
+        !/^[0-9a-f]{64}$/.test(record.adminLabPublishedTopicSha256)) return true;
+    return hasCompetingAdminLabGradingStrategy(expected) ||
+        !matchesCompleteCourse2FinalFilesystemContract(raw);
 }

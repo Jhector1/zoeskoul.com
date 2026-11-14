@@ -53,6 +53,7 @@ describe("published Course 2 GET final-step admission", () => {
     };
     const exerciseKey = "final-capstone-secure-project-step-5";
     const contract = {
+        adminLabPublishedTopicSha256: "a".repeat(64),
         adminLabFilesystemExpectations: {
             required: [
                 { path: "/workspace/secure-project", kind: "directory", mode: "0755", uid: 1000, gid: 1000 },
@@ -75,15 +76,18 @@ describe("published Course 2 GET final-step admission", () => {
         expect(lacksPublishedCourse2FinalFilesystemContract({topicBundle, exerciseKey, expected: {...contract, tests: [{stdout: "OK"}]}})).toBe(true);
     });
 
-    it("admits only a validated Runner-authoritative private contract", () => {
+    it("admits only a complete, versioned Runner-authoritative private contract", () => {
         expect(lacksPublishedCourse2FinalFilesystemContract({topicBundle, exerciseKey, expected: contract})).toBe(false);
+        expect(lacksPublishedCourse2FinalFilesystemContract({topicBundle, exerciseKey,
+            expected: {adminLabFilesystemExpectations: contract.adminLabFilesystemExpectations},
+        })).toBe(true);
     });
 
     it("rejects a partial, duplicated, or weakened final capstone even when schema-valid", () => {
         const required = contract.adminLabFilesystemExpectations.required;
         const check = (rows: typeof required) => lacksPublishedCourse2FinalFilesystemContract({
             topicBundle, exerciseKey,
-            expected: {adminLabFilesystemExpectations: {required: rows}},
+            expected: {adminLabPublishedTopicSha256: "a".repeat(64), adminLabFilesystemExpectations: {required: rows}},
         });
         expect(check(required.slice(0, 1))).toBe(true);
         expect(check([...required.slice(0, 6), required[0]])).toBe(true);
@@ -99,5 +103,15 @@ describe("published Course 2 GET final-step admission", () => {
         expect(lacksPublishedCourse2FinalFilesystemContract({topicBundle: {...topicBundle, moduleSlug: "wrong-module"}, exerciseKey, expected: null})).toBe(false);
         expect(lacksPublishedCourse2FinalFilesystemContract({topicBundle: {...topicBundle, topicId: "wrong-topic"}, exerciseKey, expected: null})).toBe(false);
         expect(lacksPublishedCourse2FinalFilesystemContract({topicBundle: null, exerciseKey, expected: null})).toBe(false);
+    });
+});
+
+
+describe("Course 2 private candidate and strict grading remain aligned", () => {
+    it("provides one exact, complete seven-path candidate for an independently pinned release", async () => {
+        const policy = await import("./adminLabFilesystemEvidencePolicy");
+        const expected = policy.course2FinalFilesystemExpected();
+        expect(expected.required).toHaveLength(7);
+        expect(policy.matchesCompleteCourse2FinalFilesystemContract(expected)).toBe(true);
     });
 });

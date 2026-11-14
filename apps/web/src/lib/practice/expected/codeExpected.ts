@@ -155,6 +155,15 @@ function normalizeShellTaskExpectedForSave(expected: any) {
         throw new Error("Invalid admin filesystem expected: conflicting grading strategy.");
     }
 
+    // A published capstone may carry a server-minted topic fingerprint. Keep it
+    // in secretPayload.expected, not in the student-visible exercise. The
+    // validator independently checks it against the currently approved bundle.
+    const topicSha = expected.adminLabPublishedTopicSha256;
+    if (topicSha !== undefined &&
+        (typeof topicSha !== "string" || !/^[0-9a-f]{64}$/.test(topicSha))) {
+        throw new Error("Invalid published admin filesystem topic revision.");
+    }
+
     // The ordinary Course 1 shell_task builder deliberately requires at least
     // one of the regular terminal/workspace strategies. It MUST remain strict.
     // This independently authorized, filesystem-only expected contract instead
@@ -169,6 +178,7 @@ function normalizeShellTaskExpectedForSave(expected: any) {
         recipeType: "shell_task",
         shellTaskMode: "terminal_workspace",
         adminLabFilesystemExpectations: parsed.data,
+        ...(topicSha ? {adminLabPublishedTopicSha256: topicSha} : {}),
     } as any;
 }
 export function makeCodeExpected(args: ProgrammingMakeCodeExpectedArgs): CodeExpectedInput;

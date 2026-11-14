@@ -5,6 +5,10 @@ const mocks = vi.hoisted(() => ({
     persistValidatedAttempt: vi.fn(),
 }));
 
+vi.mock("@/lib/practice/adminLab/approvedPublishedCourse2Capstone", () => ({
+    isCurrentApprovedCourse2FinalInstance: vi.fn(() => false),
+}));
+
 vi.mock("@/lib/practice/actor", () => ({
     attachGuestCookie: (response: Response) => response,
 }));

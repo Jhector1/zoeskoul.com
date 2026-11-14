@@ -9,7 +9,12 @@ import type { LoadedValidateInstance } from "../repositories/instance.repo";
 import type { SubmitAnswer } from "../schemas";
 import type { GradeResult } from "./index";
 import { createRunnerUnavailableGradeResult } from "./infrastructureFailure";
-import { matchesCompleteCourse2FinalFilesystemContract, requiresCourse2FinalCapstoneFilesystemEvidence } from "./adminLabFilesystemEvidencePolicy";
+import {
+  hasCompetingAdminLabGradingStrategy,
+  matchesCompleteCourse2FinalFilesystemContract,
+  requiresCourse2FinalCapstoneFilesystemEvidence,
+} from "./adminLabFilesystemEvidencePolicy";
+import { isCurrentApprovedCourse2FinalInstance } from "@/lib/practice/adminLab/approvedPublishedCourse2Capstone";
 
 /** Adapter into the EXISTING grading/attempts pipeline; not a second grader. */
 export async function verifyAdminLabFilesystemForPractice(args: {
@@ -30,19 +35,15 @@ export async function verifyAdminLabFilesystemForPractice(args: {
   const parsed = AdminLabFilesystemExpectedSchema.safeParse(effectiveRaw);
   // Do not silently ignore any second authored grading strategy. A privileged
   // filesystem-only task has one authoritative evidence source.
-  const incompatible = ["workspaceExpectations", "terminalExpectations", "hiddenShellCheck", "sourceChecks", "semanticChecks"]
-    .some((field) => effective && effective[field] !== undefined && effective[field] !== null) ||
-    (Array.isArray(effective?.tests) && effective.tests.some((test: unknown) =>
-      test && typeof test === "object" &&
-      (typeof (test as {stdout?: unknown}).stdout === "string" && Boolean((test as {stdout: string}).stdout.trim()) ||
-       typeof (test as {stdin?: unknown}).stdin === "string" && Boolean((test as {stdin: string}).stdin.trim()))));
+  const incompatible = hasCompetingAdminLabGradingStrategy(effective);
   if (!parsed.success || incompatible || args.instance.kind !== "code_input" ||
       args.answer?.kind !== "code_input") return unavailable();
   // Final Course 2 assessment must always cover ALL seven exact paths. The
   // presence of any schema-valid one-path contract must never award a capstone.
   // This also protects previously persisted instances created before GET guards.
   if (requiresCourse2FinalCapstoneFilesystemEvidence(args.instance) &&
-      !matchesCompleteCourse2FinalFilesystemContract(effectiveRaw)) return unavailable();
+      (!matchesCompleteCourse2FinalFilesystemContract(effectiveRaw) ||
+       !isCurrentApprovedCourse2FinalInstance(args.instance))) return unavailable();
   const topic = args.instance.topic;
   const target = parseStudentAdminLabTarget({
     topicSlug: topic?.slug,

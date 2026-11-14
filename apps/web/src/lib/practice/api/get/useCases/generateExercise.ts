@@ -29,6 +29,7 @@ import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
 import { readSharedChallengeMeta } from "@/lib/practice/challenges/session";
 import { selfPacedPracticeExperienceOwnerPrefix } from "@/lib/practice/experience/authoredPracticeQueue";
 import { lacksPublishedCourse2FinalFilesystemContract } from "../../validate/grade/adminLabFilesystemEvidencePolicy";
+import { resolveApprovedCourse2PrivateExpected } from "@/lib/practice/adminLab/approvedPublishedCourse2Capstone";
 
 export function openPracticeInstanceMatchesRequestedExercise(
     publicPayload: unknown,
@@ -110,6 +111,14 @@ async function resolveAuthoredExercise(args: {
         taggedManifestExercise,
     ) as ManifestExercise;
 
+    // The compiled topic manifest is public curriculum; the private answer key
+    // is injected only after an operator explicitly pins its exact published
+    // topic digest. The author QA JSON is never consulted by student GET.
+    const privateContract = resolveApprovedCourse2PrivateExpected({
+        topicBundle, manifestExercise: taggedManifestExercise,
+        exerciseKey: args.exerciseKey,
+    });
+
     const built = buildExerciseFromManifest(
         manifestExercise,
         {
@@ -131,6 +140,7 @@ async function resolveAuthoredExercise(args: {
             serviceDefaults: (topicBundle as SlimTopicManifest).serviceDefaults ?? null,
             runtimeDefaults: topicBundle.runtimeDefaults ?? null,
         },
+        privateContract?.privateExpected,
     );
 
     return {
@@ -139,7 +149,9 @@ async function resolveAuthoredExercise(args: {
             topic: args.topicSlug,
             exerciseKey: args.exerciseKey,
         } as Exercise,
-        expected: built.expected,
+        expected: privateContract
+            ? {...(built.expected as Record<string, unknown>), adminLabPublishedTopicSha256: privateContract.digest}
+            : built.expected,
         topicBundle,
     };
 }

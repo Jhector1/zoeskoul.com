@@ -323,6 +323,22 @@ describe("normalizeExpectedForSave", () => {
         expect(normalized).not.toHaveProperty("workspaceExpectations");
     });
 
+    it("retains the approved topic SHA in the server-private expected payload", () => {
+        const sha = "a".repeat(64);
+        const valid = {
+            kind: "code_input", language: "bash", recipeType: "shell_task",
+            shellTaskMode: "terminal_workspace",
+            adminLabFilesystemExpectations: {required: [{
+                path: "/workspace/secure-project", kind: "directory", mode: "0755",
+                uid: 1000, gid: 1000,
+            }]},
+            adminLabPublishedTopicSha256: sha,
+        };
+        expect((normalizeExpectedForSave(PracticeKind.code_input, valid) as any).adminLabPublishedTopicSha256).toBe(sha);
+        expect(() => normalizeExpectedForSave(PracticeKind.code_input,
+            {...valid, adminLabPublishedTopicSha256: "not-a-digest"})).toThrow();
+    });
+
     it("does not relax Course 1 shell_task requirements", () => {
         const legacyWithoutChecks = {
             kind: "code_input",

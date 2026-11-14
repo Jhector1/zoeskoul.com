@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requiresAuthoritativeAdminLabEvidence, requiresCourse2FinalCapstoneFilesystemEvidence } from "./grade/adminLabFilesystemEvidencePolicy";
 import { createRunnerUnavailableGradeResult } from "./grade/infrastructureFailure";
+import { isCurrentApprovedCourse2FinalInstance } from "@/lib/practice/adminLab/approvedPublishedCourse2Capstone";
 
 
 import { attachGuestCookie } from "@/lib/practice/actor";
@@ -246,9 +247,9 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
     // completed, including a previously finalized command-pattern instance.
     // This is deliberately before the duplicate/finalized snapshot shortcut.
     if (requiresCourse2FinalCapstoneFilesystemEvidence(instance) &&
-        !requiresAuthoritativeAdminLabEvidence(
+        (!requiresAuthoritativeAdminLabEvidence(
             (instance.secretPayload as { expected?: unknown } | null)?.expected,
-        )) {
+        ) || !isCurrentApprovedCourse2FinalInstance(instance))) {
         const unavailable = createRunnerUnavailableGradeResult(
             "Published capstone filesystem contract is missing",
         ).infrastructureFailure;

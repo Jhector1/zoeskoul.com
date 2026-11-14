@@ -4,12 +4,19 @@ const mocks = vi.hoisted(() => ({
   actorKey:vi.fn(),
   actorKeyOf:vi.fn(),
   runnerPost:vi.fn(),
+  isCurrentApproved:vi.fn(),
 }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/learning/server/authorizeStudentAdminLab", () => ({authorizeStudentAdminLab:mocks.authorize}));
 vi.mock("@/lib/server/runnerActorKey", () => ({requireRunnerActorKey:mocks.actorKey}));
 vi.mock("@/lib/practice/actor", () => ({actorKeyOf:mocks.actorKeyOf}));
 vi.mock("@/lib/server/runnerClient", () => ({runnerPost:mocks.runnerPost}));
+// Unit-test the grading adapter independently of the compiled curriculum
+// registry; the real digest and release approval are covered by
+// approvedPublishedCourse2Capstone.test.ts.
+vi.mock("@/lib/practice/adminLab/approvedPublishedCourse2Capstone", () => ({
+  isCurrentApprovedCourse2FinalInstance:mocks.isCurrentApproved,
+}));
 import {verifyAdminLabFilesystemForPractice} from "./verifyAdminLabFilesystem";
 const target = {topicSlug:"sudo-root-concepts",moduleSlug:"linux-module-3-users-groups-troubleshooting"};
 const expected = {kind:"code_input",adminLabFilesystemExpectations:{required:[{path:"/workspace/project",kind:"directory",mode:"0750"}]}};
@@ -26,6 +33,7 @@ beforeEach(() => {
   mocks.actorKey.mockResolvedValue("u:"+"a".repeat(64));
   mocks.actorKeyOf.mockReturnValue("u:"+"a".repeat(64));
   mocks.runnerPost.mockResolvedValue({ok:true,passed:true,failedPaths:[]});
+  mocks.isCurrentApproved.mockReturnValue(false);
 });
 describe("reuse existing practice grading with Runner filesystem evidence", () => {
   it("grades only trusted Runner evidence and avoids sending browser transcripts", async () => {
@@ -65,7 +73,7 @@ describe("reuse existing practice grading with Runner filesystem evidence", () =
     expect(partial.infrastructureFailure?.status).toBe(503);
     expect(mocks.runnerPost).not.toHaveBeenCalled();
 
-    const complete = {kind: "code_input", adminLabFilesystemExpectations: {required: [
+    const complete = {kind: "code_input", adminLabPublishedTopicSha256: "a".repeat(64), adminLabFilesystemExpectations: {required: [
       {path: "/workspace/secure-project", kind: "directory", mode: "0755", uid: 1000, gid: 1000},
       {path: "/workspace/secure-project/README.md", kind: "file", mode: "0644", uid: 0, gid: 0},
       {path: "/workspace/secure-project/scripts", kind: "directory", mode: "0700", uid: 1000, gid: 1000},
@@ -74,7 +82,22 @@ describe("reuse existing practice grading with Runner filesystem evidence", () =
       {path: "/workspace/secure-project/shared", kind: "directory", mode: "0770", uid: 1000, gid: 1000},
       {path: "/workspace/secure-project/shared/notes.txt", kind: "file", mode: "0640", uid: 1000, gid: 1000},
     ]}};
-    const full = await verify({instance: finalInstance, persistedExpected: complete, effectiveExpected: complete});
+    // Seven correct filesystem paths alone are not enough. Until the
+    // approved-version resolver authorizes this persisted instance, the
+    // Runner must not be contacted or the submission graded.
+    const persistedFinalInstance = {...finalInstance, secretPayload: {expected: complete}};
+    const unapproved = await verify({instance: persistedFinalInstance,
+      persistedExpected: complete, effectiveExpected: complete});
+    expect(unapproved.ok).toBe(false);
+    expect(unapproved.infrastructureFailure?.status).toBe(503);
+    expect(mocks.isCurrentApproved).toHaveBeenCalledWith(persistedFinalInstance);
+    expect(mocks.runnerPost).not.toHaveBeenCalled();
+
+    // A successful approval is supplied by the dedicated release resolver;
+    // here we isolate the verifier's downstream Runner authorization path.
+    mocks.isCurrentApproved.mockReturnValueOnce(true);
+    const full = await verify({instance: persistedFinalInstance,
+      persistedExpected: complete, effectiveExpected: complete});
     expect(full.ok).toBe(true);
     expect(mocks.runnerPost).toHaveBeenCalledWith("/sessions/admin/verify-filesystem", "u:"+"a".repeat(64), {
       topicSlug: "final-capstone-secure-project", expected: complete.adminLabFilesystemExpectations,
