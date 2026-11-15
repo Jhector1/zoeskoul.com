@@ -1,0 +1,36 @@
+name: ZoeLearning shared student grading invariant
+
+on:
+  pull_request:
+    paths:
+      - "apps/web/src/lib/practice/**"
+      - "apps/web/src/app/api/**"
+      - "apps/runner/src/**"
+      - "packages/**"
+      - "scripts/zoelearning/single_pipeline/**"
+      - ".github/workflows/zoelearning-single-practice-pipeline.yml"
+  push:
+    paths:
+      - "apps/web/src/lib/practice/**"
+      - "apps/web/src/app/api/**"
+      - "apps/runner/src/**"
+      - "packages/**"
+      - "scripts/zoelearning/single_pipeline/**"
+      - ".github/workflows/zoelearning-single-practice-pipeline.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  single-pipeline-static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Synthetic negative controls
+        run: python3 scripts/zoelearning/single_pipeline/test_audit.py --repo "$GITHUB_WORKSPACE"
+      - name: Fail-closed grading architecture scan
+        run: python3 scripts/zoelearning/single_pipeline/audit.py --repo "$GITHUB_WORKSPACE"
