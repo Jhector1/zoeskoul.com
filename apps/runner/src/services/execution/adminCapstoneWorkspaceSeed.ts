@@ -86,7 +86,12 @@ export function capstoneSeedContainerOptions(args: SeedCapstoneArgs) {
       "com.zoeskoul.runner.purpose": "learn",
       "com.zoeskoul.runner.profile": "learning-admin-capstone-seed-v1",
     },
-    Cmd: ["/bin/sh", "-eu", "-c", SCRIPT],
+    // Override the admin image's default /opt/runner/admin-init.sh entrypoint.
+    // It runs chpasswd, which cannot modify /etc on our read-only seeder rootfs.
+    // This applies ONLY to the temporary setup container; the interactive
+    // administrator shell keeps its normal audited startup behavior.
+    Entrypoint: ["/bin/sh"],
+    Cmd: ["-eu", "-c", SCRIPT],
     HostConfig: {
       ...adminHostConfig,
       ReadonlyRootfs: true,

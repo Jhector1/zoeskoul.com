@@ -39,7 +39,7 @@ describe("author-only Course 2 capstone automatic fixture", () => {
     expect(Object.keys(CAPSTONE_INITIAL_MODES)).toHaveLength(7);
     expect(CAPSTONE_INITIAL_MODES["secure-project/README.md"]).toBe("644:1000:1000");
     expect(CAPSTONE_INITIAL_MODES["secure-project/secrets.env"]).toBe("644:1000:1000");
-    const script = settings.Cmd[3];
+    const script = settings.Cmd[2];
     for (const item of Object.keys(CAPSTONE_INITIAL_MODES)) expect(script).toContain(item);
     expect(script).toContain("PLACEHOLDER=not-a-secret");
     expect(script).toContain("test ! -L");
@@ -58,9 +58,22 @@ describe("author-only Course 2 capstone automatic fixture", () => {
     expect("Binds" in settings.HostConfig).toBe(false);
   });
 
+  it("bypasses the administrator image init entrypoint only for the disposable seeder", () => {
+    const settings = capstoneSeedContainerOptions(args);
+    expect(settings.Entrypoint).toEqual(["/bin/sh"]);
+    expect(settings.Cmd.slice(0, 2)).toEqual(["-eu", "-c"]);
+    expect(settings.Cmd).toHaveLength(3);
+    expect(settings.Cmd[2]).toContain("mkdir -m 0755 secure-project");
+    expect(settings.Cmd[2]).not.toMatch(/chpasswd|admin-init\.sh/);
+    expect(settings.Image).toBe(image);
+    expect(settings.HostConfig.ReadonlyRootfs).toBe(true);
+    expect(settings.HostConfig.CapDrop).toEqual(["ALL"]);
+    expect(settings.HostConfig.CapAdd).toEqual(["CHOWN"]);
+  });
+
   it("sets exact modes before changing ownership with CAP_FOWNER absent", () => {
     const settings = capstoneSeedContainerOptions(args);
-    const script = settings.Cmd[3];
+    const script = settings.Cmd[2];
     const chmodDirectories = script.indexOf("chmod 00755 secure-project");
     const chmodFiles = script.indexOf("chmod 0644 secure-project/README.md");
     const chown = script.indexOf("chown 1000:1000 secure-project");
