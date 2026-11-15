@@ -43,6 +43,7 @@ import { adminLabConfiguration, assertVerifiedAdminGrant, type VerifiedAdminGran
 import { ADMIN_COURSE_SLUG, isEligibleAdminLabLesson } from "../execution/learningAdminLessonPolicy.js";
 import { adminHostConfig, verifyAdminSandboxImage } from "../execution/learningAdminSandbox.js";
 import { createAdminWorkspaceVolume, removeAdminWorkspaceVolume } from "../execution/adminWorkspaceVolume.js";
+import { seedAdminCapstoneWorkspace } from "../execution/adminCapstoneWorkspaceSeed.js";
 import { assertAdminLabSwitch } from "../execution/learningAdminSwitch.js";
 import { docker } from "./dockerClient.js";
 import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
@@ -369,6 +370,15 @@ async function startDockerSessionUncoordinated(
     if (adminImage) {
       adminVolumeName = await createAdminWorkspaceVolume(sessionId);
       assertAdminLabSwitch(adminGeneration);
+      // Only the signed, pre-approved capstone gets a training fixture. It is
+      // prepared inside this new, attested tmpfs volume BEFORE learner startup.
+      if (adminTopicSlug === "final-capstone-secure-project") {
+        await seedAdminCapstoneWorkspace({
+          sessionId, volumeName: adminVolumeName, image: adminImage,
+          generation: adminGeneration!,
+        });
+        assertAdminLabSwitch(adminGeneration);
+      }
     }
 
     // Shared sessions may be reused while the IDE is saving. Coordinate the
