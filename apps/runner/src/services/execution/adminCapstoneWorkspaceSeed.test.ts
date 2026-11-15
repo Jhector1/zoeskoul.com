@@ -58,6 +58,20 @@ describe("author-only Course 2 capstone automatic fixture", () => {
     expect("Binds" in settings.HostConfig).toBe(false);
   });
 
+  it("sets exact modes before changing ownership with CAP_FOWNER absent", () => {
+    const settings = capstoneSeedContainerOptions(args);
+    const script = settings.Cmd[3];
+    const chmodDirectories = script.indexOf("chmod 00755 secure-project");
+    const chmodFiles = script.indexOf("chmod 0644 secure-project/README.md");
+    const chown = script.indexOf("chown 1000:1000 secure-project");
+    expect(chmodDirectories).toBeGreaterThan(-1);
+    expect(chmodFiles).toBeGreaterThan(chmodDirectories);
+    expect(chown).toBeGreaterThan(chmodFiles);
+    expect(script.slice(chown)).not.toMatch(/\bchmod\b/);
+    expect(settings.HostConfig.CapAdd).toEqual(["CHOWN"]);
+    expect(settings.HostConfig.CapAdd).not.toContain("FOWNER");
+  });
+
   it("rejects other volume identities and unpinned images before Docker calls", () => {
     expect(() => capstoneSeedContainerOptions({...args, volumeName:"other"})).toThrow();
     expect(() => capstoneSeedContainerOptions({...args, image:"ubuntu:latest"})).toThrow();

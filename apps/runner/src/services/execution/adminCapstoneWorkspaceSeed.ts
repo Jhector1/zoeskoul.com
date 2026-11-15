@@ -37,9 +37,12 @@ const SCRIPT = [
   "printf '%s\n' 'ENVIRONMENT=training' 'PLACEHOLDER=not-a-secret' > secure-project/secrets.env",
   "printf '%s\n' '#!/bin/sh' 'printf \"Secure project demo: OK\\n\"' > secure-project/scripts/run.sh",
   "printf '%s\n' 'Team handoff notes (practice).' > secure-project/shared/notes.txt",
-  "chown 1000:1000 secure-project secure-project/README.md secure-project/scripts secure-project/scripts/run.sh secure-project/secrets.env secure-project/shared secure-project/shared/notes.txt",
+  // chmod must happen while root still owns the freshly created entries.
+  // The seeder intentionally lacks CAP_FOWNER; chmod after chown to 1000
+  // fails with EPERM even when CAP_CHOWN is available.
   "chmod 00755 secure-project secure-project/scripts secure-project/shared",
   "chmod 0644 secure-project/README.md secure-project/scripts/run.sh secure-project/secrets.env secure-project/shared/notes.txt",
+  "chown 1000:1000 secure-project secure-project/README.md secure-project/scripts secure-project/scripts/run.sh secure-project/secrets.env secure-project/shared secure-project/shared/notes.txt",
   "test -d secure-project && test ! -L secure-project",
   "test -f secure-project/README.md && test ! -L secure-project/README.md",
   "test -d secure-project/scripts && test ! -L secure-project/scripts",
