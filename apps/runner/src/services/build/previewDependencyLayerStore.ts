@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { constants } from "node:fs";
+import { constants, type Stats } from "node:fs";
 import fs from "node:fs/promises";
 import { createReadStream } from "node:fs";
 import path from "node:path";
@@ -116,12 +116,29 @@ async function attestTree(root: string, options: Readonly<{
         active++;
       }
     };
+    // Overlap independent metadata lookups without changing the canonical
+    // depth-first digest order. This accelerates wide pnpm trees while keeping
+    // strict byte hashing, link checks and the total file budget unchanged.
+    // Each promise absorbs errors, including when an earlier sibling rejects,
+    // so abandoned lookahead never creates an unhandled rejection.
+    const METADATA_LOOKAHEAD = 8;
+    const metadata = new Map<number, Promise<Stats | null>>();
+    let nextMetadata = 0;
+    const fillMetadata = () => {
+      while (nextMetadata < children.length && metadata.size < METADATA_LOOKAHEAD) {
+        const i = nextMetadata++;
+        metadata.set(i, fs.lstat(path.join(dir, children[i]!.name)).catch(() => null));
+      }
+    };
     for (const [i, child] of children.entries()) {
+      fillMetadata();
       fillPrefetch(i);
       if (++files > MAX_FILES) return reject("file-limit");
       const filename = path.join(dir, child.name);
       const relative = prefix ? `${prefix}/${child.name}` : child.name;
-      const info = await fs.lstat(filename);
+      const info = await metadata.get(i);
+      metadata.delete(i);
+      if (!info) return reject("read-failure");
       if (info.isSymbolicLink()) {
         const target = await fs.readlink(filename);
         if (path.isAbsolute(target)) return reject("unsafe-link");

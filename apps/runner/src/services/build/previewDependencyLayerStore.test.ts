@@ -45,6 +45,28 @@ describe("K20D3F persistent verified dependency layers", () => {
     next!.release(); lease!.release();
   });
 
+  it("verifies wide dependency directories and still rejects byte-level tampering", async () => {
+    const { root, first, store } = await fixture();
+    const wide = path.join(first, "node_modules", ".pnpm", "foo", "node_modules", "foo");
+    for (let i = 0; i < 32; i++) {
+      await fs.writeFile(path.join(wide, `module-${i.toString().padStart(2, "0")}.js`),
+        `export const x = ${i};`);
+    }
+    const original = await store.publish(key(), first);
+    expect(original).not.toBeNull();
+    original?.release();
+    const restarted = new PreviewDependencyLayerStore(root);
+    const valid = await restarted.lookup(key());
+    expect(valid.outcome).toBe("hit");
+    valid.lease?.release();
+    const target = path.join(root, ".zoebuild-preview-dependency-layers-v1", key(),
+      "node_modules", ".pnpm", "foo", "node_modules", "foo", "module-17.js");
+    await fs.writeFile(target, "export const x = 999;");
+    const tampered = await restarted.lookup(key());
+    expect(tampered.outcome).toBe("corrupt");
+    expect(tampered.lease).toBeNull();
+  });
+
   it("rejects tampered file contents on every acquire", async () => {
     const { first, store } = await fixture();
     const lease = await store.publish(key(), first);
