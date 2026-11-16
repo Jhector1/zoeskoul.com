@@ -75,7 +75,17 @@ export async function snapshotWorkspaceFiles(workspaceDir: string) {
   const relFiles: string[] = [];
 
   await walkEntries(workspaceDir, workspaceDir, relDirs, relFiles);
+  return formatWorkspaceSnapshotEntries(
+    relDirs, relFiles, (rel) => fs.readFile(path.join(workspaceDir, rel)),
+  );
+}
 
+/** Both host and learner-identity paths use this single snapshot serializer. */
+export async function formatWorkspaceSnapshotEntries(
+  relDirs: string[],
+  relFiles: string[],
+  read: (relativePath: string) => Promise<Buffer>,
+): Promise<WorkspaceSyncEntry[]> {
   relDirs.sort((a, b) => {
     const da = a.split("/").length;
     const db = b.split("/").length;
@@ -96,11 +106,10 @@ export async function snapshotWorkspaceFiles(workspaceDir: string) {
   }
 
   for (const relPath of relFiles) {
-    const abs = path.join(workspaceDir, relPath);
     const capability = resolveWorkspaceFileCapability(relPath);
     if (!capability) continue;
 
-    const raw = await fs.readFile(abs);
+    const raw = await read(relPath);
 
     if (capability.storage === "binary") {
       if (raw.byteLength > env.maxBinaryFileBytes) {

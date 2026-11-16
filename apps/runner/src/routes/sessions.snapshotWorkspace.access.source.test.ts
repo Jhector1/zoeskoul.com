@@ -16,3 +16,15 @@ describe("workspace snapshot restricted-permission safety", () => {
     expect(source).toContain('No files were synchronized.');
   });
 });
+
+
+describe("learner-only fallback containment", () => {
+  it("does not enable the file worker outside the dedicated active learning shell", () => {
+    expect(source).toContain('process.env.RUNNER_LEARNING_SNAPSHOT_WORKER_ENABLED !== "true"');
+    expect(source).toContain('process.env.RUNNER_EXECUTION_POOL !== "zoeskoul-learning"');
+    expect(source).toContain('session.kind !== "shell"');
+    expect(source).toContain('session.labMode === "admin"');
+    expect(source).toContain('session.state !== "waiting_for_input"');
+    expect(source).toContain('snapshotWorkspaceViaLearnerWorker(session)');
+  });
+});
