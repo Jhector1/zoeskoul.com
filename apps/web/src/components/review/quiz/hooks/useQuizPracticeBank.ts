@@ -38,6 +38,7 @@ import {
 import { buildReviewPracticeRevealCompletionPatch } from "@zoeskoul/learning-runtime/review/quiz/reviewPracticeRevealCompletion";
 import { getReviewSubmitBridgeHost } from "@zoeskoul/learning-runtime/review/submitBridge";
 import { hasUsableStarterFilesValue } from "@zoeskoul/learning-runtime/review/module/runtime/starterContent";
+import { rankPracticeRuntimeCandidates } from "./practiceRuntimeCandidateSelection";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 type ReviewPracticeQuestionActionOptions = {
@@ -558,7 +559,10 @@ export function orderPracticeWorkspaceSubmitCandidateKeys(args: {
   );
 }
 
-export function getLiveWorkspaceForPracticeSubmit(candidateKeys: string[]) {
+export function getLiveWorkspaceForPracticeSubmit(
+  candidateKeys: string[],
+  options: { allowUnscopedFallback?: boolean } = {},
+) {
   const win = getReviewSubmitBridgeHost();
   if (!win) return null;
 
@@ -574,6 +578,10 @@ export function getLiveWorkspaceForPracticeSubmit(candidateKeys: string[]) {
     if (snapshot) return snapshot;
   }
 
+  // A shell Try requires exact target ownership. The global workspace getter
+  // can be left bound to the PREVIOUS exercise during step transitions.
+  if (options.allowUnscopedFallback === false) return null;
+
   return normalizeLiveWorkspaceSubmitSnapshot(
       win.__zoeGetAnyWorkspaceBeforeSubmit?.(),
   );
@@ -581,9 +589,13 @@ export function getLiveWorkspaceForPracticeSubmit(candidateKeys: string[]) {
 
 function practiceQuestionNeedsTerminalEvidence(
     q: Extract<ReviewQuestion, { kind: "practice" }>,
+    loadedExpected?: unknown,
 ) {
   const qAny = q as any;
+  // During an initial Check, the manifest question may not yet contain the
+  // resolved server-authored contract. Prefer the signed, loaded practice item.
   const expected =
+      loadedExpected ??
       qAny.item?.expected ??
       qAny.expected ??
       qAny.exercise?.expected ??
@@ -651,13 +663,14 @@ function practiceQuestionNeedsTerminalEvidence(
 
 function getRuntimePracticePatchForQuestion(
     q: Extract<ReviewQuestion, { kind: "practice" }>,
+    loadedExpected?: unknown,
 ) {
   const stableKey = getStablePracticeQuestionKey(q);
   const runtime = useReviewRuntimeStore.getState();
   const exercises = runtime.exercises ?? {};
 
   const qAny = q as any;
-  const needsTerminalEvidence = practiceQuestionNeedsTerminalEvidence(q);
+  const needsTerminalEvidence = practiceQuestionNeedsTerminalEvidence(q, loadedExpected);
 
   const wantedIds = new Set(
       [
@@ -693,9 +706,12 @@ function getRuntimePracticePatchForQuestion(
       orderPracticeWorkspaceSubmitCandidateKeys({
         stableKey,
         wantedIds,
-        boundExerciseKey,
-        activeExerciseKey,
+        // A bound/active key can still refer to another Try during a switch.
+        // Do not use it when terminal command evidence is required.
+        boundExerciseKey: needsTerminalEvidence ? null : boundExerciseKey,
+        activeExerciseKey: needsTerminalEvidence ? null : activeExerciseKey,
       }),
+      { allowUnscopedFallback: !needsTerminalEvidence },
   );
 
   const candidates = Object.entries(exercises)
@@ -786,26 +802,18 @@ function getRuntimePracticePatchForQuestion(
       })
       .filter(Boolean);
 
-  const rankedCandidates = candidates
-      .sort((a: any, b: any) => {
-        if (
-            needsTerminalEvidence &&
-            a.hasTerminalEvidence !== b.hasTerminalEvidence
-        ) {
-          return a.hasTerminalEvidence ? -1 : 1;
-        }
-
-        if (b.score !== a.score) return b.score - a.score;
-        return b.updatedAt - a.updatedAt;
-      });
+  // Never let terminal evidence from a different Try outrank the requested
+  // exercise identity, even when that old shell is still active/bound.
+  const rankedCandidates = rankPracticeRuntimeCandidates(
+      candidates.filter(Boolean) as Array<any>,
+      needsTerminalEvidence,
+  );
 
   const found = rankedCandidates[0];
 
   if (!found) {
     const liveTerminalEvidence = needsTerminalEvidence
         ? getLiveTerminalEvidenceForPracticeSubmit([
-            boundExerciseKey,
-            activeExerciseKey,
             stableKey,
             ...Array.from(wantedIds),
           ])
@@ -878,10 +886,11 @@ function getRuntimePracticePatchForQuestion(
    */
   const liveTerminalEvidence = needsTerminalEvidence
       ? getLiveTerminalEvidenceForPracticeSubmit([
-        boundExerciseKey,
-        activeExerciseKey,
         stableKey,
         ...Array.from(wantedIds),
+        found.key,
+        estate.exerciseKey,
+        estate.exerciseId,
       ])
       : null;
 
@@ -2155,7 +2164,12 @@ export function useQuizPracticeBank(args: {
             setTimeout(() => resolve(), 0);
           });
 
-          const runtimePatch = getRuntimePracticePatchForQuestion(q) as (Record<string, any> | null);
+          const runtimePatch = getRuntimePracticePatchForQuestion(
+              q,
+              (ps.item as any)?.expected ??
+              (ps.exercise as any)?.expected ??
+              (ps.item as any)?.exercise?.expected,
+          ) as (Record<string, any> | null);
           const runtimeStoreKey = String(runtimePatch?.__runtimeStoreKey ?? "").trim();
           const runtimePatchForSubmit = runtimePatch
               ? Object.fromEntries(
