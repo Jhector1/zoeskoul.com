@@ -23,6 +23,7 @@ import {
   type DependencyLayerLease,
 } from "./previewDependencyLayerStore.js";
 import { resolveSandboxProfile } from "../execution/sandboxProfile.js";
+import { captureTanstackStartupEvidence } from "./tanstackPreviewStartupDiagnostics.js";
 
 export function tanstackPreviewDependencyKey(
   ownerKey: string,
@@ -297,6 +298,7 @@ export function makeTanstackPreviewDockerDriver(
         method: "GET", path: basePath, headers: { accept: "text/html" }, bodyBase64: "",
       });
     },
+    diagnose: async id => captureTanstackStartupEvidence(docker.getContainer(id)),
     destroy: removePreviewContainer,
     cleanup: async dir => {
       await removeWorkspace(dir);
