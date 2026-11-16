@@ -18,10 +18,25 @@ export type SandboxProfile = Readonly<{
   tmpfs: Readonly<Record<string, string>>;
 }>;
 
+/**
+ * A dedicated learner image must never propagate into the trusted build,
+ * bootstrap or preview-install profiles. This is a server-only choice.
+ */
+export function resolveSandboxImage(
+  purpose: SandboxPurpose,
+  sharedImage: string,
+  learningImage?: string,
+): string {
+  if (purpose === "learn") return learningImage ?? sharedImage;
+  if (purpose === "build" || purpose === "build-bootstrap" ||
+      purpose === "build-preview-install") return sharedImage;
+  throw new Error("Sandbox profile is not configured.");
+}
+
 function learningProfile(): SandboxProfile {
   return {
     id: "learn-default-v1",
-    image: env.runnerImage,
+    image: resolveSandboxImage("learn", env.runnerImage, env.runnerLearningImage),
     user: `${env.execUid}:${env.execGid}`,
     networkMode: env.childNetwork,
     readonlyRootfs: true,
@@ -44,6 +59,7 @@ function buildBootstrapProfile(): SandboxProfile {
   return {
     ...base,
     id: "build-dependency-lock-bootstrap-v1",
+    image: resolveSandboxImage("build-bootstrap", env.runnerImage, env.runnerLearningImage),
     networkMode: "bridge",
     // Do not inherit the small interactive Learning memory budget.
     // The operator configures this bounded trusted-only limit.
@@ -61,6 +77,7 @@ function productionBuildProfile(): SandboxProfile {
     ...base,
     id:
       "build-production-react-vite-v1",
+    image: resolveSandboxImage("build", env.runnerImage, env.runnerLearningImage),
 
     // Dependency installation needs registry access. The request cannot select
     // or override this policy.
