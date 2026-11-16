@@ -18,8 +18,12 @@ import {
  * read-only mount, never this directory's writable parent or the runner root.
  */
 const MAX_ENTRIES = 24;
-const MAX_ITEM_BYTES = 256 * 1024 * 1024;
-const MAX_TOTAL_BYTES = 1024 * 1024 * 1024;
+// TanStack Start + Cloudflare installs can exceed 256 MiB. Keep publication
+// bounded, still subject to workspace headroom, symlink safety, and full
+// content attestation on every cache acquire. A 2 GiB total retains several
+// ~478 MiB project layers without exhausting the shared 10 GiB workspace cap.
+const MAX_ITEM_BYTES = 640 * 1024 * 1024;
+const MAX_TOTAL_BYTES = 2 * 1024 * 1024 * 1024;
 const MAX_FILES = 60_000;
 const TTL_MS = 24 * 60 * 60_000; // exceeds the preview hard lifetime
 const MIN_EVICTION_AGE_MS = 75 * 60_000; // survives active previews after service restart
